@@ -11,10 +11,14 @@ _Last updated 2026-09-27._
 | `b0cf210` | pilot readability pass: cParts, cModelBase, cModel, cObj, Behavior, BehaviorAppBase, BehaviorEmBase, src/system (532 functions, all compile, verified) |
 | `882ab02` | names: RTTI ctor/dtor merge, canonical virtual-slot names, re-export, cleaned files frozen |
 | `26e353b` | trigger actions/conditions split per ID; batched cleanup planner |
+| `a0ba14b` | wave 2: 644 of 662 files (managers, triggers, pl0010 states) cleaned, verified, all compile |
 
 Game data: extracted to `data/` (gitignored, `tools/cpk_extract.py`).
 
-## In progress: wave 2 (player pl0000/pl0010 + managers)
+## In progress: rest of wave 2 (mainly Pl0000.cpp, 22 chunks)
+
+Find what is left: `python tools/verified_files.py logs/wave2.json <journal>` lists finished files;
+`find src -name "*.part*"` shows parts still unassembled. Compile many: `python tools/cc_many.py -j 8 list.txt`.
 
 - Plan: `logs/wave2.json` (59 items, 691 units, 4.3 MB raw). Show a unit:
   `python tools/plan_cleanup.py --show logs/wave2.json <item> [<unit>]`
