@@ -1,224 +1,229 @@
-// src/misc/cParts.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A07410..00A193C0, 6 functions
+// src/misc/cParts.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "cParts.h"
 
-#include "types.h"
+// Array allocation header written in front of a cParts[] block: element count at block+0,
+// elements start at block+0x10.
+static const unsigned int PARTS_ARRAY_HEADER = 0x10;
+static const unsigned int PARTS_SIZE = 0xB0;
 
 // 00A07410  cParts::cParts_2  size=175  [class]
-void __fastcall cParts::cParts_2(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  param_1[0x12] = 0;
-  param_1[0x11] = 0;
-  param_1[0x10] = 0;
-  param_1[0xf] = 0;
-  param_1[0xd] = 0;
-  param_1[0xc] = 0;
-  param_1[0xb] = 0;
-  param_1[10] = 0;
-  param_1[8] = 0;
-  param_1[7] = 0;
-  param_1[6] = 0;
-  param_1[5] = 0;
-  param_1[0x13] = 0x3f800000;
-  param_1[0xe] = 0x3f800000;
-  param_1[9] = 0x3f800000;
-  param_1[4] = 0x3f800000;
-  param_1[0x17] = 0x3f800000;
-  param_1[0x14] = 0;
-  param_1[0x15] = 0;
-  param_1[0x16] = 0;
-  param_1[0x1a] = 0;
-  param_1[0x19] = 0;
-  param_1[0x18] = 0;
-  param_1[0x1b] = 0x3f800000;
-  param_1[0x27] = 0x3f800000;
-  param_1[0x24] = 0;
-  param_1[0x25] = 0;
-  param_1[0x26] = 0;
-  param_1[0x1c] = 0x3f800000;
-  param_1[0x1d] = 0x3f800000;
-  param_1[0x1e] = 0x3f800000;
-  param_1[0x20] = 0x3f800000;
-  param_1[0x21] = 0x3f800000;
-  param_1[0x22] = 0x3f800000;
-  *(undefined2 *)((int)param_1 + 0xa2) = 0;
-  param_1[0x2a] = 0;
-  *(undefined2 *)(param_1 + 0x28) = 0xffff;
-  param_1[0x29] = 0;
-  return;
+cParts::cParts()
+{
+    // vftable = cParts::vftable (0x0165C600)
+    matrix()[14] = 0.0f;
+    matrix()[13] = 0.0f;
+    matrix()[12] = 0.0f;
+    matrix()[11] = 0.0f;
+    matrix()[9] = 0.0f;
+    matrix()[8] = 0.0f;
+    matrix()[7] = 0.0f;
+    matrix()[6] = 0.0f;
+    matrix()[4] = 0.0f;
+    matrix()[3] = 0.0f;
+    matrix()[2] = 0.0f;
+    matrix()[1] = 0.0f;
+    matrix()[15] = 1.0f;
+    matrix()[10] = 1.0f;
+    matrix()[5] = 1.0f;
+    matrix()[0] = 1.0f;
+    quat()[3] = 1.0f;
+    quat()[0] = 0.0f;
+    quat()[1] = 0.0f;
+    quat()[2] = 0.0f;
+    pos()[2] = 0.0f;
+    pos()[1] = 0.0f;
+    pos()[0] = 0.0f;
+    pos()[3] = 1.0f;
+    vec90()[3] = 1.0f;
+    vec90()[0] = 0.0f;
+    vec90()[1] = 0.0f;
+    vec90()[2] = 0.0f;
+    scale()[0] = 1.0f;
+    scale()[1] = 1.0f;
+    scale()[2] = 1.0f;
+    scale2()[0] = 1.0f;
+    scale2()[1] = 1.0f;
+    scale2()[2] = 1.0f;
+    flags() = 0;
+    fieldA8() = 0;
+    index() = -1;   // stored as 0xFFFF
+    fieldA4() = 0;
 }
 
 // 00A074D0  FUN_00a074d0  size=193  [between]
-void __thiscall FUN_00a074d0(int param_1,int param_2,int param_3)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  
-  puVar2 = (undefined4 *)(param_2 + 0x10);
-  puVar3 = (undefined4 *)(param_1 + 0x10);
-  for (iVar1 = 0x10; iVar1 != 0; iVar1 = iVar1 + -1) {
-    *puVar3 = *puVar2;
-    puVar2 = puVar2 + 1;
-    puVar3 = puVar3 + 1;
-  }
-  *(undefined4 *)(param_1 + 0x50) = *(undefined4 *)(param_2 + 0x50);
-  *(undefined4 *)(param_1 + 0x54) = *(undefined4 *)(param_2 + 0x54);
-  *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_2 + 0x58);
-  *(undefined4 *)(param_1 + 0x5c) = *(undefined4 *)(param_2 + 0x5c);
-  *(undefined4 *)(param_1 + 0x60) = *(undefined4 *)(param_2 + 0x60);
-  *(undefined4 *)(param_1 + 100) = *(undefined4 *)(param_2 + 100);
-  *(undefined4 *)(param_1 + 0x68) = *(undefined4 *)(param_2 + 0x68);
-  *(undefined4 *)(param_1 + 0x6c) = *(undefined4 *)(param_2 + 0x6c);
-  *(undefined4 *)(param_1 + 0x70) = *(undefined4 *)(param_2 + 0x70);
-  *(undefined4 *)(param_1 + 0x74) = *(undefined4 *)(param_2 + 0x74);
-  *(undefined4 *)(param_1 + 0x78) = *(undefined4 *)(param_2 + 0x78);
-  *(undefined4 *)(param_1 + 0x7c) = *(undefined4 *)(param_2 + 0x7c);
-  *(undefined4 *)(param_1 + 0x90) = *(undefined4 *)(param_2 + 0x90);
-  *(undefined4 *)(param_1 + 0x94) = *(undefined4 *)(param_2 + 0x94);
-  *(undefined4 *)(param_1 + 0x98) = *(undefined4 *)(param_2 + 0x98);
-  *(undefined4 *)(param_1 + 0x9c) = *(undefined4 *)(param_2 + 0x9c);
-  *(undefined2 *)(param_1 + 0xa0) = *(undefined2 *)(param_2 + 0xa0);
-  *(undefined2 *)(param_1 + 0xa2) = 0;
-  if (param_3 != 0) {
-    *(ushort *)(param_1 + 0xa2) = *(ushort *)(param_2 + 0xa2) & 4;
-  }
-  return;
+// Copies the transform of `srcAddr` into `dstAddr`; flag bit 4 is kept only when copyFlags != 0.
+void FUN_00a074d0(int dstAddr, int srcAddr, int copyFlags)
+{
+    cParts *dst = (cParts *)dstAddr;
+    cParts *src = (cParts *)srcAddr;
+
+    // dword copies (raw bit patterns, no float conversion)
+    unsigned int *srcMatrix = (unsigned int *)src->matrix();
+    unsigned int *dstMatrix = (unsigned int *)dst->matrix();
+    for (int i = 16; i != 0; i--) {
+        *dstMatrix = *srcMatrix;
+        srcMatrix++;
+        dstMatrix++;
+    }
+    unsigned int *dstQuat = (unsigned int *)dst->quat();
+    unsigned int *srcQuat = (unsigned int *)src->quat();
+    dstQuat[0] = srcQuat[0];
+    dstQuat[1] = srcQuat[1];
+    dstQuat[2] = srcQuat[2];
+    dstQuat[3] = srcQuat[3];
+    unsigned int *dstPos = (unsigned int *)dst->pos();
+    unsigned int *srcPos = (unsigned int *)src->pos();
+    dstPos[0] = srcPos[0];
+    dstPos[1] = srcPos[1];
+    dstPos[2] = srcPos[2];
+    dstPos[3] = srcPos[3];
+    unsigned int *dstScale = (unsigned int *)dst->scale();   // +0x70..+0x7C (4 dwords)
+    unsigned int *srcScale = (unsigned int *)src->scale();
+    dstScale[0] = srcScale[0];
+    dstScale[1] = srcScale[1];
+    dstScale[2] = srcScale[2];
+    dstScale[3] = srcScale[3];
+    unsigned int *dstVec = (unsigned int *)dst->vec90();
+    unsigned int *srcVec = (unsigned int *)src->vec90();
+    dstVec[0] = srcVec[0];
+    dstVec[1] = srcVec[1];
+    dstVec[2] = srcVec[2];
+    dstVec[3] = srcVec[3];
+    dst->index() = src->index();
+    dst->flags() = 0;
+    if (copyFlags != 0) {
+        dst->flags() = src->flags() & 4;
+    }
 }
 
 // 00A07600  FUN_00a07600  size=94  [between]
-void __fastcall FUN_00a07600(int *param_1)
-
-{
-  undefined4 *puVar1;
-  
-  puVar1 = (undefined4 *)*param_1;
-  if (puVar1 != (undefined4 *)0x0) {
-    if (puVar1[-4] == 0) {
-      FUN_00dd4940(puVar1 + -4);
-    }
-    else {
-      (**(code **)*puVar1)(3);
-    }
-    *param_1 = 0;
-  }
-  if (param_1[1] != 0) {
-    FUN_00dd4940(param_1[1]);
-    param_1[1] = 0;
-  }
-  param_1[3] = 0;
-  param_1[1] = 0;
-  *param_1 = 0;
-  *(undefined2 *)(param_1 + 2) = 0;
-  return;
+// Releases a parts list: { cParts *parts; int *table; short count; int owner; }.
+void __fastcall FUN_00a07600(int *list)
+{
+    cParts *parts = (cParts *)list[0];
+    if (parts != 0) {
+        int *block = (int *)((char *)parts - PARTS_ARRAY_HEADER);
+        if (block[0] == 0) {
+            FUN_00dd4940((int)block);
+        }
+        else {
+            parts->destruct(3);
+        }
+        list[0] = 0;
+    }
+    if (list[1] != 0) {
+        FUN_00dd4940(list[1]);
+        list[1] = 0;
+    }
+    list[3] = 0;
+    list[1] = 0;
+    list[0] = 0;
+    *(short *)(list + 2) = 0;
 }
 
 // 00A07660  FUN_00a07660  size=225  [between]
-undefined4 __thiscall FUN_00a07660(int *param_1,ushort param_2,int param_3,undefined4 param_4)
-
-{
-  uint *puVar1;
-  int iVar2;
-  uint uVar3;
-  uint *puVar4;
-  uint uVar5;
-  
-  FUN_00a07600();
-  if (param_2 == 0) {
-    return 1;
-  }
-  if (param_3 == 0) {
-    return 0;
-  }
-  uVar5 = (uint)(short)param_2;
-  uVar3 = -(uint)((int)((ulonglong)uVar5 * 0xb0 >> 0x20) != 0) | (uint)((ulonglong)uVar5 * 0xb0);
-  puVar1 = (uint *)FUN_00dd3580(-(uint)(0xffffffef < uVar3) | uVar3 + 0x10,param_4);
-  if (puVar1 == (uint *)0x0) {
-    puVar4 = (uint *)0x0;
-  }
-  else {
-    puVar4 = puVar1 + 4;
-    *puVar1 = uVar5;
-    FUN_00401040(puVar4,0xb0,uVar5,cParts::cParts_2);
-  }
-  *param_1 = (int)puVar4;
-  iVar2 = FUN_00dd3580(-(uint)((int)((ulonglong)uVar5 * 4 >> 0x20) != 0) |
-                       (uint)((ulonglong)uVar5 * 4),param_4);
-  param_1[1] = iVar2;
-  if ((*param_1 != 0) && (iVar2 != 0)) {
-    iVar2 = 0;
-    if (0 < (short)param_2) {
-      uVar3 = (uint)param_2;
-      do {
-        *(undefined4 *)(iVar2 + param_1[1]) = 0;
-        iVar2 = iVar2 + 4;
-        uVar3 = uVar3 - 1;
-      } while (uVar3 != 0);
-    }
-    *(ushort *)(param_1 + 2) = param_2;
-    param_1[3] = param_3;
-    return 1;
-  }
-  return 0;
+// Allocates `count` cParts (new[] with 0x10-byte header) plus a zeroed int table of `count` entries.
+undefined4 FUN_00a07660(int *list, ushort count, int owner, undefined4 heap)
+{
+    typedef void *(*AllocFn)(unsigned int size, undefined4 heap);
+    AllocFn alloc = (AllocFn)FUN_00dd3580;
+
+    FUN_00a07600(list);
+    if (count == 0) {
+        return 1;
+    }
+    if (owner == 0) {
+        return 0;
+    }
+
+    unsigned int n = (unsigned int)(short)count;   // sign-extended
+
+    unsigned long long partsBytes64 = (unsigned long long)n * PARTS_SIZE;
+    unsigned int partsBytes = ((unsigned int)(partsBytes64 >> 32) != 0) ? 0xFFFFFFFFu
+                                                                        : (unsigned int)partsBytes64;
+    unsigned int blockBytes = (partsBytes > 0xFFFFFFEFu) ? 0xFFFFFFFFu : partsBytes + PARTS_ARRAY_HEADER;
+
+    unsigned int *block = (unsigned int *)alloc(blockBytes, heap);
+    unsigned int *parts;
+    if (block == 0) {
+        parts = 0;
+    }
+    else {
+        parts = block + 4;
+        *block = n;
+        // eh vector constructor iterator (parts, 0xB0, n, cParts::cParts)
+        FUN_00401040((undefined4)parts, PARTS_SIZE, n, (code *)0x00A07410 /* cParts::cParts_2 */);
+    }
+    list[0] = (int)parts;
+
+    unsigned long long tableBytes64 = (unsigned long long)n * 4;
+    unsigned int tableBytes = ((unsigned int)(tableBytes64 >> 32) != 0) ? 0xFFFFFFFFu
+                                                                        : (unsigned int)tableBytes64;
+    int table = (int)alloc(tableBytes, heap);
+    list[1] = table;
+
+    if (list[0] != 0 && table != 0) {
+        int offset = 0;
+        if (0 < (short)count) {
+            unsigned int remaining = (unsigned int)count;
+            do {
+                *(int *)(offset + list[1]) = 0;
+                offset += 4;
+                remaining--;
+            } while (remaining != 0);
+        }
+        *(ushort *)(list + 2) = count;
+        list[3] = owner;
+        return 1;
+    }
+    return 0;
 }
 
 // 00A07750  cParts::vf00  size=93  [class]
-undefined4 * __thiscall cParts::vf00(undefined4 *param_1,byte param_2)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  
-  if ((param_2 & 2) == 0) {
-    *param_1 = vftable;
-    if ((param_2 & 1) != 0) {
-      FUN_00dd4920(param_1);
-    }
-    return param_1;
-  }
-  iVar1 = param_1[-4];
-  puVar2 = param_1 + iVar1 * 0x2c;
-  while (iVar1 = iVar1 + -1, -1 < iVar1) {
-    puVar2 = puVar2 + -0x2c;
-    *puVar2 = vftable;
-  }
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4940(param_1 + -4);
-  }
-  return param_1 + -4;
+undefined4 cParts::destruct(byte flags)
+{
+    if ((flags & 2) == 0) {
+        *(void **)this = (void *)0x0165C600;   // cParts::vftable
+        if ((flags & 1) != 0) {
+            FUN_00dd4920((int)this);
+        }
+        return (undefined4)this;
+    }
+
+    // vector deleting: element count lives in the 0x10-byte header before the array
+    int *block = (int *)((char *)this - PARTS_ARRAY_HEADER);
+    int count = block[0];
+    char *element = (char *)this + count * PARTS_SIZE;
+    while (count = count - 1, -1 < count) {
+        element -= PARTS_SIZE;
+        *(void **)element = (void *)0x0165C600;   // cParts::vftable
+    }
+    if ((flags & 1) != 0) {
+        FUN_00dd4940((int)block);
+    }
+    return (undefined4)block;
 }
 
 // 00A193C0  cParts::cParts  size=185  [class]
-void __fastcall cParts::cParts(undefined4 *param_1)
-
-{
-  *param_1 = cModelBase::vftable;
-  FUN_00a07600();
-  FUN_00a159c0();
-  param_1[0x60] = 0xbf800000;
-  param_1[0x61] = 0xbf800000;
-  param_1[0x62] = 0xbf800000;
-  param_1[99] = 0xbf800000;
-  param_1[0x68] = 1;
-  param_1[0x66] = 0;
-  param_1[100] = 0;
-  param_1[0x67] = 0;
-  param_1[0x65] = 0x3f59999a;
-  *param_1 = vftable;
-  param_1[0x54] = 0;
-  param_1[0x55] = 0;
-  param_1[0x56] = 0;
-  param_1[0x57] = 0;
-  param_1[0x58] = 0;
-  param_1[0x59] = 0;
-  param_1[0x5a] = 0;
-  param_1[0x5b] = 0;
-  param_1[0x5c] = 0;
-  param_1[0x5d] = 0;
-  param_1[0x5e] = 0;
-  param_1[0x5f] = 0;
-  return;
-}
+void cParts::ctor_00A193C0()
+{
+    int *self = (int *)this;
 
+    *(void **)this = (void *)0x0165CA60;   // cModelBase::vftable
+    FUN_00a07600(self);   // ? Ghidra shows no argument; ECX assumed still `this`
+    FUN_00a159c0((int)this);   // ? Ghidra shows no argument; ECX assumed still `this`
+    *(float *)((char *)this + 0x180) = -1.0f;   /* cModelBase+0x180: ? */
+    *(float *)((char *)this + 0x184) = -1.0f;   /* cModelBase+0x184: ? */
+    *(float *)((char *)this + 0x188) = -1.0f;   /* cModelBase+0x188: ? */
+    *(float *)((char *)this + 0x18C) = -1.0f;   /* cModelBase+0x18C: ? */
+    *(int *)((char *)this + 0x1A0) = 1;         /* cModelBase+0x1A0: ? */
+    *(int *)((char *)this + 0x198) = 0;         /* cModelBase+0x198: ? */
+    *(int *)((char *)this + 0x190) = 0;         /* cModelBase+0x190: ? */
+    *(int *)((char *)this + 0x19C) = 0;         /* cModelBase+0x19C: ? */
+    *(float *)((char *)this + 0x194) = 0.85f;   /* cModelBase+0x194: ? (0x3F59999A) */
+    *(void **)this = (void *)0x0165C600;   // cParts::vftable (as labelled by Ghidra)
+    for (int offset = 0x150; offset <= 0x17C; offset += 4) {
+        *(int *)((char *)this + offset) = 0;   /* cModelBase+0x150..0x17C: ? */
+    }
+}

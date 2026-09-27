@@ -1,2133 +1,1595 @@
-// src/misc/cObj.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040DE00..00A01080, 53 functions
+// src/misc/cObj.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "cObj.h"
 
-#include "types.h"
+#include <math.h>
+
+// ---------------------------------------------------------------------------------------------
+// Callees whose generated prototype (include/auto/functions.h) does not match the argument list
+// recovered at the call site are invoked through CALL(fn, signature)(args...), which passes
+// exactly the arguments seen in the binary. "ECX: ?" marks calls whose register `this` argument
+// the decompiler did not recover.
+#define CALL(fn, sig) ((sig)(void *)&(fn))
+
+// Not declared in any generated header.
+namespace cModelDataManager {
+int EntryModelData(unsigned int modelFile, unsigned int cutInfoFile);  // 00A19920
+}
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const void *matrix);
+
+// Data referenced by this file (names from the binary; strings not exported).
+struct ObjCategoryPrefix { unsigned int category; char *prefix; };  // id & 0xF0000 -> folder/prefix
+struct ObjDlcPrefix      { unsigned int idMask; char *name; };      // id & 0xFF000000 -> DLC folder
+struct ObjFileEntry      { int id; unsigned int objA; unsigned int objB; };
+struct ObjIdRemap        { unsigned int from; unsigned int to; };
+
+extern unsigned char     DAT_01b7b380[];         // returned by cObj::vf04
+extern unsigned char     DAT_0165bed8[];         // debug message (destruct)
+extern unsigned char     DAT_0165c288[];         // debug message (unknown custom param)
+extern unsigned char     DAT_0165c37c[];         // debug message (construct twice)
+extern unsigned char     DAT_01657e1c[];         // file keys used by cObj::vf08
+extern unsigned char     DAT_0164518c[];
+extern unsigned char     DAT_01645174[];
+extern unsigned char     DAT_01645170[];
+extern char              DAT_0165bfb4[];         // file extension strings
+extern char              DAT_0165bfac[];
+extern char              DAT_016416fa[];         // file name suffix strings
+extern char              DAT_0165c260[];
+extern unsigned int      DAT_01b7bd48[];         // heap / allocator tag
+extern unsigned int      DAT_01bea064;
+extern unsigned int      DAT_01be9190[4];
+extern unsigned int      DAT_01f6c980;           // last object id loaded
+extern unsigned int      DAT_0189edb8[60];       // object ids handled by the "default load" path
+extern unsigned int      DAT_01890128[28];
+extern ObjCategoryPrefix DAT_01890198[12];
+extern ObjDlcPrefix      DAT_018901f8[2];        // .name is PTR_DAT_018901fc
+extern ObjFileEntry      DAT_0189eab8[64];
+extern unsigned int      DAT_0189e7b8[];         // ids without object files, 0xFFFFFFFF-terminated
+extern ObjIdRemap        DAT_0189e8a0[];         // 0xFFFFFFFF-terminated
+
+// Model-load parameters built on the stack by FUN_009fd350 and passed to FUN_00a17c30.
+struct ModelLoadParams {
+    int          useDefault;     // +0x00
+    unsigned int global[4];      // +0x04 copied from DAT_01be9190
+    int          flag14;         // +0x14
+    int          flag18;         // +0x18
+    int          flag1C;         // +0x1C
+    int          flag20;         // +0x20
+    unsigned int isCategoryE;    // +0x24
+};
+
+// Scalar deleting destructor at vtable slot 0 of an unknown polymorphic object.
+typedef void (__thiscall *DeletingDtorFn)(void *self, int flags);
+// Vtable slot 0x1C of the object returned by FUN_00910da0.
+typedef undefined4 (__thiscall *SpawnFn)(int *self, void *out, unsigned int *desc, int partMatrix,
+                                         undefined4 a, undefined4 b, int c, undefined2 d, int e);
 
 // 0040DE00  cObj::vf24  size=3  [class]
-float10 cObj::vf24(void)
-
-{
-  return (float10)1;
+float10 cObj::vf24()
+{
+    return 1.0;
 }
 
 // 0040DE70  cObj::vf38  size=22  [class]
-uint __fastcall cObj::vf38(uint param_1)
-
-{
-  return -(uint)((*(byte *)(param_1 + 0x4c8) & 3) == 0) & param_1;
+uint cObj::vf38()
+{
+    return ((stateFlags() & 3) == 0) ? (uint)this : 0;
 }
 
 // 0040E660  cObj::vf28  size=13  [class]
-void __thiscall cObj::vf28(int param_1,undefined4 param_2)
-
-{
-  *(undefined4 *)(param_1 + 0x4e0) = param_2;
-  return;
+void cObj::vf28(undefined4 value)
+{
+    field4E0() = value;
 }
 
 // 009F8A30  cObj::vf10  size=1  [class]
-void cObj::vf10(void)
-
-{
-  return;
+void cObj::vf10()
+{
 }
 
 // 009F8A40  cObj::vf14  size=1  [class]
-void cObj::vf14(void)
-
-{
-  return;
+void cObj::vf14()
+{
 }
 
 // 009F8A50  cObj::vf18  size=5  [class]
-void __fastcall cObj::vf18(int param_1)
-
-{
-  ushort uVar1;
-  int iVar2;
-  int iVar3;
-  
-  iVar2 = *(int *)(param_1 + 0x360);
-  iVar3 = param_1;
-  if (iVar2 != 0) {
-    iVar3 = iVar2;
-  }
-  if ((((*(short *)(iVar3 + 0x358) != 0) ||
-       (uVar1 = *(ushort *)(*(int *)(param_1 + 0x334) + 0xa2), (uVar1 & 4) == 0)) ||
-      ((uVar1 & 2) == 0)) && (iVar2 == 0)) {
-    FUN_00a16680(param_1,param_1 + 0xb0);
-  }
-  *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) | 0x10000;
-  return;
+void cObj::vf18()
+{
+    int owner = *(int *)((char *)this + 0x360); /* cModel+0x360: ? */
+    int holder = (owner != 0) ? owner : (int)this;
+
+    bool update = *(short *)(holder + 0x358) != 0; /* cModel+0x358: part count */
+    if (!update) {
+        unsigned short rootFlags =
+            *(unsigned short *)(*(int *)((char *)this + 0x334) /* cModel+0x334: root part */ + 0xA2);
+        update = (rootFlags & 4) == 0 || (rootFlags & 2) == 0;
+    }
+    if (update && owner == 0) {
+        CALL(FUN_00a16680, void (*)(cObj *, char *))(this, (char *)this + 0xB0);
+    }
+    *(unsigned int *)((char *)this + 0x364) |= 0x10000; /* cModel+0x364: flags */
 }
 
 // 009F8A60  FUN_009f8a60  size=19  [between]
-void __fastcall FUN_009f8a60(int param_1)
-
-{
-  FUN_00a19180(param_1,*(undefined4 *)(param_1 + 0x518));
-  return;
+void __fastcall FUN_009f8a60(cObj *self)
+{
+    CALL(FUN_00a19180, void (*)(cObj *, cObj *))(self, self->linkedObj());
 }
 
 // 009F8A80  FUN_009f8a80  size=42  [between]
-void __fastcall FUN_009f8a80(int param_1)
-
-{
-  if (((*(uint *)(param_1 + 0x364) & 0x1000000) != 0) &&
-     ((*(uint *)(param_1 + 0x364) & 0x40000) == 0)) {
-    FUN_00c2af30(param_1);
-  }
-  FUN_00a18770();
-  return;
+void __fastcall FUN_009f8a80(cObj *self)
+{
+    unsigned int flags = *(unsigned int *)((char *)self + 0x364); /* cModel+0x364: flags */
+    if ((flags & 0x1000000) != 0 &&
+        (*(unsigned int *)((char *)self + 0x364) & 0x40000) == 0) {
+        CALL(FUN_00c2af30, void (*)(cObj *))(self);
+    }
+    CALL(FUN_00a18770, void (*)())(); /* ECX: ? */
 }
 
 // 009F8AB0  cObj::vf3C  size=3  [class]
-void cObj::vf3C(void)
-
-{
-  return;
+void cObj::vf3C(undefined4 param_2)
+{
 }
 
 // 009FAB30  cObj::vf04  size=6  [class]
-undefined * cObj::vf04(void)
-
-{
-  return &DAT_01b7b380;
+undefined *cObj::vf04()
+{
+    return DAT_01b7b380;
 }
 
 // 009FAB40  cObj::vf2C  size=1  [class]
-void cObj::vf2C(void)
-
-{
-  return;
+void cObj::vf2C()
+{
 }
 
 // 009FAB50  cObj::vf30  size=1  [class]
-void cObj::vf30(void)
-
-{
-  return;
+void cObj::vf30()
+{
 }
 
 // 009FAB60  cObj::vf34  size=1  [class]
-void cObj::vf34(void)
-
-{
-  return;
+void cObj::vf34()
+{
 }
 
 // 009FAB70  FUN_009fab70  size=40  [between]
-void __fastcall FUN_009fab70(int *param_1)
-
-{
-  if ((*(byte *)(param_1 + 0x132) & 2) == 0) {
-    *(byte *)(param_1 + 0x132) = *(byte *)(param_1 + 0x132) | 2;
-    (**(code **)(*param_1 + 0x20))();
-                    /* WARNING: Could not recover jumptable at 0x009fab94. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(code **)(*param_1 + 0xc))();
-    return;
-  }
-  return;
+void __fastcall FUN_009fab70(cObj *self)
+{
+    if ((self->stateFlags() & 2) == 0) {
+        self->stateFlags() |= 2;
+        self->vf20();
+        self->vf0C();  // tail call
+    }
 }
 
 // 009FABA0  cObj::vf1C  size=8  [class]
-void __fastcall cObj::vf1C(int param_1)
-
-{
-  *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) | 1;
-  return;
+void cObj::vf1C()
+{
+    objFlags() |= 1;
 }
 
 // 009FABB0  cObj::vf20  size=8  [class]
-void __fastcall cObj::vf20(int param_1)
-
-{
-  *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) & 0xfffffffe;
-  return;
+void cObj::vf20()
+{
+    objFlags() &= 0xFFFFFFFE;
 }
 
 // 009FD150  cObj::cObj  size=141  [class]
-undefined4 * __fastcall cObj::cObj(undefined4 *param_1)
-
-{
-  cModel::cModel();
-  *param_1 = vftable;
-  FUN_00de3530();
-  param_1[0x133] = 0;
-  param_1[0x134] = 0;
-  FUN_00a09be0();
-  param_1[0x12d] = 0xffffffff;
-  param_1[0x138] = 0xffffffff;
-  param_1[0x148] = 0;
-  param_1[0x13c] = 0;
-  param_1[0x124] = 0;
-  param_1[0x13b] = 0;
-  param_1[0x139] = 0;
-  param_1[0x13a] = 0;
-  param_1[0x137] = 0;
-  *(undefined1 *)((int)param_1 + 0x4c9) = 0;
-  param_1[0x146] = 0;
-  param_1[0x145] = 0;
-  param_1[0x130] = 1;
-  return param_1;
+cObj::cObj()
+{
+    // cModel::cModel() -- base constructor, emitted by the compiler
+    // vftable = cObj::vftable
+    CALL(FUN_00de3530, void (*)())(); /* ECX: ? (embedded member ctor) */
+    *(int *)&objInfo() = 0;
+    field4D0() = 0;
+    CALL(FUN_00a09be0, void (*)())(); /* ECX: ? (embedded member ctor) */
+    objId() = 0xFFFFFFFF;
+    field4E0() = -1;
+    filesAcquired() = 0;
+    field4F0() = 0;
+    field490() = 0;
+    nameHash() = 0;
+    field4E4() = 0;
+    field4E8() = 0;
+    ownedObj4DC() = 0;
+    field4C9() = 0;
+    linkedObj() = 0;
+    constructed() = 0;
+    objFlags() = 1;
 }
 
 // 009FD1E0  cObj::destruct_2  size=93  [class]
-undefined4 * __thiscall cObj::destruct_2(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  if (param_1[0x145] != 0) {
-    FUN_00dd5650(&DAT_0165bed8);
-  }
-  param_1[0x13d] = cXmlBinary::vftable;
-  FUN_00e04180();
-  param_1[0x13d] = cXml::vftable;
-  cModel::~cModel();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 cObj::destruct(byte flags)
+{
+    // vftable = cObj::vftable
+    if (constructed() != 0) {
+        CALL(FUN_00dd5650, void (*)(void *))(DAT_0165bed8);
+    }
+    // xml() (+0x4F4): vftable = cXmlBinary::vftable
+    CALL(FUN_00e04180, void (*)())(); /* ECX: ? (xml member dtor) */
+    // xml() (+0x4F4): vftable = cXml::vftable
+    this->cModel::~cModel();
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4)this;
 }
 
 // 009FD240  FUN_009fd240  size=269  [between]
-undefined4 __fastcall FUN_009fd240(int param_1)
-
-{
-  int iVar1;
-  float10 fVar2;
-  
-  if ((((*(int *)(param_1 + 0x370) != 0) || (iVar1 = *(int *)(param_1 + 0x330), iVar1 == 0)) ||
-      ((*(byte *)(param_1 + 0x4c0) & 2) != 0)) || (*(int *)(iVar1 + 0xd8) == 0)) {
-    return 1;
-  }
-  if ((0 < *(int *)(iVar1 + 0xcc)) && (fVar2 = (float10)FUN_00a13390(), fVar2 < (float10)0.1)) {
-    return 1;
-  }
-  iVar1 = FUN_00dd3500(0xd0,&DAT_01b7bd48);
-  if (iVar1 == 0) {
-    iVar1 = 0;
-  }
-  else {
-    iVar1 = FUN_00a1ad60();
-  }
-  *(int *)(param_1 + 0x370) = iVar1;
-  if (iVar1 != 0) {
-    iVar1 = FUN_00a1bef0(param_1,*(undefined4 *)(param_1 + 0x330),&DAT_01b7bd48);
-    if (iVar1 == 0) {
-      iVar1 = *(int *)(param_1 + 0x370);
-      if (iVar1 != 0) {
-        thunk_FUN_00a1bdd0();
-        FUN_00dd4920(iVar1);
-        *(undefined4 *)(param_1 + 0x370) = 0;
-      }
-      return 0;
-    }
-    if (*(undefined4 **)(param_1 + 0x370) != (undefined4 *)0x0) {
-      *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) | 0x400000;
-      **(undefined4 **)(param_1 + 0x370) = 0;
-    }
-    if (*(int *)(param_1 + 0x370) != 0) {
-      *(undefined4 *)(*(int *)(param_1 + 0x370) + 4) = 1;
-      *(undefined4 *)(*(int *)(param_1 + 0x370) + 8) = 1;
-    }
-    if ((*(byte *)(param_1 + 0x4a0) & 8) != 0) {
-      *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) & 0xffbfffff;
-      return 1;
-    }
-    *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) | 0x400000;
-    return 1;
-  }
-  return 0;
+undefined4 __fastcall FUN_009fd240(cObj *self)
+{
+    int *attachment = (int *)((char *)self + 0x370); /* cModel+0x370: ? */
+    int modelData;
+
+    if (*attachment != 0 ||
+        (modelData = *(int *)((char *)self + 0x330) /* cModel+0x330: model data */) == 0 ||
+        (*(unsigned char *)&self->objFlags() & 2) != 0 ||
+        *(int *)(modelData + 0xD8) == 0) {
+        return 1;
+    }
+    if (0 < *(int *)(modelData + 0xCC)) {
+        float10 value = CALL(FUN_00a13390, float10 (*)())(); /* ECX: ? */
+        if (value < 0.1) {
+            return 1;
+        }
+    }
+
+    int mem = CALL(FUN_00dd3500, int (*)(int, unsigned int *))(0xD0, DAT_01b7bd48);
+    int created;
+    if (mem == 0) {
+        created = 0;
+    } else {
+        created = (int)CALL(FUN_00a1ad60, undefined4 *(*)())(); /* ECX: ? (constructs at mem) */
+    }
+    *attachment = created;
+    if (created == 0) {
+        return 0;
+    }
+
+    if (CALL(FUN_00a1bef0, int (*)(cObj *, int, unsigned int *))(
+            self, *(int *)((char *)self + 0x330), DAT_01b7bd48) == 0) {
+        int obj = *attachment;
+        if (obj != 0) {
+            CALL(thunk_FUN_00a1bdd0, void (*)())(); /* ECX: ? (destroys obj) */
+            FUN_00dd4920(obj);
+            *attachment = 0;
+        }
+        return 0;
+    }
+
+    unsigned int *flags364 = (unsigned int *)((char *)self + 0x364); /* cModel+0x364: flags */
+    if ((int *)*attachment != 0) {
+        *flags364 |= 0x400000;
+        *(int *)*attachment = 0;
+    }
+    if (*attachment != 0) {
+        *(int *)(*attachment + 4) = 1;
+        *(int *)(*attachment + 8) = 1;
+    }
+    if ((*(unsigned char *)&self->setFlags() & 8) != 0) {
+        *flags364 &= 0xFFBFFFFF;
+        return 1;
+    }
+    *flags364 |= 0x400000;
+    return 1;
 }
 
 // 009FD350  FUN_009fd350  size=641  [between]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-undefined4 __thiscall
-FUN_009fd350(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5)
-
-{
-  int iVar1;
-  uint uVar2;
-  uint *puVar3;
-  uint uVar4;
-  int local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  undefined4 local_14;
-  undefined4 local_10;
-  undefined4 local_c;
-  undefined4 local_8;
-  uint local_4;
-  
-  iVar1 = 1;
-  local_28 = iVar1;
-  if ((param_1[0x130] & 2U) == 0) {
-    uVar4 = 0;
-    do {
-      local_28 = iVar1;
-      if (*(int *)((int)&DAT_0189edb8 + uVar4) == param_1[300]) break;
-      uVar4 = uVar4 + 4;
-      local_28 = 0;
-    } while (uVar4 < 0xf0);
-  }
-  if (*(int *)(param_2 + 0x68) < 1) {
-    local_28 = iVar1;
-  }
-  param_1[0x130] = param_1[0x130] & 0xfffffffd;
-  _DAT_01f6c980 = param_1[300];
-  local_24 = _DAT_01be9190;
-  local_20 = _DAT_01be9194;
-  local_1c = _DAT_01be9198;
-  uVar4 = param_1[300] & 0xffff0000;
-  local_18 = _DAT_01be919c;
-  if (((uVar4 == 0x90000) || (uVar4 == 0xf0000)) || (uVar4 == 0xd0000)) {
-    local_c = 1;
-    local_14 = 1;
-  }
-  else {
-    local_c = 0;
-    local_14 = 0;
-  }
-  local_4 = (uint)((param_1[300] & 0xf0000U) == 0xe0000);
-  if ((uVar4 == 0x90000) || (local_10 = 1, uVar4 == 0xa0000)) {
-    local_10 = 0;
-  }
-  if ((0 < *(int *)(param_2 + 0xcc)) || (local_8 = 1, uVar4 == 0x50000)) {
-    local_8 = 0;
-  }
-  iVar1 = FUN_00a17c30(param_2,param_3,param_4,param_5,&local_28,&DAT_01b7bd48);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  if (param_1[300] == 0x11011) {
-    FUN_00a0ba60(1);
-  }
-  if (local_28 == 1) {
-    param_1[0x130] = param_1[0x130] | 2;
-    return 1;
-  }
-  FUN_00a13340((param_1[300] & 0xff000000U) != 0);
-  uVar2 = param_1[300] & 0xf0000;
-  if (((((uVar2 == 0x10000) || (uVar2 == 0x20000)) || (uVar2 == 0xd0000)) ||
-      ((uVar2 == 0xf0000 || (uVar2 == 0xe0000)))) || (uVar2 == 0x70000)) {
-    FUN_00a13340(1);
-  }
-  uVar2 = param_1[300];
-  if (((uVar2 & 0xf0000) == 0x50000) || ((uVar2 & 0xf0000) == 0xa0000)) {
-    param_1[0xd0] = 1;
-  }
-  puVar3 = &DAT_01890128;
-  do {
-    if (uVar2 == *puVar3) {
-      FUN_00a0bf60(uVar2 == 0x20110,1);
-      break;
-    }
-    puVar3 = puVar3 + 1;
-  } while ((int)puVar3 < 0x1890198);
-  if ((uVar4 == 0x90000) || (param_1[300] == 0xd5500)) {
-    param_1[0xd9] = param_1[0xd9] | 0x400;
-  }
-  else {
-    param_1[0xd9] = param_1[0xd9] & 0xfffffbff;
-  }
-  if ((*(byte *)(param_1 + 0x130) & 2) != 0) {
-    (**(code **)(*param_1 + 0x20))();
-  }
-  if ((param_1[0x12d] & 0xf0000U) == 0x60000) {
-    iVar1 = FUN_00a0bd30();
-    if (iVar1 != 0) {
-      *(undefined1 *)((int)param_1 + 0x44d) = 0;
-    }
-    iVar1 = FUN_00a0bce0();
-    if ((iVar1 != 0) && (iVar1 = FUN_00a0bc90(), iVar1 != 0)) {
-      *(undefined1 *)((int)param_1 + 0x44d) = 4;
-    }
-  }
-  return 1;
+// __thiscall in the binary: self arrives in ECX.
+int FUN_009fd350(cObj *self, int modelData, undefined4 texFileA, undefined4 texFileB,
+                 undefined4 paramFile)
+{
+    ModelLoadParams params;
+
+    params.useDefault = 1;
+    if ((self->objFlags() & 2) == 0) {
+        unsigned int i = 0;
+        do {
+            params.useDefault = 1;
+            if (DAT_0189edb8[i] == self->modelObjId()) break;
+            i++;
+            params.useDefault = 0;
+        } while (i < 60);
+    }
+    if (*(int *)(modelData + 0x68) < 1) {
+        params.useDefault = 1;
+    }
+    self->objFlags() &= 0xFFFFFFFD;
+    DAT_01f6c980 = self->modelObjId();
+    params.global[0] = DAT_01be9190[0];
+    params.global[1] = DAT_01be9190[1];
+    params.global[2] = DAT_01be9190[2];
+    unsigned int idHigh = self->modelObjId() & 0xFFFF0000;
+    params.global[3] = DAT_01be9190[3];
+    if (idHigh == 0x90000 || idHigh == 0xF0000 || idHigh == 0xD0000) {
+        params.flag1C = 1;
+        params.flag14 = 1;
+    } else {
+        params.flag1C = 0;
+        params.flag14 = 0;
+    }
+    params.isCategoryE = (unsigned int)((self->modelObjId() & 0xF0000) == 0xE0000);
+    params.flag18 = (idHigh == 0x90000 || idHigh == 0xA0000) ? 0 : 1;
+    params.flag20 = (0 < *(int *)(modelData + 0xCC) || idHigh == 0x50000) ? 0 : 1;
+
+    if (CALL(FUN_00a17c30, int (*)(int, undefined4, undefined4, undefined4, ModelLoadParams *,
+                                   unsigned int *))(modelData, texFileA, texFileB, paramFile,
+                                                    &params, DAT_01b7bd48) == 0) {
+        return 0;
+    }
+    if (self->modelObjId() == 0x11011) {
+        CALL(FUN_00a0ba60, void (*)(int))(1); /* ECX: ? */
+    }
+    if (params.useDefault == 1) {
+        self->objFlags() |= 2;
+        return 1;
+    }
+
+    CALL(FUN_00a13340, void (*)(int))((self->modelObjId() & 0xFF000000) != 0); /* ECX: ? */
+    unsigned int category = self->modelObjId() & 0xF0000;
+    if (category == 0x10000 || category == 0x20000 || category == 0xD0000 ||
+        category == 0xF0000 || category == 0xE0000 || category == 0x70000) {
+        CALL(FUN_00a13340, void (*)(int))(1); /* ECX: ? */
+    }
+    unsigned int id = self->modelObjId();
+    if ((id & 0xF0000) == 0x50000 || (id & 0xF0000) == 0xA0000) {
+        *(int *)((char *)self + 0x340) = 1; /* cModel+0x340: ? */
+    }
+    unsigned int *entry = DAT_01890128;
+    do {
+        if (id == *entry) {
+            CALL(FUN_00a0bf60, void (*)(int, int))(id == 0x20110, 1); /* ECX: ? */
+            break;
+        }
+        entry++;
+    } while ((int)entry < 0x1890198);
+
+    unsigned int *flags364 = (unsigned int *)((char *)self + 0x364); /* cModel+0x364: flags */
+    if (idHigh == 0x90000 || self->modelObjId() == 0xD5500) {
+        *flags364 |= 0x400;
+    } else {
+        *flags364 &= 0xFFFFFBFF;
+    }
+    if ((*(unsigned char *)&self->objFlags() & 2) != 0) {
+        self->vf20();
+    }
+    if ((self->objId() & 0xF0000) == 0x60000) {
+        if (CALL(FUN_00a0bd30, int (*)())() != 0) { /* ECX: ? */
+            *((unsigned char *)self + 0x44D) = 0; /* cModel+0x44D: ? */
+        }
+        if (CALL(FUN_00a0bce0, int (*)())() != 0 && /* ECX: ? */
+            CALL(FUN_00a0bc90, int (*)())() != 0) { /* ECX: ? */
+            *((unsigned char *)self + 0x44D) = 4; /* cModel+0x44D: ? */
+        }
+    }
+    return 1;
 }
 
 // 009FD5E0  FUN_009fd5e0  size=69  [between]
-bool __thiscall
-FUN_009fd5e0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5
-            ,undefined4 param_6)
-
-{
-  int iVar1;
-  
-  iVar1 = cModelDataManager::EntryModelData(param_2,param_6);
-  if (iVar1 == 0) {
-    return false;
-  }
-  *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) & 0xfffffffd;
-  iVar1 = FUN_009fd350(iVar1,param_3,param_4,param_5);
-  return iVar1 != 0;
+// __thiscall in the binary: self arrives in ECX.
+bool FUN_009fd5e0(cObj *self, unsigned int modelFile, undefined4 texFileA, undefined4 texFileB,
+                  undefined4 paramFile, unsigned int cutInfoFile)
+{
+    int modelData = cModelDataManager::EntryModelData(modelFile, cutInfoFile);
+    if (modelData == 0) {
+        return false;
+    }
+    self->objFlags() &= 0xFFFFFFFD;
+    return FUN_009fd350(self, modelData, texFileA, texFileB, paramFile) != 0;
 }
 
 // 009FD630  FUN_009fd630  size=102  [between]
-void __thiscall FUN_009fd630(int param_1,int param_2)
-
-{
-  if ((*(byte *)(param_1 + 0x4c0) & 2) == 0) {
-    *(undefined4 *)(param_1 + 0x4b4) = *(undefined4 *)(param_2 + 0x4b4);
-    *(undefined4 *)(param_1 + 0x4b8) = *(undefined4 *)(param_2 + 0x4b8);
-  }
-  *(undefined4 *)(param_1 + 0x4bc) = *(undefined4 *)(param_2 + 0x4bc);
-  *(undefined4 *)(param_1 + 0x51c) = *(undefined4 *)(param_2 + 0x51c);
-  FUN_00a12890(param_2);
-  *(undefined4 *)(param_1 + 0x4e4) = *(undefined4 *)(param_2 + 0x4e4);
-  *(undefined4 *)(param_1 + 0x4e8) = *(undefined4 *)(param_2 + 0x4e8);
-  return;
+// __thiscall in the binary: self arrives in ECX.
+void FUN_009fd630(cObj *self, cObj *source)
+{
+    if ((*(unsigned char *)&self->objFlags() & 2) == 0) {
+        self->objId() = source->objId();
+        self->objSubId() = source->objSubId();
+    }
+    self->baseObjId() = source->baseObjId();
+    self->field51C() = source->field51C();
+    CALL(FUN_00a12890, void (*)(cObj *))(source); /* ECX: ? */
+    self->field4E4() = source->field4E4();
+    self->field4E8() = source->field4E8();
 }
 
 // 009FD6A0  FUN_009fd6a0  size=30  [between]
-void __fastcall FUN_009fd6a0(int param_1)
-
-{
-  if ((*(int *)(param_1 + 0x518) != 0) && ((*(byte *)(*(int *)(param_1 + 0x518) + 0x4c8) & 3) != 0))
-  {
-    *(undefined4 *)(param_1 + 0x518) = 0;
-  }
-  return;
+void __fastcall FUN_009fd6a0(cObj *self)
+{
+    if (self->linkedObj() != 0 && (self->linkedObj()->stateFlags() & 3) != 0) {
+        self->linkedObj() = 0;
+    }
 }
 
 // 009FD6C0  cObj::vf0C  size=62  [class]
-void __fastcall cObj::vf0C(int param_1)
-
-{
-  if (*(int *)(param_1 + 0x4dc) != 0) {
-    FUN_00eaa6e0(0x3f800000,0);
-  }
-  if (*(undefined4 **)(param_1 + 0x4dc) != (undefined4 *)0x0) {
-    (**(code **)**(undefined4 **)(param_1 + 0x4dc))(1);
-    *(undefined4 *)(param_1 + 0x4dc) = 0;
-  }
-  return;
+void cObj::vf0C()
+{
+    if (ownedObj4DC() != 0) {
+        CALL(FUN_00eaa6e0, void (*)(unsigned int, int))(0x3F800000 /* 1.0f */, 0); /* ECX: ? */
+    }
+    void *owned = ownedObj4DC();
+    if (owned != 0) {
+        (*(DeletingDtorFn *)*(void **)owned)(owned, 1);
+        ownedObj4DC() = 0;
+    }
 }
 
 // 009FD700  FUN_009fd700  size=323  [callgraph]
-void __fastcall FUN_009fd700(int param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  
-  uVar3 = *(uint *)(param_1 + 0x4b4);
-  uVar1 = uVar3 & 0xf0000;
-  if (uVar1 < 0xa0001) {
-    if (uVar1 == 0xa0000) {
-      *(undefined1 *)(param_1 + 0x44d) = 5;
-      return;
-    }
-    if (uVar1 < 0x30001) {
-      if (uVar1 == 0x30000) {
-        iVar2 = FUN_009f9370(uVar3);
-        *(bool *)(param_1 + 0x44d) = iVar2 == 0;
-        return;
-      }
-      if (uVar1 == 0x10000) {
-        *(undefined1 *)(param_1 + 0x44d) = 0;
-        return;
-      }
-      if (uVar1 == 0x20000) {
-        *(undefined1 *)(param_1 + 0x44d) = 1;
-        return;
-      }
-    }
-    else if (uVar1 == 0x90000) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-      return;
-    }
-  }
-  else if (uVar1 == 0xd0000) {
-    if ((uVar3 & 0xf000) == 0x5000) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-    }
-    if ((uVar3 & 0xffff) == 0x401) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-    }
-    if ((uVar3 & 0xffff) == 0x402) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-    }
-  }
-  else if (uVar1 == 0xe0000) {
-    if ((uVar3 & 0xf000) == 0x5000) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-      return;
-    }
-  }
-  else if (uVar1 == 0xf0000) {
-    if ((uVar3 & 0xf000) == 0x5000) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-    }
-    uVar3 = uVar3 & 0xffff;
-    if ((0x3ff < uVar3) && (uVar3 < 0x411)) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-    }
-    if (uVar3 == 0x41a) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-    }
-    if ((0xd3f < uVar3) && (uVar3 < 0xd43)) {
-      *(undefined1 *)(param_1 + 0x44d) = 3;
-      return;
-    }
-  }
-  return;
+void __fastcall FUN_009fd700(cObj *self)
+{
+    unsigned char *kind = (unsigned char *)self + 0x44D; /* cModel+0x44D: ? */
+    unsigned int id = self->objId();
+    unsigned int low;
+
+    switch (id & 0xF0000) {
+    case 0x10000:
+        *kind = 0;
+        return;
+    case 0x20000:
+        *kind = 1;
+        return;
+    case 0x30000:
+        *kind = !FUN_009f9370(id);
+        return;
+    case 0x90000:
+        *kind = 3;
+        return;
+    case 0xA0000:
+        *kind = 5;
+        return;
+    case 0xD0000:
+        if ((id & 0xF000) == 0x5000) *kind = 3;
+        if ((id & 0xFFFF) == 0x401) *kind = 3;
+        if ((id & 0xFFFF) == 0x402) *kind = 3;
+        break;
+    case 0xE0000:
+        if ((id & 0xF000) == 0x5000) {
+            *kind = 3;
+            return;
+        }
+        break;
+    case 0xF0000:
+        if ((id & 0xF000) == 0x5000) *kind = 3;
+        low = id & 0xFFFF;
+        if (0x3FF < low && low < 0x411) *kind = 3;
+        if (low == 0x41A) *kind = 3;
+        if (0xD3F < low && low < 0xD43) {
+            *kind = 3;
+            return;
+        }
+        break;
+    }
 }
 
 // 009FD850  FUN_009fd850  size=33  [callgraph]
-bool __thiscall FUN_009fd850(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = FUN_00e03ea0(param_2);
-  return *(int *)(param_1 + 0x4ec) == iVar1;
+// __thiscall in the binary: self arrives in ECX.
+bool FUN_009fd850(cObj *self, undefined4 name)
+{
+    int hash = CALL(FUN_00e03ea0, int (*)(undefined4))(name);
+    return self->nameHash() == hash;
 }
 
 // 009FD880  FUN_009fd880  size=25  [callgraph]
-bool __fastcall FUN_009fd880(int param_1)
-
-{
-  if (*(int *)(param_1 + 0x4dc) == 0) {
-    return false;
-  }
-  return *(int *)(*(int *)(param_1 + 0x4dc) + 0x98) != 0;
+bool __fastcall FUN_009fd880(cObj *self)
+{
+    if (self->ownedObj4DC() == 0) {
+        return false;
+    }
+    return *(int *)((char *)self->ownedObj4DC() + 0x98) != 0;
 }
 
 // 009FD8A0  FUN_009fd8a0  size=695  [callgraph]
-int __thiscall FUN_009fd8a0(int param_1,float *param_2,float *param_3,float *param_4,float *param_5)
-
-{
-  short sVar1;
-  int iVar2;
-  float fVar3;
-  float fVar4;
-  int iVar5;
-  int iVar6;
-  float local_88;
-  int local_80;
-  int local_7c;
-  float local_70;
-  float local_6c;
-  float local_68;
-  undefined4 local_64;
-  float fStack_60;
-  float fStack_5c;
-  float fStack_58;
-  float fStack_54;
-  float local_50;
-  float local_4c;
-  float local_48;
-  float local_40;
-  float local_3c;
-  float local_38;
-  float local_30;
-  float local_2c;
-  float local_28;
-  float local_1c;
-  
-  iVar6 = 0;
-  if (*(int *)(param_1 + 0x330) != 0) {
-    iVar2 = *(int *)(param_1 + 0x334);
-    sVar1 = *(short *)(param_1 + 0x324);
-    local_7c = 0;
-    local_50 = *param_5 - *param_4;
-    local_4c = param_5[1] - param_4[1];
-    local_48 = param_5[2] - param_4[2];
-    if (0 < sVar1) {
-      local_80 = 0;
-      do {
-        if ((iVar6 < 0) || (*(short *)(param_1 + 0x324) <= iVar6)) {
-          iVar5 = 0;
-        }
-        else {
-          iVar5 = *(int *)(param_1 + 800) + local_80;
-        }
-        if (((*(byte *)(iVar5 + 0x38) & 1) != 0) &&
-           (iVar5 = FUN_00a0a890(&local_40,&local_30,iVar6), iVar5 != 0)) {
-          local_88 = local_30 - local_40;
-          fVar4 = local_2c - local_3c;
-          fVar3 = local_28 - local_38;
-          local_1c = local_3c * 0.5;
-          local_70 = local_40 * 0.5 + local_88;
-          local_6c = local_1c + fVar4;
-          local_68 = local_38 * 0.5 + fVar3;
-          if (local_88 <= fVar4) {
-            local_88 = fVar4;
-          }
-          if (local_88 <= fVar3) {
-            local_88 = fVar3;
-          }
-          local_64 = 0x3f800000;
-          D3DXVec3TransformNormal(&local_70,&local_70,iVar2 + 0x10);
-          local_70 = *(float *)(iVar2 + 0x40) + local_70;
-          local_6c = *(float *)(iVar2 + 0x44) + local_6c;
-          local_68 = *(float *)(iVar2 + 0x48) + local_68;
-          if ((0.0 <= (local_68 - param_4[2]) * local_48 +
-                      (local_70 - *param_4) * local_50 + (local_6c - param_4[1]) * local_4c) &&
-             (iVar5 = FUN_00d97a20(&fStack_60,param_4,param_5,&local_70,local_88), iVar5 != 0)) {
-            if (local_7c == 0) {
-              *param_2 = fStack_60;
-              local_7c = 1;
-              param_2[1] = fStack_5c;
-              param_2[2] = fStack_58;
-              param_2[3] = fStack_54;
-              *param_3 = local_88;
-            }
-            else if (SQRT((param_4[1] - fStack_5c) * (param_4[1] - fStack_5c) +
-                          (*param_4 - fStack_60) * (*param_4 - fStack_60) +
-                          (param_4[2] - fStack_58) * (param_4[2] - fStack_58)) <
-                     SQRT((param_4[1] - param_2[1]) * (param_4[1] - param_2[1]) +
-                          (*param_4 - *param_2) * (*param_4 - *param_2) +
-                          (param_4[2] - param_2[2]) * (param_4[2] - param_2[2]))) {
-              *param_2 = fStack_60;
-              param_2[1] = fStack_5c;
-              param_2[2] = fStack_58;
-              param_2[3] = fStack_54;
-              *param_3 = local_88;
-            }
-          }
-        }
-        local_80 = local_80 + 0x70;
-        iVar6 = iVar6 + 1;
-      } while (iVar6 < sVar1);
-    }
-    return local_7c;
-  }
-  return 0;
+// __thiscall in the binary: self arrives in ECX.
+// Tests the segment from->to against a sphere around every enabled part; keeps the hit nearest
+// to `from` in outHit (4 floats) and its radius in outRadius. Returns 1 if anything was hit.
+int FUN_009fd8a0(cObj *self, float *outHit, float *outRadius, float *from, float *to)
+{
+    int partIndex = 0;
+    if (*(int *)((char *)self + 0x330) == 0) { /* cModel+0x330: model data */
+        return 0;
+    }
+
+    int root = *(int *)((char *)self + 0x334);             /* cModel+0x334: root part */
+    short partCount = *(short *)((char *)self + 0x324);    /* cModel+0x324: mesh count */
+    int found = 0;
+    float dirX = to[0] - from[0];
+    float dirY = to[1] - from[1];
+    float dirZ = to[2] - from[2];
+
+    if (0 < partCount) {
+        int partOffset = 0;
+        do {
+            int part;
+            if (partIndex < 0 || *(short *)((char *)self + 0x324) <= partIndex) {
+                part = 0;
+            } else {
+                part = *(int *)((char *)self + 0x320) /* cModel+0x320: meshes */ + partOffset;
+            }
+
+            float bmin[3];
+            float bmax[3];
+            if ((*(unsigned char *)(part + 0x38) & 1) != 0 &&
+                CALL(FUN_00a0a890, int (*)(float *, float *, int))(bmin, bmax, partIndex) != 0) {
+                float radius = bmax[0] - bmin[0];
+                float sizeY = bmax[1] - bmin[1];
+                float sizeZ = bmax[2] - bmin[2];
+                float halfMinY = bmin[1] * 0.5f;
+                float center[4];
+                center[0] = bmin[0] * 0.5f + radius;
+                center[1] = halfMinY + sizeY;
+                center[2] = bmin[2] * 0.5f + sizeZ;
+                if (radius <= sizeY) radius = sizeY;
+                if (radius <= sizeZ) radius = sizeZ;
+                *(unsigned int *)&center[3] = 0x3F800000;  // 1.0f
+                D3DXVec3TransformNormal(center, center, (void *)(root + 0x10));
+                center[0] = *(float *)(root + 0x40) + center[0];
+                center[1] = *(float *)(root + 0x44) + center[1];
+                center[2] = *(float *)(root + 0x48) + center[2];
+
+                float hit[4];
+                if (0.0 <= (center[2] - from[2]) * dirZ + (center[0] - from[0]) * dirX +
+                               (center[1] - from[1]) * dirY &&
+                    FUN_00d97a20(hit, from, to, center, radius) != 0) {
+                    if (found == 0) {
+                        outHit[0] = hit[0];
+                        found = 1;
+                        outHit[1] = hit[1];
+                        outHit[2] = hit[2];
+                        outHit[3] = hit[3];
+                        *outRadius = radius;
+                    } else if (sqrt((from[1] - hit[1]) * (from[1] - hit[1]) +
+                                    (from[0] - hit[0]) * (from[0] - hit[0]) +
+                                    (from[2] - hit[2]) * (from[2] - hit[2])) <
+                               sqrt((from[1] - outHit[1]) * (from[1] - outHit[1]) +
+                                    (from[0] - outHit[0]) * (from[0] - outHit[0]) +
+                                    (from[2] - outHit[2]) * (from[2] - outHit[2]))) {
+                        outHit[0] = hit[0];
+                        outHit[1] = hit[1];
+                        outHit[2] = hit[2];
+                        outHit[3] = hit[3];
+                        *outRadius = radius;
+                    }
+                }
+            }
+            partOffset += 0x70;
+            partIndex++;
+        } while (partIndex < partCount);
+    }
+    return found;
 }
 
 // 009FDB60  FUN_009fdb60  size=528  [callgraph]
-/* WARNING: Removing unreachable block (ram,0x009fdd41) */
-
-void __thiscall FUN_009fdb60(int param_1,undefined4 param_2,short *param_3)
-
-{
-  undefined4 *puVar1;
-  int iVar2;
-  int iVar3;
-  bool bVar4;
-  int iVar5;
-  int *piVar6;
-  undefined4 uVar7;
-  int iVar8;
-  int local_114;
-  int local_110;
-  undefined1 local_e8 [4];
-  undefined1 local_e4 [4];
-  uint local_e0 [55];
-  
-  FUN_0118f7b0();
-  if ((char)param_3[4] != '\0') {
-    iVar2 = *(int *)(param_1 + 0x330);
-    if (iVar2 == 0) {
-      bVar4 = false;
-    }
-    else {
-      bVar4 = 0 < *(int *)(iVar2 + 0xcc);
-    }
-    iVar3 = *(int *)(iVar2 + 0xb0);
-    iVar2 = *(int *)(iVar2 + 0xa0);
-    if (*(int *)(param_1 + 0x4b4) != 0x2020c) {
-      FUN_009f8ce0(param_3);
-    }
-    local_114 = 0;
-    if (0 < param_3[3]) {
-      do {
-        iVar8 = (param_3[2] + local_114) * 0x60 + iVar3;
-        puVar1 = (undefined4 *)(iVar2 + (param_3[2] + local_114) * 0x14);
-        switch(*(undefined1 *)(iVar8 + 0x54)) {
-        case 0:
-switchD_009fdc2b_caseD_0:
-          FUN_00930610((int)*(short *)(iVar8 + 0x50),*(undefined4 *)(iVar8 + 0x4c),local_e0);
-          FUN_0092f970(*(undefined2 *)(iVar8 + 0x52),local_e8);
-          local_110 = param_1;
-          if (*param_3 != -1) {
-            iVar5 = (int)*param_3;
-            iVar8 = *(int *)(param_1 + 0x360);
-            if (*(int *)(param_1 + 0x360) == 0) {
-              iVar8 = param_1;
-            }
-            if ((iVar5 < 0) || (*(short *)(iVar8 + 0x358) <= iVar5)) {
-              local_110 = 0;
-            }
-            else {
-              local_110 = iVar5 * 0xb0 + *(int *)(iVar8 + 0x350);
-            }
-          }
-          piVar6 = (int *)FUN_009f8b60();
-          local_e0[0] = *piVar6 << 0x10 | 0xb;
-          piVar6 = (int *)FUN_00910da0();
-          uVar7 = (**(code **)(*piVar6 + 0x1c))
-                            (local_e4,local_e0,local_110 + 0x10,*puVar1,puVar1[2],(int)puVar1[3] / 3
-                             ,*(undefined2 *)(puVar1 + 1),0);
-          FUN_00910ab0(uVar7);
-          break;
-        case 2:
-          if (bVar4) goto switchD_009fdc2b_caseD_0;
-          break;
-        case 3:
-          if (!bVar4) goto switchD_009fdc2b_caseD_0;
-        }
-        local_114 = local_114 + 1;
-      } while (local_114 < param_3[3]);
-    }
-  }
-  return;
+// __thiscall in the binary: self arrives in ECX.
+void FUN_009fdb60(cObj *self, undefined4 param_2, short *entry)
+{
+    unsigned char tmpA[4];
+    unsigned char tmpB[4];
+    unsigned int desc[55];
+
+    CALL(FUN_0118f7b0, void (*)())(); /* ECX: ? */
+    if ((char)entry[4] == '\0') {
+        return;
+    }
+
+    int modelData = *(int *)((char *)self + 0x330); /* cModel+0x330: model data */
+    bool hasCC;
+    if (modelData == 0) {
+        hasCC = false;
+    } else {
+        hasCC = 0 < *(int *)(modelData + 0xCC);
+    }
+    int records = *(int *)(modelData + 0xB0);   // 0x60-byte records
+    int placements = *(int *)(modelData + 0xA0); // 0x14-byte records
+    if (self->objId() != 0x2020C) {
+        CALL(FUN_009f8ce0, void (*)(short *))(entry); /* ECX: ? */
+    }
+
+    int i = 0;
+    if (0 < entry[3]) {
+        do {
+            int record = (entry[2] + i) * 0x60 + records;
+            undefined4 *placement = (undefined4 *)(placements + (entry[2] + i) * 0x14);
+            unsigned char mode = *(unsigned char *)(record + 0x54);
+            if (mode == 0 || (mode == 2 && hasCC) || (mode == 3 && !hasCC)) {
+                CALL(FUN_00930610, void (*)(int, undefined4, unsigned int *))(
+                    (int)*(short *)(record + 0x50), *(undefined4 *)(record + 0x4C), desc);
+                CALL(FUN_0092f970, void (*)(undefined2, unsigned char *))(
+                    *(undefined2 *)(record + 0x52), tmpA);
+
+                int partBase = (int)self;
+                if (*entry != -1) {
+                    int partNo = (int)*entry;
+                    int holder = *(int *)((char *)self + 0x360); /* cModel+0x360: ? */
+                    if (*(int *)((char *)self + 0x360) == 0) {
+                        holder = (int)self;
+                    }
+                    if (partNo < 0 || *(short *)(holder + 0x358) <= partNo) {
+                        partBase = 0;
+                    } else {
+                        partBase = partNo * 0xB0 + *(int *)(holder + 0x350);
+                    }
+                }
+                int *typeId = CALL(FUN_009f8b60, int *(*)())(); /* ECX: ? */
+                desc[0] = *typeId << 0x10 | 0xB;
+                int *spawner = (int *)FUN_00910da0();
+                SpawnFn spawn = *(SpawnFn *)(*spawner + 0x1C);
+                undefined4 spawned = spawn(spawner, tmpB, desc, partBase + 0x10, placement[0],
+                                           placement[2], (int)placement[3] / 3,
+                                           *(undefined2 *)(placement + 1), 0);
+                CALL(FUN_00910ab0, void (*)(undefined4))(spawned); /* ECX: ? */
+            }
+            i++;
+        } while (i < entry[3]);
+    }
 }
 
 // 009FDD80  FUN_009fdd80  size=87  [callgraph]
-undefined4 __thiscall FUN_009fdd80(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  
-  FUN_00917740();
-  iVar1 = *(int *)(param_1 + 0x330);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  iVar2 = *(int *)(iVar1 + 0xb8);
-  iVar3 = 0;
-  if (0 < *(int *)(iVar1 + 0xbc)) {
-    do {
-      FUN_009fdb60(param_2,iVar2);
-      iVar3 = iVar3 + 1;
-      iVar2 = iVar2 + 0xc;
-    } while (iVar3 < *(int *)(*(int *)(param_1 + 0x330) + 0xbc));
-  }
-  return 1;
+// __thiscall in the binary: self arrives in ECX.
+undefined4 FUN_009fdd80(cObj *self, undefined4 param_2)
+{
+    CALL(FUN_00917740, void (*)())(); /* ECX: ? */
+    int modelData = *(int *)((char *)self + 0x330); /* cModel+0x330: model data */
+    if (modelData == 0) {
+        return 0;
+    }
+    int entry = *(int *)(modelData + 0xB8);
+    int i = 0;
+    if (0 < *(int *)(modelData + 0xBC)) {
+        do {
+            FUN_009fdb60(self, param_2, (short *)entry);
+            i++;
+            entry += 0xC;
+        } while (i < *(int *)(*(int *)((char *)self + 0x330) + 0xBC));
+    }
+    return 1;
 }
 
 // 009FDDE0  FUN_009fdde0  size=58  [callgraph]
-void __fastcall FUN_009fdde0(int *param_1)
-
-{
-  if (param_1[0x13c] != 0) {
-    FUN_00a805f0();
-    return;
-  }
-  if ((*(byte *)(param_1 + 0x132) & 2) == 0) {
-    *(byte *)(param_1 + 0x132) = *(byte *)(param_1 + 0x132) | 2;
-    (**(code **)(*param_1 + 0x20))();
-                    /* WARNING: Could not recover jumptable at 0x009fde16. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(code **)(*param_1 + 0xc))();
-    return;
-  }
-  return;
+void __fastcall FUN_009fdde0(cObj *self)
+{
+    if (self->field4F0() != 0) {
+        CALL(FUN_00a805f0, void (*)())(); /* ECX: ? */
+        return;
+    }
+    if ((self->stateFlags() & 2) == 0) {
+        self->stateFlags() |= 2;
+        self->vf20();
+        self->vf0C();  // tail call
+    }
 }
 
 // 009FDE20  FUN_009fde20  size=50  [callgraph]
-bool __fastcall FUN_009fde20(int param_1)
-
-{
-  uint uVar1;
-  
-  if (((((*(byte *)(param_1 + 0x4c8) & 3) == 0) &&
-       (uVar1 = *(uint *)(param_1 + 0x4c0), (uVar1 & 4) == 0)) && ((uVar1 & 2) == 0)) &&
-     (((uVar1 & 8) == 0 && ((uVar1 & 0x10000) == 0)))) {
-    return 0 < *(short *)(param_1 + 0x324);
-  }
-  return false;
+bool __fastcall FUN_009fde20(cObj *self)
+{
+    unsigned int flags;
+    if ((self->stateFlags() & 3) == 0 &&
+        ((flags = self->objFlags()) & 4) == 0 && (flags & 2) == 0 &&
+        (flags & 8) == 0 && (flags & 0x10000) == 0) {
+        return 0 < *(short *)((char *)self + 0x324); /* cModel+0x324: mesh count */
+    }
+    return false;
 }
 
 // 009FDE60  FUN_009fde60  size=799  [callgraph]
-int FUN_009fde60(char *param_1)
-
-{
-  char cVar1;
-  int iVar2;
-  char *pcVar3;
-  char *pcVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  uint uVar8;
-  int iVar9;
-  char local_12c;
-  char local_12b;
-  undefined1 local_12a;
-  char *local_128;
-  char *local_124;
-  char local_120 [32];
-  char local_100 [256];
-  
-  iVar2 = FUN_00fdc7b0(param_1,0x5f);
-  if (iVar2 != 0) {
-    _strcpy_s(local_100,0x100,param_1);
-    pcVar3 = _strtok_s(local_100,"_",&local_128);
-    if (pcVar3 == (char *)0x0) {
-      return -1;
-    }
-    uVar8 = 0;
-    do {
-      iVar2 = __stricmp(*(char **)((int)&PTR_DAT_018901fc + uVar8),pcVar3);
-      if (iVar2 == 0) {
-        _strcpy_s(local_120,0x20,param_1);
-        pcVar3 = _strtok_s(local_120,"_",&local_124);
-        pcVar4 = _strtok_s((char *)0x0,"_",&local_124);
-        uVar8 = 0;
-        while (iVar2 = __stricmp((&PTR_DAT_018901fc)[uVar8 * 2],pcVar3), iVar2 != 0) {
-          uVar8 = uVar8 + 1;
-          if (1 < uVar8) {
-            return -1;
-          }
-        }
-        local_128 = (char *)(&DAT_018901f8)[uVar8 * 2];
-        if (local_128 == (char *)0xffffffff) {
-          return -1;
-        }
-        piVar7 = &DAT_01890198;
-        uVar8 = 0;
-        while( true ) {
-          local_12c = *pcVar4;
-          local_12b = pcVar4[1];
-          local_12a = 0;
-          iVar2 = __stricmp((char *)piVar7[1],&local_12c);
-          if (iVar2 == 0) break;
-          uVar8 = uVar8 + 8;
-          piVar7 = piVar7 + 2;
-          if (0x5f < uVar8) {
-            return -1;
-          }
-        }
-        cVar1 = pcVar4[2];
-        if ((byte)(cVar1 - 0x30U) < 10) {
-          iVar2 = cVar1 + -0x30;
-        }
-        else if ((byte)(cVar1 + 0x9fU) < 6) {
-          iVar2 = cVar1 + -0x57;
-        }
-        else {
-          iVar2 = -1;
-        }
-        cVar1 = pcVar4[3];
-        if ((byte)(cVar1 - 0x30U) < 10) {
-          iVar9 = cVar1 + -0x30;
-        }
-        else if ((byte)(cVar1 + 0x9fU) < 6) {
-          iVar9 = cVar1 + -0x57;
-        }
-        else {
-          iVar9 = -1;
-        }
-        cVar1 = pcVar4[4];
-        if ((byte)(cVar1 - 0x30U) < 10) {
-          iVar6 = cVar1 + -0x30;
-        }
-        else if ((byte)(cVar1 + 0x9fU) < 6) {
-          iVar6 = cVar1 + -0x57;
-        }
-        else {
-          iVar6 = -1;
-        }
-        cVar1 = pcVar4[5];
-        if ((byte)(cVar1 - 0x30U) < 10) {
-          iVar5 = cVar1 + -0x30;
-        }
-        else if ((byte)(cVar1 + 0x9fU) < 6) {
-          iVar5 = cVar1 + -0x57;
-        }
-        else {
-          iVar5 = -1;
-        }
-        if (iVar2 < 0) {
-          return -1;
-        }
-        if (iVar9 < 0) {
-          return -1;
-        }
-        if (iVar6 < 0) {
-          return -1;
-        }
-        if (iVar5 < 0) {
-          return -1;
-        }
-        return (int)(local_128 + *piVar7 + ((iVar2 * 0x10 + iVar9) * 0x10 + iVar6) * 0x10 + iVar5);
-      }
-      uVar8 = uVar8 + 8;
-    } while (uVar8 < 0x10);
-  }
-  piVar7 = &DAT_01890198;
-  uVar8 = 0;
-  while( true ) {
-    local_12c = *param_1;
-    local_12b = param_1[1];
-    local_12a = 0;
-    iVar2 = __stricmp((char *)piVar7[1],&local_12c);
-    if (iVar2 == 0) break;
-    uVar8 = uVar8 + 8;
-    piVar7 = piVar7 + 2;
-    if (0x5f < uVar8) {
-      return -1;
-    }
-  }
-  cVar1 = param_1[2];
-  if ((byte)(cVar1 - 0x30U) < 10) {
-    iVar2 = cVar1 + -0x30;
-  }
-  else if ((byte)(cVar1 + 0x9fU) < 6) {
-    iVar2 = cVar1 + -0x57;
-  }
-  else {
-    iVar2 = -1;
-  }
-  cVar1 = param_1[3];
-  if ((byte)(cVar1 - 0x30U) < 10) {
-    iVar9 = cVar1 + -0x30;
-  }
-  else if ((byte)(cVar1 + 0x9fU) < 6) {
-    iVar9 = cVar1 + -0x57;
-  }
-  else {
-    iVar9 = -1;
-  }
-  cVar1 = param_1[4];
-  if ((byte)(cVar1 - 0x30U) < 10) {
-    iVar6 = cVar1 + -0x30;
-  }
-  else if ((byte)(cVar1 + 0x9fU) < 6) {
-    iVar6 = cVar1 + -0x57;
-  }
-  else {
-    iVar6 = -1;
-  }
-  cVar1 = param_1[5];
-  if ((byte)(cVar1 - 0x30U) < 10) {
-    iVar5 = cVar1 + -0x30;
-  }
-  else if ((byte)(cVar1 + 0x9fU) < 6) {
-    iVar5 = cVar1 + -0x57;
-  }
-  else {
-    iVar5 = -1;
-  }
-  if (iVar2 < 0) {
-    return -1;
-  }
-  if (iVar9 < 0) {
-    return -1;
-  }
-  if (iVar6 < 0) {
-    return -1;
-  }
-  if (iVar5 < 0) {
-    return -1;
-  }
-  return ((iVar2 * 0x10 + iVar9) * 0x10 + iVar6) * 0x10 + *piVar7 + iVar5;
+// Parses an object name ("xx1234" or "<dlc>_xx1234") into an object id; -1 on failure.
+int FUN_009fde60(char *name)
+{
+    auto hexDigit = [](char c) -> int {
+        if ((unsigned char)(c - 0x30U) < 10) return c - 0x30;   // '0'..'9'
+        if ((unsigned char)(c + 0x9FU) < 6) return c - 0x57;    // 'a'..'f'
+        return -1;
+    };
+    char code[3];
+    char *context;
+
+    if (FUN_00fdc7b0((uint *)name, '_') != 0) {
+        char buf[256];
+        _strcpy_s(buf, 0x100, name);
+        char *token = _strtok_s(buf, "_", &context);
+        if (token == 0) {
+            return -1;
+        }
+        unsigned int i = 0;
+        do {
+            if (__stricmp(DAT_018901f8[i].name, token) == 0) {
+                char buf2[32];
+                char *context2;
+                _strcpy_s(buf2, 0x20, name);
+                char *dlcName = _strtok_s(buf2, "_", &context2);
+                char *rest = _strtok_s(0, "_", &context2);
+                unsigned int dlc = 0;
+                while (__stricmp(DAT_018901f8[dlc].name, dlcName) != 0) {
+                    dlc++;
+                    if (1 < dlc) {
+                        return -1;
+                    }
+                }
+                unsigned int dlcBase = DAT_018901f8[dlc].idMask;
+                if (dlcBase == 0xFFFFFFFF) {
+                    return -1;
+                }
+                ObjCategoryPrefix *category = DAT_01890198;
+                unsigned int k = 0;
+                while (true) {
+                    code[0] = rest[0];
+                    code[1] = rest[1];
+                    code[2] = 0;
+                    if (__stricmp(category->prefix, code) == 0) break;
+                    k += 8;
+                    category++;
+                    if (0x5F < k) {
+                        return -1;
+                    }
+                }
+                int d0 = hexDigit(rest[2]);
+                int d1 = hexDigit(rest[3]);
+                int d2 = hexDigit(rest[4]);
+                int d3 = hexDigit(rest[5]);
+                if (d0 < 0) return -1;
+                if (d1 < 0) return -1;
+                if (d2 < 0) return -1;
+                if (d3 < 0) return -1;
+                return (int)(dlcBase + category->category + ((d0 * 0x10 + d1) * 0x10 + d2) * 0x10 + d3);
+            }
+            i++;
+        } while (i < 2);
+    }
+
+    ObjCategoryPrefix *category = DAT_01890198;
+    unsigned int k = 0;
+    while (true) {
+        code[0] = name[0];
+        code[1] = name[1];
+        code[2] = 0;
+        if (__stricmp(category->prefix, code) == 0) break;
+        k += 8;
+        category++;
+        if (0x5F < k) {
+            return -1;
+        }
+    }
+    int d0 = hexDigit(name[2]);
+    int d1 = hexDigit(name[3]);
+    int d2 = hexDigit(name[4]);
+    int d3 = hexDigit(name[5]);
+    if (d0 < 0) return -1;
+    if (d1 < 0) return -1;
+    if (d2 < 0) return -1;
+    if (d3 < 0) return -1;
+    return ((d0 * 0x10 + d1) * 0x10 + d2) * 0x10 + category->category + d3;
 }
 
 // 009FE180  FUN_009fe180  size=457  [callgraph]
-undefined4 FUN_009fe180(char *param_1,size_t param_2,uint param_3,int param_4)
-
-{
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  uint uVar4;
-  uint *puVar5;
-  undefined *puVar6;
-  undefined1 *puVar7;
-  char local_20 [32];
-  
-  puVar6 = &DAT_0165bfb4;
-  if (param_4 != 0) {
-    puVar6 = &DAT_0165bfac;
-  }
-  uVar4 = 0;
-  do {
-    if (*(uint *)((int)&DAT_0189eabc + uVar4) == param_3) {
-      bVar1 = true;
-      goto LAB_009fe1b4;
-    }
-    uVar4 = uVar4 + 0xc;
-  } while (uVar4 < 0x300);
-  bVar1 = false;
-LAB_009fe1b4:
-  uVar4 = 0;
-  do {
-    if (*(uint *)((int)&DAT_0189eac0 + uVar4) == param_3) {
-      bVar2 = true;
-      goto LAB_009fe1ca;
-    }
-    uVar4 = uVar4 + 0xc;
-  } while (uVar4 < 0x300);
-  bVar2 = false;
-LAB_009fe1ca:
-  if ((((param_3 == 0x1e012) || (param_3 == 0x1fff2)) || (param_3 == 0x1e013)) ||
-     (param_3 == 0x1fff3)) {
-    bVar3 = true;
-  }
-  else {
-    bVar3 = false;
-  }
-  if (((bVar1) || (bVar2)) || (bVar3)) {
-    puVar7 = &DAT_016416fa;
-    if ((DAT_01bea064 & 0x8000) == 0) {
-      puVar7 = &DAT_0165c260;
-    }
-  }
-  else {
-    puVar7 = &DAT_016416fa;
-  }
-  if ((param_3 & 0xff000000) == 0) {
-    puVar5 = &DAT_01890198;
-    uVar4 = 0;
-    do {
-      if (*puVar5 == (param_3 & 0xffff0000)) {
-        _sprintf_s(param_1,param_2,"%s\\%s%04x%s%s",puVar5[1],puVar5[1],param_3 & 0xffff,puVar7,
-                   puVar6);
-        return 1;
-      }
-      uVar4 = uVar4 + 8;
-      puVar5 = puVar5 + 2;
-    } while (uVar4 < 0x60);
-    return 0;
-  }
-  uVar4 = 0;
-  local_20[0] = '\0';
-  local_20[1] = '\0';
-  local_20[2] = '\0';
-  local_20[3] = '\0';
-  local_20[4] = '\0';
-  local_20[5] = '\0';
-  local_20[6] = '\0';
-  local_20[7] = '\0';
-  local_20[8] = '\0';
-  local_20[9] = '\0';
-  local_20[10] = '\0';
-  local_20[0xb] = '\0';
-  local_20[0xc] = '\0';
-  local_20[0xd] = '\0';
-  local_20[0xe] = '\0';
-  local_20[0xf] = '\0';
-  local_20[0x10] = '\0';
-  local_20[0x11] = '\0';
-  local_20[0x12] = '\0';
-  local_20[0x13] = '\0';
-  local_20[0x14] = '\0';
-  local_20[0x15] = '\0';
-  local_20[0x16] = '\0';
-  local_20[0x17] = '\0';
-  local_20[0x18] = '\0';
-  local_20[0x19] = '\0';
-  local_20[0x1a] = '\0';
-  local_20[0x1b] = '\0';
-  local_20[0x1c] = '\0';
-  local_20[0x1d] = '\0';
-  local_20[0x1e] = '\0';
-  local_20[0x1f] = 0;
-  do {
-    if ((param_3 & 0xff000000) == (&DAT_018901f8)[uVar4 * 2]) {
-      _strcpy_s(local_20,0x20,(&PTR_DAT_018901fc)[uVar4 * 2]);
-      break;
-    }
-    uVar4 = uVar4 + 1;
-  } while (uVar4 < 2);
-  if (local_20[0] != '\0') {
-    puVar5 = &DAT_01890198;
-    uVar4 = 0;
-    do {
-      if (*puVar5 == (param_3 & 0xf0000)) {
-        _sprintf_s(param_1,param_2,"%s\\%s%04x%s%s",local_20,puVar5[1],param_3 & 0xffff,puVar7,
-                   puVar6);
-        return 1;
-      }
-      uVar4 = uVar4 + 8;
-      puVar5 = puVar5 + 2;
-    } while (uVar4 < 0x60);
-  }
-  return 0;
+// Formats the file path of object `id` ("<dir>\<prefix><id:04x><suffix><ext>"); 1 on success.
+undefined4 FUN_009fe180(char *out, size_t outSize, uint id, int altExt)
+{
+    char *ext = DAT_0165bfb4;
+    if (altExt != 0) {
+        ext = DAT_0165bfac;
+    }
+
+    bool inColumnA = false;
+    for (unsigned int i = 0; i < 64; i++) {
+        if (DAT_0189eab8[i].objA == id) {
+            inColumnA = true;
+            break;
+        }
+    }
+    bool inColumnB = false;
+    for (unsigned int i = 0; i < 64; i++) {
+        if (DAT_0189eab8[i].objB == id) {
+            inColumnB = true;
+            break;
+        }
+    }
+    bool special = id == 0x1E012 || id == 0x1FFF2 || id == 0x1E013 || id == 0x1FFF3;
+
+    char *suffix;
+    if (inColumnA || inColumnB || special) {
+        suffix = DAT_016416fa;
+        if ((DAT_01bea064 & 0x8000) == 0) {
+            suffix = DAT_0165c260;
+        }
+    } else {
+        suffix = DAT_016416fa;
+    }
+
+    if ((id & 0xFF000000) == 0) {
+        ObjCategoryPrefix *category = DAT_01890198;
+        unsigned int k = 0;
+        do {
+            if (category->category == (id & 0xFFFF0000)) {
+                _sprintf_s(out, outSize, "%s\\%s%04x%s%s", category->prefix, category->prefix,
+                           id & 0xFFFF, suffix, ext);
+                return 1;
+            }
+            k += 8;
+            category++;
+        } while (k < 0x60);
+        return 0;
+    }
+
+    char dlcName[32] = {};
+    unsigned int dlc = 0;
+    do {
+        if ((id & 0xFF000000) == DAT_018901f8[dlc].idMask) {
+            _strcpy_s(dlcName, 0x20, DAT_018901f8[dlc].name);
+            break;
+        }
+        dlc++;
+    } while (dlc < 2);
+    if (dlcName[0] != '\0') {
+        ObjCategoryPrefix *category = DAT_01890198;
+        unsigned int k = 0;
+        do {
+            if (category->category == (id & 0xF0000)) {
+                _sprintf_s(out, outSize, "%s\\%s%04x%s%s", dlcName, category->prefix, id & 0xFFFF,
+                           suffix, ext);
+                return 1;
+            }
+            k += 8;
+            category++;
+        } while (k < 0x60);
+    }
+    return 0;
 }
 
 // 009FE410  FUN_009fe410  size=513  [callgraph]
-undefined4 * FUN_009fe410(int param_1)
-
-{
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  uint uVar4;
-  uint uVar5;
-  uint *puVar6;
-  int iVar7;
-  int iVar8;
-  undefined1 *puVar9;
-  char *pcVar10;
-  char *pcVar11;
-  char local_a0 [160];
-  
-  iVar8 = 0;
-  uVar4 = 0;
-  while ((*(int *)((int)&DAT_0189eab8 + uVar4) == 0 ||
-         (*(int *)((int)&DAT_0189eab8 + uVar4) != param_1))) {
-    uVar4 = uVar4 + 0xc;
-    iVar8 = iVar8 + 1;
-    if (0x2ff < uVar4) {
-      return (undefined4 *)0x0;
-    }
-  }
-  uVar4 = (&DAT_0189eabc)[iVar8 * 3];
-  uVar5 = 0;
-  do {
-    if (*(uint *)((int)&DAT_0189eabc + uVar5) == uVar4) {
-      bVar1 = true;
-      goto LAB_009fe474;
-    }
-    uVar5 = uVar5 + 0xc;
-  } while (uVar5 < 0x300);
-  bVar1 = false;
-LAB_009fe474:
-  uVar5 = 0;
-  do {
-    if (*(uint *)((int)&DAT_0189eac0 + uVar5) == uVar4) {
-      bVar2 = true;
-      goto LAB_009fe48a;
-    }
-    uVar5 = uVar5 + 0xc;
-  } while (uVar5 < 0x300);
-  bVar2 = false;
-LAB_009fe48a:
-  if ((((uVar4 == 0x1e012) || (uVar4 == 0x1fff2)) || (uVar4 == 0x1e013)) || (uVar4 == 0x1fff3)) {
-    bVar3 = true;
-  }
-  else {
-    bVar3 = false;
-  }
-  if (((bVar1) || (bVar2)) || (bVar3)) {
-    puVar9 = &DAT_016416fa;
-    if ((DAT_01bea064 & 0x8000) == 0) {
-      puVar9 = &DAT_0165c260;
-    }
-  }
-  else {
-    puVar9 = &DAT_016416fa;
-  }
-  if ((uVar4 & 0xff000000) == 0) {
-    puVar6 = &DAT_01890198;
-    uVar5 = 0;
-    do {
-      if (*puVar6 == (uVar4 & 0xffff0000)) {
-        pcVar10 = (char *)puVar6[1];
-        pcVar11 = pcVar10;
-        goto LAB_009fe5e2;
-      }
-      uVar5 = uVar5 + 8;
-      puVar6 = puVar6 + 2;
-    } while (uVar5 < 0x60);
-  }
-  else {
-    uVar5 = 0;
-    local_a0[0] = '\0';
-    local_a0[1] = '\0';
-    local_a0[2] = '\0';
-    local_a0[3] = '\0';
-    local_a0[4] = '\0';
-    local_a0[5] = '\0';
-    local_a0[6] = '\0';
-    local_a0[7] = '\0';
-    local_a0[8] = '\0';
-    local_a0[9] = '\0';
-    local_a0[10] = '\0';
-    local_a0[0xb] = '\0';
-    local_a0[0xc] = '\0';
-    local_a0[0xd] = '\0';
-    local_a0[0xe] = '\0';
-    local_a0[0xf] = '\0';
-    local_a0[0x10] = '\0';
-    local_a0[0x11] = '\0';
-    local_a0[0x12] = '\0';
-    local_a0[0x13] = '\0';
-    local_a0[0x14] = '\0';
-    local_a0[0x15] = '\0';
-    local_a0[0x16] = '\0';
-    local_a0[0x17] = '\0';
-    local_a0[0x18] = '\0';
-    local_a0[0x19] = '\0';
-    local_a0[0x1a] = '\0';
-    local_a0[0x1b] = '\0';
-    local_a0[0x1c] = '\0';
-    local_a0[0x1d] = '\0';
-    local_a0[0x1e] = '\0';
-    local_a0[0x1f] = 0;
-    do {
-      if ((uVar4 & 0xff000000) == (&DAT_018901f8)[uVar5 * 2]) {
-        _strcpy_s(local_a0,0x20,(&PTR_DAT_018901fc)[uVar5 * 2]);
-        break;
-      }
-      uVar5 = uVar5 + 1;
-    } while (uVar5 < 2);
-    if (local_a0[0] != '\0') {
-      puVar6 = &DAT_01890198;
-      uVar5 = 0;
-      do {
-        if (*puVar6 == (uVar4 & 0xf0000)) {
-          pcVar10 = local_a0;
-          pcVar11 = (char *)puVar6[1];
-LAB_009fe5e2:
-          _sprintf_s(local_a0 + 0x20,0x80,"%s\\%s%04x%s%s",pcVar10,pcVar11,uVar4 & 0xffff,puVar9,
-                     &DAT_0165bfb4);
-          break;
-        }
-        uVar5 = uVar5 + 8;
-        puVar6 = puVar6 + 2;
-      } while (uVar5 < 0x60);
-    }
-  }
-  iVar7 = FUN_00dec390(local_a0 + 0x20);
-  if (iVar7 == 0) {
-    return (undefined4 *)0x0;
-  }
-  return &DAT_0189eab8 + iVar8 * 3;
+// Returns the DAT_0189eab8 entry for `id` if the file of its objA exists, else null.
+undefined4 *FUN_009fe410(int id)
+{
+    int index = 0;
+    while (DAT_0189eab8[index].id == 0 || DAT_0189eab8[index].id != id) {
+        index++;
+        if (63 < index) {
+            return 0;
+        }
+    }
+    unsigned int objA = DAT_0189eab8[index].objA;
+
+    bool inColumnA = false;
+    for (unsigned int i = 0; i < 64; i++) {
+        if (DAT_0189eab8[i].objA == objA) {
+            inColumnA = true;
+            break;
+        }
+    }
+    bool inColumnB = false;
+    for (unsigned int i = 0; i < 64; i++) {
+        if (DAT_0189eab8[i].objB == objA) {
+            inColumnB = true;
+            break;
+        }
+    }
+    bool special = objA == 0x1E012 || objA == 0x1FFF2 || objA == 0x1E013 || objA == 0x1FFF3;
+
+    char *suffix;
+    if (inColumnA || inColumnB || special) {
+        suffix = DAT_016416fa;
+        if ((DAT_01bea064 & 0x8000) == 0) {
+            suffix = DAT_0165c260;
+        }
+    } else {
+        suffix = DAT_016416fa;
+    }
+
+    char dlcName[32];
+    char path[128];
+    char *dirName = 0;
+    char *prefix = 0;
+    bool haveName = false;
+    if ((objA & 0xFF000000) == 0) {
+        ObjCategoryPrefix *category = DAT_01890198;
+        unsigned int k = 0;
+        do {
+            if (category->category == (objA & 0xFFFF0000)) {
+                dirName = category->prefix;
+                prefix = dirName;
+                haveName = true;
+                break;
+            }
+            k += 8;
+            category++;
+        } while (k < 0x60);
+    } else {
+        unsigned int dlc = 0;
+        for (int j = 0; j < 32; j++) dlcName[j] = '\0';
+        do {
+            if ((objA & 0xFF000000) == DAT_018901f8[dlc].idMask) {
+                _strcpy_s(dlcName, 0x20, DAT_018901f8[dlc].name);
+                break;
+            }
+            dlc++;
+        } while (dlc < 2);
+        if (dlcName[0] != '\0') {
+            ObjCategoryPrefix *category = DAT_01890198;
+            unsigned int k = 0;
+            do {
+                if (category->category == (objA & 0xF0000)) {
+                    dirName = dlcName;
+                    prefix = category->prefix;
+                    haveName = true;
+                    break;
+                }
+                k += 8;
+                category++;
+            } while (k < 0x60);
+        }
+    }
+    if (haveName) {
+        _sprintf_s(path, 0x80, "%s\\%s%04x%s%s", dirName, prefix, objA & 0xFFFF, suffix,
+                   DAT_0165bfb4);
+    }
+
+    if (CALL(FUN_00dec390, int (*)(char *))(path) == 0) {
+        return 0;
+    }
+    return (undefined4 *)&DAT_0189eab8[index];
 }
 
 // 009FE620  FUN_009fe620  size=129  [callgraph]
-undefined4 * FUN_009fe620(int param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  undefined1 local_80 [128];
-  
-  iVar3 = 0;
-  uVar1 = 0;
-  while (((*(int *)((int)&DAT_0189eab8 + uVar1) == 0 ||
-          (*(int *)((int)&DAT_0189eab8 + uVar1) != param_1)) ||
-         (*(int *)((int)&DAT_0189eac0 + uVar1) == -1))) {
-    uVar1 = uVar1 + 0xc;
-    iVar3 = iVar3 + 1;
-    if (0x2ff < uVar1) {
-      return (undefined4 *)0x0;
-    }
-  }
-  FUN_009fe180(local_80,0x80,(&DAT_0189eac0)[iVar3 * 3],0);
-  iVar2 = FUN_00dec390(local_80);
-  if (iVar2 == 0) {
-    return (undefined4 *)0x0;
-  }
-  return &DAT_0189eab8 + iVar3 * 3;
+// Returns the DAT_0189eab8 entry for `id` if it has an objB whose file exists, else null.
+undefined4 *FUN_009fe620(int id)
+{
+    char path[128];
+    int index = 0;
+    while (DAT_0189eab8[index].id == 0 || DAT_0189eab8[index].id != id ||
+           DAT_0189eab8[index].objB == 0xFFFFFFFF) {
+        index++;
+        if (63 < index) {
+            return 0;
+        }
+    }
+    FUN_009fe180(path, 0x80, DAT_0189eab8[index].objB, 0);
+    if (CALL(FUN_00dec390, int (*)(char *))(path) == 0) {
+        return 0;
+    }
+    return (undefined4 *)&DAT_0189eab8[index];
 }
 
 // 009FE6B0  FUN_009fe6b0  size=92  [callgraph]
-undefined4 FUN_009fe6b0(undefined4 param_1,uint param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  undefined4 *puVar3;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar3 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_2) goto LAB_009fe6e1;
-      uVar1 = puVar3[1];
-      puVar3 = puVar3 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_2 & 0xffff0000) != 0x90000) {
-    uVar2 = FUN_009f9d10(param_2);
-    uVar2 = FUN_00e9e8f0(param_1,uVar2);
-    return uVar2;
-  }
-LAB_009fe6e1:
-  FUN_00de3540(0,0);
-  return 0;
+undefined4 FUN_009fe6b0(undefined4 param_1, uint id)
+{
+    bool noFiles = false;
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            noFiles = true;
+            break;
+        }
+    }
+    if (!noFiles && (id & 0xFFFF0000) != 0x90000) {
+        uint fileId = FUN_009f9d10(id);
+        return CALL(FUN_00e9e8f0, undefined4 (*)(undefined4, uint))(param_1, fileId);
+    }
+    CALL(FUN_00de3540, void (*)(int, int))(0, 0); /* ECX: ? */
+    return 0;
 }
 
 // 009FE710  FUN_009fe710  size=190  [callgraph]
-void FUN_009fe710(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  int *piVar6;
-  int iVar7;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar5 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return;
-      }
-      uVar1 = puVar5[1];
-      puVar5 = puVar5 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) != 0x90000) {
-    uVar2 = FUN_009f9d10(param_1);
-    FUN_00e9e9d0(uVar2);
-    iVar3 = FUN_009f9ed0(uVar2,param_2);
-    if (iVar3 != 0) {
-      iVar7 = 0;
-      piVar6 = (int *)(iVar3 + 8);
-      do {
-        if (*piVar6 == 0) break;
-        uVar4 = FUN_009f9d10(*piVar6);
-        FUN_00e9e9d0(uVar4);
-        iVar7 = iVar7 + 1;
-        piVar6 = piVar6 + 1;
-      } while (iVar7 < 0x30);
-    }
-    iVar3 = FUN_009fe410(uVar2);
-    if (iVar3 != 0) {
-      FUN_00e9e9d0(*(undefined4 *)(iVar3 + 4));
-    }
-    iVar3 = FUN_009fe620(uVar2);
-    if (iVar3 != 0) {
-      FUN_00e9e9d0(*(undefined4 *)(iVar3 + 8));
-    }
-  }
-  return;
+// Acquires the files of object `id`, its dependencies and its linked entries (see FUN_009fe7d0).
+void FUN_009fe710(uint id, undefined4 param_2)
+{
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return;
+        }
+    }
+    if ((id & 0xFFFF0000) != 0x90000) {
+        uint fileId = FUN_009f9d10(id);
+        FUN_00e9e9d0(fileId);
+        undefined4 *deps = FUN_009f9ed0(fileId, param_2);
+        if (deps != 0) {
+            int *dep = (int *)((char *)deps + 8);
+            for (int n = 0; n < 0x30; n++, dep++) {
+                if (*dep == 0) break;
+                FUN_00e9e9d0(FUN_009f9d10(*dep));
+            }
+        }
+        ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(fileId);
+        if (entry != 0) {
+            FUN_00e9e9d0(entry->objA);
+        }
+        entry = (ObjFileEntry *)FUN_009fe620(fileId);
+        if (entry != 0) {
+            FUN_00e9e9d0(entry->objB);
+        }
+    }
 }
 
 // 009FE7D0  FUN_009fe7d0  size=190  [callgraph]
-void FUN_009fe7d0(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  int *piVar6;
-  int iVar7;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar5 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return;
-      }
-      uVar1 = puVar5[1];
-      puVar5 = puVar5 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) != 0x90000) {
-    uVar2 = FUN_009f9d10(param_1);
-    FUN_00e9ea80(uVar2);
-    iVar3 = FUN_009f9ed0(uVar2,param_2);
-    if (iVar3 != 0) {
-      iVar7 = 0;
-      piVar6 = (int *)(iVar3 + 8);
-      do {
-        if (*piVar6 == 0) break;
-        uVar4 = FUN_009f9d10(*piVar6);
-        FUN_00e9ea80(uVar4);
-        iVar7 = iVar7 + 1;
-        piVar6 = piVar6 + 1;
-      } while (iVar7 < 0x30);
-    }
-    iVar3 = FUN_009fe410(uVar2);
-    if (iVar3 != 0) {
-      FUN_00e9ea80(*(undefined4 *)(iVar3 + 4));
-    }
-    iVar3 = FUN_009fe620(uVar2);
-    if (iVar3 != 0) {
-      FUN_00e9ea80(*(undefined4 *)(iVar3 + 8));
-    }
-  }
-  return;
+// Releases what FUN_009fe710 acquired.
+void FUN_009fe7d0(uint id, undefined4 param_2)
+{
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return;
+        }
+    }
+    if ((id & 0xFFFF0000) != 0x90000) {
+        uint fileId = FUN_009f9d10(id);
+        FUN_00e9ea80(fileId);
+        undefined4 *deps = FUN_009f9ed0(fileId, param_2);
+        if (deps != 0) {
+            int *dep = (int *)((char *)deps + 8);
+            for (int n = 0; n < 0x30; n++, dep++) {
+                if (*dep == 0) break;
+                FUN_00e9ea80(FUN_009f9d10(*dep));
+            }
+        }
+        ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(fileId);
+        if (entry != 0) {
+            FUN_00e9ea80(entry->objA);
+        }
+        entry = (ObjFileEntry *)FUN_009fe620(fileId);
+        if (entry != 0) {
+            FUN_00e9ea80(entry->objB);
+        }
+    }
 }
 
 // 009FEB00  cObj::setCustomParam  size=444  [class]
-void __thiscall cObj::setCustomParam(byte *param_1,int *param_2)
-
-{
-  byte bVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  byte bVar6;
-  byte *pbVar7;
-  uint uVar8;
-  byte *pbVar9;
-  byte *local_10;
-  int local_c;
-  
-  uVar8 = (uint)*param_1;
-  pbVar7 = param_1 + (byte)((char)((int)(uVar8 + 3) >> 2) * '\x04') + 4;
-  bVar6 = 8;
-  local_c = 0;
-  pbVar9 = pbVar7;
-  local_10 = pbVar7;
-  if (uVar8 != 0) {
-    do {
-      switch(param_1[local_c + 4]) {
-      case 1:
-        param_2[0x13b] = *(int *)pbVar7;
-        FUN_00a18be0(param_2);
-      case 3:
-        pbVar7 = pbVar7 + 4;
-        break;
-      case 2:
-        pbVar7 = pbVar7 + 4;
-        param_2[99] = 0;
-        break;
-      default:
-        FUN_00dd5650(&DAT_0165c288,param_1[local_c + 4]);
-        break;
-      case 0x20:
-      case 0x21:
-      case 0x22:
-      case 0x23:
-        local_10 = local_10 + 2;
-        break;
-      case 0x40:
-        *(byte *)(param_2 + 0x113) = *pbVar9;
-      case 0x41:
-      case 0x44:
-        pbVar9 = pbVar9 + 1;
-        break;
-      case 0x42:
-        *(byte *)((int)param_2 + 0x4c9) = *pbVar9;
-        pbVar9 = pbVar9 + 1;
-        break;
-      case 0x43:
-        bVar1 = *pbVar9;
-        pbVar9 = pbVar9 + 1;
-        iVar4 = 0;
-        fVar2 = (float)bVar1 * 0.01;
-        if (0 < (short)param_2[0xc9]) {
-          iVar5 = 0;
-          do {
-            iVar3 = param_2[200];
-            *(float *)(iVar3 + 0x10 + iVar5) = fVar2;
-            iVar3 = iVar3 + iVar5;
-            *(float *)(iVar3 + 0x14) = fVar2;
-            iVar4 = iVar4 + 1;
-            *(float *)(iVar3 + 0x18) = fVar2;
-            iVar5 = iVar5 + 0x70;
-            *(undefined4 *)(iVar3 + 0x1c) = 0x3f800000;
-          } while (iVar4 < (short)param_2[0xc9]);
-        }
-        break;
-      case 0x80:
-        bVar6 = bVar6 - 4;
-        param_2[0xce] = *pbVar9 >> (bVar6 & 0x1f) & 0xf;
-        break;
-      case 0xa0:
-        bVar6 = bVar6 - 2;
-        break;
-      case 0xc0:
-        bVar6 = bVar6 - 1;
-        if ((short)param_2[0xc9] != 0) {
-          FUN_00a0ba60(*pbVar9 >> (bVar6 & 0x1f) & 1);
-        }
-        break;
-      case 0xc1:
-        bVar6 = bVar6 - 1;
-        if ((short)param_2[0xc9] != 0) {
-          FUN_00a13340(*pbVar9 >> (bVar6 & 0x1f) & 1);
-        }
-        break;
-      case 0xc2:
-        bVar6 = bVar6 - 1;
-        (**(code **)(*param_2 + 0x20))();
-        break;
-      case 0xc3:
-      case 0xc4:
-        bVar6 = bVar6 - 1;
-      }
-      if (local_10 < pbVar7) {
-        local_10 = pbVar7;
-      }
-      if (pbVar9 < local_10) {
-        pbVar9 = local_10;
-      }
-      if (bVar6 == 0) {
-        pbVar9 = pbVar9 + 1;
-        bVar6 = 8;
-      }
-      local_c = local_c + 1;
-    } while (local_c < (int)uVar8);
-  }
-  return;
+// Layout: params[0] = count, params[4..4+count) = parameter codes, then (4-byte aligned)
+// the dword values, followed by word values, byte values and packed bit fields.
+void cObj::setCustomParam(unsigned char *params, cObj *obj)
+{
+    unsigned int count = params[0];
+    unsigned char *dwordCursor = params + (unsigned char)(((count + 3) >> 2) * 4) + 4;
+    unsigned char bitsLeft = 8;
+    int i = 0;
+    unsigned char *byteCursor = dwordCursor;
+    unsigned char *wordCursor = dwordCursor;
+
+    if (count != 0) {
+        do {
+            switch (params[i + 4]) {
+            case 1:
+                obj->nameHash() = *(int *)dwordCursor;
+                CALL(FUN_00a18be0, void (*)(cObj *))(obj); /* ECX: ? */
+                // fall through
+            case 3:
+                dwordCursor += 4;
+                break;
+            case 2:
+                dwordCursor += 4;
+                *(int *)((char *)obj + 0x18C) = 0; /* cModel+0x18C: ? */
+                break;
+            default:
+                CALL(FUN_00dd5650, void (*)(void *, unsigned char))(DAT_0165c288, params[i + 4]);
+                break;
+            case 0x20:
+            case 0x21:
+            case 0x22:
+            case 0x23:
+                wordCursor += 2;
+                break;
+            case 0x40:
+                *((unsigned char *)obj + 0x44C) = *byteCursor; /* cModel+0x44C: ? */
+                // fall through
+            case 0x41:
+            case 0x44:
+                byteCursor++;
+                break;
+            case 0x42:
+                obj->field4C9() = *byteCursor;
+                byteCursor++;
+                break;
+            case 0x43: {
+                unsigned char percent = *byteCursor;
+                byteCursor++;
+                int mesh = 0;
+                float scale = (float)((float)percent * 0.01);
+                if (0 < *(short *)((char *)obj + 0x324)) { /* cModel+0x324: mesh count */
+                    int meshOffset = 0;
+                    do {
+                        int meshes = *(int *)((char *)obj + 0x320); /* cModel+0x320: meshes */
+                        *(float *)(meshes + 0x10 + meshOffset) = scale;
+                        int m = meshes + meshOffset;
+                        *(float *)(m + 0x14) = scale;
+                        mesh++;
+                        *(float *)(m + 0x18) = scale;
+                        meshOffset += 0x70;
+                        *(unsigned int *)(m + 0x1C) = 0x3F800000;  // 1.0f
+                    } while (mesh < *(short *)((char *)obj + 0x324));
+                }
+                break;
+            }
+            case 0x80:
+                bitsLeft -= 4;
+                *(unsigned int *)((char *)obj + 0x338) = /* cModel+0x338: ? */
+                    *byteCursor >> (bitsLeft & 0x1F) & 0xF;
+                break;
+            case 0xA0:
+                bitsLeft -= 2;
+                break;
+            case 0xC0:
+                bitsLeft -= 1;
+                if (*(short *)((char *)obj + 0x324) != 0) {
+                    CALL(FUN_00a0ba60, void (*)(unsigned int))(
+                        *byteCursor >> (bitsLeft & 0x1F) & 1); /* ECX: ? */
+                }
+                break;
+            case 0xC1:
+                bitsLeft -= 1;
+                if (*(short *)((char *)obj + 0x324) != 0) {
+                    CALL(FUN_00a13340, void (*)(unsigned int))(
+                        *byteCursor >> (bitsLeft & 0x1F) & 1); /* ECX: ? */
+                }
+                break;
+            case 0xC2:
+                bitsLeft -= 1;
+                obj->vf20();
+                break;
+            case 0xC3:
+            case 0xC4:
+                bitsLeft -= 1;
+                break;
+            }
+            if (wordCursor < dwordCursor) {
+                wordCursor = dwordCursor;
+            }
+            if (byteCursor < wordCursor) {
+                byteCursor = wordCursor;
+            }
+            if (bitsLeft == 0) {
+                byteCursor++;
+                bitsLeft = 8;
+            }
+            i++;
+        } while (i < (int)count);
+    }
 }
 
 // 00A005F0  cObj::construct  size=172  [class]
-void __thiscall
-cObj::construct(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 *param_6)
-
-{
-  undefined4 uVar1;
-  
-  *(undefined4 *)(param_1 + 0x4b0) = param_2;
-  if (*(int *)(param_1 + 0x514) != 0) {
-    FUN_00dd5650(&DAT_0165c37c);
-    FUN_009fe7d0(*(undefined4 *)(param_1 + 0x4b4),*(undefined4 *)(param_1 + 0x4b8));
-  }
-  *(undefined4 *)(param_1 + 0x4a0) = param_3;
-  *(undefined4 *)(param_1 + 0x4b8) = param_5;
-  *(undefined4 *)(param_1 + 0x4b4) = param_4;
-  *(undefined4 *)(param_1 + 0x4bc) = param_4;
-  *(undefined4 *)(param_1 + 0x514) = 1;
-  *(undefined4 *)(param_1 + 0x494) = *param_6;
-  uVar1 = param_6[1];
-  *(undefined4 *)(param_1 + 0x524) = 0;
-  *(undefined4 *)(param_1 + 0x498) = uVar1;
-  *(undefined4 *)(param_1 + 0x51c) = 0xffffffff;
-  FUN_009fe710(param_4,param_5);
-  *(undefined4 *)(param_1 + 0x520) = 1;
-  return;
+void cObj::construct(unsigned int modelObjId, unsigned int setFlags, unsigned int objId,
+                     unsigned int objSubId, unsigned int *filePair)
+{
+    this->modelObjId() = modelObjId;
+    if (constructed() != 0) {
+        CALL(FUN_00dd5650, void (*)(void *))(DAT_0165c37c);
+        FUN_009fe7d0(this->objId(), this->objSubId());
+    }
+    this->setFlags() = setFlags;
+    this->objSubId() = objSubId;
+    this->objId() = objId;
+    baseObjId() = objId;
+    constructed() = 1;
+    filePair0() = filePair[0];
+    unsigned int second = filePair[1];
+    field524() = 0;
+    filePair1() = second;
+    field51C() = -1;
+    FUN_009fe710(objId, objSubId);
+    filesAcquired() = 1;
 }
 
 // 00A006A0  FUN_00a006a0  size=25  [between]
-void FUN_00a006a0(undefined4 param_1,undefined4 param_2,undefined4 param_3)
-
-{
-  cObj::construct(param_1,param_2,param_1,param_2,param_3);
-  return;
+// `self` is passed through in ECX.
+void FUN_00a006a0(cObj *self, undefined4 id, undefined4 flags, undefined4 filePair)
+{
+    self->construct(id, flags, id, flags, (unsigned int *)filePair);
 }
 
 // 00A006C0  FUN_00a006c0  size=105  [between]
-void __fastcall FUN_00a006c0(int param_1)
-
-{
-  if (*(int *)(param_1 + 0x520) != 0) {
-    FUN_009fe7d0(*(undefined4 *)(param_1 + 0x4b4),*(undefined4 *)(param_1 + 0x4b8));
-  }
-  if (*(int *)(param_1 + 0x4ec) != 0) {
-    FUN_00a18c30(param_1);
-  }
-  FUN_0092f760(param_1 + 0x4cc);
-  *(undefined4 *)(param_1 + 0x520) = 0;
-  *(undefined4 *)(param_1 + 0x4f0) = 0;
-  *(undefined4 *)(param_1 + 0x514) = 0;
-  return;
+void __fastcall FUN_00a006c0(cObj *self)
+{
+    if (self->filesAcquired() != 0) {
+        FUN_009fe7d0(self->objId(), self->objSubId());
+    }
+    if (self->nameHash() != 0) {
+        CALL(FUN_00a18c30, void (*)(cObj *))(self); /* ECX: ? */
+    }
+    FUN_0092f760((undefined4 *)&self->objInfo());
+    self->filesAcquired() = 0;
+    self->field4F0() = 0;
+    self->constructed() = 0;
 }
 
 // 00A00730  cObj::vf08  size=63  [class]
-bool __fastcall cObj::vf08(int *param_1)
-
-{
-  code *pcVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  
-  puVar2 = (undefined4 *)FUN_0092f750(param_1[300]);
-  pcVar1 = *(code **)(*param_1 + 0x3c);
-  param_1[0x133] = (int)puVar2;
-  (*pcVar1)(*puVar2);
-  if (param_1[300] == 0x700000) {
-    return true;
-  }
-  iVar3 = FUN_00de44b0(&DAT_01657e1c,0);
-  iVar4 = FUN_00de44b0(&DAT_0164518c,0);
-  iVar5 = FUN_00de44b0(&DAT_01645174,0);
-  iVar6 = FUN_00de44b0(&DAT_01645170,0);
-  uVar7 = FUN_00de4550("_param.bxm",0);
-  uVar8 = FUN_00de4500("CutInfo.bxm");
-  if (iVar4 == 0) {
-    if ((iVar5 == 0) || (iVar4 = iVar6, iVar6 == 0)) {
-      iVar5 = FUN_00de4500("dummy.wtb");
-      iVar4 = 0;
-      if (iVar5 == 0) {
-        iVar5 = FUN_00de4500("dummy.wta");
-        iVar4 = FUN_00de4500("dummy.wtp");
-      }
-    }
-  }
-  else {
-    iVar5 = 0;
-  }
-  if ((iVar3 == 0) && (iVar3 = param_1[0x127], iVar3 == 0)) {
-    iVar3 = FUN_00de4500("dummy.wmb");
-    param_1[0x130] = param_1[0x130] | 2;
-  }
-  FUN_00a09c00(param_1 + 0x125);
-  iVar3 = cModelDataManager::EntryModelData(iVar3,uVar8);
-  if (iVar3 == 0) {
-    return false;
-  }
-  param_1[0x130] = param_1[0x130] & 0xfffffffd;
-  iVar3 = FUN_009fd350(iVar3,iVar4,iVar5,uVar7);
-  return iVar3 != 0;
+undefined4 cObj::vf08()
+{
+    unsigned int *info = CALL(FUN_0092f750, unsigned int *(*)(unsigned int))(modelObjId());
+    objInfo() = info;
+    this->vf3C(*info);
+    if (modelObjId() == 0x700000) {
+        return true;
+    }
+
+    int modelFile = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_01657e1c, 0);
+    int texFileA = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_0164518c, 0);
+    int texFileB = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_01645174, 0);
+    int texFileC = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_01645170, 0);
+    int paramFile = CALL(FUN_00de4550, int (*)(char *, int))("_param.bxm", 0);
+    int cutInfoFile = CALL(FUN_00de4500, int (*)(char *))("CutInfo.bxm");
+    if (texFileA == 0) {
+        if (texFileB == 0 || (texFileA = texFileC, texFileC == 0)) {
+            texFileB = CALL(FUN_00de4500, int (*)(char *))("dummy.wtb");
+            texFileA = 0;
+            if (texFileB == 0) {
+                texFileB = CALL(FUN_00de4500, int (*)(char *))("dummy.wta");
+                texFileA = CALL(FUN_00de4500, int (*)(char *))("dummy.wtp");
+            }
+        }
+    } else {
+        texFileB = 0;
+    }
+    if (modelFile == 0 && (modelFile = overrideWmb()) == 0) {
+        modelFile = CALL(FUN_00de4500, int (*)(char *))("dummy.wmb");
+        objFlags() |= 2;
+    }
+    CALL(FUN_00a09c00, void (*)(unsigned int *))(&filePair0());
+
+    int modelData = cModelDataManager::EntryModelData(modelFile, cutInfoFile);
+    if (modelData == 0) {
+        return false;
+    }
+    objFlags() &= 0xFFFFFFFD;
+    return FUN_009fd350(this, modelData, texFileA, texFileB, paramFile) != 0;
 }
 
 // 00A0076F  FUN_00a0076f  size=327  [callgraph]
-bool FUN_00a0076f(void)
-
-{
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  int unaff_EDI;
-  int iStack00000004;
-  int iStack00000008;
-  
-  iStack00000008 = FUN_00de44b0(&DAT_01657e1c,0);
-  iStack00000004 = FUN_00de44b0(&DAT_0164518c,0);
-  iVar1 = FUN_00de44b0(&DAT_01645174,0);
-  iVar2 = FUN_00de44b0(&DAT_01645170,0);
-  uVar3 = FUN_00de4550("_param.bxm",0);
-  uVar4 = FUN_00de4500("CutInfo.bxm");
-  if (iStack00000004 == 0) {
-    if ((iVar1 == 0) || (iStack00000004 = iVar2, iVar2 == 0)) {
-      iVar1 = FUN_00de4500("dummy.wtb");
-      iStack00000004 = 0;
-      if (iVar1 == 0) {
-        iVar1 = FUN_00de4500("dummy.wta");
-        iStack00000004 = FUN_00de4500("dummy.wtp");
-      }
-    }
-  }
-  else {
-    iVar1 = 0;
-  }
-  if ((iStack00000008 == 0) && (iStack00000008 = *(int *)(unaff_EDI + 0x49c), iStack00000008 == 0))
-  {
-    iStack00000008 = FUN_00de4500("dummy.wmb");
-    *(uint *)(unaff_EDI + 0x4c0) = *(uint *)(unaff_EDI + 0x4c0) | 2;
-  }
-  FUN_00a09c00(unaff_EDI + 0x494);
-  iVar2 = cModelDataManager::EntryModelData(iStack00000008,uVar4);
-  if (iVar2 == 0) {
-    return false;
-  }
-  *(uint *)(unaff_EDI + 0x4c0) = *(uint *)(unaff_EDI + 0x4c0) & 0xfffffffd;
-  iVar1 = FUN_009fd350(iVar2,iStack00000004,iVar1,uVar3);
-  return iVar1 != 0;
+// Entry point inside cObj::vf08 (after the 0x700000 check); `this` arrives in EDI and the two
+// file handles live in the caller's stack slots.
+bool FUN_00a0076f(void)
+{
+    cObj *self; // = EDI, not expressible in C
+
+    int modelFile = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_01657e1c, 0);
+    int texFileA = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_0164518c, 0);
+    int texFileB = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_01645174, 0);
+    int texFileC = CALL(FUN_00de44b0, int (*)(void *, int))(DAT_01645170, 0);
+    int paramFile = CALL(FUN_00de4550, int (*)(char *, int))("_param.bxm", 0);
+    int cutInfoFile = CALL(FUN_00de4500, int (*)(char *))("CutInfo.bxm");
+    if (texFileA == 0) {
+        if (texFileB == 0 || (texFileA = texFileC, texFileC == 0)) {
+            texFileB = CALL(FUN_00de4500, int (*)(char *))("dummy.wtb");
+            texFileA = 0;
+            if (texFileB == 0) {
+                texFileB = CALL(FUN_00de4500, int (*)(char *))("dummy.wta");
+                texFileA = CALL(FUN_00de4500, int (*)(char *))("dummy.wtp");
+            }
+        }
+    } else {
+        texFileB = 0;
+    }
+    if (modelFile == 0 && (modelFile = self->overrideWmb()) == 0) {
+        modelFile = CALL(FUN_00de4500, int (*)(char *))("dummy.wmb");
+        self->objFlags() |= 2;
+    }
+    CALL(FUN_00a09c00, void (*)(unsigned int *))(&self->filePair0());
+
+    int modelData = cModelDataManager::EntryModelData(modelFile, cutInfoFile);
+    if (modelData == 0) {
+        return false;
+    }
+    self->objFlags() &= 0xFFFFFFFD;
+    return FUN_009fd350(self, modelData, texFileA, texFileB, paramFile) != 0;
 }
 
 // 00A008C0  FUN_00a008c0  size=401  [callgraph]
-undefined4 __thiscall
-FUN_00a008c0(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-            int param_6)
-
-{
-  code *pcVar1;
-  uint uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  
-  if (param_2 == 0) {
-    iVar3 = (**(code **)(*param_1 + 8))();
-    if (iVar3 == 0) {
-      return 0;
-    }
-LAB_00a0092e:
-    if (param_6 != 0) goto LAB_00a0098a;
-  }
-  else {
-    puVar4 = (undefined4 *)FUN_0092f750(param_1[300]);
-    pcVar1 = *(code **)(*param_1 + 0x3c);
-    param_1[0x133] = (int)puVar4;
-    (*pcVar1)(*puVar4);
-    iVar3 = FUN_009fd350(param_2,param_3,param_4,param_5);
-    if (iVar3 == 0) {
-      return 0;
-    }
-    if (param_6 != 0) {
-      FUN_009fd630(param_6);
-      goto LAB_00a0092e;
-    }
-  }
-  switchD_0080dbae::default();
-  if ((*(byte *)(param_1 + 0x130) & 2) == 0) {
-    FUN_009f8b80();
-    FUN_009fd700();
-  }
-  if (param_1[0xdc] == 0) {
-    uVar2 = param_1[300];
-    if ((uVar2 & 0xf0000) == 0x20000) {
-      if (((uVar2 & 0xffff) != 0x91) && ((uVar2 & 0xffff) != 0x221)) goto LAB_00a009d1;
-    }
-    else if (((uVar2 & 0xf0000) == 0x30000) && ((uVar2 & 0xffff) != 0x90)) goto LAB_00a009d1;
-  }
-  else {
-LAB_00a009d1:
-    iVar3 = param_1[300];
-    iVar5 = FUN_00c13980(iVar3);
-    if ((((iVar5 == 0) && (iVar5 = FUN_00c139a0(iVar3), iVar5 == 0)) &&
-        (iVar5 = FUN_00c139f0(iVar3), iVar5 == 0)) &&
-       ((((iVar5 = FUN_00c13a30(iVar3), iVar5 == 0 && (iVar5 = FUN_00c13a70(iVar3), iVar5 == 0)) &&
-         (iVar5 = FUN_00c13a90(iVar3), iVar5 == 0)) && (iVar3 = FUN_00c13ab0(iVar3), iVar3 == 0))))
-    {
-      param_1[0xd9] = param_1[0xd9] | 0x400000;
-      goto LAB_00a0098a;
-    }
-  }
-  param_1[0xd9] = param_1[0xd9] & 0xffbfffff;
-LAB_00a0098a:
-  if (param_1[0x147] == -1) {
-    iVar3 = FUN_00a4af90(1);
-    param_1[0x147] = iVar3;
-  }
-  return 1;
+// __thiscall in the binary: self arrives in ECX.
+undefined4 FUN_00a008c0(cObj *self, int modelData, undefined4 texFileA, undefined4 texFileB,
+                        undefined4 paramFile, cObj *source)
+{
+    if (modelData == 0) {
+        if (self->vf08() == 0) {
+            return 0;
+        }
+    } else {
+        unsigned int *info = CALL(FUN_0092f750, unsigned int *(*)(unsigned int))(self->modelObjId());
+        self->objInfo() = info;
+        self->vf3C(*info);
+        if (FUN_009fd350(self, modelData, texFileA, texFileB, paramFile) == 0) {
+            return 0;
+        }
+        if (source != 0) {
+            FUN_009fd630(self, source);
+        }
+    }
+
+    if (source == 0) {
+        // switchD_0080dbae::default (00A17A40); ECX: ?
+        ((void (*)())0x00A17A40)();
+        if ((*(unsigned char *)&self->objFlags() & 2) == 0) {
+            CALL(FUN_009f8b80, void (*)())(); /* ECX: ? */
+            FUN_009fd700(self);
+        }
+
+        unsigned int *flags364 = (unsigned int *)((char *)self + 0x364); /* cModel+0x364: flags */
+        bool check;
+        if (*(int *)((char *)self + 0x370) == 0) { /* cModel+0x370: ? */
+            unsigned int id = self->modelObjId();
+            if ((id & 0xF0000) == 0x20000) {
+                check = (id & 0xFFFF) != 0x91 && (id & 0xFFFF) != 0x221;
+            } else {
+                check = (id & 0xF0000) == 0x30000 && (id & 0xFFFF) != 0x90;
+            }
+        } else {
+            check = true;
+        }
+        if (check) {
+            int id = (int)self->modelObjId();
+            if (FUN_00c13980(id) == 0 && FUN_00c139a0(id) == 0 && FUN_00c139f0(id) == 0 &&
+                FUN_00c13a30(id) == 0 && FUN_00c13a70(id) == 0 && FUN_00c13a90(id) == 0 &&
+                FUN_00c13ab0(id) == 0) {
+                *flags364 |= 0x400000;
+                goto finish;
+            }
+        }
+        *flags364 &= 0xFFBFFFFF;
+    }
+
+finish:
+    if (self->field51C() == -1) {
+        self->field51C() = (int)CALL(FUN_00a4af90, uint (*)(int))(1); /* ECX: ? */
+    }
+    return 1;
 }
 
 // 00A00A60  FUN_00a00a60  size=353  [callgraph]
-undefined4 FUN_00a00a60(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 *puVar6;
-  int *piVar7;
-  uint *puVar8;
-  int iVar9;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar6 = &DAT_0189e7b8;
-    uVar2 = DAT_0189e7b8;
-    do {
-      if (uVar2 == param_1) {
-        return 1;
-      }
-      uVar2 = puVar6[1];
-      puVar6 = puVar6 + 1;
-    } while (uVar2 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) == 0x90000) {
-    return 1;
-  }
-  uVar3 = FUN_009f9d10(param_1);
-  iVar4 = FUN_00e9eeb0(uVar3);
-  if (iVar4 == 0) {
-    return 0;
-  }
-  iVar9 = 0;
-  iVar4 = FUN_009f9ed0(param_1,param_2);
-  if (iVar4 != 0) {
-    piVar7 = (int *)(iVar4 + 8);
-    do {
-      if (*piVar7 == 0) break;
-      uVar3 = FUN_009f9d10(*piVar7);
-      iVar5 = FUN_00e9eeb0(uVar3);
-      if (iVar5 == 0) goto LAB_00a00b44;
-      iVar9 = iVar9 + 1;
-      piVar7 = piVar7 + 1;
-    } while (iVar9 < 0x30);
-  }
-  iVar5 = FUN_009fe410(param_1);
-  if (iVar5 != 0) {
-    uVar3 = FUN_009f9d10(*(undefined4 *)(iVar5 + 4));
-    iVar5 = FUN_00e9eeb0(uVar3);
-    if (iVar5 == 0) goto LAB_00a00b44;
-  }
-  iVar5 = FUN_009fe620(param_1);
-  if (iVar5 != 0) {
-    uVar3 = FUN_009f9d10(*(undefined4 *)(iVar5 + 8));
-    iVar5 = FUN_00e9eeb0(uVar3);
-    if (iVar5 == 0) {
-LAB_00a00b44:
-      uVar3 = FUN_009f9d10(param_1);
-      FUN_00e9e780(uVar3);
-      iVar9 = iVar9 + -1;
-      if (-1 < iVar9) {
-        puVar8 = (uint *)(iVar4 + 8 + iVar9 * 4);
-        do {
-          uVar2 = *puVar8;
-          if (((uVar2 & 0xf0000) == 0x20000) || ((uVar2 & 0xf0000) == 0xf0000)) {
-            iVar4 = 0;
-            uVar1 = DAT_0189e8a0;
-            while (uVar1 != 0xffffffff) {
-              if (uVar1 == uVar2) {
-                uVar2 = (&DAT_0189e8a4)[iVar4 * 2];
-                break;
-              }
-              iVar5 = iVar4 * 2;
-              iVar4 = iVar4 + 1;
-              uVar1 = (&DAT_0189e8a8)[iVar5];
-            }
-          }
-          FUN_00e9e780(uVar2);
-          puVar8 = puVar8 + -1;
-          iVar9 = iVar9 + -1;
-        } while (-1 < iVar9);
-      }
-      return 0;
-    }
-  }
-  return 1;
+// Checks FUN_00e9eeb0 for the object and all its files; on a failure after the first file,
+// releases (FUN_00e9e780) the object and the dependencies checked so far and returns 0.
+undefined4 FUN_00a00a60(uint id, undefined4 param_2)
+{
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return 1;
+        }
+    }
+    if ((id & 0xFFFF0000) == 0x90000) {
+        return 1;
+    }
+    if (FUN_00e9eeb0(FUN_009f9d10(id)) == 0) {
+        return 0;
+    }
+
+    int checked = 0;
+    undefined4 *deps = FUN_009f9ed0(id, param_2);
+    if (deps != 0) {
+        int *dep = (int *)((char *)deps + 8);
+        for (; checked < 0x30; checked++, dep++) {
+            if (*dep == 0) break;
+            if (FUN_00e9eeb0(FUN_009f9d10(*dep)) == 0) goto rollback;
+        }
+    }
+    {
+        ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(id);
+        if (entry != 0 && FUN_00e9eeb0(FUN_009f9d10(entry->objA)) == 0) goto rollback;
+        entry = (ObjFileEntry *)FUN_009fe620(id);
+        if (entry != 0 && FUN_00e9eeb0(FUN_009f9d10(entry->objB)) == 0) goto rollback;
+    }
+    return 1;
+
+rollback:
+    CALL(FUN_00e9e780, void (*)(uint))(FUN_009f9d10(id));
+    checked--;
+    if (-1 < checked) {
+        unsigned int *dep = (unsigned int *)((char *)deps + 8 + checked * 4);
+        do {
+            unsigned int depId = *dep;
+            if ((depId & 0xF0000) == 0x20000 || (depId & 0xF0000) == 0xF0000) {
+                int k = 0;
+                unsigned int from = DAT_0189e8a0[0].from;
+                while (from != 0xFFFFFFFF) {
+                    if (from == depId) {
+                        depId = DAT_0189e8a0[k].to;
+                        break;
+                    }
+                    k++;
+                    from = DAT_0189e8a0[k].from;
+                }
+            }
+            CALL(FUN_00e9e780, void (*)(uint))(depId);
+            dep--;
+            checked--;
+        } while (-1 < checked);
+    }
+    return 0;
 }
 
 // 00A00BD0  FUN_00a00bd0  size=204  [callgraph]
-void FUN_00a00bd0(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  int *piVar5;
-  int iVar6;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar4 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return;
-      }
-      uVar1 = puVar4[1];
-      puVar4 = puVar4 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) != 0x90000) {
-    uVar2 = FUN_009f9d10(param_1);
-    FUN_00e9e780(uVar2);
-    iVar3 = FUN_009f9ed0(param_1,param_2);
-    if (iVar3 != 0) {
-      iVar6 = 0;
-      piVar5 = (int *)(iVar3 + 8);
-      do {
-        if (*piVar5 == 0) break;
-        uVar2 = FUN_009f9d10(*piVar5);
-        FUN_00e9e780(uVar2);
-        iVar6 = iVar6 + 1;
-        piVar5 = piVar5 + 1;
-      } while (iVar6 < 0x30);
-    }
-    iVar3 = FUN_009fe410(param_1);
-    if (iVar3 != 0) {
-      uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 4));
-      FUN_00e9e780(uVar2);
-    }
-    iVar3 = FUN_009fe620(param_1);
-    if (iVar3 != 0) {
-      uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 8));
-      FUN_00e9e780(uVar2);
-    }
-  }
-  return;
+void FUN_00a00bd0(uint id, undefined4 param_2)
+{
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return;
+        }
+    }
+    if ((id & 0xFFFF0000) != 0x90000) {
+        CALL(FUN_00e9e780, void (*)(uint))(FUN_009f9d10(id));
+        undefined4 *deps = FUN_009f9ed0(id, param_2);
+        if (deps != 0) {
+            int *dep = (int *)((char *)deps + 8);
+            for (int n = 0; n < 0x30; n++, dep++) {
+                if (*dep == 0) break;
+                CALL(FUN_00e9e780, void (*)(uint))(FUN_009f9d10(*dep));
+            }
+        }
+        ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(id);
+        if (entry != 0) {
+            CALL(FUN_00e9e780, void (*)(uint))(FUN_009f9d10(entry->objA));
+        }
+        entry = (ObjFileEntry *)FUN_009fe620(id);
+        if (entry != 0) {
+            CALL(FUN_00e9e780, void (*)(uint))(FUN_009f9d10(entry->objB));
+        }
+    }
 }
 
 // 00A00CA0  FUN_00a00ca0  size=241  [callgraph]
-undefined4 FUN_00a00ca0(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  int *piVar6;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar4 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return 1;
-      }
-      uVar1 = puVar4[1];
-      puVar4 = puVar4 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) == 0x90000) {
-    return 1;
-  }
-  uVar2 = FUN_009f9d10(param_1);
-  iVar3 = FUN_00e9e7c0(uVar2);
-  if (iVar3 == 0) {
-    return 0;
-  }
-  iVar3 = FUN_009f9ed0(param_1,param_2);
-  if (iVar3 != 0) {
-    iVar5 = 0;
-    piVar6 = (int *)(iVar3 + 8);
-    do {
-      if (*piVar6 == 0) break;
-      uVar2 = FUN_009f9d10(*piVar6);
-      iVar3 = FUN_00e9e7c0(uVar2);
-      if (iVar3 == 0) {
-        return 0;
-      }
-      iVar5 = iVar5 + 1;
-      piVar6 = piVar6 + 1;
-    } while (iVar5 < 0x30);
-  }
-  iVar3 = FUN_009fe410(param_1);
-  if (iVar3 != 0) {
-    uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 4));
-    iVar3 = FUN_00e9e7c0(uVar2);
-    if (iVar3 == 0) {
-      return 0;
-    }
-  }
-  iVar3 = FUN_009fe620(param_1);
-  if (iVar3 != 0) {
-    uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 8));
-    iVar3 = FUN_00e9e7c0(uVar2);
-    if (iVar3 == 0) {
-      return 0;
-    }
-  }
-  return 1;
+undefined4 FUN_00a00ca0(uint id, undefined4 param_2)
+{
+    typedef int (*CheckFn)(uint);
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return 1;
+        }
+    }
+    if ((id & 0xFFFF0000) == 0x90000) {
+        return 1;
+    }
+    if (CALL(FUN_00e9e7c0, CheckFn)(FUN_009f9d10(id)) == 0) {
+        return 0;
+    }
+    undefined4 *deps = FUN_009f9ed0(id, param_2);
+    if (deps != 0) {
+        int *dep = (int *)((char *)deps + 8);
+        for (int n = 0; n < 0x30; n++, dep++) {
+            if (*dep == 0) break;
+            if (CALL(FUN_00e9e7c0, CheckFn)(FUN_009f9d10(*dep)) == 0) {
+                return 0;
+            }
+        }
+    }
+    ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(id);
+    if (entry != 0 && CALL(FUN_00e9e7c0, CheckFn)(FUN_009f9d10(entry->objA)) == 0) {
+        return 0;
+    }
+    entry = (ObjFileEntry *)FUN_009fe620(id);
+    if (entry != 0 && CALL(FUN_00e9e7c0, CheckFn)(FUN_009f9d10(entry->objB)) == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 // 00A00DA0  FUN_00a00da0  size=205  [callgraph]
-undefined4 FUN_00a00da0(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  int *piVar6;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar4 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return 1;
-      }
-      uVar1 = puVar4[1];
-      puVar4 = puVar4 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) == 0x90000) {
-    return 1;
-  }
-  uVar2 = FUN_009f9d10(param_1);
-  iVar3 = FUN_00e9e860(uVar2);
-  if (iVar3 == 0) {
-    return 0;
-  }
-  iVar3 = FUN_009f9ed0(param_1,param_2);
-  if (iVar3 != 0) {
-    iVar5 = 0;
-    piVar6 = (int *)(iVar3 + 8);
-    do {
-      if (*piVar6 == 0) break;
-      uVar2 = FUN_009f9d10(*piVar6);
-      iVar3 = FUN_00e9e860(uVar2);
-      if (iVar3 == 0) {
-        return 0;
-      }
-      iVar5 = iVar5 + 1;
-      piVar6 = piVar6 + 1;
-    } while (iVar5 < 0x30);
-  }
-  iVar3 = FUN_009fe410(param_1);
-  if (iVar3 != 0) {
-    uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 4));
-    iVar3 = FUN_00e9e860(uVar2);
-    if (iVar3 == 0) {
-      return 0;
-    }
-  }
-  return 1;
+undefined4 FUN_00a00da0(uint id, undefined4 param_2)
+{
+    typedef int (*CheckFn)(uint);
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return 1;
+        }
+    }
+    if ((id & 0xFFFF0000) == 0x90000) {
+        return 1;
+    }
+    if (CALL(FUN_00e9e860, CheckFn)(FUN_009f9d10(id)) == 0) {
+        return 0;
+    }
+    undefined4 *deps = FUN_009f9ed0(id, param_2);
+    if (deps != 0) {
+        int *dep = (int *)((char *)deps + 8);
+        for (int n = 0; n < 0x30; n++, dep++) {
+            if (*dep == 0) break;
+            if (CALL(FUN_00e9e860, CheckFn)(FUN_009f9d10(*dep)) == 0) {
+                return 0;
+            }
+        }
+    }
+    ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(id);
+    if (entry != 0 && CALL(FUN_00e9e860, CheckFn)(FUN_009f9d10(entry->objA)) == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 // 00A00E70  FUN_00a00e70  size=265  [callgraph]
-undefined4 FUN_00a00e70(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  int *piVar6;
-  int iVar7;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar5 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return 1;
-      }
-      uVar1 = puVar5[1];
-      puVar5 = puVar5 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) == 0x90000) {
-    return 1;
-  }
-  iVar2 = FUN_00e9e960(param_1,0);
-  if (iVar2 == 0) {
-    uVar3 = FUN_009f9d10(param_1);
-    iVar2 = FUN_00e9e860(uVar3);
-    if (iVar2 == 0) {
-      return 0;
-    }
-  }
-  iVar2 = FUN_009f9ed0(param_1,param_2);
-  if (iVar2 != 0) {
-    iVar7 = 0;
-    piVar6 = (int *)(iVar2 + 8);
-    do {
-      iVar2 = *piVar6;
-      if (iVar2 == 0) break;
-      iVar4 = FUN_00e9e960(iVar2,0);
-      if (iVar4 == 0) {
-        uVar3 = FUN_009f9d10(iVar2);
-        iVar2 = FUN_00e9e860(uVar3);
-        if (iVar2 == 0) {
-          return 0;
-        }
-      }
-      iVar7 = iVar7 + 1;
-      piVar6 = piVar6 + 1;
-    } while (iVar7 < 0x30);
-  }
-  iVar2 = FUN_009fe410(param_1);
-  if ((iVar2 != 0) && (iVar7 = FUN_00e9e960(*(undefined4 *)(iVar2 + 4),0), iVar7 == 0)) {
-    uVar3 = FUN_009f9d10(*(undefined4 *)(iVar2 + 4));
-    iVar2 = FUN_00e9e860(uVar3);
-    if (iVar2 == 0) {
-      return 0;
-    }
-  }
-  return 1;
+undefined4 FUN_00a00e70(uint id, undefined4 param_2)
+{
+    typedef int (*CheckFn)(uint);
+    typedef int (*LookupFn)(int, int);
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return 1;
+        }
+    }
+    if ((id & 0xFFFF0000) == 0x90000) {
+        return 1;
+    }
+    if (CALL(FUN_00e9e960, LookupFn)(id, 0) == 0 &&
+        CALL(FUN_00e9e860, CheckFn)(FUN_009f9d10(id)) == 0) {
+        return 0;
+    }
+    undefined4 *deps = FUN_009f9ed0(id, param_2);
+    if (deps != 0) {
+        int *dep = (int *)((char *)deps + 8);
+        for (int n = 0; n < 0x30; n++, dep++) {
+            int depId = *dep;
+            if (depId == 0) break;
+            if (CALL(FUN_00e9e960, LookupFn)(depId, 0) == 0 &&
+                CALL(FUN_00e9e860, CheckFn)(FUN_009f9d10(depId)) == 0) {
+                return 0;
+            }
+        }
+    }
+    ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(id);
+    if (entry != 0 && CALL(FUN_00e9e960, LookupFn)(entry->objA, 0) == 0 &&
+        CALL(FUN_00e9e860, CheckFn)(FUN_009f9d10(entry->objA)) == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 // 00A00F80  FUN_00a00f80  size=241  [callgraph]
-undefined4 FUN_00a00f80(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  int *piVar6;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar4 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return 1;
-      }
-      uVar1 = puVar4[1];
-      puVar4 = puVar4 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) == 0x90000) {
-    return 1;
-  }
-  uVar2 = FUN_009f9d10(param_1);
-  iVar3 = FUN_00e9e810(uVar2);
-  if (iVar3 == 0) {
-    return 0;
-  }
-  iVar3 = FUN_009f9ed0(param_1,param_2);
-  if (iVar3 != 0) {
-    iVar5 = 0;
-    piVar6 = (int *)(iVar3 + 8);
-    do {
-      if (*piVar6 == 0) break;
-      uVar2 = FUN_009f9d10(*piVar6);
-      iVar3 = FUN_00e9e810(uVar2);
-      if (iVar3 == 0) {
-        return 0;
-      }
-      iVar5 = iVar5 + 1;
-      piVar6 = piVar6 + 1;
-    } while (iVar5 < 0x30);
-  }
-  iVar3 = FUN_009fe410(param_1);
-  if (iVar3 != 0) {
-    uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 4));
-    iVar3 = FUN_00e9e810(uVar2);
-    if (iVar3 == 0) {
-      return 0;
-    }
-  }
-  iVar3 = FUN_009fe620(param_1);
-  if (iVar3 != 0) {
-    uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 8));
-    iVar3 = FUN_00e9e810(uVar2);
-    if (iVar3 == 0) {
-      return 0;
-    }
-  }
-  return 1;
+undefined4 FUN_00a00f80(uint id, undefined4 param_2)
+{
+    typedef int (*CheckFn)(uint);
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return 1;
+        }
+    }
+    if ((id & 0xFFFF0000) == 0x90000) {
+        return 1;
+    }
+    if (CALL(FUN_00e9e810, CheckFn)(FUN_009f9d10(id)) == 0) {
+        return 0;
+    }
+    undefined4 *deps = FUN_009f9ed0(id, param_2);
+    if (deps != 0) {
+        int *dep = (int *)((char *)deps + 8);
+        for (int n = 0; n < 0x30; n++, dep++) {
+            if (*dep == 0) break;
+            if (CALL(FUN_00e9e810, CheckFn)(FUN_009f9d10(*dep)) == 0) {
+                return 0;
+            }
+        }
+    }
+    ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(id);
+    if (entry != 0 && CALL(FUN_00e9e810, CheckFn)(FUN_009f9d10(entry->objA)) == 0) {
+        return 0;
+    }
+    entry = (ObjFileEntry *)FUN_009fe620(id);
+    if (entry != 0 && CALL(FUN_00e9e810, CheckFn)(FUN_009f9d10(entry->objB)) == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 // 00A01080  FUN_00a01080  size=239  [callgraph]
-undefined4 FUN_00a01080(uint param_1,undefined4 param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  int *piVar6;
-  
-  if (DAT_0189e7b8 != 0xffffffff) {
-    puVar4 = &DAT_0189e7b8;
-    uVar1 = DAT_0189e7b8;
-    do {
-      if (uVar1 == param_1) {
-        return 0;
-      }
-      uVar1 = puVar4[1];
-      puVar4 = puVar4 + 1;
-    } while (uVar1 != 0xffffffff);
-  }
-  if ((param_1 & 0xffff0000) == 0x90000) {
-    return 0;
-  }
-  uVar2 = FUN_009f9d10(param_1);
-  iVar3 = FUN_00e9e8b0(uVar2);
-  if (iVar3 != 0) {
-    return 1;
-  }
-  iVar3 = FUN_009f9ed0(param_1,param_2);
-  if (iVar3 == 0) {
-    return 0;
-  }
-  iVar5 = 0;
-  piVar6 = (int *)(iVar3 + 8);
-  do {
-    if (*piVar6 == 0) break;
-    uVar2 = FUN_009f9d10(*piVar6);
-    iVar3 = FUN_00e9e8b0(uVar2);
-    if (iVar3 != 0) {
-      return 1;
-    }
-    iVar5 = iVar5 + 1;
-    piVar6 = piVar6 + 1;
-  } while (iVar5 < 0x30);
-  iVar3 = FUN_009fe410(param_1);
-  if (iVar3 != 0) {
-    uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 4));
-    iVar3 = FUN_00e9e8b0(uVar2);
-    if (iVar3 == 0) {
-      return 0;
-    }
-  }
-  iVar3 = FUN_009fe620(param_1);
-  if (iVar3 != 0) {
-    uVar2 = FUN_009f9d10(*(undefined4 *)(iVar3 + 8));
-    FUN_00e9e8b0(uVar2);
-  }
-  return 0;
+undefined4 FUN_00a01080(uint id, undefined4 param_2)
+{
+    typedef int (*CheckFn)(uint);
+    for (unsigned int *p = DAT_0189e7b8; *p != 0xFFFFFFFF; p++) {
+        if (*p == id) {
+            return 0;
+        }
+    }
+    if ((id & 0xFFFF0000) == 0x90000) {
+        return 0;
+    }
+    if (CALL(FUN_00e9e8b0, CheckFn)(FUN_009f9d10(id)) != 0) {
+        return 1;
+    }
+    undefined4 *deps = FUN_009f9ed0(id, param_2);
+    if (deps == 0) {
+        return 0;
+    }
+    int *dep = (int *)((char *)deps + 8);
+    for (int n = 0; n < 0x30; n++, dep++) {
+        if (*dep == 0) break;
+        if (CALL(FUN_00e9e8b0, CheckFn)(FUN_009f9d10(*dep)) != 0) {
+            return 1;
+        }
+    }
+    ObjFileEntry *entry = (ObjFileEntry *)FUN_009fe410(id);
+    if (entry != 0 && CALL(FUN_00e9e8b0, CheckFn)(FUN_009f9d10(entry->objA)) == 0) {
+        return 0;
+    }
+    entry = (ObjFileEntry *)FUN_009fe620(id);
+    if (entry != 0) {
+        CALL(FUN_00e9e8b0, CheckFn)(FUN_009f9d10(entry->objB));
+    }
+    return 0;
 }
-

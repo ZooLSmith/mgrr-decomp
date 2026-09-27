@@ -1,231 +1,249 @@
-// src/graphics/cModelBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A11C60..00EFC800, 4 functions
+// src/graphics/cModelBase.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "cModelBase.h"
 
-#include "types.h"
+// d3dx9: D3DXMATRIX *D3DXMatrixInverse(D3DXMATRIX *out, FLOAT *determinant, const D3DXMATRIX *m)
+extern "C" float *__stdcall D3DXMatrixInverse(float *out, float *determinant, const float *m);
+
+// Data referenced by these functions (contents not yet identified).
+extern char DAT_0165c8a8[];  // format string for the "parts not found" debug print
+extern char DAT_01ee11f4[];
+extern char DAT_016d9de0[];
+extern char DAT_016d9e14[];
+extern char DAT_016d9ed0[];
+extern char DAT_0164524c[];  // debug message (? "MeshNo >= %d" variant)
+
+// Several callees are __thiscall/__fastcall in functions.h, but the decompiler lost the
+// register argument at these call sites. The calls below keep exactly the stack arguments
+// the raw decompilation shows, through a cast to the call shape seen here.
+typedef int  (*DebugPrintFn)(const char *fmt, ...);  // FUN_00dd5650 (debug printf)
+#define DebugPrint ((DebugPrintFn)FUN_00dd5650)
 
 // 00A11C60  cModelBase::setRootPartsNo  size=187  [class]
-undefined4 __thiscall cModelBase::setRootPartsNo(int param_1,int param_2)
-
-{
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  
-  iVar2 = *(int *)(param_1 + 0x360);
-  if (*(int *)(param_1 + 0x360) == 0) {
-    iVar2 = param_1;
-  }
-  if (*(int *)(iVar2 + 0x330) == 0) {
-    iVar3 = 0xfff;
-  }
-  else {
-    iVar3 = FUN_00a06de0(param_2);
-  }
-  iVar1 = *(int *)(iVar2 + 0x360);
-  if (*(int *)(iVar2 + 0x360) == 0) {
-    iVar1 = iVar2;
-  }
-  if ((iVar3 < 0) || (*(short *)(iVar1 + 0x358) <= iVar3)) {
-    iVar1 = 0;
-  }
-  else {
-    iVar1 = iVar3 * 0xb0 + *(int *)(iVar1 + 0x350);
-  }
-  uVar4 = 1;
-  if (iVar1 == 0) {
-    *(int *)(param_1 + 0x334) = iVar2;
-    if (param_2 != -1) {
-      FUN_00dd5650(&DAT_0165c8a8,param_2);
-      uVar4 = 0;
-    }
-  }
-  else {
-    *(int *)(param_1 + 0x334) = iVar1;
-  }
-  FUN_00a07ac0(*(undefined4 *)(param_1 + 0x334),iVar3,*(undefined4 *)(param_1 + 0x330));
-  *(int *)(param_1 + 0x368) = param_2;
-  return uVar4;
+int cModelBase::setRootPartsNo(int partsNo)
+{
+    cModelBase *model = parentModel();
+    if (parentModel() == 0) {
+        model = this;
+    }
+
+    int index;
+    if (model->field330() == 0) {
+        index = 0xfff;
+    }
+    else {
+        index = ((int (*)(int))FUN_00a06de0)(partsNo);  // ? ECX not recovered
+    }
+
+    cModelBase *owner = model->parentModel();
+    if (model->parentModel() == 0) {
+        owner = model;
+    }
+
+    cParts *parts;
+    if ((index < 0) || (owner->partsCount() <= index)) {
+        parts = 0;
+    }
+    else {
+        parts = (cParts *)(owner->partsArray() + index * 0xb0);
+    }
+
+    int result = 1;
+    if (parts == 0) {
+        rootParts() = model;
+        if (partsNo != -1) {
+            DebugPrint(DAT_0165c8a8, partsNo);
+            result = 0;
+        }
+    }
+    else {
+        rootParts() = parts;
+    }
+    ((void (*)(cParts *, int, int))FUN_00a07ac0)(rootParts(), index, field330());  // ? ECX not recovered
+    rootPartsNo() = partsNo;
+    return result;
 }
 
 // 00A19210  cModelBase::cModelBase  size=419  [class]
-undefined4 * __fastcall cModelBase::cModelBase(undefined4 *param_1)
-
-{
-  cParts::cParts_2();
-  *param_1 = vftable;
-  param_1[0x54] = 0;
-  param_1[0x55] = 0;
-  param_1[0x56] = 0;
-  param_1[0x57] = 0;
-  param_1[0x58] = 0;
-  param_1[0x59] = 0;
-  param_1[0x5a] = 0;
-  param_1[0x5b] = 0;
-  param_1[0x5c] = 0;
-  param_1[0x5d] = 0;
-  param_1[0x5e] = 0;
-  param_1[0x5f] = 0;
-  param_1[0x60] = 0xbf800000;
-  param_1[0x61] = 0xbf800000;
-  param_1[0x62] = 0xbf800000;
-  param_1[99] = 0xbf800000;
-  param_1[0x68] = 1;
-  param_1[0x66] = 0;
-  param_1[100] = 0;
-  param_1[0x67] = 0;
-  param_1[0x65] = 0x3f59999a;
-  *(undefined2 *)((int)param_1 + 0x23e) = 1;
-  param_1[0x8c] = 0;
-  *(undefined4 *)((int)param_1 + 0x23a) = 0;
-  param_1[0x8d] = 0;
-  *(undefined2 *)(param_1 + 0x8e) = 0;
-  param_1[0x90] = 0;
-  param_1[200] = 0;
-  param_1[0xd7] = 0;
-  param_1[0xd5] = 0;
-  param_1[0xd4] = 0;
-  *(undefined2 *)(param_1 + 0xd6) = 0;
-  param_1[0x3a] = 0;
-  param_1[0x39] = 0;
-  param_1[0x38] = 0;
-  param_1[0x37] = 0;
-  param_1[0x35] = 0;
-  param_1[0x34] = 0;
-  param_1[0x33] = 0;
-  param_1[0x32] = 0;
-  param_1[0x30] = 0;
-  param_1[0x2f] = 0;
-  param_1[0x2e] = 0;
-  param_1[0x2d] = 0;
-  param_1[0x3b] = 0x3f800000;
-  param_1[0x36] = 0x3f800000;
-  param_1[0x31] = 0x3f800000;
-  param_1[0x2c] = 0x3f800000;
-  D3DXMatrixInverse(param_1 + 0x3c,0,param_1 + 0x2c);
-  *(undefined2 *)(param_1 + 0xcb) = 0;
-  param_1[0xcd] = param_1;
-  param_1[0xcc] = 0;
-  param_1[0xd3] = 0;
-  param_1[0xca] = 0;
-  param_1[0xd8] = 0;
-  param_1[0xce] = 0;
-  param_1[0xd0] = 2;
-  *(undefined2 *)(param_1 + 0xc9) = 0;
-  param_1[0xd9] = 0;
-  param_1[0xda] = 0xffffffff;
-  param_1[0xcf] = 0xffffffff;
-  param_1[0xdb] = 0;
-  param_1[0xd1] = 0;
-  param_1[0xd2] = 0;
-  param_1[0xd9] = param_1[0xd9] | 2;
-  return param_1;
+cModelBase::cModelBase() : cParts()
+{
+    // vftable = cModelBase::vftable
+    field150() = 0;
+    field154() = 0;
+    field158() = 0;
+    field15C() = 0;
+    field160() = 0;
+    field164() = 0;
+    field168() = 0;
+    field16C() = 0;
+    field170() = 0;
+    field174() = 0;
+    field178() = 0;
+    field17C() = 0;
+    field180() = -1.0f;
+    field184() = -1.0f;
+    field188() = -1.0f;
+    field18C() = -1.0f;
+    field1A0() = 1;
+    field198() = 0;
+    field190() = 0;
+    field19C() = 0;
+    field194() = 0.85f;  // 0x3F59999A
+    field23E() = 1;
+    field230() = 0;
+    field23A() = 0;
+    field234() = 0;
+    field238() = 0;
+    field240() = 0;
+    meshArray() = 0;
+    field35C() = 0;
+    field354() = 0;
+    partsArray() = 0;
+    partsCount() = 0;
+
+    // identity matrix at +0xB0 (stored in this order)
+    float *m = matrixB0();
+    m[14] = 0.0f;
+    m[13] = 0.0f;
+    m[12] = 0.0f;
+    m[11] = 0.0f;
+    m[9] = 0.0f;
+    m[8] = 0.0f;
+    m[7] = 0.0f;
+    m[6] = 0.0f;
+    m[4] = 0.0f;
+    m[3] = 0.0f;
+    m[2] = 0.0f;
+    m[1] = 0.0f;
+    m[15] = 1.0f;
+    m[10] = 1.0f;
+    m[5] = 1.0f;
+    m[0] = 1.0f;
+    D3DXMatrixInverse(invMatrixF0(), 0, matrixB0());
+
+    field32C() = 0;
+    rootParts() = this;
+    field330() = 0;
+    field34C() = 0;
+    field328() = 0;
+    parentModel() = 0;
+    field338() = 0;
+    field340() = 2;
+    meshCount() = 0;
+    flags364() = 0;
+    rootPartsNo() = -1;
+    field33C() = -1;
+    field36C() = 0;
+    field344() = 0;
+    field348() = 0;
+    flags364() = flags364() | 2;
 }
 
 // 00A196D0  cModelBase::vf00  size=30  [class]
-undefined4 __thiscall cModelBase::vf00(undefined4 param_1,byte param_2)
-
-{
-  cParts::cParts();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 cModelBase::destruct(byte flags)
+{
+    // scalar deleting destructor
+    ctor_00A193C0();  // 00A193C0 (FILEMAP: cParts::cParts; acts as the destructor body)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4)this;
 }
 
 // 00EFC800  cModelBase::getMeshAlphaSystem  size=617  [class]
-void __fastcall cModelBase::getMeshAlphaSystem(int param_1)
-
-{
-  short sVar1;
-  bool bVar2;
-  int iVar3;
-  float local_18;
-  undefined1 local_14 [16];
-  uint local_4;
-  
-  local_4 = DAT_018e8764 ^ (uint)&local_18;
-  if (*(int *)(param_1 + 0x50) == 0) {
-    __security_check_cookie(local_4 ^ (uint)&local_18);
-    return;
-  }
-  iVar3 = FUN_00a7c990(&DAT_01ee11f4);
-  if ((iVar3 == 0) && (iVar3 = FUN_00a81330(), iVar3 != 0)) {
-    iVar3 = FUN_00a7c7e0();
-    if (iVar3 == 0) {
-      if ((*(uint *)(param_1 + 0x3c) & 0x400) == 0) goto LAB_00efc87b;
-      if (*(int *)(param_1 + 0x50) != 0) {
-        FUN_00edc5c0(*(int *)(param_1 + 0x50) + 0x10);
-        *(undefined4 *)(param_1 + 0x50) = 0;
-      }
-      FUN_00a7c970(0);
-      if ((*(uint *)(param_1 + 0x3c) & 0x200) != 0) {
-        FUN_00edbe30(0,0);
-        __security_check_cookie(local_4 ^ (uint)&local_18);
-        return;
-      }
-    }
-    else if ((*(byte *)(param_1 + 0x3e) & 1) != 0) {
-      iVar3 = FUN_00a7c800();
-      if (iVar3 == 0) {
-        FUN_009cca90(param_1,&DAT_016d9e14);
-        __security_check_cookie(local_4 ^ (uint)&local_18);
-        return;
-      }
-      if (*(short *)(iVar3 + 0x324) < 1) {
-        iVar3 = FUN_009f8ea0(local_14,0x10,*(undefined4 *)(iVar3 + 0x4b0),0);
-        if (iVar3 == 0) {
-          FUN_009cca90(param_1,&DAT_016d9ed0);
-        }
-        __security_check_cookie(local_4 ^ (uint)&local_18);
-        return;
-      }
-      if ((((*(byte *)(iVar3 + 0x4c0) & 1) == 0) || (*(int *)(iVar3 + 0x198) < 0)) ||
-         ((*(uint *)(param_1 + 0x30) & 0x200000) != 0)) {
-        bVar2 = true;
-      }
-      else {
-        bVar2 = false;
-      }
-      if (bVar2) {
-        *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x400000;
-      }
-      else {
-        *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) & 0xffbfffff;
-      }
-      sVar1 = *(short *)(iVar3 + 0x324);
-      if (0 < sVar1) {
-        if (sVar1 < 1) {
-          FUN_00dd5650("cModelBase::getMeshAlphaSystem MeshNo >= %d",(int)sVar1);
-          local_18 = 0.0;
-        }
-        else {
-          local_18 = *(float *)(*(int *)(iVar3 + 800) + 0x2c);
-        }
-        *(float *)(param_1 + 0x128) = local_18;
-        if (*(short *)(iVar3 + 0x324) < 1) {
-          FUN_00dd5650(&DAT_0164524c);
-          local_18 = 0.0;
-        }
-        else {
-          local_18 = *(float *)(*(int *)(iVar3 + 800) + 0x1c);
-        }
-        if (local_18 < *(float *)(param_1 + 0x128)) {
-          *(float *)(param_1 + 0x128) = local_18;
-        }
-        *(float *)(param_1 + 0x128) = *(float *)(iVar3 + 0x45c) * *(float *)(param_1 + 0x128);
-      }
-    }
-    __security_check_cookie(local_4 ^ (uint)&local_18);
-    return;
-  }
-  if ((*(uint *)(param_1 + 0x3c) & 0x400) != 0) {
-    FUN_009cca90(param_1,&DAT_016d9de0);
-    *(undefined4 *)(param_1 + 0x50) = 0;
-    FUN_00a7c970(0);
-  }
-LAB_00efc87b:
-  __security_check_cookie(local_4 ^ (uint)&local_18);
-  return;
-}
+// ? The receiver's fields (+0x30 flags, +0x3C flags, +0x50 handle, +0x128 alpha) do not match
+// the cModelBase layout (+0x128 lies inside invMatrixF0), so they are accessed raw. The model
+// returned by FUN_00a7c800 is a cModelBase-derived object (cModel fields at +0x45C/+0x4B0/+0x4C0).
+// The stack-cookie checks (__security_check_cookie) are compiler-generated (/GS, buffer below).
+void cModelBase::getMeshAlphaSystem()
+{
+    char *self = (char *)this;
+    float alpha;
+    char nameBuf[16];
 
+    if (*(int *)(self + 0x50) /* ?+0x50 */ == 0) {
+        return;
+    }
+
+    if ((((int (*)(void *))FUN_00a7c990)(DAT_01ee11f4) == 0) &&
+        (((int (*)())FUN_00a81330)() != 0)) {
+        if (((int (*)())FUN_00a7c7e0)() == 0) {
+            if ((*(unsigned int *)(self + 0x3c) /* ?+0x3C flags */ & 0x400) == 0) {
+                return;
+            }
+            if (*(int *)(self + 0x50) != 0) {
+                ((void (*)(int))FUN_00edc5c0)(*(int *)(self + 0x50) + 0x10);
+                *(int *)(self + 0x50) = 0;
+            }
+            ((void (*)(int))FUN_00a7c970)(0);
+            if ((*(unsigned int *)(self + 0x3c) & 0x200) != 0) {
+                ((void (*)(int, int))FUN_00edbe30)(0, 0);
+                return;
+            }
+        }
+        else if ((*(unsigned char *)(self + 0x3e) /* ?+0x3E = byte 2 of +0x3C flags */ & 1) != 0) {
+            cModelBase *model = (cModelBase *)((int (*)())FUN_00a7c800)();
+            if (model == 0) {
+                ((void (*)(void *, void *))FUN_009cca90)(this, DAT_016d9e14);
+                return;
+            }
+            if (model->meshCount() < 1) {
+                int ok = FUN_009f8ea0(nameBuf, 0x10,
+                                      *(unsigned int *)((char *)model + 0x4b0) /* cModel+0x4B0: ? */, 0);
+                if (ok == 0) {
+                    ((void (*)(void *, void *))FUN_009cca90)(this, DAT_016d9ed0);
+                }
+                return;
+            }
+
+            bool translucent;
+            if ((((*(unsigned char *)((char *)model + 0x4c0) /* cModel+0x4C0: ? */ & 1) == 0) ||
+                 (model->field198() < 0)) ||
+                ((*(unsigned int *)(self + 0x30) /* ?+0x30 flags */ & 0x200000) != 0)) {
+                translucent = true;
+            }
+            else {
+                translucent = false;
+            }
+            if (translucent) {
+                *(unsigned int *)(self + 0x30) = *(unsigned int *)(self + 0x30) | 0x400000;
+            }
+            else {
+                *(unsigned int *)(self + 0x30) = *(unsigned int *)(self + 0x30) & 0xffbfffff;
+            }
+
+            short meshCount = model->meshCount();
+            if (0 < meshCount) {
+                // inlined mesh-alpha getter (mesh 0), with its bounds check
+                if (meshCount < 1) {
+                    DebugPrint("cModelBase::getMeshAlphaSystem MeshNo >= %d", (int)meshCount);
+                    alpha = 0.0f;
+                }
+                else {
+                    alpha = *(float *)((char *)model->meshArray() + 0x2c);
+                }
+                *(float *)(self + 0x128) /* ?+0x128 */ = alpha;
+
+                if (model->meshCount() < 1) {
+                    DebugPrint(DAT_0164524c);
+                    alpha = 0.0f;
+                }
+                else {
+                    alpha = *(float *)((char *)model->meshArray() + 0x1c);
+                }
+                if (alpha < *(float *)(self + 0x128)) {
+                    *(float *)(self + 0x128) = alpha;
+                }
+                *(float *)(self + 0x128) =
+                    *(float *)((char *)model + 0x45c) /* cModel+0x45C: scale45C */ * *(float *)(self + 0x128);
+            }
+        }
+        return;
+    }
+
+    if ((*(unsigned int *)(self + 0x3c) & 0x400) != 0) {
+        ((void (*)(void *, void *))FUN_009cca90)(this, DAT_016d9de0);
+        *(int *)(self + 0x50) = 0;
+        ((void (*)(int))FUN_00a7c970)(0);
+    }
+}
