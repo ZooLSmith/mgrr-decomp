@@ -1,0 +1,54 @@
+// src/misc/cStealthKillTargetBase.cpp
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C970..00D25FB0, 3 functions
+
+#include "types.h"
+
+// 00D0C970  cStealthKillTargetBase::cStealthKillTargetBase  size=18  [class]
+undefined4 * __fastcall cStealthKillTargetBase::cStealthKillTargetBase(undefined4 *param_1)
+
+{
+  cCustomObjCtrl::cCustomObjCtrl();
+  *param_1 = vftable;
+  return param_1;
+}
+
+// 00D0C9C0  cStealthKillTargetBase::vf00  size=65  [class]
+undefined4 * __thiscall cStealthKillTargetBase::vf00(undefined4 *param_1,byte param_2)
+
+{
+  code *pcVar1;
+  
+  pcVar1 = *(code **)(param_1[0x10] + 0xc);
+  *param_1 = cCustomObjWorkBase::vftable;
+  (*pcVar1)();
+  param_1[0x10] = cUICtrl::vftable;
+  FUN_00cc7640();
+  *param_1 = cUIWork::vftable;
+  if ((param_2 & 1) != 0) {
+    FUN_00dd4920(param_1);
+  }
+  return param_1;
+}
+
+// 00D25FB0  cStealthKillTargetBase::vf14  size=92  [class]
+undefined4 __thiscall cStealthKillTargetBase::vf14(int param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = FUN_00d467a0();
+  if (iVar1 == 0) {
+    uVar2 = 0x524;
+  }
+  else {
+    uVar2 = 0x552;
+  }
+  FUN_00d1fb20(2,uVar2,param_2,0,1);
+  if ((*(int *)(param_1 + 0xb8) != 0) && (*(int *)(param_1 + 0xbc) != 0)) {
+    *(uint *)(param_1 + 0x28) = *(uint *)(param_1 + 0x28) | 0x20000000;
+    return 1;
+  }
+  return 0;
+}
+
