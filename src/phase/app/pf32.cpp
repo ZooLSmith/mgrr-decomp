@@ -1,5 +1,5 @@
 // src/phase/app/pf32.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D57030..00D70B40, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D57030..00D70B40, 5 functions
 
 #include "mgrr.h"
 #include "Pf32.h"
@@ -189,6 +189,20 @@ LAB_00d65dc4:
     FUN_00d37460();
   }
   return;
+}
+
+// 00D6FB70  Pf32::Pf32  size=62  [class]
+undefined4 * __fastcall Pf32::Pf32(undefined4 *param_1)
+
+{
+  param_1[4] = param_1 + 7;
+  param_1[5] = 0;
+  param_1[6] = 0x40;
+  param_1[3] = lib::StaticArray<int,64>::vftable;
+  *param_1 = vftable;
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  return param_1;
 }
 
 // 00D70B40  Pf32::vf00  size=76  [class]

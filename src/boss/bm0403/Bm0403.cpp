@@ -607,8 +607,8 @@ LAB_004138c5:
   return;
 }
 
-// 00413990  Bm0403::vf40  size=358  [class]
-undefined4 __fastcall Bm0403::vf40(int param_1)
+// 00413990  Bm0403::startup  size=358  [class]
+undefined4 __fastcall Bm0403::startup(int param_1)
 
 {
   uint *puVar1;
@@ -621,7 +621,7 @@ undefined4 __fastcall Bm0403::vf40(int param_1)
   int iVar8;
   bool bVar9;
   
-  iVar3 = Bm6041::vf40();
+  iVar3 = BehaviorBm::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -724,8 +724,8 @@ undefined * Bm0403::vf04(void)
   return &DAT_01b34bd8;
 }
 
-// 00AB9140  Bm0403::vf00  size=43  [class]
-undefined4 __thiscall Bm0403::vf00(undefined4 param_1,byte param_2)
+// 00AB9140  Bm0403::destruct  size=43  [class]
+undefined4 __thiscall Bm0403::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

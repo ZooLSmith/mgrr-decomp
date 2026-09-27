@@ -88,7 +88,6 @@ struct cXml {
     cXml();  // 0049CC10
     void ctor_0092B460();  // 0092B460
     void ctor_009F88C0();  // 009F88C0
-    void ctor_009F88E0();  // 009F88E0
     void ctor_00A60400();  // 00A60400
     void ctor_00D5E0C0();  // 00D5E0C0
     void ctor_00E91740();  // 00E91740

@@ -721,7 +721,7 @@ LAB_00a17926:
     iVar1 = 0;
   }
   else {
-    iVar1 = Hw::cTexture::cTexture_6();
+    iVar1 = Hw::cTexture::cTexture();
   }
   *(int *)(param_1 + 0x34c) = iVar1;
   if (iVar1 != 0) {
@@ -735,7 +735,7 @@ LAB_00a17926:
       *(undefined4 *)(param_1 + 0x348) = param_3;
       *(int *)(param_1 + 0x344) = param_4;
       iVar1 = FUN_00a11d20(param_2,param_6);
-      if (((iVar1 != 0) && (iVar1 = cMesh::cMesh(param_2,param_6), iVar1 != 0)) &&
+      if (((iVar1 != 0) && (iVar1 = cMesh::~cMesh(param_2,param_6), iVar1 != 0)) &&
          (iVar1 = FUN_00a177c0(param_2,param_6), iVar1 != 0)) {
         FUN_00a07960(param_2,param_5 + 1);
         goto LAB_00a17926;

@@ -3,8 +3,8 @@
 
 #include "mgrr.h"
 
-// 00E13500  std::locale::facet::facet_2  size=7  [run]
-void __fastcall std::locale::facet::facet_2(undefined4 *param_1)
+// 00E13500  std::locale::facet::~facet  size=7  [run]
+void __fastcall std::locale::facet::~facet(undefined4 *param_1)
 
 {
   *param_1 = vftable;

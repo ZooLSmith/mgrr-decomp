@@ -10,4 +10,6 @@ struct cCodecViewer : public cCustomObjCtrlManager {
     virtual void vf08();  // 009AD9C0 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 0098A950 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009B9AA0 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cCodecViewer();  // 0099C930
 };

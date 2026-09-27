@@ -6,13 +6,13 @@
 #include "hkCpuWorldGetClosestPointsCollector.h"
 #include "hkCpuWorldLinearCastCollector.h"
 #include "hkCpuWorldRayCastCollector.h"
-#include "hkpAction.h"
 #include "hkpBinaryAction.h"
 #include "hkpBroadPhaseListener.h"
 #include "hkpFixedBufferCdPointCollector.h"
 #include "hkpFixedBufferRayHitCollector.h"
 #include "hkpNullBroadPhaseListener.h"
 #include "hkpSimpleWorldRayCaster.h"
+#include "hkpUnaryAction.h"
 #include "hkpWindAction.h"
 #include "hkpWorldLinearCaster.h"
 #include "hkpWorldRayCaster.h"
@@ -1657,8 +1657,8 @@ void __fastcall hkpBroadPhaseListener::hkpBroadPhaseListener_3(int param_1)
   return;
 }
 
-// 0146D1E0  hkBaseObject::hkBaseObject_191  size=21  [run]
-void __fastcall hkBaseObject::hkBaseObject_191(int param_1)
+// 0146D1E0  hkBaseObject::hkBaseObject  size=21  [run]
+void __fastcall hkBaseObject::hkBaseObject(int param_1)
 
 {
   *(undefined ***)(param_1 + 0x108) = hkpBroadPhaseListener::vftable;
@@ -1985,7 +1985,7 @@ undefined4 * __thiscall hkpNullBroadPhaseListener::vf00(undefined4 *param_1,byte
   LPVOID pvVar1;
   
   param_1[2] = hkpBroadPhaseListener::vftable;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -7186,8 +7186,8 @@ LAB_01474ff6:
   return (float10)*(float *)(param_1 + 8);
 }
 
-// 01475010  hkpFixedBufferRayHitCollector::hkpFixedBufferRayHitCollector_2  size=260  [run]
-void hkpFixedBufferRayHitCollector::hkpFixedBufferRayHitCollector_2
+// 01475010  hkpFixedBufferRayHitCollector::hkpFixedBufferRayHitCollector  size=260  [run]
+void hkpFixedBufferRayHitCollector::hkpFixedBufferRayHitCollector
                (int *param_1,undefined4 *param_2,int param_3,undefined4 *param_4)
 
 {
@@ -33829,17 +33829,18 @@ void __thiscall FUN_014992d0(int param_1,undefined4 param_2)
   return;
 }
 
-// 01499320  hkpAction::hkpAction  size=77  [run]
-undefined4 * __thiscall hkpAction::hkpAction(undefined4 *param_1,int param_2,undefined4 param_3)
+// 01499320  hkpUnaryAction::hkpUnaryAction  size=77  [run]
+undefined4 * __thiscall
+hkpUnaryAction::hkpUnaryAction(undefined4 *param_1,int param_2,undefined4 param_3)
 
 {
   param_1[4] = param_3;
   *(undefined2 *)((int)param_1 + 6) = 1;
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   param_1[2] = 0;
   param_1[3] = 0;
   FUN_010065a0();
-  *param_1 = hkpUnaryAction::vftable;
+  *param_1 = vftable;
   param_1[6] = param_2;
   if (param_2 != 0) {
     FUN_01006000();
@@ -33847,18 +33848,18 @@ undefined4 * __thiscall hkpAction::hkpAction(undefined4 *param_1,int param_2,und
   return param_1;
 }
 
-// 01499370  hkBaseObject::hkBaseObject_29  size=50  [run]
-void __fastcall hkBaseObject::hkBaseObject_29(undefined4 *param_1)
+// 01499370  hkpUnaryAction::~hkpUnaryAction  size=50  [run]
+void __fastcall hkpUnaryAction::~hkpUnaryAction(undefined4 *param_1)
 
 {
-  *param_1 = hkpUnaryAction::vftable;
+  *param_1 = vftable;
   if (param_1[6] != 0) {
     FUN_010060a0();
     param_1[6] = 0;
   }
   *param_1 = hkpAction::vftable;
   FUN_01006770();
-  *param_1 = vftable;
+  *param_1 = ::hkBaseObject::vftable;
   return;
 }
 
@@ -33936,18 +33937,18 @@ void __thiscall FUN_01499480(int param_1,undefined4 param_2)
   return;
 }
 
-// 014994D0  hkpAction::hkpAction_2  size=89  [run]
+// 014994D0  hkpBinaryAction::hkpBinaryAction  size=89  [run]
 undefined4 * __thiscall
-hkpAction::hkpAction_2(undefined4 *param_1,int param_2,int param_3,undefined4 param_4)
+hkpBinaryAction::hkpBinaryAction(undefined4 *param_1,int param_2,int param_3,undefined4 param_4)
 
 {
   param_1[4] = param_4;
   *(undefined2 *)((int)param_1 + 6) = 1;
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   param_1[2] = 0;
   param_1[3] = 0;
   FUN_010065a0();
-  *param_1 = hkpBinaryAction::vftable;
+  *param_1 = vftable;
   param_1[6] = param_2;
   param_1[7] = param_3;
   if ((param_3 != 0) || (param_2 != 0)) {

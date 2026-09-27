@@ -358,8 +358,8 @@ void __fastcall Em0121::vf50(int param_1)
   return;
 }
 
-// 004ECE50  Em0121::vf264  size=24  [class]
-undefined4 Em0121::vf264(undefined4 param_1)
+// 004ECE50  Em0121::setEmSetInfo  size=24  [class]
+undefined4 Em0121::setEmSetInfo(undefined4 param_1)
 
 {
   FUN_0040ac60(param_1);
@@ -1017,16 +1017,16 @@ void FUN_004ef040(void)
 
 {
   FUN_00905ce0();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 004EF060  Em0121::vf00  size=43  [class]
-undefined4 __thiscall Em0121::vf00(undefined4 param_1,byte param_2)
+// 004EF060  Em0121::destruct  size=43  [class]
+undefined4 __thiscall Em0121::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00905ce0();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1564,8 +1564,8 @@ LAB_004eff4d:
   return;
 }
 
-// 004EFFA0  Em0121::vf40  size=851  [class]
-undefined4 __fastcall Em0121::vf40(int param_1)
+// 004EFFA0  Em0121::startup  size=851  [class]
+undefined4 __fastcall Em0121::startup(int param_1)
 
 {
   short sVar1;
@@ -1580,7 +1580,7 @@ undefined4 __fastcall Em0121::vf40(int param_1)
   undefined4 local_168;
   undefined4 local_164;
   
-  iVar2 = BehaviorEmBase::vf40();
+  iVar2 = BehaviorEmBase::startup();
   if (iVar2 == 0) {
     return 0;
   }

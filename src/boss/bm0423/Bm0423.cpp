@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bm0423.h"
 
-// 00413B50  Bm0423::vf40  size=29  [class]
-undefined4 __fastcall Bm0423::vf40(int param_1)
+// 00413B50  Bm0423::startup  size=29  [class]
+undefined4 __fastcall Bm0423::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -67,7 +67,7 @@ void __fastcall Bm0423::vf48(int *param_1)
       param_1[0x2d4] = 0;
       iVar4 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
       if (iVar4 != 0) {
-        iVar4 = CollisionAttackData::CollisionAttackData_3();
+        iVar4 = CollisionAttackData::CollisionAttackData();
         if (iVar4 != 0) {
           puVar3 = *(undefined4 **)(iVar4 + 8);
           *(undefined4 *)(iVar4 + 4) = 1;
@@ -118,8 +118,8 @@ undefined * Bm0423::vf04(void)
   return &DAT_01b34bdc;
 }
 
-// 00AB9270  Bm0423::vf00  size=43  [class]
-undefined4 __thiscall Bm0423::vf00(undefined4 param_1,byte param_2)
+// 00AB9270  Bm0423::destruct  size=43  [class]
+undefined4 __thiscall Bm0423::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

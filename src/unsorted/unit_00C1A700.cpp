@@ -76,7 +76,7 @@ void __fastcall FUN_00c1a790(int param_1)
         iVar1 = FUN_00a7c7e0();
         if (iVar1 != 0) {
           FUN_00a7c8a0();
-          FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
           piVar3[2] = piVar3[2] | 1;
         }
         *piVar3 = 0;

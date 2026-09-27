@@ -47,8 +47,8 @@ undefined4 * __thiscall LandingStatePl0010::vf04(undefined4 *param_1,byte param_
   return param_1;
 }
 
-// 00BABD30  LandingStatePl0010::vf0C  size=1204  [class]
-void __thiscall LandingStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BABD30  LandingStatePl0010::SafeCheck  size=1204  [class]
+void __thiscall LandingStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -271,7 +271,7 @@ LAB_00bac01c:
     *(undefined4 *)(uVar3 + 0x10) = 0;
     *(undefined4 *)(uVar3 + 0x30) = 0;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -478,8 +478,8 @@ LAB_00bcac4e:
   return;
 }
 
-// 00BDF1A0  LandingStatePl0010::vf10  size=491  [class]
-void __thiscall LandingStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BDF1A0  LandingStatePl0010::qteSafeCheck  size=491  [class]
+void __thiscall LandingStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -555,7 +555,7 @@ void __thiscall LandingStatePl0010::vf10(int param_1,undefined4 *param_2)
     FUN_00bd3910(param_2,param_1,0xb,10);
     FUN_00bd39d0(param_2,param_1,10);
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

@@ -33,7 +33,7 @@ int FUN_00d31fe0(void)
   
   iVar1 = FUN_00dd3500(0x18c,&DAT_01b7be50);
   if (iVar1 != 0) {
-    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager_27();
+    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager();
     if (iVar1 != 0) {
       *(char **)(iVar1 + 0xc) = "cQTEButtonPCParts";
       *(undefined4 *)(iVar1 + 8) = 5;

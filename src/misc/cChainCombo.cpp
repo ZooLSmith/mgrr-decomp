@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cChainCombo.h"
 
-// 00CB5D10  cChainCombo::cChainCombo_3  size=59  [class]
-void __fastcall cChainCombo::cChainCombo_3(undefined4 *param_1)
+// 00CB5D10  cChainCombo::cChainCombo  size=59  [class]
+void __fastcall cChainCombo::cChainCombo(undefined4 *param_1)
 
 {
   undefined4 local_14;

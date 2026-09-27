@@ -1480,7 +1480,7 @@ undefined4 * __thiscall hkgpTriangulatorBase::vf00(undefined4 *param_1,byte para
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -5619,8 +5619,8 @@ void FUN_010b4a00(void)
   return;
 }
 
-// 010B4A10  hkBaseObject::hkBaseObject_143  size=51  [run]
-void __fastcall hkBaseObject::hkBaseObject_143(undefined4 *param_1)
+// 010B4A10  hkBaseObject::hkBaseObject  size=51  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkgpAbstractMesh<hkgpMeshBase::Edge,hkgpMeshBase::Vertex,hkgpMeshBase::Triangle,hkContainerHeapAllocator>
@@ -9407,7 +9407,7 @@ hkgpAbstractMesh<hkgpMeshBase::Edge,hkgpMeshBase::Vertex,hkgpMeshBase::Triangle,
   FUN_010b0360();
   FUN_010b0ba0();
   FUN_010b02f0();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));

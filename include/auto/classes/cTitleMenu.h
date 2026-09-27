@@ -10,4 +10,6 @@ struct cTitleMenu : public cCustomObjCtrlManager {
     virtual void vf08();  // 009B4B30 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 00994A00 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009B50A0 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cTitleMenu();  // 009A64E0
 };

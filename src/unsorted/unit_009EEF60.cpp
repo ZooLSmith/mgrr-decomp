@@ -178,7 +178,7 @@ void __thiscall FUN_009eef60(int param_1,int param_2)
     puStack_140 = (undefined1 *)0x9ef321;
     FID_conflict__memcpy((void *)(param_2 + 0x10),&local_120,0x40);
   }
-  FUN_00efed20();
+  esp107::vf10();
   ModelShaderJackModule::updateModule_5();
   return;
 }

@@ -61,8 +61,8 @@ undefined4 * __thiscall OvercomeTrainToTrainStatePl0010::vf04(undefined4 *param_
   return param_1;
 }
 
-// 00BB07F0  OvercomeTrainToTrainStatePl0010::vf0C  size=333  [class]
-void __thiscall OvercomeTrainToTrainStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB07F0  OvercomeTrainToTrainStatePl0010::SafeCheck  size=333  [class]
+void __thiscall OvercomeTrainToTrainStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -111,7 +111,7 @@ void __thiscall OvercomeTrainToTrainStatePl0010::vf0C(int param_1,undefined4 *pa
     }
     FUN_00a937e0();
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -195,8 +195,8 @@ undefined4 __thiscall OvercomeTrainToTrainStatePl0010::vf20(int param_1,undefine
   return 1;
 }
 
-// 00BE0670  OvercomeTrainToTrainStatePl0010::vf10  size=636  [class]
-void __thiscall OvercomeTrainToTrainStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BE0670  OvercomeTrainToTrainStatePl0010::qteSafeCheck  size=636  [class]
+void __thiscall OvercomeTrainToTrainStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -282,7 +282,7 @@ void __thiscall OvercomeTrainToTrainStatePl0010::vf10(int param_1,undefined4 *pa
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

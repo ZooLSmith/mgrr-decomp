@@ -12,4 +12,6 @@ struct cPa15 {
     virtual void vf14(undefined4 param_2, byte * param_3);  // 00D66830 slot 0x14  overrides cPhaseAbstract
     virtual void vf18();  // 00D47860 slot 0x18  overrides cPhaseAbstract
     virtual void vf1C(undefined4 param_1, byte * param_2);  // 00D47870 slot 0x1C  overrides cPhaseAbstract
+    // non-virtual members
+    cPa15();  // 00D6EA80
 };

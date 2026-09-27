@@ -14,4 +14,6 @@ struct BoundingSphere : public BoundingVolumeBase {
     virtual undefined4 vf14(float * param_2, float * param_3);  // 00A66E40 slot 0x14  overrides BoundingVolumeBase
     virtual undefined4 vf18(undefined4 param_2);  // 00A68890 slot 0x18  overrides BoundingVolumeBase
     virtual byte vf1C(int * param_2);  // 00A6AB10 slot 0x1C  overrides BoundingVolumeBase
+    // non-virtual members
+    static byte vf1C_00A6A750(int * param_2);  // 00A6A750
 };

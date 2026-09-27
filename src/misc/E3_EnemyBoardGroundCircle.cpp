@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "E3_EnemyBoardGroundCircle.h"
 
-// 0040B020  E3_EnemyBoardGroundCircle::vf40  size=31  [class]
-undefined4 __fastcall E3_EnemyBoardGroundCircle::vf40(int param_1)
+// 0040B020  E3_EnemyBoardGroundCircle::startup  size=31  [class]
+undefined4 __fastcall E3_EnemyBoardGroundCircle::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -78,8 +78,8 @@ undefined * E3_EnemyBoardGroundCircle::vf04(void)
   return &DAT_01b34b5c;
 }
 
-// 00AB93E0  E3_EnemyBoardGroundCircle::vf00  size=43  [class]
-undefined4 __thiscall E3_EnemyBoardGroundCircle::vf00(undefined4 param_1,byte param_2)
+// 00AB93E0  E3_EnemyBoardGroundCircle::destruct  size=43  [class]
+undefined4 __thiscall E3_EnemyBoardGroundCircle::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

@@ -56,8 +56,8 @@ undefined4 * __thiscall WalkStatePl0010::vf04(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00BB2550  WalkStatePl0010::vf0C  size=169  [class]
-void __thiscall WalkStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB2550  WalkStatePl0010::SafeCheck  size=169  [class]
+void __thiscall WalkStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -93,7 +93,7 @@ void __thiscall WalkStatePl0010::vf0C(int param_1,undefined4 *param_2)
     *(undefined4 *)(uVar2 + 0x4190) = *(undefined4 *)(uVar2 + 0x4184);
     FUN_00aa9280(0x1c);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -165,8 +165,8 @@ undefined4 WalkStatePl0010::vf20(undefined4 *param_1)
   return 1;
 }
 
-// 00BCCC40  WalkStatePl0010::vf10  size=382  [class]
-void __thiscall WalkStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BCCC40  WalkStatePl0010::qteSafeCheck  size=382  [class]
+void __thiscall WalkStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -245,7 +245,7 @@ void __thiscall WalkStatePl0010::vf10(int param_1,undefined4 *param_2)
   if (iVar4 != *(int *)(param_1 + 4)) {
     FUN_00d82510(iVar4,0x19);
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

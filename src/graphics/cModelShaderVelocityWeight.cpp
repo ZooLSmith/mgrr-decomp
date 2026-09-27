@@ -13,7 +13,7 @@
 undefined4 * __fastcall cModelShaderVelocityWeight::cModelShaderVelocityWeight(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
+  cModelShaderGBuffer::cModelShaderGBuffer();
   *param_1 = vftable;
   param_1[0x54] = 0x1000000;
   param_1[0x54] = 0x1000111;
@@ -63,7 +63,7 @@ undefined4 * __thiscall cModelShaderVelocityWeight::vf00(undefined4 *param_1,byt
   param_1[0x57] = 0x1111111;
   *param_1 = cModelShaderGBuffer::vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

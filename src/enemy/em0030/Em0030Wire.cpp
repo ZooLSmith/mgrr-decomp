@@ -11,8 +11,8 @@ undefined * Em0030Wire::vf04(void)
   return &DAT_01be9d54;
 }
 
-// 00AB7970  Em0030Wire::vf00  size=105  [class]
-undefined4 * __thiscall Em0030Wire::vf00(undefined4 *param_1,byte param_2)
+// 00AB7970  Em0030Wire::destruct  size=105  [class]
+undefined4 * __thiscall Em0030Wire::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,15 +26,15 @@ undefined4 * __thiscall Em0030Wire::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00B62BA0  Em0030Wire::vf40  size=157  [class]
-undefined4 __fastcall Em0030Wire::vf40(int param_1)
+// 00B62BA0  Em0030Wire::startup  size=157  [class]
+undefined4 __fastcall Em0030Wire::startup(int param_1)
 
 {
   int iVar1;
@@ -46,7 +46,7 @@ undefined4 __fastcall Em0030Wire::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -124,8 +124,8 @@ void Em0030Wire::vf150(int param_1,int param_2)
   return;
 }
 
-// 00B682C0  Em0030Wire::vf130  size=260  [class]
-int __thiscall Em0030Wire::vf130(int param_1,short *param_2)
+// 00B682C0  Em0030Wire::getAttackInfo  size=260  [class]
+int __thiscall Em0030Wire::getAttackInfo(int param_1,short *param_2)
 
 {
   undefined4 *puVar1;
@@ -138,7 +138,7 @@ int __thiscall Em0030Wire::vf130(int param_1,short *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       iVar3 = FUN_00a81330();
       if (iVar3 != 0) {

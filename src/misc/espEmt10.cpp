@@ -1387,7 +1387,7 @@ LAB_00f1f467:
 undefined4 * __fastcall espEmt10::espEmt10(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   param_1[0x157] = 0;
   return param_1;
@@ -2760,8 +2760,9 @@ LAB_00f26ae7:
   return 1;
 }
 
-// 00F2C7A0  espEmt10::vf04  size=1618  [class]
-undefined4 __thiscall espEmt10::vf04(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
+// 00F2C7A0  espEmt10::preTrans  size=1618  [class]
+undefined4 __thiscall
+espEmt10::preTrans(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
 
 {
   char cVar1;
@@ -3072,8 +3073,8 @@ void __thiscall FUN_00f2ce00(int param_1,int param_2)
   return;
 }
 
-// 00F38860  espEmt10::vf10  size=456  [class]
-void __fastcall espEmt10::vf10(int param_1)
+// 00F38860  espEmt10::addOtTransList  size=456  [class]
+void __fastcall espEmt10::addOtTransList(int param_1)
 
 {
   int iVar1;
@@ -3094,7 +3095,7 @@ void __fastcall espEmt10::vf10(int param_1)
       if (DAT_01edd490 == 0) goto LAB_00f388bf;
       iVar2 = cPrimHeap::allocBuffer(0x1a0,0x20);
       if (iVar2 == 0) goto LAB_00f388bf;
-      iVar2 = cEspDrawWork_Emt10_Impl::cEspDrawWork_Emt10_Impl_2();
+      iVar2 = cEspDrawWork_Emt10_Impl_Mask::cEspDrawWork_Emt10_Impl_Mask();
     }
     if (iVar2 == 0) {
 LAB_00f388bf:

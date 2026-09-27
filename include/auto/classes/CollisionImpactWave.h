@@ -14,6 +14,6 @@ struct CollisionImpactWave : public Collision {
     virtual float10 vf1C();  // 00D77570 slot 0x1C  overrides Collision
     virtual void vf24();  // 00D7A5C0 slot 0x24  overrides Collision
     // non-virtual members
-    CollisionImpactWave();  // 00D7D470
-    void ctor_00D7DFE0();  // 00D7DFE0
+    ~CollisionImpactWave();  // 00D7D470
+    CollisionImpactWave();  // 00D7DFE0
 };

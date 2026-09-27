@@ -15,6 +15,4 @@ struct hkpConstraintListener {
     // non-virtual members
     hkpConstraintListener();  // 0119F260
     void ctor_011DF8B0();  // 011DF8B0
-    void ctor_011DF910();  // 011DF910
-    void ctor_01280360();  // 01280360
 };

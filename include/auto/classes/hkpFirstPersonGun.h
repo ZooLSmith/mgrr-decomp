@@ -16,4 +16,5 @@ struct hkpFirstPersonGun : public hkReferencedObject {
     // non-virtual members
     hkpFirstPersonGun();  // 0127F9A0
     hkpFirstPersonGun(int param_2);  // 0127F9E0
+    ~hkpFirstPersonGun();  // 0127FA20
 };

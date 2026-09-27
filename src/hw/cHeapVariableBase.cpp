@@ -93,8 +93,8 @@ void FUN_00dd3d10(void *param_1,size_t param_2,undefined4 param_3)
   }
 }
 
-// 00DD4590  Hw::cHeapVariableBase::vf38  size=383  [class]
-void * __thiscall Hw::cHeapVariableBase::vf38(int param_1,int param_2,int param_3,int param_4)
+// 00DD4590  Hw::cHeapVariableBase::allocImpl  size=383  [class]
+void * __thiscall Hw::cHeapVariableBase::allocImpl(int param_1,int param_2,int param_3,int param_4)
 
 {
   LPCRITICAL_SECTION lpCriticalSection;

@@ -72,7 +72,6 @@ struct Bh0064 : public Behavior {
     static undefined4 vf250();  // 0040DBA0
     static void vf258();  // 0040DBB0
     static void vf260();  // 0040DBC0
-    static undefined4 vf264();  // 0040DBD0
     static undefined4 vf268();  // 0040DBE0
     static undefined4 vf26C();  // 0040DBF0
     static undefined4 vf270();  // 0040DC00
@@ -142,9 +141,7 @@ struct Bh0064 : public Behavior {
     static undefined4 vf10C();  // 00A8C260
     static void vf2D8();  // 00A8C270
     static void vf2DC();  // 00A8C280
-    static void vf1B8(undefined4 * param_1, undefined4 param_2, int param_3);  // 00A8CD20
     static undefined4 vf12C();  // 00A8CDA0
-    static undefined4 vf130();  // 00A8CDB0
     static void vf198(undefined4 param_2, undefined4 param_3, undefined4 param_4);  // 00A8CDE0
     static void vf19C();  // 00A8CE60
     static void vf1A4();  // 00A8CE70

@@ -9,7 +9,7 @@ void FUN_00ed0680(void)
 {
   FUN_009de370();
   Spline<float>::Spline<float>_2();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   return;
 }
 

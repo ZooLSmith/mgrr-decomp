@@ -12,7 +12,7 @@ int FUN_00d2cf90(void)
   
   iVar1 = FUN_00dd3500(0x410,&DAT_01b7be50);
   if (iVar1 != 0) {
-    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager_18();
+    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager();
     if (iVar1 != 0) {
       *(char **)(iVar1 + 0xc) = "cDryCellGauge2";
       *(undefined4 *)(iVar1 + 8) = 9;

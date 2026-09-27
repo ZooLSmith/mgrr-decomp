@@ -8,7 +8,7 @@
 undefined4 * __fastcall cCkMsgTeropDisp::cCkMsgTeropDisp(undefined4 *param_1)
 
 {
-  cUIWorkBase::cUIWorkBase_3();
+  cCkMsgDisp::cCkMsgDisp();
   *param_1 = vftable;
   return param_1;
 }
@@ -24,7 +24,7 @@ undefined4 * cCkMsgTeropDisp::cCkMsgTeropDisp_2(void)
     return (undefined4 *)0x0;
   }
   _memset(_Dst,0,0x210);
-  cUIWorkBase::cUIWorkBase_3();
+  cCkMsgDisp::cCkMsgDisp();
   *_Dst = vftable;
   return _Dst;
 }

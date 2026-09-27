@@ -99,8 +99,8 @@ void Em0221::vf50(void)
   return;
 }
 
-// 0055C970  Em0221::vf264  size=115  [class]
-undefined4 __thiscall Em0221::vf264(int param_1,int param_2)
+// 0055C970  Em0221::setEmSetInfo  size=115  [class]
+undefined4 __thiscall Em0221::setEmSetInfo(int param_1,int param_2)
 
 {
   int iVar1;
@@ -173,8 +173,8 @@ void __fastcall FUN_0055cb40(int param_1)
   return;
 }
 
-// 0056CA20  Em0221::vf40  size=546  [class]
-undefined4 __fastcall Em0221::vf40(int param_1)
+// 0056CA20  Em0221::startup  size=546  [class]
+undefined4 __fastcall Em0221::startup(int param_1)
 
 {
   int iVar1;
@@ -186,7 +186,7 @@ undefined4 __fastcall Em0221::vf40(int param_1)
   float local_1c;
   undefined4 local_18;
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -348,7 +348,7 @@ void __fastcall Em0221::vf4C(int param_1)
 undefined4 * __fastcall Em0221::Em0221(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a831e0();
   FUN_00a603a0();
@@ -363,13 +363,13 @@ undefined * Em0221::vf04(void)
   return &DAT_01b35004;
 }
 
-// 00AB6F10  Em0221::vf00  size=54  [class]
-undefined4 __thiscall Em0221::vf00(undefined4 param_1,byte param_2)
+// 00AB6F10  Em0221::destruct  size=54  [class]
+undefined4 __thiscall Em0221::destruct(undefined4 param_1,byte param_2)
 
 {
   cXml::cXml_7();
   cXml::cXml_7();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

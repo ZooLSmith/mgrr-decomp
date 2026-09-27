@@ -9,4 +9,6 @@ struct cWeakPointLine : public cUIWorkBase {
     virtual undefined4 * vf00(byte param_2);  // 00D06B40 slot 0x0  overrides cUIWork
     virtual void vf08(undefined4 param_2);  // 00D27580 slot 0x8  overrides cUIWork
     virtual void vf0C(undefined4 param_2);  // 00CDA770 slot 0xC  overrides cUIWork
+    // non-virtual members
+    cWeakPointLine();  // 00CF3450
 };

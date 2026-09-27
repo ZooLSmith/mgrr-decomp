@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "EspListThread.h"
 
-// 00F42220  EspListThread::vf14  size=145  [class]
-void __fastcall EspListThread::vf14(int param_1)
+// 00F42220  EspListThread::preTrans  size=145  [class]
+void __fastcall EspListThread::preTrans(int param_1)
 
 {
   undefined4 *puVar1;

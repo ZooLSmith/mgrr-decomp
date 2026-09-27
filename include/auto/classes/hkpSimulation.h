@@ -24,6 +24,7 @@ struct hkpSimulation : public hkReferencedObject {
     virtual void vf44(undefined8 * param_2);  // 011BEE40 slot 0x44
     virtual void vf48(float param_2);  // 011B0F70 slot 0x48
     // non-virtual members
-    hkpSimulation(undefined4 * param_1);  // 011B0EB0
+    ~hkpSimulation();  // 011B0EB0
+    hkpSimulation();  // 011B0ED0
     hkpSimulation(undefined4 param_2);  // 011BD7E0
 };

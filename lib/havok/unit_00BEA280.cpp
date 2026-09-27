@@ -106,12 +106,12 @@ void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_20(int *param_1)
           if (((iStack_1dc == 0) || (iVar4 = FUN_008f7780(iStack_1dc), iVar4 != iStack_1d4)) &&
              (iStack_1d8 != 0)) {
             param_1[0x225] = 0x3da3d70a;
-            hkpCdPointCollector::hkpCdPointCollector_4();
+            hkpCdPointCollector::hkpCdPointCollector();
             goto LAB_00bea55f;
           }
         }
         param_1[0x250] = 1;
-        hkpCdPointCollector::hkpCdPointCollector_4();
+        hkpCdPointCollector::hkpCdPointCollector();
         goto LAB_00bea55f;
       }
     }

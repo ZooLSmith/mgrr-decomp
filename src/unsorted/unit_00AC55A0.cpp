@@ -34,7 +34,7 @@ int __fastcall FUN_00ac55e0(int param_1)
   int iVar1;
   int iVar2;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }

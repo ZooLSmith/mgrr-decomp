@@ -9,5 +9,5 @@ struct cFilterShaderZConversion {
     virtual void vf04();  // 00EC1310 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShaderZConversion();  // 00EC1200
-    void ctor_015F1CB0();  // 015F1CB0
+    ~cFilterShaderZConversion();  // 015F1CB0
 };

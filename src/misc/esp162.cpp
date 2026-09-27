@@ -1,5 +1,5 @@
 // src/misc/esp162.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0C10..009DAF30, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0C10..00EE0AC0, 7 functions
 
 #include "mgrr.h"
 #include "esp162.h"
@@ -405,7 +405,7 @@ LAB_009d12c1:
 undefined4 * __fastcall esp162::esp162(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -414,16 +414,16 @@ undefined4 * __fastcall esp162::esp162(undefined4 *param_1)
 undefined4 __thiscall esp162::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009DACC0  esp162::vf04  size=612  [class]
+// 009DACC0  esp162::preTrans  size=612  [class]
 undefined4 __thiscall
-esp162::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp162::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -434,7 +434,7 @@ esp162::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   int iVar6;
   int iVar7;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (((iVar3 == 0) || (*(int *)(param_1 + 0x50) == 0)) || (*(short *)(param_1 + 0x400) != -1)) {
     return 0;
   }
@@ -723,6 +723,17 @@ void __fastcall esp162::vf08(int param_1)
       }
       FUN_00ed6110();
     }
+  }
+  return;
+}
+
+// 00EE0AC0  esp162::vf14  size=45  [class]
+void __fastcall esp162::vf14(int param_1)
+
+{
+  if ((*(int *)(param_1 + 0x458) != 0) && (*(int *)(param_1 + 0x458) != 0)) {
+    FUN_00dd48d0(*(int *)(param_1 + 0x458),0);
+    *(undefined4 *)(param_1 + 0x458) = 0;
   }
   return;
 }

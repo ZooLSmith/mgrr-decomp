@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp51DrawWork.h"
 
-// 00EDAC40  esp51DrawWork::vf04  size=144  [class]
-void __fastcall esp51DrawWork::vf04(int param_1)
+// 00EDAC40  esp51DrawWork::draw  size=144  [class]
+void __fastcall esp51DrawWork::draw(int param_1)
 
 {
   undefined4 uVar1;

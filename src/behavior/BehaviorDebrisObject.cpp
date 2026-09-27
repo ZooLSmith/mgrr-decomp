@@ -1,5 +1,5 @@
 // src/behavior/BehaviorDebrisObject.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8900..005E24B0, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8900..005E24B0, 9 functions
 
 #include "mgrr.h"
 #include "BehaviorDebrisObject.h"
@@ -39,6 +39,24 @@ void __fastcall BehaviorDebrisObject::vf30(int param_1)
   return;
 }
 
+// 005DA7D0  BehaviorDebrisObject::BehaviorDebrisObject  size=91  [class]
+undefined4 * __fastcall BehaviorDebrisObject::BehaviorDebrisObject(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = BehaviorDebrisBase::vftable;
+  FUN_009003e0();
+  param_1[0x227] = 0;
+  param_1[0x241] = 0;
+  param_1[0x242] = 0;
+  FUN_00a7c930();
+  param_1[599] = 0;
+  param_1[0x24f] = 0;
+  *param_1 = vftable;
+  FUN_00904d60();
+  return param_1;
+}
+
 // 005DA830  BehaviorDebrisObject::vf04  size=6  [class]
 undefined * BehaviorDebrisObject::vf04(void)
 
@@ -46,12 +64,12 @@ undefined * BehaviorDebrisObject::vf04(void)
   return &DAT_01b35308;
 }
 
-// 005DA840  BehaviorDebrisObject::vf00  size=43  [class]
-undefined4 __thiscall BehaviorDebrisObject::vf00(undefined4 param_1,byte param_2)
+// 005DA840  BehaviorDebrisObject::destruct  size=43  [class]
+undefined4 __thiscall BehaviorDebrisObject::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00905ce0();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -633,8 +651,8 @@ LAB_005df235:
   return;
 }
 
-// 005E04A0  BehaviorDebrisObject::vf40  size=1665  [class]
-undefined4 __fastcall BehaviorDebrisObject::vf40(int *param_1)
+// 005E04A0  BehaviorDebrisObject::startup  size=1665  [class]
+undefined4 __fastcall BehaviorDebrisObject::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -662,7 +680,7 @@ undefined4 __fastcall BehaviorDebrisObject::vf40(int *param_1)
   float fStack_18;
   float fStack_14;
   
-  iVar4 = BehaviorDebrisBase::vf40();
+  iVar4 = BehaviorDebrisBase::startup();
   if (iVar4 == 0) {
     return 0;
   }

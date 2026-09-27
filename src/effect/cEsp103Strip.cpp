@@ -181,7 +181,7 @@ void __fastcall cEsp103Strip::thunk_vf14(int param_1)
 undefined4 * __fastcall cEsp103Strip::cEsp103Strip(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -190,7 +190,7 @@ undefined4 * __fastcall cEsp103Strip::cEsp103Strip(undefined4 *param_1)
 undefined4 __thiscall cEsp103Strip::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -583,9 +583,9 @@ LAB_009d78ab:
   return;
 }
 
-// 009D7BC0  cEsp103Strip::vf04  size=124  [class]
+// 009D7BC0  cEsp103Strip::preTrans  size=124  [class]
 undefined4 __thiscall
-cEsp103Strip::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+cEsp103Strip::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   uint uVar1;
@@ -593,7 +593,7 @@ cEsp103Strip::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 
   uint *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar2 != 0) && (iVar2 = FUN_00f12b50(), iVar2 != 0)) {
     if ((*(int *)(param_1 + 0x58) != 0) &&
        (puVar3 = (uint *)(*(int *)(param_1 + 0x58) + 0x70), puVar3 != (uint *)0x0)) {
@@ -654,8 +654,8 @@ void __fastcall cEsp103Strip::vf08(int param_1)
   return;
 }
 
-// 009D7D10  cEsp103Strip::vf10  size=299  [class]
-void __fastcall cEsp103Strip::vf10(int *param_1)
+// 009D7D10  cEsp103Strip::addOtTransList  size=299  [class]
+void __fastcall cEsp103Strip::addOtTransList(int *param_1)
 
 {
   int iVar1;
@@ -681,7 +681,7 @@ void __fastcall cEsp103Strip::vf10(int *param_1)
     *(undefined4 *)(iVar1 + 0x68) = 0x3f800000;
     *(undefined4 *)(iVar1 + 0x54) = 0x3f800000;
     *(undefined4 *)(iVar1 + 0x40) = 0x3f800000;
-    FUN_00efed20();
+    esp107::vf10();
     FUN_00edfcd0(param_1 + 0xf2);
     FUN_00f26b40(iVar1);
     FUN_00ed4fa0(iVar1,param_1 + 0xf2,DAT_01b78870,param_1[0xf6]);

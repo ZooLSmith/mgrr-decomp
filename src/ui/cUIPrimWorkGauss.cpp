@@ -44,8 +44,8 @@ undefined4 * __thiscall cUIPrimWorkGauss::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00CCC5E0  cUIPrimWorkGauss::vf04  size=498  [class]
-void __fastcall cUIPrimWorkGauss::vf04(int param_1)
+// 00CCC5E0  cUIPrimWorkGauss::draw  size=498  [class]
+void __fastcall cUIPrimWorkGauss::draw(int param_1)
 
 {
   int iVar1;

@@ -1410,9 +1410,9 @@ LAB_00f14631:
   return;
 }
 
-// 00F2E930  esp06::vf04  size=1760  [class]
+// 00F2E930  esp06::preTrans  size=1760  [class]
 undefined4 __thiscall
-esp06::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp06::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -1440,7 +1440,7 @@ esp06::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
     *puVar3 = 0;
     puVar3 = puVar3 + 1;
   }
-  iVar6 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar6 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar6 == 0) {
     return 0;
   }

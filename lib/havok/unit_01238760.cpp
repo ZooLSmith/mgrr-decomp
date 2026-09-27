@@ -78,8 +78,8 @@ void __fastcall FUN_01238870(undefined4 *param_1)
   return;
 }
 
-// 012388B0  hkGeometryUtils::IVertices::IVertices  size=115  [run]
-void __fastcall hkGeometryUtils::IVertices::IVertices(undefined4 *param_1)
+// 012388B0  hkGeometryUtils::IVertices::~IVertices  size=115  [run]
+void __fastcall hkGeometryUtils::IVertices::~IVertices(undefined4 *param_1)
 
 {
   param_1[6] = 0;
@@ -194,7 +194,7 @@ hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned_int,unsigned___int64,
 {
   LPVOID pvVar1;
   
-  hkGeometryUtils::IVertices::IVertices();
+  hkGeometryUtils::IVertices::~IVertices();
   if (((param_2 & 1) != 0) && (param_1 != 0)) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,4);

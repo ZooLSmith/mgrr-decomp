@@ -8,5 +8,6 @@ struct hkxAnimatedQuaternion : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D4200 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxAnimatedQuaternion(undefined4 * param_1);  // 010D4000
+    ~hkxAnimatedQuaternion();  // 010D4000
+    hkxAnimatedQuaternion();  // 010D4020
 };

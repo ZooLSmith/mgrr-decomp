@@ -20,7 +20,7 @@ undefined4 __fastcall FUN_00a986d0(int param_1)
       iVar4 = 0;
     }
     else {
-      iVar4 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar4 = RigidBodyCollision::RigidBodyCollision();
     }
     *(int *)(param_1 + 0x7b0) = iVar4;
     if (iVar4 != 0) {

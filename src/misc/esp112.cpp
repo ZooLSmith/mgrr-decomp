@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "esp112.h"
 
-// 009D0050  esp112::vf04  size=29  [class]
-bool esp112::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+// 009D0050  esp112::preTrans  size=29  [class]
+bool esp112::preTrans(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   int iVar1;
   
-  iVar1 = cEspModel::vf04(param_1,param_2,param_3);
+  iVar1 = cEsp::preTrans(param_1,param_2,param_3);
   return iVar1 != 0;
 }
 
@@ -35,8 +35,8 @@ void __fastcall esp112::thunk_vf08(int param_1)
   return;
 }
 
-// 009D0080  esp112::vf10  size=1  [class]
-void esp112::vf10(void)
+// 009D0080  esp112::addOtTransList  size=1  [class]
+void esp112::addOtTransList(void)
 
 {
   return;
@@ -53,7 +53,7 @@ void esp112::vf14(void)
 undefined4 * __fastcall esp112::esp112(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -62,7 +62,7 @@ undefined4 * __fastcall esp112::esp112(undefined4 *param_1)
 undefined4 __thiscall esp112::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

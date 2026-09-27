@@ -56,8 +56,8 @@ undefined4 * __thiscall QuickTurnStatePl0010::vf04(undefined4 *param_1,byte para
   return param_1;
 }
 
-// 00BB0C10  QuickTurnStatePl0010::vf0C  size=208  [class]
-void __thiscall QuickTurnStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB0C10  QuickTurnStatePl0010::SafeCheck  size=208  [class]
+void __thiscall QuickTurnStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -107,7 +107,7 @@ void __thiscall QuickTurnStatePl0010::vf0C(int param_1,undefined4 *param_2)
     FUN_00aa92c0(uVar5);
   }
 LAB_00bb0ccc:
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -178,8 +178,8 @@ void __thiscall QuickTurnStatePl0010::vf14(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00BE08F0  QuickTurnStatePl0010::vf10  size=169  [class]
-void __thiscall QuickTurnStatePl0010::vf10(undefined4 param_1,undefined4 *param_2)
+// 00BE08F0  QuickTurnStatePl0010::qteSafeCheck  size=169  [class]
+void __thiscall QuickTurnStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
 
 {
   uint uVar1;
@@ -206,7 +206,7 @@ void __thiscall QuickTurnStatePl0010::vf10(undefined4 param_1,undefined4 *param_
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

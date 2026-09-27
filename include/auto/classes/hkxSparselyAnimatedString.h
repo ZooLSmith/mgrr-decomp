@@ -8,5 +8,6 @@ struct hkxSparselyAnimatedString : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D21C0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxSparselyAnimatedString(undefined4 * param_1);  // 010D20C0
+    ~hkxSparselyAnimatedString();  // 010D20C0
+    hkxSparselyAnimatedString();  // 010D20E0
 };

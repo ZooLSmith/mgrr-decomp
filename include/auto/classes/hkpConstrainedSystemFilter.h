@@ -8,11 +8,13 @@
 struct hkpConstrainedSystemFilter : public hkpCollisionFilter, public hkpConstraintListener {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpConstrainedSystemFilter();  // 01276090
     static void vf00();  // 01276110
     static void vf0C();  // 01276120
     static void vf04();  // 01276130
     static void vf00_01276140();  // 01276140
     static void vf00_01276150();  // 01276150
+    void ctor_01280360();  // 01280360
     static undefined vf04_01280430();  // 01280430
     static undefined vf04_01280510();  // 01280510
     static undefined vf00_01280560();  // 01280560

@@ -1,14 +1,61 @@
 // src/misc/cChapterResult.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D07B70..00D41360, 7 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF3840..00D41360, 8 functions
 
 #include "mgrr.h"
 #include "cChapterResult.h"
+
+// 00CF3840  cChapterResult::~cChapterResult  size=164  [class]
+void __fastcall cChapterResult::~cChapterResult(undefined4 *param_1)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0x183] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x183])(1);
+    param_1[0x183] = 0;
+  }
+  if ((undefined4 *)param_1[0x184] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x184])(1);
+    param_1[0x184] = 0;
+  }
+  iVar3 = 0x17;
+  puVar2 = param_1 + 0x183;
+  do {
+    iVar1 = puVar2[-2];
+    puVar2[-7] = cCustomObjCtrlManager::vftable;
+    puVar2[-1] = 0;
+    if (iVar1 != 0) {
+      if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
+        *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
+        *(undefined4 *)(iVar1 + 4) = 0;
+      }
+      puVar2[-2] = 0;
+    }
+    iVar3 = iVar3 + -1;
+    puVar2 = puVar2 + -7;
+  } while (-1 < iVar3);
+  cChapterResultParts::~cChapterResultParts();
+  iVar3 = param_1[5];
+  *param_1 = cCustomObjCtrlManager::vftable;
+  param_1[6] = 0;
+  if (iVar3 != 0) {
+    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
+      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
+      *(undefined4 *)(iVar3 + 4) = 0;
+    }
+    param_1[5] = 0;
+  }
+  return;
+}
 
 // 00D07B70  cChapterResult::vf00  size=30  [class]
 undefined4 __thiscall cChapterResult::vf00(undefined4 param_1,byte param_2)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_11();
+  ~cChapterResult();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1026,8 +1073,8 @@ LAB_00d1aaa2:
   return 0x13 < sVar2;
 }
 
-// 00D41360  cChapterResult::vf14  size=3460  [class]
-void __fastcall cChapterResult::vf14(int param_1)
+// 00D41360  cChapterResult::create  size=3460  [class]
+void __fastcall cChapterResult::create(int param_1)
 
 {
   short *psVar1;

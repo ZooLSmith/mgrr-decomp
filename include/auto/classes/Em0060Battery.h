@@ -14,4 +14,6 @@ struct Em0060Battery : public BehaviorAppBase {
     virtual void vf4C();  // 00462BB0 slot 0x4C  overrides Behavior
     virtual void vf50();  // 004424B0 slot 0x50  overrides Behavior
     virtual void vf54();  // 00457E40 slot 0x54  overrides Behavior
+    // non-virtual members
+    Em0060Battery();  // 00AAF040
 };

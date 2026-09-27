@@ -174,7 +174,7 @@ LAB_0041284c:
   local_2c = param_1[0x11];
   local_28 = param_1[0x12];
   local_24 = param_1[0x13];
-  iVar1 = hkpCdPointCollector::hkpCdPointCollector_14(&local_20,&local_30,1,0,0x3c23d70a);
+  iVar1 = hkpCdPointCollector::hkpCdPointCollector(&local_20,&local_30,1,0,0x3c23d70a);
   if (iVar1 != 0) {
     param_1[0x14] = local_30;
     param_1[0x15] = local_2c;
@@ -265,8 +265,8 @@ void __fastcall FUN_004128d0(int *param_1)
   return;
 }
 
-// 00412AE0  Bm0303::vf40  size=452  [class]
-undefined4 __fastcall Bm0303::vf40(int param_1)
+// 00412AE0  Bm0303::startup  size=452  [class]
+undefined4 __fastcall Bm0303::startup(int param_1)
 
 {
   int iVar1;
@@ -289,7 +289,7 @@ undefined4 __fastcall Bm0303::vf40(int param_1)
       iVar1 = 0;
     }
     else {
-      iVar1 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar1 = RigidBodyCollision::RigidBodyCollision();
     }
     *(int *)(param_1 + 0x7b0) = iVar1;
     if (iVar1 != 0) {
@@ -440,7 +440,7 @@ LAB_00412eb0:
 undefined4 * __fastcall Bm0303::Bm0303(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   cEspControler::cEspControler();
   return param_1;
@@ -453,11 +453,11 @@ undefined * Bm0303::vf04(void)
   return &DAT_01b34bd0;
 }
 
-// 00AB9060  Bm0303::vf00  size=30  [class]
-undefined4 __thiscall Bm0303::vf00(undefined4 param_1,byte param_2)
+// 00AB9060  Bm0303::destruct  size=30  [class]
+undefined4 __thiscall Bm0303::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_41();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

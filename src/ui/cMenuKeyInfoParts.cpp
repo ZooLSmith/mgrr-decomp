@@ -8,7 +8,7 @@
 undefined4 * __fastcall cMenuKeyInfoParts::cMenuKeyInfoParts(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   param_1[0xc] = 0x3f800000;
   param_1[7] = 0;
   param_1[0xe] = 0;
@@ -29,7 +29,7 @@ undefined4 * cMenuKeyInfoParts::cMenuKeyInfoParts_2(void)
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x44,&DAT_01b7be50);
   if (puVar1 != (undefined4 *)0x0) {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     puVar1[0xc] = 0x3f800000;
     *puVar1 = vftable;
     puVar1[0xe] = 0;
@@ -115,15 +115,15 @@ undefined4 * __thiscall cMenuKeyInfoParts::vf00(undefined4 *param_1,byte param_2
 
 {
   *param_1 = vftable;
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009A28C0  cMenuKeyInfoParts::vf14  size=190  [class]
-void __fastcall cMenuKeyInfoParts::vf14(int param_1)
+// 009A28C0  cMenuKeyInfoParts::create  size=190  [class]
+void __fastcall cMenuKeyInfoParts::create(int param_1)
 
 {
   bool bVar1;

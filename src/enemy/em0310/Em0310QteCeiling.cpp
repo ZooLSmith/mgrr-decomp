@@ -42,8 +42,8 @@ void __thiscall Em0310QteCeiling::thunk_vf1D0(int param_1,int param_2)
   return;
 }
 
-// 0057E770  Em0310QteCeiling::vf1B8  size=31  [class]
-void Em0310QteCeiling::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 0057E770  Em0310QteCeiling::setCutCrerateInfo  size=31  [class]
+void Em0310QteCeiling::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -56,15 +56,15 @@ void Em0310QteCeiling::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 00586400  Em0310QteCeiling::vf40  size=235  [class]
-undefined4 __fastcall Em0310QteCeiling::vf40(int param_1)
+// 00586400  Em0310QteCeiling::startup  size=235  [class]
+undefined4 __fastcall Em0310QteCeiling::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   undefined4 *puVar3;
   
-  iVar1 = BehaviorBgBase::vf40();
+  iVar1 = BehaviorBgBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -159,8 +159,8 @@ undefined * Em0310QteCeiling::vf04(void)
   return &DAT_01b35154;
 }
 
-// 00AB7080  Em0310QteCeiling::vf00  size=30  [class]
-undefined4 __thiscall Em0310QteCeiling::vf00(undefined4 param_1,byte param_2)
+// 00AB7080  Em0310QteCeiling::destruct  size=30  [class]
+undefined4 __thiscall Em0310QteCeiling::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_0040d3f0();

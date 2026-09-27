@@ -273,7 +273,7 @@ void __fastcall Pf31::vf08(int param_1)
       }
     }
     else {
-      iVar2 = cBattleResultEx::cBattleResultEx();
+      iVar2 = cBattleResultEx::~cBattleResultEx();
       *(int *)(param_1 + 0x11c) = iVar2;
       if (iVar2 == 0) {
         puVar3 = &DAT_016bcd64;

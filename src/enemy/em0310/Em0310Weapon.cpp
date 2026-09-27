@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Em0310Weapon.h"
 
-// 0057E1F0  Em0310Weapon::vf40  size=41  [class]
-undefined4 __fastcall Em0310Weapon::vf40(int param_1)
+// 0057E1F0  Em0310Weapon::startup  size=41  [class]
+undefined4 __fastcall Em0310Weapon::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorWeapon::vf40();
+  iVar1 = BehaviorWeapon::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -53,7 +53,7 @@ void __fastcall Em0310Weapon::vf4C(int *param_1)
       param_1[0x232] = (int)(float)fVar5;
       if (fVar5 < fVar2 != (fVar5 == fVar2)) {
         (**(code **)(*param_1 + 0x20))();
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
       iVar4 = 0;
@@ -100,7 +100,7 @@ void __fastcall Em0310Weapon::vf54(int param_1)
 undefined4 * __fastcall Em0310Weapon::Em0310Weapon(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   param_1[0x228] = 0;
   param_1[0x22a] = 0;
   param_1[0x22d] = 0;
@@ -116,8 +116,8 @@ undefined * Em0310Weapon::vf04(void)
   return &DAT_01b35144;
 }
 
-// 00AB7110  Em0310Weapon::vf00  size=105  [class]
-undefined4 * __thiscall Em0310Weapon::vf00(undefined4 *param_1,byte param_2)
+// 00AB7110  Em0310Weapon::destruct  size=105  [class]
+undefined4 * __thiscall Em0310Weapon::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -131,7 +131,7 @@ undefined4 * __thiscall Em0310Weapon::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

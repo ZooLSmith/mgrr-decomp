@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEspDrawWork14.h"
 
-// 00ED82B0  cEspDrawWork14::vf04  size=192  [class]
-void __fastcall cEspDrawWork14::vf04(int param_1)
+// 00ED82B0  cEspDrawWork14::draw  size=192  [class]
+void __fastcall cEspDrawWork14::draw(int param_1)
 
 {
   undefined1 auStack_64 [4];

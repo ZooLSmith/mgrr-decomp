@@ -11,5 +11,5 @@ struct LostDeviceWindow : public cCustomObjCtrlManager {
     virtual void vf08();  // 00999220 slot 0x8  overrides cCustomObjCtrlManager
     virtual void create();  // 009992F0 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
-    LostDeviceWindow();  // 00999120
+    ~LostDeviceWindow();  // 00999120
 };

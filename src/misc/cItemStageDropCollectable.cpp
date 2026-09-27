@@ -1,8 +1,32 @@
 // src/misc/cItemStageDropCollectable.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094D280..00953180, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094D230..00953180, 6 functions
 
 #include "mgrr.h"
 #include "cItemStageDropCollectable.h"
+
+// 0094D230  cItemStageDropCollectable::cItemStageDropCollectable  size=73  [class]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void __fastcall cItemStageDropCollectable::cItemStageDropCollectable(undefined4 *param_1)
+
+{
+  undefined4 uVar1;
+  
+  param_1[1] = 0;
+  *param_1 = cItemStageDrop::vftable;
+  param_1[0x14] = 0;
+  param_1[0x18] = 0;
+  param_1[0x15] = &DAT_01b37438;
+  param_1[0x16] = _DAT_01b37448;
+  uVar1 = _DAT_01b37444;
+  param_1[1] = 0x1100;
+  param_1[0x17] = uVar1;
+  param_1[0x19] = 0xffffffff;
+  param_1[0x1a] = 0xffffffff;
+  *param_1 = vftable;
+  param_1[0x24] = 0;
+  return;
+}
 
 // 0094D280  cItemStageDropCollectable::vf00  size=6  [class]
 char * cItemStageDropCollectable::vf00(void)

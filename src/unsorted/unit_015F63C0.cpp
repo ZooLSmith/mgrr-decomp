@@ -34,7 +34,7 @@ void FUN_015f63c0(void)
   _DAT_01f70fc0 = 0xffffffff;
   _DAT_01f70fc8 = 0xffffffff;
   _DAT_01f70fcc = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -69,7 +69,7 @@ void FUN_015f6460(void)
   _DAT_01f71088 = 0xffffffff;
   _DAT_01f71090 = 0xffffffff;
   _DAT_01f71094 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -104,7 +104,7 @@ void FUN_015f6500(void)
   _DAT_01f71150 = 0xffffffff;
   _DAT_01f71158 = 0xffffffff;
   _DAT_01f7115c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -148,7 +148,7 @@ void FUN_015f65a0(void)
   _DAT_01f71218 = 0xffffffff;
   _DAT_01f71220 = 0xffffffff;
   _DAT_01f71224 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

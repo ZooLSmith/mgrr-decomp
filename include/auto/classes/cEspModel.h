@@ -10,5 +10,4 @@ struct cEspModel : public cEsp {
     virtual bool vf18(int param_2);  // 00EE04A0 slot 0x18  overrides cEspBase
     // non-virtual members
     cEspModel();  // 00F12AB0
-    static void vf04(undefined4 * param_2, float * param_3, undefined4 param_4);  // 00F2D190
 };

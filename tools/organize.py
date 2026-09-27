@@ -310,6 +310,27 @@ def render(fn, reason):
 def main():
     funcs = load_functions()
     assign, reason, kind = build_units(funcs)
+
+    # cleaned files are frozen: the functions they contain stay there, and any other function
+    # the plan routes to a cleaned file goes to a "<stem>_raw.cpp" sidecar for later cleanup
+    import glob
+    pinned, cleaned_files = {}, set()
+    for p in glob.glob(os.path.join(ROOT, "src", "**", "*.cpp"), recursive=True):
+        with open(p, encoding="utf-8") as fh:
+            text = fh.read()
+        if "-- cleaned" not in text.split("\n", 1)[0]:
+            continue
+        rel = os.path.relpath(p, ROOT).replace("\\", "/")
+        cleaned_files.add(rel)
+        for ea in re.findall(r"^// ([0-9A-F]{8})  ", text, re.M):
+            pinned[ea] = rel
+    for i, f in enumerate(funcs):
+        ea = f["ea"].upper().zfill(8)
+        if ea in pinned:
+            assign[i], reason[i] = pinned[ea], "cleaned"
+        elif assign[i] in cleaned_files:
+            assign[i] = assign[i][:-4] + "_raw.cpp"
+
     units = collections.OrderedDict()
     for i, f in enumerate(funcs):
         units.setdefault(assign[i], []).append(i)
@@ -324,6 +345,9 @@ def main():
     for path, idxs in units.items():
         full = os.path.join(ROOT, path.replace("/", os.sep))
         os.makedirs(os.path.dirname(full), exist_ok=True)
+        # never overwrite a file that the readability pass has already cleaned
+        if os.path.exists(full) and "-- cleaned" in open(full, encoding="utf-8").readline():
+            continue
         with open(full, "w", encoding="utf-8") as out:
             lo, hi = funcs[idxs[0]]["ea"].upper(), funcs[idxs[-1]]["ea"].upper()
             out.write("// %s\n// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), %s..%s, %d functions\n\n"
@@ -341,6 +365,16 @@ def main():
     stats = collections.Counter(reason)
     print("functions", len(funcs), "units", len(units), dict(stats))
     print(collections.Counter(kind))
+
+    # remove raw files the new plan no longer produces (cleaned files are never removed)
+    removed = 0
+    for top in ("src", "lib"):
+        for p in glob.glob(os.path.join(ROOT, top, "**", "*.cpp"), recursive=True):
+            rel = os.path.relpath(p, ROOT).replace("\\", "/")
+            if rel not in units and rel not in cleaned_files:
+                os.remove(p)
+                removed += 1
+    print("stale raw files removed", removed)
 
 
 if __name__ == "__main__":

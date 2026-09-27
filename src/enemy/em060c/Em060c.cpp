@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Em060c.h"
 
-// 0059FC80  Em060c::vf40  size=71  [class]
-undefined4 __fastcall Em060c::vf40(int param_1)
+// 0059FC80  Em060c::startup  size=71  [class]
+undefined4 __fastcall Em060c::startup(int param_1)
 
 {
   int iVar1;
@@ -124,7 +124,7 @@ void __fastcall Em060c::vf44(int param_1)
 undefined4 * __fastcall Em060c::Em060c(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -136,8 +136,8 @@ undefined * Em060c::vf04(void)
   return &DAT_01b351a4;
 }
 
-// 00AB6AF0  Em060c::vf00  size=105  [class]
-undefined4 * __thiscall Em060c::vf00(undefined4 *param_1,byte param_2)
+// 00AB6AF0  Em060c::destruct  size=105  [class]
+undefined4 * __thiscall Em060c::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -151,7 +151,7 @@ undefined4 * __thiscall Em060c::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

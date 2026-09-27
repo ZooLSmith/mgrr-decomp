@@ -9,6 +9,8 @@ struct hkpCallbackConstraintMotor : public hkpLimitedForceConstraintMotor {
     virtual undefined4 * vf00(byte param_2);  // 011B1F50 slot 0x0  overrides hkBaseObject
     virtual void vf0C();  // 011DFD60 slot 0xC  overrides hkpConstraintMotor
     // non-virtual members
-    hkpCallbackConstraintMotor(undefined4 * param_1);  // 011B1EC0
-    hkpCallbackConstraintMotor();  // 011DFD10
+    ~hkpCallbackConstraintMotor();  // 011B1EC0
+    hkpCallbackConstraintMotor();  // 011B1EE0
+    void ctor_011DFD10();  // 011DFD10
+    void ctor_011DFE00();  // 011DFE00
 };

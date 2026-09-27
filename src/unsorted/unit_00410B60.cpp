@@ -42,7 +42,7 @@ undefined4 __fastcall FUN_00410c20(int param_1)
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 != 0) {
     lib::AllocatedArray<Behavior::InstructionContainer>::
     AllocatedArray<Behavior::InstructionContainer>();

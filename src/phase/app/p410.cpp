@@ -1,5 +1,5 @@
 // src/phase/app/p410.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48DE0..00D70460, 7 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48DE0..00D70460, 8 functions
 
 #include "mgrr.h"
 #include "P410.h"
@@ -174,6 +174,19 @@ LAB_00d62845:
     FUN_00e5e050("r401_se_env_elevator_02",0);
   }
   return;
+}
+
+// 00D6F110  P410::P410  size=51  [class]
+undefined4 * __fastcall P410::P410(undefined4 *param_1)
+
+{
+  param_1[4] = param_1 + 7;
+  param_1[5] = 0;
+  param_1[6] = 0x40;
+  param_1[3] = lib::StaticArray<int,64>::vftable;
+  *param_1 = vftable;
+  cEspControler::cEspControler();
+  return param_1;
 }
 
 // 00D70460  P410::vf00  size=65  [class]

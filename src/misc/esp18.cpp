@@ -113,7 +113,7 @@ undefined4 __thiscall esp18::vf18(int param_1,int param_2)
 undefined4 * __fastcall esp18::esp18(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   param_1[0x128] = 0;
   param_1[0x129] = 0;
   param_1[0x12a] = 0;
@@ -150,7 +150,7 @@ esp18::preTrans_2(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   uint local_4;
   
   local_4 = DAT_018e8764 ^ (uint)&local_20;
-  iVar6 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar6 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar6 == 0) {
     __security_check_cookie(local_4 ^ (uint)&local_20);
     return;
@@ -408,10 +408,10 @@ LAB_00f32a74:
   return;
 }
 
-// 00F32A90  esp18::vf10  size=5594  [class]
+// 00F32A90  esp18::addOtTransList  size=5594  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall esp18::vf10(int param_1)
+void __fastcall esp18::addOtTransList(int param_1)
 
 {
   float fVar1;

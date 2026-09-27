@@ -29,7 +29,5 @@ struct hkpCdPointCollector {
     void ctor_0090E510();  // 0090E510
     void ctor_0090E620();  // 0090E620
     void ctor_00A89390();  // 00A89390
-    void ctor_00AC13C0();  // 00AC13C0
-    void ctor_00D7C2B0();  // 00D7C2B0
     void ctor_00D7C3C0();  // 00D7C3C0
 };

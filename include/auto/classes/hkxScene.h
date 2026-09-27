@@ -8,7 +8,7 @@ struct hkxScene : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D0020 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxScene(undefined4 * param_1, undefined4 param_2);  // 010CE9B0
+    ~hkxScene();  // 010CE9B0
     hkxScene();  // 010CE9E0
     hkxScene(undefined4 param_2);  // 010CFFC0
     void ctor_010D4B00();  // 010D4B00

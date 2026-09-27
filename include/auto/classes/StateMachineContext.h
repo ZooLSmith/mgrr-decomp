@@ -8,6 +8,5 @@ struct StateMachineContext {
     virtual undefined * vf00();  // 00B79B20 slot 0x0
     virtual undefined4 * vf04(byte param_2);  // 00B79B40 slot 0x4
     // non-virtual members
-    StateMachineContext();  // 00BD3340
     StateMachineContext(undefined4 param_2);  // 00D821A0
 };

@@ -112,8 +112,8 @@ undefined4 * __thiscall NarrowScaffoldIdleStatePl0010::vf04(undefined4 *param_1,
   return param_1;
 }
 
-// 00BAD050  NarrowScaffoldIdleStatePl0010::vf0C  size=170  [class]
-void __thiscall NarrowScaffoldIdleStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BAD050  NarrowScaffoldIdleStatePl0010::SafeCheck  size=170  [class]
+void __thiscall NarrowScaffoldIdleStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -149,14 +149,14 @@ void __thiscall NarrowScaffoldIdleStatePl0010::vf0C(int param_1,undefined4 *para
       *(undefined4 *)(*(int *)(iVar3 + 0xd0) + 4) = 0;
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00BAD100  NarrowScaffoldIdleStatePl0010::vf10  size=4521  [class]
+// 00BAD100  NarrowScaffoldIdleStatePl0010::qteSafeCheck  size=4521  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void NarrowScaffoldIdleStatePl0010::vf10(undefined4 *param_1)
+void NarrowScaffoldIdleStatePl0010::qteSafeCheck(undefined4 *param_1)
 
 {
   float fVar1;
@@ -263,7 +263,7 @@ void NarrowScaffoldIdleStatePl0010::vf10(undefined4 *param_1)
   fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c);
   if (*(float *)(uVar3 + 0xd28) <= fVar1 * fVar1) {
     FUN_00aa9280(0xd6);
-    StateMachineNode::vf10(param_1);
+    StateMachineNode::qteSafeCheck(param_1);
     return;
   }
   FUN_00b8ae90(local_170);
@@ -515,7 +515,7 @@ void NarrowScaffoldIdleStatePl0010::vf10(undefined4 *param_1)
     }
     if (!bVar2) {
       FUN_00aa9280(0xd6);
-      StateMachineNode::vf10(param_1);
+      StateMachineNode::qteSafeCheck(param_1);
       return;
     }
   }
@@ -530,7 +530,7 @@ LAB_00bae21f:
     FUN_00aa9280(uVar8);
   }
   FUN_00a95fb0(0);
-  StateMachineNode::vf10(param_1);
+  StateMachineNode::qteSafeCheck(param_1);
   return;
 }
 

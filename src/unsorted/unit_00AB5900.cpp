@@ -13,7 +13,7 @@ void FUN_00ab5900(void)
   cXml::cXml_7();
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 

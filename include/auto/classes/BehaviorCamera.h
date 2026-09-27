@@ -14,4 +14,6 @@ struct BehaviorCamera : public BehaviorAppBase {
     virtual void vf4C();  // 00ACA050 slot 0x4C  overrides Behavior
     virtual void vf50();  // 00AC5150 slot 0x50  overrides Behavior
     virtual void vf5C();  // 00AC5180 slot 0x5C  overrides Behavior
+    // non-virtual members
+    BehaviorCamera();  // 00AAF350
 };

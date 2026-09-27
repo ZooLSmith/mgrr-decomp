@@ -8,7 +8,7 @@
 undefined4 * __fastcall EspShaderMosaic::EspShaderMosaic(undefined4 *param_1)
 
 {
-  cEspShaderBase::cEspShaderBase_3();
+  cEspShaderBase::cEspShaderBase();
   *param_1 = vftable;
   param_1[0x13] = 0xffffffff;
   param_1[0x14] = 0xffffffff;
@@ -21,7 +21,7 @@ undefined4 * __thiscall EspShaderMosaic::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  cEspShaderBase::cEspShaderBase_2();
+  cEspShaderBase::~cEspShaderBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -73,14 +73,14 @@ void EspShaderMosaic::vf0C(void)
   return;
 }
 
-// 015ECC20  EspShaderMosaic::EspShaderMosaic_2  size=20  [class]
+// 015ECC20  EspShaderMosaic::~EspShaderMosaic  size=20  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void EspShaderMosaic::EspShaderMosaic_2(void)
+void EspShaderMosaic::~EspShaderMosaic(void)
 
 {
   _DAT_01b7af70 = vftable;
-  cEspShaderBase::cEspShaderBase_2();
+  cEspShaderBase::~cEspShaderBase();
   return;
 }
 

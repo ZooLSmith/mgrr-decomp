@@ -35,7 +35,7 @@ void __fastcall FUN_00aa5700(int param_1)
       iVar2 = 0;
     }
     else {
-      iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar2 = RigidBodyCollision::RigidBodyCollision();
     }
     *(int *)(param_1 + 0x7b0) = iVar2;
     if (iVar2 != 0) {

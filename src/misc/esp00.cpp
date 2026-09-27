@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp00::esp00(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }

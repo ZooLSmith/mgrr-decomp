@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ZangekiNormalStatePl1500.h"
 
-// 008A4940  ZangekiNormalStatePl1500::vf0C  size=5  [class]
-void __thiscall ZangekiNormalStatePl1500::vf0C(int param_1,undefined4 param_2)
+// 008A4940  ZangekiNormalStatePl1500::SafeCheck  size=5  [class]
+void __thiscall ZangekiNormalStatePl1500::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -164,8 +164,8 @@ undefined4 __thiscall ZangekiNormalStatePl1500::vf20(undefined4 param_1,undefine
   return 1;
 }
 
-// 008CFD90  ZangekiNormalStatePl1500::vf10  size=151  [class]
-void __thiscall ZangekiNormalStatePl1500::vf10(int param_1,undefined4 *param_2)
+// 008CFD90  ZangekiNormalStatePl1500::qteSafeCheck  size=151  [class]
+void __thiscall ZangekiNormalStatePl1500::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;
@@ -198,7 +198,7 @@ void __thiscall ZangekiNormalStatePl1500::vf10(int param_1,undefined4 *param_2)
     FUN_008b7300(param_2);
   }
   FUN_008b82e0(param_2);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

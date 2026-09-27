@@ -59,6 +59,7 @@ struct Pl1400 : public PlBaseDLC {
     virtual void vf420();  // 0085C900 slot 0x420  overrides PlBaseDLC
     virtual undefined4 vf424();  // 008651C0 slot 0x424  overrides PlBaseDLC
     // non-virtual members
+    static undefined4 vf134_00893AA0();  // 00893AA0
     static void qteSafeCheck(undefined4 * param_2);  // 0089F120
     Pl1400();  // 00AC38D0
 };

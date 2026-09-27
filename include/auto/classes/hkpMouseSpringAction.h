@@ -11,5 +11,7 @@ struct hkpMouseSpringAction : public hkpUnaryAction {
     virtual void vf18();  // 0127D3A0 slot 0x18  overrides hkpAction
     virtual int vf1C(int * param_2, int param_3);  // 0127DA30 slot 0x1C  overrides hkpAction
     // non-virtual members
-    ~hkpMouseSpringAction();  // 0127D6E0
+    hkpMouseSpringAction(undefined4 * param_1, undefined4 param_2);  // 01274B00
+    hkpMouseSpringAction();  // 01274CE0
+    void ctor_0127D6E0();  // 0127D6E0
 };

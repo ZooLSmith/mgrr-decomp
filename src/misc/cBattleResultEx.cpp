@@ -861,8 +861,8 @@ LAB_00d2882e:
   return;
 }
 
-// 00D28A00  cBattleResultEx::vf14  size=412  [class]
-void __fastcall cBattleResultEx::vf14(int param_1)
+// 00D28A00  cBattleResultEx::create  size=412  [class]
+void __fastcall cBattleResultEx::create(int param_1)
 
 {
   char cVar1;
@@ -921,8 +921,8 @@ LAB_00d28b81:
   return;
 }
 
-// 00D36BD0  cBattleResultEx::cBattleResultEx  size=136  [class]
-undefined4 * cBattleResultEx::cBattleResultEx(void)
+// 00D36BD0  cBattleResultEx::~cBattleResultEx  size=136  [class]
+undefined4 * cBattleResultEx::~cBattleResultEx(void)
 
 {
   undefined4 *puVar1;
@@ -937,7 +937,7 @@ undefined4 * cBattleResultEx::cBattleResultEx(void)
     puVar1[5] = 0;
     puVar1[6] = 0;
     *puVar1 = vftable;
-    cCustomObjCtrlManager::cCustomObjCtrlManager_40();
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
     *(undefined1 *)(puVar1 + 0x10d) = 0;
     *(undefined2 *)(puVar1 + 0x10e) = 0;
     *(undefined1 *)((int)puVar1 + 0x436) = 0;

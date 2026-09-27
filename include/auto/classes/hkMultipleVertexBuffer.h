@@ -21,6 +21,6 @@ struct hkMultipleVertexBuffer : public hkMeshVertexBuffer {
     virtual void vf34();  // 01066900 slot 0x34  overrides hkMeshVertexBuffer
     // non-virtual members
     hkMultipleVertexBuffer();  // 01067040
-    void ctor_01067130();  // 01067130
-    ~hkMultipleVertexBuffer();  // 01067140
+    ~hkMultipleVertexBuffer();  // 01067130
+    void ctor_01067140();  // 01067140
 };

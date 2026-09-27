@@ -23,7 +23,7 @@ void FUN_00ad3b60(void)
   }
   iVar1 = FUN_00dd9400(9);
   if (iVar1 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   return;
 }

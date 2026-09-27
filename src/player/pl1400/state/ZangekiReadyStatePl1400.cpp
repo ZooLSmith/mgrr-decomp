@@ -46,8 +46,8 @@ undefined4 * __thiscall ZangekiReadyStatePl1400::vf04(undefined4 *param_1,byte p
   return param_1;
 }
 
-// 00874100  ZangekiReadyStatePl1400::vf0C  size=240  [class]
-void __thiscall ZangekiReadyStatePl1400::vf0C(int param_1,undefined4 *param_2)
+// 00874100  ZangekiReadyStatePl1400::SafeCheck  size=240  [class]
+void __thiscall ZangekiReadyStatePl1400::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -92,7 +92,7 @@ void __thiscall ZangekiReadyStatePl1400::vf0C(int param_1,undefined4 *param_2)
       }
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -224,8 +224,8 @@ undefined4 __thiscall ZangekiReadyStatePl1400::vf08(int param_1,undefined4 *para
   return 1;
 }
 
-// 0089B100  ZangekiReadyStatePl1400::vf10  size=1029  [class]
-void __thiscall ZangekiReadyStatePl1400::vf10(int param_1,undefined4 *param_2)
+// 0089B100  ZangekiReadyStatePl1400::qteSafeCheck  size=1029  [class]
+void __thiscall ZangekiReadyStatePl1400::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -358,7 +358,7 @@ LAB_0089b44a:
       piVar4[0x234] = 0;
     }
   }
-  StateMachineNode::vf10(puVar2);
+  StateMachineNode::qteSafeCheck(puVar2);
   return;
 }
 

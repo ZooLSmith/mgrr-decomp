@@ -114,8 +114,8 @@ void FUN_004fa000(void)
   return;
 }
 
-// 004FA030  Em0190::vf1B8  size=127  [class]
-void Em0190::vf1B8(undefined4 *param_1,int param_2,int param_3)
+// 004FA030  Em0190::setCutCrerateInfo  size=127  [class]
+void Em0190::setCutCrerateInfo(undefined4 *param_1,int param_2,int param_3)
 
 {
   undefined4 *puVar1;
@@ -1516,7 +1516,7 @@ void __fastcall FUN_004fd420(int *param_1)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar3 = *(undefined4 **)(iVar2 + 8);
       *(undefined4 *)(iVar2 + 4) = 1;
@@ -2479,8 +2479,8 @@ void __fastcall FUN_004fea90(int param_1)
   return;
 }
 
-// 004FEC00  Em0190::vf130  size=397  [class]
-undefined4 __thiscall Em0190::vf130(int param_1,ushort *param_2)
+// 004FEC00  Em0190::getAttackInfo  size=397  [class]
+undefined4 __thiscall Em0190::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -2495,7 +2495,7 @@ undefined4 __thiscall Em0190::vf130(int param_1,ushort *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(uint **)(iVar2 + 8);
       puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -10085,8 +10085,8 @@ void __fastcall Em0190::vf48(int *param_1)
   return;
 }
 
-// 00515000  Em0190::vf264  size=488  [class]
-undefined4 __thiscall Em0190::vf264(int *param_1,undefined4 param_2)
+// 00515000  Em0190::setEmSetInfo  size=488  [class]
+undefined4 __thiscall Em0190::setEmSetInfo(int *param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -10429,8 +10429,8 @@ LAB_00515557:
   return 0;
 }
 
-// 00515FD0  Em0190::vf40  size=2503  [class]
-undefined4 __fastcall Em0190::vf40(int *param_1)
+// 00515FD0  Em0190::startup  size=2503  [class]
+undefined4 __fastcall Em0190::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -10455,7 +10455,7 @@ undefined4 __fastcall Em0190::vf40(int *param_1)
   undefined1 auStack_1d0 [112];
   undefined1 auStack_160 [348];
   
-  iVar2 = BehaviorEmBase::vf40();
+  iVar2 = BehaviorEmBase::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -10495,7 +10495,7 @@ undefined4 __fastcall Em0190::vf40(int *param_1)
       iVar3 = 0;
     }
     else {
-      iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar3 = RigidBodyCollision::RigidBodyCollision();
     }
     param_1[0x1ec] = iVar3;
     if (iVar3 != 0) {
@@ -11072,8 +11072,8 @@ void __fastcall FUN_00517930(int *param_1)
         local_200 = local_1f0 - (float)param_1[0x10];
         local_1f8 = local_1e8 - (float)param_1[0x12];
         local_1fc = (float)(float10)0;
-        hkpAllCdPointCollector::hkpAllCdPointCollector_12();
-        iVar6 = hkpCdPointCollector::hkpCdPointCollector_14
+        Em0190MoveCheckLinearCastCollector::Em0190MoveCheckLinearCastCollector();
+        iVar6 = hkpCdPointCollector::hkpCdPointCollector
                           (&local_200,&local_200,1,local_1b0,0x3c23d70a);
         if ((iVar6 == 0) ||
            ((local_1e8 - local_1f8) * (local_1e8 - local_1f8) +
@@ -12641,7 +12641,7 @@ undefined4 * __fastcall Em0190::Em0190(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -12721,12 +12721,12 @@ void __fastcall FUN_00aaf610(int param_1)
   FUN_00905ce0();
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB7F00  Em0190::vf00  size=30  [class]
-undefined4 __thiscall Em0190::vf00(undefined4 param_1,byte param_2)
+// 00AB7F00  Em0190::destruct  size=30  [class]
+undefined4 __thiscall Em0190::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00aaf610();

@@ -29,7 +29,7 @@ undefined4 __thiscall hkBaseObject::hkBaseObject_240(int param_1,int param_2)
   if (param_2 != 0) {
     if ((*(byte *)(param_1 + 0x16c) & 4) == 0) {
       FUN_00860de0();
-      hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+      hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
       FUN_01269700(local_a0);
       local_a0[0] = vftable;
       FUN_00860e40();

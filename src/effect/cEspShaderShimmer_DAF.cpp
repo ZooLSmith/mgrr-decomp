@@ -18,7 +18,7 @@ undefined4 * __thiscall cEspShaderShimmer_DAF::vf00(undefined4 *param_1,byte par
 
 {
   *param_1 = vftable;
-  cEspShaderBase::cEspShaderBase();
+  cEspShaderBase::~cEspShaderBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -93,14 +93,14 @@ void __fastcall cEspShaderShimmer_DAF::vf04(int param_1)
   return;
 }
 
-// 015ECC00  cEspShaderShimmer_DAF::cEspShaderShimmer_DAF_2  size=20  [class]
+// 015ECC00  cEspShaderShimmer_DAF::~cEspShaderShimmer_DAF  size=20  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cEspShaderShimmer_DAF::cEspShaderShimmer_DAF_2(void)
+void cEspShaderShimmer_DAF::~cEspShaderShimmer_DAF(void)
 
 {
   _DAT_01b7a898 = vftable;
-  cEspShaderBase::cEspShaderBase();
+  cEspShaderBase::~cEspShaderBase();
   return;
 }
 

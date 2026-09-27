@@ -9,5 +9,6 @@ struct hkReferencedObject : public hkBaseObject {
     virtual undefined4 * vf00(byte param_2);  // 008E2CB0 slot 0x0  overrides hkBaseObject
     virtual undefined * vf08();  // 01005E40 slot 0x8
     // non-virtual members
-    hkReferencedObject(undefined4 * param_1);  // 01013280
+    ~hkReferencedObject();  // 01013280
+    hkReferencedObject();  // 010132B0
 };

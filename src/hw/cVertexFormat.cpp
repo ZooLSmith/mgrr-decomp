@@ -13,8 +13,8 @@ void __fastcall Hw::cVertexFormat::cVertexFormat(undefined4 *param_1)
   return;
 }
 
-// 00F9F020  Hw::cVertexFormat::cVertexFormat_2  size=33  [class]
-void __fastcall Hw::cVertexFormat::cVertexFormat_2(undefined4 *param_1)
+// 00F9F020  Hw::cVertexFormat::~cVertexFormat  size=33  [class]
+void __fastcall Hw::cVertexFormat::~cVertexFormat(undefined4 *param_1)
 
 {
   int *piVar1;

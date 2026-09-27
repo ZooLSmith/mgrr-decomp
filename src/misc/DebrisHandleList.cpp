@@ -131,10 +131,10 @@ void __fastcall FUN_0093e740(int param_1)
         (**(code **)(*piVar2 + 4))(&DAT_01b35300);
         iVar3 = FUN_00dd6d80(puVar5);
         if ((iVar3 == 0) || (piVar2[0x24a] != 0)) {
-          FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
         }
         else if (*(int *)(param_1 + 0x78) == 0) {
-          thunk_FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
         }
         else {
           FUN_005d84f0(0x40a00000);
@@ -384,7 +384,7 @@ void __fastcall FUN_0093ed00(int param_1)
       for (iVar7 = *(int *)((int)unaff_EBX[4] + 4); iVar7 != iVar5; iVar7 = iVar7 + 0x28) {
         iVar6 = FUN_00a81330();
         if ((iVar6 != 0) && (iVar6 = FUN_00a7c8a0(), iVar6 != 0)) {
-          FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
         }
       }
       if (*unaff_EBX <= 60.0) {
@@ -512,7 +512,7 @@ void __fastcall FUN_0093f0c0(int param_1)
       (**(code **)(*piVar4 + 4))(&DAT_01b35300);
       iVar2 = FUN_00dd6d80(puVar6);
       if (iVar2 != 0) {
-        thunk_FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
     }
   }
@@ -699,7 +699,7 @@ void __fastcall FUN_0093fa20(int param_1)
             (**(code **)(*piVar3 + 4))(&DAT_01b35300);
             iVar4 = FUN_00dd6d80(puVar7);
             if (iVar4 != 0) {
-              thunk_FUN_009fdde0();
+              E3_EnemyBoardDebrisSokushi::vf4C();
               bVar2 = true;
             }
           }
@@ -806,7 +806,7 @@ void __thiscall FUN_00940c50(int param_1,int param_2)
           (**(code **)(*piVar4 + 4))(&DAT_01b35300);
           iVar2 = FUN_00dd6d80(puVar6);
           if (iVar2 != 0) {
-            thunk_FUN_009fdde0();
+            E3_EnemyBoardDebrisSokushi::vf4C();
           }
         }
       }
@@ -1235,7 +1235,7 @@ void __thiscall FUN_009416e0(int param_1,int param_2)
                 (**(code **)(*piVar5 + 4))(&DAT_01b35300);
                 iVar4 = FUN_00dd6d80(puVar8);
                 if (iVar4 != 0) {
-                  thunk_FUN_009fdde0();
+                  E3_EnemyBoardDebrisSokushi::vf4C();
                   bVar3 = true;
                 }
               }
@@ -1560,7 +1560,7 @@ void __fastcall FUN_00941d30(int param_1)
         (**(code **)(*piVar1 + 4))(&DAT_01b35300);
         iVar2 = FUN_00dd6d80(puVar4);
         if (iVar2 != 0) {
-          thunk_FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
         }
       }
       iVar3 = iVar3 + 0x28;
@@ -1775,7 +1775,7 @@ void __fastcall FUN_00941f50(int param_1)
           FUN_005d8530(0x40a00000);
           return;
         }
-        thunk_FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -2008,7 +2008,7 @@ LAB_0094263b:
                 FUN_005d8530(0x40a00000);
                 return;
               }
-              thunk_FUN_009fdde0();
+              E3_EnemyBoardDebrisSokushi::vf4C();
             }
           }
         }

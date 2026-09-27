@@ -124,7 +124,7 @@ void __fastcall FUN_005c6df0(int param_1)
       iVar4 = 0;
     }
     else {
-      iVar4 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar4 = RigidBodyCollision::RigidBodyCollision();
     }
     *(int *)(param_1 + 0x7b0) = iVar4;
     if (iVar4 != 0) {
@@ -137,8 +137,8 @@ void __fastcall FUN_005c6df0(int param_1)
   return;
 }
 
-// 005C6E90  Em1010::vf264  size=165  [class]
-undefined4 __thiscall Em1010::vf264(int *param_1,undefined4 param_2)
+// 005C6E90  Em1010::setEmSetInfo  size=165  [class]
+undefined4 __thiscall Em1010::setEmSetInfo(int *param_1,undefined4 param_2)
 
 {
   char cVar1;
@@ -153,7 +153,7 @@ undefined4 __thiscall Em1010::vf264(int *param_1,undefined4 param_2)
       FUN_00a85340(0);
       FUN_00e5e0c0("Stop_em1010_se_mov_search",param_1,0xffffffff,0);
       (**(code **)(*param_1 + 0x20))();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   return 1;
@@ -994,8 +994,8 @@ void FUN_005c8820(undefined4 param_1,int param_2)
   return;
 }
 
-// 005C8870  Em1010::vf40  size=755  [class]
-undefined4 __fastcall Em1010::vf40(int param_1)
+// 005C8870  Em1010::startup  size=755  [class]
+undefined4 __fastcall Em1010::startup(int param_1)
 
 {
   int iVar1;
@@ -1008,7 +1008,7 @@ undefined4 __fastcall Em1010::vf40(int param_1)
   undefined1 local_1d0 [112];
   undefined1 local_160 [348];
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     FUN_005c6df0();
     FUN_00a8efe0();
@@ -1156,7 +1156,7 @@ void __fastcall FUN_005c8c30(int *param_1)
     fVar1 = (float)param_1[0x248];
     param_1[0x248] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   default:
     return;
@@ -1215,7 +1215,7 @@ undefined4 * __fastcall Em1010::Em1010(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a831e0();
   iVar1 = 1;
@@ -1234,12 +1234,12 @@ undefined * Em1010::vf04(void)
   return &DAT_01b351e0;
 }
 
-// 00AB77B0  Em1010::vf00  size=43  [class]
-undefined4 __thiscall Em1010::vf00(undefined4 param_1,byte param_2)
+// 00AB77B0  Em1010::destruct  size=43  [class]
+undefined4 __thiscall Em1010::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

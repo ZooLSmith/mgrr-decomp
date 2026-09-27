@@ -71,8 +71,8 @@ void __fastcall Hw::cTextureInstance::cTextureInstance(undefined4 *param_1)
   return;
 }
 
-// 00F9F280  Hw::cTextureInstance::cTextureInstance_4  size=70  [class]
-void __fastcall Hw::cTextureInstance::cTextureInstance_4(undefined4 *param_1)
+// 00F9F280  Hw::cTextureInstance::cTextureInstance  size=70  [class]
+void __fastcall Hw::cTextureInstance::cTextureInstance(undefined4 *param_1)
 
 {
   param_1[1] = 0;
@@ -121,8 +121,8 @@ void __fastcall Hw::cTextureInstance::cTextureInstance_5(undefined4 *param_1)
   return;
 }
 
-// 00F9F490  Hw::cTextureInstance::cTextureInstance_2  size=67  [class]
-void __fastcall Hw::cTextureInstance::cTextureInstance_2(undefined4 *param_1)
+// 00F9F490  Hw::cTextureInstance::cTextureInstance  size=67  [class]
+void __fastcall Hw::cTextureInstance::cTextureInstance(undefined4 *param_1)
 
 {
   param_1[1] = 0;

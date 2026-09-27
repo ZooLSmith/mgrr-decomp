@@ -8,7 +8,7 @@
 undefined4 * __fastcall PlayerNullCamera::PlayerNullCamera(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -20,8 +20,8 @@ undefined * PlayerNullCamera::vf04(void)
   return &DAT_01be9dd8;
 }
 
-// 00AB6600  PlayerNullCamera::vf00  size=105  [class]
-undefined4 * __thiscall PlayerNullCamera::vf00(undefined4 *param_1,byte param_2)
+// 00AB6600  PlayerNullCamera::destruct  size=105  [class]
+undefined4 * __thiscall PlayerNullCamera::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -35,15 +35,15 @@ undefined4 * __thiscall PlayerNullCamera::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00B80A00  PlayerNullCamera::vf40  size=12  [class]
-bool PlayerNullCamera::vf40(void)
+// 00B80A00  PlayerNullCamera::startup  size=12  [class]
+bool PlayerNullCamera::startup(void)
 
 {
   int iVar1;

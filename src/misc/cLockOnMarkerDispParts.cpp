@@ -60,8 +60,8 @@ undefined4 * __thiscall cLockOnMarkerDispParts::vf00(undefined4 *param_1,byte pa
   return param_1;
 }
 
-// 00CEF720  cLockOnMarkerDispParts::vf14  size=380  [class]
-void __fastcall cLockOnMarkerDispParts::vf14(int param_1)
+// 00CEF720  cLockOnMarkerDispParts::create  size=380  [class]
+void __fastcall cLockOnMarkerDispParts::create(int param_1)
 
 {
   int iVar1;

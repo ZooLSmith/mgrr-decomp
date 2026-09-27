@@ -4,9 +4,9 @@
 #include "mgrr.h"
 #include "espEmtEst.h"
 
-// 00F0ACF0  espEmtEst::vf04  size=329  [class]
+// 00F0ACF0  espEmtEst::preTrans  size=329  [class]
 undefined4 __thiscall
-espEmtEst::vf04(int param_1,undefined4 param_2,void *param_3,undefined4 param_4)
+espEmtEst::preTrans(int param_1,undefined4 param_2,void *param_3,undefined4 param_4)
 
 {
   int iVar1;
@@ -524,8 +524,8 @@ void __fastcall FUN_00f44dc0(void *param_1)
   return;
 }
 
-// 00F44E80  espEmtEst::espEmtEst_3  size=28  [class]
-undefined4 * __fastcall espEmtEst::espEmtEst_3(undefined4 *param_1)
+// 00F44E80  espEmtEst::espEmtEst  size=28  [class]
+undefined4 * __fastcall espEmtEst::espEmtEst(undefined4 *param_1)
 
 {
   cEspBase::cEspBase();
@@ -538,7 +538,7 @@ undefined4 * __fastcall espEmtEst::espEmtEst_3(undefined4 *param_1)
 undefined4 __thiscall espEmtEst::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_3();
+  cEspBase::~cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

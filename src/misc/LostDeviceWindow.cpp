@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "LostDeviceWindow.h"
 
-// 00999120  LostDeviceWindow::LostDeviceWindow  size=39  [class]
-void __fastcall LostDeviceWindow::LostDeviceWindow(undefined4 *param_1)
+// 00999120  LostDeviceWindow::~LostDeviceWindow  size=39  [class]
+void __fastcall LostDeviceWindow::~LostDeviceWindow(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -13,7 +13,7 @@ void __fastcall LostDeviceWindow::LostDeviceWindow(undefined4 *param_1)
     (*(code *)**(undefined4 **)param_1[0xe])(1);
     param_1[0xe] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -26,7 +26,7 @@ undefined4 * __thiscall LostDeviceWindow::vf00(undefined4 *param_1,byte param_2)
     (*(code *)**(undefined4 **)param_1[0xe])(1);
     param_1[0xe] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -87,8 +87,8 @@ void __fastcall LostDeviceWindow::vf08(int param_1)
   return;
 }
 
-// 009992F0  LostDeviceWindow::vf14  size=268  [class]
-void __fastcall LostDeviceWindow::vf14(int param_1)
+// 009992F0  LostDeviceWindow::create  size=268  [class]
+void __fastcall LostDeviceWindow::create(int param_1)
 
 {
   float fVar1;

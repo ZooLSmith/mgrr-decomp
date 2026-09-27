@@ -11,5 +11,4 @@ struct esp108 : public cEsp {
     virtual void vf08();  // 009CFF40 slot 0x8  overrides cEspBase
     // non-virtual members
     esp108();  // 009D42B0
-    static void vf10();  // 00F2D650
 };

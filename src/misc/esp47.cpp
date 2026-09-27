@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp47::esp47(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -18,15 +18,15 @@ undefined4 * __fastcall esp47::esp47(undefined4 *param_1)
 undefined4 __thiscall esp47::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00EDA190  esp47::vf10  size=1  [class]
-void esp47::vf10(void)
+// 00EDA190  esp47::addOtTransList  size=1  [class]
+void esp47::addOtTransList(void)
 
 {
   return;
@@ -422,9 +422,9 @@ LAB_00f1d2da:
   return;
 }
 
-// 00F380E0  esp47::vf04  size=224  [class]
+// 00F380E0  esp47::preTrans  size=224  [class]
 undefined4 __thiscall
-esp47::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp47::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -432,7 +432,7 @@ esp47::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return 0;
   }

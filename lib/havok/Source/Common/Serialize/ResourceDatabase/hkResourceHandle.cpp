@@ -60,7 +60,7 @@ void __thiscall hkMemoryResourceHandle::vf2C(int param_1,int *param_2)
                     (1,0xf032edfe,local_434,
                      "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\Serialize\\ResourceDatabase\\hkResourceHandle.cpp"
                      ,0x80);
-          hkBaseObject::hkBaseObject_38();
+          ::hkBaseObject::hkBaseObject_38();
           goto LAB_01110a72;
         }
         FUN_01016300();
@@ -79,7 +79,7 @@ LAB_01110a72:
                   (1,0xf032edf1,local_434,
                    "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\Serialize\\ResourceDatabase\\hkResourceHandle.cpp"
                    ,0x92);
-        hkBaseObject::hkBaseObject_38();
+        ::hkBaseObject::hkBaseObject_38();
       }
       else {
         *puVar2 = uVar5;
@@ -237,7 +237,7 @@ void __thiscall hkResourceHandle::vf34(int *param_1,undefined4 *param_2)
                     (1,0xf034ed21,local_234,
                      "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\Serialize\\ResourceDatabase\\hkResourceHandle.cpp"
                      ,0xb2);
-          hkBaseObject::hkBaseObject_38();
+          ::hkBaseObject::hkBaseObject_38();
         }
         else {
           iVar3 = (**(code **)(*local_28 + 0x18))();
@@ -333,7 +333,7 @@ LAB_01110fe1:
                     (1,0xf034ed22,local_2a0,
                      "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\Serialize\\ResourceDatabase\\hkResourceHandle.cpp"
                      ,0x138);
-          hkBaseObject::hkBaseObject_38();
+          ::hkBaseObject::hkBaseObject_38();
           return (int *)0x0;
         }
       }
@@ -485,7 +485,7 @@ undefined4 __thiscall hkMemoryResourceContainer::vf38(int *param_1,int *param_2)
                 (1,0xabba4554,local_218,
                  "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\Serialize\\ResourceDatabase\\hkResourceHandle.cpp"
                  ,0x198);
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       return 1;
     }
   }

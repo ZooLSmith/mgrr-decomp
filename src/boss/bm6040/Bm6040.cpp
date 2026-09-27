@@ -4,14 +4,14 @@
 #include "mgrr.h"
 #include "Bm6040.h"
 
-// 00604170  Bm6040::vf40  size=58  [class]
-undefined4 __fastcall Bm6040::vf40(int param_1)
+// 00604170  Bm6040::startup  size=58  [class]
+undefined4 __fastcall Bm6040::startup(int param_1)
 
 {
   int iVar1;
   
   *(undefined4 *)(param_1 + 0xb64) = 0;
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 != 0) {
     iVar1 = FUN_00dd7240();
     if (iVar1 != 0) {
@@ -104,8 +104,8 @@ undefined * Bm6040::vf04(void)
   return &DAT_01b354f0;
 }
 
-// 00AB9AD0  Bm6040::vf00  size=54  [class]
-undefined4 __thiscall Bm6040::vf00(undefined4 param_1,byte param_2)
+// 00AB9AD0  Bm6040::destruct  size=54  [class]
+undefined4 __thiscall Bm6040::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();

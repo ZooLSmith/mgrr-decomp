@@ -16,7 +16,7 @@ struct StructArrayImplementation : public hkDataArrayImpl {
     virtual undefined4 vf1C();  // 010F39E0 slot 0x1C  overrides hkDataArrayImpl
     virtual undefined4 vf20();  // 010F38E0 slot 0x20  overrides hkDataArrayImpl
     virtual undefined4 vf28(undefined4 param_2);  // 010F3F60 slot 0x28  overrides hkDataArrayImpl
-    virtual void Object(int param_2);  // 010F3BA0 slot 0x5C  overrides hkDataArrayImpl
+    virtual void vf5C(int param_2);  // 010F3BA0 slot 0x5C  overrides hkDataArrayImpl
     virtual void vf60(int param_2, undefined4 param_3);  // 010F3BE0 slot 0x60  overrides hkDataArrayImpl
     // non-virtual members
     StructArrayImplementation();  // 010F37C0

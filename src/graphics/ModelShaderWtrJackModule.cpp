@@ -8,7 +8,7 @@
 undefined4 * __fastcall ModelShaderWtrJackModule::ModelShaderWtrJackModule(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   param_1[0x114] = 0;
   param_1[0x115] = 0;
@@ -42,7 +42,7 @@ undefined4 __thiscall ModelShaderWtrJackModule::vf00(undefined4 param_1,byte par
 
 {
   Spline<float>::Spline<float>();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

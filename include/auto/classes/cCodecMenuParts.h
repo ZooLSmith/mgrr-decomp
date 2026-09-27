@@ -10,4 +10,6 @@ struct cCodecMenuParts : public cCustomObjCtrlManager {
     virtual void vf08();  // 0099B1C0 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 0098A510 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009AD850 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cCodecMenuParts();  // 0099B110
 };

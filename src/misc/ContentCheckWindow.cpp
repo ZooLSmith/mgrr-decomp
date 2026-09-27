@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ContentCheckWindow.h"
 
-// 009997C0  ContentCheckWindow::ContentCheckWindow  size=39  [class]
-void __fastcall ContentCheckWindow::ContentCheckWindow(undefined4 *param_1)
+// 009997C0  ContentCheckWindow::~ContentCheckWindow  size=39  [class]
+void __fastcall ContentCheckWindow::~ContentCheckWindow(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -13,7 +13,7 @@ void __fastcall ContentCheckWindow::ContentCheckWindow(undefined4 *param_1)
     (*(code *)**(undefined4 **)param_1[0xe])(1);
     param_1[0xe] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -26,7 +26,7 @@ undefined4 * __thiscall ContentCheckWindow::vf00(undefined4 *param_1,byte param_
     (*(code *)**(undefined4 **)param_1[0xe])(1);
     param_1[0xe] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -63,8 +63,8 @@ void __fastcall ContentCheckWindow::vf08(int param_1)
   return;
 }
 
-// 00999950  ContentCheckWindow::vf14  size=268  [class]
-void __fastcall ContentCheckWindow::vf14(int param_1)
+// 00999950  ContentCheckWindow::create  size=268  [class]
+void __fastcall ContentCheckWindow::create(int param_1)
 
 {
   float fVar1;

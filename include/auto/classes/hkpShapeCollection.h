@@ -10,5 +10,7 @@ struct hkpShapeCollection : public hkpShape, public hkpShapeContainer {
     virtual void vf44(int param_2);  // 0114F860 slot 0x44
     virtual void vf48(uint param_2, undefined2 param_3);  // 0114F850 slot 0x48
     // non-virtual members
+    hkpShapeCollection();  // 0114F880
+    hkpShapeCollection(int param_2);  // 0114F8D0
     static void vf00();  // 0114FE30
 };

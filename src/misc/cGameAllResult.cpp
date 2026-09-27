@@ -420,8 +420,8 @@ LAB_00d0b00d:
   } while( true );
 }
 
-// 00D37FA0  cGameAllResult::vf14  size=436  [class]
-void __fastcall cGameAllResult::vf14(int param_1)
+// 00D37FA0  cGameAllResult::create  size=436  [class]
+void __fastcall cGameAllResult::create(int param_1)
 
 {
   int iVar1;

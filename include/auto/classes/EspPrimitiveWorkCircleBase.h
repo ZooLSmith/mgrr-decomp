@@ -11,5 +11,4 @@ struct EspPrimitiveWorkCircleBase : public EspPrimitiveWorkBase {
     virtual void vf0C(int param_2);  // 00F4EC90 slot 0xC  overrides EspPrimitiveWorkBase
     // non-virtual members
     EspPrimitiveWorkCircleBase();  // 00F4EBE0
-    void ctor_00F588E0();  // 00F588E0
 };

@@ -176,8 +176,8 @@ undefined4 __thiscall ZangekiInterceptStatePl1400::vf08(int param_1,undefined4 *
   return 1;
 }
 
-// 0088A7D0  ZangekiInterceptStatePl1400::vf0C  size=484  [class]
-void __thiscall ZangekiInterceptStatePl1400::vf0C(int param_1,undefined4 *param_2)
+// 0088A7D0  ZangekiInterceptStatePl1400::SafeCheck  size=484  [class]
+void __thiscall ZangekiInterceptStatePl1400::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -250,12 +250,12 @@ void __thiscall ZangekiInterceptStatePl1400::vf0C(int param_1,undefined4 *param_
     }
     FUN_00a8c8b0(0x11400,auStack_160);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00897A40  ZangekiInterceptStatePl1400::vf10  size=1324  [class]
-void __thiscall ZangekiInterceptStatePl1400::vf10(int param_1,undefined4 *param_2)
+// 00897A40  ZangekiInterceptStatePl1400::qteSafeCheck  size=1324  [class]
+void __thiscall ZangekiInterceptStatePl1400::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -419,7 +419,7 @@ LAB_00897ee2:
   FUN_0088fce0(param_2,0x420c0000,0xc2700000,0,0);
   FUN_008774a0(param_2);
   FUN_008770b0(param_2,0x3f800000);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

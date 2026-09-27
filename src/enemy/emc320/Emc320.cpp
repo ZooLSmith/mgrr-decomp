@@ -1,5 +1,5 @@
 // src/enemy/emc320/Emc320.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0083ECD0..00AB99A0, 10 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0083ECD0..00AB99A0, 11 functions
 
 #include "mgrr.h"
 #include "Emc320.h"
@@ -46,8 +46,8 @@ void Emc320::vf50(void)
   return;
 }
 
-// 0083ED50  Emc320::vf264  size=29  [class]
-undefined4 __thiscall Emc320::vf264(int param_1,undefined4 *param_2)
+// 0083ED50  Emc320::setEmSetInfo  size=29  [class]
+undefined4 __thiscall Emc320::setEmSetInfo(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -85,8 +85,8 @@ uint FUN_0083edc0(int *param_1)
   return -(uint)(iVar1 != 0) & (uint)param_1;
 }
 
-// 0083EE20  Emc320::vf40  size=484  [class]
-undefined4 __fastcall Emc320::vf40(int param_1)
+// 0083EE20  Emc320::startup  size=484  [class]
+undefined4 __fastcall Emc320::startup(int param_1)
 
 {
   int iVar1;
@@ -95,7 +95,7 @@ undefined4 __fastcall Emc320::vf40(int param_1)
   undefined *puVar4;
   undefined4 uVar5;
   
-  iVar1 = EmBaseDLC::vf40();
+  iVar1 = EmBaseDLC::startup();
   if (iVar1 != 0) {
     iVar1 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
     if (iVar1 != 0) {
@@ -218,12 +218,24 @@ void __fastcall Emc320::vf48(int *param_1)
       fVar4 = fVar4 * (float10)0.016666668 + (float10)(float)param_1[0x248];
       param_1[0x248] = (int)(float)fVar4;
       if ((float10)3.0 <= fVar4) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
   }
   return;
+}
+
+// 00AB1610  Emc320::Emc320  size=45  [class]
+undefined4 * __fastcall Emc320::Emc320(undefined4 *param_1)
+
+{
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  param_1[0x3ae] = 0;
+  return param_1;
 }
 
 // 00AB1640  Emc320::vf04  size=6  [class]
@@ -233,13 +245,13 @@ undefined * Emc320::vf04(void)
   return &DAT_01b35a50;
 }
 
-// 00AB99A0  Emc320::vf00  size=54  [class]
-undefined4 __thiscall Emc320::vf00(undefined4 param_1,byte param_2)
+// 00AB99A0  Emc320::destruct  size=54  [class]
+undefined4 __thiscall Emc320::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

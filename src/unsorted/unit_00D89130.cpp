@@ -70,7 +70,7 @@ float * __fastcall FUN_00d89130(float *param_1)
   local_558 = param_1[0x362] * fVar2 + local_568;
   local_554 = param_1[0x363] * fVar2 + local_564;
   FUN_00a84140(0xffffffff,0x1a,"obstacle");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar7 = BehaviorUtility::checkRay(local_530,&local_570);
   if ((iVar7 != 0) &&
      ((FUN_00a84420(0xffffffff,0x1a,"obstacle"), fVar6 = local_514, fVar5 = local_518,

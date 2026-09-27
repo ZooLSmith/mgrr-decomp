@@ -55,8 +55,8 @@ void __fastcall Em0110CutWhip::vf44(int param_1)
   return;
 }
 
-// 004D7620  Em0110CutWhip::vf40  size=612  [class]
-undefined4 __fastcall Em0110CutWhip::vf40(int param_1)
+// 004D7620  Em0110CutWhip::startup  size=612  [class]
+undefined4 __fastcall Em0110CutWhip::startup(int param_1)
 
 {
   int iVar1;
@@ -74,7 +74,7 @@ undefined4 __fastcall Em0110CutWhip::vf40(int param_1)
   undefined4 uStack_18;
   undefined4 uStack_14;
   
-  iVar1 = BehaviorWeapon::vf40();
+  iVar1 = BehaviorWeapon::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -86,7 +86,7 @@ undefined4 __fastcall Em0110CutWhip::vf40(int param_1)
       uVar3 = 0;
     }
     else {
-      uVar3 = RigidBodyCollection::RigidBodyCollection_2();
+      uVar3 = RigidBodyCollision::RigidBodyCollision();
     }
     *(undefined4 *)(param_1 + 0x7b0) = uVar3;
     iVar1 = FUN_008f6410(*(undefined4 *)(param_1 + 0x4f0),iVar1,local_34);
@@ -150,7 +150,7 @@ undefined4 __fastcall Em0110CutWhip::vf40(int param_1)
 undefined4 * __fastcall Em0110CutWhip::Em0110CutWhip(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   param_1[0x228] = 0;
   param_1[0x22a] = 0;
   param_1[0x22d] = 0;
@@ -174,8 +174,8 @@ void Em0110CutWhip::vf1D0(void)
   return;
 }
 
-// 00AB7250  Em0110CutWhip::vf00  size=105  [class]
-undefined4 * __thiscall Em0110CutWhip::vf00(undefined4 *param_1,byte param_2)
+// 00AB7250  Em0110CutWhip::destruct  size=105  [class]
+undefined4 * __thiscall Em0110CutWhip::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -189,7 +189,7 @@ undefined4 * __thiscall Em0110CutWhip::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

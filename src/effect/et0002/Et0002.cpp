@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Et0002.h"
 
-// 005C98D0  Et0002::vf40  size=64  [class]
-undefined4 __fastcall Et0002::vf40(int param_1)
+// 005C98D0  Et0002::startup  size=64  [class]
+undefined4 __fastcall Et0002::startup(int param_1)
 
 {
   int iVar1;
@@ -181,7 +181,7 @@ void __fastcall FUN_005c9c30(int *param_1)
     return;
   case 3:
     FUN_00a8caf0(5,0,0,0);
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   default:
     return;
@@ -327,7 +327,7 @@ void __fastcall Et0002::vf4C(int *param_1)
 undefined4 * __fastcall Et0002::Et0002(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -339,8 +339,8 @@ undefined * Et0002::vf04(void)
   return &DAT_01b35220;
 }
 
-// 00AB7F20  Et0002::vf00  size=105  [class]
-undefined4 * __thiscall Et0002::vf00(undefined4 *param_1,byte param_2)
+// 00AB7F20  Et0002::destruct  size=105  [class]
+undefined4 * __thiscall Et0002::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -354,7 +354,7 @@ undefined4 * __thiscall Et0002::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

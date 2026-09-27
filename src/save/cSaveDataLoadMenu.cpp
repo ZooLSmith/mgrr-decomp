@@ -1,5 +1,5 @@
 // src/save/cSaveDataLoadMenu.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009947A0..009BD760, 10 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009947A0..009BD760, 12 functions
 
 #include "mgrr.h"
 #include "cSaveDataLoadMenu.h"
@@ -95,6 +95,56 @@ LAB_00994975:
   *(undefined4 *)(param_1 + 0x3d8) = 0;
   *(undefined4 *)(param_1 + 0x3e0) = 0;
   return;
+}
+
+// 009A5D80  cSaveDataLoadMenu::~cSaveDataLoadMenu  size=140  [class]
+void __fastcall cSaveDataLoadMenu::~cSaveDataLoadMenu(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0xf5] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0xf5])(1);
+    param_1[0xf5] = 0;
+  }
+  FUN_00cfe0f0(10);
+  param_1[0xf1] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[0xf2] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0xf2])(1);
+    param_1[0xf2] = 0;
+  }
+  iVar1 = 0xe;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  iVar1 = 2;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 009A5E10  FUN_009a5e10  size=68  [between]
+int FUN_009a5e10(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00dd3500(0x3f0,&DAT_01b7be50);
+  if (iVar1 != 0) {
+    iVar1 = cMessWindowCtrl::cMessWindowCtrl();
+    if (iVar1 != 0) {
+      *(char **)(iVar1 + 0xc) = "cSaveDataLoadMenu";
+      FUN_00d29ca0(0x71,10);
+      *(undefined4 *)(iVar1 + 0x10) = 0;
+    }
+    return iVar1;
+  }
+  return 0;
 }
 
 // 009A5E60  cSaveDataLoadMenu::vf08  size=648  [class]
@@ -211,7 +261,7 @@ void __fastcall cSaveDataLoadMenu::vf08(int param_1)
 undefined4 __thiscall cSaveDataLoadMenu::vf00(undefined4 param_1,byte param_2)
 
 {
-  cMessWindowCtrl::cMessWindowCtrl_26();
+  ~cSaveDataLoadMenu();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -274,8 +324,8 @@ void __fastcall FUN_009b4a30(int param_1)
   return;
 }
 
-// 009BD760  cSaveDataLoadMenu::vf14  size=2984  [class]
-void __fastcall cSaveDataLoadMenu::vf14(int param_1)
+// 009BD760  cSaveDataLoadMenu::create  size=2984  [class]
+void __fastcall cSaveDataLoadMenu::create(int param_1)
 
 {
   int *piVar1;

@@ -12,4 +12,6 @@ struct cItemStageDropPassCordDlc : public cItemStageDropInstant {
     virtual char * vf10();  // 0094F370 slot 0x10  overrides cItemStageDrop
     virtual void vf1C();  // 00952390 slot 0x1C  overrides cItemStageDrop
     virtual void vf2C();  // 0094C020 slot 0x2C  overrides cItemStageDrop
+    // non-virtual members
+    cItemStageDropPassCordDlc();  // 0094F300
 };

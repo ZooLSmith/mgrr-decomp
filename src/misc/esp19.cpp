@@ -20,7 +20,7 @@ void __fastcall esp19::vf14(int param_1)
 undefined4 * __fastcall esp19::esp19(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   param_1[0x115] = 0;
   param_1[0x116] = 0;
   *param_1 = vftable;
@@ -85,9 +85,9 @@ LAB_00f1779e:
   return;
 }
 
-// 00F34080  esp19::vf04  size=557  [class]
+// 00F34080  esp19::preTrans  size=557  [class]
 undefined4 __thiscall
-esp19::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp19::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   uint *puVar1;
@@ -98,7 +98,7 @@ esp19::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar6;
   undefined4 uVar7;
   
-  iVar5 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar5 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar5 == 0) {
     return 0;
   }
@@ -187,8 +187,8 @@ esp19::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   return 0;
 }
 
-// 00F342B0  esp19::vf10  size=910  [class]
-void __fastcall esp19::vf10(int param_1)
+// 00F342B0  esp19::addOtTransList  size=910  [class]
+void __fastcall esp19::addOtTransList(int param_1)
 
 {
   float *pfVar1;

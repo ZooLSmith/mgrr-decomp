@@ -8,5 +8,5 @@ struct hkRefCountedProperties : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010236A0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkRefCountedProperties();  // 010232B0
+    ~hkRefCountedProperties();  // 010232B0
 };

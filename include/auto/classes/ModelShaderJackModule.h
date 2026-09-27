@@ -14,10 +14,6 @@ struct ModelShaderJackModule : public cEsp {
     static void updateModule_2(int * param_2, int param_3);  // 009EF340
     static void updateModule_3(int * param_2, int param_3);  // 009F01E0
     ModelShaderJackModule();  // 00ECD610
-    void ctor_00ED0480();  // 00ED0480
-    void ctor_00ED04C0();  // 00ED04C0
-    void ctor_00ED0640();  // 00ED0640
-    void ctor_00ED06E0();  // 00ED06E0
     static void updateModule_4();  // 00EF7BD0
     static void updateModule_5();  // 00EF81E0
     static void updateModule_6(int * param_2, int param_3);  // 00F15820

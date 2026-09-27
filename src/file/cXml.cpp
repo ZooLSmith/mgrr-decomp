@@ -1,5 +1,5 @@
 // src/file/cXml.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CBF0..00EC7600, 21 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CBF0..00EC7600, 20 functions
 
 #include "mgrr.h"
 #include "cXml.h"
@@ -15,8 +15,8 @@ undefined4 * __thiscall cXml::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 0049CC10  cXml::cXml_4  size=22  [class]
-void __fastcall cXml::cXml_4(undefined4 *param_1)
+// 0049CC10  cXml::cXml  size=22  [class]
+void __fastcall cXml::cXml(undefined4 *param_1)
 
 {
   *param_1 = cXmlBinary::vftable;
@@ -319,7 +319,7 @@ undefined4 * __fastcall FUN_0092b420(undefined4 *param_1)
   param_1[5] = 0;
   param_1[6] = 0;
   param_1[7] = 0;
-  cXmlBinary::cXmlBinary_103();
+  cXmlBinary::cXmlBinary();
   FUN_00a7c930();
   param_1[1] = 0;
   *(undefined1 *)(param_1 + 8) = 0;
@@ -735,7 +735,7 @@ void __fastcall FUN_0092bcd0(uint *param_1)
         (**(code **)(*piVar7 + 0x20))();
       }
       if (((float)param_1[1] < 0.0) && ((float)param_1[2] <= 0.0)) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         *param_1 = *param_1 & 0x7fffffff;
         return;
       }
@@ -792,7 +792,7 @@ void __fastcall FUN_0092bcd0(uint *param_1)
             FUN_009295c0(param_1);
           }
           else {
-            FUN_009fdde0();
+            E3_EnemyBoardDebrisSokushi::vf4C();
             *param_1 = *param_1 & 0xbfffffff;
           }
         }
@@ -817,21 +817,6 @@ void __fastcall cXml::cXml(undefined4 *param_1)
   *param_1 = cXmlBinary::vftable;
   FUN_00e04180();
   *param_1 = vftable;
-  return;
-}
-
-// 009F88E0  cXml::cXml_2  size=72  [class]
-void __fastcall cXml::cXml_2(undefined4 *param_1)
-
-{
-  *param_1 = cObj::vftable;
-  if (param_1[0x145] != 0) {
-    FUN_00dd5650(&DAT_0165bed8);
-  }
-  param_1[0x13d] = cXmlBinary::vftable;
-  FUN_00e04180();
-  param_1[0x13d] = vftable;
-  cModel::~cModel();
   return;
 }
 
@@ -937,8 +922,8 @@ void __fastcall cXml::cXml_5(undefined4 *param_1)
   return;
 }
 
-// 00EC7600  cXml::cXml_8  size=43  [class]
-void __fastcall cXml::cXml_8(int param_1)
+// 00EC7600  cXml::cXml  size=43  [class]
+void __fastcall cXml::cXml(int param_1)
 
 {
   FUN_00de3540(0,0);

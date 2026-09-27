@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiOnPartsStatePl1400::ZangekiOnPartsStatePl1400(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a603a0();
   return param_1;
@@ -260,8 +260,8 @@ void __thiscall ZangekiOnPartsStatePl1400::vf08(int param_1,undefined4 *param_2)
   return;
 }
 
-// 0088AA50  ZangekiOnPartsStatePl1400::vf0C  size=1496  [class]
-void __thiscall ZangekiOnPartsStatePl1400::vf0C(int param_1,undefined4 *param_2)
+// 0088AA50  ZangekiOnPartsStatePl1400::SafeCheck  size=1496  [class]
+void __thiscall ZangekiOnPartsStatePl1400::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -483,7 +483,7 @@ void __thiscall ZangekiOnPartsStatePl1400::vf0C(int param_1,undefined4 *param_2)
   }
   local_234 = param_2;
   local_238 = (float *)0x88b01f;
-  StateMachineNode::vf0C();
+  StateMachineNode::SafeCheck();
   return;
 }
 
@@ -549,7 +549,7 @@ undefined4 __thiscall ZangekiOnPartsStatePl1400::vf20(undefined4 param_1,undefin
     FUN_00a7c950();
     iVar2 = FUN_00a7c8a0();
     if (iVar2 != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   uVar3 = 0;
@@ -1560,10 +1560,10 @@ FUN_0088c850(int param_1,float *param_2,int param_3,int param_4,float param_5,fl
   return;
 }
 
-// 00898B50  ZangekiOnPartsStatePl1400::vf10  size=9277  [class]
+// 00898B50  ZangekiOnPartsStatePl1400::qteSafeCheck  size=9277  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiOnPartsStatePl1400::vf10(float *param_1,float *param_2)
+void __thiscall ZangekiOnPartsStatePl1400::qteSafeCheck(float *param_1,float *param_2)
 
 {
   float fVar1;
@@ -2837,7 +2837,7 @@ LAB_0089a053:
       param_1[0x7d] = param_1[0x21];
       param_1[0x7e] = param_1[0x22];
       param_1[0x7f] = param_1[0x23];
-      StateMachineNode::vf10(param_2);
+      StateMachineNode::qteSafeCheck(param_2);
       return;
     }
   }
@@ -2850,7 +2850,7 @@ LAB_0089a053:
   param_1[0x21] = param_1[0x7d];
   param_1[0x22] = param_1[0x7e];
   param_1[0x23] = param_1[0x7f];
-  StateMachineNode::vf10();
+  StateMachineNode::qteSafeCheck();
   return;
 }
 

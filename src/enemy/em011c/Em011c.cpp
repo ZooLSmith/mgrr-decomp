@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Em011c.h"
 
-// 004B7A20  Em011c::vf40  size=76  [class]
-undefined4 __fastcall Em011c::vf40(int param_1)
+// 004B7A20  Em011c::startup  size=76  [class]
+undefined4 __fastcall Em011c::startup(int param_1)
 
 {
   int iVar1;
@@ -44,7 +44,7 @@ void Em011c::vf50(void)
 undefined4 * __fastcall Em011c::Em011c(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -56,8 +56,8 @@ undefined * Em011c::vf04(void)
   return &DAT_01b34ea4;
 }
 
-// 00AB7330  Em011c::vf00  size=105  [class]
-undefined4 * __thiscall Em011c::vf00(undefined4 *param_1,byte param_2)
+// 00AB7330  Em011c::destruct  size=105  [class]
+undefined4 * __thiscall Em011c::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -71,7 +71,7 @@ undefined4 * __thiscall Em011c::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

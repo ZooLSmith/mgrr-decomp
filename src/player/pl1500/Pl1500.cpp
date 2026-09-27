@@ -507,7 +507,7 @@ void __thiscall FUN_008a18d0(int *param_1,int param_2)
     local_2c = param_1[0x11];
     local_28 = param_1[0x12];
     local_24 = param_1[0x13];
-    iVar1 = hkpCdPointCollector::hkpCdPointCollector_14(&local_20,&local_30,1,0,0x3c23d70a);
+    iVar1 = hkpCdPointCollector::hkpCdPointCollector(&local_20,&local_30,1,0,0x3c23d70a);
     if ((iVar1 != 0) && (param_1[0x15] = local_2c, param_2 != 0)) {
       (**(code **)(*param_1 + 800))(param_1[0x156c]);
     }
@@ -553,7 +553,7 @@ void __fastcall FUN_008a1990(int param_1)
       local_38 = fVar2 - *(float *)(param_1 + 0x54);
       local_34 = fVar3 - *(float *)(param_1 + 0x58);
       fStack_30 = local_40 - *(float *)(param_1 + 0x5c);
-      iVar4 = hkpCdPointCollector::hkpCdPointCollector_14(&local_3c,&fStack_2c,0,0,0x3c23d70a);
+      iVar4 = hkpCdPointCollector::hkpCdPointCollector(&local_3c,&fStack_2c,0,0,0x3c23d70a);
       if (iVar4 != 0) {
         *(float *)(param_1 + 0x50) = *(float *)(param_1 + 0x50) + (fStack_2c - fVar1);
         *(float *)(param_1 + 0x54) = *(float *)(param_1 + 0x54) + (fStack_28 - fVar2);
@@ -1025,8 +1025,8 @@ undefined4 __fastcall FUN_008a2790(int param_1)
   return 0;
 }
 
-// 008A2930  FUN_008a2930  size=26  [between]
-undefined4 FUN_008a2930(void)
+// 008A2930  Pl1500::vf358  size=26  [class]
+undefined4 Pl1500::vf358(void)
 
 {
   int iVar1;
@@ -1038,8 +1038,8 @@ undefined4 FUN_008a2930(void)
   return 1;
 }
 
-// 008A2950  FUN_008a2950  size=21  [between]
-bool FUN_008a2950(void)
+// 008A2950  Pl1500::vf35C  size=21  [class]
+bool Pl1500::vf35C(void)
 
 {
   int iVar1;
@@ -1048,8 +1048,8 @@ bool FUN_008a2950(void)
   return iVar1 - 0x30002U < 3;
 }
 
-// 008A2970  FUN_008a2970  size=26  [between]
-undefined4 FUN_008a2970(void)
+// 008A2970  Pl1500::vf360  size=26  [class]
+undefined4 Pl1500::vf360(void)
 
 {
   int iVar1;
@@ -1076,8 +1076,8 @@ undefined4 __fastcall FUN_008a2990(int param_1)
   return 0;
 }
 
-// 008A29B0  FUN_008a29b0  size=38  [between]
-undefined4 __fastcall FUN_008a29b0(int param_1)
+// 008A29B0  Pl1500::vf378  size=38  [class]
+undefined4 __fastcall Pl1500::vf378(int param_1)
 
 {
   if (((*(int *)(param_1 + 0x1410) == 0) && (0x7ffff < *(int *)(param_1 + 0x618))) &&
@@ -1087,8 +1087,8 @@ undefined4 __fastcall FUN_008a29b0(int param_1)
   return 0;
 }
 
-// 008A29E0  FUN_008a29e0  size=42  [between]
-undefined4 FUN_008a29e0(void)
+// 008A29E0  Pl1500::vf37C  size=42  [class]
+undefined4 Pl1500::vf37C(void)
 
 {
   int iVar1;
@@ -1103,8 +1103,8 @@ undefined4 FUN_008a29e0(void)
   return 1;
 }
 
-// 008A2A10  FUN_008a2a10  size=17  [between]
-bool FUN_008a2a10(void)
+// 008A2A10  Pl1500::vf404  size=17  [class]
+bool Pl1500::vf404(void)
 
 {
   int iVar1;
@@ -3166,8 +3166,8 @@ switchD_008a6f7e_default:
   return;
 }
 
-// 008A72B0  Pl1500::vf130  size=516  [class]
-undefined4 __thiscall Pl1500::vf130(int param_1,ushort *param_2)
+// 008A72B0  Pl1500::getAttackInfo  size=516  [class]
+undefined4 __thiscall Pl1500::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -3180,7 +3180,7 @@ undefined4 __thiscall Pl1500::vf130(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_01649f9c);
     return 0;
   }
@@ -10782,13 +10782,13 @@ undefined4 __fastcall FUN_008bbc10(int *param_1)
   } while( true );
 }
 
-// 008C6130  Pl1500::vf40  size=207  [class]
-undefined4 __fastcall Pl1500::vf40(int *param_1)
+// 008C6130  Pl1500::startup  size=207  [class]
+undefined4 __fastcall Pl1500::startup(int *param_1)
 
 {
   int iVar1;
   
-  iVar1 = PlBaseDLC::vf40();
+  iVar1 = PlBaseDLC::startup();
   if (iVar1 != 0) {
     iVar1 = FUN_008a5da0();
     if (iVar1 != 0) {
@@ -13611,7 +13611,7 @@ void __fastcall Pl1500::vf3FC(int *param_1)
     iStack_2c = param_1[0x11];
     iStack_28 = param_1[0x12];
     iStack_24 = param_1[0x13];
-    iVar1 = hkpCdPointCollector::hkpCdPointCollector_14(&local_20,&local_30,1,0,0x3c23d70a);
+    iVar1 = hkpCdPointCollector::hkpCdPointCollector(&local_20,&local_30,1,0,0x3c23d70a);
     if (iVar1 != 0) {
       param_1[0x15] = iStack_2c;
     }
@@ -13637,7 +13637,7 @@ undefined4 * __fastcall Pl1500::Pl1500(undefined4 *param_1)
 {
   int iVar1;
   
-  hkpAllCdPointCollector::hkpAllCdPointCollector_34();
+  Pl0000::Pl0000();
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -13810,8 +13810,8 @@ bool __fastcall Pl1500::vf408(int param_1)
   return *(int *)(param_1 + 0x56c8) == 0;
 }
 
-// 00AC3CA0  Pl1500::vf00  size=82  [class]
-undefined4 __thiscall Pl1500::vf00(undefined4 param_1,byte param_2)
+// 00AC3CA0  Pl1500::destruct  size=82  [class]
+undefined4 __thiscall Pl1500::destruct(undefined4 param_1,byte param_2)
 
 {
   int iVar1;
@@ -13823,7 +13823,7 @@ undefined4 __thiscall Pl1500::vf00(undefined4 param_1,byte param_2)
     FUN_00905ce0();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
-  hkpCdPointCollector::hkpCdPointCollector_22();
+  hkpAllCdPointCollector::~hkpAllCdPointCollector();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

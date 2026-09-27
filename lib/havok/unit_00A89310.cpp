@@ -5,14 +5,14 @@
 #include "hkpAllCdPointCollector.h"
 #include "hkpCdPointCollector.h"
 
-// 00A89310  hkpAllCdPointCollector::hkpAllCdPointCollector_21  size=113  [run]
-int __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_21(int param_1)
+// 00A89310  hkpAllCdPointCollector::hkpAllCdPointCollector  size=113  [run]
+int __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector(int param_1)
 
 {
   FUN_00910a40(0);
   *(undefined4 *)(param_1 + 4) = 0;
   *(undefined4 *)(param_1 + 0x30) = 0;
-  hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector::hkpAllRayHitCollector();
   *(undefined4 *)(param_1 + 0x364) = 0x7f7fffee;
   *(undefined ***)(param_1 + 0x360) = vftable;
   *(undefined4 *)(param_1 + 0x378) = 0x80000008;

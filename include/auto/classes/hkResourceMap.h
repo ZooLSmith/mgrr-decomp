@@ -8,5 +8,5 @@ struct hkResourceMap {
     virtual void vf00(undefined4 param_1, undefined4 * param_2) = 0;  // 00FDB68B slot 0x0
     virtual undefined4 * vf04(byte param_2);  // 01111F70 slot 0x4
     // non-virtual members
-    hkResourceMap();  // 01112DC0
+    ~hkResourceMap();  // 01112DC0
 };

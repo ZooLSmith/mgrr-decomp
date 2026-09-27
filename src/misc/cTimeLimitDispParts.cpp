@@ -246,8 +246,8 @@ int FUN_00d34e40(void)
   return 0;
 }
 
-// 00D34E90  cTimeLimitDispParts::vf14  size=362  [class]
-void __fastcall cTimeLimitDispParts::vf14(int param_1)
+// 00D34E90  cTimeLimitDispParts::create  size=362  [class]
+void __fastcall cTimeLimitDispParts::create(int param_1)
 
 {
   int iVar1;

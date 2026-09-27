@@ -1,5 +1,5 @@
 // src/hw/cPrimHeap.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9D070..00FA9B80, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9D070..00FA9B80, 3 functions
 
 #include "mgrr.h"
 
@@ -15,52 +15,6 @@ void __fastcall Hw::cPrimHeap::cPrimHeap(undefined4 *param_1)
   param_1[1] = 0;
   param_1[3] = 0;
   param_1[4] = 0;
-  return;
-}
-
-// 00FA5ED0  Hw::cPrimHeap::cPrimHeap_3  size=120  [class]
-void __fastcall Hw::cPrimHeap::cPrimHeap_3(int param_1)
-
-{
-  undefined4 *puVar1;
-  int iVar2;
-  
-  puVar1 = (undefined4 *)(param_1 + 0x20);
-  iVar2 = 1;
-  do {
-    *puVar1 = vftable;
-    puVar1[1] = 0;
-    puVar1[3] = 0;
-    puVar1[4] = 0;
-    puVar1 = puVar1 + 5;
-    iVar2 = iVar2 + -1;
-  } while (-1 < iVar2);
-  puVar1 = (undefined4 *)(param_1 + 0x48);
-  iVar2 = 1;
-  do {
-    *puVar1 = 0;
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    puVar1[6] = 0;
-    puVar1 = puVar1 + 7;
-    iVar2 = iVar2 + -1;
-  } while (-1 < iVar2);
-  puVar1 = (undefined4 *)(param_1 + 0x80);
-  iVar2 = 1;
-  do {
-    *puVar1 = cIndexBufferHeap::vftable;
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    puVar1[6] = 0;
-    puVar1 = puVar1 + 7;
-    iVar2 = iVar2 + -1;
-  } while (-1 < iVar2);
   return;
 }
 

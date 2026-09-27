@@ -503,8 +503,8 @@ LAB_004d1bf2:
   goto LAB_004d1b74;
 }
 
-// 004DA790  Em0111::vf40  size=759  [class]
-undefined4 __fastcall Em0111::vf40(int *param_1)
+// 004DA790  Em0111::startup  size=759  [class]
+undefined4 __fastcall Em0111::startup(int *param_1)
 
 {
   int iVar1;
@@ -524,7 +524,7 @@ undefined4 __fastcall Em0111::vf40(int *param_1)
   undefined4 uStack_10;
   undefined4 uStack_c;
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     iVar1 = FUN_00a12210(2);
     iVar8 = 0;
@@ -649,7 +649,7 @@ undefined4 * __fastcall Em0111::Em0111(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   param_1[0x370] = 0;
   FUN_00a7c930();
@@ -675,11 +675,11 @@ void Em0111::vf2F8(void)
   return;
 }
 
-// 00AB7230  Em0111::vf00  size=30  [class]
-undefined4 __thiscall Em0111::vf00(undefined4 param_1,byte param_2)
+// 00AB7230  Em0111::destruct  size=30  [class]
+undefined4 __thiscall Em0111::destruct(undefined4 param_1,byte param_2)
 
 {
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

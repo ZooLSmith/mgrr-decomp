@@ -8,4 +8,6 @@ struct cEspDrawWork_Emt10_Impl_Mask : public cEspDrawWork_Emt10_Impl {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00F3FB10 slot 0x0  overrides Hw::cOtWork
     virtual void draw();  // 00EDAEB0 slot 0x4  overrides Hw::cOtWork
+    // non-virtual members
+    cEspDrawWork_Emt10_Impl_Mask();  // 00F3F700
 };

@@ -1,5 +1,5 @@
 // src/phase/app/pa15.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47830..00D70020, 7 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47830..00D70020, 8 functions
 
 #include "mgrr.h"
 #include "cPa15.h"
@@ -473,6 +473,23 @@ LAB_00d66eba:
     FUN_00911ca0("programmabled");
   }
   return;
+}
+
+// 00D6EA80  cPa15::cPa15  size=88  [class]
+undefined4 * __fastcall cPa15::cPa15(undefined4 *param_1)
+
+{
+  param_1[4] = param_1 + 7;
+  param_1[5] = 0;
+  param_1[6] = 0x40;
+  param_1[3] = lib::StaticArray<int,64>::vftable;
+  *param_1 = vftable;
+  param_1[0x49] = 0;
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  cEspControler::cEspControler();
+  return param_1;
 }
 
 // 00D70020  cPa15::vf00  size=65  [class]

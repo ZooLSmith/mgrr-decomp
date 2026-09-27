@@ -13,8 +13,8 @@ void Em0060Battery::vf50(void)
   return;
 }
 
-// 00450540  Em0060Battery::vf40  size=331  [class]
-undefined4 __fastcall Em0060Battery::vf40(int param_1)
+// 00450540  Em0060Battery::startup  size=331  [class]
+undefined4 __fastcall Em0060Battery::startup(int param_1)
 
 {
   int iVar1;
@@ -26,7 +26,7 @@ undefined4 __fastcall Em0060Battery::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 != 0) {
     iVar1 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
     if (iVar1 != 0) {
@@ -179,7 +179,7 @@ void __fastcall Em0060Battery::vf4C(int *param_1)
     param_1[0x2ba] = iVar1;
   }
   if (param_1[0x2ba] == 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00a92fb0();
@@ -220,8 +220,8 @@ undefined * Em0060Battery::vf04(void)
   return &DAT_01b34c84;
 }
 
-// 00AB79E0  Em0060Battery::vf00  size=105  [class]
-undefined4 * __thiscall Em0060Battery::vf00(undefined4 *param_1,byte param_2)
+// 00AB79E0  Em0060Battery::destruct  size=105  [class]
+undefined4 * __thiscall Em0060Battery::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -235,7 +235,7 @@ undefined4 * __thiscall Em0060Battery::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

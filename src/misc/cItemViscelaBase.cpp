@@ -1,5 +1,5 @@
 // src/misc/cItemViscelaBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8FC0..00ABABA0, 14 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8FC0..00ABABA0, 15 functions
 
 #include "mgrr.h"
 #include "cItemViscelaBase.h"
@@ -43,7 +43,7 @@ void __fastcall FUN_005e8fc0(int *param_1)
         return;
       }
       (**(code **)(*param_1 + 0x310))();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
     if ((char)param_1[0x251] != '\0') {
@@ -59,7 +59,7 @@ void __fastcall FUN_005e8fc0(int *param_1)
     param_1[0x250] = (int)(float)((float10)fVar1 - fVar4);
     if ((float10)fVar1 - fVar4 < (float10)0) {
       (**(code **)(*param_1 + 0x310))();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -164,15 +164,15 @@ void __fastcall cItemViscelaBase::vf310(int param_1)
   }
 }
 
-// 005EB6A0  cItemViscelaBase::vf40  size=214  [class]
-undefined4 __fastcall cItemViscelaBase::vf40(int *param_1)
+// 005EB6A0  cItemViscelaBase::startup  size=214  [class]
+undefined4 __fastcall cItemViscelaBase::startup(int *param_1)
 
 {
   code *pcVar1;
   int iVar2;
   float10 fVar3;
   
-  iVar2 = cItemObjectBase::vf40();
+  iVar2 = cItemObjectBase::startup();
   if (iVar2 != 0) {
     iVar2 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
     if (iVar2 != 0) {
@@ -441,6 +441,20 @@ void __fastcall cItemViscelaBase::vf48(int param_1)
   return;
 }
 
+// 00AB6700  cItemViscelaBase::cItemViscelaBase  size=67  [class]
+undefined4 * __fastcall cItemViscelaBase::cItemViscelaBase(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = vftable;
+  Hw::cTexture::cTexture();
+  return param_1;
+}
+
 // 00AB6750  cItemViscelaBase::vf04  size=6  [class]
 undefined * cItemViscelaBase::vf04(void)
 
@@ -455,12 +469,12 @@ void cItemViscelaBase::vf314(void)
   return;
 }
 
-// 00ABABA0  cItemViscelaBase::vf00  size=43  [class]
-undefined4 __thiscall cItemViscelaBase::vf00(undefined4 param_1,byte param_2)
+// 00ABABA0  cItemViscelaBase::destruct  size=43  [class]
+undefined4 __thiscall cItemViscelaBase::destruct(undefined4 param_1,byte param_2)
 
 {
-  Hw::cTexture::cTexture_5();
-  Behavior::Behavior_124();
+  Hw::cTexture::~cTexture();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

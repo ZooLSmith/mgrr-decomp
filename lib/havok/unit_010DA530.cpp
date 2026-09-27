@@ -44,9 +44,9 @@ hkXmlTagfileWriter::hkXmlTagfileWriter(int param_1,undefined4 param_2,uint *para
   return uVar2;
 }
 
-// 010DA5A0  hkBaseObject::hkBaseObject_14  size=185  [run]
+// 010DA5A0  hkBaseObject::hkBaseObject  size=185  [run]
 undefined4 __thiscall
-hkBaseObject::hkBaseObject_14
+hkBaseObject::hkBaseObject
           (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
           undefined4 *param_5,uint param_6)
 
@@ -81,7 +81,7 @@ hkBaseObject::hkBaseObject_14
     }
   }
   local_18 = vftable;
-  hkBaseObject_207();
+  hkBaseObject();
   return uVar2;
 }
 
@@ -105,7 +105,7 @@ void FUN_010da680(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 void FUN_010da6a0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
-  hkBaseObject::hkBaseObject_14(param_1,param_2,param_3,0,param_4);
+  hkBaseObject::hkBaseObject(param_1,param_2,param_3,0,param_4);
   return;
 }
 
@@ -230,7 +230,7 @@ joined_r0x010da937:
       }
     }
     if (local_20 != 0) {
-      hkIstream::hkIstream_3(local_24,local_20);
+      hkIstream::hkIstream(local_24,local_20);
       uVar2 = (**(code **)(*DAT_0209b840 + 0x14))(local_28,param_2,param_3);
       hkBaseObject::hkBaseObject_216();
       goto LAB_010da998;
@@ -293,12 +293,12 @@ hkTypeInfoRegistry::hkTypeInfoRegistry
           (**(code **)*local_8)(1);
         }
       }
-      hkBaseObject::hkBaseObject_207();
+      ::hkBaseObject::hkBaseObject();
       FUN_010060a0();
       FUN_01025870();
       return uVar2;
     }
-    hkBaseObject::hkBaseObject_207();
+    ::hkBaseObject::hkBaseObject();
     FUN_010060a0();
   }
   FUN_01025870();
@@ -623,7 +623,7 @@ undefined4 FUN_010db0e0(int *param_1,undefined4 *param_2,undefined8 param_3,unde
             }
           }
         }
-        hkBaseObject::hkBaseObject_200();
+        hkBaseObject::hkBaseObject();
         break;
       case 5:
         pvVar6 = TlsGetValue(DAT_01f8fc4c);
@@ -651,12 +651,12 @@ undefined4 FUN_010db0e0(int *param_1,undefined4 *param_2,undefined8 param_3,unde
             *piVar1 = *piVar1 + -1;
             if (*piVar1 == 0) {
               (**(code **)*local_10)(1);
-              hkBaseObject::hkBaseObject_200();
+              hkBaseObject::hkBaseObject();
               break;
             }
           }
         }
-        hkBaseObject::hkBaseObject_200();
+        hkBaseObject::hkBaseObject();
         break;
       default:
         if (param_2 != (undefined4 *)0x0) {
@@ -736,7 +736,7 @@ FUN_010db460(int *param_1,undefined4 param_2,undefined4 param_3,undefined8 param
       }
     }
   }
-  iVar2 = hkIstream::hkIstream_3();
+  iVar2 = hkIstream::hkIstream();
   uVar3 = FUN_010db0e0(*(undefined4 *)(iVar2 + 8),param_3,param_4,param_5);
   hkBaseObject::hkBaseObject_216();
   return uVar3;
@@ -800,11 +800,11 @@ switchD_010db5ee_caseD_3:
     FUN_01006770();
     return uVar3;
   case 4:
-    hkDataWorldDict::hkDataWorldDict_2();
+    hkDataWorldDict::hkDataWorldDict();
     iVar5 = FUN_010daf60();
     if (iVar5 != 0) {
 LAB_010db719:
-      hkBaseObject::hkBaseObject_200();
+      hkBaseObject::hkBaseObject();
       FUN_01006770();
       return 0;
     }
@@ -822,7 +822,7 @@ LAB_010db719:
     }
     goto LAB_010db6fd;
   case 5:
-    hkDataWorldDict::hkDataWorldDict_2();
+    hkDataWorldDict::hkDataWorldDict();
     iVar5 = hkXmlTagfileReader::hkXmlTagfileReader(uVar3);
     if (iVar5 != 0) goto LAB_010db719;
     uVar4 = 1;
@@ -838,7 +838,7 @@ LAB_010db719:
       }
     }
 LAB_010db6fd:
-    hkBaseObject::hkBaseObject_200();
+    hkBaseObject::hkBaseObject();
     FUN_01006770();
     return uVar3;
   default:
@@ -874,7 +874,7 @@ FUN_010db830(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined8
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = hkIstream::hkIstream_3();
+  iVar1 = hkIstream::hkIstream();
   uVar2 = FUN_010db540(*(undefined4 *)(iVar1 + 8),param_3,param_4,param_5);
   hkBaseObject::hkBaseObject_216();
   return uVar2;
@@ -1090,7 +1090,7 @@ undefined4 * __thiscall hkXmlTagfileReader::vf00(undefined4 *param_1,byte param_
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1104,7 +1104,7 @@ undefined4 * __thiscall hkTagfileReader::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1279,7 +1279,7 @@ undefined4 * __thiscall hkXmlTagfileWriter::vf00(undefined4 *param_1,byte param_
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1293,7 +1293,7 @@ undefined4 * __thiscall hkBinaryTagfileWriter::vf00(undefined4 *param_1,byte par
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1364,7 +1364,7 @@ _anon_F3B081D0::ForwardingPackfileListerer::vf00(undefined4 *param_1,byte param_
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1379,7 +1379,7 @@ hkTagfileWriter::AddDataObjectListener::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1393,7 +1393,7 @@ undefined4 * __thiscall hkTagfileWriter::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));

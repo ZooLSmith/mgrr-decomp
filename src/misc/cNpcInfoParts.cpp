@@ -106,8 +106,8 @@ undefined4 * __thiscall cNpcInfoParts::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00D01780  cNpcInfoParts::vf14  size=965  [class]
-void __fastcall cNpcInfoParts::vf14(int param_1)
+// 00D01780  cNpcInfoParts::create  size=965  [class]
+void __fastcall cNpcInfoParts::create(int param_1)
 
 {
   float fVar1;

@@ -11,5 +11,6 @@ struct esp51 : public cEsp {
     virtual void addOtTransList();  // 00F099B0 slot 0x10  overrides cEspBase
     virtual void vf14();  // 00EDACD0 slot 0x14  overrides cEspBase
     // non-virtual members
+    static void vf14_00EC7FC0();  // 00EC7FC0
     esp51();  // 00ECD580
 };

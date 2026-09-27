@@ -9,5 +9,5 @@ struct cModelShaderWeightDepth {
     virtual void vf04();  // 00F92330 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cModelShaderWeightDepth();  // 00F922F0
-    void ctor_015F41D0();  // 015F41D0
+    ~cModelShaderWeightDepth();  // 015F41D0
 };

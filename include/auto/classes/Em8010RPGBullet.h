@@ -11,4 +11,6 @@ struct Em8010RPGBullet : public Em0010RPGBullet {
     virtual undefined4 startup();  // 0061F720 slot 0x40  overrides Behavior
     virtual undefined4 vf94();  // 00AB5FF0 slot 0x94  overrides Behavior
     virtual undefined4 vf98();  // 00AB6000 slot 0x98  overrides Behavior
+    // non-virtual members
+    Em8010RPGBullet();  // 00AB5FB0
 };

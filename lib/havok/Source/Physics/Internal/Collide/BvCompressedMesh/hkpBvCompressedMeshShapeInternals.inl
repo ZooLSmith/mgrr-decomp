@@ -234,7 +234,7 @@ hkpSingleShapeContainer::hkpSingleShapeContainer_11(int param_1,int param_2,unde
         } while (iVar14 < (int)puVar18[9]);
       }
       hkpCylinderShape::hkpCylinderShape(puVar18[8],puVar18[8] + 0x10,local_1c,local_24);
-      hkpCylinderShape::vf10(&DAT_01701ca0,0,puVar18);
+      hkpCylinderShape::getAabb(&DAT_01701ca0,0,puVar18);
       param_1 = local_18;
     }
     iVar14 = param_3[0xc];
@@ -259,7 +259,7 @@ hkpSingleShapeContainer::hkpSingleShapeContainer_11(int param_1,int param_2,unde
       (*pcVar1)();
       return;
     }
-    hkBaseObject::hkBaseObject_38();
+    ::hkBaseObject::hkBaseObject_38();
     break;
   case 4.2039e-45:
     if (*(int *)(*(int *)(param_1 + 8) + param_2 * 4) == 0) {

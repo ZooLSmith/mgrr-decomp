@@ -16,4 +16,6 @@ struct Em0030Wire : public BehaviorAppBase {
     virtual undefined4 vf14C();  // 00B62C70 slot 0x14C  overrides Behavior
     virtual void vf150();  // 00B62CB0 slot 0x150  overrides Behavior
     virtual undefined4 vf1A0();  // 00B683D0 slot 0x1A0  overrides Behavior
+    // non-virtual members
+    Em0030Wire();  // 00AAEFA0
 };

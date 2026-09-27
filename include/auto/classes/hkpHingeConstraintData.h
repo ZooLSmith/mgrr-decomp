@@ -20,5 +20,6 @@ struct hkpHingeConstraintData : public hkpConstraintData {
     virtual void vf48(undefined4 param_2);  // 011A6C10 slot 0x48  overrides hkpConstraintData
     // non-virtual members
     hkpHingeConstraintData();  // 011A6D60
-    hkpHingeConstraintData(undefined4 * param_1);  // 011B0360
+    ~hkpHingeConstraintData();  // 011B0360
+    void ctor_011B0380();  // 011B0380
 };

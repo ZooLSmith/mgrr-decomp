@@ -11,8 +11,8 @@ undefined * BehaviorTest::vf04(void)
   return &DAT_01be9c88;
 }
 
-// 00AB67B0  BehaviorTest::vf00  size=105  [class]
-undefined4 * __thiscall BehaviorTest::vf00(undefined4 *param_1,byte param_2)
+// 00AB67B0  BehaviorTest::destruct  size=105  [class]
+undefined4 * __thiscall BehaviorTest::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,15 +26,15 @@ undefined4 * __thiscall BehaviorTest::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00AC53F0  BehaviorTest::vf40  size=105  [class]
-undefined4 __fastcall BehaviorTest::vf40(int *param_1)
+// 00AC53F0  BehaviorTest::startup  size=105  [class]
+undefined4 __fastcall BehaviorTest::startup(int *param_1)
 
 {
   int iVar1;
@@ -46,7 +46,7 @@ undefined4 __fastcall BehaviorTest::vf40(int *param_1)
   undefined4 uVar7;
   undefined4 uVar8;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }

@@ -11,8 +11,8 @@ undefined * Ba0041::vf04(void)
   return &DAT_01be9d7c;
 }
 
-// 00AB9530  Ba0041::vf00  size=105  [class]
-undefined4 * __thiscall Ba0041::vf00(undefined4 *param_1,byte param_2)
+// 00AB9530  Ba0041::destruct  size=105  [class]
+undefined4 * __thiscall Ba0041::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,7 +26,7 @@ undefined4 * __thiscall Ba0041::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -113,8 +113,8 @@ void __fastcall FUN_00b787b0(int *param_1)
   return;
 }
 
-// 00B789A0  Ba0041::vf40  size=447  [class]
-undefined4 __fastcall Ba0041::vf40(int *param_1)
+// 00B789A0  Ba0041::startup  size=447  [class]
+undefined4 __fastcall Ba0041::startup(int *param_1)
 
 {
   int iVar1;
@@ -122,7 +122,7 @@ undefined4 __fastcall Ba0041::vf40(int *param_1)
   undefined4 uVar3;
   undefined4 *puVar4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }

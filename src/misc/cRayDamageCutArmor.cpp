@@ -11,8 +11,8 @@ undefined * cRayDamageCutArmor::vf04(void)
   return &DAT_01be9ce0;
 }
 
-// 00AC12A0  cRayDamageCutArmor::vf00  size=105  [class]
-undefined4 * __thiscall cRayDamageCutArmor::vf00(undefined4 *param_1,byte param_2)
+// 00AC12A0  cRayDamageCutArmor::destruct  size=105  [class]
+undefined4 * __thiscall cRayDamageCutArmor::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,7 +26,7 @@ undefined4 * __thiscall cRayDamageCutArmor::vf00(undefined4 *param_1,byte param_
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -84,7 +84,7 @@ void __fastcall cRayDamageCutArmor::thunk_vf4C(int param_1)
       fVar5 = (float10)*(float *)(param_1 + 0xa6c) - (float10)0.016666668;
       *(float *)(param_1 + 0xa6c) = (float)fVar5;
       if (fVar5 < fVar1 != (fVar5 == fVar1)) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -112,15 +112,15 @@ void __thiscall cRayDamageCutArmor::vf1BC(int param_1,undefined4 param_2)
   return;
 }
 
-// 00AEF8F0  cRayDamageCutArmor::vf40  size=2230  [class]
-undefined4 __fastcall cRayDamageCutArmor::vf40(int *param_1)
+// 00AEF8F0  cRayDamageCutArmor::startup  size=2230  [class]
+undefined4 __fastcall cRayDamageCutArmor::startup(int *param_1)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
   
-  iVar2 = cRayArmor::vf40();
+  iVar2 = cRayArmor::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -389,8 +389,9 @@ LAB_00af02a7:
   return;
 }
 
-// 00AF02F0  cRayDamageCutArmor::vf1B8  size=166  [class]
-void __thiscall cRayDamageCutArmor::vf1B8(int param_1,undefined4 *param_2,int param_3,int param_4)
+// 00AF02F0  cRayDamageCutArmor::setCutCrerateInfo  size=166  [class]
+void __thiscall
+cRayDamageCutArmor::setCutCrerateInfo(int param_1,undefined4 *param_2,int param_3,int param_4)
 
 {
   int iVar1;

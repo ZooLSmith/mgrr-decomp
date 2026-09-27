@@ -37,16 +37,16 @@ void FUN_00aafe90(void)
   iVar1 = 0xf9;
   do {
     FUN_00905ce0();
-    EspControllerBullet::EspControllerBullet_6();
+    EspControllerBullet::~EspControllerBullet();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   FUN_00dd7270();
-  Behavior::Behavior_120();
+  Behavior::~Behavior();
   return;
 }
 
-// 00AB8C50  BehaviorBalkan::vf00  size=30  [class]
-undefined4 __thiscall BehaviorBalkan::vf00(undefined4 param_1,byte param_2)
+// 00AB8C50  BehaviorBalkan::destruct  size=30  [class]
+undefined4 __thiscall BehaviorBalkan::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00aafe90();
@@ -203,8 +203,8 @@ void __fastcall BehaviorBalkan::vf4C(int *param_1)
   return;
 }
 
-// 00ACD440  BehaviorBalkan::vf40  size=14  [class]
-undefined4 __fastcall BehaviorBalkan::vf40(int param_1)
+// 00ACD440  BehaviorBalkan::startup  size=14  [class]
+undefined4 __fastcall BehaviorBalkan::startup(int param_1)
 
 {
   ushort *puVar1;
@@ -213,7 +213,7 @@ undefined4 __fastcall BehaviorBalkan::vf40(int param_1)
   int iVar4;
   int iVar5;
   
-  iVar2 = Pl1500Knife::vf40();
+  iVar2 = BehaviorBulletBase::startup();
   if (iVar2 == 0) {
     return 0;
   }

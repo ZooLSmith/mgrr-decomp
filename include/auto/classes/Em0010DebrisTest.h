@@ -15,7 +15,7 @@ struct Em0010DebrisTest : public BehaviorBgBase {
     virtual void vf4C();  // 005E4E90 slot 0x4C  overrides Behavior
     virtual void vf50();  // 005E4EE0 slot 0x50  overrides Behavior
     // non-virtual members
-    Em0010DebrisTest();  // 005E4160
-    void ctor_005E4DE0();  // 005E4DE0
+    ~Em0010DebrisTest();  // 005E4160
+    Em0010DebrisTest();  // 005E4DE0
     static void vf54();  // 00AA1660
 };

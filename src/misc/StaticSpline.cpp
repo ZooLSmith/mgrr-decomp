@@ -649,9 +649,9 @@ void __fastcall FUN_00eb50c0(int param_1)
   return;
 }
 
-// 00EC31B0  StaticSpline<float,18>::StaticSpline<float,18>_2  size=107  [class]
+// 00EC31B0  StaticSpline<float,18>::StaticSpline<float,18>  size=107  [class]
 undefined4 * __thiscall
-StaticSpline<float,18>::StaticSpline<float,18>_2
+StaticSpline<float,18>::StaticSpline<float,18>
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {

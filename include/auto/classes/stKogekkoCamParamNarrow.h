@@ -10,4 +10,5 @@ struct stKogekkoCamParamNarrow : public stKogekkoCamParamBase {
     virtual void vf04();  // 005F56D0 slot 0x4  overrides stKogekkoCamParamBase
     // non-virtual members
     stKogekkoCamParamNarrow();  // 00A90B20
+    void ctor_00AAB650();  // 00AAB650
 };

@@ -11,4 +11,6 @@ struct esp23 : public ModelShaderJackModule {
     virtual void vf08();  // 00F180F0 slot 0x8  overrides cEspBase
     virtual void addOtTransList();  // 00ED87B0 slot 0x10  overrides cEspBase
     virtual void vf14();  // 00EF14C0 slot 0x14  overrides cEspBase
+    // non-virtual members
+    esp23();  // 00ED04C0
 };

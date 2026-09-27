@@ -1,5 +1,5 @@
 // src/collision/BoundingSphere.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A66730..00A6AB10, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A66730..00A6AB10, 10 functions
 
 #include "mgrr.h"
 #include "BoundingSphere.h"
@@ -153,6 +153,50 @@ undefined4 __thiscall BoundingSphere::vf08(int param_1,undefined4 param_2)
   (**(code **)(*piVar10 + 8))
             (param_2,local_e0,&local_100,&local_f0,*(undefined4 *)(param_1 + 0x100),1);
   return param_2;
+}
+
+// 00A6A6E0  FUN_00a6a6e0  size=112  [callgraph]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined1 FUN_00a6a6e0(int *param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  char cVar2;
+  undefined1 uVar3;
+  
+  if ((_DAT_01be99cc & 1) == 0) {
+    _DAT_01be99cc = _DAT_01be99cc | 1;
+    DAT_01be99c8 = DAT_01884314;
+    DAT_01884314 = DAT_01884314 + 1;
+  }
+  iVar1 = DAT_01be99c8;
+  cVar2 = (**(code **)(*param_1 + 0x10))(param_2,DAT_01be99c8);
+  if (cVar2 == '\0') {
+    return 0;
+  }
+  uVar3 = FUN_00a6a260(param_1);
+  (**(code **)(*param_1 + 0x14))(param_2,iVar1);
+  return uVar3;
+}
+
+// 00A6A750  BoundingSphere::vf1C  size=108  [class]
+byte __thiscall BoundingSphere::vf1C(int param_1,int *param_2)
+
+{
+  char cVar1;
+  byte bVar2;
+  byte bVar3;
+  
+  FUN_00a6a6e0(param_2,&DAT_01662d6c,param_1);
+  bVar3 = 0xb;
+  cVar1 = (**(code **)(*param_2 + 0x10))("radius");
+  if (cVar1 != '\0') {
+    bVar2 = (**(code **)(*param_2 + 0x1c))(param_1 + 0x100);
+    (**(code **)(*param_2 + 0x14))("radius",0xb);
+    return bVar2 & bVar3;
+  }
+  return 0;
 }
 
 // 00A6AB10  BoundingSphere::thunk_vf1C  size=5  [class]

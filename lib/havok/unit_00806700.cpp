@@ -28,14 +28,13 @@ undefined4 __thiscall hkpAllCdPointCollector::hkpAllCdPointCollector_43(int para
   local_1bc = ((*param_2 + *(float *)(param_1 + 0xeb4)) - *(float *)(param_1 + 0x44)) - 3.0;
   local_1b8 = 0;
   if (local_1bc != 0.0) {
-    iVar1 = hkpCdPointCollector::hkpCdPointCollector_14
-                      (&local_1c0,&local_1c0,1,&local_1b0,0x3c23d70a);
+    iVar1 = hkpCdPointCollector::hkpCdPointCollector(&local_1c0,&local_1c0,1,&local_1b0,0x3c23d70a);
     if ((iVar1 != 0) && (1.0 <= ABS(*(float *)(param_1 + 0xeb4) - local_1bc))) {
       *param_2 = local_1bc - *(float *)(param_1 + 0xeb4);
-      hkpCdPointCollector::hkpCdPointCollector_4();
+      hkpCdPointCollector::hkpCdPointCollector();
       return 1;
     }
-    hkpCdPointCollector::hkpCdPointCollector_4();
+    hkpCdPointCollector::hkpCdPointCollector();
   }
   return 0;
 }
@@ -226,7 +225,7 @@ void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_42(int param_1)
         iVar5 = iVar5 + 0x30;
       } while (iStack_1f8 < iStack_19c);
     }
-    hkpCdPointCollector::hkpCdPointCollector_4();
+    hkpCdPointCollector::hkpCdPointCollector();
     if (DAT_01885d68 != 1) {
       piVar1 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
       *piVar1 = *piVar1 + -1;

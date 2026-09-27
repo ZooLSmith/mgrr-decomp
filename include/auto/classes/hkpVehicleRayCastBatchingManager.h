@@ -11,5 +11,6 @@ struct hkpVehicleRayCastBatchingManager : public hkpVehicleCastBatchingManager {
     virtual undefined vf24();  // 01290F30 slot 0x24  overrides hkpVehicleCastBatchingManager
     virtual undefined vf28();  // 012910D0 slot 0x28  overrides hkpVehicleCastBatchingManager
     // non-virtual members
-    hkpVehicleRayCastBatchingManager(undefined4 * param_1);  // 01288060
+    ~hkpVehicleRayCastBatchingManager();  // 01288060
+    hkpVehicleRayCastBatchingManager();  // 01288080
 };

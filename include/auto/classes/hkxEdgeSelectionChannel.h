@@ -8,5 +8,6 @@ struct hkxEdgeSelectionChannel : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D3910 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxEdgeSelectionChannel(undefined4 * param_1);  // 010D3850
+    ~hkxEdgeSelectionChannel();  // 010D3850
+    hkxEdgeSelectionChannel();  // 010D3870
 };

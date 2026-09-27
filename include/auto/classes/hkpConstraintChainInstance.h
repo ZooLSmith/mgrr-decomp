@@ -11,4 +11,6 @@ struct hkpConstraintChainInstance : public hkpConstraintInstance {
     virtual undefined4 vf18();  // 011A99D0 slot 0x18  overrides hkpConstraintInstance
     // non-virtual members
     ~hkpConstraintChainInstance();  // 011A9830
+    hkpConstraintChainInstance(undefined4 * param_1, undefined4 param_2);  // 011B1D30
+    hkpConstraintChainInstance();  // 011B1DE0
 };

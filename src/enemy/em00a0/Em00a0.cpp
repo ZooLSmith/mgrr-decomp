@@ -160,7 +160,7 @@ void __fastcall Em00a0::vf50(int param_1)
   if (*(int *)(param_1 + 0x7b0) != 0) {
     FUN_008f3cb0(param_1);
   }
-  BehaviorEmBase::vf128();
+  BehaviorEmBase::setSeqAtk();
   return;
 }
 
@@ -227,7 +227,7 @@ LAB_0049f9d9:
     cVar1 = FUN_00c9db20(0);
     iVar2 = FUN_00a97e60(0x3fc00000,0);
     if ((iVar2 != 0) && (cVar1 != '\0')) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -251,8 +251,8 @@ LAB_0049f9d9:
   return;
 }
 
-// 0049FB20  Em00a0::vf264  size=233  [class]
-undefined4 __thiscall Em00a0::vf264(int param_1,undefined4 param_2)
+// 0049FB20  Em00a0::setEmSetInfo  size=233  [class]
+undefined4 __thiscall Em00a0::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   undefined4 uVar1;
@@ -287,8 +287,8 @@ undefined4 __thiscall Em00a0::vf264(int param_1,undefined4 param_2)
   return 1;
 }
 
-// 0049FC10  Em00a0::vf40  size=256  [class]
-void __fastcall Em00a0::vf40(int param_1)
+// 0049FC10  Em00a0::startup  size=256  [class]
+void __fastcall Em00a0::startup(int param_1)
 
 {
   uint *puVar1;
@@ -300,7 +300,7 @@ void __fastcall Em00a0::vf40(int param_1)
   int iVar7;
   bool bVar8;
   
-  iVar3 = BehaviorEmBase::vf40();
+  iVar3 = BehaviorEmBase::startup();
   if (iVar3 == 0) {
     return;
   }
@@ -369,7 +369,7 @@ void __fastcall Em00a0::vf4C(int param_1)
 undefined4 * __fastcall Em00a0::Em00a0(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_004ec5c0();
@@ -383,11 +383,11 @@ undefined * Em00a0::vf04(void)
   return &DAT_01b34da4;
 }
 
-// 00AB7EE0  Em00a0::vf00  size=30  [class]
-undefined4 __thiscall Em00a0::vf00(undefined4 param_1,byte param_2)
+// 00AB7EE0  Em00a0::destruct  size=30  [class]
+undefined4 __thiscall Em00a0::destruct(undefined4 param_1,byte param_2)
 
 {
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

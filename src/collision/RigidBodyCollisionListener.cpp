@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "RigidBodyCollisionListener.h"
 
-// 00910CD0  RigidBodyCollisionListener::vf18  size=3  [class]
-void RigidBodyCollisionListener::vf18(void)
+// 00910CD0  RigidBodyCollisionListener::contactProcessCallback  size=3  [class]
+void RigidBodyCollisionListener::contactProcessCallback(void)
 
 {
   return;

@@ -66,7 +66,7 @@ undefined4 * __thiscall CharacterProxyListener::vf00(undefined4 *param_1,byte pa
   LPVOID pvVar1;
   
   param_1[2] = hkpCharacterProxyListener::vftable;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));

@@ -316,10 +316,10 @@ void __fastcall FUN_00d2a250(int param_1)
   return;
 }
 
-// 00D38A70  cActionMessageParts::vf14  size=3198  [class]
+// 00D38A70  cActionMessageParts::create  size=3198  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cActionMessageParts::vf14(int param_1)
+void __fastcall cActionMessageParts::create(int param_1)
 
 {
   float fVar1;

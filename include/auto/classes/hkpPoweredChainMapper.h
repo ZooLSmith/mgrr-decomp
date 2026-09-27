@@ -8,6 +8,7 @@ struct hkpPoweredChainMapper : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 01273F80 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpPoweredChainMapper(undefined4 * param_1);  // 01273B50
-    hkpPoweredChainMapper();  // 0127AAD0
+    ~hkpPoweredChainMapper();  // 01273B50
+    hkpPoweredChainMapper();  // 01273B70
+    void ctor_0127AAD0();  // 0127AAD0
 };

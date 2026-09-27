@@ -9,5 +9,5 @@ struct cFilterShaderZCullReload {
     virtual void vf04();  // 00EB2470 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShaderZCullReload();  // 00EB2440
-    void ctor_015F1640();  // 015F1640
+    ~cFilterShaderZCullReload();  // 015F1640
 };

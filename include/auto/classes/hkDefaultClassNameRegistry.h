@@ -6,4 +6,7 @@
 
 struct hkDefaultClassNameRegistry : public hkDynamicClassNameRegistry {
     // virtual functions, in vftable order (slot = byte offset / 4)
+    // non-virtual members
+    hkDefaultClassNameRegistry();  // 010D9BD0
+    void ctor_01441AA0();  // 01441AA0
 };

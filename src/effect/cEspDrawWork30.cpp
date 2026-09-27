@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEspDrawWork30.h"
 
-// 00EF2FE0  cEspDrawWork30::vf04  size=704  [class]
-void __fastcall cEspDrawWork30::vf04(int param_1)
+// 00EF2FE0  cEspDrawWork30::draw  size=704  [class]
+void __fastcall cEspDrawWork30::draw(int param_1)
 
 {
   void *_Src;
@@ -19,7 +19,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
   uint local_14;
   
   local_14 = DAT_018e8764 ^ (uint)auStack_a8;
-  cEspDrawWork::vf04();
+  cEspDrawWork::draw();
   _Src = (void *)(param_1 + 0x40);
   puStack_c0 = (undefined1 *)0xef3013;
   FID_conflict__memcpy(local_60,_Src,0x40);
@@ -29,7 +29,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
   }
   if (0.0 < *(float *)(param_1 + 0xd0)) {
     puStack_c0 = local_a0;
@@ -37,7 +37,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
   }
   if (*(float *)(param_1 + 0xd4) < 0.0) {
     puStack_c0 = local_a0;
@@ -45,7 +45,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
   }
   if (0.0 < *(float *)(param_1 + 0xd4)) {
     puStack_c0 = local_a0;
@@ -53,7 +53,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
   }
   if ((*(float *)(param_1 + 0xd0) < 0.0) && (*(float *)(param_1 + 0xd4) < 0.0)) {
     puStack_c0 = local_a0;
@@ -61,7 +61,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
   }
   if ((*(float *)(param_1 + 0xd0) < 0.0) && (0.0 < *(float *)(param_1 + 0xd4))) {
     puStack_c0 = local_a0;
@@ -69,7 +69,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
   }
   if ((0.0 < *(float *)(param_1 + 0xd0)) && (*(float *)(param_1 + 0xd4) < 0.0)) {
     puStack_c0 = local_a0;
@@ -77,7 +77,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
   }
   if ((0.0 < *(float *)(param_1 + 0xd0)) && (0.0 < *(float *)(param_1 + 0xd4))) {
     puStack_c0 = local_a0;
@@ -85,7 +85,7 @@ void __fastcall cEspDrawWork30::vf04(int param_1)
     D3DXMatrixTranslation();
     puStack_c4 = &stack0xffffff50;
     D3DXMatrixMultiply(_Src,auStack_70);
-    cEspDrawWork::vf04();
+    cEspDrawWork::draw();
     __security_check_cookie(uStack_30 ^ (uint)&puStack_c4);
     return;
   }

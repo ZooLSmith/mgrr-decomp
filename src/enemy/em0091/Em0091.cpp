@@ -1069,8 +1069,8 @@ void __thiscall FUN_0049e6b0(undefined4 param_1,undefined4 param_2,undefined4 pa
   return;
 }
 
-// 0049E6F0  Em0091::vf40  size=1187  [class]
-undefined4 __fastcall Em0091::vf40(int param_1)
+// 0049E6F0  Em0091::startup  size=1187  [class]
+undefined4 __fastcall Em0091::startup(int param_1)
 
 {
   uint *puVar1;
@@ -1085,7 +1085,7 @@ undefined4 __fastcall Em0091::vf40(int param_1)
   undefined4 local_174;
   undefined1 local_160 [348];
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 != 0) {
     local_180 = (undefined **)0x1;
     local_17c = 1;
@@ -1189,10 +1189,10 @@ undefined4 __fastcall Em0091::vf40(int param_1)
         }
         iVar2 = FUN_00de4500("CamParam.bxm");
         if (iVar2 != 0) {
-          cXmlBinary::cXmlBinary_103();
+          cXmlBinary::cXmlBinary();
           FUN_00e062b0(iVar2,0);
-          uVar3 = FUN_00e041c0();
-          uStack_184 = FUN_00e06390(uVar3,"Em0091Root");
+          uVar3 = cXmlBinary::vf04();
+          uStack_184 = cXmlBinary::vf18(uVar3,"Em0091Root");
           FUN_0049cb40(&local_180,&uStack_184);
           local_180 = cXmlBinary::vftable;
           FUN_00e04180();
@@ -1270,7 +1270,7 @@ void __fastcall FUN_0049eba0(int *param_1)
     param_1[0x248] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
       uStack_174 = 0x49ed5b;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   return;
@@ -1585,11 +1585,11 @@ undefined * Em0091::vf04(void)
   return &DAT_01b34da0;
 }
 
-// 00AB9220  Em0091::vf00  size=30  [class]
-undefined4 __thiscall Em0091::vf00(undefined4 param_1,byte param_2)
+// 00AB9220  Em0091::destruct  size=30  [class]
+undefined4 __thiscall Em0091::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_13();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

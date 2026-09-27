@@ -9,5 +9,5 @@ struct cFilterShaderZTurn {
     virtual void vf04();  // 00EC1920 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShaderZTurn();  // 00EC1810
-    void ctor_015F1E70();  // 015F1E70
+    ~cFilterShaderZTurn();  // 015F1E70
 };

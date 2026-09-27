@@ -14,6 +14,6 @@ struct CollisionBox : public Collision {
     virtual float10 vf1C();  // 00D774A0 slot 0x1C  overrides Collision
     virtual void vf24();  // 00D78790 slot 0x24  overrides Collision
     // non-virtual members
-    CollisionBox();  // 00D7D280
+    ~CollisionBox();  // 00D7D280
     CollisionBox(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00D7DF40
 };

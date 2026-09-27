@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Pl2041.h"
 
-// 005F50A0  Pl2041::vf40  size=28  [class]
-undefined4 __fastcall Pl2041::vf40(int param_1)
+// 005F50A0  Pl2041::startup  size=28  [class]
+undefined4 __fastcall Pl2041::startup(int param_1)
 
 {
   int iVar1;
@@ -48,7 +48,7 @@ void __fastcall Pl2041::vf50(int param_1)
 undefined4 * __fastcall Pl2041::Pl2041(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -60,8 +60,8 @@ undefined * Pl2041::vf04(void)
   return &DAT_01b35424;
 }
 
-// 00AB9900  Pl2041::vf00  size=105  [class]
-undefined4 * __thiscall Pl2041::vf00(undefined4 *param_1,byte param_2)
+// 00AB9900  Pl2041::destruct  size=105  [class]
+undefined4 * __thiscall Pl2041::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -75,7 +75,7 @@ undefined4 * __thiscall Pl2041::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

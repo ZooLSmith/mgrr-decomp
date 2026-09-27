@@ -35,8 +35,8 @@ void FUN_0102c010(void)
   return;
 }
 
-// 0102C0A0  hkBaseObject::hkBaseObject_202  size=29  [between]
-void __fastcall hkBaseObject::hkBaseObject_202(undefined4 *param_1)
+// 0102C0A0  hkBaseObject::hkBaseObject  size=29  [between]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkBsdSocket::vftable;
@@ -47,11 +47,11 @@ void __fastcall hkBaseObject::hkBaseObject_202(undefined4 *param_1)
   return;
 }
 
-// 0102C0C0  hkBsdSocket::~hkBsdSocket  size=42  [between]
-undefined4 * __thiscall hkBsdSocket::~hkBsdSocket(undefined4 *param_1,int param_2)
+// 0102C0C0  hkBsdSocket::hkBsdSocket  size=42  [between]
+undefined4 * __thiscall hkBsdSocket::hkBsdSocket(undefined4 *param_1,int param_2)
 
 {
-  hkSocket::ReaderAdapter::ReaderAdapter();
+  hkSocket::hkSocket();
   *param_1 = vftable;
   param_1[8] = param_2;
   if (param_2 == -1) {
@@ -115,7 +115,7 @@ undefined4 __fastcall hkBsdSocket::vf2C(int param_1)
                   (0,0xffffffff,local_4c4,
                    "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\Base\\System\\Io\\Socket\\Bsd\\hkBsdSocket.cpp"
                    ,0x1c3);
-        hkBaseObject::hkBaseObject_38();
+        ::hkBaseObject::hkBaseObject_38();
         if (s != 0xffffffff) {
           local_8[0] = '\x01';
           local_8[1] = '\0';
@@ -125,7 +125,7 @@ undefined4 __fastcall hkBsdSocket::vf2C(int param_1)
           pvVar5 = TlsGetValue(DAT_01f8fc4c);
           iVar2 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x24);
           *(undefined2 *)(iVar2 + 4) = 0x24;
-          uVar6 = ~hkBsdSocket(s);
+          uVar6 = hkBsdSocket(s);
           FUN_01015a80();
           return uVar6;
         }
@@ -188,7 +188,7 @@ undefined4 __thiscall hkBsdSocket::vf20(int *param_1,undefined4 param_2)
                 (0,0xffffffff,local_3b0,
                  "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\Base\\System\\Io\\Socket\\Bsd\\hkBsdSocket.cpp"
                  ,0x18c);
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       FUN_01015a80();
       return 0;
     }

@@ -17,4 +17,6 @@ struct Collision {
     virtual void vf24() = 0;  // 00FDB68B slot 0x24
     // non-virtual members
     static void addObjDatReference(undefined4 param_2, undefined4 param_3);  // 00D77E40
+    Collision();  // 00D7C050
+    ~Collision();  // 00D7C2B0
 };

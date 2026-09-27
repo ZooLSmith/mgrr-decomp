@@ -11,4 +11,6 @@ struct cItemStageDropCollectable : public cItemStageDrop {
     virtual char * vf10();  // 0094D290 slot 0x10  overrides cItemStageDrop
     virtual void vf1C();  // 00953180 slot 0x1C  overrides cItemStageDrop
     virtual void vf2C();  // 0094D320 slot 0x2C  overrides cItemStageDrop
+    // non-virtual members
+    cItemStageDropCollectable();  // 0094D230
 };

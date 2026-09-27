@@ -4,6 +4,7 @@
 #include "mgrr.h"
 #include "hkBaseObject.h"
 #include "hkpAabbCastCollector.h"
+#include "hkpBvCompressedMeshShape.h"
 #include "hkpClosestRayHitCollector.h"
 #include "hkpDefaultToiResourceMgr.h"
 #include "hkpShapeContainer.h"
@@ -3170,7 +3171,7 @@ int __thiscall hkpStaticCompoundShape::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_150();
+  ::hkBaseObject::hkBaseObject_150();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -13024,8 +13025,8 @@ undefined4 __fastcall hkpDefaultToiResourceMgr::vf1C(int param_1)
   return *(undefined4 *)(param_1 + 0xc);
 }
 
-// 01230260  hkBaseObject::hkBaseObject_118  size=7  [run]
-void __fastcall hkBaseObject::hkBaseObject_118(undefined4 *param_1)
+// 01230260  hkBaseObject::~hkBaseObject  size=7  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -13132,7 +13133,7 @@ undefined4 * __thiscall hkpToiResourceMgr::vf00(undefined4 *param_1,byte param_2
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13164,7 +13165,7 @@ int __thiscall hkpDefaultToiResourceMgr::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_118();
+  ::hkBaseObject::~hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -13597,14 +13598,15 @@ void __thiscall FUN_01230ae0(int *param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 01230C30  hkpShapeContainer::hkpShapeContainer_6  size=56  [run]
-undefined4 * __thiscall hkpShapeContainer::hkpShapeContainer_6(undefined4 *param_1,int param_2)
+// 01230C30  hkpBvCompressedMeshShape::hkpBvCompressedMeshShape  size=56  [run]
+undefined4 * __thiscall
+hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(undefined4 *param_1,int param_2)
 
 {
-  hkpBvTreeShape::hkpBvTreeShape_2(param_2);
+  hkpBvTreeShape::hkpBvTreeShape(param_2);
+  param_1[5] = hkpShapeContainer::vftable;
+  *param_1 = vftable;
   param_1[5] = vftable;
-  *param_1 = hkpBvCompressedMeshShape::vftable;
-  param_1[5] = hkpBvCompressedMeshShape::vftable;
   if (param_2 != 0) {
     *(undefined1 *)(param_1 + 2) = 0x11;
     *(undefined1 *)(param_1 + 4) = 3;
@@ -14021,8 +14023,8 @@ LAB_012313e5:
   return;
 }
 
-// 01231540  hkpShapeContainer::hkpShapeContainer_4  size=1864  [run]
-undefined4 * __thiscall hkpShapeContainer::hkpShapeContainer_4(undefined4 *param_1,int *param_2)
+// 01231540  hkpShapeContainer::~hkpShapeContainer  size=1864  [run]
+undefined4 * __thiscall hkpShapeContainer::~hkpShapeContainer(undefined4 *param_1,int *param_2)
 
 {
   char cVar1;

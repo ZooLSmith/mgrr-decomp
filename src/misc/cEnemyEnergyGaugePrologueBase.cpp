@@ -9,7 +9,7 @@ undefined4 * __fastcall
 cEnemyEnergyGaugePrologueBase::cEnemyEnergyGaugePrologueBase(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

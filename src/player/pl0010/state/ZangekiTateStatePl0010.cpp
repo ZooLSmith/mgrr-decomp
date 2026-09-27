@@ -68,8 +68,8 @@ void ZangekiTateStatePl0010::EntryCutTargetSlot::vf18(void)
   return;
 }
 
-// 00B83A10  ZangekiTateStatePl0010::thunk_vf0C  size=5  [class]
-void __thiscall ZangekiTateStatePl0010::thunk_vf0C(int param_1,undefined4 param_2)
+// 00B83A10  ZangekiTateStatePl0010::SafeCheck  size=5  [class]
+void __thiscall ZangekiTateStatePl0010::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -116,7 +116,7 @@ ZangekiTateStatePl0010::ZangekiTateStatePl0010(undefined4 *param_1,undefined4 pa
 {
   int iVar1;
   
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   iVar1 = 1;
   do {
@@ -548,8 +548,8 @@ undefined4 __thiscall ZangekiTateStatePl0010::vf08(int param_1,undefined4 *param
   return 1;
 }
 
-// 00BE5640  ZangekiTateStatePl0010::vf10  size=1535  [class]
-void __thiscall ZangekiTateStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BE5640  ZangekiTateStatePl0010::qteSafeCheck  size=1535  [class]
+void __thiscall ZangekiTateStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   undefined4 *puVar1;
@@ -745,7 +745,7 @@ void __thiscall ZangekiTateStatePl0010::vf10(int param_1,undefined4 *param_2)
   }
   FUN_00bbb430(puVar2,param_1,100);
   FUN_00bbc390(puVar2);
-  StateMachineNode::vf10(puVar2);
+  StateMachineNode::qteSafeCheck(puVar2);
   return;
 }
 

@@ -621,8 +621,8 @@ void __fastcall cCodecWindowParts::vf08(int param_1)
   return;
 }
 
-// 00D220A0  cCodecWindowParts::vf14  size=1289  [class]
-void __fastcall cCodecWindowParts::vf14(int param_1)
+// 00D220A0  cCodecWindowParts::create  size=1289  [class]
+void __fastcall cCodecWindowParts::create(int param_1)
 
 {
   int iVar1;

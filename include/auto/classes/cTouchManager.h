@@ -8,5 +8,5 @@ struct cTouchManager {
     virtual undefined4 * vf00(byte param_2);  // 00983780 slot 0x0
     // non-virtual members
     cTouchManager();  // 009835F0
-    void ctor_00983640();  // 00983640
+    ~cTouchManager();  // 00983640
 };

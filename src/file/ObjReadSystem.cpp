@@ -72,8 +72,8 @@ void __thiscall FUN_00e9c200(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00E9C480  ObjReadSystem::Work::Work_2  size=59  [class]
-undefined4 * __fastcall ObjReadSystem::Work::Work_2(undefined4 *param_1)
+// 00E9C480  ObjReadSystem::Work::Work  size=59  [class]
+undefined4 * __fastcall ObjReadSystem::Work::Work(undefined4 *param_1)
 
 {
   *param_1 = vftable;

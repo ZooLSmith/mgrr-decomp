@@ -18,7 +18,7 @@ undefined4 * __thiscall esp32::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = cEspModel::vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -60,8 +60,8 @@ void __fastcall esp32::vf0C(int param_1)
   return;
 }
 
-// 00F04AC0  esp32::thunk_vf10  size=5  [class]
-void __fastcall esp32::thunk_vf10(int param_1)
+// 00F04AC0  esp32::addOtTransList  size=5  [class]
+void __fastcall esp32::addOtTransList(int param_1)
 
 {
   float fVar1;
@@ -328,10 +328,11 @@ void __fastcall esp32::vf08(int param_1)
   return;
 }
 
-// 00F35BC0  esp32::vf04  size=991  [class]
+// 00F35BC0  esp32::preTrans  size=991  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 __thiscall esp32::vf04(int param_1,undefined4 param_2,undefined4 param_3,uint param_4)
+undefined4 __thiscall
+esp32::preTrans(int param_1,undefined4 param_2,undefined4 param_3,uint param_4)
 
 {
   int iVar1;
@@ -356,7 +357,7 @@ undefined4 __thiscall esp32::vf04(int param_1,undefined4 param_2,undefined4 para
   undefined4 uVar20;
   
   uVar4 = param_4;
-  iVar1 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar1 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar1 != 0) {
     if (*(uint **)(param_1 + 0x58) == (uint *)0x0) {
       param_4 = 0;

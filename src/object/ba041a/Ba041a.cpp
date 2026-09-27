@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Ba041a.h"
 
-// 00405A00  Ba041a::vf40  size=32  [class]
-undefined4 __fastcall Ba041a::vf40(int param_1)
+// 00405A00  Ba041a::startup  size=32  [class]
+undefined4 __fastcall Ba041a::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -119,8 +119,8 @@ undefined * Ba041a::vf04(void)
   return &DAT_01b34b30;
 }
 
-// 00AB9330  Ba041a::vf00  size=43  [class]
-undefined4 __thiscall Ba041a::vf00(undefined4 param_1,byte param_2)
+// 00AB9330  Ba041a::destruct  size=43  [class]
+undefined4 __thiscall Ba041a::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

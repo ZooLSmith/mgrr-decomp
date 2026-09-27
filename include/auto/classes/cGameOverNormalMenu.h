@@ -10,4 +10,6 @@ struct cGameOverNormalMenu : public cCustomObjCtrlManager {
     virtual void vf08();  // 00990D40 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 00990E00 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009A2600 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cGameOverNormalMenu();  // 009A2540
 };

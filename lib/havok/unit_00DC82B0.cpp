@@ -29,7 +29,7 @@ hkpAllRayHitCollector::hkpAllRayHitCollector_6
   
   iVar10 = 0;
   local_348 = 0;
-  hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector();
   iVar8 = RayCastMultiHitWork::RayCastMultiHitWork
                     (local_330,param_3,param_4,param_5,"Ray Final Cam");
   if (iVar8 != 0) {

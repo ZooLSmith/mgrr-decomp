@@ -3,10 +3,10 @@
 
 #include "mgrr.h"
 
-// 00FA09A0  Hw::cPrimG::vf04  size=992  [class]
+// 00FA09A0  Hw::cPrimG::draw  size=992  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall Hw::cPrimG::vf04(int param_1)
+void __fastcall Hw::cPrimG::draw(int param_1)
 
 {
   int iVar1;

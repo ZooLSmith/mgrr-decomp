@@ -186,8 +186,8 @@ void __fastcall FUN_005d2930(int param_1)
   return;
 }
 
-// 005D2C80  Et0070::vf40  size=1062  [class]
-undefined4 __fastcall Et0070::vf40(int *param_1)
+// 005D2C80  Et0070::startup  size=1062  [class]
+undefined4 __fastcall Et0070::startup(int *param_1)
 
 {
   int iVar1;
@@ -206,7 +206,7 @@ undefined4 __fastcall Et0070::vf40(int *param_1)
   undefined4 uStack_84;
   undefined1 auStack_80 [124];
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     local_ac = 0;
     iVar1 = FUN_00a54ae0(&local_ac,param_1 + 0x125,"_col.hkx");
@@ -216,7 +216,7 @@ undefined4 __fastcall Et0070::vf40(int *param_1)
         iVar2 = 0;
       }
       else {
-        iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar2 = RigidBodyCollision::RigidBodyCollision();
       }
       param_1[0x1ec] = iVar2;
       if (iVar2 != 0) {
@@ -357,7 +357,7 @@ undefined4 __thiscall Et0070::getAttackInfo(int param_1,ushort *param_2)
   uint uVar6;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_01643748);
     return 0;
   }
@@ -418,7 +418,7 @@ void __fastcall Et0070::createWindAtk(int param_1)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar3 = *(undefined4 **)(iVar2 + 8);
       *(undefined4 *)(iVar2 + 4) = 1;
@@ -891,7 +891,7 @@ void __thiscall Et0070::createReactiveArmorExplosionCollision(int param_1,undefi
   
   iVar3 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar3 != 0) {
-    iVar3 = CollisionAttackData::CollisionAttackData_3();
+    iVar3 = CollisionAttackData::CollisionAttackData();
     if (iVar3 != 0) {
       puVar5 = *(undefined4 **)(iVar3 + 8);
       *(undefined4 *)(iVar3 + 4) = 1;
@@ -1083,8 +1083,8 @@ void __fastcall Et0070::vf50(int param_1)
   return;
 }
 
-// 005D4210  Et0070::vf264  size=170  [class]
-undefined4 __thiscall Et0070::vf264(int param_1,undefined4 param_2)
+// 005D4210  Et0070::setEmSetInfo  size=170  [class]
+undefined4 __thiscall Et0070::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   FUN_0040ac60(param_2);
@@ -2815,7 +2815,7 @@ void __fastcall Et0070::vf4C(int param_1)
 undefined4 * __fastcall Et0070::Et0070(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   param_1[0x370] = 0;
   param_1[0x3a0] = 0;
@@ -2833,8 +2833,8 @@ undefined * Et0070::vf04(void)
   return &DAT_01b352b0;
 }
 
-// 00AB80C0  Et0070::vf00  size=88  [class]
-int __thiscall Et0070::vf00(int param_1,byte param_2)
+// 00AB80C0  Et0070::destruct  size=88  [class]
+int __thiscall Et0070::destruct(int param_1,byte param_2)
 
 {
   if (*(int *)(param_1 + 0xe84) != 0) {
@@ -2846,7 +2846,7 @@ int __thiscall Et0070::vf00(int param_1,byte param_2)
     *(undefined4 *)(param_1 + 0xe84) = 0;
     *(undefined4 *)(param_1 + 0xe88) = 0;
   }
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

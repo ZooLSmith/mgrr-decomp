@@ -4,16 +4,16 @@
 #include "mgrr.h"
 #include "cFilterShaderCopyTex.h"
 
-// 00EC0AB0  cFilterShaderCopyTex::cFilterShaderCopyTex_2  size=266  [class]
+// 00EC0AB0  cFilterShaderCopyTex::cFilterShaderCopyTex  size=266  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec0b05) */
 /* WARNING: Removing unreachable block (ram,0x00ec0b78) */
 
-undefined4 * __fastcall cFilterShaderCopyTex::cFilterShaderCopyTex_2(undefined4 *param_1)
+undefined4 * __fastcall cFilterShaderCopyTex::cFilterShaderCopyTex(undefined4 *param_1)
 
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
@@ -80,7 +80,7 @@ void __fastcall cFilterShaderCopyTex::cFilterShaderCopyTex(undefined4 *param_1)
   param_1[0x11] = 0xffffffff;
   param_1[0x12] = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -99,17 +99,17 @@ undefined4 * __thiscall cFilterShaderCopyTex::vf00(undefined4 *param_1,byte para
   param_1[0x11] = 0xffffffff;
   param_1[0x12] = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 015F1B80  cFilterShaderCopyTex::cFilterShaderCopyTex_3  size=83  [class]
+// 015F1B80  cFilterShaderCopyTex::~cFilterShaderCopyTex  size=83  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cFilterShaderCopyTex::cFilterShaderCopyTex_3(void)
+void cFilterShaderCopyTex::~cFilterShaderCopyTex(void)
 
 {
   _DAT_01edcd30 = vftable;
@@ -123,7 +123,7 @@ void cFilterShaderCopyTex::cFilterShaderCopyTex_3(void)
   _DAT_01edcd74 = 0xffffffff;
   DAT_01edcd78 = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

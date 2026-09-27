@@ -22,5 +22,4 @@ struct BehaviorEmBody : public Behavior {
     virtual void vf260();  // 00AD2E40 slot 0x260  overrides Behavior
     // non-virtual members
     BehaviorEmBody();  // 00AA6180
-    void ctor_00AB20E0();  // 00AB20E0
 };

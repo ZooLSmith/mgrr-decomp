@@ -33,7 +33,7 @@ void FUN_00a90c30(void)
 
 {
   FUN_00905ce0();
-  EspControllerBullet::EspControllerBullet_6();
+  EspControllerBullet::~EspControllerBullet();
   return;
 }
 

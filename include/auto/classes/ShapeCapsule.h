@@ -15,4 +15,5 @@ struct ShapeCapsule : public ShapeBase {
     virtual byte vf1C(undefined4 param_2);  // 00A6C9D0 slot 0x1C  overrides ShapeBase
     // non-virtual members
     ShapeCapsule();  // 00A6B690
+    static byte vf1C_00A6C870(int * param_2);  // 00A6C870
 };

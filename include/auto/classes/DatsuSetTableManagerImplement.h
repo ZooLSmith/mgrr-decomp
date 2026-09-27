@@ -12,4 +12,6 @@ struct DatsuSetTableManagerImplement : public DatsuSetTableManager {
     virtual void vf0C();  // 0093D040 slot 0xC  overrides DatsuSetTableManager
     virtual void vf10();  // 0093D070 slot 0x10  overrides DatsuSetTableManager
     virtual undefined4 * vf14(byte param_2);  // 0093D0D0 slot 0x14  overrides DatsuSetTableManager
+    // non-virtual members
+    static void vf00_0093C7E0();  // 0093C7E0
 };

@@ -12,5 +12,6 @@ struct hkpCogWheelConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011DC190 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011DC170 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpCogWheelConstraintData(undefined4 * param_1);  // 011B0740
+    ~hkpCogWheelConstraintData();  // 011B0740
+    hkpCogWheelConstraintData();  // 011B0760
 };

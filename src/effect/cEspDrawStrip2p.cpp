@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEspDrawStrip2p.h"
 
-// 00ED7B60  cEspDrawStrip2p::vf04  size=191  [class]
-void __fastcall cEspDrawStrip2p::vf04(int param_1)
+// 00ED7B60  cEspDrawStrip2p::draw  size=191  [class]
+void __fastcall cEspDrawStrip2p::draw(int param_1)
 
 {
   FUN_00f45d30(0);

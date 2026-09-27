@@ -19,7 +19,7 @@ struct hkSimpleLocalFrame : public hkLocalFrame {
     virtual undefined4 vf30();  // 01011D00 slot 0x30  overrides hkLocalFrame
     virtual void vf34(int param_2);  // 0101ABD0 slot 0x34  overrides hkLocalFrame
     // non-virtual members
-    hkSimpleLocalFrame(undefined4 * param_1, undefined4 param_2);  // 01011A40
+    ~hkSimpleLocalFrame();  // 01011A40
     hkSimpleLocalFrame();  // 01011A60
     void ctor_01011CC0();  // 01011CC0
 };

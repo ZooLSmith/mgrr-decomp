@@ -11,6 +11,4 @@ struct BattleRegionManager {
     virtual bool vf0C(undefined4 param_1) = 0;  // 00FDB68B slot 0xC
     virtual void vf10() = 0;  // 00FDB68B slot 0x10
     virtual undefined4 * vf14(byte param_2);  // 00401010 slot 0x14
-    // non-virtual members
-    BattleRegionManager();  // 004024A0
 };

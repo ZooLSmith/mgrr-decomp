@@ -35,11 +35,11 @@ undefined * BulletBaseDLC::vf04(void)
   return &DAT_01be9c48;
 }
 
-// 00ABA990  BulletBaseDLC::vf00  size=30  [class]
-undefined4 __thiscall BulletBaseDLC::vf00(undefined4 param_1,byte param_2)
+// 00ABA990  BulletBaseDLC::destruct  size=30  [class]
+undefined4 __thiscall BulletBaseDLC::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_120();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

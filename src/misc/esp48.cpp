@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp48::esp48(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp48::esp48(undefined4 *param_1)
 undefined4 __thiscall esp48::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -32,8 +32,8 @@ void __fastcall esp48::vf08(int param_1)
   return;
 }
 
-// 00F2C3E0  esp48::vf10  size=335  [class]
-void __fastcall esp48::vf10(int param_1)
+// 00F2C3E0  esp48::addOtTransList  size=335  [class]
+void __fastcall esp48::addOtTransList(int param_1)
 
 {
   short sVar1;
@@ -44,7 +44,7 @@ void __fastcall esp48::vf10(int param_1)
   uint uVar6;
   
   iVar3 = FUN_00dd7ad0();
-  FUN_00efed20();
+  esp107::vf10();
   if (0.01 < *(float *)(param_1 + 0x124)) {
     if ((DAT_01edd490 == 0) ||
        (puVar4 = (undefined4 *)cPrimHeap::allocBuffer(0x140,0x20), puVar4 == (undefined4 *)0x0)) {
@@ -91,9 +91,9 @@ void __fastcall esp48::vf10(int param_1)
   return;
 }
 
-// 00F381C0  esp48::vf04  size=412  [class]
+// 00F381C0  esp48::preTrans  size=412  [class]
 undefined4 __thiscall
-esp48::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp48::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -102,7 +102,7 @@ esp48::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar4;
   undefined4 uVar5;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }

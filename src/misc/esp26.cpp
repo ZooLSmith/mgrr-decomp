@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp26.h"
 
-// 00ED8860  esp26::vf10  size=1  [class]
-void esp26::vf10(void)
+// 00ED8860  esp26::addOtTransList  size=1  [class]
+void esp26::addOtTransList(void)
 
 {
   return;
@@ -22,7 +22,7 @@ void esp26::vf1C(void)
 undefined4 * __fastcall esp26::esp26(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   param_1[0x114] = 0;
   param_1[0x115] = 0;
@@ -170,9 +170,9 @@ void __fastcall esp26::vf08(int param_1)
   return;
 }
 
-// 00F34E50  esp26::vf04  size=402  [class]
+// 00F34E50  esp26::preTrans  size=402  [class]
 undefined4 __thiscall
-esp26::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp26::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -180,7 +180,7 @@ esp26::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 != 0) {
     if ((*(int *)(param_1 + 0x58) != 0) &&
        (puVar3 = (undefined4 *)(*(int *)(param_1 + 0x58) + 0x80), puVar3 != (undefined4 *)0x0)) {

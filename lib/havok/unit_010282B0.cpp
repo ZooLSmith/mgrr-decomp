@@ -1626,7 +1626,7 @@ int __thiscall hkMemoryTrackStreamReader::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_162();
+  ::hkBaseObject::hkBaseObject_162();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -2597,8 +2597,8 @@ undefined4 * __thiscall hkStdioStreamWriter::hkStdioStreamWriter(undefined4 *par
   return param_1;
 }
 
-// 0102B600  hkStdioStreamWriter::hkStdioStreamWriter_2  size=56  [run]
-undefined4 * __thiscall hkStdioStreamWriter::hkStdioStreamWriter_2(undefined4 *param_1,int param_2)
+// 0102B600  hkStdioStreamWriter::hkStdioStreamWriter  size=56  [run]
+undefined4 * __thiscall hkStdioStreamWriter::hkStdioStreamWriter(undefined4 *param_1,int param_2)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
@@ -2611,8 +2611,8 @@ undefined4 * __thiscall hkStdioStreamWriter::hkStdioStreamWriter_2(undefined4 *p
   return param_1;
 }
 
-// 0102B640  hkBaseObject::hkBaseObject_155  size=22  [run]
-void __fastcall hkBaseObject::hkBaseObject_155(undefined4 *param_1)
+// 0102B640  hkBaseObject::hkBaseObject  size=22  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkStdioStreamWriter::vftable;
@@ -2627,7 +2627,7 @@ int __thiscall hkStdioStreamWriter::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_155();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -2894,8 +2894,8 @@ hkBufferedStreamReader::hkBufferedStreamReader
   return param_1;
 }
 
-// 0102BA80  hkBaseObject::hkBaseObject_152  size=33  [run]
-void __fastcall hkBaseObject::hkBaseObject_152(undefined4 *param_1)
+// 0102BA80  hkBaseObject::hkBaseObject  size=33  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkBufferedStreamReader::vftable;
@@ -2922,7 +2922,7 @@ int __thiscall hkBufferedStreamReader::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_152();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -3065,7 +3065,7 @@ undefined4 * __thiscall hkSeekableStreamReader::vf00(undefined4 *param_1,byte pa
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3079,7 +3079,7 @@ int __thiscall hkStdioStreamReader::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_151();
+  ::hkBaseObject::hkBaseObject_151();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

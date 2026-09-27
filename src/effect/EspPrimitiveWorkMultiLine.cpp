@@ -1,7 +1,24 @@
 // src/effect/EspPrimitiveWorkMultiLine.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58D60..00F59960, 2 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58CD0..00F59960, 3 functions
 
 #include "mgrr.h"
+
+// 00F58CD0  EspPrimitiveWorkMultiLine<1024,4>::EspPrimitiveWorkMultiLine<1024,4>  size=76  [class]
+undefined4 * __fastcall
+EspPrimitiveWorkMultiLine<1024,4>::EspPrimitiveWorkMultiLine<1024,4>(undefined4 *param_1)
+
+{
+  *param_1 = EspPrimitiveWorkMultiLineBase::vftable;
+  FUN_00f9c880();
+  FUN_00f9c880();
+  FUN_00f9c880();
+  FUN_00f9c880();
+  FUN_00f9c7b0();
+  param_1[0x31] = 0;
+  param_1[0x32] = 0;
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00F58D60  EspPrimitiveWorkMultiLine<1024,4>::vf00  size=80  [class]
 undefined4 * __thiscall EspPrimitiveWorkMultiLine<1024,4>::vf00(undefined4 *param_1,byte param_2)

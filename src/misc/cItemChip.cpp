@@ -1,11 +1,11 @@
 // src/misc/cItemChip.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA640..00AB9880, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA640..00AB9880, 9 functions
 
 #include "mgrr.h"
 #include "cItemChip.h"
 
-// 005EA640  cItemChip::vf40  size=479  [class]
-undefined4 __fastcall cItemChip::vf40(int param_1)
+// 005EA640  cItemChip::startup  size=479  [class]
+undefined4 __fastcall cItemChip::startup(int param_1)
 
 {
   undefined2 uVar1;
@@ -15,7 +15,7 @@ undefined4 __fastcall cItemChip::vf40(int param_1)
   
   uVar2 = FUN_0094b720();
   *(undefined4 *)(param_1 + 0x920) = uVar2;
-  iVar3 = cItemObjectBase::vf40();
+  iVar3 = cItemObjectBase::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -143,7 +143,7 @@ void __fastcall cItemChip::vf54(int *param_1)
         return;
       }
       FUN_009f8c40();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
     if ((char)param_1[0x259] != '\0') {
@@ -186,7 +186,7 @@ void __fastcall FUN_005ea950(int param_1)
   }
   (**(code **)(*piVar2 + 0x3c))(iVar3);
   FUN_009f8c40();
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -344,11 +344,24 @@ void __fastcall cItemChip::vf48(int *param_1)
     }
     if (*(float *)(param_1[0x248] + 0x14) < (float)param_1[599]) {
       FUN_009f8c40();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
   return;
+}
+
+// 00AB1490  cItemChip::cItemChip  size=56  [class]
+undefined4 * __fastcall cItemChip::cItemChip(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = vftable;
+  return param_1;
 }
 
 // 00AB14D0  cItemChip::vf04  size=6  [class]
@@ -358,11 +371,11 @@ undefined * cItemChip::vf04(void)
   return &DAT_01b3539c;
 }
 
-// 00AB9880  cItemChip::vf00  size=30  [class]
-undefined4 __thiscall cItemChip::vf00(undefined4 param_1,byte param_2)
+// 00AB9880  cItemChip::destruct  size=30  [class]
+undefined4 __thiscall cItemChip::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_124();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

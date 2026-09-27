@@ -11,12 +11,6 @@ struct hkpPhantomOverlapListener {
     // non-virtual members
     hkpPhantomOverlapListener();  // 011D17F0
     void ctor_011D1BD0();  // 011D1BD0
-    hkpPhantomOverlapListener(undefined4 * param_1, int param_2);  // 01286620
-    void ctor_01286920();  // 01286920
-    void ctor_01287F20(undefined4 * param_1, int param_2);  // 01287F20
-    void ctor_01287F70();  // 01287F70
     hkpPhantomOverlapListener(undefined4 * param_1);  // 01289040
     void ctor_01289170();  // 01289170
-    void ctor_01289E00();  // 01289E00
-    void ctor_0128FC90();  // 0128FC90
 };

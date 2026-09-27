@@ -407,10 +407,10 @@ undefined4 * cTitleDisp::cTitleDisp(void)
   return (undefined4 *)0x0;
 }
 
-// 00D42210  cTitleDisp::vf14  size=1037  [class]
+// 00D42210  cTitleDisp::create  size=1037  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cTitleDisp::vf14(int param_1)
+void __fastcall cTitleDisp::create(int param_1)
 
 {
   uint uVar1;

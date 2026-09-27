@@ -1,17 +1,17 @@
 // src/misc/EmBodyDLC.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A9BAC0..00AB9D10, 3 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A9BAC0..00AB9D10, 4 functions
 
 #include "mgrr.h"
 #include "EmBodyDLC.h"
 
-// 00A9BAC0  EmBodyDLC::vf40  size=182  [class]
-undefined4 __fastcall EmBodyDLC::vf40(int param_1)
+// 00A9BAC0  EmBodyDLC::startup  size=182  [class]
+undefined4 __fastcall EmBodyDLC::startup(int param_1)
 
 {
   uint uVar1;
   int iVar2;
   
-  iVar2 = BehaviorEmBody::vf40();
+  iVar2 = BehaviorEmBody::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -71,6 +71,17 @@ switchD_00a9bb59_caseD_2c141:
   return 1;
 }
 
+// 00AB20E0  EmBodyDLC::EmBodyDLC  size=35  [class]
+undefined4 * __fastcall EmBodyDLC::EmBodyDLC(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = BehaviorEmBody::vftable;
+  FUN_00a7c930();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB2110  EmBodyDLC::vf04  size=6  [class]
 undefined * EmBodyDLC::vf04(void)
 
@@ -78,8 +89,8 @@ undefined * EmBodyDLC::vf04(void)
   return &DAT_01be9c40;
 }
 
-// 00AB9D10  EmBodyDLC::vf00  size=105  [class]
-undefined4 * __thiscall EmBodyDLC::vf00(undefined4 *param_1,byte param_2)
+// 00AB9D10  EmBodyDLC::destruct  size=105  [class]
+undefined4 * __thiscall EmBodyDLC::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -93,7 +104,7 @@ undefined4 * __thiscall EmBodyDLC::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

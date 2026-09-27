@@ -12,5 +12,5 @@ struct cEspShaderShimmer_DAF : public cEspShaderShimmer {
     cEspShaderShimmer_DAF();  // 009D1490
     static void vf0C();  // 00F5D080
     static void vf04();  // 00F80F10
-    void ctor_015ECC00();  // 015ECC00
+    ~cEspShaderShimmer_DAF();  // 015ECC00
 };

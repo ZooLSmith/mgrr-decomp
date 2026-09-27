@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEsp22DrawWork.h"
 
-// 00ED8650  cEsp22DrawWork::vf04  size=25  [class]
-void cEsp22DrawWork::vf04(void)
+// 00ED8650  cEsp22DrawWork::draw  size=25  [class]
+void cEsp22DrawWork::draw(void)
 
 {
   FUN_00f45d30(0);
@@ -29,7 +29,7 @@ void __fastcall cEsp22DrawWork::cEsp22DrawWork(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  FUN_00efed20();
+  esp107::vf10();
   if (*(float *)(param_1 + 0x124) <= 0.01) {
     return;
   }

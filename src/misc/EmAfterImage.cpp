@@ -11,8 +11,8 @@ undefined * EmAfterImage::vf04(void)
   return &DAT_01be9c7c;
 }
 
-// 00AB68B0  EmAfterImage::vf00  size=105  [class]
-undefined4 * __thiscall EmAfterImage::vf00(undefined4 *param_1,byte param_2)
+// 00AB68B0  EmAfterImage::destruct  size=105  [class]
+undefined4 * __thiscall EmAfterImage::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,21 +26,21 @@ undefined4 * __thiscall EmAfterImage::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00AC4D90  EmAfterImage::vf40  size=97  [class]
-undefined4 __fastcall EmAfterImage::vf40(int param_1)
+// 00AC4D90  EmAfterImage::startup  size=97  [class]
+undefined4 __fastcall EmAfterImage::startup(int param_1)
 
 {
   int iVar1;
   int iVar2;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }

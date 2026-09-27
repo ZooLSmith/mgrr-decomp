@@ -15,10 +15,10 @@ undefined4 __thiscall cItemInfoDispParts::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 00D249D0  cItemInfoDispParts::vf14  size=1547  [class]
+// 00D249D0  cItemInfoDispParts::create  size=1547  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cItemInfoDispParts::vf14(int param_1)
+void __fastcall cItemInfoDispParts::create(int param_1)
 
 {
   float fVar1;

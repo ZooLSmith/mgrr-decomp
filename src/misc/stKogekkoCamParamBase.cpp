@@ -19,8 +19,8 @@ void __fastcall stKogekkoCamParamBase::stKogekkoCamParamBase(undefined4 *param_1
   return;
 }
 
-// 005F5650  stKogekkoCamParamBase::stKogekkoCamParamBase_2  size=7  [class]
-void __fastcall stKogekkoCamParamBase::stKogekkoCamParamBase_2(undefined4 *param_1)
+// 005F5650  stKogekkoCamParamBase::~stKogekkoCamParamBase  size=7  [class]
+void __fastcall stKogekkoCamParamBase::~stKogekkoCamParamBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;

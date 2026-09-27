@@ -317,7 +317,7 @@ undefined4 __fastcall FUN_0043e570(int param_1)
             uVar2 = 0;
           }
           else {
-            uVar2 = RigidBodyCollection::RigidBodyCollection_2();
+            uVar2 = RigidBodyCollision::RigidBodyCollision();
           }
           *(undefined4 *)(param_1 + 0x7b0) = uVar2;
           iVar1 = FUN_008f6410(*(undefined4 *)(param_1 + 0x4f0),iVar1,local_170);

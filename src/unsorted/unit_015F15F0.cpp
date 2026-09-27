@@ -7,7 +7,7 @@
 void FUN_015f15f0(void)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   return;
 }
 
@@ -22,7 +22,7 @@ void FUN_015f1610(void)
   puVar1 = &DAT_01edc0d8;
   do {
     puVar1 = puVar1 + -0x388;
-    FUN_00401070(puVar1,0x1c,0x20,Hw::cTexture::cTexture_5);
+    FUN_00401070(puVar1,0x1c,0x20,Hw::cTexture::~cTexture);
     iVar2 = iVar2 + -1;
   } while (-1 < iVar2);
   return;

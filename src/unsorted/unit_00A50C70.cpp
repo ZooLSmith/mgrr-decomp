@@ -165,7 +165,7 @@ undefined4 __fastcall FUN_00a50eb0(int param_1)
           FUN_009cf650();
           FUN_00c56da0();
           FUN_00c13b50();
-          GameWorkManagerImplement::GameWorkManagerImplement(&DAT_01b7bcf0);
+          GameWorkManagerImplement::~GameWorkManagerImplement(&DAT_01b7bcf0);
           GameStageManagerImplement::GameStageManagerImplement(&DAT_01b7bcf0);
           FUN_00c67780(&DAT_01b7bcf0);
           PhaseReadManagerImplement::PhaseReadManagerImplement();
@@ -349,7 +349,7 @@ undefined4 FUN_00a51080(void)
 void __fastcall FUN_00a51440(int param_1)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   if (*(int *)(param_1 + 0x34) != 0) {
     if (*(int *)(param_1 + 0x34) != 0) {
       FUN_00dd48d0(*(int *)(param_1 + 0x34),0);

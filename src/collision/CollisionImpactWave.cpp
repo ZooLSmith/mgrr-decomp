@@ -98,13 +98,13 @@ undefined4 * CollisionImpactWave::vf04(undefined4 *param_1)
   return param_1;
 }
 
-// 00D7D470  CollisionImpactWave::CollisionImpactWave_2  size=28  [class]
-void __fastcall CollisionImpactWave::CollisionImpactWave_2(undefined4 *param_1)
+// 00D7D470  CollisionImpactWave::~CollisionImpactWave  size=28  [class]
+void __fastcall CollisionImpactWave::~CollisionImpactWave(undefined4 *param_1)
 
 {
   *param_1 = vftable;
-  ShapeBase::ShapeBase_4();
-  hkpCdPointCollector::hkpCdPointCollector_5();
+  ShapeBase::~ShapeBase();
+  Collision::~Collision();
   return;
 }
 
@@ -113,8 +113,8 @@ undefined4 * __thiscall CollisionImpactWave::vf08(undefined4 *param_1,byte param
 
 {
   *param_1 = vftable;
-  ShapeBase::ShapeBase_4();
-  hkpCdPointCollector::hkpCdPointCollector_5();
+  ShapeBase::~ShapeBase();
+  Collision::~Collision();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -130,7 +130,7 @@ CollisionImpactWave::CollisionImpactWave(undefined4 param_1,undefined4 param_2,u
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x540,&DAT_01b7c0b8);
   if (puVar1 != (undefined4 *)0x0) {
-    hkpAllCdPointCollector::hkpAllCdPointCollector_10(puVar1 + 0x110,param_1,param_2,param_3);
+    Collision::Collision(puVar1 + 0x110,param_1,param_2,param_3);
     *puVar1 = vftable;
     ShapeSphere::ShapeSphere();
     return puVar1;

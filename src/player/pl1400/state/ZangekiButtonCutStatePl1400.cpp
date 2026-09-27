@@ -100,8 +100,8 @@ void ZangekiButtonCutStatePl1400::EntryCutTargetSlot::vf18(void)
   return;
 }
 
-// 0085F1D0  ZangekiButtonCutStatePl1400::thunk_vf0C  size=5  [class]
-void __thiscall ZangekiButtonCutStatePl1400::thunk_vf0C(int param_1,undefined4 param_2)
+// 0085F1D0  ZangekiButtonCutStatePl1400::SafeCheck  size=5  [class]
+void __thiscall ZangekiButtonCutStatePl1400::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -148,7 +148,7 @@ ZangekiButtonCutStatePl1400::ZangekiButtonCutStatePl1400(undefined4 *param_1,und
 {
   int iVar1;
   
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   iVar1 = 1;
   do {
@@ -569,8 +569,8 @@ LAB_00894a5d:
   return 1;
 }
 
-// 00894C60  ZangekiButtonCutStatePl1400::vf10  size=1504  [class]
-void __thiscall ZangekiButtonCutStatePl1400::vf10(int param_1,int *param_2)
+// 00894C60  ZangekiButtonCutStatePl1400::qteSafeCheck  size=1504  [class]
+void __thiscall ZangekiButtonCutStatePl1400::qteSafeCheck(int param_1,int *param_2)
 
 {
   undefined4 *puVar1;
@@ -765,7 +765,7 @@ void __thiscall ZangekiButtonCutStatePl1400::vf10(int param_1,int *param_2)
   }
   FUN_00876420(puVar1,param_1,100);
   FUN_00877520(puVar1);
-  StateMachineNode::vf10(puVar1);
+  StateMachineNode::qteSafeCheck(puVar1);
   return;
 }
 

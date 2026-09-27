@@ -14,4 +14,5 @@ struct hkpRigidBody : public hkpEntity {
     // non-virtual members
     hkpRigidBody(undefined4 param_2);  // 0119F370
     ~hkpRigidBody();  // 0119F390
+    hkpRigidBody(undefined4 * param_2);  // 011A0390
 };

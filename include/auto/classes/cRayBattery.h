@@ -16,4 +16,6 @@ struct cRayBattery : public BehaviorAppBase {
     virtual void setCutCrerateInfo(undefined4 * param_1, undefined4 param_2, int param_3);  // 00B74430 slot 0x1B8  overrides Behavior
     virtual void vf1BC(int * param_2);  // 00B74410 slot 0x1BC  overrides Behavior
     virtual void vf1D0(undefined4 param_2);  // 00B74420 slot 0x1D0  overrides Behavior
+    // non-virtual members
+    cRayBattery();  // 00AAEDA0
 };

@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp151.h"
 
-// 009D0A50  esp151::vf10  size=1  [class]
-void esp151::vf10(void)
+// 009D0A50  esp151::addOtTransList  size=1  [class]
+void esp151::addOtTransList(void)
 
 {
   return;
@@ -31,11 +31,11 @@ void __fastcall esp151::thunk_vf14(int param_1)
   return;
 }
 
-// 009EF9A0  esp151::vf04  size=1089  [class]
+// 009EF9A0  esp151::preTrans  size=1089  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 undefined4 __thiscall
-esp151::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp151::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -52,7 +52,7 @@ esp151::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   undefined4 local_8;
   int local_4;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }
@@ -326,7 +326,7 @@ undefined4 __thiscall esp151::vf00(undefined4 param_1,byte param_2)
 
 {
   Spline<float>::Spline<float>();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -8,7 +8,7 @@
 undefined4 * __fastcall cFilterShaderZCullReload::cFilterShaderZCullReload(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
@@ -45,17 +45,17 @@ undefined4 * __thiscall cFilterShaderZCullReload::vf00(undefined4 *param_1,byte 
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0xffffffff;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 015F1640  cFilterShaderZCullReload::cFilterShaderZCullReload_2  size=63  [class]
+// 015F1640  cFilterShaderZCullReload::~cFilterShaderZCullReload  size=63  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cFilterShaderZCullReload::cFilterShaderZCullReload_2(void)
+void cFilterShaderZCullReload::~cFilterShaderZCullReload(void)
 
 {
   _DAT_01edd038 = vftable;
@@ -66,7 +66,7 @@ void cFilterShaderZCullReload::cFilterShaderZCullReload_2(void)
   _DAT_01edd070 = 0xffffffff;
   _DAT_01edd074 = 0xffffffff;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

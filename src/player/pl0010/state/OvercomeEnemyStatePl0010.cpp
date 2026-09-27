@@ -37,7 +37,7 @@ undefined4 * __thiscall
 OvercomeEnemyStatePl0010::OvercomeEnemyStatePl0010(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -290,8 +290,8 @@ LAB_00bb01f0:
   return;
 }
 
-// 00BB0220  OvercomeEnemyStatePl0010::vf0C  size=282  [class]
-void __thiscall OvercomeEnemyStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB0220  OvercomeEnemyStatePl0010::SafeCheck  size=282  [class]
+void __thiscall OvercomeEnemyStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -331,7 +331,7 @@ void __thiscall OvercomeEnemyStatePl0010::vf0C(int param_1,undefined4 *param_2)
     iVar3 = FUN_00a7c8a0();
     if (*(int *)(iVar3 + 0x4b4) == 0x20010) {
       FUN_00bafda0(param_2);
-      StateMachineNode::vf0C(param_2);
+      StateMachineNode::SafeCheck(param_2);
       return;
     }
     FUN_00a81330();
@@ -340,7 +340,7 @@ void __thiscall OvercomeEnemyStatePl0010::vf0C(int param_1,undefined4 *param_2)
       FUN_00baff00(param_2);
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -667,8 +667,8 @@ void __thiscall FUN_00be0090(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00BE02E0  OvercomeEnemyStatePl0010::vf10  size=210  [class]
-void OvercomeEnemyStatePl0010::vf10(undefined4 *param_1)
+// 00BE02E0  OvercomeEnemyStatePl0010::qteSafeCheck  size=210  [class]
+void OvercomeEnemyStatePl0010::qteSafeCheck(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -699,11 +699,11 @@ void OvercomeEnemyStatePl0010::vf10(undefined4 *param_1)
     if (*(int *)(iVar2 + 0x4b4) == 0x20030) {
       FUN_00be0090(param_1);
     }
-    StateMachineNode::vf10(param_1);
+    StateMachineNode::qteSafeCheck(param_1);
     return;
   }
   FUN_00bdfdf0(param_1);
-  StateMachineNode::vf10(param_1);
+  StateMachineNode::qteSafeCheck(param_1);
   return;
 }
 

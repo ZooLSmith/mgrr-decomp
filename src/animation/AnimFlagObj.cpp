@@ -4,14 +4,14 @@
 #include "mgrr.h"
 #include "AnimFlagObj.h"
 
-// 00408FD0  AnimFlagObj::vf40  size=98  [class]
-undefined4 AnimFlagObj::vf40(void)
+// 00408FD0  AnimFlagObj::startup  size=98  [class]
+undefined4 AnimFlagObj::startup(void)
 
 {
   short sVar1;
   int iVar2;
   
-  iVar2 = MonThrowMoto::vf40();
+  iVar2 = BehaviorBa::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -121,8 +121,8 @@ undefined * AnimFlagObj::vf04(void)
   return &DAT_01b34b44;
 }
 
-// 00AB91A0  AnimFlagObj::vf00  size=43  [class]
-undefined4 __thiscall AnimFlagObj::vf00(undefined4 param_1,byte param_2)
+// 00AB91A0  AnimFlagObj::destruct  size=43  [class]
+undefined4 __thiscall AnimFlagObj::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

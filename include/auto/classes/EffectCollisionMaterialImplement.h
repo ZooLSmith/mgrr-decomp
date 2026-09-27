@@ -11,5 +11,5 @@ struct EffectCollisionMaterialImplement : public EffectCollisionMaterial {
     virtual undefined4 * vf08(byte param_2);  // 00900200 slot 0x8  overrides EffectCollisionMaterial
     // non-virtual members
     EffectCollisionMaterialImplement();  // 009001C0
-    void ctor_00900280();  // 00900280
+    ~EffectCollisionMaterialImplement();  // 00900280
 };

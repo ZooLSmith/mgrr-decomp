@@ -65,8 +65,8 @@ undefined4 * __thiscall cVisorMode::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00D27060  cVisorMode::vf14  size=486  [class]
-void __fastcall cVisorMode::vf14(int param_1)
+// 00D27060  cVisorMode::create  size=486  [class]
+void __fastcall cVisorMode::create(int param_1)
 
 {
   float fVar1;

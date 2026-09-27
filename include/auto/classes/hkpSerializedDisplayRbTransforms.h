@@ -8,5 +8,6 @@ struct hkpSerializedDisplayRbTransforms : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 01273AA0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpSerializedDisplayRbTransforms(undefined4 * param_1);  // 012738F0
+    ~hkpSerializedDisplayRbTransforms();  // 012738F0
+    hkpSerializedDisplayRbTransforms();  // 01273910
 };

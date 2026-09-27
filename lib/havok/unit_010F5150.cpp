@@ -188,7 +188,7 @@ int __thiscall hkDataWorldDict::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_200();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -267,8 +267,8 @@ hkObjectCopier::hkObjectCopier
   return;
 }
 
-// 010F55F0  hkBaseObject::hkBaseObject_138  size=7  [run]
-void __fastcall hkBaseObject::hkBaseObject_138(undefined4 *param_1)
+// 010F55F0  hkBaseObject::~hkBaseObject  size=7  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = vftable;

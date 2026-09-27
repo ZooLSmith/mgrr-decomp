@@ -186,7 +186,7 @@ void __fastcall Pl1400::vf4C(int param_1)
   local_28 = *(float *)(param_1 + 0x58) - *(float *)(param_1 + 0x908);
   local_24 = *(float *)(param_1 + 0x5c) - *(float *)(param_1 + 0x90c);
   CharacterControl::setRadius(0x3e4ccccd);
-  iVar2 = hkpCdPointCollector::hkpCdPointCollector_14(&local_30,&local_40,1,0,0x3c23d70a);
+  iVar2 = hkpCdPointCollector::hkpCdPointCollector(&local_30,&local_40,1,0,0x3c23d70a);
   if (iVar2 == 0) {
     FUN_008e4580(pfVar1,1);
     local_20 = 0;
@@ -196,7 +196,7 @@ void __fastcall Pl1400::vf4C(int param_1)
     local_4c = *(undefined4 *)(param_1 + 0x54);
     local_48 = *(undefined4 *)(param_1 + 0x58);
     local_44 = *(undefined4 *)(param_1 + 0x5c);
-    iVar2 = hkpCdPointCollector::hkpCdPointCollector_14(&local_20,&local_50,1,0,0x3c23d70a);
+    iVar2 = hkpCdPointCollector::hkpCdPointCollector(&local_20,&local_50,1,0,0x3c23d70a);
     if (iVar2 != 0) {
       *(undefined4 *)(param_1 + 0x54) = local_4c;
       *(undefined4 *)(*(int *)(param_1 + 0x764) + 0x124) = 0;
@@ -6149,7 +6149,7 @@ int __thiscall Pl1400::getAttackInfo(int param_1,ushort *param_2)
   
   iVar3 = FUN_00dd3500(0x110);
   if ((iVar3 != 0) &&
-     (iVar3 = CollisionAttackData::CollisionAttackData_3(), local_4 = iVar3, iVar3 != 0)) {
+     (iVar3 = CollisionAttackData::CollisionAttackData(), local_4 = iVar3, iVar3 != 0)) {
     if (*param_2 != 0) {
       puVar1 = *(uint **)(iVar3 + 8);
       puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -8514,8 +8514,8 @@ void __fastcall FUN_008781b0(int param_1)
   return;
 }
 
-// 008782B0  Pl1400::vf40  size=2932  [class]
-undefined4 __fastcall Pl1400::vf40(int param_1)
+// 008782B0  Pl1400::startup  size=2932  [class]
+undefined4 __fastcall Pl1400::startup(int param_1)
 
 {
   uint uVar1;
@@ -8540,7 +8540,7 @@ undefined4 __fastcall Pl1400::vf40(int param_1)
   undefined4 local_18;
   undefined4 local_14;
   
-  iVar3 = PlBaseDLC::vf40();
+  iVar3 = PlBaseDLC::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -9311,7 +9311,7 @@ LAB_008796d9:
     iStack_6c = param_1[0x11];
     iStack_68 = param_1[0x12];
     iStack_64 = param_1[0x13];
-    iVar3 = hkpCdPointCollector::hkpCdPointCollector_14(&uStack_60,&iStack_70,1,0,0x3c23d70a);
+    iVar3 = hkpCdPointCollector::hkpCdPointCollector(&uStack_60,&iStack_70,1,0,0x3c23d70a);
     if (iVar3 != 0) {
       param_1[0x14] = iStack_70;
       param_1[0x15] = iStack_6c;
@@ -15974,8 +15974,8 @@ switchD_008936d4_default:
   return;
 }
 
-// 00893AA0  FUN_00893aa0  size=183  [between]
-undefined4 __fastcall FUN_00893aa0(int param_1)
+// 00893AA0  Pl1400::vf134  size=183  [class]
+undefined4 __fastcall Pl1400::vf134(int param_1)
 
 {
   int iVar1;
@@ -19612,7 +19612,7 @@ void __fastcall Pl1400::vf3FC(int param_1)
     local_270 = 0.0;
     local_26c = 0.0;
     local_268 = 0.0;
-    hkpAllCdPointCollector::hkpAllCdPointCollector_5();
+    hkpAllCdPointCollector::hkpAllCdPointCollector();
     FUN_00900350(local_1b0);
     if (0 < iStack_19c) {
       iStack_234 = 0;
@@ -19712,12 +19712,12 @@ LAB_0089ee76:
       fStack_24c = *(float *)(param_1 + 0x44);
       fStack_248 = *(float *)(param_1 + 0x48);
       fStack_244 = *(float *)(param_1 + 0x4c);
-      iVar5 = hkpCdPointCollector::hkpCdPointCollector_14(&local_280,&fStack_250,1,0,0x3c23d70a);
+      iVar5 = hkpCdPointCollector::hkpCdPointCollector(&local_280,&fStack_250,1,0,0x3c23d70a);
       if (iVar5 != 0) {
         *(float *)(param_1 + 0x54) = fStack_24c;
       }
     }
-    hkpCdPointCollector::hkpCdPointCollector_4();
+    hkpCdPointCollector::hkpCdPointCollector();
   }
   if (DAT_01885d68 != 1) {
     piVar1 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
@@ -19816,7 +19816,7 @@ void __thiscall Pl1400::qteSafeCheck(int param_1,undefined4 *param_2)
   iVar2 = FUN_00a81330();
   if ((iVar2 == 0) && (*(int *)(param_1 + 0xd4) == 0)) {
     FUN_00d82510(1,100);
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   switch(*(undefined4 *)(param_1 + 0x30)) {
@@ -20311,7 +20311,7 @@ switchD_0089f1c4_default:
     FUN_008774a0(param_2);
   }
   (**(code **)((int)*pfVar7 + 0x220))(0x41200000);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 
@@ -20319,7 +20319,7 @@ switchD_0089f1c4_default:
 undefined4 * __fastcall Pl1400::Pl1400(undefined4 *param_1)
 
 {
-  hkpAllCdPointCollector::hkpAllCdPointCollector_34();
+  Pl0000::Pl0000();
   *param_1 = vftable;
   *(undefined2 *)(param_1 + 0x1514) = 0;
   return param_1;
@@ -20430,11 +20430,11 @@ void __fastcall Pl1400::vf3F0(int param_1)
   return;
 }
 
-// 00AC3C80  Pl1400::vf00  size=30  [class]
-undefined4 __thiscall Pl1400::vf00(undefined4 param_1,byte param_2)
+// 00AC3C80  Pl1400::destruct  size=30  [class]
+undefined4 __thiscall Pl1400::destruct(undefined4 param_1,byte param_2)
 
 {
-  hkpCdPointCollector::hkpCdPointCollector_22();
+  hkpAllCdPointCollector::~hkpAllCdPointCollector();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

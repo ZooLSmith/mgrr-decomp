@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp42::esp42(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp42::esp42(undefined4 *param_1)
 undefined4 __thiscall esp42::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -32,8 +32,8 @@ void __fastcall esp42::vf08(int param_1)
   return;
 }
 
-// 00F2B960  esp42::vf10  size=335  [class]
-void __fastcall esp42::vf10(int param_1)
+// 00F2B960  esp42::addOtTransList  size=335  [class]
+void __fastcall esp42::addOtTransList(int param_1)
 
 {
   short sVar1;
@@ -44,7 +44,7 @@ void __fastcall esp42::vf10(int param_1)
   uint uVar6;
   
   iVar3 = FUN_00dd7ad0();
-  FUN_00efed20();
+  esp107::vf10();
   if (0.01 < *(float *)(param_1 + 0x124)) {
     if ((DAT_01edd490 == 0) ||
        (puVar4 = (undefined4 *)cPrimHeap::allocBuffer(0x140,0x20), puVar4 == (undefined4 *)0x0)) {
@@ -91,9 +91,9 @@ void __fastcall esp42::vf10(int param_1)
   return;
 }
 
-// 00F37580  esp42::vf04  size=357  [class]
+// 00F37580  esp42::preTrans  size=357  [class]
 undefined4 __thiscall
-esp42::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp42::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -101,7 +101,7 @@ esp42::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return 0;
   }

@@ -1,5 +1,5 @@
 // src/effect/EspPrimitiveWorkCircle.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58890..00F59B50, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58890..00F59B50, 5 functions
 
 #include "mgrr.h"
 
@@ -20,6 +20,23 @@ undefined4 * __thiscall EspPrimitiveWorkCircle<12>::vf00(undefined4 *param_1,byt
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
+  return param_1;
+}
+
+// 00F588E0  EspPrimitiveWorkCircle<24>::EspPrimitiveWorkCircle<24>  size=54  [class]
+undefined4 * __fastcall EspPrimitiveWorkCircle<24>::EspPrimitiveWorkCircle<24>(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = EspPrimitiveWorkCircleBase::vftable;
+  FUN_00f9c880();
+  iVar1 = 3;
+  do {
+    FUN_00f9c880();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  *param_1 = vftable;
   return param_1;
 }
 

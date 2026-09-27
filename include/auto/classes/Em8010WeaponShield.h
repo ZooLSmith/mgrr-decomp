@@ -17,4 +17,6 @@ struct Em8010WeaponShield : public Em8010Weapon {
     virtual void vf54();  // 0061BA10 slot 0x54  overrides Behavior
     virtual undefined4 vfD8();  // 0061BB80 slot 0xD8  overrides Behavior
     virtual void vf1D0(undefined4 param_2);  // 00AB60C0 slot 0x1D0  overrides Behavior
+    // non-virtual members
+    Em8010WeaponShield();  // 00AB6070
 };

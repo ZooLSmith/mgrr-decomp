@@ -4,15 +4,15 @@
 #include "mgrr.h"
 #include "Em0010DebrisTest.h"
 
-// 005E4160  Em0010DebrisTest::Em0010DebrisTest_2  size=50  [class]
-void __fastcall Em0010DebrisTest::Em0010DebrisTest_2(undefined4 *param_1)
+// 005E4160  Em0010DebrisTest::~Em0010DebrisTest  size=50  [class]
+void __fastcall Em0010DebrisTest::~Em0010DebrisTest(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   cEspControler::~cEspControler();
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 
@@ -23,13 +23,13 @@ undefined * Em0010DebrisTest::vf04(void)
   return &DAT_01b35364;
 }
 
-// 005E41B0  Em0010DebrisTest::vf40  size=39  [class]
-undefined4 __fastcall Em0010DebrisTest::vf40(int param_1)
+// 005E41B0  Em0010DebrisTest::startup  size=39  [class]
+undefined4 __fastcall Em0010DebrisTest::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorBgBase::vf40();
+  iVar1 = BehaviorBgBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -191,15 +191,15 @@ undefined4 * __fastcall Em0010DebrisTest::Em0010DebrisTest(undefined4 *param_1)
   return param_1;
 }
 
-// 005E4E40  Em0010DebrisTest::vf00  size=71  [class]
-undefined4 * __thiscall Em0010DebrisTest::vf00(undefined4 *param_1,byte param_2)
+// 005E4E40  Em0010DebrisTest::destruct  size=71  [class]
+undefined4 * __thiscall Em0010DebrisTest::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
   cEspControler::~cEspControler();
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -350,7 +350,7 @@ void __fastcall Em0010DebrisTest::vf34(int *param_1)
   FUN_00a963e0(local_160);
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       *(undefined4 *)(*(int *)(iVar2 + 8) + 4) = 100;
       *(undefined4 *)(*(int *)(iVar2 + 8) + 0xc) = 1;

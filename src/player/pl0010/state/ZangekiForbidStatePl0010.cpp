@@ -14,8 +14,8 @@ bool ZangekiForbidStatePl0010::vf08(undefined4 param_1)
   return iVar1 != 0;
 }
 
-// 00B82FD0  ZangekiForbidStatePl0010::vf0C  size=5  [class]
-void __thiscall ZangekiForbidStatePl0010::vf0C(int param_1,undefined4 param_2)
+// 00B82FD0  ZangekiForbidStatePl0010::SafeCheck  size=5  [class]
+void __thiscall ZangekiForbidStatePl0010::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -31,8 +31,8 @@ void __thiscall ZangekiForbidStatePl0010::vf0C(int param_1,undefined4 param_2)
   return;
 }
 
-// 00B82FE0  ZangekiForbidStatePl0010::vf10  size=5  [class]
-undefined4 __thiscall ZangekiForbidStatePl0010::vf10(int param_1,int param_2)
+// 00B82FE0  ZangekiForbidStatePl0010::qteSafeCheck  size=5  [class]
+undefined4 __thiscall ZangekiForbidStatePl0010::qteSafeCheck(int param_1,int param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {

@@ -8,7 +8,7 @@
 undefined4 * __fastcall BehaviorDatsu::BehaviorDatsu(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -24,11 +24,11 @@ undefined * BehaviorDatsu::vf04(void)
   return &DAT_01be9ca8;
 }
 
-// 00AB66E0  BehaviorDatsu::vf00  size=30  [class]
-undefined4 __thiscall BehaviorDatsu::vf00(undefined4 param_1,byte param_2)
+// 00AB66E0  BehaviorDatsu::destruct  size=30  [class]
+undefined4 __thiscall BehaviorDatsu::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_100();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -428,10 +428,10 @@ void __fastcall FUN_00ac6fc0(int param_1)
   }
 }
 
-// 00ACDF10  BehaviorDatsu::vf40  size=845  [class]
+// 00ACDF10  BehaviorDatsu::startup  size=845  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 __fastcall BehaviorDatsu::vf40(int *param_1)
+undefined4 __fastcall BehaviorDatsu::startup(int *param_1)
 
 {
   int iVar1;
@@ -610,11 +610,11 @@ void __fastcall BehaviorDatsu::updateSuicideDefault(int param_1)
   *(undefined4 *)(param_1 + 0x61c) = 1;
   iVar1 = FUN_00a81410(*(undefined4 *)(param_1 + 0x4f0));
   if (iVar1 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00dd5650(&DAT_016a012c);
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -630,11 +630,11 @@ void __fastcall BehaviorDatsu::updateSuicideMechanical(int param_1)
   *(undefined4 *)(param_1 + 0x61c) = 1;
   iVar1 = FUN_00a81410(*(undefined4 *)(param_1 + 0x4f0));
   if (iVar1 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00dd5650(&DAT_016a0164);
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -650,11 +650,11 @@ void __fastcall BehaviorDatsu::updateSuicideMechanicalCase(int param_1)
   *(undefined4 *)(param_1 + 0x61c) = 1;
   iVar1 = FUN_00a81410(*(undefined4 *)(param_1 + 0x4f0));
   if (iVar1 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00dd5650(&DAT_016a01a0);
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -670,11 +670,11 @@ void __fastcall BehaviorDatsu::updateSuicideMechanicalCaseOff(int param_1)
   *(undefined4 *)(param_1 + 0x61c) = 1;
   iVar1 = FUN_00a81410(*(undefined4 *)(param_1 + 0x4f0));
   if (iVar1 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00dd5650(&DAT_016a01e0);
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -692,7 +692,7 @@ void __fastcall FUN_00ace440(int param_1)
       *(undefined4 *)(param_1 + 0x910) = 0;
       iVar2 = FUN_00a81410(*(undefined4 *)(param_1 + 0x4f0));
       if (iVar2 != 0) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -780,10 +780,10 @@ void __fastcall BehaviorDatsu::updateWaitMechanicalCase(int *param_1)
   iVar3 = FUN_00a81410(param_1[0x13c]);
   if (iVar3 == 0) {
     FUN_00dd5650(&DAT_016a0294);
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -814,10 +814,10 @@ void __fastcall BehaviorDatsu::updateSuicideDefault_2(int param_1)
   iVar1 = FUN_00a81410(*(undefined4 *)(param_1 + 0x4f0));
   if (iVar1 == 0) {
     FUN_00dd5650(&DAT_016a012c);
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -1018,10 +1018,10 @@ void __fastcall FUN_00ae4390(int *param_1)
   iVar1 = FUN_00a81410(param_1[0x13c]);
   if (iVar1 == 0) {
     FUN_00dd5650(&DAT_016a03bc);
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -1065,10 +1065,10 @@ void __fastcall BehaviorDatsu::updateWaitMechanicalCaseOff(int *param_1)
   iVar1 = FUN_00a81410(param_1[0x13c]);
   if (iVar1 == 0) {
     FUN_00dd5650(&DAT_016a0408);
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -1457,7 +1457,7 @@ void __fastcall BehaviorDatsu::vf4C(int *param_1)
   FUN_00ae4000();
   if (((param_1[0x24d] != 0) && ((*(byte *)(param_1 + 0x130) & 1) == 0)) && (param_1[0x2b2] == 0)) {
     FUN_00eaa6e0(0x3f800000,0);
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   if ((param_1[0x186] != 1) && (param_1[0x244] != 0)) {
     FUN_00d9fa80(auStack_20,param_1 + 0x14);

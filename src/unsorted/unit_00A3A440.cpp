@@ -22,7 +22,7 @@ void FUN_00a3a440(void)
   FUN_00f975c0(&DAT_01be0518);
   FUN_00fa5730(local_30,1);
   FUN_00f98b60(0xffffffff,0x3f800000,0,7);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 

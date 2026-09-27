@@ -8,8 +8,7 @@ struct hkxMaterial : public hkxAttributeHolder {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D0CB0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxMaterial(undefined4 * param_1, undefined4 param_2);  // 010D07F0
+    ~hkxMaterial();  // 010D07F0
     hkxMaterial();  // 010D0810
     hkxMaterial(undefined4 param_2);  // 010D0C60
-    ~hkxMaterial();  // 010D6180
 };

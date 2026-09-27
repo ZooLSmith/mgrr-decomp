@@ -12,6 +12,7 @@ struct hkpPrismaticConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011D5780 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011D5760 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpPrismaticConstraintData(undefined4 * param_1);  // 011AFC40
-    hkpPrismaticConstraintData();  // 011D5890
+    ~hkpPrismaticConstraintData();  // 011AFC40
+    hkpPrismaticConstraintData();  // 011AFC60
+    void ctor_011D5890();  // 011D5890
 };

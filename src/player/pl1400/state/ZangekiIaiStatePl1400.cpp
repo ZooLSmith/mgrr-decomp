@@ -113,15 +113,15 @@ undefined4 __thiscall ZangekiIaiStatePl1400::vf08(int param_1,undefined4 *param_
   return 1;
 }
 
-// 0088A460  ZangekiIaiStatePl1400::vf0C  size=74  [class]
-void __thiscall ZangekiIaiStatePl1400::vf0C(int param_1,undefined4 param_2)
+// 0088A460  ZangekiIaiStatePl1400::SafeCheck  size=74  [class]
+void __thiscall ZangekiIaiStatePl1400::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int *)(param_1 + 0x20) == 0) {
     FUN_00877160(param_2,0x3dcccccd,0x43340000,0x3f800000,0x3dcccccd);
     FUN_00877430(param_2);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -215,8 +215,8 @@ undefined4 __thiscall ZangekiIaiStatePl1400::vf20(undefined4 param_1,undefined4 
   return 1;
 }
 
-// 0089E6F0  ZangekiIaiStatePl1400::vf10  size=1228  [class]
-void __thiscall ZangekiIaiStatePl1400::vf10(float param_1,undefined4 *param_2)
+// 0089E6F0  ZangekiIaiStatePl1400::qteSafeCheck  size=1228  [class]
+void __thiscall ZangekiIaiStatePl1400::qteSafeCheck(float param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;
@@ -444,12 +444,12 @@ void __thiscall ZangekiIaiStatePl1400::vf10(float param_1,undefined4 *param_2)
     (**(code **)(*piVar8 + 0x88))(&fStack_90);
     FUN_00da8810(0x41a00000);
     FUN_00db3e80(0x41a00000,1,&DAT_01bea1d0);
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   puStack_154 = param_2;
   pfStack_158 = (float *)0x89ebb3;
-  StateMachineNode::vf10();
+  StateMachineNode::qteSafeCheck();
   return;
 }
 

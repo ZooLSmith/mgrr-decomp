@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cSlashFinishLineParts.h"
 
-// 00CBF360  cSlashFinishLineParts::vf14  size=134  [class]
-int __fastcall cSlashFinishLineParts::vf14(int param_1)
+// 00CBF360  cSlashFinishLineParts::create  size=134  [class]
+int __fastcall cSlashFinishLineParts::create(int param_1)
 
 {
   uint uVar1;

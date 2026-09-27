@@ -17,6 +17,6 @@ struct hkpListShapeBreakableMaterial : public hkpBreakableMultiMaterial {
     virtual void vf34();  // 011DDF50 slot 0x34  overrides hkpBreakableMaterial
     // non-virtual members
     hkpListShapeBreakableMaterial();  // 011DDFE0
-    ~hkpListShapeBreakableMaterial();  // 011DE000
+    void ctor_011DE000();  // 011DE000
     void ctor_011DE050();  // 011DE050
 };

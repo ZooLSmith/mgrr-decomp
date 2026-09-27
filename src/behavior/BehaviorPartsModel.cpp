@@ -11,8 +11,8 @@ undefined * BehaviorPartsModel::vf04(void)
   return &DAT_01be9c8c;
 }
 
-// 00AAE300  BehaviorPartsModel::vf00  size=105  [class]
-undefined4 * __thiscall BehaviorPartsModel::vf00(undefined4 *param_1,byte param_2)
+// 00AAE300  BehaviorPartsModel::destruct  size=105  [class]
+undefined4 * __thiscall BehaviorPartsModel::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,7 +26,7 @@ undefined4 * __thiscall BehaviorPartsModel::vf00(undefined4 *param_1,byte param_
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -104,8 +104,8 @@ void __fastcall BehaviorPartsModel::vf54(int param_1)
   return;
 }
 
-// 00ACA490  BehaviorPartsModel::vf40  size=447  [class]
-undefined4 __fastcall BehaviorPartsModel::vf40(int *param_1)
+// 00ACA490  BehaviorPartsModel::startup  size=447  [class]
+undefined4 __fastcall BehaviorPartsModel::startup(int *param_1)
 
 {
   int iVar1;
@@ -120,7 +120,7 @@ undefined4 __fastcall BehaviorPartsModel::vf40(int *param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 != 0) {
     local_c = 1;
     local_8 = 1;
@@ -151,7 +151,7 @@ undefined4 __fastcall BehaviorPartsModel::vf40(int *param_1)
         iVar1 = 0;
       }
       else {
-        iVar1 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar1 = RigidBodyCollision::RigidBodyCollision();
       }
       param_1[0x1ec] = iVar1;
       if (iVar1 != 0) {

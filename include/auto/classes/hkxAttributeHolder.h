@@ -9,5 +9,6 @@ struct hkxAttributeHolder : public hkReferencedObject {
     virtual undefined4 * vf00(byte param_2);  // 010CDF10 slot 0x0  overrides hkBaseObject
     // non-virtual members
     hkxAttributeHolder(int param_2);  // 010CD6A0
-    hkxAttributeHolder(undefined4 * param_1);  // 010D3E30
+    ~hkxAttributeHolder();  // 010CD7C0
+    hkxAttributeHolder();  // 010D3E50
 };

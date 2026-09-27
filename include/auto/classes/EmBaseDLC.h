@@ -21,31 +21,4 @@ struct EmBaseDLC : public BehaviorEmBase {
     virtual void vf370(float param_2);  // 00AA2780 slot 0x370
     // non-virtual members
     EmBaseDLC();  // 00AA73F0
-    void ctor_00AB1540();  // 00AB1540
-    void ctor_00AB15A0();  // 00AB15A0
-    void ctor_00AB1610();  // 00AB1610
-    void ctor_00AB1850();  // 00AB1850
-    void ctor_00AB1910();  // 00AB1910
-    void ctor_00AB1C50();  // 00AB1C50
-    void ctor_00AB2180();  // 00AB2180
-    void ctor_00AB2430();  // 00AB2430
-    void ctor_00AB25F0();  // 00AB25F0
-    void ctor_00AB27C0();  // 00AB27C0
-    void ctor_00AB2A40();  // 00AB2A40
-    void ctor_00AB2E30();  // 00AB2E30
-    void ctor_00AB3150();  // 00AB3150
-    void ctor_00AB3380();  // 00AB3380
-    void ctor_00AB3590();  // 00AB3590
-    void ctor_00AB3840();  // 00AB3840
-    void ctor_00AB3C60();  // 00AB3C60
-    void ctor_00AB4360();  // 00AB4360
-    void ctor_00AB4800();  // 00AB4800
-    void ctor_00AB4AB0();  // 00AB4AB0
-    void ctor_00AB4C70();  // 00AB4C70
-    void ctor_00AB4EC0();  // 00AB4EC0
-    void ctor_00AB5150();  // 00AB5150
-    void ctor_00AB5570();  // 00AB5570
-    void ctor_00AB57D0();  // 00AB57D0
-    void ctor_00AB5950();  // 00AB5950
-    void ctor_00AB5B90();  // 00AB5B90
 };

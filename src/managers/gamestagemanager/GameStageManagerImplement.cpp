@@ -1,8 +1,26 @@
 // src/managers/gamestagemanager/GameStageManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DFBD0..008DFD10, 9 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DC7B0..008DFD10, 11 functions
 
 #include "mgrr.h"
 #include "GameStageManagerImplement.h"
+
+// 008DC7B0  FUN_008dc7b0  size=6  [callgraph]
+undefined4 FUN_008dc7b0(void)
+
+{
+  return DAT_01b35d60;
+}
+
+// 008DC7C0  GameStageManagerImplement::vf10  size=29  [class]
+void GameStageManagerImplement::vf10(void)
+
+{
+  if (DAT_01b35d60 != (undefined4 *)0x0) {
+    (**(code **)*DAT_01b35d60)(1);
+    DAT_01b35d60 = (undefined4 *)0x0;
+  }
+  return;
+}
 
 // 008DFBD0  GameStageManagerImplement::vf08  size=11  [class]
 void __fastcall GameStageManagerImplement::vf08(int param_1)

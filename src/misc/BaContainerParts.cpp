@@ -28,8 +28,8 @@ void __fastcall BaContainerParts::vf54(int param_1)
   return;
 }
 
-// 0047F070  BaContainerParts::vf1B8  size=92  [class]
-void BaContainerParts::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 0047F070  BaContainerParts::setCutCrerateInfo  size=92  [class]
+void BaContainerParts::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   int iVar1;
@@ -118,8 +118,8 @@ void __fastcall BaContainerParts::vf44(int param_1)
   return;
 }
 
-// 00497760  BaContainerParts::vf40  size=977  [class]
-undefined4 __fastcall BaContainerParts::vf40(int param_1)
+// 00497760  BaContainerParts::startup  size=977  [class]
+undefined4 __fastcall BaContainerParts::startup(int param_1)
 
 {
   uint *puVar1;
@@ -137,7 +137,7 @@ undefined4 __fastcall BaContainerParts::vf40(int param_1)
   undefined4 local_164;
   undefined1 auStack_160 [348];
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 != 0) {
     FUN_009fd240();
     iVar2 = 0;
@@ -175,7 +175,7 @@ undefined4 __fastcall BaContainerParts::vf40(int param_1)
         iVar2 = 0;
       }
       else {
-        iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar2 = RigidBodyCollision::RigidBodyCollision();
       }
       *(int *)(param_1 + 0x7b0) = iVar2;
       if (iVar2 != 0) {
@@ -1944,7 +1944,7 @@ void __thiscall FUN_00498ce0(int *param_1,undefined4 param_2)
   if ((iVar2 != 0) && (iVar2 = FUN_00a7c8a0(), iVar2 != 0)) {
     FUN_00498ce0(param_2);
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   if (DAT_01885d68 != 1) {
     piVar4 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
     *piVar4 = *piVar4 + -1;
@@ -2599,7 +2599,7 @@ void __fastcall hkpCdPointCollector::hkpCdPointCollector(int param_1)
         *(float *)(param_1 + 0x1124) = fStack_39c + *(float *)(param_1 + 0x1124);
         *(float *)(param_1 + 0x1128) = (float)pfStack_398 + *(float *)(param_1 + 0x1128);
         *(float *)(param_1 + 0x112c) = (float)pfStack_394 + *(float *)(param_1 + 0x112c);
-        hkpCdPointCollector_4();
+        hkpCdPointCollector();
         if (DAT_01885d68 != 1) {
           piVar3 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
           *piVar3 = *piVar3 + -1;
@@ -2863,7 +2863,7 @@ void __fastcall BaContainerParts::vf4C(int *param_1)
     param_1[0x484] = (int)(fVar2 - (float)param_1[0x244]);
     if (fVar2 - (float)param_1[0x244] < 0.0) {
       param_1[0x483] = 0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -2884,11 +2884,11 @@ float10 __fastcall BaContainerParts::vf24(int param_1)
   return (float10)*(float *)(param_1 + 0x910);
 }
 
-// 00AB9700  BaContainerParts::vf00  size=30  [class]
-undefined4 __thiscall BaContainerParts::vf00(undefined4 param_1,byte param_2)
+// 00AB9700  BaContainerParts::destruct  size=30  [class]
+undefined4 __thiscall BaContainerParts::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_10();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

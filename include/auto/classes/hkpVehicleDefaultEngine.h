@@ -9,5 +9,6 @@ struct hkpVehicleDefaultEngine : public hkpVehicleEngine {
     virtual undefined4 * vf00(byte param_2);  // 01288E50 slot 0x0  overrides hkBaseObject
     virtual undefined vf0C();  // 01292630 slot 0xC  overrides hkpVehicleEngine
     // non-virtual members
-    hkpVehicleDefaultEngine(undefined4 * param_1);  // 01288D40
+    ~hkpVehicleDefaultEngine();  // 01288D40
+    hkpVehicleDefaultEngine();  // 01288D60
 };

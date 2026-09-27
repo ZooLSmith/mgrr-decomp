@@ -17,4 +17,6 @@ struct cRayBatteryDLC : public BehaviorAppBase {
     virtual void vf1BC(int * param_2);  // 008D4C40 slot 0x1BC  overrides Behavior
     virtual void vf1D0(undefined4 param_2);  // 008D4C50 slot 0x1D0  overrides Behavior
     virtual undefined4 vf238();  // 00AB3BE0 slot 0x238  overrides Behavior
+    // non-virtual members
+    cRayBatteryDLC();  // 00AB3B60
 };

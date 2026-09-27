@@ -1,5 +1,5 @@
 // src/misc/cPhaseAbstract.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D66370..00D66450, 15 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D66370..00D6FBB0, 21 functions
 
 #include "mgrr.h"
 #include "cPhaseAbstract.h"
@@ -117,5 +117,116 @@ undefined4 * __thiscall cPhaseAbstract::vf00(undefined4 *param_1,byte param_2)
     FUN_00dd4920(param_1);
   }
   return param_1;
+}
+
+// 00D6D8D0  cPhaseAbstract::~cPhaseAbstract  size=56  [class]
+void __fastcall cPhaseAbstract::~cPhaseAbstract(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  cEspControler::~cEspControler();
+  cEspControler::~cEspControler();
+  *param_1 = vftable;
+  iVar1 = param_1[4];
+  param_1[3] = lib::Array<int>::vftable;
+  param_1[6] = 0;
+  param_1[4] = 0;
+  if (iVar1 != 0) {
+    param_1[5] = 0;
+  }
+  return;
+}
+
+// 00D6E860  cPhaseAbstract::~cPhaseAbstract  size=56  [class]
+void __fastcall cPhaseAbstract::~cPhaseAbstract(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  cEspControler::~cEspControler();
+  cEspControler::~cEspControler();
+  *param_1 = vftable;
+  iVar1 = param_1[4];
+  param_1[3] = lib::Array<int>::vftable;
+  param_1[6] = 0;
+  param_1[4] = 0;
+  if (iVar1 != 0) {
+    param_1[5] = 0;
+  }
+  return;
+}
+
+// 00D6EAE0  cPhaseAbstract::~cPhaseAbstract  size=45  [class]
+void __fastcall cPhaseAbstract::~cPhaseAbstract(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  cEspControler::~cEspControler();
+  *param_1 = vftable;
+  iVar1 = param_1[4];
+  param_1[3] = lib::Array<int>::vftable;
+  param_1[6] = 0;
+  param_1[4] = 0;
+  if (iVar1 != 0) {
+    param_1[5] = 0;
+  }
+  return;
+}
+
+// 00D6F150  cPhaseAbstract::~cPhaseAbstract  size=45  [class]
+void __fastcall cPhaseAbstract::~cPhaseAbstract(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  cEspControler::~cEspControler();
+  *param_1 = vftable;
+  iVar1 = param_1[4];
+  param_1[3] = lib::Array<int>::vftable;
+  param_1[6] = 0;
+  param_1[4] = 0;
+  if (iVar1 != 0) {
+    param_1[5] = 0;
+  }
+  return;
+}
+
+// 00D6FA30  cPhaseAbstract::~cPhaseAbstract  size=45  [class]
+void __fastcall cPhaseAbstract::~cPhaseAbstract(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  cEspControler::~cEspControler();
+  *param_1 = vftable;
+  iVar1 = param_1[4];
+  param_1[3] = lib::Array<int>::vftable;
+  param_1[6] = 0;
+  param_1[4] = 0;
+  if (iVar1 != 0) {
+    param_1[5] = 0;
+  }
+  return;
+}
+
+// 00D6FBB0  cPhaseAbstract::~cPhaseAbstract  size=56  [class]
+void __fastcall cPhaseAbstract::~cPhaseAbstract(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  cEspControler::~cEspControler();
+  cEspControler::~cEspControler();
+  *param_1 = vftable;
+  iVar1 = param_1[4];
+  param_1[3] = lib::Array<int>::vftable;
+  param_1[6] = 0;
+  param_1[4] = 0;
+  if (iVar1 != 0) {
+    param_1[5] = 0;
+  }
+  return;
 }
 

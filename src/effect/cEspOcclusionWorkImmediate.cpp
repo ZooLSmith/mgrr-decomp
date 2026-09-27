@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEspOcclusionWorkImmediate.h"
 
-// 00ED84B0  cEspOcclusionWorkImmediate::vf04  size=76  [class]
-void __fastcall cEspOcclusionWorkImmediate::vf04(int param_1)
+// 00ED84B0  cEspOcclusionWorkImmediate::draw  size=76  [class]
+void __fastcall cEspOcclusionWorkImmediate::draw(int param_1)
 
 {
   int iVar1;
@@ -16,7 +16,7 @@ void __fastcall cEspOcclusionWorkImmediate::vf04(int param_1)
     return;
   }
   FUN_00eca020(iVar1);
-  cEspDrawWork::vf04();
+  cEspDrawWork::draw();
   FUN_00ec6ac0(iVar1);
   *(undefined4 *)(*(int *)(param_1 + 0xd0) + 4) = 1;
   return;

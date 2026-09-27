@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp28::esp28(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp28::esp28(undefined4 *param_1)
 undefined4 __thiscall esp28::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -375,9 +375,9 @@ LAB_00f24287:
   return;
 }
 
-// 00F352F0  esp28::vf04  size=622  [class]
+// 00F352F0  esp28::preTrans  size=622  [class]
 undefined4 __thiscall
-esp28::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp28::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   float fVar1;
@@ -391,7 +391,7 @@ esp28::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   float *pfVar9;
   uint uVar10;
   
-  iVar8 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar8 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar8 != 0) && (iVar8 = FUN_00f12b50(), iVar8 != 0)) {
     if (*(int *)(param_1 + 0x50) != 0) {
       if (*(short *)(param_1 + 0x400) != -1) {

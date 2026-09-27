@@ -83,8 +83,8 @@ undefined4 __thiscall JumpStatePl0010::vf08(int param_1,undefined4 *param_2)
   return 1;
 }
 
-// 00BAB960  JumpStatePl0010::vf0C  size=246  [class]
-void __thiscall JumpStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BAB960  JumpStatePl0010::SafeCheck  size=246  [class]
+void __thiscall JumpStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -128,7 +128,7 @@ void __thiscall JumpStatePl0010::vf0C(int param_1,undefined4 *param_2)
     FUN_00aa9280(*(undefined4 *)(param_1 + 0x98));
     *(undefined4 *)(param_1 + 0x90) = 1;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -283,8 +283,8 @@ undefined4 JumpStatePl0010::vf20(undefined4 *param_1)
   return 1;
 }
 
-// 00BDEE30  JumpStatePl0010::vf10  size=867  [class]
-void __thiscall JumpStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BDEE30  JumpStatePl0010::qteSafeCheck  size=867  [class]
+void __thiscall JumpStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -405,7 +405,7 @@ void __thiscall JumpStatePl0010::vf10(int param_1,undefined4 *param_2)
       FUN_00d82510(0xe,100);
     }
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

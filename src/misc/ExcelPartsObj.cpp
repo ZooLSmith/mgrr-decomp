@@ -22,14 +22,14 @@ void __fastcall ExcelPartsObj::vf4C(int *param_1)
   param_1[0x2ae] = (int)(fVar1 - (float)param_1[0x244]);
   if (fVar1 - (float)param_1[0x244] < 0.0) {
     param_1[0x2ad] = 0;
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   return;
 }
 
-// 005B0A60  ExcelPartsObj::vf1B8  size=31  [class]
-void ExcelPartsObj::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 005B0A60  ExcelPartsObj::setCutCrerateInfo  size=31  [class]
+void ExcelPartsObj::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -42,8 +42,8 @@ void ExcelPartsObj::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 005B78F0  ExcelPartsObj::vf40  size=577  [class]
-undefined4 __fastcall ExcelPartsObj::vf40(int param_1)
+// 005B78F0  ExcelPartsObj::startup  size=577  [class]
+undefined4 __fastcall ExcelPartsObj::startup(int param_1)
 
 {
   undefined4 uVar1;
@@ -55,7 +55,7 @@ undefined4 __fastcall ExcelPartsObj::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -88,7 +88,7 @@ undefined4 __fastcall ExcelPartsObj::vf40(int param_1)
     iVar2 = 0;
   }
   else {
-    iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar2 = RigidBodyCollision::RigidBodyCollision();
   }
   *(int *)(param_1 + 0x7b0) = iVar2;
   if (iVar2 != 0) {
@@ -167,7 +167,7 @@ int __thiscall ExcelPartsObj::getAttackInfo(int param_1,ushort *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7bd48);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(uint **)(iVar2 + 8);
       puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -524,11 +524,11 @@ undefined * ExcelPartsObj::vf04(void)
   return &DAT_01b351d0;
 }
 
-// 00AB76E0  ExcelPartsObj::vf00  size=30  [class]
-undefined4 __thiscall ExcelPartsObj::vf00(undefined4 param_1,byte param_2)
+// 00AB76E0  ExcelPartsObj::destruct  size=30  [class]
+undefined4 __thiscall ExcelPartsObj::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_86();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

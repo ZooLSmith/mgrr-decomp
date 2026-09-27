@@ -13,8 +13,8 @@ void Wp030a::vf50(void)
   return;
 }
 
-// 005FF640  Wp030a::vf40  size=12  [class]
-bool Wp030a::vf40(void)
+// 005FF640  Wp030a::startup  size=12  [class]
+bool Wp030a::startup(void)
 
 {
   int iVar1;
@@ -225,7 +225,7 @@ void __fastcall Wp030a::vf4C(int *param_1)
 undefined4 * __fastcall Wp030a::Wp030a(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -237,8 +237,8 @@ undefined * Wp030a::vf04(void)
   return &DAT_01b35450;
 }
 
-// 00AB7900  Wp030a::vf00  size=105  [class]
-undefined4 * __thiscall Wp030a::vf00(undefined4 *param_1,byte param_2)
+// 00AB7900  Wp030a::destruct  size=105  [class]
+undefined4 * __thiscall Wp030a::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -252,7 +252,7 @@ undefined4 * __thiscall Wp030a::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

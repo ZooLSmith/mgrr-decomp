@@ -6,4 +6,6 @@
 struct cUIDataManager {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 vf00(byte param_2);  // 00CF72B0 slot 0x0
+    // non-virtual members
+    ~cUIDataManager();  // 00CE0310
 };

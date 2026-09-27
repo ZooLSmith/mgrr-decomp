@@ -49,4 +49,5 @@ struct Emc060 : public EmBaseDLC {
     static void R0_ExplodeDie();  // 0078DC00
     static void R0_ExplodeDie_2();  // 00792FD0
     static void R0_ChanceAttack();  // 00793FC0
+    Emc060();  // 00AB25F0
 };

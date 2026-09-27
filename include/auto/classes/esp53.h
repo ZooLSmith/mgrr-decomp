@@ -8,4 +8,6 @@ struct esp53 : public esp12 {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 vf00(byte param_2);  // 00ED0C00 slot 0x0  overrides cEspBase
     virtual void vf08();  // 00F25110 slot 0x8  overrides cEspBase
+    // non-virtual members
+    esp53();  // 00ED06E0
 };

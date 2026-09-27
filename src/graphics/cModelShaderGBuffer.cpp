@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "cModelShaderGBuffer.h"
 
-// 00F8FD60  cModelShaderGBuffer::cModelShaderGBuffer_3  size=22  [class]
-void __fastcall cModelShaderGBuffer::cModelShaderGBuffer_3(undefined4 *param_1)
+// 00F8FD60  cModelShaderGBuffer::~cModelShaderGBuffer  size=22  [class]
+void __fastcall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -20,15 +20,15 @@ undefined4 * __thiscall cModelShaderGBuffer::vf00(undefined4 *param_1,byte param
 {
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00F935C0  cModelShaderGBuffer::cModelShaderGBuffer  size=47  [class]
-void __fastcall cModelShaderGBuffer::cModelShaderGBuffer(undefined4 *param_1)
+// 00F935C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=47  [class]
+void __fastcall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1)
 
 {
   param_1[0x52] = 0xffffffff;
@@ -36,11 +36,11 @@ void __fastcall cModelShaderGBuffer::cModelShaderGBuffer(undefined4 *param_1)
   param_1[0x54] = 0x1111111;
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 00F94780  cModelShaderGBuffer::cModelShaderGBuffer_2  size=2954  [class]
+// 00F94780  cModelShaderGBuffer::cModelShaderGBuffer  size=2954  [class]
 /* WARNING: Removing unreachable block (ram,0x00f9513b) */
 /* WARNING: Removing unreachable block (ram,0x00f9502b) */
 /* WARNING: Removing unreachable block (ram,0x00f94f1b) */
@@ -64,10 +64,10 @@ void __fastcall cModelShaderGBuffer::cModelShaderGBuffer(undefined4 *param_1)
 /* WARNING: Removing unreachable block (ram,0x00f950b9) */
 /* WARNING: Removing unreachable block (ram,0x00f951c9) */
 
-undefined4 * __fastcall cModelShaderGBuffer::cModelShaderGBuffer_2(undefined4 *param_1)
+undefined4 * __fastcall cModelShaderGBuffer::cModelShaderGBuffer(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0;
   param_1[0xc] = 0x1000000;
@@ -269,21 +269,20 @@ undefined4 * __fastcall cModelShaderGBuffer::cModelShaderGBuffer_2(undefined4 *p
 undefined4 * __fastcall FUN_00fc2450(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3cf4;
   return param_1;
 }
 
-// 00FC2490  cModelShaderGBuffer::cModelShaderGBuffer_11  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_11(undefined4 *param_1,byte param_2)
+// 00FC2490  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -294,21 +293,20 @@ cModelShaderGBuffer::cModelShaderGBuffer_11(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fc24d0(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_13_016f3cfc;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3cfc;
   return param_1;
 }
 
-// 00FC2510  cModelShaderGBuffer::cModelShaderGBuffer_13  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_13(undefined4 *param_1,byte param_2)
+// 00FC2510  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_13_016f3cfc;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3cfc;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -319,21 +317,20 @@ cModelShaderGBuffer::cModelShaderGBuffer_13(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fc2550(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_12_016f3d04;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d04;
   return param_1;
 }
 
-// 00FC2590  cModelShaderGBuffer::cModelShaderGBuffer_12  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_12(undefined4 *param_1,byte param_2)
+// 00FC2590  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_12_016f3d04;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d04;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -344,21 +341,20 @@ cModelShaderGBuffer::cModelShaderGBuffer_12(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fc25d0(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_15_016f3d0c;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d0c;
   return param_1;
 }
 
-// 00FC2610  cModelShaderGBuffer::cModelShaderGBuffer_15  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_15(undefined4 *param_1,byte param_2)
+// 00FC2610  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_15_016f3d0c;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d0c;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -369,21 +365,20 @@ cModelShaderGBuffer::cModelShaderGBuffer_15(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fc2650(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_14_016f3d14;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d14;
   return param_1;
 }
 
-// 00FC2690  cModelShaderGBuffer::cModelShaderGBuffer_14  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_14(undefined4 *param_1,byte param_2)
+// 00FC2690  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_14_016f3d14;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d14;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -394,21 +389,20 @@ cModelShaderGBuffer::cModelShaderGBuffer_14(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fc26d0(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_17_016f3d1c;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d1c;
   return param_1;
 }
 
-// 00FC2710  cModelShaderGBuffer::cModelShaderGBuffer_17  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_17(undefined4 *param_1,byte param_2)
+// 00FC2710  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_17_016f3d1c;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d1c;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -419,21 +413,20 @@ cModelShaderGBuffer::cModelShaderGBuffer_17(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fc2750(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_16_016f3d24;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d24;
   return param_1;
 }
 
-// 00FC2790  cModelShaderGBuffer::cModelShaderGBuffer_16  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_16(undefined4 *param_1,byte param_2)
+// 00FC2790  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_16_016f3d24;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d24;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -444,20 +437,20 @@ cModelShaderGBuffer::cModelShaderGBuffer_16(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fc27d0(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_5_016f3d2c;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d2c;
   return param_1;
 }
 
-// 00FC2810  cModelShaderGBuffer::cModelShaderGBuffer_5  size=55  [class]
-undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_5(undefined4 *param_1,byte param_2)
+// 00FC2810  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_5_016f3d2c;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d2c;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -468,20 +461,20 @@ undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_5(undefined4 *p
 undefined4 * __fastcall FUN_00fc2850(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_4_016f3d34;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d34;
   return param_1;
 }
 
-// 00FC2890  cModelShaderGBuffer::cModelShaderGBuffer_4  size=55  [class]
-undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_4(undefined4 *param_1,byte param_2)
+// 00FC2890  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_4_016f3d34;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d34;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -492,20 +485,20 @@ undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_4(undefined4 *p
 undefined4 * __fastcall FUN_00fc28d0(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_7_016f3d3c;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d3c;
   return param_1;
 }
 
-// 00FC2910  cModelShaderGBuffer::cModelShaderGBuffer_7  size=55  [class]
-undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_7(undefined4 *param_1,byte param_2)
+// 00FC2910  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_7_016f3d3c;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d3c;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -516,20 +509,20 @@ undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_7(undefined4 *p
 undefined4 * __fastcall FUN_00fc2950(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_6_016f3d44;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d44;
   return param_1;
 }
 
-// 00FC2990  cModelShaderGBuffer::cModelShaderGBuffer_6  size=55  [class]
-undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_6(undefined4 *param_1,byte param_2)
+// 00FC2990  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_6_016f3d44;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d44;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -540,20 +533,20 @@ undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_6(undefined4 *p
 undefined4 * __fastcall FUN_00fc29d0(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_9_016f3d4c;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d4c;
   return param_1;
 }
 
-// 00FC2A10  cModelShaderGBuffer::cModelShaderGBuffer_9  size=55  [class]
-undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_9(undefined4 *param_1,byte param_2)
+// 00FC2A10  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_9_016f3d4c;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d4c;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -564,20 +557,20 @@ undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_9(undefined4 *p
 undefined4 * __fastcall FUN_00fc2a50(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_8_016f3d54;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d54;
   return param_1;
 }
 
-// 00FC2A90  cModelShaderGBuffer::cModelShaderGBuffer_8  size=55  [class]
-undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_8(undefined4 *param_1,byte param_2)
+// 00FC2A90  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_8_016f3d54;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d54;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -588,21 +581,20 @@ undefined4 * __thiscall cModelShaderGBuffer::cModelShaderGBuffer_8(undefined4 *p
 undefined4 * __fastcall FUN_00fc2ad0(undefined4 *param_1)
 
 {
-  cModelShaderGBuffer::cModelShaderGBuffer_2();
-  *param_1 = &PTR_cModelShaderGBuffer_10_016f3d5c;
+  cModelShaderGBuffer::cModelShaderGBuffer();
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d5c;
   return param_1;
 }
 
-// 00FC2B10  cModelShaderGBuffer::cModelShaderGBuffer_10  size=55  [class]
-undefined4 * __thiscall
-cModelShaderGBuffer::cModelShaderGBuffer_10(undefined4 *param_1,byte param_2)
+// 00FC2B10  cModelShaderGBuffer::~cModelShaderGBuffer  size=55  [class]
+undefined4 * __thiscall cModelShaderGBuffer::~cModelShaderGBuffer(undefined4 *param_1,byte param_2)
 
 {
-  *param_1 = &PTR_cModelShaderGBuffer_10_016f3d5c;
+  *param_1 = &PTR__cModelShaderGBuffer_016f3d5c;
   FUN_00fc0f40();
   *param_1 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -630,7 +622,7 @@ undefined4 * __fastcall FUN_00fc2b50(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3d64;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -706,7 +698,7 @@ undefined4 * __thiscall FUN_00fc3140(undefined4 *param_1,byte param_2)
 {
   *param_1 = &PTR_FUN_016f3d64;
   FUN_00fc0b20();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -730,7 +722,7 @@ undefined4 * __thiscall FUN_00fc31b0(undefined4 *param_1,byte param_2)
   FUN_00fc0b20();
   *param_1 = &PTR_FUN_016f3d64;
   FUN_00fc0b20();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -774,7 +766,7 @@ void __fastcall FUN_00fc3240(undefined4 *param_1)
   extraout_ECX[0x2d] = 0xffffffff;
   *extraout_ECX = &PTR_FUN_016f3d64;
   FUN_00fc0b20();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -914,7 +906,7 @@ undefined4 * __thiscall FUN_00fc3550(undefined4 *param_1,byte param_2)
   param_1[0x27] = 0xffffffff;
   *param_1 = &PTR_FUN_016f3d64;
   FUN_00fc0b20();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -949,7 +941,7 @@ undefined4 * __thiscall FUN_00fc3620(undefined4 *param_1,byte param_2)
   param_1[0x27] = 0xffffffff;
   *param_1 = &PTR_FUN_016f3d64;
   FUN_00fc0b20();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -975,7 +967,7 @@ undefined4 * __fastcall FUN_00fc3690(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3d9c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1087,7 +1079,7 @@ undefined4 * __thiscall FUN_00fc3c90(undefined4 *param_1,byte param_2)
 {
   *param_1 = &PTR_FUN_016f3d9c;
   FUN_00fc13d0();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1146,7 +1138,7 @@ undefined4 * __thiscall FUN_00fc3f20(undefined4 *param_1,byte param_2)
   FUN_00fc13d0();
   *param_1 = &PTR_FUN_016f3d9c;
   FUN_00fc13d0();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1182,7 +1174,7 @@ undefined4 * __thiscall FUN_00fc4020(undefined4 *param_1,byte param_2)
   param_1[0x36] = 0xffffffff;
   *param_1 = &PTR_FUN_016f3d9c;
   FUN_00fc13d0();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1244,7 +1236,7 @@ void __fastcall FUN_00fc41d0(undefined4 *param_1)
   extraout_ECX_00[0x36] = 0xffffffff;
   *extraout_ECX_00 = &PTR_FUN_016f3d9c;
   FUN_00fc13d0();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -1274,7 +1266,7 @@ undefined4 * __fastcall FUN_00fc4270(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3dbc;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1343,7 +1335,7 @@ undefined4 * __thiscall FUN_00fc4630(undefined4 *param_1,byte param_2)
   param_1[0x13] = 0xffffffff;
   param_1[0x14] = 0xffffffff;
   param_1[0x15] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1524,7 +1516,7 @@ undefined4 * __fastcall FUN_00fc4a30(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3dc4;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1573,7 +1565,7 @@ void __fastcall FUN_00fc4c30(int param_1)
 undefined4 * __fastcall FUN_00fc4c60(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3dcc;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1612,7 +1604,7 @@ void __fastcall FUN_00fc4d90(int param_1)
 undefined4 * __fastcall FUN_00fc4dc0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3dd4;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1645,7 +1637,7 @@ void __fastcall FUN_00fc4ed0(int param_1)
 undefined4 * __fastcall FUN_00fc4ef0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3ddc;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1677,7 +1669,7 @@ void __fastcall FUN_00fc5000(int param_1)
 undefined4 * __fastcall FUN_00fc5020(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3de4;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1719,10 +1711,10 @@ void cModelShaderGBuffer::vf04(void)
   return;
 }
 
-// 015F4200  cModelShaderGBuffer::cModelShaderGBuffer_18  size=83  [class]
+// 015F4200  cModelShaderGBuffer::~cModelShaderGBuffer  size=83  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_18(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01eeea98 = 0xffffffff;
@@ -1736,14 +1728,14 @@ void cModelShaderGBuffer::cModelShaderGBuffer_18(void)
   _DAT_01eeeaac = 0xffffffff;
   _DAT_01eee950 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F4260  cModelShaderGBuffer::cModelShaderGBuffer_19  size=53  [class]
+// 015F4260  cModelShaderGBuffer::~cModelShaderGBuffer  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_19(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01eeec50 = 0xffffffff;
@@ -1751,14 +1743,14 @@ void cModelShaderGBuffer::cModelShaderGBuffer_19(void)
   _DAT_01eeec58 = 0x1111111;
   _DAT_01eeeb08 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F42A0  cModelShaderGBuffer::cModelShaderGBuffer_20  size=68  [class]
+// 015F42A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=68  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_20(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01eeede4 = 0xffffffff;
@@ -1769,14 +1761,14 @@ void cModelShaderGBuffer::cModelShaderGBuffer_20(void)
   _DAT_01eeede0 = 0x1111111;
   _DAT_01eeec90 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F42F0  cModelShaderGBuffer::cModelShaderGBuffer_21  size=83  [class]
+// 015F42F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=83  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_21(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01eeef84 = 0xffffffff;
@@ -1790,14 +1782,14 @@ void cModelShaderGBuffer::cModelShaderGBuffer_21(void)
   _DAT_01eeef98 = 0xffffffff;
   _DAT_01eeee18 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F4350  cModelShaderGBuffer::cModelShaderGBuffer_22  size=83  [class]
+// 015F4350  cModelShaderGBuffer::~cModelShaderGBuffer  size=83  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_22(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01eef154 = 0xffffffff;
@@ -1811,14 +1803,14 @@ void cModelShaderGBuffer::cModelShaderGBuffer_22(void)
   _DAT_01eef168 = 0xffffffff;
   _DAT_01eeefe8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F43B0  cModelShaderGBuffer::cModelShaderGBuffer_23  size=70  [class]
+// 015F43B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=70  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_23(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01eef308 = 0x1111111;
@@ -1829,7 +1821,7 @@ void cModelShaderGBuffer::cModelShaderGBuffer_23(void)
   _DAT_01eef310 = 0xffffffff;
   _DAT_01eef1b8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -1881,7 +1873,7 @@ void FUN_015f6680(void)
   _DAT_01f71388 = 0xffffffff;
   _DAT_01f71390 = 0xffffffff;
   _DAT_01f71394 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -1925,7 +1917,7 @@ void FUN_015f6750(void)
   _DAT_01f71440 = 0xffffffff;
   _DAT_01f71448 = 0xffffffff;
   _DAT_01f7144c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -1963,7 +1955,7 @@ void FUN_015f6820(void)
   _DAT_01f714f8 = 0xffffffff;
   _DAT_01f71500 = 0xffffffff;
   _DAT_01f71504 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2001,7 +1993,7 @@ void FUN_015f68d0(void)
   _DAT_01f71598 = 0xffffffff;
   _DAT_01f715a0 = 0xffffffff;
   _DAT_01f715a4 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2039,7 +2031,7 @@ void FUN_015f6980(void)
   _DAT_01f71638 = 0xffffffff;
   _DAT_01f71640 = 0xffffffff;
   _DAT_01f71644 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2074,7 +2066,7 @@ void FUN_015f6a30(void)
   _DAT_01f716d8 = 0xffffffff;
   _DAT_01f716e0 = 0xffffffff;
   _DAT_01f716e4 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2109,7 +2101,7 @@ void FUN_015f6ad0(void)
   _DAT_01f71770 = 0xffffffff;
   _DAT_01f71778 = 0xffffffff;
   _DAT_01f7177c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2144,7 +2136,7 @@ void FUN_015f6b70(void)
   _DAT_01f71808 = 0xffffffff;
   _DAT_01f71810 = 0xffffffff;
   _DAT_01f71814 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2204,7 +2196,7 @@ void FUN_015f6c30(void)
   _DAT_01f71a10 = 0xffffffff;
   _DAT_01f71a18 = 0xffffffff;
   _DAT_01f71a1c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2248,7 +2240,7 @@ void FUN_015f6d00(void)
   _DAT_01f71ac8 = 0xffffffff;
   _DAT_01f71ad0 = 0xffffffff;
   _DAT_01f71ad4 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2286,7 +2278,7 @@ void FUN_015f6dd0(void)
   _DAT_01f71b80 = 0xffffffff;
   _DAT_01f71b88 = 0xffffffff;
   _DAT_01f71b8c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2324,7 +2316,7 @@ void FUN_015f6e80(void)
   _DAT_01f71c20 = 0xffffffff;
   _DAT_01f71c28 = 0xffffffff;
   _DAT_01f71c2c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2362,7 +2354,7 @@ void FUN_015f6f30(void)
   _DAT_01f71cc0 = 0xffffffff;
   _DAT_01f71cc8 = 0xffffffff;
   _DAT_01f71ccc = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2397,7 +2389,7 @@ void FUN_015f6fe0(void)
   _DAT_01f71d60 = 0xffffffff;
   _DAT_01f71d68 = 0xffffffff;
   _DAT_01f71d6c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2432,7 +2424,7 @@ void FUN_015f7080(void)
   _DAT_01f71df8 = 0xffffffff;
   _DAT_01f71e00 = 0xffffffff;
   _DAT_01f71e04 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2467,7 +2459,7 @@ void FUN_015f7120(void)
   _DAT_01f71e90 = 0xffffffff;
   _DAT_01f71e98 = 0xffffffff;
   _DAT_01f71e9c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2519,7 +2511,7 @@ void FUN_015f71d0(void)
   _DAT_01f71fe0 = 0xffffffff;
   _DAT_01f71fe8 = 0xffffffff;
   _DAT_01f71fec = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2563,7 +2555,7 @@ void FUN_015f72a0(void)
   _DAT_01f72098 = 0xffffffff;
   _DAT_01f720a0 = 0xffffffff;
   _DAT_01f720a4 = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2601,7 +2593,7 @@ void FUN_015f7370(void)
   _DAT_01f72150 = 0xffffffff;
   _DAT_01f72158 = 0xffffffff;
   _DAT_01f7215c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2639,7 +2631,7 @@ void FUN_015f7420(void)
   _DAT_01f721f0 = 0xffffffff;
   _DAT_01f721f8 = 0xffffffff;
   _DAT_01f721fc = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -2677,4383 +2669,4383 @@ void FUN_015f74d0(void)
   _DAT_01f72290 = 0xffffffff;
   _DAT_01f72298 = 0xffffffff;
   _DAT_01f7229c = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7580  cModelShaderGBuffer::cModelShaderGBuffer_24  size=25  [class]
+// 015F7580  cModelShaderGBuffer::~cModelShaderGBuffer  size=25  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_24(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01f72a70 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F75A0  cModelShaderGBuffer::cModelShaderGBuffer_25  size=25  [class]
+// 015F75A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=25  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_25(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01f72bb8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F75C0  cModelShaderGBuffer::cModelShaderGBuffer_26  size=25  [class]
+// 015F75C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=25  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_26(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
   _DAT_01f72d00 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F75E0  cModelShaderGBuffer::cModelShaderGBuffer_27  size=40  [class]
+// 015F75E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_27(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f72e48 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f72e48 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f72e48 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7610  cModelShaderGBuffer::cModelShaderGBuffer_28  size=40  [class]
+// 015F7610  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_28(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f72f90 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f72f90 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f72f90 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7640  cModelShaderGBuffer::cModelShaderGBuffer_29  size=40  [class]
+// 015F7640  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_29(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f730d8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f730d8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f730d8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7670  cModelShaderGBuffer::cModelShaderGBuffer_30  size=40  [class]
+// 015F7670  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_30(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73220 = &PTR_cModelShaderGBuffer_13_016f3cfc;
+  _DAT_01f73220 = &PTR__cModelShaderGBuffer_016f3cfc;
   FUN_00fc0f40();
   _DAT_01f73220 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F76A0  cModelShaderGBuffer::cModelShaderGBuffer_31  size=40  [class]
+// 015F76A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_31(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73368 = &PTR_cModelShaderGBuffer_13_016f3cfc;
+  _DAT_01f73368 = &PTR__cModelShaderGBuffer_016f3cfc;
   FUN_00fc0f40();
   _DAT_01f73368 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F76D0  cModelShaderGBuffer::cModelShaderGBuffer_32  size=40  [class]
+// 015F76D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_32(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f734b0 = &PTR_cModelShaderGBuffer_12_016f3d04;
+  _DAT_01f734b0 = &PTR__cModelShaderGBuffer_016f3d04;
   FUN_00fc0f40();
   _DAT_01f734b0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7700  cModelShaderGBuffer::cModelShaderGBuffer_33  size=40  [class]
+// 015F7700  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_33(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f735f8 = &PTR_cModelShaderGBuffer_15_016f3d0c;
+  _DAT_01f735f8 = &PTR__cModelShaderGBuffer_016f3d0c;
   FUN_00fc0f40();
   _DAT_01f735f8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7730  cModelShaderGBuffer::cModelShaderGBuffer_34  size=40  [class]
+// 015F7730  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_34(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73740 = &PTR_cModelShaderGBuffer_14_016f3d14;
+  _DAT_01f73740 = &PTR__cModelShaderGBuffer_016f3d14;
   FUN_00fc0f40();
   _DAT_01f73740 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7760  cModelShaderGBuffer::cModelShaderGBuffer_35  size=40  [class]
+// 015F7760  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_35(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73888 = &PTR_cModelShaderGBuffer_17_016f3d1c;
+  _DAT_01f73888 = &PTR__cModelShaderGBuffer_016f3d1c;
   FUN_00fc0f40();
   _DAT_01f73888 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7790  cModelShaderGBuffer::cModelShaderGBuffer_36  size=40  [class]
+// 015F7790  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_36(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f739d0 = &PTR_cModelShaderGBuffer_16_016f3d24;
+  _DAT_01f739d0 = &PTR__cModelShaderGBuffer_016f3d24;
   FUN_00fc0f40();
   _DAT_01f739d0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F77C0  cModelShaderGBuffer::cModelShaderGBuffer_37  size=40  [class]
+// 015F77C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_37(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73b18 = &PTR_cModelShaderGBuffer_5_016f3d2c;
+  _DAT_01f73b18 = &PTR__cModelShaderGBuffer_016f3d2c;
   FUN_00fc0f40();
   _DAT_01f73b18 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F77F0  cModelShaderGBuffer::cModelShaderGBuffer_38  size=40  [class]
+// 015F77F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_38(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73c60 = &PTR_cModelShaderGBuffer_4_016f3d34;
+  _DAT_01f73c60 = &PTR__cModelShaderGBuffer_016f3d34;
   FUN_00fc0f40();
   _DAT_01f73c60 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7820  cModelShaderGBuffer::cModelShaderGBuffer_39  size=40  [class]
+// 015F7820  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_39(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73da8 = &PTR_cModelShaderGBuffer_7_016f3d3c;
+  _DAT_01f73da8 = &PTR__cModelShaderGBuffer_016f3d3c;
   FUN_00fc0f40();
   _DAT_01f73da8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7850  cModelShaderGBuffer::cModelShaderGBuffer_40  size=40  [class]
+// 015F7850  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_40(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f73ef0 = &PTR_cModelShaderGBuffer_7_016f3d3c;
+  _DAT_01f73ef0 = &PTR__cModelShaderGBuffer_016f3d3c;
   FUN_00fc0f40();
   _DAT_01f73ef0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7880  cModelShaderGBuffer::cModelShaderGBuffer_41  size=40  [class]
+// 015F7880  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_41(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74038 = &PTR_cModelShaderGBuffer_6_016f3d44;
+  _DAT_01f74038 = &PTR__cModelShaderGBuffer_016f3d44;
   FUN_00fc0f40();
   _DAT_01f74038 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F78B0  cModelShaderGBuffer::cModelShaderGBuffer_42  size=40  [class]
+// 015F78B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_42(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74180 = &PTR_cModelShaderGBuffer_6_016f3d44;
+  _DAT_01f74180 = &PTR__cModelShaderGBuffer_016f3d44;
   FUN_00fc0f40();
   _DAT_01f74180 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F78E0  cModelShaderGBuffer::cModelShaderGBuffer_43  size=40  [class]
+// 015F78E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_43(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f742c8 = &PTR_cModelShaderGBuffer_6_016f3d44;
+  _DAT_01f742c8 = &PTR__cModelShaderGBuffer_016f3d44;
   FUN_00fc0f40();
   _DAT_01f742c8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7910  cModelShaderGBuffer::cModelShaderGBuffer_44  size=40  [class]
+// 015F7910  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_44(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74410 = &PTR_cModelShaderGBuffer_9_016f3d4c;
+  _DAT_01f74410 = &PTR__cModelShaderGBuffer_016f3d4c;
   FUN_00fc0f40();
   _DAT_01f74410 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7940  cModelShaderGBuffer::cModelShaderGBuffer_45  size=40  [class]
+// 015F7940  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_45(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74558 = &PTR_cModelShaderGBuffer_9_016f3d4c;
+  _DAT_01f74558 = &PTR__cModelShaderGBuffer_016f3d4c;
   FUN_00fc0f40();
   _DAT_01f74558 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7970  cModelShaderGBuffer::cModelShaderGBuffer_46  size=40  [class]
+// 015F7970  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_46(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f746a0 = &PTR_cModelShaderGBuffer_8_016f3d54;
+  _DAT_01f746a0 = &PTR__cModelShaderGBuffer_016f3d54;
   FUN_00fc0f40();
   _DAT_01f746a0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F79A0  cModelShaderGBuffer::cModelShaderGBuffer_47  size=40  [class]
+// 015F79A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_47(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f747e8 = &PTR_cModelShaderGBuffer_10_016f3d5c;
+  _DAT_01f747e8 = &PTR__cModelShaderGBuffer_016f3d5c;
   FUN_00fc0f40();
   _DAT_01f747e8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F79D0  cModelShaderGBuffer::cModelShaderGBuffer_48  size=40  [class]
+// 015F79D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_48(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74930 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f74930 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f74930 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7A00  cModelShaderGBuffer::cModelShaderGBuffer_49  size=40  [class]
+// 015F7A00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_49(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74a78 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f74a78 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f74a78 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7A30  cModelShaderGBuffer::cModelShaderGBuffer_50  size=40  [class]
+// 015F7A30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_50(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74bc0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f74bc0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f74bc0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7A60  cModelShaderGBuffer::cModelShaderGBuffer_51  size=40  [class]
+// 015F7A60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_51(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74d08 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f74d08 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f74d08 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7A90  cModelShaderGBuffer::cModelShaderGBuffer_52  size=40  [class]
+// 015F7A90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_52(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74e50 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f74e50 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f74e50 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7AC0  cModelShaderGBuffer::cModelShaderGBuffer_53  size=40  [class]
+// 015F7AC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_53(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f74f98 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f74f98 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f74f98 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7AF0  cModelShaderGBuffer::cModelShaderGBuffer_54  size=40  [class]
+// 015F7AF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_54(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f750e0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f750e0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f750e0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7B20  cModelShaderGBuffer::cModelShaderGBuffer_55  size=40  [class]
+// 015F7B20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_55(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75228 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75228 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75228 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7B50  cModelShaderGBuffer::cModelShaderGBuffer_56  size=40  [class]
+// 015F7B50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_56(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75370 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75370 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75370 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7B80  cModelShaderGBuffer::cModelShaderGBuffer_57  size=40  [class]
+// 015F7B80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_57(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f754b8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f754b8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f754b8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7BB0  cModelShaderGBuffer::cModelShaderGBuffer_58  size=40  [class]
+// 015F7BB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_58(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75600 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75600 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75600 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7BE0  cModelShaderGBuffer::cModelShaderGBuffer_59  size=40  [class]
+// 015F7BE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_59(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75748 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75748 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75748 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7C10  cModelShaderGBuffer::cModelShaderGBuffer_60  size=40  [class]
+// 015F7C10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_60(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75890 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75890 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75890 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7C40  cModelShaderGBuffer::cModelShaderGBuffer_61  size=40  [class]
+// 015F7C40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_61(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f759d8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f759d8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f759d8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7C70  cModelShaderGBuffer::cModelShaderGBuffer_62  size=40  [class]
+// 015F7C70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_62(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75b20 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75b20 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75b20 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7CA0  cModelShaderGBuffer::cModelShaderGBuffer_63  size=40  [class]
+// 015F7CA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_63(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75c68 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75c68 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75c68 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7CD0  cModelShaderGBuffer::cModelShaderGBuffer_64  size=40  [class]
+// 015F7CD0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_64(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75db0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75db0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75db0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7D00  cModelShaderGBuffer::cModelShaderGBuffer_65  size=40  [class]
+// 015F7D00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_65(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f75ef8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f75ef8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f75ef8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7D30  cModelShaderGBuffer::cModelShaderGBuffer_66  size=40  [class]
+// 015F7D30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_66(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76040 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76040 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76040 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7D60  cModelShaderGBuffer::cModelShaderGBuffer_67  size=40  [class]
+// 015F7D60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_67(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76188 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76188 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76188 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7D90  cModelShaderGBuffer::cModelShaderGBuffer_68  size=40  [class]
+// 015F7D90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_68(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f762d0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f762d0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f762d0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7DC0  cModelShaderGBuffer::cModelShaderGBuffer_69  size=40  [class]
+// 015F7DC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_69(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76418 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76418 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76418 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7DF0  cModelShaderGBuffer::cModelShaderGBuffer_70  size=40  [class]
+// 015F7DF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_70(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76560 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76560 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76560 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7E20  cModelShaderGBuffer::cModelShaderGBuffer_71  size=40  [class]
+// 015F7E20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_71(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f766a8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f766a8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f766a8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7E50  cModelShaderGBuffer::cModelShaderGBuffer_72  size=40  [class]
+// 015F7E50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_72(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f767f0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f767f0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f767f0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7E80  cModelShaderGBuffer::cModelShaderGBuffer_73  size=40  [class]
+// 015F7E80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_73(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76938 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76938 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76938 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7EB0  cModelShaderGBuffer::cModelShaderGBuffer_74  size=40  [class]
+// 015F7EB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_74(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76a80 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76a80 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76a80 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7EE0  cModelShaderGBuffer::cModelShaderGBuffer_75  size=40  [class]
+// 015F7EE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_75(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76bc8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76bc8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76bc8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7F10  cModelShaderGBuffer::cModelShaderGBuffer_76  size=40  [class]
+// 015F7F10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_76(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76d10 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76d10 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76d10 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7F40  cModelShaderGBuffer::cModelShaderGBuffer_77  size=40  [class]
+// 015F7F40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_77(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76e58 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76e58 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76e58 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7F70  cModelShaderGBuffer::cModelShaderGBuffer_78  size=40  [class]
+// 015F7F70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_78(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f76fa0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f76fa0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f76fa0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7FA0  cModelShaderGBuffer::cModelShaderGBuffer_79  size=40  [class]
+// 015F7FA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_79(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f770e8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f770e8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f770e8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F7FD0  cModelShaderGBuffer::cModelShaderGBuffer_80  size=40  [class]
+// 015F7FD0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_80(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77230 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77230 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77230 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8000  cModelShaderGBuffer::cModelShaderGBuffer_81  size=40  [class]
+// 015F8000  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_81(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77378 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77378 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77378 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8030  cModelShaderGBuffer::cModelShaderGBuffer_82  size=40  [class]
+// 015F8030  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_82(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f774c0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f774c0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f774c0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8060  cModelShaderGBuffer::cModelShaderGBuffer_83  size=40  [class]
+// 015F8060  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_83(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77608 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77608 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77608 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8090  cModelShaderGBuffer::cModelShaderGBuffer_84  size=40  [class]
+// 015F8090  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_84(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77750 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77750 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77750 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F80C0  cModelShaderGBuffer::cModelShaderGBuffer_85  size=40  [class]
+// 015F80C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_85(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77898 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77898 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77898 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F80F0  cModelShaderGBuffer::cModelShaderGBuffer_86  size=40  [class]
+// 015F80F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_86(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f779e0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f779e0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f779e0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8120  cModelShaderGBuffer::cModelShaderGBuffer_87  size=40  [class]
+// 015F8120  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_87(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77b28 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77b28 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77b28 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8150  cModelShaderGBuffer::cModelShaderGBuffer_88  size=40  [class]
+// 015F8150  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_88(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77c70 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77c70 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77c70 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8180  cModelShaderGBuffer::cModelShaderGBuffer_89  size=40  [class]
+// 015F8180  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_89(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77db8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77db8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77db8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F81B0  cModelShaderGBuffer::cModelShaderGBuffer_90  size=40  [class]
+// 015F81B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_90(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f77f00 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f77f00 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f77f00 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F81E0  cModelShaderGBuffer::cModelShaderGBuffer_91  size=40  [class]
+// 015F81E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_91(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78048 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78048 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78048 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8210  cModelShaderGBuffer::cModelShaderGBuffer_92  size=40  [class]
+// 015F8210  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_92(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78190 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78190 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78190 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8240  cModelShaderGBuffer::cModelShaderGBuffer_93  size=40  [class]
+// 015F8240  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_93(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f782d8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f782d8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f782d8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8270  cModelShaderGBuffer::cModelShaderGBuffer_94  size=40  [class]
+// 015F8270  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_94(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78420 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78420 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78420 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F82A0  cModelShaderGBuffer::cModelShaderGBuffer_95  size=40  [class]
+// 015F82A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_95(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78568 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78568 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78568 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F82D0  cModelShaderGBuffer::cModelShaderGBuffer_96  size=40  [class]
+// 015F82D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_96(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f786b0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f786b0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f786b0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8300  cModelShaderGBuffer::cModelShaderGBuffer_97  size=40  [class]
+// 015F8300  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_97(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f787f8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f787f8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f787f8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8330  cModelShaderGBuffer::cModelShaderGBuffer_98  size=40  [class]
+// 015F8330  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_98(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78940 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78940 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78940 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8360  cModelShaderGBuffer::cModelShaderGBuffer_99  size=40  [class]
+// 015F8360  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_99(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78a88 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78a88 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78a88 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8390  cModelShaderGBuffer::cModelShaderGBuffer_100  size=40  [class]
+// 015F8390  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_100(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78bd0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78bd0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78bd0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F83C0  cModelShaderGBuffer::cModelShaderGBuffer_101  size=40  [class]
+// 015F83C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_101(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78d18 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78d18 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78d18 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F83F0  cModelShaderGBuffer::cModelShaderGBuffer_102  size=40  [class]
+// 015F83F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_102(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78e60 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78e60 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78e60 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8420  cModelShaderGBuffer::cModelShaderGBuffer_103  size=40  [class]
+// 015F8420  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_103(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f78fa8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f78fa8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f78fa8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8450  cModelShaderGBuffer::cModelShaderGBuffer_104  size=40  [class]
+// 015F8450  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_104(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f790f0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f790f0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f790f0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8480  cModelShaderGBuffer::cModelShaderGBuffer_105  size=40  [class]
+// 015F8480  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_105(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79238 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79238 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79238 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F84B0  cModelShaderGBuffer::cModelShaderGBuffer_106  size=40  [class]
+// 015F84B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_106(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79380 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79380 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79380 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F84E0  cModelShaderGBuffer::cModelShaderGBuffer_107  size=40  [class]
+// 015F84E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_107(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f794c8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f794c8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f794c8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8510  cModelShaderGBuffer::cModelShaderGBuffer_108  size=40  [class]
+// 015F8510  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_108(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79610 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79610 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79610 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8540  cModelShaderGBuffer::cModelShaderGBuffer_109  size=40  [class]
+// 015F8540  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_109(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79758 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79758 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79758 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8570  cModelShaderGBuffer::cModelShaderGBuffer_110  size=40  [class]
+// 015F8570  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_110(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f798a0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f798a0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f798a0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F85A0  cModelShaderGBuffer::cModelShaderGBuffer_111  size=40  [class]
+// 015F85A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_111(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f799e8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f799e8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f799e8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F85D0  cModelShaderGBuffer::cModelShaderGBuffer_112  size=40  [class]
+// 015F85D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_112(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79b30 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79b30 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79b30 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8600  cModelShaderGBuffer::cModelShaderGBuffer_113  size=40  [class]
+// 015F8600  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_113(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79c78 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79c78 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79c78 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8630  cModelShaderGBuffer::cModelShaderGBuffer_114  size=40  [class]
+// 015F8630  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_114(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79dc0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79dc0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79dc0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8660  cModelShaderGBuffer::cModelShaderGBuffer_115  size=40  [class]
+// 015F8660  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_115(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f79f08 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f79f08 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f79f08 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8690  cModelShaderGBuffer::cModelShaderGBuffer_116  size=40  [class]
+// 015F8690  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_116(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a050 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a050 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a050 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F86C0  cModelShaderGBuffer::cModelShaderGBuffer_117  size=40  [class]
+// 015F86C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_117(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a198 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a198 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a198 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F86F0  cModelShaderGBuffer::cModelShaderGBuffer_118  size=40  [class]
+// 015F86F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_118(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a2e0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a2e0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a2e0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8720  cModelShaderGBuffer::cModelShaderGBuffer_119  size=40  [class]
+// 015F8720  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_119(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a428 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a428 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a428 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8750  cModelShaderGBuffer::cModelShaderGBuffer_120  size=40  [class]
+// 015F8750  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_120(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a570 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a570 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a570 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8780  cModelShaderGBuffer::cModelShaderGBuffer_121  size=40  [class]
+// 015F8780  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_121(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a6b8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a6b8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a6b8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F87B0  cModelShaderGBuffer::cModelShaderGBuffer_122  size=40  [class]
+// 015F87B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_122(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a800 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a800 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a800 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F87E0  cModelShaderGBuffer::cModelShaderGBuffer_123  size=40  [class]
+// 015F87E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_123(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7a948 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7a948 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7a948 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8810  cModelShaderGBuffer::cModelShaderGBuffer_124  size=40  [class]
+// 015F8810  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_124(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7aa90 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7aa90 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7aa90 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8840  cModelShaderGBuffer::cModelShaderGBuffer_125  size=40  [class]
+// 015F8840  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_125(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7abd8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7abd8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7abd8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8870  cModelShaderGBuffer::cModelShaderGBuffer_126  size=40  [class]
+// 015F8870  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_126(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ad20 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ad20 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ad20 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F88A0  cModelShaderGBuffer::cModelShaderGBuffer_127  size=40  [class]
+// 015F88A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_127(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ae68 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ae68 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ae68 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F88D0  cModelShaderGBuffer::cModelShaderGBuffer_128  size=40  [class]
+// 015F88D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_128(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7afb0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7afb0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7afb0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8900  cModelShaderGBuffer::cModelShaderGBuffer_129  size=40  [class]
+// 015F8900  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_129(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b0f8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b0f8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b0f8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8930  cModelShaderGBuffer::cModelShaderGBuffer_130  size=40  [class]
+// 015F8930  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_130(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b240 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b240 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b240 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8960  cModelShaderGBuffer::cModelShaderGBuffer_131  size=40  [class]
+// 015F8960  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_131(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b388 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b388 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b388 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8990  cModelShaderGBuffer::cModelShaderGBuffer_132  size=40  [class]
+// 015F8990  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_132(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b4d0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b4d0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b4d0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F89C0  cModelShaderGBuffer::cModelShaderGBuffer_133  size=40  [class]
+// 015F89C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_133(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b618 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b618 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b618 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F89F0  cModelShaderGBuffer::cModelShaderGBuffer_134  size=40  [class]
+// 015F89F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_134(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b760 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b760 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b760 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8A20  cModelShaderGBuffer::cModelShaderGBuffer_135  size=40  [class]
+// 015F8A20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_135(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b8a8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b8a8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b8a8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8A50  cModelShaderGBuffer::cModelShaderGBuffer_136  size=40  [class]
+// 015F8A50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_136(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7b9f0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7b9f0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7b9f0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8A80  cModelShaderGBuffer::cModelShaderGBuffer_137  size=40  [class]
+// 015F8A80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_137(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7bb38 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7bb38 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7bb38 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8AB0  cModelShaderGBuffer::cModelShaderGBuffer_138  size=40  [class]
+// 015F8AB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_138(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7bc80 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7bc80 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7bc80 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8AE0  cModelShaderGBuffer::cModelShaderGBuffer_139  size=40  [class]
+// 015F8AE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_139(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7bdc8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7bdc8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7bdc8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8B10  cModelShaderGBuffer::cModelShaderGBuffer_140  size=40  [class]
+// 015F8B10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_140(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7bf10 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7bf10 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7bf10 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8B40  cModelShaderGBuffer::cModelShaderGBuffer_141  size=40  [class]
+// 015F8B40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_141(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c058 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c058 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c058 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8B70  cModelShaderGBuffer::cModelShaderGBuffer_142  size=40  [class]
+// 015F8B70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_142(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c1a0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c1a0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c1a0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8BA0  cModelShaderGBuffer::cModelShaderGBuffer_143  size=40  [class]
+// 015F8BA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_143(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c2e8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c2e8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c2e8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8BD0  cModelShaderGBuffer::cModelShaderGBuffer_144  size=40  [class]
+// 015F8BD0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_144(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c430 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c430 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c430 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8C00  cModelShaderGBuffer::cModelShaderGBuffer_145  size=40  [class]
+// 015F8C00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_145(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c578 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c578 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c578 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8C30  cModelShaderGBuffer::cModelShaderGBuffer_146  size=40  [class]
+// 015F8C30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_146(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c6c0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c6c0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c6c0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8C60  cModelShaderGBuffer::cModelShaderGBuffer_147  size=40  [class]
+// 015F8C60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_147(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c808 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c808 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c808 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8C90  cModelShaderGBuffer::cModelShaderGBuffer_148  size=40  [class]
+// 015F8C90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_148(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7c950 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7c950 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7c950 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8CC0  cModelShaderGBuffer::cModelShaderGBuffer_149  size=40  [class]
+// 015F8CC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_149(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ca98 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ca98 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ca98 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8CF0  cModelShaderGBuffer::cModelShaderGBuffer_150  size=40  [class]
+// 015F8CF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_150(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7cbe0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7cbe0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7cbe0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8D20  cModelShaderGBuffer::cModelShaderGBuffer_151  size=40  [class]
+// 015F8D20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_151(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7cd28 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7cd28 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7cd28 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8D50  cModelShaderGBuffer::cModelShaderGBuffer_152  size=40  [class]
+// 015F8D50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_152(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ce70 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ce70 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ce70 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8D80  cModelShaderGBuffer::cModelShaderGBuffer_153  size=40  [class]
+// 015F8D80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_153(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7cfb8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7cfb8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7cfb8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8DB0  cModelShaderGBuffer::cModelShaderGBuffer_154  size=40  [class]
+// 015F8DB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_154(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d100 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d100 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d100 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8DE0  cModelShaderGBuffer::cModelShaderGBuffer_155  size=40  [class]
+// 015F8DE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_155(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d248 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d248 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d248 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8E10  cModelShaderGBuffer::cModelShaderGBuffer_156  size=40  [class]
+// 015F8E10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_156(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d390 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d390 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d390 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8E40  cModelShaderGBuffer::cModelShaderGBuffer_157  size=40  [class]
+// 015F8E40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_157(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d4d8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d4d8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d4d8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8E70  cModelShaderGBuffer::cModelShaderGBuffer_158  size=40  [class]
+// 015F8E70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_158(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d620 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d620 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d620 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8EA0  cModelShaderGBuffer::cModelShaderGBuffer_159  size=40  [class]
+// 015F8EA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_159(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d768 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d768 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d768 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8ED0  cModelShaderGBuffer::cModelShaderGBuffer_160  size=40  [class]
+// 015F8ED0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_160(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d8b0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d8b0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d8b0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8F00  cModelShaderGBuffer::cModelShaderGBuffer_161  size=40  [class]
+// 015F8F00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_161(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7d9f8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7d9f8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7d9f8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8F30  cModelShaderGBuffer::cModelShaderGBuffer_162  size=40  [class]
+// 015F8F30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_162(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7db40 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7db40 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7db40 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8F60  cModelShaderGBuffer::cModelShaderGBuffer_163  size=40  [class]
+// 015F8F60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_163(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7dc88 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7dc88 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7dc88 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8F90  cModelShaderGBuffer::cModelShaderGBuffer_164  size=40  [class]
+// 015F8F90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_164(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ddd0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ddd0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ddd0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8FC0  cModelShaderGBuffer::cModelShaderGBuffer_165  size=40  [class]
+// 015F8FC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_165(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7df18 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7df18 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7df18 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F8FF0  cModelShaderGBuffer::cModelShaderGBuffer_166  size=40  [class]
+// 015F8FF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_166(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e060 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e060 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e060 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9020  cModelShaderGBuffer::cModelShaderGBuffer_167  size=40  [class]
+// 015F9020  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_167(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e1a8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e1a8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e1a8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9050  cModelShaderGBuffer::cModelShaderGBuffer_168  size=40  [class]
+// 015F9050  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_168(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e2f0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e2f0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e2f0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9080  cModelShaderGBuffer::cModelShaderGBuffer_169  size=40  [class]
+// 015F9080  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_169(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e438 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e438 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e438 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F90B0  cModelShaderGBuffer::cModelShaderGBuffer_170  size=40  [class]
+// 015F90B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_170(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e580 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e580 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e580 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F90E0  cModelShaderGBuffer::cModelShaderGBuffer_171  size=40  [class]
+// 015F90E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_171(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e6c8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e6c8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e6c8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9110  cModelShaderGBuffer::cModelShaderGBuffer_172  size=40  [class]
+// 015F9110  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_172(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e810 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e810 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e810 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9140  cModelShaderGBuffer::cModelShaderGBuffer_173  size=40  [class]
+// 015F9140  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_173(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7e958 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7e958 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7e958 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9170  cModelShaderGBuffer::cModelShaderGBuffer_174  size=40  [class]
+// 015F9170  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_174(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7eaa0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7eaa0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7eaa0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F91A0  cModelShaderGBuffer::cModelShaderGBuffer_175  size=40  [class]
+// 015F91A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_175(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ebe8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ebe8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ebe8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F91D0  cModelShaderGBuffer::cModelShaderGBuffer_176  size=40  [class]
+// 015F91D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_176(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ed30 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ed30 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ed30 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9200  cModelShaderGBuffer::cModelShaderGBuffer_177  size=40  [class]
+// 015F9200  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_177(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ee78 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ee78 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ee78 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9230  cModelShaderGBuffer::cModelShaderGBuffer_178  size=40  [class]
+// 015F9230  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_178(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7efc0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7efc0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7efc0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9260  cModelShaderGBuffer::cModelShaderGBuffer_179  size=40  [class]
+// 015F9260  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_179(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7f108 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7f108 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7f108 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9290  cModelShaderGBuffer::cModelShaderGBuffer_180  size=40  [class]
+// 015F9290  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_180(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7f250 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7f250 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7f250 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F92C0  cModelShaderGBuffer::cModelShaderGBuffer_181  size=40  [class]
+// 015F92C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_181(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7f398 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7f398 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7f398 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F92F0  cModelShaderGBuffer::cModelShaderGBuffer_182  size=40  [class]
+// 015F92F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_182(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7f4e0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7f4e0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7f4e0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9320  cModelShaderGBuffer::cModelShaderGBuffer_183  size=40  [class]
+// 015F9320  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_183(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7f628 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7f628 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7f628 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9350  cModelShaderGBuffer::cModelShaderGBuffer_184  size=40  [class]
+// 015F9350  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_184(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7f770 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7f770 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7f770 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9380  cModelShaderGBuffer::cModelShaderGBuffer_185  size=40  [class]
+// 015F9380  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_185(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7f8b8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7f8b8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7f8b8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F93B0  cModelShaderGBuffer::cModelShaderGBuffer_186  size=40  [class]
+// 015F93B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_186(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7fa00 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7fa00 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7fa00 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F93E0  cModelShaderGBuffer::cModelShaderGBuffer_187  size=40  [class]
+// 015F93E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_187(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7fb48 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7fb48 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7fb48 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9410  cModelShaderGBuffer::cModelShaderGBuffer_188  size=40  [class]
+// 015F9410  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_188(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7fc90 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7fc90 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7fc90 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9440  cModelShaderGBuffer::cModelShaderGBuffer_189  size=40  [class]
+// 015F9440  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_189(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7fdd8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7fdd8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7fdd8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9470  cModelShaderGBuffer::cModelShaderGBuffer_190  size=40  [class]
+// 015F9470  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_190(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f7ff20 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f7ff20 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f7ff20 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F94A0  cModelShaderGBuffer::cModelShaderGBuffer_191  size=40  [class]
+// 015F94A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_191(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80068 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80068 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80068 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F94D0  cModelShaderGBuffer::cModelShaderGBuffer_192  size=40  [class]
+// 015F94D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_192(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f801b0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f801b0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f801b0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9500  cModelShaderGBuffer::cModelShaderGBuffer_193  size=40  [class]
+// 015F9500  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_193(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f802f8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f802f8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f802f8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9530  cModelShaderGBuffer::cModelShaderGBuffer_194  size=40  [class]
+// 015F9530  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_194(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80440 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80440 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80440 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9560  cModelShaderGBuffer::cModelShaderGBuffer_195  size=40  [class]
+// 015F9560  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_195(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80588 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80588 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80588 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9590  cModelShaderGBuffer::cModelShaderGBuffer_196  size=40  [class]
+// 015F9590  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_196(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f806d0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f806d0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f806d0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F95C0  cModelShaderGBuffer::cModelShaderGBuffer_197  size=40  [class]
+// 015F95C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_197(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80818 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80818 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80818 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F95F0  cModelShaderGBuffer::cModelShaderGBuffer_198  size=40  [class]
+// 015F95F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_198(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80960 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80960 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80960 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9620  cModelShaderGBuffer::cModelShaderGBuffer_199  size=40  [class]
+// 015F9620  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_199(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80aa8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80aa8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80aa8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9650  cModelShaderGBuffer::cModelShaderGBuffer_200  size=40  [class]
+// 015F9650  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_200(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80bf0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80bf0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80bf0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9680  cModelShaderGBuffer::cModelShaderGBuffer_201  size=40  [class]
+// 015F9680  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_201(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80d38 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80d38 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80d38 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F96B0  cModelShaderGBuffer::cModelShaderGBuffer_202  size=40  [class]
+// 015F96B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_202(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80e80 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80e80 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80e80 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F96E0  cModelShaderGBuffer::cModelShaderGBuffer_203  size=40  [class]
+// 015F96E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_203(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f80fc8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f80fc8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f80fc8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9710  cModelShaderGBuffer::cModelShaderGBuffer_204  size=40  [class]
+// 015F9710  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_204(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81110 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81110 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81110 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9740  cModelShaderGBuffer::cModelShaderGBuffer_205  size=40  [class]
+// 015F9740  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_205(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81258 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81258 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81258 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9770  cModelShaderGBuffer::cModelShaderGBuffer_206  size=40  [class]
+// 015F9770  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_206(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f813a0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f813a0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f813a0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F97A0  cModelShaderGBuffer::cModelShaderGBuffer_207  size=40  [class]
+// 015F97A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_207(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f814e8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f814e8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f814e8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F97D0  cModelShaderGBuffer::cModelShaderGBuffer_208  size=40  [class]
+// 015F97D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_208(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81630 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81630 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81630 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9800  cModelShaderGBuffer::cModelShaderGBuffer_209  size=40  [class]
+// 015F9800  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_209(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81778 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81778 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81778 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9830  cModelShaderGBuffer::cModelShaderGBuffer_210  size=40  [class]
+// 015F9830  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_210(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f818c0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f818c0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f818c0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9860  cModelShaderGBuffer::cModelShaderGBuffer_211  size=40  [class]
+// 015F9860  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_211(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81a08 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81a08 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81a08 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9890  cModelShaderGBuffer::cModelShaderGBuffer_212  size=40  [class]
+// 015F9890  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_212(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81b50 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81b50 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81b50 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F98C0  cModelShaderGBuffer::cModelShaderGBuffer_213  size=40  [class]
+// 015F98C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_213(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81c98 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81c98 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81c98 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F98F0  cModelShaderGBuffer::cModelShaderGBuffer_214  size=40  [class]
+// 015F98F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_214(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81de0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81de0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81de0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9920  cModelShaderGBuffer::cModelShaderGBuffer_215  size=40  [class]
+// 015F9920  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_215(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f81f28 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f81f28 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f81f28 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9950  cModelShaderGBuffer::cModelShaderGBuffer_216  size=40  [class]
+// 015F9950  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_216(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82070 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82070 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82070 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9980  cModelShaderGBuffer::cModelShaderGBuffer_217  size=40  [class]
+// 015F9980  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_217(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f821b8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f821b8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f821b8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F99B0  cModelShaderGBuffer::cModelShaderGBuffer_218  size=40  [class]
+// 015F99B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_218(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82300 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82300 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82300 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F99E0  cModelShaderGBuffer::cModelShaderGBuffer_219  size=40  [class]
+// 015F99E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_219(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82448 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82448 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82448 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9A10  cModelShaderGBuffer::cModelShaderGBuffer_220  size=40  [class]
+// 015F9A10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_220(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82590 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82590 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82590 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9A40  cModelShaderGBuffer::cModelShaderGBuffer_221  size=40  [class]
+// 015F9A40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_221(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f826d8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f826d8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f826d8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9A70  cModelShaderGBuffer::cModelShaderGBuffer_222  size=40  [class]
+// 015F9A70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_222(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82820 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82820 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82820 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9AA0  cModelShaderGBuffer::cModelShaderGBuffer_223  size=40  [class]
+// 015F9AA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_223(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82968 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82968 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82968 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9AD0  cModelShaderGBuffer::cModelShaderGBuffer_224  size=40  [class]
+// 015F9AD0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_224(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82ab0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82ab0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82ab0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9B00  cModelShaderGBuffer::cModelShaderGBuffer_225  size=40  [class]
+// 015F9B00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_225(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82bf8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82bf8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82bf8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9B30  cModelShaderGBuffer::cModelShaderGBuffer_226  size=40  [class]
+// 015F9B30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_226(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82d40 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82d40 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82d40 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9B60  cModelShaderGBuffer::cModelShaderGBuffer_227  size=40  [class]
+// 015F9B60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_227(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82e88 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82e88 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82e88 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9B90  cModelShaderGBuffer::cModelShaderGBuffer_228  size=40  [class]
+// 015F9B90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_228(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f82fd0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f82fd0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f82fd0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9BC0  cModelShaderGBuffer::cModelShaderGBuffer_229  size=40  [class]
+// 015F9BC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_229(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83118 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83118 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83118 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9BF0  cModelShaderGBuffer::cModelShaderGBuffer_230  size=40  [class]
+// 015F9BF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_230(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83260 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83260 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83260 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9C20  cModelShaderGBuffer::cModelShaderGBuffer_231  size=40  [class]
+// 015F9C20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_231(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f833a8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f833a8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f833a8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9C50  cModelShaderGBuffer::cModelShaderGBuffer_232  size=40  [class]
+// 015F9C50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_232(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f834f0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f834f0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f834f0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9C80  cModelShaderGBuffer::cModelShaderGBuffer_233  size=40  [class]
+// 015F9C80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_233(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83638 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83638 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83638 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9CB0  cModelShaderGBuffer::cModelShaderGBuffer_234  size=40  [class]
+// 015F9CB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_234(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83780 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83780 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83780 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9CE0  cModelShaderGBuffer::cModelShaderGBuffer_235  size=40  [class]
+// 015F9CE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_235(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f838c8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f838c8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f838c8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9D10  cModelShaderGBuffer::cModelShaderGBuffer_236  size=40  [class]
+// 015F9D10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_236(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83a10 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83a10 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83a10 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9D40  cModelShaderGBuffer::cModelShaderGBuffer_237  size=40  [class]
+// 015F9D40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_237(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83b58 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83b58 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83b58 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9D70  cModelShaderGBuffer::cModelShaderGBuffer_238  size=40  [class]
+// 015F9D70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_238(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83ca0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83ca0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83ca0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9DA0  cModelShaderGBuffer::cModelShaderGBuffer_239  size=40  [class]
+// 015F9DA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_239(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83de8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83de8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83de8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9DD0  cModelShaderGBuffer::cModelShaderGBuffer_240  size=40  [class]
+// 015F9DD0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_240(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f83f30 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f83f30 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f83f30 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9E00  cModelShaderGBuffer::cModelShaderGBuffer_241  size=40  [class]
+// 015F9E00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_241(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84078 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84078 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84078 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9E30  cModelShaderGBuffer::cModelShaderGBuffer_242  size=40  [class]
+// 015F9E30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_242(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f841c0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f841c0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f841c0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9E60  cModelShaderGBuffer::cModelShaderGBuffer_243  size=40  [class]
+// 015F9E60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_243(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84308 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84308 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84308 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9E90  cModelShaderGBuffer::cModelShaderGBuffer_244  size=40  [class]
+// 015F9E90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_244(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84450 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84450 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84450 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9EC0  cModelShaderGBuffer::cModelShaderGBuffer_245  size=40  [class]
+// 015F9EC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_245(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84598 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84598 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84598 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9EF0  cModelShaderGBuffer::cModelShaderGBuffer_246  size=40  [class]
+// 015F9EF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_246(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f846e0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f846e0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f846e0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9F20  cModelShaderGBuffer::cModelShaderGBuffer_247  size=40  [class]
+// 015F9F20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_247(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84828 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84828 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84828 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9F50  cModelShaderGBuffer::cModelShaderGBuffer_248  size=40  [class]
+// 015F9F50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_248(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84970 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84970 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84970 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9F80  cModelShaderGBuffer::cModelShaderGBuffer_249  size=40  [class]
+// 015F9F80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_249(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84ab8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84ab8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84ab8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9FB0  cModelShaderGBuffer::cModelShaderGBuffer_250  size=40  [class]
+// 015F9FB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_250(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84c00 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84c00 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84c00 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F9FE0  cModelShaderGBuffer::cModelShaderGBuffer_251  size=40  [class]
+// 015F9FE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_251(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84d48 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84d48 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84d48 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA010  cModelShaderGBuffer::cModelShaderGBuffer_252  size=40  [class]
+// 015FA010  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_252(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84e90 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84e90 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84e90 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA040  cModelShaderGBuffer::cModelShaderGBuffer_253  size=40  [class]
+// 015FA040  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_253(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f84fd8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f84fd8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f84fd8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA070  cModelShaderGBuffer::cModelShaderGBuffer_254  size=40  [class]
+// 015FA070  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_254(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85120 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85120 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85120 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA0A0  cModelShaderGBuffer::cModelShaderGBuffer_255  size=40  [class]
+// 015FA0A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_255(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85268 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85268 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85268 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA0D0  cModelShaderGBuffer::cModelShaderGBuffer_256  size=40  [class]
+// 015FA0D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_256(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f853b0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f853b0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f853b0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA100  cModelShaderGBuffer::cModelShaderGBuffer_257  size=40  [class]
+// 015FA100  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_257(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f854f8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f854f8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f854f8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA130  cModelShaderGBuffer::cModelShaderGBuffer_258  size=40  [class]
+// 015FA130  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_258(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85640 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85640 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85640 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA160  cModelShaderGBuffer::cModelShaderGBuffer_259  size=40  [class]
+// 015FA160  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_259(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85788 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85788 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85788 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA190  cModelShaderGBuffer::cModelShaderGBuffer_260  size=40  [class]
+// 015FA190  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_260(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f858d0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f858d0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f858d0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA1C0  cModelShaderGBuffer::cModelShaderGBuffer_261  size=40  [class]
+// 015FA1C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_261(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85a18 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85a18 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85a18 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA1F0  cModelShaderGBuffer::cModelShaderGBuffer_262  size=40  [class]
+// 015FA1F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_262(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85b60 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85b60 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85b60 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA220  cModelShaderGBuffer::cModelShaderGBuffer_263  size=40  [class]
+// 015FA220  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_263(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85ca8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85ca8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85ca8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA250  cModelShaderGBuffer::cModelShaderGBuffer_264  size=40  [class]
+// 015FA250  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_264(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85df0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85df0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85df0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA280  cModelShaderGBuffer::cModelShaderGBuffer_265  size=40  [class]
+// 015FA280  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_265(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f85f38 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f85f38 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f85f38 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA2B0  cModelShaderGBuffer::cModelShaderGBuffer_266  size=40  [class]
+// 015FA2B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_266(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86080 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86080 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86080 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA2E0  cModelShaderGBuffer::cModelShaderGBuffer_267  size=40  [class]
+// 015FA2E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_267(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f861c8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f861c8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f861c8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA310  cModelShaderGBuffer::cModelShaderGBuffer_268  size=40  [class]
+// 015FA310  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_268(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86310 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86310 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86310 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA340  cModelShaderGBuffer::cModelShaderGBuffer_269  size=40  [class]
+// 015FA340  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_269(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86458 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86458 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86458 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA370  cModelShaderGBuffer::cModelShaderGBuffer_270  size=40  [class]
+// 015FA370  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_270(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f865a0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f865a0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f865a0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA3A0  cModelShaderGBuffer::cModelShaderGBuffer_271  size=40  [class]
+// 015FA3A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_271(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f866e8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f866e8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f866e8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA3D0  cModelShaderGBuffer::cModelShaderGBuffer_272  size=40  [class]
+// 015FA3D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_272(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86830 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86830 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86830 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA400  cModelShaderGBuffer::cModelShaderGBuffer_273  size=40  [class]
+// 015FA400  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_273(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86978 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86978 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86978 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA430  cModelShaderGBuffer::cModelShaderGBuffer_274  size=40  [class]
+// 015FA430  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_274(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86ac0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86ac0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86ac0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA460  cModelShaderGBuffer::cModelShaderGBuffer_275  size=40  [class]
+// 015FA460  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_275(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86c08 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86c08 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86c08 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA490  cModelShaderGBuffer::cModelShaderGBuffer_276  size=40  [class]
+// 015FA490  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_276(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86d50 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86d50 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86d50 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA4C0  cModelShaderGBuffer::cModelShaderGBuffer_277  size=40  [class]
+// 015FA4C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_277(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86e98 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86e98 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86e98 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA4F0  cModelShaderGBuffer::cModelShaderGBuffer_278  size=40  [class]
+// 015FA4F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_278(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f86fe0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f86fe0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f86fe0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA520  cModelShaderGBuffer::cModelShaderGBuffer_279  size=40  [class]
+// 015FA520  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_279(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87128 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87128 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87128 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA550  cModelShaderGBuffer::cModelShaderGBuffer_280  size=40  [class]
+// 015FA550  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_280(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87270 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87270 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87270 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA580  cModelShaderGBuffer::cModelShaderGBuffer_281  size=40  [class]
+// 015FA580  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_281(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f873b8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f873b8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f873b8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA5B0  cModelShaderGBuffer::cModelShaderGBuffer_282  size=40  [class]
+// 015FA5B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_282(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87500 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87500 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87500 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA5E0  cModelShaderGBuffer::cModelShaderGBuffer_283  size=40  [class]
+// 015FA5E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_283(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87648 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87648 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87648 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA610  cModelShaderGBuffer::cModelShaderGBuffer_284  size=40  [class]
+// 015FA610  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_284(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87790 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87790 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87790 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA640  cModelShaderGBuffer::cModelShaderGBuffer_285  size=40  [class]
+// 015FA640  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_285(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f878d8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f878d8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f878d8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA670  cModelShaderGBuffer::cModelShaderGBuffer_286  size=40  [class]
+// 015FA670  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_286(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87a20 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87a20 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87a20 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA6A0  cModelShaderGBuffer::cModelShaderGBuffer_287  size=40  [class]
+// 015FA6A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_287(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87b68 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87b68 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87b68 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA6D0  cModelShaderGBuffer::cModelShaderGBuffer_288  size=40  [class]
+// 015FA6D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_288(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87cb0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87cb0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87cb0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA700  cModelShaderGBuffer::cModelShaderGBuffer_289  size=40  [class]
+// 015FA700  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_289(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87df8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87df8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87df8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA730  cModelShaderGBuffer::cModelShaderGBuffer_290  size=40  [class]
+// 015FA730  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_290(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f87f40 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f87f40 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f87f40 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA760  cModelShaderGBuffer::cModelShaderGBuffer_291  size=40  [class]
+// 015FA760  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_291(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88088 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88088 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88088 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA790  cModelShaderGBuffer::cModelShaderGBuffer_292  size=40  [class]
+// 015FA790  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_292(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f881d0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f881d0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f881d0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA7C0  cModelShaderGBuffer::cModelShaderGBuffer_293  size=40  [class]
+// 015FA7C0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_293(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88318 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88318 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88318 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA7F0  cModelShaderGBuffer::cModelShaderGBuffer_294  size=40  [class]
+// 015FA7F0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_294(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88460 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88460 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88460 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA820  cModelShaderGBuffer::cModelShaderGBuffer_295  size=40  [class]
+// 015FA820  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_295(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f885a8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f885a8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f885a8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA850  cModelShaderGBuffer::cModelShaderGBuffer_296  size=40  [class]
+// 015FA850  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_296(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f886f0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f886f0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f886f0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA880  cModelShaderGBuffer::cModelShaderGBuffer_297  size=40  [class]
+// 015FA880  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_297(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88838 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88838 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88838 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA8B0  cModelShaderGBuffer::cModelShaderGBuffer_298  size=40  [class]
+// 015FA8B0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_298(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88980 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88980 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88980 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA8E0  cModelShaderGBuffer::cModelShaderGBuffer_299  size=40  [class]
+// 015FA8E0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_299(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88ac8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88ac8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88ac8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA910  cModelShaderGBuffer::cModelShaderGBuffer_300  size=40  [class]
+// 015FA910  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_300(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88c10 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88c10 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88c10 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA940  cModelShaderGBuffer::cModelShaderGBuffer_301  size=40  [class]
+// 015FA940  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_301(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88d58 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88d58 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88d58 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA970  cModelShaderGBuffer::cModelShaderGBuffer_302  size=40  [class]
+// 015FA970  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_302(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88ea0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88ea0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88ea0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA9A0  cModelShaderGBuffer::cModelShaderGBuffer_303  size=40  [class]
+// 015FA9A0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_303(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f88fe8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f88fe8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f88fe8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FA9D0  cModelShaderGBuffer::cModelShaderGBuffer_304  size=40  [class]
+// 015FA9D0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_304(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89130 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89130 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89130 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAA00  cModelShaderGBuffer::cModelShaderGBuffer_305  size=40  [class]
+// 015FAA00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_305(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89278 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89278 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89278 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAA30  cModelShaderGBuffer::cModelShaderGBuffer_306  size=40  [class]
+// 015FAA30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_306(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f893c0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f893c0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f893c0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAA60  cModelShaderGBuffer::cModelShaderGBuffer_307  size=40  [class]
+// 015FAA60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_307(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89508 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89508 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89508 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAA90  cModelShaderGBuffer::cModelShaderGBuffer_308  size=40  [class]
+// 015FAA90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_308(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89650 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89650 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89650 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAAC0  cModelShaderGBuffer::cModelShaderGBuffer_309  size=40  [class]
+// 015FAAC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_309(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89798 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89798 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89798 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAAF0  cModelShaderGBuffer::cModelShaderGBuffer_310  size=40  [class]
+// 015FAAF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_310(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f898e0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f898e0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f898e0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAB20  cModelShaderGBuffer::cModelShaderGBuffer_311  size=40  [class]
+// 015FAB20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_311(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89a28 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89a28 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89a28 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAB50  cModelShaderGBuffer::cModelShaderGBuffer_312  size=40  [class]
+// 015FAB50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_312(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89b70 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89b70 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89b70 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAB80  cModelShaderGBuffer::cModelShaderGBuffer_313  size=40  [class]
+// 015FAB80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_313(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89cb8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89cb8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89cb8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FABB0  cModelShaderGBuffer::cModelShaderGBuffer_314  size=40  [class]
+// 015FABB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_314(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89e00 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89e00 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89e00 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FABE0  cModelShaderGBuffer::cModelShaderGBuffer_315  size=40  [class]
+// 015FABE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_315(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f89f48 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f89f48 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f89f48 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAC10  cModelShaderGBuffer::cModelShaderGBuffer_316  size=40  [class]
+// 015FAC10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_316(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a090 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a090 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a090 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAC40  cModelShaderGBuffer::cModelShaderGBuffer_317  size=40  [class]
+// 015FAC40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_317(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a1d8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a1d8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a1d8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAC70  cModelShaderGBuffer::cModelShaderGBuffer_318  size=40  [class]
+// 015FAC70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_318(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a320 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a320 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a320 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FACA0  cModelShaderGBuffer::cModelShaderGBuffer_319  size=40  [class]
+// 015FACA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_319(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a468 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a468 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a468 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FACD0  cModelShaderGBuffer::cModelShaderGBuffer_320  size=40  [class]
+// 015FACD0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_320(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a5b0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a5b0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a5b0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAD00  cModelShaderGBuffer::cModelShaderGBuffer_321  size=40  [class]
+// 015FAD00  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_321(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a6f8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a6f8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a6f8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAD30  cModelShaderGBuffer::cModelShaderGBuffer_322  size=40  [class]
+// 015FAD30  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_322(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a840 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a840 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a840 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAD60  cModelShaderGBuffer::cModelShaderGBuffer_323  size=40  [class]
+// 015FAD60  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_323(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8a988 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8a988 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8a988 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAD90  cModelShaderGBuffer::cModelShaderGBuffer_324  size=40  [class]
+// 015FAD90  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_324(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8aad0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8aad0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8aad0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FADC0  cModelShaderGBuffer::cModelShaderGBuffer_325  size=40  [class]
+// 015FADC0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_325(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8ac18 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8ac18 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8ac18 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FADF0  cModelShaderGBuffer::cModelShaderGBuffer_326  size=40  [class]
+// 015FADF0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_326(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8ad60 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8ad60 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8ad60 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAE20  cModelShaderGBuffer::cModelShaderGBuffer_327  size=40  [class]
+// 015FAE20  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_327(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8aea8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8aea8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8aea8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAE50  cModelShaderGBuffer::cModelShaderGBuffer_328  size=40  [class]
+// 015FAE50  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_328(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8aff0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8aff0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8aff0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAE80  cModelShaderGBuffer::cModelShaderGBuffer_329  size=40  [class]
+// 015FAE80  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_329(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8b138 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8b138 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8b138 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAEB0  cModelShaderGBuffer::cModelShaderGBuffer_330  size=40  [class]
+// 015FAEB0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_330(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8b280 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8b280 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8b280 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAEE0  cModelShaderGBuffer::cModelShaderGBuffer_331  size=40  [class]
+// 015FAEE0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_331(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8b3c8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8b3c8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8b3c8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAF10  cModelShaderGBuffer::cModelShaderGBuffer_332  size=40  [class]
+// 015FAF10  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_332(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8b510 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8b510 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8b510 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAF40  cModelShaderGBuffer::cModelShaderGBuffer_333  size=40  [class]
+// 015FAF40  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_333(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8b658 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8b658 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8b658 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAF70  cModelShaderGBuffer::cModelShaderGBuffer_334  size=40  [class]
+// 015FAF70  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_334(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8b7a0 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8b7a0 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8b7a0 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAFA0  cModelShaderGBuffer::cModelShaderGBuffer_335  size=40  [class]
+// 015FAFA0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_335(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8b8e8 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8b8e8 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8b8e8 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015FAFD0  cModelShaderGBuffer::cModelShaderGBuffer_336  size=40  [class]
+// 015FAFD0  cModelShaderGBuffer::~cModelShaderGBuffer  size=40  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderGBuffer::cModelShaderGBuffer_336(void)
+void cModelShaderGBuffer::~cModelShaderGBuffer(void)
 
 {
-  _DAT_01f8ba30 = &PTR_cModelShaderGBuffer_11_016f3cf4;
+  _DAT_01f8ba30 = &PTR__cModelShaderGBuffer_016f3cf4;
   FUN_00fc0f40();
   _DAT_01f8ba30 = vftable;
   FUN_00fc0f40();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

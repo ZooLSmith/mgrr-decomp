@@ -1,8 +1,57 @@
 // src/misc/cOptionMenu.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009A8C70..009B8E20, 14 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009A8B90..009B8E20, 16 functions
 
 #include "mgrr.h"
 #include "cOptionMenu.h"
+
+// 009A8B90  cOptionMenu::~cOptionMenu  size=141  [class]
+void __fastcall cOptionMenu::~cOptionMenu(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0xb] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0xb])(1);
+    param_1[0xb] = 0;
+  }
+  FUN_00cfe0f0(0x14);
+  param_1[0xcc] = cOptionMenuGraphicParts::vftable;
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  param_1[0xd] = cOptionMenuSystemParts::vftable;
+  iVar1 = 2;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  param_1[7] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[8] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[8])(1);
+    param_1[8] = 0;
+  }
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 009A8C20  FUN_009a8c20  size=68  [between]
+int FUN_009a8c20(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00dd3500(0x58c,&DAT_01b7be50);
+  if (iVar1 != 0) {
+    iVar1 = cOptionMenuGraphicParts::cOptionMenuGraphicParts();
+    if (iVar1 != 0) {
+      *(char **)(iVar1 + 0xc) = "cOptionMenu";
+      FUN_00d29ca0(0x76,10);
+      *(undefined4 *)(iVar1 + 0x10) = 0;
+    }
+    return iVar1;
+  }
+  return 0;
+}
 
 // 009A8C70  cOptionMenu::vf0C  size=36  [class]
 void __fastcall cOptionMenu::vf0C(int param_1)
@@ -817,7 +866,7 @@ void __fastcall FUN_009a9b20(int param_1)
 undefined4 __thiscall cOptionMenu::vf00(undefined4 param_1,byte param_2)
 
 {
-  cOptionMenuSystemParts::cOptionMenuSystemParts_3();
+  ~cOptionMenu();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bh0056.h"
 
-// 0040D3C0  Bh0056::vf40  size=39  [class]
-undefined4 Bh0056::vf40(void)
+// 0040D3C0  Bh0056::startup  size=39  [class]
+undefined4 Bh0056::startup(void)
 
 {
   int iVar1;
   
-  iVar1 = Bh0140::vf40();
+  iVar1 = BehaviorBh::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -24,7 +24,7 @@ void FUN_0040d3f0(void)
 {
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 
@@ -112,12 +112,12 @@ void FUN_0040d7c0(void)
   cEspControler::~cEspControler();
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 
-// 0040D800  Bh0056::Bh0056_2  size=61  [class]
-void __fastcall Bh0056::Bh0056_2(undefined4 *param_1)
+// 0040D800  Bh0056::~Bh0056  size=61  [class]
+void __fastcall Bh0056::~Bh0056(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -125,7 +125,7 @@ void __fastcall Bh0056::Bh0056_2(undefined4 *param_1)
   cEspControler::~cEspControler();
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 
@@ -152,8 +152,8 @@ undefined4 * __fastcall Bh0056::Bh0056(undefined4 *param_1)
   return param_1;
 }
 
-// 0040E070  Bh0056::vf00  size=82  [class]
-undefined4 * __thiscall Bh0056::vf00(undefined4 *param_1,byte param_2)
+// 0040E070  Bh0056::destruct  size=82  [class]
+undefined4 * __thiscall Bh0056::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -161,7 +161,7 @@ undefined4 * __thiscall Bh0056::vf00(undefined4 *param_1,byte param_2)
   cEspControler::~cEspControler();
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1046,11 +1046,11 @@ void __fastcall Bh0056::vf60(int param_1)
   iVar1 = FUN_00c1e240();
   if (iVar1 == 0) {
     *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) | 8;
-    FUN_00a98280();
+    Behavior::vf60();
     return;
   }
   *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) & 0xfffffff7;
-  FUN_00a98280();
+  Behavior::vf60();
   return;
 }
 
@@ -1253,7 +1253,7 @@ void __fastcall FUN_00ad30a0(int *param_1)
       iVar3 = 0;
     }
     else {
-      iVar3 = CollisionAttackData::CollisionAttackData_3();
+      iVar3 = CollisionAttackData::CollisionAttackData();
     }
     *(undefined4 *)(*(int *)(iVar3 + 8) + 4) = 100;
     *(undefined4 *)(*(int *)(iVar3 + 8) + 0xc) = 1;
@@ -1364,7 +1364,7 @@ void __fastcall Bh0056::vf34(int *param_1)
     FUN_00a963e0(local_160);
     iVar3 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
     if (iVar3 == 0) goto LAB_00ad3714;
-    piVar2 = (int *)CollisionAttackData::CollisionAttackData_3();
+    piVar2 = (int *)CollisionAttackData::CollisionAttackData();
     if (piVar2 == (int *)0x0) goto LAB_00ad3714;
     *(undefined4 *)(piVar2[2] + 4) = 100;
     *(undefined4 *)(piVar2[2] + 0xc) = 1;
@@ -1488,7 +1488,7 @@ void __fastcall FUN_00ad3850(int *param_1)
   FUN_00a963e0(&stack0xfffffe94);
   iVar3 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar3 != 0) {
-    iVar3 = CollisionAttackData::CollisionAttackData_3();
+    iVar3 = CollisionAttackData::CollisionAttackData();
     if (iVar3 != 0) {
       *(undefined4 *)(*(int *)(iVar3 + 8) + 4) = 0x1e;
       *(undefined4 *)(*(int *)(iVar3 + 8) + 0xc) = 1;

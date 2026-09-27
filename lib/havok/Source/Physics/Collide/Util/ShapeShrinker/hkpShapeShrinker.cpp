@@ -76,7 +76,8 @@ int FUN_01150810(uint param_1,char param_2)
         *(undefined2 *)(iVar2 + 4) = 0x70;
         local_40 = CONCAT44(local_1c,(undefined4)local_40);
         local_38 = CONCAT44(0x10,local_18);
-        iVar2 = hkpConvexVerticesShape::hkpConvexVerticesShape((int)&local_40 + 4,local_7c);
+        iVar2 = hkpConvexVerticesConnectivity::hkpConvexVerticesConnectivity
+                          ((int)&local_40 + 4,local_7c);
         hkBaseObject::hkBaseObject_27();
         local_18 = 0;
         if (local_14 < 0) {
@@ -356,7 +357,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
                 (1,0xabbafa2c,local_2d0,
                  "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Collide\\Util\\ShapeShrinker\\hkpShapeShrinker.cpp"
                  ,0x1ba);
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       return local_38;
     }
     FUN_0112c440((float)local_1c - (float)local_18);
@@ -439,7 +440,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
                 (1,0xabbafa2d,local_2d0,
                  "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Collide\\Util\\ShapeShrinker\\hkpShapeShrinker.cpp"
                  ,0x1d0);
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       local_1c = local_18;
     }
     local_30 = CONCAT44(local_30._4_4_ - (float)local_1c,(float)local_30 - (float)local_1c);
@@ -490,7 +491,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
       fStack_44 = pfVar12[3];
       local_50 = fVar14;
     }
-    hkBaseObject::hkBaseObject_27();
+    ::hkBaseObject::hkBaseObject_27();
     lVar5 = uStack_28;
     uVar6 = (uint)uStack_28._4_4_;
     uStack_28 = (ulonglong)(uint)uStack_28._4_4_ << 0x20;
@@ -510,7 +511,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
                   (1,0xdd12ee34,local_2d0,
                    "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Collide\\Util\\ShapeShrinker\\hkpShapeShrinker.cpp"
                    ,0x21b);
-        hkBaseObject::hkBaseObject_38();
+        ::hkBaseObject::hkBaseObject_38();
         param_1[4] = 0;
         if (local_11 != '\0') {
           return local_38;
@@ -540,7 +541,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
                 (1,0xabbafa2e,local_2d0,
                  "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Collide\\Util\\ShapeShrinker\\hkpShapeShrinker.cpp"
                  ,0x227);
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
     }
     iVar7 = FUN_0112fea0();
     if (*(int *)(iVar7 + 4) < *(int *)(piVar8[0x18] + 0x18)) {
@@ -612,7 +613,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
         pvVar10 = TlsGetValue(DAT_01f8fc4c);
         iVar7 = (**(code **)(**(int **)((int)pvVar10 + 0x2c) + 4))(0x70);
         *(undefined2 *)(iVar7 + 4) = 0x70;
-        piVar8 = (int *)hkpListShape::hkpListShape_2(local_30._4_4_,(float)uStack_28,1);
+        piVar8 = (int *)hkpListShape::hkpListShape(local_30._4_4_,(float)uStack_28,1);
         local_18 = (int *)0x0;
         local_1c = piVar8;
         if (0 < (int)(float)uStack_28) {
@@ -652,7 +653,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
     pvVar10 = TlsGetValue(DAT_01f8fc4c);
     piVar8 = (int *)(**(code **)(**(int **)((int)pvVar10 + 0x2c) + 4))(0x30);
     *(undefined2 *)(piVar8 + 1) = 0x30;
-    hkpSingleShapeContainer::hkpSingleShapeContainer_14(10,local_18[4],local_18,1);
+    hkpConvexTransformShapeBase::hkpConvexTransformShapeBase(10,local_18[4],local_18,1);
     *piVar8 = (int)vftable;
     iVar7 = param_1[9];
     iVar4 = param_1[10];
@@ -671,7 +672,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
     pvVar10 = TlsGetValue(DAT_01f8fc4c);
     iVar7 = (**(code **)(**(int **)((int)pvVar10 + 0x2c) + 4))(0x60);
     *(undefined2 *)(iVar7 + 4) = 0x60;
-    piVar8 = (int *)hkpConvexTransformShape::hkpConvexTransformShape_2(local_18,local_d0,1);
+    piVar8 = (int *)hkpConvexTransformShape::hkpConvexTransformShape(local_18,local_d0,1);
     break;
   case '\x0e':
     local_18 = (int *)hkpConvexTranslateShape(param_1[5],param_2,param_3);
@@ -681,7 +682,7 @@ int * hkpConvexTranslateShape::hkpConvexTranslateShape(int *param_1,int *param_2
     pvVar10 = TlsGetValue(DAT_01f8fc4c);
     iVar7 = (**(code **)(**(int **)((int)pvVar10 + 0x2c) + 4))(0x70);
     *(undefined2 *)(iVar7 + 4) = 0x70;
-    piVar8 = (int *)hkpSingleShapeContainer::hkpSingleShapeContainer_10(local_18,param_1 + 0xc);
+    piVar8 = (int *)hkpSingleShapeContainer::hkpSingleShapeContainer(local_18,param_1 + 0xc);
     break;
   case '\x1e':
     piVar8 = (int *)hkpConvexTranslateShape(param_1[6],param_2,param_3);

@@ -25,7 +25,7 @@ float10 hkBaseObject::hkBaseObject_209(void)
     }
     *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1;
   }
-  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
   FUN_01269700(local_a0);
   local_a0[0] = vftable;
   if ((DAT_01885d68 != 1) && (iVar3 = *(int *)((int)pvVar4 + iVar3 * 4), *(int *)(iVar3 + 4) == 0))

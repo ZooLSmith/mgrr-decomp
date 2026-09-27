@@ -10,4 +10,5 @@ struct hkpSphereRepShape : public hkpShape {
     // non-virtual members
     hkpSphereRepShape(undefined4 param_2);  // 0112F100
     hkpSphereRepShape(undefined4 * param_1, undefined4 param_2);  // 011404A0
+    hkpSphereRepShape();  // 011404D0
 };

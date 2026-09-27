@@ -4,15 +4,15 @@
 #include "mgrr.h"
 #include "RayArmorDebris.h"
 
-// 00AEAC00  RayArmorDebris::vf40  size=163  [class]
-undefined4 __fastcall RayArmorDebris::vf40(int param_1)
+// 00AEAC00  RayArmorDebris::startup  size=163  [class]
+undefined4 __fastcall RayArmorDebris::startup(int param_1)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
   
-  iVar1 = BehaviorDebrisBase::vf40();
+  iVar1 = BehaviorDebrisBase::startup();
   if (iVar1 != 0) {
     *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) & 0xfffffffd;
     *(undefined4 *)(param_1 + 0x970) = 1;
@@ -42,8 +42,8 @@ undefined4 __fastcall RayArmorDebris::vf40(int param_1)
   return 0;
 }
 
-// 00AEAD40  RayArmorDebris::vf1B8  size=31  [class]
-void RayArmorDebris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 00AEAD40  RayArmorDebris::setCutCrerateInfo  size=31  [class]
+void RayArmorDebris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -144,7 +144,7 @@ void __fastcall RayArmorDebris::vf300(int param_1)
 undefined4 * __fastcall RayArmorDebris::RayArmorDebris(undefined4 *param_1)
 
 {
-  BehaviorDebrisBase::BehaviorDebrisBase_4();
+  BehaviorDebrisBase::BehaviorDebrisBase();
   *param_1 = vftable;
   return param_1;
 }
@@ -156,11 +156,11 @@ undefined * RayArmorDebris::vf04(void)
   return &DAT_01be9cdc;
 }
 
-// 00AEF860  RayArmorDebris::vf00  size=30  [class]
-undefined4 __thiscall RayArmorDebris::vf00(undefined4 param_1,byte param_2)
+// 00AEF860  RayArmorDebris::destruct  size=30  [class]
+undefined4 __thiscall RayArmorDebris::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

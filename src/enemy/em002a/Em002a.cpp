@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Em002a.h"
 
-// 00439D40  Em002a::vf264  size=136  [class]
-undefined4 __thiscall Em002a::vf264(int param_1,int param_2)
+// 00439D40  Em002a::setEmSetInfo  size=136  [class]
+undefined4 __thiscall Em002a::setEmSetInfo(int param_1,int param_2)
 
 {
   undefined4 uVar1;
@@ -52,7 +52,7 @@ void __fastcall Em002a::vf50(int param_1)
   if (*(int *)(param_1 + 0x7b0) != 0) {
     FUN_008f3cb0(param_1);
   }
-  BehaviorEmBase::vf128();
+  BehaviorEmBase::setSeqAtk();
   return;
 }
 
@@ -560,7 +560,7 @@ void FUN_0043a6e0(void)
 
 {
   FUN_0043a350();
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -618,8 +618,8 @@ void FUN_0043a7c0(void)
   return;
 }
 
-// 0043A7E0  Em002a::vf40  size=641  [class]
-undefined4 __fastcall Em002a::vf40(int param_1)
+// 0043A7E0  Em002a::startup  size=641  [class]
+undefined4 __fastcall Em002a::startup(int param_1)
 
 {
   int iVar1;
@@ -630,7 +630,7 @@ undefined4 __fastcall Em002a::vf40(int param_1)
   undefined1 local_1d0 [112];
   undefined1 local_160 [348];
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) | 0x20;
     FUN_00405230();
@@ -699,7 +699,7 @@ undefined4 * __fastcall Em002a::Em002a(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   cEspControler::cEspControler();
   iVar1 = 1;
@@ -718,12 +718,12 @@ undefined * Em002a::vf04(void)
   return &DAT_01b34c34;
 }
 
-// 00AB6A40  Em002a::vf00  size=43  [class]
-undefined4 __thiscall Em002a::vf00(undefined4 param_1,byte param_2)
+// 00AB6A40  Em002a::destruct  size=43  [class]
+undefined4 __thiscall Em002a::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

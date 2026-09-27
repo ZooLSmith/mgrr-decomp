@@ -4,9 +4,9 @@
 #include "mgrr.h"
 #include "esp110.h"
 
-// 009D8A80  esp110::vf04  size=105  [class]
+// 009D8A80  esp110::preTrans  size=105  [class]
 undefined4 __thiscall
-esp110::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp110::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   uint uVar1;
@@ -14,7 +14,7 @@ esp110::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   uint *puVar3;
   undefined4 uVar4;
   
-  iVar2 = esp28::vf04(param_2,param_3,param_4);
+  iVar2 = esp28::preTrans(param_2,param_3,param_4);
   if (iVar2 != 0) {
     if ((*(int *)(param_1 + 0x58) != 0) &&
        (puVar3 = (uint *)(*(int *)(param_1 + 0x58) + 0x80), puVar3 != (uint *)0x0)) {
@@ -329,7 +329,7 @@ LAB_009d929d:
 undefined4 * __fastcall esp110::esp110(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -338,7 +338,7 @@ undefined4 * __fastcall esp110::esp110(undefined4 *param_1)
 undefined4 __thiscall esp110::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

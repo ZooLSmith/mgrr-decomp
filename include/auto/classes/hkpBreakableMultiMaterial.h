@@ -12,5 +12,6 @@ struct hkpBreakableMultiMaterial : public hkpBreakableMaterial {
     virtual undefined4 vf2C();  // 011D7C70 slot 0x2C  overrides hkpBreakableMaterial
     // non-virtual members
     hkpBreakableMultiMaterial();  // 011D7EA0
+    void ctor_011D7FC0();  // 011D7FC0
     void ctor_011D8110();  // 011D8110
 };

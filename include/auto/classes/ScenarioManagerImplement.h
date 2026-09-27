@@ -51,4 +51,5 @@ struct ScenarioManagerImplement : public ScenarioManager {
     virtual undefined4 * vfA8(byte param_2);  // 00A7BCB0 slot 0xA8  overrides ScenarioManager
     // non-virtual members
     ScenarioManagerImplement();  // 00A7BAB0
+    ~ScenarioManagerImplement();  // 00A7BBD0
 };

@@ -11,6 +11,7 @@ struct hkpWorldObject : public hkReferencedObject {
     virtual undefined4 vf10(int * param_2);  // 011C8350 slot 0x10
     virtual undefined4 vf14() = 0;  // 00FDB68B slot 0x14
     // non-virtual members
+    ~hkpWorldObject();  // 01192170
     hkpWorldObject(int param_2);  // 011C85D0
     hkpWorldObject();  // 011C8650
 };

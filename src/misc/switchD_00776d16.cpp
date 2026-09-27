@@ -1147,7 +1147,7 @@ void __fastcall FUN_007764d0(int *param_1)
       fVar1 = (float)param_1[0x248];
       param_1[0x248] = (int)((float)param_1[0x244] + fVar1);
       if (120.0 < (float)param_1[0x244] + fVar1) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -1309,7 +1309,7 @@ void __fastcall FUN_007764d0(int *param_1)
       fVar1 = (float)param_1[0x248];
       param_1[0x248] = (int)((float)param_1[0x244] + fVar1);
       if (120.0 < (float)param_1[0x244] + fVar1) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -1471,7 +1471,7 @@ void __fastcall FUN_007764d0(int *param_1)
       fVar1 = (float)param_1[0x248];
       param_1[0x248] = (int)((float)param_1[0x244] + fVar1);
       if (120.0 < (float)param_1[0x244] + fVar1) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }

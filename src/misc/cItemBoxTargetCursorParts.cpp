@@ -45,10 +45,10 @@ undefined4 * __thiscall cItemBoxTargetCursorParts::vf00(undefined4 *param_1,byte
   return param_1;
 }
 
-// 00CEF320  cItemBoxTargetCursorParts::vf14  size=672  [class]
+// 00CEF320  cItemBoxTargetCursorParts::create  size=672  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cItemBoxTargetCursorParts::vf14(int param_1)
+void __fastcall cItemBoxTargetCursorParts::create(int param_1)
 
 {
   float fVar1;

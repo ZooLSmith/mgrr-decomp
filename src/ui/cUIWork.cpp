@@ -22,8 +22,8 @@ undefined4 * __thiscall cUIWork::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00CE3150  cUIWork::cUIWork_138  size=42  [class]
-void __fastcall cUIWork::cUIWork_138(undefined4 *param_1)
+// 00CE3150  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -34,8 +34,8 @@ void __fastcall cUIWork::cUIWork_138(undefined4 *param_1)
   return;
 }
 
-// 00CEAB60  cUIWork::cUIWork_64  size=42  [class]
-void __fastcall cUIWork::cUIWork_64(undefined4 *param_1)
+// 00CEAB60  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -46,8 +46,8 @@ void __fastcall cUIWork::cUIWork_64(undefined4 *param_1)
   return;
 }
 
-// 00CEABF0  cUIWork::cUIWork_63  size=42  [class]
-void __fastcall cUIWork::cUIWork_63(undefined4 *param_1)
+// 00CEABF0  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -58,8 +58,8 @@ void __fastcall cUIWork::cUIWork_63(undefined4 *param_1)
   return;
 }
 
-// 00CEB560  cUIWork::cUIWork_60  size=42  [class]
-void __fastcall cUIWork::cUIWork_60(undefined4 *param_1)
+// 00CEB560  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -70,8 +70,8 @@ void __fastcall cUIWork::cUIWork_60(undefined4 *param_1)
   return;
 }
 
-// 00CEB790  cUIWork::cUIWork_62  size=42  [class]
-void __fastcall cUIWork::cUIWork_62(undefined4 *param_1)
+// 00CEB790  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -82,8 +82,8 @@ void __fastcall cUIWork::cUIWork_62(undefined4 *param_1)
   return;
 }
 
-// 00CEDE40  cUIWork::cUIWork_118  size=42  [class]
-void __fastcall cUIWork::cUIWork_118(undefined4 *param_1)
+// 00CEDE40  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -94,8 +94,8 @@ void __fastcall cUIWork::cUIWork_118(undefined4 *param_1)
   return;
 }
 
-// 00CF34E0  cUIWork::cUIWork_3  size=42  [class]
-void __fastcall cUIWork::cUIWork_3(undefined4 *param_1)
+// 00CF34E0  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -106,8 +106,8 @@ void __fastcall cUIWork::cUIWork_3(undefined4 *param_1)
   return;
 }
 
-// 00CF3750  cUIWork::cUIWork_4  size=42  [class]
-void __fastcall cUIWork::cUIWork_4(undefined4 *param_1)
+// 00CF3750  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -118,8 +118,8 @@ void __fastcall cUIWork::cUIWork_4(undefined4 *param_1)
   return;
 }
 
-// 00CF6560  cUIWork::cUIWork_46  size=42  [class]
-void __fastcall cUIWork::cUIWork_46(undefined4 *param_1)
+// 00CF6560  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -130,8 +130,8 @@ void __fastcall cUIWork::cUIWork_46(undefined4 *param_1)
   return;
 }
 
-// 00CF8070  cUIWork::cUIWork_2  size=42  [class]
-void __fastcall cUIWork::cUIWork_2(undefined4 *param_1)
+// 00CF8070  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;
@@ -157,8 +157,8 @@ void __fastcall cUIWork::cUIWork(undefined4 *param_1)
   return;
 }
 
-// 00D0B620  cUIWork::cUIWork_61  size=42  [class]
-void __fastcall cUIWork::cUIWork_61(undefined4 *param_1)
+// 00D0B620  cUIWork::cUIWork  size=42  [class]
+void __fastcall cUIWork::cUIWork(undefined4 *param_1)
 
 {
   *param_1 = cUIWorkBase::vftable;

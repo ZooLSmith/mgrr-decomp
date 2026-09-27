@@ -18,8 +18,8 @@ void hkpCollisionListener::vf14(void)
   return;
 }
 
-// 00913F60  hkpCollisionListener::vf18  size=3  [run]
-void hkpCollisionListener::vf18(void)
+// 00913F60  hkpCollisionListener::contactProcessCallback  size=3  [run]
+void hkpCollisionListener::contactProcessCallback(void)
 
 {
   return;

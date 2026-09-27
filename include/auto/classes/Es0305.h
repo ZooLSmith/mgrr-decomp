@@ -14,4 +14,6 @@ struct Es0305 : public BehaviorAppBase {
     virtual void vf4C();  // 005C97B0 slot 0x4C  overrides Behavior
     virtual void vf50();  // 005C97C0 slot 0x50  overrides Behavior
     virtual void vf54();  // 005C97D0 slot 0x54  overrides Behavior
+    // non-virtual members
+    Es0305();  // 00AAC100
 };

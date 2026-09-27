@@ -9,7 +9,4 @@ struct EspPrimitiveWorkRadialCircleBase : public EspPrimitiveWorkBase {
     virtual undefined4 * vf00(byte param_2);  // 00F591F0 slot 0x0  overrides EspPrimitiveWorkBase
     virtual void vf08();  // 00F4ED70 slot 0x8  overrides EspPrimitiveWorkBase
     virtual void vf0C(int param_2);  // 00F4EDA0 slot 0xC  overrides EspPrimitiveWorkBase
-    // non-virtual members
-    EspPrimitiveWorkRadialCircleBase();  // 00F589B0
-    void ctor_00F58A80();  // 00F58A80
 };

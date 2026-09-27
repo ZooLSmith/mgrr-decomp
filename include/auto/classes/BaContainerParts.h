@@ -18,4 +18,6 @@ struct BaContainerParts : public BehaviorAppBase {
     virtual void vf19C(int param_2, undefined4 param_3);  // 0047F0D0 slot 0x19C  overrides Behavior
     virtual void vf1A4(undefined4 param_2, uint param_3);  // 004996D0 slot 0x1A4  overrides Behavior
     virtual void setCutCrerateInfo(undefined4 * param_1, undefined4 param_2, int param_3);  // 0047F070 slot 0x1B8  overrides Behavior
+    // non-virtual members
+    BaContainerParts();  // 00AB0F90
 };

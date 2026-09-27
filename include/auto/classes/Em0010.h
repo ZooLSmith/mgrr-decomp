@@ -79,4 +79,5 @@ struct Em0010 : public BehaviorEmBase {
     // non-virtual members
     Em0010();  // 00AAB940
     static void setRayCast(undefined4 * param_2);  // 00B30BF0
+    static void vf2B4_00B32100();  // 00B32100
 };

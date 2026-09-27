@@ -4,3 +4,4 @@
 #include "ghidra_types.h"
 #include "auto/fwd.h"
 #include "auto/functions.h"
+#include "auto/cleaned.h"

@@ -19,12 +19,6 @@ struct cItemStageDrop : public cItemBase {
     virtual void vf28();  // 009500F0 slot 0x28
     virtual void vf2C();  // 0094CE10 slot 0x2C
     // non-virtual members
-    cItemStageDrop();  // 0094D160
-    void ctor_0094D230();  // 0094D230
-    void ctor_0094D3C0();  // 0094D3C0
-    void ctor_0094D5D0();  // 0094D5D0
-    void ctor_0094F1B0();  // 0094F1B0
-    void ctor_0094F300();  // 0094F300
     cItemStageDrop(int * param_1);  // 00952F10
-    void ctor_00953290();  // 00953290
+    cItemStageDrop();  // 00953290
 };

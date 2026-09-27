@@ -8,6 +8,7 @@
 struct hkpDisableEntityCollisionFilter : public hkpCollisionFilter, public hkpEntityListener {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpDisableEntityCollisionFilter();  // 01275D80
     static void vf00();  // 01275DF0
     static void vf0C();  // 01275E00
     static void vf04();  // 01275E10
@@ -20,4 +21,5 @@ struct hkpDisableEntityCollisionFilter : public hkpCollisionFilter, public hkpEn
     static void vf14();  // 0127FCF0
     static undefined vf04_0127FD00();  // 0127FD00
     static void vf08(int param_2);  // 0127FDB0
+    void ctor_0127FDF0();  // 0127FDF0
 };

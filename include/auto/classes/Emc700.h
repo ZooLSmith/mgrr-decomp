@@ -32,4 +32,6 @@ struct Emc700 : public EmBaseDLC {
     virtual undefined4 vf32C();  // 00850530 slot 0x32C  overrides BehaviorEmBase
     virtual void vf34C();  // 008405F0 slot 0x34C  overrides BehaviorEmBase
     virtual void vf360();  // 00845DC0 slot 0x360  overrides BehaviorEmBase
+    // non-virtual members
+    Emc700();  // 00AB3C60
 };

@@ -1,5 +1,5 @@
 // src/behavior/BehaviorDebrisBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8170..005E1870, 41 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8170..005E1870, 37 functions
 
 #include "mgrr.h"
 #include "BehaviorDebrisBase.h"
@@ -29,25 +29,6 @@ void BehaviorDebrisBase::DiscreateSlot::vf10(void)
 void BehaviorDebrisBase::DiscreateSlot::vf14(void)
 
 {
-  return;
-}
-
-// 005D8210  thunk_FUN_009fdde0  size=5  [between]
-void __fastcall thunk_FUN_009fdde0(int *param_1)
-
-{
-  if (param_1[0x13c] != 0) {
-    FUN_00a805f0();
-    return;
-  }
-  if ((*(byte *)(param_1 + 0x132) & 2) == 0) {
-    *(byte *)(param_1 + 0x132) = *(byte *)(param_1 + 0x132) | 2;
-    (**(code **)(*param_1 + 0x20))();
-                    /* WARNING: Could not recover jumptable at 0x009fde16. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(code **)(*param_1 + 0xc))();
-    return;
-  }
   return;
 }
 
@@ -246,7 +227,7 @@ void __thiscall BehaviorDebrisBase::DiscreateSlot::vf18(int param_1,int param_2,
         iVar1 = *(int *)(iVar1 + 0xb0);
       }
       if (param_3[2] == iVar1) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
     }
   }
@@ -724,11 +705,11 @@ float10 __fastcall FUN_005d9db0(int param_1)
   return fVar2;
 }
 
-// 005D9E20  BehaviorDebrisBase::BehaviorDebrisBase_4  size=74  [class]
-undefined4 * __fastcall BehaviorDebrisBase::BehaviorDebrisBase_4(undefined4 *param_1)
+// 005D9E20  BehaviorDebrisBase::BehaviorDebrisBase  size=74  [class]
+undefined4 * __fastcall BehaviorDebrisBase::BehaviorDebrisBase(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_009003e0();
   param_1[0x227] = 0;
@@ -747,66 +728,14 @@ undefined * BehaviorDebrisBase::vf04(void)
   return &DAT_01b35300;
 }
 
-// 005D9E80  BehaviorDebrisBase::vf00  size=30  [class]
-undefined4 __thiscall BehaviorDebrisBase::vf00(undefined4 param_1,byte param_2)
+// 005D9E80  BehaviorDebrisBase::destruct  size=30  [class]
+undefined4 __thiscall BehaviorDebrisBase::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
-  return param_1;
-}
-
-// 005DA7D0  BehaviorDebrisBase::BehaviorDebrisBase_3  size=91  [class]
-undefined4 * __fastcall BehaviorDebrisBase::BehaviorDebrisBase_3(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  FUN_009003e0();
-  param_1[0x227] = 0;
-  param_1[0x241] = 0;
-  param_1[0x242] = 0;
-  FUN_00a7c930();
-  param_1[599] = 0;
-  param_1[0x24f] = 0;
-  *param_1 = BehaviorDebrisObject::vftable;
-  FUN_00904d60();
-  return param_1;
-}
-
-// 005DBE70  BehaviorDebrisBase::BehaviorDebrisBase  size=80  [class]
-undefined4 * __fastcall BehaviorDebrisBase::BehaviorDebrisBase(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  FUN_009003e0();
-  param_1[0x227] = 0;
-  param_1[0x241] = 0;
-  param_1[0x242] = 0;
-  FUN_00a7c930();
-  param_1[599] = 0;
-  param_1[0x24f] = 0;
-  *param_1 = BehaviorDebrisBullet::vftable;
-  return param_1;
-}
-
-// 005DBF20  BehaviorDebrisBase::BehaviorDebrisBase_2  size=80  [class]
-undefined4 * __fastcall BehaviorDebrisBase::BehaviorDebrisBase_2(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  FUN_009003e0();
-  param_1[0x227] = 0;
-  param_1[0x241] = 0;
-  param_1[0x242] = 0;
-  FUN_00a7c930();
-  param_1[599] = 0;
-  param_1[0x24f] = 0;
-  *param_1 = BehaviorDebrisExplode::vftable;
   return param_1;
 }
 
@@ -943,7 +872,7 @@ void __fastcall BehaviorDebrisBase::vf4C(int param_1)
     *(undefined4 *)(param_1 + 0x948) = 0;
   }
   if (DAT_01b372f8 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   if (*(int *)(param_1 + 0x928) != 0) {
@@ -1055,12 +984,12 @@ void __fastcall BehaviorDebrisBase::vf4C(int param_1)
     local_8 = *(float *)(param_1 + 0x900) + 7.0;
   }
   if (local_8 < *(float *)(param_1 + 0x884) != (local_8 == *(float *)(param_1 + 0x884))) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
 LAB_005ddd03:
   if ((((*(int *)(param_1 + 0x894) != 0) && (*(char *)(param_1 + 0x470) != '\0')) &&
       ((*(byte *)(param_1 + 0x472) & 0x80) != 0)) && (*(char *)(param_1 + 0x471) != '\0')) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   if (*(int *)(param_1 + 0x8e4) != 0) {
     fVar3 = *(float *)(param_1 + 0x8e0) - 0.011111111;
@@ -1099,8 +1028,8 @@ LAB_005ddd03:
   return;
 }
 
-// 005DF3A0  BehaviorDebrisBase::vf40  size=2039  [class]
-undefined4 __fastcall BehaviorDebrisBase::vf40(int param_1)
+// 005DF3A0  BehaviorDebrisBase::startup  size=2039  [class]
+undefined4 __fastcall BehaviorDebrisBase::startup(int param_1)
 
 {
   uint *puVar1;
@@ -1470,7 +1399,7 @@ LAB_005e18b2:
   local_1dc[0] = 0;
   FUN_00900350(&local_1f0);
   local_224 = (float)(uint)(local_1dc[0] != 0);
-  hkpCdPointCollector::hkpCdPointCollector_4();
+  hkpCdPointCollector::hkpCdPointCollector();
   if (local_224 == 0.0) {
     local_1e8 = local_1dc;
     local_1f0 = hkpAllCdBodyPairCollector::vftable;

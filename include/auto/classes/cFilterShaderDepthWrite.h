@@ -9,6 +9,5 @@ struct cFilterShaderDepthWrite {
     virtual void vf04();  // 00EBDC10 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShaderDepthWrite();  // 00EC1480
-    void ctor_00EC1570();  // 00EC1570
-    void ctor_015F1B40();  // 015F1B40
+    ~cFilterShaderDepthWrite();  // 00EC1570
 };

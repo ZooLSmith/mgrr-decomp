@@ -10,6 +10,7 @@ struct cCreditParts : public cCustomObjCtrlManager {
     virtual void vf08();  // 00D1BB80 slot 0x8  overrides cCustomObjCtrlManager
     virtual void create();  // 00D094B0 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
+    ~cCreditParts();  // 00CDD000
     static undefined setLineData();  // 00D36DA0
     cCreditParts();  // 00D37360
 };

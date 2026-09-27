@@ -12,4 +12,6 @@ struct cP370 {
     virtual void vf14(undefined4 param_2, byte * param_3);  // 00D53F90 slot 0x14  overrides cPhaseAbstract
     virtual void vf18();  // 00D53FD0 slot 0x18  overrides cPhaseAbstract
     virtual void vf1C(undefined4 param_1, byte * param_2);  // 00D48B50 slot 0x1C  overrides cPhaseAbstract
+    // non-virtual members
+    static void vf18_00D48B90();  // 00D48B90
 };

@@ -69,7 +69,7 @@ void __fastcall FUN_00b2f3a0(int param_1)
       FUN_00a81330();
       FUN_00a805f0();
     }
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   return;

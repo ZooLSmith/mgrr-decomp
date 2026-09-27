@@ -12,4 +12,6 @@ struct Ba0041 : public BehaviorAppBase {
     virtual void vf44();  // 00B78780 slot 0x44  overrides Behavior
     virtual void vf48();  // 00B78D40 slot 0x48  overrides Behavior
     virtual void vf4C();  // 00B78B60 slot 0x4C  overrides Behavior
+    // non-virtual members
+    Ba0041();  // 00AB0CA0
 };

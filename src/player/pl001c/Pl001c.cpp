@@ -94,8 +94,8 @@ void __thiscall FUN_005edcb0(int param_1,float param_2)
   return;
 }
 
-// 005EDD30  Pl001c::vf40  size=586  [class]
-undefined4 __fastcall Pl001c::vf40(int *param_1)
+// 005EDD30  Pl001c::startup  size=586  [class]
+undefined4 __fastcall Pl001c::startup(int *param_1)
 
 {
   int iVar1;
@@ -393,8 +393,8 @@ void __thiscall FUN_005ee3d0(int param_1,void *param_2)
   return;
 }
 
-// 005EE420  Pl001c::vf130  size=86  [class]
-undefined4 Pl001c::vf130(void)
+// 005EE420  Pl001c::getAttackInfo  size=86  [class]
+undefined4 Pl001c::getAttackInfo(void)
 
 {
   int *piVar1;
@@ -1327,10 +1327,10 @@ void __fastcall Pl001c::vf4C(int *param_1)
   return;
 }
 
-// 005EFBF0  Pl001c::vf128  size=2412  [class]
+// 005EFBF0  Pl001c::setSeqAtk  size=2412  [class]
 /* WARNING: Removing unreachable block (ram,0x005f045c) */
 
-void __fastcall Pl001c::vf128(float *param_1)
+void __fastcall Pl001c::setSeqAtk(float *param_1)
 
 {
   float fVar1;
@@ -1658,7 +1658,7 @@ LAB_005f03a6:
 undefined4 * __fastcall Pl001c::Pl001c(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -1671,8 +1671,8 @@ undefined * Pl001c::vf04(void)
   return &DAT_01b353e0;
 }
 
-// 00AB6670  Pl001c::vf00  size=105  [class]
-undefined4 * __thiscall Pl001c::vf00(undefined4 *param_1,byte param_2)
+// 00AB6670  Pl001c::destruct  size=105  [class]
+undefined4 * __thiscall Pl001c::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -1686,7 +1686,7 @@ undefined4 * __thiscall Pl001c::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

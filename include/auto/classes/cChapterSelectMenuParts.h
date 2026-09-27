@@ -12,4 +12,5 @@ struct cChapterSelectMenuParts : public cCustomObjCtrlManager {
     virtual void create();  // 009ABFD0 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
     cChapterSelectMenuParts();  // 0099A900
+    ~cChapterSelectMenuParts();  // 0099A9C0
 };

@@ -29,5 +29,7 @@ struct hkpKeyframedRigidMotion : public hkpMotion {
     hkpKeyframedRigidMotion();  // 01190F80
     hkpKeyframedRigidMotion(int param_2);  // 01191410
     hkpKeyframedRigidMotion(undefined4 * param_1, int param_2);  // 011B13E0
+    void ctor_011B1420();  // 011B1420
     void ctor_011C1FF0();  // 011C1FF0
+    ~hkpKeyframedRigidMotion();  // 011C2040
 };

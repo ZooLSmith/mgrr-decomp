@@ -8,6 +8,7 @@ struct hkpMoppCode : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 011EE860 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpMoppCode(undefined4 * param_1);  // 011EE790
-    hkpMoppCode();  // 01242390
+    ~hkpMoppCode();  // 011EE790
+    hkpMoppCode();  // 011EE7B0
+    void ctor_01242390();  // 01242390
 };

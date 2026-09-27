@@ -1,17 +1,17 @@
 // src/enemy/emc330/Emc330.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0083F6B0..00AB9970, 11 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0083F6B0..00AB9970, 12 functions
 
 #include "mgrr.h"
 #include "Emc330.h"
 
-// 0083F6B0  Emc330::vf40  size=262  [class]
-undefined4 __fastcall Emc330::vf40(int param_1)
+// 0083F6B0  Emc330::startup  size=262  [class]
+undefined4 __fastcall Emc330::startup(int param_1)
 
 {
   int iVar1;
   int iVar2;
   
-  iVar1 = EmBaseDLC::vf40();
+  iVar1 = EmBaseDLC::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -102,7 +102,7 @@ void __fastcall Emc330::vf48(int *param_1)
       fVar1 = (float)param_1[0x248];
       param_1[0x248] = (int)(float)(fVar5 + (float10)fVar1);
       if ((float10)30.0 <= fVar5 + (float10)fVar1) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         EmBaseDLC::vf48();
         return;
       }
@@ -180,8 +180,8 @@ void Emc330::vf50(void)
   return;
 }
 
-// 0083F920  Emc330::vf264  size=52  [class]
-undefined4 __thiscall Emc330::vf264(int param_1,undefined4 *param_2)
+// 0083F920  Emc330::setEmSetInfo  size=52  [class]
+undefined4 __thiscall Emc330::setEmSetInfo(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -289,6 +289,17 @@ void __fastcall Emc330::vf4C(int *param_1)
   return;
 }
 
+// 00AB15A0  Emc330::Emc330  size=35  [class]
+undefined4 * __fastcall Emc330::Emc330(undefined4 *param_1)
+
+{
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB15D0  Emc330::vf04  size=6  [class]
 undefined * Emc330::vf04(void)
 
@@ -303,12 +314,12 @@ void Emc330::vf34C(void)
   return;
 }
 
-// 00AB9970  Emc330::vf00  size=43  [class]
-undefined4 __thiscall Emc330::vf00(undefined4 param_1,byte param_2)
+// 00AB9970  Emc330::destruct  size=43  [class]
+undefined4 __thiscall Emc330::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

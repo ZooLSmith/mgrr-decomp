@@ -13,5 +13,6 @@ struct hkpConvexListShape : public hkpConvexShape, public hkpShapeContainer {
     static undefined4 vf04();  // 01158B10
     static int vf0C(int param_2);  // 01158B20
     static undefined4 vf14(int param_2);  // 01158B40
+    hkpConvexListShape();  // 01159010
     static void vf00();  // 01159440
 };

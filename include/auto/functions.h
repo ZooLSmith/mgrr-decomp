@@ -11,10 +11,8 @@ void FUN_004011c0(char * param_1, char * param_2);  // 004011C0
 void __fastcall FUN_00401260(undefined4 param_1);  // 00401260
 undefined4 __fastcall FUN_00401290(undefined4 param_1);  // 00401290
 void __fastcall FUN_00401350(int * param_1);  // 00401350
-void __fastcall FUN_004017b0(undefined4 * param_1);  // 004017B0
 void __fastcall FUN_00401810(int * param_1);  // 00401810
 void __fastcall FUN_00401a90(int param_1);  // 00401A90
-void __fastcall FUN_00401cb0(int param_1);  // 00401CB0
 int __fastcall FUN_00401da0(int param_1);  // 00401DA0
 undefined4 * FUN_00401f90(undefined4 * param_1, undefined4 * param_2);  // 00401F90 __thiscall
 void __fastcall FUN_00402200(int param_1);  // 00402200
@@ -1351,7 +1349,6 @@ void __fastcall FUN_0049c460(int * param_1);  // 0049C460
 void FUN_0049cae0(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 0049CAE0
 void FUN_0049cb10(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 0049CB10
 void FUN_0049cb40(int param_1, int * param_2, undefined4 * param_3);  // 0049CB40 __thiscall
-bool __fastcall FUN_0049cc30(int param_1);  // 0049CC30
 void FUN_0049cc90(uint param_1);  // 0049CC90
 void FUN_0049cd00(uint param_1);  // 0049CD00
 void __fastcall FUN_0049cd80(undefined4 * param_1);  // 0049CD80
@@ -3513,7 +3510,6 @@ void FUN_005d7710(int * param_1, undefined4 param_2, undefined4 param_3, int par
 void __fastcall FUN_005d78e0(int * param_1);  // 005D78E0
 void FUN_005d7f90(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 005D7F90
 void FUN_005d7fc0(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 005D7FC0
-void __fastcall thunk_FUN_009fdde0(int * param_1);  // 005D8210
 void FUN_005d84f0(int param_1, undefined4 param_2);  // 005D84F0 __thiscall
 void FUN_005d8530(int param_1, undefined4 param_2);  // 005D8530 __thiscall
 float10 __fastcall FUN_005d85a0(int param_1);  // 005D85A0
@@ -5545,7 +5541,6 @@ void __fastcall FUN_006de6e0(int * param_1);  // 006DE6E0
 void FUN_006dea30(int param_1, int param_2);  // 006DEA30 __thiscall
 void __fastcall FUN_006deb10(int param_1);  // 006DEB10
 void __fastcall FUN_006dec80(int param_1);  // 006DEC80
-undefined4 __fastcall FUN_006dede0(int param_1);  // 006DEDE0
 void __fastcall FUN_006dee60(int param_1);  // 006DEE60
 void __fastcall FUN_006def60(int param_1);  // 006DEF60
 void __fastcall FUN_006df0b0(int param_1);  // 006DF0B0
@@ -5932,7 +5927,6 @@ undefined1 __fastcall FUN_00710010(int param_1);  // 00710010
 void __fastcall FUN_007100f0(int param_1);  // 007100F0
 void __fastcall FUN_007101c0(int * param_1);  // 007101C0
 void FUN_00710ad0(void);  // 00710AD0
-void __fastcall FUN_00710bd0(int param_1);  // 00710BD0
 void __fastcall FUN_00710f30(int * param_1);  // 00710F30
 void __fastcall FUN_00711030(int * param_1);  // 00711030
 void __fastcall FUN_00711110(int * param_1);  // 00711110
@@ -8588,7 +8582,6 @@ void FUN_00890cf0(undefined4 * param_1);  // 00890CF0
 void FUN_00892af0(undefined4 * param_1);  // 00892AF0
 void FUN_00892c40(undefined4 * param_1);  // 00892C40
 void __fastcall FUN_00893680(int * param_1);  // 00893680
-undefined4 __fastcall FUN_00893aa0(int param_1);  // 00893AA0
 undefined FUN_0089c390(void);  // 0089C390
 void FUN_0089e060(undefined4 * param_1);  // 0089E060
 undefined4 __fastcall FUN_008a0770(int * param_1);  // 008A0770
@@ -8614,13 +8607,7 @@ int FUN_008a23d0(void);  // 008A23D0
 undefined4 __fastcall FUN_008a2740(int param_1);  // 008A2740
 undefined4 __fastcall FUN_008a2760(int param_1);  // 008A2760
 undefined4 __fastcall FUN_008a2790(int param_1);  // 008A2790
-undefined4 FUN_008a2930(void);  // 008A2930
-bool FUN_008a2950(void);  // 008A2950
-undefined4 FUN_008a2970(void);  // 008A2970
 undefined4 __fastcall FUN_008a2990(int param_1);  // 008A2990
-undefined4 __fastcall FUN_008a29b0(int param_1);  // 008A29B0
-undefined4 FUN_008a29e0(void);  // 008A29E0
-bool FUN_008a2a10(void);  // 008A2A10
 void __fastcall FUN_008a2b40(int param_1);  // 008A2B40
 void FUN_008a2b70(undefined4 param_1, undefined4 param_2);  // 008A2B70
 void FUN_008a2c10(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);  // 008A2C10
@@ -8940,7 +8927,6 @@ void __fastcall FUN_008d8180(int param_1);  // 008D8180
 undefined1 FUN_008d85c0(int * param_1, undefined4 param_2);  // 008D85C0
 void __fastcall FUN_008d87b0(int param_1);  // 008D87B0
 void FUN_008d87e0(int * param_1, char param_2, int * param_3, int * param_4);  // 008D87E0 __thiscall
-void __fastcall FUN_008d8de0(int param_1);  // 008D8DE0
 void __fastcall FUN_008d9080(int param_1);  // 008D9080
 void FUN_008d90b0(int * param_1, int param_2);  // 008D90B0 __thiscall
 void __fastcall FUN_008d9370(int param_1);  // 008D9370
@@ -8968,7 +8954,6 @@ float10 FUN_008dc510(float param_1);  // 008DC510
 undefined4 __fastcall FUN_008dc570(undefined4 param_1);  // 008DC570
 undefined4 __fastcall FUN_008dc6c0(undefined4 param_1);  // 008DC6C0
 undefined4 FUN_008dc7b0(void);  // 008DC7B0
-void FUN_008dc7c0(void);  // 008DC7C0
 void FUN_008dc7e0(undefined4 param_1);  // 008DC7E0
 int FUN_008dc890(int param_1, int param_2);  // 008DC890 __thiscall
 int FUN_008dc940(int param_1, int param_2);  // 008DC940 __thiscall
@@ -9287,7 +9272,6 @@ void FUN_00901540(int * param_1, uint param_2);  // 00901540 __thiscall
 uint __fastcall FUN_00901570(int * param_1);  // 00901570
 void FUN_00901590(int * param_1, int param_2);  // 00901590 __thiscall
 uint __fastcall FUN_009015c0(int * param_1);  // 009015C0
-int FUN_009021f0(uint param_1, int param_2, int param_3);  // 009021F0
 int FUN_00902cf0(undefined4 param_1, uint param_2, int param_3, int param_4, int param_5);  // 00902CF0
 void __fastcall FUN_00903bf0(int param_1);  // 00903BF0
 void __fastcall FUN_00903c60(int param_1);  // 00903C60
@@ -9321,12 +9305,7 @@ void __fastcall FUN_009058a0(int param_1);  // 009058A0
 void __fastcall FUN_009058d0(int * param_1);  // 009058D0
 undefined FUN_00905900(void);  // 00905900
 void FUN_00905980(int param_1, int * param_2, undefined4 * param_3, undefined4 * param_4);  // 00905980 __thiscall
-void __fastcall FUN_009059e0(int * param_1);  // 009059E0
-void __fastcall FUN_00905a80(int param_1);  // 00905A80
-void __fastcall FUN_00905a90(int * param_1);  // 00905A90
 void FUN_00905b30(int * param_1, int * param_2, float * param_3);  // 00905B30 __thiscall
-void __fastcall FUN_00905ca0(int param_1);  // 00905CA0
-void __fastcall FUN_00905cb0(int * param_1);  // 00905CB0
 void __fastcall FUN_00905ce0(int * param_1);  // 00905CE0
 void FUN_00905cf0(int * param_1, int * param_2);  // 00905CF0 __thiscall
 int __fastcall FUN_00905d10(int param_1);  // 00905D10
@@ -9339,13 +9318,8 @@ void FUN_009062b0(undefined4 param_1, undefined4 param_2, undefined4 param_3);  
 void FUN_009062f0(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);  // 009062F0
 void __fastcall FUN_00906320(int param_1);  // 00906320
 bool __fastcall FUN_009066c0(int param_1);  // 009066C0
-bool __fastcall FUN_009067b0(int param_1);  // 009067B0
 void __fastcall FUN_009067e0(int * param_1);  // 009067E0
-void __fastcall FUN_009068d0(int * param_1);  // 009068D0
-void __fastcall FUN_00906910(int * param_1);  // 00906910
 void FUN_00906970(int * param_1, int * param_2);  // 00906970 __thiscall
-void __fastcall FUN_00906a00(int * param_1);  // 00906A00
-void __fastcall FUN_00907070(int * param_1);  // 00907070
 void __fastcall FUN_00907210(int param_1);  // 00907210
 void __fastcall FUN_00907360(int param_1);  // 00907360
 void __fastcall FUN_009074a0(int param_1);  // 009074A0
@@ -9357,7 +9331,6 @@ void __fastcall FUN_00907740(int param_1);  // 00907740
 void __fastcall FUN_009078e0(int param_1);  // 009078E0
 void FUN_00907980(undefined4 * param_1, undefined4 * param_2);  // 00907980 __thiscall
 void FUN_00907a60(int * param_1, int * param_2);  // 00907A60 __thiscall
-void __fastcall FUN_00907ba0(int param_1);  // 00907BA0
 void __fastcall FUN_00907bb0(int param_1);  // 00907BB0
 void FUN_00907ce0(int param_1, undefined4 param_2);  // 00907CE0 __thiscall
 void __fastcall FUN_00907d20(int param_1);  // 00907D20
@@ -9376,15 +9349,6 @@ undefined4 FUN_0090a690(int param_1, int param_2);  // 0090A690
 void __fastcall FUN_0090a740(int * param_1);  // 0090A740
 void __fastcall FUN_0090a780(int * param_1);  // 0090A780
 void FUN_0090a7c0(int * param_1, undefined4 param_2);  // 0090A7C0 __thiscall
-void __fastcall FUN_0090a800(int * param_1);  // 0090A800
-void __fastcall FUN_0090a8b0(int * param_1);  // 0090A8B0
-void FUN_0090a9a0(int * param_1, undefined4 param_2);  // 0090A9A0 __thiscall
-void __fastcall FUN_0090aa90(int * param_1);  // 0090AA90
-void __fastcall FUN_0090ab40(int * param_1);  // 0090AB40
-void FUN_0090ac30(int * param_1, undefined4 param_2);  // 0090AC30 __thiscall
-void __fastcall FUN_0090afb0(int * param_1);  // 0090AFB0
-void __fastcall FUN_0090aff0(int * param_1);  // 0090AFF0
-void FUN_0090b030(int * param_1, undefined4 param_2);  // 0090B030 __thiscall
 undefined4 * __fastcall FUN_0090b070(undefined4 * param_1);  // 0090B070
 void __fastcall FUN_0090b090(int param_1);  // 0090B090
 void FUN_0090b720(int * param_1, int * param_2);  // 0090B720 __thiscall
@@ -9393,8 +9357,6 @@ undefined FUN_0090c430(void);  // 0090C430
 undefined FUN_0090c7a0(void);  // 0090C7A0
 undefined FUN_0090d470(void);  // 0090D470
 void FUN_0090e0e0(int * param_1, undefined4 param_2, int * param_3);  // 0090E0E0 __thiscall
-undefined4 __fastcall FUN_0090e460(int param_1);  // 0090E460
-undefined4 __fastcall FUN_0090e610(int param_1);  // 0090E610
 void FUN_0090e700(int param_1, int param_2);  // 0090E700 __thiscall
 undefined FUN_0090ed90(void);  // 0090ED90
 undefined FUN_0090eea0(void);  // 0090EEA0
@@ -10055,7 +10017,6 @@ undefined4 FUN_0093bfd0(void);  // 0093BFD0
 void FUN_0093bfe0(void);  // 0093BFE0
 undefined FUN_0093c1f0(void);  // 0093C1F0
 void __fastcall FUN_0093c410(int param_1);  // 0093C410
-void __fastcall FUN_0093c7e0(int param_1);  // 0093C7E0
 void __fastcall FUN_0093c9f0(int param_1);  // 0093C9F0
 void __fastcall FUN_0093ca60(int param_1);  // 0093CA60
 undefined4 FUN_0093cad0(int param_1, int param_2, undefined4 * param_3);  // 0093CAD0 __thiscall
@@ -10130,7 +10091,6 @@ void __fastcall FUN_009422f0(int param_1);  // 009422F0
 void __fastcall FUN_009423c0(int param_1);  // 009423C0
 void __fastcall FUN_00942790(int param_1);  // 00942790
 void __fastcall FUN_009427e0(int param_1);  // 009427E0
-void __fastcall FUN_00942810(int param_1);  // 00942810
 void FUN_00942c00(int param_1, undefined4 * param_2);  // 00942C00 __thiscall
 void __fastcall FUN_00942c60(undefined4 * param_1);  // 00942C60
 void __fastcall FUN_00942d90(int param_1);  // 00942D90
@@ -10220,23 +10180,8 @@ void FUN_00949510(int param_1, undefined4 param_2);  // 00949510 __thiscall
 void FUN_00949530(int param_1, undefined4 param_2);  // 00949530 __thiscall
 void FUN_00949550(int param_1, undefined4 param_2, undefined4 * param_3);  // 00949550 __thiscall
 void FUN_00949690(int param_1, undefined4 param_2);  // 00949690 __thiscall
-char * FUN_009496f0(void);  // 009496F0
 undefined4 __fastcall FUN_00949770(int param_1);  // 00949770
-char * FUN_00949920(void);  // 00949920
-void FUN_00949970(int param_1, int param_2);  // 00949970 __thiscall
-undefined4 __fastcall FUN_009499a0(int * param_1);  // 009499A0
-undefined4 __fastcall FUN_009499e0(int param_1);  // 009499E0
-undefined4 __fastcall FUN_00949a20(int param_1);  // 00949A20
-int __fastcall FUN_00949a30(int param_1);  // 00949A30
-undefined4 __fastcall FUN_00949a40(int param_1);  // 00949A40
-void FUN_00949a60(int param_1, int param_2);  // 00949A60 __thiscall
-void FUN_00949a80(int * param_1, int param_2);  // 00949A80 __thiscall
-bool __fastcall FUN_00949ab0(int param_1);  // 00949AB0
-void FUN_00949ac0(int * param_1, int param_2);  // 00949AC0 __thiscall
-bool __fastcall FUN_00949b00(int * param_1);  // 00949B00
 void FUN_00949be0(void);  // 00949BE0
-undefined4 __fastcall FUN_00949c40(int param_1);  // 00949C40
-void FUN_00949c60(int param_1, int param_2);  // 00949C60 __thiscall
 undefined4 FUN_00949cc0(char * param_1);  // 00949CC0
 void __fastcall FUN_00949d50(int param_1);  // 00949D50
 void __fastcall FUN_00949da0(undefined4 * param_1);  // 00949DA0
@@ -10295,18 +10240,10 @@ int FUN_0094c150(int param_1);  // 0094C150
 uint FUN_0094c820(int * param_1);  // 0094C820
 uint FUN_0094c8b0(int * param_1);  // 0094C8B0
 void FUN_0094cb90(int param_1, int * param_2, int * param_3);  // 0094CB90 __thiscall
-char * FUN_0094cdf0(void);  // 0094CDF0
 undefined4 FUN_0094cfc0(int param_1, undefined4 param_2);  // 0094CFC0 __thiscall
 void FUN_0094d000(int param_1, int param_2);  // 0094D000 __thiscall
 void FUN_0094d2d0(int param_1, undefined4 param_2);  // 0094D2D0 __thiscall
 void FUN_0094d700(int param_1, undefined4 param_2);  // 0094D700 __thiscall
-bool __fastcall FUN_0094d9a0(int param_1);  // 0094D9A0
-void __fastcall FUN_0094d9b0(int * param_1);  // 0094D9B0
-void FUN_0094da00(int * param_1, int param_2);  // 0094DA00 __thiscall
-char * FUN_0094daf0(void);  // 0094DAF0
-undefined4 __fastcall FUN_0094db50(int * param_1);  // 0094DB50
-undefined4 __fastcall FUN_0094dcb0(int * param_1);  // 0094DCB0
-undefined4 __fastcall FUN_0094de20(int * param_1);  // 0094DE20
 int * FUN_0094df20(int param_1, int param_2);  // 0094DF20 __thiscall
 undefined4 FUN_0094df90(int param_1, uint param_2);  // 0094DF90 __thiscall
 int FUN_0094dfd0(int param_1, int param_2);  // 0094DFD0 __thiscall
@@ -10407,7 +10344,6 @@ void FUN_00953ef0(void);  // 00953EF0
 void FUN_00954070(void);  // 00954070
 int FUN_00954450(undefined4 param_1);  // 00954450
 undefined4 FUN_009544a0(void);  // 009544A0
-void __fastcall FUN_009544c0(int param_1);  // 009544C0
 undefined4 FUN_00954780(int param_1, int param_2, int param_3);  // 00954780 __thiscall
 void __fastcall FUN_00954910(int param_1);  // 00954910
 void FUN_00954980(void);  // 00954980
@@ -10502,10 +10438,6 @@ void __fastcall FUN_0095a710(int param_1);  // 0095A710
 void __fastcall FUN_0095a750(int param_1);  // 0095A750
 undefined4 __fastcall FUN_0095a770(undefined4 param_1);  // 0095A770
 void __fastcall FUN_0095aa30(int param_1);  // 0095AA30
-void __fastcall FUN_0095ab40(int param_1);  // 0095AB40
-undefined4 FUN_0095ab50(void);  // 0095AB50
-void __fastcall FUN_0095ab60(int param_1);  // 0095AB60
-void __fastcall FUN_0095abc0(int param_1);  // 0095ABC0
 uint __fastcall FUN_0095acf0(int * param_1);  // 0095ACF0
 void __fastcall FUN_0095ad60(int * param_1);  // 0095AD60
 void __fastcall FUN_0095af80(int param_1);  // 0095AF80
@@ -11422,7 +11354,6 @@ undefined4 __fastcall FUN_009a9650(int param_1);  // 009A9650
 void FUN_009a96a0(undefined4 param_1);  // 009A96A0
 void __fastcall FUN_009a96f0(int param_1);  // 009A96F0
 void __fastcall FUN_009a9b20(int param_1);  // 009A9B20
-undefined4 FUN_009aac10(int param_1, int param_2, int param_3, undefined4 param_4);  // 009AAC10 __thiscall
 void FUN_009aad70(void);  // 009AAD70
 undefined FUN_009ab030(void);  // 009AB030
 void FUN_009ab100(int param_1, int param_2, undefined4 param_3);  // 009AB100 __thiscall
@@ -11978,8 +11909,6 @@ void FUN_009f8930(void);  // 009F8930
 void FUN_009f8940(int param_1, undefined4 * param_2);  // 009F8940 __thiscall
 undefined4 FUN_009f89f0(undefined4 param_1, byte param_2);  // 009F89F0 __thiscall
 bool FUN_009f8a10(int param_1, int param_2);  // 009F8A10 __thiscall
-void __fastcall FUN_009f8a60(int param_1);  // 009F8A60
-void __fastcall FUN_009f8a80(int param_1);  // 009F8A80
 void FUN_009f8ae0(int * param_1, int param_2);  // 009F8AE0 __thiscall
 void __fastcall FUN_009f8b10(int * param_1);  // 009F8B10
 undefined4 __fastcall FUN_009f8b40(int param_1);  // 009F8B40
@@ -12025,7 +11954,6 @@ undefined4 FUN_009fa350(byte * param_1, byte param_2, undefined4 * param_3);  //
 void __fastcall FUN_009fa430(undefined4 * param_1);  // 009FA430
 undefined FUN_009fa4d0(void);  // 009FA4D0
 void FUN_009fa510(int * param_1, int param_2);  // 009FA510 __thiscall
-void __fastcall FUN_009fab70(int * param_1);  // 009FAB70
 void __fastcall FUN_009fac50(undefined4 * param_1);  // 009FAC50
 undefined4 __fastcall FUN_009fad80(int param_1);  // 009FAD80
 void FUN_009fadb0(int param_1, int param_2, float param_3, float param_4);  // 009FADB0 __thiscall
@@ -12046,26 +11974,6 @@ void FUN_009fc970(undefined2 * param_1, int * param_2, undefined4 param_3);  // 
 void FUN_009fcdb0(undefined4 * param_1, int * param_2, undefined4 param_3);  // 009FCDB0
 undefined4 FUN_009fd040(int param_1, int param_2);  // 009FD040 __thiscall
 void FUN_009fd100(int param_1, undefined4 param_2);  // 009FD100 __thiscall
-undefined4 __fastcall FUN_009fd240(int param_1);  // 009FD240
-undefined FUN_009fd350(void);  // 009FD350
-undefined FUN_009fd5e0(void);  // 009FD5E0
-void FUN_009fd630(int param_1, int param_2);  // 009FD630 __thiscall
-void __fastcall FUN_009fd6a0(int param_1);  // 009FD6A0
-void __fastcall FUN_009fd700(int param_1);  // 009FD700
-bool FUN_009fd850(int param_1, undefined4 param_2);  // 009FD850 __thiscall
-bool __fastcall FUN_009fd880(int param_1);  // 009FD880
-int FUN_009fd8a0(int param_1, float * param_2, float * param_3, float * param_4, float * param_5);  // 009FD8A0 __thiscall
-void FUN_009fdb60(int param_1, undefined4 param_2, short * param_3);  // 009FDB60 __thiscall
-undefined4 FUN_009fdd80(int param_1, undefined4 param_2);  // 009FDD80 __thiscall
-void __fastcall FUN_009fdde0(int * param_1);  // 009FDDE0
-bool __fastcall FUN_009fde20(int param_1);  // 009FDE20
-int FUN_009fde60(char * param_1);  // 009FDE60
-undefined4 FUN_009fe180(char * param_1, size_t param_2, uint param_3, int param_4);  // 009FE180
-undefined4 * FUN_009fe410(int param_1);  // 009FE410
-undefined4 * FUN_009fe620(int param_1);  // 009FE620
-undefined4 FUN_009fe6b0(undefined4 param_1, uint param_2);  // 009FE6B0
-void FUN_009fe710(uint param_1, undefined4 param_2);  // 009FE710
-void FUN_009fe7d0(uint param_1, undefined4 param_2);  // 009FE7D0
 void FUN_009fe920(undefined4 param_1);  // 009FE920
 undefined4 FUN_009fe950(uint * param_1, int param_2);  // 009FE950 __thiscall
 undefined1 __fastcall FUN_009fedd0(undefined4 param_1);  // 009FEDD0
@@ -12081,17 +11989,6 @@ void __fastcall FUN_009ff9b0(int param_1);  // 009FF9B0
 undefined4 FUN_009ffa00(int param_1, int param_2);  // 009FFA00 __thiscall
 undefined4 FUN_009ffa70(int param_1, int param_2);  // 009FFA70 __thiscall
 undefined4 __fastcall FUN_009ffdf0(int param_1);  // 009FFDF0
-void FUN_00a006a0(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00A006A0
-void __fastcall FUN_00a006c0(int param_1);  // 00A006C0
-bool FUN_00a0076f(void);  // 00A0076F
-undefined FUN_00a008c0(void);  // 00A008C0
-undefined4 FUN_00a00a60(uint param_1, undefined4 param_2);  // 00A00A60
-void FUN_00a00bd0(uint param_1, undefined4 param_2);  // 00A00BD0
-undefined4 FUN_00a00ca0(uint param_1, undefined4 param_2);  // 00A00CA0
-undefined4 FUN_00a00da0(uint param_1, undefined4 param_2);  // 00A00DA0
-undefined4 FUN_00a00e70(uint param_1, undefined4 param_2);  // 00A00E70
-undefined4 FUN_00a00f80(uint param_1, undefined4 param_2);  // 00A00F80
-undefined4 FUN_00a01080(uint param_1, undefined4 param_2);  // 00A01080
 void __fastcall FUN_00a01300(int param_1);  // 00A01300
 void FUN_00a01350(int * param_1, float param_2, int param_3);  // 00A01350 __thiscall
 undefined FUN_00a039e0(void);  // 00A039E0
@@ -12152,9 +12049,6 @@ int FUN_00a07310(int * param_1, int param_2);  // 00A07310 __thiscall
 undefined4 FUN_00a07340(int * param_1, int param_2);  // 00A07340 __thiscall
 undefined4 FUN_00a073c0(int * param_1, int param_2);  // 00A073C0 __thiscall
 int FUN_00a073f0(int param_1, int param_2);  // 00A073F0 __thiscall
-void FUN_00a074d0(int param_1, int param_2, int param_3);  // 00A074D0 __thiscall
-void __fastcall FUN_00a07600(int * param_1);  // 00A07600
-undefined4 FUN_00a07660(int * param_1, ushort param_2, int param_3, undefined4 param_4);  // 00A07660 __thiscall
 void FUN_00a077b0(int * param_1, ushort param_2);  // 00A077B0 __thiscall
 void FUN_00a077e0(int * param_1, ushort param_2);  // 00A077E0 __thiscall
 void FUN_00a07820(int * param_1, int param_2);  // 00A07820 __thiscall
@@ -13098,10 +12992,6 @@ byte FUN_00a6a260(int param_1, int * param_2);  // 00A6A260 __thiscall
 void __fastcall FUN_00a6a420(int param_1);  // 00A6A420
 void __fastcall FUN_00a6a520(undefined4 * param_1);  // 00A6A520
 undefined1 FUN_00a6a6e0(int * param_1, undefined4 param_2);  // 00A6A6E0
-byte FUN_00a6a750(int param_1, int * param_2);  // 00A6A750 __thiscall
-byte FUN_00a6a7c0(int param_1, int * param_2);  // 00A6A7C0 __thiscall
-byte FUN_00a6a8b0(int param_1, int * param_2);  // 00A6A8B0 __thiscall
-undefined4 FUN_00a6a960(int param_1, int * param_2);  // 00A6A960 __thiscall
 void FUN_00a6ae60(int param_1, undefined4 param_2);  // 00A6AE60 __thiscall
 void __fastcall FUN_00a6ae80(int param_1);  // 00A6AE80
 void FUN_00a6b620(int param_1, undefined4 * param_2, undefined4 * param_3);  // 00A6B620 __thiscall
@@ -13111,9 +13001,6 @@ void __fastcall FUN_00a6c4f0(undefined4 * param_1);  // 00A6C4F0
 int * FUN_00a6c580(int * param_1, uint param_2);  // 00A6C580 __thiscall
 void __fastcall FUN_00a6c5f0(int * param_1);  // 00A6C5F0
 uint FUN_00a6c680(int * param_1, undefined4 param_2);  // 00A6C680
-byte FUN_00a6c720(int param_1, int * param_2);  // 00A6C720 __thiscall
-byte FUN_00a6c790(int param_1, int * param_2);  // 00A6C790 __thiscall
-byte FUN_00a6c870(int param_1, int * param_2);  // 00A6C870 __thiscall
 byte FUN_00a6c950(int param_1, undefined4 param_2);  // 00A6C950 __thiscall
 void FUN_00a6cbc0(int * param_1, undefined4 param_2);  // 00A6CBC0
 undefined4 __fastcall FUN_00a6d5c0(int param_1);  // 00A6D5C0
@@ -13539,9 +13426,6 @@ void FUN_00a8e740(int param_1, undefined1 param_2);  // 00A8E740 __thiscall
 undefined1 __fastcall FUN_00a8e750(int param_1);  // 00A8E750
 void __fastcall FUN_00a8e760(int param_1);  // 00A8E760
 void FUN_00a8e880(int param_1, float * param_2);  // 00A8E880 __thiscall
-void FUN_00a8e960(int param_1, undefined4 param_2);  // 00A8E960 __thiscall
-int __fastcall FUN_00a8e9b0(int param_1);  // 00A8E9B0
-float10 __fastcall FUN_00a8e9c0(int param_1);  // 00A8E9C0
 float10 FUN_00a8eaa0(int param_1, float * param_2);  // 00A8EAA0 __thiscall
 float * FUN_00a8eb50(int param_1, float * param_2, float * param_3);  // 00A8EB50 __thiscall
 float10 FUN_00a8ec30(int param_1, float * param_2);  // 00A8EC30 __thiscall
@@ -13551,10 +13435,6 @@ void FUN_00a8ee10(int param_1, undefined4 param_2);  // 00A8EE10 __thiscall
 void FUN_00a8ee20(int param_1, undefined4 param_2);  // 00A8EE20 __thiscall
 undefined4 __fastcall FUN_00a8eea0(int param_1);  // 00A8EEA0
 undefined4 __fastcall FUN_00a8eeb0(int param_1);  // 00A8EEB0
-void __fastcall FUN_00a8eec0(int * param_1);  // 00A8EEC0
-undefined4 __fastcall FUN_00a8ef10(int param_1);  // 00A8EF10
-void __fastcall FUN_00a8efe0(int param_1);  // 00A8EFE0
-void __fastcall FUN_00a8f000(int param_1);  // 00A8F000
 undefined4 FUN_00a8f040(int param_1, int param_2);  // 00A8F040 __thiscall
 int __fastcall FUN_00a8f0e0(int param_1);  // 00A8F0E0
 undefined4 __fastcall FUN_00a8f190(undefined4 param_1);  // 00A8F190
@@ -13625,22 +13505,6 @@ void __fastcall FUN_00a930c0(int param_1);  // 00A930C0
 void __fastcall FUN_00a93170(int param_1);  // 00A93170
 void __fastcall FUN_00a931b0(int param_1);  // 00A931B0
 undefined FUN_00a93220(void);  // 00A93220
-void __fastcall FUN_00a933e0(int param_1);  // 00A933E0
-void __fastcall FUN_00a93450(int param_1);  // 00A93450
-void __fastcall FUN_00a934c0(int param_1);  // 00A934C0
-int FUN_00a93530(int param_1, int param_2);  // 00A93530 __thiscall
-int FUN_00a93580(int param_1, int param_2);  // 00A93580 __thiscall
-void __fastcall FUN_00a935d0(int param_1);  // 00A935D0
-int FUN_00a93610(int param_1, int param_2);  // 00A93610 __thiscall
-void FUN_00a93660(int param_1, int * param_2, undefined4 param_3);  // 00A93660 __thiscall
-void FUN_00a936d0(int param_1, int * param_2, int param_3);  // 00A936D0 __thiscall
-void FUN_00a93730(int param_1, undefined4 param_2);  // 00A93730 __thiscall
-void FUN_00a93780(int param_1, undefined4 param_2);  // 00A93780 __thiscall
-void __fastcall FUN_00a937e0(int param_1);  // 00A937E0
-void __fastcall FUN_00a93820(int param_1);  // 00A93820
-void FUN_00a938c0(int param_1, int param_2);  // 00A938C0 __thiscall
-void FUN_00a93910(int param_1, int param_2);  // 00A93910 __thiscall
-undefined4 FUN_00a93a00(int param_1, undefined4 param_2);  // 00A93A00 __thiscall
 void __fastcall FUN_00a93fc0(int param_1);  // 00A93FC0
 undefined4 __fastcall FUN_00a94360(int param_1);  // 00A94360
 int FUN_00a94380(int param_1, uint param_2);  // 00A94380 __thiscall
@@ -13733,7 +13597,6 @@ undefined4 FUN_00a97e60(int param_1, float param_2, int param_3);  // 00A97E60 _
 undefined FUN_00a980d0(void);  // 00A980D0
 undefined FUN_00a981b0(void);  // 00A981B0
 undefined4 FUN_00a98220(int param_1, int param_2);  // 00A98220 __thiscall
-void __fastcall FUN_00a98280(int param_1);  // 00A98280
 undefined4 __fastcall FUN_00a986d0(int param_1);  // 00A986D0
 undefined1 * __fastcall FUN_00a987f0(undefined1 * param_1);  // 00A987F0
 void __fastcall FUN_00a98890(undefined2 * param_1);  // 00A98890
@@ -13775,45 +13638,6 @@ void FUN_00a9ca50(void);  // 00A9CA50
 void FUN_00a9ca80(void);  // 00A9CA80
 void FUN_00a9cab0(void);  // 00A9CAB0
 void FUN_00a9cae0(void);  // 00A9CAE0
-void FUN_00a9cba0(int * param_1, int param_2, int param_3, int param_4);  // 00A9CBA0 __thiscall
-void FUN_00a9cc10(int * param_1, int param_2, int param_3);  // 00A9CC10 __thiscall
-uint FUN_00a9cc70(int * param_1, undefined4 param_2);  // 00A9CC70 __thiscall
-void __fastcall FUN_00a9ccb0(int * param_1);  // 00A9CCB0
-void __fastcall FUN_00a9cef0(int * param_1);  // 00A9CEF0
-undefined4 FUN_00a9d4c0(int param_1, undefined4 param_2);  // 00A9D4C0 __thiscall
-int FUN_00a9d5e0(int param_1, int param_2);  // 00A9D5E0 __thiscall
-void FUN_00a9d720(int param_1, undefined4 * param_2);  // 00A9D720 __thiscall
-void FUN_00a9d7c0(int param_1, undefined4 * param_2, undefined4 param_3);  // 00A9D7C0 __thiscall
-void __fastcall FUN_00a9d860(int param_1);  // 00A9D860
-void __fastcall FUN_00a9d8a0(int param_1);  // 00A9D8A0
-void __fastcall FUN_00a9d9a0(int param_1);  // 00A9D9A0
-void FUN_00a9dac0(int param_1, int param_2);  // 00A9DAC0 __thiscall
-void FUN_00a9dd90(int param_1, int param_2);  // 00A9DD90 __thiscall
-void __fastcall FUN_00a9e060(int param_1);  // 00A9E060
-void FUN_00a9e080(int param_1, uint param_2);  // 00A9E080 __thiscall
-void FUN_00a9e0d0(int param_1, undefined4 param_2);  // 00A9E0D0 __thiscall
-void __fastcall FUN_00a9e120(int param_1);  // 00A9E120
-void __fastcall FUN_00a9e140(int param_1);  // 00A9E140
-uint FUN_00a9e160(int param_1, undefined4 param_2);  // 00A9E160 __thiscall
-void FUN_00a9e1e0(int param_1, int param_2, char * param_3);  // 00A9E1E0 __thiscall
-undefined FUN_00a9e290(void);  // 00A9E290
-undefined FUN_00a9e440(void);  // 00A9E440
-undefined FUN_00a9e6a0(void);  // 00A9E6A0
-undefined FUN_00a9e8e0(void);  // 00A9E8E0
-undefined FUN_00a9eb20(void);  // 00A9EB20
-undefined FUN_00a9ed60(void);  // 00A9ED60
-undefined FUN_00a9efb0(void);  // 00A9EFB0
-undefined FUN_00a9f0e0(void);  // 00A9F0E0
-undefined FUN_00a9f180(void);  // 00A9F180
-undefined FUN_00a9f2f0(void);  // 00A9F2F0
-undefined FUN_00a9f3c0(void);  // 00A9F3C0
-undefined FUN_00a9f4c0(void);  // 00A9F4C0
-undefined FUN_00a9f560(void);  // 00A9F560
-bool FUN_00a9f6b0(int param_1, undefined4 param_2);  // 00A9F6B0 __thiscall
-undefined4 FUN_00a9f710(int param_1, undefined4 param_2);  // 00A9F710 __thiscall
-undefined4 FUN_00a9f760(int param_1, undefined4 param_2);  // 00A9F760 __thiscall
-undefined4 FUN_00a9f7d0(int param_1, undefined4 param_2);  // 00A9F7D0 __thiscall
-undefined4 FUN_00a9f890(int param_1, int param_2);  // 00A9F890 __thiscall
 void FUN_00aa0920(int param_1, int param_2);  // 00AA0920 __thiscall
 bool FUN_00aa09c0(int param_1, undefined4 * param_2, float param_3, int param_4);  // 00AA09C0 __thiscall
 undefined4 FUN_00aa0ba0(int param_1, int param_2, int param_3);  // 00AA0BA0 __thiscall
@@ -13870,13 +13694,10 @@ void __fastcall FUN_00aa5700(int param_1);  // 00AA5700
 undefined4 * FUN_00aa5a70(undefined4 * param_1, undefined4 * param_2);  // 00AA5A70 __thiscall
 undefined4 * FUN_00aa5b30(undefined4 * param_1, undefined4 * param_2);  // 00AA5B30 __thiscall
 void __fastcall FUN_00aa5ec0(undefined4 * param_1);  // 00AA5EC0
-void FUN_00aa7100(void);  // 00AA7100
 void FUN_00aa72a0(void);  // 00AA72A0
 void FUN_00aa72c0(void);  // 00AA72C0
 void FUN_00aa72e0(void);  // 00AA72E0
 void FUN_00aa7420(void);  // 00AA7420
-void FUN_00aa7be0(void);  // 00AA7BE0
-void FUN_00aa7cd0(void);  // 00AA7CD0
 void FUN_00aa8c20(void);  // 00AA8C20
 void __fastcall FUN_00aa8f60(int param_1);  // 00AA8F60
 void __fastcall FUN_00aa8fc0(undefined4 * param_1);  // 00AA8FC0
@@ -14019,9 +13840,7 @@ void FUN_00ac3890(void);  // 00AC3890
 void FUN_00ac3c40(void);  // 00AC3C40
 void FUN_00ac3e30(int param_1, int param_2);  // 00AC3E30 __thiscall
 void __fastcall FUN_00ac3f80(int param_1);  // 00AC3F80
-void FUN_00ac4160(void);  // 00AC4160
 void __fastcall FUN_00ac4490(int param_1);  // 00AC4490
-undefined4 FUN_00ac45b0(void);  // 00AC45B0
 undefined FUN_00ac45d0(void);  // 00AC45D0
 void FUN_00ac4640(int param_1, undefined4 param_2);  // 00AC4640 __thiscall
 void FUN_00ac4670(int param_1, undefined4 param_2, undefined4 param_3);  // 00AC4670 __thiscall
@@ -14032,11 +13851,8 @@ uint __fastcall FUN_00ac46e0(int param_1);  // 00AC46E0
 uint __fastcall FUN_00ac46f0(int param_1);  // 00AC46F0
 undefined4 __fastcall FUN_00ac4700(int param_1);  // 00AC4700
 undefined4 FUN_00ac4710(int param_1, int param_2);  // 00AC4710 __thiscall
-uint FUN_00ac4770(void);  // 00AC4770
-void FUN_00ac4780(void);  // 00AC4780
 float10 __fastcall FUN_00ac4790(int param_1);  // 00AC4790
 float10 __fastcall FUN_00ac4820(int param_1);  // 00AC4820
-void FUN_00ac48e0(void);  // 00AC48E0
 undefined4 FUN_00ac48f0(int param_1, int param_2);  // 00AC48F0 __thiscall
 void FUN_00ac4a90(int param_1, int param_2);  // 00AC4A90 __thiscall
 void FUN_00ac4bd0(void);  // 00AC4BD0
@@ -14085,16 +13901,9 @@ uint FUN_00ac7150(undefined4 * param_1);  // 00AC7150
 void __fastcall FUN_00ac7810(int * param_1);  // 00AC7810
 undefined4 __fastcall FUN_00ac8000(int param_1);  // 00AC8000
 void FUN_00ac80a0(int param_1, undefined4 param_2, float param_3);  // 00AC80A0 __thiscall
-uint FUN_00ac8120(void);  // 00AC8120
 byte FUN_00ac8170(int param_1);  // 00AC8170
-undefined4 FUN_00ac8190(void);  // 00AC8190
 void FUN_00ac81f0(undefined4 param_1, undefined4 * param_2, undefined4 * param_3);  // 00AC81F0
 void FUN_00ac8270(undefined4 param_1, undefined4 * param_2, undefined4 * param_3);  // 00AC8270
-undefined4 FUN_00ac82f0(void);  // 00AC82F0
-undefined4 FUN_00ac8350(void);  // 00AC8350
-undefined4 FUN_00ac83b0(void);  // 00AC83B0
-undefined4 FUN_00ac8410(void);  // 00AC8410
-undefined4 FUN_00ac8470(void);  // 00AC8470
 int FUN_00ac84d0(int param_1, undefined4 param_2);  // 00AC84D0 __thiscall
 int FUN_00ac8520(int param_1, undefined4 param_2);  // 00AC8520 __thiscall
 float10 FUN_00ac8570(int param_1, undefined4 param_2);  // 00AC8570 __thiscall
@@ -14925,7 +14734,6 @@ void __fastcall FUN_00b30de0(int param_1);  // 00B30DE0
 void __fastcall FUN_00b30eb0(int * param_1);  // 00B30EB0
 void FUN_00b316d0(void);  // 00B316D0
 void __fastcall FUN_00b31b10(int * param_1);  // 00B31B10
-void __fastcall FUN_00b32100(int param_1);  // 00B32100
 void __fastcall FUN_00b32520(int * param_1);  // 00B32520
 void __fastcall FUN_00b32620(int * param_1);  // 00B32620
 void __fastcall FUN_00b32700(int * param_1);  // 00B32700
@@ -16139,7 +15947,6 @@ void FUN_00bda230(int * param_1, float param_2, int param_3);  // 00BDA230 __thi
 void FUN_00bda2b0(undefined4 param_1);  // 00BDA2B0
 float10 __fastcall FUN_00bda2d0(int param_1);  // 00BDA2D0
 undefined FUN_00bda7a0(void);  // 00BDA7A0
-undefined4 __fastcall FUN_00bda8a0(int * param_1);  // 00BDA8A0
 void __fastcall FUN_00bda970(int * param_1);  // 00BDA970
 void FUN_00bdb1d0(void);  // 00BDB1D0
 void __fastcall FUN_00bdb200(int * param_1);  // 00BDB200
@@ -16591,7 +16398,6 @@ int FUN_00c1e370(int param_1, byte param_2);  // 00C1E370 __thiscall
 void FUN_00c1e3a0(void);  // 00C1E3A0
 void FUN_00c1e3c0(int param_1);  // 00C1E3C0
 void FUN_00c1e410(undefined4 param_1, undefined4 param_2);  // 00C1E410
-void FUN_00c1e5e0(int param_1, undefined4 * param_2);  // 00C1E5E0 __thiscall
 void FUN_00c1e920(int * param_1, float param_2);  // 00C1E920 __thiscall
 void FUN_00c1ea90(int * param_1, undefined4 param_2, float param_3);  // 00C1EA90 __thiscall
 void FUN_00c1ebd0(int param_1, float * param_2);  // 00C1EBD0 __thiscall
@@ -16779,7 +16585,6 @@ int FUN_00c314e0(int param_1, int param_2);  // 00C314E0 __thiscall
 void FUN_00c315d0(int * param_1, undefined4 param_2);  // 00C315D0
 undefined4 FUN_00c31610(int * param_1, int param_2, undefined4 param_3);  // 00C31610 __thiscall
 undefined4 FUN_00c317b0(int * param_1, int param_2, undefined4 param_3);  // 00C317B0 __thiscall
-undefined FUN_00c31a20(void);  // 00C31A20
 void FUN_00c31c90(float * param_1, float param_2);  // 00C31C90 __thiscall
 void FUN_00c31d20(undefined4 * param_1, float param_2);  // 00C31D20 __thiscall
 void FUN_00c31d70(int * param_1, int param_2);  // 00C31D70 __thiscall
@@ -17476,8 +17281,6 @@ void FUN_00c77040(int param_1, int param_2);  // 00C77040
 undefined4 FUN_00c770c0(int param_1, undefined4 * param_2);  // 00C770C0
 undefined4 FUN_00c771b0(int param_1, undefined4 * param_2);  // 00C771B0
 undefined4 FUN_00c774d0(void);  // 00C774D0
-void __fastcall FUN_00c775c0(int param_1);  // 00C775C0
-void __fastcall FUN_00c775d0(int param_1);  // 00C775D0
 void FUN_00c775e0(void);  // 00C775E0
 void __fastcall FUN_00c775f0(uint * param_1);  // 00C775F0
 undefined4 FUN_00c777e0(int param_1, int * param_2);  // 00C777E0 __thiscall
@@ -17504,113 +17307,7 @@ void __fastcall FUN_00c78840(int param_1);  // 00C78840
 void __fastcall FUN_00c78890(int param_1);  // 00C78890
 void __fastcall FUN_00c788d0(undefined4 * param_1);  // 00C788D0
 void __fastcall FUN_00c789d0(undefined4 * param_1);  // 00C789D0
-undefined4 __fastcall FUN_00c79770(int param_1);  // 00C79770
-void FUN_00c797c0(int param_1, undefined4 param_2);  // 00C797C0 __thiscall
-void FUN_00c79820(int param_1, undefined4 param_2);  // 00C79820 __thiscall
-void FUN_00c79920(int param_1, int param_2);  // 00C79920 __thiscall
-void FUN_00c79a90(int param_1, int param_2);  // 00C79A90 __thiscall
-void FUN_00c79c50(int param_1, undefined4 param_2);  // 00C79C50 __thiscall
-void FUN_00c79c80(int param_1, undefined4 param_2);  // 00C79C80 __thiscall
 undefined4 __fastcall FUN_00c79ce0(undefined4 param_1);  // 00C79CE0
-void FUN_00c79d70(int param_1, int param_2);  // 00C79D70 __thiscall
-void FUN_00c79e20(int param_1, int param_2);  // 00C79E20 __thiscall
-void FUN_00c79f90(int param_1, int param_2);  // 00C79F90 __thiscall
-void FUN_00c7a0b0(int param_1, int param_2);  // 00C7A0B0 __thiscall
-undefined4 __fastcall FUN_00c7a0d0(int param_1);  // 00C7A0D0
-void FUN_00c7a260(int param_1, int param_2);  // 00C7A260 __thiscall
-void FUN_00c7a3b0(int param_1, int param_2);  // 00C7A3B0 __thiscall
-void FUN_00c7a480(int param_1, int param_2);  // 00C7A480 __thiscall
-void FUN_00c7a540(int param_1, int param_2);  // 00C7A540 __thiscall
-undefined4 __fastcall FUN_00c7a560(int param_1);  // 00C7A560
-void FUN_00c7a6f0(int param_1, int param_2);  // 00C7A6F0 __thiscall
-void FUN_00c7a740(int param_1, int param_2);  // 00C7A740 __thiscall
-void FUN_00c7a7b0(int param_1, int param_2);  // 00C7A7B0 __thiscall
-void FUN_00c7a800(int param_1, int param_2);  // 00C7A800 __thiscall
-void FUN_00c7a850(int param_1, int param_2);  // 00C7A850 __thiscall
-void FUN_00c7a8a0(int param_1, int param_2);  // 00C7A8A0 __thiscall
-void FUN_00c7a8f0(int param_1, undefined4 param_2);  // 00C7A8F0 __thiscall
-void FUN_00c7a950(int param_1, int param_2);  // 00C7A950 __thiscall
-void FUN_00c7a9c0(int param_1, int param_2);  // 00C7A9C0 __thiscall
-void FUN_00c7aa00(int param_1, int param_2);  // 00C7AA00 __thiscall
-void FUN_00c7ab00(int param_1, int param_2);  // 00C7AB00 __thiscall
-void FUN_00c7ab60(int param_1, int param_2);  // 00C7AB60 __thiscall
-void FUN_00c7abb0(int param_1, int param_2);  // 00C7ABB0 __thiscall
-void FUN_00c7ac30(int param_1, int param_2);  // 00C7AC30 __thiscall
-void FUN_00c7acd0(int param_1, int param_2);  // 00C7ACD0 __thiscall
-void FUN_00c7ad80(int param_1, int param_2);  // 00C7AD80 __thiscall
-void FUN_00c7adf0(int param_1, undefined4 param_2);  // 00C7ADF0 __thiscall
-void FUN_00c7ae90(int param_1, undefined4 param_2);  // 00C7AE90 __thiscall
-void FUN_00c7b000(int param_1, int param_2);  // 00C7B000 __thiscall
-void FUN_00c7b060(int param_1, int param_2);  // 00C7B060 __thiscall
-void FUN_00c7b0b0(int param_1, int param_2);  // 00C7B0B0 __thiscall
-void FUN_00c7b140(int param_1, int param_2);  // 00C7B140 __thiscall
-void FUN_00c7b2e0(int param_1, int param_2);  // 00C7B2E0 __thiscall
-void FUN_00c7b3a0(int param_1, int param_2);  // 00C7B3A0 __thiscall
-void FUN_00c7b440(int param_1, int param_2);  // 00C7B440 __thiscall
-void FUN_00c7b540(int param_1, int param_2);  // 00C7B540 __thiscall
-void FUN_00c7b6a0(int param_1, int param_2);  // 00C7B6A0 __thiscall
-void FUN_00c7b7c0(int param_1, int param_2);  // 00C7B7C0 __thiscall
-void FUN_00c7bad0(int param_1, int param_2);  // 00C7BAD0 __thiscall
-void FUN_00c7bb40(int param_1, int param_2);  // 00C7BB40 __thiscall
-void FUN_00c7c4a0(int param_1, int param_2);  // 00C7C4A0 __thiscall
-void FUN_00c7c620(int param_1, int param_2);  // 00C7C620 __thiscall
-undefined4 __fastcall FUN_00c7c640(int param_1);  // 00C7C640
-void FUN_00c7c920(int param_1, int param_2);  // 00C7C920 __thiscall
-void FUN_00c7c9e0(int param_1, int param_2);  // 00C7C9E0 __thiscall
-void FUN_00c7ca90(int param_1, int param_2);  // 00C7CA90 __thiscall
-void FUN_00c7cb50(int param_1, int param_2);  // 00C7CB50 __thiscall
-void FUN_00c7cd00(int param_1, int param_2);  // 00C7CD00 __thiscall
-void FUN_00c7cd70(int param_1, int param_2);  // 00C7CD70 __thiscall
-void FUN_00c7cdd0(int param_1, undefined4 param_2);  // 00C7CDD0 __thiscall
-void FUN_00c7ce40(int param_1, undefined4 param_2);  // 00C7CE40 __thiscall
-undefined4 __fastcall FUN_00c7ce50(int param_1);  // 00C7CE50
-void FUN_00c7ceb0(int param_1, int param_2);  // 00C7CEB0 __thiscall
-void FUN_00c7cf20(int param_1, int param_2);  // 00C7CF20 __thiscall
-void FUN_00c7cf90(int param_1, int param_2);  // 00C7CF90 __thiscall
-void FUN_00c7d170(int param_1, int param_2);  // 00C7D170 __thiscall
-void FUN_00c7d2a0(int param_1, int param_2);  // 00C7D2A0 __thiscall
-undefined4 __fastcall FUN_00c7d2c0(int param_1);  // 00C7D2C0
-void FUN_00c7d430(int param_1, int param_2);  // 00C7D430 __thiscall
-undefined4 __fastcall FUN_00c7d450(int param_1);  // 00C7D450
-void FUN_00c7d600(int param_1, int param_2);  // 00C7D600 __thiscall
-undefined4 __fastcall FUN_00c7d620(int param_1);  // 00C7D620
-void FUN_00c7d740(int param_1, undefined4 param_2);  // 00C7D740 __thiscall
-void FUN_00c7d7a0(int param_1, undefined4 param_2);  // 00C7D7A0 __thiscall
-void FUN_00c7d8e0(int param_1, undefined4 param_2);  // 00C7D8E0 __thiscall
-void FUN_00c7d940(int param_1, undefined4 param_2);  // 00C7D940 __thiscall
-void FUN_00c7dd30(int param_1, int param_2);  // 00C7DD30 __thiscall
-void FUN_00c7dd90(int param_1, undefined4 param_2);  // 00C7DD90 __thiscall
-void FUN_00c7de00(int param_1, undefined4 param_2);  // 00C7DE00 __thiscall
-void FUN_00c7de70(int param_1, undefined4 param_2);  // 00C7DE70 __thiscall
-void FUN_00c7dec0(int param_1, undefined4 param_2);  // 00C7DEC0 __thiscall
-void FUN_00c7df30(int param_1, int param_2);  // 00C7DF30 __thiscall
-void FUN_00c7dfa0(int param_1, int param_2);  // 00C7DFA0 __thiscall
-void FUN_00c7e000(int param_1, int param_2);  // 00C7E000 __thiscall
-void FUN_00c7e120(int param_1, int param_2);  // 00C7E120 __thiscall
-void FUN_00c7e240(int param_1, int param_2);  // 00C7E240 __thiscall
-void FUN_00c7e320(int param_1, int param_2);  // 00C7E320 __thiscall
-void FUN_00c7e3b0(int param_1, int param_2);  // 00C7E3B0 __thiscall
-void FUN_00c7e4f0(int param_1, int param_2);  // 00C7E4F0 __thiscall
-void FUN_00c7e610(int param_1, int param_2);  // 00C7E610 __thiscall
-void FUN_00c7e710(int param_1, int param_2);  // 00C7E710 __thiscall
-void FUN_00c7e7d0(int param_1, int param_2);  // 00C7E7D0 __thiscall
-void FUN_00c7e810(int param_1, int param_2);  // 00C7E810 __thiscall
-void FUN_00c7e850(int param_1, int param_2);  // 00C7E850 __thiscall
-void FUN_00c7e890(int param_1, int param_2);  // 00C7E890 __thiscall
-undefined4 FUN_00c7ebe0(void);  // 00C7EBE0
-undefined4 __fastcall FUN_00c7ec20(int param_1);  // 00C7EC20
-undefined4 __fastcall FUN_00c7ec70(int param_1);  // 00C7EC70
-undefined4 __fastcall FUN_00c7ecb0(int param_1);  // 00C7ECB0
-undefined4 __fastcall FUN_00c7ed00(int param_1);  // 00C7ED00
-undefined4 __fastcall FUN_00c7fcd0(int param_1);  // 00C7FCD0
-undefined4 __fastcall FUN_00c7fd10(int param_1);  // 00C7FD10
-undefined4 FUN_00c7fd80(void);  // 00C7FD80
-undefined4 FUN_00c7fdc0(void);  // 00C7FDC0
-undefined4 __fastcall FUN_00c7fe10(int param_1);  // 00C7FE10
-undefined4 __fastcall FUN_00c7fe50(int param_1);  // 00C7FE50
-undefined4 FUN_00c7fec0(void);  // 00C7FEC0
-undefined4 FUN_00c7ffe0(void);  // 00C7FFE0
-undefined4 __fastcall FUN_00c80440(int param_1);  // 00C80440
 undefined4 FUN_00c81ab0(int param_1, int param_2);  // 00C81AB0 __thiscall
 void FUN_00c81b30(int param_1, uint param_2);  // 00C81B30 __thiscall
 void FUN_00c81b80(int param_1, uint param_2);  // 00C81B80 __thiscall
@@ -17645,7 +17342,6 @@ uint FUN_00c83b80(int * param_1);  // 00C83B80
 uint FUN_00c83bb0(int * param_1);  // 00C83BB0
 void __fastcall FUN_00c83d40(int param_1);  // 00C83D40
 void FUN_00c83e90(int param_1, undefined4 param_2);  // 00C83E90 __thiscall
-void __fastcall FUN_00c83f10(int param_1);  // 00C83F10
 undefined4 __fastcall FUN_00c84030(int param_1);  // 00C84030
 void __fastcall FUN_00c840a0(int param_1);  // 00C840A0
 void __fastcall FUN_00c84110(int param_1);  // 00C84110
@@ -17661,9 +17357,6 @@ bool FUN_00c84960(int param_1, int param_2);  // 00C84960 __thiscall
 void __fastcall FUN_00c849f0(int param_1);  // 00C849F0
 void __fastcall FUN_00c84a70(undefined4 * param_1);  // 00C84A70
 void __fastcall FUN_00c84b30(int param_1);  // 00C84B30
-void FUN_00c84cf0(int param_1, int param_2);  // 00C84CF0 __thiscall
-void FUN_00c86cb0(int param_1, int param_2);  // 00C86CB0 __thiscall
-void FUN_00c86e90(int param_1, int param_2);  // 00C86E90 __thiscall
 void __fastcall FUN_00c88f90(int param_1);  // 00C88F90
 void __fastcall FUN_00c88fc0(int param_1);  // 00C88FC0
 void __fastcall FUN_00c8fe10(int param_1);  // 00C8FE10
@@ -18208,7 +17901,6 @@ undefined4 FUN_00cb9ab0(int param_1, int param_2);  // 00CB9AB0 __thiscall
 void FUN_00cb9b80(int param_1, float param_2, float param_3, float param_4);  // 00CB9B80 __thiscall
 void FUN_00cb9e80(int param_1, float param_2, float param_3, float param_4);  // 00CB9E80 __thiscall
 void FUN_00cba1a0(int param_1, float param_2, float param_3, float param_4);  // 00CBA1A0 __thiscall
-void __fastcall FUN_00cba440(int param_1);  // 00CBA440
 void FUN_00cba4c0(int param_1, float param_2, float param_3, float param_4);  // 00CBA4C0 __thiscall
 void FUN_00cba780(int param_1, int param_2);  // 00CBA780 __thiscall
 void FUN_00cba930(int param_1, float * param_2, float * param_3);  // 00CBA930 __thiscall
@@ -18428,7 +18120,6 @@ void __fastcall FUN_00cd0720(int param_1);  // 00CD0720
 undefined4 FUN_00cd0ad0(int param_1, undefined4 param_2, uint param_3);  // 00CD0AD0 __thiscall
 undefined4 FUN_00cd0ca0(int param_1, undefined4 param_2, uint param_3);  // 00CD0CA0 __thiscall
 undefined4 FUN_00cd1040(int param_1, undefined4 param_2);  // 00CD1040 __thiscall
-void __fastcall FUN_00cd11c0(int * param_1);  // 00CD11C0
 undefined4 FUN_00cd1270(uint param_1);  // 00CD1270
 undefined4 FUN_00cd128c(undefined4 param_1, undefined4 param_2, uint param_3);  // 00CD128C
 void __fastcall FUN_00cd16f0(int param_1);  // 00CD16F0
@@ -18570,7 +18261,6 @@ void __fastcall FUN_00ceaa00(int param_1);  // 00CEAA00
 undefined4 FUN_00ceaa60(undefined4 * param_1);  // 00CEAA60
 void __fastcall FUN_00ceac60(int param_1);  // 00CEAC60
 void __fastcall FUN_00cead40(int param_1);  // 00CEAD40
-void __fastcall FUN_00ceb110(int param_1);  // 00CEB110
 void __fastcall FUN_00ceb1d0(int param_1);  // 00CEB1D0
 void __fastcall FUN_00ceb5d0(int param_1);  // 00CEB5D0
 void __fastcall FUN_00ceb800(int param_1);  // 00CEB800
@@ -18678,7 +18368,6 @@ int FUN_00cfee50(int param_1, uint param_2);  // 00CFEE50 __thiscall
 void FUN_00cfef30(int param_1, char param_2);  // 00CFEF30 __thiscall
 int FUN_00cff240(int param_1, uint param_2);  // 00CFF240 __thiscall
 int FUN_00d00730(int param_1, uint param_2);  // 00D00730 __thiscall
-void __fastcall FUN_00d00c30(int param_1);  // 00D00C30
 void __fastcall FUN_00d00e40(int param_1);  // 00D00E40
 void FUN_00d01220(int param_1, int param_2, int param_3, int param_4, int param_5);  // 00D01220 __thiscall
 void __fastcall FUN_00d01b60(int param_1);  // 00D01B60
@@ -18997,7 +18686,6 @@ void __fastcall FUN_00d47550(int param_1);  // 00D47550
 void __fastcall FUN_00d47a60(int param_1);  // 00D47A60
 void __fastcall FUN_00d47aa0(int param_1);  // 00D47AA0
 void __fastcall FUN_00d48aa0(int param_1);  // 00D48AA0
-void __fastcall FUN_00d48b90(int param_1);  // 00D48B90
 void FUN_00d48d60(void);  // 00D48D60
 undefined4 FUN_00d48fb0(byte * param_1);  // 00D48FB0
 void FUN_00d49130(undefined4 param_1, undefined4 param_2, undefined4 param_3, float param_4);  // 00D49130
@@ -19218,7 +18906,6 @@ void __fastcall FUN_00d73170(int param_1);  // 00D73170
 void __fastcall FUN_00d73210(int param_1);  // 00D73210
 undefined FUN_00d73290(void);  // 00D73290
 void __fastcall FUN_00d734b0(int param_1);  // 00D734B0
-void __fastcall FUN_00d73c20(int param_1);  // 00D73C20
 byte FUN_00d73d10(int param_1, int * param_2);  // 00D73D10 __thiscall
 byte FUN_00d73db0(int param_1, int * param_2);  // 00D73DB0 __thiscall
 byte FUN_00d73e50(int param_1, int * param_2);  // 00D73E50 __thiscall
@@ -19332,7 +19019,6 @@ void FUN_00d7f7a0(void);  // 00D7F7A0
 void __fastcall FUN_00d7f8b0(int param_1);  // 00D7F8B0
 void __fastcall FUN_00d7f970(int param_1);  // 00D7F970
 void FUN_00d7fac0(void);  // 00D7FAC0
-void __fastcall FUN_00d7fbd0(int param_1);  // 00D7FBD0
 int FUN_00d7fe20(int param_1, int param_2);  // 00D7FE20 __thiscall
 undefined4 FUN_00d800e0(void);  // 00D800E0
 void FUN_00d80160(void);  // 00D80160
@@ -20965,8 +20651,6 @@ void FUN_00e03d10(void);  // 00E03D10
 void FUN_00e03d20(int param_1, uint param_2);  // 00E03D20
 void FUN_00e03ea0(char * param_1);  // 00E03EA0
 void __fastcall FUN_00e04180(int param_1);  // 00E04180
-undefined4 FUN_00e041c0(void);  // 00E041C0
-undefined4 FUN_00e041d0(int param_1, int param_2);  // 00E041D0 __thiscall
 undefined4 __fastcall FUN_00e04210(undefined4 * param_1);  // 00E04210
 undefined4 __fastcall FUN_00e04220(int param_1);  // 00E04220
 undefined4 __fastcall FUN_00e04240(int param_1);  // 00E04240
@@ -20984,13 +20668,8 @@ undefined4 FUN_00e04a60(int * param_1, undefined4 * param_2);  // 00E04A60 __thi
 void FUN_00e04ff0(int * param_1, undefined4 param_2, undefined4 * param_3);  // 00E04FF0 __thiscall
 void FUN_00e05140(int * param_1, undefined4 param_2, int param_3, int param_4, int param_5);  // 00E05140 __thiscall
 void FUN_00e05380(int param_1, int param_2);  // 00E05380 __thiscall
-undefined2 FUN_00e053e0(int param_1, int param_2);  // 00E053E0 __thiscall
-int FUN_00e05410(int * param_1, int param_2);  // 00E05410 __thiscall
-undefined2 FUN_00e05460(int param_1, int param_2);  // 00E05460 __thiscall
-int FUN_00e05490(int param_1, int param_2, int param_3);  // 00E05490 __thiscall
 int FUN_00e054c0(int param_1, uint param_2);  // 00E054C0 __thiscall
 undefined * FUN_00e05520(int param_1, uint param_2);  // 00E05520 __thiscall
-undefined4 FUN_00e05590(int param_1);  // 00E05590
 ulonglong FUN_00e05630(int param_1, int param_2, uint param_3);  // 00E05630 __thiscall
 ulonglong FUN_00e056f0(int param_1, byte * param_2, uint param_3);  // 00E056F0 __thiscall
 undefined4 FUN_00e057c0(int param_1, int param_2, uint param_3, uint param_4, int param_5);  // 00E057C0 __thiscall
@@ -21003,76 +20682,6 @@ ulonglong FUN_00e05b60(int param_1, byte * param_2);  // 00E05B60 __thiscall
 char * FUN_00e05f70(char * param_1, int * param_2);  // 00E05F70
 void __fastcall FUN_00e060f0(int * param_1);  // 00E060F0
 undefined4 FUN_00e062b0(int param_1, uint param_2, int param_3);  // 00E062B0 __thiscall
-int FUN_00e06390(int param_1, int param_2, byte * param_3);  // 00E06390 __thiscall
-int FUN_00e064c0(int param_1, int param_2, byte * param_3, int param_4);  // 00E064C0 __thiscall
-int FUN_00e065f0(int param_1, int param_2, char * param_3, undefined4 param_4);  // 00E065F0 __thiscall
-bool FUN_00e06650(int param_1, int param_2, byte * param_3);  // 00E06650 __thiscall
-int FUN_00e066f0(int param_1, int param_2, char * param_3, undefined4 param_4);  // 00E066F0 __thiscall
-int FUN_00e06750(int param_1, int param_2, char * param_3, undefined4 param_4);  // 00E06750 __thiscall
-void FUN_00e067b0(int param_1, int param_2, undefined1 * param_3);  // 00E067B0 __thiscall
-void FUN_00e067f0(int param_1, int param_2, undefined2 * param_3);  // 00E067F0 __thiscall
-void FUN_00e06830(int param_1, int param_2, ulong * param_3);  // 00E06830 __thiscall
-void FUN_00e06870(int param_1, int param_2, ulonglong * param_3);  // 00E06870 __thiscall
-void FUN_00e068b0(int param_1, int param_2, undefined1 * param_3);  // 00E068B0 __thiscall
-void FUN_00e068f0(int param_1, int param_2, undefined2 * param_3);  // 00E068F0 __thiscall
-void FUN_00e06930(int param_1, int param_2, undefined4 * param_3);  // 00E06930 __thiscall
-void FUN_00e06970(int param_1, int param_2, float * param_3);  // 00E06970 __thiscall
-void FUN_00e069b0(int param_1, int param_2, double * param_3);  // 00E069B0 __thiscall
-void FUN_00e069f0(int param_1, int param_2, undefined4 param_3);  // 00E069F0 __thiscall
-void FUN_00e06a30(int param_1, int param_2, undefined4 param_3);  // 00E06A30 __thiscall
-void FUN_00e06a70(int param_1, int param_2, undefined4 param_3);  // 00E06A70 __thiscall
-void FUN_00e06ab0(int param_1, int param_2, undefined4 param_3);  // 00E06AB0 __thiscall
-void FUN_00e06af0(int param_1, int param_2, undefined4 param_3);  // 00E06AF0 __thiscall
-void FUN_00e06b30(int param_1, int param_2, undefined1 * param_3);  // 00E06B30 __thiscall
-void FUN_00e06b70(int param_1, int param_2, undefined4 param_3);  // 00E06B70 __thiscall
-void FUN_00e06bf0(int param_1, int param_2, float * param_3);  // 00E06BF0 __thiscall
-void FUN_00e06c30(int param_1, int param_2, undefined1 * param_3);  // 00E06C30 __thiscall
-void FUN_00e06c70(int param_1, int param_2, undefined2 * param_3);  // 00E06C70 __thiscall
-void FUN_00e06cb0(int param_1, int param_2, ulong * param_3);  // 00E06CB0 __thiscall
-void FUN_00e06cf0(int param_1, int param_2, ulonglong * param_3);  // 00E06CF0 __thiscall
-void FUN_00e06d30(int param_1, int param_2, undefined1 * param_3);  // 00E06D30 __thiscall
-void FUN_00e06d70(int param_1, int param_2, undefined2 * param_3);  // 00E06D70 __thiscall
-void FUN_00e06db0(int param_1, int param_2, long * param_3);  // 00E06DB0 __thiscall
-int FUN_00e06df0(int param_1, int param_2, char * param_3);  // 00E06DF0 __thiscall
-int FUN_00e06ec0(undefined4 param_1, char * param_2, undefined4 param_3);  // 00E06EC0
-bool FUN_00e06f00(undefined4 param_1, byte * param_2);  // 00E06F00
-void FUN_00e06f50(undefined4 param_1, undefined1 * param_2);  // 00E06F50
-void FUN_00e06f70(undefined4 param_1, undefined2 * param_2);  // 00E06F70
-void FUN_00e06fa0(undefined4 param_1, ulong * param_2);  // 00E06FA0
-void FUN_00e06fc0(undefined4 param_1, ulonglong * param_2);  // 00E06FC0
-void FUN_00e06ff0(undefined4 param_1, undefined1 * param_2);  // 00E06FF0
-void FUN_00e07010(undefined4 param_1, undefined2 * param_2);  // 00E07010
-void FUN_00e07030(undefined4 param_1, undefined4 * param_2);  // 00E07030
-void FUN_00e07050(undefined4 param_1, float * param_2);  // 00E07050
-void FUN_00e07070(undefined4 param_1, double * param_2);  // 00E07070
-void FUN_00e07090(undefined4 param_1, ulong * param_2);  // 00E07090
-void FUN_00e070b0(undefined4 param_1, undefined4 param_2);  // 00E070B0
-void FUN_00e070d0(undefined4 param_1, undefined4 param_2);  // 00E070D0
-void FUN_00e070f0(undefined4 param_1, undefined4 param_2);  // 00E070F0
-void FUN_00e07110(undefined4 param_1, undefined4 param_2);  // 00E07110
-void FUN_00e07130(undefined4 param_1, undefined4 param_2);  // 00E07130
-void FUN_00e07150(undefined4 param_1, undefined1 * param_2);  // 00E07150
-void FUN_00e07170(undefined4 param_1, undefined4 param_2);  // 00E07170
-void FUN_00e07190(undefined4 param_1, undefined4 param_2);  // 00E07190
-void FUN_00e071b0(undefined4 param_1, float * param_2);  // 00E071B0
-int FUN_00e071d0(undefined4 param_1, char * param_2, undefined4 param_3);  // 00E071D0
-int FUN_00e07210(undefined4 param_1, char * param_2, undefined4 param_3);  // 00E07210
-void FUN_00e07250(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E07250
-void FUN_00e07270(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E07270
-void FUN_00e07290(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E07290
-void FUN_00e072b0(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E072B0
-void FUN_00e072d0(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E072D0
-void FUN_00e072f0(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E072F0
-void FUN_00e07310(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E07310
-void FUN_00e07330(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E07330
-void FUN_00e07350(undefined4 param_1, undefined1 * param_2);  // 00E07350
-void FUN_00e07370(undefined4 param_1, undefined2 * param_2);  // 00E07370
-void FUN_00e073a0(undefined4 param_1, ulong * param_2);  // 00E073A0
-void FUN_00e073c0(undefined4 param_1, ulonglong * param_2);  // 00E073C0
-void FUN_00e073f0(undefined4 param_1, undefined1 * param_2);  // 00E073F0
-void FUN_00e07410(undefined4 param_1, undefined2 * param_2);  // 00E07410
-void FUN_00e07440(undefined4 param_1, long * param_2);  // 00E07440
-undefined4 FUN_00e07460(int param_1);  // 00E07460
 void FUN_00e08440(int param_1, undefined4 param_2, int param_3, int param_4, int param_5);  // 00E08440 __thiscall
 void __fastcall FUN_00e085e0(int * param_1);  // 00E085E0
 int * FUN_00e08600(int * param_1, int * param_2);  // 00E08600 __thiscall
@@ -21815,17 +21424,6 @@ void FUN_00e47ee0(int param_1, int param_2);  // 00E47EE0 __thiscall
 undefined4 FUN_00e48130(float * param_1, float * param_2);  // 00E48130
 void FUN_00e485c0(float * param_1, float * param_2, float * param_3);  // 00E485C0
 void FUN_00e48830(undefined4 * param_1);  // 00E48830
-int __fastcall FUN_00e48970(int param_1);  // 00E48970
-undefined FUN_00e48a00(void);  // 00E48A00
-undefined4 FUN_00e48a90(void);  // 00E48A90
-void FUN_00e48aa0(int param_1, float * param_2);  // 00E48AA0 __thiscall
-undefined4 FUN_00e48ae0(void);  // 00E48AE0
-undefined4 FUN_00e48af0(undefined4 param_1);  // 00E48AF0
-float10 __fastcall FUN_00e48b00(int param_1);  // 00E48B00
-void FUN_00e48b10(int param_1, undefined4 param_2);  // 00E48B10 __thiscall
-float10 __fastcall FUN_00e48b20(int param_1);  // 00E48B20
-void FUN_00e48b30(int param_1, undefined4 param_2);  // 00E48B30 __thiscall
-float10 __fastcall FUN_00e48b40(int param_1);  // 00E48B40
 void FUN_00e48ba0(float * param_1, float * param_2, float param_3);  // 00E48BA0 __thiscall
 void FUN_00e48c20(int param_1, float * param_2, float param_3);  // 00E48C20 __thiscall
 void FUN_00e48d30(float * param_1, float * param_2);  // 00E48D30 __thiscall
@@ -21958,7 +21556,6 @@ void FUN_00e56cc0(int param_1, undefined4 param_2, undefined4 param_3);  // 00E5
 undefined4 FUN_00e56ec0(int param_1, float * param_2, undefined4 param_3, undefined4 param_4);  // 00E56EC0 __thiscall
 undefined4 FUN_00e56fc0(undefined4 * param_1, int * param_2, undefined4 param_3);  // 00E56FC0 __thiscall
 undefined4 FUN_00e57140(int param_1, int param_2, int param_3);  // 00E57140 __thiscall
-void FUN_00e58760(int param_1, undefined4 param_2);  // 00E58760 __thiscall
 void FUN_00e587b0(int param_1);  // 00E587B0
 void FUN_00e58980(byte * param_1);  // 00E58980
 void FUN_00e58a10(int param_1, int param_2, int param_3, int param_4);  // 00E58A10 __thiscall
@@ -21989,8 +21586,6 @@ int FUN_00e5a0c0(int * param_1);  // 00E5A0C0
 void FUN_00e5a480(int param_1, float * param_2);  // 00E5A480 __thiscall
 void FUN_00e5a5c0(int param_1, uint param_2);  // 00E5A5C0 __thiscall
 void FUN_00e5a630(undefined4 * param_1, undefined4 * param_2);  // 00E5A630 __thiscall
-undefined4 FUN_00e5b9f0(int param_1, float * param_2, uint param_3);  // 00E5B9F0 __thiscall
-void FUN_00e5bb20(int param_1, undefined4 param_2);  // 00E5BB20 __thiscall
 int * FUN_00e5bba0(undefined4 param_1, undefined4 param_2);  // 00E5BBA0
 void FUN_00e5bc90(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E5BC90
 bool FUN_00e5bd60(undefined1 * param_1, undefined4 param_2, undefined4 param_3);  // 00E5BD60 __thiscall
@@ -22247,11 +21842,6 @@ void __fastcall FUN_00e6a840(int param_1);  // 00E6A840
 float10 FUN_00e6a8c0(int * param_1, undefined4 param_2);  // 00E6A8C0 __thiscall
 void __fastcall FUN_00e6a970(int param_1);  // 00E6A970
 undefined4 __fastcall FUN_00e6aa70(int param_1);  // 00E6AA70
-bool __fastcall FUN_00e6aaf0(int param_1);  // 00E6AAF0
-bool __fastcall FUN_00e6ab10(int param_1);  // 00E6AB10
-int __fastcall FUN_00e6ab20(int param_1);  // 00E6AB20
-bool __fastcall FUN_00e6ab30(int param_1);  // 00E6AB30
-void FUN_00e6aba0(int param_1, char * param_2, undefined4 param_3);  // 00E6ABA0 __thiscall
 undefined4 FUN_00e6b4f0(undefined4 * param_1, undefined4 param_2, undefined4 param_3);  // 00E6B4F0
 void FUN_00e6b580(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E6B580
 void FUN_00e6b610(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00E6B610
@@ -22331,11 +21921,8 @@ float10 __fastcall FUN_00e70cd0(int * param_1);  // 00E70CD0
 void FUN_00e70d10(int param_1, int * param_2);  // 00E70D10 __thiscall
 undefined4 FUN_00e71050(int param_1);  // 00E71050
 void __fastcall FUN_00e710f0(int * param_1);  // 00E710F0
-undefined FUN_00e712d0(void);  // 00E712D0
 undefined4 __fastcall FUN_00e71340(int param_1);  // 00E71340
 undefined4 __fastcall FUN_00e71380(int param_1);  // 00E71380
-undefined4 FUN_00e713d0(undefined4 param_1, undefined4 param_2);  // 00E713D0
-bool FUN_00e713f0(int param_1, undefined4 param_2, undefined4 param_3, int param_4);  // 00E713F0 __thiscall
 void __fastcall FUN_00e714c0(int * param_1);  // 00E714C0
 undefined4 __fastcall FUN_00e71520(int param_1);  // 00E71520
 undefined4 __fastcall FUN_00e715a0(int param_1);  // 00E715A0
@@ -22405,12 +21992,9 @@ void FUN_00e76d30(int * param_1, undefined4 param_2);  // 00E76D30 __thiscall
 undefined4 FUN_00e76d80(undefined4 * param_1, undefined4 param_2, int param_3);  // 00E76D80 __thiscall
 void __fastcall FUN_00e76db0(undefined4 * param_1);  // 00E76DB0
 undefined4 FUN_00e76e10(undefined4 * param_1, undefined4 param_2, int param_3);  // 00E76E10 __thiscall
-void __fastcall FUN_00e76e50(int param_1);  // 00E76E50
-void __fastcall thunk_FUN_00e76e50(int param_1);  // 00E76EC0
 undefined4 __fastcall FUN_00e76ed0(int param_1);  // 00E76ED0
 void __fastcall FUN_00e76f30(int param_1);  // 00E76F30
 undefined4 __fastcall FUN_00e76fb0(int param_1);  // 00E76FB0
-void __fastcall FUN_00e77270(int param_1);  // 00E77270
 undefined4 __fastcall FUN_00e77300(int param_1);  // 00E77300
 void FUN_00e77350(void);  // 00E77350
 undefined4 FUN_00e77370(undefined4 param_1);  // 00E77370
@@ -22465,7 +22049,6 @@ float10 FUN_00e7a060(int * param_1, int param_2);  // 00E7A060 __thiscall
 undefined4 FUN_00e7a0e0(int * param_1, int param_2, int param_3);  // 00E7A0E0 __thiscall
 void __fastcall FUN_00e7a150(int * param_1);  // 00E7A150
 void __fastcall FUN_00e7a230(int * param_1);  // 00E7A230
-int __fastcall FUN_00e7a310(int param_1);  // 00E7A310
 void FUN_00e7a5e0(undefined4 param_1);  // 00E7A5E0
 undefined4 FUN_00e7a5f0(undefined4 param_1);  // 00E7A5F0
 undefined4 FUN_00e7a640(undefined4 param_1);  // 00E7A640
@@ -22495,7 +22078,6 @@ void __fastcall FUN_00e7d370(int * param_1);  // 00E7D370
 void __fastcall FUN_00e7d3c0(int * param_1);  // 00E7D3C0
 void __fastcall FUN_00e7d4c0(int * param_1);  // 00E7D4C0
 void __fastcall FUN_00e7d500(int * param_1);  // 00E7D500
-undefined4 FUN_00e7d560(int param_1, undefined4 * param_2);  // 00E7D560 __thiscall
 void FUN_00e7d700(void);  // 00E7D700
 void FUN_00e7d760(void);  // 00E7D760
 undefined4 FUN_00e7d880(int param_1, int param_2, int param_3);  // 00E7D880 __thiscall
@@ -22743,7 +22325,6 @@ void __fastcall FUN_00e93ca0(int param_1);  // 00E93CA0
 undefined4 FUN_00e93cd0(int * param_1, int param_2, int param_3);  // 00E93CD0 __thiscall
 void __fastcall FUN_00e93dc0(int param_1);  // 00E93DC0
 void __fastcall FUN_00e93df0(int param_1);  // 00E93DF0
-void __fastcall FUN_00e93fc0(int * param_1);  // 00E93FC0
 int * FUN_00e94790(int * param_1, undefined4 param_2);  // 00E94790 __thiscall
 void FUN_00e947d0(int * param_1, int * param_2);  // 00E947D0
 void FUN_00e94b00(int * param_1, int * param_2);  // 00E94B00
@@ -22774,7 +22355,6 @@ void FUN_00e972d0(int * param_1, int * param_2);  // 00E972D0
 uint FUN_00e97640(int * param_1, char * param_2);  // 00E97640
 void __fastcall FUN_00e97bc0(int param_1);  // 00E97BC0
 undefined FUN_00e97c00(void);  // 00E97C00
-int * FUN_00e97ef0(int * param_1, int * param_2, uint param_3);  // 00E97EF0 __thiscall
 undefined4 * FUN_00e97ff0(undefined4 * param_1, undefined4 param_2);  // 00E97FF0 __thiscall
 undefined4 * FUN_00e98060(undefined4 * param_1, undefined4 param_2);  // 00E98060 __thiscall
 undefined4 * FUN_00e980d0(undefined4 * param_1, undefined4 param_2);  // 00E980D0 __thiscall
@@ -22845,10 +22425,6 @@ undefined4 FUN_00e9a950(int param_1, uint param_2, undefined4 param_3, undefined
 void __fastcall FUN_00e9a9f0(int param_1);  // 00E9A9F0
 undefined4 FUN_00e9aa20(int param_1, uint param_2, undefined4 param_3, undefined4 param_4);  // 00E9AA20 __thiscall
 undefined4 * FUN_00e9ab90(undefined4 * param_1, undefined4 param_2);  // 00E9AB90 __thiscall
-void FUN_00e9ac90(int param_1, int param_2);  // 00E9AC90 __thiscall
-uint FUN_00e9acc0(int * param_1, undefined4 param_2);  // 00E9ACC0 __thiscall
-int FUN_00e9ad20(int * param_1, int param_2, undefined4 param_3);  // 00E9AD20 __thiscall
-void FUN_00e9ade0(int param_1, uint param_2);  // 00E9ADE0 __thiscall
 undefined1 FUN_00e9b6d0(int * param_1, undefined4 param_2);  // 00E9B6D0
 undefined4 FUN_00e9b770(int * param_1, undefined4 param_2);  // 00E9B770
 undefined4 FUN_00e9bc30(int * param_1, int * param_2);  // 00E9BC30 __thiscall
@@ -23061,7 +22637,6 @@ void __fastcall FUN_00ea9c50(undefined4 * param_1);  // 00EA9C50
 void __fastcall FUN_00ea9d90(undefined4 * param_1);  // 00EA9D90
 void FUN_00ea9e60(int param_1, undefined4 * param_2);  // 00EA9E60 __thiscall
 undefined4 FUN_00ea9e80(int param_1, undefined4 * param_2);  // 00EA9E80 __thiscall
-void __fastcall FUN_00ea9eb0(int param_1);  // 00EA9EB0
 undefined4 FUN_00ea9ec0(int param_1, undefined4 * param_2);  // 00EA9EC0 __thiscall
 undefined4 FUN_00ea9f00(int param_1, undefined4 * param_2);  // 00EA9F00 __thiscall
 void FUN_00ea9f40(int param_1, undefined4 * param_2);  // 00EA9F40 __thiscall
@@ -23102,10 +22677,6 @@ void __fastcall FUN_00eab5e0(int param_1);  // 00EAB5E0
 void FUN_00eabb00(int param_1, uint param_2, int param_3, float param_4);  // 00EABB00 __thiscall
 void FUN_00eac200(int param_1, int param_2, int param_3, float param_4);  // 00EAC200 __thiscall
 void FUN_00eac880(int param_1, int param_2);  // 00EAC880 __thiscall
-void FUN_00eac9e0(int param_1, undefined4 param_2);  // 00EAC9E0 __thiscall
-void FUN_00eacb30(void);  // 00EACB30
-void FUN_00eacb40(void);  // 00EACB40
-void __fastcall FUN_00eacb50(undefined4 param_1);  // 00EACB50
 void FUN_00eacdf0(void);  // 00EACDF0
 void FUN_00eace00(int param_1, float param_2);  // 00EACE00 __thiscall
 void __fastcall FUN_00eace90(int param_1);  // 00EACE90
@@ -23292,7 +22863,6 @@ undefined4 * FUN_00ec7e40(undefined4 * param_1, undefined4 * param_2);  // 00EC7
 void FUN_00ec7ed0(void);  // 00EC7ED0
 void FUN_00ec7ef0(void);  // 00EC7EF0
 void FUN_00ec7f70(void * param_1);  // 00EC7F70
-void FUN_00ec7fc0(void);  // 00EC7FC0
 undefined4 FUN_00ec8000(undefined4 param_1);  // 00EC8000
 void FUN_00ec8050(void);  // 00EC8050
 void FUN_00ec83c0(int * param_1, int * param_2);  // 00EC83C0 __thiscall
@@ -23412,7 +22982,6 @@ undefined4 FUN_00ed4db0(int * param_1, undefined4 * param_2);  // 00ED4DB0
 void FUN_00ed4fa0(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);  // 00ED4FA0
 void FUN_00ed4ff0(int param_1, int param_2, float param_3);  // 00ED4FF0 __thiscall
 undefined4 __fastcall FUN_00ed5150(int param_1);  // 00ED5150
-void __fastcall FUN_00ed5330(int param_1);  // 00ED5330
 void __fastcall FUN_00ed53f0(int param_1);  // 00ED53F0
 void __fastcall FUN_00ed54f0(int param_1);  // 00ED54F0
 void __fastcall FUN_00ed6110(int param_1);  // 00ED6110
@@ -23427,7 +22996,6 @@ void __fastcall FUN_00ed8880(int param_1);  // 00ED8880
 void __fastcall FUN_00ed89f0(int param_1);  // 00ED89F0
 void FUN_00ed8fa0(int param_1, undefined4 * param_2);  // 00ED8FA0 __thiscall
 undefined4 __fastcall FUN_00ed90d0(int param_1);  // 00ED90D0
-void __fastcall FUN_00ed9190(int param_1);  // 00ED9190
 void __fastcall FUN_00ed9bd0(int param_1);  // 00ED9BD0
 bool __fastcall FUN_00eda090(int param_1);  // 00EDA090
 void __fastcall FUN_00eda1a0(int param_1);  // 00EDA1A0
@@ -23435,7 +23003,6 @@ void __fastcall FUN_00eda1e0(int param_1);  // 00EDA1E0
 void __fastcall FUN_00edaf90(int param_1);  // 00EDAF90
 void FUN_00edafd0(void);  // 00EDAFD0
 void __fastcall FUN_00edb050(undefined4 * param_1);  // 00EDB050
-void __fastcall FUN_00edb090(int param_1);  // 00EDB090
 undefined4 FUN_00edb1a0(undefined4 * param_1, int * param_2);  // 00EDB1A0
 undefined4 FUN_00edb270(int param_1, int param_2);  // 00EDB270 __thiscall
 void FUN_00edb3c0(int param_1, int param_2);  // 00EDB3C0 __thiscall
@@ -23466,7 +23033,6 @@ void FUN_00ee0500(void);  // 00EE0500
 undefined4 __fastcall FUN_00ee05a0(int param_1);  // 00EE05A0
 undefined4 __fastcall FUN_00ee06c0(int param_1);  // 00EE06C0
 undefined4 FUN_00ee0710(int param_1, int param_2);  // 00EE0710 __thiscall
-void __fastcall FUN_00ee0ac0(int param_1);  // 00EE0AC0
 undefined4 FUN_00ee0af0(int * param_1, int param_2);  // 00EE0AF0 __thiscall
 undefined4 FUN_00ee0bd0(int * param_1, int param_2);  // 00EE0BD0 __thiscall
 void FUN_00ee0d40(int param_1, float * param_2, int param_3, float * param_4, float param_5);  // 00EE0D40 __thiscall
@@ -23485,7 +23051,6 @@ undefined4 __fastcall FUN_00ef2f70(int param_1);  // 00EF2F70
 void FUN_00ef3380(int param_1, float * param_2, float * param_3);  // 00EF3380 __thiscall
 void FUN_00ef35d0(int param_1, float * param_2);  // 00EF35D0 __thiscall
 void FUN_00ef3920(int param_1, float * param_2, float * param_3);  // 00EF3920 __thiscall
-void FUN_00ef3f50(int param_1, undefined4 param_2);  // 00EF3F50 __thiscall
 void FUN_00ef4710(int param_1, float param_2);  // 00EF4710 __thiscall
 undefined4 __fastcall FUN_00ef5970(int param_1);  // 00EF5970
 undefined4 __fastcall FUN_00ef59c0(int param_1);  // 00EF59C0
@@ -23532,7 +23097,6 @@ void FUN_00efde00(int param_1, int param_2, int * param_3, int param_4);  // 00E
 void FUN_00efe330(undefined4 * param_1, int * param_2);  // 00EFE330
 void FUN_00efe790(int param_1, int * param_2, int param_3);  // 00EFE790
 void __fastcall FUN_00efece0(int param_1);  // 00EFECE0
-void __fastcall FUN_00efed20(int param_1);  // 00EFED20
 void FUN_00efedf0(int param_1, undefined4 param_2);  // 00EFEDF0 __thiscall
 void FUN_00efee20(int param_1, undefined4 param_2);  // 00EFEE20 __thiscall
 void FUN_00efee50(int param_1, int param_2);  // 00EFEE50 __thiscall
@@ -23792,7 +23356,6 @@ bool FUN_00f4aa40(undefined4 param_1);  // 00F4AA40
 undefined4 FUN_00f4aa90(int param_1, undefined4 param_2, undefined4 param_3);  // 00F4AA90 __thiscall
 undefined4 FUN_00f4ab60(int param_1, undefined4 param_2, int param_3, undefined4 param_4);  // 00F4AB60 __thiscall
 undefined FUN_00f4ac40(void);  // 00F4AC40
-void __fastcall FUN_00f4ace0(int param_1);  // 00F4ACE0
 void __fastcall FUN_00f4ae70(int param_1);  // 00F4AE70
 bool FUN_00f4aff0(int param_1);  // 00F4AFF0
 undefined * FUN_00f4b0b0(int param_1);  // 00F4B0B0
@@ -26341,22 +25904,6 @@ void FUN_010057c0(undefined4 * param_1, undefined4 * param_2);  // 010057C0 __th
 void FUN_01005850(int param_1);  // 01005850
 void FUN_01005880(int param_1);  // 01005880
 void FUN_010058b0(int param_1);  // 010058B0
-void FUN_01005920(void);  // 01005920
-void FUN_01005940(void);  // 01005940
-void FUN_01005960(void);  // 01005960
-void FUN_01005980(void);  // 01005980
-void FUN_010059a0(void);  // 010059A0
-void FUN_01005a20(void);  // 01005A20
-void FUN_01005a40(void);  // 01005A40
-void FUN_01005a60(void);  // 01005A60
-void FUN_01005a80(void);  // 01005A80
-void FUN_01005aa0(void);  // 01005AA0
-void FUN_01005ac0(void);  // 01005AC0
-void FUN_01005ae0(void);  // 01005AE0
-void FUN_01005b00(void);  // 01005B00
-void FUN_01005b20(void);  // 01005B20
-void FUN_01005b40(void);  // 01005B40
-void FUN_01005b60(void);  // 01005B60
 void FUN_01005c40(int * param_1, int param_2, int param_3);  // 01005C40
 void FUN_01005c80(int * param_1, int param_2);  // 01005C80
 undefined4 * FUN_01005cb0(int * param_1, int param_2);  // 01005CB0
@@ -26371,7 +25918,6 @@ void FUN_01005dd0(DWORD * param_1, LPVOID param_2);  // 01005DD0 __thiscall
 undefined FUN_01005df0(void);  // 01005DF0
 void __fastcall FUN_01005e50(int param_1);  // 01005E50
 void __fastcall FUN_01005e60(undefined4 * param_1);  // 01005E60
-undefined ** FUN_01005e80(void);  // 01005E80
 void FUN_01005f00(undefined4 param_1);  // 01005F00
 void FUN_01005f20(undefined4 param_1);  // 01005F20
 void FUN_01005f90(void);  // 01005F90
@@ -26808,7 +26354,6 @@ void FUN_01011ea0(int param_1, undefined4 param_2);  // 01011EA0
 void FUN_01011ec0(void);  // 01011EC0
 void FUN_01011ed0(void);  // 01011ED0
 void FUN_01011ee0(void);  // 01011EE0
-undefined ** FUN_01011f10(void);  // 01011F10
 void FUN_01011f20(void);  // 01011F20
 void FUN_01011fc0(int * param_1, undefined4 param_2, int param_3);  // 01011FC0 __thiscall
 void FUN_01011ff0(int * param_1, undefined4 param_2, int param_3);  // 01011FF0 __thiscall
@@ -26869,7 +26414,6 @@ void __fastcall FUN_01013140(undefined4 * param_1);  // 01013140
 undefined4 * FUN_01013190(undefined4 * param_1, byte param_2);  // 01013190 __thiscall
 undefined4 FUN_01013260(undefined4 param_1, undefined4 param_2);  // 01013260
 void FUN_010132a0(undefined4 * param_1);  // 010132A0
-undefined ** FUN_010132b0(void);  // 010132B0
 undefined4 FUN_010132c0(undefined4 param_1, undefined4 param_2);  // 010132C0
 void FUN_010132d0(undefined4 param_1, undefined4 param_2);  // 010132D0
 void FUN_01013310(LPCSTR param_1);  // 01013310
@@ -28515,8 +28059,6 @@ void FUN_01058c00(int param_1);  // 01058C00
 void FUN_01058c30(undefined4 param_1);  // 01058C30
 void FUN_01058d50(int * param_1, int param_2, undefined4 param_3, int param_4);  // 01058D50 __thiscall
 void FUN_01059290(int param_1);  // 01059290
-void FUN_010592e0(int param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);  // 010592E0 __thiscall
-void FUN_01059320(int param_1, undefined4 param_2);  // 01059320 __thiscall
 void FUN_01059400(undefined4 param_1, undefined4 param_2);  // 01059400
 undefined4 FUN_01059420(int * param_1, int param_2);  // 01059420 __thiscall
 undefined4 FUN_01059430(int * param_1, int param_2);  // 01059430 __thiscall
@@ -29757,7 +29299,6 @@ void FUN_010921a0(float * param_1, float * param_2);  // 010921A0 __thiscall
 void FUN_010921c0(undefined4 * param_1, undefined4 * param_2);  // 010921C0
 void FUN_010921e0(undefined4 * param_1, undefined4 param_2, undefined4 param_3);  // 010921E0 __thiscall
 void FUN_01092200(int param_1);  // 01092200
-float10 __fastcall FUN_01092350(int param_1);  // 01092350
 void FUN_01092400(int * param_1, int param_2);  // 01092400 __thiscall
 int FUN_01092450(int * param_1, undefined4 param_2);  // 01092450 __thiscall
 void FUN_01092490(uint * param_1, undefined4);  // 01092490 __thiscall
@@ -30659,9 +30200,6 @@ int FUN_010c9040(int * param_1, undefined4 param_2);  // 010C9040 __thiscall
 void FUN_010c9080(undefined4 param_1, int param_2, undefined4 param_3);  // 010C9080
 void FUN_010c90b0(undefined4 * param_1, int param_2);  // 010C90B0
 void FUN_010c90e0(int * param_1, undefined4 param_2);  // 010C90E0 __thiscall
-undefined1 FUN_010c9130(void);  // 010C9130
-void FUN_010c9140(void);  // 010C9140
-void FUN_010c9150(void);  // 010C9150
 void FUN_010c91c0(int * param_1, undefined4 * param_2);  // 010C91C0 __thiscall
 int * FUN_010c9240(int * param_1, uint param_2, int * param_3);  // 010C9240 __thiscall
 void FUN_010c9300(int * param_1, uint param_2, int * param_3);  // 010C9300 __thiscall
@@ -30951,8 +30489,6 @@ void FUN_010d0f00(int param_1, undefined4 param_2);  // 010D0F00
 void FUN_010d0f30(undefined4 * param_1);  // 010D0F30
 void FUN_010d0f50(undefined4 * param_1);  // 010D0F50
 void FUN_010d0f60(void);  // 010D0F60
-undefined ** FUN_010d0f90(void);  // 010D0F90
-undefined ** FUN_010d0fc0(void);  // 010D0FC0
 void __fastcall FUN_010d1020(int * param_1);  // 010D1020
 void FUN_010d1050(int * param_1, undefined4 param_2, int param_3);  // 010D1050 __thiscall
 void FUN_010d1070(int param_1);  // 010D1070
@@ -30975,23 +30511,18 @@ void FUN_010d15c0(int param_1, undefined4 param_2);  // 010D15C0
 void FUN_010d15e0(int param_1);  // 010D15E0
 undefined4 FUN_010d1610(undefined4 param_1, undefined4 param_2);  // 010D1610
 void FUN_010d1630(undefined4 * param_1);  // 010D1630
-undefined ** FUN_010d1660(void);  // 010D1660
 void FUN_010d1680(int param_1);  // 010D1680
 undefined4 FUN_010d1770(undefined4 param_1, undefined4 param_2);  // 010D1770
 void FUN_010d1790(undefined4 * param_1);  // 010D1790
-undefined ** FUN_010d17c0(void);  // 010D17C0
 void FUN_010d17e0(int param_1);  // 010D17E0
 undefined4 FUN_010d18d0(undefined4 param_1, undefined4 param_2);  // 010D18D0
 void FUN_010d18f0(undefined4 * param_1);  // 010D18F0
-undefined ** FUN_010d1920(void);  // 010D1920
 void FUN_010d1940(int param_1);  // 010D1940
 undefined4 FUN_010d1a30(undefined4 param_1, undefined4 param_2);  // 010D1A30
 void FUN_010d1a50(undefined4 * param_1);  // 010D1A50
-undefined ** FUN_010d1a80(void);  // 010D1A80
 void FUN_010d1ab0(int param_1);  // 010D1AB0
 undefined4 FUN_010d1ba0(undefined4 param_1, undefined4 param_2);  // 010D1BA0
 void FUN_010d1bc0(undefined4 * param_1);  // 010D1BC0
-undefined ** FUN_010d1bf0(void);  // 010D1BF0
 void FUN_010d1c10(int param_1);  // 010D1C10
 undefined4 FUN_010d1d00(undefined4 param_1, undefined4 param_2);  // 010D1D00
 void FUN_010d1d20(undefined4 * param_1);  // 010D1D20
@@ -31001,14 +30532,11 @@ void FUN_010d1fb0(undefined4 * param_1);  // 010D1FB0
 void FUN_010d2010(int param_1);  // 010D2010
 undefined4 FUN_010d2090(undefined4 param_1, undefined4 param_2);  // 010D2090
 void FUN_010d20b0(undefined4 * param_1);  // 010D20B0
-undefined ** FUN_010d20e0(void);  // 010D20E0
 void FUN_010d2100(int param_1);  // 010D2100
 undefined4 FUN_010d2200(undefined4 param_1, undefined4 param_2);  // 010D2200
 void FUN_010d2220(undefined4 * param_1);  // 010D2220
-undefined ** FUN_010d2250(void);  // 010D2250
 undefined4 FUN_010d2260(undefined4 param_1, undefined4 param_2);  // 010D2260
 void FUN_010d2280(undefined4 * param_1);  // 010D2280
-undefined ** FUN_010d22b0(void);  // 010D22B0
 void __fastcall FUN_010d22f0(int * param_1);  // 010D22F0
 void FUN_010d2330(undefined4 * param_1, int * param_2);  // 010D2330 __thiscall
 void __fastcall FUN_010d2370(undefined4 * param_1);  // 010D2370
@@ -31016,7 +30544,6 @@ void __fastcall FUN_010d23b0(undefined4 * param_1);  // 010D23B0
 void FUN_010d2400(int param_1);  // 010D2400
 undefined4 FUN_010d24e0(undefined4 param_1, undefined4 param_2);  // 010D24E0
 void FUN_010d2500(undefined4 * param_1);  // 010D2500
-undefined ** FUN_010d2530(void);  // 010D2530
 void FUN_010d2560(int param_1);  // 010D2560
 undefined4 FUN_010d2670(undefined4 param_1, undefined4 param_2);  // 010D2670
 void FUN_010d2690(undefined4 * param_1);  // 010D2690
@@ -31032,7 +30559,6 @@ void FUN_010d2960(void);  // 010D2960
 void FUN_010d2980(int param_1);  // 010D2980
 undefined4 FUN_010d2a00(undefined4 param_1, undefined4 param_2);  // 010D2A00
 void FUN_010d2a20(undefined4 * param_1);  // 010D2A20
-undefined ** FUN_010d2a50(void);  // 010D2A50
 void __fastcall FUN_010d2a90(int * param_1);  // 010D2A90
 void FUN_010d2af0(int * param_1, undefined4 param_2, int param_3);  // 010D2AF0 __thiscall
 void FUN_010d2b20(int * param_1, undefined4 param_2, int param_3);  // 010D2B20 __thiscall
@@ -31062,19 +30588,15 @@ void FUN_010d3410(undefined4 * param_1);  // 010D3410
 void FUN_010d34b0(int param_1);  // 010D34B0
 undefined4 FUN_010d35b0(undefined4 param_1, undefined4 param_2);  // 010D35B0
 void FUN_010d35d0(undefined4 * param_1);  // 010D35D0
-undefined ** FUN_010d3600(void);  // 010D3600
 void FUN_010d3640(int param_1);  // 010D3640
 undefined4 FUN_010d36b0(undefined4 param_1, undefined4 param_2);  // 010D36B0
 void FUN_010d36d0(undefined4 * param_1);  // 010D36D0
-undefined ** FUN_010d3700(void);  // 010D3700
 void FUN_010d3730(int param_1);  // 010D3730
 undefined4 FUN_010d3820(undefined4 param_1, undefined4 param_2);  // 010D3820
 void FUN_010d3840(undefined4 * param_1);  // 010D3840
-undefined ** FUN_010d3870(void);  // 010D3870
 void FUN_010d3890(int param_1);  // 010D3890
 undefined4 FUN_010d3980(undefined4 param_1, undefined4 param_2);  // 010D3980
 void FUN_010d39e0(undefined4 * param_1);  // 010D39E0
-undefined ** FUN_010d39f0(void);  // 010D39F0
 void FUN_010d3a00(int param_1);  // 010D3A00
 undefined4 FUN_010d3a70(undefined4 param_1, undefined4 param_2);  // 010D3A70
 void FUN_010d3a90(undefined4 * param_1);  // 010D3A90
@@ -31082,17 +30604,13 @@ void FUN_010d3b20(int param_1);  // 010D3B20
 void FUN_010d3c20(int param_1);  // 010D3C20
 undefined4 FUN_010d3da0(undefined4 param_1, undefined4 param_2);  // 010D3DA0
 void FUN_010d3dc0(undefined4 * param_1);  // 010D3DC0
-undefined ** FUN_010d3df0(void);  // 010D3DF0
 undefined4 FUN_010d3e00(undefined4 param_1, undefined4 param_2);  // 010D3E00
 void FUN_010d3e20(undefined4 * param_1);  // 010D3E20
-undefined ** FUN_010d3e50(void);  // 010D3E50
 undefined4 FUN_010d3e60(undefined4 param_1, undefined4 param_2);  // 010D3E60
 void FUN_010d3e80(undefined4 * param_1);  // 010D3E80
-undefined ** FUN_010d3eb0(void);  // 010D3EB0
 void FUN_010d3ee0(int param_1);  // 010D3EE0
 undefined4 FUN_010d3fd0(undefined4 param_1, undefined4 param_2);  // 010D3FD0
 void FUN_010d3ff0(undefined4 * param_1);  // 010D3FF0
-undefined ** FUN_010d4020(void);  // 010D4020
 void FUN_010d4060(int * param_1, undefined4 param_2, int param_3);  // 010D4060 __thiscall
 void FUN_010d40b0(undefined4 * param_1, int * param_2);  // 010D40B0 __thiscall
 void __fastcall FUN_010d40f0(undefined4 * param_1);  // 010D40F0
@@ -31100,11 +30618,9 @@ void __fastcall FUN_010d4130(undefined4 * param_1);  // 010D4130
 void FUN_010d4180(int param_1);  // 010D4180
 undefined4 FUN_010d4270(undefined4 param_1, undefined4 param_2);  // 010D4270
 void FUN_010d4290(undefined4 * param_1);  // 010D4290
-undefined ** FUN_010d42c0(void);  // 010D42C0
 void FUN_010d42e0(int param_1);  // 010D42E0
 undefined4 FUN_010d43d0(undefined4 param_1, undefined4 param_2);  // 010D43D0
 void FUN_010d43f0(undefined4 * param_1);  // 010D43F0
-undefined ** FUN_010d4420(void);  // 010D4420
 void FUN_010d4440(int param_1);  // 010D4440
 undefined4 FUN_010d4530(undefined4 param_1, undefined4 param_2);  // 010D4530
 void FUN_010d4550(int param_1, undefined4 param_2);  // 010D4550
@@ -31954,16 +31470,8 @@ void __fastcall FUN_010edea0(int * param_1);  // 010EDEA0
 void FUN_010edf20(int * param_1, undefined4 param_2);  // 010EDF20 __thiscall
 void FUN_010edf40(undefined4 * param_1, undefined4 param_2, undefined4 * param_3);  // 010EDF40 __thiscall
 void FUN_010edf60(undefined4 * param_1, undefined4 param_2, undefined4 param_3);  // 010EDF60 __thiscall
-undefined4 __fastcall FUN_010edf80(int param_1);  // 010EDF80
-undefined4 FUN_010edfb0(void);  // 010EDFB0
-int FUN_010edfc0(int param_1);  // 010EDFC0
-void FUN_010edfd0(undefined4 * param_1, undefined4 * param_2);  // 010EDFD0
 int FUN_010ee000(int * param_1, int param_2);  // 010EE000 __thiscall
 void FUN_010ee040(int param_1, int param_2, int param_3);  // 010EE040 __thiscall
-bool FUN_010ee080(int param_1, int param_2);  // 010EE080 __thiscall
-undefined4 FUN_010ee0a0(int param_1, int param_2);  // 010EE0A0 __thiscall
-void FUN_010ee0c0(int param_1, int * param_2, int param_3);  // 010EE0C0 __thiscall
-undefined4 FUN_010ee0e0(int param_1, int * param_2);  // 010EE0E0 __thiscall
 int FUN_010ee200(int * param_1, int param_2);  // 010EE200 __thiscall
 int FUN_010ee210(int * param_1, int param_2);  // 010EE210 __thiscall
 void FUN_010ee250(int * param_1, undefined4 param_2, int param_3);  // 010EE250 __thiscall
@@ -32031,13 +31539,9 @@ void FUN_010efea0(int param_1, int * param_2);  // 010EFEA0 __thiscall
 int FUN_010efef0(int * param_1, int param_2);  // 010EFEF0 __thiscall
 int FUN_010eff30(int param_1, int param_2);  // 010EFF30 __thiscall
 int FUN_010eff80(int param_1, byte param_2);  // 010EFF80 __thiscall
-undefined4 __fastcall FUN_010effb0(int param_1);  // 010EFFB0
-void FUN_010effc0(void);  // 010EFFC0
 void FUN_010effd0(int param_1, int param_2, undefined4 param_3);  // 010EFFD0 __thiscall
 void FUN_010f0010(int * param_1, int param_2);  // 010F0010
 bool FUN_010f0070(int param_1, int param_2);  // 010F0070 __thiscall
-void FUN_010f00f0(int param_1);  // 010F00F0
-undefined4 * FUN_010f0160(undefined4 param_1, undefined4 * param_2, int param_3);  // 010F0160 __thiscall
 void __fastcall FUN_010f0350(int param_1);  // 010F0350
 void FUN_010f0690(int param_1, int param_2);  // 010F0690 __thiscall
 int FUN_010f0710(int param_1, byte param_2);  // 010F0710 __thiscall
@@ -32075,16 +31579,8 @@ void FUN_010f1c40(int param_1, undefined4 param_2, undefined4 param_3, undefined
 bool FUN_010f1cb0(int param_1, int param_2);  // 010F1CB0 __thiscall
 void __fastcall FUN_010f1d30(int param_1);  // 010F1D30
 void __fastcall FUN_010f1e40(int param_1);  // 010F1E40
-void __fastcall FUN_010f1f10(int param_1);  // 010F1F10
 void FUN_010f1fe0(int param_1, int param_2);  // 010F1FE0 __thiscall
 void FUN_010f20d0(int param_1, undefined4 * param_2, int * param_3);  // 010F20D0 __thiscall
-void FUN_010f2180(int param_1, undefined4 param_2, int param_3);  // 010F2180 __thiscall
-void FUN_010f21c0(int param_1, undefined4 param_2, int * param_3);  // 010F21C0 __thiscall
-void FUN_010f2240(int param_1, undefined4 param_2, int param_3);  // 010F2240 __thiscall
-void FUN_010f22a0(int param_1, undefined4 param_2, undefined4 param_3);  // 010F22A0 __thiscall
-void FUN_010f22e0(int param_1, undefined4 param_2, short param_3);  // 010F22E0 __thiscall
-void FUN_010f2320(int param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);  // 010F2320 __thiscall
-void FUN_010f2380(int param_1, undefined4 param_2, int param_3);  // 010F2380 __thiscall
 int FUN_010f25e0(int * param_1, int param_2);  // 010F25E0 __thiscall
 int FUN_010f28c0(int * param_1, int param_2);  // 010F28C0 __thiscall
 int FUN_010f2a50(int * param_1, int param_2);  // 010F2A50 __thiscall
@@ -32102,18 +31598,13 @@ void __fastcall FUN_010f3470(undefined4 * param_1);  // 010F3470
 void __fastcall FUN_010f34b0(undefined4 * param_1);  // 010F34B0
 uint __fastcall FUN_010f34f0(int * param_1);  // 010F34F0
 uint __fastcall FUN_010f3530(int * param_1);  // 010F3530
-undefined4 FUN_010f38e0(void);  // 010F38E0
-undefined4 __fastcall FUN_010f39e0(int param_1);  // 010F39E0
 void FUN_010f3a10(void);  // 010F3A10
 int FUN_010f3a20(int * param_1, int param_2);  // 010F3A20 __thiscall
 void FUN_010f3a30(int * param_1, undefined4 param_2, int param_3);  // 010F3A30 __thiscall
 int FUN_010f3a80(int param_1, int * param_2);  // 010F3A80 __thiscall
-void FUN_010f3be0(int param_1, undefined4 param_2, int * param_3);  // 010F3BE0 __thiscall
 void FUN_010f3d40(int * param_1);  // 010F3D40
 void FUN_010f3d80(int * param_1, int param_2);  // 010F3D80
 int FUN_010f3de0(int param_1, int param_2);  // 010F3DE0 __thiscall
-undefined4 __fastcall FUN_010f3f50(int param_1);  // 010F3F50
-undefined4 FUN_010f3f60(int param_1, undefined4 param_2);  // 010F3F60 __thiscall
 void FUN_010f3f80(undefined4 * param_1, int * param_2);  // 010F3F80 __thiscall
 void FUN_010f3fc0(int * param_1, undefined4 param_2);  // 010F3FC0 __thiscall
 void FUN_010f3fe0(int * param_1, int * param_2);  // 010F3FE0 __thiscall
@@ -32127,14 +31618,6 @@ void __fastcall FUN_010f47d0(undefined4 * param_1);  // 010F47D0
 void FUN_010f4810(int * param_1, undefined4 param_2, undefined4 * param_3);  // 010F4810 __thiscall
 void __fastcall FUN_010f4860(undefined4 * param_1);  // 010F4860
 void FUN_010f48a0(int param_1, undefined4 * param_2, int * param_3);  // 010F48A0 __thiscall
-undefined4 FUN_010f4ac0(int param_1, undefined4 param_2);  // 010F4AC0 __thiscall
-undefined4 FUN_010f4af0(int param_1, undefined4 param_2);  // 010F4AF0 __thiscall
-undefined8 FUN_010f4b20(int param_1, undefined4 param_2);  // 010F4B20 __thiscall
-undefined4 FUN_010f4b70(int param_1, undefined4 param_2);  // 010F4B70 __thiscall
-void FUN_010f4ba0(undefined4 param_1, undefined4 param_2);  // 010F4BA0
-float10 FUN_010f4be0(int param_1, undefined4 param_2);  // 010F4BE0 __thiscall
-void FUN_010f4c10(int param_1, undefined4 param_2, int * param_3);  // 010F4C10 __thiscall
-void FUN_010f4cc0(int param_1, undefined4 param_2, undefined4 param_3, int param_4);  // 010F4CC0 __thiscall
 void __fastcall FUN_010f4da0(undefined4 * param_1);  // 010F4DA0
 void FUN_010f4e00(int param_1, int * param_2);  // 010F4E00 __thiscall
 void FUN_010f4e30(int * param_1);  // 010F4E30
@@ -32475,12 +31958,6 @@ void FUN_011037e0(int param_1, int param_2);  // 011037E0
 void FUN_01103850(int * param_1, undefined4 param_2, int param_3);  // 01103850 __thiscall
 void FUN_01103890(int * param_1, undefined4 param_2, int param_3);  // 01103890 __thiscall
 void FUN_011038c0(int * param_1, undefined4 param_2, int param_3);  // 011038C0 __thiscall
-undefined4 FUN_01103910(int param_1, undefined4 param_2);  // 01103910 __thiscall
-void __fastcall FUN_01103930(int param_1);  // 01103930
-void __fastcall FUN_01103940(int param_1);  // 01103940
-undefined4 FUN_01103950(int param_1, undefined4 param_2);  // 01103950 __thiscall
-void FUN_01103970(int param_1, int param_2, int param_3);  // 01103970 __thiscall
-int __fastcall FUN_011039b0(int param_1);  // 011039B0
 void FUN_011039e0(int param_1);  // 011039E0
 undefined4 FUN_01103a10(int * param_1, int param_2);  // 01103A10 __thiscall
 undefined4 FUN_01103a20(int * param_1, int param_2);  // 01103A20 __thiscall
@@ -33827,10 +33304,8 @@ void __fastcall FUN_0113f010(undefined4 * param_1);  // 0113F010
 void FUN_0113f060(undefined4 * param_1, undefined4 * param_2);  // 0113F060 __thiscall
 undefined4 FUN_0113f070(undefined4 param_1, undefined4 param_2);  // 0113F070
 void FUN_0113f0a0(undefined4 * param_1);  // 0113F0A0
-undefined ** FUN_0113f0d0(void);  // 0113F0D0
 undefined4 FUN_0113f190(undefined4 param_1, undefined4 param_2);  // 0113F190
 void FUN_0113f1c0(undefined4 * param_1);  // 0113F1C0
-undefined ** FUN_0113f230(void);  // 0113F230
 void FUN_0113f260(undefined1 * param_1, undefined1 param_2);  // 0113F260 __thiscall
 undefined4 FUN_0113f300(undefined4 param_1, undefined4 param_2);  // 0113F300
 void FUN_0113f340(int param_1, undefined4 param_2);  // 0113F340
@@ -33932,10 +33407,8 @@ void FUN_01140430(undefined4 * param_1);  // 01140430
 undefined4 FUN_01140440(void);  // 01140440
 undefined4 FUN_01140470(undefined4 param_1, undefined4 param_2);  // 01140470
 void FUN_01140490(undefined4 * param_1);  // 01140490
-undefined ** FUN_011404d0(void);  // 011404D0
 undefined4 FUN_01140500(undefined4 param_1, undefined4 param_2);  // 01140500
 void FUN_01140520(undefined4 * param_1);  // 01140520
-undefined ** FUN_01140550(void);  // 01140550
 void __fastcall FUN_01140580(int * param_1);  // 01140580
 void FUN_011405c0(int * param_1, undefined4 param_2, int param_3);  // 011405C0 __thiscall
 void FUN_01140610(undefined4 * param_1, int * param_2);  // 01140610 __thiscall
@@ -33952,11 +33425,9 @@ undefined4 FUN_011408c0(void);  // 011408C0
 undefined4 FUN_011408f0(undefined4 param_1, undefined4 param_2);  // 011408F0
 undefined4 FUN_01140940(undefined4 param_1, undefined4 param_2);  // 01140940
 void FUN_01140970(undefined4 * param_1);  // 01140970
-undefined ** FUN_011409a0(void);  // 011409A0
 void FUN_011409e0(int param_1);  // 011409E0
 undefined4 FUN_01140a50(undefined4 param_1, undefined4 param_2);  // 01140A50
 void FUN_01140a70(undefined4 * param_1);  // 01140A70
-undefined ** FUN_01140ae0(void);  // 01140AE0
 void FUN_01140c40(int param_1);  // 01140C40
 undefined4 FUN_01140cb0(undefined4 param_1, undefined4 param_2);  // 01140CB0
 void FUN_01140cd0(int param_1, undefined4 param_2);  // 01140CD0
@@ -33964,10 +33435,8 @@ void FUN_01140cf0(undefined4 * param_1);  // 01140CF0
 undefined4 FUN_01140d00(void);  // 01140D00
 undefined4 FUN_01140d40(undefined4 param_1, undefined4 param_2);  // 01140D40
 void FUN_01140d60(undefined4 * param_1);  // 01140D60
-undefined ** FUN_01140dd0(void);  // 01140DD0
 undefined4 FUN_01140e60(undefined4 param_1, undefined4 param_2);  // 01140E60
 void FUN_01140ec0(undefined4 * param_1);  // 01140EC0
-undefined ** FUN_01140ed0(void);  // 01140ED0
 void FUN_01140ee0(int param_1);  // 01140EE0
 void FUN_01140f50(int param_1);  // 01140F50
 undefined4 FUN_01140fc0(undefined4 param_1, undefined4 param_2);  // 01140FC0
@@ -33979,7 +33448,6 @@ void FUN_01141070(undefined4 * param_1);  // 01141070
 undefined4 FUN_01141080(void);  // 01141080
 undefined4 FUN_011410b0(undefined4 param_1, undefined4 param_2);  // 011410B0
 void FUN_011410d0(undefined4 * param_1);  // 011410D0
-undefined ** FUN_01141100(void);  // 01141100
 void FUN_01141130(int param_1, undefined4 param_2);  // 01141130
 void FUN_01141150(undefined4 * param_1);  // 01141150
 undefined4 FUN_01141160(void);  // 01141160
@@ -33992,7 +33460,6 @@ void FUN_01141240(undefined4 * param_1);  // 01141240
 undefined4 FUN_01141250(void);  // 01141250
 undefined4 FUN_01141280(undefined4 param_1, undefined4 param_2);  // 01141280
 void FUN_011412a0(undefined4 * param_1);  // 011412A0
-undefined ** FUN_01141310(void);  // 01141310
 void FUN_01141350(int * param_1, undefined4 param_2, int param_3);  // 01141350 __thiscall
 void FUN_011413a0(undefined4 * param_1, int * param_2);  // 011413A0 __thiscall
 void __fastcall FUN_011413e0(undefined4 * param_1);  // 011413E0
@@ -35965,7 +35432,6 @@ void FUN_011aede0(undefined4 * param_1);  // 011AEDE0
 undefined4 FUN_011aedf0(void);  // 011AEDF0
 undefined4 FUN_011aee40(undefined4 param_1, undefined4 param_2);  // 011AEE40
 void FUN_011aeea0(undefined4 * param_1);  // 011AEEA0
-undefined ** FUN_011aeeb0(void);  // 011AEEB0
 void FUN_011aeed0(int param_1);  // 011AEED0
 void FUN_011aef50(undefined1 * param_1, undefined1 param_2);  // 011AEF50 __thiscall
 void FUN_011aef80(undefined1 * param_1, undefined1 param_2);  // 011AEF80 __thiscall
@@ -35976,12 +35442,10 @@ undefined4 FUN_011af010(void);  // 011AF010
 undefined4 FUN_011af040(undefined4 param_1, undefined4 param_2);  // 011AF040
 undefined4 FUN_011af050(undefined4 param_1, undefined4 param_2);  // 011AF050
 void FUN_011af090(undefined4 * param_1);  // 011AF090
-undefined ** FUN_011af0d0(void);  // 011AF0D0
 void FUN_011af100(int param_1);  // 011AF100
 undefined4 FUN_011af180(undefined4 param_1, undefined4 param_2);  // 011AF180
 undefined4 FUN_011af190(undefined4 param_1, undefined4 param_2);  // 011AF190
 void FUN_011af1d0(undefined4 * param_1);  // 011AF1D0
-undefined ** FUN_011af210(void);  // 011AF210
 undefined4 FUN_011af240(undefined4 param_1, undefined4 param_2);  // 011AF240
 void FUN_011af280(int param_1, undefined4 param_2);  // 011AF280
 void FUN_011af2a0(undefined4 * param_1);  // 011AF2A0
@@ -35993,44 +35457,36 @@ undefined4 FUN_011af350(void);  // 011AF350
 undefined4 FUN_011af490(undefined4 param_1, undefined4 param_2);  // 011AF490
 undefined4 FUN_011af4a0(undefined4 param_1, undefined4 param_2);  // 011AF4A0
 void FUN_011af4e0(undefined4 * param_1);  // 011AF4E0
-undefined ** FUN_011af520(void);  // 011AF520
 void FUN_011af550(int param_1);  // 011AF550
 undefined4 FUN_011af5d0(undefined4 param_1, undefined4 param_2);  // 011AF5D0
 undefined4 FUN_011af5e0(undefined4 param_1, undefined4 param_2);  // 011AF5E0
 void FUN_011af5f0(int param_1, undefined4 param_2);  // 011AF5F0 __thiscall
 void FUN_011af640(undefined4 * param_1);  // 011AF640
-undefined ** FUN_011af690(void);  // 011AF690
 void FUN_011af6e0(int param_1);  // 011AF6E0
 undefined4 FUN_011af760(undefined4 param_1, undefined4 param_2);  // 011AF760
 undefined4 FUN_011af770(undefined4 param_1, undefined4 param_2);  // 011AF770
 void FUN_011af780(int param_1, undefined4 param_2);  // 011AF780 __thiscall
 void FUN_011af7d0(undefined4 * param_1);  // 011AF7D0
-undefined ** FUN_011af820(void);  // 011AF820
 void FUN_011af870(int param_1);  // 011AF870
 undefined4 FUN_011af8e0(undefined4 param_1, undefined4 param_2);  // 011AF8E0
 undefined4 FUN_011af8f0(undefined4 param_1, undefined4 param_2);  // 011AF8F0
 void FUN_011af930(undefined4 * param_1);  // 011AF930
-undefined ** FUN_011af970(void);  // 011AF970
 void FUN_011af9a0(int param_1);  // 011AF9A0
 undefined4 FUN_011afa20(undefined4 param_1, undefined4 param_2);  // 011AFA20
 undefined4 FUN_011afa30(undefined4 param_1, undefined4 param_2);  // 011AFA30
 void FUN_011afa70(undefined4 * param_1);  // 011AFA70
-undefined ** FUN_011afab0(void);  // 011AFAB0
 void FUN_011afae0(int param_1);  // 011AFAE0
 undefined4 FUN_011afbb0(undefined4 param_1, undefined4 param_2);  // 011AFBB0
 undefined4 FUN_011afbd0(undefined4 param_1, undefined4 param_2);  // 011AFBD0
 undefined4 FUN_011afbe0(undefined4 param_1, undefined4 param_2);  // 011AFBE0
 void FUN_011afc20(undefined4 * param_1);  // 011AFC20
-undefined ** FUN_011afc60(void);  // 011AFC60
 void FUN_011afc90(int param_1);  // 011AFC90
 undefined4 FUN_011afd00(undefined4 param_1, undefined4 param_2);  // 011AFD00
 undefined4 FUN_011afd10(undefined4 param_1, undefined4 param_2);  // 011AFD10
 void FUN_011afd50(undefined4 * param_1);  // 011AFD50
-undefined ** FUN_011afd90(void);  // 011AFD90
 void FUN_011afdc0(int param_1);  // 011AFDC0
 undefined4 FUN_011afe40(undefined4 param_1, undefined4 param_2);  // 011AFE40
 void FUN_011afe80(undefined4 * param_1);  // 011AFE80
-undefined ** FUN_011afef0(void);  // 011AFEF0
 void FUN_011aff40(undefined4 param_1);  // 011AFF40
 undefined4 * FUN_011aff60(undefined4 * param_1, int param_2);  // 011AFF60 __thiscall
 void FUN_011b0040(int param_1);  // 011B0040
@@ -36038,16 +35494,13 @@ undefined4 FUN_011b00e0(undefined4 param_1, undefined4 param_2);  // 011B00E0
 undefined4 FUN_011b00f0(undefined4 param_1, undefined4 param_2);  // 011B00F0
 undefined4 FUN_011b0100(undefined4 param_1, undefined4 param_2);  // 011B0100
 void FUN_011b0140(undefined4 * param_1);  // 011B0140
-undefined ** FUN_011b0180(void);  // 011B0180
 undefined4 FUN_011b01b0(undefined4 param_1, undefined4 param_2);  // 011B01B0
 undefined4 FUN_011b01c0(undefined4 param_1, undefined4 param_2);  // 011B01C0
 void FUN_011b0200(undefined4 * param_1);  // 011B0200
-undefined ** FUN_011b0240(void);  // 011B0240
 void FUN_011b0270(int param_1);  // 011B0270
 undefined4 FUN_011b02f0(undefined4 param_1, undefined4 param_2);  // 011B02F0
 undefined4 FUN_011b0300(undefined4 param_1, undefined4 param_2);  // 011B0300
 void FUN_011b0340(undefined4 * param_1);  // 011B0340
-undefined ** FUN_011b0380(void);  // 011B0380
 undefined4 FUN_011b03b0(undefined4 param_1, undefined4 param_2);  // 011B03B0
 void FUN_011b03f0(int param_1, undefined4 param_2);  // 011B03F0
 void FUN_011b0410(void);  // 011B0410
@@ -36064,7 +35517,6 @@ undefined4 FUN_011b0660(undefined4 param_1, undefined4 param_2);  // 011B0660
 undefined4 FUN_011b06d0(undefined4 param_1, undefined4 param_2);  // 011B06D0
 undefined4 FUN_011b06e0(undefined4 param_1, undefined4 param_2);  // 011B06E0
 void FUN_011b0720(undefined4 * param_1);  // 011B0720
-undefined ** FUN_011b0760(void);  // 011B0760
 void FUN_011b0790(int param_1);  // 011B0790
 undefined4 FUN_011b0810(undefined4 param_1, undefined4 param_2);  // 011B0810
 void FUN_011b0850(int param_1, undefined4 param_2);  // 011B0850
@@ -36073,7 +35525,6 @@ undefined4 FUN_011b0880(void);  // 011B0880
 undefined4 FUN_011b08b0(undefined4 param_1, undefined4 param_2);  // 011B08B0
 undefined4 FUN_011b08c0(undefined4 param_1, undefined4 param_2);  // 011B08C0
 void FUN_011b0900(undefined4 * param_1);  // 011B0900
-undefined ** FUN_011b0940(void);  // 011B0940
 void FUN_011b0970(int param_1);  // 011B0970
 undefined4 FUN_011b09f0(undefined4 param_1, undefined4 param_2);  // 011B09F0
 void FUN_011b0a10(int param_1, undefined4 param_2);  // 011B0A10
@@ -36085,23 +35536,18 @@ void FUN_011b0ac0(undefined4 * param_1);  // 011B0AC0
 undefined4 FUN_011b0ad0(void);  // 011B0AD0
 undefined4 FUN_011b0b10(undefined4 param_1, undefined4 param_2);  // 011B0B10
 void FUN_011b0b30(undefined4 * param_1);  // 011B0B30
-undefined ** FUN_011b0b60(void);  // 011B0B60
 void FUN_011b0bc0(int param_1);  // 011B0BC0
 void FUN_011b0c40(undefined4 * param_1);  // 011B0C40
-undefined ** FUN_011b0c90(void);  // 011B0C90
 undefined4 FUN_011b0ca0(undefined4 param_1, undefined4 param_2);  // 011B0CA0
 void FUN_011b0cc0(int param_1, undefined4 param_2);  // 011B0CC0
 void FUN_011b0ce0(undefined4 * param_1);  // 011B0CE0
 undefined4 FUN_011b0cf0(void);  // 011B0CF0
 undefined4 FUN_011b0d20(undefined4 param_1, undefined4 param_2);  // 011B0D20
 void FUN_011b0d40(undefined4 * param_1);  // 011B0D40
-undefined ** FUN_011b0d70(void);  // 011B0D70
 void FUN_011b0da0(int param_1);  // 011B0DA0
 void FUN_011b0e20(undefined4 * param_1);  // 011B0E20
-undefined ** FUN_011b0e70(void);  // 011B0E70
 undefined4 FUN_011b0e80(undefined4 param_1, undefined4 param_2);  // 011B0E80
 void FUN_011b0ea0(undefined4 * param_1);  // 011B0EA0
-undefined ** FUN_011b0ed0(void);  // 011B0ED0
 void FUN_011b0f80(int param_1);  // 011B0F80
 undefined4 FUN_011b0ff0(undefined4 param_1, undefined4 param_2);  // 011B0FF0
 void FUN_011b1010(int param_1, undefined4 param_2);  // 011B1010
@@ -36113,17 +35559,13 @@ void FUN_011b10b0(undefined4 * param_1);  // 011B10B0
 undefined4 FUN_011b10c0(void);  // 011B10C0
 undefined4 FUN_011b1100(undefined4 param_1, undefined4 param_2);  // 011B1100
 void FUN_011b1120(undefined4 * param_1);  // 011B1120
-undefined ** FUN_011b1150(void);  // 011B1150
 undefined4 FUN_011b1170(undefined4 param_1, undefined4 param_2);  // 011B1170
 void FUN_011b1190(undefined4 * param_1);  // 011B1190
-undefined ** FUN_011b11d0(void);  // 011B11D0
 void FUN_011b1220(int param_1);  // 011B1220
 undefined4 FUN_011b1290(undefined4 param_1, undefined4 param_2);  // 011B1290
 void FUN_011b12b0(undefined4 * param_1);  // 011B12B0
 void FUN_011b13b0(undefined4 * param_1);  // 011B13B0
 void FUN_011b13d0(undefined4 * param_1);  // 011B13D0
-undefined ** FUN_011b1420(void);  // 011B1420
-undefined ** FUN_011b1470(void);  // 011B1470
 undefined4 FUN_011b1480(undefined4 param_1, undefined4 param_2);  // 011B1480
 undefined4 FUN_011b1490(undefined4 param_1, undefined4 param_2);  // 011B1490
 void FUN_011b14b0(int param_1, undefined4 param_2);  // 011B14B0
@@ -36135,7 +35577,6 @@ void FUN_011b1550(undefined4 * param_1);  // 011B1550
 undefined4 FUN_011b1560(void);  // 011B1560
 undefined4 FUN_011b1590(undefined4 param_1, undefined4 param_2);  // 011B1590
 void FUN_011b15b0(undefined4 * param_1);  // 011B15B0
-undefined ** FUN_011b15e0(void);  // 011B15E0
 void FUN_011b1610(int param_1);  // 011B1610
 void FUN_011b1690(int param_1);  // 011B1690
 undefined4 FUN_011b1780(undefined4 param_1, undefined4 param_2);  // 011B1780
@@ -36143,14 +35584,12 @@ void FUN_011b17a0(int param_1, undefined4 param_2);  // 011B17A0
 void FUN_011b17c0(undefined4 * param_1);  // 011B17C0
 undefined4 FUN_011b17d0(void);  // 011B17D0
 void FUN_011b1810(undefined4 * param_1);  // 011B1810
-undefined ** FUN_011b1860(void);  // 011B1860
 undefined4 FUN_011b1870(undefined4 param_1, undefined4 param_2);  // 011B1870
 void FUN_011b1890(int param_1, undefined4 param_2);  // 011B1890
 void FUN_011b18b0(undefined4 * param_1);  // 011B18B0
 undefined4 FUN_011b18c0(void);  // 011B18C0
 undefined4 FUN_011b18f0(undefined4 param_1, undefined4 param_2);  // 011B18F0
 void FUN_011b1910(undefined4 * param_1);  // 011B1910
-undefined ** FUN_011b1940(void);  // 011B1940
 void FUN_011b1980(int param_1);  // 011B1980
 void FUN_011b19c0(int param_1);  // 011B19C0
 undefined4 FUN_011b1a70(undefined4 param_1, undefined4 param_2);  // 011B1A70
@@ -36163,10 +35602,8 @@ void FUN_011b1c30(undefined4 * param_1);  // 011B1C30
 undefined4 FUN_011b1d00(undefined4 param_1, undefined4 param_2);  // 011B1D00
 void FUN_011b1d20(undefined4 * param_1);  // 011B1D20
 void FUN_011b1e30(undefined4 * param_1);  // 011B1E30
-undefined ** FUN_011b1e80(void);  // 011B1E80
 undefined4 FUN_011b1e90(undefined4 param_1, undefined4 param_2);  // 011B1E90
 void FUN_011b1eb0(undefined4 * param_1);  // 011B1EB0
-undefined ** FUN_011b1ee0(void);  // 011B1EE0
 void FUN_011b1f20(int param_1);  // 011B1F20
 undefined4 FUN_011b1f90(undefined4 param_1, undefined4 param_2);  // 011B1F90
 void FUN_011b1fb0(undefined4 * param_1);  // 011B1FB0
@@ -36179,7 +35616,6 @@ void __fastcall FUN_011b2140(undefined4 * param_1);  // 011B2140
 void FUN_011b21e0(int param_1);  // 011B21E0
 undefined4 FUN_011b2250(undefined4 param_1, undefined4 param_2);  // 011B2250
 void FUN_011b2270(undefined4 * param_1);  // 011B2270
-undefined ** FUN_011b22a0(void);  // 011B22A0
 void __fastcall FUN_011b22c0(int * param_1);  // 011B22C0
 void __fastcall FUN_011b22f0(int * param_1);  // 011B22F0
 void FUN_011b2320(int param_1);  // 011B2320
@@ -36188,7 +35624,6 @@ void FUN_011b2410(int param_1, undefined4 param_2);  // 011B2410
 void FUN_011b2430(undefined4 * param_1);  // 011B2430
 undefined4 FUN_011b2440(void);  // 011B2440
 void FUN_011b2480(undefined4 * param_1);  // 011B2480
-undefined ** FUN_011b24d0(void);  // 011B24D0
 undefined4 FUN_011b24e0(undefined4 param_1, undefined4 param_2);  // 011B24E0
 void FUN_011b2500(undefined4 * param_1);  // 011B2500
 void FUN_011b2510(int param_1, undefined4 param_2);  // 011B2510
@@ -37343,11 +36778,9 @@ int FUN_011ee6a0(int param_1, byte param_2);  // 011EE6A0 __thiscall
 int FUN_011ee6e0(int param_1, byte param_2);  // 011EE6E0 __thiscall
 undefined4 FUN_011ee720(undefined4 param_1, undefined4 param_2);  // 011EE720
 void FUN_011ee780(undefined4 * param_1);  // 011EE780
-undefined ** FUN_011ee7b0(void);  // 011EE7B0
 void FUN_011ee7e0(int param_1);  // 011EE7E0
 undefined4 FUN_011ee8e0(undefined4 param_1, undefined4 param_2);  // 011EE8E0
 void FUN_011ee900(undefined4 * param_1);  // 011EE900
-undefined ** FUN_011ee930(void);  // 011EE930
 void FUN_011ee950(int param_1);  // 011EE950
 undefined4 FUN_011eea70(undefined4 param_1, undefined4 param_2);  // 011EEA70
 void FUN_011eea90(int param_1, undefined4 param_2);  // 011EEA90
@@ -38986,7 +38419,6 @@ void FUN_01273020(int * param_1, int param_2);  // 01273020 __thiscall
 void __fastcall FUN_01273040(undefined4 * param_1);  // 01273040
 undefined4 FUN_01273080(undefined4 param_1, undefined4 param_2);  // 01273080
 void FUN_012730a0(undefined4 * param_1);  // 012730A0
-undefined ** FUN_012730d0(void);  // 012730D0
 void FUN_01273120(int * param_1, undefined4 param_2, int param_3);  // 01273120 __thiscall
 void FUN_01273150(undefined4 * param_1, int * param_2);  // 01273150 __thiscall
 void __fastcall FUN_01273190(undefined4 * param_1);  // 01273190
@@ -39017,7 +38449,6 @@ void __fastcall FUN_012737b0(undefined4 * param_1);  // 012737B0
 void FUN_01273830(int param_1);  // 01273830
 undefined4 FUN_012738a0(undefined4 param_1, undefined4 param_2);  // 012738A0
 void FUN_012738e0(undefined4 * param_1);  // 012738E0
-undefined ** FUN_01273910(void);  // 01273910
 void FUN_01273950(int * param_1, undefined4 param_2, int param_3);  // 01273950 __thiscall
 void FUN_012739a0(undefined4 * param_1, int * param_2);  // 012739A0 __thiscall
 void __fastcall FUN_012739e0(undefined4 * param_1);  // 012739E0
@@ -39025,7 +38456,6 @@ void __fastcall FUN_01273a20(undefined4 * param_1);  // 01273A20
 void FUN_01273a70(int param_1);  // 01273A70
 undefined4 FUN_01273ae0(undefined4 param_1, undefined4 param_2);  // 01273AE0
 void FUN_01273b40(undefined4 * param_1);  // 01273B40
-undefined ** FUN_01273b70(void);  // 01273B70
 void FUN_01273bf0(int * param_1, undefined4 param_2, int param_3);  // 01273BF0 __thiscall
 void FUN_01273c20(int * param_1, undefined4 param_2, int param_3);  // 01273C20 __thiscall
 void FUN_01273c50(int * param_1, undefined4 param_2, int param_3);  // 01273C50 __thiscall
@@ -39047,7 +38477,6 @@ void FUN_01274130(int param_1);  // 01274130
 void FUN_012741a0(int param_1);  // 012741A0
 undefined4 FUN_01274210(undefined4 param_1, undefined4 param_2);  // 01274210
 void FUN_01274230(undefined4 * param_1);  // 01274230
-undefined ** FUN_01274260(void);  // 01274260
 void FUN_012742a0(int * param_1, undefined4 param_2, int param_3);  // 012742A0 __thiscall
 void FUN_012742f0(undefined4 * param_1, int * param_2);  // 012742F0 __thiscall
 void __fastcall FUN_01274330(undefined4 * param_1);  // 01274330
@@ -39056,7 +38485,6 @@ int FUN_012743c0(int * param_1, int param_2);  // 012743C0 __thiscall
 void FUN_012743e0(int param_1);  // 012743E0
 undefined4 FUN_012744c0(undefined4 param_1, undefined4 param_2);  // 012744C0
 void FUN_012744e0(undefined4 * param_1);  // 012744E0
-undefined ** FUN_01274510(void);  // 01274510
 void FUN_01274540(int param_1);  // 01274540
 undefined4 FUN_012745e0(undefined4 param_1, undefined4 param_2);  // 012745E0
 void FUN_01274670(undefined4 * param_1);  // 01274670
@@ -39091,7 +38519,6 @@ void FUN_01274f30(undefined4 * param_1);  // 01274F30
 void FUN_01274f80(int param_1);  // 01274F80
 undefined4 FUN_01274ff0(undefined4 param_1, undefined4 param_2);  // 01274FF0
 void FUN_01275010(undefined4 * param_1);  // 01275010
-undefined ** FUN_01275070(void);  // 01275070
 void FUN_01275140(int param_1);  // 01275140
 undefined4 FUN_012751d0(undefined4 param_1, undefined4 param_2);  // 012751D0
 void FUN_012751f0(int param_1, undefined4 param_2);  // 012751F0
@@ -39107,9 +38534,6 @@ undefined4 FUN_01275300(undefined4 param_1, undefined4 param_2);  // 01275300
 void FUN_01275320(undefined4 * param_1);  // 01275320
 void FUN_01275340(undefined4 * param_1);  // 01275340
 void FUN_01275360(undefined4 * param_1);  // 01275360
-undefined ** FUN_01275390(void);  // 01275390
-undefined ** FUN_012753c0(void);  // 012753C0
-undefined ** FUN_012753f0(void);  // 012753F0
 void __fastcall FUN_01275430(int * param_1);  // 01275430
 void __fastcall FUN_01275470(int * param_1);  // 01275470
 void FUN_012754b0(int * param_1, undefined4 param_2, int param_3);  // 012754B0 __thiscall
@@ -39133,24 +38557,19 @@ void FUN_01275ab0(int param_1);  // 01275AB0
 void FUN_01275af0(int param_1);  // 01275AF0
 undefined4 FUN_01275cf0(undefined4 param_1, undefined4 param_2);  // 01275CF0
 void FUN_01275d10(undefined4 * param_1);  // 01275D10
-undefined ** FUN_01275d80(void);  // 01275D80
 void FUN_01275e40(int param_1);  // 01275E40
 undefined4 FUN_01275eb0(undefined4 param_1, undefined4 param_2);  // 01275EB0
 void FUN_01275f40(undefined4 * param_1);  // 01275F40
 void FUN_01275f90(int param_1);  // 01275F90
 undefined4 FUN_01276000(undefined4 param_1, undefined4 param_2);  // 01276000
 void FUN_01276020(undefined4 * param_1);  // 01276020
-undefined ** FUN_01276090(void);  // 01276090
 void FUN_01276160(int param_1);  // 01276160
 undefined4 FUN_012761e0(undefined4 param_1, undefined4 param_2);  // 012761E0
 void FUN_01276230(undefined4 * param_1);  // 01276230
-undefined ** FUN_01276240(void);  // 01276240
 undefined4 FUN_01276250(undefined4 param_1, undefined4 param_2);  // 01276250
 void FUN_012762a0(undefined4 * param_1);  // 012762A0
-undefined ** FUN_012762b0(void);  // 012762B0
 undefined4 FUN_012762c0(undefined4 param_1, undefined4 param_2);  // 012762C0
 void FUN_01276300(undefined4 * param_1);  // 01276300
-undefined ** FUN_01276310(void);  // 01276310
 undefined4 FUN_01276320(undefined4 param_1, undefined4 param_2);  // 01276320
 void FUN_01276340(int param_1, undefined4 param_2);  // 01276340
 void FUN_01276360(undefined4 * param_1);  // 01276360
@@ -39258,7 +38677,6 @@ void FUN_0127c2c0(undefined4 param_1);  // 0127C2C0
 void __fastcall FUN_0127c440(int * param_1);  // 0127C440
 void __fastcall FUN_0127c460(int param_1);  // 0127C460
 void __fastcall FUN_0127c490(int param_1);  // 0127C490
-void __fastcall FUN_0127c4d0(int param_1);  // 0127C4D0
 void FUN_0127c500(int * param_1, float param_2);  // 0127C500 __thiscall
 void FUN_0127c530(int param_1, byte param_2);  // 0127C530 __thiscall
 void FUN_0127c580(int param_1, float param_2);  // 0127C580 __thiscall
@@ -39445,7 +38863,6 @@ void FUN_01286310(undefined4 param_1, int * param_2);  // 01286310
 void FUN_012863e0(undefined4 param_1, undefined4 param_2, int param_3);  // 012863E0 __thiscall
 undefined4 FUN_012865d0(undefined4 param_1, undefined4 param_2);  // 012865D0
 void FUN_01286610(undefined4 * param_1);  // 01286610
-undefined ** FUN_01286660(void);  // 01286660
 void FUN_012866a0(int * param_1, undefined4 param_2, int param_3);  // 012866A0 __thiscall
 void FUN_012866f0(undefined1 * param_1, undefined1 param_2);  // 012866F0 __thiscall
 void FUN_01286730(int param_1);  // 01286730
@@ -39464,7 +38881,6 @@ void FUN_01286c10(int param_1);  // 01286C10
 undefined4 FUN_01286d10(undefined4 param_1, undefined4 param_2);  // 01286D10
 undefined4 FUN_01286d20(undefined4 param_1, undefined4 param_2);  // 01286D20
 void FUN_01286d60(undefined4 * param_1);  // 01286D60
-undefined ** FUN_01286d90(void);  // 01286D90
 void FUN_01286dd0(int * param_1, undefined4 param_2, int param_3);  // 01286DD0 __thiscall
 void FUN_01286e30(int * param_1, undefined4 param_2, int param_3);  // 01286E30 __thiscall
 void FUN_01286ea0(undefined4 * param_1, int * param_2);  // 01286EA0 __thiscall
@@ -39477,7 +38893,6 @@ void FUN_01287030(int param_1);  // 01287030
 void FUN_012870c0(int param_1);  // 012870C0
 undefined4 FUN_01287230(undefined4 param_1, undefined4 param_2);  // 01287230
 void FUN_01287270(undefined4 * param_1);  // 01287270
-undefined ** FUN_012872a0(void);  // 012872A0
 void FUN_012872e0(int * param_1, undefined4 param_2, int param_3);  // 012872E0 __thiscall
 void FUN_01287350(int param_1);  // 01287350
 void FUN_012873c0(undefined4 * param_1, int * param_2);  // 012873C0 __thiscall
@@ -39485,7 +38900,6 @@ void __fastcall FUN_01287400(undefined4 * param_1);  // 01287400
 void __fastcall FUN_01287440(undefined4 * param_1);  // 01287440
 void FUN_01287490(int param_1);  // 01287490
 void FUN_012875c0(undefined4 * param_1);  // 012875C0
-undefined ** FUN_012875f0(void);  // 012875F0
 undefined4 FUN_01287600(undefined4 param_1, undefined4 param_2);  // 01287600
 void FUN_01287660(int * param_1, undefined4 param_2, int param_3);  // 01287660 __thiscall
 void __fastcall FUN_01287690(int * param_1);  // 01287690
@@ -39498,8 +38912,6 @@ void __fastcall FUN_01287870(undefined4 * param_1);  // 01287870
 void FUN_012878c0(int param_1);  // 012878C0
 void FUN_01287a00(undefined4 * param_1);  // 01287A00
 void FUN_01287a20(undefined4 * param_1);  // 01287A20
-undefined ** FUN_01287a60(void);  // 01287A60
-undefined ** FUN_01287a90(void);  // 01287A90
 undefined4 FUN_01287aa0(undefined4 param_1, undefined4 param_2);  // 01287AA0
 undefined4 FUN_01287ac0(undefined4 param_1, undefined4 param_2);  // 01287AC0
 undefined4 FUN_01287ad0(undefined4 param_1, undefined4 param_2);  // 01287AD0
@@ -39515,11 +38927,9 @@ void FUN_01287d70(int param_1);  // 01287D70
 void FUN_01287e80(int param_1);  // 01287E80
 undefined4 FUN_01287ef0(undefined4 param_1, undefined4 param_2);  // 01287EF0
 void FUN_01287f10(undefined4 * param_1);  // 01287F10
-undefined ** FUN_01287f60(void);  // 01287F60
 void FUN_01287fb0(int param_1);  // 01287FB0
 undefined4 FUN_01288030(undefined4 param_1, undefined4 param_2);  // 01288030
 void FUN_01288050(undefined4 * param_1);  // 01288050
-undefined ** FUN_01288080(void);  // 01288080
 void FUN_012880c0(int * param_1, undefined4 param_2, int param_3);  // 012880C0 __thiscall
 void FUN_01288110(undefined4 * param_1, int * param_2);  // 01288110 __thiscall
 void __fastcall FUN_01288150(undefined4 * param_1);  // 01288150
@@ -39529,52 +38939,41 @@ void FUN_01288260(int param_1);  // 01288260
 void FUN_012882f0(int param_1);  // 012882F0
 undefined4 FUN_01288360(undefined4 param_1, undefined4 param_2);  // 01288360
 void FUN_01288380(undefined4 * param_1);  // 01288380
-undefined ** FUN_012883b0(void);  // 012883B0
 undefined4 FUN_012883c0(undefined4 param_1, undefined4 param_2);  // 012883C0
 void FUN_012883e0(undefined4 * param_1);  // 012883E0
-undefined ** FUN_01288410(void);  // 01288410
 void FUN_01288440(int param_1);  // 01288440
 undefined4 FUN_012884b0(undefined4 param_1, undefined4 param_2);  // 012884B0
 undefined4 FUN_012884c0(undefined4 param_1, undefined4 param_2);  // 012884C0
 void FUN_012884e0(undefined4 * param_1);  // 012884E0
 void FUN_01288500(undefined4 * param_1);  // 01288500
-undefined ** FUN_01288530(void);  // 01288530
-undefined ** FUN_01288560(void);  // 01288560
 void FUN_012885c0(int param_1);  // 012885C0
 void FUN_01288650(int param_1);  // 01288650
 void FUN_01288690(int param_1);  // 01288690
 void FUN_01288700(int param_1);  // 01288700
 undefined4 FUN_012887b0(undefined4 param_1, undefined4 param_2);  // 012887B0
 void FUN_012887d0(undefined4 * param_1);  // 012887D0
-undefined ** FUN_01288800(void);  // 01288800
 void FUN_01288840(int param_1);  // 01288840
 void FUN_01288880(int param_1);  // 01288880
 undefined4 FUN_01288930(undefined4 param_1, undefined4 param_2);  // 01288930
 void FUN_01288950(undefined4 * param_1);  // 01288950
-undefined ** FUN_01288980(void);  // 01288980
 void FUN_012889b0(int param_1);  // 012889B0
 void FUN_01288a30(int param_1);  // 01288A30
 undefined4 FUN_01288b20(undefined4 param_1, undefined4 param_2);  // 01288B20
 void FUN_01288b40(undefined4 * param_1);  // 01288B40
-undefined ** FUN_01288b70(void);  // 01288B70
 void FUN_01288ba0(int param_1);  // 01288BA0
 void FUN_01288c20(int param_1);  // 01288C20
 undefined4 FUN_01288d10(undefined4 param_1, undefined4 param_2);  // 01288D10
 void FUN_01288d30(undefined4 * param_1);  // 01288D30
-undefined ** FUN_01288d60(void);  // 01288D60
 void FUN_01288da0(int param_1);  // 01288DA0
 void FUN_01288de0(int param_1);  // 01288DE0
 undefined4 FUN_01288e90(undefined4 param_1, undefined4 param_2);  // 01288E90
 void FUN_01288eb0(undefined4 * param_1);  // 01288EB0
-undefined ** FUN_01288ee0(void);  // 01288EE0
 void FUN_01288f20(int param_1);  // 01288F20
 void FUN_01288f60(int param_1);  // 01288F60
 undefined4 FUN_01289010(undefined4 param_1, undefined4 param_2);  // 01289010
 void FUN_01289030(undefined4 * param_1);  // 01289030
-undefined ** FUN_01289060(void);  // 01289060
 undefined4 FUN_01289070(undefined4 param_1, undefined4 param_2);  // 01289070
 void FUN_01289090(undefined4 * param_1);  // 01289090
-undefined ** FUN_012890c0(void);  // 012890C0
 void FUN_012890f0(int param_1);  // 012890F0
 void FUN_01289260(float param_1, undefined4 param_2);  // 01289260
 void FUN_012897d0(int param_1, int param_2, byte param_3, float * param_4);  // 012897D0 __thiscall

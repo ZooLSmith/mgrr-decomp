@@ -11,6 +11,7 @@ struct hkpCharacterProxy : public hkReferencedObject, public hkpEntityListener, 
     virtual undefined vf0C();  // 0126CB20 slot 0xC
     virtual void vf10(float * param_2, float * param_3, float param_4);  // 01269940 slot 0x10
     // non-virtual members
+    hkpCharacterProxy(undefined4 param_2);  // 0126ACB0
     static void vf00();  // 0126ED70
     static void vf00_0126ED80();  // 0126ED80
 };

@@ -110,7 +110,7 @@ undefined4 * __thiscall esp39::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -121,7 +121,7 @@ undefined4 * __thiscall esp39::vf00(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall esp39::esp39(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -1747,7 +1747,7 @@ FUN_00f36b00(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   float *pfVar9;
   uint uVar10;
   
-  iVar8 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar8 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar8 != 0) && (iVar8 = FUN_00f12b50(), iVar8 != 0)) {
     if (*(int *)(param_1 + 0x50) != 0) {
       if (*(short *)(param_1 + 0x400) != -1) {
@@ -1819,10 +1819,10 @@ FUN_00f36b00(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   return 0;
 }
 
-// 00F36D60  esp39::vf04  size=271  [class]
+// 00F36D60  esp39::preTrans  size=271  [class]
 /* WARNING: Removing unreachable block (ram,0x00f36dd1) */
 
-undefined4 __thiscall esp39::vf04(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
+undefined4 __thiscall esp39::preTrans(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -1831,7 +1831,7 @@ undefined4 __thiscall esp39::vf04(int param_1,int param_2,undefined4 param_3,und
   uint *puVar4;
   undefined4 uVar5;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }
@@ -1870,8 +1870,8 @@ undefined4 __thiscall esp39::vf04(int param_1,int param_2,undefined4 param_3,und
   return 1;
 }
 
-// 00F36E70  esp39::vf10  size=480  [class]
-void __fastcall esp39::vf10(int param_1)
+// 00F36E70  esp39::addOtTransList  size=480  [class]
+void __fastcall esp39::addOtTransList(int param_1)
 
 {
   int iVar1;

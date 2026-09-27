@@ -14,4 +14,6 @@ struct ExcelObj : public BehaviorAppBase {
     virtual void vf4C();  // 005BE380 slot 0x4C  overrides Behavior
     virtual void vf50();  // 005B7830 slot 0x50  overrides Behavior
     virtual int getAttackInfo(ushort * param_2);  // 005B7760 slot 0x130  overrides Behavior
+    // non-virtual members
+    ExcelObj();  // 00AAEA30
 };

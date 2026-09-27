@@ -10,5 +10,5 @@ struct cFilterShaderCopyTex {
     // non-virtual members
     cFilterShaderCopyTex();  // 00EC0AB0
     void ctor_00EC1C70();  // 00EC1C70
-    void ctor_015F1B80();  // 015F1B80
+    ~cFilterShaderCopyTex();  // 015F1B80
 };

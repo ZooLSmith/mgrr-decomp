@@ -24,7 +24,6 @@
 #include "hkpGroupCollisionFilter.h"
 #include "hkpMotorAction.h"
 #include "hkpMouseSpringAction.h"
-#include "hkpPhantomListener.h"
 #include "hkpPhysicsData.h"
 #include "hkpPhysicsSystem.h"
 #include "hkpPhysicsSystemWithContacts.h"
@@ -2098,14 +2097,14 @@ void FUN_01268260(float *param_1,float *param_2,float param_3,int param_4)
   return;
 }
 
-// 01268970  hkpWindAction::~hkpWindAction  size=61  [run]
+// 01268970  hkpWindAction::hkpWindAction  size=61  [run]
 undefined4 * __thiscall
-hkpWindAction::~hkpWindAction
+hkpWindAction::hkpWindAction
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
           undefined4 param_5)
 
 {
-  hkpAction::hkpAction(param_2,0);
+  hkpUnaryAction::hkpUnaryAction(param_2,0);
   param_1[8] = param_4;
   *param_1 = vftable;
   param_1[7] = param_3;
@@ -2120,7 +2119,7 @@ void __fastcall hkpWindAction::~hkpWindAction(undefined4 *param_1)
 {
   *param_1 = vftable;
   FUN_010060a0();
-  hkBaseObject::hkBaseObject_29();
+  hkpUnaryAction::~hkpUnaryAction();
   return;
 }
 
@@ -2135,8 +2134,8 @@ int __thiscall hkpWindAction::vf1C(int param_1,undefined4 *param_2,int param_3)
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x28);
     *(undefined2 *)(iVar2 + 4) = 0x28;
-    iVar2 = ~hkpWindAction(*(undefined4 *)*param_2,*(undefined4 *)(param_1 + 0x1c),
-                           *(undefined4 *)(param_1 + 0x20),*(undefined4 *)(param_1 + 0x24));
+    iVar2 = hkpWindAction(*(undefined4 *)*param_2,*(undefined4 *)(param_1 + 0x1c),
+                          *(undefined4 *)(param_1 + 0x20),*(undefined4 *)(param_1 + 0x24));
     *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)(param_1 + 0x10);
     return iVar2;
   }
@@ -2184,10 +2183,9 @@ int __thiscall hkpWindAction::vf00(int param_1,byte param_2)
   return param_1;
 }
 
-// 01268BA0  hkpPrevailingWind::Oscillator::Oscillator_9  size=35  [run]
+// 01268BA0  hkpPrevailingWind::Oscillator::Oscillator  size=35  [run]
 void __thiscall
-hkpPrevailingWind::Oscillator::Oscillator_9
-          (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
+hkpPrevailingWind::Oscillator::Oscillator(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
   param_1[1] = param_2;
@@ -2305,8 +2303,8 @@ hkpWorldPostSimulationListener::hkpWorldPostSimulationListener_2
   return;
 }
 
-// 01268E40  hkpPrevailingWind::Oscillator::Oscillator_12  size=30  [run]
-void __thiscall hkpPrevailingWind::Oscillator::Oscillator_12(undefined4 *param_1,int param_2)
+// 01268E40  hkpPrevailingWind::Oscillator::Oscillator  size=30  [run]
+void __thiscall hkpPrevailingWind::Oscillator::Oscillator(undefined4 *param_1,int param_2)
 
 {
   *param_1 = vftable;
@@ -2322,9 +2320,8 @@ int __thiscall FUN_01268ed0(int *param_1,int param_2)
   return param_2 * 0x20 + *param_1;
 }
 
-// 01268F00  hkpPrevailingWind::Oscillator::Oscillator_10  size=43  [run]
-void __thiscall
-hkpPrevailingWind::Oscillator::Oscillator_10(undefined4 *param_1,undefined4 *param_2)
+// 01268F00  hkpPrevailingWind::Oscillator::Oscillator  size=43  [run]
+void __thiscall hkpPrevailingWind::Oscillator::Oscillator(undefined4 *param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;
@@ -2360,8 +2357,8 @@ int FUN_01268f50(int param_1,int param_2)
   return param_2 + param_1;
 }
 
-// 01268F60  hkpPrevailingWind::Oscillator::Oscillator_11  size=35  [run]
-int __thiscall hkpPrevailingWind::Oscillator::Oscillator_11(int param_1,byte param_2)
+// 01268F60  hkpPrevailingWind::Oscillator::~Oscillator  size=35  [run]
+int __thiscall hkpPrevailingWind::Oscillator::~Oscillator(int param_1,byte param_2)
 
 {
   *(undefined ***)(param_1 + 0x10) = vftable;
@@ -2388,7 +2385,7 @@ undefined4 * __thiscall hkpWind::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -2409,9 +2406,9 @@ void FUN_01269000(int param_1)
   return;
 }
 
-// 01269030  hkpPrevailingWind::Oscillator::Oscillator_2  size=50  [run]
+// 01269030  hkpPrevailingWind::Oscillator::Oscillator  size=50  [run]
 void __thiscall
-hkpPrevailingWind::Oscillator::Oscillator_2
+hkpPrevailingWind::Oscillator::Oscillator
           (undefined4 *param_1,undefined4 *param_2,int param_3,undefined4 param_4)
 
 {
@@ -2447,8 +2444,8 @@ undefined4 * __thiscall hkpPrevailingWind::Oscillator::vf00(undefined4 *param_1,
   return param_1;
 }
 
-// 012690D0  hkpPrevailingWind::Oscillator::Oscillator_3  size=288  [run]
-void hkpPrevailingWind::Oscillator::Oscillator_3(int param_1,int param_2,undefined4 *param_3)
+// 012690D0  hkpPrevailingWind::Oscillator::Oscillator  size=288  [run]
+void hkpPrevailingWind::Oscillator::Oscillator(int param_1,int param_2,undefined4 *param_3)
 
 {
   undefined4 uVar1;
@@ -2544,8 +2541,8 @@ void hkpPrevailingWind::Oscillator::Oscillator_3(int param_1,int param_2,undefin
   return;
 }
 
-// 012691F0  hkpPrevailingWind::Oscillator::Oscillator  size=35  [run]
-void hkpPrevailingWind::Oscillator::Oscillator(int param_1,int param_2)
+// 012691F0  hkpPrevailingWind::Oscillator::~Oscillator  size=35  [run]
+void hkpPrevailingWind::Oscillator::~Oscillator(int param_1,int param_2)
 
 {
   undefined4 *puVar1;
@@ -2562,9 +2559,9 @@ void hkpPrevailingWind::Oscillator::Oscillator(int param_1,int param_2)
   return;
 }
 
-// 01269220  hkpPrevailingWind::Oscillator::Oscillator_7  size=86  [run]
+// 01269220  hkpPrevailingWind::Oscillator::~Oscillator  size=86  [run]
 void __thiscall
-hkpPrevailingWind::Oscillator::Oscillator_7(int *param_1,undefined4 param_2,undefined4 *param_3)
+hkpPrevailingWind::Oscillator::~Oscillator(int *param_1,undefined4 param_2,undefined4 *param_3)
 
 {
   undefined4 uVar1;
@@ -2593,8 +2590,8 @@ hkpPrevailingWind::Oscillator::Oscillator_7(int *param_1,undefined4 param_2,unde
   return;
 }
 
-// 012692B0  hkpPrevailingWind::Oscillator::Oscillator_8  size=87  [run]
-void __thiscall hkpPrevailingWind::Oscillator::Oscillator_8(int *param_1,undefined4 *param_2)
+// 012692B0  hkpPrevailingWind::Oscillator::~Oscillator  size=87  [run]
+void __thiscall hkpPrevailingWind::Oscillator::~Oscillator(int *param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;
@@ -2623,8 +2620,8 @@ void __thiscall hkpPrevailingWind::Oscillator::Oscillator_8(int *param_1,undefin
   return;
 }
 
-// 01269310  hkpPrevailingWind::Oscillator::Oscillator_4  size=91  [run]
-void __thiscall hkpPrevailingWind::Oscillator::Oscillator_4(int *param_1,int *param_2)
+// 01269310  hkpPrevailingWind::Oscillator::~Oscillator  size=91  [run]
+void __thiscall hkpPrevailingWind::Oscillator::~Oscillator(int *param_1,int *param_2)
 
 {
   int iVar1;
@@ -2648,8 +2645,8 @@ void __thiscall hkpPrevailingWind::Oscillator::Oscillator_4(int *param_1,int *pa
   return;
 }
 
-// 01269380  hkpPrevailingWind::Oscillator::Oscillator_5  size=89  [run]
-void __fastcall hkpPrevailingWind::Oscillator::Oscillator_5(int *param_1)
+// 01269380  hkpPrevailingWind::Oscillator::~Oscillator  size=89  [run]
+void __fastcall hkpPrevailingWind::Oscillator::~Oscillator(int *param_1)
 
 {
   int iVar1;
@@ -2673,8 +2670,8 @@ void __fastcall hkpPrevailingWind::Oscillator::Oscillator_5(int *param_1)
   return;
 }
 
-// 012693E0  hkpPrevailingWind::Oscillator::Oscillator_6  size=89  [run]
-void __fastcall hkpPrevailingWind::Oscillator::Oscillator_6(int *param_1)
+// 012693E0  hkpPrevailingWind::Oscillator::~Oscillator  size=89  [run]
+void __fastcall hkpPrevailingWind::Oscillator::~Oscillator(int *param_1)
 
 {
   int iVar1;
@@ -2752,7 +2749,7 @@ int __thiscall hkpPrevailingWind::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_167();
+  ::hkBaseObject::hkBaseObject_167();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -4168,17 +4165,16 @@ LAB_0126ac95:
   goto LAB_0126ab73;
 }
 
-// 0126ACB0  hkpPhantomListener::hkpPhantomListener  size=131  [run]
-undefined4 * __thiscall
-hkpPhantomListener::hkpPhantomListener(undefined4 *param_1,undefined4 param_2)
+// 0126ACB0  hkpCharacterProxy::hkpCharacterProxy  size=131  [run]
+undefined4 * __thiscall hkpCharacterProxy::hkpCharacterProxy(undefined4 *param_1,undefined4 param_2)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
   param_1[2] = hkpEntityListener::vftable;
+  param_1[3] = hkpPhantomListener::vftable;
+  *param_1 = vftable;
+  param_1[2] = vftable;
   param_1[3] = vftable;
-  *param_1 = hkpCharacterProxy::vftable;
-  param_1[2] = hkpCharacterProxy::vftable;
-  param_1[3] = hkpCharacterProxy::vftable;
   param_1[4] = 0;
   param_1[5] = 0;
   param_1[6] = 0x80000000;
@@ -7678,7 +7674,7 @@ int __thiscall hkpCharacterProxy::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_160();
+  ::hkBaseObject::hkBaseObject_160();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -8039,8 +8035,9 @@ void __thiscall CharacterRigidBody::vf0C(int *param_1,undefined4 param_2,int *pa
   return;
 }
 
-// 0126F810  hkpEntityListener::hkpEntityListener_7  size=403  [run]
-undefined4 * __thiscall hkpEntityListener::hkpEntityListener_7(undefined4 *param_1,int param_2)
+// 0126F810  hkpCharacterRigidBody::hkpCharacterRigidBody  size=403  [run]
+undefined4 * __thiscall
+hkpCharacterRigidBody::hkpCharacterRigidBody(undefined4 *param_1,int param_2)
 
 {
   undefined4 uVar1;
@@ -8083,11 +8080,11 @@ undefined4 * __thiscall hkpEntityListener::hkpEntityListener_7(undefined4 *param
   undefined4 uStack_14;
   
   *(undefined2 *)((int)param_1 + 6) = 1;
-  param_1[2] = vftable;
+  param_1[2] = hkpEntityListener::vftable;
   param_1[3] = hkpWorldPostSimulationListener::vftable;
-  *param_1 = hkpCharacterRigidBody::vftable;
-  param_1[2] = hkpCharacterRigidBody::vftable;
-  param_1[3] = hkpCharacterRigidBody::vftable;
+  *param_1 = vftable;
+  param_1[2] = vftable;
+  param_1[3] = vftable;
   param_1[0x19] = 0;
   param_1[0x1a] = 0;
   param_1[0x1b] = 0x80000000;
@@ -8112,7 +8109,7 @@ undefined4 * __thiscall hkpEntityListener::hkpEntityListener_7(undefined4 *param
   pvVar3 = TlsGetValue(DAT_01f8fc4c);
   iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x220);
   *(undefined2 *)(iVar4 + 4) = 0x220;
-  uVar5 = hkpRigidBody::~hkpRigidBody(&local_120);
+  uVar5 = hkpRigidBody::hkpRigidBody(&local_120);
   param_1[4] = uVar5;
   local_20 = 0;
   uStack_1c = 0;
@@ -9001,7 +8998,7 @@ int __thiscall hkpCharacterRigidBody::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_174();
+  ::hkBaseObject::hkBaseObject_174();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11495,8 +11492,8 @@ void FUN_012730a0(undefined4 *param_1)
   return;
 }
 
-// 012730B0  hkpPhysicsData::hkpPhysicsData  size=18  [run]
-void hkpPhysicsData::hkpPhysicsData(undefined4 *param_1)
+// 012730B0  hkpPhysicsData::~hkpPhysicsData  size=18  [run]
+void hkpPhysicsData::~hkpPhysicsData(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11505,11 +11502,11 @@ void hkpPhysicsData::hkpPhysicsData(undefined4 *param_1)
   return;
 }
 
-// 012730D0  FUN_012730d0  size=6  [run]
-undefined ** FUN_012730d0(void)
+// 012730D0  hkpPhysicsData::hkpPhysicsData  size=6  [run]
+undefined ** hkpPhysicsData::hkpPhysicsData(void)
 
 {
-  return hkpPhysicsData::vftable;
+  return vftable;
 }
 
 // 01273120  FUN_01273120  size=26  [run]
@@ -11576,7 +11573,7 @@ int __thiscall hkpPhysicsData::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_36();
+  ::hkBaseObject::hkBaseObject_36();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11664,8 +11661,8 @@ void FUN_012733b0(void)
   return;
 }
 
-// 012733E0  hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry_2  size=30  [run]
-void hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry_2(undefined4 *param_1,undefined4 param_2)
+// 012733E0  hkpSerializedAgentNnEntry::~hkpSerializedAgentNnEntry  size=30  [run]
+void hkpSerializedAgentNnEntry::~hkpSerializedAgentNnEntry(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11675,8 +11672,8 @@ void hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry_2(undefined4 *param_1,
   return;
 }
 
-// 01273400  hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry_4  size=65  [run]
-undefined ** hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry_4(void)
+// 01273400  hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry  size=65  [run]
+undefined ** hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry(void)
 
 {
   FUN_011c07b0(0);
@@ -11858,7 +11855,7 @@ int __thiscall hkpSerializedAgentNnEntry::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_17();
+  ::hkBaseObject::hkBaseObject_17();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11881,8 +11878,8 @@ void FUN_012738e0(undefined4 *param_1)
   return;
 }
 
-// 012738F0  hkpSerializedDisplayRbTransforms::hkpSerializedDisplayRbTransforms  size=18  [run]
-void hkpSerializedDisplayRbTransforms::hkpSerializedDisplayRbTransforms(undefined4 *param_1)
+// 012738F0  hkpSerializedDisplayRbTransforms::~hkpSerializedDisplayRbTransforms  size=18  [run]
+void hkpSerializedDisplayRbTransforms::~hkpSerializedDisplayRbTransforms(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11891,11 +11888,11 @@ void hkpSerializedDisplayRbTransforms::hkpSerializedDisplayRbTransforms(undefine
   return;
 }
 
-// 01273910  FUN_01273910  size=6  [run]
-undefined ** FUN_01273910(void)
+// 01273910  hkpSerializedDisplayRbTransforms::hkpSerializedDisplayRbTransforms  size=6  [run]
+undefined ** hkpSerializedDisplayRbTransforms::hkpSerializedDisplayRbTransforms(void)
 
 {
-  return hkpSerializedDisplayRbTransforms::vftable;
+  return vftable;
 }
 
 // 01273950  FUN_01273950  size=28  [run]
@@ -11971,7 +11968,7 @@ int __thiscall hkpSerializedDisplayRbTransforms::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_15();
+  ::hkBaseObject::hkBaseObject_15();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11994,8 +11991,8 @@ void FUN_01273b40(undefined4 *param_1)
   return;
 }
 
-// 01273B50  hkpPoweredChainMapper::hkpPoweredChainMapper_2  size=18  [run]
-void hkpPoweredChainMapper::hkpPoweredChainMapper_2(undefined4 *param_1)
+// 01273B50  hkpPoweredChainMapper::~hkpPoweredChainMapper  size=18  [run]
+void hkpPoweredChainMapper::~hkpPoweredChainMapper(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12004,11 +12001,11 @@ void hkpPoweredChainMapper::hkpPoweredChainMapper_2(undefined4 *param_1)
   return;
 }
 
-// 01273B70  FUN_01273b70  size=6  [run]
-undefined ** FUN_01273b70(void)
+// 01273B70  hkpPoweredChainMapper::hkpPoweredChainMapper  size=6  [run]
+undefined ** hkpPoweredChainMapper::hkpPoweredChainMapper(void)
 
 {
-  return hkpPoweredChainMapper::vftable;
+  return vftable;
 }
 
 // 01273BF0  FUN_01273bf0  size=29  [run]
@@ -12169,7 +12166,7 @@ int __thiscall hkpPoweredChainMapper::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_9();
+  ::hkBaseObject::hkBaseObject_9();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12190,13 +12187,13 @@ FUN_01273fc0(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined
   return;
 }
 
-// 01274000  hkpAction::hkpAction_14  size=37  [run]
-undefined4 * __thiscall hkpAction::hkpAction_14(undefined4 *param_1,undefined4 param_2)
+// 01274000  hkpBinaryAction::hkpBinaryAction  size=37  [run]
+undefined4 * __thiscall hkpBinaryAction::hkpBinaryAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpBinaryAction::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
@@ -12214,24 +12211,24 @@ undefined4 FUN_01274040(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 01274050  hkpAction::hkpAction_15  size=37  [run]
-undefined4 * __thiscall hkpAction::hkpAction_15(undefined4 *param_1,undefined4 param_2)
+// 01274050  hkpSpringAction::hkpSpringAction  size=37  [run]
+undefined4 * __thiscall hkpSpringAction::hkpSpringAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpSpringAction::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
-// 012740A0  hkpAction::hkpAction_16  size=38  [run]
-void hkpAction::hkpAction_16(undefined4 *param_1,undefined4 param_2)
+// 012740A0  hkpSpringAction::hkpSpringAction  size=38  [run]
+void hkpSpringAction::hkpSpringAction(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
-    *param_1 = vftable;
+    *param_1 = hkpAction::vftable;
     FUN_010065b0(param_2);
-    *param_1 = hkpSpringAction::vftable;
+    *param_1 = vftable;
   }
   return;
 }
@@ -12277,7 +12274,7 @@ int __thiscall hkpBinaryAction::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_31();
+  ::hkBaseObject::hkBaseObject_31();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12302,7 +12299,7 @@ int __thiscall hkpSpringAction::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_31();
+  ::hkBaseObject::hkBaseObject_31();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12325,8 +12322,8 @@ void FUN_01274230(undefined4 *param_1)
   return;
 }
 
-// 01274240  hkpSerializedDisplayMarkerList::hkpSerializedDisplayMarkerList  size=18  [run]
-void hkpSerializedDisplayMarkerList::hkpSerializedDisplayMarkerList(undefined4 *param_1)
+// 01274240  hkpSerializedDisplayMarkerList::~hkpSerializedDisplayMarkerList  size=18  [run]
+void hkpSerializedDisplayMarkerList::~hkpSerializedDisplayMarkerList(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12335,11 +12332,11 @@ void hkpSerializedDisplayMarkerList::hkpSerializedDisplayMarkerList(undefined4 *
   return;
 }
 
-// 01274260  FUN_01274260  size=6  [run]
-undefined ** FUN_01274260(void)
+// 01274260  hkpSerializedDisplayMarkerList::hkpSerializedDisplayMarkerList  size=6  [run]
+undefined ** hkpSerializedDisplayMarkerList::hkpSerializedDisplayMarkerList(void)
 
 {
-  return hkpSerializedDisplayMarkerList::vftable;
+  return vftable;
 }
 
 // 012742A0  FUN_012742a0  size=26  [run]
@@ -12437,7 +12434,7 @@ int __thiscall hkpSerializedDisplayMarkerList::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_148();
+  ::hkBaseObject::hkBaseObject_148();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12460,8 +12457,8 @@ void FUN_012744e0(undefined4 *param_1)
   return;
 }
 
-// 012744F0  hkpSerializedDisplayMarker::hkpSerializedDisplayMarker  size=18  [run]
-void hkpSerializedDisplayMarker::hkpSerializedDisplayMarker(undefined4 *param_1)
+// 012744F0  hkpSerializedDisplayMarker::~hkpSerializedDisplayMarker  size=18  [run]
+void hkpSerializedDisplayMarker::~hkpSerializedDisplayMarker(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12470,11 +12467,11 @@ void hkpSerializedDisplayMarker::hkpSerializedDisplayMarker(undefined4 *param_1)
   return;
 }
 
-// 01274510  FUN_01274510  size=6  [run]
-undefined ** FUN_01274510(void)
+// 01274510  hkpSerializedDisplayMarker::hkpSerializedDisplayMarker  size=6  [run]
+undefined ** hkpSerializedDisplayMarker::hkpSerializedDisplayMarker(void)
 
 {
-  return hkpSerializedDisplayMarker::vftable;
+  return vftable;
 }
 
 // 01274540  FUN_01274540  size=38  [run]
@@ -12494,7 +12491,7 @@ undefined4 * __thiscall hkpSerializedDisplayMarker::vf00(undefined4 *param_1,byt
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12502,13 +12499,13 @@ undefined4 * __thiscall hkpSerializedDisplayMarker::vf00(undefined4 *param_1,byt
   return param_1;
 }
 
-// 012745B0  hkpAction::hkpAction_17  size=37  [run]
-undefined4 * __thiscall hkpAction::hkpAction_17(undefined4 *param_1,undefined4 param_2)
+// 012745B0  hkpUnaryAction::hkpUnaryAction  size=37  [run]
+undefined4 * __thiscall hkpUnaryAction::hkpUnaryAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpUnaryAction::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
@@ -12519,24 +12516,24 @@ undefined4 FUN_012745e0(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 012745F0  hkpAction::hkpAction_18  size=37  [run]
-undefined4 * __thiscall hkpAction::hkpAction_18(undefined4 *param_1,undefined4 param_2)
+// 012745F0  hkpReorientAction::hkpReorientAction  size=37  [run]
+undefined4 * __thiscall hkpReorientAction::hkpReorientAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpReorientAction::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
-// 01274640  hkpAction::hkpAction_19  size=38  [run]
-void hkpAction::hkpAction_19(undefined4 *param_1,undefined4 param_2)
+// 01274640  hkpReorientAction::hkpReorientAction  size=38  [run]
+void hkpReorientAction::hkpReorientAction(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
-    *param_1 = vftable;
+    *param_1 = hkpAction::vftable;
     FUN_010065b0(param_2);
-    *param_1 = hkpReorientAction::vftable;
+    *param_1 = vftable;
   }
   return;
 }
@@ -12574,7 +12571,7 @@ int __thiscall hkpUnaryAction::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_29();
+  ~hkpUnaryAction();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12599,7 +12596,7 @@ int __thiscall hkpReorientAction::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_29();
+  hkpUnaryAction::~hkpUnaryAction();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12632,7 +12629,7 @@ void FUN_012747e0(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkpProjectileGun::hkpProjectileGun_2(param_2);
+    hkpProjectileGun::hkpProjectileGun(param_2);
   }
   return;
 }
@@ -12651,7 +12648,7 @@ undefined4 FUN_01274810(void)
 {
   undefined4 local_50;
   
-  hkpProjectileGun::hkpProjectileGun_2(0);
+  hkpProjectileGun::hkpProjectileGun(0);
   return local_50;
 }
 
@@ -12670,14 +12667,15 @@ void FUN_01274860(undefined4 *param_1)
   return;
 }
 
-// 01274870  hkpPhysicsSystem::hkpPhysicsSystem_3  size=38  [run]
-void hkpPhysicsSystem::hkpPhysicsSystem_3(undefined4 *param_1,undefined4 param_2)
+// 01274870  hkpPhysicsSystemWithContacts::hkpPhysicsSystemWithContacts  size=38  [run]
+void hkpPhysicsSystemWithContacts::hkpPhysicsSystemWithContacts
+               (undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
-    *param_1 = vftable;
+    *param_1 = hkpPhysicsSystem::vftable;
     FUN_010065b0(param_2);
-    *param_1 = hkpPhysicsSystemWithContacts::vftable;
+    *param_1 = vftable;
   }
   return;
 }
@@ -12737,13 +12735,14 @@ void __fastcall FUN_012749e0(undefined4 *param_1)
   return;
 }
 
-// 01274A20  hkpPhysicsSystem::hkpPhysicsSystem_4  size=37  [run]
-undefined4 * __thiscall hkpPhysicsSystem::hkpPhysicsSystem_4(undefined4 *param_1,undefined4 param_2)
+// 01274A20  hkpPhysicsSystemWithContacts::hkpPhysicsSystemWithContacts  size=37  [run]
+undefined4 * __thiscall
+hkpPhysicsSystemWithContacts::hkpPhysicsSystemWithContacts(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpPhysicsSystem::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpPhysicsSystemWithContacts::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
@@ -12795,14 +12794,14 @@ void FUN_01274af0(undefined4 *param_1)
   return;
 }
 
-// 01274B00  hkpAction::hkpAction_10  size=59  [run]
-void hkpAction::hkpAction_10(undefined4 *param_1,undefined4 param_2)
+// 01274B00  hkpMouseSpringAction::hkpMouseSpringAction  size=59  [run]
+void hkpMouseSpringAction::hkpMouseSpringAction(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
-    *param_1 = vftable;
+    *param_1 = hkpAction::vftable;
     FUN_010065b0(param_2);
-    *param_1 = hkpMouseSpringAction::vftable;
+    *param_1 = vftable;
     param_1[0x15] = 0;
     param_1[0x16] = 0;
     param_1[0x17] = 0x80000000;
@@ -12865,13 +12864,14 @@ void __fastcall FUN_01274ca0(undefined4 *param_1)
   return;
 }
 
-// 01274CE0  hkpAction::hkpAction_11  size=52  [run]
-undefined4 * __thiscall hkpAction::hkpAction_11(undefined4 *param_1,undefined4 param_2)
+// 01274CE0  hkpMouseSpringAction::hkpMouseSpringAction  size=52  [run]
+undefined4 * __thiscall
+hkpMouseSpringAction::hkpMouseSpringAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpMouseSpringAction::vftable;
+  *param_1 = vftable;
   param_1[0x15] = 0;
   param_1[0x16] = 0;
   param_1[0x17] = 0x80000000;
@@ -12900,7 +12900,7 @@ void __fastcall FUN_01274d50(int param_1)
   }
   *(undefined4 *)(param_1 + 0x54) = 0;
   *(undefined4 *)(param_1 + 0x5c) = 0x80000000;
-  hkBaseObject::hkBaseObject_29();
+  hkpUnaryAction::~hkpUnaryAction();
   return;
 }
 
@@ -12917,7 +12917,7 @@ int __thiscall hkpMouseSpringAction::vf00(int param_1,byte param_2)
   }
   *(undefined4 *)(param_1 + 0x54) = 0;
   *(undefined4 *)(param_1 + 0x5c) = 0x80000000;
-  hkBaseObject::hkBaseObject_29();
+  hkpUnaryAction::~hkpUnaryAction();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12967,24 +12967,24 @@ undefined4 FUN_01274ea0(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 01274EB0  hkpAction::hkpAction_13  size=37  [run]
-undefined4 * __thiscall hkpAction::hkpAction_13(undefined4 *param_1,undefined4 param_2)
+// 01274EB0  hkpMotorAction::hkpMotorAction  size=37  [run]
+undefined4 * __thiscall hkpMotorAction::hkpMotorAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpMotorAction::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
-// 01274F00  hkpAction::hkpAction_12  size=38  [run]
-void hkpAction::hkpAction_12(undefined4 *param_1,undefined4 param_2)
+// 01274F00  hkpMotorAction::hkpMotorAction  size=38  [run]
+void hkpMotorAction::hkpMotorAction(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
-    *param_1 = vftable;
+    *param_1 = hkpAction::vftable;
     FUN_010065b0(param_2);
-    *param_1 = hkpMotorAction::vftable;
+    *param_1 = vftable;
   }
   return;
 }
@@ -13022,7 +13022,7 @@ int __thiscall hkpMotorAction::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_29();
+  hkpUnaryAction::~hkpUnaryAction();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -13063,11 +13063,11 @@ void hkpCollidableCollidableFilter::hkpCollidableCollidableFilter_4(undefined4 *
   return;
 }
 
-// 01275070  FUN_01275070  size=6  [run]
-undefined ** FUN_01275070(void)
+// 01275070  hkpGroupCollisionFilter::hkpGroupCollisionFilter  size=6  [run]
+undefined ** hkpGroupCollisionFilter::hkpGroupCollisionFilter(void)
 
 {
-  return hkpGroupCollisionFilter::vftable;
+  return vftable;
 }
 
 // 01275100  hkpGroupCollisionFilter::vf00  size=8  [run]
@@ -13123,7 +13123,7 @@ undefined4 * __thiscall hkpGroupCollisionFilter::vf00(undefined4 *param_1,byte p
   param_1[4] = hkpRayShapeCollectionFilter::vftable;
   param_1[3] = hkpShapeCollectionFilter::vftable;
   param_1[2] = hkpCollidableCollidableFilter::vftable;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13143,7 +13143,7 @@ void FUN_012751f0(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkpGravityGun::hkpGravityGun_2(param_2);
+    hkpGravityGun::hkpGravityGun(param_2);
   }
   return;
 }
@@ -13162,7 +13162,7 @@ undefined4 FUN_01275220(void)
 {
   undefined4 local_70;
   
-  hkpGravityGun::hkpGravityGun_2(0);
+  hkpGravityGun::hkpGravityGun(0);
   return local_70;
 }
 
@@ -13178,7 +13178,7 @@ void FUN_01275270(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkpFirstPersonGun::hkpFirstPersonGun_2(param_2);
+    hkpFirstPersonGun::hkpFirstPersonGun(param_2);
   }
   return;
 }
@@ -13197,7 +13197,7 @@ undefined4 FUN_012752a0(void)
 {
   undefined4 local_30;
   
-  hkpFirstPersonGun::hkpFirstPersonGun_2(0);
+  hkpFirstPersonGun::hkpFirstPersonGun(0);
   return local_30;
 }
 
@@ -13246,8 +13246,8 @@ void FUN_01275360(undefined4 *param_1)
   return;
 }
 
-// 01275370  hkpDisplayBindingData::RigidBody::RigidBody  size=18  [run]
-void hkpDisplayBindingData::RigidBody::RigidBody(undefined4 *param_1)
+// 01275370  hkpDisplayBindingData::RigidBody::~RigidBody  size=18  [run]
+void hkpDisplayBindingData::RigidBody::~RigidBody(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -13256,15 +13256,15 @@ void hkpDisplayBindingData::RigidBody::RigidBody(undefined4 *param_1)
   return;
 }
 
-// 01275390  FUN_01275390  size=6  [run]
-undefined ** FUN_01275390(void)
+// 01275390  hkpDisplayBindingData::RigidBody::RigidBody  size=6  [run]
+undefined ** hkpDisplayBindingData::RigidBody::RigidBody(void)
 
 {
-  return hkpDisplayBindingData::RigidBody::vftable;
+  return vftable;
 }
 
-// 012753A0  hkpDisplayBindingData::PhysicsSystem::PhysicsSystem  size=18  [run]
-void hkpDisplayBindingData::PhysicsSystem::PhysicsSystem(undefined4 *param_1)
+// 012753A0  hkpDisplayBindingData::PhysicsSystem::~PhysicsSystem  size=18  [run]
+void hkpDisplayBindingData::PhysicsSystem::~PhysicsSystem(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -13273,15 +13273,15 @@ void hkpDisplayBindingData::PhysicsSystem::PhysicsSystem(undefined4 *param_1)
   return;
 }
 
-// 012753C0  FUN_012753c0  size=6  [run]
-undefined ** FUN_012753c0(void)
+// 012753C0  hkpDisplayBindingData::PhysicsSystem::PhysicsSystem  size=6  [run]
+undefined ** hkpDisplayBindingData::PhysicsSystem::PhysicsSystem(void)
 
 {
-  return hkpDisplayBindingData::PhysicsSystem::vftable;
+  return vftable;
 }
 
-// 012753D0  hkpDisplayBindingData::hkpDisplayBindingData  size=18  [run]
-void hkpDisplayBindingData::hkpDisplayBindingData(undefined4 *param_1)
+// 012753D0  hkpDisplayBindingData::~hkpDisplayBindingData  size=18  [run]
+void hkpDisplayBindingData::~hkpDisplayBindingData(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -13290,11 +13290,11 @@ void hkpDisplayBindingData::hkpDisplayBindingData(undefined4 *param_1)
   return;
 }
 
-// 012753F0  FUN_012753f0  size=6  [run]
-undefined ** FUN_012753f0(void)
+// 012753F0  hkpDisplayBindingData::hkpDisplayBindingData  size=6  [run]
+undefined ** hkpDisplayBindingData::hkpDisplayBindingData(void)
 
 {
-  return hkpDisplayBindingData::vftable;
+  return vftable;
 }
 
 // 01275430  FUN_01275430  size=22  [run]
@@ -13424,7 +13424,7 @@ undefined4 * __thiscall hkpDisplayBindingData::RigidBody::vf00(undefined4 *param
     FUN_010060a0();
   }
   param_1[2] = 0;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13745,7 +13745,7 @@ int __thiscall hkpDisplayBindingData::PhysicsSystem::vf00(int param_1,byte param
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_131();
+  ::hkBaseObject::hkBaseObject_131();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -13759,7 +13759,7 @@ int __thiscall hkpDisplayBindingData::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_132();
+  ::hkBaseObject::hkBaseObject_132();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -13802,11 +13802,11 @@ void hkpEntityListener::hkpEntityListener_6(undefined4 *param_1)
   return;
 }
 
-// 01275D80  FUN_01275d80  size=6  [run]
-undefined ** FUN_01275d80(void)
+// 01275D80  hkpDisableEntityCollisionFilter::hkpDisableEntityCollisionFilter  size=6  [run]
+undefined ** hkpDisableEntityCollisionFilter::hkpDisableEntityCollisionFilter(void)
 
 {
-  return hkpDisableEntityCollisionFilter::vftable;
+  return vftable;
 }
 
 // 01275DF0  hkpDisableEntityCollisionFilter::vf00  size=8  [run]
@@ -13866,7 +13866,7 @@ int __thiscall hkpDisableEntityCollisionFilter::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_49();
+  ::hkBaseObject::hkBaseObject_49();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -13881,24 +13881,24 @@ undefined4 FUN_01275eb0(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 01275EC0  hkpAction::hkpAction_9  size=37  [run]
-undefined4 * __thiscall hkpAction::hkpAction_9(undefined4 *param_1,undefined4 param_2)
+// 01275EC0  hkpDashpotAction::hkpDashpotAction  size=37  [run]
+undefined4 * __thiscall hkpDashpotAction::hkpDashpotAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpDashpotAction::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
-// 01275F10  hkpAction::hkpAction_8  size=38  [run]
-void hkpAction::hkpAction_8(undefined4 *param_1,undefined4 param_2)
+// 01275F10  hkpDashpotAction::hkpDashpotAction  size=38  [run]
+void hkpDashpotAction::hkpDashpotAction(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
-    *param_1 = vftable;
+    *param_1 = hkpAction::vftable;
     FUN_010065b0(param_2);
-    *param_1 = hkpDashpotAction::vftable;
+    *param_1 = vftable;
   }
   return;
 }
@@ -13936,7 +13936,7 @@ int __thiscall hkpDashpotAction::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_31();
+  ::hkBaseObject::hkBaseObject_31();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -13979,11 +13979,11 @@ void hkpCollidableCollidableFilter::hkpCollidableCollidableFilter_3(undefined4 *
   return;
 }
 
-// 01276090  FUN_01276090  size=6  [run]
-undefined ** FUN_01276090(void)
+// 01276090  hkpConstrainedSystemFilter::hkpConstrainedSystemFilter  size=6  [run]
+undefined ** hkpConstrainedSystemFilter::hkpConstrainedSystemFilter(void)
 
 {
-  return hkpConstrainedSystemFilter::vftable;
+  return vftable;
 }
 
 // 01276100  hkpConstrainedSystemFilter::vf08  size=6  [run]
@@ -14050,7 +14050,7 @@ int __thiscall hkpConstrainedSystemFilter::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_225();
+  ::hkBaseObject::hkBaseObject_225();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -14065,8 +14065,8 @@ undefined4 FUN_012761e0(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 01276210  hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo  size=18  [run]
-void hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo(undefined4 *param_1)
+// 01276210  hkpCharacterRigidBodyCinfo::~hkpCharacterRigidBodyCinfo  size=18  [run]
+void hkpCharacterRigidBodyCinfo::~hkpCharacterRigidBodyCinfo(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -14083,11 +14083,11 @@ void FUN_01276230(undefined4 *param_1)
   return;
 }
 
-// 01276240  FUN_01276240  size=6  [run]
-undefined ** FUN_01276240(void)
+// 01276240  hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo  size=6  [run]
+undefined ** hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo(void)
 
 {
-  return hkpCharacterRigidBodyCinfo::vftable;
+  return vftable;
 }
 
 // 01276250  FUN_01276250  size=8  [run]
@@ -14097,8 +14097,8 @@ undefined4 FUN_01276250(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 01276280  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo  size=18  [run]
-void hkpCharacterProxyCinfo::hkpCharacterProxyCinfo(undefined4 *param_1)
+// 01276280  hkpCharacterProxyCinfo::~hkpCharacterProxyCinfo  size=18  [run]
+void hkpCharacterProxyCinfo::~hkpCharacterProxyCinfo(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -14115,11 +14115,11 @@ void FUN_012762a0(undefined4 *param_1)
   return;
 }
 
-// 012762B0  FUN_012762b0  size=6  [run]
-undefined ** FUN_012762b0(void)
+// 012762B0  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo  size=6  [run]
+undefined ** hkpCharacterProxyCinfo::hkpCharacterProxyCinfo(void)
 
 {
-  return hkpCharacterProxyCinfo::vftable;
+  return vftable;
 }
 
 // 012762C0  FUN_012762c0  size=8  [run]
@@ -14129,8 +14129,8 @@ undefined4 FUN_012762c0(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 012762E0  hkpCharacterControllerCinfo::hkpCharacterControllerCinfo  size=18  [run]
-void hkpCharacterControllerCinfo::hkpCharacterControllerCinfo(undefined4 *param_1)
+// 012762E0  hkpCharacterControllerCinfo::~hkpCharacterControllerCinfo  size=18  [run]
+void hkpCharacterControllerCinfo::~hkpCharacterControllerCinfo(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -14147,11 +14147,11 @@ void FUN_01276300(undefined4 *param_1)
   return;
 }
 
-// 01276310  FUN_01276310  size=6  [run]
-undefined ** FUN_01276310(void)
+// 01276310  hkpCharacterControllerCinfo::hkpCharacterControllerCinfo  size=6  [run]
+undefined ** hkpCharacterControllerCinfo::hkpCharacterControllerCinfo(void)
 
 {
-  return hkpCharacterControllerCinfo::vftable;
+  return vftable;
 }
 
 // 01276320  FUN_01276320  size=8  [run]
@@ -14196,24 +14196,25 @@ undefined4 FUN_012763a0(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 012763B0  hkpAction::hkpAction_6  size=37  [run]
-undefined4 * __thiscall hkpAction::hkpAction_6(undefined4 *param_1,undefined4 param_2)
+// 012763B0  hkpAngularDashpotAction::hkpAngularDashpotAction  size=37  [run]
+undefined4 * __thiscall
+hkpAngularDashpotAction::hkpAngularDashpotAction(undefined4 *param_1,undefined4 param_2)
 
 {
-  *param_1 = vftable;
+  *param_1 = hkpAction::vftable;
   FUN_010065b0(param_2);
-  *param_1 = hkpAngularDashpotAction::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
-// 01276400  hkpAction::hkpAction_7  size=38  [run]
-void hkpAction::hkpAction_7(undefined4 *param_1,undefined4 param_2)
+// 01276400  hkpAngularDashpotAction::hkpAngularDashpotAction  size=38  [run]
+void hkpAngularDashpotAction::hkpAngularDashpotAction(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
-    *param_1 = vftable;
+    *param_1 = hkpAction::vftable;
     FUN_010065b0(param_2);
-    *param_1 = hkpAngularDashpotAction::vftable;
+    *param_1 = vftable;
   }
   return;
 }
@@ -14251,7 +14252,7 @@ int __thiscall hkpAngularDashpotAction::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_31();
+  ::hkBaseObject::hkBaseObject_31();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -15266,7 +15267,7 @@ void __thiscall FUN_012777e0(int param_1,int *param_2,undefined4 param_3)
   fStack_14 = fVar1 * fStack_14;
   hkpBoxShape::hkpBoxShape(&local_20,0);
   FUN_01277090(local_b0,local_f0);
-  hkBaseObject::hkBaseObject_44();
+  hkBaseObject::~hkBaseObject();
   return;
 }
 
@@ -16420,7 +16421,7 @@ hkpPhysicsSystemWithContacts::hkpPhysicsSystemWithContacts_2
     pvVar2 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar2 + 0x2c) + 4))(0xf0);
     *(undefined2 *)(iVar3 + 4) = 0xf0;
-    uVar4 = hkpWorldCinfo::hkpWorldCinfo_3();
+    uVar4 = hkpWorldCinfo::hkpWorldCinfo();
     *(undefined4 *)(param_1 + 8) = uVar4;
   }
   FUN_01193cf0(*(undefined4 *)(param_1 + 8));
@@ -16432,7 +16433,7 @@ hkpPhysicsSystemWithContacts::hkpPhysicsSystemWithContacts_2
     pvVar2 = TlsGetValue(DAT_01f8fc4c);
     puVar5 = (undefined4 *)(**(code **)(**(int **)((int)pvVar2 + 0x2c) + 4))(0x50);
     *(undefined2 *)(puVar5 + 1) = 0x50;
-    hkpPhysicsSystem::~hkpPhysicsSystem();
+    hkpPhysicsSystem::hkpPhysicsSystem();
     *puVar5 = vftable;
     puVar5[0x11] = 0;
     puVar5[0x12] = 0;
@@ -16483,7 +16484,7 @@ void FUN_01278d40(int param_1,undefined4 *param_2)
   pvVar4 = TlsGetValue(DAT_01f8fc4c);
   iVar5 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x44);
   *(undefined2 *)(iVar5 + 4) = 0x44;
-  puVar6 = (undefined4 *)hkpPhysicsSystem::~hkpPhysicsSystem();
+  puVar6 = (undefined4 *)hkpPhysicsSystem::hkpPhysicsSystem();
   local_10 = 0;
   if (0 < *(int *)(param_1 + 0xc)) {
     do {
@@ -16516,7 +16517,7 @@ void FUN_01278d40(int param_1,undefined4 *param_2)
   pvVar4 = TlsGetValue(DAT_01f8fc4c);
   iVar7 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x44);
   *(undefined2 *)(iVar7 + 4) = 0x44;
-  puVar8 = (undefined4 *)hkpPhysicsSystem::~hkpPhysicsSystem();
+  puVar8 = (undefined4 *)hkpPhysicsSystem::hkpPhysicsSystem();
   local_20 = puVar8;
   FUN_01006780("Unconstrained Rigid Bodies");
   puVar8[0xf] = puVar6[0xf];
@@ -16524,7 +16525,7 @@ void FUN_01278d40(int param_1,undefined4 *param_2)
   pvVar4 = TlsGetValue(DAT_01f8fc4c);
   iVar7 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x44);
   *(undefined2 *)(iVar7 + 4) = 0x44;
-  puVar8 = (undefined4 *)hkpPhysicsSystem::~hkpPhysicsSystem();
+  puVar8 = (undefined4 *)hkpPhysicsSystem::hkpPhysicsSystem();
   local_24 = puVar8;
   FUN_01006780("Fixed Rigid Bodies");
   puVar8[0xf] = puVar6[0xf];
@@ -16532,7 +16533,7 @@ void FUN_01278d40(int param_1,undefined4 *param_2)
   pvVar4 = TlsGetValue(DAT_01f8fc4c);
   iVar7 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x44);
   *(undefined2 *)(iVar7 + 4) = 0x44;
-  puVar8 = (undefined4 *)hkpPhysicsSystem::~hkpPhysicsSystem();
+  puVar8 = (undefined4 *)hkpPhysicsSystem::hkpPhysicsSystem();
   local_1c = puVar8;
   FUN_01006780("Keyframed Rigid Bodies");
   puVar8[0xf] = puVar6[0xf];
@@ -16568,7 +16569,7 @@ void FUN_01278d40(int param_1,undefined4 *param_2)
         pvVar4 = TlsGetValue(DAT_01f8fc4c);
         iVar7 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x44);
         *(undefined2 *)(iVar7 + 4) = 0x44;
-        iVar7 = hkpPhysicsSystem::~hkpPhysicsSystem();
+        iVar7 = hkpPhysicsSystem::hkpPhysicsSystem();
         FUN_01006780("Phantoms");
         *(undefined4 *)(iVar7 + 0x3c) = puVar6[0xf];
         param_2[3] = iVar7;
@@ -16588,7 +16589,7 @@ void FUN_01278d40(int param_1,undefined4 *param_2)
     pvVar4 = TlsGetValue(DAT_01f8fc4c);
     iVar7 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x44);
     *(undefined2 *)(iVar7 + 4) = 0x44;
-    puVar8 = (undefined4 *)hkpPhysicsSystem::~hkpPhysicsSystem();
+    puVar8 = (undefined4 *)hkpPhysicsSystem::hkpPhysicsSystem();
     FUN_01006780("Constrained System");
     puVar8[0xf] = puVar6[0xf];
     puVar9 = (undefined1 *)FUN_0118fae0(&local_6);
@@ -16724,7 +16725,7 @@ undefined4 * __fastcall
 hkpPhysicsSystemWithContacts::hkpPhysicsSystemWithContacts(undefined4 *param_1)
 
 {
-  hkpPhysicsSystem::~hkpPhysicsSystem();
+  hkpPhysicsSystem::hkpPhysicsSystem();
   *param_1 = vftable;
   param_1[0x11] = 0;
   param_1[0x12] = 0;
@@ -17616,7 +17617,7 @@ int __thiscall hkpTriggerVolume::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_32();
+  ::hkBaseObject::hkBaseObject_32();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

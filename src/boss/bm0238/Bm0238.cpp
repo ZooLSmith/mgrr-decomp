@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bm0238.h"
 
-// 004119E0  Bm0238::vf40  size=36  [class]
-undefined4 __fastcall Bm0238::vf40(int param_1)
+// 004119E0  Bm0238::startup  size=36  [class]
+undefined4 __fastcall Bm0238::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -131,7 +131,7 @@ LAB_00411ab0:
     (**(code **)(*param_1 + 0x20))();
   }
   if ((param_1[0x2d0] != 0) && (param_1[0x2fa] == 0)) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   return;
@@ -154,8 +154,8 @@ undefined * Bm0238::vf04(void)
   return &DAT_01b34ba8;
 }
 
-// 00AB8FC0  Bm0238::vf00  size=54  [class]
-undefined4 __thiscall Bm0238::vf00(undefined4 param_1,byte param_2)
+// 00AB8FC0  Bm0238::destruct  size=54  [class]
+undefined4 __thiscall Bm0238::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

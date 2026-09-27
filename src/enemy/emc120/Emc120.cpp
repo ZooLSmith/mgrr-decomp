@@ -1,5 +1,5 @@
 // src/enemy/emc120/Emc120.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007DD9F0..00AB9F20, 125 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007DD9F0..00AB9F20, 126 functions
 
 #include "mgrr.h"
 #include "Emc120.h"
@@ -3138,7 +3138,7 @@ LAB_007e33e9:
     return;
   }
   if ((param_1[0x2c0] & 0x500U) != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   if ((param_1[0x2c0] & 0x800U) == 0) {
@@ -3743,7 +3743,7 @@ undefined4 __thiscall Emc120::getAttackInfo(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 != 0)) {
+  if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 != 0)) {
     puVar1 = *(uint **)(iVar2 + 8);
     puVar1[5] = *(uint *)(param_1 + 0x4f0);
     uVar3 = FUN_00a7c7f0();
@@ -5753,7 +5753,7 @@ LAB_007e7fe8:
   iVar3 = FUN_00a54a60(param_1[0x249]);
   if (iVar3 != 0) {
     if ((param_1[0x12a] & 0x100U) != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     param_1[0x187] = param_1[0x187] + 1;
     iVar3 = FUN_007e4020();
@@ -6921,8 +6921,8 @@ void __thiscall Emc120::vf19C(int *param_1,int param_2,undefined4 param_3)
   return;
 }
 
-// 007EA170  Emc120::vf264  size=817  [class]
-undefined4 __thiscall Emc120::vf264(int param_1,undefined4 param_2)
+// 007EA170  Emc120::setEmSetInfo  size=817  [class]
+undefined4 __thiscall Emc120::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   undefined4 *puVar1;
@@ -7297,8 +7297,8 @@ void __fastcall FUN_007eaa80(int param_1)
   return;
 }
 
-// 007EAC70  Emc120::vf40  size=3123  [class]
-undefined4 __fastcall Emc120::vf40(int *param_1)
+// 007EAC70  Emc120::startup  size=3123  [class]
+undefined4 __fastcall Emc120::startup(int *param_1)
 
 {
   uint uVar1;
@@ -7331,7 +7331,7 @@ undefined4 __fastcall Emc120::vf40(int *param_1)
   undefined1 local_190 [112];
   undefined1 auStack_120 [284];
   
-  iVar3 = EmBaseDLC::vf40();
+  iVar3 = EmBaseDLC::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -7528,7 +7528,7 @@ undefined4 __fastcall Emc120::vf40(int *param_1)
     iVar3 = 0;
   }
   else {
-    iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar3 = RigidBodyCollision::RigidBodyCollision();
   }
   param_1[0x1ec] = iVar3;
   if (iVar3 != 0) {
@@ -8606,6 +8606,39 @@ void __fastcall Emc120::vf4C(int param_1)
   return;
 }
 
+// 00AB3150  Emc120::Emc120  size=277  [class]
+undefined4 * __fastcall Emc120::Emc120(undefined4 *param_1)
+
+{
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  FUN_00a7c930();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  FUN_00a603a0();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_009003e0();
+  FUN_00a826e0();
+  FUN_00a826e0();
+  FUN_00a826e0();
+  return param_1;
+}
+
 // 00AB3270  Emc120::vf04  size=6  [class]
 undefined * Emc120::vf04(void)
 
@@ -8649,12 +8682,12 @@ void FUN_00ab32a0(void)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB9F20  Emc120::vf00  size=30  [class]
-undefined4 __thiscall Emc120::vf00(undefined4 param_1,byte param_2)
+// 00AB9F20  Emc120::destruct  size=30  [class]
+undefined4 __thiscall Emc120::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00ab32a0();

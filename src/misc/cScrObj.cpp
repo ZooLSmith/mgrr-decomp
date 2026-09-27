@@ -101,7 +101,7 @@ bool __fastcall cScrObj::vf08(int *param_1)
 undefined4 * __fastcall cScrObj::cScrObj(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00c1e220();
   return param_1;
@@ -114,11 +114,11 @@ undefined * cScrObj::vf04(void)
   return &DAT_01b7b37c;
 }
 
-// 00AB7DC0  cScrObj::vf00  size=30  [class]
-undefined4 __thiscall cScrObj::vf00(undefined4 param_1,byte param_2)
+// 00AB7DC0  cScrObj::destruct  size=30  [class]
+undefined4 __thiscall cScrObj::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_52();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

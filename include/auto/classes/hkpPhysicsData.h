@@ -8,5 +8,6 @@ struct hkpPhysicsData : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 01273250 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpPhysicsData(undefined4 * param_1);  // 012730B0
+    ~hkpPhysicsData();  // 012730B0
+    hkpPhysicsData();  // 012730D0
 };

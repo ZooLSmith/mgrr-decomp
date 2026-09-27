@@ -47,8 +47,8 @@ undefined4 * __thiscall FreeFallStatePl0010::vf04(undefined4 *param_1,byte param
   return param_1;
 }
 
-// 00BAA6C0  FreeFallStatePl0010::vf0C  size=467  [class]
-void __thiscall FreeFallStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BAA6C0  FreeFallStatePl0010::SafeCheck  size=467  [class]
+void __thiscall FreeFallStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -129,7 +129,7 @@ LAB_00baa855:
     *(undefined4 *)(local_8 + 0x30) = 0;
     *(undefined4 *)(local_8 + 0x10) = 0;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -285,8 +285,8 @@ undefined4 FreeFallStatePl0010::vf20(undefined4 *param_1)
   return 1;
 }
 
-// 00BDE9A0  FreeFallStatePl0010::vf10  size=411  [class]
-void __thiscall FreeFallStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BDE9A0  FreeFallStatePl0010::qteSafeCheck  size=411  [class]
+void __thiscall FreeFallStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -355,7 +355,7 @@ LAB_00bdeb01:
   *(undefined4 *)(param_1 + 0x44) = *(undefined4 *)(uVar5 + 0x44);
   *(undefined4 *)(param_1 + 0x48) = *(undefined4 *)(uVar5 + 0x48);
   *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(uVar5 + 0x4c);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

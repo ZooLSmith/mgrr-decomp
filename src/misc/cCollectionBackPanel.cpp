@@ -8,12 +8,12 @@
 undefined4 * __fastcall cCollectionBackPanel::cCollectionBackPanel(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   param_1[8] = 0;
   param_1[9] = 0xffffffff;
   param_1[10] = 0xffffffff;
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   param_1[0x17] = 0xffffffff;
   param_1[0x18] = 0;
   param_1[7] = 0;
@@ -117,13 +117,13 @@ void __fastcall cCollectionBackPanel::~cCollectionBackPanel(undefined4 *param_1)
     FUN_00e9d6a0(param_1[9]);
     param_1[9] = 0xffffffff;
   }
-  Hw::cTexture::cTexture_5();
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  Hw::cTexture::~cTexture();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
-// 0099D0D0  cCollectionBackPanel::vf14  size=269  [class]
-void __fastcall cCollectionBackPanel::vf14(int param_1)
+// 0099D0D0  cCollectionBackPanel::create  size=269  [class]
+void __fastcall cCollectionBackPanel::create(int param_1)
 
 {
   int iVar1;

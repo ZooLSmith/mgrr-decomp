@@ -62,8 +62,8 @@ undefined4 * __thiscall WallEdgeGrabFromBelowStatePl0010::vf04(undefined4 *param
   return param_1;
 }
 
-// 00BB2720  WallEdgeGrabFromBelowStatePl0010::vf0C  size=178  [class]
-void __thiscall WallEdgeGrabFromBelowStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB2720  WallEdgeGrabFromBelowStatePl0010::SafeCheck  size=178  [class]
+void __thiscall WallEdgeGrabFromBelowStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -101,7 +101,7 @@ void __thiscall WallEdgeGrabFromBelowStatePl0010::vf0C(int param_1,undefined4 *p
     }
     *(undefined4 *)(uVar2 + 0x4170) = 1;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -200,8 +200,8 @@ void __thiscall WallEdgeGrabFromBelowStatePl0010::vf14(int param_1,undefined4 *p
   return;
 }
 
-// 00BE11B0  WallEdgeGrabFromBelowStatePl0010::vf10  size=331  [class]
-void __thiscall WallEdgeGrabFromBelowStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BE11B0  WallEdgeGrabFromBelowStatePl0010::qteSafeCheck  size=331  [class]
+void __thiscall WallEdgeGrabFromBelowStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -263,7 +263,7 @@ LAB_00be12c2:
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

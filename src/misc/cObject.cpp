@@ -22,8 +22,8 @@ undefined4 * __thiscall cObject::vf04(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00A36200  cObject::cObject_2  size=139  [class]
-void __fastcall cObject::cObject_2(undefined4 *param_1)
+// 00A36200  cObject::cObject  size=139  [class]
+void __fastcall cObject::cObject(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -77,7 +77,7 @@ void __fastcall cObject::cObject_3(undefined4 *param_1)
   int iVar2;
   
   FUN_00dd7270();
-  cObject_2();
+  cObject();
   param_1[0x16858] = vftable;
   iVar2 = 0x3ff;
   puVar1 = param_1 + 0x16858;
@@ -93,7 +93,7 @@ void __fastcall cObject::cObject_3(undefined4 *param_1)
     iVar2 = iVar2 + -1;
     *puVar1 = vftable;
   } while (-1 < iVar2);
-  cObject_2();
+  cObject();
   *param_1 = vftable;
   return;
 }
@@ -106,7 +106,7 @@ void __fastcall cObject::cObject_4(int param_1)
   FUN_00dd7270();
   *(undefined ***)(param_1 + 0x2af0) = vftable;
   *(undefined ***)(param_1 + 0x2aa4) = vftable;
-  cObject_2();
+  cObject();
   FUN_00a3e430();
   FUN_00a3e2f0();
   if (*(int *)(param_1 + 0x1a4) != 0) {
@@ -184,8 +184,8 @@ void cObject::cObject_5(void)
 void FUN_015edaa0(void)
 
 {
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
-  Hw::cOtManagerBase::cOtManagerBase_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
+  Hw::cOtManagerBase::~cOtManagerBase();
   return;
 }
 
@@ -193,7 +193,7 @@ void FUN_015edaa0(void)
 void FUN_015edac0(void)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -201,7 +201,7 @@ void FUN_015edac0(void)
 void FUN_015edad0(void)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -209,7 +209,7 @@ void FUN_015edad0(void)
 void FUN_015edae0(void)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -217,7 +217,7 @@ void FUN_015edae0(void)
 void FUN_015edaf0(void)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -225,7 +225,7 @@ void FUN_015edaf0(void)
 void FUN_015edb00(void)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -233,7 +233,7 @@ void FUN_015edb00(void)
 void FUN_015edb10(void)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

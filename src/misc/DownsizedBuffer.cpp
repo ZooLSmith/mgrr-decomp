@@ -118,7 +118,7 @@ void __fastcall DownsizedBuffer::ShaderDrawZMap::vf04(int param_1)
 undefined4 * __fastcall DownsizedBuffer::ShaderDownSample::ShaderDownSample(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -142,7 +142,7 @@ undefined4 * __fastcall DownsizedBuffer::ShaderDownSample::ShaderDownSample(unde
 undefined4 __thiscall DownsizedBuffer::ShaderDownSample::vf00(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -156,7 +156,7 @@ undefined4 __thiscall DownsizedBuffer::ShaderDownSample::vf00(undefined4 param_1
 undefined4 * __fastcall DownsizedBuffer::ShaderDownSampleZ::ShaderDownSampleZ(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -180,7 +180,7 @@ undefined4 * __fastcall DownsizedBuffer::ShaderDownSampleZ::ShaderDownSampleZ(un
 undefined4 __thiscall DownsizedBuffer::ShaderDownSampleZ::vf00(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -199,7 +199,7 @@ DownsizedBuffer::ShaderDownSampleMRT::ShaderDownSampleMRT(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -240,7 +240,7 @@ DownsizedBuffer::ShaderDownSampleMRT::ShaderDownSampleMRT(undefined4 *param_1)
 undefined4 __thiscall DownsizedBuffer::ShaderDownSampleMRT::vf00(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -254,7 +254,7 @@ undefined4 __thiscall DownsizedBuffer::ShaderDownSampleMRT::vf00(undefined4 para
 undefined4 * __fastcall DownsizedBuffer::ShaderComposition::ShaderComposition(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -278,7 +278,7 @@ undefined4 * __fastcall DownsizedBuffer::ShaderComposition::ShaderComposition(un
 undefined4 __thiscall DownsizedBuffer::ShaderComposition::vf00(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -296,7 +296,7 @@ undefined4 * __fastcall DownsizedBuffer::ShaderResolve::ShaderResolve(undefined4
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -333,7 +333,7 @@ undefined4 * __fastcall DownsizedBuffer::ShaderResolve::ShaderResolve(undefined4
 undefined4 __thiscall DownsizedBuffer::ShaderResolve::vf00(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -347,7 +347,7 @@ undefined4 __thiscall DownsizedBuffer::ShaderResolve::vf00(undefined4 param_1,by
 undefined4 * __fastcall DownsizedBuffer::ShaderDrawZMap::ShaderDrawZMap(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -371,7 +371,7 @@ undefined4 * __fastcall DownsizedBuffer::ShaderDrawZMap::ShaderDrawZMap(undefine
 undefined4 __thiscall DownsizedBuffer::ShaderDrawZMap::vf00(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

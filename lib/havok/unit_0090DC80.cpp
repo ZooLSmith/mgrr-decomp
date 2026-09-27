@@ -18,7 +18,7 @@ hkpFirstCdBodyPairCollector::hkpFirstCdBodyPairCollector
 {
   if (((*param_4 != 0.0) && (param_4[1] != 0.0)) && (param_4[2] != 0.0)) {
     FUN_0090cbe0(0xffffffff,param_2,param_3,param_4,param_5,param_6,5,1);
-    FUN_00907070();
+    RayCastPenetrationWork::vf08();
     FUN_009053f0();
     hkpCdBodyPairCollector::hkpCdBodyPairCollector_2();
     return 0;

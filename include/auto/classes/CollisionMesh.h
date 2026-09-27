@@ -14,6 +14,6 @@ struct CollisionMesh : public Collision {
     virtual float10 vf1C();  // 00D776B0 slot 0x1C  overrides Collision
     virtual void vf24();  // 00D776C0 slot 0x24  overrides Collision
     // non-virtual members
-    CollisionMesh();  // 00D7D650
+    ~CollisionMesh();  // 00D7D650
     CollisionMesh(undefined4 param_1, undefined4 param_2, undefined4 param_3);  // 00D7E080
 };

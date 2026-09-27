@@ -8,13 +8,13 @@
 undefined4 * __fastcall esp130::esp130(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
 
-// 009D0890  esp130::vf10  size=1  [class]
-void esp130::vf10(void)
+// 009D0890  esp130::addOtTransList  size=1  [class]
+void esp130::addOtTransList(void)
 
 {
   return;
@@ -25,7 +25,7 @@ undefined4 * __thiscall esp130::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -144,13 +144,13 @@ void __fastcall esp130::vf08(int param_1)
   return;
 }
 
-// 009F5840  esp130::vf04  size=931  [class]
+// 009F5840  esp130::preTrans  size=931  [class]
 /* WARNING: Removing unreachable block (ram,0x009f5945) */
 /* WARNING: Removing unreachable block (ram,0x009f58f2) */
 /* WARNING: Removing unreachable block (ram,0x009f5983) */
 
 undefined4 __thiscall
-esp130::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp130::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   float fVar1;
@@ -186,7 +186,7 @@ esp130::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   undefined4 uStack_38;
   undefined4 uStack_34;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 != 0) {
     if (*(int *)(param_1 + 0x120) < 1) {
       FUN_009cca90(param_1,&DAT_0165bac8);

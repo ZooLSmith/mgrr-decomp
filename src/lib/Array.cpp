@@ -1,5 +1,5 @@
 // src/lib/Array.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401180..015F1270, 2392 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401180..015F1270, 2385 functions
 
 #include "mgrr.h"
 #include "HkDataManagerImplement.h"
@@ -925,7 +925,7 @@ void __fastcall FUN_00456610(int *param_1)
     if (iVar1 != 0) {
       return;
     }
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00ac80a0(0x3f800000,0x3f800000);
@@ -11530,7 +11530,7 @@ undefined4 __thiscall FUN_0091ea80(int param_1,int param_2)
         pvVar7 = TlsGetValue(DAT_01f8fc4c);
         iVar9 = (**(code **)(**(int **)((int)pvVar7 + 0x2c) + 4))(0x38);
         *(undefined2 *)(iVar9 + 4) = 0x38;
-        uVar10 = hkpConstraintInstance::hkpConstraintInstance_5(fVar4,local_350,iVar8,1);
+        uVar10 = hkpConstraintInstance::hkpConstraintInstance(fVar4,local_350,iVar8,1);
         FUN_01197ce0(uVar10);
         FUN_010060a0();
         FUN_010060a0();
@@ -11963,8 +11963,7 @@ LAB_00923b82:
         pvVar7 = TlsGetValue(DAT_01f8fc4c);
         iVar12 = (**(code **)(**(int **)((int)pvVar7 + 0x2c) + 4))(0x70);
         *(undefined2 *)(iVar12 + 4) = 0x70;
-        iVar12 = hkpConvexVerticesShape::hkpConvexVerticesShape_5
-                           (auStack_460,auStack_2a4,0x3c23d70a);
+        iVar12 = hkpConvexVerticesShape::hkpConvexVerticesShape(auStack_460,auStack_2a4,0x3c23d70a);
         if (iVar12 != 0) {
           (**(code **)(*(int *)**(undefined4 **)(local_49c + 8) + 0xc))(iVar12);
           puVar8[4] = 0;
@@ -12613,7 +12612,7 @@ undefined4 __thiscall FUN_00923ff0(float param_1,int param_2)
       iVar6 = (**(code **)(**(int **)((int)pvVar10 + 0x2c) + 4))();
       *(undefined2 *)(iVar6 + 4) = 0x70;
       puVar9 = (undefined4 *)
-               hkpConvexVerticesShape::hkpConvexVerticesShape_5(auStack_5a0,auStack_264,0x3c23d70a);
+               hkpConvexVerticesShape::hkpConvexVerticesShape(auStack_5a0,auStack_264,0x3c23d70a);
       if (puVar9 != (undefined4 *)0x0) {
         local_620 = 1.4013e-45;
         if (fStack_3b4 <= 0.0) {
@@ -24058,7 +24057,7 @@ LAB_00a52d25:
     FUN_00a499a0();
     iVar3 = 10;
     do {
-      Hw::cTexture::cTexture_5();
+      Hw::cTexture::~cTexture();
       iVar3 = iVar3 + -1;
     } while (-1 < iVar3);
     FUN_00dd4920(iVar1);
@@ -24317,7 +24316,7 @@ void FUN_00a533f0(void)
   FUN_00a20070();
   iVar1 = FUN_00de4500("color_table.wtb");
   if (iVar1 != 0) {
-    cFilter::cFilter(iVar1);
+    cFilter::~cFilter(iVar1);
   }
   FUN_00c76270();
   FUN_00c76d30();
@@ -34106,9 +34105,8 @@ void __fastcall lib::Array<AntiqueScrollMultiple>::Array<AntiqueScrollMultiple>(
   return;
 }
 
-// 00A64960  lib::Array<AntiqueScrollMultiple>::Array<AntiqueScrollMultiple>_2  size=24  [class]
-void __fastcall
-lib::Array<AntiqueScrollMultiple>::Array<AntiqueScrollMultiple>_2(undefined4 *param_1)
+// 00A64960  lib::Array<AntiqueScrollMultiple>::Array<AntiqueScrollMultiple>  size=24  [class]
+void __fastcall lib::Array<AntiqueScrollMultiple>::Array<AntiqueScrollMultiple>(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -37129,7 +37127,7 @@ lib::Array<cRoomAbstract::stRoomEspUnit*>::Array<cRoomAbstract::stRoomEspUnit*>_
 {
   int iVar1;
   
-  EspControllerBullet::EspControllerBullet_6();
+  EspControllerBullet::~EspControllerBullet();
   cEspControler::~cEspControler();
   *param_1 = cRoomAbstract::vftable;
   FUN_00dd7270();
@@ -42271,7 +42269,7 @@ void __fastcall lib::Array<Entity*>::Array<Entity*>_6(int param_1)
   *(undefined4 *)(param_1 + 0xdec) = 0;
   *(undefined4 *)(param_1 + 0xdf4) = 0;
   FUN_00dd7270();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
@@ -42293,7 +42291,7 @@ void __fastcall lib::Array<Entity*>::Array<Entity*>(int param_1)
   *(undefined4 *)(param_1 + 0xe78) = 0;
   *(undefined4 *)(param_1 + 0xe80) = 0;
   cXml::cXml_7();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
@@ -42321,7 +42319,7 @@ void __fastcall lib::Array<Hw::cVec4>::Array<Hw::cVec4>(undefined4 *param_1)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   return;
 }
 
@@ -44411,7 +44409,7 @@ int * __thiscall FUN_00c3ee70(int *param_1,uint param_2,uint param_3)
   
   uVar2 = param_1[4];
   if (uVar2 < param_2) {
-    uVar2 = std::out_of_range::out_of_range_2("invalid string position");
+    uVar2 = std::out_of_range::out_of_range("invalid string position");
     param_2 = extraout_ECX;
   }
   uVar2 = uVar2 - param_2;
@@ -45606,7 +45604,7 @@ int * __thiscall FUN_00c4ab40(int *param_1,undefined4 *param_2,uint param_3,uint
   uVar2 = param_2[4];
   uVar4 = param_3;
   if (uVar2 < param_3) {
-    uVar2 = std::out_of_range::out_of_range_2("invalid string position");
+    uVar2 = std::out_of_range::out_of_range("invalid string position");
     uVar4 = extraout_ECX;
   }
   if (uVar2 - uVar4 < param_4) {
@@ -45615,13 +45613,13 @@ int * __thiscall FUN_00c4ab40(int *param_1,undefined4 *param_2,uint param_3,uint
   iVar1 = param_1[4];
   if (-iVar1 - 1U <= param_4) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if (param_4 != 0) {
     uVar2 = iVar1 + param_4;
     if (uVar2 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-      std::length_error::length_error_3("string too long");
+      std::length_error::length_error("string too long");
     }
     if ((uint)param_1[5] < uVar2) {
       FUN_00c3ef00(uVar2,iVar1);
@@ -46526,13 +46524,13 @@ int * __thiscall FUN_00c556a0(int *param_1,uint param_2,undefined4 param_3)
   iVar2 = param_1[4];
   if (-iVar2 - 1U <= param_2) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if (param_2 != 0) {
     uVar1 = iVar2 + param_2;
     if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-      std::length_error::length_error_3("string too long");
+      std::length_error::length_error("string too long");
     }
     if ((uint)param_1[5] < uVar1) {
       FUN_00c3ef00(uVar1,iVar2);
@@ -46592,13 +46590,13 @@ int * __thiscall FUN_00c55840(int *param_1,int *param_2,uint param_3)
   iVar2 = param_1[4];
   if (-iVar2 - 1U <= param_3) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if (param_3 != 0) {
     uVar1 = iVar2 + param_3;
     if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-      std::length_error::length_error_3("string too long");
+      std::length_error::length_error("string too long");
     }
     if ((uint)param_1[5] < uVar1) {
       FUN_00c3ef00(uVar1,iVar2);
@@ -46639,7 +46637,7 @@ int * __thiscall FUN_00c55960(int *param_1,int *param_2,uint param_3,uint param_
   
   uVar1 = param_2[4];
   if (uVar1 < param_3) {
-    std::out_of_range::out_of_range_2("invalid string position");
+    std::out_of_range::out_of_range("invalid string position");
   }
   uVar1 = uVar1 - param_3;
   if (param_4 < uVar1) {
@@ -46652,7 +46650,7 @@ int * __thiscall FUN_00c55960(int *param_1,int *param_2,uint param_3,uint param_
   }
   if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if ((uint)param_1[5] < uVar1) {
     FUN_00c3ef00(uVar1,param_1[4]);
@@ -50319,7 +50317,7 @@ undefined4 FUN_00c64c90(undefined4 param_1,undefined4 param_2,undefined4 param_3
                pppuVar17 == (undefined4 ***)0xffffffff)) {
 LAB_00c650c3:
                     /* WARNING: Subroutine does not return */
-              std::length_error::length_error_3("string too long");
+              std::length_error::length_error("string too long");
             }
             if (local_440 < pppuVar17) {
               FUN_00c3ef00(pppuVar17,local_444);
@@ -55420,8 +55418,8 @@ void __fastcall FUN_00c72330(int param_1)
   return;
 }
 
-// 00C72420  lib::Array<unsigned_short>::Array<unsigned_short>_3  size=193  [class]
-int * __thiscall lib::Array<unsigned_short>::Array<unsigned_short>_3(int param_1,int *param_2)
+// 00C72420  lib::Array<unsigned_short>::Array<unsigned_short>  size=193  [class]
+int * __thiscall lib::Array<unsigned_short>::Array<unsigned_short>(int param_1,int *param_2)
 
 {
   int *piVar1;
@@ -55467,8 +55465,8 @@ int * __thiscall lib::Array<unsigned_short>::Array<unsigned_short>_3(int param_1
   return piVar2;
 }
 
-// 00C724F0  lib::Array<unsigned_short>::Array<unsigned_short>_2  size=59  [class]
-void __fastcall lib::Array<unsigned_short>::Array<unsigned_short>_2(int param_1)
+// 00C724F0  lib::Array<unsigned_short>::Array<unsigned_short>  size=59  [class]
+void __fastcall lib::Array<unsigned_short>::Array<unsigned_short>(int param_1)
 
 {
   int iVar1;
@@ -55500,15 +55498,15 @@ void __fastcall lib::Array<unsigned_short>::Array<unsigned_short>_2(int param_1)
 void __fastcall FUN_00c72530(int param_1)
 
 {
-  lib::Array<unsigned_short>::Array<unsigned_short>_2();
+  lib::Array<unsigned_short>::Array<unsigned_short>();
   *(undefined4 *)(param_1 + 4) = 0;
   *(undefined4 *)(param_1 + 0xc) = 0;
   return;
 }
 
-// 00C72550  lib::Array<unsigned_short>::Array<unsigned_short>_4  size=226  [class]
+// 00C72550  lib::Array<unsigned_short>::Array<unsigned_short>  size=226  [class]
 int * __thiscall
-lib::Array<unsigned_short>::Array<unsigned_short>_4(int param_1,int *param_2,int *param_3)
+lib::Array<unsigned_short>::Array<unsigned_short>(int param_1,int *param_2,int *param_3)
 
 {
   int *piVar1;
@@ -55592,7 +55590,7 @@ undefined4 FUN_00c72640(int *param_1,undefined4 param_2)
 void __fastcall FUN_00c72750(int param_1)
 
 {
-  lib::Array<unsigned_short>::Array<unsigned_short>_2();
+  lib::Array<unsigned_short>::Array<unsigned_short>();
   if (*(int *)(param_1 + 4) != 0) {
     FUN_00dd48d0(*(int *)(param_1 + 4),0);
     *(undefined4 *)(param_1 + 4) = 0;
@@ -56254,7 +56252,7 @@ lib::Array<waypoint::WaypointNode>::Array<waypoint::WaypointNode>_2(undefined4 *
 
 {
   *param_1 = vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   param_1[1] = 0;
   param_1[3] = 0;
   return;
@@ -56265,7 +56263,7 @@ undefined4 * __thiscall lib::Array<waypoint::WaypointNode>::vf00(undefined4 *par
 
 {
   *param_1 = vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   param_1[1] = 0;
   param_1[3] = 0;
   if ((param_2 & 1) != 0) {
@@ -56278,7 +56276,7 @@ undefined4 * __thiscall lib::Array<waypoint::WaypointNode>::vf00(undefined4 *par
 int __thiscall FUN_00c738a0(int param_1,undefined4 param_2,uint param_3)
 
 {
-  lib::Array<unsigned_short>::Array<unsigned_short>_2();
+  lib::Array<unsigned_short>::Array<unsigned_short>();
   *(undefined4 *)(param_1 + 4) = param_2;
   *(uint *)(param_1 + 0xc) = param_3 / 0x18;
   return param_3 * -0x55555555;
@@ -56288,7 +56286,7 @@ int __thiscall FUN_00c738a0(int param_1,undefined4 param_2,uint param_3)
 void __fastcall FUN_00c738d0(int param_1)
 
 {
-  lib::Array<unsigned_short>::Array<unsigned_short>_2();
+  lib::Array<unsigned_short>::Array<unsigned_short>();
   if (*(int *)(param_1 + 4) != 0) {
     FUN_00dd48d0(*(int *)(param_1 + 4),0);
     *(undefined4 *)(param_1 + 4) = 0;
@@ -56301,7 +56299,7 @@ void __fastcall FUN_00c738d0(int param_1)
 void __fastcall FUN_00c73960(int param_1)
 
 {
-  lib::Array<unsigned_short>::Array<unsigned_short>_2();
+  lib::Array<unsigned_short>::Array<unsigned_short>();
   *(undefined4 *)(param_1 + 0x44) = 0xffffffff;
   return;
 }
@@ -56330,7 +56328,7 @@ undefined4 __thiscall FUN_00c73980(int param_1,int param_2)
       }
       FUN_00c6e340(param_2);
       FUN_00c6df70(param_2);
-      lib::Array<unsigned_short>::Array<unsigned_short>_3(piVar4);
+      lib::Array<unsigned_short>::Array<unsigned_short>(piVar4);
       return 1;
     }
   }
@@ -56651,7 +56649,7 @@ void __thiscall FUN_00c73ea0(int param_1,undefined4 param_2)
   local_8 = CONCAT31(local_8._1_3_,*(undefined1 *)(param_1 + 0x14));
   FUN_00c6eee0(&local_8,*(int *)(param_1 + 4),*(int *)(param_1 + 4) + *(int *)(param_1 + 8) * 0x18,
                param_2,local_8,0);
-  lib::Array<unsigned_short>::Array<unsigned_short>_4(local_8,local_4);
+  lib::Array<unsigned_short>::Array<unsigned_short>(local_8,local_4);
   return;
 }
 
@@ -56661,14 +56659,14 @@ lib::Array<waypoint::WaypointNode>::Array<waypoint::WaypointNode>(undefined4 *pa
 
 {
   *param_1 = DynamicArray<waypoint::WaypointNode,sys::AllocatorByHeap>::vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   if (param_1[1] != 0) {
     FUN_00dd48d0(param_1[1],0);
     param_1[1] = 0;
     param_1[3] = 0;
   }
   *param_1 = vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   param_1[1] = 0;
   param_1[3] = 0;
   return;
@@ -56780,7 +56778,7 @@ void __thiscall FUN_00c74420(int param_1,int *param_2)
     FUN_00c6eee0(&local_8,*(int *)(param_1 + 0x30),
                  *(int *)(param_1 + 0x30) + *(int *)(param_1 + 0x34) * 0x18,param_2,
                  *(undefined1 *)(param_1 + 0x40),0);
-    lib::Array<unsigned_short>::Array<unsigned_short>_4(local_8,local_4);
+    lib::Array<unsigned_short>::Array<unsigned_short>(local_8,local_4);
   }
   return;
 }
@@ -56948,14 +56946,14 @@ lib::Array<waypoint::WaypointNode>::Array<waypoint::WaypointNode>_6(undefined4 *
 
 {
   *param_1 = DynamicArray<waypoint::WaypointNode,sys::AllocatorByHeap>::vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   if (param_1[1] != 0) {
     FUN_00dd48d0(param_1[1],0);
     param_1[1] = 0;
     param_1[3] = 0;
   }
   *param_1 = vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   param_1[1] = 0;
   param_1[3] = 0;
   return;
@@ -57067,14 +57065,14 @@ lib::Array<waypoint::WaypointNode>::Array<waypoint::WaypointNode>_4(undefined4 *
 
 {
   *param_1 = DynamicArray<waypoint::WaypointNode,sys::AllocatorByHeap>::vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   if (param_1[1] != 0) {
     FUN_00dd48d0(param_1[1],0);
     param_1[1] = 0;
     param_1[3] = 0;
   }
   *param_1 = vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   param_1[1] = 0;
   param_1[3] = 0;
   return;
@@ -57099,14 +57097,14 @@ void __fastcall lib::Array<waypoint::WaypointNode>::Array<waypoint::WaypointNode
   } while (-1 < iVar1);
   *(undefined ***)(param_1 + 0x2c) =
        DynamicArray<waypoint::WaypointNode,sys::AllocatorByHeap>::vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   if (*(int *)(param_1 + 0x30) != 0) {
     FUN_00dd48d0(*(int *)(param_1 + 0x30),0);
     *(undefined4 *)(param_1 + 0x30) = 0;
     *(undefined4 *)(param_1 + 0x38) = 0;
   }
   *(undefined ***)(param_1 + 0x2c) = vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   *(undefined4 *)(param_1 + 0x30) = 0;
   *(undefined4 *)(param_1 + 0x38) = 0;
   FUN_00dd7270();
@@ -57126,8 +57124,8 @@ lib::Array<waypoint::WaypointNode>::Array<waypoint::WaypointNode>_5(int param_1,
   FUN_00dd7240();
   *(undefined4 *)(param_1 + 0x28) = param_2;
   FUN_00c73780((int *)(param_1 + 0x2c));
-  Array<unsigned_short>::Array<unsigned_short>_2();
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
+  Array<unsigned_short>::Array<unsigned_short>();
   (**(code **)(*(int *)(param_1 + 0x2c) + 0x14))(0x40);
   *(undefined4 *)(param_1 + 0x48) = 0;
   *(undefined4 *)(param_1 + 0x17c) = 0;
@@ -57218,7 +57216,7 @@ void __thiscall FUN_00c75290(int param_1,int param_2)
             FUN_00c6eee0(&local_8,*(int *)(param_1 + 0x30),
                          *(int *)(param_1 + 0x30) + *(int *)(param_1 + 0x34) * 0x18,piVar4,local_10,
                          0);
-            lib::Array<unsigned_short>::Array<unsigned_short>_4(local_8,local_4);
+            lib::Array<unsigned_short>::Array<unsigned_short>(local_8,local_4);
           }
         }
         *local_c = 0;
@@ -57423,7 +57421,7 @@ void __thiscall FUN_00c75740(int param_1,int param_2)
             FUN_00c6e340(*(undefined4 *)(*piVar9 + 0xc));
             *(uint *)(*piVar9 + 0x14) = *(uint *)(*piVar9 + 0x14) | 0x10000000;
             FUN_00c6eee0(&local_8,*piVar10,*piVar10 + piVar10[1] * 0x18,piVar9,(char)piVar10[4],0);
-            lib::Array<unsigned_short>::Array<unsigned_short>_4(local_8,local_4);
+            lib::Array<unsigned_short>::Array<unsigned_short>(local_8,local_4);
           }
           *piVar4 = 0;
           iVar7 = (int)puVar8 - *(int *)(iVar3 + 4) >> 2;
@@ -61588,25 +61586,6 @@ void __fastcall lib::Array<int>::Array<int>_12(undefined4 *param_1)
   return;
 }
 
-// 00D6D8D0  lib::Array<int>::Array<int>_11  size=56  [class]
-void __fastcall lib::Array<int>::Array<int>_11(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  *param_1 = cPhaseAbstract::vftable;
-  iVar1 = param_1[4];
-  param_1[3] = vftable;
-  param_1[6] = 0;
-  param_1[4] = 0;
-  if (iVar1 != 0) {
-    param_1[5] = 0;
-  }
-  return;
-}
-
 // 00D6E7A0  lib::Array<int>::Array<int>_10  size=45  [class]
 void __fastcall lib::Array<int>::Array<int>_10(undefined4 *param_1)
 
@@ -61614,43 +61593,6 @@ void __fastcall lib::Array<int>::Array<int>_10(undefined4 *param_1)
   int iVar1;
   
   cMessWindowCtrl::cMessWindowCtrl_6();
-  *param_1 = cPhaseAbstract::vftable;
-  iVar1 = param_1[4];
-  param_1[3] = vftable;
-  param_1[6] = 0;
-  param_1[4] = 0;
-  if (iVar1 != 0) {
-    param_1[5] = 0;
-  }
-  return;
-}
-
-// 00D6E860  lib::Array<int>::Array<int>_8  size=56  [class]
-void __fastcall lib::Array<int>::Array<int>_8(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  *param_1 = cPhaseAbstract::vftable;
-  iVar1 = param_1[4];
-  param_1[3] = vftable;
-  param_1[6] = 0;
-  param_1[4] = 0;
-  if (iVar1 != 0) {
-    param_1[5] = 0;
-  }
-  return;
-}
-
-// 00D6EAE0  lib::Array<int>::Array<int>_9  size=45  [class]
-void __fastcall lib::Array<int>::Array<int>_9(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  cEspControler::~cEspControler();
   *param_1 = cPhaseAbstract::vftable;
   iVar1 = param_1[4];
   param_1[3] = vftable;
@@ -61694,37 +61636,19 @@ void __fastcall lib::Array<Entity*>::Array<Entity*>_7(undefined4 *param_1)
   return;
 }
 
-// 00D6F150  lib::Array<int>::Array<int>_6  size=45  [class]
-void __fastcall lib::Array<int>::Array<int>_6(undefined4 *param_1)
+// 00D6F210  lib::Array<int>::~Array<int>  size=119  [class]
+void __fastcall lib::Array<int>::~Array<int>(undefined4 *param_1)
 
 {
   int iVar1;
   
-  cEspControler::~cEspControler();
-  *param_1 = cPhaseAbstract::vftable;
-  iVar1 = param_1[4];
-  param_1[3] = vftable;
-  param_1[6] = 0;
-  param_1[4] = 0;
-  if (iVar1 != 0) {
-    param_1[5] = 0;
-  }
-  return;
-}
-
-// 00D6F210  lib::Array<EntityHandle>::Array<EntityHandle>_3  size=119  [class]
-void __fastcall lib::Array<EntityHandle>::Array<EntityHandle>_3(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  param_1[0x88] = Array<int>::vftable;
+  param_1[0x88] = vftable;
   if (param_1[0x89] != 0) {
     param_1[0x8a] = 0;
   }
   param_1[0x89] = 0;
   param_1[0x8b] = 0;
-  param_1[0x7c] = vftable;
+  param_1[0x7c] = Array<EntityHandle>::vftable;
   if (param_1[0x7d] != 0) {
     param_1[0x7e] = 0;
   }
@@ -61733,7 +61657,7 @@ void __fastcall lib::Array<EntityHandle>::Array<EntityHandle>_3(undefined4 *para
   cEspControler::~cEspControler();
   *param_1 = cPhaseAbstract::vftable;
   iVar1 = param_1[4];
-  param_1[3] = Array<int>::vftable;
+  param_1[3] = vftable;
   param_1[6] = 0;
   param_1[4] = 0;
   if (iVar1 != 0) {
@@ -61760,24 +61684,6 @@ void __fastcall lib::Array<int>::Array<int>_7(undefined4 *param_1)
   return;
 }
 
-// 00D6FA30  lib::Array<int>::Array<int>_3  size=45  [class]
-void __fastcall lib::Array<int>::Array<int>_3(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  cEspControler::~cEspControler();
-  *param_1 = cPhaseAbstract::vftable;
-  iVar1 = param_1[4];
-  param_1[3] = vftable;
-  param_1[6] = 0;
-  param_1[4] = 0;
-  if (iVar1 != 0) {
-    param_1[5] = 0;
-  }
-  return;
-}
-
 // 00D6FB40  lib::Array<int>::Array<int>_5  size=45  [class]
 void __fastcall lib::Array<int>::Array<int>_5(undefined4 *param_1)
 
@@ -61785,25 +61691,6 @@ void __fastcall lib::Array<int>::Array<int>_5(undefined4 *param_1)
   int iVar1;
   
   cMessWindowCtrl::cMessWindowCtrl_6();
-  *param_1 = cPhaseAbstract::vftable;
-  iVar1 = param_1[4];
-  param_1[3] = vftable;
-  param_1[6] = 0;
-  param_1[4] = 0;
-  if (iVar1 != 0) {
-    param_1[5] = 0;
-  }
-  return;
-}
-
-// 00D6FBB0  lib::Array<int>::Array<int>_4  size=56  [class]
-void __fastcall lib::Array<int>::Array<int>_4(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
   *param_1 = cPhaseAbstract::vftable;
   iVar1 = param_1[4];
   param_1[3] = vftable;
@@ -68309,36 +68196,6 @@ lib::Array<lib::HashedString<sys::StringSystem::Allocator>_>::vf00(undefined4 *p
   return param_1;
 }
 
-// 00E9AD20  FUN_00e9ad20  size=117  [callgraph]
-int __thiscall FUN_00e9ad20(int *param_1,int param_2,undefined4 param_3)
-
-{
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
-  
-  uVar1 = param_1[2];
-  uVar3 = (param_2 - param_1[1]) / 0xc;
-  if (uVar1 < uVar3) {
-    return param_1[1] + uVar1 * 0xc;
-  }
-  uVar2 = param_1[3];
-  if (uVar1 == uVar2) {
-    if (uVar2 == 0) {
-      (**(code **)(*param_1 + 0x14))(0x20);
-    }
-    else {
-      (**(code **)(*param_1 + 0x14))(uVar2 * 2);
-    }
-    param_2 = param_1[1] + uVar3 * 0xc;
-  }
-  iVar4 = lib::
-          Array<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>_>
-          ::vf0C(param_2,param_3);
-  return iVar4;
-}
-
 // 00E9ADA0  lib::Array<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>_>::Array<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>_>_2  size=62  [class]
 void __fastcall
 lib::
@@ -68436,8 +68293,8 @@ void FUN_014b4ed0(void)
   _DAT_018b929c = local_14;
   _DAT_018b92dc = local_14;
   FUN_00de3530();
-  cXmlBinary::cXmlBinary_103();
-  cXmlBinary::cXmlBinary_103();
+  cXmlBinary::cXmlBinary();
+  cXmlBinary::cXmlBinary();
   _DAT_018b933c = 0;
   _DAT_018b9340 = 0;
   _DAT_018b9344 = 0;

@@ -8,5 +8,6 @@ struct hkxSparselyAnimatedBool : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D24A0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxSparselyAnimatedBool(undefined4 * param_1);  // 010D2290
+    ~hkxSparselyAnimatedBool();  // 010D2290
+    hkxSparselyAnimatedBool();  // 010D22B0
 };

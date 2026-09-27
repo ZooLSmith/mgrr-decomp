@@ -7,4 +7,6 @@
 struct EspEmtBase : public cEspBase {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 vf00(byte param_2);  // 00F409E0 slot 0x0  overrides cEspBase
+    // non-virtual members
+    EspEmtBase();  // 00F200E0
 };

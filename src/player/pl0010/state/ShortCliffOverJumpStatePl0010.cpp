@@ -273,8 +273,8 @@ LAB_00bb147c:
   return;
 }
 
-// 00BB14D0  ShortCliffOverJumpStatePl0010::vf0C  size=540  [class]
-void __thiscall ShortCliffOverJumpStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB14D0  ShortCliffOverJumpStatePl0010::SafeCheck  size=540  [class]
+void __thiscall ShortCliffOverJumpStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -360,7 +360,7 @@ void __thiscall ShortCliffOverJumpStatePl0010::vf0C(int param_1,undefined4 *para
     }
     *(undefined4 *)(uVar7 + 0x4170) = 1;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -534,8 +534,8 @@ void __thiscall ShortCliffOverJumpStatePl0010::vf14(int param_1,undefined4 *para
   return;
 }
 
-// 00BE0C60  ShortCliffOverJumpStatePl0010::vf10  size=227  [class]
-void __thiscall ShortCliffOverJumpStatePl0010::vf10(undefined4 param_1,undefined4 *param_2)
+// 00BE0C60  ShortCliffOverJumpStatePl0010::qteSafeCheck  size=227  [class]
+void __thiscall ShortCliffOverJumpStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -575,7 +575,7 @@ void __thiscall ShortCliffOverJumpStatePl0010::vf10(undefined4 param_1,undefined
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

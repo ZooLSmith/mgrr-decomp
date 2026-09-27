@@ -14,6 +14,4 @@ struct hkpCapsuleTriangleAgent : public hkpIterativeLinearCastAgent {
     // non-virtual members
     hkpCapsuleTriangleAgent();  // 0116BC20
     void ctor_0116BCB0();  // 0116BCB0
-    void ctor_0116BD60();  // 0116BD60
-    void ctor_0116CC70();  // 0116CC70
 };

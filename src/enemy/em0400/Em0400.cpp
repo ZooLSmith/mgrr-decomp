@@ -40,8 +40,8 @@ void Em0400::vf50(void)
   return;
 }
 
-// 0059BD20  Em0400::vf264  size=38  [class]
-undefined4 __thiscall Em0400::vf264(int param_1,int param_2)
+// 0059BD20  Em0400::setEmSetInfo  size=38  [class]
+undefined4 __thiscall Em0400::setEmSetInfo(int param_1,int param_2)
 
 {
   if (*(int *)(param_2 + 0x44) == 1) {
@@ -175,7 +175,7 @@ void __fastcall FUN_0059bfc0(int *param_1)
       fVar2 = (float10)FUN_00ac8f80();
       if (fVar2 - (float10)0.0033333334 < (float10)0) {
         (**(code **)(*param_1 + 0x20))();
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         FUN_00ac8fd0((float)(float10)0);
         return;
       }
@@ -555,7 +555,7 @@ void __fastcall FUN_0059c4e0(int *param_1)
       return;
     }
     (**(code **)(*param_1 + 0x20))();
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     FUN_00ac8fd0((float)(float10)0);
     return;
   }
@@ -566,8 +566,8 @@ void __fastcall FUN_0059c4e0(int *param_1)
   return;
 }
 
-// 0059C640  Em0400::vf40  size=1028  [class]
-undefined4 __fastcall Em0400::vf40(int *param_1)
+// 0059C640  Em0400::startup  size=1028  [class]
+undefined4 __fastcall Em0400::startup(int *param_1)
 
 {
   int iVar1;
@@ -584,7 +584,7 @@ undefined4 __fastcall Em0400::vf40(int *param_1)
   undefined4 local_18;
   undefined4 local_14;
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     FUN_00acf600(0x20401,"Em0400Body");
     *(undefined2 *)((int)param_1 + 0xdc3) = 0;
@@ -1016,7 +1016,7 @@ undefined4 __fastcall Em0400::vf32C(int param_1)
 undefined4 * __fastcall Em0400::Em0400(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a831e0();
   return param_1;
@@ -1029,11 +1029,11 @@ undefined * Em0400::vf04(void)
   return &DAT_01b35170;
 }
 
-// 00AB9200  Em0400::vf00  size=30  [class]
-undefined4 __thiscall Em0400::vf00(undefined4 param_1,byte param_2)
+// 00AB9200  Em0400::destruct  size=30  [class]
+undefined4 __thiscall Em0400::destruct(undefined4 param_1,byte param_2)
 
 {
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

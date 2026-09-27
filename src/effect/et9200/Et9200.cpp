@@ -246,8 +246,8 @@ LAB_005d7e26:
   return;
 }
 
-// 005D7E40  Et9200::vf40  size=263  [class]
-undefined4 __fastcall Et9200::vf40(int *param_1)
+// 005D7E40  Et9200::startup  size=263  [class]
+undefined4 __fastcall Et9200::startup(int *param_1)
 
 {
   int iVar1;
@@ -297,7 +297,7 @@ undefined4 __fastcall Et9200::vf40(int *param_1)
 undefined4 * __fastcall Et9200::Et9200(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   param_1[0x21c] = 0;
   FUN_00904d60();
@@ -313,11 +313,11 @@ undefined * Et9200::vf04(void)
   return &DAT_01b352e0;
 }
 
-// 00AB8F50  Et9200::vf00  size=30  [class]
-undefined4 __thiscall Et9200::vf00(undefined4 param_1,byte param_2)
+// 00AB8F50  Et9200::destruct  size=30  [class]
+undefined4 __thiscall Et9200::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_42();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

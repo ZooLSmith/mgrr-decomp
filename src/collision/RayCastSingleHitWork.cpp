@@ -1,5 +1,5 @@
 // src/collision/RayCastSingleHitWork.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009066A0..00910800, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009066A0..00910800, 9 functions
 
 #include "mgrr.h"
 #include "RayCastSingleHitWork.h"
@@ -37,6 +37,29 @@ int * __thiscall RayCastSingleHitWork::vf04(int *param_1,byte param_2)
     FUN_00dd4920(param_1);
   }
   return param_1;
+}
+
+// 009068D0  RayCastSingleHitWork::vf08  size=59  [class]
+void __fastcall RayCastSingleHitWork::vf08(int *param_1)
+
+{
+  code *UNRECOVERED_JUMPTABLE;
+  
+  (**(code **)(*param_1 + 0x14))();
+  FUN_009060a0(param_1 + 8,param_1 + 0x18);
+  UNRECOVERED_JUMPTABLE = *(code **)(*param_1 + 0x10);
+  param_1[0x30] = param_1[8];
+  param_1[0x31] = param_1[9];
+  param_1[0x32] = param_1[10];
+  param_1[0x33] = param_1[0xb];
+  param_1[0x34] = param_1[0xc];
+  param_1[0x35] = param_1[0xd];
+  param_1[0x36] = param_1[0xe];
+  param_1[0x37] = param_1[0xf];
+                    /* WARNING: Could not recover jumptable at 0x00906909. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)();
+  return;
 }
 
 // 00907860  RayCastSingleHitWork::RayCastSingleHitWork_5  size=114  [class]
@@ -92,7 +115,7 @@ RayCastSingleHitWork::RayCastSingleHitWork_2
   RayCastWork::set(0xffffffff,param_5,param_5 + 0x10,*(undefined4 *)(param_5 + 0x20),
                    *(undefined4 *)(param_5 + 0x24),*(undefined4 *)(param_5 + 0x28),
                    *(undefined4 *)(param_5 + 0x2c),*(undefined4 *)(param_5 + 0x30),1,1,0);
-  FUN_009068d0();
+  vf08();
   FUN_009053f0();
   if (param_3 != (undefined4 *)0x0) {
     *param_3 = 0;
@@ -232,7 +255,7 @@ RayCastSingleHitWork::RayCastSingleHitWork_4
   int iVar1;
   
   RayCastWork::set(0xffffffff,param_5,param_6,param_7,0,0,0,param_8,1,1,0);
-  FUN_009068d0();
+  vf08();
   FUN_009053f0();
   if (param_3 != (undefined4 *)0x0) {
     *param_3 = 0;
@@ -268,7 +291,7 @@ undefined4 RayCastSingleHitWork::RayCastSingleHitWork(undefined4 param_1,int par
   RayCastWork::set(0xffffffff,param_2,param_2 + 0x10,*(undefined4 *)(param_2 + 0x20),
                    *(undefined4 *)(param_2 + 0x24),*(undefined4 *)(param_2 + 0x28),
                    *(undefined4 *)(param_2 + 0x2c),*(undefined4 *)(param_2 + 0x30),2,1,0);
-  FUN_009068d0();
+  vf08();
   FUN_009053f0();
   iVar1 = FUN_009066c0();
   if (iVar1 != 0) {

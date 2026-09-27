@@ -56,8 +56,8 @@ undefined4 * __thiscall AnyDiveRollStatePl0010::vf04(undefined4 *param_1,byte pa
   return param_1;
 }
 
-// 00BA8700  AnyDiveRollStatePl0010::vf0C  size=244  [class]
-void __thiscall AnyDiveRollStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BA8700  AnyDiveRollStatePl0010::SafeCheck  size=244  [class]
+void __thiscall AnyDiveRollStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -103,7 +103,7 @@ void __thiscall AnyDiveRollStatePl0010::vf0C(int param_1,undefined4 *param_2)
     *(undefined4 *)(uVar2 + 0x4188) = *(undefined4 *)(uVar2 + 0x417c);
     *(undefined4 *)(uVar2 + 0x4190) = *(undefined4 *)(uVar2 + 0x4184);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -190,8 +190,8 @@ void __thiscall AnyDiveRollStatePl0010::vf14(undefined4 param_1,undefined4 *para
   return;
 }
 
-// 00BDC910  AnyDiveRollStatePl0010::vf10  size=197  [class]
-void __thiscall AnyDiveRollStatePl0010::vf10(undefined4 param_1,undefined4 *param_2)
+// 00BDC910  AnyDiveRollStatePl0010::qteSafeCheck  size=197  [class]
+void __thiscall AnyDiveRollStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;
@@ -231,7 +231,7 @@ void __thiscall AnyDiveRollStatePl0010::vf10(undefined4 param_1,undefined4 *para
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

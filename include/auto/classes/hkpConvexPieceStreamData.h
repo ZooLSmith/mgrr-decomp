@@ -8,5 +8,6 @@ struct hkpConvexPieceStreamData : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 011EEA30 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpConvexPieceStreamData(undefined4 * param_1);  // 011EE910
+    ~hkpConvexPieceStreamData();  // 011EE910
+    hkpConvexPieceStreamData();  // 011EE930
 };

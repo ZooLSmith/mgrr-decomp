@@ -7,7 +7,7 @@
 undefined4 * __fastcall FUN_00fb10f0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f23c8;
   return param_1;
 }

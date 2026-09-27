@@ -9,5 +9,6 @@ struct hkpCharacterProxyCinfo : public hkpCharacterControllerCinfo {
     virtual undefined4 * vf00(byte param_2);  // 008E2F40 slot 0x0  overrides hkBaseObject
     // non-virtual members
     hkpCharacterProxyCinfo();  // 008E1740
-    hkpCharacterProxyCinfo(undefined4 * param_1);  // 01276280
+    ~hkpCharacterProxyCinfo();  // 01276280
+    void ctor_012762B0();  // 012762B0
 };

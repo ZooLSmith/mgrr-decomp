@@ -10,4 +10,6 @@ struct cPauseMenu : public cCustomObjCtrlManager {
     virtual void vf08();  // 009A5060 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 00993F60 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009B4730 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cPauseMenu();  // 009A4FC0
 };

@@ -63,13 +63,12 @@ hkpCdPointCollector::hkpCdPointCollector_13
   float fStack_48;
   
   FUN_004066f0();
-  uVar12 = hkBaseObject::hkBaseObject_240(param_4);
+  uVar12 = ::hkBaseObject::hkBaseObject_240(param_4);
   pvVar13 = TlsGetValue(DAT_01f8fc4c);
   iVar14 = (**(code **)(**(int **)((int)pvVar13 + 0x2c) + 4))(0x160);
   *(undefined2 *)(iVar14 + 4) = 0x160;
   uVar15 = FUN_008e2620();
-  puVar16 = (undefined4 *)hkpSimpleShapePhantom::~hkpSimpleShapePhantom(uVar12,&DAT_01701ca0,uVar15)
-  ;
+  puVar16 = (undefined4 *)hkpSimpleShapePhantom::hkpSimpleShapePhantom(uVar12,&DAT_01701ca0,uVar15);
   FUN_01006780("CharacterControl::checkClosestPoints");
   FUN_010060a0();
   if (puVar16 == (undefined4 *)0x0) {
@@ -80,7 +79,7 @@ hkpCdPointCollector::hkpCdPointCollector_13
     iVar14 = *(int *)((int)ThreadLocalStoragePointer + _tls_index * 4);
   }
   else {
-    hkBaseObject::hkBaseObject_205(&fStack_274,param_2);
+    ::hkBaseObject::hkBaseObject_205(&fStack_274,param_2);
     fStack_254 = fStack_274;
     fStack_250 = fStack_270;
     uStack_24c = uStack_26c;
@@ -88,10 +87,10 @@ hkpCdPointCollector::hkpCdPointCollector_13
     if (param_4 != 0) {
       if ((*(byte *)(param_1 + 0x16c) & 4) == 0) {
         FUN_00860de0();
-        hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+        hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
         FUN_01269700(appuStack_a4);
         fStack_258 = fStack_48;
-        appuStack_a4[0] = hkBaseObject::vftable;
+        appuStack_a4[0] = ::hkBaseObject::vftable;
         FUN_00860e40();
         fVar2 = fStack_258;
       }
@@ -175,7 +174,7 @@ hkpCdPointCollector::hkpCdPointCollector_13
       return 1;
     }
     (**(code **)*puVar16)(1);
-    hkpCdPointCollector_4();
+    hkpCdPointCollector();
     if (DAT_01885d68 == 1) {
       return 0;
     }
@@ -189,9 +188,9 @@ hkpCdPointCollector::hkpCdPointCollector_13
   return 0;
 }
 
-// 008EAF70  hkpCdPointCollector::hkpCdPointCollector_14  size=928  [run]
+// 008EAF70  hkpCdPointCollector::hkpCdPointCollector  size=928  [run]
 undefined4 __thiscall
-hkpCdPointCollector::hkpCdPointCollector_14
+hkpCdPointCollector::hkpCdPointCollector
           (int param_1,float *param_2,float *param_3,undefined4 param_4,undefined ***param_5)
 
 {
@@ -240,7 +239,7 @@ hkpCdPointCollector::hkpCdPointCollector_14
   else {
     local_208 = param_5;
   }
-  iVar3 = hkBaseObject::hkBaseObject_240(param_4);
+  iVar3 = ::hkBaseObject::hkBaseObject_240(param_4);
   if (iVar3 == 0) {
     FUN_00dd5650(&DAT_0164b3b4);
     local_1b0 = hkpAllCdPointCollector::vftable;
@@ -271,7 +270,7 @@ hkpCdPointCollector::hkpCdPointCollector_14
       iVar5 = iVar5 + 0xf0;
     }
     uVar6 = FUN_008e2620();
-    puVar7 = (undefined4 *)hkpSimpleShapePhantom::~hkpSimpleShapePhantom(iVar3,iVar5,uVar6);
+    puVar7 = (undefined4 *)hkpSimpleShapePhantom::hkpSimpleShapePhantom(iVar3,iVar5,uVar6);
     FUN_01006780("CharacterControl::checkLinearCast");
     FUN_010060a0();
     if (puVar7 != (undefined4 *)0x0) {
@@ -288,14 +287,14 @@ hkpCdPointCollector::hkpCdPointCollector_14
       FUN_009062f0(puVar7 + 4,&fStack_1e0,local_208,0);
       if ((int)local_208[5] < 1) {
         if (param_3 != (float *)0x0) {
-          hkBaseObject::hkBaseObject_246(&fStack_1f0,&fStack_200);
+          ::hkBaseObject::hkBaseObject_246(&fStack_1f0,&fStack_200);
           *param_3 = fStack_1f0;
           param_3[1] = fStack_1ec;
           param_3[2] = fStack_1e8;
           param_3[3] = fStack_1e4;
         }
         (**(code **)*puVar7)(1);
-        hkpCdPointCollector_4();
+        hkpCdPointCollector();
         FUN_00406760();
         return 0;
       }
@@ -309,19 +308,19 @@ hkpCdPointCollector::hkpCdPointCollector_14
         fStack_1c0 = fStack_1f0;
         fStack_1bc = fStack_1ec;
         fStack_1b8 = fStack_1e8;
-        hkBaseObject::hkBaseObject_246(&fStack_200,&fStack_1c0);
+        ::hkBaseObject::hkBaseObject_246(&fStack_200,&fStack_1c0);
         *param_3 = fStack_200;
         param_3[1] = fStack_1fc;
         param_3[2] = fStack_1f8;
         param_3[3] = fStack_1f4;
       }
       (**(code **)*puVar7)(1);
-      hkpCdPointCollector_4();
+      hkpCdPointCollector();
       FUN_00406760();
       return 1;
     }
     FUN_00dd5650(&DAT_0164b350);
-    hkpCdPointCollector_4();
+    hkpCdPointCollector();
     if (DAT_01885d68 == 1) {
       return 0;
     }
@@ -405,15 +404,15 @@ hkpCdPointCollector::hkpCdPointCollector_11(int param_1,float *param_2,float par
   ppuStack_240 = hkpAllCdPointCollector::vftable;
   uStack_228 = 0x80000008;
   iStack_22c = 0;
-  iVar5 = hkpCdPointCollector_14(&local_290,0,1,&ppuStack_240,0x3c23d70a);
+  iVar5 = hkpCdPointCollector(&local_290,0,1,&ppuStack_240,0x3c23d70a);
   puVar9 = puStack_230;
   if (iVar5 != 0) {
     if ((*(byte *)(param_1 + 0x16c) & 4) == 0) {
       FUN_00860de0();
-      hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+      hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
       FUN_01269700(appuStack_a0);
       fStack_2a4 = fStack_2c;
-      appuStack_a0[0] = hkBaseObject::vftable;
+      appuStack_a0[0] = ::hkBaseObject::vftable;
       FUN_00860e40();
     }
     else {
@@ -465,7 +464,7 @@ hkpCdPointCollector::hkpCdPointCollector_11(int param_1,float *param_2,float par
                                                  SQRT(fVar2 + fVar4))), puVar9 = puStack_230,
                  (float10)fStack_254 < fVar10)) {
 LAB_008eb78b:
-                hkpCdPointCollector_4();
+                hkpCdPointCollector();
                 FUN_00406760();
                 return 1;
               }

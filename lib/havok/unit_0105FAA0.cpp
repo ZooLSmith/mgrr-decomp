@@ -9,20 +9,20 @@
 #include "hkSkinnedMeshShape.h"
 #include "hkStorageSkinnedMeshShape.h"
 
-// 0105FAA0  hkBaseObject::hkBaseObject_48  size=68  [run]
-void __fastcall hkBaseObject::hkBaseObject_48(undefined4 *param_1)
+// 0105FAA0  hkPackfileReader::~hkPackfileReader  size=68  [run]
+void __fastcall hkPackfileReader::~hkPackfileReader(undefined4 *param_1)
 
 {
   undefined4 uVar1;
   LPVOID pvVar2;
   
   uVar1 = param_1[5];
-  *param_1 = hkPackfileReader::vftable;
+  *param_1 = vftable;
   pvVar2 = TlsGetValue(DAT_01f8fc4c);
   FUN_01005d00(*(undefined4 *)((int)pvVar2 + 0x2c),uVar1);
   FUN_01010310(&PTR_vftable_018e9b94);
   FUN_0100fd10();
-  *param_1 = vftable;
+  *param_1 = ::hkBaseObject::vftable;
   return;
 }
 
@@ -71,7 +71,7 @@ int __thiscall hkPackfileReader::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_48();
+  ~hkPackfileReader();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -3445,7 +3445,7 @@ void FUN_010645c0(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape_2(param_2);
+    hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape(param_2);
   }
   return;
 }
@@ -3464,7 +3464,7 @@ undefined4 FUN_010645f0(void)
 {
   undefined4 local_40;
   
-  hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape_2(0);
+  hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape(0);
   return local_40;
 }
 
@@ -3590,7 +3590,7 @@ void FUN_01064980(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkMultipleVertexBuffer::hkMultipleVertexBuffer(param_2);
+    hkMultipleVertexBuffer::~hkMultipleVertexBuffer(param_2);
   }
   return;
 }
@@ -3609,7 +3609,7 @@ undefined4 FUN_010649b0(void)
 {
   undefined4 local_160;
   
-  hkMultipleVertexBuffer::hkMultipleVertexBuffer(0);
+  hkMultipleVertexBuffer::~hkMultipleVertexBuffer(0);
   return local_160;
 }
 
@@ -3695,7 +3695,7 @@ void FUN_01064b30(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkIndexedTransformSet::hkIndexedTransformSet(param_2);
+    hkIndexedTransformSet::~hkIndexedTransformSet(param_2);
   }
   return;
 }
@@ -3714,7 +3714,7 @@ undefined4 FUN_01064b60(void)
 {
   undefined4 local_60;
   
-  hkIndexedTransformSet::hkIndexedTransformSet(0);
+  hkIndexedTransformSet::~hkIndexedTransformSet(0);
   return local_60;
 }
 
@@ -3823,7 +3823,7 @@ void FUN_01064d90(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer_2(param_2);
+    hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer(param_2);
   }
   return;
 }
@@ -3842,7 +3842,7 @@ undefined4 FUN_01064dc0(void)
 {
   undefined4 local_1c0;
   
-  hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer_2(0);
+  hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer(0);
   return local_1c0;
 }
 
@@ -3861,8 +3861,8 @@ void FUN_01064e40(undefined4 *param_1)
   return;
 }
 
-// 01064E50  hkMemoryMeshTexture::hkMemoryMeshTexture_3  size=30  [run]
-void hkMemoryMeshTexture::hkMemoryMeshTexture_3(undefined4 *param_1,undefined4 param_2)
+// 01064E50  hkMemoryMeshTexture::~hkMemoryMeshTexture  size=30  [run]
+void hkMemoryMeshTexture::~hkMemoryMeshTexture(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -3872,8 +3872,8 @@ void hkMemoryMeshTexture::hkMemoryMeshTexture_3(undefined4 *param_1,undefined4 p
   return;
 }
 
-// 01064E70  hkMemoryMeshTexture::hkMemoryMeshTexture_4  size=53  [run]
-undefined ** hkMemoryMeshTexture::hkMemoryMeshTexture_4(void)
+// 01064E70  hkMemoryMeshTexture::hkMemoryMeshTexture  size=53  [run]
+undefined ** hkMemoryMeshTexture::hkMemoryMeshTexture(void)
 
 {
   FUN_010065b0(0);
@@ -3897,7 +3897,7 @@ undefined4 * __thiscall hkMeshTexture::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3905,9 +3905,9 @@ undefined4 * __thiscall hkMeshTexture::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 01064F70  hkMemoryMeshTexture::hkMemoryMeshTexture_2  size=31  [run]
+// 01064F70  hkMemoryMeshTexture::hkMemoryMeshTexture  size=31  [run]
 undefined4 * __thiscall
-hkMemoryMeshTexture::hkMemoryMeshTexture_2(undefined4 *param_1,undefined4 param_2)
+hkMemoryMeshTexture::hkMemoryMeshTexture(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -3954,7 +3954,7 @@ undefined4 * __thiscall hkMemoryMeshTexture::vf00(undefined4 *param_1,byte param
   param_1[3] = 0;
   param_1[5] = 0x80000000;
   FUN_01006770();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3974,7 +3974,7 @@ void FUN_010650b0(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkMemoryMeshShape::hkMemoryMeshShape_2(param_2);
+    hkMemoryMeshShape::hkMemoryMeshShape(param_2);
   }
   return;
 }
@@ -3993,7 +3993,7 @@ undefined4 FUN_010650e0(void)
 {
   undefined4 local_40;
   
-  hkMemoryMeshShape::hkMemoryMeshShape_2(0);
+  hkMemoryMeshShape::hkMemoryMeshShape(0);
   return local_40;
 }
 
@@ -4009,7 +4009,7 @@ void FUN_01065130(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkMemoryMeshMaterial::hkMemoryMeshMaterial_2(param_2);
+    hkMemoryMeshMaterial::hkMemoryMeshMaterial(param_2);
   }
   return;
 }
@@ -4028,7 +4028,7 @@ undefined4 FUN_01065160(void)
 {
   undefined4 local_70;
   
-  hkMemoryMeshMaterial::hkMemoryMeshMaterial_2(0);
+  hkMemoryMeshMaterial::hkMemoryMeshMaterial(0);
   return local_70;
 }
 
@@ -4044,7 +4044,7 @@ void FUN_010651b0(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkMemoryMeshBody::hkMemoryMeshBody_2(param_2);
+    hkMemoryMeshBody::hkMemoryMeshBody(param_2);
   }
   return;
 }
@@ -4063,7 +4063,7 @@ undefined4 FUN_010651e0(void)
 {
   undefined4 local_80;
   
-  hkMemoryMeshBody::hkMemoryMeshBody_2(0);
+  hkMemoryMeshBody::hkMemoryMeshBody(0);
   return local_80;
 }
 
@@ -4076,16 +4076,16 @@ void __fastcall hkSkinnedMeshShape::hkSkinnedMeshShape(undefined4 *param_1)
   return;
 }
 
-// 01065250  hkSkinnedMeshShape::hkSkinnedMeshShape_2  size=11  [run]
-void __fastcall hkSkinnedMeshShape::hkSkinnedMeshShape_2(undefined4 *param_1)
+// 01065250  hkSkinnedMeshShape::hkSkinnedMeshShape  size=11  [run]
+void __fastcall hkSkinnedMeshShape::hkSkinnedMeshShape(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   return;
 }
 
-// 01065260  hkBaseObject::hkBaseObject_242  size=7  [run]
-void __fastcall hkBaseObject::hkBaseObject_242(undefined4 *param_1)
+// 01065260  hkBaseObject::~hkBaseObject  size=7  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = vftable;

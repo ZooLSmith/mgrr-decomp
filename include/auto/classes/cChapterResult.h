@@ -9,4 +9,6 @@ struct cChapterResult : public cCustomObjCtrlManager {
     virtual undefined4 * vf00(byte param_2);  // 00D07B70 slot 0x0  overrides cCustomObjCtrlManager
     virtual void vf08();  // 00D19E00 slot 0x8  overrides cCustomObjCtrlManager
     virtual void create();  // 00D41360 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cChapterResult();  // 00CF3840
 };

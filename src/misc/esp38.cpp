@@ -1,8 +1,21 @@
 // src/misc/esp38.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0A60..00F39470, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0640..00F39470, 6 functions
 
 #include "mgrr.h"
 #include "esp38.h"
+
+// 00ED0640  esp38::esp38  size=57  [class]
+undefined4 * __fastcall esp38::esp38(undefined4 *param_1)
+
+{
+  cEsp::cEsp();
+  *param_1 = ModelShaderJackModule::vftable;
+  FUN_009e6c70();
+  FUN_009d2900();
+  FUN_00a7c930();
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00ED0A60  esp38::vf00  size=54  [class]
 undefined4 __thiscall esp38::vf00(undefined4 param_1,byte param_2)
@@ -10,15 +23,15 @@ undefined4 __thiscall esp38::vf00(undefined4 param_1,byte param_2)
 {
   FUN_009de370();
   Spline<float>::Spline<float>_2();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00EDA080  esp38::vf10  size=1  [class]
-void esp38::vf10(void)
+// 00EDA080  esp38::addOtTransList  size=1  [class]
+void esp38::addOtTransList(void)
 
 {
   return;
@@ -119,7 +132,7 @@ void __fastcall esp38::vf08(int param_1)
     pcVar16 = *(code **)(*piVar11 + 0x1c);
   }
   (*pcVar16)();
-  FUN_00efed20();
+  esp107::vf10();
   ModelShaderJackModule::updateModule_4();
   if (*(int *)(param_1 + 0x4f8) == 0) {
     FUN_00f04bb0(piVar11);
@@ -280,8 +293,8 @@ void __fastcall esp38::vf08(int param_1)
   return;
 }
 
-// 00F39470  esp38::vf04  size=912  [class]
-bool __thiscall esp38::vf04(int param_1,undefined4 param_2,undefined4 param_3,uint param_4)
+// 00F39470  esp38::preTrans  size=912  [class]
+bool __thiscall esp38::preTrans(int param_1,undefined4 param_2,undefined4 param_3,uint param_4)
 
 {
   short *psVar1;
@@ -316,7 +329,7 @@ bool __thiscall esp38::vf04(int param_1,undefined4 param_2,undefined4 param_3,ui
   int local_4;
   
   uVar5 = param_4;
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 != 0) {
     if (*(uint **)(param_1 + 0x58) == (uint *)0x0) {
       param_4 = 0;

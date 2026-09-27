@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "hkpAllCdPointCollector.h"
 
-// 0090E5B0  hkpAllCdPointCollector::hkpAllCdPointCollector_31  size=75  [run]
-void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_31(undefined4 *param_1)
+// 0090E5B0  hkpAllCdPointCollector::hkpAllCdPointCollector  size=75  [run]
+void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector(undefined4 *param_1)
 
 {
   *(undefined2 *)((int)param_1 + 10) = 0;

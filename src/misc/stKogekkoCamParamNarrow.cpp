@@ -43,7 +43,7 @@ undefined4 * __fastcall stKogekkoCamParamNarrow::stKogekkoCamParamNarrow(undefin
 undefined4 __thiscall stKogekkoCamParamNarrow::vf00(undefined4 param_1,byte param_2)
 
 {
-  stKogekkoCamParamBase::stKogekkoCamParamBase_2();
+  stKogekkoCamParamBase::~stKogekkoCamParamBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -2,13 +2,13 @@
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AC13C0..00AC13C0, 1 functions
 
 #include "mgrr.h"
-#include "hkpCdPointCollector.h"
+#include "hkpAllCdPointCollector.h"
 
-// 00AC13C0  hkpCdPointCollector::hkpCdPointCollector_22  size=1157  [run]
-void __fastcall hkpCdPointCollector::hkpCdPointCollector_22(undefined4 *param_1)
+// 00AC13C0  hkpAllCdPointCollector::~hkpAllCdPointCollector  size=1157  [run]
+void __fastcall hkpAllCdPointCollector::~hkpAllCdPointCollector(undefined4 *param_1)
 
 {
-  param_1[0x1490] = hkpAllCdPointCollector::vftable;
+  param_1[0x1490] = vftable;
   param_1[0x1495] = 0;
   if (-1 < (int)param_1[0x1496]) {
     (**(code **)(PTR_vftable_018e9b94 + 0x10))
@@ -16,8 +16,8 @@ void __fastcall hkpCdPointCollector::hkpCdPointCollector_22(undefined4 *param_1)
   }
   param_1[0x1494] = 0;
   param_1[0x1496] = 0x80000000;
-  param_1[0x1490] = vftable;
-  param_1[0x1428] = hkpAllCdPointCollector::vftable;
+  param_1[0x1490] = hkpCdPointCollector::vftable;
+  param_1[0x1428] = vftable;
   param_1[0x142d] = 0;
   if (-1 < (int)param_1[0x142e]) {
     (**(code **)(PTR_vftable_018e9b94 + 0x10))
@@ -25,7 +25,7 @@ void __fastcall hkpCdPointCollector::hkpCdPointCollector_22(undefined4 *param_1)
   }
   param_1[0x142c] = 0;
   param_1[0x142e] = 0x80000000;
-  param_1[0x1428] = vftable;
+  param_1[0x1428] = hkpCdPointCollector::vftable;
   param_1[0x1099] = lib::Array<FreeRunActivity::Info>::vftable;
   if (param_1[0x109a] != 0) {
     param_1[0x109b] = 0;
@@ -37,8 +37,8 @@ void __fastcall hkpCdPointCollector::hkpCdPointCollector_22(undefined4 *param_1)
   FUN_00905ce0();
   cEspControler::~cEspControler();
   cXml::cXml_7();
-  Animation::PostControl::Work::Work();
-  Animation::PostControl::Work::Work();
+  Animation::PostControl::Work::~Work();
+  Animation::PostControl::Work::~Work();
   FUN_00905ce0();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
@@ -99,7 +99,7 @@ void __fastcall hkpCdPointCollector::hkpCdPointCollector_22(undefined4 *param_1)
     param_1[0xa15] = 0;
   }
   FUN_00905ce0();
-  Animation::PostControl::Work::Work_2();
+  Animation::PostControl::Work::~Work();
   FUN_00a82a50();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
@@ -155,7 +155,7 @@ void __fastcall hkpCdPointCollector::hkpCdPointCollector_22(undefined4 *param_1)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   return;
 }
 

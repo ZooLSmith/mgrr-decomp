@@ -1,12 +1,12 @@
 // src/effect/EspPrimitiveWorkMultiStripBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F50960..00F59730, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F50960..00F59730, 4 functions
 
 #include "mgrr.h"
 #include "EspPrimitiveWorkMultiStripBase.h"
 
-// 00F50960  EspPrimitiveWorkMultiStripBase::EspPrimitiveWorkMultiStripBase_2  size=36  [class]
+// 00F50960  EspPrimitiveWorkMultiStripBase::EspPrimitiveWorkMultiStripBase  size=36  [class]
 undefined4 * __fastcall
-EspPrimitiveWorkMultiStripBase::EspPrimitiveWorkMultiStripBase_2(undefined4 *param_1)
+EspPrimitiveWorkMultiStripBase::EspPrimitiveWorkMultiStripBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -51,19 +51,6 @@ void __thiscall EspPrimitiveWorkMultiStripBase::vf0C(int param_1,int param_2)
   FUN_00f99090(param_1 + 0x2c);
   FUN_00f9f6d0(4,uVar2 * 6);
   return;
-}
-
-// 00F58DB0  EspPrimitiveWorkMultiStripBase::EspPrimitiveWorkMultiStripBase  size=42  [class]
-undefined4 * __fastcall
-EspPrimitiveWorkMultiStripBase::EspPrimitiveWorkMultiStripBase(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  FUN_00f9c880();
-  FUN_00f9c7b0();
-  param_1[0x13] = 0;
-  *param_1 = EspPrimitiveWorkMultiStrip<64>::vftable;
-  return param_1;
 }
 
 // 00F59730  EspPrimitiveWorkMultiStripBase::vf00  size=53  [class]

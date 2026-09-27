@@ -1,11 +1,11 @@
 // src/ui/cUIExtendFactory.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D28F50..00D29160, 3 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D28F50..00D28FF0, 3 functions
 
 #include "mgrr.h"
 #include "cUIExtendFactory.h"
 
-// 00D28F50  cUIExtendFactory::cUIExtendFactory_2  size=28  [class]
-undefined4 * __fastcall cUIExtendFactory::cUIExtendFactory_2(undefined4 *param_1)
+// 00D28F50  cUIExtendFactory::cUIExtendFactory  size=28  [class]
+undefined4 * __fastcall cUIExtendFactory::cUIExtendFactory(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -32,42 +32,49 @@ undefined4 * __thiscall cUIExtendFactory::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00D29160  cUIExtendFactory::cUIExtendFactory  size=305  [class]
-void __fastcall cUIExtendFactory::cUIExtendFactory(undefined4 *param_1)
+// 00D28FF0  cUIExtendFactory::cUIExtendFactory  size=353  [class]
+undefined4 * __fastcall cUIExtendFactory::cUIExtendFactory(undefined4 *param_1)
 
 {
-  int iVar1;
-  
   *param_1 = cUISystem::vftable;
-  Hw::cTexture::cTexture_5();
-  Hw::cTexture::cTexture_5();
-  Hw::cTexture::cTexture_5();
+  FUN_00fd7210();
+  FUN_00fd9800();
+  FUN_00fd8a50();
+  FUN_00fd8db0();
+  FUN_00fd7480();
+  FUN_00fd94a0();
+  FUN_00fd9c20();
+  FUN_00fd9110();
+  FUN_00fd76e0();
+  FUN_00fd7aa0();
+  FUN_00fd7e60();
+  FUN_00fd80f0();
+  FUN_00fd8380();
+  Hw::cVertexFormat::cVertexFormat();
+  param_1[0x24c] = cVertexFormatUI::vftable;
+  param_1[0x252] = 0;
+  param_1[0x250] = cUIWorkList::vftable;
+  param_1[0x25a] = 0;
+  param_1[0x25c] = 0;
+  param_1[0x25d] = 0;
+  param_1[0x260] = 0;
+  param_1[0x261] = 0;
+  param_1[0x262] = 0;
+  param_1[0x263] = cUIWorkExecList::vftable;
+  param_1[0x264] = 0;
+  param_1[0x265] = 0;
+  param_1[0x266] = 0;
+  param_1[0x267] = 0;
+  param_1[0x252] = 0;
+  param_1[0x286] = 0;
+  Hw::cHeapVariable::cHeapVariable();
   param_1[0x29e] = vftable;
-  iVar1 = (**(code **)(param_1[0x2a4] + 0xc))();
-  if (iVar1 != 0) {
-    FUN_00d0b720();
-  }
-  Hw::cHeap::cHeap_5();
-  iVar1 = (**(code **)(param_1[0x288] + 0xc))();
-  if (iVar1 != 0) {
-    FUN_00d0b6e0();
-  }
-  Hw::cHeap::cHeap_5();
-  cUIWorkExecList::cUIWorkExecList();
-  Hw::cVertexFormat::cVertexFormat_2();
-  FUN_00fcd070();
-  FUN_00fccf60();
-  FUN_00fcce50();
-  FUN_00fcccf0();
-  FUN_00fccb90();
-  FUN_00fcd4e0();
-  FUN_00fcda70();
-  FUN_00fcd640();
-  FUN_00fccaa0();
-  FUN_00fcd3f0();
-  FUN_00fcd300();
-  FUN_00fcd8c0();
-  FUN_00fcc9b0();
-  return;
+  param_1[0x2a2] = 0;
+  Hw::cHeapVariable::cHeapVariable();
+  param_1[0x2ba] = 0;
+  Hw::cTexture::cTexture();
+  Hw::cTexture::cTexture();
+  Hw::cTexture::cTexture();
+  return param_1;
 }
 

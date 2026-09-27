@@ -203,10 +203,10 @@ void __fastcall cEnemyLogParts::cEnemyLogParts(int *param_1)
   } while( true );
 }
 
-// 00D3C200  cEnemyLogParts::vf14  size=716  [class]
+// 00D3C200  cEnemyLogParts::create  size=716  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cEnemyLogParts::vf14(int param_1)
+void __fastcall cEnemyLogParts::create(int param_1)
 
 {
   undefined4 uVar1;

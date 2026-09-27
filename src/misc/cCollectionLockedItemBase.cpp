@@ -20,7 +20,7 @@ undefined4 __thiscall cCollectionLockedItemBase::vf14(int param_1,undefined4 par
 undefined4 * __fastcall cCollectionLockedItemBase::cCollectionLockedItemBase(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

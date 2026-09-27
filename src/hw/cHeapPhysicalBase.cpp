@@ -255,8 +255,8 @@ undefined4 Hw::cHeapPhysicalBase::vf20(int param_1)
   return *(undefined4 *)(param_1 + -0x14);
 }
 
-// 00DD4290  Hw::cHeapPhysicalBase::vf38  size=409  [class]
-int __thiscall Hw::cHeapPhysicalBase::vf38(int *param_1,int param_2,uint param_3,int param_4)
+// 00DD4290  Hw::cHeapPhysicalBase::allocImpl  size=409  [class]
+int __thiscall Hw::cHeapPhysicalBase::allocImpl(int *param_1,int param_2,uint param_3,int param_4)
 
 {
   LPCRITICAL_SECTION lpCriticalSection;
@@ -426,8 +426,8 @@ undefined4 Hw::cHeapPhysicalBase::vf24(void)
   return 0x20;
 }
 
-// 00DD4E40  Hw::cHeapPhysicalBase::vf30  size=18  [class]
-undefined4 Hw::cHeapPhysicalBase::vf30(void)
+// 00DD4E40  Hw::cHeapPhysicalBase::createChildHeap  size=18  [class]
+undefined4 Hw::cHeapPhysicalBase::createChildHeap(void)
 
 {
   FUN_00dd56a0(&DAT_016c4728);

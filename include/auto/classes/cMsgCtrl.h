@@ -8,14 +8,9 @@ struct cMsgCtrl {
     virtual undefined4 * vf00(byte param_2);  // 00CE4410 slot 0x0
     // non-virtual members
     cMsgCtrl();  // 00CCD450
-    void ctor_00CCD480();  // 00CCD480
-    void ctor_00CCDA10();  // 00CCDA10
+    ~cMsgCtrl();  // 00CCD480
     void ctor_00CDE530();  // 00CDE530
     void ctor_00CE02B0();  // 00CE02B0
-    void ctor_00CE02E0();  // 00CE02E0
-    void ctor_00CE0310();  // 00CE0310
-    void ctor_00CE1450();  // 00CE1450
-    void ctor_00CE14C0();  // 00CE14C0
     void ctor_00CF71E0();  // 00CF71E0
     void ctor_00CF7450();  // 00CF7450
 };

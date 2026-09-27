@@ -11,8 +11,8 @@ undefined * BehaviorCamera::vf04(void)
   return &DAT_01be9c80;
 }
 
-// 00AB7E50  BehaviorCamera::vf00  size=105  [class]
-undefined4 * __thiscall BehaviorCamera::vf00(undefined4 *param_1,byte param_2)
+// 00AB7E50  BehaviorCamera::destruct  size=105  [class]
+undefined4 * __thiscall BehaviorCamera::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,21 +26,21 @@ undefined4 * __thiscall BehaviorCamera::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00AC4F90  BehaviorCamera::vf40  size=90  [class]
-void __fastcall BehaviorCamera::vf40(int *param_1)
+// 00AC4F90  BehaviorCamera::startup  size=90  [class]
+void __fastcall BehaviorCamera::startup(int *param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return;
   }

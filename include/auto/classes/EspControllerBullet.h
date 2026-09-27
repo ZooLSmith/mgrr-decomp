@@ -9,10 +9,7 @@ struct EspControllerBullet : public EspControllerHitStrip {
     virtual undefined4 * vf00(byte param_2);  // 009D6140 slot 0x0  overrides cEspControler
     // non-virtual members
     EspControllerBullet();  // 009CF2E0
-    void ctor_009CF300();  // 009CF300
-    EspControllerBullet(byte param_2);  // 009DE420
+    ~EspControllerBullet();  // 009CF300
     void ctor_009DE450();  // 009DE450
-    void ctor_009ED510();  // 009ED510
-    void ctor_009F1110();  // 009F1110
     void ctor_009F3CA0();  // 009F3CA0
 };

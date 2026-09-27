@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cDepressionScreenDispParts.h"
 
-// 00CD1C60  cDepressionScreenDispParts::vf14  size=112  [class]
-void __fastcall cDepressionScreenDispParts::vf14(int param_1)
+// 00CD1C60  cDepressionScreenDispParts::create  size=112  [class]
+void __fastcall cDepressionScreenDispParts::create(int param_1)
 
 {
   int *piVar1;

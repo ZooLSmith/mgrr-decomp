@@ -55,14 +55,14 @@ void __fastcall cElectromagneticBarrierNode::vf328(int param_1)
   return;
 }
 
-// 005E3630  cElectromagneticBarrierNode::vf40  size=143  [class]
-undefined4 __fastcall cElectromagneticBarrierNode::vf40(int param_1)
+// 005E3630  cElectromagneticBarrierNode::startup  size=143  [class]
+undefined4 __fastcall cElectromagneticBarrierNode::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = GimmickBehaviorBase::vf40();
+  iVar1 = GimmickBehaviorBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -111,8 +111,8 @@ void cElectromagneticBarrierNode::vf324(void)
   return;
 }
 
-// 00ABA9B0  cElectromagneticBarrierNode::vf00  size=43  [class]
-undefined4 __thiscall cElectromagneticBarrierNode::vf00(undefined4 param_1,byte param_2)
+// 00ABA9B0  cElectromagneticBarrierNode::destruct  size=43  [class]
+undefined4 __thiscall cElectromagneticBarrierNode::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

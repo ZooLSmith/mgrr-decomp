@@ -738,10 +738,10 @@ void __fastcall cResultDispParts::vf08(int param_1)
   return;
 }
 
-// 00D32E60  cResultDispParts::vf14  size=1583  [class]
+// 00D32E60  cResultDispParts::create  size=1583  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cResultDispParts::vf14(int param_1)
+void __fastcall cResultDispParts::create(int param_1)
 
 {
   uint *puVar1;

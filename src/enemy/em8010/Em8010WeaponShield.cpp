@@ -1,5 +1,5 @@
 // src/enemy/em8010/Em8010WeaponShield.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0061B9A0..00ABA8E0, 13 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0061B9A0..00ABA8E0, 14 functions
 
 #include "mgrr.h"
 #include "Em8010WeaponShield.h"
@@ -48,7 +48,7 @@ void __fastcall Em8010WeaponShield::vf54(int param_1)
       switchD_0080dbae::default();
       if ((((*(int *)(param_1 + 0x87c) != 0) && (*(char *)(param_1 + 0x470) != '\0')) &&
           ((*(byte *)(param_1 + 0x472) & 0x80) != 0)) && (*(char *)(param_1 + 0x471) != '\0')) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -105,14 +105,14 @@ undefined4 __thiscall Em8010WeaponShield::vfD8(int param_1,int param_2)
   return 0;
 }
 
-// 0061F620  Em8010WeaponShield::vf40  size=255  [class]
-undefined4 __fastcall Em8010WeaponShield::vf40(int param_1)
+// 0061F620  Em8010WeaponShield::startup  size=255  [class]
+undefined4 __fastcall Em8010WeaponShield::startup(int param_1)
 
 {
   undefined4 uVar1;
   int iVar2;
   
-  iVar2 = Em8010Weapon::vf40();
+  iVar2 = Em8010Weapon::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -201,6 +201,20 @@ void Em8010WeaponShield::vf48(void)
   return;
 }
 
+// 00AB6070  Em8010WeaponShield::Em8010WeaponShield  size=55  [class]
+undefined4 * __fastcall Em8010WeaponShield::Em8010WeaponShield(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  param_1[0x228] = 0;
+  param_1[0x22a] = 0;
+  param_1[0x22d] = 0;
+  *param_1 = cEm0010Weapon::vftable;
+  FUN_00a7c930();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB60B0  Em8010WeaponShield::vf04  size=6  [class]
 undefined * Em8010WeaponShield::vf04(void)
 
@@ -215,8 +229,8 @@ void Em8010WeaponShield::vf1D0(void)
   return;
 }
 
-// 00ABA8E0  Em8010WeaponShield::vf00  size=105  [class]
-undefined4 * __thiscall Em8010WeaponShield::vf00(undefined4 *param_1,byte param_2)
+// 00ABA8E0  Em8010WeaponShield::destruct  size=105  [class]
+undefined4 * __thiscall Em8010WeaponShield::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -230,7 +244,7 @@ undefined4 * __thiscall Em8010WeaponShield::vf00(undefined4 *param_1,byte param_
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -15,4 +15,6 @@ struct Et002f : public BehaviorAppBase {
     virtual void vf50();  // 005D1520 slot 0x50  overrides Behavior
     virtual undefined4 setEmSetInfo();  // 005D1560 slot 0x264  overrides Behavior
     virtual void vf2B4();  // 005D15E0 slot 0x2B4  overrides Behavior
+    // non-virtual members
+    Et002f();  // 00AAF850
 };

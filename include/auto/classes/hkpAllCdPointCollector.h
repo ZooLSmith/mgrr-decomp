@@ -14,7 +14,6 @@ struct hkpAllCdPointCollector : public hkpCdPointCollector {
     hkpAllCdPointCollector(float * param_2);  // 00439A20
     void ctor_005169C0(float * param_2);  // 005169C0
     void ctor_00516AA0();  // 00516AA0
-    void ctor_00517750();  // 00517750
     void ctor_0053B0F0();  // 0053B0F0
     void ctor_0053CB20();  // 0053CB20
     void ctor_0053D560();  // 0053D560
@@ -25,7 +24,6 @@ struct hkpAllCdPointCollector : public hkpCdPointCollector {
     void ctor_005FE860();  // 005FE860
     void ctor_00806700(float * param_2);  // 00806700
     void ctor_008067E0();  // 008067E0
-    void ctor_00807490();  // 00807490
     void ctor_00859C10();  // 00859C10
     void ctor_008D07D0();  // 008D07D0
     void ctor_008EB9C0();  // 008EB9C0
@@ -41,7 +39,7 @@ struct hkpAllCdPointCollector : public hkpCdPointCollector {
     void ctor_009262F0();  // 009262F0
     void ctor_00A89310();  // 00A89310
     void ctor_00ABBB30();  // 00ABBB30
-    void ctor_00AC0310();  // 00AC0310
+    ~hkpAllCdPointCollector();  // 00AC13C0
     void ctor_00AE4E70();  // 00AE4E70
     void ctor_00AE78B0();  // 00AE78B0
     void ctor_00BEA280();  // 00BEA280
@@ -50,7 +48,6 @@ struct hkpAllCdPointCollector : public hkpCdPointCollector {
     void ctor_00BF4E00();  // 00BF4E00
     void ctor_00BF6DA0();  // 00BF6DA0
     void ctor_00C61BC0();  // 00C61BC0
-    void ctor_00D7C050();  // 00D7C050
     void ctor_00D87BA0();  // 00D87BA0
     void ctor_00DC9770();  // 00DC9770
     hkpAllCdPointCollector(int * param_2);  // 0126AD40

@@ -1,5 +1,5 @@
 // src/misc/cCodecForcedLoadingDisp.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB6B60..00D39DF0, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB6B60..00D39DF0, 3 functions
 
 #include "mgrr.h"
 #include "cCodecForcedLoadingDisp.h"
@@ -13,30 +13,6 @@ void __fastcall cCodecForcedLoadingDisp::cCodecForcedLoadingDisp_2(undefined4 *p
     (*(code *)**(undefined4 **)param_1[1])(1);
     param_1[1] = 0;
   }
-  return;
-}
-
-// 00CD11C0  FUN_00cd11c0  size=60  [callgraph]
-void __fastcall FUN_00cd11c0(int *param_1)
-
-{
-  int iVar1;
-  
-  if (param_1[1] == 0) {
-    iVar1 = FUN_00ccdda0(param_1[2]);
-    if (iVar1 == 0) {
-      param_1[1] = -1;
-      return;
-    }
-    (**(code **)(*param_1 + 8))();
-    param_1[1] = param_1[1] + 1;
-  }
-  else if (param_1[1] != 1) {
-    return;
-  }
-                    /* WARNING: Could not recover jumptable at 0x00cd11fa. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(*param_1 + 0x14))();
   return;
 }
 

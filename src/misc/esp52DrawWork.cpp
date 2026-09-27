@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp52DrawWork.h"
 
-// 00EF6560  esp52DrawWork::vf04  size=109  [class]
-void __fastcall esp52DrawWork::vf04(int param_1)
+// 00EF6560  esp52DrawWork::draw  size=109  [class]
+void __fastcall esp52DrawWork::draw(int param_1)
 
 {
   undefined4 local_10;

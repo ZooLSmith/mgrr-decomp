@@ -412,7 +412,7 @@ undefined4 __thiscall Pl2040::vf320(int param_1,undefined4 param_2)
     local_2c = *(undefined4 *)(param_1 + 0x44);
     local_28 = *(undefined4 *)(param_1 + 0x48);
     local_24 = *(undefined4 *)(param_1 + 0x4c);
-    iVar2 = hkpCdPointCollector::hkpCdPointCollector_14(&local_20,&local_30,1,0,0x3c23d70a);
+    iVar2 = hkpCdPointCollector::hkpCdPointCollector(&local_20,&local_30,1,0,0x3c23d70a);
     if (iVar2 != 0) {
       *(undefined4 *)(param_1 + 0x50) = local_30;
       *(undefined4 *)(param_1 + 0x54) = local_2c;
@@ -692,7 +692,7 @@ int __fastcall Pl2040::getAttackInfo(int param_1)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(undefined4 **)(iVar2 + 8);
       puVar1[5] = *(undefined4 *)(param_1 + 0x4f0);
@@ -1943,8 +1943,8 @@ LAB_005fb81d:
   }
 }
 
-// 005FB9D0  Pl2040::vf40  size=1779  [class]
-undefined4 __fastcall Pl2040::vf40(int *param_1)
+// 005FB9D0  Pl2040::startup  size=1779  [class]
+undefined4 __fastcall Pl2040::startup(int *param_1)
 
 {
   uint uVar1;
@@ -1967,7 +1967,7 @@ undefined4 __fastcall Pl2040::vf40(int *param_1)
   undefined4 uStack_2c;
   undefined4 uStack_28;
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -2336,8 +2336,8 @@ void __fastcall FUN_005fc2a0(int param_1)
   return;
 }
 
-// 005FD070  Pl2040::vf264  size=45  [class]
-undefined4 __thiscall Pl2040::vf264(int param_1,undefined4 *param_2)
+// 005FD070  Pl2040::setEmSetInfo  size=45  [class]
+undefined4 __thiscall Pl2040::setEmSetInfo(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -3018,7 +3018,7 @@ void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_7(int param_1)
             iStack_214 = iStack_214 + 1;
           } while (iStack_214 < iStack_19c);
         }
-        hkpCdPointCollector::hkpCdPointCollector_4();
+        hkpCdPointCollector::hkpCdPointCollector();
       }
     }
     if (DAT_01885d68 != 1) {
@@ -3298,11 +3298,11 @@ undefined * Pl2040::vf04(void)
   return &DAT_01b35420;
 }
 
-// 00AB6570  Pl2040::vf00  size=30  [class]
-undefined4 __thiscall Pl2040::vf00(undefined4 param_1,byte param_2)
+// 00AB6570  Pl2040::destruct  size=30  [class]
+undefined4 __thiscall Pl2040::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_32();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

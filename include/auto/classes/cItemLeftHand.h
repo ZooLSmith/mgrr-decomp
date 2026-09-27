@@ -12,4 +12,6 @@ struct cItemLeftHand : public cItemObjectBase {
     virtual void vf44();  // 005EAB60 slot 0x44  overrides Behavior
     virtual void vf48();  // 005ED460 slot 0x48  overrides Behavior
     virtual void vf50();  // 005EAB70 slot 0x50  overrides Behavior
+    // non-virtual members
+    cItemLeftHand();  // 00AB13C0
 };

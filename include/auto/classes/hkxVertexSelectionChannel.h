@@ -8,5 +8,6 @@ struct hkxVertexSelectionChannel : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D1860 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxVertexSelectionChannel(undefined4 * param_1);  // 010D17A0
+    ~hkxVertexSelectionChannel();  // 010D17A0
+    hkxVertexSelectionChannel();  // 010D17C0
 };

@@ -20,8 +20,8 @@ undefined * BehaviorBg::vf04(void)
   return &DAT_01be9c50;
 }
 
-// 00AA7900  BehaviorBg::vf00  size=30  [class]
-undefined4 __thiscall BehaviorBg::vf00(undefined4 param_1,byte param_2)
+// 00AA7900  BehaviorBg::destruct  size=30  [class]
+undefined4 __thiscall BehaviorBg::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_0040d3f0();
@@ -31,13 +31,13 @@ undefined4 __thiscall BehaviorBg::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 00AC3DD0  BehaviorBg::vf40  size=12  [class]
-bool BehaviorBg::vf40(void)
+// 00AC3DD0  BehaviorBg::startup  size=12  [class]
+bool BehaviorBg::startup(void)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorBgBase::vf40();
+  iVar1 = BehaviorBgBase::startup();
   return iVar1 != 0;
 }
 

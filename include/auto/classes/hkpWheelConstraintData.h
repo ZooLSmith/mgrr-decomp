@@ -12,6 +12,7 @@ struct hkpWheelConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011D3DB0 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011D3D90 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpWheelConstraintData(undefined4 * param_1);  // 011AF0B0
-    hkpWheelConstraintData();  // 011D3EC0
+    ~hkpWheelConstraintData();  // 011AF0B0
+    hkpWheelConstraintData();  // 011AF0D0
+    void ctor_011D3EC0();  // 011D3EC0
 };

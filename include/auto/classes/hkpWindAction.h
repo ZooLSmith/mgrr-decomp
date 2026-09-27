@@ -10,7 +10,8 @@ struct hkpWindAction : public hkpUnaryAction {
     virtual void vf0C(int param_2);  // 01268A50 slot 0xC  overrides hkpAction
     virtual int vf1C(int * param_2, int param_3);  // 012689D0 slot 0x1C  overrides hkpAction
     // non-virtual members
-    ~hkpWindAction();  // 01268970
+    hkpWindAction();  // 01268970
+    ~hkpWindAction();  // 012689B0
     static undefined * vf08();  // 01268A90
     static void vf18();  // 014992B0
     static void vf10(int * param_2);  // 014993B0

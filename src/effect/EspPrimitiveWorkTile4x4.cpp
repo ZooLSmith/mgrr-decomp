@@ -1,8 +1,25 @@
 // src/effect/EspPrimitiveWorkTile4x4.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F55E20..00F595B0, 2 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4FC80..00F595B0, 3 functions
 
 #include "mgrr.h"
 #include "EspPrimitiveWorkTile4x4.h"
+
+// 00F4FC80  EspPrimitiveWorkTile4x4::EspPrimitiveWorkTile4x4  size=54  [class]
+undefined4 * __fastcall EspPrimitiveWorkTile4x4::EspPrimitiveWorkTile4x4(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = EspPrimitiveWorkTileBase::vftable;
+  FUN_00f9c880();
+  iVar1 = 3;
+  do {
+    FUN_00f9c880();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00F55E20  EspPrimitiveWorkTile4x4::vf04  size=1577  [class]
 void EspPrimitiveWorkTile4x4::vf04(undefined4 param_1)

@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cUIPrimWorkStrip.h"
 
-// 00CCC420  cUIPrimWorkStrip::cUIPrimWorkStrip_5  size=32  [class]
-undefined4 * __fastcall cUIPrimWorkStrip::cUIPrimWorkStrip_5(undefined4 *param_1)
+// 00CCC420  cUIPrimWorkStrip::cUIPrimWorkStrip  size=32  [class]
+undefined4 * __fastcall cUIPrimWorkStrip::cUIPrimWorkStrip(undefined4 *param_1)
 
 {
   cUIPrimWorkBase::cUIPrimWorkBase();

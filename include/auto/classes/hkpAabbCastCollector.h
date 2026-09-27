@@ -8,7 +8,5 @@ struct hkpAabbCastCollector {
     virtual void vf00(undefined4 param_2) = 0;  // 00FDB68B slot 0x0
     virtual undefined4 * vf04(byte param_2);  // 0115B210 slot 0x4
     // non-virtual members
-    hkpAabbCastCollector();  // 0115AC10
-    void ctor_01216960();  // 01216960
     hkpAabbCastCollector(int * param_1, int * param_2, int * param_3);  // 0121D5B0
 };

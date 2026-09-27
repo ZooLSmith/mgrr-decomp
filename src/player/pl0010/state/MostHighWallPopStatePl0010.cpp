@@ -70,8 +70,8 @@ undefined4 * __thiscall MostHighWallPopStatePl0010::vf04(undefined4 *param_1,byt
   return param_1;
 }
 
-// 00BACEE0  MostHighWallPopStatePl0010::vf0C  size=111  [class]
-void __thiscall MostHighWallPopStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BACEE0  MostHighWallPopStatePl0010::SafeCheck  size=111  [class]
+void __thiscall MostHighWallPopStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -101,12 +101,12 @@ void __thiscall MostHighWallPopStatePl0010::vf0C(int param_1,undefined4 *param_2
     }
     *(undefined4 *)(uVar2 + 0x4170) = 1;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00BACF50  MostHighWallPopStatePl0010::vf10  size=125  [class]
-void MostHighWallPopStatePl0010::vf10(undefined4 *param_1)
+// 00BACF50  MostHighWallPopStatePl0010::qteSafeCheck  size=125  [class]
+void MostHighWallPopStatePl0010::qteSafeCheck(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -129,7 +129,7 @@ void MostHighWallPopStatePl0010::vf10(undefined4 *param_1)
   }
   FUN_008e0b70(0);
   FUN_008e0ba0(0);
-  StateMachineNode::vf10(param_1);
+  StateMachineNode::qteSafeCheck(param_1);
   return;
 }
 

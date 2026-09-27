@@ -15,4 +15,5 @@ struct ShapeCylinder : public ShapeBase {
     virtual byte vf1C(undefined4 param_2);  // 00A6C9C0 slot 0x1C  overrides ShapeBase
     // non-virtual members
     ShapeCylinder();  // 00A6B3C0
+    static byte vf1C_00A6C790(int * param_2);  // 00A6C790
 };

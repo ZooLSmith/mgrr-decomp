@@ -252,8 +252,8 @@ int FUN_00d2e080(void)
   return 0;
 }
 
-// 00D2E0D0  cEnemyEnergyGaugePrologueParts::vf14  size=211  [class]
-void __fastcall cEnemyEnergyGaugePrologueParts::vf14(int param_1)
+// 00D2E0D0  cEnemyEnergyGaugePrologueParts::create  size=211  [class]
+void __fastcall cEnemyEnergyGaugePrologueParts::create(int param_1)
 
 {
   int iVar1;

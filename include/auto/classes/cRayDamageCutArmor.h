@@ -15,4 +15,6 @@ struct cRayDamageCutArmor : public cRayArmor {
     virtual void setCutCrerateInfo(undefined4 * param_1, undefined4 param_2, int param_3);  // 00AF02F0 slot 0x1B8  overrides Behavior
     virtual void vf1BC(int * param_2);  // 00AEF880 slot 0x1BC  overrides Behavior
     virtual void vf1D0(undefined4 param_2);  // 00AEAD60 slot 0x1D0  overrides Behavior
+    // non-virtual members
+    cRayDamageCutArmor();  // 00AC0E90
 };

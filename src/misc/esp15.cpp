@@ -19,15 +19,15 @@ undefined4 * __thiscall esp15::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = cEspModel::vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00ED8370  esp15::vf10  size=1  [class]
-void esp15::vf10(void)
+// 00ED8370  esp15::addOtTransList  size=1  [class]
+void esp15::addOtTransList(void)
 
 {
   return;
@@ -761,9 +761,9 @@ LAB_00f29083:
   return;
 }
 
-// 00F315B0  esp15::vf04  size=1721  [class]
+// 00F315B0  esp15::preTrans  size=1721  [class]
 void __thiscall
-esp15::vf04(undefined *param_1,undefined *param_2,undefined *param_3,undefined *param_4)
+esp15::preTrans(undefined *param_1,undefined *param_2,undefined *param_3,undefined *param_4)
 
 {
   short sVar1;
@@ -808,7 +808,7 @@ esp15::vf04(undefined *param_1,undefined *param_2,undefined *param_3,undefined *
   local_c4 = param_3;
   local_ec = param_2;
   iStack_f0 = 0xf315e4;
-  iVar2 = cEspModel::vf04();
+  iVar2 = cEsp::preTrans();
   if (iVar2 != 0) {
     puStack_e4 = (undefined *)0xf315f3;
     iVar2 = FUN_00f26e90();

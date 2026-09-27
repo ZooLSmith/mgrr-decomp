@@ -495,7 +495,7 @@ int FUN_010fdb50(int *param_1,int *param_2)
   case 0x20:
     iVar8 = FUN_01016520();
     local_c = iVar8;
-    hkIstream::hkIstream_3(*param_1,param_1[1] + -1);
+    hkIstream::hkIstream(*param_1,param_1[1] + -1);
     FUN_010ff2e0(iVar8,1);
     iVar3 = FUN_010fd240(iVar3);
     while (iVar3 == 0) {
@@ -742,7 +742,7 @@ FUN_010fdee0(undefined4 param_1,int param_2,int *param_3,int param_4,int *param_
       local_dc = 1;
       local_d4[0] = 0;
       FUN_010fd660(1,&local_e0);
-      hkIstream::hkIstream_3(local_e0,local_dc + -1);
+      hkIstream::hkIstream(local_e0,local_dc + -1);
       iVar12 = (uint)*(ushort *)((int)puVar5 + 0x12) + *(int *)*param_3 + param_2;
       puVar6 = (undefined4 *)FUN_010fcfd0();
       iVar3 = FUN_01016360();

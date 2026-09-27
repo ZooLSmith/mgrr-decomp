@@ -648,7 +648,7 @@ undefined4 BehaviorEmBase::startup()
     flagBF8() = 0;
     fieldD88() = 0;
     if ((objFlags() & 2) == 0) {
-        FUN_009fd240((int)this);
+        FUN_009fd240((cObj *)this);
         fieldA50() = 1;
     }
     fieldD8C() = 0.0f;
@@ -1712,7 +1712,7 @@ void BehaviorEmBase::vf2F8()
     FUN_009f8ea0(name, 0x10, modelObjId(), 0);
     emb::cdeclcall<void>(&FUN_00dd5650, DAT_0169fcb8, name);  // "forced death requested; do what is needed on death : %s"
     field6BC() = 1;
-    FUN_009fdde0((int *)this);
+    FUN_009fdde0((cObj *)this);
 }
 
 // 00ACE6C0  BehaviorEmBase::vf20  size=58  [class]
@@ -2005,7 +2005,7 @@ void BehaviorEmBase::vf44()
 void BehaviorEmBase::vf4C()
 {
     if (fieldA58() != 0 && FUN_00ac89d0() == 0) {
-        FUN_009fdde0((int *)this);  // tail jump
+        FUN_009fdde0((cObj *)this);  // tail jump
         return;
     }
     if ((DAT_01bea070 & 0x20000000) == 0) {
@@ -2295,7 +2295,7 @@ void BehaviorEmBase::setCutCrerateInfo(undefined4 *out, undefined4 ids, int coun
             dst = dst + 3;
         }
         if (chosen == -1) {
-            FUN_009fdde0((int *)this);
+            FUN_009fdde0((cObj *)this);
         }
     }
 
@@ -2317,7 +2317,7 @@ Behavior *BehaviorEmBase::FUN_00acf600(unsigned int a, unsigned int b)
         Behavior *body = (Behavior *)FUN_00acdc90(field4F0(), a, (undefined4)desc, b);
         if (body != 0) {
             fieldA58() = 1;
-            FUN_009fd240((int)body);
+            FUN_009fd240((cObj *)body);
             FUN_009f8ae0((int *)body, FUN_009f8b40((int)this));
             FUN_00a7c960((undefined4 *)&emBodyHandle(), (undefined4 *)FUN_00a7c7f0(body->field4F0()));
             fieldA50() = 1;

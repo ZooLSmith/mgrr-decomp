@@ -14,7 +14,7 @@ undefined4 * __thiscall hkReferencedObject::vf00(undefined4 *param_1,byte param_
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -28,7 +28,7 @@ undefined4 * __thiscall hkpCharacterControllerCinfo::vf00(undefined4 *param_1,by
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -42,7 +42,7 @@ undefined4 * __thiscall hkpCharacterProxyCinfo::vf00(undefined4 *param_1,byte pa
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -64,8 +64,8 @@ undefined4 * __thiscall hkpCharacterProxyListener::vf00(undefined4 *param_1,byte
   return param_1;
 }
 
-// 008E2FE0  hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo_2  size=142  [run]
-void __fastcall hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo_2(undefined4 *param_1)
+// 008E2FE0  hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo  size=142  [run]
+void __fastcall hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo(undefined4 *param_1)
 
 {
   param_1[0xc] = 0x42c80000;
@@ -104,7 +104,7 @@ undefined4 * __thiscall hkpCharacterRigidBodyCinfo::vf00(undefined4 *param_1,byt
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));

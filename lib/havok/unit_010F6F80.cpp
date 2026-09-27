@@ -19,7 +19,7 @@ _anon_B1A2C86F::PackfileObjectCopier::vf0C
   undefined1 local_14 [16];
   
   uVar2 = param_4;
-  hkOArchive::hkOArchive_4(param_4,*(undefined1 *)(param_1 + 0x14));
+  hkOArchive::hkOArchive(param_4,*(undefined1 *)(param_1 + 0x14));
   uVar3 = param_5;
   param_4 = FUN_010f5c60(param_2,param_3,local_14,param_5);
   FUN_010f5850(uVar2);
@@ -27,7 +27,7 @@ _anon_B1A2C86F::PackfileObjectCopier::vf0C
   FUN_010f5850(uVar2);
   pcVar4 = (char *)FUN_01016fc0((int)&param_3 + 3);
   cVar1 = *pcVar4;
-  hkBaseObject::hkBaseObject_129();
+  ::hkBaseObject::hkBaseObject();
   return cVar1 == '\0';
 }
 
@@ -246,7 +246,7 @@ int __thiscall hkObjectCopier::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_138();
+  ::hkBaseObject::~hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -740,7 +740,7 @@ undefined4 FUN_010f7c00(int *param_1,int param_2,uint param_3)
   local_28 = 0x33323130;
   local_24 = 0x37363534;
   local_20 = 0x2f2b3938;
-  hkOArchive::hkOArchive_4(param_1,0);
+  hkOArchive::hkOArchive(param_1,0);
   local_c = 0x13;
   uVar5 = param_3;
   if (0 < (int)param_3) {
@@ -767,11 +767,11 @@ undefined4 FUN_010f7c00(int *param_1,int param_2,uint param_3)
       }
       pcVar2 = (char *)(**(code **)(*param_1 + 0xc))((int)&param_2 + 3);
       if (*pcVar2 == '\0') {
-        hkBaseObject::hkBaseObject_129();
+        hkBaseObject::hkBaseObject();
         return 1;
       }
       if ((int)uVar5 < 1) {
-        hkBaseObject::hkBaseObject_129();
+        hkBaseObject::hkBaseObject();
         return 0;
       }
     }
@@ -785,7 +785,7 @@ undefined4 FUN_010f7c00(int *param_1,int param_2,uint param_3)
     FUN_01016f90(&local_8,4);
   }
 LAB_010f7da7:
-  hkBaseObject::hkBaseObject_129();
+  hkBaseObject::hkBaseObject();
   return 0;
 }
 
@@ -1112,12 +1112,12 @@ hkXmlObjectWriter::vf10(int param_1,undefined4 param_2,undefined4 param_3,undefi
   undefined4 uVar1;
   undefined1 local_10 [12];
   
-  hkOstream::hkOstream_4(param_2);
+  hkOstream::hkOstream(param_2);
   FUN_01018f60(local_10,"\n%s<hkrawdata size=\"%i\"><![CDATA[\n",*(undefined4 *)(param_1 + 8),
                param_4);
   uVar1 = FUN_010f7c00(param_2,param_3,param_4);
   FUN_01018f60(local_10,"\n]]></hkrawdata>");
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   return uVar1;
 }
 
@@ -1204,7 +1204,7 @@ void __thiscall FUN_010f89e0(int param_1,int *param_2,undefined4 param_3,int *pa
     (**(code **)(*param_2 + 0x10))(&DAT_016cc51c,1);
     (**(code **)(*param_2 + 0x10))(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_1 + 0xc));
   }
-  hkOstream::hkOstream_4(param_2);
+  hkOstream::hkOstream(param_2);
   FUN_01018f60(local_10,&DAT_016cc53c,param_3);
   if (param_4 != (int *)0x0) {
     iVar3 = 0;

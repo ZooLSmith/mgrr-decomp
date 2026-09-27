@@ -338,9 +338,9 @@ LAB_00c61046:
               if (*(int *)(iVar6 + 0x764) != 0) {
                 fStack_6c = *(float *)(*(int *)(iVar6 + 0x764) + 0xfc);
                 fVar1 = *(float *)(piVar9[0x1d9] + 0xfc);
-                fVar13 = (float10)hkBaseObject::hkBaseObject_209();
+                fVar13 = (float10)::hkBaseObject::hkBaseObject_209();
                 local_108 = (float)fVar13;
-                fVar13 = (float10)hkBaseObject::hkBaseObject_209();
+                fVar13 = (float10)::hkBaseObject::hkBaseObject_209();
                 fStack_114 = (float)(((float10)fVar1 + (float10)fStack_6c +
                                      fVar13 + (float10)local_108) * (float10)1.1);
                 iVar11 = (**(code **)(*piVar9 + 0x368))();

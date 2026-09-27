@@ -1,14 +1,14 @@
 // src/enemy/em0010/Em0010RPGBullet.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA68D0..00B33310, 10 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA68D0..00B33310, 8 functions
 
 #include "mgrr.h"
 #include "Em0010RPGBullet.h"
 
-// 00AA68D0  Em0010RPGBullet::Em0010RPGBullet_3  size=29  [class]
-undefined4 * __fastcall Em0010RPGBullet::Em0010RPGBullet_3(undefined4 *param_1)
+// 00AA68D0  Em0010RPGBullet::Em0010RPGBullet  size=29  [class]
+undefined4 * __fastcall Em0010RPGBullet::Em0010RPGBullet(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -21,30 +21,8 @@ undefined * Em0010RPGBullet::vf04(void)
   return &DAT_01be9d30;
 }
 
-// 00AB41A0  Em0010RPGBullet::Em0010RPGBullet_2  size=35  [class]
-undefined4 * __fastcall Em0010RPGBullet::Em0010RPGBullet_2(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = EmC010RPGBullet::vftable;
-  return param_1;
-}
-
-// 00AB5FB0  Em0010RPGBullet::Em0010RPGBullet  size=35  [class]
-undefined4 * __fastcall Em0010RPGBullet::Em0010RPGBullet(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = Em8010RPGBullet::vftable;
-  return param_1;
-}
-
-// 00AB7D10  Em0010RPGBullet::vf00  size=105  [class]
-undefined4 * __thiscall Em0010RPGBullet::vf00(undefined4 *param_1,byte param_2)
+// 00AB7D10  Em0010RPGBullet::destruct  size=105  [class]
+undefined4 * __thiscall Em0010RPGBullet::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -58,15 +36,15 @@ undefined4 * __thiscall Em0010RPGBullet::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00B2DFE0  Em0010RPGBullet::vf40  size=93  [class]
-undefined4 __fastcall Em0010RPGBullet::vf40(int param_1)
+// 00B2DFE0  Em0010RPGBullet::startup  size=93  [class]
+undefined4 __fastcall Em0010RPGBullet::startup(int param_1)
 
 {
   int iVar1;

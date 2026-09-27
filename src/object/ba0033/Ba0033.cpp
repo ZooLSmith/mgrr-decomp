@@ -113,15 +113,15 @@ void __fastcall Ba0033::thunk_vf44(int param_1)
   return;
 }
 
-// 00404D10  Ba0033::vf40  size=110  [class]
-undefined4 __fastcall Ba0033::vf40(int param_1)
+// 00404D10  Ba0033::startup  size=110  [class]
+undefined4 __fastcall Ba0033::startup(int param_1)
 
 {
   uint *puVar1;
   int iVar2;
   int iVar3;
   
-  iVar2 = MonThrowMoto::vf40();
+  iVar2 = BehaviorBa::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -160,8 +160,8 @@ undefined * Ba0033::vf04(void)
   return &DAT_01b34b14;
 }
 
-// 00AB96A0  Ba0033::vf00  size=43  [class]
-undefined4 __thiscall Ba0033::vf00(undefined4 param_1,byte param_2)
+// 00AB96A0  Ba0033::destruct  size=43  [class]
+undefined4 __thiscall Ba0033::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

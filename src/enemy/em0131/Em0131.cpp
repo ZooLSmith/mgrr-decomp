@@ -1,5 +1,5 @@
 // src/enemy/em0131/Em0131.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00606970..00ABA510, 32 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00606970..00ABA510, 33 functions
 
 #include "mgrr.h"
 #include "Em0131.h"
@@ -645,8 +645,8 @@ void __thiscall Em0131::vf334(int *param_1,undefined4 param_2,int *param_3)
   return;
 }
 
-// 0060CDA0  Em0131::vf40  size=599  [class]
-undefined4 __fastcall Em0131::vf40(int *param_1)
+// 0060CDA0  Em0131::startup  size=599  [class]
+undefined4 __fastcall Em0131::startup(int *param_1)
 
 {
   int iVar1;
@@ -657,7 +657,7 @@ undefined4 __fastcall Em0131::vf40(int *param_1)
   undefined4 local_88;
   undefined1 local_80 [124];
   
-  iVar1 = EmBaseDLC::vf40();
+  iVar1 = EmBaseDLC::startup();
   if (iVar1 != 0) {
     iVar1 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
     if (iVar1 != 0) {
@@ -1544,7 +1544,7 @@ LAB_00612e4c:
                   sVar2 = FUN_00dde2d0(5,0x14);
                   param_1[0x255] = param_1[0x255] + (int)sVar2;
                   FUN_005d9b40(&uStack_1a0);
-                  thunk_FUN_009fdde0();
+                  E3_EnemyBoardDebrisSokushi::vf4C();
                   uVar8 = param_1[300];
                   fStack_19c = (float)param_1[0x11];
                   if (uVar8 == 0x7c0000) {
@@ -1671,6 +1671,19 @@ undefined4 __fastcall Em0131::vf32C(int param_1)
   return 0;
 }
 
+// 00AB5950  Em0131::Em0131  size=57  [class]
+undefined4 * __fastcall Em0131::Em0131(undefined4 *param_1)
+
+{
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  FUN_00a7c930();
+  FUN_00a7c930();
+  return param_1;
+}
+
 // 00AB5990  Em0131::vf04  size=6  [class]
 undefined * Em0131::vf04(void)
 
@@ -1678,12 +1691,12 @@ undefined * Em0131::vf04(void)
   return &DAT_01b35520;
 }
 
-// 00ABA510  Em0131::vf00  size=43  [class]
-undefined4 __thiscall Em0131::vf00(undefined4 param_1,byte param_2)
+// 00ABA510  Em0131::destruct  size=43  [class]
+undefined4 __thiscall Em0131::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

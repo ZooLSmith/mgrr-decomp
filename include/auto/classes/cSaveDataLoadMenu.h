@@ -10,4 +10,6 @@ struct cSaveDataLoadMenu : public cCustomObjCtrlManager {
     virtual void vf08();  // 009A5E60 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 009947C0 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009BD760 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cSaveDataLoadMenu();  // 009A5D80
 };

@@ -15,10 +15,10 @@ undefined4 __thiscall cItemGetDispParts::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 00D14600  cItemGetDispParts::vf14  size=1999  [class]
+// 00D14600  cItemGetDispParts::create  size=1999  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cItemGetDispParts::vf14(int param_1)
+void __fastcall cItemGetDispParts::create(int param_1)
 
 {
   uint *puVar1;

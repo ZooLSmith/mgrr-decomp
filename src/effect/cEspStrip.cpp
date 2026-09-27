@@ -8,7 +8,7 @@
 undefined4 * __fastcall cEspStrip::cEspStrip(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall cEspStrip::cEspStrip(undefined4 *param_1)
 undefined4 __thiscall cEspStrip::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -610,8 +610,8 @@ void __fastcall cEspStrip::vf24(int param_1)
   return;
 }
 
-// 00F27760  cEspStrip::vf10  size=391  [class]
-void __fastcall cEspStrip::vf10(int *param_1)
+// 00F27760  cEspStrip::addOtTransList  size=391  [class]
+void __fastcall cEspStrip::addOtTransList(int *param_1)
 
 {
   int *piVar1;
@@ -647,7 +647,7 @@ void __fastcall cEspStrip::vf10(int *param_1)
         *(undefined4 *)(iVar3 + 0x68) = 0x3f800000;
         *(undefined4 *)(iVar3 + 0x54) = 0x3f800000;
         *(undefined4 *)(iVar3 + 0x40) = 0x3f800000;
-        FUN_00efed20();
+        esp107::vf10();
         piVar1 = param_1 + 0xf2;
         FUN_00edfcd0(piVar1);
         FUN_00f26b40(iVar3);
@@ -691,13 +691,13 @@ void __fastcall cEspStrip::vf10(int *param_1)
   return;
 }
 
-// 00F2DEC0  cEspStrip::vf04  size=50  [class]
-bool cEspStrip::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+// 00F2DEC0  cEspStrip::preTrans  size=50  [class]
+bool cEspStrip::preTrans(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   int iVar1;
   
-  iVar1 = cEspModel::vf04(param_1,param_2,param_3);
+  iVar1 = cEsp::preTrans(param_1,param_2,param_3);
   if (iVar1 == 0) {
     return false;
   }

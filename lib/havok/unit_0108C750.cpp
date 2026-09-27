@@ -2447,7 +2447,7 @@ ConstFunction<hkGeometryProcessing::IFunction<hkVector4,float>_>_2
   cVar4 = FUN_0108f1c0(local_160,param_2,param_3,local_a8 + 4);
   if (cVar4 == '\0') {
 LAB_01090b4d:
-    hkBaseObject::hkBaseObject_69();
+    ::hkBaseObject::hkBaseObject_69();
     return 0;
   }
   if (param_4 < 1) goto LAB_01090aa8;
@@ -2914,7 +2914,7 @@ LAB_010904a3:
     (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_64,local_5c * 4);
   }
 LAB_01090aa8:
-  hkBaseObject::hkBaseObject_69();
+  ::hkBaseObject::hkBaseObject_69();
   return 1;
 }
 
@@ -4261,8 +4261,10 @@ ConstFunction<hkGeometryProcessing::IFunction<hkVector4,float>_>
   return;
 }
 
-// 01092350  FUN_01092350  size=6  [run]
-float10 __fastcall FUN_01092350(int param_1)
+// 01092350  hkGeometryProcessing::ConstFunction<hkGeometryProcessing::IFunction<hkVector4,float>_>::vf04  size=6  [run]
+float10 __fastcall
+hkGeometryProcessing::ConstFunction<hkGeometryProcessing::IFunction<hkVector4,float>_>::vf04
+          (int param_1)
 
 {
   return (float10)*(float *)(param_1 + 4);
@@ -6949,8 +6951,8 @@ void __fastcall FUN_01095490(undefined4 *param_1)
   return;
 }
 
-// 010954E0  hkBaseObject::hkBaseObject_140  size=51  [run]
-void __fastcall hkBaseObject::hkBaseObject_140(undefined4 *param_1)
+// 010954E0  hkBaseObject::hkBaseObject  size=51  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkgpAbstractMesh<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkContainerHeapAllocator>
@@ -6997,7 +6999,7 @@ hkgpAbstractMesh<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Ve
   FUN_01093a30();
   FUN_01094190();
   FUN_01093980();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));

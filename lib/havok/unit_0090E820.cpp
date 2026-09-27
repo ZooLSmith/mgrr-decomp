@@ -18,7 +18,7 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_24
 {
   if (param_4 != 0.0) {
     FUN_0090bff0(0xffffffff,param_2,param_3,param_4,param_5,param_6,3,1);
-    FUN_00906a00();
+    RayCastClosestPointsWork::vf08();
     FUN_009053f0();
     hkpCdPointCollector::hkpCdPointCollector_21();
     return 0;
@@ -40,7 +40,7 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_25
 {
   if (param_4 != 0.0) {
     FUN_0090c1f0(0xffffffff,param_2,param_3,param_4,param_5,param_6,3,1);
-    FUN_00906a00();
+    RayCastClosestPointsWork::vf08();
     FUN_009053f0();
     hkpCdPointCollector::hkpCdPointCollector_21();
     return 0;
@@ -62,7 +62,7 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_26
 {
   if (param_3 != 0.0) {
     FUN_0090c370(0xffffffff,param_2,param_3,param_4,param_5,3,1);
-    FUN_00906a00();
+    RayCastClosestPointsWork::vf08();
     FUN_009053f0();
     hkpCdPointCollector::hkpCdPointCollector_21();
     return 0;
@@ -83,7 +83,7 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_27
 
 {
   FUN_0090c430(0xffffffff,param_2,param_3,param_4,param_5,param_6,param_7,3,1);
-  FUN_00906a00();
+  RayCastClosestPointsWork::vf08();
   FUN_009053f0();
   hkpCdPointCollector::hkpCdPointCollector_21();
   return 0;
@@ -102,7 +102,7 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_28
 {
   if (param_2 != 0) {
     FUN_0090c7a0(0xffffffff,param_2,param_3,param_4,3,1);
-    FUN_00906a00();
+    RayCastClosestPointsWork::vf08();
     FUN_009053f0();
     hkpCdPointCollector::hkpCdPointCollector_21();
     return 0;

@@ -54,10 +54,10 @@ undefined4 __thiscall cWeaponInfoDispParts::vf00(undefined4 param_1,byte param_2
   return param_1;
 }
 
-// 00D06BC0  cWeaponInfoDispParts::vf14  size=2224  [class]
+// 00D06BC0  cWeaponInfoDispParts::create  size=2224  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cWeaponInfoDispParts::vf14(int param_1)
+void __fastcall cWeaponInfoDispParts::create(int param_1)
 
 {
   bool bVar1;

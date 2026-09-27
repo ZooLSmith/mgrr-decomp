@@ -11,4 +11,6 @@ struct esp38 : public ModelShaderJackModule {
     virtual void vf08();  // 00F1B610 slot 0x8  overrides cEspBase
     virtual void addOtTransList();  // 00EDA080 slot 0x10  overrides cEspBase
     virtual void vf14();  // 00EF5A40 slot 0x14  overrides cEspBase
+    // non-virtual members
+    esp38();  // 00ED0640
 };

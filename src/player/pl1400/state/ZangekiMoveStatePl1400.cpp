@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ZangekiMoveStatePl1400.h"
 
-// 00860060  ZangekiMoveStatePl1400::vf0C  size=5  [class]
-void __thiscall ZangekiMoveStatePl1400::vf0C(int param_1,undefined4 param_2)
+// 00860060  ZangekiMoveStatePl1400::SafeCheck  size=5  [class]
+void __thiscall ZangekiMoveStatePl1400::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -64,7 +64,7 @@ undefined4 * __thiscall
 ZangekiMoveStatePl1400::ZangekiMoveStatePl1400(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a826e0();
   return param_1;
@@ -221,10 +221,10 @@ undefined4 __thiscall ZangekiMoveStatePl1400::vf20(int param_1,undefined4 *param
   return 0;
 }
 
-// 00897F70  ZangekiMoveStatePl1400::vf10  size=3038  [class]
+// 00897F70  ZangekiMoveStatePl1400::qteSafeCheck  size=3038  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiMoveStatePl1400::vf10(int param_1,undefined4 *param_2)
+void __thiscall ZangekiMoveStatePl1400::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -564,7 +564,7 @@ LAB_008984c3:
   D3DXMatrixMultiply(afStack_10c + 10,&uStack_a4,afStack_10c + 10);
   FID_conflict__memcpy(&DAT_01d618e0,afStack_10c + 7,0x40);
   _DAT_01d61920 = 0x41200000;
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

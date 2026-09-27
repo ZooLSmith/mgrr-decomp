@@ -10,5 +10,6 @@ struct cCameraApp : public cCamera {
     virtual void vf0C();  // 00DC0C90 slot 0xC
     virtual void vf10() = 0;  // 00FDB68B slot 0x10
     // non-virtual members
+    cCameraApp();  // 00C40760
     static void vf00();  // 00C407C0
 };

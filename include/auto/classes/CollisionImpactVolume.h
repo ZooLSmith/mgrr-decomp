@@ -14,6 +14,6 @@ struct CollisionImpactVolume : public Collision {
     virtual float10 vf1C();  // 00D775F0 slot 0x1C  overrides Collision
     virtual void vf24();  // 00D7A680 slot 0x24  overrides Collision
     // non-virtual members
-    CollisionImpactVolume();  // 00D7D560
-    void ctor_00D7E030();  // 00D7E030
+    ~CollisionImpactVolume();  // 00D7D560
+    CollisionImpactVolume();  // 00D7E030
 };

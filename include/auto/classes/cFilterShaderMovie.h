@@ -9,5 +9,5 @@ struct cFilterShaderMovie {
     virtual void vf04();  // 00EC16B0 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShaderMovie();  // 00EC15A0
-    void ctor_015F1D70();  // 015F1D70
+    ~cFilterShaderMovie();  // 015F1D70
 };

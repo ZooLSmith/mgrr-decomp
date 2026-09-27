@@ -8,5 +8,6 @@ struct hkxAnimatedVector : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D3F60 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxAnimatedVector(undefined4 * param_1);  // 010D3E90
+    ~hkxAnimatedVector();  // 010D3E90
+    hkxAnimatedVector();  // 010D3EB0
 };

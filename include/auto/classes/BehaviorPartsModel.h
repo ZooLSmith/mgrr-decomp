@@ -15,4 +15,6 @@ struct BehaviorPartsModel : public BehaviorAppBase {
     virtual void vf54();  // 00AC5540 slot 0x54  overrides Behavior
     virtual void vf1B4();  // 00ACA930 slot 0x1B4  overrides Behavior
     virtual void vf32C();  // 00ACA6B0 slot 0x32C
+    // non-virtual members
+    BehaviorPartsModel();  // 00AAE2C0
 };

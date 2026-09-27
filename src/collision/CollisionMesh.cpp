@@ -86,13 +86,13 @@ undefined4 * CollisionMesh::vf04(undefined4 *param_1)
   return param_1;
 }
 
-// 00D7D650  CollisionMesh::CollisionMesh_2  size=28  [class]
-void __fastcall CollisionMesh::CollisionMesh_2(undefined4 *param_1)
+// 00D7D650  CollisionMesh::~CollisionMesh  size=28  [class]
+void __fastcall CollisionMesh::~CollisionMesh(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   ShapeBase::ShapeBase();
-  hkpCdPointCollector::hkpCdPointCollector_5();
+  Collision::~Collision();
   return;
 }
 
@@ -102,7 +102,7 @@ undefined4 * __thiscall CollisionMesh::vf08(undefined4 *param_1,byte param_2)
 {
   *param_1 = vftable;
   ShapeBase::ShapeBase();
-  hkpCdPointCollector::hkpCdPointCollector_5();
+  Collision::~Collision();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -117,7 +117,7 @@ undefined4 * CollisionMesh::CollisionMesh(undefined4 param_1,undefined4 param_2,
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x520,&DAT_01b7c0b8);
   if (puVar1 != (undefined4 *)0x0) {
-    hkpAllCdPointCollector::hkpAllCdPointCollector_10(puVar1 + 0x110,param_1,param_2,param_3);
+    Collision::Collision(puVar1 + 0x110,param_1,param_2,param_3);
     *puVar1 = vftable;
     ShapeMesh::ShapeMesh();
     return puVar1;

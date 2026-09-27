@@ -83,7 +83,7 @@ void __thiscall hkpAllCdPointCollector::hkpAllCdPointCollector_32(int param_1,in
             }
             bVar1 = true;
           }
-          hkpCdPointCollector::hkpCdPointCollector_4();
+          hkpCdPointCollector::hkpCdPointCollector();
         }
       }
       local_250 = local_250 + 0x70;

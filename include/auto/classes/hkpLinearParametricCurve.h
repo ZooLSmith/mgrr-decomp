@@ -19,6 +19,7 @@ struct hkpLinearParametricCurve : public hkpParametricCurve {
     virtual void vf30(undefined4 param_2);  // 011DE330 slot 0x30  overrides hkpParametricCurve
     virtual void vf34();  // 011DED50 slot 0x34  overrides hkpParametricCurve
     // non-virtual members
-    hkpLinearParametricCurve(undefined4 * param_1);  // 011B15C0
-    ~hkpLinearParametricCurve();  // 011DE550
+    ~hkpLinearParametricCurve();  // 011B15C0
+    hkpLinearParametricCurve();  // 011B15E0
+    void ctor_011DE550();  // 011DE550
 };

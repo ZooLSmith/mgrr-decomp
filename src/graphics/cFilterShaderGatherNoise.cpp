@@ -11,7 +11,7 @@
 undefined4 * __fastcall cFilterShaderGatherNoise::cFilterShaderGatherNoise(undefined4 *param_1)
 
 {
-  cFilterShaderGather::cFilterShaderGather_2();
+  cFilterShaderGather::cFilterShaderGather();
   *param_1 = vftable;
   param_1[0x27] = 0x1000000;
   param_1[0x27] = 0x1000111;

@@ -1,5 +1,5 @@
 // src/lib/helper.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004013E0..00402270, 9 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004013E0..00402270, 8 functions
 
 #include "mgrr.h"
 
@@ -46,15 +46,6 @@ lib::helper::AllocatorProxy::CoreT<sys::AllocatorByHeap>::vf00(undefined4 *param
     FUN_00dd4920(param_1);
   }
   return param_1;
-}
-
-// 004017B0  FUN_004017b0  size=24  [callgraph]
-void __fastcall FUN_004017b0(undefined4 *param_1)
-
-{
-  (**(code **)*param_1)(0);
-  FUN_00dd48d0(param_1,0);
-  return;
 }
 
 // 00401F90  FUN_00401f90  size=104  [callgraph]

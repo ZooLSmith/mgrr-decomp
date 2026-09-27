@@ -1214,8 +1214,8 @@ undefined4 SoundArea::ShapeSphere::vf14(void)
   return 0;
 }
 
-// 00E48970  FUN_00e48970  size=7  [between]
-int __fastcall FUN_00e48970(int param_1)
+// 00E48970  SoundArea::ShapeSphere::vf5C  size=7  [class]
+int __fastcall SoundArea::ShapeSphere::vf5C(int param_1)
 
 {
   return param_1 + 0x120;
@@ -1253,9 +1253,9 @@ undefined4 __thiscall SoundArea::ShapeSphere::vf24(int param_1,undefined4 *param
   return 0;
 }
 
-// 00E48A00  FUN_00e48a00  size=138  [between]
+// 00E48A00  SoundArea::ShapeSphere::vf28  size=138  [class]
 undefined4 __thiscall
-FUN_00e48a00(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4)
+SoundArea::ShapeSphere::vf28(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4)
 
 {
   *(undefined4 *)(param_1 + 0x120) = 0xffffffff;
@@ -1278,15 +1278,15 @@ FUN_00e48a00(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param
   return 1;
 }
 
-// 00E48A90  FUN_00e48a90  size=3  [between]
-undefined4 FUN_00e48a90(void)
+// 00E48A90  SoundArea::ShapeSphere::vf2C  size=3  [class]
+undefined4 SoundArea::ShapeSphere::vf2C(void)
 
 {
   return 0;
 }
 
-// 00E48AA0  FUN_00e48aa0  size=51  [between]
-void __thiscall FUN_00e48aa0(int param_1,float *param_2)
+// 00E48AA0  SoundArea::ShapeSphere::vf30  size=51  [class]
+void __thiscall SoundArea::ShapeSphere::vf30(int param_1,float *param_2)
 
 {
   *(float *)(param_1 + 0x134) = *param_2 + *(float *)(param_1 + 0x134);
@@ -1295,52 +1295,52 @@ void __thiscall FUN_00e48aa0(int param_1,float *param_2)
   return;
 }
 
-// 00E48AE0  FUN_00e48ae0  size=6  [between]
-undefined4 FUN_00e48ae0(void)
+// 00E48AE0  SoundArea::ShapeSphere::vf38  size=6  [class]
+undefined4 SoundArea::ShapeSphere::vf38(void)
 
 {
   return 0xffffffff;
 }
 
-// 00E48AF0  FUN_00e48af0  size=7  [between]
-undefined4 FUN_00e48af0(undefined4 param_1)
+// 00E48AF0  SoundArea::ShapeSphere::vf3C  size=7  [class]
+undefined4 SoundArea::ShapeSphere::vf3C(undefined4 param_1)
 
 {
   return param_1;
 }
 
-// 00E48B00  FUN_00e48b00  size=7  [between]
-float10 __fastcall FUN_00e48b00(int param_1)
+// 00E48B00  SoundArea::ShapeSphere::vf44  size=7  [class]
+float10 __fastcall SoundArea::ShapeSphere::vf44(int param_1)
 
 {
   return (float10)*(float *)(param_1 + 0x140);
 }
 
-// 00E48B10  FUN_00e48b10  size=13  [between]
-void __thiscall FUN_00e48b10(int param_1,undefined4 param_2)
+// 00E48B10  SoundArea::ShapeSphere::vf48  size=13  [class]
+void __thiscall SoundArea::ShapeSphere::vf48(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 0x144) = param_2;
   return;
 }
 
-// 00E48B20  FUN_00e48b20  size=7  [between]
-float10 __fastcall FUN_00e48b20(int param_1)
+// 00E48B20  SoundArea::ShapeSphere::vf4C  size=7  [class]
+float10 __fastcall SoundArea::ShapeSphere::vf4C(int param_1)
 
 {
   return (float10)*(float *)(param_1 + 0x144);
 }
 
-// 00E48B30  FUN_00e48b30  size=13  [between]
-void __thiscall FUN_00e48b30(int param_1,undefined4 param_2)
+// 00E48B30  SoundArea::ShapeSphere::vf50  size=13  [class]
+void __thiscall SoundArea::ShapeSphere::vf50(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 0x148) = param_2;
   return;
 }
 
-// 00E48B40  FUN_00e48b40  size=7  [between]
-float10 __fastcall FUN_00e48b40(int param_1)
+// 00E48B40  SoundArea::ShapeSphere::vf54  size=7  [class]
+float10 __fastcall SoundArea::ShapeSphere::vf54(int param_1)
 
 {
   return (float10)*(float *)(param_1 + 0x148);
@@ -9226,8 +9226,8 @@ LAB_00e58095:
   return;
 }
 
-// 00E58760  FUN_00e58760  size=63  [between]
-void __thiscall FUN_00e58760(int param_1,undefined4 param_2)
+// 00E58760  SoundArea::ShapeSphere::vf58  size=63  [class]
+void __thiscall SoundArea::ShapeSphere::vf58(int param_1,undefined4 param_2)
 
 {
   FUN_00e54c60(param_1,1,param_2);
@@ -11401,8 +11401,8 @@ int __thiscall SoundArea::ShapeRail::vf3C(int *param_1,int param_2)
   return param_2;
 }
 
-// 00E5B9F0  FUN_00e5b9f0  size=289  [callgraph]
-undefined4 __thiscall FUN_00e5b9f0(int param_1,float *param_2,uint param_3)
+// 00E5B9F0  SoundArea::ShapeSphere::vf34  size=289  [class]
+undefined4 __thiscall SoundArea::ShapeSphere::vf34(int param_1,float *param_2,uint param_3)
 
 {
   undefined4 *puVar1;
@@ -11453,8 +11453,8 @@ undefined4 __thiscall FUN_00e5b9f0(int param_1,float *param_2,uint param_3)
   return 1;
 }
 
-// 00E5BB20  FUN_00e5bb20  size=82  [callgraph]
-void __thiscall FUN_00e5bb20(int param_1,undefined4 param_2)
+// 00E5BB20  SoundArea::ShapeSphere::vf40  size=82  [class]
+void __thiscall SoundArea::ShapeSphere::vf40(int param_1,undefined4 param_2)
 
 {
   undefined4 *puVar1;

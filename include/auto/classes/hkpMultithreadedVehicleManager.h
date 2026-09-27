@@ -9,5 +9,6 @@ struct hkpMultithreadedVehicleManager : public hkpVehicleManager {
     virtual undefined4 * vf00(byte param_2);  // 01289120 slot 0x0  overrides hkBaseObject
     virtual undefined vf18();  // 01292E50 slot 0x18
     // non-virtual members
-    hkpMultithreadedVehicleManager(undefined4 * param_1);  // 012890A0
+    ~hkpMultithreadedVehicleManager();  // 012890A0
+    hkpMultithreadedVehicleManager();  // 012890C0
 };

@@ -1025,7 +1025,7 @@ void __fastcall hkBinaryPackfileWriter::~hkBinaryPackfileWriter(undefined4 *para
 
 {
   *param_1 = vftable;
-  hkBaseObject::hkBaseObject_239();
+  hkPackfileWriter::~hkPackfileWriter();
   return;
 }
 
@@ -1220,7 +1220,7 @@ void __thiscall FUN_011028b0(int param_1,int param_2,undefined4 param_3)
   
   iVar3 = param_2;
   local_2c = param_1;
-  hkOArchive::hkOArchive_4(*(undefined4 *)(param_2 + 0x1c),*(undefined1 *)(param_2 + 0x4c));
+  hkOArchive::hkOArchive(*(undefined4 *)(param_2 + 0x1c),*(undefined1 *)(param_2 + 0x4c));
   local_30 = 0;
   if (0 < *(int *)(param_2 + 8)) {
     local_24 = 0;
@@ -1344,15 +1344,15 @@ void __thiscall FUN_011028b0(int param_1,int param_2,undefined4 param_3)
   (**(code **)(**(int **)(iVar3 + 0x1c) + 0x1c))(0x18,0);
   puVar5 = (undefined4 *)FUN_01113500();
   param_2 = CONCAT31(param_2._1_3_,(char)((uint)*puVar5 >> 8) != DAT_01b1dc08._1_1_);
-  hkOArchive::hkOArchive_4(*(undefined4 *)(iVar3 + 0x1c),param_2);
+  hkOArchive::hkOArchive(*(undefined4 *)(iVar3 + 0x1c),param_2);
   FUN_01017100(*(undefined4 *)(*(int *)(iVar3 + 0x10) + *(int *)(param_1 + 0x8c) * 8));
   FUN_01017100(*(undefined4 *)(*(int *)(iVar3 + 0x10) + 4 + *(int *)(param_1 + 0x8c) * 8));
   FUN_01017100(0);
   uVar4 = FUN_010093a0();
   uVar4 = FUN_01025be0(uVar4,0xffffffff);
   FUN_01017100(uVar4);
-  hkBaseObject::hkBaseObject_129();
-  hkBaseObject::hkBaseObject_129();
+  hkBaseObject::hkBaseObject();
+  hkBaseObject::hkBaseObject();
   return;
 }
 
@@ -1631,7 +1631,7 @@ void __thiscall FUN_01102d50(int param_1,int *param_2)
           iVar8 = iVar8 + -0x10;
         } while (-1 < (int)param_2);
       }
-      hkOArchive::hkOArchive_4(piVar1[7],(char)piVar1[0x13]);
+      hkOArchive::hkOArchive(piVar1[7],(char)piVar1[0x13]);
       iVar8 = (**(code **)(*(int *)piVar1[7] + 0x20))();
       *(int *)(iVar3 + 0x18) = iVar8 - *(int *)(iVar3 + 0x14);
       FUN_01016e20(local_7c,4,local_78 * 2);
@@ -1707,7 +1707,7 @@ void __thiscall FUN_01102d50(int param_1,int *param_2)
       }
       iVar8 = (**(code **)(*(int *)piVar1[7] + 0x20))();
       *(int *)(iVar3 + 0x2c) = iVar8 - *(int *)(iVar3 + 0x14);
-      hkBaseObject::hkBaseObject_129();
+      hkBaseObject::hkBaseObject();
       FUN_010f79a0();
       local_18 = local_18 + 0x30;
       local_10 = local_10 + 0x34;
@@ -1758,7 +1758,7 @@ bool hkBinaryPackfileWriter::vf1C(int *param_1,undefined4 param_2)
   (*(code *)local_14[5])();
   pcVar3 = (char *)(*(code *)local_14[3])((int)&param_1 + 3);
   cVar1 = *pcVar3;
-  local_14 = hkBaseObject::vftable;
+  local_14 = ::hkBaseObject::vftable;
   FUN_01104540();
   return cVar1 == '\0';
 }
@@ -1940,16 +1940,16 @@ undefined4 * __thiscall hkSubStreamWriter::hkSubStreamWriter(undefined4 *param_1
   return param_1;
 }
 
-// 01103910  FUN_01103910  size=25  [run]
-undefined4 __thiscall FUN_01103910(int param_1,undefined4 param_2)
+// 01103910  hkSubStreamWriter::vf0C  size=25  [run]
+undefined4 __thiscall hkSubStreamWriter::vf0C(int param_1,undefined4 param_2)
 
 {
   (**(code **)(**(int **)(param_1 + 8) + 0xc))(param_2);
   return param_2;
 }
 
-// 01103930  FUN_01103930  size=14  [run]
-void __fastcall FUN_01103930(int param_1)
+// 01103930  hkSubStreamWriter::vf10  size=14  [run]
+void __fastcall hkSubStreamWriter::vf10(int param_1)
 
 {
                     /* WARNING: Could not recover jumptable at 0x0110393c. Too many branches */
@@ -1958,8 +1958,8 @@ void __fastcall FUN_01103930(int param_1)
   return;
 }
 
-// 01103940  FUN_01103940  size=10  [run]
-void __fastcall FUN_01103940(int param_1)
+// 01103940  hkSubStreamWriter::vf14  size=10  [run]
+void __fastcall hkSubStreamWriter::vf14(int param_1)
 
 {
                     /* WARNING: Could not recover jumptable at 0x01103948. Too many branches */
@@ -1968,16 +1968,16 @@ void __fastcall FUN_01103940(int param_1)
   return;
 }
 
-// 01103950  FUN_01103950  size=25  [run]
-undefined4 __thiscall FUN_01103950(int param_1,undefined4 param_2)
+// 01103950  hkSubStreamWriter::vf18  size=25  [run]
+undefined4 __thiscall hkSubStreamWriter::vf18(int param_1,undefined4 param_2)
 
 {
   (**(code **)(**(int **)(param_1 + 8) + 0x18))(param_2);
   return param_2;
 }
 
-// 01103970  FUN_01103970  size=55  [run]
-void __thiscall FUN_01103970(int param_1,int param_2,int param_3)
+// 01103970  hkSubStreamWriter::vf1C  size=55  [run]
+void __thiscall hkSubStreamWriter::vf1C(int param_1,int param_2,int param_3)
 
 {
   if (param_3 == 0) {
@@ -1988,8 +1988,8 @@ void __thiscall FUN_01103970(int param_1,int param_2,int param_3)
   return;
 }
 
-// 011039B0  FUN_011039b0  size=18  [run]
-int __fastcall FUN_011039b0(int param_1)
+// 011039B0  hkSubStreamWriter::vf20  size=18  [run]
+int __fastcall hkSubStreamWriter::vf20(int param_1)
 
 {
   int iVar1;
@@ -2205,7 +2205,7 @@ undefined4 * __thiscall hkSubStreamWriter::vf00(undefined4 *param_1,byte param_2
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -4795,7 +4795,7 @@ void __thiscall FUN_011069d0(int *param_1,undefined4 *param_2,int *param_3)
   undefined4 local_c;
   int *local_8;
   
-  hkOstream::hkOstream_4(param_3);
+  hkOstream::hkOstream(param_3);
   FUN_01018f60(local_24,"<?xml version=\"1.0\" encoding=\"ascii\"?>");
   FUN_01018f60(local_24,"\n<hktagfile version=\"%d\">\n",1);
   FUN_01105ee0();
@@ -8632,7 +8632,7 @@ uint __thiscall FUN_0110b4c0(uint param_1,uint param_2,undefined4 param_3,int pa
   uint uVar3;
   undefined4 *puVar4;
   
-  hkOArchive::hkOArchive_4(param_2,param_1 & 0xffffff00);
+  hkOArchive::hkOArchive(param_2,param_1 & 0xffffff00);
   uVar2 = param_2 >> 8;
   param_2 = uVar2 << 8;
   FUN_01025830(param_2);
@@ -8711,7 +8711,7 @@ void __fastcall FUN_0110b630(int param_1)
   FUN_011084b0(&PTR_vftable_018e9b94);
   FUN_01025870();
   FUN_01025870();
-  hkBaseObject::hkBaseObject_129();
+  hkBaseObject::hkBaseObject();
   return;
 }
 
@@ -9817,7 +9817,7 @@ int __thiscall LOCALNAMESPACE::hkNativeResource::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_198();
+  ::hkBaseObject::hkBaseObject_198();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -10214,7 +10214,7 @@ undefined4 * __thiscall hkBinaryTagfileReader::vf00(undefined4 *param_1,byte par
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -11158,7 +11158,7 @@ undefined4 * __thiscall FUN_0110e210(undefined4 *param_1,undefined4 param_2,unde
   int *piVar1;
   
   *param_1 = 0xffffffff;
-  hkIArchive::hkIArchive_3(param_2,(uint)param_1 & 0xffffff00);
+  hkIArchive::hkIArchive(param_2,(uint)param_1 & 0xffffff00);
   param_1[5] = param_3;
   param_1[6] = 0;
   param_1[7] = 0;

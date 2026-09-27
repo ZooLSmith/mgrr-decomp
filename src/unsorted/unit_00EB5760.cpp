@@ -2350,7 +2350,7 @@ void FUN_00eb9610(undefined4 param_1,int param_2,int param_3,int param_4,int par
     FUN_00a28070();
     FUN_00f9ee50(&DAT_01edcd58,local_60,puVar8,uVar9);
   }
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   __security_check_cookie(local_14 ^ (uint)auStack_194);
   return;
 }
@@ -3003,7 +3003,7 @@ void FUN_00eba2b0(void)
       FUN_00f9dfb0(5);
       FUN_00f9d8f0(0);
       FUN_00f9dc40(0,0,0);
-      Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+      Hw::cRenderTargetInfo::~cRenderTargetInfo();
     }
   }
   __security_check_cookie(local_14 ^ (uint)auStack_134);
@@ -3353,7 +3353,7 @@ void FUN_00ebb5e0(void)
     FUN_00f9d720();
     DAT_01edc6bc = 0;
     puStack_1a4 = (undefined1 *)0xebbf52;
-    Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+    Hw::cRenderTargetInfo::~cRenderTargetInfo();
   }
   __security_check_cookie(local_14 ^ (uint)&local_194);
   return;
@@ -3936,7 +3936,7 @@ void __fastcall FUN_00ebbfd0(undefined *param_1)
   FUN_00f9d6e0(3);
   FUN_00f9d760(1);
   FUN_00f9d7a0(1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   __security_check_cookie(local_14 ^ (uint)&local_1f4);
   return;
 }

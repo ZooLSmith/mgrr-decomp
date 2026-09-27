@@ -11,7 +11,7 @@ struct hkpMountedBallGun : public hkpBallGun {
     // non-virtual members
     static void vf0C();  // 0127CE80
     hkpMountedBallGun(int param_2);  // 0127DD90
-    hkpMountedBallGun();  // 0127DDC0
+    hkpMountedBallGun(undefined4 param_2);  // 0127DDC0
     static void vf14();  // 0127E0E0
     static uint vf1C();  // 0127F650
     static void vf18();  // 0127F660

@@ -11,5 +11,4 @@ struct esp170 : public esp13 {
     // non-virtual members
     esp170();  // 009E0180
     static void vf08();  // 00F23340
-    static void vf10();  // 00F2FF00
 };

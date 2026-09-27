@@ -8,7 +8,7 @@ struct hkpSerializedAgentNnEntry : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 01273860 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpSerializedAgentNnEntry(undefined4 * param_1, undefined4 param_2);  // 012733E0
+    ~hkpSerializedAgentNnEntry();  // 012733E0
     hkpSerializedAgentNnEntry();  // 01273400
     void ctor_01273810();  // 01273810
     void ctor_01282F30();  // 01282F30

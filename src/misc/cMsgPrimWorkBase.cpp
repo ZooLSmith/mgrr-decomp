@@ -56,10 +56,10 @@ undefined4 * __thiscall cMsgPrimWorkBase::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00CCCCD0  cMsgPrimWorkBase::vf04  size=1506  [class]
+// 00CCCCD0  cMsgPrimWorkBase::draw  size=1506  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cMsgPrimWorkBase::vf04(int *param_1)
+void __fastcall cMsgPrimWorkBase::draw(int *param_1)
 
 {
   bool bVar1;
@@ -304,7 +304,7 @@ void __fastcall cMsgPrimWorkBase::vf04(int *param_1)
       thunk_FUN_00fa5730(local_30,1);
     }
   }
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 

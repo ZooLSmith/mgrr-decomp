@@ -100,11 +100,11 @@ void __fastcall BehaviorDebrisZangekiBonus::vf4C(int param_1)
       iVar1 = FUN_00a12210(0xd);
       if (iVar1 != 0) {
         FUN_00957ab0(iVar1 + 0x40,*(undefined4 *)(param_1 + 0x9ac));
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
       FUN_00957ab0(param_1 + 0x40,*(undefined4 *)(param_1 + 0x9ac));
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -658,13 +658,13 @@ LAB_005df235:
   return;
 }
 
-// 005E16E0  BehaviorDebrisZangekiBonus::vf40  size=68  [class]
-void __fastcall BehaviorDebrisZangekiBonus::vf40(int param_1)
+// 005E16E0  BehaviorDebrisZangekiBonus::startup  size=68  [class]
+void __fastcall BehaviorDebrisZangekiBonus::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorDebrisObject::vf40();
+  iVar1 = BehaviorDebrisObject::startup();
   if (iVar1 == 0) {
     return;
   }
@@ -958,7 +958,7 @@ LAB_005e2bf3:
 undefined4 * __fastcall BehaviorDebrisZangekiBonus::BehaviorDebrisZangekiBonus(undefined4 *param_1)
 
 {
-  BehaviorDebrisBase::BehaviorDebrisBase_3();
+  BehaviorDebrisObject::BehaviorDebrisObject();
   *param_1 = vftable;
   return param_1;
 }
@@ -970,8 +970,8 @@ undefined * BehaviorDebrisZangekiBonus::vf04(void)
   return &DAT_01b3531c;
 }
 
-// 00AC13A0  BehaviorDebrisZangekiBonus::vf00  size=30  [class]
-undefined4 __thiscall BehaviorDebrisZangekiBonus::vf00(undefined4 param_1,byte param_2)
+// 00AC13A0  BehaviorDebrisZangekiBonus::destruct  size=30  [class]
+undefined4 __thiscall BehaviorDebrisZangekiBonus::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_005d8930();

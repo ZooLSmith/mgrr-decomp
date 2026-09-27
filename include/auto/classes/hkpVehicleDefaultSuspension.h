@@ -9,5 +9,6 @@ struct hkpVehicleDefaultSuspension : public hkpVehicleSuspension {
     virtual undefined4 * vf00(byte param_2);  // 012871F0 slot 0x0  overrides hkBaseObject
     virtual undefined vf0C();  // 0128E5E0 slot 0xC  overrides hkpVehicleSuspension
     // non-virtual members
-    hkpVehicleDefaultSuspension(undefined4 * param_1);  // 01286D70
+    ~hkpVehicleDefaultSuspension();  // 01286D70
+    hkpVehicleDefaultSuspension();  // 01286D90
 };

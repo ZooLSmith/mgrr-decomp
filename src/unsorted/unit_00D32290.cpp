@@ -516,7 +516,7 @@ int FUN_00d32e00(void)
   if (iVar1 == 0) {
     return 0;
   }
-  iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager_24();
+  iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager();
   if (iVar1 != 0) {
     *(char **)(iVar1 + 0xc) = "cResultDispParts";
     *(undefined4 *)(iVar1 + 8) = 8;

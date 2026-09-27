@@ -64,8 +64,8 @@ void FUN_005ab220(void)
   return;
 }
 
-// 005AB250  Em0700::vf264  size=8  [class]
-undefined4 Em0700::vf264(void)
+// 005AB250  Em0700::setEmSetInfo  size=8  [class]
+undefined4 Em0700::setEmSetInfo(void)
 
 {
   return 1;
@@ -1578,12 +1578,12 @@ void FUN_005adda0(void)
     if (iVar1 != 0) {
       iVar1 = FUN_00a81330();
       if (iVar1 == 0) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         FUN_00a7c950();
         return;
       }
       FUN_00a7c8a0();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   FUN_00a7c950();
@@ -1899,7 +1899,7 @@ void __fastcall Em0700::vf44(int param_1)
       if (iVar1 != 0) {
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   FUN_00a7c950();
@@ -1911,7 +1911,7 @@ void __fastcall Em0700::vf44(int param_1)
       if (iVar1 != 0) {
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   FUN_00a7c950();
@@ -1923,7 +1923,7 @@ void __fastcall Em0700::vf44(int param_1)
       if (iVar1 != 0) {
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   FUN_00a7c950();
@@ -1935,7 +1935,7 @@ void __fastcall Em0700::vf44(int param_1)
       if (iVar1 != 0) {
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   FUN_00a7c950();
@@ -1947,7 +1947,7 @@ void __fastcall Em0700::vf44(int param_1)
       if (iVar1 != 0) {
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   FUN_00a7c950();
@@ -3071,8 +3071,8 @@ LAB_005b3014:
   return;
 }
 
-// 005B3060  Em0700::vf130  size=811  [class]
-undefined4 __thiscall Em0700::vf130(int param_1,ushort *param_2)
+// 005B3060  Em0700::getAttackInfo  size=811  [class]
+undefined4 __thiscall Em0700::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -3085,7 +3085,7 @@ undefined4 __thiscall Em0700::vf130(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7bd48);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_01643124);
     return 0;
   }
@@ -9938,8 +9938,8 @@ void __thiscall FUN_005c2b40(int param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 005C2B90  Em0700::vf40  size=2538  [class]
-undefined4 __fastcall Em0700::vf40(int *param_1)
+// 005C2B90  Em0700::startup  size=2538  [class]
+undefined4 __fastcall Em0700::startup(int *param_1)
 
 {
   int iVar1;
@@ -9961,7 +9961,7 @@ undefined4 __fastcall Em0700::vf40(int *param_1)
   int local_84;
   undefined1 local_80 [124];
   
-  iVar3 = BehaviorEmBase::vf40();
+  iVar3 = BehaviorEmBase::startup();
   if (iVar3 != 0) {
     param_1[0xd9] = param_1[0xd9] & 0xffefffff;
     iVar3 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
@@ -10012,7 +10012,7 @@ undefined4 __fastcall Em0700::vf40(int *param_1)
         iVar3 = 0;
       }
       else {
-        iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar3 = RigidBodyCollision::RigidBodyCollision();
       }
       iVar1 = param_1[0x13c];
       param_1[0x1ec] = iVar3;
@@ -12275,7 +12275,7 @@ undefined4 * __fastcall Em0700::Em0700(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   cEspControler::cEspControler();
   cEspControler::cEspControler();
@@ -12326,12 +12326,12 @@ void FUN_00aae870(void)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB75D0  Em0700::vf00  size=30  [class]
-undefined4 __thiscall Em0700::vf00(undefined4 param_1,byte param_2)
+// 00AB75D0  Em0700::destruct  size=30  [class]
+undefined4 __thiscall Em0700::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00aae870();

@@ -1,15 +1,15 @@
 // src/havok/RigidBodyCollection.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008EC770..008F46D0, 81 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008EC770..008F46D0, 80 functions
 
 #include "mgrr.h"
 #include "RigidBodyCollection.h"
 
-// 008EC770  RigidBodyCollection::RigidBodyCollection_3  size=29  [class]
-undefined4 * __fastcall RigidBodyCollection::RigidBodyCollection_3(undefined4 *param_1)
+// 008EC770  RigidBodyCollection::RigidBodyCollection  size=29  [class]
+undefined4 * __fastcall RigidBodyCollection::RigidBodyCollection(undefined4 *param_1)
 
 {
   *param_1 = vftable;
-  HkPhysicsSystemContainer::HkPhysicsSystemContainer_2();
+  HkPhysicsSystemContainer::HkPhysicsSystemContainer();
   param_1[4] = 0;
   param_1[5] = 0;
   return param_1;
@@ -3166,25 +3166,6 @@ bool __thiscall RigidBodyCollection::startupPhysicsSystem(int *param_1,undefined
     return iVar2 != 0;
   }
   return false;
-}
-
-// 008F4670  RigidBodyCollection::RigidBodyCollection_2  size=61  [class]
-undefined4 * __fastcall RigidBodyCollection::RigidBodyCollection_2(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  HkPhysicsSystemContainer::HkPhysicsSystemContainer_2();
-  param_1[4] = 0;
-  param_1[5] = 0;
-  *param_1 = RigidBodyCollision::vftable;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0x80000000;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0x80000000;
-  param_1[0xe] = 0;
-  return param_1;
 }
 
 // 008F46D0  RigidBodyCollection::RigidBodyCollection  size=133  [class]

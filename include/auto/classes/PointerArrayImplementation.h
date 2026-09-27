@@ -7,7 +7,7 @@ struct PointerArrayImplementation {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual int vf00(byte param_2);  // 010F29C0 slot 0x0  overrides hkDataRefCounted
     virtual undefined4 vf20();  // 010F28B0 slot 0x20  overrides hkDataArrayImpl
-    virtual void Object(int param_2);  // 010F28D0 slot 0x5C  overrides hkDataArrayImpl
+    virtual void vf5C(int param_2);  // 010F28D0 slot 0x5C  overrides hkDataArrayImpl
     virtual void vf60(int param_2, undefined4 param_3);  // 010F28E0 slot 0x60  overrides hkDataArrayImpl
     // non-virtual members
     PointerArrayImplementation();  // 010F2870

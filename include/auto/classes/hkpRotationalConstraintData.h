@@ -12,5 +12,6 @@ struct hkpRotationalConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011D97D0 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011D97B0 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpRotationalConstraintData(undefined4 * param_1);  // 011AF500
+    ~hkpRotationalConstraintData();  // 011AF500
+    hkpRotationalConstraintData();  // 011AF520
 };

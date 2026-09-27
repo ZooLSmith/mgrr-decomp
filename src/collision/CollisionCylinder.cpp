@@ -17,8 +17,8 @@ float10 __fastcall CollisionCylinder::vf1C(int param_1)
   return fVar1;
 }
 
-// 00D788E0  CollisionCylinder::vf10  size=555  [class]
-void __fastcall CollisionCylinder::vf10(int param_1)
+// 00D788E0  CollisionCylinder::detectionForPenetration  size=555  [class]
+void __fastcall CollisionCylinder::detectionForPenetration(int param_1)
 
 {
   float *pfVar1;
@@ -151,13 +151,13 @@ undefined4 * CollisionCylinder::vf04(undefined4 *param_1)
   return param_1;
 }
 
-// 00D7D380  CollisionCylinder::CollisionCylinder_2  size=28  [class]
-void __fastcall CollisionCylinder::CollisionCylinder_2(undefined4 *param_1)
+// 00D7D380  CollisionCylinder::~CollisionCylinder  size=28  [class]
+void __fastcall CollisionCylinder::~CollisionCylinder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
-  ShapeBase::ShapeBase_3();
-  hkpCdPointCollector::hkpCdPointCollector_5();
+  ShapeBase::~ShapeBase();
+  Collision::~Collision();
   return;
 }
 
@@ -166,8 +166,8 @@ undefined4 * __thiscall CollisionCylinder::vf08(undefined4 *param_1,byte param_2
 
 {
   *param_1 = vftable;
-  ShapeBase::ShapeBase_3();
-  hkpCdPointCollector::hkpCdPointCollector_5();
+  ShapeBase::~ShapeBase();
+  Collision::~Collision();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -183,7 +183,7 @@ CollisionCylinder::CollisionCylinder(undefined4 param_1,undefined4 param_2,undef
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x580,&DAT_01b7c0b8);
   if (puVar1 != (undefined4 *)0x0) {
-    hkpAllCdPointCollector::hkpAllCdPointCollector_10(puVar1 + 0x110,param_1,param_2,param_3);
+    Collision::Collision(puVar1 + 0x110,param_1,param_2,param_3);
     *puVar1 = vftable;
     ShapeCylinder::ShapeCylinder();
     return puVar1;

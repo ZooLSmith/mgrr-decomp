@@ -11,4 +11,6 @@ struct It0500 : public cItemViscelaBase {
     virtual void vf30C();  // 005E8280 slot 0x30C  overrides cItemViscelaBase
     virtual void vf310();  // 005E81E0 slot 0x310  overrides cItemViscelaBase
     virtual void vf314();  // 005E8070 slot 0x314  overrides cItemViscelaBase
+    // non-virtual members
+    It0500();  // 00AC0D90
 };

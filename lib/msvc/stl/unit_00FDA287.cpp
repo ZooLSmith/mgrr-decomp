@@ -48,8 +48,8 @@ exception * __thiscall std::overflow_error::overflow_error(exception *param_1,ch
   return param_1;
 }
 
-// 00FDA34E  std::invalid_argument::invalid_argument_2  size=47  [run]
-void std::invalid_argument::invalid_argument_2(char *param_1)
+// 00FDA34E  std::invalid_argument::invalid_argument  size=47  [run]
+void std::invalid_argument::invalid_argument(char *param_1)
 
 {
   undefined **local_10 [3];
@@ -60,8 +60,8 @@ void std::invalid_argument::invalid_argument_2(char *param_1)
   __CxxThrowException_8(local_10,&DAT_01879aa0);
 }
 
-// 00FDA37E  std::logic_error::logic_error_2  size=29  [run]
-exception * __thiscall std::logic_error::logic_error_2(exception *param_1,exception *param_2)
+// 00FDA37E  std::logic_error::logic_error  size=29  [run]
+exception * __thiscall std::logic_error::logic_error(exception *param_1,exception *param_2)
 
 {
   exception::exception(param_1,param_2);
@@ -69,8 +69,8 @@ exception * __thiscall std::logic_error::logic_error_2(exception *param_1,except
   return param_1;
 }
 
-// 00FDA39B  std::length_error::length_error_3  size=47  [run]
-void std::length_error::length_error_3(char *param_1)
+// 00FDA39B  std::length_error::length_error  size=47  [run]
+void std::length_error::length_error(char *param_1)
 
 {
   undefined **local_10 [3];
@@ -81,8 +81,8 @@ void std::length_error::length_error_3(char *param_1)
   __CxxThrowException_8(local_10,&DAT_01879af8);
 }
 
-// 00FDA3CB  std::length_error::length_error_2  size=29  [run]
-exception * __thiscall std::length_error::length_error_2(exception *param_1,exception *param_2)
+// 00FDA3CB  std::length_error::length_error  size=29  [run]
+exception * __thiscall std::length_error::length_error(exception *param_1,exception *param_2)
 
 {
   exception::exception(param_1,param_2);
@@ -90,8 +90,8 @@ exception * __thiscall std::length_error::length_error_2(exception *param_1,exce
   return param_1;
 }
 
-// 00FDA3E8  std::out_of_range::out_of_range_2  size=47  [run]
-void std::out_of_range::out_of_range_2(char *param_1)
+// 00FDA3E8  std::out_of_range::out_of_range  size=47  [run]
+void std::out_of_range::out_of_range(char *param_1)
 
 {
   undefined **local_10 [3];
@@ -102,8 +102,8 @@ void std::out_of_range::out_of_range_2(char *param_1)
   __CxxThrowException_8(local_10,&DAT_01879b34);
 }
 
-// 00FDA418  std::out_of_range::out_of_range_3  size=29  [run]
-exception * __thiscall std::out_of_range::out_of_range_3(exception *param_1,exception *param_2)
+// 00FDA418  std::out_of_range::out_of_range  size=29  [run]
+exception * __thiscall std::out_of_range::out_of_range(exception *param_1,exception *param_2)
 
 {
   exception::exception(param_1,param_2);
@@ -111,8 +111,8 @@ exception * __thiscall std::out_of_range::out_of_range_3(exception *param_1,exce
   return param_1;
 }
 
-// 00FDA435  std::overflow_error::overflow_error_2  size=47  [run]
-void std::overflow_error::overflow_error_2(char *param_1)
+// 00FDA435  std::overflow_error::overflow_error  size=47  [run]
+void std::overflow_error::overflow_error(char *param_1)
 
 {
   undefined **local_10 [3];
@@ -139,7 +139,7 @@ void std::runtime_error::runtime_error(char *param_1)
 undefined4 __thiscall std::logic_error::vf00(undefined4 param_1,byte param_2)
 
 {
-  exception::exception_2();
+  exception::~exception();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -150,7 +150,7 @@ undefined4 __thiscall std::logic_error::vf00(undefined4 param_1,byte param_2)
 undefined4 __thiscall std::invalid_argument::vf00(undefined4 param_1,byte param_2)
 
 {
-  exception::exception_2();
+  exception::~exception();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -161,7 +161,7 @@ undefined4 __thiscall std::invalid_argument::vf00(undefined4 param_1,byte param_
 undefined4 __thiscall std::length_error::vf00(undefined4 param_1,byte param_2)
 
 {
-  exception::exception_2();
+  exception::~exception();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -172,7 +172,7 @@ undefined4 __thiscall std::length_error::vf00(undefined4 param_1,byte param_2)
 undefined4 __thiscall std::out_of_range::vf00(undefined4 param_1,byte param_2)
 
 {
-  exception::exception_2();
+  exception::~exception();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -183,16 +183,16 @@ undefined4 __thiscall std::out_of_range::vf00(undefined4 param_1,byte param_2)
 undefined4 __thiscall std::overflow_error::vf00(undefined4 param_1,byte param_2)
 
 {
-  exception::exception_2();
+  exception::~exception();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00FDA53A  std::invalid_argument::invalid_argument_3  size=29  [run]
+// 00FDA53A  std::invalid_argument::invalid_argument  size=29  [run]
 exception * __thiscall
-std::invalid_argument::invalid_argument_3(exception *param_1,exception *param_2)
+std::invalid_argument::invalid_argument(exception *param_1,exception *param_2)
 
 {
   exception::exception(param_1,param_2);
@@ -200,8 +200,8 @@ std::invalid_argument::invalid_argument_3(exception *param_1,exception *param_2)
   return param_1;
 }
 
-// 00FDA557  std::overflow_error::overflow_error_3  size=29  [run]
-exception * __thiscall std::overflow_error::overflow_error_3(exception *param_1,exception *param_2)
+// 00FDA557  std::overflow_error::overflow_error  size=29  [run]
+exception * __thiscall std::overflow_error::overflow_error(exception *param_1,exception *param_2)
 
 {
   exception::exception(param_1,param_2);

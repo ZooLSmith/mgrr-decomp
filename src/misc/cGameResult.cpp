@@ -232,8 +232,8 @@ LAB_00d0a946:
   return;
 }
 
-// 00D37C70  cGameResult::vf14  size=720  [class]
-void __fastcall cGameResult::vf14(int param_1)
+// 00D37C70  cGameResult::create  size=720  [class]
+void __fastcall cGameResult::create(int param_1)
 
 {
   uint uVar1;

@@ -10,7 +10,4 @@ struct cConfigMenuParts : public cCustomObjCtrlManager {
     // non-virtual members
     cConfigMenuParts();  // 0098E6B0
     static void vf08();  // 0098E6D0
-    static void vf14();  // 0098E6E0
-    void ctor_0099E8B0();  // 0099E8B0
-    void ctor_0099E970();  // 0099E970
 };

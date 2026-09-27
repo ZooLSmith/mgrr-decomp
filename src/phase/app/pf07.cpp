@@ -31,7 +31,7 @@ void __fastcall cPf07::vf08(int param_1)
   *(undefined4 *)(param_1 + 0x120) = 0;
   if (DAT_018b9148 != 0xf09) {
     if (((DAT_018b9148 & 0xf00) == 0x700) || ((DAT_018b9148 & 0xf00) == 0x600)) {
-      iVar2 = cBattleResultEx::cBattleResultEx();
+      iVar2 = cBattleResultEx::~cBattleResultEx();
       *(int *)(param_1 + 0x11c) = iVar2;
       if (iVar2 != 0) goto LAB_00d5097d;
       puVar4 = &DAT_016bcd64;

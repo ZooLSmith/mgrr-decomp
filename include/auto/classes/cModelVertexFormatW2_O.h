@@ -9,4 +9,5 @@ struct cModelVertexFormatW2_O {
     virtual undefined4 * vf04(byte param_2);  // 00F94580 slot 0x4  overrides Hw::cVertexFormat
     // non-virtual members
     cModelVertexFormatW2_O();  // 00F8FD30
+    void ctor_00F90210();  // 00F90210
 };

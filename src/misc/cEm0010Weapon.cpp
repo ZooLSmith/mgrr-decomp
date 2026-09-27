@@ -1,14 +1,14 @@
 // src/misc/cEm0010Weapon.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6830..00B32420, 11 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6830..00B32420, 6 functions
 
 #include "mgrr.h"
 #include "cEm0010Weapon.h"
 
-// 00AA6830  cEm0010Weapon::cEm0010Weapon_6  size=49  [class]
-undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon_6(undefined4 *param_1)
+// 00AA6830  cEm0010Weapon::cEm0010Weapon  size=49  [class]
+undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   param_1[0x228] = 0;
   param_1[0x22a] = 0;
   param_1[0x22d] = 0;
@@ -24,78 +24,8 @@ undefined * cEm0010Weapon::vf04(void)
   return &DAT_01be9d28;
 }
 
-// 00AAF1C0  cEm0010Weapon::cEm0010Weapon_5  size=55  [class]
-undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon_5(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  param_1[0x228] = 0;
-  param_1[0x22a] = 0;
-  param_1[0x22d] = 0;
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = Em0010WeaponShield::vftable;
-  return param_1;
-}
-
-// 00AB4090  cEm0010Weapon::cEm0010Weapon_3  size=55  [class]
-undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon_3(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  param_1[0x228] = 0;
-  param_1[0x22a] = 0;
-  param_1[0x22d] = 0;
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = EmC010Weapon::vftable;
-  return param_1;
-}
-
-// 00AB4260  cEm0010Weapon::cEm0010Weapon_4  size=55  [class]
-undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon_4(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  param_1[0x228] = 0;
-  param_1[0x22a] = 0;
-  param_1[0x22d] = 0;
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = EmC010WeaponShield::vftable;
-  return param_1;
-}
-
-// 00AB5EA0  cEm0010Weapon::cEm0010Weapon_2  size=55  [class]
-undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon_2(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  param_1[0x228] = 0;
-  param_1[0x22a] = 0;
-  param_1[0x22d] = 0;
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = Em8010Weapon::vftable;
-  return param_1;
-}
-
-// 00AB6070  cEm0010Weapon::cEm0010Weapon  size=55  [class]
-undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  param_1[0x228] = 0;
-  param_1[0x22a] = 0;
-  param_1[0x22d] = 0;
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = Em8010WeaponShield::vftable;
-  return param_1;
-}
-
-// 00AB7BA0  cEm0010Weapon::vf00  size=105  [class]
-undefined4 * __thiscall cEm0010Weapon::vf00(undefined4 *param_1,byte param_2)
+// 00AB7BA0  cEm0010Weapon::destruct  size=105  [class]
+undefined4 * __thiscall cEm0010Weapon::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -109,15 +39,15 @@ undefined4 * __thiscall cEm0010Weapon::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00B322B0  cEm0010Weapon::vf40  size=308  [class]
-undefined4 __fastcall cEm0010Weapon::vf40(int param_1)
+// 00B322B0  cEm0010Weapon::startup  size=308  [class]
+undefined4 __fastcall cEm0010Weapon::startup(int param_1)
 
 {
   int iVar1;
@@ -126,7 +56,7 @@ undefined4 __fastcall cEm0010Weapon::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = BehaviorWeapon::vf40();
+  iVar1 = BehaviorWeapon::startup();
   if (iVar1 != 0) {
     if (*(int *)(param_1 + 0x4a0) == 100) {
 LAB_00b323ca:

@@ -15,10 +15,10 @@ undefined4 __thiscall cVRGoalPointSignParts::vf00(undefined4 param_1,byte param_
   return param_1;
 }
 
-// 00CF2B60  cVRGoalPointSignParts::vf14  size=652  [class]
+// 00CF2B60  cVRGoalPointSignParts::create  size=652  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cVRGoalPointSignParts::vf14(int param_1)
+void __fastcall cVRGoalPointSignParts::create(int param_1)
 
 {
   float *pfVar1;

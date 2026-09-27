@@ -8,9 +8,8 @@ struct hkpCollidableCollidableFilter {
     virtual undefined4 * vf00(byte param_2);  // 01132140 slot 0x0
     virtual undefined vf04() = 0;  // 00FDB68B slot 0x4
     // non-virtual members
-    hkpCollidableCollidableFilter();  // 01132860
     hkpCollidableCollidableFilter(undefined4 * param_1, int param_2);  // 01140A80
-    void ctor_01140B50();  // 01140B50
+    hkpCollidableCollidableFilter();  // 01140B50
     void ctor_01140D70();  // 01140D70
     void ctor_01140DE0();  // 01140DE0
     void ctor_011412B0(undefined4 * param_1, int param_2);  // 011412B0

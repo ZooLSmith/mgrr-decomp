@@ -160,7 +160,7 @@ void __thiscall FUN_00872740(int param_1,undefined4 *param_2)
       iVar2 = 0;
     }
     else {
-      iVar2 = CollisionAttackData::CollisionAttackData_3();
+      iVar2 = CollisionAttackData::CollisionAttackData();
     }
     *(undefined4 *)(*(int *)(iVar2 + 8) + 0x30) = 0;
     iVar1 = *(int *)(iVar2 + 8);

@@ -88,7 +88,7 @@ void __fastcall Bh00a2::vf54(int param_1)
 undefined4 * __fastcall Bh00a2::Bh00a2(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -100,8 +100,8 @@ undefined * Bh00a2::vf04(void)
   return &DAT_01be9d74;
 }
 
-// 00B77EE0  Bh00a2::vf40  size=121  [class]
-undefined4 __fastcall Bh00a2::vf40(int param_1)
+// 00B77EE0  Bh00a2::startup  size=121  [class]
+undefined4 __fastcall Bh00a2::startup(int param_1)
 
 {
   undefined4 uVar1;
@@ -118,7 +118,7 @@ undefined4 __fastcall Bh00a2::vf40(int param_1)
     iVar2 = 0;
   }
   else {
-    iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar2 = RigidBodyCollision::RigidBodyCollision();
   }
   *(int *)(param_1 + 0x7b0) = iVar2;
   if (iVar2 != 0) {
@@ -130,12 +130,12 @@ undefined4 __fastcall Bh00a2::vf40(int param_1)
   return 1;
 }
 
-// 00B77F60  Bh00a2::vf00  size=36  [class]
-undefined4 * __thiscall Bh00a2::vf00(undefined4 *param_1,byte param_2)
+// 00B77F60  Bh00a2::destruct  size=36  [class]
+undefined4 * __thiscall Bh00a2::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

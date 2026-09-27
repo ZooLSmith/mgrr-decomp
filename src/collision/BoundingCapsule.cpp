@@ -1,5 +1,5 @@
 // src/collision/BoundingCapsule.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A68250..00A6AB40, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A68250..00A6AB40, 16 functions
 
 #include "mgrr.h"
 #include "BoundingCapsule.h"
@@ -384,6 +384,92 @@ undefined4 __thiscall BoundingCapsule::vf18(int param_1,undefined4 param_2)
   return 0;
 }
 
+// 00A69130  FUN_00a69130  size=96  [callgraph]
+undefined1 FUN_00a69130(int *param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  char cVar1;
+  undefined1 uVar2;
+  
+  cVar1 = (**(code **)(*param_1 + 8))();
+  if (cVar1 == '\0') {
+    uVar2 = (**(code **)(*param_1 + 0x1c))(param_3);
+    return uVar2;
+  }
+  cVar1 = (**(code **)(*param_1 + 0x10))(param_2,0xb);
+  if (cVar1 != '\0') {
+    uVar2 = (**(code **)(*param_1 + 0x1c))(param_1);
+    (**(code **)(*param_1 + 0x14))(param_2,0xb);
+    return uVar2;
+  }
+  return 0;
+}
+
+// 00A691B0  FUN_00a691b0  size=93  [callgraph]
+undefined4 __thiscall FUN_00a691b0(int param_1,int param_2)
+
+{
+  int iVar1;
+  
+  if (*(int *)(param_1 + 4) != 0) {
+    return 0;
+  }
+  iVar1 = FUN_00dd29b0(param_2 * 0xc + 0xc,0x20,0,0);
+  *(int *)(param_1 + 4) = iVar1;
+  if (iVar1 == 0) {
+    return 0;
+  }
+  *(int *)(param_1 + 8) = param_2;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(int *)(param_1 + 0x18) = param_2 * 0xc + iVar1;
+  FUN_00a68710();
+  return 1;
+}
+
+// 00A69210  FUN_00a69210  size=65  [callgraph]
+void __fastcall FUN_00a69210(undefined4 *param_1)
+
+{
+  if (param_1[1] != 0) {
+    if (param_1[1] != 0) {
+      FUN_00dd48d0(param_1[1],0);
+      param_1[1] = 0;
+    }
+    param_1[2] = 0;
+    param_1[3] = 0;
+    param_1[4] = *param_1;
+    param_1[5] = *param_1;
+    param_1[6] = *param_1;
+  }
+  return;
+}
+
+// 00A692D0  FUN_00a692d0  size=113  [callgraph]
+undefined4 FUN_00a692d0(undefined4 *param_1,undefined4 *param_2)
+
+{
+  char cVar1;
+  
+  cVar1 = (**(code **)*param_1)();
+  if (cVar1 != '\0') {
+    *param_2 = 0;
+    param_2[1] = 0;
+    param_2[2] = 0;
+    param_2[3] = 0x3f800000;
+  }
+  cVar1 = FUN_00a69130(param_1,&DAT_01662d3c,param_2);
+  if (cVar1 != '\0') {
+    cVar1 = FUN_00a69130(param_1,&DAT_01662d38,param_2 + 1);
+    if (cVar1 != '\0') {
+      cVar1 = FUN_00a69130(param_1,&DAT_01662d34,param_2 + 2);
+      if (cVar1 != '\0') {
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
 // 00A69DB0  BoundingCapsule::vf08  size=484  [class]
 undefined4 __thiscall BoundingCapsule::vf08(int param_1,undefined4 param_2)
 
@@ -457,6 +543,148 @@ undefined4 __thiscall BoundingCapsule::vf08(int param_1,undefined4 param_2)
             (param_2,local_e0,&local_130,&local_100,&local_110,&local_f0,
              *(undefined4 *)(param_1 + 0x100),1);
   return param_2;
+}
+
+// 00A69FA0  FUN_00a69fa0  size=69  [callgraph]
+void __fastcall FUN_00a69fa0(int param_1)
+
+{
+  int iVar1;
+  
+  if (*(int *)(param_1 + 4) == 0) {
+    iVar1 = FUN_00dd29b0(0x180c,0x20,0,0);
+    *(int *)(param_1 + 4) = iVar1;
+    if (iVar1 != 0) {
+      *(undefined4 *)(param_1 + 8) = 0x200;
+      *(undefined4 *)(param_1 + 0xc) = 0;
+      *(int *)(param_1 + 0x18) = iVar1 + 0x1800;
+      FUN_00a68710();
+      return;
+    }
+  }
+  return;
+}
+
+// 00A69FF0  FUN_00a69ff0  size=108  [callgraph]
+void __fastcall FUN_00a69ff0(undefined4 *param_1)
+
+{
+  int *piVar1;
+  int *piVar2;
+  
+  piVar2 = (int *)param_1[5];
+  if (piVar2 != (int *)param_1[6]) {
+    do {
+      piVar1 = (int *)*piVar2;
+      if ((piVar1[6] != 0) && (piVar1 != (int *)0x0)) {
+        (**(code **)(*piVar1 + 4))(1);
+      }
+      piVar2 = (int *)piVar2[2];
+    } while (piVar2 != (int *)param_1[6]);
+  }
+  if (param_1[1] != 0) {
+    if (param_1[1] != 0) {
+      FUN_00dd48d0(param_1[1],0);
+      param_1[1] = 0;
+    }
+    param_1[2] = 0;
+    param_1[3] = 0;
+    param_1[4] = *param_1;
+    param_1[5] = *param_1;
+    param_1[6] = *param_1;
+  }
+  return;
+}
+
+// 00A6A060  FUN_00a6a060  size=116  [callgraph]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined1 FUN_00a6a060(int *param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  char cVar2;
+  undefined1 uVar3;
+  
+  if ((_DAT_01be99c4 & 1) == 0) {
+    _DAT_01be99c4 = _DAT_01be99c4 | 1;
+    DAT_01be99c0 = DAT_01884314;
+    DAT_01884314 = DAT_01884314 + 1;
+  }
+  iVar1 = DAT_01be99c0;
+  cVar2 = (**(code **)(*param_1 + 0x10))(param_2,DAT_01be99c0);
+  if (cVar2 == '\0') {
+    return 0;
+  }
+  uVar3 = FUN_00a692d0(param_1,param_1);
+  (**(code **)(*param_1 + 0x14))(param_2,iVar1);
+  return uVar3;
+}
+
+// 00A6A960  BoundingCapsule::vf1C  size=358  [class]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 __thiscall BoundingCapsule::vf1C(int param_1,int *param_2)
+
+{
+  int iVar1;
+  byte bVar2;
+  char cVar3;
+  char extraout_AL;
+  byte bVar4;
+  undefined3 extraout_var;
+  undefined4 uVar5;
+  undefined3 uVar6;
+  byte unaff_BL;
+  int iVar7;
+  int iVar8;
+  byte bStack_4;
+  
+  bVar2 = FUN_00a6a6e0(param_2,&DAT_01662d6c,param_1);
+  cVar3 = (**(code **)(*param_2 + 0x10))("radius",0xb);
+  if (cVar3 == '\0') {
+    bStack_4 = 0;
+  }
+  else {
+    (**(code **)(*param_2 + 0x1c))(param_1 + 0x100);
+    (**(code **)(*param_2 + 0x14))("radius",0xb);
+  }
+  (**(code **)(*param_2 + 0x10))("countOfPoints",7);
+  if (extraout_AL == '\0') {
+    unaff_BL = 0;
+    uVar6 = extraout_var;
+  }
+  else {
+    (**(code **)(*param_2 + 0x2c))(param_1 + 0x104);
+    uVar5 = (**(code **)(*param_2 + 0x14))("countOfPoints",7);
+    uVar6 = (undefined3)((uint)uVar5 >> 8);
+  }
+  bVar2 = bVar2 & bStack_4 & unaff_BL;
+  iVar8 = 0;
+  if (*(int *)(param_1 + 0x104) < 1) {
+    return CONCAT31(uVar6,bVar2);
+  }
+  iVar7 = param_1 + 0x110;
+  do {
+    if ((_DAT_01be99c4 & 1) == 0) {
+      _DAT_01be99c4 = _DAT_01be99c4 | 1;
+      DAT_01be99c0 = DAT_01884314;
+      DAT_01884314 = DAT_01884314 + 1;
+    }
+    iVar1 = DAT_01be99c0;
+    cVar3 = (**(code **)(*param_2 + 0x10))("point",DAT_01be99c0);
+    if (cVar3 == '\0') {
+      bVar4 = 0;
+    }
+    else {
+      bVar4 = FUN_00a692d0(param_2,iVar7);
+      (**(code **)(*param_2 + 0x14))("point",iVar1);
+    }
+    bVar2 = bVar2 & bVar4;
+    iVar7 = iVar7 + 0x10;
+    iVar8 = iVar8 + 1;
+  } while (iVar8 < *(int *)(param_1 + 0x104));
+  return CONCAT31((int3)((uint)iVar8 >> 8),bVar2);
 }
 
 // 00A6AB40  BoundingCapsule::thunk_vf1C  size=5  [class]

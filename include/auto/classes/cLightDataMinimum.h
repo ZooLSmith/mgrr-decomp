@@ -8,4 +8,6 @@ struct cLightDataMinimum : public cObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined ** vf00();  // 00A40810 slot 0x0  overrides cObject
     virtual undefined4 * vf04(byte param_2);  // 00A40820 slot 0x4  overrides cObject
+    // non-virtual members
+    cLightDataMinimum();  // 00A409E0
 };

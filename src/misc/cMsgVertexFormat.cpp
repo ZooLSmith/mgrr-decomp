@@ -25,20 +25,20 @@ void cMsgVertexFormat::vf00(void)
 undefined4 __thiscall cMsgVertexFormat::vf04(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00CCD980  cMsgVertexFormat::cMsgVertexFormat_2  size=134  [class]
-undefined4 * __fastcall cMsgVertexFormat::cMsgVertexFormat_2(undefined4 *param_1)
+// 00CCD980  cMsgVertexFormat::cMsgVertexFormat  size=134  [class]
+undefined4 * __fastcall cMsgVertexFormat::cMsgVertexFormat(undefined4 *param_1)
 
 {
   *param_1 = cMsgSystem::vftable;
   param_1[1] = cMsgCtrl::vftable;
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   param_1[2] = 0;
   param_1[3] = 0;
   param_1[0xb] = 0;

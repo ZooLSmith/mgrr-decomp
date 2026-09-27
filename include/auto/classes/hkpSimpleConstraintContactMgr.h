@@ -27,4 +27,5 @@ struct hkpSimpleConstraintContactMgr : public hkpDynamicsContactMgr {
     virtual int vf4C();  // 011CD530 slot 0x4C
     // non-virtual members
     hkpSimpleConstraintContactMgr();  // 011CDF80
+    ~hkpSimpleConstraintContactMgr();  // 011CE060
 };

@@ -380,7 +380,7 @@ void __fastcall BehaviorDebrisActor::vf30(int *param_1)
 undefined4 * __fastcall BehaviorDebrisActor::BehaviorDebrisActor(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_009003e0();
   param_1[0x221] = 0;
@@ -417,11 +417,11 @@ undefined * BehaviorDebrisActor::vf04(void)
   return &DAT_01b35304;
 }
 
-// 005DA750  BehaviorDebrisActor::vf00  size=30  [class]
-undefined4 __thiscall BehaviorDebrisActor::vf00(undefined4 param_1,byte param_2)
+// 005DA750  BehaviorDebrisActor::destruct  size=30  [class]
+undefined4 __thiscall BehaviorDebrisActor::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -925,7 +925,7 @@ LAB_005de6cc:
 LAB_005de583:
     if (fVar2 < (float)param_1[0x221] == (fVar2 == (float)param_1[0x221])) goto LAB_005de6f7;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
 LAB_005de6f7:
   iVar6 = 0;
   if (param_1[0x235] != 0) {
@@ -1008,8 +1008,8 @@ BehaviorDebrisActor::ExplosionSlot::vf18(int param_1,int param_2,undefined4 *par
   return;
 }
 
-// 005DFC00  BehaviorDebrisActor::vf40  size=2193  [class]
-undefined4 __fastcall BehaviorDebrisActor::vf40(int *param_1)
+// 005DFC00  BehaviorDebrisActor::startup  size=2193  [class]
+undefined4 __fastcall BehaviorDebrisActor::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -1443,7 +1443,7 @@ LAB_005e1d95:
   FUN_00900350(&local_1f0);
   bVar9 = local_1dc[0] != 0;
   uVar8 = (uint)bVar9;
-  hkpCdPointCollector::hkpCdPointCollector_4();
+  hkpCdPointCollector::hkpCdPointCollector();
   if (uVar8 == 0) {
     local_1e8 = local_1dc;
     local_1f0 = hkpAllCdBodyPairCollector::vftable;

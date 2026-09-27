@@ -1584,7 +1584,7 @@ void __thiscall FUN_00a09ba0(int param_1,undefined4 param_2)
 undefined4 __fastcall FUN_00a09be0(undefined4 param_1)
 
 {
-  cXmlBinary::cXmlBinary_103();
+  cXmlBinary::cXmlBinary();
   return param_1;
 }
 

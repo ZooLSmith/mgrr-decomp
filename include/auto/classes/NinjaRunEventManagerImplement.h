@@ -19,6 +19,6 @@ struct NinjaRunEventManagerImplement : public NinjaRunEventManager {
     virtual void vf28(int param_2);  // 00C433C0 slot 0x28  overrides NinjaRunEventManager
     virtual void vf2C();  // 00C43450 slot 0x2C  overrides NinjaRunEventManager
     virtual undefined AllocatedArray_NinjaRunEventManagerImplement__RegionUnit__();  // 00C5F010 slot 0x34  overrides NinjaRunEventManager
-    virtual undefined PointUnit();  // 00C5EE70 slot 0x48  overrides NinjaRunEventManager
+    virtual undefined vf48();  // 00C5EE70 slot 0x48  overrides NinjaRunEventManager
     virtual undefined4 * vf94(byte param_2);  // 00C62A40 slot 0x94  overrides NinjaRunEventManager
 };

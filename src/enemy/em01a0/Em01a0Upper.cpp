@@ -283,8 +283,8 @@ void __thiscall Em01a0Upper::vf1A4(int param_1,undefined4 param_2,byte param_3)
   return;
 }
 
-// 0051DC00  Em01a0Upper::vf40  size=511  [class]
-undefined4 __fastcall Em01a0Upper::vf40(int *param_1)
+// 0051DC00  Em01a0Upper::startup  size=511  [class]
+undefined4 __fastcall Em01a0Upper::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -299,7 +299,7 @@ undefined4 __fastcall Em01a0Upper::vf40(int *param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar2 = BehaviorEmBase::vf40();
+  iVar2 = BehaviorEmBase::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -519,7 +519,7 @@ undefined4 __thiscall Em01a0Upper::getAttackInfo(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7bd48);
-  if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 != 0)) {
+  if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 != 0)) {
     puVar1 = *(uint **)(iVar2 + 8);
     iVar6 = 0;
     iVar2 = FUN_00a81330();
@@ -988,7 +988,7 @@ void __fastcall Em01a0Upper::vf4C(int param_1)
 undefined4 * __fastcall Em01a0Upper::Em01a0Upper(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -1001,11 +1001,11 @@ undefined * Em01a0Upper::vf04(void)
   return &DAT_01b34f3c;
 }
 
-// 00AB7430  Em01a0Upper::vf00  size=30  [class]
-undefined4 __thiscall Em01a0Upper::vf00(undefined4 param_1,byte param_2)
+// 00AB7430  Em01a0Upper::destruct  size=30  [class]
+undefined4 __thiscall Em01a0Upper::destruct(undefined4 param_1,byte param_2)
 
 {
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

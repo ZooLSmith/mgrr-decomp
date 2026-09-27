@@ -1,5 +1,5 @@
 // src/collision/BoundingBox.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A66FE0..00A6AB20, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A66FE0..00A6AB20, 9 functions
 
 #include "mgrr.h"
 #include "BoundingBox.h"
@@ -506,6 +506,53 @@ undefined4 __thiscall BoundingBox::vf08(int param_1,undefined4 param_2)
   piVar4 = (int *)FUN_00910da0();
   (**(code **)(*piVar4 + 0x14))(param_2,local_e0,&local_160,&local_190,&local_170,1);
   return param_2;
+}
+
+// 00A6A7C0  BoundingBox::vf1C  size=226  [class]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+byte __thiscall BoundingBox::vf1C(int param_1,int *param_2)
+
+{
+  int iVar1;
+  char cVar2;
+  byte bVar3;
+  int iVar4;
+  byte bStack_4;
+  
+  FUN_00a6a6e0(param_2,&DAT_01662d6c,param_1);
+  cVar2 = (**(code **)(*param_2 + 0x10))("height",0xb);
+  if (cVar2 == '\0') {
+    bVar3 = 0;
+  }
+  else {
+    bVar3 = (**(code **)(*param_2 + 0x1c))(param_1 + 0x140);
+    (**(code **)(*param_2 + 0x14))("height",0xb);
+  }
+  bStack_4 = (byte)param_1;
+  bStack_4 = bStack_4 & bVar3;
+  param_1 = param_1 + 0x100;
+  iVar4 = 4;
+  do {
+    if ((_DAT_01be99c4 & 1) == 0) {
+      _DAT_01be99c4 = _DAT_01be99c4 | 1;
+      DAT_01be99c0 = DAT_01884314;
+      DAT_01884314 = DAT_01884314 + 1;
+    }
+    iVar1 = DAT_01be99c0;
+    cVar2 = (**(code **)(*param_2 + 0x10))("point",DAT_01be99c0);
+    if (cVar2 == '\0') {
+      bVar3 = 0;
+    }
+    else {
+      bVar3 = FUN_00a692d0(param_2,param_1);
+      (**(code **)(*param_2 + 0x14))("point",iVar1);
+    }
+    bStack_4 = bStack_4 & bVar3;
+    param_1 = param_1 + 0x10;
+    iVar4 = iVar4 + -1;
+  } while (iVar4 != 0);
+  return bStack_4;
 }
 
 // 00A6AB20  BoundingBox::thunk_vf1C  size=5  [class]

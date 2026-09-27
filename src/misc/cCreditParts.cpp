@@ -1,24 +1,48 @@
 // src/misc/cCreditParts.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF39C0..00D37460, 7 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDD000..00D37460, 8 functions
 
 #include "mgrr.h"
 #include "cCreditParts.h"
+
+// 00CDD000  cCreditParts::~cCreditParts  size=100  [class]
+void __fastcall cCreditParts::~cCreditParts(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if (param_1[0x42] != 0) {
+    (**(code **)(param_1[0x1c] + 8))(0,0,0);
+  }
+  cEspControler::~cEspControler();
+  iVar1 = param_1[5];
+  *param_1 = cCustomObjCtrlManager::vftable;
+  param_1[6] = 0;
+  if (iVar1 != 0) {
+    if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
+      *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
+      *(undefined4 *)(iVar1 + 4) = 0;
+    }
+    param_1[5] = 0;
+  }
+  return;
+}
 
 // 00CF39C0  cCreditParts::vf00  size=30  [class]
 undefined4 __thiscall cCreditParts::vf00(undefined4 param_1,byte param_2)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_10();
+  ~cCreditParts();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00D094B0  cCreditParts::vf14  size=663  [class]
+// 00D094B0  cCreditParts::create  size=663  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cCreditParts::vf14(int param_1)
+void __fastcall cCreditParts::create(int param_1)
 
 {
   float fVar1;

@@ -9,5 +9,5 @@ struct cEspControlerEvent : public cEspControler {
     virtual undefined4 * vf00(byte param_2);  // 00EAAD30 slot 0x0  overrides cEspControler
     // non-virtual members
     cEspControlerEvent();  // 00EAAA30
-    void ctor_00EAAAA0();  // 00EAAAA0
+    ~cEspControlerEvent();  // 00EAAAA0
 };

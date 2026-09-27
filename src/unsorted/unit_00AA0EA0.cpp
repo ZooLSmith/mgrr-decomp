@@ -11,7 +11,7 @@ undefined2 * __fastcall FUN_00aa0ea0(undefined2 *param_1)
   FUN_00410710();
   FUN_0041cf30();
   FUN_00a7c930();
-  EspControllerBullet::EspControllerBullet_5();
+  EspControllerBullet::EspControllerBullet();
   FUN_00904d60();
   *param_1 = 0;
   FUN_00a7c950();

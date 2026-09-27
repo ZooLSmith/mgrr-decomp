@@ -1,5 +1,5 @@
 // src/misc/ShapeCapsule.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6B450..00A6CB00, 9 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6B450..00A6CB00, 10 functions
 
 #include "mgrr.h"
 #include "ShapeCapsule.h"
@@ -79,7 +79,7 @@ void __thiscall FUN_00a6b620(int param_1,undefined4 *param_2,undefined4 *param_3
 undefined4 * __fastcall ShapeCapsule::ShapeCapsule(undefined4 *param_1)
 
 {
-  ShapeBase::ShapeBase_2(3);
+  ShapeBase::ShapeBase(3);
   param_1[0x54] = 0x3f000000;
   *param_1 = vftable;
   param_1[0x55] = 0x3f800000;
@@ -189,6 +189,38 @@ void __fastcall ShapeCapsule::vf14(int param_1)
   uStack_24 = *(undefined4 *)(param_1 + 0xe0);
   hkpCapsuleShape::hkpCapsuleShape(&uStack_24,&uStack_34,*(undefined4 *)(param_1 + 0x150));
   return;
+}
+
+// 00A6C870  ShapeCapsule::vf1C  size=210  [class]
+byte __thiscall ShapeCapsule::vf1C(int param_1,int *param_2)
+
+{
+  byte bVar1;
+  byte bVar2;
+  byte bVar3;
+  char cVar4;
+  byte unaff_BL;
+  byte bVar5;
+  
+  bVar1 = FUN_00a6c680(param_2,&DAT_01662d6c,param_1);
+  bVar2 = FUN_00a6a060(param_2,"baseOffset",param_1 + 0x130);
+  bVar3 = FUN_00a6a060(param_2,"baseRotation",param_1 + 0x140);
+  cVar4 = (**(code **)(*param_2 + 0x10))("radius",0xb);
+  if (cVar4 == '\0') {
+    unaff_BL = 0;
+  }
+  else {
+    (**(code **)(*param_2 + 0x1c))(param_1 + 0x150);
+    (**(code **)(*param_2 + 0x14))("radius",0xb);
+  }
+  bVar5 = 0xb;
+  cVar4 = (**(code **)(*param_2 + 0x10))("height");
+  if (cVar4 != '\0') {
+    (**(code **)(*param_2 + 0x1c))(param_1 + 0x154);
+    (**(code **)(*param_2 + 0x14))("height",0xb);
+    return bVar5 & bVar1 & bVar2 & bVar3 & unaff_BL;
+  }
+  return 0;
 }
 
 // 00A6C9D0  ShapeCapsule::thunk_vf1C  size=5  [class]

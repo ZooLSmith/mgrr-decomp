@@ -1,5 +1,5 @@
 // src/misc/cGameOverNormalMenu.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00990D40..009B3340, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00990D40..009B3340, 6 functions
 
 #include "mgrr.h"
 #include "cGameOverNormalMenu.h"
@@ -81,8 +81,23 @@ LAB_00990f15:
   return;
 }
 
-// 009A2600  cGameOverNormalMenu::vf14  size=576  [class]
-void __fastcall cGameOverNormalMenu::vf14(int param_1)
+// 009A2540  cGameOverNormalMenu::~cGameOverNormalMenu  size=56  [class]
+void __fastcall cGameOverNormalMenu::~cGameOverNormalMenu(undefined4 *param_1)
+
+{
+  *param_1 = vftable;
+  FUN_00cfe0f0(0x10);
+  param_1[0x11] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[0x12] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x12])(1);
+    param_1[0x12] = 0;
+  }
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 009A2600  cGameOverNormalMenu::create  size=576  [class]
+void __fastcall cGameOverNormalMenu::create(int param_1)
 
 {
   int *piVar1;
@@ -201,7 +216,7 @@ undefined4 * __thiscall cGameOverNormalMenu::vf00(undefined4 *param_1,byte param
     (*(code *)**(undefined4 **)param_1[0x12])(1);
     param_1[0x12] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

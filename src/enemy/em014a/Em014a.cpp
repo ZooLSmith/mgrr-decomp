@@ -75,8 +75,8 @@ void __thiscall Em014a::vf110(int param_1,int param_2)
   return;
 }
 
-// 004F1540  Em014a::vf264  size=100  [class]
-undefined4 __thiscall Em014a::vf264(int param_1,undefined4 param_2)
+// 004F1540  Em014a::setEmSetInfo  size=100  [class]
+undefined4 __thiscall Em014a::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   FUN_0040ac60(param_2);
@@ -275,8 +275,8 @@ void __fastcall FUN_004f1a10(int *param_1)
   return;
 }
 
-// 004F1A90  Em014a::vf40  size=640  [class]
-undefined4 __fastcall Em014a::vf40(int *param_1)
+// 004F1A90  Em014a::startup  size=640  [class]
+undefined4 __fastcall Em014a::startup(int *param_1)
 
 {
   code *pcVar1;
@@ -290,7 +290,7 @@ undefined4 __fastcall Em014a::vf40(int *param_1)
   undefined4 local_18;
   int local_14;
   
-  iVar2 = BehaviorEmBase::vf40();
+  iVar2 = BehaviorEmBase::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -401,7 +401,7 @@ void __fastcall FUN_004f1dc0(int param_1)
   fVar1 = *(float *)(param_1 + 0x920) - *(float *)(param_1 + 0x910);
   *(float *)(param_1 + 0x920) = fVar1;
   if (fVar1 < 0.0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   FUN_00ac80a0(0x3f800000,0x3f800000);
   return;
@@ -562,7 +562,7 @@ undefined4 * __fastcall Em014a::Em014a(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   cEspControler::cEspControler();
   cEspControler::cEspControler();
@@ -608,8 +608,8 @@ void __fastcall Em014a::vf1EC(int param_1)
   return;
 }
 
-// 00AB6920  Em014a::vf00  size=98  [class]
-undefined4 __thiscall Em014a::vf00(undefined4 param_1,byte param_2)
+// 00AB6920  Em014a::destruct  size=98  [class]
+undefined4 __thiscall Em014a::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00905ce0();
@@ -618,7 +618,7 @@ undefined4 __thiscall Em014a::vf00(undefined4 param_1,byte param_2)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -16,5 +16,7 @@ struct PhantomManagerImplement : public PhantomManager {
     virtual void vf1C(int param_1);  // 00900E30 slot 0x1C  overrides PhantomManager
     virtual undefined4 * vf20(byte param_2);  // 00900440 slot 0x20  overrides PhantomManager
     // non-virtual members
-    PhantomManagerImplement();  // 00900E70
+    ~PhantomManagerImplement();  // 00900E70
+    static int vf18_009021F0(uint param_1, int param_2, int param_3);  // 009021F0
+    static undefined vf14_00903B00();  // 00903B00
 };

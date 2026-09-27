@@ -12,7 +12,7 @@ int FUN_00d34740(void)
   
   iVar1 = FUN_00dd3500(0x160,&DAT_01b7be50);
   if (iVar1 != 0) {
-    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager_7();
+    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager();
     if (iVar1 != 0) {
       *(char **)(iVar1 + 0xc) = "cSubWeaponInfoDispParts";
       *(undefined4 *)(iVar1 + 8) = 5;

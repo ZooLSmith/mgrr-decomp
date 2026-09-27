@@ -9,5 +9,6 @@ struct hkpVehicleDriverInputAnalogStatus : public hkpVehicleDriverInputStatus {
     virtual undefined4 * vf00(byte param_2);  // 01288600 slot 0x0  overrides hkBaseObject
     virtual void vf0C();  // 01291C70 slot 0xC  overrides hkpVehicleDriverInputStatus
     // non-virtual members
-    hkpVehicleDriverInputAnalogStatus(undefined4 * param_1);  // 01288510
+    ~hkpVehicleDriverInputAnalogStatus();  // 01288510
+    hkpVehicleDriverInputAnalogStatus();  // 01288530
 };

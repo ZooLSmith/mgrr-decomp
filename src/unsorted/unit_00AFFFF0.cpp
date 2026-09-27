@@ -108,7 +108,7 @@ LAB_00aff57e:
     if (!bVar13) {
       FUN_00a81330();
       FUN_00a7c8a0();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       if (param_1[0x370] == 0x12) {
         iVar3 = 0;
         if (0 < (short)param_1[0xc9]) {

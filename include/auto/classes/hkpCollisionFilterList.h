@@ -7,6 +7,7 @@
 struct hkpCollisionFilterList : public hkpCollisionFilter {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpCollisionFilterList();  // 01141310
     static void vf00();  // 011414C0
     static void vf0C();  // 011414D0
     static void vf04();  // 011414E0
@@ -16,6 +17,6 @@ struct hkpCollisionFilterList : public hkpCollisionFilter {
     static undefined vf00_01159580();  // 01159580
     static undefined vf00_011595E0();  // 011595E0
     static undefined vf04_01159640();  // 01159640
-    hkpCollisionFilterList();  // 01159730
+    void ctor_01159730();  // 01159730
     void ctor_011598C0();  // 011598C0
 };

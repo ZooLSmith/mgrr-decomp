@@ -7,6 +7,4 @@
 struct cGameResultParts : public cCustomObjCtrlManager {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00CE40A0 slot 0x0  overrides cCustomObjCtrlManager
-    // non-virtual members
-    cGameResultParts();  // 00CF5320
 };

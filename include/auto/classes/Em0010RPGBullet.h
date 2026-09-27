@@ -13,6 +13,4 @@ struct Em0010RPGBullet : public Behavior {
     virtual void vf4C();  // 00B33310 slot 0x4C  overrides Behavior
     // non-virtual members
     Em0010RPGBullet();  // 00AA68D0
-    void ctor_00AB41A0();  // 00AB41A0
-    void ctor_00AB5FB0();  // 00AB5FB0
 };

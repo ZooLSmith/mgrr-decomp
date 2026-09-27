@@ -3370,8 +3370,8 @@ void __fastcall FUN_0041d070(int param_1)
   return;
 }
 
-// 0041D210  Em0020::vf264  size=267  [class]
-undefined4 __thiscall Em0020::vf264(int param_1,int param_2)
+// 0041D210  Em0020::setEmSetInfo  size=267  [class]
+undefined4 __thiscall Em0020::setEmSetInfo(int param_1,int param_2)
 
 {
   byte bVar1;
@@ -4502,8 +4502,8 @@ void __fastcall FUN_0041ec40(int param_1)
   return;
 }
 
-// 0041EE70  Em0020::vf130  size=1107  [class]
-int __thiscall Em0020::vf130(int param_1,ushort *param_2)
+// 0041EE70  Em0020::getAttackInfo  size=1107  [class]
+int __thiscall Em0020::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -4515,7 +4515,7 @@ int __thiscall Em0020::vf130(int param_1,ushort *param_2)
   uint local_c;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_0163d15c);
     return 0;
   }
@@ -5012,7 +5012,7 @@ void __fastcall FUN_0041ff10(int param_1)
     uVar3 = 0;
   }
   else {
-    uVar3 = RigidBodyCollection::RigidBodyCollection_2();
+    uVar3 = RigidBodyCollision::RigidBodyCollision();
   }
   uVar1 = *(undefined4 *)(param_1 + 0x4f0);
   *(undefined4 *)(param_1 + 0x7b0) = uVar3;
@@ -8306,8 +8306,8 @@ void __fastcall FUN_004259f0(int *param_1)
   return;
 }
 
-// 00425EB0  Em0020::vf128  size=2166  [class]
-void __fastcall Em0020::vf128(int *param_1)
+// 00425EB0  Em0020::setSeqAtk  size=2166  [class]
+void __fastcall Em0020::setSeqAtk(int *param_1)
 
 {
   float fVar1;
@@ -8364,7 +8364,7 @@ void __fastcall Em0020::vf128(int *param_1)
   undefined4 local_414;
   int local_410 [259];
   
-  BehaviorEmBase::vf128();
+  BehaviorEmBase::setSeqAtk();
   iVar4 = FUN_00a96130();
   local_41c = local_410;
   local_418 = 0;
@@ -16721,8 +16721,8 @@ switchD_0043565e_default:
   return;
 }
 
-// 004357E0  Em0020::vf40  size=1168  [class]
-undefined4 __fastcall Em0020::vf40(int param_1)
+// 004357E0  Em0020::startup  size=1168  [class]
+undefined4 __fastcall Em0020::startup(int param_1)
 
 {
   int iVar1;
@@ -16735,7 +16735,7 @@ undefined4 __fastcall Em0020::vf40(int param_1)
   undefined4 local_84;
   undefined1 local_80 [124];
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) | 0x20;
     if (((byte)DAT_01bea090 & 0x10) == 0) {
@@ -16892,7 +16892,7 @@ void __fastcall Em0020::vf50(int param_1)
     if (*(int *)(param_1 + 0x7b0) != 0) {
       FUN_008f3cb0(param_1);
     }
-    BehaviorEmBase::vf128();
+    BehaviorEmBase::setSeqAtk();
     return;
   }
   return;
@@ -18140,8 +18140,8 @@ LAB_004384bb:
   return 0;
 }
 
-// 00438860  hkpAllCdPointCollector::hkpAllCdPointCollector_5  size=39  [between]
-void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_5(undefined4 *param_1)
+// 00438860  hkpAllCdPointCollector::hkpAllCdPointCollector  size=39  [between]
+void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector(undefined4 *param_1)
 
 {
   param_1[1] = 0x7f7fffee;
@@ -18153,8 +18153,8 @@ void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_5(undefined4 *par
   return;
 }
 
-// 004388C0  hkpCdPointCollector::hkpCdPointCollector_4  size=77  [between]
-void __fastcall hkpCdPointCollector::hkpCdPointCollector_4(undefined4 *param_1)
+// 004388C0  hkpCdPointCollector::hkpCdPointCollector  size=77  [between]
+void __fastcall hkpCdPointCollector::hkpCdPointCollector(undefined4 *param_1)
 
 {
   *param_1 = hkpAllCdPointCollector::vftable;
@@ -19658,7 +19658,7 @@ undefined4 * __fastcall Em0020::Em0020(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   iVar1 = 1;
   do {
@@ -19707,12 +19707,12 @@ void __fastcall FUN_00aac070(int param_1)
     *(undefined4 *)(param_1 + 0x1190) = 0;
   }
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB6990  Em0020::vf00  size=30  [class]
-undefined4 __thiscall Em0020::vf00(undefined4 param_1,byte param_2)
+// 00AB6990  Em0020::destruct  size=30  [class]
+undefined4 __thiscall Em0020::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00aac070();

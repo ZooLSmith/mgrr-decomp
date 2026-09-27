@@ -1,5 +1,5 @@
 // src/enemy/em8060/Em8060.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0067BFA0..00ABA3B0, 354 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0067BFA0..00ABA3B0, 355 functions
 
 #include "mgrr.h"
 #include "Em8060.h"
@@ -44,7 +44,7 @@ void __fastcall FUN_0067c000(int param_1)
         fVar1 = fVar1 - *(float *)(param_1 + 0x910) * 0.05;
         if (fVar1 < 0.0 != (fVar1 == 0.0)) {
           (**(code **)(*piVar3 + 0x20))();
-          FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
           fVar1 = 0.0;
         }
         iVar4 = 0;
@@ -112,7 +112,7 @@ void __fastcall Em8060::vf2F8(int *param_1)
     (**(code **)(*param_1 + 0x344))(5,0,0);
     param_1[0x1af] = 1;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -4377,8 +4377,8 @@ void __fastcall FUN_00683bd0(int param_1)
   return;
 }
 
-// 00683C40  Em8060::vf264  size=639  [class]
-undefined4 __thiscall Em8060::vf264(int param_1,undefined4 param_2)
+// 00683C40  Em8060::setEmSetInfo  size=639  [class]
+undefined4 __thiscall Em8060::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   byte bVar1;
@@ -5042,7 +5042,7 @@ void __fastcall FUN_00684c70(int *param_1)
       FUN_00a805f0();
     }
     (**(code **)(*param_1 + 0x364))(0xffffffff);
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     fVar6 = (float10)local_14;
   }
   FUN_00ac8fd0((float)fVar6);
@@ -7418,7 +7418,7 @@ undefined4 __thiscall Em8060::getAttackInfo(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 != 0)) {
+  if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 != 0)) {
     puVar1 = *(uint **)(iVar2 + 8);
     puVar1[5] = *(uint *)(param_1 + 0x4f0);
     uVar3 = FUN_00a7c7f0();
@@ -12638,7 +12638,7 @@ void __fastcall FUN_006924e0(int *param_1)
     if (iVar1 != 0) {
       return;
     }
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00ac80a0(0x3f800000,0x3f800000);
@@ -13747,7 +13747,7 @@ LAB_006945ab:
   case 6:
     iVar3 = thunk_FUN_00e58ed0(param_1[0x71d]);
     if (iVar3 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   default:
@@ -13879,7 +13879,7 @@ void __fastcall Em8060::R0_ExplodeDie(int *param_1)
     fVar4 = (float10)FUN_00ac8f80();
     if (fVar4 - (float10)0.011111111 < (float10)0) {
       local_184 = (float)(float10)0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       FUN_00ac8fd0(local_184);
       return;
     }
@@ -16910,7 +16910,7 @@ void __fastcall Em8060::R0_ExplodeDie_2(int *param_1)
     if (iVar1 != 0) {
       return;
     }
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00ac80a0(0x3f800000,0x3f800000);
@@ -17519,7 +17519,7 @@ void __fastcall Em8060::R0_ChanceAttack(int *param_1)
   case 6:
     iVar1 = thunk_FUN_00e58ed0(param_1[0x71d]);
     if (iVar1 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   iVar1 = FUN_00a8c760(0x32);
@@ -18597,8 +18597,8 @@ void __thiscall FUN_0069d5b0(int *param_1,int param_2)
   return;
 }
 
-// 0069D780  Em8060::vf40  size=3353  [class]
-undefined4 __fastcall Em8060::vf40(int *param_1)
+// 0069D780  Em8060::startup  size=3353  [class]
+undefined4 __fastcall Em8060::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -18625,7 +18625,7 @@ undefined4 __fastcall Em8060::vf40(int *param_1)
   undefined4 local_84;
   undefined1 local_80 [124];
   
-  iVar4 = EmBaseDLC::vf40();
+  iVar4 = EmBaseDLC::startup();
   if (iVar4 == 0) {
     return 0;
   }
@@ -18737,7 +18737,7 @@ undefined4 __fastcall Em8060::vf40(int *param_1)
     iVar4 = 0;
   }
   else {
-    iVar4 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar4 = RigidBodyCollision::RigidBodyCollision();
   }
   param_1[0x1ec] = iVar4;
   if (iVar4 != 0) {
@@ -20395,6 +20395,63 @@ LAB_006a08a5:
   return uVar4;
 }
 
+// 00AB4C70  Em8060::Em8060  size=357  [class]
+undefined4 * __fastcall Em8060::Em8060(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  FUN_00a826e0();
+  FUN_00a826e0();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a603a0();
+  iVar2 = 2;
+  do {
+    FUN_00a7c930();
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  iVar2 = 2;
+  do {
+    FUN_00a7c930();
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  iVar2 = 1;
+  do {
+    FUN_00a826e0();
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  iVar2 = 0xf;
+  puVar1 = param_1 + 0x5e0;
+  do {
+    *puVar1 = 0;
+    puVar1 = puVar1 + 5;
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  FUN_009003e0();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00904d60();
+  FUN_00904d60();
+  param_1[0x6fb] = 0;
+  param_1[0x6fc] = 0;
+  FUN_00a831e0();
+  return param_1;
+}
+
 // 00AB4DE0  Em8060::vf04  size=6  [class]
 undefined * Em8060::vf04(void)
 
@@ -20446,12 +20503,12 @@ void FUN_00ab4e30(void)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00ABA3B0  Em8060::vf00  size=30  [class]
-undefined4 __thiscall Em8060::vf00(undefined4 param_1,byte param_2)
+// 00ABA3B0  Em8060::destruct  size=30  [class]
+undefined4 __thiscall Em8060::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00ab4e30();

@@ -11,5 +11,6 @@ struct hkxBlob : public hkReferencedObject {
     hkxBlob(undefined4 * param_1, undefined4 param_2);  // 010D3AA0
     hkxBlob();  // 010D3AD0
     hkxBlob(undefined4 param_2);  // 010D3BA0
-    hkxBlob(undefined4 * param_1);  // 010D3DD0
+    ~hkxBlob();  // 010D3DD0
+    void ctor_010D3DF0();  // 010D3DF0
 };

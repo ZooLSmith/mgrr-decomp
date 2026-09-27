@@ -982,7 +982,7 @@ LAB_00f06e69:
   *(float *)(param_1 + 0x138) = local_f4;
   *(float *)(param_1 + 0x13c) = fStack_1b0;
 LAB_00f06ec5:
-  FUN_00efed20();
+  esp107::vf10();
   if ((*(uint *)(param_1 + 0x3c) & 0x100000) != 0) {
     iVar3 = FUN_009d49d0();
     if ((*(byte *)(iVar3 + 0x1c) == 0) && (*(char *)(iVar3 + 0x1d) == '\0')) {

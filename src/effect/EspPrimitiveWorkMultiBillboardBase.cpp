@@ -1,12 +1,12 @@
 // src/effect/EspPrimitiveWorkMultiBillboardBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F50330..00F59690, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F50330..00F59690, 4 functions
 
 #include "mgrr.h"
 #include "EspPrimitiveWorkMultiBillboardBase.h"
 
-// 00F50330  EspPrimitiveWorkMultiBillboardBase::EspPrimitiveWorkMultiBillboardBase_2  size=66  [class]
+// 00F50330  EspPrimitiveWorkMultiBillboardBase::EspPrimitiveWorkMultiBillboardBase  size=66  [class]
 undefined4 * __fastcall
-EspPrimitiveWorkMultiBillboardBase::EspPrimitiveWorkMultiBillboardBase_2(undefined4 *param_1)
+EspPrimitiveWorkMultiBillboardBase::EspPrimitiveWorkMultiBillboardBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -65,22 +65,6 @@ void __thiscall EspPrimitiveWorkMultiBillboardBase::vf0C(int param_1,int param_2
   FUN_00f99090(param_1 + 0xa4);
   FUN_00f9f6d0(4,uVar3 * 2);
   return;
-}
-
-// 00F58BF0  EspPrimitiveWorkMultiBillboardBase::EspPrimitiveWorkMultiBillboardBase  size=72  [class]
-undefined4 * __fastcall
-EspPrimitiveWorkMultiBillboardBase::EspPrimitiveWorkMultiBillboardBase(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  FUN_00f9c880();
-  FUN_00f9c880();
-  FUN_00f9c880();
-  FUN_00f9c880();
-  FUN_00f9c7b0();
-  param_1[0x31] = 0;
-  *param_1 = EspPrimitiveWorkMultiBillboard<1024>::vftable;
-  return param_1;
 }
 
 // 00F59690  EspPrimitiveWorkMultiBillboardBase::vf00  size=80  [class]

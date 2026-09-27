@@ -14,10 +14,7 @@ struct ShapeBase {
     virtual void vf18(undefined4 param_2) = 0;  // 00FDB68B slot 0x18
     virtual byte vf1C(undefined4 param_2) = 0;  // 00FDB68B slot 0x1C
     // non-virtual members
-    ShapeBase();  // 00A6AD30
-    void ctor_00A6ADA0();  // 00A6ADA0
-    void ctor_00A6AE10();  // 00A6AE10
-    void ctor_00A6AE30();  // 00A6AE30
+    ~ShapeBase();  // 00A6AD30
     ShapeBase(undefined4 param_2);  // 00A6B000
-    void ctor_00A6B9A0();  // 00A6B9A0
+    ShapeBase();  // 00A6B9A0
 };

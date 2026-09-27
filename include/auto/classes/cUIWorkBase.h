@@ -11,13 +11,4 @@ struct cUIWorkBase : public cUIWork {
     virtual void vf08(undefined4 param_2);  // 00CE3180 slot 0x8  overrides cUIWork
     virtual void vf0C(undefined4 param_2);  // 00CCA890 slot 0xC  overrides cUIWork
     virtual void vf10();  // 00CCA880 slot 0x10  overrides cUIWork
-    // non-virtual members
-    cUIWorkBase();  // 00CEAAD0
-    void ctor_00CEAB90();  // 00CEAB90
-    void ctor_00CEB510();  // 00CEB510
-    void ctor_00CEDDD0();  // 00CEDDD0
-    void ctor_00CEF690();  // 00CEF690
-    void ctor_00CF3450();  // 00CF3450
-    void ctor_00CF36F0();  // 00CF36F0
-    void ctor_00CF7FE0();  // 00CF7FE0
 };

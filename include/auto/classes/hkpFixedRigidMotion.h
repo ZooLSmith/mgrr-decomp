@@ -12,5 +12,8 @@ struct hkpFixedRigidMotion : public hkpKeyframedRigidMotion {
     virtual void vf6C();  // 011C70E0 slot 0x6C  overrides hkpKeyframedRigidMotion
     virtual void vf74(int param_2);  // 011C7140 slot 0x74
     // non-virtual members
-    hkpFixedRigidMotion();  // 011C7110
+    hkpFixedRigidMotion(int param_2);  // 01191600
+    hkpFixedRigidMotion(undefined4 * param_1, int param_2);  // 011B1820
+    hkpFixedRigidMotion();  // 011B1860
+    void ctor_011C7110();  // 011C7110
 };

@@ -12,7 +12,7 @@ int FUN_00d37f40(void)
   
   iVar1 = FUN_00dd3500(0xa34,&DAT_01b7be50);
   if (iVar1 != 0) {
-    iVar1 = cGameResultRankDisp::cGameResultRankDisp();
+    iVar1 = cDLCRankDisp::cDLCRankDisp();
     if (iVar1 != 0) {
       *(char **)(iVar1 + 0xc) = "cGameAllResult";
       *(undefined4 *)(iVar1 + 8) = 10;

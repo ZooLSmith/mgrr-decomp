@@ -41,7 +41,7 @@ hkpAllRayHitCollector::hkpAllRayHitCollector
   param_2[1] = 0.0;
   param_2[2] = 0.0;
   param_2[3] = 1.0;
-  hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector();
   iVar7 = RayCastMultiHitWork::RayCastMultiHitWork
                     (local_330,param_3,param_4,0xffff0006,"DatsuJump::CollisionCheck");
   uVar10 = 0;

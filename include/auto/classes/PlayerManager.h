@@ -50,6 +50,4 @@ struct PlayerManager {
     virtual undefined4 vfA8() = 0;  // 00FDB68B slot 0xA8
     virtual bool vfAC(uint param_2) = 0;  // 00FDB68B slot 0xAC
     virtual void vfB0(uint param_2) = 0;  // 00FDB68B slot 0xB0
-    // non-virtual members
-    PlayerManager();  // 00C4CEB0
 };

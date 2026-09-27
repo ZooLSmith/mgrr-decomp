@@ -11,14 +11,14 @@ void GimmickBehaviorBase::vf318(void)
   return;
 }
 
-// 005E2D00  GimmickBehaviorBase::vf40  size=128  [class]
-bool __fastcall GimmickBehaviorBase::vf40(int param_1)
+// 005E2D00  GimmickBehaviorBase::startup  size=128  [class]
+bool __fastcall GimmickBehaviorBase::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return false;
   }
@@ -173,8 +173,8 @@ void GimmickBehaviorBase::vf330(void)
   return;
 }
 
-// 00AA8AE0  GimmickBehaviorBase::vf00  size=43  [class]
-undefined4 __thiscall GimmickBehaviorBase::vf00(undefined4 param_1,byte param_2)
+// 00AA8AE0  GimmickBehaviorBase::destruct  size=43  [class]
+undefined4 __thiscall GimmickBehaviorBase::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

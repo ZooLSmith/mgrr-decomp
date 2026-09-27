@@ -22,7 +22,7 @@ undefined4 __fastcall FUN_00a98f50(int param_1)
       iVar4 = 0;
     }
     else {
-      iVar4 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar4 = RigidBodyCollision::RigidBodyCollision();
     }
     *(int *)(param_1 + 0x7b0) = iVar4;
     if (iVar4 != 0) {
@@ -65,7 +65,7 @@ void __fastcall BehaviorBgBase::vf4C(int *param_1)
     fVar1 = (float)param_1[0x22d] - 1.0;
     param_1[0x22d] = (int)fVar1;
     if (NAN(fVar1) || 0.0 < fVar1 == (fVar1 == 0.0)) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   if (((*(byte *)(param_1 + 0x130) & 1) != 0) && (param_1[0x27d] != 0)) {
@@ -259,7 +259,7 @@ LAB_00a9993c:
         } while (iVar2 < unaff_retaddr);
       }
       if (iStack_4 == -1) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
       if (param_1[0x299] != 0) {
         FUN_00dd4940(param_1[0x299]);
@@ -411,7 +411,7 @@ void __fastcall BehaviorBgBase::vf50(int param_1)
 undefined4 * __fastcall BehaviorBgBase::BehaviorBgBase(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00c1e220();
   param_1[0x221] = 0;
@@ -448,8 +448,8 @@ undefined * BehaviorBgBase::vf04(void)
   return &DAT_01be9c28;
 }
 
-// 00AA94A0  BehaviorBgBase::vf00  size=30  [class]
-undefined4 __thiscall BehaviorBgBase::vf00(undefined4 param_1,byte param_2)
+// 00AA94A0  BehaviorBgBase::destruct  size=30  [class]
+undefined4 __thiscall BehaviorBgBase::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_0040d3f0();
@@ -459,8 +459,8 @@ undefined4 __thiscall BehaviorBgBase::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 00AA94C0  BehaviorBgBase::vf40  size=2096  [class]
-undefined4 __fastcall BehaviorBgBase::vf40(int param_1)
+// 00AA94C0  BehaviorBgBase::startup  size=2096  [class]
+undefined4 __fastcall BehaviorBgBase::startup(int param_1)
 
 {
   uint *puVar1;
@@ -562,26 +562,26 @@ undefined4 __fastcall BehaviorBgBase::vf40(int param_1)
   switchD_0080dbae::default();
   iVar5 = FUN_00de4550("_param.bxm",0);
   if (iVar5 != 0) {
-    cXmlBinary::cXmlBinary_103();
+    cXmlBinary::cXmlBinary();
     FUN_00e062b0(iVar5,0);
-    uVar8 = FUN_00e041c0();
-    iVar5 = FUN_00e06390(uVar8,"Carry");
+    uVar8 = cXmlBinary::vf04();
+    iVar5 = cXmlBinary::vf18(uVar8,"Carry");
     if (iVar5 != -1) {
       *(undefined4 *)(param_1 + 0x658) = 1;
       lib::StaticArray<Collision*,64>::StaticArray<Collision*,64>(2,1);
     }
-    iVar5 = FUN_00e06390(uVar8,"CutZanMode");
+    iVar5 = cXmlBinary::vf18(uVar8,"CutZanMode");
     if (iVar5 != -1) {
       *(undefined4 *)(param_1 + 0x8ac) = 1;
     }
-    iVar5 = FUN_00e06390(uVar8,"NeedlessApplyRigidBody");
+    iVar5 = cXmlBinary::vf18(uVar8,"NeedlessApplyRigidBody");
     if (iVar5 != -1) {
       *(undefined4 *)(param_1 + 0x88c) = 1;
       *(undefined4 *)(param_1 + 0x8a0) = 0;
       *(undefined4 *)(param_1 + 0x8a4) = 0;
       *(undefined4 *)(param_1 + 0x8a8) = 0;
     }
-    iVar5 = FUN_00e06390(uVar8,"InstallationKeyframed");
+    iVar5 = cXmlBinary::vf18(uVar8,"InstallationKeyframed");
     if (iVar5 != -1) {
       *(undefined4 *)(param_1 + 0x890) = 1;
       *(undefined4 *)(param_1 + 0x8a4) = 1;
@@ -615,43 +615,43 @@ undefined4 __fastcall BehaviorBgBase::vf40(int param_1)
         FUN_008f2cd0(0);
       }
     }
-    iVar5 = FUN_00e06390(uVar8,"RideCheckActivate");
+    iVar5 = cXmlBinary::vf18(uVar8,"RideCheckActivate");
     if (iVar5 != -1) {
       *(undefined4 *)(param_1 + 0x894) = 1;
     }
-    iVar5 = FUN_00e06390(uVar8,"AutoSePlay");
+    iVar5 = cXmlBinary::vf18(uVar8,"AutoSePlay");
     if ((iVar5 != -1) &&
-       (FUN_00e06930(iVar5,(int *)(param_1 + 0x898)), *(int *)(param_1 + 0x898) != 0)) {
+       (cXmlBinary::vf58(iVar5,(int *)(param_1 + 0x898)), *(int *)(param_1 + 0x898) != 0)) {
       FUN_009f8ea0(&uStack_1c0,10,*(undefined4 *)(param_1 + 0x4b0),0);
       FUN_00a90970(auStack_110,"%s_se_setobj_play",&uStack_1c0);
       uVar11 = FUN_00e5e080(auStack_110,param_1 + 0x40,0,0xffffffff,0);
       *(undefined4 *)(param_1 + 0x89c) = uVar11;
     }
-    iVar5 = FUN_00e06390(uVar8,"ZanTargetDisp");
+    iVar5 = cXmlBinary::vf18(uVar8,"ZanTargetDisp");
     if (iVar5 != -1) {
       *(undefined4 *)(param_1 + 0xa54) = 1;
-      iVar5 = FUN_00e06390(uVar8,"ZanTargetRad");
+      iVar5 = cXmlBinary::vf18(uVar8,"ZanTargetRad");
       if (iVar5 == -1) {
         *(undefined4 *)(param_1 + 0xa4c) = 0x41200000;
       }
       else {
-        FUN_00e06970(iVar5,param_1 + 0xa4c);
+        cXmlBinary::vf54(iVar5,param_1 + 0xa4c);
       }
-      iVar5 = FUN_00e06390(uVar8,"ZanTargetEnableRange");
+      iVar5 = cXmlBinary::vf18(uVar8,"ZanTargetEnableRange");
       puVar2 = (undefined4 *)(param_1 + 0xa48);
       if (iVar5 == -1) {
         *puVar2 = 0x40400000;
       }
       else {
-        FUN_00e06970(iVar5,puVar2);
+        cXmlBinary::vf54(iVar5,puVar2);
       }
-      iVar5 = FUN_00e06390(uVar8,"ZanTargetHomingRange");
+      iVar5 = cXmlBinary::vf18(uVar8,"ZanTargetHomingRange");
       puVar3 = (undefined4 *)(param_1 + 0xa50);
       if (iVar5 == -1) {
         *puVar3 = 0x3f800000;
       }
       else {
-        FUN_00e06970(iVar5,puVar3);
+        cXmlBinary::vf54(iVar5,puVar3);
       }
       uStack_1c0 = 0;
       uStack_1bc = 0;
@@ -670,7 +670,7 @@ undefined4 __fastcall BehaviorBgBase::vf40(int param_1)
         *(undefined1 *)(iVar5 + 0x4c) = 3;
       }
     }
-    iVar5 = FUN_00e06390(uVar8,"EnemyNoBreak");
+    iVar5 = cXmlBinary::vf18(uVar8,"EnemyNoBreak");
     if (iVar5 != -1) {
       *(undefined4 *)(param_1 + 0x9f8) = 1;
     }

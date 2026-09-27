@@ -11811,7 +11811,7 @@ undefined4 * __thiscall hkSerializeDeprecated::vf00(undefined4 *param_1,byte par
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -11963,8 +11963,8 @@ void FUN_0104ceb0(undefined4 param_1)
   return;
 }
 
-// 0104CEE0  hkBaseObject::hkBaseObject_201  size=34  [run]
-void __fastcall hkBaseObject::hkBaseObject_201(undefined4 *param_1)
+// 0104CEE0  hkBaseObject::~hkBaseObject  size=34  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01010310(&PTR_vftable_018e9b94);
@@ -12045,7 +12045,7 @@ undefined4 * __thiscall hkVersionPatchManager::ClassWrapper::vf00(undefined4 *pa
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12070,7 +12070,7 @@ int __thiscall _anon_4671B7E4::DataWorldNative::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_207();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12097,7 +12097,7 @@ hkSerializeDeprecated2::vf0C
   hkXmlPackfileWriter::hkXmlPackfileWriter(local_14);
   hkXmlPackfileWriter::vf10(param_1,param_2,param_5);
   uVar1 = hkXmlPackfileWriter::vf1C(param_3,param_4);
-  hkBaseObject::hkBaseObject_239();
+  hkPackfileWriter::~hkPackfileWriter();
   return uVar1;
 }
 
@@ -12117,8 +12117,8 @@ bool hkSerializeDeprecated2::vf10(int *param_1)
   return true;
 }
 
-// 0104D1E0  hkBaseObject::hkBaseObject_192  size=34  [run]
-void __fastcall hkBaseObject::hkBaseObject_192(undefined4 *param_1)
+// 0104D1E0  hkBaseObject::~hkBaseObject  size=34  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01010310(&PTR_vftable_018e9b94);
@@ -12133,7 +12133,7 @@ undefined4 * __thiscall hkSerializeDeprecated2::vf00(undefined4 *param_1,byte pa
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12165,7 +12165,7 @@ undefined4 * __thiscall _anon_4671B7E4::ClassWrapper::vf00(undefined4 *param_1,b
     FUN_010060a0();
   }
   param_1[2] = 0;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12288,7 +12288,7 @@ undefined4 * __thiscall hkVtableClassRegistry::vf00(undefined4 *param_1,byte par
   
   FUN_01010310(&PTR_vftable_018e9b94);
   FUN_0100fd10();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12389,7 +12389,7 @@ undefined4 * __thiscall hkClassPointerVtable::VtableRegistry::vf00(undefined4 *p
   
   FUN_01010310(&PTR_vftable_018e9b94);
   FUN_0100fd10();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12566,11 +12566,11 @@ int hkBaseObject::hkBaseObject_195
     *param_5 = 4;
     FUN_01006780("Unable to version contents, check warning log");
   }
-  hkBaseObject_207();
+  hkBaseObject();
   FUN_01010310(&PTR_vftable_018e9b94);
   FUN_0100fd10();
   local_2c = vftable;
-  hkBaseObject_233();
+  hkBaseObject();
   FUN_01025870();
   return iVar1;
 }
@@ -12608,7 +12608,7 @@ undefined4 hkSerializeDeprecated2::vf14(undefined4 param_1,undefined4 param_2,un
   undefined4 uVar4;
   undefined1 local_9c [152];
   
-  hkDataWorldDict::hkDataWorldDict_2();
+  hkDataWorldDict::hkDataWorldDict();
   iVar2 = FUN_0104dbc0(local_9c,param_1,param_2,param_3);
   if (iVar2 == 0) {
     uVar4 = 1;
@@ -12622,10 +12622,10 @@ undefined4 hkSerializeDeprecated2::vf14(undefined4 param_1,undefined4 param_2,un
         (**(code **)*param_3)(1);
       }
     }
-    hkBaseObject::hkBaseObject_200();
+    ::hkBaseObject::hkBaseObject();
     return uVar3;
   }
-  hkBaseObject::hkBaseObject_200();
+  ::hkBaseObject::hkBaseObject();
   return 0;
 }
 
@@ -12639,7 +12639,7 @@ undefined4 hkSerializeDeprecated2::vf18(undefined4 param_1,undefined4 param_2,un
   undefined4 uVar4;
   undefined1 local_9c [152];
   
-  hkDataWorldDict::hkDataWorldDict_2();
+  hkDataWorldDict::hkDataWorldDict();
   iVar2 = FUN_0104dbc0(local_9c,param_1,param_2,param_3);
   if (iVar2 == 0) {
     uVar4 = 1;
@@ -12653,10 +12653,10 @@ undefined4 hkSerializeDeprecated2::vf18(undefined4 param_1,undefined4 param_2,un
         (**(code **)*param_3)(1);
       }
     }
-    hkBaseObject::hkBaseObject_200();
+    ::hkBaseObject::hkBaseObject();
     return uVar3;
   }
-  hkBaseObject::hkBaseObject_200();
+  ::hkBaseObject::hkBaseObject();
   return 0;
 }
 
@@ -13115,21 +13115,21 @@ LAB_0104e685:
   return 0;
 }
 
-// 0104E6C0  hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_4  size=75  [run]
+// 0104E6C0  ValidatedClassNameRegistry::ValidatedClassNameRegistry  size=75  [run]
 undefined4 * __thiscall
-hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_4(undefined4 *param_1,int param_2)
+ValidatedClassNameRegistry::ValidatedClassNameRegistry(undefined4 *param_1,int param_2)
 
 {
   uint local_8;
   
   local_8 = (uint)param_1 & 0xffffff00;
   *(undefined2 *)((int)param_1 + 6) = 1;
-  *param_1 = vftable;
+  *param_1 = hkDynamicClassNameRegistry::vftable;
   param_1[2] = 0;
   FUN_01025830(local_8);
-  *param_1 = ValidatedClassNameRegistry::vftable;
+  *param_1 = vftable;
   if (param_2 != 0) {
-    vf24(param_2);
+    hkDynamicClassNameRegistry::vf24(param_2);
   }
   return param_1;
 }
@@ -13291,7 +13291,7 @@ undefined4 FUN_0104ead0(int *param_1)
   uVar2 = (**(code **)(*param_1 + 0xc))();
   piVar3 = (int *)FUN_0104e810(uVar2);
   iVar1 = *piVar3;
-  uVar2 = hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_4(param_1);
+  uVar2 = ValidatedClassNameRegistry::ValidatedClassNameRegistry(param_1);
   (**(code **)(iVar1 + 0x24))(uVar2);
   FUN_01025870();
   return 0;
@@ -13341,7 +13341,7 @@ undefined4 hkBaseObject::hkBaseObject_184(int *param_1,undefined4 param_2,uint p
     FUN_010060a0();
   }
   local_34 = piVar7;
-  hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_4(0);
+  ValidatedClassNameRegistry::ValidatedClassNameRegistry(0);
   for (piVar2 = param_1; piVar2 != (int *)0x0; piVar2 = (int *)piVar2[3]) {
     if (piVar2[2] != 0) {
       hkDynamicClassNameRegistry::vf24(piVar2[2]);
@@ -13623,8 +13623,8 @@ void hkDynamicClassNameRegistry::vf1C(undefined4 param_1,int param_2)
   return;
 }
 
-// 0104F150  hkBaseObject::hkBaseObject_175  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_175(undefined4 *param_1)
+// 0104F150  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01025870();
@@ -13741,7 +13741,7 @@ undefined4 * __thiscall hkRenamedClassNameRegistry::vf00(undefined4 *param_1,byt
     FUN_010060a0();
   }
   FUN_01025870();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13749,8 +13749,8 @@ undefined4 * __thiscall hkRenamedClassNameRegistry::vf00(undefined4 *param_1,byt
   return param_1;
 }
 
-// 0104F300  hkBaseObject::hkBaseObject_178  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_178(undefined4 *param_1)
+// 0104F300  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01025870();
@@ -13884,9 +13884,9 @@ void FUN_0104f550(int param_1)
   return;
 }
 
-// 0104F580  hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_3  size=50  [run]
+// 0104F580  hkDynamicClassNameRegistry::hkDynamicClassNameRegistry  size=50  [run]
 undefined4 * __thiscall
-hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_3(undefined4 *param_1,uint param_2)
+hkDynamicClassNameRegistry::hkDynamicClassNameRegistry(undefined4 *param_1,uint param_2)
 
 {
   uint uVar1;
@@ -14014,7 +14014,7 @@ undefined4 * __thiscall hkDynamicClassNameRegistry::vf00(undefined4 *param_1,byt
   LPVOID pvVar1;
   
   FUN_01025870();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -14028,7 +14028,7 @@ undefined4 * __thiscall hkClassNameRegistry::vf00(undefined4 *param_1,byte param
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -14049,10 +14049,9 @@ void FUN_0104f7e0(undefined4 param_1)
   return;
 }
 
-// 0104F810  hkRenamedClassNameRegistry::hkRenamedClassNameRegistry_2  size=130  [run]
+// 0104F810  hkRenamedClassNameRegistry::hkRenamedClassNameRegistry  size=130  [run]
 undefined4 * __thiscall
-hkRenamedClassNameRegistry::hkRenamedClassNameRegistry_2
-          (undefined4 *param_1,int *param_2,int param_3)
+hkRenamedClassNameRegistry::hkRenamedClassNameRegistry(undefined4 *param_1,int *param_2,int param_3)
 
 {
   int *piVar1;
@@ -14442,7 +14441,7 @@ undefined4 * __thiscall ValidatedClassNameRegistry::vf00(undefined4 *param_1,byt
   LPVOID pvVar1;
   
   FUN_01025870();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -14467,7 +14466,7 @@ int __thiscall hkVersionRegistry::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_187();
+  ::hkBaseObject::hkBaseObject_187();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -15111,7 +15110,7 @@ int FUN_01050de0(int *param_1,int *param_2,int *param_3)
   local_1c = 0;
   local_18 = 0;
   local_14 = 0x80000000;
-  hkOstream::hkOstream_3(&local_1c);
+  hkOstream::hkOstream(&local_1c);
   local_78 = 0x80000000;
   local_6c = 0x80000000;
   local_60 = 0x80000000;
@@ -15141,7 +15140,7 @@ int FUN_01050de0(int *param_1,int *param_2,int *param_3)
       *piVar3 = local_18;
       FUN_010100a0(&PTR_vftable_018e9b94,*puVar7,local_18);
       _anon_B1A2C86F::PackfileObjectCopier::vf0C(*puVar7,puVar7[1],local_2c,local_10,&local_80);
-      hkBaseObject::hkBaseObject_138();
+      hkBaseObject::~hkBaseObject();
       iVar6 = iVar6 + 1;
     } while (iVar6 < in_EAX[1]);
   }
@@ -15306,7 +15305,7 @@ hkRenamedClassNameRegistry::hkRenamedClassNameRegistry
   
   puVar7 = param_3;
   piVar4 = param_1;
-  hkRenamedClassNameRegistry_2(*param_3,param_4);
+  hkRenamedClassNameRegistry(*param_3,param_4);
   for (piVar2 = (int *)puVar7[3]; piVar2 != (int *)0x0; piVar2 = (int *)piVar2[3]) {
     piVar10 = (int *)*piVar2;
     if (piVar10 != (int *)0x0) {
@@ -16926,7 +16925,7 @@ int __thiscall _anon_B1A2C86F::PackfileObjectCopier::vf00(int param_1,byte param
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_138();
+  ::hkBaseObject::~hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -17802,7 +17801,7 @@ bool __thiscall hkXmlPackfileWriter::vf1C(int param_1,int *param_2,int param_3)
       iVar6 = param_3;
     } while (local_c < *(int *)(param_1 + 0xc));
   }
-  hkOstream::hkOstream_4(param_2);
+  hkOstream::hkOstream(param_2);
   FUN_01018f60(local_18,"<?xml version=\"1.0\" encoding=\"ascii\"?>\n");
   puVar5 = *(undefined1 **)(iVar6 + 0xc);
   if (puVar5 == (undefined1 *)0x0) {
@@ -17852,14 +17851,14 @@ bool __thiscall hkXmlPackfileWriter::vf1C(int param_1,int *param_2,int param_3)
   cVar1 = *pcVar3;
   FUN_01010310(&PTR_vftable_018e9b94);
   FUN_0100fd10();
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   local_60 = 0;
   if (-1 < (int)local_5c) {
     (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_64,local_5c & 0x3fffffff);
   }
   local_64 = 0;
   local_5c = 0x80000000;
-  local_6c[0] = hkBaseObject::vftable;
+  local_6c[0] = ::hkBaseObject::vftable;
   FUN_01010310(&PTR_vftable_018e9b94);
   FUN_0100fd10();
   return cVar1 == '\0';
@@ -17977,7 +17976,7 @@ int __thiscall hkXmlPackfileWriter::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_239();
+  hkPackfileWriter::~hkPackfileWriter();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -17985,8 +17984,8 @@ int __thiscall hkXmlPackfileWriter::vf00(int param_1,byte param_2)
   return param_1;
 }
 
-// 010551C0  hkXmlObjectWriter::NameFromAddress::NameFromAddress  size=34  [run]
-void __fastcall hkXmlObjectWriter::NameFromAddress::NameFromAddress(undefined4 *param_1)
+// 010551C0  hkXmlObjectWriter::NameFromAddress::~NameFromAddress  size=34  [run]
+void __fastcall hkXmlObjectWriter::NameFromAddress::~NameFromAddress(undefined4 *param_1)
 
 {
   FUN_01010310(&PTR_vftable_018e9b94);

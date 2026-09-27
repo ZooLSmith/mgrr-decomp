@@ -43,13 +43,13 @@ void __fastcall BaContainer::thunk_vf50(int param_1)
   return;
 }
 
-// 004853B0  BaContainer::vf40  size=110  [class]
-void __fastcall BaContainer::vf40(int param_1)
+// 004853B0  BaContainer::startup  size=110  [class]
+void __fastcall BaContainer::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return;
   }
@@ -152,8 +152,8 @@ undefined * BaContainer::vf04(void)
   return &DAT_01b34d74;
 }
 
-// 00AB96D0  BaContainer::vf00  size=43  [class]
-undefined4 __thiscall BaContainer::vf00(undefined4 param_1,byte param_2)
+// 00AB96D0  BaContainer::destruct  size=43  [class]
+undefined4 __thiscall BaContainer::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

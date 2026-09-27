@@ -75,7 +75,7 @@ void __fastcall FUN_00fcc4a0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f3fb4;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -116,7 +116,7 @@ void __fastcall FUN_00fcc560(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f3ff4;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -169,7 +169,7 @@ void __fastcall FUN_00fcc690(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4024;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -213,7 +213,7 @@ void __fastcall FUN_00fcc770(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f402c;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -254,7 +254,7 @@ void __fastcall FUN_00fcc830(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4034;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -295,7 +295,7 @@ void __fastcall FUN_00fcc8f0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f403c;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -336,7 +336,7 @@ void __fastcall FUN_00fcc9b0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4044;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -383,7 +383,7 @@ void __fastcall FUN_00fccaa0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4078;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -434,7 +434,7 @@ void __fastcall FUN_00fccb90(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4080;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -493,7 +493,7 @@ void __fastcall FUN_00fcccf0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4088;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -552,7 +552,7 @@ void __fastcall FUN_00fcce50(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4090;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -602,7 +602,7 @@ void __fastcall FUN_00fccf60(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4098;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -652,7 +652,7 @@ void __fastcall FUN_00fcd070(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f40a0;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -771,7 +771,7 @@ void __fastcall FUN_00fcd300(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f40e8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -818,7 +818,7 @@ void __fastcall FUN_00fcd3f0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f40f0;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -865,7 +865,7 @@ void __fastcall FUN_00fcd4e0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f40f8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -932,7 +932,7 @@ void __fastcall FUN_00fcd640(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4138;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -1032,7 +1032,7 @@ void __fastcall FUN_00fcd8c0(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4264;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -1111,7 +1111,7 @@ void __fastcall FUN_00fcda70(undefined4 *param_1)
 
 {
   *param_1 = &PTR_FUN_016f4284;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -1171,17 +1171,17 @@ undefined4 __fastcall FUN_00fcdbb0(undefined4 param_1)
   
   iVar1 = 0x3f;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   iVar1 = 7;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   iVar1 = 0xc;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return param_1;
@@ -1195,17 +1195,17 @@ void FUN_00fcdc10(void)
   
   iVar1 = 0xc;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   iVar1 = 7;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   iVar1 = 0x3f;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return;

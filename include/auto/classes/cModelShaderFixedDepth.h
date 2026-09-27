@@ -9,5 +9,5 @@ struct cModelShaderFixedDepth {
     virtual void vf04();  // 00F92220 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cModelShaderFixedDepth();  // 00F921E0
-    void ctor_015F41A0();  // 015F41A0
+    ~cModelShaderFixedDepth();  // 015F41A0
 };

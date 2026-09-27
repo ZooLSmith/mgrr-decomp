@@ -8,7 +8,7 @@
 undefined4 * __fastcall cEventPauseMenu::cEventPauseMenu(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   param_1[0xe] = 0;
   param_1[0xf] = 0xffffffff;
@@ -18,10 +18,10 @@ undefined4 * __fastcall cEventPauseMenu::cEventPauseMenu(undefined4 *param_1)
   return param_1;
 }
 
-// 009944E0  cEventPauseMenu::cEventPauseMenu_2  size=59  [class]
+// 009944E0  cEventPauseMenu::~cEventPauseMenu  size=59  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cEventPauseMenu::cEventPauseMenu_2(undefined4 *param_1)
+void __fastcall cEventPauseMenu::~cEventPauseMenu(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -29,7 +29,7 @@ void __fastcall cEventPauseMenu::cEventPauseMenu_2(undefined4 *param_1)
   FUN_00e5e1b0("bgm_Paused_Movie_Exit");
   FUN_00e5e050("core_se_sys_pause_movie_out",0);
   FUN_00cfe0f0(9);
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -41,7 +41,7 @@ undefined4 * cEventPauseMenu::cEventPauseMenu_3(void)
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x44,&DAT_01b7be50);
   if (puVar1 != (undefined4 *)0x0) {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     *puVar1 = vftable;
     puVar1[0xe] = 0;
     puVar1[0xf] = 0xffffffff;
@@ -165,7 +165,7 @@ undefined4 * __thiscall cEventPauseMenu::vf00(undefined4 *param_1,byte param_2)
   FUN_00e5e1b0("bgm_Paused_Movie_Exit");
   FUN_00e5e050("core_se_sys_pause_movie_out",0);
   FUN_00cfe0f0(9);
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -214,10 +214,10 @@ void __fastcall cEventPauseMenu::vf08(int param_1)
   return;
 }
 
-// 009A5930  cEventPauseMenu::vf14  size=757  [class]
+// 009A5930  cEventPauseMenu::create  size=757  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cEventPauseMenu::vf14(int param_1)
+void __fastcall cEventPauseMenu::create(int param_1)
 
 {
   int *piVar1;

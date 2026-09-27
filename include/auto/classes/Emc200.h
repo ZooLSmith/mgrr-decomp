@@ -30,4 +30,6 @@ struct Emc200 : public EmBaseDLC {
     virtual undefined4 setEmSetInfo();  // 00808890 slot 0x264  overrides Behavior
     virtual undefined4 vf32C();  // 0081B990 slot 0x32C  overrides BehaviorEmBase
     virtual void vf358(undefined4 param_2, int param_3);  // 0081A360 slot 0x358  overrides BehaviorEmBase
+    // non-virtual members
+    Emc200();  // 00AB3840
 };

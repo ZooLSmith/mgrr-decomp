@@ -193,8 +193,8 @@ void __fastcall cEnemyEnergyGaugeParts::vf08(int param_1)
   return;
 }
 
-// 00D14160  cEnemyEnergyGaugeParts::vf14  size=284  [class]
-void __fastcall cEnemyEnergyGaugeParts::vf14(int param_1)
+// 00D14160  cEnemyEnergyGaugeParts::create  size=284  [class]
+void __fastcall cEnemyEnergyGaugeParts::create(int param_1)
 
 {
   uint uVar1;

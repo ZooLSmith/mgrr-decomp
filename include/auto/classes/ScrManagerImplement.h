@@ -38,4 +38,5 @@ struct ScrManagerImplement : public ScrManager {
     virtual undefined4 * vf74(byte param_2);  // 00C24C30 slot 0x74  overrides ScrManager
     // non-virtual members
     ScrManagerImplement();  // 00C24B60
+    ~ScrManagerImplement();  // 00C24BC0
 };

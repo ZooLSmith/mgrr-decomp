@@ -4,13 +4,14 @@
 #include "mgrr.h"
 #include "esp121.h"
 
-// 009D0700  esp121::vf04  size=140  [class]
-void __thiscall esp121::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+// 009D0700  esp121::preTrans  size=140  [class]
+void __thiscall
+esp121::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int iVar1;
   
-  iVar1 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar1 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar1 == 0) {
     return;
   }
@@ -30,8 +31,8 @@ void __thiscall esp121::vf04(int param_1,undefined4 param_2,undefined4 param_3,u
   return;
 }
 
-// 009D0790  esp121::vf10  size=44  [class]
-void __fastcall esp121::vf10(int param_1)
+// 009D0790  esp121::addOtTransList  size=44  [class]
+void __fastcall esp121::addOtTransList(int param_1)
 
 {
   undefined2 uVar1;
@@ -41,7 +42,7 @@ void __fastcall esp121::vf10(int param_1)
   uVar1 = *(undefined2 *)(param_1 + 0x4e);
   *(undefined2 *)(param_1 + 0x4e) = 0xfffa;
   *(undefined4 *)(param_1 + 0x50) = 0;
-  esp108::vf10();
+  cEsp::addOtTransList();
   *(undefined2 *)(param_1 + 0x4e) = uVar1;
   *(undefined4 *)(param_1 + 0x50) = uVar2;
   return;
@@ -51,7 +52,7 @@ void __fastcall esp121::vf10(int param_1)
 undefined4 * __fastcall esp121::esp121(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -60,7 +61,7 @@ undefined4 * __fastcall esp121::esp121(undefined4 *param_1)
 undefined4 __thiscall esp121::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -9,5 +9,6 @@ struct hkpVehicleDefaultBrake : public hkpVehicleBrake {
     virtual undefined4 * vf00(byte param_2);  // 01287510 slot 0x0  overrides hkBaseObject
     virtual undefined vf0C();  // 0128E720 slot 0xC  overrides hkpVehicleBrake
     // non-virtual members
-    hkpVehicleDefaultBrake(undefined4 * param_1);  // 01287280
+    ~hkpVehicleDefaultBrake();  // 01287280
+    hkpVehicleDefaultBrake();  // 012872A0
 };

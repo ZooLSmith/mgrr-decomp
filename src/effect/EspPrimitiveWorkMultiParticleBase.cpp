@@ -1,20 +1,25 @@
 // src/effect/EspPrimitiveWorkMultiParticleBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58B50..00F59650, 2 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4FDC0..00F59650, 2 functions
 
 #include "mgrr.h"
 #include "EspPrimitiveWorkMultiParticleBase.h"
 
-// 00F58B50  EspPrimitiveWorkMultiParticleBase::EspPrimitiveWorkMultiParticleBase  size=42  [class]
-undefined4 * __fastcall
-EspPrimitiveWorkMultiParticleBase::EspPrimitiveWorkMultiParticleBase(undefined4 *param_1)
+// 00F4FDC0  EspPrimitiveWorkMultiParticleBase::EspPrimitiveWorkMultiParticleBase  size=36  [class]
+/* Library Function - Single Match
+    public: __thiscall _AFX_EDIT_STATE::_AFX_EDIT_STATE(void)
+   
+   Libraries: Visual Studio 2003 Release, Visual Studio 2005 Release, Visual Studio 2008 Release */
+
+EspPrimitiveWorkMultiParticleBase * __thiscall
+EspPrimitiveWorkMultiParticleBase::EspPrimitiveWorkMultiParticleBase
+          (EspPrimitiveWorkMultiParticleBase *this)
 
 {
-  *param_1 = vftable;
+  *(undefined ***)this = vftable;
   FUN_00f9c880();
   FUN_00f9c880();
-  param_1[0x15] = 0;
-  *param_1 = EspPrimitiveWorkMultiParticle<1024>::vftable;
-  return param_1;
+  *(undefined4 *)(this + 0x54) = 0;
+  return this;
 }
 
 // 00F59650  EspPrimitiveWorkMultiParticleBase::vf00  size=53  [class]

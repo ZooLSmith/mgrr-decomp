@@ -9,7 +9,7 @@ void FUN_00aad3b0(void)
 {
   cXml::cXml_7();
   cXml::cXml_7();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 

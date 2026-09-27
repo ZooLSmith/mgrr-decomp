@@ -1,5 +1,5 @@
 // src/enemy/em0130/Em0130.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006046C0..00ABA4A0, 148 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006046C0..00ABA4A0, 149 functions
 
 #include "mgrr.h"
 #include "Em0130.h"
@@ -1499,8 +1499,8 @@ void __fastcall Em0130::vf50(int *param_1)
   return;
 }
 
-// 00607090  Em0130::vf264  size=41  [class]
-undefined4 Em0130::vf264(int param_1)
+// 00607090  Em0130::setEmSetInfo  size=41  [class]
+undefined4 Em0130::setEmSetInfo(int param_1)
 
 {
   FUN_0040ac60(param_1);
@@ -1508,8 +1508,8 @@ undefined4 Em0130::vf264(int param_1)
   return 1;
 }
 
-// 006070C0  Em0130::vf130  size=544  [class]
-undefined4 __thiscall Em0130::vf130(int param_1,ushort *param_2)
+// 006070C0  Em0130::getAttackInfo  size=544  [class]
+undefined4 __thiscall Em0130::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -1522,7 +1522,7 @@ undefined4 __thiscall Em0130::vf130(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     return 0;
   }
   puVar1 = *(uint **)(iVar2 + 8);
@@ -6597,7 +6597,7 @@ void __fastcall FUN_00611820(int param_1)
           uStack_34 = uVar4;
           FUN_00a8c930(uVar8,auStack_160);
         }
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
     }
   }
@@ -7649,8 +7649,8 @@ switchD_00614f4e_default:
   return;
 }
 
-// 00616030  Em0130::vf40  size=3091  [class]
-undefined4 __fastcall Em0130::vf40(int *param_1)
+// 00616030  Em0130::startup  size=3091  [class]
+undefined4 __fastcall Em0130::startup(int *param_1)
 
 {
   uint uVar1;
@@ -7690,7 +7690,7 @@ undefined4 __fastcall Em0130::vf40(int *param_1)
   undefined4 uStack_58;
   
   piStack_1f4 = (int *)0x616046;
-  iVar2 = EmBaseDLC::vf40();
+  iVar2 = EmBaseDLC::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -7819,7 +7819,7 @@ undefined4 __fastcall Em0130::vf40(int *param_1)
   }
   else {
     piStack_1f4 = (int *)0x61637c;
-    iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar2 = RigidBodyCollision::RigidBodyCollision();
   }
   param_1[0x1ec] = iVar2;
   if (iVar2 != 0) {
@@ -8156,6 +8156,43 @@ void __fastcall Em0130::vf4C(int param_1)
   return;
 }
 
+// 00AB57D0  Em0130::Em0130  size=235  [class]
+undefined4 * __fastcall Em0130::Em0130(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  FUN_00a7c930();
+  FUN_00904d60();
+  FUN_00a603a0();
+  iVar1 = 0xe;
+  do {
+    FUN_00a7c930();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  FUN_00904d60();
+  iVar1 = 1;
+  do {
+    FUN_00a826e0();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  param_1[0x460] = 0;
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  param_1[0x4ce] = 0xbf800000;
+  param_1[0x4cd] = 0;
+  param_1[0x4cf] = 0;
+  FUN_009003e0();
+  FUN_009003e0();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  return param_1;
+}
+
 // 00AB58C0  Em0130::vf04  size=6  [class]
 undefined * Em0130::vf04(void)
 
@@ -8184,8 +8221,8 @@ float10 Em0130::vf148(void)
   return (float10)6.5;
 }
 
-// 00ABA4A0  Em0130::vf00  size=98  [class]
-undefined4 __thiscall Em0130::vf00(undefined4 param_1,byte param_2)
+// 00ABA4A0  Em0130::destruct  size=98  [class]
+undefined4 __thiscall Em0130::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
@@ -8194,7 +8231,7 @@ undefined4 __thiscall Em0130::vf00(undefined4 param_1,byte param_2)
   cXml::cXml_7();
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

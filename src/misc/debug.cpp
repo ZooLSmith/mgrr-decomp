@@ -420,7 +420,7 @@ int debug::RoomNoCheckerImpl::vf04(undefined4 *param_1,float param_2,float param
   local_334 = param_1[3];
   local_34c = (float)param_1[1] + param_2;
   local_33c = (float)param_1[1] - param_3;
-  hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector::hkpAllRayHitCollector();
   RayCastMultiHitWork::RayCastMultiHitWork(local_330,&local_350,&local_340,0x1e,"check_room_no");
   iVar3 = 0;
   if (0 < local_31c) {

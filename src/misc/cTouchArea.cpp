@@ -15,8 +15,8 @@ undefined4 * __thiscall cTouchArea::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00982780  cTouchArea::cTouchArea_3  size=24  [class]
-void __fastcall cTouchArea::cTouchArea_3(undefined4 *param_1)
+// 00982780  cTouchArea::cTouchArea  size=24  [class]
+void __fastcall cTouchArea::cTouchArea(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -38,8 +38,8 @@ undefined4 __thiscall FUN_009827a0(int param_1,float param_2,float param_3)
   return 1;
 }
 
-// 00982880  cTouchArea::cTouchArea_2  size=99  [class]
-void __thiscall cTouchArea::cTouchArea_2(undefined4 *param_1,int param_2)
+// 00982880  cTouchArea::cTouchArea  size=99  [class]
+void __thiscall cTouchArea::cTouchArea(undefined4 *param_1,int param_2)
 
 {
   *param_1 = vftable;

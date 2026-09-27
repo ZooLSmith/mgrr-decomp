@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Em0080Debris.h"
 
-// 00486D50  Em0080Debris::vf40  size=63  [class]
-void __fastcall Em0080Debris::vf40(int param_1)
+// 00486D50  Em0080Debris::startup  size=63  [class]
+void __fastcall Em0080Debris::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = RayArmorDebris::vf40();
+  iVar1 = RayArmorDebris::startup();
   if (iVar1 == 0) {
     return;
   }
@@ -98,8 +98,9 @@ void __fastcall Em0080Debris::vf300(int param_1)
   return;
 }
 
-// 00486FD0  Em0080Debris::vf1B8  size=34  [class]
-void __thiscall Em0080Debris::vf1B8(int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
+// 00486FD0  Em0080Debris::setCutCrerateInfo  size=34  [class]
+void __thiscall
+Em0080Debris::setCutCrerateInfo(int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
 
 {
   if (0 < param_4) {
@@ -153,8 +154,8 @@ undefined * Em0080Debris::vf04(void)
   return &DAT_01b34d80;
 }
 
-// 00AB86F0  Em0080Debris::vf00  size=105  [class]
-undefined4 * __thiscall Em0080Debris::vf00(undefined4 *param_1,byte param_2)
+// 00AB86F0  Em0080Debris::destruct  size=105  [class]
+undefined4 * __thiscall Em0080Debris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -168,7 +169,7 @@ undefined4 * __thiscall Em0080Debris::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

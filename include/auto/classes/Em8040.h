@@ -53,4 +53,5 @@ struct Em8040 : public EmBaseDLC {
     virtual void vf34C();  // 0066E5D0 slot 0x34C  overrides BehaviorEmBase
     // non-virtual members
     static void createDestructExplosion();  // 00664340
+    Em8040();  // 00AB4AB0
 };

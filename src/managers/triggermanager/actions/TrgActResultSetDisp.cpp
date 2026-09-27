@@ -20,8 +20,8 @@ void __fastcall Trigger::cTriggerTask::vf08(int param_1)
   return;
 }
 
-// 00C775C0  FUN_00c775c0  size=12  [between]
-void __fastcall FUN_00c775c0(int param_1)
+// 00C775C0  Trigger::cTriggerTask_PlAnim::vf04  size=12  [class]
+void __fastcall Trigger::cTriggerTask_PlAnim::vf04(int param_1)
 
 {
   *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 1;
@@ -29,8 +29,8 @@ void __fastcall FUN_00c775c0(int param_1)
   return;
 }
 
-// 00C775D0  FUN_00c775d0  size=12  [between]
-void __fastcall FUN_00c775d0(int param_1)
+// 00C775D0  Trigger::cTriggerTask_PlAnim::vf08  size=12  [class]
+void __fastcall Trigger::cTriggerTask_PlAnim::vf08(int param_1)
 
 {
   *(undefined4 *)(param_1 + 4) = 0;
@@ -1392,8 +1392,8 @@ undefined4 __fastcall Trigger::cCondOr::vf14(int param_1)
   return 0;
 }
 
-// 00C79770  FUN_00c79770  size=63  [between]
-undefined4 __fastcall FUN_00c79770(int param_1)
+// 00C79770  Trigger::cCondOr::vf20  size=63  [class]
+undefined4 __fastcall Trigger::cCondOr::vf20(int param_1)
 
 {
   int iVar1;
@@ -1424,8 +1424,8 @@ void Trigger::cCondPhaseJump::vf14(void)
   return;
 }
 
-// 00C797C0  FUN_00c797c0  size=10  [between]
-void __thiscall FUN_00c797c0(int param_1,undefined4 param_2)
+// 00C797C0  Trigger::cCondPhaseJump::vf1C  size=10  [class]
+void __thiscall Trigger::cCondPhaseJump::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -1449,8 +1449,8 @@ bool __fastcall Trigger::cCondOnce::vf14(int param_1)
   return *(int *)(param_1 + 0x10) == 1;
 }
 
-// 00C79820  FUN_00c79820  size=10  [between]
-void __thiscall FUN_00c79820(int param_1,undefined4 param_2)
+// 00C79820  Trigger::cCondOnce::vf1C  size=10  [class]
+void __thiscall Trigger::cCondOnce::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -1484,8 +1484,8 @@ void __fastcall Trigger::cCondAreaGroup::vf10(int param_1)
   return;
 }
 
-// 00C79920  FUN_00c79920  size=36  [between]
-void __thiscall FUN_00c79920(int param_1,int param_2)
+// 00C79920  Trigger::cCondAreaGroup::vf1C  size=36  [class]
+void __thiscall Trigger::cCondAreaGroup::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -1554,8 +1554,8 @@ undefined4 __fastcall Trigger::cCondAreaEm::vf14(int param_1)
   return 0;
 }
 
-// 00C79A90  FUN_00c79a90  size=66  [between]
-void __thiscall FUN_00c79a90(int param_1,int param_2)
+// 00C79A90  Trigger::cCondAreaEm::vf1C  size=66  [class]
+void __thiscall Trigger::cCondAreaEm::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -1664,8 +1664,8 @@ void Trigger::cCondPlayerEngGaugeFull::vf10(void)
   return;
 }
 
-// 00C79C50  FUN_00c79c50  size=10  [between]
-void __thiscall FUN_00c79c50(int param_1,undefined4 param_2)
+// 00C79C50  Trigger::cCondPlayerEngGaugeFull::vf1C  size=10  [class]
+void __thiscall Trigger::cCondPlayerEngGaugeFull::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -1679,8 +1679,8 @@ undefined4 Trigger::cCondTrue::vf14(void)
   return 1;
 }
 
-// 00C79C80  FUN_00c79c80  size=10  [between]
-void __thiscall FUN_00c79c80(int param_1,undefined4 param_2)
+// 00C79C80  Trigger::cCondTrue::vf1C  size=10  [class]
+void __thiscall Trigger::cCondTrue::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -1747,8 +1747,8 @@ undefined4 __fastcall Trigger::cCondAreaOut::vf14(int param_1)
   return 0;
 }
 
-// 00C79D70  FUN_00c79d70  size=18  [between]
-void __thiscall FUN_00c79d70(int param_1,int param_2)
+// 00C79D70  Trigger::cCondAreaOut::vf1C  size=18  [class]
+void __thiscall Trigger::cCondAreaOut::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -1790,8 +1790,8 @@ void __fastcall Trigger::cCondAreaGroupOut::vf10(int param_1)
   return;
 }
 
-// 00C79E20  FUN_00c79e20  size=36  [between]
-void __thiscall FUN_00c79e20(int param_1,int param_2)
+// 00C79E20  Trigger::cCondAreaGroupOut::vf1C  size=36  [class]
+void __thiscall Trigger::cCondAreaGroupOut::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -1860,8 +1860,8 @@ undefined4 __fastcall Trigger::cCondAreaEmOut::vf14(int param_1)
   return 0;
 }
 
-// 00C79F90  FUN_00c79f90  size=66  [between]
-void __thiscall FUN_00c79f90(int param_1,int param_2)
+// 00C79F90  Trigger::cCondAreaEmOut::vf1C  size=66  [class]
+void __thiscall Trigger::cCondAreaEmOut::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -1914,8 +1914,8 @@ undefined4 __fastcall Trigger::cCondEnemyFinishByNumber::vf14(int param_1)
   return 0;
 }
 
-// 00C7A0B0  FUN_00c7a0b0  size=28  [between]
-void __thiscall FUN_00c7a0b0(int param_1,int param_2)
+// 00C7A0B0  Trigger::cCondEnemyFinishByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyFinishByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -1924,8 +1924,8 @@ void __thiscall FUN_00c7a0b0(int param_1,int param_2)
   return;
 }
 
-// 00C7A0D0  FUN_00c7a0d0  size=18  [between]
-undefined4 __fastcall FUN_00c7a0d0(int param_1)
+// 00C7A0D0  Trigger::cCondEnemyFinishByNumber::vf20  size=18  [class]
+undefined4 __fastcall Trigger::cCondEnemyFinishByNumber::vf20(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1c) = 0;
@@ -1997,8 +1997,8 @@ bool __fastcall Trigger::Cond::ENM_COUNT(int param_1)
   return false;
 }
 
-// 00C7A260  FUN_00c7a260  size=28  [between]
-void __thiscall FUN_00c7a260(int param_1,int param_2)
+// 00C7A260  Trigger::cCondEnemyCountByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyCountByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2055,8 +2055,8 @@ undefined4 __fastcall Trigger::cCondInCamera::vf14(int param_1)
   return 0;
 }
 
-// 00C7A3B0  FUN_00c7a3b0  size=16  [between]
-void __thiscall FUN_00c7a3b0(int param_1,int param_2)
+// 00C7A3B0  Trigger::cCondInCamera::vf1C  size=16  [class]
+void __thiscall Trigger::cCondInCamera::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2086,8 +2086,8 @@ undefined4 __fastcall Trigger::cCondOutCamera::vf14(int param_1)
   return 1;
 }
 
-// 00C7A480  FUN_00c7a480  size=16  [between]
-void __thiscall FUN_00c7a480(int param_1,int param_2)
+// 00C7A480  Trigger::cCondOutCamera::vf1C  size=16  [class]
+void __thiscall Trigger::cCondOutCamera::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2125,8 +2125,8 @@ undefined4 __fastcall Trigger::cCondEnemyFinishHP0ByNumber::vf14(int param_1)
   return 0;
 }
 
-// 00C7A540  FUN_00c7a540  size=28  [between]
-void __thiscall FUN_00c7a540(int param_1,int param_2)
+// 00C7A540  Trigger::cCondEnemyFinishHP0ByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyFinishHP0ByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2135,8 +2135,8 @@ void __thiscall FUN_00c7a540(int param_1,int param_2)
   return;
 }
 
-// 00C7A560  FUN_00c7a560  size=18  [between]
-undefined4 __fastcall FUN_00c7a560(int param_1)
+// 00C7A560  Trigger::cCondEnemyFinishHP0ByNumber::vf20  size=18  [class]
+undefined4 __fastcall Trigger::cCondEnemyFinishHP0ByNumber::vf20(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1c) = 0;
@@ -2208,8 +2208,8 @@ bool __fastcall Trigger::Cond::ENM_HP0_COUNT(int param_1)
   return false;
 }
 
-// 00C7A6F0  FUN_00c7a6f0  size=28  [between]
-void __thiscall FUN_00c7a6f0(int param_1,int param_2)
+// 00C7A6F0  Trigger::cCondEnemyCountHP0ByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyCountHP0ByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2219,8 +2219,8 @@ void __thiscall FUN_00c7a6f0(int param_1,int param_2)
   return;
 }
 
-// 00C7A740  FUN_00c7a740  size=28  [between]
-void __thiscall FUN_00c7a740(int param_1,int param_2)
+// 00C7A740  Trigger::cCondEnemyCountHP0ByName::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyCountHP0ByName::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2230,8 +2230,8 @@ void __thiscall FUN_00c7a740(int param_1,int param_2)
   return;
 }
 
-// 00C7A7B0  FUN_00c7a7b0  size=16  [between]
-void __thiscall FUN_00c7a7b0(int param_1,int param_2)
+// 00C7A7B0  Trigger::cCondFlag::vf1C  size=16  [class]
+void __thiscall Trigger::cCondFlag::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2246,8 +2246,8 @@ undefined4 Trigger::cCondIsSubstage::vf14(void)
   return 0;
 }
 
-// 00C7A800  FUN_00c7a800  size=16  [between]
-void __thiscall FUN_00c7a800(int param_1,int param_2)
+// 00C7A800  Trigger::cCondIsSubstage::vf1C  size=16  [class]
+void __thiscall Trigger::cCondIsSubstage::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2262,8 +2262,8 @@ undefined4 Trigger::cCondPastSubstage::vf14(void)
   return 0;
 }
 
-// 00C7A850  FUN_00c7a850  size=16  [between]
-void __thiscall FUN_00c7a850(int param_1,int param_2)
+// 00C7A850  Trigger::cCondPastSubstage::vf1C  size=16  [class]
+void __thiscall Trigger::cCondPastSubstage::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2278,8 +2278,8 @@ undefined4 Trigger::cCondNowPastSubstage::vf14(void)
   return 0;
 }
 
-// 00C7A8A0  FUN_00c7a8a0  size=16  [between]
-void __thiscall FUN_00c7a8a0(int param_1,int param_2)
+// 00C7A8A0  Trigger::cCondNowPastSubstage::vf1C  size=16  [class]
+void __thiscall Trigger::cCondNowPastSubstage::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2294,8 +2294,8 @@ void Trigger::cCondPlayerHpGaugeFull::vf10(void)
   return;
 }
 
-// 00C7A8F0  FUN_00c7a8f0  size=10  [between]
-void __thiscall FUN_00c7a8f0(int param_1,undefined4 param_2)
+// 00C7A8F0  Trigger::cCondPlayerHpGaugeFull::vf1C  size=10  [class]
+void __thiscall Trigger::cCondPlayerHpGaugeFull::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -2312,8 +2312,8 @@ bool __fastcall Trigger::cCondEnemyNotSetByNumber::vf14(int param_1)
   return iVar1 == 0;
 }
 
-// 00C7A950  FUN_00c7a950  size=16  [between]
-void __thiscall FUN_00c7a950(int param_1,int param_2)
+// 00C7A950  Trigger::cCondEnemyNotSetByNumber::vf1C  size=16  [class]
+void __thiscall Trigger::cCondEnemyNotSetByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2335,8 +2335,8 @@ bool __fastcall Trigger::cCondEnemyNotSetByName::vf14(int param_1)
   return iVar1 == 0;
 }
 
-// 00C7A9C0  FUN_00c7a9c0  size=16  [between]
-void __thiscall FUN_00c7a9c0(int param_1,int param_2)
+// 00C7A9C0  Trigger::cCondEnemyNotSetByName::vf1C  size=16  [class]
+void __thiscall Trigger::cCondEnemyNotSetByName::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2344,8 +2344,8 @@ void __thiscall FUN_00c7a9c0(int param_1,int param_2)
   return;
 }
 
-// 00C7AA00  FUN_00c7aa00  size=16  [between]
-void __thiscall FUN_00c7aa00(int param_1,int param_2)
+// 00C7AA00  Trigger::cCondNotFlag::vf1C  size=16  [class]
+void __thiscall Trigger::cCondNotFlag::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2414,8 +2414,8 @@ void Trigger::cCondPlayerHpGaugeState::vf10(void)
   return;
 }
 
-// 00C7AB00  FUN_00c7ab00  size=16  [between]
-void __thiscall FUN_00c7ab00(int param_1,int param_2)
+// 00C7AB00  Trigger::cCondPlayerHpGaugeState::vf1C  size=16  [class]
+void __thiscall Trigger::cCondPlayerHpGaugeState::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2433,8 +2433,8 @@ bool __fastcall Trigger::cCondChainBreak::vf14(int param_1)
   return cVar1 != '\0';
 }
 
-// 00C7AB60  FUN_00c7ab60  size=16  [between]
-void __thiscall FUN_00c7ab60(int param_1,int param_2)
+// 00C7AB60  Trigger::cCondChainBreak::vf1C  size=16  [class]
+void __thiscall Trigger::cCondChainBreak::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2449,8 +2449,8 @@ void Trigger::cCondPlayerDie::vf10(void)
   return;
 }
 
-// 00C7ABB0  FUN_00c7abb0  size=16  [between]
-void __thiscall FUN_00c7abb0(int param_1,int param_2)
+// 00C7ABB0  Trigger::cCondPlayerDie::vf1C  size=16  [class]
+void __thiscall Trigger::cCondPlayerDie::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2483,8 +2483,8 @@ undefined4 __fastcall Trigger::cCondRoomEvent::vf14(int param_1)
   return uVar2;
 }
 
-// 00C7AC30  FUN_00c7ac30  size=16  [between]
-void __thiscall FUN_00c7ac30(int param_1,int param_2)
+// 00C7AC30  Trigger::cCondRoomEvent::vf1C  size=16  [class]
+void __thiscall Trigger::cCondRoomEvent::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2524,8 +2524,8 @@ LAB_00c7acac:
   return uVar2;
 }
 
-// 00C7ACD0  FUN_00c7acd0  size=16  [between]
-void __thiscall FUN_00c7acd0(int param_1,int param_2)
+// 00C7ACD0  Trigger::cCondRoomEventEnd::vf1C  size=16  [class]
+void __thiscall Trigger::cCondRoomEventEnd::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2567,8 +2567,8 @@ undefined4 __fastcall Trigger::cCondBehaviorInstruction::vf14(int param_1)
   return uVar3;
 }
 
-// 00C7AD80  FUN_00c7ad80  size=22  [between]
-void __thiscall FUN_00c7ad80(int param_1,int param_2)
+// 00C7AD80  Trigger::cCondBehaviorInstruction::vf1C  size=22  [class]
+void __thiscall Trigger::cCondBehaviorInstruction::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2591,8 +2591,8 @@ undefined4 Trigger::cCondConversation::vf14(void)
   return 0;
 }
 
-// 00C7ADF0  FUN_00c7adf0  size=10  [between]
-void __thiscall FUN_00c7adf0(int param_1,undefined4 param_2)
+// 00C7ADF0  Trigger::cCondConversation::vf1C  size=10  [class]
+void __thiscall Trigger::cCondConversation::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -2606,8 +2606,8 @@ undefined4 Trigger::cCondResultFollowMove::vf14(void)
   return DAT_01dc1310;
 }
 
-// 00C7AE90  FUN_00c7ae90  size=10  [between]
-void __thiscall FUN_00c7ae90(int param_1,undefined4 param_2)
+// 00C7AE90  Trigger::cCondResultFollowMove::vf1C  size=10  [class]
+void __thiscall Trigger::cCondResultFollowMove::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -2685,8 +2685,8 @@ undefined4 Trigger::cCondHackStart::vf14(void)
   return 0;
 }
 
-// 00C7B000  FUN_00c7b000  size=16  [between]
-void __thiscall FUN_00c7b000(int param_1,int param_2)
+// 00C7B000  Trigger::cCondHackStart::vf1C  size=16  [class]
+void __thiscall Trigger::cCondHackStart::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2701,8 +2701,8 @@ void Trigger::cCondPlayerEnergyGaugeState::vf10(void)
   return;
 }
 
-// 00C7B060  FUN_00c7b060  size=16  [between]
-void __thiscall FUN_00c7b060(int param_1,int param_2)
+// 00C7B060  Trigger::cCondPlayerEnergyGaugeState::vf1C  size=16  [class]
+void __thiscall Trigger::cCondPlayerEnergyGaugeState::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2718,8 +2718,8 @@ void __fastcall Trigger::cCondIsEndPlayMovie::vf14(int param_1)
   return;
 }
 
-// 00C7B0B0  FUN_00c7b0b0  size=16  [between]
-void __thiscall FUN_00c7b0b0(int param_1,int param_2)
+// 00C7B0B0  Trigger::cCondIsEndPlayMovie::vf1C  size=16  [class]
+void __thiscall Trigger::cCondIsEndPlayMovie::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2754,8 +2754,8 @@ uint __fastcall Trigger::cCondGimmick::vf14(int param_1)
   return uVar1;
 }
 
-// 00C7B140  FUN_00c7b140  size=16  [between]
-void __thiscall FUN_00c7b140(int param_1,int param_2)
+// 00C7B140  Trigger::cCondGimmick::vf1C  size=16  [class]
+void __thiscall Trigger::cCondGimmick::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -2879,8 +2879,8 @@ bool __fastcall Trigger::Cond::GAME_FLAG(int param_1)
   return false;
 }
 
-// 00C7B2E0  FUN_00c7b2e0  size=58  [between]
-void __thiscall FUN_00c7b2e0(int param_1,int param_2)
+// 00C7B2E0  Trigger::cCondGameFlag::vf1C  size=58  [class]
+void __thiscall Trigger::cCondGameFlag::vf1C(int param_1,int param_2)
 
 {
   int iVar1;
@@ -2911,8 +2911,8 @@ bool __fastcall Trigger::Cond::NOT_GAME_FLAG(int param_1)
   return false;
 }
 
-// 00C7B3A0  FUN_00c7b3a0  size=58  [between]
-void __thiscall FUN_00c7b3a0(int param_1,int param_2)
+// 00C7B3A0  Trigger::cCondNotGameFlag::vf1C  size=58  [class]
+void __thiscall Trigger::cCondNotGameFlag::vf1C(int param_1,int param_2)
 
 {
   int iVar1;
@@ -2944,8 +2944,8 @@ undefined4 __fastcall Trigger::cCondCodecSeqEnd::vf14(int param_1)
   return uVar1;
 }
 
-// 00C7B440  FUN_00c7b440  size=34  [between]
-void __thiscall FUN_00c7b440(int param_1,int param_2)
+// 00C7B440  Trigger::cCondCodecSeqEnd::vf1C  size=34  [class]
+void __thiscall Trigger::cCondCodecSeqEnd::vf1C(int param_1,int param_2)
 
 {
   *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_2 + 8);
@@ -2986,8 +2986,8 @@ bool __fastcall Trigger::Cond::ENM_ENTITY_COUNT(int param_1)
   return false;
 }
 
-// 00C7B540  FUN_00c7b540  size=28  [between]
-void __thiscall FUN_00c7b540(int param_1,int param_2)
+// 00C7B540  Trigger::cCondEnemyEntityCountByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyEntityCountByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -3053,8 +3053,8 @@ bool __fastcall Trigger::Cond::ENM_ENTITY_HP0_COUNT(int param_1)
   return false;
 }
 
-// 00C7B6A0  FUN_00c7b6a0  size=28  [between]
-void __thiscall FUN_00c7b6a0(int param_1,int param_2)
+// 00C7B6A0  Trigger::cCondEnemyEntityCountHP0ByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyEntityCountHP0ByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -3120,8 +3120,8 @@ LAB_00c7b7b0:
   return uVar2 ^ 1;
 }
 
-// 00C7B7C0  FUN_00c7b7c0  size=16  [between]
-void __thiscall FUN_00c7b7c0(int param_1,int param_2)
+// 00C7B7C0  Trigger::cCondRoomEventNotEnd::vf1C  size=16  [class]
+void __thiscall Trigger::cCondRoomEventNotEnd::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -3327,8 +3327,8 @@ bool __fastcall Trigger::cCondEnemyGroupNotSetByName::vf14(int param_1)
   return iVar1 == 0;
 }
 
-// 00C7BAD0  FUN_00c7bad0  size=22  [between]
-void __thiscall FUN_00c7bad0(int param_1,int param_2)
+// 00C7BAD0  Trigger::cCondEnemyGroupNotSetByName::vf1C  size=22  [class]
+void __thiscall Trigger::cCondEnemyGroupNotSetByName::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -3347,8 +3347,8 @@ bool __fastcall Trigger::cCondEnemyGroupNotSetByNumber::vf14(int param_1)
   return iVar1 == 0;
 }
 
-// 00C7BB40  FUN_00c7bb40  size=22  [between]
-void __thiscall FUN_00c7bb40(int param_1,int param_2)
+// 00C7BB40  Trigger::cCondEnemyGroupNotSetByNumber::vf1C  size=22  [class]
+void __thiscall Trigger::cCondEnemyGroupNotSetByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -3828,8 +3828,8 @@ bool __fastcall Trigger::Cond::ENM_GRP_ENTITY_HP0_COUNT(int param_1)
   return false;
 }
 
-// 00C7C4A0  FUN_00c7c4a0  size=34  [between]
-void __thiscall FUN_00c7c4a0(int param_1,int param_2)
+// 00C7C4A0  Trigger::cCondEnemyGroupEntityCountHP0ByNumber::vf1C  size=34  [class]
+void __thiscall Trigger::cCondEnemyGroupEntityCountHP0ByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -3905,8 +3905,8 @@ undefined4 __fastcall Trigger::cCondEnemyFinishDebrisByNumber::vf14(int param_1)
   return 0;
 }
 
-// 00C7C620  FUN_00c7c620  size=28  [between]
-void __thiscall FUN_00c7c620(int param_1,int param_2)
+// 00C7C620  Trigger::cCondEnemyFinishDebrisByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyFinishDebrisByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -3915,8 +3915,8 @@ void __thiscall FUN_00c7c620(int param_1,int param_2)
   return;
 }
 
-// 00C7C640  FUN_00c7c640  size=18  [between]
-undefined4 __fastcall FUN_00c7c640(int param_1)
+// 00C7C640  Trigger::cCondEnemyFinishDebrisByNumber::vf20  size=18  [class]
+undefined4 __fastcall Trigger::cCondEnemyFinishDebrisByNumber::vf20(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1c) = 0;
@@ -4105,8 +4105,8 @@ bool __fastcall Trigger::Cond::STA_FLAG(int param_1)
   return false;
 }
 
-// 00C7C920  FUN_00c7c920  size=58  [between]
-void __thiscall FUN_00c7c920(int param_1,int param_2)
+// 00C7C920  Trigger::cCondStaFlag::vf1C  size=58  [class]
+void __thiscall Trigger::cCondStaFlag::vf1C(int param_1,int param_2)
 
 {
   int iVar1;
@@ -4137,8 +4137,8 @@ bool __fastcall Trigger::Cond::NOT_GAME_FLAG_2(int param_1)
   return false;
 }
 
-// 00C7C9E0  FUN_00c7c9e0  size=58  [between]
-void __thiscall FUN_00c7c9e0(int param_1,int param_2)
+// 00C7C9E0  Trigger::cCondNotStaFlag::vf1C  size=58  [class]
+void __thiscall Trigger::cCondNotStaFlag::vf1C(int param_1,int param_2)
 
 {
   int iVar1;
@@ -4169,8 +4169,8 @@ bool __fastcall Trigger::Cond::STP_FLAG(int param_1)
   return false;
 }
 
-// 00C7CA90  FUN_00c7ca90  size=58  [between]
-void __thiscall FUN_00c7ca90(int param_1,int param_2)
+// 00C7CA90  Trigger::cCondStpFlag::vf1C  size=58  [class]
+void __thiscall Trigger::cCondStpFlag::vf1C(int param_1,int param_2)
 
 {
   int iVar1;
@@ -4201,8 +4201,8 @@ bool __fastcall Trigger::Cond::NOT_STP_FLAG(int param_1)
   return false;
 }
 
-// 00C7CB50  FUN_00c7cb50  size=58  [between]
-void __thiscall FUN_00c7cb50(int param_1,int param_2)
+// 00C7CB50  Trigger::cCondNotStpFlag::vf1C  size=58  [class]
+void __thiscall Trigger::cCondNotStpFlag::vf1C(int param_1,int param_2)
 
 {
   int iVar1;
@@ -4309,8 +4309,8 @@ void __fastcall Trigger::cCondHasItem::vf14(int param_1)
   return;
 }
 
-// 00C7CD00  FUN_00c7cd00  size=16  [between]
-void __thiscall FUN_00c7cd00(int param_1,int param_2)
+// 00C7CD00  Trigger::cCondHasItem::vf1C  size=16  [class]
+void __thiscall Trigger::cCondHasItem::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4335,8 +4335,8 @@ bool __fastcall Trigger::cCondHasNotItem::vf14(int param_1)
   return iVar1 == 0;
 }
 
-// 00C7CD70  FUN_00c7cd70  size=16  [between]
-void __thiscall FUN_00c7cd70(int param_1,int param_2)
+// 00C7CD70  Trigger::cCondHasNotItem::vf1C  size=16  [class]
+void __thiscall Trigger::cCondHasNotItem::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4359,8 +4359,8 @@ void Trigger::cCondIsNowBattle::vf14(void)
   return;
 }
 
-// 00C7CDD0  FUN_00c7cdd0  size=10  [between]
-void __thiscall FUN_00c7cdd0(int param_1,undefined4 param_2)
+// 00C7CDD0  Trigger::cCondIsNowBattle::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsNowBattle::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -4385,16 +4385,16 @@ uint __fastcall Trigger::cCondResultEnd::vf14(int param_1)
   return ~DAT_01dc1308 & 1;
 }
 
-// 00C7CE40  FUN_00c7ce40  size=10  [between]
-void __thiscall FUN_00c7ce40(int param_1,undefined4 param_2)
+// 00C7CE40  Trigger::cCondResultEnd::vf1C  size=10  [class]
+void __thiscall Trigger::cCondResultEnd::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
   return;
 }
 
-// 00C7CE50  FUN_00c7ce50  size=13  [between]
-undefined4 __fastcall FUN_00c7ce50(int param_1)
+// 00C7CE50  Trigger::cCondResultEnd::vf20  size=13  [class]
+undefined4 __fastcall Trigger::cCondResultEnd::vf20(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x10) = 0;
@@ -4410,8 +4410,8 @@ void __fastcall Trigger::cCondHostageSaved::vf14(int param_1)
   return;
 }
 
-// 00C7CEB0  FUN_00c7ceb0  size=28  [between]
-void __thiscall FUN_00c7ceb0(int param_1,int param_2)
+// 00C7CEB0  Trigger::cCondHostageSaved::vf1C  size=28  [class]
+void __thiscall Trigger::cCondHostageSaved::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4436,8 +4436,8 @@ void __fastcall Trigger::cCondLineInfraredHit::vf14(int param_1)
   return;
 }
 
-// 00C7CF20  FUN_00c7cf20  size=16  [between]
-void __thiscall FUN_00c7cf20(int param_1,int param_2)
+// 00C7CF20  Trigger::cCondLineInfraredHit::vf1C  size=16  [class]
+void __thiscall Trigger::cCondLineInfraredHit::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4463,8 +4463,8 @@ void __fastcall Trigger::cCondIsBattleAreaOn::vf14(int param_1)
   return;
 }
 
-// 00C7CF90  FUN_00c7cf90  size=16  [between]
-void __thiscall FUN_00c7cf90(int param_1,int param_2)
+// 00C7CF90  Trigger::cCondIsBattleAreaOn::vf1C  size=16  [class]
+void __thiscall Trigger::cCondIsBattleAreaOn::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4549,8 +4549,8 @@ undefined4 __fastcall Trigger::Cond::TIME_STA(int param_1)
   return 0;
 }
 
-// 00C7D170  FUN_00c7d170  size=117  [between]
-void __thiscall FUN_00c7d170(int param_1,int param_2)
+// 00C7D170  Trigger::cCondTimeSta::vf1C  size=117  [class]
+void __thiscall Trigger::cCondTimeSta::vf1C(int param_1,int param_2)
 
 {
   int iVar1;
@@ -4629,8 +4629,8 @@ undefined4 __fastcall Trigger::cCondEnemyFinishCompByNumber::vf14(int param_1)
   return 0;
 }
 
-// 00C7D2A0  FUN_00c7d2a0  size=28  [between]
-void __thiscall FUN_00c7d2a0(int param_1,int param_2)
+// 00C7D2A0  Trigger::cCondEnemyFinishCompByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyFinishCompByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4639,8 +4639,8 @@ void __thiscall FUN_00c7d2a0(int param_1,int param_2)
   return;
 }
 
-// 00C7D2C0  FUN_00c7d2c0  size=18  [between]
-undefined4 __fastcall FUN_00c7d2c0(int param_1)
+// 00C7D2C0  Trigger::cCondEnemyFinishCompByNumber::vf20  size=18  [class]
+undefined4 __fastcall Trigger::cCondEnemyFinishCompByNumber::vf20(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1c) = 0;
@@ -4712,8 +4712,8 @@ undefined4 __fastcall Trigger::cCondEnemyFinishHPCompByNumber::vf14(int param_1)
   return 0;
 }
 
-// 00C7D430  FUN_00c7d430  size=28  [between]
-void __thiscall FUN_00c7d430(int param_1,int param_2)
+// 00C7D430  Trigger::cCondEnemyFinishHPCompByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyFinishHPCompByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4722,8 +4722,8 @@ void __thiscall FUN_00c7d430(int param_1,int param_2)
   return;
 }
 
-// 00C7D450  FUN_00c7d450  size=18  [between]
-undefined4 __fastcall FUN_00c7d450(int param_1)
+// 00C7D450  Trigger::cCondEnemyFinishHPCompByNumber::vf20  size=18  [class]
+undefined4 __fastcall Trigger::cCondEnemyFinishHPCompByNumber::vf20(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1c) = 0;
@@ -4800,8 +4800,8 @@ undefined4 __fastcall Trigger::cCondEnemyFinishDebrisCompByNumber::vf14(int para
   return 0;
 }
 
-// 00C7D600  FUN_00c7d600  size=28  [between]
-void __thiscall FUN_00c7d600(int param_1,int param_2)
+// 00C7D600  Trigger::cCondEnemyFinishDebrisCompByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyFinishDebrisCompByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -4810,8 +4810,8 @@ void __thiscall FUN_00c7d600(int param_1,int param_2)
   return;
 }
 
-// 00C7D620  FUN_00c7d620  size=18  [between]
-undefined4 __fastcall FUN_00c7d620(int param_1)
+// 00C7D620  Trigger::cCondEnemyFinishDebrisCompByNumber::vf20  size=18  [class]
+undefined4 __fastcall Trigger::cCondEnemyFinishDebrisCompByNumber::vf20(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1c) = 0;
@@ -4871,8 +4871,8 @@ bool Trigger::cCondIsEndAntiqueScroll::vf14(void)
   return cVar1 != '\0';
 }
 
-// 00C7D740  FUN_00c7d740  size=10  [between]
-void __thiscall FUN_00c7d740(int param_1,undefined4 param_2)
+// 00C7D740  Trigger::cCondIsEndAntiqueScroll::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsEndAntiqueScroll::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -4895,8 +4895,8 @@ void Trigger::cCondIsNowVRMission::vf14(void)
   return;
 }
 
-// 00C7D7A0  FUN_00c7d7a0  size=10  [between]
-void __thiscall FUN_00c7d7a0(int param_1,undefined4 param_2)
+// 00C7D7A0  Trigger::cCondIsNowVRMission::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsNowVRMission::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -4985,8 +4985,8 @@ uint Trigger::cCondIsCodec::vf14(void)
   return DAT_01bea060 >> 0x12 & 1;
 }
 
-// 00C7D8E0  FUN_00c7d8e0  size=10  [between]
-void __thiscall FUN_00c7d8e0(int param_1,undefined4 param_2)
+// 00C7D8E0  Trigger::cCondIsCodec::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsCodec::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -5007,8 +5007,8 @@ uint Trigger::cCondIsAnyCodec::vf14(void)
   return DAT_01bea060 >> 7 & 1;
 }
 
-// 00C7D940  FUN_00c7d940  size=10  [between]
-void __thiscall FUN_00c7d940(int param_1,undefined4 param_2)
+// 00C7D940  Trigger::cCondIsAnyCodec::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsAnyCodec::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -5257,8 +5257,8 @@ bool __fastcall Trigger::cCondIsDifficulty::vf14(int param_1)
   return bVar1;
 }
 
-// 00C7DD30  FUN_00c7dd30  size=22  [between]
-void __thiscall FUN_00c7dd30(int param_1,int param_2)
+// 00C7DD30  Trigger::cCondIsDifficulty::vf1C  size=22  [class]
+void __thiscall Trigger::cCondIsDifficulty::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5274,8 +5274,8 @@ void Trigger::cCondIsZangeki::vf10(void)
   return;
 }
 
-// 00C7DD90  FUN_00c7dd90  size=10  [between]
-void __thiscall FUN_00c7dd90(int param_1,undefined4 param_2)
+// 00C7DD90  Trigger::cCondIsZangeki::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsZangeki::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -5302,8 +5302,8 @@ uint Trigger::cCondIsFade::vf14(void)
   return uVar1 ^ 1;
 }
 
-// 00C7DE00  FUN_00c7de00  size=10  [between]
-void __thiscall FUN_00c7de00(int param_1,undefined4 param_2)
+// 00C7DE00  Trigger::cCondIsFade::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsFade::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -5331,8 +5331,8 @@ undefined4 __fastcall Trigger::cCondIsFadeEnd::vf14(int param_1)
   return uVar1;
 }
 
-// 00C7DE70  FUN_00c7de70  size=10  [between]
-void __thiscall FUN_00c7de70(int param_1,undefined4 param_2)
+// 00C7DE70  Trigger::cCondIsFadeEnd::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsFadeEnd::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -5346,8 +5346,8 @@ void Trigger::cCondIsRipperMode::vf10(void)
   return;
 }
 
-// 00C7DEC0  FUN_00c7dec0  size=10  [between]
-void __thiscall FUN_00c7dec0(int param_1,undefined4 param_2)
+// 00C7DEC0  Trigger::cCondIsRipperMode::vf1C  size=10  [class]
+void __thiscall Trigger::cCondIsRipperMode::vf1C(int param_1,undefined4 param_2)
 
 {
   *(undefined4 *)(param_1 + 4) = param_2;
@@ -5373,8 +5373,8 @@ uint __fastcall Trigger::cCondGenericFlag::vf14(int param_1)
   return 0;
 }
 
-// 00C7DF30  FUN_00c7df30  size=19  [between]
-void __thiscall FUN_00c7df30(int param_1,int param_2)
+// 00C7DF30  Trigger::cCondGenericFlag::vf1C  size=19  [class]
+void __thiscall Trigger::cCondGenericFlag::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5390,8 +5390,8 @@ void Trigger::cCondEnemyGroupIsCautionLevelByNumber::vf10(void)
   return;
 }
 
-// 00C7DFA0  FUN_00c7dfa0  size=28  [between]
-void __thiscall FUN_00c7dfa0(int param_1,int param_2)
+// 00C7DFA0  Trigger::cCondEnemyGroupIsCautionLevelByNumber::vf1C  size=28  [class]
+void __thiscall Trigger::cCondEnemyGroupIsCautionLevelByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5408,8 +5408,8 @@ void Trigger::cCondEnemyIsCautionLevelByNumber::vf10(void)
   return;
 }
 
-// 00C7E000  FUN_00c7e000  size=22  [between]
-void __thiscall FUN_00c7e000(int param_1,int param_2)
+// 00C7E000  Trigger::cCondEnemyIsCautionLevelByNumber::vf1C  size=22  [class]
+void __thiscall Trigger::cCondEnemyIsCautionLevelByNumber::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5470,8 +5470,8 @@ void __fastcall Trigger::cCondScenarioAreaGroup::vf08(int param_1)
   return;
 }
 
-// 00C7E120  FUN_00c7e120  size=36  [between]
-void __thiscall FUN_00c7e120(int param_1,int param_2)
+// 00C7E120  Trigger::cCondScenarioAreaGroup::vf1C  size=36  [class]
+void __thiscall Trigger::cCondScenarioAreaGroup::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5528,8 +5528,8 @@ undefined4 __fastcall Trigger::cCondScenarioAreaEm::vf14(int param_1)
   return 0;
 }
 
-// 00C7E240  FUN_00c7e240  size=66  [between]
-void __thiscall FUN_00c7e240(int param_1,int param_2)
+// 00C7E240  Trigger::cCondScenarioAreaEm::vf1C  size=66  [class]
+void __thiscall Trigger::cCondScenarioAreaEm::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5571,8 +5571,8 @@ undefined4 __fastcall Trigger::cCondScenarioAreaOut::vf14(int param_1)
   return 0;
 }
 
-// 00C7E320  FUN_00c7e320  size=18  [between]
-void __thiscall FUN_00c7e320(int param_1,int param_2)
+// 00C7E320  Trigger::cCondScenarioAreaOut::vf1C  size=18  [class]
+void __thiscall Trigger::cCondScenarioAreaOut::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5607,8 +5607,8 @@ void __fastcall Trigger::cCondScenarioAreaGroupOut::vf10(int param_1)
   return;
 }
 
-// 00C7E3B0  FUN_00c7e3b0  size=36  [between]
-void __thiscall FUN_00c7e3b0(int param_1,int param_2)
+// 00C7E3B0  Trigger::cCondScenarioAreaGroupOut::vf1C  size=36  [class]
+void __thiscall Trigger::cCondScenarioAreaGroupOut::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5667,8 +5667,8 @@ undefined4 __fastcall Trigger::cCondScenarioAreaEmOut::vf14(int param_1)
   return 0;
 }
 
-// 00C7E4F0  FUN_00c7e4f0  size=66  [between]
-void __thiscall FUN_00c7e4f0(int param_1,int param_2)
+// 00C7E4F0  Trigger::cCondScenarioAreaEmOut::vf1C  size=66  [class]
+void __thiscall Trigger::cCondScenarioAreaEmOut::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5717,8 +5717,8 @@ undefined4 __fastcall Trigger::cCondAreaPlCam::vf14(int param_1)
   return 1;
 }
 
-// 00C7E610  FUN_00c7e610  size=18  [between]
-void __thiscall FUN_00c7e610(int param_1,int param_2)
+// 00C7E610  Trigger::cCondAreaPlCam::vf1C  size=18  [class]
+void __thiscall Trigger::cCondAreaPlCam::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5759,8 +5759,8 @@ undefined4 __fastcall Trigger::cCondAreaPlCamOut::vf14(int param_1)
   return 0;
 }
 
-// 00C7E710  FUN_00c7e710  size=18  [between]
-void __thiscall FUN_00c7e710(int param_1,int param_2)
+// 00C7E710  Trigger::cCondAreaPlCamOut::vf1C  size=18  [class]
+void __thiscall Trigger::cCondAreaPlCamOut::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5783,8 +5783,8 @@ undefined4 __fastcall Trigger::cCondKgkArea::vf18(int param_1)
   return *(undefined4 *)(param_1 + 0x14);
 }
 
-// 00C7E7D0  FUN_00c7e7d0  size=16  [between]
-void __thiscall FUN_00c7e7d0(int param_1,int param_2)
+// 00C7E7D0  Trigger::cCondFlagDlc2::vf1C  size=16  [class]
+void __thiscall Trigger::cCondFlagDlc2::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5792,8 +5792,8 @@ void __thiscall FUN_00c7e7d0(int param_1,int param_2)
   return;
 }
 
-// 00C7E810  FUN_00c7e810  size=16  [between]
-void __thiscall FUN_00c7e810(int param_1,int param_2)
+// 00C7E810  Trigger::cCondNotFlagDlc2::vf1C  size=16  [class]
+void __thiscall Trigger::cCondNotFlagDlc2::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5801,8 +5801,8 @@ void __thiscall FUN_00c7e810(int param_1,int param_2)
   return;
 }
 
-// 00C7E850  FUN_00c7e850  size=16  [between]
-void __thiscall FUN_00c7e850(int param_1,int param_2)
+// 00C7E850  Trigger::cCondFlagDlc3::vf1C  size=16  [class]
+void __thiscall Trigger::cCondFlagDlc3::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -5810,8 +5810,8 @@ void __thiscall FUN_00c7e850(int param_1,int param_2)
   return;
 }
 
-// 00C7E890  FUN_00c7e890  size=16  [between]
-void __thiscall FUN_00c7e890(int param_1,int param_2)
+// 00C7E890  Trigger::cCondNotFlagDlc3::vf1C  size=16  [class]
+void __thiscall Trigger::cCondNotFlagDlc3::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -6031,8 +6031,8 @@ undefined4 __fastcall Trigger::Act::BOSS(int param_1)
   return uVar1;
 }
 
-// 00C7EBE0  FUN_00c7ebe0  size=4  [between]
-undefined4 FUN_00c7ebe0(void)
+// 00C7EBE0  Trigger::cActBoss::vf24  size=4  [class]
+undefined4 Trigger::cActBoss::vf24(void)
 
 {
   return 0xffffffff;
@@ -6052,8 +6052,8 @@ undefined4 __fastcall Trigger::cActEnemyByName::vf18(int param_1)
   return uVar1;
 }
 
-// 00C7EC20  FUN_00c7ec20  size=26  [between]
-undefined4 __fastcall FUN_00c7ec20(int param_1)
+// 00C7EC20  Trigger::cActEnemyByName::vf24  size=26  [class]
+undefined4 __fastcall Trigger::cActEnemyByName::vf24(int param_1)
 
 {
   undefined4 uVar1;
@@ -6079,8 +6079,8 @@ undefined4 __fastcall Trigger::cActEnemyByNumber::vf18(int param_1)
   return uVar1;
 }
 
-// 00C7EC70  FUN_00c7ec70  size=15  [between]
-undefined4 __fastcall FUN_00c7ec70(int param_1)
+// 00C7EC70  Trigger::cActEnemyByNumber::vf24  size=15  [class]
+undefined4 __fastcall Trigger::cActEnemyByNumber::vf24(int param_1)
 
 {
   if (*(int *)(param_1 + 4) == 0) {
@@ -6103,8 +6103,8 @@ undefined4 __fastcall Trigger::Act::ENM_FORCE(int param_1)
   return uVar1;
 }
 
-// 00C7ECB0  FUN_00c7ecb0  size=32  [between]
-undefined4 __fastcall FUN_00c7ecb0(int param_1)
+// 00C7ECB0  Trigger::cActEnemyByNameForce::vf24  size=32  [class]
+undefined4 __fastcall Trigger::cActEnemyByNameForce::vf24(int param_1)
 
 {
   undefined4 uVar1;
@@ -6130,8 +6130,8 @@ undefined4 __fastcall Trigger::Act::ENM_FORCE_2(int param_1)
   return uVar1;
 }
 
-// 00C7ED00  FUN_00c7ed00  size=15  [between]
-undefined4 __fastcall FUN_00c7ed00(int param_1)
+// 00C7ED00  Trigger::cActEnemyByNumberForce::vf24  size=15  [class]
+undefined4 __fastcall Trigger::cActEnemyByNumberForce::vf24(int param_1)
 
 {
   if (*(int *)(param_1 + 4) == 0) {
@@ -7200,8 +7200,8 @@ undefined4 __fastcall Trigger::cActEnemyRequestEnd::vf18(int param_1)
   return 1;
 }
 
-// 00C7FCD0  FUN_00c7fcd0  size=15  [between]
-undefined4 __fastcall FUN_00c7fcd0(int param_1)
+// 00C7FCD0  Trigger::cActEnemyRequestEnd::vf24  size=15  [class]
+undefined4 __fastcall Trigger::cActEnemyRequestEnd::vf24(int param_1)
 
 {
   if (*(int *)(param_1 + 4) == 0) {
@@ -7222,8 +7222,8 @@ undefined4 __fastcall Trigger::cActEnemyRequestEndByName::vf18(int param_1)
   return 1;
 }
 
-// 00C7FD10  FUN_00c7fd10  size=32  [between]
-undefined4 __fastcall FUN_00c7fd10(int param_1)
+// 00C7FD10  Trigger::cActEnemyRequestEndByName::vf24  size=32  [class]
+undefined4 __fastcall Trigger::cActEnemyRequestEndByName::vf24(int param_1)
 
 {
   undefined4 uVar1;
@@ -7249,8 +7249,8 @@ undefined4 __fastcall Trigger::cActEnemyRequestEndBySubPhase::vf18(int param_1)
   return 0;
 }
 
-// 00C7FD80  FUN_00c7fd80  size=4  [between]
-undefined4 FUN_00c7fd80(void)
+// 00C7FD80  Trigger::cActEnemyRequestEndBySubPhase::vf24  size=4  [class]
+undefined4 Trigger::cActEnemyRequestEndBySubPhase::vf24(void)
 
 {
   return 0xffffffff;
@@ -7268,8 +7268,8 @@ undefined4 __fastcall Trigger::cActEnemyRequestEndAll::vf18(int param_1)
   return 1;
 }
 
-// 00C7FDC0  FUN_00c7fdc0  size=4  [between]
-undefined4 FUN_00c7fdc0(void)
+// 00C7FDC0  Trigger::cActEnemyRequestEndAll::vf24  size=4  [class]
+undefined4 Trigger::cActEnemyRequestEndAll::vf24(void)
 
 {
   return 0xffffffff;
@@ -7292,8 +7292,8 @@ undefined4 __fastcall Trigger::cActEnemyRequest::vf18(int param_1)
   return 1;
 }
 
-// 00C7FE10  FUN_00c7fe10  size=15  [between]
-undefined4 __fastcall FUN_00c7fe10(int param_1)
+// 00C7FE10  Trigger::cActEnemyRequest::vf24  size=15  [class]
+undefined4 __fastcall Trigger::cActEnemyRequest::vf24(int param_1)
 
 {
   if (*(int *)(param_1 + 4) == 0) {
@@ -7314,8 +7314,8 @@ undefined4 __fastcall Trigger::cActEnemyRequestByName::vf18(int param_1)
   return 1;
 }
 
-// 00C7FE50  FUN_00c7fe50  size=32  [between]
-undefined4 __fastcall FUN_00c7fe50(int param_1)
+// 00C7FE50  Trigger::cActEnemyRequestByName::vf24  size=32  [class]
+undefined4 __fastcall Trigger::cActEnemyRequestByName::vf24(int param_1)
 
 {
   undefined4 uVar1;
@@ -7341,8 +7341,8 @@ undefined4 __fastcall Trigger::cActEnemyRequestBySubPhase::vf18(int param_1)
   return 0;
 }
 
-// 00C7FEC0  FUN_00c7fec0  size=4  [between]
-undefined4 FUN_00c7fec0(void)
+// 00C7FEC0  Trigger::cActEnemyRequestBySubPhase::vf24  size=4  [class]
+undefined4 Trigger::cActEnemyRequestBySubPhase::vf24(void)
 
 {
   return 0xffffffff;
@@ -7420,8 +7420,8 @@ undefined4 __fastcall Trigger::cActEnemyFirstRequestEnd::vf18(int param_1)
   return 1;
 }
 
-// 00C7FFE0  FUN_00c7ffe0  size=4  [between]
-undefined4 FUN_00c7ffe0(void)
+// 00C7FFE0  Trigger::cActEnemyFirstRequestEnd::vf24  size=4  [class]
+undefined4 Trigger::cActEnemyFirstRequestEnd::vf24(void)
 
 {
   return 0xffffffff;
@@ -7718,8 +7718,8 @@ undefined4 __fastcall Trigger::cActEnemyGroupByNumber::vf18(int param_1)
   return uVar2;
 }
 
-// 00C80440  FUN_00c80440  size=15  [between]
-undefined4 __fastcall FUN_00c80440(int param_1)
+// 00C80440  Trigger::cActEnemyGroupByNumber::vf24  size=15  [class]
+undefined4 __fastcall Trigger::cActEnemyGroupByNumber::vf24(int param_1)
 
 {
   if (*(int *)(param_1 + 4) == 0) {
@@ -9345,8 +9345,8 @@ void __thiscall FUN_00c83e90(int param_1,undefined4 param_2)
   return;
 }
 
-// 00C83F10  FUN_00c83f10  size=208  [between]
-void __fastcall FUN_00c83f10(int param_1)
+// 00C83F10  Trigger::cTriggerTask_PlAnim::vf0C  size=208  [class]
+void __fastcall Trigger::cTriggerTask_PlAnim::vf0C(int param_1)
 
 {
   int iVar1;
@@ -9801,8 +9801,8 @@ undefined4 * __thiscall Trigger::cCondArea::vf00(undefined4 *param_1,byte param_
   return param_1;
 }
 
-// 00C84CF0  FUN_00c84cf0  size=18  [between]
-void __thiscall FUN_00c84cf0(int param_1,int param_2)
+// 00C84CF0  Trigger::cCondArea::vf1C  size=18  [class]
+void __thiscall Trigger::cCondArea::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -12012,8 +12012,8 @@ undefined4 * __thiscall Trigger::cCondScenarioArea::vf00(undefined4 *param_1,byt
   return param_1;
 }
 
-// 00C86CB0  FUN_00c86cb0  size=18  [between]
-void __thiscall FUN_00c86cb0(int param_1,int param_2)
+// 00C86CB0  Trigger::cCondScenarioArea::vf1C  size=18  [class]
+void __thiscall Trigger::cCondScenarioArea::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;
@@ -12149,8 +12149,8 @@ undefined4 __fastcall Trigger::cCondKgkArea::vf14(int param_1)
   return 0;
 }
 
-// 00C86E90  FUN_00c86e90  size=16  [between]
-void __thiscall FUN_00c86e90(int param_1,int param_2)
+// 00C86E90  Trigger::cCondKgkArea::vf1C  size=16  [class]
+void __thiscall Trigger::cCondKgkArea::vf1C(int param_1,int param_2)
 
 {
   *(int *)(param_1 + 4) = param_2;

@@ -1,5 +1,5 @@
 // src/enemy/em8800/Em8800.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007080A0..00AB9B80, 17 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007080A0..00AB9B80, 18 functions
 
 #include "mgrr.h"
 #include "Em8800.h"
@@ -42,8 +42,8 @@ void Em8800::vf50(void)
   return;
 }
 
-// 00708120  Em8800::vf264  size=52  [class]
-undefined4 __thiscall Em8800::vf264(int param_1,undefined4 *param_2)
+// 00708120  Em8800::setEmSetInfo  size=52  [class]
+undefined4 __thiscall Em8800::setEmSetInfo(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -280,7 +280,7 @@ void __fastcall FUN_007086d0(int *param_1)
     (**(code **)(*param_1 + 0x20))();
     FUN_00aa92c0(1);
     iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-    if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 != 0)) {
+    if ((iVar2 != 0) && (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 != 0)) {
       puVar3 = *(undefined4 **)(iVar2 + 8);
       *(undefined4 *)(iVar2 + 4) = 1;
       iVar7 = 9999;
@@ -325,15 +325,15 @@ void __fastcall FUN_007086d0(int *param_1)
     fVar8 = (float10)(float)param_1[0x248] - fVar8 * (float10)0.016666668;
     param_1[0x248] = (int)(float)fVar8;
     if (fVar8 <= (float10)0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
   return;
 }
 
-// 007088C0  Em8800::vf40  size=529  [class]
-undefined4 __fastcall Em8800::vf40(int param_1)
+// 007088C0  Em8800::startup  size=529  [class]
+undefined4 __fastcall Em8800::startup(int param_1)
 
 {
   int iVar1;
@@ -342,7 +342,7 @@ undefined4 __fastcall Em8800::vf40(int param_1)
   undefined *puVar4;
   undefined4 uVar5;
   
-  iVar1 = EmBaseDLC::vf40();
+  iVar1 = EmBaseDLC::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -543,6 +543,17 @@ undefined4 __fastcall Em8800::vf32C(int param_1)
   return 0;
 }
 
+// 00AB1910  Em8800::Em8800  size=35  [class]
+undefined4 * __fastcall Em8800::Em8800(undefined4 *param_1)
+
+{
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB1940  Em8800::vf04  size=6  [class]
 undefined * Em8800::vf04(void)
 
@@ -550,12 +561,12 @@ undefined * Em8800::vf04(void)
   return &DAT_01b35780;
 }
 
-// 00AB9B80  Em8800::vf00  size=43  [class]
-undefined4 __thiscall Em8800::vf00(undefined4 param_1,byte param_2)
+// 00AB9B80  Em8800::destruct  size=43  [class]
+undefined4 __thiscall Em8800::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

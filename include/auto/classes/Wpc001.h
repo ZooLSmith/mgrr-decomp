@@ -27,7 +27,6 @@ struct Wpc001 : public BehaviorBulletBase {
     static undefined4 vf31C();  // 00AC59F0
     static void vf324();  // 00AC5C10
     static void vfC8(int param_2);  // 00AC5C60
-    static void vf1B8(undefined4 * param_1, undefined4 param_2, int param_3);  // 00AC5CE0
     static void vf320();  // 00ACADB0
     static int vfD8(int param_2);  // 00ACCBC0
     static undefined4 vf314();  // 00ACFE20
@@ -35,5 +34,4 @@ struct Wpc001 : public BehaviorBulletBase {
     static int vf308(int param_2, int param_3);  // 00ADD6D0
     static undefined4 vf30C();  // 00ADD8D0
     static void vf1D0(int param_2);  // 00ADE250
-    static void vf128();  // 00ADE4B0
 };

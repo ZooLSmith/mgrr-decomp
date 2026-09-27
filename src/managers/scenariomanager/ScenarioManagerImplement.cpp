@@ -1,5 +1,5 @@
 // src/managers/scenariomanager/ScenarioManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6D6F0..00A7BCB0, 47 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6D6F0..00A7BCB0, 48 functions
 
 #include "mgrr.h"
 #include "ScenarioManagerImplement.h"
@@ -831,11 +831,59 @@ int __fastcall ScenarioManagerImplement::vf98(int param_1)
   return param_1 + 0x30;
 }
 
+// 00A7BBD0  ScenarioManagerImplement::~ScenarioManagerImplement  size=213  [class]
+void __fastcall ScenarioManagerImplement::~ScenarioManagerImplement(undefined4 *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  
+  *param_1 = vftable;
+  if (DAT_01be9a34 != (undefined4 *)0x0) {
+    (**(code **)*DAT_01be9a34)(1);
+    DAT_01be9a34 = (undefined4 *)0x0;
+  }
+  if (((int *)param_1[0x2d] != (int *)0x0) && (param_1[0x2e] != 0)) {
+    (**(code **)(*(int *)param_1[0x2d] + 0x10))();
+    if ((undefined4 *)param_1[0x2d] != (undefined4 *)0x0) {
+      (*(code *)**(undefined4 **)param_1[0x2d])(1);
+      param_1[0x2d] = 0;
+    }
+  }
+  piVar2 = param_1 + 0x1d;
+  iVar1 = 8;
+  do {
+    if ((int *)*piVar2 != (int *)0x0) {
+      (**(code **)(*(int *)*piVar2 + 8))();
+      if ((int *)*piVar2 != (int *)0x0) {
+        (**(code **)(*(int *)*piVar2 + 0x14))(1);
+        *piVar2 = 0;
+      }
+    }
+    piVar2 = piVar2 + 2;
+    iVar1 = iVar1 + -1;
+  } while (iVar1 != 0);
+  FUN_00dd8450();
+  if (param_1[10] != 0) {
+    FUN_00dd4940(param_1[10]);
+    param_1[10] = 0;
+  }
+  hkMemoryAllocator::~hkMemoryAllocator();
+  FUN_00dd8450();
+  if (param_1[10] != 0) {
+    FUN_00dd4940(param_1[10]);
+    param_1[10] = 0;
+  }
+  thunk_FUN_00dd8450();
+  *param_1 = ScenarioManager::vftable;
+  return;
+}
+
 // 00A7BCB0  ScenarioManagerImplement::vfA8  size=30  [class]
 undefined4 __thiscall ScenarioManagerImplement::vfA8(undefined4 param_1,byte param_2)
 
 {
-  ScenarioManager::ScenarioManager();
+  ~ScenarioManagerImplement();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

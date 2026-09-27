@@ -48,6 +48,4 @@ struct ScenarioManager {
     virtual undefined4 vfA0(undefined4 param_1, undefined4 param_2, undefined4 param_3) = 0;  // 00FDB68B slot 0xA0
     virtual undefined4 vfA4(undefined4 param_1, undefined4 param_2) = 0;  // 00FDB68B slot 0xA4
     virtual undefined4 * vfA8(byte param_2);  // 00A6D440 slot 0xA8
-    // non-virtual members
-    ScenarioManager();  // 00A7BBD0
 };

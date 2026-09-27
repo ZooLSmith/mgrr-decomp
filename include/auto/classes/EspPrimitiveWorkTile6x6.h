@@ -8,4 +8,6 @@ struct EspPrimitiveWorkTile6x6 : public EspPrimitiveWorkTileBase {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00F59600 slot 0x0  overrides EspPrimitiveWorkBase
     virtual void vf04(undefined4 param_1);  // 00F56450 slot 0x4  overrides EspPrimitiveWorkBase
+    // non-virtual members
+    EspPrimitiveWorkTile6x6();  // 00F4FD20
 };

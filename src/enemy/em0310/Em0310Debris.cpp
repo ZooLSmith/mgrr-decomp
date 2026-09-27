@@ -56,8 +56,8 @@ void __thiscall Em0310Debris::vf1BC(int param_1,undefined4 param_2)
   return;
 }
 
-// 0057F4D0  Em0310Debris::vf1B8  size=31  [class]
-void Em0310Debris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 0057F4D0  Em0310Debris::setCutCrerateInfo  size=31  [class]
+void Em0310Debris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -261,8 +261,8 @@ switchD_005885a4_default:
   return;
 }
 
-// 00592BA0  Em0310Debris::vf40  size=1034  [class]
-undefined4 __fastcall Em0310Debris::vf40(int param_1)
+// 00592BA0  Em0310Debris::startup  size=1034  [class]
+undefined4 __fastcall Em0310Debris::startup(int param_1)
 
 {
   float fVar1;
@@ -298,7 +298,7 @@ undefined4 __fastcall Em0310Debris::vf40(int param_1)
   undefined1 local_2c;
   
   local_154 = 8.18904e-39;
-  iVar9 = BehaviorDebrisBase::vf40();
+  iVar9 = BehaviorDebrisBase::startup();
   if (iVar9 != 0) {
     local_154 = 8.189065e-39;
     fVar15 = (float10)FUN_00a13390();
@@ -454,7 +454,7 @@ void __fastcall Em0310Debris::vf54(int param_1)
 undefined4 * __fastcall Em0310Debris::Em0310Debris(undefined4 *param_1)
 
 {
-  BehaviorDebrisBase::BehaviorDebrisBase_4();
+  BehaviorDebrisBase::BehaviorDebrisBase();
   *param_1 = vftable;
   param_1[0x25d] = 0;
   return param_1;
@@ -467,8 +467,8 @@ undefined * Em0310Debris::vf04(void)
   return &DAT_01b35160;
 }
 
-// 00AB8840  Em0310Debris::vf00  size=105  [class]
-undefined4 * __thiscall Em0310Debris::vf00(undefined4 *param_1,byte param_2)
+// 00AB8840  Em0310Debris::destruct  size=105  [class]
+undefined4 * __thiscall Em0310Debris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -482,7 +482,7 @@ undefined4 * __thiscall Em0310Debris::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

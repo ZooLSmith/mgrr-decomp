@@ -1,14 +1,28 @@
 // src/misc/esp51.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD580..00F386D0, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC7FC0..00F386D0, 5 functions
 
 #include "mgrr.h"
 #include "esp51.h"
+
+// 00EC7FC0  esp51::vf14  size=51  [class]
+void esp51::vf14(void)
+
+{
+  if (DAT_01ede1a8 != 0) {
+    EnterCriticalSection((LPCRITICAL_SECTION)&DAT_01ede190);
+  }
+  DAT_01eddaf0 = 0;
+  if (DAT_01ede1a8 != 0) {
+    LeaveCriticalSection((LPCRITICAL_SECTION)&DAT_01ede190);
+  }
+  return;
+}
 
 // 00ECD580  esp51::esp51  size=18  [class]
 undefined4 * __fastcall esp51::esp51(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +31,7 @@ undefined4 * __fastcall esp51::esp51(undefined4 *param_1)
 undefined4 __thiscall esp51::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -38,9 +52,9 @@ void esp51::thunk_vf14(void)
   return;
 }
 
-// 00F386D0  esp51::vf04  size=169  [class]
+// 00F386D0  esp51::preTrans  size=169  [class]
 undefined4 __thiscall
-esp51::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp51::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   float fVar1;
@@ -49,7 +63,7 @@ esp51::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar4;
   undefined4 uVar5;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 != 0) {
     *(undefined4 *)(param_1 + 0x450) = 0x3f7eb852;
     *(undefined4 *)(param_1 + 0x454) = 0;

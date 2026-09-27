@@ -51,10 +51,10 @@ undefined4 __thiscall cBossWeaponInfoDispParts::vf00(undefined4 param_1,byte par
   return param_1;
 }
 
-// 00CFE1D0  cBossWeaponInfoDispParts::vf14  size=1682  [class]
+// 00CFE1D0  cBossWeaponInfoDispParts::create  size=1682  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cBossWeaponInfoDispParts::vf14(int param_1)
+void __fastcall cBossWeaponInfoDispParts::create(int param_1)
 
 {
   float fVar1;

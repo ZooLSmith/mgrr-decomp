@@ -1,5 +1,5 @@
 // src/misc/cChapterSelectMenuParts.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0099A900..009ABFD0, 10 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0099A900..009ABFD0, 11 functions
 
 #include "mgrr.h"
 #include "cChapterSelectMenuParts.h"
@@ -12,13 +12,13 @@ cChapterSelectMenuParts::cChapterSelectMenuParts(undefined4 *param_1,char param_
   undefined4 *puVar1;
   int iVar2;
   
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
-  cChapterResultParts::cChapterResultParts_2();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   param_1[0xdb] = 0;
   param_1[0x120] = 0;
   param_1[0x121] = 0;
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   param_1[0x13e] = (int)param_2;
   param_1[0x13f] = (int)param_3;
   *(undefined1 *)((int)param_1 + 0x4e7) = 0xff;
@@ -45,7 +45,31 @@ cChapterSelectMenuParts::cChapterSelectMenuParts(undefined4 *param_1,char param_
   return param_1;
 }
 
-// 0099AA30  FUN_0099aa30  size=78  [callgraph]
+// 0099A9C0  cChapterSelectMenuParts::~cChapterSelectMenuParts  size=112  [class]
+void __fastcall cChapterSelectMenuParts::~cChapterSelectMenuParts(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0xdb] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0xdb])(1);
+    param_1[0xdb] = 0;
+  }
+  FUN_00cfe0f0(0x13);
+  Hw::cTexture::~cTexture();
+  param_1[7] = cChapterResultParts::vftable;
+  iVar1 = 8;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 0099AA30  FUN_0099aa30  size=78  [between]
 int FUN_0099aa30(undefined4 param_1,undefined4 param_2)
 
 {
@@ -64,7 +88,7 @@ int FUN_0099aa30(undefined4 param_1,undefined4 param_2)
   return 0;
 }
 
-// 0099AA80  FUN_0099aa80  size=648  [callgraph]
+// 0099AA80  FUN_0099aa80  size=648  [between]
 void __thiscall FUN_0099aa80(int param_1,int param_2,int param_3,int param_4,int param_5)
 
 {
@@ -206,7 +230,7 @@ FUN_009ab030(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param
 undefined4 __thiscall cChapterSelectMenuParts::vf00(undefined4 param_1,byte param_2)
 
 {
-  cChapterResultParts::cChapterResultParts();
+  ~cChapterSelectMenuParts();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -724,10 +748,10 @@ LAB_009aba0d:
   return;
 }
 
-// 009ABFD0  cChapterSelectMenuParts::vf14  size=2571  [class]
+// 009ABFD0  cChapterSelectMenuParts::create  size=2571  [class]
 /* WARNING (jumptable): Unable to track spacebase fully for stack */
 
-void __fastcall cChapterSelectMenuParts::vf14(int param_1)
+void __fastcall cChapterSelectMenuParts::create(int param_1)
 
 {
   float fVar1;

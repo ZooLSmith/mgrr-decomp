@@ -19,7 +19,8 @@ struct hkpRagdollConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011D4A00 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011D49E0 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpRagdollConstraintData(undefined4 * param_1, int param_2);  // 011AF7F0
-    hkpRagdollConstraintData();  // 011AF840
+    ~hkpRagdollConstraintData();  // 011AF7F0
+    hkpRagdollConstraintData();  // 011AF820
+    void ctor_011AF840();  // 011AF840
     void ctor_011D4E80();  // 011D4E80
 };

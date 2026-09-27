@@ -9,4 +9,6 @@ struct EmBodyDLC : public BehaviorEmBody {
     virtual undefined4 destruct(byte param_2);  // 00AB9D10 slot 0x0  overrides cParts
     virtual undefined * vf04();  // 00AB2110 slot 0x4  overrides cObj
     virtual undefined4 startup();  // 00A9BAC0 slot 0x40  overrides Behavior
+    // non-virtual members
+    EmBodyDLC();  // 00AB20E0
 };

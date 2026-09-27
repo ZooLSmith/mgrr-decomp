@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "P458AtqScr.h"
 
-// 00415A90  P458AtqScr::vf40  size=65  [class]
-undefined4 __fastcall P458AtqScr::vf40(int param_1)
+// 00415A90  P458AtqScr::startup  size=65  [class]
+undefined4 __fastcall P458AtqScr::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -40,7 +40,7 @@ void __fastcall P458AtqScr::vf4C(int *param_1)
     fVar1 = (float)param_1[0x22d] - 1.0;
     param_1[0x22d] = (int)fVar1;
     if (NAN(fVar1) || 0.0 < fVar1 == (fVar1 == 0.0)) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   if (((*(byte *)(param_1 + 0x130) & 1) != 0) && (param_1[0x27d] != 0)) {
@@ -239,8 +239,8 @@ undefined * P458AtqScr::vf04(void)
   return &DAT_01b34c18;
 }
 
-// 00AB07F0  P458AtqScr::vf00  size=43  [class]
-undefined4 __thiscall P458AtqScr::vf00(undefined4 param_1,byte param_2)
+// 00AB07F0  P458AtqScr::destruct  size=43  [class]
+undefined4 __thiscall P458AtqScr::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

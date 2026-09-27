@@ -11,5 +11,4 @@ struct EspPrimitiveWorkMultiLineBase : public EspPrimitiveWorkBase {
     virtual void vf0C(int param_2);  // 00F50750 slot 0xC  overrides EspPrimitiveWorkBase
     // non-virtual members
     EspPrimitiveWorkMultiLineBase();  // 00F50690
-    void ctor_00F58CD0();  // 00F58CD0
 };

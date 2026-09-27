@@ -110,8 +110,8 @@ void __fastcall cUIDrawBase::cUIDrawBase(undefined4 *param_1)
   return;
 }
 
-// 00CE5320  cUIDrawBase::cUIDrawBase_3  size=42  [class]
-void __fastcall cUIDrawBase::cUIDrawBase_3(undefined4 *param_1)
+// 00CE5320  cUIDrawBase::cUIDrawBase  size=42  [class]
+void __fastcall cUIDrawBase::cUIDrawBase(undefined4 *param_1)
 
 {
   *param_1 = cUIDrawLocator::vftable;

@@ -25,7 +25,7 @@ void __fastcall Em002f::vf50(int param_1)
   if (*(int *)(param_1 + 0x7b0) != 0) {
     FUN_008f3cb0(param_1);
   }
-  BehaviorEmBase::vf128();
+  BehaviorEmBase::setSeqAtk();
   return;
 }
 
@@ -367,8 +367,8 @@ void __fastcall Em002f::vf20(int *param_1)
   return;
 }
 
-// 0043AF70  Em002f::vf264  size=116  [class]
-undefined4 __thiscall Em002f::vf264(int param_1,int param_2)
+// 0043AF70  Em002f::setEmSetInfo  size=116  [class]
+undefined4 __thiscall Em002f::setEmSetInfo(int param_1,int param_2)
 
 {
   int iVar1;
@@ -720,8 +720,8 @@ void __fastcall FUN_0043b650(int *param_1)
   return;
 }
 
-// 0043B810  Em002f::vf40  size=1211  [class]
-undefined4 __fastcall Em002f::vf40(int param_1)
+// 0043B810  Em002f::startup  size=1211  [class]
+undefined4 __fastcall Em002f::startup(int param_1)
 
 {
   uint *puVar1;
@@ -740,7 +740,7 @@ undefined4 __fastcall Em002f::vf40(int param_1)
   undefined1 local_80 [24];
   undefined4 local_68;
   
-  iVar3 = BehaviorEmBase::vf40();
+  iVar3 = BehaviorEmBase::startup();
   if (iVar3 != 0) {
     *(uint *)(param_1 + 0x4c0) = *(uint *)(param_1 + 0x4c0) | 0x20;
     FUN_00405230();
@@ -1022,7 +1022,7 @@ undefined4 * __fastcall Em002f::Em002f(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a603a0();
   iVar1 = 1;
@@ -1041,12 +1041,12 @@ undefined * Em002f::vf04(void)
   return &DAT_01b34c50;
 }
 
-// 00AB6A70  Em002f::vf00  size=43  [class]
-undefined4 __thiscall Em002f::vf00(undefined4 param_1,byte param_2)
+// 00AB6A70  Em002f::destruct  size=43  [class]
+undefined4 __thiscall Em002f::destruct(undefined4 param_1,byte param_2)
 
 {
   cXml::cXml_7();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

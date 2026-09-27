@@ -1,5 +1,5 @@
 // src/misc/cItemFixVRPdaDlc.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085AE30..00AB9C50, 17 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085AE30..00AB9C50, 18 functions
 
 #include "mgrr.h"
 #include "cItemFixVRPdaDlc.h"
@@ -148,8 +148,8 @@ uint FUN_0085b090(int *param_1)
   return -(uint)(iVar1 != 0) & (uint)param_1;
 }
 
-// 0085B0C0  cItemFixVRPdaDlc::vf40  size=426  [class]
-undefined4 __fastcall cItemFixVRPdaDlc::vf40(int param_1)
+// 0085B0C0  cItemFixVRPdaDlc::startup  size=426  [class]
+undefined4 __fastcall cItemFixVRPdaDlc::startup(int param_1)
 
 {
   int iVar1;
@@ -157,7 +157,7 @@ undefined4 __fastcall cItemFixVRPdaDlc::vf40(int param_1)
   undefined4 uVar3;
   undefined4 uVar4;
   
-  iVar1 = cItemFixBase::vf40();
+  iVar1 = cItemFixBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -167,7 +167,7 @@ undefined4 __fastcall cItemFixVRPdaDlc::vf40(int param_1)
     iVar1 = 0;
   }
   else {
-    iVar1 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar1 = RigidBodyCollision::RigidBodyCollision();
   }
   *(int *)(param_1 + 0x7b0) = iVar1;
   if (iVar1 != 0) {
@@ -697,6 +697,19 @@ void __fastcall cItemFixVRPdaDlc::vf44(int param_1)
   return;
 }
 
+// 00AB1A60  cItemFixVRPdaDlc::cItemFixVRPdaDlc  size=56  [class]
+undefined4 * __fastcall cItemFixVRPdaDlc::cItemFixVRPdaDlc(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB1AA0  cItemFixVRPdaDlc::vf04  size=6  [class]
 undefined * cItemFixVRPdaDlc::vf04(void)
 
@@ -704,11 +717,11 @@ undefined * cItemFixVRPdaDlc::vf04(void)
   return &DAT_01b35b00;
 }
 
-// 00AB9C50  cItemFixVRPdaDlc::vf00  size=30  [class]
-undefined4 __thiscall cItemFixVRPdaDlc::vf00(undefined4 param_1,byte param_2)
+// 00AB9C50  cItemFixVRPdaDlc::destruct  size=30  [class]
+undefined4 __thiscall cItemFixVRPdaDlc::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_124();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

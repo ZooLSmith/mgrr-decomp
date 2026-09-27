@@ -11,5 +11,6 @@ struct hkpStaticCompoundShape : public hkpBvTreeShape, public hkpShapeContainer 
     static uint vf08();  // 01213690
     static uint vf0C(uint param_2);  // 012136F0
     static int vf04();  // 01213E90
+    hkpStaticCompoundShape();  // 01214520
     static void vf00();  // 0121CB80
 };

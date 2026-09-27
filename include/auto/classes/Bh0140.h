@@ -12,5 +12,4 @@ struct Bh0140 : public BehaviorBh {
     // non-virtual members
     Bh0140();  // 00AAE9D0
     static void vf54();  // 00AC7940
-    static undefined4 vf40();  // 00AC79B0
 };

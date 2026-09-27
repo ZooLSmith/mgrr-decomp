@@ -8,7 +8,7 @@
 undefined4 * __fastcall cKeyConfigHelpMenu::cKeyConfigHelpMenu(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   param_1[0x20] = 0;
   *param_1 = vftable;
   param_1[0x1f] = 0;
@@ -21,7 +21,7 @@ undefined4 * __thiscall cKeyConfigHelpMenu::vf00(undefined4 *param_1,byte param_
 
 {
   *param_1 = vftable;
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -98,8 +98,8 @@ void __fastcall cKeyConfigHelpMenu::vf08(int param_1)
   return;
 }
 
-// 0098E5E0  cKeyConfigHelpMenu::vf14  size=139  [class]
-void __fastcall cKeyConfigHelpMenu::vf14(int param_1)
+// 0098E5E0  cKeyConfigHelpMenu::create  size=139  [class]
+void __fastcall cKeyConfigHelpMenu::create(int param_1)
 
 {
   float10 fVar1;

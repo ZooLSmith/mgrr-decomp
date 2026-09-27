@@ -8,7 +8,7 @@
 undefined4 * __fastcall cEsp28Strip::cEsp28Strip(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall cEsp28Strip::cEsp28Strip(undefined4 *param_1)
 undefined4 __thiscall cEsp28Strip::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -635,8 +635,8 @@ void __fastcall cEsp28Strip::vf14(int param_1)
   return;
 }
 
-// 00F2A550  cEsp28Strip::vf10  size=375  [class]
-void __fastcall cEsp28Strip::vf10(int *param_1)
+// 00F2A550  cEsp28Strip::addOtTransList  size=375  [class]
+void __fastcall cEsp28Strip::addOtTransList(int *param_1)
 
 {
   int *piVar1;
@@ -672,7 +672,7 @@ void __fastcall cEsp28Strip::vf10(int *param_1)
         *(undefined4 *)(iVar2 + 0x68) = 0x3f800000;
         *(undefined4 *)(iVar2 + 0x54) = 0x3f800000;
         *(undefined4 *)(iVar2 + 0x40) = 0x3f800000;
-        FUN_00efed20();
+        esp107::vf10();
         piVar1 = param_1 + 0xf2;
         FUN_00edfcd0(piVar1);
         FUN_00f26b40(iVar2);
@@ -709,9 +709,9 @@ void __fastcall cEsp28Strip::vf10(int *param_1)
   return;
 }
 
-// 00F35270  cEsp28Strip::vf04  size=124  [class]
+// 00F35270  cEsp28Strip::preTrans  size=124  [class]
 undefined4 __thiscall
-cEsp28Strip::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+cEsp28Strip::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   uint uVar1;
@@ -719,7 +719,7 @@ cEsp28Strip::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   uint *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar2 != 0) && (iVar2 = FUN_00f12b50(), iVar2 != 0)) {
     if ((*(int *)(param_1 + 0x58) != 0) &&
        (puVar3 = (uint *)(*(int *)(param_1 + 0x58) + 0x70), puVar3 != (uint *)0x0)) {

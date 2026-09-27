@@ -476,8 +476,8 @@ undefined4 __thiscall cQTEButtonPCParts::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 00D15390  cQTEButtonPCParts::vf14  size=621  [class]
-void __fastcall cQTEButtonPCParts::vf14(int param_1)
+// 00D15390  cQTEButtonPCParts::create  size=621  [class]
+void __fastcall cQTEButtonPCParts::create(int param_1)
 
 {
   int iVar1;

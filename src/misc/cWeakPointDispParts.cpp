@@ -82,8 +82,8 @@ undefined4 * __thiscall cWeakPointDispParts::vf00(undefined4 *param_1,byte param
   return param_1;
 }
 
-// 00CF3100  cWeakPointDispParts::vf14  size=828  [class]
-void __fastcall cWeakPointDispParts::vf14(int param_1)
+// 00CF3100  cWeakPointDispParts::create  size=828  [class]
+void __fastcall cWeakPointDispParts::create(int param_1)
 
 {
   float fVar1;

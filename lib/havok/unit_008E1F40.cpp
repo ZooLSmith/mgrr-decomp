@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "hkBaseObject.h"
 
-// 008E1F40  hkBaseObject::hkBaseObject_218  size=142  [run]
-void hkBaseObject::hkBaseObject_218(undefined4 param_1)
+// 008E1F40  hkBaseObject::hkBaseObject  size=142  [run]
+void hkBaseObject::hkBaseObject(undefined4 param_1)
 
 {
   int *piVar1;
@@ -13,7 +13,7 @@ void hkBaseObject::hkBaseObject_218(undefined4 param_1)
   undefined4 local_30;
   
   FUN_004066f0();
-  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
   FUN_01269700(local_a0);
   local_30 = param_1;
   FUN_0126a610(local_a0);
@@ -49,7 +49,7 @@ float10 hkBaseObject::hkBaseObject_217(void)
     }
     *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1;
   }
-  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
   FUN_01269700(local_a0);
   local_a0[0] = vftable;
   if ((DAT_01885d68 != 1) && (iVar3 = *(int *)((int)pvVar4 + iVar3 * 4), *(int *)(iVar3 + 4) == 0))
@@ -63,8 +63,8 @@ float10 hkBaseObject::hkBaseObject_217(void)
   return (float10)local_30;
 }
 
-// 008E20B0  hkBaseObject::hkBaseObject_210  size=139  [run]
-void hkBaseObject::hkBaseObject_210(undefined4 param_1)
+// 008E20B0  hkBaseObject::hkBaseObject  size=139  [run]
+void hkBaseObject::hkBaseObject(undefined4 param_1)
 
 {
   int *piVar1;
@@ -72,7 +72,7 @@ void hkBaseObject::hkBaseObject_210(undefined4 param_1)
   undefined4 local_34;
   
   FUN_004066f0();
-  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
   FUN_01269700(local_a0);
   local_34 = param_1;
   FUN_0126a610(local_a0);
@@ -108,7 +108,7 @@ float10 hkBaseObject::hkBaseObject_213(void)
     }
     *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1;
   }
-  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
   FUN_01269700(local_a0);
   local_a0[0] = vftable;
   if ((DAT_01885d68 != 1) && (iVar3 = *(int *)((int)pvVar4 + iVar3 * 4), *(int *)(iVar3 + 4) == 0))

@@ -757,8 +757,6 @@ struct ZangekiStatePl1400;
 struct ZangekiStatePl1500;
 struct ZangekiTateStatePl0010;
 struct ZangekiYokoStatePl0010;
-struct _AFX_EDIT_STATE;
-struct _AFX_RICHEDIT_STATE;
 struct _HeapManager;
 struct _LocaleUpdate;
 namespace _anon_4671B7E4 {}

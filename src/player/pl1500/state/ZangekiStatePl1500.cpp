@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiStatePl1500::ZangekiStatePl1500(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_009003e0();
   return param_1;
@@ -2819,10 +2819,10 @@ LAB_008cd55f:
   return 1;
 }
 
-// 008CDAC0  ZangekiStatePl1500::vf0C  size=442  [class]
+// 008CDAC0  ZangekiStatePl1500::SafeCheck  size=442  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiStatePl1500::vf0C(int param_1,undefined4 *param_2)
+void __thiscall ZangekiStatePl1500::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -2888,7 +2888,7 @@ void __thiscall ZangekiStatePl1500::vf0C(int param_1,undefined4 *param_2)
     *(undefined4 *)(uVar6 + 0x6b0) = 0;
     FUN_00c1cee0(0x40a80000);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -3383,8 +3383,8 @@ FUN_008ce550(undefined4 *param_1,int param_2,undefined4 param_3,int param_4,unde
   return local_a0;
 }
 
-// 008D02B0  ZangekiStatePl1500::vf10  size=1104  [class]
-undefined4 __thiscall ZangekiStatePl1500::vf10(int param_1,undefined4 *param_2)
+// 008D02B0  ZangekiStatePl1500::qteSafeCheck  size=1104  [class]
+undefined4 __thiscall ZangekiStatePl1500::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -3534,7 +3534,7 @@ undefined4 __thiscall ZangekiStatePl1500::vf10(int param_1,undefined4 *param_2)
        ((iVar3 = FUN_008b7810(param_2), iVar3 != 0 || (*(int *)(uVar7 + 0x188) == 0)))) {
       *(undefined4 *)(uVar7 + 0xe4) = 1;
     }
-    uVar6 = StateMachineNode::vf10(param_2);
+    uVar6 = StateMachineNode::qteSafeCheck(param_2);
     return uVar6;
   }
   FUN_00d82510(1,100);

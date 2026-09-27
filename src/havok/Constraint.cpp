@@ -256,7 +256,7 @@ undefined4 __thiscall FUN_008fbca0(int param_1,int *param_2)
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0xd0);
     *(undefined2 *)(iVar2 + 4) = 0xd0;
-    uVar3 = hkpHingeConstraintData::hkpHingeConstraintData_2();
+    uVar3 = hkpHingeConstraintData::hkpHingeConstraintData();
     iStack_24 = param_2[4];
     iStack_20 = param_2[5];
     iStack_1c = param_2[6];
@@ -269,7 +269,7 @@ undefined4 __thiscall FUN_008fbca0(int param_1,int *param_2)
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x38);
     *(undefined2 *)(iVar2 + 4) = 0x38;
-    uVar3 = hkpConstraintInstance::hkpConstraintInstance_5(*param_2,param_2[1],uVar3,1);
+    uVar3 = hkpConstraintInstance::hkpConstraintInstance(*param_2,param_2[1],uVar3,1);
     FUN_01197ce0(uVar3);
     *(undefined4 *)(param_1 + 4) = uVar3;
     FUN_010060a0();
@@ -301,7 +301,7 @@ undefined4 __thiscall FUN_008fbdd0(int param_1,int *param_2)
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x100);
     *(undefined2 *)(iVar2 + 4) = 0x100;
-    iVar2 = hkpLimitedHingeConstraintData::hkpLimitedHingeConstraintData_2();
+    iVar2 = hkpLimitedHingeConstraintData::hkpLimitedHingeConstraintData();
     iStack_24 = param_2[4];
     iStack_20 = param_2[5];
     iStack_1c = param_2[6];
@@ -317,7 +317,7 @@ undefined4 __thiscall FUN_008fbdd0(int param_1,int *param_2)
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x38);
     *(undefined2 *)(iVar3 + 4) = 0x38;
-    uVar4 = hkpConstraintInstance::hkpConstraintInstance_5(*param_2,param_2[1],iVar2,1);
+    uVar4 = hkpConstraintInstance::hkpConstraintInstance(*param_2,param_2[1],iVar2,1);
     FUN_01197ce0(uVar4);
     *(undefined4 *)(param_1 + 4) = uVar4;
     FUN_010060a0();
@@ -424,7 +424,7 @@ undefined4 FUN_008fc020(undefined4 *param_1)
   pvVar1 = TlsGetValue(DAT_01f8fc4c);
   iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x24);
   *(undefined2 *)(iVar2 + 4) = 0x24;
-  iVar2 = hkpPositionConstraintMotor::hkpPositionConstraintMotor_2(0);
+  iVar2 = hkpPositionConstraintMotor::hkpPositionConstraintMotor(0);
   if (iVar2 == 0) {
     return 0;
   }
@@ -441,7 +441,7 @@ undefined4 FUN_008fc020(undefined4 *param_1)
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar4 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x48);
     *(undefined2 *)(iVar4 + 4) = 0x48;
-    iVar4 = hkpAction::hkpAction_20(iVar3);
+    iVar4 = hkpConstraintChainInstanceAction::hkpConstraintChainInstanceAction(iVar3);
     if (iVar4 != 0) {
       *(undefined4 *)(iVar3 + 0x34) = param_1[0xc];
       *(undefined4 *)(iVar3 + 0x38) = param_1[0xd];
@@ -476,11 +476,11 @@ undefined4 __thiscall FUN_008fc1d0(int param_1,undefined4 param_2,undefined4 par
   pvVar1 = TlsGetValue(DAT_01f8fc4c);
   iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x34);
   *(undefined2 *)(iVar2 + 4) = 0x34;
-  uVar3 = hkpBallSocketChainData::hkpBallSocketChainData_2();
+  uVar3 = hkpBallSocketChainData::hkpBallSocketChainData();
   pvVar1 = TlsGetValue(DAT_01f8fc4c);
   iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x48);
   *(undefined2 *)(iVar2 + 4) = 0x48;
-  uVar3 = hkpAction::hkpAction_20(uVar3);
+  uVar3 = hkpConstraintChainInstanceAction::hkpConstraintChainInstanceAction(uVar3);
   FUN_011a9740(param_2);
   uStack_28 = 0;
   uStack_24 = 0;
@@ -502,7 +502,7 @@ undefined4 * __thiscall hkFixedConstraintData::vf00(undefined4 *param_1,byte par
   LPVOID pvVar1;
   
   *param_1 = vftable;
-  hkBaseObject::hkBaseObject_204();
+  ::hkBaseObject::hkBaseObject_204();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -571,7 +571,7 @@ undefined4 * __fastcall hkFixedConstraintData::hkFixedConstraintData(undefined4 
   undefined4 uVar3;
   undefined1 local_40 [60];
   
-  hkpGenericConstraintData::hkpGenericConstraintData_2();
+  hkpGenericConstraintData::hkpGenericConstraintData();
   *param_1 = vftable;
   FUN_011aa9f0(param_1);
   FUN_011ab3e0(&DAT_01701b10);
@@ -873,7 +873,7 @@ FUN_008fcc90(int param_1,int param_2,int param_3,undefined4 param_4,undefined4 *
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x58);
     *(undefined2 *)(iVar2 + 4) = 0x58;
-    iVar2 = hkpGenericConstraintData::hkpGenericConstraintData_2();
+    iVar2 = hkpGenericConstraintData::hkpGenericConstraintData();
     if (iVar2 != 0) {
       FUN_011aa9f0(iVar2);
       uStack_84 = *param_5;
@@ -924,7 +924,7 @@ FUN_008fcc90(int param_1,int param_2,int param_3,undefined4 param_4,undefined4 *
       pvVar1 = TlsGetValue(DAT_01f8fc4c);
       iVar3 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x38);
       *(undefined2 *)(iVar3 + 4) = 0x38;
-      uVar4 = hkpConstraintInstance::hkpConstraintInstance_5(param_2,param_3,iVar2,1);
+      uVar4 = hkpConstraintInstance::hkpConstraintInstance(param_2,param_3,iVar2,1);
       FUN_01197ce0(uVar4);
       *(undefined4 *)(param_1 + 0x18) = param_4;
       *(undefined4 *)(param_1 + 4) = uVar4;

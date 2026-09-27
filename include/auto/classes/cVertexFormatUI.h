@@ -9,5 +9,4 @@ struct cVertexFormatUI {
     virtual undefined4 * vf04(byte param_2);  // 00CA8F60 slot 0x4  overrides Hw::cVertexFormat
     // non-virtual members
     cVertexFormatUI();  // 00CA8F20
-    void ctor_00D28FF0();  // 00D28FF0
 };

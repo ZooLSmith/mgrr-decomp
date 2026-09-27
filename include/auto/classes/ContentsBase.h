@@ -12,5 +12,5 @@ struct ContentsBase {
     virtual void vf10() = 0;  // 00FDB68B slot 0x10
     // non-virtual members
     ContentsBase();  // 008DC280
-    void ctor_008DC2C0();  // 008DC2C0
+    ~ContentsBase();  // 008DC2C0
 };

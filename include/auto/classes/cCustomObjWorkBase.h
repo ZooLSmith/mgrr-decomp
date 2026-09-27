@@ -12,4 +12,6 @@ struct cCustomObjWorkBase : public cUIWork {
     virtual void vf0C(undefined4 param_2);  // 00CCE830 slot 0xC  overrides cUIWork
     virtual void vf10();  // 00CB3870 slot 0x10  overrides cUIWork
     virtual undefined4 vf14(undefined4 param_2);  // 00CF9A40 slot 0x14
+    // non-virtual members
+    cCustomObjWorkBase();  // 00CF99C0
 };

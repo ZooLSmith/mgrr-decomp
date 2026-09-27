@@ -14,10 +14,9 @@ struct hkpConstraintInstance : public hkReferencedObject {
     // non-virtual members
     hkpConstraintInstance();  // 011A65F0
     void ctor_011A6680();  // 011A6680
+    ~hkpConstraintInstance();  // 011A6800
     hkpConstraintInstance(undefined4 * param_1, undefined4 param_2);  // 011B05E0
     void ctor_011B0620();  // 011B0620
     void ctor_011B0690();  // 011B0690
-    void ctor_011B1D30(undefined4 * param_1, undefined4 param_2);  // 011B1D30
     void ctor_011B1D70();  // 011B1D70
-    void ctor_011B1DE0();  // 011B1DE0
 };

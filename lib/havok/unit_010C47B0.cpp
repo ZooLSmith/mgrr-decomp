@@ -7,7 +7,6 @@
 #include "hkBuiltinTypeRegistry.h"
 #include "hkDefaultBuiltinTypeRegistry.h"
 #include "hkDefaultClassNameRegistry.h"
-#include "hkDynamicClassNameRegistry.h"
 #include "hkTypeInfoRegistry.h"
 #include "hkgpIndexedMesh.h"
 #include "hkgpMesh.h"
@@ -907,8 +906,8 @@ hkgpTriangulatorType<hkContainerHeapAllocator,hkgpTriangulatorBase::VertexBase,h
   FUN_010b3280();
   FUN_010b79e0();
   FUN_010b3210();
-  param_1[2] = hkBaseObject::vftable;
-  *param_1 = hkBaseObject::vftable;
+  param_1[2] = ::hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3377,22 +3376,22 @@ void __thiscall FUN_010c90e0(int *param_1,undefined4 param_2)
   return;
 }
 
-// 010C9130  FUN_010c9130  size=5  [run]
-undefined1 FUN_010c9130(void)
+// 010C9130  hkgpIndexedMeshInternals::DefaultEdgeCollapseInterface::vf0C  size=5  [run]
+undefined1 hkgpIndexedMeshInternals::DefaultEdgeCollapseInterface::vf0C(void)
 
 {
   return 1;
 }
 
-// 010C9140  FUN_010c9140  size=3  [run]
-void FUN_010c9140(void)
+// 010C9140  hkgpIndexedMeshInternals::DefaultEdgeCollapseInterface::vf04  size=3  [run]
+void hkgpIndexedMeshInternals::DefaultEdgeCollapseInterface::vf04(void)
 
 {
   return;
 }
 
-// 010C9150  FUN_010c9150  size=3  [run]
-void FUN_010c9150(void)
+// 010C9150  hkgpIndexedMeshInternals::DefaultEdgeCollapseInterface::vf08  size=3  [run]
+void hkgpIndexedMeshInternals::DefaultEdgeCollapseInterface::vf08(void)
 
 {
   return;
@@ -5415,7 +5414,7 @@ int __thiscall hkgpIndexedMesh::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_35();
+  ::hkBaseObject::hkBaseObject_35();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -7061,8 +7060,8 @@ int FUN_010cd630(int param_1,int param_2)
   return iVar2;
 }
 
-// 010CD6A0  hkxAttributeHolder::hkxAttributeHolder_2  size=287  [run]
-undefined4 * __thiscall hkxAttributeHolder::hkxAttributeHolder_2(undefined4 *param_1,int param_2)
+// 010CD6A0  hkxAttributeHolder::hkxAttributeHolder  size=287  [run]
+undefined4 * __thiscall hkxAttributeHolder::hkxAttributeHolder(undefined4 *param_1,int param_2)
 
 {
   int *piVar1;
@@ -7127,13 +7126,13 @@ undefined4 * __thiscall hkxAttributeHolder::hkxAttributeHolder_2(undefined4 *par
   return param_1;
 }
 
-// 010CD7C0  hkBaseObject::hkBaseObject_196  size=103  [run]
-void __fastcall hkBaseObject::hkBaseObject_196(undefined4 *param_1)
+// 010CD7C0  hkxAttributeHolder::~hkxAttributeHolder  size=103  [run]
+void __fastcall hkxAttributeHolder::~hkxAttributeHolder(undefined4 *param_1)
 
 {
   int iVar1;
   
-  *param_1 = hkxAttributeHolder::vftable;
+  *param_1 = vftable;
   iVar1 = param_1[3];
   while (iVar1 = iVar1 + -1, -1 < iVar1) {
     FUN_010cda00();
@@ -7144,7 +7143,7 @@ void __fastcall hkBaseObject::hkBaseObject_196(undefined4 *param_1)
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = vftable;
+  *param_1 = ::hkBaseObject::vftable;
   return;
 }
 
@@ -7497,7 +7496,7 @@ int __thiscall hkxAttributeHolder::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_196();
+  ~hkxAttributeHolder();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -7814,7 +7813,7 @@ void __fastcall hkxNode::~hkxNode(undefined4 *param_1)
   }
   param_1[6] = 0;
   FUN_01006770();
-  hkBaseObject::hkBaseObject_196();
+  hkxAttributeHolder::~hkxAttributeHolder();
   return;
 }
 
@@ -8107,8 +8106,8 @@ void FUN_010ce9a0(undefined4 *param_1)
   return;
 }
 
-// 010CE9B0  hkxScene::hkxScene_3  size=43  [run]
-void hkxScene::hkxScene_3(undefined4 *param_1,undefined4 param_2)
+// 010CE9B0  hkxScene::~hkxScene  size=43  [run]
+void hkxScene::~hkxScene(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -8119,8 +8118,8 @@ void hkxScene::hkxScene_3(undefined4 *param_1,undefined4 param_2)
   return;
 }
 
-// 010CE9E0  hkxScene::hkxScene_4  size=79  [run]
-undefined ** hkxScene::hkxScene_4(void)
+// 010CE9E0  hkxScene::hkxScene  size=79  [run]
+undefined ** hkxScene::hkxScene(void)
 
 {
   FUN_010065b0(0);
@@ -9240,8 +9239,8 @@ void __fastcall FUN_010cff50(int *param_1)
   return;
 }
 
-// 010CFFC0  hkxScene::hkxScene_2  size=43  [run]
-undefined4 * __thiscall hkxScene::hkxScene_2(undefined4 *param_1,undefined4 param_2)
+// 010CFFC0  hkxScene::hkxScene  size=43  [run]
+undefined4 * __thiscall hkxScene::hkxScene(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -9267,7 +9266,7 @@ int __thiscall hkxScene::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_142();
+  ::hkBaseObject::hkBaseObject_142();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -9559,8 +9558,8 @@ void FUN_010d05f0(void)
   return;
 }
 
-// 010D0600  hkxNode::hkxNode  size=43  [run]
-void hkxNode::hkxNode(undefined4 *param_1,undefined4 param_2)
+// 010D0600  hkxNode::~hkxNode  size=43  [run]
+void hkxNode::~hkxNode(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -9571,8 +9570,8 @@ void hkxNode::hkxNode(undefined4 *param_1,undefined4 param_2)
   return;
 }
 
-// 010D0630  hkxNode::hkxNode_3  size=64  [run]
-undefined ** hkxNode::hkxNode_3(void)
+// 010D0630  hkxNode::hkxNode  size=64  [run]
+undefined ** hkxNode::hkxNode(void)
 
 {
   FUN_010065b0(0);
@@ -9580,8 +9579,8 @@ undefined ** hkxNode::hkxNode_3(void)
   return vftable;
 }
 
-// 010D06F0  hkxNode::hkxNode_2  size=43  [run]
-undefined4 * __thiscall hkxNode::hkxNode_2(undefined4 *param_1,undefined4 param_2)
+// 010D06F0  hkxNode::hkxNode  size=43  [run]
+undefined4 * __thiscall hkxNode::hkxNode(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -9630,8 +9629,8 @@ void FUN_010d07d0(int *param_1)
   return;
 }
 
-// 010D07F0  hkxMaterial::hkxMaterial_2  size=30  [run]
-void hkxMaterial::hkxMaterial_2(undefined4 *param_1,undefined4 param_2)
+// 010D07F0  hkxMaterial::~hkxMaterial  size=30  [run]
+void hkxMaterial::~hkxMaterial(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -9641,8 +9640,8 @@ void hkxMaterial::hkxMaterial_2(undefined4 *param_1,undefined4 param_2)
   return;
 }
 
-// 010D0810  hkxMaterial::hkxMaterial_3  size=62  [run]
-undefined ** hkxMaterial::hkxMaterial_3(void)
+// 010D0810  hkxMaterial::hkxMaterial  size=62  [run]
+undefined ** hkxMaterial::hkxMaterial(void)
 
 {
   FUN_010065b0(0);
@@ -9923,7 +9922,7 @@ void FUN_010d0d90(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkxEnvironment::hkxEnvironment(param_2);
+    hkxEnvironment::~hkxEnvironment(param_2);
   }
   return;
 }
@@ -9942,7 +9941,7 @@ undefined4 FUN_010d0dc0(void)
 {
   undefined4 local_30;
   
-  hkxEnvironment::hkxEnvironment(0);
+  hkxEnvironment::~hkxEnvironment(0);
   return local_30;
 }
 
@@ -10055,8 +10054,8 @@ void FUN_010d0f60(void)
   return;
 }
 
-// 010D0F70  hkxSparselyAnimatedEnum::hkxSparselyAnimatedEnum  size=18  [run]
-void hkxSparselyAnimatedEnum::hkxSparselyAnimatedEnum(undefined4 *param_1)
+// 010D0F70  hkxSparselyAnimatedEnum::~hkxSparselyAnimatedEnum  size=18  [run]
+void hkxSparselyAnimatedEnum::~hkxSparselyAnimatedEnum(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10065,15 +10064,15 @@ void hkxSparselyAnimatedEnum::hkxSparselyAnimatedEnum(undefined4 *param_1)
   return;
 }
 
-// 010D0F90  FUN_010d0f90  size=6  [run]
-undefined ** FUN_010d0f90(void)
+// 010D0F90  hkxSparselyAnimatedEnum::hkxSparselyAnimatedEnum  size=6  [run]
+undefined ** hkxSparselyAnimatedEnum::hkxSparselyAnimatedEnum(void)
 
 {
-  return hkxSparselyAnimatedEnum::vftable;
+  return vftable;
 }
 
-// 010D0FA0  hkxEnum::hkxEnum  size=18  [run]
-void hkxEnum::hkxEnum(undefined4 *param_1)
+// 010D0FA0  hkxEnum::~hkxEnum  size=18  [run]
+void hkxEnum::~hkxEnum(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10082,11 +10081,11 @@ void hkxEnum::hkxEnum(undefined4 *param_1)
   return;
 }
 
-// 010D0FC0  FUN_010d0fc0  size=6  [run]
-undefined ** FUN_010d0fc0(void)
+// 010D0FC0  hkxEnum::hkxEnum  size=6  [run]
+undefined ** hkxEnum::hkxEnum(void)
 
 {
-  return hkxEnum::vftable;
+  return vftable;
 }
 
 // 010D1020  FUN_010d1020  size=22  [run]
@@ -10278,7 +10277,7 @@ int __thiscall hkxSparselyAnimatedInt::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_107();
+  ::hkBaseObject::hkBaseObject_107();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -10327,7 +10326,7 @@ int __thiscall hkxSparselyAnimatedEnum::vf00(int param_1,byte param_2)
     FUN_010060a0();
   }
   *(undefined4 *)(param_1 + 0x20) = 0;
-  hkBaseObject::hkBaseObject_107();
+  ::hkBaseObject::hkBaseObject_107();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -10341,7 +10340,7 @@ int __thiscall hkxEnum::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_111();
+  ::hkBaseObject::hkBaseObject_111();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -10426,8 +10425,8 @@ void FUN_010d1630(undefined4 *param_1)
   return;
 }
 
-// 010D1640  hkxVertexVectorDataChannel::hkxVertexVectorDataChannel  size=18  [run]
-void hkxVertexVectorDataChannel::hkxVertexVectorDataChannel(undefined4 *param_1)
+// 010D1640  hkxVertexVectorDataChannel::~hkxVertexVectorDataChannel  size=18  [run]
+void hkxVertexVectorDataChannel::~hkxVertexVectorDataChannel(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10436,11 +10435,11 @@ void hkxVertexVectorDataChannel::hkxVertexVectorDataChannel(undefined4 *param_1)
   return;
 }
 
-// 010D1660  FUN_010d1660  size=6  [run]
-undefined ** FUN_010d1660(void)
+// 010D1660  hkxVertexVectorDataChannel::hkxVertexVectorDataChannel  size=6  [run]
+undefined ** hkxVertexVectorDataChannel::hkxVertexVectorDataChannel(void)
 
 {
-  return hkxVertexVectorDataChannel::vftable;
+  return vftable;
 }
 
 // 010D1680  FUN_010d1680  size=38  [run]
@@ -10480,7 +10479,7 @@ undefined4 * __thiscall hkxVertexVectorDataChannel::vf00(undefined4 *param_1,byt
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -10503,8 +10502,8 @@ void FUN_010d1790(undefined4 *param_1)
   return;
 }
 
-// 010D17A0  hkxVertexSelectionChannel::hkxVertexSelectionChannel  size=18  [run]
-void hkxVertexSelectionChannel::hkxVertexSelectionChannel(undefined4 *param_1)
+// 010D17A0  hkxVertexSelectionChannel::~hkxVertexSelectionChannel  size=18  [run]
+void hkxVertexSelectionChannel::~hkxVertexSelectionChannel(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10513,11 +10512,11 @@ void hkxVertexSelectionChannel::hkxVertexSelectionChannel(undefined4 *param_1)
   return;
 }
 
-// 010D17C0  FUN_010d17c0  size=6  [run]
-undefined ** FUN_010d17c0(void)
+// 010D17C0  hkxVertexSelectionChannel::hkxVertexSelectionChannel  size=6  [run]
+undefined ** hkxVertexSelectionChannel::hkxVertexSelectionChannel(void)
 
 {
-  return hkxVertexSelectionChannel::vftable;
+  return vftable;
 }
 
 // 010D17E0  FUN_010d17e0  size=38  [run]
@@ -10557,7 +10556,7 @@ undefined4 * __thiscall hkxVertexSelectionChannel::vf00(undefined4 *param_1,byte
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -10580,8 +10579,8 @@ void FUN_010d18f0(undefined4 *param_1)
   return;
 }
 
-// 010D1900  hkxVertexIntDataChannel::hkxVertexIntDataChannel  size=18  [run]
-void hkxVertexIntDataChannel::hkxVertexIntDataChannel(undefined4 *param_1)
+// 010D1900  hkxVertexIntDataChannel::~hkxVertexIntDataChannel  size=18  [run]
+void hkxVertexIntDataChannel::~hkxVertexIntDataChannel(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10590,11 +10589,11 @@ void hkxVertexIntDataChannel::hkxVertexIntDataChannel(undefined4 *param_1)
   return;
 }
 
-// 010D1920  FUN_010d1920  size=6  [run]
-undefined ** FUN_010d1920(void)
+// 010D1920  hkxVertexIntDataChannel::hkxVertexIntDataChannel  size=6  [run]
+undefined ** hkxVertexIntDataChannel::hkxVertexIntDataChannel(void)
 
 {
-  return hkxVertexIntDataChannel::vftable;
+  return vftable;
 }
 
 // 010D1940  FUN_010d1940  size=38  [run]
@@ -10634,7 +10633,7 @@ undefined4 * __thiscall hkxVertexIntDataChannel::vf00(undefined4 *param_1,byte p
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -10657,8 +10656,8 @@ void FUN_010d1a50(undefined4 *param_1)
   return;
 }
 
-// 010D1A60  hkxVertexFloatDataChannel::hkxVertexFloatDataChannel  size=18  [run]
-void hkxVertexFloatDataChannel::hkxVertexFloatDataChannel(undefined4 *param_1)
+// 010D1A60  hkxVertexFloatDataChannel::~hkxVertexFloatDataChannel  size=18  [run]
+void hkxVertexFloatDataChannel::~hkxVertexFloatDataChannel(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10667,11 +10666,11 @@ void hkxVertexFloatDataChannel::hkxVertexFloatDataChannel(undefined4 *param_1)
   return;
 }
 
-// 010D1A80  FUN_010d1a80  size=6  [run]
-undefined ** FUN_010d1a80(void)
+// 010D1A80  hkxVertexFloatDataChannel::hkxVertexFloatDataChannel  size=6  [run]
+undefined ** hkxVertexFloatDataChannel::hkxVertexFloatDataChannel(void)
 
 {
-  return hkxVertexFloatDataChannel::vftable;
+  return vftable;
 }
 
 // 010D1AB0  FUN_010d1ab0  size=38  [run]
@@ -10711,7 +10710,7 @@ undefined4 * __thiscall hkxVertexFloatDataChannel::vf00(undefined4 *param_1,byte
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -10734,8 +10733,8 @@ void FUN_010d1bc0(undefined4 *param_1)
   return;
 }
 
-// 010D1BD0  hkxTriangleSelectionChannel::hkxTriangleSelectionChannel  size=18  [run]
-void hkxTriangleSelectionChannel::hkxTriangleSelectionChannel(undefined4 *param_1)
+// 010D1BD0  hkxTriangleSelectionChannel::~hkxTriangleSelectionChannel  size=18  [run]
+void hkxTriangleSelectionChannel::~hkxTriangleSelectionChannel(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10744,11 +10743,11 @@ void hkxTriangleSelectionChannel::hkxTriangleSelectionChannel(undefined4 *param_
   return;
 }
 
-// 010D1BF0  FUN_010d1bf0  size=6  [run]
-undefined ** FUN_010d1bf0(void)
+// 010D1BF0  hkxTriangleSelectionChannel::hkxTriangleSelectionChannel  size=6  [run]
+undefined ** hkxTriangleSelectionChannel::hkxTriangleSelectionChannel(void)
 
 {
-  return hkxTriangleSelectionChannel::vftable;
+  return vftable;
 }
 
 // 010D1C10  FUN_010d1c10  size=38  [run]
@@ -10788,7 +10787,7 @@ undefined4 * __thiscall hkxTriangleSelectionChannel::vf00(undefined4 *param_1,by
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -10811,8 +10810,8 @@ void FUN_010d1d20(undefined4 *param_1)
   return;
 }
 
-// 010D1D30  hkxTextureInplace::hkxTextureInplace  size=43  [run]
-void hkxTextureInplace::hkxTextureInplace(undefined4 *param_1,undefined4 param_2)
+// 010D1D30  hkxTextureInplace::~hkxTextureInplace  size=43  [run]
+void hkxTextureInplace::~hkxTextureInplace(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10823,8 +10822,8 @@ void hkxTextureInplace::hkxTextureInplace(undefined4 *param_1,undefined4 param_2
   return;
 }
 
-// 010D1D60  hkxTextureInplace::hkxTextureInplace_3  size=64  [run]
-undefined ** hkxTextureInplace::hkxTextureInplace_3(void)
+// 010D1D60  hkxTextureInplace::hkxTextureInplace  size=64  [run]
+undefined ** hkxTextureInplace::hkxTextureInplace(void)
 
 {
   FUN_010065b0(0);
@@ -10832,9 +10831,8 @@ undefined ** hkxTextureInplace::hkxTextureInplace_3(void)
   return vftable;
 }
 
-// 010D1DA0  hkxTextureInplace::hkxTextureInplace_2  size=43  [run]
-undefined4 * __thiscall
-hkxTextureInplace::hkxTextureInplace_2(undefined4 *param_1,undefined4 param_2)
+// 010D1DA0  hkxTextureInplace::hkxTextureInplace  size=43  [run]
+undefined4 * __thiscall hkxTextureInplace::hkxTextureInplace(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -10884,7 +10882,7 @@ undefined4 * __thiscall hkxTextureInplace::vf00(undefined4 *param_1,byte param_2
   }
   param_1[3] = 0;
   param_1[5] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -10899,8 +10897,8 @@ undefined4 FUN_010d1ee0(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 010D1EF0  hkxTextureFile::hkxTextureFile_2  size=55  [run]
-undefined4 * __thiscall hkxTextureFile::hkxTextureFile_2(undefined4 *param_1,undefined4 param_2)
+// 010D1EF0  hkxTextureFile::hkxTextureFile  size=55  [run]
+undefined4 * __thiscall hkxTextureFile::hkxTextureFile(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -10910,8 +10908,8 @@ undefined4 * __thiscall hkxTextureFile::hkxTextureFile_2(undefined4 *param_1,und
   return param_1;
 }
 
-// 010D1F30  hkBaseObject::hkBaseObject_105  size=35  [run]
-void __fastcall hkBaseObject::hkBaseObject_105(undefined4 *param_1)
+// 010D1F30  hkBaseObject::~hkBaseObject  size=35  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01006770();
@@ -10921,8 +10919,8 @@ void __fastcall hkBaseObject::hkBaseObject_105(undefined4 *param_1)
   return;
 }
 
-// 010D1F70  hkxTextureFile::hkxTextureFile  size=52  [run]
-void hkxTextureFile::hkxTextureFile(undefined4 *param_1,undefined4 param_2)
+// 010D1F70  hkxTextureFile::~hkxTextureFile  size=52  [run]
+void hkxTextureFile::~hkxTextureFile(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -10942,8 +10940,8 @@ void FUN_010d1fb0(undefined4 *param_1)
   return;
 }
 
-// 010D1FC0  hkxTextureFile::hkxTextureFile_3  size=73  [run]
-undefined ** hkxTextureFile::hkxTextureFile_3(void)
+// 010D1FC0  hkxTextureFile::hkxTextureFile  size=73  [run]
+undefined ** hkxTextureFile::hkxTextureFile(void)
 
 {
   FUN_010065b0(0);
@@ -10972,7 +10970,7 @@ undefined4 * __thiscall hkxTextureFile::vf00(undefined4 *param_1,byte param_2)
   FUN_01006770();
   FUN_01006770();
   FUN_01006770();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -10995,8 +10993,8 @@ void FUN_010d20b0(undefined4 *param_1)
   return;
 }
 
-// 010D20C0  hkxSparselyAnimatedString::hkxSparselyAnimatedString  size=18  [run]
-void hkxSparselyAnimatedString::hkxSparselyAnimatedString(undefined4 *param_1)
+// 010D20C0  hkxSparselyAnimatedString::~hkxSparselyAnimatedString  size=18  [run]
+void hkxSparselyAnimatedString::~hkxSparselyAnimatedString(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11005,11 +11003,11 @@ void hkxSparselyAnimatedString::hkxSparselyAnimatedString(undefined4 *param_1)
   return;
 }
 
-// 010D20E0  FUN_010d20e0  size=6  [run]
-undefined ** FUN_010d20e0(void)
+// 010D20E0  hkxSparselyAnimatedString::hkxSparselyAnimatedString  size=6  [run]
+undefined ** hkxSparselyAnimatedString::hkxSparselyAnimatedString(void)
 
 {
-  return hkxSparselyAnimatedString::vftable;
+  return vftable;
 }
 
 // 010D2100  FUN_010d2100  size=38  [run]
@@ -11055,7 +11053,7 @@ int __thiscall hkxSparselyAnimatedString::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_92();
+  ::hkBaseObject::hkBaseObject_92();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11078,8 +11076,8 @@ void FUN_010d2220(undefined4 *param_1)
   return;
 }
 
-// 010D2230  hkxSparselyAnimatedInt::hkxSparselyAnimatedInt  size=18  [run]
-void hkxSparselyAnimatedInt::hkxSparselyAnimatedInt(undefined4 *param_1)
+// 010D2230  hkxSparselyAnimatedInt::~hkxSparselyAnimatedInt  size=18  [run]
+void hkxSparselyAnimatedInt::~hkxSparselyAnimatedInt(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11088,11 +11086,11 @@ void hkxSparselyAnimatedInt::hkxSparselyAnimatedInt(undefined4 *param_1)
   return;
 }
 
-// 010D2250  FUN_010d2250  size=6  [run]
-undefined ** FUN_010d2250(void)
+// 010D2250  hkxSparselyAnimatedInt::hkxSparselyAnimatedInt  size=6  [run]
+undefined ** hkxSparselyAnimatedInt::hkxSparselyAnimatedInt(void)
 
 {
-  return hkxSparselyAnimatedInt::vftable;
+  return vftable;
 }
 
 // 010D2260  FUN_010d2260  size=8  [run]
@@ -11110,8 +11108,8 @@ void FUN_010d2280(undefined4 *param_1)
   return;
 }
 
-// 010D2290  hkxSparselyAnimatedBool::hkxSparselyAnimatedBool  size=18  [run]
-void hkxSparselyAnimatedBool::hkxSparselyAnimatedBool(undefined4 *param_1)
+// 010D2290  hkxSparselyAnimatedBool::~hkxSparselyAnimatedBool  size=18  [run]
+void hkxSparselyAnimatedBool::~hkxSparselyAnimatedBool(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11120,11 +11118,11 @@ void hkxSparselyAnimatedBool::hkxSparselyAnimatedBool(undefined4 *param_1)
   return;
 }
 
-// 010D22B0  FUN_010d22b0  size=6  [run]
-undefined ** FUN_010d22b0(void)
+// 010D22B0  hkxSparselyAnimatedBool::hkxSparselyAnimatedBool  size=6  [run]
+undefined ** hkxSparselyAnimatedBool::hkxSparselyAnimatedBool(void)
 
 {
-  return hkxSparselyAnimatedBool::vftable;
+  return vftable;
 }
 
 // 010D22F0  FUN_010d22f0  size=11  [run]
@@ -11213,7 +11211,7 @@ int __thiscall hkxSparselyAnimatedBool::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_97();
+  ::hkBaseObject::hkBaseObject_97();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11236,8 +11234,8 @@ void FUN_010d2500(undefined4 *param_1)
   return;
 }
 
-// 010D2510  hkxSkinBinding::hkxSkinBinding  size=18  [run]
-void hkxSkinBinding::hkxSkinBinding(undefined4 *param_1)
+// 010D2510  hkxSkinBinding::~hkxSkinBinding  size=18  [run]
+void hkxSkinBinding::~hkxSkinBinding(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11246,11 +11244,11 @@ void hkxSkinBinding::hkxSkinBinding(undefined4 *param_1)
   return;
 }
 
-// 010D2530  FUN_010d2530  size=6  [run]
-undefined ** FUN_010d2530(void)
+// 010D2530  hkxSkinBinding::hkxSkinBinding  size=6  [run]
+undefined ** hkxSkinBinding::hkxSkinBinding(void)
 
 {
-  return hkxSkinBinding::vftable;
+  return vftable;
 }
 
 // 010D2560  FUN_010d2560  size=38  [run]
@@ -11300,7 +11298,7 @@ int __thiscall hkxSkinBinding::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_96();
+  ::hkBaseObject::hkBaseObject_96();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11323,8 +11321,8 @@ void FUN_010d2690(undefined4 *param_1)
   return;
 }
 
-// 010D26A0  hkxNodeSelectionSet::hkxNodeSelectionSet_2  size=30  [run]
-void hkxNodeSelectionSet::hkxNodeSelectionSet_2(undefined4 *param_1,undefined4 param_2)
+// 010D26A0  hkxNodeSelectionSet::~hkxNodeSelectionSet  size=30  [run]
+void hkxNodeSelectionSet::~hkxNodeSelectionSet(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11334,8 +11332,8 @@ void hkxNodeSelectionSet::hkxNodeSelectionSet_2(undefined4 *param_1,undefined4 p
   return;
 }
 
-// 010D26C0  hkxNodeSelectionSet::hkxNodeSelectionSet_3  size=53  [run]
-undefined ** hkxNodeSelectionSet::hkxNodeSelectionSet_3(void)
+// 010D26C0  hkxNodeSelectionSet::hkxNodeSelectionSet  size=53  [run]
+undefined ** hkxNodeSelectionSet::hkxNodeSelectionSet(void)
 
 {
   FUN_010065b0(0);
@@ -11387,7 +11385,7 @@ void __fastcall FUN_010d2750(int param_1)
   }
   *(undefined4 *)(param_1 + 0x14) = 0;
   *(undefined4 *)(param_1 + 0x1c) = 0x80000000;
-  hkBaseObject::hkBaseObject_196();
+  hkxAttributeHolder::~hkxAttributeHolder();
   return;
 }
 
@@ -11432,7 +11430,7 @@ void FUN_010d2860(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkxMesh::hkxMesh(param_2);
+    hkxMesh::~hkxMesh(param_2);
   }
   return;
 }
@@ -11451,12 +11449,12 @@ undefined4 FUN_010d2890(void)
 {
   undefined4 local_30;
   
-  hkxMesh::hkxMesh(0);
+  hkxMesh::~hkxMesh(0);
   return local_30;
 }
 
-// 010D28C0  hkxMesh::UserChannelInfo::UserChannelInfo_2  size=43  [run]
-void hkxMesh::UserChannelInfo::UserChannelInfo_2(undefined4 *param_1,undefined4 param_2)
+// 010D28C0  hkxMesh::UserChannelInfo::~UserChannelInfo  size=43  [run]
+void hkxMesh::UserChannelInfo::~UserChannelInfo(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11467,8 +11465,8 @@ void hkxMesh::UserChannelInfo::UserChannelInfo_2(undefined4 *param_1,undefined4 
   return;
 }
 
-// 010D28F0  hkxMesh::UserChannelInfo::UserChannelInfo_3  size=64  [run]
-undefined ** hkxMesh::UserChannelInfo::UserChannelInfo_3(void)
+// 010D28F0  hkxMesh::UserChannelInfo::UserChannelInfo  size=64  [run]
+undefined ** hkxMesh::UserChannelInfo::UserChannelInfo(void)
 
 {
   FUN_010065b0(0);
@@ -11493,7 +11491,7 @@ void FUN_010d2960(void)
 {
   FUN_01006770();
   FUN_01006770();
-  hkBaseObject::hkBaseObject_196();
+  hkxAttributeHolder::~hkxAttributeHolder();
   return;
 }
 
@@ -11516,7 +11514,7 @@ int __thiscall hkxMesh::UserChannelInfo::vf00(int param_1,byte param_2)
   
   FUN_01006770();
   FUN_01006770();
-  hkBaseObject::hkBaseObject_196();
+  hkxAttributeHolder::~hkxAttributeHolder();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11539,8 +11537,8 @@ void FUN_010d2a20(undefined4 *param_1)
   return;
 }
 
-// 010D2A30  hkxMeshSection::hkxMeshSection_2  size=18  [run]
-void hkxMeshSection::hkxMeshSection_2(undefined4 *param_1)
+// 010D2A30  hkxMeshSection::~hkxMeshSection  size=18  [run]
+void hkxMeshSection::~hkxMeshSection(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11549,11 +11547,11 @@ void hkxMeshSection::hkxMeshSection_2(undefined4 *param_1)
   return;
 }
 
-// 010D2A50  FUN_010d2a50  size=6  [run]
-undefined ** FUN_010d2a50(void)
+// 010D2A50  hkxMeshSection::hkxMeshSection  size=6  [run]
+undefined ** hkxMeshSection::hkxMeshSection(void)
 
 {
-  return hkxMeshSection::vftable;
+  return vftable;
 }
 
 // 010D2A90  FUN_010d2a90  size=22  [run]
@@ -11903,7 +11901,7 @@ int __thiscall hkxMeshSection::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_84();
+  ::hkBaseObject::hkBaseObject_84();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11923,7 +11921,7 @@ void FUN_010d3180(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkxMaterialShaderSet::hkxMaterialShaderSet(param_2);
+    hkxMaterialShaderSet::~hkxMaterialShaderSet(param_2);
   }
   return;
 }
@@ -11942,7 +11940,7 @@ undefined4 FUN_010d31b0(void)
 {
   undefined4 local_30;
   
-  hkxMaterialShaderSet::hkxMaterialShaderSet(0);
+  hkxMaterialShaderSet::~hkxMaterialShaderSet(0);
   return local_30;
 }
 
@@ -11961,8 +11959,8 @@ void FUN_010d3200(undefined4 *param_1)
   return;
 }
 
-// 010D3210  hkxMaterialShader::hkxMaterialShader  size=61  [run]
-void hkxMaterialShader::hkxMaterialShader(undefined4 *param_1,undefined4 param_2)
+// 010D3210  hkxMaterialShader::~hkxMaterialShader  size=61  [run]
+void hkxMaterialShader::~hkxMaterialShader(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -11975,8 +11973,8 @@ void hkxMaterialShader::hkxMaterialShader(undefined4 *param_1,undefined4 param_2
   return;
 }
 
-// 010D3250  hkxMaterialShader::hkxMaterialShader_3  size=82  [run]
-undefined ** hkxMaterialShader::hkxMaterialShader_3(void)
+// 010D3250  hkxMaterialShader::hkxMaterialShader  size=82  [run]
+undefined ** hkxMaterialShader::hkxMaterialShader(void)
 
 {
   FUN_010065b0(0);
@@ -11986,9 +11984,8 @@ undefined ** hkxMaterialShader::hkxMaterialShader_3(void)
   return vftable;
 }
 
-// 010D32C0  hkxMaterialShader::hkxMaterialShader_2  size=67  [run]
-undefined4 * __thiscall
-hkxMaterialShader::hkxMaterialShader_2(undefined4 *param_1,undefined4 param_2)
+// 010D32C0  hkxMaterialShader::hkxMaterialShader  size=67  [run]
+undefined4 * __thiscall hkxMaterialShader::hkxMaterialShader(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -12034,7 +12031,7 @@ int __thiscall hkxMaterialShader::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_85();
+  ::hkBaseObject::hkBaseObject_85();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12057,8 +12054,8 @@ void FUN_010d3410(undefined4 *param_1)
   return;
 }
 
-// 010D3420  hkxMaterialEffect::hkxMaterialEffect  size=30  [run]
-void hkxMaterialEffect::hkxMaterialEffect(undefined4 *param_1,undefined4 param_2)
+// 010D3420  hkxMaterialEffect::~hkxMaterialEffect  size=30  [run]
+void hkxMaterialEffect::~hkxMaterialEffect(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12068,17 +12065,16 @@ void hkxMaterialEffect::hkxMaterialEffect(undefined4 *param_1,undefined4 param_2
   return;
 }
 
-// 010D3440  hkxMaterialEffect::hkxMaterialEffect_3  size=53  [run]
-undefined ** hkxMaterialEffect::hkxMaterialEffect_3(void)
+// 010D3440  hkxMaterialEffect::hkxMaterialEffect  size=53  [run]
+undefined ** hkxMaterialEffect::hkxMaterialEffect(void)
 
 {
   FUN_010065b0(0);
   return vftable;
 }
 
-// 010D3490  hkxMaterialEffect::hkxMaterialEffect_2  size=31  [run]
-undefined4 * __thiscall
-hkxMaterialEffect::hkxMaterialEffect_2(undefined4 *param_1,undefined4 param_2)
+// 010D3490  hkxMaterialEffect::hkxMaterialEffect  size=31  [run]
+undefined4 * __thiscall hkxMaterialEffect::hkxMaterialEffect(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -12125,7 +12121,7 @@ undefined4 * __thiscall hkxMaterialEffect::vf00(undefined4 *param_1,byte param_2
   param_1[4] = 0;
   param_1[6] = 0x80000000;
   FUN_01006770();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12148,8 +12144,8 @@ void FUN_010d35d0(undefined4 *param_1)
   return;
 }
 
-// 010D35E0  hkxLight::hkxLight  size=18  [run]
-void hkxLight::hkxLight(undefined4 *param_1)
+// 010D35E0  hkxLight::~hkxLight  size=18  [run]
+void hkxLight::~hkxLight(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12158,11 +12154,11 @@ void hkxLight::hkxLight(undefined4 *param_1)
   return;
 }
 
-// 010D3600  FUN_010d3600  size=6  [run]
-undefined ** FUN_010d3600(void)
+// 010D3600  hkxLight::hkxLight  size=6  [run]
+undefined ** hkxLight::hkxLight(void)
 
 {
-  return hkxLight::vftable;
+  return vftable;
 }
 
 // 010D3640  FUN_010d3640  size=38  [run]
@@ -12182,7 +12178,7 @@ undefined4 * __thiscall hkxLight::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12205,8 +12201,8 @@ void FUN_010d36d0(undefined4 *param_1)
   return;
 }
 
-// 010D36E0  hkxIndexBuffer::hkxIndexBuffer  size=18  [run]
-void hkxIndexBuffer::hkxIndexBuffer(undefined4 *param_1)
+// 010D36E0  hkxIndexBuffer::~hkxIndexBuffer  size=18  [run]
+void hkxIndexBuffer::~hkxIndexBuffer(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12215,11 +12211,11 @@ void hkxIndexBuffer::hkxIndexBuffer(undefined4 *param_1)
   return;
 }
 
-// 010D3700  FUN_010d3700  size=6  [run]
-undefined ** FUN_010d3700(void)
+// 010D3700  hkxIndexBuffer::hkxIndexBuffer  size=6  [run]
+undefined ** hkxIndexBuffer::hkxIndexBuffer(void)
 
 {
-  return hkxIndexBuffer::vftable;
+  return vftable;
 }
 
 // 010D3730  FUN_010d3730  size=38  [run]
@@ -12259,7 +12255,7 @@ int __thiscall hkxIndexBuffer::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_89();
+  ::hkBaseObject::hkBaseObject_89();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12282,8 +12278,8 @@ void FUN_010d3840(undefined4 *param_1)
   return;
 }
 
-// 010D3850  hkxEdgeSelectionChannel::hkxEdgeSelectionChannel  size=18  [run]
-void hkxEdgeSelectionChannel::hkxEdgeSelectionChannel(undefined4 *param_1)
+// 010D3850  hkxEdgeSelectionChannel::~hkxEdgeSelectionChannel  size=18  [run]
+void hkxEdgeSelectionChannel::~hkxEdgeSelectionChannel(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12292,11 +12288,11 @@ void hkxEdgeSelectionChannel::hkxEdgeSelectionChannel(undefined4 *param_1)
   return;
 }
 
-// 010D3870  FUN_010d3870  size=6  [run]
-undefined ** FUN_010d3870(void)
+// 010D3870  hkxEdgeSelectionChannel::hkxEdgeSelectionChannel  size=6  [run]
+undefined ** hkxEdgeSelectionChannel::hkxEdgeSelectionChannel(void)
 
 {
-  return hkxEdgeSelectionChannel::vftable;
+  return vftable;
 }
 
 // 010D3890  FUN_010d3890  size=38  [run]
@@ -12336,7 +12332,7 @@ undefined4 * __thiscall hkxEdgeSelectionChannel::vf00(undefined4 *param_1,byte p
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12351,8 +12347,8 @@ undefined4 FUN_010d3980(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 010D39C0  hkxCamera::hkxCamera  size=18  [run]
-void hkxCamera::hkxCamera(undefined4 *param_1)
+// 010D39C0  hkxCamera::~hkxCamera  size=18  [run]
+void hkxCamera::~hkxCamera(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12369,11 +12365,11 @@ void FUN_010d39e0(undefined4 *param_1)
   return;
 }
 
-// 010D39F0  FUN_010d39f0  size=6  [run]
-undefined ** FUN_010d39f0(void)
+// 010D39F0  hkxCamera::hkxCamera  size=6  [run]
+undefined ** hkxCamera::hkxCamera(void)
 
 {
-  return hkxCamera::vftable;
+  return vftable;
 }
 
 // 010D3A00  FUN_010d3a00  size=38  [run]
@@ -12393,7 +12389,7 @@ undefined4 * __thiscall hkxCamera::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12416,8 +12412,8 @@ void FUN_010d3a90(undefined4 *param_1)
   return;
 }
 
-// 010D3AA0  hkxBlob::hkxBlob_2  size=37  [run]
-void hkxBlob::hkxBlob_2(undefined4 *param_1,undefined4 param_2)
+// 010D3AA0  hkxBlob::hkxBlob  size=37  [run]
+void hkxBlob::hkxBlob(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12553,7 +12549,7 @@ undefined4 * __thiscall hkxBlob::vf00(undefined4 *param_1,byte param_2)
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12574,8 +12570,8 @@ undefined4 * __thiscall hkxBlobMeshShape::vf00(undefined4 *param_1,byte param_2)
   }
   param_1[4] = 0;
   param_1[6] = 0x80000000;
-  param_1[2] = hkBaseObject::vftable;
-  *param_1 = hkBaseObject::vftable;
+  param_1[2] = ::hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12598,8 +12594,8 @@ void FUN_010d3dc0(undefined4 *param_1)
   return;
 }
 
-// 010D3DD0  hkxBlob::hkxBlob_3  size=18  [run]
-void hkxBlob::hkxBlob_3(undefined4 *param_1)
+// 010D3DD0  hkxBlob::~hkxBlob  size=18  [run]
+void hkxBlob::~hkxBlob(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12608,11 +12604,11 @@ void hkxBlob::hkxBlob_3(undefined4 *param_1)
   return;
 }
 
-// 010D3DF0  FUN_010d3df0  size=6  [run]
-undefined ** FUN_010d3df0(void)
+// 010D3DF0  hkxBlob::hkxBlob  size=6  [run]
+undefined ** hkxBlob::hkxBlob(void)
 
 {
-  return hkxBlob::vftable;
+  return vftable;
 }
 
 // 010D3E00  FUN_010d3e00  size=8  [run]
@@ -12630,8 +12626,8 @@ void FUN_010d3e20(undefined4 *param_1)
   return;
 }
 
-// 010D3E30  hkxAttributeHolder::hkxAttributeHolder  size=18  [run]
-void hkxAttributeHolder::hkxAttributeHolder(undefined4 *param_1)
+// 010D3E30  hkxAttributeHolder::~hkxAttributeHolder  size=18  [run]
+void hkxAttributeHolder::~hkxAttributeHolder(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12640,11 +12636,11 @@ void hkxAttributeHolder::hkxAttributeHolder(undefined4 *param_1)
   return;
 }
 
-// 010D3E50  FUN_010d3e50  size=6  [run]
-undefined ** FUN_010d3e50(void)
+// 010D3E50  hkxAttributeHolder::hkxAttributeHolder  size=6  [run]
+undefined ** hkxAttributeHolder::hkxAttributeHolder(void)
 
 {
-  return hkxAttributeHolder::vftable;
+  return vftable;
 }
 
 // 010D3E60  FUN_010d3e60  size=8  [run]
@@ -12662,8 +12658,8 @@ void FUN_010d3e80(undefined4 *param_1)
   return;
 }
 
-// 010D3E90  hkxAnimatedVector::hkxAnimatedVector  size=18  [run]
-void hkxAnimatedVector::hkxAnimatedVector(undefined4 *param_1)
+// 010D3E90  hkxAnimatedVector::~hkxAnimatedVector  size=18  [run]
+void hkxAnimatedVector::~hkxAnimatedVector(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12672,11 +12668,11 @@ void hkxAnimatedVector::hkxAnimatedVector(undefined4 *param_1)
   return;
 }
 
-// 010D3EB0  FUN_010d3eb0  size=6  [run]
-undefined ** FUN_010d3eb0(void)
+// 010D3EB0  hkxAnimatedVector::hkxAnimatedVector  size=6  [run]
+undefined ** hkxAnimatedVector::hkxAnimatedVector(void)
 
 {
-  return hkxAnimatedVector::vftable;
+  return vftable;
 }
 
 // 010D3EE0  FUN_010d3ee0  size=38  [run]
@@ -12716,7 +12712,7 @@ undefined4 * __thiscall hkxAnimatedVector::vf00(undefined4 *param_1,byte param_2
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12739,8 +12735,8 @@ void FUN_010d3ff0(undefined4 *param_1)
   return;
 }
 
-// 010D4000  hkxAnimatedQuaternion::hkxAnimatedQuaternion  size=18  [run]
-void hkxAnimatedQuaternion::hkxAnimatedQuaternion(undefined4 *param_1)
+// 010D4000  hkxAnimatedQuaternion::~hkxAnimatedQuaternion  size=18  [run]
+void hkxAnimatedQuaternion::~hkxAnimatedQuaternion(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12749,11 +12745,11 @@ void hkxAnimatedQuaternion::hkxAnimatedQuaternion(undefined4 *param_1)
   return;
 }
 
-// 010D4020  FUN_010d4020  size=6  [run]
-undefined ** FUN_010d4020(void)
+// 010D4020  hkxAnimatedQuaternion::hkxAnimatedQuaternion  size=6  [run]
+undefined ** hkxAnimatedQuaternion::hkxAnimatedQuaternion(void)
 
 {
-  return hkxAnimatedQuaternion::vftable;
+  return vftable;
 }
 
 // 010D4060  FUN_010d4060  size=25  [run]
@@ -12840,7 +12836,7 @@ undefined4 * __thiscall hkxAnimatedQuaternion::vf00(undefined4 *param_1,byte par
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12863,8 +12859,8 @@ void FUN_010d4290(undefined4 *param_1)
   return;
 }
 
-// 010D42A0  hkxAnimatedMatrix::hkxAnimatedMatrix  size=18  [run]
-void hkxAnimatedMatrix::hkxAnimatedMatrix(undefined4 *param_1)
+// 010D42A0  hkxAnimatedMatrix::~hkxAnimatedMatrix  size=18  [run]
+void hkxAnimatedMatrix::~hkxAnimatedMatrix(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12873,11 +12869,11 @@ void hkxAnimatedMatrix::hkxAnimatedMatrix(undefined4 *param_1)
   return;
 }
 
-// 010D42C0  FUN_010d42c0  size=6  [run]
-undefined ** FUN_010d42c0(void)
+// 010D42C0  hkxAnimatedMatrix::hkxAnimatedMatrix  size=6  [run]
+undefined ** hkxAnimatedMatrix::hkxAnimatedMatrix(void)
 
 {
-  return hkxAnimatedMatrix::vftable;
+  return vftable;
 }
 
 // 010D42E0  FUN_010d42e0  size=38  [run]
@@ -12917,7 +12913,7 @@ undefined4 * __thiscall hkxAnimatedMatrix::vf00(undefined4 *param_1,byte param_2
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12940,8 +12936,8 @@ void FUN_010d43f0(undefined4 *param_1)
   return;
 }
 
-// 010D4400  hkxAnimatedFloat::hkxAnimatedFloat  size=18  [run]
-void hkxAnimatedFloat::hkxAnimatedFloat(undefined4 *param_1)
+// 010D4400  hkxAnimatedFloat::~hkxAnimatedFloat  size=18  [run]
+void hkxAnimatedFloat::~hkxAnimatedFloat(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -12950,11 +12946,11 @@ void hkxAnimatedFloat::hkxAnimatedFloat(undefined4 *param_1)
   return;
 }
 
-// 010D4420  FUN_010d4420  size=6  [run]
-undefined ** FUN_010d4420(void)
+// 010D4420  hkxAnimatedFloat::hkxAnimatedFloat  size=6  [run]
+undefined ** hkxAnimatedFloat::hkxAnimatedFloat(void)
 
 {
-  return hkxAnimatedFloat::vftable;
+  return vftable;
 }
 
 // 010D4440  FUN_010d4440  size=38  [run]
@@ -12994,7 +12990,7 @@ undefined4 * __thiscall hkxAnimatedFloat::vf00(undefined4 *param_1,byte param_2)
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13014,7 +13010,7 @@ void FUN_010d4550(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions_2(param_2);
+    hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(param_2);
   }
   return;
 }
@@ -13033,7 +13029,7 @@ undefined4 FUN_010d4580(void)
 {
   undefined4 local_30;
   
-  hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions_2(0);
+  hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(0);
   return local_30;
 }
 
@@ -14165,7 +14161,7 @@ undefined4 * __thiscall hkxVertexBuffer::vf00(undefined4 *param_1,byte param_2)
   param_1[0x17] = 0;
   param_1[0x19] = 0x80000000;
   FUN_010d0430();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -14359,7 +14355,7 @@ void __fastcall hkxMaterial::~hkxMaterial(undefined4 *param_1)
   param_1[6] = 0;
   param_1[8] = 0x80000000;
   FUN_01006770();
-  hkBaseObject::hkBaseObject_196();
+  hkxAttributeHolder::~hkxAttributeHolder();
   return;
 }
 
@@ -14936,8 +14932,8 @@ switchD_010d6a72_caseD_5:
   } while( true );
 }
 
-// 010D6D30  hkxEnvironment::hkxEnvironment  size=11  [run]
-void __fastcall hkxEnvironment::hkxEnvironment(undefined4 *param_1)
+// 010D6D30  hkxEnvironment::~hkxEnvironment  size=11  [run]
+void __fastcall hkxEnvironment::~hkxEnvironment(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -15179,7 +15175,7 @@ int __thiscall hkxEnvironment::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_124();
+  ::hkBaseObject::hkBaseObject_124();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -15492,8 +15488,8 @@ LAB_010d7743:
   return;
 }
 
-// 010D7840  hkxMesh::hkxMesh  size=11  [run]
-void __fastcall hkxMesh::hkxMesh(undefined4 *param_1)
+// 010D7840  hkxMesh::~hkxMesh  size=11  [run]
+void __fastcall hkxMesh::~hkxMesh(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -15904,7 +15900,7 @@ int __thiscall hkxMesh::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_120();
+  ::hkBaseObject::hkBaseObject_120();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -16051,8 +16047,8 @@ void __fastcall FUN_010d8210(int *param_1)
   return;
 }
 
-// 010D82B0  hkxMaterialShaderSet::hkxMaterialShaderSet  size=11  [run]
-void __fastcall hkxMaterialShaderSet::hkxMaterialShaderSet(undefined4 *param_1)
+// 010D82B0  hkxMaterialShaderSet::~hkxMaterialShaderSet  size=11  [run]
+void __fastcall hkxMaterialShaderSet::~hkxMaterialShaderSet(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -16102,7 +16098,7 @@ int __thiscall hkxMaterialShaderSet::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_41();
+  ::hkBaseObject::hkBaseObject_41();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -16128,9 +16124,9 @@ undefined4 * __fastcall hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(und
   return param_1;
 }
 
-// 010D83E0  hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions_2  size=31  [run]
+// 010D83E0  hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions  size=31  [run]
 undefined4 * __thiscall
-hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions_2(undefined4 *param_1,undefined4 param_2)
+hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -16138,8 +16134,8 @@ hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions_2(undefined4 *param_1,undef
   return param_1;
 }
 
-// 010D8400  hkBaseObject::hkBaseObject_46  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_46(undefined4 *param_1)
+// 010D8400  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01006770();
@@ -16165,7 +16161,7 @@ undefined4 * __thiscall hkAlignSceneToNodeOptions::vf00(undefined4 *param_1,byte
   LPVOID pvVar1;
   
   FUN_01006770();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -17222,9 +17218,9 @@ void FUN_010d9900(undefined4 param_1)
   return;
 }
 
-// 010D9930  hkTypeInfoRegistry::hkTypeInfoRegistry_2  size=59  [run]
+// 010D9930  hkTypeInfoRegistry::hkTypeInfoRegistry  size=59  [run]
 undefined4 * __thiscall
-hkTypeInfoRegistry::hkTypeInfoRegistry_2(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
+hkTypeInfoRegistry::hkTypeInfoRegistry(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
   uint local_8;
@@ -17341,8 +17337,8 @@ void hkTypeInfoRegistry::vf1C(undefined4 param_1)
   return;
 }
 
-// 010D9B20  hkBaseObject::hkBaseObject_20  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_20(undefined4 *param_1)
+// 010D9B20  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01025870();
@@ -17397,24 +17393,23 @@ void FUN_010d9ba0(undefined4 param_1)
   return;
 }
 
-// 010D9BD0  hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_2  size=58  [run]
-undefined4 * __fastcall
-hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_2(undefined4 *param_1)
+// 010D9BD0  hkDefaultClassNameRegistry::hkDefaultClassNameRegistry  size=58  [run]
+undefined4 * __fastcall hkDefaultClassNameRegistry::hkDefaultClassNameRegistry(undefined4 *param_1)
 
 {
   uint local_8;
   
   local_8 = (uint)param_1 & 0xffffff00;
   *(undefined2 *)((int)param_1 + 6) = 1;
-  *param_1 = vftable;
+  *param_1 = hkDynamicClassNameRegistry::vftable;
   param_1[2] = "hk_2011.3.0-r1";
   FUN_01025830(local_8);
-  *param_1 = hkDefaultClassNameRegistry::vftable;
+  *param_1 = vftable;
   return param_1;
 }
 
-// 010D9C10  hkBaseObject::hkBaseObject_22  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_22(undefined4 *param_1)
+// 010D9C10  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01025870();
@@ -17440,7 +17435,7 @@ undefined4 * __thiscall hkDefaultClassNameRegistry::vf00(undefined4 *param_1,byt
   LPVOID pvVar1;
   
   FUN_01025870();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -17479,7 +17474,7 @@ undefined4 * __thiscall hkTypeInfoRegistry::vf00(undefined4 *param_1,byte param_
   LPVOID pvVar1;
   
   FUN_01025870();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -17493,7 +17488,7 @@ undefined4 * __thiscall hkDefaultBuiltinTypeRegistry::vf00(undefined4 *param_1,b
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -17507,7 +17502,7 @@ undefined4 * __thiscall hkBuiltinTypeRegistry::vf00(undefined4 *param_1,byte par
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));

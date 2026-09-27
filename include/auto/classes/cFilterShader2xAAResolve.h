@@ -9,6 +9,5 @@ struct cFilterShader2xAAResolve {
     virtual void vf04();  // 00EC17F0 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShader2xAAResolve();  // 00EC16E0
-    void ctor_015F1DD0();  // 015F1DD0
-    void ctor_015F1E20();  // 015F1E20
+    ~cFilterShader2xAAResolve();  // 015F1DD0
 };

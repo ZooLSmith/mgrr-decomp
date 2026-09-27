@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEspDrawChain.h"
 
-// 00ED6220  cEspDrawChain::vf04  size=105  [class]
-void __fastcall cEspDrawChain::vf04(int param_1)
+// 00ED6220  cEspDrawChain::draw  size=105  [class]
+void __fastcall cEspDrawChain::draw(int param_1)
 
 {
   FUN_00f45d30(1);

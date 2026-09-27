@@ -1,5 +1,5 @@
 // src/misc/cItemBox.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E89D0..00AB97F0, 7 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E89D0..00AB97F0, 8 functions
 
 #include "mgrr.h"
 #include "cItemBox.h"
@@ -11,14 +11,14 @@ undefined4 cItemBox::vf308(void)
   return 0;
 }
 
-// 005EA540  cItemBox::vf40  size=46  [class]
-undefined4 __fastcall cItemBox::vf40(int param_1)
+// 005EA540  cItemBox::startup  size=46  [class]
+undefined4 __fastcall cItemBox::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = cItemObjectBase::vf40();
+  iVar1 = cItemObjectBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -157,6 +157,19 @@ void __fastcall cItemBox::vf48(int param_1)
   return;
 }
 
+// 00AB1360  cItemBox::cItemBox  size=56  [class]
+undefined4 * __fastcall cItemBox::cItemBox(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB13A0  cItemBox::vf04  size=6  [class]
 undefined * cItemBox::vf04(void)
 
@@ -164,11 +177,11 @@ undefined * cItemBox::vf04(void)
   return &DAT_01b35398;
 }
 
-// 00AB97F0  cItemBox::vf00  size=30  [class]
-undefined4 __thiscall cItemBox::vf00(undefined4 param_1,byte param_2)
+// 00AB97F0  cItemBox::destruct  size=30  [class]
+undefined4 __thiscall cItemBox::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_124();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

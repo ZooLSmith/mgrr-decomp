@@ -1,5 +1,5 @@
 // src/graphics/ModelShaderJackModule.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009EE450..00F3E960, 35 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009EE450..00F3E960, 31 functions
 
 #include "mgrr.h"
 #include "ModelShaderJackModule.h"
@@ -470,11 +470,11 @@ LAB_009f0640:
   return;
 }
 
-// 00ECD610  ModelShaderJackModule::ModelShaderJackModule_5  size=51  [class]
-undefined4 * __fastcall ModelShaderJackModule::ModelShaderJackModule_5(undefined4 *param_1)
+// 00ECD610  ModelShaderJackModule::ModelShaderJackModule  size=51  [class]
+undefined4 * __fastcall ModelShaderJackModule::ModelShaderJackModule(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   FUN_009e6c70();
   FUN_009d2900();
@@ -488,62 +488,10 @@ undefined4 __thiscall ModelShaderJackModule::vf00(undefined4 param_1,byte param_
 {
   FUN_009de370();
   Spline<float>::Spline<float>_2();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
-  return param_1;
-}
-
-// 00ED0480  ModelShaderJackModule::ModelShaderJackModule_2  size=57  [class]
-undefined4 * __fastcall ModelShaderJackModule::ModelShaderJackModule_2(undefined4 *param_1)
-
-{
-  cEspBase::cEspBase_4();
-  *param_1 = vftable;
-  FUN_009e6c70();
-  FUN_009d2900();
-  FUN_00a7c930();
-  *param_1 = esp12::vftable;
-  return param_1;
-}
-
-// 00ED04C0  ModelShaderJackModule::ModelShaderJackModule  size=57  [class]
-undefined4 * __fastcall ModelShaderJackModule::ModelShaderJackModule(undefined4 *param_1)
-
-{
-  cEspBase::cEspBase_4();
-  *param_1 = vftable;
-  FUN_009e6c70();
-  FUN_009d2900();
-  FUN_00a7c930();
-  *param_1 = esp23::vftable;
-  return param_1;
-}
-
-// 00ED0640  ModelShaderJackModule::ModelShaderJackModule_4  size=57  [class]
-undefined4 * __fastcall ModelShaderJackModule::ModelShaderJackModule_4(undefined4 *param_1)
-
-{
-  cEspBase::cEspBase_4();
-  *param_1 = vftable;
-  FUN_009e6c70();
-  FUN_009d2900();
-  FUN_00a7c930();
-  *param_1 = esp38::vftable;
-  return param_1;
-}
-
-// 00ED06E0  ModelShaderJackModule::ModelShaderJackModule_3  size=57  [class]
-undefined4 * __fastcall ModelShaderJackModule::ModelShaderJackModule_3(undefined4 *param_1)
-
-{
-  cEspBase::cEspBase_4();
-  *param_1 = vftable;
-  FUN_009e6c70();
-  FUN_009d2900();
-  FUN_00a7c930();
-  *param_1 = esp53::vftable;
   return param_1;
 }
 
@@ -2841,7 +2789,7 @@ void __thiscall FUN_00f15360(int param_1,int param_2)
     puStack_160 = (undefined1 *)0xf157ea;
     FID_conflict__memcpy((void *)(param_2 + 0x10),&local_e0,0x40);
   }
-  FUN_00efed20();
+  esp107::vf10();
   ModelShaderJackModule::updateModule_5();
   __security_check_cookie(local_14 ^ (uint)&fStack_144);
   return;
@@ -3284,7 +3232,7 @@ void __thiscall FUN_00f15f30(int param_1,int param_2)
     puStack_160 = (undefined1 *)0xf163ba;
     FID_conflict__memcpy((void *)(param_2 + 0x10),&local_e0,0x40);
   }
-  FUN_00efed20();
+  esp107::vf10();
   ModelShaderJackModule::updateModule_4();
   __security_check_cookie(local_14 ^ (uint)&fStack_144);
   return;

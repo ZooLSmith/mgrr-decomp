@@ -15,4 +15,6 @@ struct Emc320 : public EmBaseDLC {
     virtual void vf50();  // 0083ED40 slot 0x50  overrides Behavior
     virtual undefined4 setEmSetInfo();  // 0083ED50 slot 0x264  overrides Behavior
     virtual void vf34C();  // 0083ED70 slot 0x34C  overrides BehaviorEmBase
+    // non-virtual members
+    Emc320();  // 00AB1610
 };

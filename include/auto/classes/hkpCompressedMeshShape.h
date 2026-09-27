@@ -16,6 +16,4 @@ struct hkpCompressedMeshShape : public hkpShapeCollection {
     static bool vf18();  // 01134E40
     static void vf00();  // 01134E50
     static int vf38();  // 0114F840
-    static void vf14_0114F910(undefined4 param_2, int param_3, int param_4);  // 0114F910
-    static void vf18_0114FCB0(int param_2, int param_3, undefined4 param_4);  // 0114FCB0
 };

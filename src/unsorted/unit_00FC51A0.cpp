@@ -14,7 +14,7 @@ undefined4 * __fastcall FUN_00fc51a0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3dec;
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
@@ -86,7 +86,7 @@ void __fastcall FUN_00fc53e0(int param_1)
 undefined4 * __fastcall FUN_00fc5420(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3df4;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -118,7 +118,7 @@ void __fastcall FUN_00fc5530(int param_1)
 undefined4 * __fastcall FUN_00fc5550(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3dfc;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -150,7 +150,7 @@ void __fastcall FUN_00fc5660(int param_1)
 undefined4 * __fastcall FUN_00fc5680(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e04;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -188,7 +188,7 @@ undefined4 * __fastcall FUN_00fc57b0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e0c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -256,7 +256,7 @@ undefined4 * __fastcall FUN_00fc5ac0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e14;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -296,7 +296,7 @@ undefined4 * __fastcall FUN_00fc5ce0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e1c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -360,7 +360,7 @@ void __fastcall FUN_00fc5fc0(int param_1)
 undefined4 * __fastcall FUN_00fc5ff0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e24;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -392,7 +392,7 @@ void __fastcall FUN_00fc6100(int param_1)
 undefined4 * __fastcall FUN_00fc6120(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e2c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -428,7 +428,7 @@ undefined4 * __fastcall FUN_00fc6250(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e34;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -462,7 +462,7 @@ undefined4 * __fastcall FUN_00fc6250(undefined4 *param_1)
 undefined4 * __fastcall FUN_00fc6470(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e3c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -498,7 +498,7 @@ undefined4 * __fastcall FUN_00fc65a0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e44;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -552,7 +552,7 @@ undefined4 * __fastcall FUN_00fc67c0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e4c;
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
@@ -638,7 +638,7 @@ undefined4 * __fastcall FUN_00fc6b30(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e54;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -695,7 +695,7 @@ void FUN_00fc6ca0(void)
 undefined4 * __fastcall FUN_00fc6cb0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e5c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -727,7 +727,7 @@ void __fastcall FUN_00fc6dc0(int param_1)
 undefined4 * __fastcall FUN_00fc6de0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e64;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -768,7 +768,7 @@ undefined4 * __fastcall FUN_00fc6f40(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e6c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -821,7 +821,7 @@ void __fastcall FUN_00fc70a0(int param_1)
 undefined4 * __fastcall FUN_00fc70f0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e74;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -853,7 +853,7 @@ void __fastcall FUN_00fc7200(int param_1)
 undefined4 * __fastcall FUN_00fc7220(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e7c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1147,7 +1147,7 @@ undefined4 * __fastcall FUN_00fc7680(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e8c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1256,7 +1256,7 @@ undefined4 * __fastcall FUN_00fc7ad0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e94;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1357,7 +1357,7 @@ undefined4 * __fastcall FUN_00fc7fb0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3e9c;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1427,7 +1427,7 @@ undefined4 * __fastcall FUN_00fc82c0(undefined4 *param_1)
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f3ea4;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -1922,7 +1922,7 @@ undefined4 * __thiscall FUN_00fc9340(undefined4 *param_1,byte param_2)
   param_1[0xd] = 0xffffffff;
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1940,7 +1940,7 @@ undefined4 * __thiscall FUN_00fc9390(undefined4 *param_1,byte param_2)
   param_1[0xd] = 0xffffffff;
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1955,7 +1955,7 @@ undefined4 * __thiscall FUN_00fc93d0(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1970,7 +1970,7 @@ undefined4 * __thiscall FUN_00fc9410(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1988,7 +1988,7 @@ undefined4 * __thiscall FUN_00fc9450(undefined4 *param_1,byte param_2)
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0xffffffff;
   *param_1 = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2015,7 +2015,7 @@ undefined4 * __thiscall FUN_00fc9490(undefined4 *param_1,byte param_2)
   param_1[0x10] = 0xffffffff;
   param_1[0x11] = 0xffffffff;
   param_1[0x12] = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2030,7 +2030,7 @@ undefined4 * __thiscall FUN_00fc94f0(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2045,7 +2045,7 @@ undefined4 * __thiscall FUN_00fc9530(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2060,7 +2060,7 @@ undefined4 * __thiscall FUN_00fc9570(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2081,7 +2081,7 @@ undefined4 * __thiscall FUN_00fc95b0(undefined4 *param_1,byte param_2)
   param_1[0x10] = 0xffffffff;
   param_1[0x11] = 0xffffffff;
   param_1[0x12] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2099,7 +2099,7 @@ undefined4 * __thiscall FUN_00fc9600(undefined4 *param_1,byte param_2)
   param_1[0xd] = 0xffffffff;
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2120,7 +2120,7 @@ undefined4 * __thiscall FUN_00fc9650(undefined4 *param_1,byte param_2)
   param_1[0x10] = 0xffffffff;
   param_1[0x11] = 0xffffffff;
   param_1[0x12] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2135,7 +2135,7 @@ undefined4 * __thiscall FUN_00fc96a0(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2150,7 +2150,7 @@ undefined4 * __thiscall FUN_00fc96e0(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2168,7 +2168,7 @@ undefined4 * __thiscall FUN_00fc9720(undefined4 *param_1,byte param_2)
   param_1[0xd] = 0xffffffff;
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2183,7 +2183,7 @@ undefined4 * __thiscall FUN_00fc9770(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2201,7 +2201,7 @@ undefined4 * __thiscall FUN_00fc97b0(undefined4 *param_1,byte param_2)
   param_1[0xd] = 0xffffffff;
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2231,7 +2231,7 @@ undefined4 * __thiscall FUN_00fc9800(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2244,7 +2244,7 @@ undefined4 * __thiscall FUN_00fc9870(undefined4 *param_1,byte param_2)
 {
   *param_1 = &PTR_FUN_016f3e54;
   FUN_00fc12a0();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2259,7 +2259,7 @@ undefined4 * __thiscall FUN_00fc98a0(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2277,7 +2277,7 @@ undefined4 * __thiscall FUN_00fc98e0(undefined4 *param_1,byte param_2)
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0xffffffff;
   *param_1 = &PTR_FUN_016f23d0;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2301,7 +2301,7 @@ undefined4 * __thiscall FUN_00fc9920(undefined4 *param_1,byte param_2)
   param_1[0x20] = 0xffffffff;
   param_1[0x21] = 0xffffffff;
   param_1[0x22] = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2316,7 +2316,7 @@ undefined4 * __thiscall FUN_00fc9980(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2331,7 +2331,7 @@ undefined4 * __thiscall FUN_00fc99c0(undefined4 *param_1,byte param_2)
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2363,7 +2363,7 @@ void __thiscall FUN_00fc9a30(int param_1,char *param_2,int param_3)
     puVar2 = (undefined4 *)0x0;
   }
   else {
-    Hw::cVertexShader::cVertexShader();
+    Hw::cPixelShader::cPixelShader();
     *puVar2 = &PTR_FUN_016f1d80;
   }
   pcVar1 = param_2;
@@ -2398,7 +2398,7 @@ void __thiscall FUN_00fc9ae0(int param_1,char *param_2,int param_3)
     puVar2 = (undefined4 *)0x0;
   }
   else {
-    Hw::cVertexShader::cVertexShader();
+    Hw::cPixelShader::cPixelShader();
     *puVar2 = &PTR_FUN_016f1d80;
   }
   pcVar1 = param_2;
@@ -2434,7 +2434,7 @@ undefined4 * __thiscall FUN_00fc9bb0(undefined4 *param_1,byte param_2)
 {
   *param_1 = &PTR_FUN_016f3e8c;
   FUN_00fc1fc0();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2461,7 +2461,7 @@ undefined4 * __thiscall FUN_00fc9be0(undefined4 *param_1,byte param_2)
   param_1[0x16] = 0xffffffff;
   param_1[0x17] = 0xffffffff;
   param_1[0x18] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2482,7 +2482,7 @@ undefined4 * __thiscall FUN_00fc9c40(undefined4 *param_1,byte param_2)
   param_1[0x10] = 0xffffffff;
   param_1[0x11] = 0xffffffff;
   param_1[0x12] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -2503,7 +2503,7 @@ undefined4 * __thiscall FUN_00fc9c90(undefined4 *param_1,byte param_2)
   param_1[0x10] = 0xffffffff;
   param_1[0x11] = 0xffffffff;
   param_1[0x12] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -4017,7 +4017,7 @@ LAB_00fca704:
 undefined4 __fastcall FUN_00fcc300(undefined4 param_1)
 
 {
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   return param_1;
 }
 
@@ -4025,7 +4025,7 @@ undefined4 __fastcall FUN_00fcc300(undefined4 param_1)
 undefined4 __fastcall FUN_00fcc320(undefined4 param_1)
 
 {
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   return param_1;
 }
 

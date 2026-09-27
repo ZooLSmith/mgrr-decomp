@@ -142,7 +142,7 @@ void __thiscall DatsuJump::SafeCheck(int param_1,undefined4 *param_2)
     local_52c = pfVar4[1];
     local_528 = pfVar4[2];
     local_524 = pfVar4[3];
-    hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+    hkpAllRayHitCollector::hkpAllRayHitCollector();
     iVar3 = RayCastMultiHitWork::RayCastMultiHitWork
                       (appuStack_330,&fStack_4f0,&local_530,0xffff0006,"DatsuJump::SafeCheck");
     if (iVar3 != 0) {
@@ -183,7 +183,7 @@ void __thiscall DatsuJump::SafeCheck(int param_1,undefined4 *param_2)
       (**(code **)(PTR_vftable_018e9b94 + 0x10))(iStack_320,(uStack_318 & 0x3fffffff) * 0x60);
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -326,7 +326,7 @@ void __thiscall DatsuJump::SafeCheck_2(int param_1,undefined4 *param_2)
     local_52c = pfVar4[1];
     local_528 = pfVar4[2];
     local_524 = pfVar4[3];
-    hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+    hkpAllRayHitCollector::hkpAllRayHitCollector();
     iVar3 = RayCastMultiHitWork::RayCastMultiHitWork
                       (appuStack_330,&fStack_4f0,&local_530,0xffff0006,"DatsuJump::SafeCheck");
     if (iVar3 != 0) {
@@ -367,7 +367,7 @@ void __thiscall DatsuJump::SafeCheck_2(int param_1,undefined4 *param_2)
       (**(code **)(PTR_vftable_018e9b94 + 0x10))(iStack_320,(uStack_318 & 0x3fffffff) * 0x60);
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -510,7 +510,7 @@ void __thiscall DatsuJump::SafeCheck_3(int param_1,undefined4 *param_2)
     local_52c = pfVar4[1];
     local_528 = pfVar4[2];
     local_524 = pfVar4[3];
-    hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+    hkpAllRayHitCollector::hkpAllRayHitCollector();
     iVar3 = RayCastMultiHitWork::RayCastMultiHitWork
                       (appuStack_330,&fStack_4f0,&local_530,0xffff0006,"DatsuJump::SafeCheck");
     if (iVar3 != 0) {
@@ -551,7 +551,7 @@ void __thiscall DatsuJump::SafeCheck_3(int param_1,undefined4 *param_2)
       (**(code **)(PTR_vftable_018e9b94 + 0x10))(iStack_320,(uStack_318 & 0x3fffffff) * 0x60);
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 

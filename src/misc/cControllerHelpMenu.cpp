@@ -8,7 +8,7 @@
 undefined4 * __fastcall cControllerHelpMenu::cControllerHelpMenu(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   param_1[9] = 0;
   *param_1 = vftable;
   param_1[8] = 0;
@@ -21,7 +21,7 @@ undefined4 * __thiscall cControllerHelpMenu::vf00(undefined4 *param_1,byte param
 
 {
   *param_1 = vftable;
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -49,8 +49,8 @@ void __fastcall cControllerHelpMenu::vf08(int param_1)
   return;
 }
 
-// 0098E2D0  cControllerHelpMenu::vf14  size=125  [class]
-void __fastcall cControllerHelpMenu::vf14(int param_1)
+// 0098E2D0  cControllerHelpMenu::create  size=125  [class]
+void __fastcall cControllerHelpMenu::create(int param_1)
 
 {
   float10 fVar1;

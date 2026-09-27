@@ -16,5 +16,6 @@ struct hkPackfileWriter : public hkReferencedObject {
     virtual void vf24(undefined4 param_1, undefined4 param_2);  // 010E5AB0 slot 0x24
     virtual void vf28(undefined4 param_1, undefined4 param_2);  // 010E5AE0 slot 0x28
     // non-virtual members
+    ~hkPackfileWriter();  // 010E5BD0
     hkPackfileWriter(undefined8 * param_2);  // 010E60C0
 };

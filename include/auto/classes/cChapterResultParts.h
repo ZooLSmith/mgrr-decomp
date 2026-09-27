@@ -8,7 +8,5 @@ struct cChapterResultParts : public cCustomObjCtrlManager {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 0099A7A0 slot 0x0  overrides cCustomObjCtrlManager
     // non-virtual members
-    cChapterResultParts();  // 0099A770
-    void ctor_0099A9C0();  // 0099A9C0
-    void ctor_00CDAFD0();  // 00CDAFD0
+    ~cChapterResultParts();  // 0099A770
 };

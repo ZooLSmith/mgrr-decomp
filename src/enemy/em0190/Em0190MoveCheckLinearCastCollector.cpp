@@ -1,9 +1,24 @@
 // src/enemy/em0190/Em0190MoveCheckLinearCastCollector.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00517780..00517820, 3 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00517750..00517820, 4 functions
 
 #include "mgrr.h"
 #include "Em0190MoveCheckLinearCastCollector.h"
 #include "hkpCdPointCollector.h"
+
+// 00517750  Em0190MoveCheckLinearCastCollector::Em0190MoveCheckLinearCastCollector  size=45  [class]
+void __fastcall
+Em0190MoveCheckLinearCastCollector::Em0190MoveCheckLinearCastCollector(undefined4 *param_1)
+
+{
+  param_1[1] = 0x7f7fffee;
+  *param_1 = hkpAllCdPointCollector::vftable;
+  param_1[4] = param_1 + 8;
+  param_1[6] = 0x80000008;
+  param_1[5] = 0;
+  param_1[1] = 0x7f7fffee;
+  *param_1 = vftable;
+  return;
+}
 
 // 00517780  Em0190MoveCheckLinearCastCollector::vf04  size=67  [class]
 void Em0190MoveCheckLinearCastCollector::vf04(int param_1)

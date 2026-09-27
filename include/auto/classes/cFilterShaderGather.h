@@ -10,5 +10,5 @@ struct cFilterShaderGather {
     // non-virtual members
     cFilterShaderGather();  // 00EC0D20
     void ctor_00EC22A0();  // 00EC22A0
-    void ctor_015F1BF0();  // 015F1BF0
+    ~cFilterShaderGather();  // 015F1BF0
 };

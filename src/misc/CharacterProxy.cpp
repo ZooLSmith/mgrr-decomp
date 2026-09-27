@@ -113,7 +113,7 @@ undefined4 * __thiscall CharacterProxy::vf00(undefined4 *param_1,byte param_2)
   *param_1 = vftable;
   param_1[2] = vftable;
   param_1[3] = vftable;
-  hkBaseObject::hkBaseObject_160();
+  ::hkBaseObject::hkBaseObject_160();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -165,7 +165,7 @@ CharacterProxy::CharacterProxy
   pvVar4 = TlsGetValue(DAT_01f8fc4c);
   iVar5 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x160);
   *(undefined2 *)(iVar5 + 4) = 0x160;
-  iVar5 = hkpSimpleShapePhantom::~hkpSimpleShapePhantom(param_1,&DAT_01701ca0,param_7);
+  iVar5 = hkpSimpleShapePhantom::hkpSimpleShapePhantom(param_1,&DAT_01701ca0,param_7);
   FUN_01006780("CharControl::createCharacterProxy");
   FUN_010060a0();
   if (iVar5 == 0) {
@@ -173,7 +173,7 @@ CharacterProxy::CharacterProxy
   }
   FUN_01194450(iVar5);
   FUN_010060a0();
-  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
   fStack_64 = *(float *)(DAT_01885d20 + 0x10);
   fStack_60 = *(float *)(DAT_01885d20 + 0x14);
   fStack_5c = *(float *)(DAT_01885d20 + 0x18);
@@ -613,7 +613,7 @@ CharacterProxy::CharacterProxy
   pvVar4 = TlsGetValue(DAT_01f8fc4c);
   puVar7 = (undefined4 *)(**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0xc0);
   *(undefined2 *)(puVar7 + 1) = 0xc0;
-  hkpPhantomListener::hkpPhantomListener(apuStack_a8);
+  hkpCharacterProxy::hkpCharacterProxy(apuStack_a8);
   *puVar7 = vftable;
   puVar7[2] = vftable;
   puVar7[3] = vftable;

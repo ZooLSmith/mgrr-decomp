@@ -9,6 +9,5 @@ struct cCustomizePointDisp : public cCustomObjCtrlManager {
     virtual undefined4 * vf00(byte param_2);  // 0098F7A0 slot 0x0  overrides cCustomObjCtrlManager
     // non-virtual members
     cCustomizePointDisp();  // 0098F740
-    void ctor_009A02B0();  // 009A02B0
     void ctor_009A09E0();  // 009A09E0
 };

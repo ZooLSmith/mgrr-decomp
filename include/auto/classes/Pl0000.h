@@ -112,6 +112,8 @@ struct Pl0000 : public BehaviorAppBase {
     virtual void vf3F0();  // 00AC0D80 slot 0x3F0
     virtual void vf3F4();  // 00B7D760 slot 0x3F4
     // non-virtual members
+    Pl0000();  // 00AC0310
     static void qteZangekiSafeCheckForward();  // 00B89A20
+    static undefined4 vf134_00BDA8A0();  // 00BDA8A0
     static void em0080Qte2SafeCheck(undefined4 * param_2);  // 00BF9730
 };

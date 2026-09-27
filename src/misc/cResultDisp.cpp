@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cResultDisp.h"
 
-// 00CBEF20  cResultDisp::cResultDisp_2  size=69  [class]
-void __fastcall cResultDisp::cResultDisp_2(undefined4 *param_1)
+// 00CBEF20  cResultDisp::cResultDisp  size=69  [class]
+void __fastcall cResultDisp::cResultDisp(undefined4 *param_1)
 
 {
   undefined4 local_14;

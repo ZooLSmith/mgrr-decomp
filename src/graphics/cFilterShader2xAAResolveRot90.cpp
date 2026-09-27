@@ -26,7 +26,7 @@ undefined4 * __thiscall cFilterShader2xAAResolveRot90::vf00(undefined4 *param_1,
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

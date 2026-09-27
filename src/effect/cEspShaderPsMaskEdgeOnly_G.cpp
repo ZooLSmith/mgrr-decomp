@@ -64,7 +64,7 @@ undefined4 * __thiscall cEspShaderPsMaskEdgeOnly_G::vf00(undefined4 *param_1,byt
   param_1[0x1a] = 0xffffffff;
   param_1[0x1b] = 0x1111111;
   *param_1 = cEspShaderBase::vftable;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

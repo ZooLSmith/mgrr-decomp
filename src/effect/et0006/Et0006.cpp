@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Et0006.h"
 
-// 005CA030  Et0006::vf40  size=174  [class]
-undefined4 __fastcall Et0006::vf40(int *param_1)
+// 005CA030  Et0006::startup  size=174  [class]
+undefined4 __fastcall Et0006::startup(int *param_1)
 
 {
   int iVar1;
@@ -497,7 +497,7 @@ switchD_005ca386_default:
 undefined4 * __fastcall Et0006::Et0006(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   cEspControler::cEspControler();
   return param_1;
@@ -510,11 +510,11 @@ undefined * Et0006::vf04(void)
   return &DAT_01b35260;
 }
 
-// 00AB8AE0  Et0006::vf00  size=30  [class]
-undefined4 __thiscall Et0006::vf00(undefined4 param_1,byte param_2)
+// 00AB8AE0  Et0006::destruct  size=30  [class]
+undefined4 __thiscall Et0006::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_34();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

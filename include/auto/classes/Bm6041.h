@@ -11,5 +11,4 @@ struct Bm6041 : public BehaviorBm {
     virtual void vf30();  // 00604370 slot 0x30  overrides cObj
     // non-virtual members
     Bm6041();  // 00AB1740
-    static undefined4 vf40();  // 00AC7250
 };

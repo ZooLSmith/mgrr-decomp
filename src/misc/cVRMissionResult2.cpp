@@ -701,8 +701,8 @@ LAB_00d18c70:
   return;
 }
 
-// 00D43A90  cVRMissionResult2::vf14  size=796  [class]
-void __fastcall cVRMissionResult2::vf14(int param_1)
+// 00D43A90  cVRMissionResult2::create  size=796  [class]
+void __fastcall cVRMissionResult2::create(int param_1)
 
 {
   byte bVar1;

@@ -8,4 +8,5 @@ struct cCkMsgDataManager {
     virtual undefined4 vf00(byte param_2);  // 00CF7580 slot 0x0
     // non-virtual members
     static void setupReadInfoDLC(int param_1);  // 00CCA390
+    ~cCkMsgDataManager();  // 00CE14C0
 };

@@ -16,10 +16,6 @@ struct hkDynamicClassNameRegistry : public hkClassNameRegistry {
     virtual void vf24(int * param_2);  // 0104FE40 slot 0x24
     virtual void vf28(undefined4 param_2);  // 0104F690 slot 0x28
     // non-virtual members
-    hkDynamicClassNameRegistry();  // 0104E6C0
-    void ctor_0104F580();  // 0104F580
-    void ctor_010D9BD0();  // 010D9BD0
+    hkDynamicClassNameRegistry();  // 0104F580
     void ctor_010E7660();  // 010E7660
-    void ctor_010FB000();  // 010FB000
-    void ctor_01441AA0();  // 01441AA0
 };

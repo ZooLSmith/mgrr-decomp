@@ -13,7 +13,6 @@ struct cLightApplyScale : public cObject {
     cLightApplyScale();  // 00A389E0
     void ctor_00A391A0();  // 00A391A0
     void ctor_00A3E950(int param_2);  // 00A3E950
-    void ctor_00A409E0();  // 00A409E0
     void ctor_00A40B40();  // 00A40B40
     void ctor_00EC9740(int param_1);  // 00EC9740
     void ctor_00EC9890(int param_1);  // 00EC9890

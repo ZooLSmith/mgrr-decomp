@@ -490,8 +490,8 @@ hkDynamicClassNameRegistry::hkDynamicClassNameRegistry_6(undefined4 *param_1,und
   return param_1;
 }
 
-// 010E7710  hkBaseObject::hkBaseObject_233  size=168  [run]
-void __fastcall hkBaseObject::hkBaseObject_233(undefined4 *param_1)
+// 010E7710  hkBaseObject::hkBaseObject  size=168  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   undefined4 uVar1;
@@ -697,7 +697,7 @@ int __thiscall hkClassPointerVtable::TypeInfoRegistry::vf00(int param_1,byte par
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_233();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -3501,9 +3501,9 @@ void __thiscall FUN_010eae90(undefined4 *param_1,undefined4 param_2)
   return;
 }
 
-// 010EAEC0  _anon_75E1A8BC::InternedStringRefCounted::InternedStringRefCounted_2  size=32  [run]
+// 010EAEC0  _anon_75E1A8BC::InternedStringRefCounted::InternedStringRefCounted  size=32  [run]
 void __thiscall
-_anon_75E1A8BC::InternedStringRefCounted::InternedStringRefCounted_2
+_anon_75E1A8BC::InternedStringRefCounted::InternedStringRefCounted
           (undefined4 *param_1,undefined4 *param_2)
 
 {

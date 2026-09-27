@@ -855,7 +855,7 @@ switchD_0080d807_caseD_3:
       }
     }
     else {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     break;
   case 8:
@@ -869,7 +869,7 @@ LAB_0080da48:
     param_1[0x248] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
       param_1[0x187] = param_1[0x187] + 1;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   switchD_0080dbae::default();
@@ -954,7 +954,7 @@ void __fastcall FUN_0080db60(int *param_1)
     FUN_00ac80a0(0x3f800000,0x3f800000);
     iVar1 = FUN_00a94ce0(0);
     if (iVar1 != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     goto LAB_0080dd54;
   default:
@@ -1000,7 +1000,7 @@ void __fastcall FUN_0080de50(int param_1)
     }
     if ((iVar1 == 2) && (*(int *)(param_1 + 0x61c) == 0)) {
       *(undefined4 *)(param_1 + 0x61c) = 1;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -4169,7 +4169,7 @@ void __fastcall FUN_00814990(int param_1)
       return;
     }
     *(undefined4 *)(param_1 + 0x61c) = 3;
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   FUN_00ac80a0(0x3f800000,0x3f800000);
@@ -7385,7 +7385,7 @@ LAB_00b010ec:
     if (iVar3 != 0) {
       FUN_00a81330();
       FUN_00a7c8a0();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     FUN_00a7c950();
     goto LAB_00b011b3;
@@ -7522,7 +7522,7 @@ LAB_00b01544:
       if (iVar3 != 0) {
         FUN_00a81330();
         FUN_00a7c8a0();
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
       param_1[0x725] = 0;
       FUN_00a7c950();
@@ -8264,7 +8264,7 @@ LAB_00af6116:
       FUN_00dffb30(param_1 + 0x698);
       FUN_00e02d50(param_1,0x1d,local_120);
       if (param_1[0x810] != 0) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
       param_1[0x810] = 0;
     case 1:
@@ -8301,7 +8301,7 @@ LAB_00af6116:
       FUN_00a94bc0(5,0x3e888889);
       (**(code **)(param_1[0x698] + 8))(0x41200000,0,0);
       if (param_1[0x810] != 0) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
       param_1[0x810] = 0;
     case 5:

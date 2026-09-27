@@ -81,7 +81,7 @@ _anon_557D7FF8::hkpStaticCompoundShape_RayHitCollectorWrapper::vf00
         (*pcVar11)();
         return;
       }
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       break;
     }
     local_14 = puVar8;

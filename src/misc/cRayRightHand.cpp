@@ -11,11 +11,11 @@ undefined * cRayRightHand::vf04(void)
   return &DAT_01be9cc8;
 }
 
-// 00AC35F0  cRayRightHand::vf00  size=30  [class]
-undefined4 __thiscall cRayRightHand::vf00(undefined4 param_1,byte param_2)
+// 00AC35F0  cRayRightHand::destruct  size=30  [class]
+undefined4 __thiscall cRayRightHand::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_97();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -50,8 +50,8 @@ void __fastcall cRayRightHand::vf44(int param_1)
   return;
 }
 
-// 00AFFE60  cRayRightHand::vf40  size=249  [class]
-int __fastcall cRayRightHand::vf40(int param_1)
+// 00AFFE60  cRayRightHand::startup  size=249  [class]
+int __fastcall cRayRightHand::startup(int param_1)
 
 {
   uint *puVar1;
@@ -62,7 +62,7 @@ int __fastcall cRayRightHand::vf40(int param_1)
   int *piVar6;
   undefined4 uVar7;
   
-  iVar3 = BehaviorPartsModel::vf40();
+  iVar3 = BehaviorPartsModel::startup();
   if (iVar3 == 0) {
     return 0;
   }

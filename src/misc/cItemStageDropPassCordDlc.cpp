@@ -1,5 +1,5 @@
 // src/misc/cItemStageDropPassCordDlc.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094C020..00952390, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094C020..00952390, 7 functions
 
 #include "mgrr.h"
 #include "cItemStageDropPassCordDlc.h"
@@ -8,6 +8,32 @@
 void cItemStageDropPassCordDlc::vf2C(void)
 
 {
+  return;
+}
+
+// 0094F300  cItemStageDropPassCordDlc::cItemStageDropPassCordDlc  size=85  [class]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void __fastcall cItemStageDropPassCordDlc::cItemStageDropPassCordDlc(undefined4 *param_1)
+
+{
+  undefined4 uVar1;
+  
+  param_1[1] = 0;
+  *param_1 = cItemStageDrop::vftable;
+  param_1[0x14] = 0;
+  param_1[0x18] = 0;
+  param_1[0x15] = &DAT_01b37438;
+  param_1[0x16] = _DAT_01b37448;
+  uVar1 = _DAT_01b37444;
+  param_1[0x19] = 0xffffffff;
+  param_1[0x17] = uVar1;
+  param_1[0x1a] = 0xffffffff;
+  *(undefined1 *)(param_1 + 0x25) = 0;
+  param_1[0x24] = 0;
+  *param_1 = vftable;
+  param_1[0x28] = 0;
+  param_1[1] = 0x5100;
   return;
 }
 

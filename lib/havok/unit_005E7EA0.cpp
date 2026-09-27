@@ -37,7 +37,7 @@ void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_37(int *param_1)
     FUN_00900350(&local_1b0);
     bVar3 = local_19c[0] != 0;
     uVar2 = (uint)bVar3;
-    hkpCdPointCollector::hkpCdPointCollector_4();
+    hkpCdPointCollector::hkpCdPointCollector();
     if (uVar2 == 0) {
       local_1a8 = local_19c;
       local_1b0 = hkpAllCdBodyPairCollector::vftable;

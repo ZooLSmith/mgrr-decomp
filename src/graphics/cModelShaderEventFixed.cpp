@@ -4,22 +4,22 @@
 #include "mgrr.h"
 #include "cModelShaderEventFixed.h"
 
-// 00F8FDB0  cModelShaderEventFixed::cModelShaderEventFixed_2  size=18  [class]
-undefined4 * __fastcall cModelShaderEventFixed::cModelShaderEventFixed_2(undefined4 *param_1)
+// 00F8FDB0  cModelShaderEventFixed::cModelShaderEventFixed  size=18  [class]
+undefined4 * __fastcall cModelShaderEventFixed::cModelShaderEventFixed(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   return param_1;
 }
 
-// 00F8FDD0  cModelShaderEventFixed::cModelShaderEventFixed  size=22  [class]
-void __fastcall cModelShaderEventFixed::cModelShaderEventFixed(undefined4 *param_1)
+// 00F8FDD0  cModelShaderEventFixed::~cModelShaderEventFixed  size=22  [class]
+void __fastcall cModelShaderEventFixed::~cModelShaderEventFixed(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -29,7 +29,7 @@ undefined4 * __thiscall cModelShaderEventFixed::vf00(undefined4 *param_1,byte pa
 {
   *param_1 = vftable;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -45,15 +45,15 @@ void cModelShaderEventFixed::vf04(void)
   return;
 }
 
-// 015F4120  cModelShaderEventFixed::cModelShaderEventFixed_3  size=30  [class]
+// 015F4120  cModelShaderEventFixed::~cModelShaderEventFixed  size=30  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cModelShaderEventFixed::cModelShaderEventFixed_3(void)
+void cModelShaderEventFixed::~cModelShaderEventFixed(void)
 
 {
   _DAT_01eeeae0 = vftable;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

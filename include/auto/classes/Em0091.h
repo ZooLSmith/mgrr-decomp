@@ -13,4 +13,6 @@ struct Em0091 : public BehaviorAppBase {
     virtual void vf48();  // 0049E690 slot 0x48  overrides Behavior
     virtual void vf4C();  // 0049F1D0 slot 0x4C  overrides Behavior
     virtual void vf50();  // 0049E390 slot 0x50  overrides Behavior
+    // non-virtual members
+    Em0091();  // 00AB0680
 };

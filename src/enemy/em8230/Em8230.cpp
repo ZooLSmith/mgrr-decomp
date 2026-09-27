@@ -1,5 +1,5 @@
 // src/enemy/em8230/Em8230.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00707DD0..00AB9B10, 10 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00707DD0..00AB9B10, 11 functions
 
 #include "mgrr.h"
 #include "Em8230.h"
@@ -37,8 +37,8 @@ void Em8230::vf50(void)
   return;
 }
 
-// 00707E50  Em8230::vf264  size=29  [class]
-undefined4 __thiscall Em8230::vf264(int param_1,undefined4 *param_2)
+// 00707E50  Em8230::setEmSetInfo  size=29  [class]
+undefined4 __thiscall Em8230::setEmSetInfo(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -76,8 +76,8 @@ uint FUN_00707f10(int *param_1)
   return -(uint)(iVar1 != 0) & (uint)param_1;
 }
 
-// 00707F40  Em8230::vf40  size=173  [class]
-undefined4 __fastcall Em8230::vf40(int param_1)
+// 00707F40  Em8230::startup  size=173  [class]
+undefined4 __fastcall Em8230::startup(int param_1)
 
 {
   int iVar1;
@@ -85,7 +85,7 @@ undefined4 __fastcall Em8230::vf40(int param_1)
   
   *(undefined4 *)(param_1 + 0xe90) = 0;
   *(undefined4 *)(param_1 + 0xeb8) = 0;
-  iVar1 = EmBaseDLC::vf40();
+  iVar1 = EmBaseDLC::startup();
   if (iVar1 != 0) {
     iVar1 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
     if (iVar1 != 0) {
@@ -144,10 +144,22 @@ void __fastcall Em8230::vf48(int *param_1)
   fVar5 = fVar5 * (float10)0.016666668 + (float10)(float)param_1[0x248];
   param_1[0x248] = (int)(float)fVar5;
   if ((float10)3.0 <= fVar5) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   return;
+}
+
+// 00AB1850  Em8230::Em8230  size=45  [class]
+undefined4 * __fastcall Em8230::Em8230(undefined4 *param_1)
+
+{
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  param_1[0x3ac] = 0;
+  return param_1;
 }
 
 // 00AB1880  Em8230::vf04  size=6  [class]
@@ -157,13 +169,13 @@ undefined * Em8230::vf04(void)
   return &DAT_01b35760;
 }
 
-// 00AB9B10  Em8230::vf00  size=54  [class]
-undefined4 __thiscall Em8230::vf00(undefined4 param_1,byte param_2)
+// 00AB9B10  Em8230::destruct  size=54  [class]
+undefined4 __thiscall Em8230::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

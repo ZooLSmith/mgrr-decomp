@@ -1,5 +1,5 @@
 // src/misc/cItemPossessionBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009496E0..009530A0, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009496E0..009530A0, 5 functions
 
 #include "mgrr.h"
 #include "cItemPossessionBase.h"
@@ -9,6 +9,13 @@ char * cItemPossessionBase::vf00(void)
 
 {
   return "cItemPossessionBase";
+}
+
+// 009496F0  cItemPossessionBase::vf10  size=6  [class]
+char * cItemPossessionBase::vf10(void)
+
+{
+  return "cItemBase";
 }
 
 // 0094D7D0  cItemPossessionBase::vf04  size=75  [class]

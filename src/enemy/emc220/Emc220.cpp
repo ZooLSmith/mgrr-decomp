@@ -1,5 +1,5 @@
 // src/enemy/emc220/Emc220.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0081FDC0..00AB9F60, 249 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0081FDC0..00AB9F60, 250 functions
 
 #include "mgrr.h"
 #include "Emc220.h"
@@ -70,7 +70,7 @@ void __fastcall Emc220::vf2F8(int *param_1)
     (**(code **)(*param_1 + 0x344))(7,0,1);
     param_1[0x1af] = 1;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -2077,7 +2077,7 @@ undefined4 __fastcall FUN_008241d0(int param_1)
       local_30[2] = *(float *)(param_1 + 0x1408) - *(float *)(param_1 + 0x48);
       local_24 = *(float *)(param_1 + 0x140c) - *(float *)(param_1 + 0x4c);
       local_30[1] = 0.0;
-      iVar3 = hkpCdPointCollector::hkpCdPointCollector_14(local_30,local_20,1,0,0x3c23d70a);
+      iVar3 = hkpCdPointCollector::hkpCdPointCollector(local_30,local_20,1,0,0x3c23d70a);
       if ((iVar3 == 0) ||
          (local_20[0] = local_20[0] - *(float *)(param_1 + 0x1400),
          local_18 = local_18 - *(float *)(param_1 + 0x1408),
@@ -2839,8 +2839,8 @@ undefined4 __fastcall FUN_008258c0(int param_1)
   return 0;
 }
 
-// 00825920  Emc220::vf130  size=726  [class]
-undefined4 __thiscall Emc220::vf130(int param_1,ushort *param_2)
+// 00825920  Emc220::getAttackInfo  size=726  [class]
+undefined4 __thiscall Emc220::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -2853,7 +2853,7 @@ undefined4 __thiscall Emc220::vf130(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_01648840);
     return 0;
   }
@@ -8068,7 +8068,7 @@ void __fastcall FUN_0082fe30(int param_1)
           uVar3 = 0;
         }
         else {
-          uVar3 = RigidBodyCollection::RigidBodyCollection_2();
+          uVar3 = RigidBodyCollision::RigidBodyCollision();
         }
         *(undefined4 *)(param_1 + 0x7b0) = uVar3;
         iVar1 = FUN_008f6410(*(undefined4 *)(param_1 + 0x4f0),iVar1,local_24[0]);
@@ -9552,8 +9552,8 @@ LAB_00832712:
   return;
 }
 
-// 00832730  Emc220::vf264  size=278  [class]
-undefined4 __thiscall Emc220::vf264(int param_1,undefined4 param_2)
+// 00832730  Emc220::setEmSetInfo  size=278  [class]
+undefined4 __thiscall Emc220::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -14072,8 +14072,8 @@ LAB_0083b5a1:
   } while( true );
 }
 
-// 0083B6C0  Emc220::vf40  size=2899  [class]
-undefined4 __fastcall Emc220::vf40(int *param_1)
+// 0083B6C0  Emc220::startup  size=2899  [class]
+undefined4 __fastcall Emc220::startup(int *param_1)
 
 {
   code *pcVar1;
@@ -14129,7 +14129,7 @@ undefined4 __fastcall Emc220::vf40(int *param_1)
   undefined4 uStack_24;
   undefined4 uStack_1c;
   
-  iVar2 = EmBaseDLC::vf40();
+  iVar2 = EmBaseDLC::startup();
   if (iVar2 != 0) {
     param_1[0x3a4] = 0;
     FUN_00a7c950();
@@ -14323,7 +14323,7 @@ undefined4 __fastcall Emc220::vf40(int *param_1)
           iVar3 = 0;
         }
         else {
-          iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+          iVar3 = RigidBodyCollision::RigidBodyCollision();
         }
         param_1[0x1ec] = iVar3;
         iVar2 = FUN_008f6410(param_1[0x13c],iVar2,local_1e0);
@@ -15698,6 +15698,66 @@ void __fastcall Emc220::vf4C(int *param_1)
   return;
 }
 
+// 00AB3590  Emc220::Emc220  size=352  [class]
+undefined4 * __fastcall Emc220::Emc220(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  param_1[0x3a4] = 0;
+  param_1[0x3a5] = 0;
+  param_1[0x3a6] = 0;
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  param_1[0x498] = 0;
+  param_1[0x499] = 0;
+  param_1[0x49a] = 0;
+  param_1[0x4a4] = 0;
+  param_1[0x4a5] = 0;
+  param_1[0x4a6] = 0;
+  param_1[0x4b0] = 0;
+  param_1[0x4b1] = 0;
+  param_1[0x4b2] = 0;
+  param_1[0x4bc] = 0;
+  param_1[0x4bd] = 0;
+  param_1[0x4be] = 0;
+  param_1[0x4c8] = 0;
+  param_1[0x4c9] = 0;
+  param_1[0x4ca] = 0;
+  param_1[0x4d4] = 0;
+  param_1[0x4d5] = 0;
+  param_1[0x4d6] = 0;
+  param_1[0x4e0] = 0;
+  param_1[0x4e1] = 0;
+  param_1[0x4e2] = 0;
+  param_1[0x4ec] = 0;
+  param_1[0x4ed] = 0;
+  param_1[0x4ee] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00a603a0();
+  FUN_00a603a0();
+  FUN_00a603a0();
+  FUN_00a831e0();
+  iVar2 = 10;
+  puVar1 = param_1 + 0x5c8;
+  do {
+    *puVar1 = 0;
+    puVar1 = puVar1 + 5;
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  return param_1;
+}
+
 // 00AB36F0  Emc220::vf04  size=6  [class]
 undefined * Emc220::vf04(void)
 
@@ -15719,12 +15779,12 @@ void FUN_00ab3700(void)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB9F60  Emc220::vf00  size=30  [class]
-undefined4 __thiscall Emc220::vf00(undefined4 param_1,byte param_2)
+// 00AB9F60  Emc220::destruct  size=30  [class]
+undefined4 __thiscall Emc220::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00ab3700();

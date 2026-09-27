@@ -35,8 +35,8 @@ void hkContainerTempAllocator::Allocator::vf08(void)
   return;
 }
 
-// 01005920  FUN_01005920  size=26  [run]
-void FUN_01005920(void)
+// 01005920  hkContainerTempAllocator::Allocator::vf0C  size=26  [run]
+void hkContainerTempAllocator::Allocator::vf0C(void)
 
 {
   LPVOID pvVar1;
@@ -48,8 +48,8 @@ void FUN_01005920(void)
   return;
 }
 
-// 01005940  FUN_01005940  size=26  [run]
-void FUN_01005940(void)
+// 01005940  hkContainerTempAllocator::Allocator::vf10  size=26  [run]
+void hkContainerTempAllocator::Allocator::vf10(void)
 
 {
   LPVOID pvVar1;
@@ -61,8 +61,8 @@ void FUN_01005940(void)
   return;
 }
 
-// 01005960  FUN_01005960  size=26  [run]
-void FUN_01005960(void)
+// 01005960  hkContainerTempAllocator::Allocator::vf14  size=26  [run]
+void hkContainerTempAllocator::Allocator::vf14(void)
 
 {
   LPVOID pvVar1;
@@ -74,8 +74,8 @@ void FUN_01005960(void)
   return;
 }
 
-// 01005980  FUN_01005980  size=26  [run]
-void FUN_01005980(void)
+// 01005980  hkContainerTempAllocator::Allocator::vf20  size=26  [run]
+void hkContainerTempAllocator::Allocator::vf20(void)
 
 {
   LPVOID pvVar1;
@@ -87,8 +87,8 @@ void FUN_01005980(void)
   return;
 }
 
-// 010059A0  FUN_010059a0  size=26  [run]
-void FUN_010059a0(void)
+// 010059A0  hkContainerTempAllocator::Allocator::vf24  size=26  [run]
+void hkContainerTempAllocator::Allocator::vf24(void)
 
 {
   LPVOID pvVar1;
@@ -139,8 +139,8 @@ void hkContainerDebugAllocator::Allocator::vf0C(void)
   return;
 }
 
-// 01005A20  FUN_01005a20  size=26  [run]
-void FUN_01005a20(void)
+// 01005A20  hkContainerDebugAllocator::Allocator::vf10  size=26  [run]
+void hkContainerDebugAllocator::Allocator::vf10(void)
 
 {
   LPVOID pvVar1;
@@ -152,8 +152,8 @@ void FUN_01005a20(void)
   return;
 }
 
-// 01005A40  FUN_01005a40  size=26  [run]
-void FUN_01005a40(void)
+// 01005A40  hkContainerDebugAllocator::Allocator::vf14  size=26  [run]
+void hkContainerDebugAllocator::Allocator::vf14(void)
 
 {
   LPVOID pvVar1;
@@ -165,8 +165,8 @@ void FUN_01005a40(void)
   return;
 }
 
-// 01005A60  FUN_01005a60  size=26  [run]
-void FUN_01005a60(void)
+// 01005A60  hkContainerDebugAllocator::Allocator::vf20  size=26  [run]
+void hkContainerDebugAllocator::Allocator::vf20(void)
 
 {
   LPVOID pvVar1;
@@ -178,8 +178,8 @@ void FUN_01005a60(void)
   return;
 }
 
-// 01005A80  FUN_01005a80  size=26  [run]
-void FUN_01005a80(void)
+// 01005A80  hkContainerDebugAllocator::Allocator::vf24  size=26  [run]
+void hkContainerDebugAllocator::Allocator::vf24(void)
 
 {
   LPVOID pvVar1;
@@ -191,8 +191,8 @@ void FUN_01005a80(void)
   return;
 }
 
-// 01005AA0  FUN_01005aa0  size=26  [run]
-void FUN_01005aa0(void)
+// 01005AA0  hkContainerHeapAllocator::Allocator::vf04  size=26  [run]
+void hkContainerHeapAllocator::Allocator::vf04(void)
 
 {
   LPVOID pvVar1;
@@ -204,8 +204,8 @@ void FUN_01005aa0(void)
   return;
 }
 
-// 01005AC0  FUN_01005ac0  size=26  [run]
-void FUN_01005ac0(void)
+// 01005AC0  hkContainerHeapAllocator::Allocator::vf08  size=26  [run]
+void hkContainerHeapAllocator::Allocator::vf08(void)
 
 {
   LPVOID pvVar1;
@@ -217,8 +217,8 @@ void FUN_01005ac0(void)
   return;
 }
 
-// 01005AE0  FUN_01005ae0  size=26  [run]
-void FUN_01005ae0(void)
+// 01005AE0  hkContainerHeapAllocator::Allocator::vf0C  size=26  [run]
+void hkContainerHeapAllocator::Allocator::vf0C(void)
 
 {
   LPVOID pvVar1;
@@ -230,8 +230,8 @@ void FUN_01005ae0(void)
   return;
 }
 
-// 01005B00  FUN_01005b00  size=26  [run]
-void FUN_01005b00(void)
+// 01005B00  hkContainerHeapAllocator::Allocator::vf10  size=26  [run]
+void hkContainerHeapAllocator::Allocator::vf10(void)
 
 {
   LPVOID pvVar1;
@@ -243,8 +243,8 @@ void FUN_01005b00(void)
   return;
 }
 
-// 01005B20  FUN_01005b20  size=26  [run]
-void FUN_01005b20(void)
+// 01005B20  hkContainerHeapAllocator::Allocator::vf14  size=26  [run]
+void hkContainerHeapAllocator::Allocator::vf14(void)
 
 {
   LPVOID pvVar1;
@@ -256,8 +256,8 @@ void FUN_01005b20(void)
   return;
 }
 
-// 01005B40  FUN_01005b40  size=26  [run]
-void FUN_01005b40(void)
+// 01005B40  hkContainerHeapAllocator::Allocator::vf20  size=26  [run]
+void hkContainerHeapAllocator::Allocator::vf20(void)
 
 {
   LPVOID pvVar1;
@@ -269,8 +269,8 @@ void FUN_01005b40(void)
   return;
 }
 
-// 01005B60  FUN_01005b60  size=26  [run]
-void FUN_01005b60(void)
+// 01005B60  hkContainerHeapAllocator::Allocator::vf24  size=26  [run]
+void hkContainerHeapAllocator::Allocator::vf24(void)
 
 {
   LPVOID pvVar1;
@@ -488,11 +488,11 @@ void __fastcall FUN_01005e60(undefined4 *param_1)
   return;
 }
 
-// 01005E80  FUN_01005e80  size=6  [run]
-undefined ** FUN_01005e80(void)
+// 01005E80  hkBaseObject::hkBaseObject  size=6  [run]
+undefined ** hkBaseObject::hkBaseObject(void)
 
 {
-  return hkBaseObject::vftable;
+  return vftable;
 }
 
 // 01005F00  FUN_01005f00  size=17  [run]
@@ -797,8 +797,8 @@ undefined4 * __fastcall hkReferencedObjectLock::hkReferencedObjectLock(undefined
   return param_1;
 }
 
-// 010064A0  hkBaseObject::hkBaseObject_237  size=21  [run]
-void __fastcall hkBaseObject::hkBaseObject_237(undefined4 *param_1)
+// 010064A0  hkBaseObject::~hkBaseObject  size=21  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   DeleteCriticalSection((LPCRITICAL_SECTION)(param_1 + 7));
@@ -824,7 +824,7 @@ undefined4 * __thiscall hkReferencedObjectLock::vf00(undefined4 *param_1,byte pa
   LPVOID pvVar1;
   
   DeleteCriticalSection((LPCRITICAL_SECTION)(param_1 + 7));
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3386,7 +3386,7 @@ void __thiscall FUN_01009bd0(uint param_1,undefined4 param_2)
   int local_10;
   int local_8;
   
-  hkOArchive::hkOArchive_4(param_2,param_1 & 0xffffff00);
+  hkOArchive::hkOArchive(param_2,param_1 & 0xffffff00);
   FUN_01017100(*(undefined4 *)(param_1 + 0xc));
   iVar5 = 0;
   if (0 < *(int *)(param_1 + 0x14)) {
@@ -3452,7 +3452,7 @@ void __thiscall FUN_01009bd0(uint param_1,undefined4 param_2)
     } while (local_10 < *(int *)(param_1 + 0x1c));
   }
   FUN_01017100(*(undefined4 *)(param_1 + 0x1c));
-  hkBaseObject::hkBaseObject_129();
+  hkBaseObject::hkBaseObject();
   return;
 }
 
@@ -3700,7 +3700,7 @@ undefined4 * __thiscall hkStreamWriter::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3708,8 +3708,8 @@ undefined4 * __thiscall hkStreamWriter::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 0100A140  hkCrc32StreamWriter::hkCrc32StreamWriter_2  size=32  [run]
-void __thiscall hkCrc32StreamWriter::hkCrc32StreamWriter_2(undefined4 *param_1,uint param_2)
+// 0100A140  hkCrc32StreamWriter::hkCrc32StreamWriter  size=32  [run]
+void __thiscall hkCrc32StreamWriter::hkCrc32StreamWriter(undefined4 *param_1,uint param_2)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
@@ -3735,7 +3735,7 @@ undefined4 * __thiscall hkCrc32StreamWriter::vf00(undefined4 *param_1,byte param
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3750,7 +3750,7 @@ hkCrcStreamWriter<unsigned_int,3988292384>::vf00(undefined4 *param_1,byte param_
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -4732,7 +4732,7 @@ undefined4 * __thiscall hkErrStream::hkErrStream(undefined4 *param_1,int param_2
   int iVar1;
   undefined4 uVar2;
   
-  hkOstream::hkOstream_4(0);
+  hkOstream::hkOstream(0);
   iVar1 = param_2 + -0x20 + param_3;
   *param_1 = vftable;
   if (iVar1 != 0) {

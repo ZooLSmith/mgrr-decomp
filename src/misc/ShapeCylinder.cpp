@@ -1,5 +1,5 @@
 // src/misc/ShapeCylinder.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6ADB0..00A6CAC0, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6ADB0..00A6CAC0, 9 functions
 
 #include "mgrr.h"
 #include "ShapeCylinder.h"
@@ -56,7 +56,7 @@ void __fastcall ShapeCylinder::vf10(int param_1)
 undefined4 * __fastcall ShapeCylinder::ShapeCylinder(undefined4 *param_1)
 
 {
-  ShapeBase::ShapeBase_2(1);
+  ShapeBase::ShapeBase(1);
   param_1[0x4c] = 0x3f000000;
   *param_1 = vftable;
   param_1[0x4d] = 0x3f800000;
@@ -154,6 +154,38 @@ void __fastcall ShapeCylinder::vf14(int param_1)
   hkpCylinderShape::hkpCylinderShape
             (&local_7c,&local_8c,*(undefined4 *)(param_1 + 0x130),DAT_01b20754);
   return;
+}
+
+// 00A6C790  ShapeCylinder::vf1C  size=210  [class]
+byte __thiscall ShapeCylinder::vf1C(int param_1,int *param_2)
+
+{
+  byte bVar1;
+  byte bVar2;
+  byte bVar3;
+  char cVar4;
+  byte unaff_BL;
+  byte bVar5;
+  
+  bVar1 = FUN_00a6c680(param_2,&DAT_01662d6c,param_1);
+  bVar2 = FUN_00a6a060(param_2,"baseOffset",param_1 + 0x110);
+  bVar3 = FUN_00a6a060(param_2,"baseRotation",param_1 + 0x120);
+  cVar4 = (**(code **)(*param_2 + 0x10))("radius",0xb);
+  if (cVar4 == '\0') {
+    unaff_BL = 0;
+  }
+  else {
+    (**(code **)(*param_2 + 0x1c))(param_1 + 0x130);
+    (**(code **)(*param_2 + 0x14))("radius",0xb);
+  }
+  bVar5 = 0xb;
+  cVar4 = (**(code **)(*param_2 + 0x10))("height");
+  if (cVar4 != '\0') {
+    (**(code **)(*param_2 + 0x1c))(param_1 + 0x134);
+    (**(code **)(*param_2 + 0x14))("height",0xb);
+    return bVar5 & bVar1 & bVar2 & bVar3 & unaff_BL;
+  }
+  return 0;
 }
 
 // 00A6C9C0  ShapeCylinder::thunk_vf1C  size=5  [class]

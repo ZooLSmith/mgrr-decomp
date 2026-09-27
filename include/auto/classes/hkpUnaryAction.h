@@ -10,4 +10,8 @@ struct hkpUnaryAction : public hkpAction {
     virtual undefined * vf08();  // 01268A90 slot 0x8  overrides hkReferencedObject
     virtual void vf10(int * param_2);  // 014993B0 slot 0x10  overrides hkpAction
     virtual void vf18();  // 014992B0 slot 0x18  overrides hkpAction
+    // non-virtual members
+    hkpUnaryAction(undefined4 param_2);  // 012745B0
+    hkpUnaryAction();  // 01499320
+    ~hkpUnaryAction();  // 01499370
 };

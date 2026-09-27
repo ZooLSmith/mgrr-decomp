@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ZangekiLandingStatePl1400.h"
 
-// 0085FFD0  ZangekiLandingStatePl1400::vf0C  size=5  [class]
-void __thiscall ZangekiLandingStatePl1400::vf0C(int param_1,undefined4 param_2)
+// 0085FFD0  ZangekiLandingStatePl1400::SafeCheck  size=5  [class]
+void __thiscall ZangekiLandingStatePl1400::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -21,8 +21,8 @@ void __thiscall ZangekiLandingStatePl1400::vf0C(int param_1,undefined4 param_2)
   return;
 }
 
-// 0085FFE0  ZangekiLandingStatePl1400::thunk_vf10  size=5  [class]
-undefined4 __thiscall ZangekiLandingStatePl1400::thunk_vf10(int param_1,int param_2)
+// 0085FFE0  ZangekiLandingStatePl1400::qteSafeCheck  size=5  [class]
+undefined4 __thiscall ZangekiLandingStatePl1400::qteSafeCheck(int param_1,int param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {

@@ -52,10 +52,10 @@ undefined4 __thiscall cEnemyItemDispParts::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 00CFF7B0  cEnemyItemDispParts::vf14  size=1201  [class]
+// 00CFF7B0  cEnemyItemDispParts::create  size=1201  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cEnemyItemDispParts::vf14(int param_1)
+void __fastcall cEnemyItemDispParts::create(int param_1)
 
 {
   float fVar1;

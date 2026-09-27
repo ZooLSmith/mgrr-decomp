@@ -116,11 +116,11 @@ undefined4 * __thiscall cEnemyTargetParts::vf00(undefined4 *param_1,byte param_2
   return param_1;
 }
 
-// 00CFF320  cEnemyTargetParts::vf14  size=1157  [class]
+// 00CFF320  cEnemyTargetParts::create  size=1157  [class]
 /* WARNING: Type propagation algorithm not settling */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cEnemyTargetParts::vf14(int param_1)
+void __fastcall cEnemyTargetParts::create(int param_1)
 
 {
   uint uVar1;

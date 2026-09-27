@@ -151,11 +151,11 @@ undefined4 __fastcall FUN_009311f0(int *param_1)
     if (iVar1 != 0) {
       FUN_008e0880(&DAT_01b7c218);
       FUN_009284f0();
-      PhantomManagerImplement::PhantomManagerImplement();
+      PhantomManagerImplement::~PhantomManagerImplement();
       piVar2 = (int *)FUN_0092c170();
       (**(code **)(*piVar2 + 4))(&DAT_01b7c218);
       FUN_008eb980();
-      EffectCollisionMaterialImplement::EffectCollisionMaterialImplement_2();
+      EffectCollisionMaterialImplement::~EffectCollisionMaterialImplement();
       FUN_011926a0();
       FUN_00904d90();
       UserData::EntityUserDataListener::EntityUserDataListener();

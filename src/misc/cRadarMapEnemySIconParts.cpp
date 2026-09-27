@@ -84,8 +84,8 @@ void __fastcall cRadarMapEnemySIconParts::vf08(int param_1)
   return;
 }
 
-// 00CF1050  cRadarMapEnemySIconParts::vf14  size=321  [class]
-void __fastcall cRadarMapEnemySIconParts::vf14(int param_1)
+// 00CF1050  cRadarMapEnemySIconParts::create  size=321  [class]
+void __fastcall cRadarMapEnemySIconParts::create(int param_1)
 
 {
   int iVar1;

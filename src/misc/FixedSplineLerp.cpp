@@ -31,7 +31,7 @@ undefined4 * __thiscall FixedSplineLerp<Hw::cVec4>::vf00(undefined4 *param_1,byt
 undefined4 * __fastcall FixedSplineLerp<Hw::cVec4>::FixedSplineLerp<Hw::cVec4>(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = cEspStrip2p::vftable;
   param_1[0x152] = 0;
   param_1[0x153] = 0;

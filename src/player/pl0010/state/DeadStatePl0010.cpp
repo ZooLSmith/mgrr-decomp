@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "DeadStatePl0010.h"
 
-// 00B81280  DeadStatePl0010::vf0C  size=5  [class]
-void __thiscall DeadStatePl0010::vf0C(int param_1,undefined4 param_2)
+// 00B81280  DeadStatePl0010::SafeCheck  size=5  [class]
+void __thiscall DeadStatePl0010::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -73,7 +73,7 @@ bool DeadStatePl0010::vf24(undefined4 param_1)
 undefined4 * __thiscall DeadStatePl0010::DeadStatePl0010(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   cEspControler::cEspControler();
   return param_1;
@@ -118,8 +118,8 @@ void DeadStatePl0010::vf08(undefined4 *param_1)
   return;
 }
 
-// 00B90EA0  DeadStatePl0010::vf10  size=65  [class]
-void DeadStatePl0010::vf10(undefined4 *param_1)
+// 00B90EA0  DeadStatePl0010::qteSafeCheck  size=65  [class]
+void DeadStatePl0010::qteSafeCheck(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -136,7 +136,7 @@ void DeadStatePl0010::vf10(undefined4 *param_1)
     uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
   }
   *(undefined4 *)(uVar1 + 0x2f0) = 1;
-  StateMachineNode::vf10(param_1);
+  StateMachineNode::qteSafeCheck(param_1);
   return;
 }
 

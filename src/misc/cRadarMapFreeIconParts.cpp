@@ -69,8 +69,8 @@ void __fastcall cRadarMapFreeIconParts::cRadarMapFreeIconParts(undefined4 *param
   return;
 }
 
-// 00CD6920  cRadarMapFreeIconParts::vf14  size=199  [class]
-void __fastcall cRadarMapFreeIconParts::vf14(int param_1)
+// 00CD6920  cRadarMapFreeIconParts::create  size=199  [class]
+void __fastcall cRadarMapFreeIconParts::create(int param_1)
 
 {
   int iVar1;

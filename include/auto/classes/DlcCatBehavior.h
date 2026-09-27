@@ -13,4 +13,6 @@ struct DlcCatBehavior : public BehaviorAppBase {
     virtual void vf48();  // 00603BA0 slot 0x48  overrides Behavior
     virtual void vf4C();  // 00603980 slot 0x4C  overrides Behavior
     virtual undefined4 vf94();  // 00603750 slot 0x94  overrides Behavior
+    // non-virtual members
+    DlcCatBehavior();  // 00AB19C0
 };

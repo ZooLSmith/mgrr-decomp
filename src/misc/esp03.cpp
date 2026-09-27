@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp03::esp03(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp03::esp03(undefined4 *param_1)
 undefined4 __thiscall esp03::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -46,14 +46,14 @@ void __fastcall esp03::vf08(int param_1)
   return;
 }
 
-// 00F2DF00  esp03::vf04  size=634  [class]
+// 00F2DF00  esp03::preTrans  size=634  [class]
 /* WARNING: Removing unreachable block (ram,0x00f2e086) */
 /* WARNING: Removing unreachable block (ram,0x00f2dfd0) */
 /* WARNING: Removing unreachable block (ram,0x00f2e035) */
 /* WARNING: Removing unreachable block (ram,0x00f2e0db) */
 
 undefined4 __thiscall
-esp03::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp03::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   float *pfVar1;
@@ -63,7 +63,7 @@ esp03::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   uint uVar5;
   uint *puVar6;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar2 != 0) && (iVar2 = FUN_00f12b50(), iVar2 != 0)) {
     if ((*(int *)(param_1 + 0x58) != 0) &&
        (puVar3 = (undefined4 *)(*(int *)(param_1 + 0x58) + 0x70), puVar3 != (undefined4 *)0x0)) {

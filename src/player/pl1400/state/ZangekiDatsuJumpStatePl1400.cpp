@@ -33,7 +33,7 @@ undefined4 * __thiscall
 ZangekiDatsuJumpStatePl1400::ZangekiDatsuJumpStatePl1400(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();

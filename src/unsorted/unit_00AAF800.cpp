@@ -16,7 +16,7 @@ void __fastcall FUN_00aaf800(int param_1)
     *(undefined4 *)(param_1 + 0xe84) = 0;
     *(undefined4 *)(param_1 + 0xe88) = 0;
   }
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 

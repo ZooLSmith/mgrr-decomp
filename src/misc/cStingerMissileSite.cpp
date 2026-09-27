@@ -4,10 +4,10 @@
 #include "mgrr.h"
 #include "cStingerMissileSite.h"
 
-// 00CBF740  cStingerMissileSite::cStingerMissileSite_2  size=112  [class]
+// 00CBF740  cStingerMissileSite::cStingerMissileSite  size=112  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cStingerMissileSite::cStingerMissileSite_2(undefined4 *param_1)
+void __fastcall cStingerMissileSite::cStingerMissileSite(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -64,7 +64,7 @@ undefined4 FUN_00cbf7e0(void)
   
   iVar1 = FUN_00dd3500(0x58,&DAT_01b7be50);
   if (iVar1 != 0) {
-    uVar2 = cStingerMissileSite::cStingerMissileSite_2();
+    uVar2 = cStingerMissileSite::cStingerMissileSite();
     return uVar2;
   }
   return 0;

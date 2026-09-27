@@ -44,4 +44,6 @@ struct Em8220 : public EmBaseDLC {
     virtual void vf33C(undefined4 param_1, int param_2);  // 006FECC0 slot 0x33C  overrides BehaviorEmBase
     virtual void vf34C();  // 006FBCF0 slot 0x34C  overrides BehaviorEmBase
     virtual undefined4 vf368();  // 006E9880 slot 0x368  overrides BehaviorEmBase
+    // non-virtual members
+    Em8220();  // 00AB5B90
 };

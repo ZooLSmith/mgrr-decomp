@@ -146,15 +146,15 @@ LAB_008bc3c6:
   return 1;
 }
 
-// 008BC460  ZangekiChanceStatePl1500::vf0C  size=74  [class]
-void __thiscall ZangekiChanceStatePl1500::vf0C(int param_1,undefined4 param_2)
+// 008BC460  ZangekiChanceStatePl1500::SafeCheck  size=74  [class]
+void __thiscall ZangekiChanceStatePl1500::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int *)(param_1 + 0x20) == 0) {
     FUN_008b8470(param_2,0x3dcccccd,0x43340000,0x3f800000,0x3dcccccd);
     FUN_008b8630(param_2);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -444,8 +444,8 @@ void FUN_008bc5a0(undefined4 *param_1)
   return;
 }
 
-// 008CF460  ZangekiChanceStatePl1500::vf10  size=511  [class]
-void __thiscall ZangekiChanceStatePl1500::vf10(int param_1,undefined4 *param_2)
+// 008CF460  ZangekiChanceStatePl1500::qteSafeCheck  size=511  [class]
+void __thiscall ZangekiChanceStatePl1500::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -533,7 +533,7 @@ void __thiscall ZangekiChanceStatePl1500::vf10(int param_1,undefined4 *param_2)
     *(undefined4 *)(param_1 + 0x30) = 0;
   }
   FUN_008bc5a0(param_2);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

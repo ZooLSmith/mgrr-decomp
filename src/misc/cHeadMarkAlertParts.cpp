@@ -166,8 +166,8 @@ undefined4 * __thiscall cHeadMarkAlertParts::vf00(undefined4 *param_1,byte param
   return param_1;
 }
 
-// 00CEEFB0  cHeadMarkAlertParts::vf14  size=388  [class]
-void __fastcall cHeadMarkAlertParts::vf14(int param_1)
+// 00CEEFB0  cHeadMarkAlertParts::create  size=388  [class]
+void __fastcall cHeadMarkAlertParts::create(int param_1)
 
 {
   float fVar1;

@@ -588,14 +588,14 @@ void __fastcall esp50::vf08(int param_1)
 undefined4 * __fastcall esp50::esp50(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
 
-// 00F38380  esp50::vf04  size=832  [class]
+// 00F38380  esp50::preTrans  size=832  [class]
 undefined4 __thiscall
-esp50::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp50::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -605,7 +605,7 @@ esp50::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   int iVar5;
   int iVar6;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 != 0) {
     if (*(int *)(param_1 + 0x50) == 0) {
       FUN_009cca90(param_1,&DAT_016dd454);

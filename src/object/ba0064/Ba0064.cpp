@@ -95,14 +95,14 @@ void __fastcall FUN_00404e40(int param_1)
   return;
 }
 
-// 00404E70  Ba0064::vf40  size=266  [class]
-undefined4 __fastcall Ba0064::vf40(int *param_1)
+// 00404E70  Ba0064::startup  size=266  [class]
+undefined4 __fastcall Ba0064::startup(int *param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = BehaviorBgBase::vf40();
+  iVar1 = BehaviorBgBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -189,8 +189,8 @@ undefined * Ba0064::vf04(void)
   return &DAT_01b34b18;
 }
 
-// 00AB8F30  Ba0064::vf00  size=30  [class]
-undefined4 __thiscall Ba0064::vf00(undefined4 param_1,byte param_2)
+// 00AB8F30  Ba0064::destruct  size=30  [class]
+undefined4 __thiscall Ba0064::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_0040d3f0();

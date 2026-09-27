@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ZangekiHoldStatePl1500.h"
 
-// 008A4680  ZangekiHoldStatePl1500::thunk_vf0C  size=5  [class]
-void __thiscall ZangekiHoldStatePl1500::thunk_vf0C(int param_1,undefined4 param_2)
+// 008A4680  ZangekiHoldStatePl1500::SafeCheck  size=5  [class]
+void __thiscall ZangekiHoldStatePl1500::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -248,10 +248,10 @@ undefined4 __thiscall ZangekiHoldStatePl1500::vf08(int param_1,undefined4 param_
   return 1;
 }
 
-// 008CAFE0  ZangekiHoldStatePl1500::vf10  size=2665  [class]
+// 008CAFE0  ZangekiHoldStatePl1500::qteSafeCheck  size=2665  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiHoldStatePl1500::vf10(int param_1,undefined4 *param_2)
+void __thiscall ZangekiHoldStatePl1500::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -587,7 +587,7 @@ LAB_008cb5b7:
   }
   *(float **)(param_1 + 0x48) = pfVar13;
   *(undefined4 *)(uVar8 + 0x400) = *(undefined4 *)(uVar8 + 0x3f8);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

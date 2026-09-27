@@ -40,8 +40,8 @@ void hkpContactListener::vf14(void)
   return;
 }
 
-// 009118F0  hkpContactListener::vf18  size=3  [run]
-void hkpContactListener::vf18(void)
+// 009118F0  hkpContactListener::contactProcessCallback  size=3  [run]
+void hkpContactListener::contactProcessCallback(void)
 
 {
   return;

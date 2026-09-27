@@ -24,8 +24,8 @@ undefined * ContentsBase::vf00(void)
   return &DAT_01b35d64;
 }
 
-// 008DC2C0  ContentsBase::ContentsBase_2  size=7  [class]
-void __fastcall ContentsBase::ContentsBase_2(undefined4 *param_1)
+// 008DC2C0  ContentsBase::~ContentsBase  size=7  [class]
+void __fastcall ContentsBase::~ContentsBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;

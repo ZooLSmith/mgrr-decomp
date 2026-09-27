@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Em0700Face.h"
 
-// 005B0860  Em0700Face::vf40  size=101  [class]
-bool __fastcall Em0700Face::vf40(int *param_1)
+// 005B0860  Em0700Face::startup  size=101  [class]
+bool __fastcall Em0700Face::startup(int *param_1)
 
 {
   code *pcVar1;
@@ -76,7 +76,7 @@ void __fastcall Em0700Face::vf50(int param_1)
 undefined4 * __fastcall Em0700Face::Em0700Face(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -88,8 +88,8 @@ undefined * Em0700Face::vf04(void)
   return &DAT_01b351c4;
 }
 
-// 00AB75F0  Em0700Face::vf00  size=105  [class]
-undefined4 * __thiscall Em0700Face::vf00(undefined4 *param_1,byte param_2)
+// 00AB75F0  Em0700Face::destruct  size=105  [class]
+undefined4 * __thiscall Em0700Face::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -103,7 +103,7 @@ undefined4 * __thiscall Em0700Face::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

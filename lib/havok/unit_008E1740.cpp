@@ -5,8 +5,8 @@
 #include "hkpCharacterProxyCinfo.h"
 #include "hkpCharacterProxyListener.h"
 
-// 008E1740  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2  size=139  [run]
-void __fastcall hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2(undefined4 *param_1)
+// 008E1740  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo  size=139  [run]
+void __fastcall hkpCharacterProxyCinfo::hkpCharacterProxyCinfo(undefined4 *param_1)
 
 {
   param_1[0xc] = 0x3f800000;

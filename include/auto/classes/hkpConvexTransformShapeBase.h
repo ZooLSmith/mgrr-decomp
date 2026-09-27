@@ -7,4 +7,6 @@
 struct hkpConvexTransformShapeBase : public hkpConvexShape {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 0112F150 slot 0x0  overrides hkBaseObject
+    // non-virtual members
+    hkpConvexTransformShapeBase();  // 0112EF50
 };

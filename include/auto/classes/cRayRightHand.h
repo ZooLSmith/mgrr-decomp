@@ -11,4 +11,6 @@ struct cRayRightHand : public BehaviorPartsModel {
     virtual undefined4 startup();  // 00AFFE60 slot 0x40  overrides Behavior
     virtual void vf44();  // 00AFC210 slot 0x44  overrides Behavior
     virtual void vf4C();  // 00B00100 slot 0x4C  overrides Behavior
+    // non-virtual members
+    cRayRightHand();  // 00AC1070
 };

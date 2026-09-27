@@ -18,7 +18,7 @@ undefined4 * __thiscall EspShaderDrawMirror::vf00(undefined4 *param_1,byte param
 
 {
   *param_1 = vftable;
-  cEspShaderBase::cEspShaderBase();
+  cEspShaderBase::~cEspShaderBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -69,25 +69,25 @@ undefined4 __fastcall EspShaderDrawMirror::vf08(int *param_1)
   return 0;
 }
 
-// 015ECC90  EspShaderDrawMirror::EspShaderDrawMirror_2  size=20  [class]
+// 015ECC90  EspShaderDrawMirror::~EspShaderDrawMirror  size=20  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void EspShaderDrawMirror::EspShaderDrawMirror_2(void)
+void EspShaderDrawMirror::~EspShaderDrawMirror(void)
 
 {
   _DAT_01b7b140 = vftable;
-  cEspShaderBase::cEspShaderBase();
+  cEspShaderBase::~cEspShaderBase();
   return;
 }
 
-// 015ECCB0  EspShaderDrawMirror::EspShaderDrawMirror_3  size=20  [class]
+// 015ECCB0  EspShaderDrawMirror::~EspShaderDrawMirror  size=20  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void EspShaderDrawMirror::EspShaderDrawMirror_3(void)
+void EspShaderDrawMirror::~EspShaderDrawMirror(void)
 
 {
   _DAT_01b7b1b0 = vftable;
-  cEspShaderBase::cEspShaderBase();
+  cEspShaderBase::~cEspShaderBase();
   return;
 }
 

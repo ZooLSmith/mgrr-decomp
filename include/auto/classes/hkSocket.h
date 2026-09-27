@@ -16,4 +16,6 @@ struct hkSocket : public hkReferencedObject {
     virtual bool vf24(HWND param_2, undefined4 param_3, uint param_4);  // 0101A750 slot 0x24
     virtual ulonglong vf28(undefined4 param_2);  // 0101A760 slot 0x28
     virtual undefined4 vf2C() = 0;  // 00FDB68B slot 0x2C
+    // non-virtual members
+    hkSocket();  // 0101A630
 };

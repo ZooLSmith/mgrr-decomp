@@ -64,13 +64,13 @@ void __fastcall Em0310QteObstacle::thunk_vf20(int param_1)
   return;
 }
 
-// 0058A6A0  Em0310QteObstacle::vf40  size=224  [class]
-undefined4 __fastcall Em0310QteObstacle::vf40(int *param_1)
+// 0058A6A0  Em0310QteObstacle::startup  size=224  [class]
+undefined4 __fastcall Em0310QteObstacle::startup(int *param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorBgBase::vf40();
+  iVar1 = BehaviorBgBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -140,7 +140,7 @@ void __fastcall Em0310QteObstacle::vf4C(int *param_1)
       param_1[0x308] = (int)fVar1;
       if (fVar1 < 0.0 != (fVar1 == 0.0)) {
         param_1[0x139] = 1;
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
     }
     if (param_1[0x309] == 0) {
@@ -185,7 +185,7 @@ void __fastcall Em0310QteObstacle::vf4C(int *param_1)
     (**(code **)(*param_1 + 0x20))();
     return;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -221,8 +221,8 @@ undefined * Em0310QteObstacle::vf04(void)
   return &DAT_01b35150;
 }
 
-// 00AB7050  Em0310QteObstacle::vf00  size=43  [class]
-undefined4 __thiscall Em0310QteObstacle::vf00(undefined4 param_1,byte param_2)
+// 00AB7050  Em0310QteObstacle::destruct  size=43  [class]
+undefined4 __thiscall Em0310QteObstacle::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

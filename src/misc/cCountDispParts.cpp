@@ -54,8 +54,8 @@ undefined4 * __thiscall cCountDispParts::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00CEB370  cCountDispParts::vf14  size=373  [class]
-void __fastcall cCountDispParts::vf14(int param_1)
+// 00CEB370  cCountDispParts::create  size=373  [class]
+void __fastcall cCountDispParts::create(int param_1)
 
 {
   int *piVar1;

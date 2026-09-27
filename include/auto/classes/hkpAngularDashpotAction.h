@@ -10,5 +10,7 @@ struct hkpAngularDashpotAction : public hkpBinaryAction {
     virtual void vf0C(int param_2);  // 01280E40 slot 0xC  overrides hkpAction
     virtual int vf1C(int * param_2, int param_3);  // 01281090 slot 0x1C  overrides hkpAction
     // non-virtual members
-    ~hkpAngularDashpotAction();  // 01280DF0
+    hkpAngularDashpotAction();  // 012763B0
+    hkpAngularDashpotAction(undefined4 * param_1, undefined4 param_2);  // 01276400
+    void ctor_01280DF0();  // 01280DF0
 };

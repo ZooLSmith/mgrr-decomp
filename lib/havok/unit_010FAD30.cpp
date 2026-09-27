@@ -4,7 +4,6 @@
 #include "mgrr.h"
 #include "hkBaseObject.h"
 #include "hkChainedClassNameRegistry.h"
-#include "hkDynamicClassNameRegistry.h"
 #include "hkXmlParser.h"
 
 // 010FAD30  FUN_010fad30  size=9  [run]
@@ -141,16 +140,16 @@ void __thiscall FUN_010faf60(int param_1,int param_2)
   return;
 }
 
-// 010FAF90  hkBaseObject::hkBaseObject_11  size=37  [run]
-void __fastcall hkBaseObject::hkBaseObject_11(undefined4 *param_1)
+// 010FAF90  hkChainedClassNameRegistry::~hkChainedClassNameRegistry  size=37  [run]
+void __fastcall hkChainedClassNameRegistry::~hkChainedClassNameRegistry(undefined4 *param_1)
 
 {
-  *param_1 = hkChainedClassNameRegistry::vftable;
+  *param_1 = vftable;
   if (param_1[7] != 0) {
     FUN_01005e60();
   }
   FUN_01025870();
-  *param_1 = vftable;
+  *param_1 = ::hkBaseObject::vftable;
   return;
 }
 
@@ -171,19 +170,19 @@ int __thiscall hkChainedClassNameRegistry::vf10(int param_1,undefined4 param_2)
   return iVar1;
 }
 
-// 010FB000  hkDynamicClassNameRegistry::hkDynamicClassNameRegistry  size=75  [run]
+// 010FB000  hkChainedClassNameRegistry::hkChainedClassNameRegistry  size=75  [run]
 undefined4 * __thiscall
-hkDynamicClassNameRegistry::hkDynamicClassNameRegistry(undefined4 *param_1,int param_2)
+hkChainedClassNameRegistry::hkChainedClassNameRegistry(undefined4 *param_1,int param_2)
 
 {
   uint local_8;
   
   local_8 = (uint)param_1 & 0xffffff00;
   *(undefined2 *)((int)param_1 + 6) = 1;
-  *param_1 = vftable;
+  *param_1 = hkDynamicClassNameRegistry::vftable;
   param_1[2] = 0;
   FUN_01025830(local_8);
-  *param_1 = hkChainedClassNameRegistry::vftable;
+  *param_1 = vftable;
   param_1[7] = param_2;
   if (param_2 != 0) {
     FUN_01006000();
@@ -208,7 +207,7 @@ int __thiscall hkChainedClassNameRegistry::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_11();
+  ~hkChainedClassNameRegistry();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -782,7 +781,7 @@ hkXmlParser::vf14(int *param_1,undefined4 *param_2,int *param_3,undefined4 param
   char *pcVar9;
   undefined4 *local_8;
   
-  hkIstream::hkIstream_4(param_4);
+  hkIstream::hkIstream(param_4);
   piVar2 = param_3;
   if (*param_3 != 0) {
     FUN_0105d310(*param_3);
@@ -833,7 +832,7 @@ LAB_010fbbba:
         FUN_01006810(param_1 + 5,pcVar9,uVar6 & 0xfffffffe);
       }
 LAB_010fbbc2:
-      hkBaseObject::hkBaseObject_216();
+      ::hkBaseObject::hkBaseObject_216();
       return 1;
     }
     if (puVar1 == (undefined4 *)0x0) goto LAB_010fbbd8;
@@ -864,7 +863,7 @@ LAB_010fbb1f:
                 }
                 if (puVar4 == (undefined4 *)0x0) {
 LAB_010fbbd8:
-                  hkBaseObject::hkBaseObject_216();
+                  ::hkBaseObject::hkBaseObject_216();
                   return 0;
                 }
                 goto LAB_010fbb7b;
@@ -927,18 +926,18 @@ undefined4 __thiscall hkXmlParser::vf0C(int *param_1,undefined4 *param_2,undefin
   uint local_8;
   
   local_20 = param_1;
-  hkIstream::hkIstream_4(param_3);
+  hkIstream::hkIstream(param_3);
   if (param_1[3] != 0) {
     *param_2 = *(undefined4 *)(param_1[2] + -4 + param_1[3] * 4);
     param_1[3] = param_1[3] + -1;
-    hkBaseObject::hkBaseObject_216();
+    ::hkBaseObject::hkBaseObject_216();
     return 0;
   }
   *param_2 = 0;
   pcVar2 = (char *)FUN_01441ba0((int)&param_3 + 3);
   if (*pcVar2 == '\0') {
     FUN_01006780("End of stream");
-    hkBaseObject::hkBaseObject_216();
+    ::hkBaseObject::hkBaseObject_216();
     return 1;
   }
   local_10 = (char *)0x0;
@@ -1041,7 +1040,7 @@ undefined4 __thiscall hkXmlParser::vf0C(int *param_1,undefined4 *param_2,undefin
             pvVar4 = TlsGetValue(DAT_01f8fc4c);
             iVar6 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x10);
             *(undefined2 *)(iVar6 + 4) = 0x10;
-            uVar5 = Characters::Characters_2(pcVar2,iVar3);
+            uVar5 = Characters::Characters(pcVar2,iVar3);
           }
           *param_2 = uVar5;
           local_c = 0;
@@ -1050,7 +1049,7 @@ undefined4 __thiscall hkXmlParser::vf0C(int *param_1,undefined4 *param_2,undefin
           }
           local_8 = 0x80000000;
           local_10 = (char *)0x0;
-          hkBaseObject::hkBaseObject_216();
+          ::hkBaseObject::hkBaseObject_216();
           return 0;
         }
         local_c = 0;
@@ -1073,7 +1072,7 @@ undefined4 __thiscall hkXmlParser::vf0C(int *param_1,undefined4 *param_2,undefin
 LAB_010fbdfc:
   local_8 = 0x80000000;
   local_10 = (char *)0x0;
-  hkBaseObject::hkBaseObject_216();
+  ::hkBaseObject::hkBaseObject_216();
   return 1;
   while (iVar6 = iVar6 + 1, iVar6 < iVar3) {
 LAB_010fc0d1:
@@ -1131,7 +1130,7 @@ LAB_010fc21a:
 LAB_010fc22a:
   local_8 = 0x80000000;
   local_10 = (char *)0x0;
-  hkBaseObject::hkBaseObject_216();
+  ::hkBaseObject::hkBaseObject_216();
   return 0;
 }
 
@@ -1431,8 +1430,8 @@ undefined4 * __thiscall hkXmlParser::EndElement::EndElement(undefined4 *param_1,
   return param_1;
 }
 
-// 010FC7D0  hkBaseObject::hkBaseObject_78  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_78(undefined4 *param_1)
+// 010FC7D0  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01006770();
@@ -1475,8 +1474,8 @@ undefined4 * __thiscall hkXmlParser::Characters::Characters(undefined4 *param_1,
   return param_1;
 }
 
-// 010FC880  hkBaseObject::hkBaseObject_72  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_72(undefined4 *param_1)
+// 010FC880  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01006770();
@@ -1495,9 +1494,9 @@ void FUN_010fc8a0(int param_1)
   return;
 }
 
-// 010FC8D0  hkXmlParser::Characters::Characters_2  size=51  [run]
+// 010FC8D0  hkXmlParser::Characters::Characters  size=51  [run]
 undefined4 * __thiscall
-hkXmlParser::Characters::Characters_2(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
+hkXmlParser::Characters::Characters(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
@@ -1513,7 +1512,7 @@ undefined4 * __thiscall hkXmlParser::Node::vf00(undefined4 *param_1,byte param_2
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1528,7 +1527,7 @@ undefined4 * __thiscall hkXmlParser::EndElement::vf00(undefined4 *param_1,byte p
   LPVOID pvVar1;
   
   FUN_01006770();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1543,7 +1542,7 @@ undefined4 * __thiscall hkXmlParser::Characters::vf00(undefined4 *param_1,byte p
   LPVOID pvVar1;
   
   FUN_01006770();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1724,7 +1723,7 @@ int __thiscall hkXmlParser::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -1846,7 +1845,7 @@ int __thiscall hkXmlParser::StartElement::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_77();
+  ::hkBaseObject::hkBaseObject_77();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -1869,8 +1868,8 @@ int FUN_010fcf80(int param_1,int param_2)
   return param_2 + param_1;
 }
 
-// 010FCF90  hkBaseObject::hkBaseObject_76  size=25  [run]
-void __fastcall hkBaseObject::hkBaseObject_76(undefined4 *param_1)
+// 010FCF90  hkBaseObject::hkBaseObject  size=25  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkXmlObjectReader::vftable;

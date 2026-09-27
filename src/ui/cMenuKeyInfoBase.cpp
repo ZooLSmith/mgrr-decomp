@@ -20,7 +20,7 @@ undefined4 __thiscall cMenuKeyInfoBase::vf14(int param_1,undefined4 param_2)
 undefined4 * __fastcall cMenuKeyInfoBase::cMenuKeyInfoBase(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

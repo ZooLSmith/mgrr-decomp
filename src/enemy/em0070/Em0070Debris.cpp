@@ -57,8 +57,8 @@ void __fastcall Em0070Debris::vf30(int param_1)
   return;
 }
 
-// 00467FB0  Em0070Debris::vf1B8  size=31  [class]
-void Em0070Debris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 00467FB0  Em0070Debris::setCutCrerateInfo  size=31  [class]
+void Em0070Debris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -358,7 +358,7 @@ void __fastcall Em0070Debris::vf4C(int *param_1)
     fVar1 = (float)param_1[0x220];
     param_1[0x220] = (int)(fVar1 + fStack_58);
     if (600.0 < fVar1 + fStack_58) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -426,8 +426,8 @@ void __fastcall Em0070Debris::vf54(int param_1)
   return;
 }
 
-// 0047B5B0  Em0070Debris::vf40  size=665  [class]
-undefined4 __fastcall Em0070Debris::vf40(int param_1)
+// 0047B5B0  Em0070Debris::startup  size=665  [class]
+undefined4 __fastcall Em0070Debris::startup(int param_1)
 
 {
   int iVar1;
@@ -455,7 +455,7 @@ undefined4 __fastcall Em0070Debris::vf40(int param_1)
       FUN_00e08640(uVar3);
       iVar1 = FUN_009f8d30();
       if (iVar1 == 0) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
       else {
         iVar1 = FUN_00dd3500(0x3080,&DAT_01b7bd48);
@@ -528,7 +528,7 @@ undefined4 __fastcall Em0070Debris::vf40(int param_1)
 undefined4 * __fastcall Em0070Debris::Em0070Debris(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -540,8 +540,8 @@ undefined * Em0070Debris::vf04(void)
   return &DAT_01b34d58;
 }
 
-// 00AB85A0  Em0070Debris::vf00  size=105  [class]
-undefined4 * __thiscall Em0070Debris::vf00(undefined4 *param_1,byte param_2)
+// 00AB85A0  Em0070Debris::destruct  size=105  [class]
+undefined4 * __thiscall Em0070Debris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -555,7 +555,7 @@ undefined4 * __thiscall Em0070Debris::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

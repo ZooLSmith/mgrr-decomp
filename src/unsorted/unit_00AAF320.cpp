@@ -9,7 +9,7 @@ void FUN_00aaf320(void)
 {
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  Behavior::Behavior_121();
+  Behavior::~Behavior();
   return;
 }
 

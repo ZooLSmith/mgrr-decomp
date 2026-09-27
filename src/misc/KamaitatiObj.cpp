@@ -55,8 +55,8 @@ void __fastcall KamaitatiObj::vf1A4(int param_1)
   return;
 }
 
-// 00867680  KamaitatiObj::vf40  size=216  [class]
-undefined4 __fastcall KamaitatiObj::vf40(int param_1)
+// 00867680  KamaitatiObj::startup  size=216  [class]
+undefined4 __fastcall KamaitatiObj::startup(int param_1)
 
 {
   int iVar1;
@@ -65,7 +65,7 @@ undefined4 __fastcall KamaitatiObj::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -125,8 +125,8 @@ uint FUN_00867760(void)
   return 0;
 }
 
-// 00870310  KamaitatiObj::vf130  size=508  [class]
-int KamaitatiObj::vf130(ushort *param_1)
+// 00870310  KamaitatiObj::getAttackInfo  size=508  [class]
+int KamaitatiObj::getAttackInfo(ushort *param_1)
 
 {
   ushort uVar1;
@@ -149,7 +149,7 @@ LAB_0087033e:
     FUN_00dd5650(&DAT_01649464);
     return 0;
   }
-  iVar3 = CollisionAttackData::CollisionAttackData_3();
+  iVar3 = CollisionAttackData::CollisionAttackData();
   if (iVar3 == 0) goto LAB_0087033e;
   puVar2 = *(uint **)(iVar3 + 8);
   iVar4 = FUN_00c13920();
@@ -422,7 +422,7 @@ void __fastcall KamaitatiObj::vf4C(int *param_1)
     if ((fVar1 - (float)param_1[0x244] < 0.0) && (param_1[0x2a6] == 0)) {
       (**(code **)(param_1[0x280] + 8))(0x3f800000,0,0);
       param_1[0x2b5] = 0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -477,8 +477,8 @@ void __thiscall FUN_008874c0(int param_1,undefined4 param_2,undefined4 *param_3,
   return;
 }
 
-// 00887570  KamaitatiObj::vf128  size=2138  [class]
-void __fastcall KamaitatiObj::vf128(int *param_1)
+// 00887570  KamaitatiObj::setSeqAtk  size=2138  [class]
+void __fastcall KamaitatiObj::setSeqAtk(int *param_1)
 
 {
   float fVar1;
@@ -820,11 +820,11 @@ undefined4 KamaitatiObj::vf94(void)
   return 2;
 }
 
-// 00AB9CD0  KamaitatiObj::vf00  size=30  [class]
-undefined4 __thiscall KamaitatiObj::vf00(undefined4 param_1,byte param_2)
+// 00AB9CD0  KamaitatiObj::destruct  size=30  [class]
+undefined4 __thiscall KamaitatiObj::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_9();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

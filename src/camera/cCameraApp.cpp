@@ -1,8 +1,23 @@
 // src/camera/cCameraApp.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C407C0..00DC0CE0, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C40760..00DC0CE0, 6 functions
 
 #include "mgrr.h"
 #include "cCameraApp.h"
+
+// 00C40760  cCameraApp::cCameraApp  size=87  [class]
+undefined4 * __fastcall cCameraApp::cCameraApp(undefined4 *param_1)
+
+{
+  param_1[0xb0] = cCameraFrustum::vftable;
+  param_1[0xd4] = 1;
+  *param_1 = vftable;
+  param_1[0xb0] = vftable;
+  FUN_00a7c930();
+  FUN_00da4f10();
+  FUN_00da5590();
+  FUN_00da50b0();
+  return param_1;
+}
 
 // 00C407C0  cCameraApp::vf00  size=11  [class]
 void cCameraApp::vf00(void)

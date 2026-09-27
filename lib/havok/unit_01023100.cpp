@@ -121,8 +121,8 @@ void __thiscall FUN_010231f0(int param_1,short param_2)
   return;
 }
 
-// 010232B0  hkRefCountedProperties::hkRefCountedProperties  size=11  [run]
-void __fastcall hkRefCountedProperties::hkRefCountedProperties(undefined4 *param_1)
+// 010232B0  hkRefCountedProperties::~hkRefCountedProperties  size=11  [run]
+void __fastcall hkRefCountedProperties::~hkRefCountedProperties(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -349,7 +349,7 @@ int __thiscall hkRefCountedProperties::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_208();
+  ::hkBaseObject::hkBaseObject_208();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -2059,7 +2059,7 @@ int __thiscall hkStackTracer::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_247();
+  ::hkBaseObject::hkBaseObject_247();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

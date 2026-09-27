@@ -8,7 +8,7 @@
 undefined4 * __fastcall BehaviorLockOnMarker::BehaviorLockOnMarker(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   cEspControler::cEspControler();
   cEspControler::cEspControler();
@@ -22,19 +22,19 @@ undefined * BehaviorLockOnMarker::vf04(void)
   return &DAT_01be9ca4;
 }
 
-// 00AB7590  BehaviorLockOnMarker::vf00  size=30  [class]
-undefined4 __thiscall BehaviorLockOnMarker::vf00(undefined4 param_1,byte param_2)
+// 00AB7590  BehaviorLockOnMarker::destruct  size=30  [class]
+undefined4 __thiscall BehaviorLockOnMarker::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_114();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00AC63B0  BehaviorLockOnMarker::vf40  size=49  [class]
-undefined4 __fastcall BehaviorLockOnMarker::vf40(int param_1)
+// 00AC63B0  BehaviorLockOnMarker::startup  size=49  [class]
+undefined4 __fastcall BehaviorLockOnMarker::startup(int param_1)
 
 {
   int iVar1;

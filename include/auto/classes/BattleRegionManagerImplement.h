@@ -12,4 +12,6 @@ struct BattleRegionManagerImplement : public BattleRegionManager {
     virtual bool vf0C(undefined4 param_1);  // 00401470 slot 0xC  overrides BattleRegionManager
     virtual void vf10();  // 00401100 slot 0x10  overrides BattleRegionManager
     virtual undefined4 * vf14(byte param_2);  // 004024C0 slot 0x14  overrides BattleRegionManager
+    // non-virtual members
+    ~BattleRegionManagerImplement();  // 004024A0
 };

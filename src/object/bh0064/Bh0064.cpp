@@ -1,5 +1,5 @@
 // src/object/bh0064/Bh0064.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040D840..00AA36F0, 354 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040D840..00AA36F0, 349 functions
 
 #include "mgrr.h"
 #include "Bh0064.h"
@@ -409,13 +409,6 @@ void Bh0064::vf260(void)
   return;
 }
 
-// 0040DBD0  Bh0064::vf264  size=8  [class]
-undefined4 Bh0064::vf264(void)
-
-{
-  return 1;
-}
-
 // 0040DBE0  Bh0064::vf268  size=5  [class]
 undefined4 Bh0064::vf268(void)
 
@@ -745,7 +738,7 @@ void __fastcall Bh0064::vf54(int param_1)
 undefined4 * __fastcall Bh0064::Bh0064(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -799,8 +792,8 @@ undefined * Bh0064::vf04(void)
   return &DAT_01b34b6c;
 }
 
-// 0040E670  Bh0064::vf40  size=128  [class]
-undefined4 __fastcall Bh0064::vf40(int param_1)
+// 0040E670  Bh0064::startup  size=128  [class]
+undefined4 __fastcall Bh0064::startup(int param_1)
 
 {
   undefined4 uVar1;
@@ -818,7 +811,7 @@ undefined4 __fastcall Bh0064::vf40(int param_1)
     iVar2 = 0;
   }
   else {
-    iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar2 = RigidBodyCollision::RigidBodyCollision();
   }
   *(int *)(param_1 + 0x7b0) = iVar2;
   if (iVar2 != 0) {
@@ -830,12 +823,12 @@ undefined4 __fastcall Bh0064::vf40(int param_1)
   return 1;
 }
 
-// 0040E6F0  Bh0064::vf00  size=36  [class]
-undefined4 * __thiscall Bh0064::vf00(undefined4 *param_1,byte param_2)
+// 0040E6F0  Bh0064::destruct  size=36  [class]
+undefined4 * __thiscall Bh0064::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1428,59 +1421,10 @@ void Bh0064::vf2DC(void)
   return;
 }
 
-// 00A8CD20  Bh0064::vf1B8  size=31  [class]
-void Bh0064::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
-
-{
-  if (0 < param_3) {
-    do {
-      *param_1 = 0x42000;
-      param_1 = param_1 + 3;
-      param_3 = param_3 + -1;
-    } while (param_3 != 0);
-  }
-  return;
-}
-
-// 00A8CD60  FUN_00a8cd60  size=32  [between]
-bool FUN_00a8cd60(undefined4 param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = FUN_00a10040(param_2);
-  return iVar1 - 1U < 2;
-}
-
-// 00A8CD80  FUN_00a8cd80  size=28  [between]
-bool FUN_00a8cd80(undefined4 param_1,undefined4 param_2,int param_3)
-
-{
-  int iVar1;
-  
-  iVar1 = FUN_00a10040(param_2);
-  return iVar1 == param_3;
-}
-
 // 00A8CDA0  Bh0064::vf12C  size=3  [class]
 undefined4 Bh0064::vf12C(void)
 
 {
-  return 0;
-}
-
-// 00A8CDB0  Bh0064::vf130  size=37  [class]
-undefined4 Bh0064::vf130(void)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  
-  iVar1 = FUN_00dd3500(0x110,&DAT_01b7bd48);
-  if (iVar1 != 0) {
-    uVar2 = CollisionAttackData::CollisionAttackData_3();
-    return uVar2;
-  }
   return 0;
 }
 

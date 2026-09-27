@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Emffff.h"
 
-// 005C93B0  Emffff::vf40  size=139  [class]
-undefined4 __fastcall Emffff::vf40(int *param_1)
+// 005C93B0  Emffff::startup  size=139  [class]
+undefined4 __fastcall Emffff::startup(int *param_1)
 
 {
   code *pcVar1;
@@ -14,7 +14,7 @@ undefined4 __fastcall Emffff::vf40(int *param_1)
   undefined4 uStack_1c;
   undefined4 uStack_18;
   
-  iVar2 = BehaviorBg::vf40();
+  iVar2 = BehaviorBg::startup();
   if (iVar2 != 0) {
     iVar2 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
     if (iVar2 != 0) {
@@ -200,8 +200,8 @@ undefined * Emffff::vf04(void)
   return &DAT_01b35200;
 }
 
-// 00AB6790  Emffff::vf00  size=30  [class]
-undefined4 __thiscall Emffff::vf00(undefined4 param_1,byte param_2)
+// 00AB6790  Emffff::destruct  size=30  [class]
+undefined4 __thiscall Emffff::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_0040d3f0();

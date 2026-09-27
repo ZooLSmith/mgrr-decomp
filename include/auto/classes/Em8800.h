@@ -20,4 +20,6 @@ struct Em8800 : public EmBaseDLC {
     virtual undefined4 setEmSetInfo();  // 00708120 slot 0x264  overrides Behavior
     virtual undefined4 vf32C();  // 00708D80 slot 0x32C  overrides BehaviorEmBase
     virtual void vf34C();  // 007081A0 slot 0x34C  overrides BehaviorEmBase
+    // non-virtual members
+    Em8800();  // 00AB1910
 };

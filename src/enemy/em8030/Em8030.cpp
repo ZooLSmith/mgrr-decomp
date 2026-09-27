@@ -1,5 +1,5 @@
 // src/enemy/em8030/Em8030.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0064B420..00ABA300, 170 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0064B420..00ABA300, 171 functions
 
 #include "mgrr.h"
 #include "Em8030.h"
@@ -1315,12 +1315,12 @@ void __fastcall Em8030::vf2F8(int *param_1)
     (**(code **)(*param_1 + 0x344))(3,0,0);
     param_1[0x1af] = 1;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
-// 0064DD40  Em8030::vf130  size=725  [class]
-undefined4 __thiscall Em8030::vf130(int param_1,ushort *param_2)
+// 0064DD40  Em8030::getAttackInfo  size=725  [class]
+undefined4 __thiscall Em8030::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -1333,7 +1333,7 @@ undefined4 __thiscall Em8030::vf130(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     return 0;
   }
   puVar1 = *(uint **)(iVar2 + 8);
@@ -4231,8 +4231,8 @@ void __fastcall Em8030::vf44(int param_1)
   return;
 }
 
-// 00653070  Em8030::vf264  size=674  [class]
-undefined4 __thiscall Em8030::vf264(int param_1,undefined4 param_2)
+// 00653070  Em8030::setEmSetInfo  size=674  [class]
+undefined4 __thiscall Em8030::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -5629,14 +5629,14 @@ void __fastcall FUN_00655f60(int *param_1)
     param_1[0x248] = (int)((float)param_1[0x248] - (float)param_1[0x244]);
     iVar4 = thunk_FUN_00e58ed0(param_1[0x6bb]);
     if (iVar4 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
     break;
   case 3:
     fVar5 = (float10)FUN_00ac8f80();
     if (fVar5 - (float10)0.011111111 < (float10)0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       FUN_00ac8fd0((float)(float10)0);
       return;
     }
@@ -6979,8 +6979,8 @@ void __fastcall FUN_00659270(int *param_1)
   return;
 }
 
-// 0065A280  Em8030::vf40  size=3524  [class]
-undefined4 __fastcall Em8030::vf40(int *param_1)
+// 0065A280  Em8030::startup  size=3524  [class]
+undefined4 __fastcall Em8030::startup(int *param_1)
 
 {
   code *pcVar1;
@@ -7008,7 +7008,7 @@ undefined4 __fastcall Em8030::vf40(int *param_1)
   undefined4 local_84;
   undefined1 local_80 [124];
   
-  iVar2 = EmBaseDLC::vf40();
+  iVar2 = EmBaseDLC::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -7221,7 +7221,7 @@ undefined4 __fastcall Em8030::vf40(int *param_1)
     iVar2 = 0;
   }
   else {
-    iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar2 = RigidBodyCollision::RigidBodyCollision();
   }
   param_1[0x1ec] = iVar2;
   if (iVar2 != 0) {
@@ -8101,7 +8101,7 @@ switchD_0065bd9d_default:
             fVar15 = (float)(float10)0;
             (**(code **)(*param_1 + 0x364))();
             (**(code **)(*param_1 + 0x20))();
-            FUN_009fdde0();
+            E3_EnemyBoardDebrisSokushi::vf4C();
             fVar11 = (float10)fVar15;
           }
           local_18 = (char *)(float)fVar11;
@@ -8148,7 +8148,7 @@ switchD_0065bd9d_default:
             param_1[0x248] = (int)((float)param_1[0x248] - (float)param_1[0x244]);
             iVar4 = thunk_FUN_00e58ed0();
             if (iVar4 == 0) {
-              FUN_009fdde0();
+              E3_EnemyBoardDebrisSokushi::vf4C();
               return;
             }
           }
@@ -8213,14 +8213,14 @@ switchD_0065bd9d_default:
             param_1[0x248] = (int)((float)param_1[0x248] - (float)param_1[0x244]);
             iVar4 = thunk_FUN_00e58ed0();
             if (iVar4 == 0) {
-              FUN_009fdde0();
+              E3_EnemyBoardDebrisSokushi::vf4C();
               return;
             }
             break;
           case 3:
             fVar11 = (float10)FUN_00ac8f80();
             if (fVar11 - (float10)0.011111111 < (float10)0) {
-              FUN_009fdde0();
+              E3_EnemyBoardDebrisSokushi::vf4C();
               FUN_00ac8fd0();
               return;
             }
@@ -9025,14 +9025,14 @@ LAB_00656260:
     param_1[0x248] = (int)((float)param_1[0x248] - (float)param_1[0x244]);
     iVar4 = thunk_FUN_00e58ed0();
     if (iVar4 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
     break;
   case 3:
     fVar11 = (float10)FUN_00ac8f80();
     if (fVar11 - (float10)0.011111111 < (float10)0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       FUN_00ac8fd0();
       return;
     }
@@ -9451,6 +9451,48 @@ void __fastcall Em8030::vf4C(int *param_1)
   return;
 }
 
+// 00AB4800  Em8030::Em8030  size=249  [class]
+undefined4 * __fastcall Em8030::Em8030(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  iVar1 = 2;
+  do {
+    FUN_00a7c930();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  iVar1 = 1;
+  do {
+    FUN_00a826e0();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  iVar1 = 1;
+  do {
+    FUN_00a826e0();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  iVar1 = 8;
+  do {
+    cEspControler::cEspControler();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00a603a0();
+  FUN_00904d60();
+  FUN_00a603a0();
+  return param_1;
+}
+
 // 00AB4900  Em8030::vf04  size=6  [class]
 undefined * Em8030::vf04(void)
 
@@ -9521,12 +9563,12 @@ void FUN_00ab4970(void)
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00ABA300  Em8030::vf00  size=30  [class]
-undefined4 __thiscall Em8030::vf00(undefined4 param_1,byte param_2)
+// 00ABA300  Em8030::destruct  size=30  [class]
+undefined4 __thiscall Em8030::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00ab4970();

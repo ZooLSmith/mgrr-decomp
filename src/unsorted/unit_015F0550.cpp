@@ -15,7 +15,7 @@ void FUN_015f0550(void)
 void FUN_015f0560(void)
 
 {
-  cUIExtendFactory::cUIExtendFactory();
+  cUISystem::~cUISystem();
   return;
 }
 

@@ -33,4 +33,6 @@ struct Emc220 : public EmBaseDLC {
     virtual void vf33C(undefined4 param_1, int param_2);  // 008363A0 slot 0x33C  overrides BehaviorEmBase
     virtual void vf34C();  // 00832D70 slot 0x34C  overrides BehaviorEmBase
     virtual undefined4 vf368();  // 00820080 slot 0x368  overrides BehaviorEmBase
+    // non-virtual members
+    Emc220();  // 00AB3590
 };

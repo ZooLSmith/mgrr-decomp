@@ -12,4 +12,6 @@ struct cItemFixBase : public cItemObjectBase {
     virtual void vf44();  // 005EA4E0 slot 0x44  overrides Behavior
     virtual void vf48();  // 005ECE70 slot 0x48  overrides Behavior
     virtual void vf50();  // 005EA4F0 slot 0x50  overrides Behavior
+    // non-virtual members
+    cItemFixBase();  // 00AB1420
 };

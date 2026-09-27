@@ -11,4 +11,6 @@ struct esp12 : public ModelShaderJackModule {
     virtual void vf08();  // 00F23160 slot 0x8  overrides cEspBase
     virtual void addOtTransList();  // 00ED8050 slot 0x10  overrides cEspBase
     virtual void vf14();  // 00EF0440 slot 0x14  overrides cEspBase
+    // non-virtual members
+    esp12();  // 00ED0480
 };

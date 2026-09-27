@@ -31,8 +31,8 @@ void Em0500::vf1A4(void)
   return;
 }
 
-// 0059D180  Em0500::vf130  size=5  [class]
-undefined4 Em0500::vf130(void)
+// 0059D180  Em0500::getAttackInfo  size=5  [class]
+undefined4 Em0500::getAttackInfo(void)
 
 {
   return 0;
@@ -66,8 +66,8 @@ void __fastcall FUN_0059d210(int param_1)
   return;
 }
 
-// 0059D2C0  Em0500::vf40  size=499  [class]
-undefined4 __fastcall Em0500::vf40(int *param_1)
+// 0059D2C0  Em0500::startup  size=499  [class]
+undefined4 __fastcall Em0500::startup(int *param_1)
 
 {
   int iVar1;
@@ -79,7 +79,7 @@ undefined4 __fastcall Em0500::vf40(int *param_1)
   undefined4 uStack_8c;
   undefined1 auStack_84 [128];
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     iVar1 = FUN_008ec660(param_1,0x3f4ccccd,0x3e99999a,0x41a00000,0x41a00000,0x78,7,0);
     param_1[0x1d9] = iVar1;
@@ -173,8 +173,8 @@ void __fastcall Em0500::vf48(int param_1)
   return;
 }
 
-// 0059D570  Em0500::vf264  size=87  [class]
-void __thiscall Em0500::vf264(int param_1,undefined4 param_2)
+// 0059D570  Em0500::setEmSetInfo  size=87  [class]
+void __thiscall Em0500::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   FUN_0040ac60(param_2);
@@ -335,7 +335,7 @@ undefined4 __fastcall Em0500::vf32C(int *param_1)
 undefined4 * __fastcall Em0500::Em0500(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   return param_1;
 }
@@ -347,11 +347,11 @@ undefined * Em0500::vf04(void)
   return &DAT_01b35184;
 }
 
-// 00AB75B0  Em0500::vf00  size=30  [class]
-undefined4 __thiscall Em0500::vf00(undefined4 param_1,byte param_2)
+// 00AB75B0  Em0500::destruct  size=30  [class]
+undefined4 __thiscall Em0500::destruct(undefined4 param_1,byte param_2)
 
 {
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -18,7 +18,7 @@ undefined4 __thiscall Em01c0::getAttackInfo(int param_1,ushort *param_2)
   uint uVar6;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_01641194);
     return 0;
   }
@@ -79,7 +79,7 @@ void __fastcall Em01c0::createWindAtk(int param_1)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar3 = *(undefined4 **)(iVar2 + 8);
       *(undefined4 *)(iVar2 + 4) = 1;
@@ -492,7 +492,7 @@ void __thiscall FUN_005439d0(int param_1,undefined4 param_2)
   
   iVar3 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar3 != 0) {
-    iVar3 = CollisionAttackData::CollisionAttackData_3();
+    iVar3 = CollisionAttackData::CollisionAttackData();
     if (iVar3 != 0) {
       puVar5 = *(undefined4 **)(iVar3 + 8);
       *(undefined4 *)(iVar3 + 4) = 1;

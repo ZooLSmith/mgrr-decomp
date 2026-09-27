@@ -11,9 +11,9 @@ struct Bh0056 : public BehaviorBh {
     virtual undefined4 startup();  // 0040D3C0 slot 0x40  overrides Behavior
     virtual void vf54();  // 0040E300 slot 0x54  overrides Behavior
     // non-virtual members
-    Bh0056();  // 0040D800
+    ~Bh0056();  // 0040D800
     static void vf310();  // 0040DDE0
-    void ctor_0040E050();  // 0040E050
+    Bh0056();  // 0040E050
     static void vf308(undefined4 param_1);  // 00A8F620
     static void vfC8(undefined4 param_2);  // 00A8F690
     static uint vfDC();  // 00A8F710

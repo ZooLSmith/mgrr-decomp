@@ -1,5 +1,5 @@
 // src/misc/cItemStageDrop.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094CDE0..00953290, 20 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094CDE0..009544C0, 7 functions
 
 #include "mgrr.h"
 #include "cItemStageDrop.h"
@@ -11,187 +11,11 @@ char * cItemStageDrop::vf00(void)
   return "cItemStageDrop";
 }
 
-// 0094D160  cItemStageDrop::cItemStageDrop_5  size=79  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall cItemStageDrop::cItemStageDrop_5(undefined4 *param_1)
+// 0094CDF0  cItemStageDrop::vf10  size=6  [class]
+char * cItemStageDrop::vf10(void)
 
 {
-  undefined4 uVar1;
-  
-  param_1[1] = 0;
-  *param_1 = vftable;
-  param_1[0x14] = 0;
-  param_1[0x18] = 0;
-  param_1[0x15] = &DAT_01b37438;
-  param_1[0x16] = _DAT_01b37448;
-  uVar1 = _DAT_01b37444;
-  param_1[1] = 0x1100;
-  param_1[0x17] = uVar1;
-  param_1[0x19] = 0xffffffff;
-  param_1[0x1a] = 0xffffffff;
-  *param_1 = cItemStageDropInstant::vftable;
-  *(undefined1 *)(param_1 + 0x25) = 0;
-  param_1[0x24] = 0;
-  return;
-}
-
-// 0094D230  cItemStageDrop::cItemStageDrop_6  size=73  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall cItemStageDrop::cItemStageDrop_6(undefined4 *param_1)
-
-{
-  undefined4 uVar1;
-  
-  param_1[1] = 0;
-  *param_1 = vftable;
-  param_1[0x14] = 0;
-  param_1[0x18] = 0;
-  param_1[0x15] = &DAT_01b37438;
-  param_1[0x16] = _DAT_01b37448;
-  uVar1 = _DAT_01b37444;
-  param_1[1] = 0x1100;
-  param_1[0x17] = uVar1;
-  param_1[0x19] = 0xffffffff;
-  param_1[0x1a] = 0xffffffff;
-  *param_1 = cItemStageDropCollectable::vftable;
-  param_1[0x24] = 0;
-  return;
-}
-
-// 0094D3C0  cItemStageDrop::cItemStageDrop_7  size=85  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall cItemStageDrop::cItemStageDrop_7(undefined4 *param_1)
-
-{
-  undefined4 uVar1;
-  
-  param_1[1] = 0;
-  *param_1 = vftable;
-  param_1[0x14] = 0;
-  param_1[0x18] = 0;
-  param_1[0x15] = &DAT_01b37438;
-  param_1[0x16] = _DAT_01b37448;
-  uVar1 = _DAT_01b37444;
-  param_1[1] = 0x1100;
-  param_1[0x17] = uVar1;
-  param_1[0x19] = 0xffffffff;
-  param_1[0x1a] = 0xffffffff;
-  *(undefined1 *)(param_1 + 0x25) = 0;
-  param_1[0x24] = 0;
-  *param_1 = cItemStageDropViscera::vftable;
-  param_1[0x28] = 0xffffffff;
-  return;
-}
-
-// 0094D5D0  cItemStageDrop::cItemStageDrop_8  size=79  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall cItemStageDrop::cItemStageDrop_8(undefined4 *param_1)
-
-{
-  undefined4 uVar1;
-  
-  param_1[1] = 0;
-  *param_1 = vftable;
-  param_1[0x14] = 0;
-  param_1[0x18] = 0;
-  param_1[0x15] = &DAT_01b37438;
-  param_1[0x16] = _DAT_01b37448;
-  uVar1 = _DAT_01b37444;
-  param_1[1] = 0x1100;
-  param_1[0x17] = uVar1;
-  param_1[0x19] = 0xffffffff;
-  param_1[0x1a] = 0xffffffff;
-  *(undefined1 *)(param_1 + 0x25) = 0;
-  param_1[0x24] = 0;
-  *param_1 = cItemStageDropLeftHand::vftable;
-  return;
-}
-
-// 0094F1B0  cItemStageDrop::cItemStageDrop_3  size=73  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall cItemStageDrop::cItemStageDrop_3(undefined4 *param_1)
-
-{
-  undefined4 uVar1;
-  
-  param_1[1] = 0;
-  *param_1 = vftable;
-  param_1[0x14] = 0;
-  param_1[0x18] = 0;
-  param_1[0x15] = &DAT_01b37438;
-  param_1[0x16] = _DAT_01b37448;
-  uVar1 = _DAT_01b37444;
-  param_1[0x19] = 0xffffffff;
-  param_1[0x17] = uVar1;
-  param_1[0x1a] = 0xffffffff;
-  *param_1 = cItemStageDropCollectableDlc::vftable;
-  param_1[0x24] = 0;
-  param_1[1] = 0x5100;
-  return;
-}
-
-// 0094F300  cItemStageDrop::cItemStageDrop_4  size=85  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall cItemStageDrop::cItemStageDrop_4(undefined4 *param_1)
-
-{
-  undefined4 uVar1;
-  
-  param_1[1] = 0;
-  *param_1 = vftable;
-  param_1[0x14] = 0;
-  param_1[0x18] = 0;
-  param_1[0x15] = &DAT_01b37438;
-  param_1[0x16] = _DAT_01b37448;
-  uVar1 = _DAT_01b37444;
-  param_1[0x19] = 0xffffffff;
-  param_1[0x17] = uVar1;
-  param_1[0x1a] = 0xffffffff;
-  *(undefined1 *)(param_1 + 0x25) = 0;
-  param_1[0x24] = 0;
-  *param_1 = cItemStageDropPassCordDlc::vftable;
-  param_1[0x28] = 0;
-  param_1[1] = 0x5100;
-  return;
-}
-
-// 0094FE80  FUN_0094fe80  size=107  [callgraph]
-int * FUN_0094fe80(int *param_1,int param_2)
-
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  
-  if ((param_1 != (int *)0x0) && (param_2 != 0)) {
-    iVar1 = FUN_00dd3500(0xb0,&DAT_01b7bd48);
-    if (iVar1 != 0) {
-      piVar2 = (int *)cItemStageDrop::cItemStageDrop_7();
-      if (piVar2 != (int *)0x0) {
-        iVar1 = *piVar2;
-        piVar4 = param_1;
-        piVar5 = piVar2 + 2;
-        for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-          *piVar5 = *piVar4;
-          piVar4 = piVar4 + 1;
-          piVar5 = piVar5 + 1;
-        }
-        piVar2[0x14] = param_2;
-        (**(code **)(iVar1 + 8))(param_1);
-      }
-      return piVar2;
-    }
-    return (int *)0x0;
-  }
-  return (int *)0x0;
+  return "cItemBase";
 }
 
 // 00950090  cItemStageDrop::vf04  size=57  [class]
@@ -208,310 +32,6 @@ undefined4 * __thiscall cItemStageDrop::vf04(undefined4 *param_1,byte param_2)
     FUN_00dd4920(param_1);
   }
   return param_1;
-}
-
-// 00952950  FUN_00952950  size=190  [callgraph]
-int * FUN_00952950(int *param_1,undefined4 *param_2)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [80];
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  
-  FUN_0040b190();
-  local_40 = *param_2;
-  local_3c = param_2[1];
-  local_38 = param_2[2];
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xa0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_3(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
-// 00952A10  FUN_00952a10  size=190  [callgraph]
-int * FUN_00952a10(int *param_1,undefined4 *param_2)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [80];
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  
-  FUN_0040b190();
-  local_40 = *param_2;
-  local_3c = param_2[1];
-  local_38 = param_2[2];
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xb0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_7(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
-// 00952AD0  FUN_00952ad0  size=190  [callgraph]
-int * FUN_00952ad0(int *param_1,undefined4 *param_2)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [80];
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  
-  FUN_0040b190();
-  local_40 = *param_2;
-  local_3c = param_2[1];
-  local_38 = param_2[2];
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xb0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_8(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
-// 00952B90  FUN_00952b90  size=190  [callgraph]
-int * FUN_00952b90(int *param_1,undefined4 *param_2)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [80];
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  
-  FUN_0040b190();
-  local_40 = *param_2;
-  local_3c = param_2[1];
-  local_38 = param_2[2];
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xa0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_6(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
-// 00952C50  FUN_00952c50  size=167  [callgraph]
-int * FUN_00952c50(int *param_1)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [140];
-  
-  FUN_0040b190();
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xa0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_5(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
-// 00952D00  FUN_00952d00  size=167  [callgraph]
-int * FUN_00952d00(int *param_1)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [140];
-  
-  FUN_0040b190();
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xa0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_6(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
-// 00952DB0  FUN_00952db0  size=167  [callgraph]
-int * FUN_00952db0(int *param_1)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [140];
-  
-  FUN_0040b190();
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xb0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_7(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
-// 00952E60  FUN_00952e60  size=167  [callgraph]
-int * FUN_00952e60(int *param_1)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [140];
-  
-  FUN_0040b190();
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xa0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_3(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
 }
 
 // 00952F10  cItemStageDrop::cItemStageDrop_2  size=221  [class]
@@ -563,41 +83,6 @@ undefined4 cItemStageDrop::cItemStageDrop_2(int *param_1)
   return 0;
 }
 
-// 00952FF0  FUN_00952ff0  size=167  [callgraph]
-int * FUN_00952ff0(int *param_1)
-
-{
-  code *pcVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined1 local_90 [140];
-  
-  FUN_0040b190();
-  iVar2 = FUN_00a82090(param_1 + 6,param_1[3],local_90);
-  if (iVar2 == 0) {
-    return (int *)0x0;
-  }
-  iVar3 = FUN_00dd3500(0xb0,&DAT_01b7bd48);
-  if ((iVar3 != 0) && (piVar4 = (int *)cItemStageDrop::cItemStageDrop_4(), piVar4 != (int *)0x0)) {
-    pcVar1 = *(code **)(*piVar4 + 8);
-    piVar5 = param_1;
-    piVar6 = piVar4 + 2;
-    for (iVar3 = 0x12; iVar3 != 0; iVar3 = iVar3 + -1) {
-      *piVar6 = *piVar5;
-      piVar5 = piVar5 + 1;
-      piVar6 = piVar6 + 1;
-    }
-    piVar4[0x14] = iVar2;
-    (*pcVar1)(param_1);
-    return piVar4;
-  }
-  FUN_00a805f0();
-  return (int *)0x0;
-}
-
 // 00953290  cItemStageDrop::cItemStageDrop  size=175  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -634,5 +119,100 @@ void __fastcall cItemStageDrop::cItemStageDrop(undefined4 *param_1)
   *(undefined1 *)(param_1 + 0x2c) = 0;
   param_1[0x2d] = 0;
   return;
+}
+
+// 009544A0  FUN_009544a0  size=32  [callgraph]
+undefined4 FUN_009544a0(void)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = FUN_00dd3500(0xf0,&DAT_01b7bd48);
+  if (iVar1 != 0) {
+    uVar2 = cItemStageDrop::cItemStageDrop();
+    return uVar2;
+  }
+  return 0;
+}
+
+// 009544C0  cItemStageDrop::vf1C  size=517  [class]
+void __fastcall cItemStageDrop::vf1C(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int *piVar3;
+  undefined4 uVar4;
+  
+  piVar3 = (int *)PTR_DAT_01886ea4;
+  do {
+    if (piVar3 == (int *)(PTR_DAT_01886ea4 + DAT_01886ea8 * 4)) {
+LAB_009544f2:
+      FUN_00953e30(*(int *)(param_1 + 0x10));
+LAB_009544fb:
+      *(uint *)(param_1 + 4) = *(uint *)(param_1 + 4) | 1;
+      FUN_00e5e050("core_se_sys_item_get",0);
+      if (((*(int *)(param_1 + 0x10) == 0x2a5686e6) && (DAT_018b9174 == 0x220)) &&
+         ((*(int *)(param_1 + 0x68) == 0 &&
+          ((iVar2 = FUN_00c81c60(0x57), iVar2 == 0 &&
+           (iVar2 = FUN_00d4f120("P220_SEWER_4",0), iVar2 == 0)))))) {
+        FUN_00c81b30(0x57);
+        FUN_0093b4a0("P220_DANBO",0,0);
+      }
+      if ((*(uint *)(param_1 + 4) & 0x10000) != 0) {
+        FUN_0094e3e0(*(undefined4 *)(param_1 + 0x68));
+      }
+      if (*(int *)(param_1 + 0x50) != 0) {
+        piVar3 = (int *)FUN_00a7c8a0();
+        (**(code **)(*piVar3 + 0x20))();
+      }
+      uVar4 = *(undefined4 *)(param_1 + 0x10);
+LAB_009546a5:
+      FUN_0094f090(uVar4);
+      if (*(int *)(param_1 + 0x68) != -1) {
+        FUN_0094e550(*(int *)(param_1 + 0x68));
+      }
+      return;
+    }
+    piVar1 = (int *)*piVar3;
+    if (piVar1[4] == *(int *)(param_1 + 0x10)) {
+      if (piVar1 != (int *)0x0) {
+        iVar2 = (**(code **)(*piVar1 + 0x2c))();
+        if (iVar2 == 0) {
+          (**(code **)(*piVar1 + 0x18))(1);
+          goto LAB_009544fb;
+        }
+        iVar2 = FUN_00a4a350(DAT_018b9174);
+        if (iVar2 != 0) {
+          return;
+        }
+        if ((((*(int *)(param_1 + 0x10) == 0x2a5686e6) && (DAT_018b9174 == 0x220)) &&
+            (*(int *)(param_1 + 0x68) == 0)) &&
+           ((iVar2 = FUN_00c81c60(0x57), iVar2 == 0 &&
+            (iVar2 = FUN_00d4f120("P220_SEWER_4",0), iVar2 == 0)))) {
+          FUN_00c81b30(0x57);
+          FUN_0093b4a0("P220_DANBO",0,0);
+        }
+        *(uint *)(param_1 + 4) = *(uint *)(param_1 + 4) | 1;
+        uVar4 = FUN_0094aa20(*(undefined4 *)(param_1 + 0x10),1);
+        FUN_00cbac80(0xffffffff,uVar4);
+        FUN_00e5e050("core_se_sys_item_get",0);
+        if ((*(uint *)(param_1 + 4) & 0x10000) != 0) {
+          FUN_0094e3e0(*(undefined4 *)(param_1 + 0x68));
+        }
+        if (*(int *)(param_1 + 0x50) != 0) {
+          piVar3 = (int *)FUN_00a7c8a0();
+          (**(code **)(*piVar3 + 0x20))();
+        }
+        piVar3 = (int *)FUN_00c1b9a0();
+        (**(code **)(*piVar3 + 0x3c))(*(undefined4 *)(param_1 + 0x1c));
+        uVar4 = *(undefined4 *)(param_1 + 0x10);
+        goto LAB_009546a5;
+      }
+      goto LAB_009544f2;
+    }
+    piVar3 = piVar3 + 1;
+  } while( true );
 }
 

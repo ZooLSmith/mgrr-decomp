@@ -54,4 +54,6 @@ struct Emc040 : public EmBaseDLC {
     virtual void vf334(int param_2);  // 0076F890 slot 0x334  overrides BehaviorEmBase
     virtual void vf33C(undefined4 param_1, int param_2);  // 0075DAB0 slot 0x33C  overrides BehaviorEmBase
     virtual void vf34C();  // 00766880 slot 0x34C  overrides BehaviorEmBase
+    // non-virtual members
+    Emc040();  // 00AB2430
 };

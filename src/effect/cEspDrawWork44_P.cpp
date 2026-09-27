@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEspDrawWork44_P.h"
 
-// 00EDA100  cEspDrawWork44_P::vf04  size=59  [class]
-void __fastcall cEspDrawWork44_P::vf04(int param_1)
+// 00EDA100  cEspDrawWork44_P::draw  size=59  [class]
+void __fastcall cEspDrawWork44_P::draw(int param_1)
 
 {
   FUN_00f45d30(0);

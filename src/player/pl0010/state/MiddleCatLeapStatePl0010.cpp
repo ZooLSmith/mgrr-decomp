@@ -53,8 +53,8 @@ undefined4 * __thiscall MiddleCatLeapStatePl0010::vf04(undefined4 *param_1,byte 
   return param_1;
 }
 
-// 00BAC720  MiddleCatLeapStatePl0010::vf0C  size=333  [class]
-void __thiscall MiddleCatLeapStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BAC720  MiddleCatLeapStatePl0010::SafeCheck  size=333  [class]
+void __thiscall MiddleCatLeapStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -113,7 +113,7 @@ void __thiscall MiddleCatLeapStatePl0010::vf0C(int param_1,undefined4 *param_2)
       *(undefined4 *)(*(int *)(iVar2 + 0xd0) + 4) = 0;
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -264,8 +264,8 @@ LAB_00bcb0d8:
   return;
 }
 
-// 00BDF590  MiddleCatLeapStatePl0010::vf10  size=326  [class]
-void __thiscall MiddleCatLeapStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BDF590  MiddleCatLeapStatePl0010::qteSafeCheck  size=326  [class]
+void __thiscall MiddleCatLeapStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -322,7 +322,7 @@ void __thiscall MiddleCatLeapStatePl0010::vf10(int param_1,undefined4 *param_2)
     FUN_00bd3910(param_2,param_1,0xb,10);
     FUN_00bd39d0(param_2,param_1,10);
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

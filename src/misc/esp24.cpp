@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp24::esp24(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp24::esp24(undefined4 *param_1)
 undefined4 __thiscall esp24::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -127,9 +127,9 @@ void __fastcall esp24::vf08(int param_1)
   return;
 }
 
-// 00F34B70  esp24::vf04  size=442  [class]
+// 00F34B70  esp24::preTrans  size=442  [class]
 undefined4 __thiscall
-esp24::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp24::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   char cVar1;
@@ -139,7 +139,7 @@ esp24::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   uint *puVar5;
   undefined4 uVar6;
   
-  iVar4 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar4 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar4 != 0) {
     iVar4 = FUN_00f12b50();
     if (iVar4 != 0) {

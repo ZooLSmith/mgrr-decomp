@@ -36,7 +36,7 @@ FUN_00a89fc0(float *param_1,float *param_2,float param_3,undefined4 param_4,unde
   local_558 = param_1[2] + param_2[2] * param_3;
   local_554 = param_1[3] + param_2[3] * param_3;
   local_54c = param_5;
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   uVar1 = BehaviorUtility::checkRay(local_530,&local_570);
   hkpCdPointCollector::hkpCdPointCollector_16();
   return uVar1;
@@ -110,7 +110,7 @@ undefined4 FUN_00a8a0a0(float *param_1,float *param_2)
   fVar5 = param_2[5] * fVar1 + local_5ec;
   fVar4 = local_598 + local_5e8;
   fVar1 = param_2[7] * fVar1 + local_5e4;
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   local_5c4 = param_2[8];
   do {
     local_580 = local_5f0;

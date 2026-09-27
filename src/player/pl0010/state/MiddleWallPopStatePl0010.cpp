@@ -56,8 +56,8 @@ undefined4 * __thiscall MiddleWallPopStatePl0010::vf04(undefined4 *param_1,byte 
   return param_1;
 }
 
-// 00BACBB0  MiddleWallPopStatePl0010::vf0C  size=269  [class]
-void __thiscall MiddleWallPopStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BACBB0  MiddleWallPopStatePl0010::SafeCheck  size=269  [class]
+void __thiscall MiddleWallPopStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -107,7 +107,7 @@ void __thiscall MiddleWallPopStatePl0010::vf0C(int param_1,undefined4 *param_2)
     }
     *(undefined4 *)(uVar5 + 0x4170) = 1;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -221,8 +221,8 @@ undefined4 MiddleWallPopStatePl0010::vf20(undefined4 *param_1)
   return 1;
 }
 
-// 00BDF960  MiddleWallPopStatePl0010::vf10  size=169  [class]
-void __thiscall MiddleWallPopStatePl0010::vf10(undefined4 param_1,undefined4 *param_2)
+// 00BDF960  MiddleWallPopStatePl0010::qteSafeCheck  size=169  [class]
+void __thiscall MiddleWallPopStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
 
 {
   uint uVar1;
@@ -249,7 +249,7 @@ void __thiscall MiddleWallPopStatePl0010::vf10(undefined4 param_1,undefined4 *pa
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

@@ -1,11 +1,11 @@
 // src/misc/esp150.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0930..009F6DF0, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0930..00EDB090, 8 functions
 
 #include "mgrr.h"
 #include "esp150.h"
 
-// 009D0930  esp150::vf10  size=1  [class]
-void esp150::vf10(void)
+// 009D0930  esp150::addOtTransList  size=1  [class]
+void esp150::addOtTransList(void)
 
 {
   return;
@@ -31,11 +31,11 @@ void __fastcall esp150::thunk_vf14(int param_1)
   return;
 }
 
-// 009EEBC0  esp150::vf04  size=898  [class]
+// 009EEBC0  esp150::preTrans  size=898  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 undefined4 __thiscall
-esp150::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp150::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -51,7 +51,7 @@ esp150::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   undefined4 local_8;
   int local_4;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }
@@ -298,10 +298,48 @@ undefined4 __thiscall esp150::vf00(undefined4 param_1,byte param_2)
 
 {
   Spline<float>::Spline<float>();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
+}
+
+// 00EDB050  FUN_00edb050  size=49  [callgraph]
+void __fastcall FUN_00edb050(undefined4 *param_1)
+
+{
+  *param_1 = 0xffffffff;
+  param_1[1] = 0xffffffff;
+  param_1[2] = 1;
+  param_1[3] = 0;
+  param_1[4] = 0;
+  param_1[5] = 0;
+  param_1[6] = 0;
+  param_1[7] = 0;
+  param_1[8] = 0;
+  param_1[9] = 0;
+  param_1[10] = 0;
+  return;
+}
+
+// 00EDB090  esp150::vf14  size=63  [class]
+void __fastcall esp150::vf14(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  
+  if (*(int *)(param_1 + 0x4c0) != 0) {
+    uVar2 = 0x50000;
+    iVar1 = param_1;
+    iVar3 = param_1;
+    FUN_00a7c940(param_1 + 0x4c4);
+    FUN_009d5aa0(iVar1,uVar2,iVar3);
+    *(undefined4 *)(param_1 + 0x4c0) = 0;
+  }
+  Spline<float>::Spline<float>();
+  return;
 }
 

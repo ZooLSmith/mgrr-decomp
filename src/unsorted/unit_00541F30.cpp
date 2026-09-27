@@ -189,7 +189,7 @@ undefined4 __fastcall FUN_005428f0(int *param_1)
   undefined4 uStack_84;
   undefined1 auStack_80 [124];
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     local_ac = 0;
     iVar1 = FUN_00a54ae0(&local_ac,param_1 + 0x125,"_col.hkx");
@@ -199,7 +199,7 @@ undefined4 __fastcall FUN_005428f0(int *param_1)
         iVar2 = 0;
       }
       else {
-        iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar2 = RigidBodyCollision::RigidBodyCollision();
       }
       param_1[0x1ec] = iVar2;
       if (iVar2 != 0) {

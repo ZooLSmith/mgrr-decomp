@@ -4,18 +4,18 @@
 #include "mgrr.h"
 #include "cFilterShader00.h"
 
-// 00EBF300  cFilterShader00::cFilterShader00_2  size=495  [class]
+// 00EBF300  cFilterShader00::cFilterShader00  size=495  [class]
 /* WARNING: Removing unreachable block (ram,0x00ebf36b) */
 /* WARNING: Removing unreachable block (ram,0x00ebf3d6) */
 /* WARNING: Removing unreachable block (ram,0x00ebf43e) */
 /* WARNING: Removing unreachable block (ram,0x00ebf4ac) */
 
-undefined4 * __fastcall cFilterShader00::cFilterShader00_2(undefined4 *param_1)
+undefined4 * __fastcall cFilterShader00::cFilterShader00(undefined4 *param_1)
 
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
@@ -85,8 +85,8 @@ void __fastcall cFilterShader00::vf04(int param_1)
   return;
 }
 
-// 00EBF8D0  cFilterShader00::cFilterShader00  size=133  [class]
-void __fastcall cFilterShader00::cFilterShader00(undefined4 *param_1)
+// 00EBF8D0  cFilterShader00::~cFilterShader00  size=133  [class]
+void __fastcall cFilterShader00::~cFilterShader00(undefined4 *param_1)
 
 {
   param_1[0x1f] = 0xffffffff;
@@ -120,7 +120,7 @@ void __fastcall cFilterShader00::cFilterShader00(undefined4 *param_1)
   param_1[0x1c] = 0xffffffff;
   param_1[0x1d] = 0xffffffff;
   param_1[0x1e] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -150,17 +150,17 @@ undefined4 * __thiscall cFilterShader00::vf00(undefined4 *param_1,byte param_2)
   param_1[0x1c] = 0xffffffff;
   param_1[0x1d] = 0xffffffff;
   param_1[0x1e] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 015F1680  cFilterShader00::cFilterShader00_3  size=135  [class]
+// 015F1680  cFilterShader00::~cFilterShader00  size=135  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cFilterShader00::cFilterShader00_3(void)
+void cFilterShader00::~cFilterShader00(void)
 
 {
   _DAT_01edc7b4 = 0x1111111;
@@ -185,7 +185,7 @@ void cFilterShader00::cFilterShader00_3(void)
   _DAT_01edc7b0 = 0xffffffff;
   _DAT_01edc7b8 = 0xffffffff;
   _DAT_01edc7bc = 0xffffffff;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

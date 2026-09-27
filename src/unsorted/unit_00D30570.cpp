@@ -24,7 +24,7 @@ void __fastcall FUN_00d30570(int param_1)
           iVar4 = 0;
         }
         else {
-          iVar4 = cCustomObjCtrlManager::cCustomObjCtrlManager_31();
+          iVar4 = cCustomObjCtrlManager::cCustomObjCtrlManager();
           if (iVar4 != 0) {
             *(char **)(iVar4 + 0xc) = "cItemGetDispParts";
             *(undefined4 *)(iVar4 + 8) = 5;

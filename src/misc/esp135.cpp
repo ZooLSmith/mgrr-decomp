@@ -4,14 +4,14 @@
 #include "mgrr.h"
 #include "esp135.h"
 
-// 009D08A0  esp135::vf04  size=54  [class]
+// 009D08A0  esp135::preTrans  size=54  [class]
 undefined4 __thiscall
-esp135::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp135::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int iVar1;
   
-  iVar1 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar1 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar1 == 0) {
     return 0;
   }
@@ -36,13 +36,13 @@ void __fastcall esp135::vf08(int param_1)
 undefined4 * __fastcall esp135::esp135(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
 
-// 009DA7D0  esp135::vf10  size=547  [class]
-void __fastcall esp135::vf10(int param_1)
+// 009DA7D0  esp135::addOtTransList  size=547  [class]
+void __fastcall esp135::addOtTransList(int param_1)
 
 {
   float fVar1;
@@ -63,7 +63,7 @@ void __fastcall esp135::vf10(int param_1)
   float10 fVar16;
   float10 fVar17;
   
-  FUN_00efed20();
+  esp107::vf10();
   if (0.01 < *(float *)(param_1 + 0x124)) {
     iVar9 = FUN_00e9ff10();
     pfVar11 = (float *)(param_1 + 0x460);
@@ -139,7 +139,7 @@ void __fastcall esp135::vf10(int param_1)
 undefined4 __thiscall esp135::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

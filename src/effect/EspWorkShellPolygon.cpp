@@ -472,7 +472,7 @@ void __thiscall FUN_009e5610(int param_1,float *param_2,int param_3)
 undefined4 * __fastcall EspWorkShellPolygon::EspWorkShellPolygon(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   param_1[0x114] = 0;
   param_1[0x115] = 0;
   param_1[0x116] = 0;
@@ -508,7 +508,7 @@ undefined4 * __thiscall EspWorkShellPolygon::vf00(undefined4 *param_1,byte param
 
 {
   *param_1 = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -524,9 +524,9 @@ void EspWorkShellPolygon::vf14(void)
   return;
 }
 
-// 009F5C20  EspWorkShellPolygon::vf04  size=444  [class]
+// 009F5C20  EspWorkShellPolygon::preTrans  size=444  [class]
 undefined4 __thiscall
-EspWorkShellPolygon::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+EspWorkShellPolygon::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined1 uVar1;
@@ -536,7 +536,7 @@ EspWorkShellPolygon::vf04(int param_1,undefined4 param_2,undefined4 param_3,unde
   int iVar5;
   int iVar6;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return 0;
   }
@@ -585,10 +585,10 @@ EspWorkShellPolygon::vf04(int param_1,undefined4 param_2,undefined4 param_3,unde
   return 0;
 }
 
-// 009F5DE0  EspWorkShellPolygon::vf10  size=1121  [class]
+// 009F5DE0  EspWorkShellPolygon::addOtTransList  size=1121  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall EspWorkShellPolygon::vf10(int param_1)
+void __fastcall EspWorkShellPolygon::addOtTransList(int param_1)
 
 {
   undefined4 uVar1;

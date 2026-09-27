@@ -31,8 +31,8 @@ void __fastcall cTouchManager::cTouchManager(undefined4 *param_1)
   return;
 }
 
-// 00983640  cTouchManager::cTouchManager_2  size=14  [class]
-void __fastcall cTouchManager::cTouchManager_2(undefined4 *param_1)
+// 00983640  cTouchManager::~cTouchManager  size=14  [class]
+void __fastcall cTouchManager::~cTouchManager(undefined4 *param_1)
 
 {
   *param_1 = vftable;

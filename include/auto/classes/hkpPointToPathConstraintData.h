@@ -13,7 +13,8 @@ struct hkpPointToPathConstraintData : public hkpConstraintData {
     virtual void vf3C(undefined4 * param_1, undefined4 * param_2);  // 011DD9B0 slot 0x3C  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011DD650 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpPointToPathConstraintData(undefined4 * param_1, int param_2);  // 011B11A0
-    hkpPointToPathConstraintData();  // 011B11F0
+    ~hkpPointToPathConstraintData();  // 011B11A0
+    hkpPointToPathConstraintData();  // 011B11D0
+    void ctor_011B11F0();  // 011B11F0
     void ctor_011DD6E0();  // 011DD6E0
 };

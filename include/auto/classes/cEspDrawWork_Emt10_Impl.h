@@ -10,5 +10,4 @@ struct cEspDrawWork_Emt10_Impl : public cEspDrawWork_Emt10 {
     virtual void draw();  // 00EDAE40 slot 0x4  overrides Hw::cOtWork
     // non-virtual members
     cEspDrawWork_Emt10_Impl();  // 00F3B600
-    void ctor_00F3F700();  // 00F3F700
 };

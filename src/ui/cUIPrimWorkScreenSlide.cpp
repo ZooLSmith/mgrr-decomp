@@ -98,8 +98,8 @@ LAB_00ccca53:
   return;
 }
 
-// 00CCCAB0  cUIPrimWorkScreenSlide::vf04  size=202  [class]
-void __fastcall cUIPrimWorkScreenSlide::vf04(int param_1)
+// 00CCCAB0  cUIPrimWorkScreenSlide::draw  size=202  [class]
+void __fastcall cUIPrimWorkScreenSlide::draw(int param_1)
 
 {
   undefined1 local_50 [76];

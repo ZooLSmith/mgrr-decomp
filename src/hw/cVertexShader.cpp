@@ -1,27 +1,10 @@
 // src/hw/cVertexShader.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9C190..015F47E0, 32 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA0180..015F47E0, 31 functions
 
 #include "mgrr.h"
 
-// 00F9C190  Hw::cVertexShader::cVertexShader  size=48  [class]
+// 00FA0180  Hw::cVertexShader::cVertexShader  size=30  [class]
 void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
-
-{
-  *param_1 = cShader::vftable;
-  param_1[1] = vftable;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  *(undefined2 *)(param_1 + 4) = 0;
-  param_1[5] = cPixelShader::vftable;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  *(undefined2 *)(param_1 + 8) = 0;
-  param_1[9] = 0;
-  return;
-}
-
-// 00FA0180  Hw::cVertexShader::cVertexShader_8  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_8(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -31,8 +14,8 @@ void __fastcall Hw::cVertexShader::cVertexShader_8(undefined4 *param_1)
   return;
 }
 
-// 00FA04C0  Hw::cVertexShader::cVertexShader_9  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_9(undefined4 *param_1)
+// 00FA04C0  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -86,8 +69,8 @@ void __thiscall FUN_00fa05b0(int param_1,uint param_2)
   return;
 }
 
-// 00FA06A0  Hw::cVertexShader::cVertexShader_10  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_10(undefined4 *param_1)
+// 00FA06A0  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -97,8 +80,8 @@ void __fastcall Hw::cVertexShader::cVertexShader_10(undefined4 *param_1)
   return;
 }
 
-// 00FA1DA0  Hw::cVertexShader::cVertexShader_4  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_4(undefined4 *param_1)
+// 00FA1DA0  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -108,8 +91,8 @@ void __fastcall Hw::cVertexShader::cVertexShader_4(undefined4 *param_1)
   return;
 }
 
-// 00FA1EA0  Hw::cVertexShader::cVertexShader_5  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_5(undefined4 *param_1)
+// 00FA1EA0  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -179,8 +162,8 @@ void __thiscall thunk_FUN_00fa05b0(int param_1,uint param_2)
   return;
 }
 
-// 00FA1F40  Hw::cVertexShader::cVertexShader_7  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_7(undefined4 *param_1)
+// 00FA1F40  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -190,8 +173,8 @@ void __fastcall Hw::cVertexShader::cVertexShader_7(undefined4 *param_1)
   return;
 }
 
-// 00FA1FF0  Hw::cVertexShader::cVertexShader_6  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_6(undefined4 *param_1)
+// 00FA1FF0  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -201,8 +184,8 @@ void __fastcall Hw::cVertexShader::cVertexShader_6(undefined4 *param_1)
   return;
 }
 
-// 00FA20B0  Hw::cVertexShader::cVertexShader_2  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_2(undefined4 *param_1)
+// 00FA20B0  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;
@@ -212,8 +195,8 @@ void __fastcall Hw::cVertexShader::cVertexShader_2(undefined4 *param_1)
   return;
 }
 
-// 00FA21D0  Hw::cVertexShader::cVertexShader_3  size=30  [class]
-void __fastcall Hw::cVertexShader::cVertexShader_3(undefined4 *param_1)
+// 00FA21D0  Hw::cVertexShader::cVertexShader  size=30  [class]
+void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)
 
 {
   *param_1 = cShader::vftable;

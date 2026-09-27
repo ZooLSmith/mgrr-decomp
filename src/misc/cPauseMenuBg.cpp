@@ -8,7 +8,7 @@
 undefined4 * __fastcall cPauseMenuBg::cPauseMenuBg(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   return param_1;
 }
@@ -18,7 +18,7 @@ undefined4 * __thiscall cPauseMenuBg::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -33,7 +33,7 @@ undefined4 * cPauseMenuBg::cPauseMenuBg_2(void)
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x20,&DAT_01b7be50);
   if (puVar1 != (undefined4 *)0x0) {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     *puVar1 = vftable;
     puVar1[3] = "cPauseMenuBg";
     FUN_00d29ca0(0x70,8);
@@ -55,8 +55,8 @@ void __fastcall cPauseMenuBg::vf08(int param_1)
   return;
 }
 
-// 009943E0  cPauseMenuBg::vf14  size=75  [class]
-void __fastcall cPauseMenuBg::vf14(int param_1)
+// 009943E0  cPauseMenuBg::create  size=75  [class]
+void __fastcall cPauseMenuBg::create(int param_1)
 
 {
   int iVar1;

@@ -45,4 +45,7 @@ struct Em8120 : public EmBaseDLC {
     virtual void vf33C(undefined4 param_1, int param_2);  // 006DF450 slot 0x33C  overrides BehaviorEmBase
     virtual void vf34C();  // 006DEA80 slot 0x34C  overrides BehaviorEmBase
     virtual void vf360();  // 006DEBE0 slot 0x360  overrides BehaviorEmBase
+    // non-virtual members
+    static undefined4 vf13C_006DEDE0();  // 006DEDE0
+    Em8120();  // 00AB5570
 };

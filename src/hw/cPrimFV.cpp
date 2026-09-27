@@ -3,8 +3,8 @@
 
 #include "mgrr.h"
 
-// 00FA2B60  Hw::cPrimFV::vf04  size=205  [class]
-void __fastcall Hw::cPrimFV::vf04(int param_1)
+// 00FA2B60  Hw::cPrimFV::draw  size=205  [class]
+void __fastcall Hw::cPrimFV::draw(int param_1)
 
 {
   int iVar1;

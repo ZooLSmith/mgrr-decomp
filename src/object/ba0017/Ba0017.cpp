@@ -44,8 +44,8 @@ void FUN_00404680(short param_1,float *param_2,float *param_3)
   return;
 }
 
-// 00404740  Ba0017::vf40  size=182  [class]
-undefined4 __fastcall Ba0017::vf40(int param_1)
+// 00404740  Ba0017::startup  size=182  [class]
+undefined4 __fastcall Ba0017::startup(int param_1)
 
 {
   int iVar1;
@@ -53,7 +53,7 @@ undefined4 __fastcall Ba0017::vf40(int param_1)
   int unaff_EDI;
   int iVar3;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 != 0) {
     lib::AllocatedArray<Behavior::InstructionContainer>::
     AllocatedArray<Behavior::InstructionContainer>();
@@ -241,8 +241,8 @@ undefined * Ba0017::vf04(void)
   return &DAT_01b34b0c;
 }
 
-// 00AB8E00  Ba0017::vf00  size=43  [class]
-undefined4 __thiscall Ba0017::vf00(undefined4 param_1,byte param_2)
+// 00AB8E00  Ba0017::destruct  size=43  [class]
+undefined4 __thiscall Ba0017::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

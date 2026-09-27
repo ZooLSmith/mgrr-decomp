@@ -131,7 +131,7 @@ LAB_00d8000e:
         if (_DAT_01dc5340 < (float)_DAT_018bbb18) {
           FUN_00da8810((float)_DAT_018bbb18 - _DAT_01dc5340);
         }
-        FUN_00d7fbd0();
+        cEventCutWork::vf08();
         DAT_01dc533c = DAT_01dc533c | 0x64000000;
         _DAT_01dc5340 = 0.0;
         _DAT_018bbb40 = 0;

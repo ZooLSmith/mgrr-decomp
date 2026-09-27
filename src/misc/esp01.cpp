@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp01::esp01(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -18,15 +18,15 @@ undefined4 * __fastcall esp01::esp01(undefined4 *param_1)
 undefined4 __thiscall esp01::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00ED5300  esp01::vf10  size=1  [class]
-void esp01::vf10(void)
+// 00ED5300  esp01::addOtTransList  size=1  [class]
+void esp01::addOtTransList(void)
 
 {
   return;
@@ -173,7 +173,7 @@ void __fastcall esp01::vf08(int param_1)
       FUN_00edfcd0();
       pfStack_2f0 = (float *)0xf209a5;
       FUN_00f20370();
-      FUN_00efed20();
+      esp107::vf10();
     }
     local_240 = *(float *)(param_1 + 400);
     iVar2 = *(int *)(param_1 + 0x4cc);
@@ -529,7 +529,7 @@ LAB_00f21711:
     FUN_00edfcd0();
     pfStack_2f0 = (float *)0xf21d56;
     FUN_00f20370();
-    FUN_00efed20();
+    esp107::vf10();
     iVar8 = FUN_009d4a40();
     fStack_2d0 = -*(float *)(iVar8 + 0x14);
     fStack_2c8 = -*(float *)(iVar8 + 0x18);
@@ -946,9 +946,9 @@ LAB_00f22b67:
   return;
 }
 
-// 00F2D7B0  esp01::vf04  size=1027  [class]
+// 00F2D7B0  esp01::preTrans  size=1027  [class]
 undefined4 __thiscall
-esp01::vf04(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param_4)
+esp01::preTrans(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param_4)
 
 {
   float fVar1;
@@ -962,7 +962,7 @@ esp01::vf04(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param_
   undefined4 *puVar9;
   undefined4 *puVar10;
   
-  iVar6 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar6 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar6 == 0) {
     return 0;
   }

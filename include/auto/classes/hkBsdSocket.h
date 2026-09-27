@@ -17,5 +17,5 @@ struct hkBsdSocket : public hkSocket {
     virtual ulonglong vf28(undefined4 param_2);  // 0102BF90 slot 0x28  overrides hkSocket
     virtual undefined4 vf2C();  // 0102C0F0 slot 0x2C  overrides hkSocket
     // non-virtual members
-    ~hkBsdSocket();  // 0102C0C0
+    hkBsdSocket(int param_2);  // 0102C0C0
 };

@@ -12,5 +12,4 @@ struct cPl0000Weapon : public BehaviorWeapon {
     virtual void vf4C();  // 00B80560 slot 0x4C  overrides Behavior
     // non-virtual members
     cPl0000Weapon();  // 00AA6880
-    void ctor_00AAF280();  // 00AAF280
 };

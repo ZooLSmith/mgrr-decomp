@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ZangekiHugeHoldStatePl0010.h"
 
-// 00B833F0  ZangekiHugeHoldStatePl0010::vf0C  size=5  [class]
-void __thiscall ZangekiHugeHoldStatePl0010::vf0C(int param_1,undefined4 param_2)
+// 00B833F0  ZangekiHugeHoldStatePl0010::SafeCheck  size=5  [class]
+void __thiscall ZangekiHugeHoldStatePl0010::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -138,13 +138,13 @@ LAB_00bb6a53:
   return;
 }
 
-// 00BE3E30  ZangekiHugeHoldStatePl0010::vf10  size=39  [class]
-void __thiscall ZangekiHugeHoldStatePl0010::vf10(undefined4 param_1,undefined4 param_2)
+// 00BE3E30  ZangekiHugeHoldStatePl0010::qteSafeCheck  size=39  [class]
+void __thiscall ZangekiHugeHoldStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 param_2)
 
 {
   FUN_00bd61b0(param_2);
   FUN_00bd6f70(param_2,param_1,100);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

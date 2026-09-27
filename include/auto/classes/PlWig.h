@@ -12,4 +12,6 @@ struct PlWig : public BehaviorAppBase {
     virtual void vf44();  // 00B809D0 slot 0x44  overrides Behavior
     virtual void vf4C();  // 00B809E0 slot 0x4C  overrides Behavior
     virtual void vf50();  // 00B809F0 slot 0x50  overrides Behavior
+    // non-virtual members
+    PlWig();  // 00AAB480
 };

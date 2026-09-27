@@ -125,10 +125,10 @@ uint FUN_00410130(uint param_1,int param_2,uint param_3,uint param_4,uint param_
          param_1 & 0x1f;
 }
 
-// 004101A0  Bh0244::vf40  size=412  [class]
+// 004101A0  Bh0244::startup  size=412  [class]
 /* WARNING: Type propagation algorithm not settling */
 
-undefined4 __fastcall Bh0244::vf40(int *param_1)
+undefined4 __fastcall Bh0244::startup(int *param_1)
 
 {
   int iVar1;
@@ -151,7 +151,7 @@ undefined4 __fastcall Bh0244::vf40(int *param_1)
   undefined4 local_50;
   undefined1 local_2c;
   
-  iVar1 = Bh0140::vf40();
+  iVar1 = BehaviorBh::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -236,8 +236,8 @@ void __fastcall Bh0244::vf54(int *param_1)
   return;
 }
 
-// 00410420  Bh0244::Bh0244_2  size=61  [class]
-void __fastcall Bh0244::Bh0244_2(undefined4 *param_1)
+// 00410420  Bh0244::~Bh0244  size=61  [class]
+void __fastcall Bh0244::~Bh0244(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -245,7 +245,7 @@ void __fastcall Bh0244::Bh0244_2(undefined4 *param_1)
   cEspControler::~cEspControler();
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 
@@ -266,8 +266,8 @@ undefined4 * __fastcall Bh0244::Bh0244(undefined4 *param_1)
   return param_1;
 }
 
-// 00410490  Bh0244::vf00  size=82  [class]
-undefined4 * __thiscall Bh0244::vf00(undefined4 *param_1,byte param_2)
+// 00410490  Bh0244::destruct  size=82  [class]
+undefined4 * __thiscall Bh0244::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -275,7 +275,7 @@ undefined4 * __thiscall Bh0244::vf00(undefined4 *param_1,byte param_2)
   cEspControler::~cEspControler();
   FUN_00c5a280();
   FUN_00c1e230();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

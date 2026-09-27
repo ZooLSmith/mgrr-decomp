@@ -25,7 +25,7 @@ void __fastcall cFilterShaderOculus::vf04(int param_1)
 undefined4 * __fastcall cFilterShaderOculus::cFilterShaderOculus(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[0xc] = 0x1000000;
   param_1[0xc] = 0x1000111;
@@ -54,17 +54,17 @@ undefined4 * __thiscall cFilterShaderOculus::vf00(undefined4 *param_1,byte param
   param_1[0xb] = 0xffffffff;
   param_1[0xc] = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 015F1AF0  cFilterShaderOculus::cFilterShaderOculus_2  size=68  [class]
+// 015F1AF0  cFilterShaderOculus::~cFilterShaderOculus  size=68  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cFilterShaderOculus::cFilterShaderOculus_2(void)
+void cFilterShaderOculus::~cFilterShaderOculus(void)
 
 {
   _DAT_01edcdd0 = vftable;
@@ -75,7 +75,7 @@ void cFilterShaderOculus::cFilterShaderOculus_2(void)
   _DAT_01edcdfc = 0xffffffff;
   _DAT_01edce00 = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

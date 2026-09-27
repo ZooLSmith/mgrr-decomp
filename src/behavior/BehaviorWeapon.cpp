@@ -44,8 +44,8 @@ void BehaviorWeapon::vfA4(void)
   return;
 }
 
-// 00A999C0  BehaviorWeapon::vf40  size=729  [class]
-undefined4 __fastcall BehaviorWeapon::vf40(int param_1)
+// 00A999C0  BehaviorWeapon::startup  size=729  [class]
+undefined4 __fastcall BehaviorWeapon::startup(int param_1)
 
 {
   undefined4 uVar1;
@@ -68,7 +68,7 @@ undefined4 __fastcall BehaviorWeapon::vf40(int param_1)
           iVar3 = 0;
         }
         else {
-          iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+          iVar3 = RigidBodyCollision::RigidBodyCollision();
         }
         *(int *)(param_1 + 0x7b0) = iVar3;
         if (iVar3 != 0) {
@@ -357,7 +357,7 @@ void __thiscall BehaviorWeapon::vf25C(int *param_1,undefined4 param_2,int param_
 undefined4 * __fastcall BehaviorWeapon::BehaviorWeapon(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   param_1[0x228] = 0;
   param_1[0x22a] = 0;
@@ -372,8 +372,8 @@ undefined * BehaviorWeapon::vf04(void)
   return &DAT_01be9c2c;
 }
 
-// 00AA4B70  BehaviorWeapon::vf00  size=105  [class]
-undefined4 * __thiscall BehaviorWeapon::vf00(undefined4 *param_1,byte param_2)
+// 00AA4B70  BehaviorWeapon::destruct  size=105  [class]
+undefined4 * __thiscall BehaviorWeapon::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -387,7 +387,7 @@ undefined4 * __thiscall BehaviorWeapon::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -437,7 +437,7 @@ void __fastcall BehaviorWeapon::vf54(int param_1)
     switchD_0080dbae::default();
     if ((((*(int *)(param_1 + 0x87c) != 0) && (*(char *)(param_1 + 0x470) != '\0')) &&
         ((*(byte *)(param_1 + 0x472) & 0x80) != 0)) && (*(char *)(param_1 + 0x471) != '\0')) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -473,7 +473,7 @@ void __fastcall FUN_00aa52c0(int param_1)
       (**(code **)(*piVar4 + 0x28))((undefined4 *)(param_1 + 0x8a8));
       *(undefined4 *)(param_1 + 0x8a8) = 0;
       *(undefined1 *)(param_1 + 0x8a4) = 0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     goto LAB_00aa5396;
   }

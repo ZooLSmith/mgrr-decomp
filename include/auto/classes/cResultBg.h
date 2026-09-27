@@ -10,5 +10,6 @@ struct cResultBg : public cCustomObjCtrlManager {
     virtual void vf08();  // 00CC32A0 slot 0x8  overrides cCustomObjCtrlManager
     virtual void create();  // 00CDBDE0 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
+    ~cResultBg();  // 00CDBD50
     cResultBg();  // 00D36AF0
 };

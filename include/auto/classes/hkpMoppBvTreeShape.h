@@ -13,4 +13,6 @@ struct hkpMoppBvTreeShape : public hkMoppBvTreeShapeBase {
     virtual undefined vf1C();  // 0113E100 slot 0x1C  overrides hkpShapeBase
     virtual int vf38();  // 0113E550 slot 0x38  overrides hkpShape
     virtual undefined4 vf40();  // 0113DF40 slot 0x40  overrides hkpShape
+    // non-virtual members
+    hkpMoppBvTreeShape();  // 0113F230
 };

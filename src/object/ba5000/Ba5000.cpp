@@ -206,13 +206,13 @@ void FUN_00406760(void)
   return;
 }
 
-// 004067D0  Ba5000::vf40  size=181  [class]
-undefined4 __fastcall Ba5000::vf40(int param_1)
+// 004067D0  Ba5000::startup  size=181  [class]
+undefined4 __fastcall Ba5000::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -1079,8 +1079,8 @@ undefined * Ba5000::vf04(void)
   return &DAT_01b34b38;
 }
 
-// 00AB95A0  Ba5000::vf00  size=99  [class]
-int __thiscall Ba5000::vf00(int param_1,byte param_2)
+// 00AB95A0  Ba5000::destruct  size=99  [class]
+int __thiscall Ba5000::destruct(int param_1,byte param_2)
 
 {
   if (*(int *)(param_1 + 0xb8c) != 0) {

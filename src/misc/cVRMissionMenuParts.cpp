@@ -1,5 +1,5 @@
 // src/misc/cVRMissionMenuParts.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00995420..009BF030, 13 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00995420..009BF030, 14 functions
 
 #include "mgrr.h"
 #include "cVRMissionMenuParts.h"
@@ -107,11 +107,40 @@ int __fastcall FUN_009955e0(int param_1)
   return iVar2;
 }
 
+// 009A75F0  cVRMissionMenuParts::~cVRMissionMenuParts  size=143  [class]
+void __fastcall cVRMissionMenuParts::~cVRMissionMenuParts(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0x108] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x108])(1);
+    param_1[0x108] = 0;
+  }
+  FUN_009967e0();
+  FUN_00cfdc10();
+  Hw::cTexture::~cTexture();
+  param_1[0x104] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[0x105] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x105])(1);
+    param_1[0x105] = 0;
+  }
+  iVar1 = 0x22;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
 // 009B6820  cVRMissionMenuParts::vf00  size=30  [class]
 undefined4 __thiscall cVRMissionMenuParts::vf00(undefined4 param_1,byte param_2)
 
 {
-  cMessWindowCtrl::cMessWindowCtrl_22();
+  ~cVRMissionMenuParts();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -599,8 +628,8 @@ void __fastcall cVRMissionMenuParts::vf08(int param_1)
   return;
 }
 
-// 009BE770  cVRMissionMenuParts::vf14  size=2177  [class]
-void __fastcall cVRMissionMenuParts::vf14(int param_1)
+// 009BE770  cVRMissionMenuParts::create  size=2177  [class]
+void __fastcall cVRMissionMenuParts::create(int param_1)
 
 {
   undefined2 uVar1;

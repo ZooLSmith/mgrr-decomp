@@ -15,7 +15,7 @@ undefined4 cSampleCustomObjDispBase::vf14(void)
 undefined4 * __fastcall cSampleCustomObjDispBase::cSampleCustomObjDispBase(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

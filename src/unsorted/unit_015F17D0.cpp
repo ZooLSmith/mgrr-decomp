@@ -7,7 +7,7 @@
 void FUN_015f17d0(void)
 
 {
-  cFilterShader00::cFilterShader00();
+  cFilterShader00::~cFilterShader00();
   return;
 }
 

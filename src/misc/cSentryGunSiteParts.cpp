@@ -153,8 +153,8 @@ void __fastcall cSentryGunSiteParts::vf08(int param_1)
   return;
 }
 
-// 00D17910  cSentryGunSiteParts::vf14  size=613  [class]
-void __fastcall cSentryGunSiteParts::vf14(int param_1)
+// 00D17910  cSentryGunSiteParts::create  size=613  [class]
+void __fastcall cSentryGunSiteParts::create(int param_1)
 
 {
   float *pfVar1;

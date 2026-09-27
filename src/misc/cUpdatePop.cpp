@@ -4,22 +4,22 @@
 #include "mgrr.h"
 #include "cUpdatePop.h"
 
-// 00990760  cUpdatePop::cUpdatePop_2  size=18  [class]
-undefined4 * __fastcall cUpdatePop::cUpdatePop_2(undefined4 *param_1)
+// 00990760  cUpdatePop::cUpdatePop  size=18  [class]
+undefined4 * __fastcall cUpdatePop::cUpdatePop(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   return param_1;
 }
 
-// 00990780  cUpdatePop::cUpdatePop  size=27  [class]
-void __fastcall cUpdatePop::cUpdatePop(undefined4 *param_1)
+// 00990780  cUpdatePop::~cUpdatePop  size=27  [class]
+void __fastcall cUpdatePop::~cUpdatePop(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   FUN_00cfe0f0(0xe);
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -111,7 +111,7 @@ undefined4 * __thiscall cUpdatePop::vf00(undefined4 *param_1,byte param_2)
 {
   *param_1 = vftable;
   FUN_00cfe0f0(0xe);
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -138,8 +138,8 @@ void __fastcall cUpdatePop::vf08(int param_1)
   return;
 }
 
-// 009A2050  cUpdatePop::vf14  size=32  [class]
-void __fastcall cUpdatePop::vf14(int param_1)
+// 009A2050  cUpdatePop::create  size=32  [class]
+void __fastcall cUpdatePop::create(int param_1)
 
 {
   if (*(uint *)(param_1 + 0x2c) != (uint)DAT_01dc1418) {

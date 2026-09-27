@@ -12,6 +12,6 @@ struct SlashTestContents : public ContentsBase {
     virtual void vf0C();  // 008DBAA0 slot 0xC  overrides ContentsBase
     virtual void vf10();  // 008DBA20 slot 0x10  overrides ContentsBase
     // non-virtual members
-    SlashTestContents();  // 008DB520
-    void ctor_008DC110();  // 008DC110
+    ~SlashTestContents();  // 008DB520
+    SlashTestContents();  // 008DC110
 };

@@ -11,5 +11,6 @@ struct hkpVehicleManager : public hkReferencedObject {
     virtual void vf10(int param_2);  // 01290010 slot 0x10
     virtual void vf14(undefined4 param_2);  // 012905C0 slot 0x14
     // non-virtual members
-    hkpVehicleManager(undefined4 * param_1);  // 01288390
+    ~hkpVehicleManager();  // 01288390
+    hkpVehicleManager();  // 012883B0
 };

@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cEspDrawWorkImmediate.h"
 
-// 00ED8500  cEspDrawWorkImmediate::vf04  size=151  [class]
-void __fastcall cEspDrawWorkImmediate::vf04(int param_1)
+// 00ED8500  cEspDrawWorkImmediate::draw  size=151  [class]
+void __fastcall cEspDrawWorkImmediate::draw(int param_1)
 
 {
   float fVar1;
@@ -28,7 +28,7 @@ void __fastcall cEspDrawWorkImmediate::vf04(int param_1)
       fVar1 = *(float *)(param_1 + 0x8c) * fVar1;
       *(float *)(param_1 + 0x8c) = fVar1;
       if (fVar1 < 0.01 == (fVar1 == 0.01)) {
-        cEspDrawWork::vf04();
+        cEspDrawWork::draw();
         return;
       }
     }

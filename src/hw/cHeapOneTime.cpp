@@ -14,8 +14,8 @@ void __fastcall Hw::cHeapOneTime::vf04(int param_1)
   return;
 }
 
-// 00DD2D60  Hw::cHeapOneTime::vf30  size=18  [class]
-undefined4 Hw::cHeapOneTime::vf30(void)
+// 00DD2D60  Hw::cHeapOneTime::createChildHeap  size=18  [class]
+undefined4 Hw::cHeapOneTime::createChildHeap(void)
 
 {
   FUN_00dd56a0(&DAT_016c44cc);

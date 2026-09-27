@@ -1,5 +1,5 @@
 // src/enemy/em8040/Em8040.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0065C580..00ABA390, 342 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0065C580..00ABA390, 343 functions
 
 #include "mgrr.h"
 #include "Em8040.h"
@@ -151,7 +151,7 @@ void __fastcall Em8040::vf2F8(int *param_1)
     (**(code **)(*param_1 + 0x344))(10,0,0);
     param_1[0x1af] = 1;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -2060,7 +2060,7 @@ undefined4 __thiscall Em8040::getAttackInfo(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_01646c90);
     return 0;
   }
@@ -4383,7 +4383,7 @@ void __fastcall Em8040::createDestructExplosion(int param_1)
   uVar9 = (undefined1)((uint)unaff_EBX >> 0x18);
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar6 = *(undefined4 **)(iVar2 + 8);
       *(undefined4 *)(iVar2 + 4) = 1;
@@ -6295,7 +6295,7 @@ void __fastcall FUN_006677e0(int *param_1)
     param_1[0x45d] = param_1[0x45d] & 0xfbffffff;
   }
   (**(code **)(*param_1 + 0x20))();
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   param_1[0x139] = 1;
   iVar1 = FUN_00a81330();
   if (iVar1 != 0) {
@@ -14489,14 +14489,14 @@ void __fastcall FUN_00676b80(int *param_1)
   return;
 }
 
-// 00676C40  Em8040::vf40  size=198  [class]
-void __fastcall Em8040::vf40(int param_1)
+// 00676C40  Em8040::startup  size=198  [class]
+void __fastcall Em8040::startup(int param_1)
 
 {
   undefined4 uVar1;
   int iVar2;
   
-  iVar2 = EmBaseDLC::vf40();
+  iVar2 = EmBaseDLC::startup();
   if (iVar2 == 0) {
     return;
   }
@@ -14532,8 +14532,8 @@ void Em8040::vf48(void)
   return;
 }
 
-// 00676D20  Em8040::vf264  size=1  [class]
-undefined4 __thiscall Em8040::vf264(int param_1,int param_2)
+// 00676D20  Em8040::setEmSetInfo  size=1  [class]
+undefined4 __thiscall Em8040::setEmSetInfo(int param_1,int param_2)
 
 {
   int iVar1;
@@ -18375,7 +18375,7 @@ void __fastcall FUN_0067b580(int *param_1)
       fVar12 = 0.0;
       (**(code **)(*param_1 + 0x20))();
       FUN_0065e390();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     FUN_00ac8fd0();
     iVar3 = FUN_00a81330();
@@ -18596,6 +18596,37 @@ void Em8040::vf4C(void)
   return;
 }
 
+// 00AB4AB0  Em8040::Em8040  size=254  [class]
+undefined4 * __fastcall Em8040::Em8040(undefined4 *param_1)
+
+{
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  FUN_00904d60();
+  FUN_00904d60();
+  cEspControler::cEspControler();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  param_1[0x45d] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  FUN_00a7c930();
+  FUN_00a831e0();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a603a0();
+  cEspControler::cEspControler();
+  FUN_00a7c930();
+  return param_1;
+}
+
 // 00AB4BB0  Em8040::vf04  size=6  [class]
 undefined * Em8040::vf04(void)
 
@@ -18633,12 +18664,12 @@ void FUN_00ab4be0(void)
   FUN_00905ce0();
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00ABA390  Em8040::vf00  size=30  [class]
-undefined4 __thiscall Em8040::vf00(undefined4 param_1,byte param_2)
+// 00ABA390  Em8040::destruct  size=30  [class]
+undefined4 __thiscall Em8040::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00ab4be0();

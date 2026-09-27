@@ -73,4 +73,6 @@ struct Emc030 : public EmBaseDLC {
     virtual void vf350();  // 00743860 slot 0x350  overrides BehaviorEmBase
     virtual void vf360();  // 007440A0 slot 0x360  overrides BehaviorEmBase
     virtual undefined4 vf368();  // 00744330 slot 0x368  overrides BehaviorEmBase
+    // non-virtual members
+    Emc030();  // 00AB2180
 };

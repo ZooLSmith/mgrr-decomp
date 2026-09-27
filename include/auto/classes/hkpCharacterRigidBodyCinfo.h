@@ -9,5 +9,6 @@ struct hkpCharacterRigidBodyCinfo : public hkpCharacterControllerCinfo {
     virtual undefined4 * vf00(byte param_2);  // 008E30A0 slot 0x0  overrides hkBaseObject
     // non-virtual members
     hkpCharacterRigidBodyCinfo();  // 008E2FE0
-    hkpCharacterRigidBodyCinfo(undefined4 * param_1);  // 01276210
+    ~hkpCharacterRigidBodyCinfo();  // 01276210
+    void ctor_01276240();  // 01276240
 };

@@ -14,9 +14,7 @@ struct hkpEntityListener {
     // non-virtual members
     hkpEntityListener();  // 0091F310
     void ctor_0091F420();  // 0091F420
-    hkpEntityListener(int param_2);  // 0126F810
     hkpEntityListener(undefined4 * param_1);  // 01275D20
     void ctor_01279460();  // 01279460
-    void ctor_01279B50(int param_2);  // 01279B50
-    void ctor_0127FDF0();  // 0127FDF0
+    hkpEntityListener(int param_2);  // 01279B50
 };

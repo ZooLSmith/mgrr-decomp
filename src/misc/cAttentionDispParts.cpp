@@ -54,8 +54,8 @@ undefined4 * __thiscall cAttentionDispParts::vf00(undefined4 *param_1,byte param
   return param_1;
 }
 
-// 00CEFB90  cAttentionDispParts::vf14  size=225  [class]
-void __fastcall cAttentionDispParts::vf14(int param_1)
+// 00CEFB90  cAttentionDispParts::create  size=225  [class]
+void __fastcall cAttentionDispParts::create(int param_1)
 
 {
   int iVar1;

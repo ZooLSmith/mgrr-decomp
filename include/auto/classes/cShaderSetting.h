@@ -18,15 +18,11 @@ struct cShaderSetting {
     // non-virtual members
     cShaderSetting();  // 009DCB80
     void ctor_009DCC20();  // 009DCC20
-    cShaderSetting(byte param_2);  // 00FAC210
-    void ctor_00FAC330(byte param_2);  // 00FAC330
-    void ctor_00FAC3D0(byte param_2);  // 00FAC3D0
-    void ctor_00FAC4F0(byte param_2);  // 00FAC4F0
-    void ctor_00FACB90(byte param_2);  // 00FACB90
+    ~cShaderSetting();  // 00FAC210
+    cShaderSetting(byte param_2);  // 00FACB90
     void ctor_00FACC30(byte param_2);  // 00FACC30
     void ctor_00FACCD0(byte param_2);  // 00FACCD0
     void ctor_00FACD70(byte param_2);  // 00FACD70
-    void ctor_00FACDB0();  // 00FACDB0
     void ctor_00FACDE0(byte param_2);  // 00FACDE0
     void ctor_00FACE50(byte param_2);  // 00FACE50
     void ctor_00FACEC0(byte param_2);  // 00FACEC0
@@ -38,7 +34,6 @@ struct cShaderSetting {
     void ctor_00FAD220(byte param_2);  // 00FAD220
     void ctor_00FB0530(byte param_2);  // 00FB0530
     void ctor_00FB0810(byte param_2);  // 00FB0810
-    void ctor_00FB0840();  // 00FB0840
     void ctor_00FB0870(byte param_2);  // 00FB0870
     void ctor_00FB08C0(byte param_2);  // 00FB08C0
     void ctor_00FB0910(byte param_2);  // 00FB0910
@@ -48,12 +43,7 @@ struct cShaderSetting {
     void ctor_00FB0B90(byte param_2);  // 00FB0B90
     void ctor_00FB0BF0(byte param_2);  // 00FB0BF0
     void ctor_00FB0C70(byte param_2);  // 00FB0C70
-    void ctor_00FB2520(byte param_2);  // 00FB2520
-    void ctor_00FB2590(byte param_2);  // 00FB2590
     void ctor_00FB2620(byte param_2);  // 00FB2620
-    void ctor_00FB2690(byte param_2);  // 00FB2690
-    void ctor_00FB2700(byte param_2);  // 00FB2700
-    void ctor_00FB2800(byte param_2);  // 00FB2800
     void ctor_00FB2990(byte param_2);  // 00FB2990
     void ctor_00FB54E0(byte param_2);  // 00FB54E0
     void ctor_00FB5540(byte param_2);  // 00FB5540
@@ -88,12 +78,8 @@ struct cShaderSetting {
     void ctor_00FB6050(byte param_2);  // 00FB6050
     void ctor_00FB60B0(byte param_2);  // 00FB60B0
     void ctor_00FB6110(byte param_2);  // 00FB6110
-    void ctor_00FB6C50(byte param_2);  // 00FB6C50
     void ctor_00FB7140(byte param_2);  // 00FB7140
-    void ctor_00FB73A0(byte param_2);  // 00FB73A0
-    void ctor_00FB75E0(byte param_2);  // 00FB75E0
     void ctor_00FB8260(byte param_2);  // 00FB8260
-    void ctor_00FB82B0(byte param_2);  // 00FB82B0
     void ctor_00FB86B0(byte param_2);  // 00FB86B0
     void ctor_00FB8920(byte param_2);  // 00FB8920
     void ctor_00FBA470(byte param_2);  // 00FBA470
@@ -101,16 +87,7 @@ struct cShaderSetting {
     void ctor_00FBA520(byte param_2);  // 00FBA520
     void ctor_00FBA580(byte param_2);  // 00FBA580
     void ctor_015F4810();  // 015F4810
-    void ctor_015F4860();  // 015F4860
-    void ctor_015F48A0();  // 015F48A0
-    void ctor_015F48E0();  // 015F48E0
-    void ctor_015F4920();  // 015F4920
     void ctor_015F4960();  // 015F4960
-    void ctor_015F4970();  // 015F4970
-    void ctor_015F49B0();  // 015F49B0
-    void ctor_015F49F0();  // 015F49F0
-    void ctor_015F4A30();  // 015F4A30
-    void ctor_015F4A70();  // 015F4A70
     void ctor_015F4AB0();  // 015F4AB0
     void ctor_015F4AE0();  // 015F4AE0
     void ctor_015F4AF0();  // 015F4AF0
@@ -405,7 +382,6 @@ struct cShaderSetting {
     void ctor_015F5D00();  // 015F5D00
     void ctor_015F5D10();  // 015F5D10
     void ctor_015F5D20();  // 015F5D20
-    void ctor_015F5D30();  // 015F5D30
     void ctor_015F5D50();  // 015F5D50
     void ctor_015F5D60();  // 015F5D60
     void ctor_015F5D70();  // 015F5D70
@@ -416,7 +392,6 @@ struct cShaderSetting {
     void ctor_015F5DC0();  // 015F5DC0
     void ctor_015F5DE0();  // 015F5DE0
     void ctor_015F5DF0();  // 015F5DF0
-    void ctor_015F5E00();  // 015F5E00
     void ctor_015F5E20();  // 015F5E20
     void ctor_015F5E30();  // 015F5E30
     void ctor_015F5E40();  // 015F5E40

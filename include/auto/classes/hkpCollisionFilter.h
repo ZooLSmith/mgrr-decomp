@@ -12,6 +12,7 @@ struct hkpCollisionFilter : public hkReferencedObject, public hkpCollidableColli
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual void vf0C();  // 008FD6B0 slot 0xC
     // non-virtual members
+    hkpCollisionFilter();  // 01132860
     static void vf00();  // 011328D0
     static void vf0C_011328E0();  // 011328E0
     static void vf04();  // 011328F0

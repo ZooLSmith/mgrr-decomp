@@ -32,7 +32,7 @@ hkpAllRayHitCollector::hkpAllRayHitCollector_4
   int local_31c;
   uint local_318;
   
-  hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector();
   iVar12 = RayCastMultiHitWork::RayCastMultiHitWork(local_330,param_5,param_6,param_7,param_9);
   if (iVar12 == 0) {
     local_330[0] = vftable;

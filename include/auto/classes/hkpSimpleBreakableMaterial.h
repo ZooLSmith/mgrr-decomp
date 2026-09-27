@@ -14,4 +14,5 @@ struct hkpSimpleBreakableMaterial : public hkpBreakableMaterial {
     // non-virtual members
     hkpSimpleBreakableMaterial();  // 011DD3F0
     void ctor_011DD420();  // 011DD420
+    void ctor_011DD440();  // 011DD440
 };

@@ -2,11 +2,12 @@
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0113C420..0113C420, 1 functions
 
 #include "mgrr.h"
-#include "hkpConvexVerticesShape.h"
+#include "hkpConvexVerticesConnectivity.h"
 
-// 0113C420  hkpConvexVerticesShape::hkpConvexVerticesShape  size=1237  [__FILE__]
+// 0113C420  hkpConvexVerticesConnectivity::hkpConvexVerticesConnectivity  size=1237  [__FILE__]
 undefined4 * __thiscall
-hkpConvexVerticesShape::hkpConvexVerticesShape(undefined4 *param_1,undefined4 param_2,char *param_3)
+hkpConvexVerticesConnectivity::hkpConvexVerticesConnectivity
+          (undefined4 *param_1,undefined4 param_2,char *param_3)
 
 {
   int *piVar1;
@@ -49,7 +50,7 @@ hkpConvexVerticesShape::hkpConvexVerticesShape(undefined4 *param_1,undefined4 pa
   *(undefined2 *)((int)param_1 + 10) = 0;
   param_1[3] = 0;
   param_1[4] = uVar2;
-  *param_1 = vftable;
+  *param_1 = hkpConvexVerticesShape::vftable;
   param_1[0x10] = 0;
   param_1[0x11] = 0;
   param_1[0x12] = 0x80000000;
@@ -78,7 +79,7 @@ hkpConvexVerticesShape::hkpConvexVerticesShape(undefined4 *param_1,undefined4 pa
       puVar11 = (undefined4 *)(*pcVar9)();
       return puVar11;
     }
-    hkBaseObject::hkBaseObject_38();
+    ::hkBaseObject::hkBaseObject_38();
     uVar15 = extraout_ECX_00;
   }
   if ((3 < *(int *)(param_3 + 8)) &&
@@ -149,7 +150,7 @@ hkpConvexVerticesShape::hkpConvexVerticesShape(undefined4 *param_1,undefined4 pa
     pvVar14 = TlsGetValue(DAT_01f8fc4c);
     puVar11 = (undefined4 *)(**(code **)(**(int **)((int)pvVar14 + 0x2c) + 4))(0x20);
     puVar11[1] = 0x10020;
-    *puVar11 = hkpConvexVerticesConnectivity::vftable;
+    *puVar11 = vftable;
     puVar11[2] = 0;
     puVar11[3] = 0;
     puVar11[4] = 0x80000000;
@@ -245,7 +246,7 @@ hkpConvexVerticesShape::hkpConvexVerticesShape(undefined4 *param_1,undefined4 pa
   }
   local_3c = 0;
   local_34 = 0x80000000;
-  hkBaseObject::hkBaseObject_27();
+  ::hkBaseObject::hkBaseObject_27();
   return param_1;
 }
 

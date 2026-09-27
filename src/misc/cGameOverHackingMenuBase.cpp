@@ -22,7 +22,7 @@ undefined4 __thiscall cGameOverHackingMenuBase::vf14(int param_1,undefined4 para
 undefined4 * __fastcall cGameOverHackingMenuBase::cGameOverHackingMenuBase(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

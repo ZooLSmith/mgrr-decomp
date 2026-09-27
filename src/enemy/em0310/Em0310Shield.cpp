@@ -36,8 +36,8 @@ void __fastcall Em0310Shield::vf4C(int *param_1)
   return;
 }
 
-// 00585EC0  Em0310Shield::vf40  size=495  [class]
-undefined4 __fastcall Em0310Shield::vf40(int param_1)
+// 00585EC0  Em0310Shield::startup  size=495  [class]
+undefined4 __fastcall Em0310Shield::startup(int param_1)
 
 {
   uint *puVar1;
@@ -197,7 +197,7 @@ void __fastcall Em0310Shield::vf30(int param_1)
 undefined4 * __fastcall Em0310Shield::Em0310Shield(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_004105d0();
@@ -219,8 +219,8 @@ void Em0310Shield::vf1D0(void)
   return;
 }
 
-// 00AB6FE0  Em0310Shield::vf00  size=105  [class]
-undefined4 * __thiscall Em0310Shield::vf00(undefined4 *param_1,byte param_2)
+// 00AB6FE0  Em0310Shield::destruct  size=105  [class]
+undefined4 * __thiscall Em0310Shield::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -234,7 +234,7 @@ undefined4 * __thiscall Em0310Shield::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

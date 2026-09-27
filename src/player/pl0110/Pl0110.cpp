@@ -226,8 +226,8 @@ void __fastcall FUN_005f0ba0(int param_1)
   return;
 }
 
-// 005F0C90  Pl0110::vf40  size=1301  [class]
-undefined4 __fastcall Pl0110::vf40(int param_1)
+// 005F0C90  Pl0110::startup  size=1301  [class]
+undefined4 __fastcall Pl0110::startup(int param_1)
 
 {
   uint *puVar1;
@@ -465,7 +465,7 @@ LAB_005f10d5:
 undefined4 * __fastcall Pl0110::Pl0110(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -477,8 +477,8 @@ undefined * Pl0110::vf04(void)
   return &DAT_01b353e8;
 }
 
-// 00AB6500  Pl0110::vf00  size=105  [class]
-undefined4 * __thiscall Pl0110::vf00(undefined4 *param_1,byte param_2)
+// 00AB6500  Pl0110::destruct  size=105  [class]
+undefined4 * __thiscall Pl0110::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -492,7 +492,7 @@ undefined4 * __thiscall Pl0110::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

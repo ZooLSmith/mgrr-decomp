@@ -316,7 +316,7 @@ bool __thiscall cEspDrawWork::cEspDrawWork_4(int param_1,int param_2,int param_3
   undefined4 uVar5;
   undefined4 uVar6;
   
-  FUN_00efed20();
+  esp107::vf10();
   if (*(float *)(param_1 + 0x124) <= 0.01) {
     return false;
   }
@@ -402,7 +402,7 @@ void __fastcall cEspDrawWork::cEspDrawWork_5(int param_1)
   undefined4 local_14;
   
   iVar3 = FUN_00dd7ad0();
-  FUN_00efed20();
+  esp107::vf10();
   if (*(float *)(param_1 + 0x124) <= 0.01) {
     return;
   }
@@ -599,7 +599,7 @@ void __fastcall cEspDrawWork::cEspDrawWork_6(int param_1)
       (&DAT_01eddb38)[uVar5 + iVar2] = (&DAT_01eddb38)[uVar5 + iVar2] | uVar4;
     }
   }
-  FUN_00efed20();
+  esp107::vf10();
   if (*(float *)(param_1 + 0x124) <= 0.01) {
     return;
   }
@@ -634,7 +634,7 @@ bool __thiscall cEspDrawWork::cEspDrawWork_2(int param_1,int param_2,int param_3
   undefined4 local_8;
   undefined4 local_4;
   
-  FUN_00efed20();
+  esp107::vf10();
   if (*(float *)(param_1 + 0x124) <= 0.01) {
     return false;
   }
@@ -737,7 +737,7 @@ void __thiscall cEspDrawWork::cEspDrawWork_3(int param_1,int param_2)
   undefined4 local_8;
   undefined4 local_4;
   
-  FUN_00efed20();
+  esp107::vf10();
   if (0.01 < *(float *)(param_1 + 0x124)) {
     if (param_2 == -1) {
       if (DAT_01edd490 == 0) {
@@ -827,7 +827,7 @@ void __fastcall FUN_00f2b140(int *param_1)
         *(undefined4 *)(iVar2 + 0x68) = 0x3f800000;
         *(undefined4 *)(iVar2 + 0x54) = 0x3f800000;
         *(undefined4 *)(iVar2 + 0x40) = 0x3f800000;
-        FUN_00efed20();
+        esp107::vf10();
         piVar1 = param_1 + 0xf2;
         FUN_00edfcd0(piVar1);
         FUN_00f26b40(iVar2);
@@ -1033,8 +1033,8 @@ void FUN_00f45e40(int *param_1)
   return;
 }
 
-// 00F46BA0  cEspDrawWork::vf04  size=87  [class]
-void __fastcall cEspDrawWork::vf04(int param_1)
+// 00F46BA0  cEspDrawWork::draw  size=87  [class]
+void __fastcall cEspDrawWork::draw(int param_1)
 
 {
   int iVar1;

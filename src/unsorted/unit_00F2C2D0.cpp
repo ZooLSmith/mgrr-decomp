@@ -30,7 +30,7 @@ undefined4 __fastcall FUN_00f2c2d0(int param_1)
   uVar6 = (uint)*(ushort *)(uVar5 + 4);
   if ((*(int *)(param_1 + 100) == 0) || (iVar4 = FUN_00f4a2d0(uVar6,piVar1), iVar4 == 0)) {
     iVar4 = Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
-            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3();
+            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>();
     if (uVar6 - 0xf000 < 0x20) {
       iVar4 = *(int *)(iVar4 + -0x37fd8 + uVar6 * 4);
 LAB_00f2c342:

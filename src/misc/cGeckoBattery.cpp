@@ -11,8 +11,8 @@ undefined * cGeckoBattery::vf04(void)
   return &DAT_01be9d70;
 }
 
-// 00AB7890  cGeckoBattery::vf00  size=105  [class]
-undefined4 * __thiscall cGeckoBattery::vf00(undefined4 *param_1,byte param_2)
+// 00AB7890  cGeckoBattery::destruct  size=105  [class]
+undefined4 * __thiscall cGeckoBattery::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,7 +26,7 @@ undefined4 * __thiscall cGeckoBattery::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -207,8 +207,8 @@ void cGeckoBattery::vf25C(undefined4 param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 00B76E90  cGeckoBattery::vf40  size=352  [class]
-undefined4 __fastcall cGeckoBattery::vf40(int param_1)
+// 00B76E90  cGeckoBattery::startup  size=352  [class]
+undefined4 __fastcall cGeckoBattery::startup(int param_1)
 
 {
   uint *puVar1;
@@ -224,7 +224,7 @@ undefined4 __fastcall cGeckoBattery::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar3 = BehaviorAppBase::vf40();
+  iVar3 = BehaviorAppBase::startup();
   if ((iVar3 != 0) &&
      (iVar3 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>(), iVar3 != 0)) {
     uVar6 = 2;
@@ -693,7 +693,7 @@ LAB_00b77a5f:
     if (piVar7 == (int *)0x0) {
       if (piVar4 == (int *)0x0) {
         if (piStack_174 == (int *)0x0) {
-          FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
         }
         else {
           FUN_006511d0(param_1[0x13c]);
@@ -922,7 +922,7 @@ void __fastcall cGeckoBattery::vf4C(int *param_1)
   if (param_1[0x2fb] == 0) {
     return;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 

@@ -8,7 +8,7 @@
 undefined4 * __fastcall cCollectionIDItemParts::cCollectionIDItemParts(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   param_1[0xc] = 0;
   param_1[10] = 0;
   param_1[0xb] = 0;
@@ -26,7 +26,7 @@ undefined4 * cCollectionIDItemParts::cCollectionIDItemParts_2(void)
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x3c,&DAT_01b7be50);
   if (puVar1 != (undefined4 *)0x0) {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     puVar1[0xe] = 0;
     *puVar1 = vftable;
     puVar1[0xc] = 0;
@@ -61,15 +61,15 @@ undefined4 * __thiscall cCollectionIDItemParts::vf00(undefined4 *param_1,byte pa
 
 {
   *param_1 = vftable;
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 0099D400  cCollectionIDItemParts::vf14  size=195  [class]
-void __fastcall cCollectionIDItemParts::vf14(int param_1)
+// 0099D400  cCollectionIDItemParts::create  size=195  [class]
+void __fastcall cCollectionIDItemParts::create(int param_1)
 
 {
   float10 fVar1;

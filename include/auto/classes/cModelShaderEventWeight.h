@@ -8,7 +8,6 @@ struct cModelShaderEventWeight {
     virtual undefined4 vf00(byte param_2);  // 00F945D0 slot 0x0  overrides Hw::cShader
     virtual void vf04();  // 00F901C0 slot 0x4  overrides Hw::cShader
     // non-virtual members
-    cModelShaderEventWeight();  // 00F945A0
-    void ctor_00F946C0();  // 00F946C0
-    void ctor_015F4160();  // 015F4160
+    ~cModelShaderEventWeight();  // 00F945A0
+    cModelShaderEventWeight();  // 00F946C0
 };

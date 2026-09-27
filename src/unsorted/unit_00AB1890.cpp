@@ -9,7 +9,7 @@ void FUN_00ab1890(void)
 {
   FUN_00dd7270();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 

@@ -14,8 +14,8 @@ undefined4 * __thiscall Hw::cOtWork::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 009CD7E0  Hw::cOtWork::cOtWork_24  size=55  [class]
-void __fastcall Hw::cOtWork::cOtWork_24(undefined4 *param_1)
+// 009CD7E0  Hw::cOtWork::~cOtWork  size=55  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   thunk_FUN_00fa45a0();
@@ -26,8 +26,8 @@ void __fastcall Hw::cOtWork::cOtWork_24(undefined4 *param_1)
   return;
 }
 
-// 00A2A070  Hw::cOtWork::cOtWork_19  size=19  [class]
-void __fastcall Hw::cOtWork::cOtWork_19(undefined4 *param_1)
+// 00A2A070  Hw::cOtWork::~cOtWork  size=19  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   thunk_FUN_00fa45a0();
@@ -35,8 +35,8 @@ void __fastcall Hw::cOtWork::cOtWork_19(undefined4 *param_1)
   return;
 }
 
-// 00A2A750  Hw::cOtWork::cOtWork_20  size=27  [class]
-void __fastcall Hw::cOtWork::cOtWork_20(undefined4 *param_1)
+// 00A2A750  Hw::cOtWork::~cOtWork  size=27  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   thunk_FUN_00fa45a0();
@@ -45,18 +45,8 @@ void __fastcall Hw::cOtWork::cOtWork_20(undefined4 *param_1)
   return;
 }
 
-// 00A494B0  Hw::cOtWork::cOtWork_21  size=33  [class]
-void __fastcall Hw::cOtWork::cOtWork_21(undefined4 *param_1)
-
-{
-  FUN_00fa5be0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00A4C6F0  Hw::cOtWork::cOtWork_28  size=33  [class]
-void __fastcall Hw::cOtWork::cOtWork_28(undefined4 *param_1)
+// 00A494B0  Hw::cOtWork::~cOtWork  size=33  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -65,8 +55,18 @@ void __fastcall Hw::cOtWork::cOtWork_28(undefined4 *param_1)
   return;
 }
 
-// 00CB03A0  Hw::cOtWork::cOtWork_13  size=30  [class]
-void __fastcall Hw::cOtWork::cOtWork_13(undefined4 *param_1)
+// 00A4C6F0  Hw::cOtWork::~cOtWork  size=33  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  FUN_00fa5be0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00CB03A0  Hw::cOtWork::~cOtWork  size=30  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -262,8 +262,8 @@ undefined4 __thiscall FUN_00cb04c0(int param_1,int param_2,uint param_3)
   return 0;
 }
 
-// 00CB0870  Hw::cOtWork::cOtWork_12  size=27  [class]
-void __fastcall Hw::cOtWork::cOtWork_12(undefined4 *param_1)
+// 00CB0870  Hw::cOtWork::~cOtWork  size=27  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -272,8 +272,8 @@ void __fastcall Hw::cOtWork::cOtWork_12(undefined4 *param_1)
   return;
 }
 
-// 00CCC0F0  Hw::cOtWork::cOtWork_26  size=33  [class]
-void __fastcall Hw::cOtWork::cOtWork_26(undefined4 *param_1)
+// 00CCC0F0  Hw::cOtWork::~cOtWork  size=33  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -282,8 +282,8 @@ void __fastcall Hw::cOtWork::cOtWork_26(undefined4 *param_1)
   return;
 }
 
-// 00CCC460  Hw::cOtWork::cOtWork_27  size=33  [class]
-void __fastcall Hw::cOtWork::cOtWork_27(undefined4 *param_1)
+// 00CCC460  Hw::cOtWork::~cOtWork  size=33  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -292,8 +292,8 @@ void __fastcall Hw::cOtWork::cOtWork_27(undefined4 *param_1)
   return;
 }
 
-// 00CCC860  Hw::cOtWork::cOtWork_25  size=27  [class]
-void __fastcall Hw::cOtWork::cOtWork_25(undefined4 *param_1)
+// 00CCC860  Hw::cOtWork::~cOtWork  size=27  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -302,8 +302,8 @@ void __fastcall Hw::cOtWork::cOtWork_25(undefined4 *param_1)
   return;
 }
 
-// 00CCD370  Hw::cOtWork::cOtWork_22  size=27  [class]
-void __fastcall Hw::cOtWork::cOtWork_22(undefined4 *param_1)
+// 00CCD370  Hw::cOtWork::~cOtWork  size=27  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -312,8 +312,8 @@ void __fastcall Hw::cOtWork::cOtWork_22(undefined4 *param_1)
   return;
 }
 
-// 00CCD400  Hw::cOtWork::cOtWork_23  size=27  [class]
-void __fastcall Hw::cOtWork::cOtWork_23(undefined4 *param_1)
+// 00CCD400  Hw::cOtWork::~cOtWork  size=27  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -322,21 +322,8 @@ void __fastcall Hw::cOtWork::cOtWork_23(undefined4 *param_1)
   return;
 }
 
-// 00F3B650  Hw::cOtWork::cOtWork_5  size=66  [class]
-void __fastcall Hw::cOtWork::cOtWork_5(undefined4 *param_1)
-
-{
-  FUN_00fa5be0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B700  Hw::cOtWork::cOtWork_10  size=66  [class]
-void __fastcall Hw::cOtWork::cOtWork_10(undefined4 *param_1)
+// 00F3B650  Hw::cOtWork::~cOtWork  size=66  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -348,91 +335,8 @@ void __fastcall Hw::cOtWork::cOtWork_10(undefined4 *param_1)
   return;
 }
 
-// 00F3B750  Hw::cOtWork::cOtWork_9  size=55  [class]
-void __fastcall Hw::cOtWork::cOtWork_9(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B790  Hw::cOtWork::cOtWork_8  size=22  [class]
-void __fastcall Hw::cOtWork::cOtWork_8(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B7B0  Hw::cOtWork::cOtWork_7  size=33  [class]
-void __fastcall Hw::cOtWork::cOtWork_7(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B7E0  Hw::cOtWork::cOtWork_6  size=44  [class]
-void __fastcall Hw::cOtWork::cOtWork_6(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B810  Hw::cOtWork::cOtWork_4  size=55  [class]
-void __fastcall Hw::cOtWork::cOtWork_4(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B850  Hw::cOtWork::cOtWork_3  size=33  [class]
-void __fastcall Hw::cOtWork::cOtWork_3(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B8D0  Hw::cOtWork::cOtWork_2  size=22  [class]
-void __fastcall Hw::cOtWork::cOtWork_2(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3B8F0  Hw::cOtWork::cOtWork  size=33  [class]
-void __fastcall Hw::cOtWork::cOtWork(undefined4 *param_1)
-
-{
-  thunk_FUN_00fa45a0();
-  thunk_FUN_00fa45a0();
-  *param_1 = vftable;
-  return;
-}
-
-// 00F3F760  Hw::cOtWork::cOtWork_11  size=66  [class]
-void __fastcall Hw::cOtWork::cOtWork_11(undefined4 *param_1)
+// 00F3B700  Hw::cOtWork::~cOtWork  size=66  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa5be0();
@@ -444,8 +348,104 @@ void __fastcall Hw::cOtWork::cOtWork_11(undefined4 *param_1)
   return;
 }
 
-// 00FAA900  Hw::cOtWork::cOtWork_17  size=19  [class]
-void __fastcall Hw::cOtWork::cOtWork_17(undefined4 *param_1)
+// 00F3B750  Hw::cOtWork::~cOtWork  size=55  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3B790  Hw::cOtWork::~cOtWork  size=22  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3B7B0  Hw::cOtWork::~cOtWork  size=33  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3B7E0  Hw::cOtWork::~cOtWork  size=44  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3B810  Hw::cOtWork::~cOtWork  size=55  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3B850  Hw::cOtWork::~cOtWork  size=33  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3B8D0  Hw::cOtWork::~cOtWork  size=22  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3B8F0  Hw::cOtWork::~cOtWork  size=33  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00F3F760  Hw::cOtWork::~cOtWork  size=66  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
+
+{
+  FUN_00fa5be0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  thunk_FUN_00fa45a0();
+  *param_1 = vftable;
+  return;
+}
+
+// 00FAA900  Hw::cOtWork::~cOtWork  size=19  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa45a0();
@@ -453,8 +453,8 @@ void __fastcall Hw::cOtWork::cOtWork_17(undefined4 *param_1)
   return;
 }
 
-// 00FAA920  Hw::cOtWork::cOtWork_16  size=19  [class]
-void __fastcall Hw::cOtWork::cOtWork_16(undefined4 *param_1)
+// 00FAA920  Hw::cOtWork::~cOtWork  size=19  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa45a0();
@@ -517,8 +517,8 @@ void __fastcall Hw::cOtWork::cOtWork_14(undefined4 *param_1)
   return;
 }
 
-// 00FAAA30  Hw::cOtWork::cOtWork_18  size=27  [class]
-void __fastcall Hw::cOtWork::cOtWork_18(undefined4 *param_1)
+// 00FAAA30  Hw::cOtWork::~cOtWork  size=27  [class]
+void __fastcall Hw::cOtWork::~cOtWork(undefined4 *param_1)
 
 {
   FUN_00fa45a0();

@@ -8,7 +8,7 @@
 undefined4 * __fastcall cDryCellGauge2Base::cDryCellGauge2Base(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

@@ -109,7 +109,7 @@ bool __thiscall hkXmlObjectWriter::vf0C(int param_1,undefined4 param_2,undefined
   undefined1 *puVar7;
   undefined1 local_10 [12];
   
-  hkOstream::hkOstream_4(param_2);
+  hkOstream::hkOstream(param_2);
   iVar5 = 0;
   iVar2 = FUN_01009570();
   if (0 < iVar2) {
@@ -125,7 +125,7 @@ bool __thiscall hkXmlObjectWriter::vf0C(int param_1,undefined4 param_2,undefined
   }
   pcVar4 = (char *)FUN_01018c40((int)&param_2 + 3);
   cVar1 = *pcVar4;
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   return cVar1 == '\0';
 }
 
@@ -291,7 +291,7 @@ undefined4 * __thiscall hkObjectWriter::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -352,7 +352,7 @@ undefined4 * __thiscall hkXmlObjectWriter::vf00(undefined4 *param_1,byte param_2
   }
   param_1[2] = 0;
   param_1[4] = 0x80000000;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1193,7 +1193,7 @@ undefined4 * __thiscall hkResource::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1385,7 +1385,7 @@ int __thiscall hkPackfileData::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_24();
+  ::hkBaseObject::hkBaseObject_24();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

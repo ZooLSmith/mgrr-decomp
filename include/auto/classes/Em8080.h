@@ -64,4 +64,6 @@ struct Em8080 : public EmBaseDLC {
     virtual void vf34C();  // 006CA6F0 slot 0x34C  overrides BehaviorEmBase
     virtual void vf360();  // 006C0520 slot 0x360  overrides BehaviorEmBase
     virtual undefined4 vf368();  // 006C1700 slot 0x368  overrides BehaviorEmBase
+    // non-virtual members
+    Em8080();  // 00AB5150
 };

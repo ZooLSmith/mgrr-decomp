@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Em0110_WeaponDebris.h"
 
-// 004B7830  Em0110_WeaponDebris::vf40  size=91  [class]
-void __fastcall Em0110_WeaponDebris::vf40(int param_1)
+// 004B7830  Em0110_WeaponDebris::startup  size=91  [class]
+void __fastcall Em0110_WeaponDebris::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorDebrisBase::vf40();
+  iVar1 = BehaviorDebrisBase::startup();
   if (iVar1 == 0) {
     return;
   }
@@ -101,8 +101,8 @@ void __thiscall Em0110_WeaponDebris::vf1BC(int param_1,undefined4 param_2)
   return;
 }
 
-// 004B7950  Em0110_WeaponDebris::vf1B8  size=31  [class]
-void Em0110_WeaponDebris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 004B7950  Em0110_WeaponDebris::setCutCrerateInfo  size=31  [class]
+void Em0110_WeaponDebris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -119,7 +119,7 @@ void Em0110_WeaponDebris::vf1B8(undefined4 *param_1,undefined4 param_2,int param
 undefined4 * __fastcall Em0110_WeaponDebris::Em0110_WeaponDebris(undefined4 *param_1)
 
 {
-  BehaviorDebrisBase::BehaviorDebrisBase_4();
+  BehaviorDebrisBase::BehaviorDebrisBase();
   *param_1 = vftable;
   return param_1;
 }
@@ -131,8 +131,8 @@ undefined * Em0110_WeaponDebris::vf04(void)
   return &DAT_01b34ea0;
 }
 
-// 00AB8990  Em0110_WeaponDebris::vf00  size=105  [class]
-undefined4 * __thiscall Em0110_WeaponDebris::vf00(undefined4 *param_1,byte param_2)
+// 00AB8990  Em0110_WeaponDebris::destruct  size=105  [class]
+undefined4 * __thiscall Em0110_WeaponDebris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -146,7 +146,7 @@ undefined4 * __thiscall Em0110_WeaponDebris::vf00(undefined4 *param_1,byte param
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

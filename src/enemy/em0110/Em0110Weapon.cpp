@@ -18,8 +18,8 @@ void __fastcall Em0110Weapon::vf54(int param_1)
   return;
 }
 
-// 004B68A0  Em0110Weapon::vf130  size=43  [class]
-undefined4 Em0110Weapon::vf130(void)
+// 004B68A0  Em0110Weapon::getAttackInfo  size=43  [class]
+undefined4 Em0110Weapon::getAttackInfo(void)
 
 {
   int iVar1;
@@ -161,8 +161,8 @@ LAB_004b69de:
   return;
 }
 
-// 004B6B20  Em0110Weapon::vf1B8  size=64  [class]
-void __thiscall Em0110Weapon::vf1B8(int param_1,int *param_2,int param_3,int param_4)
+// 004B6B20  Em0110Weapon::setCutCrerateInfo  size=64  [class]
+void __thiscall Em0110Weapon::setCutCrerateInfo(int param_1,int *param_2,int param_3,int param_4)
 
 {
   int iVar1;
@@ -251,8 +251,8 @@ void __fastcall FUN_004b6c20(int param_1)
   return;
 }
 
-// 004BCF40  Em0110Weapon::vf40  size=795  [class]
-undefined4 __fastcall Em0110Weapon::vf40(int param_1)
+// 004BCF40  Em0110Weapon::startup  size=795  [class]
+undefined4 __fastcall Em0110Weapon::startup(int param_1)
 
 {
   uint *puVar1;
@@ -278,7 +278,7 @@ undefined4 __fastcall Em0110Weapon::vf40(int param_1)
   undefined4 local_50;
   undefined1 local_2c;
   
-  iVar2 = BehaviorWeapon::vf40();
+  iVar2 = BehaviorWeapon::startup();
   if (iVar2 != 0) {
     FUN_00410540(0x20,&DAT_01b7bd48);
     lib::StaticArray<Collision*,64>::StaticArray<Collision*,64>_2(2);
@@ -431,7 +431,7 @@ void __fastcall Em0110Weapon::vf30(int *param_1)
     if (iVar1 != 0) {
       FUN_004cdc30();
       FUN_00a9e0d0(param_1[0x13c]);
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -493,7 +493,7 @@ LAB_004d8cfb:
     fVar4 = (float10)*(float *)(param_1 + 0xcf0) - fVar4;
     *(float *)(param_1 + 0xcf0) = (float)fVar4;
     if (fVar4 <= (float10)0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -532,8 +532,8 @@ void Em0110Weapon::vf1D0(void)
   return;
 }
 
-// 00AC1330  Em0110Weapon::vf00  size=105  [class]
-undefined4 * __thiscall Em0110Weapon::vf00(undefined4 *param_1,byte param_2)
+// 00AC1330  Em0110Weapon::destruct  size=105  [class]
+undefined4 * __thiscall Em0110Weapon::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -547,7 +547,7 @@ undefined4 * __thiscall Em0110Weapon::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

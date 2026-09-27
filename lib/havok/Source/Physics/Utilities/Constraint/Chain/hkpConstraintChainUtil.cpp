@@ -54,7 +54,7 @@ int FUN_01284880(int *param_1,char param_2)
   pvVar14 = TlsGetValue(DAT_01f8fc4c);
   iVar16 = (**(code **)(**(int **)((int)pvVar14 + 0x2c) + 4))(0x48);
   *(undefined2 *)(iVar16 + 4) = 0x48;
-  iVar17 = hkpAction::hkpAction_20(iVar15);
+  iVar17 = hkpConstraintChainInstanceAction::hkpConstraintChainInstanceAction(iVar15);
   iVar15 = *(int *)*param_1;
   iVar16 = *(int *)(iVar15 + 0x14);
   if ((1 < param_1[1]) &&

@@ -13,5 +13,6 @@ struct hkpVehicleDefaultAnalogDriverInput : public hkpVehicleDriverInput {
     virtual undefined vf18();  // 01291CC0 slot 0x18
     virtual undefined vf1C();  // 01291B90 slot 0x1C
     // non-virtual members
-    hkpVehicleDefaultAnalogDriverInput(undefined4 * param_1);  // 01288540
+    ~hkpVehicleDefaultAnalogDriverInput();  // 01288540
+    hkpVehicleDefaultAnalogDriverInput();  // 01288560
 };

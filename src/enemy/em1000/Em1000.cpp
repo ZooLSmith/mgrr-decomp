@@ -93,8 +93,8 @@ void __fastcall Em1000::vf30(int param_1)
   return;
 }
 
-// 005C6740  Em1000::vf40  size=611  [class]
-undefined4 __fastcall Em1000::vf40(int *param_1)
+// 005C6740  Em1000::startup  size=611  [class]
+undefined4 __fastcall Em1000::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -117,7 +117,7 @@ undefined4 __fastcall Em1000::vf40(int *param_1)
       iVar3 = 0;
     }
     else {
-      iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar3 = RigidBodyCollision::RigidBodyCollision();
     }
     param_1[0x1ec] = iVar3;
     local_24[0] = 0;
@@ -249,7 +249,7 @@ void __fastcall FUN_005c6a20(int param_1)
           }
         }
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   return;
@@ -271,7 +271,7 @@ void __fastcall Em1000::vf48(int param_1)
 undefined4 * __fastcall Em1000::Em1000(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -291,8 +291,8 @@ void Em1000::vf1D0(void)
   return;
 }
 
-// 00AB7740  Em1000::vf00  size=105  [class]
-undefined4 * __thiscall Em1000::vf00(undefined4 *param_1,byte param_2)
+// 00AB7740  Em1000::destruct  size=105  [class]
+undefined4 * __thiscall Em1000::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -306,7 +306,7 @@ undefined4 * __thiscall Em1000::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

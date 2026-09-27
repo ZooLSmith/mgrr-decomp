@@ -9,6 +9,4 @@ struct cOptionMenuSystemParts : public cCustomObjCtrlManager {
     virtual undefined4 * vf00(byte param_2);  // 009969D0 slot 0x0  overrides cCustomObjCtrlManager
     // non-virtual members
     cOptionMenuSystemParts();  // 00996940
-    void ctor_009A8AA0();  // 009A8AA0
-    void ctor_009A8B90();  // 009A8B90
 };

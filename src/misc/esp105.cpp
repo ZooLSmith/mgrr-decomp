@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp105.h"
 
-// 009CFEA0  esp105::vf10  size=1  [class]
-void esp105::vf10(void)
+// 009CFEA0  esp105::addOtTransList  size=1  [class]
+void esp105::addOtTransList(void)
 
 {
   return;
@@ -15,14 +15,14 @@ void esp105::vf10(void)
 undefined4 * __fastcall esp105::esp105(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
 
-// 009D88B0  esp105::vf04  size=116  [class]
+// 009D88B0  esp105::preTrans  size=116  [class]
 undefined4 __thiscall
-esp105::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp105::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -31,7 +31,7 @@ esp105::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   undefined4 *puVar4;
   undefined4 uVar5;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }
@@ -54,7 +54,7 @@ esp105::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
 undefined4 __thiscall esp105::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

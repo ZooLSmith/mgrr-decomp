@@ -14,4 +14,6 @@ struct BehaviorDebrisObject : public BehaviorDebrisBase {
     virtual void vf4C();  // 005DDE10 slot 0x4C  overrides Behavior
     virtual void vf50();  // 005DE890 slot 0x50  overrides Behavior
     virtual void vf54();  // 005E24B0 slot 0x54  overrides Behavior
+    // non-virtual members
+    BehaviorDebrisObject();  // 005DA7D0
 };

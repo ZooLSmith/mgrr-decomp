@@ -111,7 +111,7 @@ void FUN_0090fa30(int *param_1,undefined4 param_2,undefined4 param_3,float param
       iVar1 = 0;
       if (_Dst != (void *)0x0) {
         _memset(_Dst,0,0x210);
-        iVar1 = hkpAllCdPointCollector::hkpAllCdPointCollector_30();
+        iVar1 = hkpAllCdPointCollector::hkpAllCdPointCollector();
       }
       iVar2 = RayCastManager::set(iVar1,param_1,param_7);
       if (iVar2 == 0) {
@@ -147,7 +147,7 @@ void FUN_0090fb00(int *param_1)
       iVar2 = 0;
       if (_Dst != (void *)0x0) {
         _memset(_Dst,0,0x210);
-        iVar2 = hkpAllCdPointCollector::hkpAllCdPointCollector_30();
+        iVar2 = hkpAllCdPointCollector::hkpAllCdPointCollector();
       }
       iVar3 = RayCastManager::set(iVar2,*param_1,param_1[0x11]);
       if (iVar3 == 0) {
@@ -191,7 +191,7 @@ FUN_0090fd80(int param_1,undefined4 param_2,undefined4 param_3,float *param_4,un
   if (((*param_4 == 0.0) || (param_4[1] == 0.0)) || (param_4[2] == 0.0)) {
     return 0;
   }
-  hkpAllCdPointCollector::hkpAllCdPointCollector_31();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   FUN_0090bba0(0xffffffff,param_2,param_3,param_4,param_5,param_6,3,1);
   if ((local_1d5 != '\0') && (local_1e4 < 1)) {
     (**(code **)(local_1f0 + 8))();

@@ -13,5 +13,6 @@ struct hkpStiffSpringConstraintData : public hkpConstraintData {
     virtual void vf48(undefined4 param_2);  // 011AA840 slot 0x48  overrides hkpConstraintData
     // non-virtual members
     hkpStiffSpringConstraintData();  // 011AA8D0
-    hkpStiffSpringConstraintData(undefined4 * param_1);  // 011AF1F0
+    ~hkpStiffSpringConstraintData();  // 011AF1F0
+    void ctor_011AF210();  // 011AF210
 };

@@ -311,7 +311,7 @@ void __fastcall BehaviorDebrisArmor::vf4C(int *param_1)
     fVar2 = (float)param_1[0x21d];
     if (NAN(fVar2) || 3.0 < fVar2 == (fVar2 == 3.0)) goto LAB_005dad29;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
 LAB_005dad29:
   if (param_1[0x22d] != 0) {
     fVar2 = (float)param_1[0x22c];
@@ -440,8 +440,8 @@ void __fastcall BehaviorDebrisArmor::vf300(int param_1)
   return;
 }
 
-// 005E0B30  BehaviorDebrisArmor::vf40  size=811  [class]
-undefined4 __fastcall BehaviorDebrisArmor::vf40(int param_1)
+// 005E0B30  BehaviorDebrisArmor::startup  size=811  [class]
+undefined4 __fastcall BehaviorDebrisArmor::startup(int param_1)
 
 {
   short sVar1;
@@ -567,7 +567,7 @@ undefined4 __fastcall BehaviorDebrisArmor::vf40(int param_1)
 undefined4 * __fastcall BehaviorDebrisArmor::BehaviorDebrisArmor(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -579,8 +579,8 @@ undefined * BehaviorDebrisArmor::vf04(void)
   return &DAT_01b3530c;
 }
 
-// 00AB83E0  BehaviorDebrisArmor::vf00  size=105  [class]
-undefined4 * __thiscall BehaviorDebrisArmor::vf00(undefined4 *param_1,byte param_2)
+// 00AB83E0  BehaviorDebrisArmor::destruct  size=105  [class]
+undefined4 * __thiscall BehaviorDebrisArmor::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -594,7 +594,7 @@ undefined4 * __thiscall BehaviorDebrisArmor::vf00(undefined4 *param_1,byte param
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

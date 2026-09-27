@@ -26,8 +26,8 @@ undefined4 * __thiscall Hw::cPrimFT::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00FA5050  Hw::cPrimFT::vf04  size=300  [class]
-void __fastcall Hw::cPrimFT::vf04(int param_1)
+// 00FA5050  Hw::cPrimFT::draw  size=300  [class]
+void __fastcall Hw::cPrimFT::draw(int param_1)
 
 {
   int iVar1;

@@ -51,7 +51,7 @@ void FUN_015f1f50(void)
   
   iVar1 = 0x23;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return;
@@ -61,7 +61,7 @@ void FUN_015f1f50(void)
 void FUN_015f1f70(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -69,7 +69,7 @@ void FUN_015f1f70(void)
 void FUN_015f1f80(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -77,7 +77,7 @@ void FUN_015f1f80(void)
 void FUN_015f1f90(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -85,7 +85,7 @@ void FUN_015f1f90(void)
 void FUN_015f1fa0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -93,7 +93,7 @@ void FUN_015f1fa0(void)
 void FUN_015f1fb0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -101,7 +101,7 @@ void FUN_015f1fb0(void)
 void FUN_015f1fc0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -109,7 +109,7 @@ void FUN_015f1fc0(void)
 void FUN_015f1fd0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -117,7 +117,7 @@ void FUN_015f1fd0(void)
 void FUN_015f1fe0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -125,7 +125,7 @@ void FUN_015f1fe0(void)
 void FUN_015f1ff0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -133,7 +133,7 @@ void FUN_015f1ff0(void)
 void FUN_015f2000(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -141,7 +141,7 @@ void FUN_015f2000(void)
 void FUN_015f2010(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -149,7 +149,7 @@ void FUN_015f2010(void)
 void FUN_015f2020(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -157,7 +157,7 @@ void FUN_015f2020(void)
 void FUN_015f2030(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -165,7 +165,7 @@ void FUN_015f2030(void)
 void FUN_015f2040(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -173,7 +173,7 @@ void FUN_015f2040(void)
 void FUN_015f2050(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -181,7 +181,7 @@ void FUN_015f2050(void)
 void FUN_015f2060(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -189,7 +189,7 @@ void FUN_015f2060(void)
 void FUN_015f2070(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -197,7 +197,7 @@ void FUN_015f2070(void)
 void FUN_015f2080(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -205,7 +205,7 @@ void FUN_015f2080(void)
 void FUN_015f2090(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -213,7 +213,7 @@ void FUN_015f2090(void)
 void FUN_015f20a0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -221,7 +221,7 @@ void FUN_015f20a0(void)
 void FUN_015f20b0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -229,7 +229,7 @@ void FUN_015f20b0(void)
 void FUN_015f20c0(void)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   return;
 }
 
@@ -263,7 +263,7 @@ void FUN_015f21d0(void)
   
   iVar1 = 2;
   do {
-    cXml::cXml_8();
+    cXml::cXml();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return;

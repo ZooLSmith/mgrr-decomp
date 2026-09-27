@@ -15,6 +15,6 @@ struct CollisionSphere : public Collision {
     virtual void vf24();  // 00D78680 slot 0x24  overrides Collision
     // non-virtual members
     static void detectionForPenetration_2();  // 00D787D0
-    CollisionSphere();  // 00D7D190
-    void ctor_00D7DF90();  // 00D7DF90
+    ~CollisionSphere();  // 00D7D190
+    CollisionSphere();  // 00D7DF90
 };

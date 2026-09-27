@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cUIPrimWorkPunchThrough.h"
 
-// 00CB0190  cUIPrimWorkPunchThrough::vf04  size=327  [class]
-void __fastcall cUIPrimWorkPunchThrough::vf04(int param_1)
+// 00CB0190  cUIPrimWorkPunchThrough::draw  size=327  [class]
+void __fastcall cUIPrimWorkPunchThrough::draw(int param_1)
 
 {
   int *piVar1;

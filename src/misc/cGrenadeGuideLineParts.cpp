@@ -14,10 +14,10 @@ void __fastcall cGrenadeGuideLineParts::vf08(int param_1)
   return;
 }
 
-// 00CB8ED0  cGrenadeGuideLineParts::vf14  size=968  [class]
+// 00CB8ED0  cGrenadeGuideLineParts::create  size=968  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cGrenadeGuideLineParts::vf14(int param_1)
+void __fastcall cGrenadeGuideLineParts::create(int param_1)
 
 {
   float fVar1;

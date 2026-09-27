@@ -1330,7 +1330,7 @@ void __fastcall FUN_005f9900(int param_1)
         iVar1 = FUN_00eb4340(*(undefined4 *)(param_1 + 0xda4));
         if (iVar1 != 0) {
           DAT_01bea070 = DAT_01bea070 & 0xffddffff;
-          FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
           return;
         }
       }

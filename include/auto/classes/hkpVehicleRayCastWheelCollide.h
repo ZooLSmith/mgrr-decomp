@@ -20,4 +20,6 @@ struct hkpVehicleRayCastWheelCollide : public hkpVehicleWheelCollide {
     virtual void vf38(int param_2, undefined4 param_3);  // 0128F650 slot 0x38
     virtual void vf3C(int param_1, byte param_2, float * param_3, float * param_4);  // 0128F8F0 slot 0x3C
     virtual void vf40(int param_1, byte param_2, undefined4 * param_3);  // 0128FAF0 slot 0x40
+    // non-virtual members
+    hkpVehicleRayCastWheelCollide();  // 01287F60
 };

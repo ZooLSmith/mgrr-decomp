@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp35::esp35(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -18,7 +18,7 @@ undefined4 * __fastcall esp35::esp35(undefined4 *param_1)
 undefined4 __thiscall esp35::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -92,8 +92,8 @@ void __fastcall esp35::vf08(int param_1)
   return;
 }
 
-// 00F364E0  esp35::vf04  size=587  [class]
-undefined4 __thiscall esp35::vf04(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
+// 00F364E0  esp35::preTrans  size=587  [class]
+undefined4 __thiscall esp35::preTrans(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -104,7 +104,7 @@ undefined4 __thiscall esp35::vf04(int param_1,int param_2,undefined4 param_3,und
   undefined4 uVar6;
   uint uVar7;
   
-  iVar4 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar4 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar4 == 0) {
     return 0;
   }

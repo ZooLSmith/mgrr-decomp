@@ -467,7 +467,7 @@ LAB_00d62960:
 undefined4 __thiscall P420::vf00(undefined4 param_1,byte param_2)
 
 {
-  lib::Array<EntityHandle>::Array<EntityHandle>_3();
+  lib::Array<int>::~Array<int>();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

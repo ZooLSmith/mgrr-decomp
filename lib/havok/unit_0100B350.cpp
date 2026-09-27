@@ -47,7 +47,7 @@ int __thiscall hkErrStream::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -3554,7 +3554,7 @@ undefined4 * __thiscall hkDummySingleton::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3625,7 +3625,7 @@ undefined4 * __thiscall hkFileSystem::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3639,7 +3639,7 @@ undefined4 * __thiscall hkNativeFileSystem::vf00(undefined4 *param_1,byte param_
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -5580,7 +5580,7 @@ undefined4 * __thiscall hkJobThreadPool::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -5619,7 +5619,7 @@ int __thiscall hkCpuJobThreadPool::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_108();
+  ::hkBaseObject::hkBaseObject_108();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -5643,8 +5643,8 @@ undefined4 * __thiscall hkLocalFrameGroup::hkLocalFrameGroup(undefined4 *param_1
   return param_1;
 }
 
-// 01011960  hkBaseObject::hkBaseObject_100  size=19  [run]
-void __fastcall hkBaseObject::hkBaseObject_100(undefined4 *param_1)
+// 01011960  hkBaseObject::~hkBaseObject  size=19  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   FUN_01006770();
@@ -5659,8 +5659,8 @@ undefined4 FUN_01011980(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 010119B0  hkLocalFrameGroup::hkLocalFrameGroup_2  size=30  [run]
-void hkLocalFrameGroup::hkLocalFrameGroup_2(undefined4 *param_1,undefined4 param_2)
+// 010119B0  hkLocalFrameGroup::~hkLocalFrameGroup  size=30  [run]
+void hkLocalFrameGroup::~hkLocalFrameGroup(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -5678,8 +5678,8 @@ void FUN_010119d0(undefined4 *param_1)
   return;
 }
 
-// 010119E0  hkLocalFrameGroup::hkLocalFrameGroup_3  size=53  [run]
-undefined ** hkLocalFrameGroup::hkLocalFrameGroup_3(void)
+// 010119E0  hkLocalFrameGroup::hkLocalFrameGroup  size=53  [run]
+undefined ** hkLocalFrameGroup::hkLocalFrameGroup(void)
 
 {
   FUN_010065b0(0);
@@ -5694,8 +5694,8 @@ void FUN_01011a30(undefined4 *param_1)
   return;
 }
 
-// 01011A40  hkSimpleLocalFrame::hkSimpleLocalFrame  size=30  [run]
-void hkSimpleLocalFrame::hkSimpleLocalFrame(undefined4 *param_1,undefined4 param_2)
+// 01011A40  hkSimpleLocalFrame::~hkSimpleLocalFrame  size=30  [run]
+void hkSimpleLocalFrame::~hkSimpleLocalFrame(undefined4 *param_1,undefined4 param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -5705,8 +5705,8 @@ void hkSimpleLocalFrame::hkSimpleLocalFrame(undefined4 *param_1,undefined4 param
   return;
 }
 
-// 01011A60  hkSimpleLocalFrame::hkSimpleLocalFrame_3  size=53  [run]
-undefined ** hkSimpleLocalFrame::hkSimpleLocalFrame_3(void)
+// 01011A60  hkSimpleLocalFrame::hkSimpleLocalFrame  size=53  [run]
+undefined ** hkSimpleLocalFrame::hkSimpleLocalFrame(void)
 
 {
   FUN_010065b0(0);
@@ -5738,7 +5738,7 @@ undefined4 * __thiscall hkLocalFrame::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -5764,7 +5764,7 @@ undefined4 * __thiscall hkLocalFrameGroup::vf00(undefined4 *param_1,byte param_2
   LPVOID pvVar1;
   
   FUN_01006770();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -5811,9 +5811,9 @@ void __fastcall FUN_01011c80(undefined4 *param_1)
   return;
 }
 
-// 01011CC0  hkSimpleLocalFrame::hkSimpleLocalFrame_2  size=31  [run]
+// 01011CC0  hkSimpleLocalFrame::hkSimpleLocalFrame  size=31  [run]
 undefined4 * __thiscall
-hkSimpleLocalFrame::hkSimpleLocalFrame_2(undefined4 *param_1,undefined4 param_2)
+hkSimpleLocalFrame::hkSimpleLocalFrame(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -5867,7 +5867,7 @@ int __thiscall hkSimpleLocalFrame::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_12();
+  ::hkBaseObject::hkBaseObject_12();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -5982,8 +5982,8 @@ void FUN_01011ee0(void)
   return;
 }
 
-// 01011EF0  hkMonitorStreamColorTable::hkMonitorStreamColorTable  size=18  [run]
-void hkMonitorStreamColorTable::hkMonitorStreamColorTable(undefined4 *param_1)
+// 01011EF0  hkMonitorStreamColorTable::~hkMonitorStreamColorTable  size=18  [run]
+void hkMonitorStreamColorTable::~hkMonitorStreamColorTable(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -5992,11 +5992,11 @@ void hkMonitorStreamColorTable::hkMonitorStreamColorTable(undefined4 *param_1)
   return;
 }
 
-// 01011F10  FUN_01011f10  size=6  [run]
-undefined ** FUN_01011f10(void)
+// 01011F10  hkMonitorStreamColorTable::hkMonitorStreamColorTable  size=6  [run]
+undefined ** hkMonitorStreamColorTable::hkMonitorStreamColorTable(void)
 
 {
-  return hkMonitorStreamColorTable::vftable;
+  return vftable;
 }
 
 // 01011F20  FUN_01011f20  size=12  [run]
@@ -6355,7 +6355,7 @@ int __thiscall hkMonitorStreamColorTable::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_95();
+  ::hkBaseObject::hkBaseObject_95();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -6573,7 +6573,7 @@ void FUN_01012c90(int param_1,undefined4 param_2)
 
 {
   if (param_1 != 0) {
-    hkRefCountedProperties::hkRefCountedProperties(param_2);
+    hkRefCountedProperties::~hkRefCountedProperties(param_2);
   }
   return;
 }
@@ -6592,7 +6592,7 @@ undefined4 FUN_01012cc0(void)
 {
   undefined4 local_30;
   
-  hkRefCountedProperties::hkRefCountedProperties(0);
+  hkRefCountedProperties::~hkRefCountedProperties(0);
   return local_30;
 }
 
@@ -6763,8 +6763,8 @@ undefined4 FUN_01013260(undefined4 param_1,undefined4 param_2)
   return param_2;
 }
 
-// 01013280  hkReferencedObject::hkReferencedObject  size=18  [run]
-void hkReferencedObject::hkReferencedObject(undefined4 *param_1)
+// 01013280  hkReferencedObject::~hkReferencedObject  size=18  [run]
+void hkReferencedObject::~hkReferencedObject(undefined4 *param_1)
 
 {
   if (param_1 != (undefined4 *)0x0) {
@@ -6781,11 +6781,11 @@ void FUN_010132a0(undefined4 *param_1)
   return;
 }
 
-// 010132B0  FUN_010132b0  size=6  [run]
-undefined ** FUN_010132b0(void)
+// 010132B0  hkReferencedObject::hkReferencedObject  size=6  [run]
+undefined ** hkReferencedObject::hkReferencedObject(void)
 
 {
-  return hkReferencedObject::vftable;
+  return vftable;
 }
 
 // 010132C0  FUN_010132c0  size=8  [run]
@@ -9806,9 +9806,9 @@ void hkStreamWriter::vf18(undefined1 *param_1)
   return;
 }
 
-// 01016D80  hkOArchive::hkOArchive_4  size=45  [run]
+// 01016D80  hkOArchive::hkOArchive  size=45  [run]
 undefined4 * __thiscall
-hkOArchive::hkOArchive_4(undefined4 *param_1,undefined4 param_2,undefined1 param_3)
+hkOArchive::hkOArchive(undefined4 *param_1,undefined4 param_2,undefined1 param_3)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
@@ -9819,8 +9819,8 @@ hkOArchive::hkOArchive_4(undefined4 *param_1,undefined4 param_2,undefined1 param
   return param_1;
 }
 
-// 01016DB0  hkBaseObject::hkBaseObject_129  size=25  [run]
-void __fastcall hkBaseObject::hkBaseObject_129(undefined4 *param_1)
+// 01016DB0  hkBaseObject::hkBaseObject  size=25  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkOArchive::vftable;
@@ -10009,10 +10009,9 @@ hkOArchive::hkOArchive(undefined4 *param_1,undefined4 param_2,undefined1 param_3
   return param_1;
 }
 
-// 01017060  hkOArchive::hkOArchive_2  size=92  [run]
+// 01017060  hkOArchive::hkOArchive  size=92  [run]
 undefined4 * __thiscall
-hkOArchive::hkOArchive_2
-          (undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined1 param_4)
+hkOArchive::hkOArchive(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined1 param_4)
 
 {
   LPVOID pvVar1;
@@ -10190,9 +10189,9 @@ void FUN_01017320(undefined4 param_1,undefined4 param_2)
   return;
 }
 
-// 01017340  hkOArchive::hkOArchive_3  size=84  [run]
+// 01017340  hkOArchive::hkOArchive  size=84  [run]
 undefined4 * __thiscall
-hkOArchive::hkOArchive_3(undefined4 *param_1,undefined4 param_2,undefined1 param_3)
+hkOArchive::hkOArchive(undefined4 *param_1,undefined4 param_2,undefined1 param_3)
 
 {
   LPVOID pvVar1;
@@ -10253,7 +10252,7 @@ int __thiscall hkOArchive::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_129();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -10417,7 +10416,7 @@ int __thiscall hkArrayStreamWriter::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_127();
+  ::hkBaseObject::hkBaseObject_127();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -10485,7 +10484,7 @@ void __thiscall FUN_010177d0(undefined4 *param_1,undefined4 param_2)
   undefined4 uVar4;
   int iVar5;
   
-  hkOArchive::hkOArchive_4(param_2,(uint)param_1 & 0xffffff00);
+  hkOArchive::hkOArchive(param_2,(uint)param_1 & 0xffffff00);
   uVar1 = *param_1;
   uVar4 = FUN_01015cd0(uVar1);
   FUN_01016f90(uVar1,uVar4);
@@ -10502,7 +10501,7 @@ void __thiscall FUN_010177d0(undefined4 *param_1,undefined4 param_2)
     } while (iVar5 < iVar2);
   }
   FUN_01017100(iVar2);
-  hkBaseObject::hkBaseObject_129();
+  hkBaseObject::hkBaseObject();
   return;
 }
 
@@ -11414,9 +11413,9 @@ undefined4 __thiscall FUN_01018980(float *param_1,float *param_2,float param_3)
   return CONCAT31((int3)((uint)iVar1 >> 8),iVar1 == 0xf);
 }
 
-// 01018B60  hkMemoryTrackStreamWriter::hkMemoryTrackStreamWriter_2  size=36  [run]
+// 01018B60  hkMemoryTrackStreamWriter::hkMemoryTrackStreamWriter  size=36  [run]
 void __thiscall
-hkMemoryTrackStreamWriter::hkMemoryTrackStreamWriter_2
+hkMemoryTrackStreamWriter::hkMemoryTrackStreamWriter
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -11468,8 +11467,8 @@ void FUN_01018bc0(void)
   return;
 }
 
-// 01018BF0  hkOstream::hkOstream_4  size=43  [run]
-undefined4 * __thiscall hkOstream::hkOstream_4(undefined4 *param_1,int param_2)
+// 01018BF0  hkOstream::hkOstream  size=43  [run]
+undefined4 * __thiscall hkOstream::hkOstream(undefined4 *param_1,int param_2)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
@@ -11702,9 +11701,9 @@ undefined4 * __thiscall hkOstream::hkOstream(undefined4 *param_1,undefined4 para
   return param_1;
 }
 
-// 01019040  hkOstream::hkOstream_2  size=84  [run]
+// 01019040  hkOstream::hkOstream  size=84  [run]
 undefined4 * __thiscall
-hkOstream::hkOstream_2(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+hkOstream::hkOstream(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   LPVOID pvVar1;
@@ -11833,8 +11832,8 @@ int __thiscall FUN_010192f0(int param_1,int *param_2)
   return param_1;
 }
 
-// 01019330  hkOstream::hkOstream_3  size=78  [run]
-undefined4 * __thiscall hkOstream::hkOstream_3(undefined4 *param_1,undefined4 param_2)
+// 01019330  hkOstream::hkOstream  size=78  [run]
+undefined4 * __thiscall hkOstream::hkOstream(undefined4 *param_1,undefined4 param_2)
 
 {
   LPVOID pvVar1;
@@ -11905,7 +11904,7 @@ int __thiscall hkOstream::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -11972,7 +11971,7 @@ undefined4 * __thiscall hkMemoryTrackStreamWriter::vf00(undefined4 *param_1,byte
     pvVar2 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar2 + 0x2c) + 8))(iVar1,0x1c);
   }
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar2 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar2 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12166,9 +12165,9 @@ hkBufferedStreamWriter::hkBufferedStreamWriter
   return param_1;
 }
 
-// 01019860  hkBufferedStreamWriter::hkBufferedStreamWriter_2  size=95  [run]
+// 01019860  hkBufferedStreamWriter::hkBufferedStreamWriter  size=95  [run]
 undefined4 * __thiscall
-hkBufferedStreamWriter::hkBufferedStreamWriter_2
+hkBufferedStreamWriter::hkBufferedStreamWriter
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -12257,7 +12256,7 @@ int __thiscall hkBufferedStreamWriter::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_19();
+  ::hkBaseObject::hkBaseObject_19();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -12546,11 +12545,11 @@ undefined4 hkNativeFileSystem::vf10(undefined4 param_1)
   iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x10);
   *(undefined2 *)(iVar2 + 4) = 0x10;
   uVar3 = (*(code *)PTR_FUN_018eaa74)(param_1,&local_90);
-  uVar3 = hkStdioStreamWriter::hkStdioStreamWriter_2(uVar3);
+  uVar3 = hkStdioStreamWriter::hkStdioStreamWriter(uVar3);
   pvVar1 = TlsGetValue(DAT_01f8fc4c);
   iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x1c);
   *(undefined2 *)(iVar2 + 4) = 0x1c;
-  uVar3 = hkBufferedStreamWriter::hkBufferedStreamWriter_2(uVar3,0x1000);
+  uVar3 = hkBufferedStreamWriter::hkBufferedStreamWriter(uVar3,0x1000);
   FUN_010060a0();
   local_8c = 0;
   if (-1 < (int)local_88) {
@@ -12861,7 +12860,7 @@ undefined4 * __thiscall hkError::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12918,7 +12917,7 @@ undefined4 * __thiscall hkDefaultError::vf00(undefined4 *param_1,byte param_2)
   param_1[7] = 0x80000000;
   FUN_01010310(&PTR_vftable_018e9b94);
   FUN_0100fd10();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12982,13 +12981,13 @@ undefined4 __thiscall hkSocket::WriterAdapter::vf0C(int param_1,undefined4 param
   return param_2;
 }
 
-// 0101A630  hkSocket::ReaderAdapter::ReaderAdapter  size=82  [run]
-undefined4 * __fastcall hkSocket::ReaderAdapter::ReaderAdapter(undefined4 *param_1)
+// 0101A630  hkSocket::hkSocket  size=82  [run]
+undefined4 * __fastcall hkSocket::hkSocket(undefined4 *param_1)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
-  *param_1 = hkSocket::vftable;
-  param_1[2] = vftable;
+  *param_1 = vftable;
+  param_1[2] = ReaderAdapter::vftable;
   *(undefined2 *)((int)param_1 + 0xe) = 1;
   *(undefined2 *)((int)param_1 + 0x1a) = 1;
   param_1[5] = WriterAdapter::vftable;
@@ -13032,7 +13031,7 @@ undefined4 * __thiscall hkStreamReader::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13079,7 +13078,7 @@ undefined4 * __thiscall hkSocket::ReaderAdapter::vf00(undefined4 *param_1,byte p
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13093,7 +13092,7 @@ undefined4 * __thiscall hkSocket::WriterAdapter::vf00(undefined4 *param_1,byte p
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -13120,9 +13119,9 @@ undefined4 * __thiscall hkSocket::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  param_1[5] = hkBaseObject::vftable;
-  param_1[2] = hkBaseObject::vftable;
-  *param_1 = hkBaseObject::vftable;
+  param_1[5] = ::hkBaseObject::vftable;
+  param_1[2] = ::hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -14781,7 +14780,7 @@ void FUN_0101c6d0(undefined4 param_1,int param_2,int param_3,int param_4,int par
   local_30 = 0;
   local_2c = 0;
   local_28 = 0x80000000;
-  hkOstream::hkOstream_3(&local_30);
+  hkOstream::hkOstream(&local_30);
   iVar8 = param_4 + param_5;
   local_8 = iVar8;
   if (param_3 != 0) {
@@ -14949,7 +14948,7 @@ void FUN_0101ca60(undefined4 param_1,int param_2,int param_3,undefined4 param_4,
   local_1c = 0;
   local_18 = 0;
   local_14 = 0x80000000;
-  hkOstream::hkOstream_3(&local_1c);
+  hkOstream::hkOstream(&local_1c);
   FUN_01018f60(local_10,"Timer Name");
   if ((1 < param_2) || (0 < param_3)) {
     if (0 < param_2) {

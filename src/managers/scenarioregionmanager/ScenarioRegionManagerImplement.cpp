@@ -601,26 +601,26 @@ ScenarioRegionManagerImplement::setGroupResource(int param_1,int param_2,uint pa
   do {
     if (*piVar12 == -1) {
       local_4 = piVar12;
-      cXmlBinary::cXmlBinary_103();
+      cXmlBinary::cXmlBinary();
       FUN_00e062b0(param_3,0);
-      uVar6 = FUN_00e041c0();
-      uVar6 = FUN_00e06390(uVar6,&DAT_01661874);
+      uVar6 = cXmlBinary::vf04();
+      uVar6 = cXmlBinary::vf18(uVar6,&DAT_01661874);
       *piVar12 = param_2;
-      iVar5 = FUN_00e053e0(uVar6);
+      iVar5 = cXmlBinary::vf10(uVar6);
       piVar12[0x1b01] = iVar5;
       iVar9 = 0;
       iVar10 = 0;
-      iVar5 = FUN_00e053e0(uVar6);
+      iVar5 = cXmlBinary::vf10(uVar6);
       if (0 < iVar5) {
         do {
-          uVar7 = FUN_00e05410(uVar6,iVar10);
+          uVar7 = cXmlBinary::vf14(uVar6,iVar10);
           param_3 = CONCAT13(0xff,(undefined3)param_3);
-          uVar7 = FUN_00e06390(uVar7,&DAT_0164fcc8);
-          FUN_00e067b0(uVar7,(int)&param_3 + 3);
+          uVar7 = cXmlBinary::vf18(uVar7,&DAT_0164fcc8);
+          cXmlBinary::vf70(uVar7,(int)&param_3 + 3);
           iVar5 = FUN_00d90360(param_3 >> 0x18);
           iVar9 = iVar9 + iVar5;
           iVar10 = iVar10 + 1;
-          iVar5 = FUN_00e053e0(uVar6);
+          iVar5 = cXmlBinary::vf10(uVar6);
         } while (iVar10 < iVar5);
       }
       uVar8 = FUN_00dd29b0(iVar9,0x20,0,0);
@@ -631,14 +631,14 @@ ScenarioRegionManagerImplement::setGroupResource(int param_1,int param_2,uint pa
       else {
         iVar9 = 0;
         param_4 = uVar8;
-        iVar5 = FUN_00e053e0(uVar6);
+        iVar5 = cXmlBinary::vf10(uVar6);
         if (0 < iVar5) {
           puVar11 = (uint *)(local_4 + 2);
           do {
-            local_8 = FUN_00e05410(uVar6,iVar9);
+            local_8 = cXmlBinary::vf14(uVar6,iVar9);
             param_3 = CONCAT13(0xff,(undefined3)param_3);
-            uVar7 = FUN_00e06390(local_8,&DAT_0164fcc8);
-            FUN_00e067b0(uVar7,(int)&param_3 + 3);
+            uVar7 = cXmlBinary::vf18(local_8,&DAT_0164fcc8);
+            cXmlBinary::vf70(uVar7,(int)&param_3 + 3);
             FUN_00a6ee80(local_28,&local_8);
             if ((puVar11[7] == 3) || (puVar11[7] == 5)) {
               *puVar11 = *puVar11 & 0xfffffffe;
@@ -657,7 +657,7 @@ ScenarioRegionManagerImplement::setGroupResource(int param_1,int param_2,uint pa
             param_4 = param_4 + iVar5;
             iVar9 = iVar9 + 1;
             puVar11 = puVar11 + 0x1b;
-            iVar5 = FUN_00e053e0(uVar6);
+            iVar5 = cXmlBinary::vf10(uVar6);
           } while (iVar9 < iVar5);
         }
         if (param_2 != 2) {

@@ -4,11 +4,11 @@
 #include "mgrr.h"
 #include "esp120.h"
 
-// 009D06D0  esp120::vf04  size=25  [class]
-undefined4 esp120::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+// 009D06D0  esp120::preTrans  size=25  [class]
+undefined4 esp120::preTrans(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
-  cEspModel::vf04(param_1,param_2,param_3);
+  cEsp::preTrans(param_1,param_2,param_3);
   return 0;
 }
 
@@ -37,7 +37,7 @@ void __fastcall esp120::vf08(int param_1)
 undefined4 * __fastcall esp120::esp120(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -46,7 +46,7 @@ undefined4 * __fastcall esp120::esp120(undefined4 *param_1)
 undefined4 __thiscall esp120::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

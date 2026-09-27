@@ -465,10 +465,10 @@ void __fastcall cChainComboParts::vf08(int param_1)
   return;
 }
 
-// 00D2AC60  cChainComboParts::vf14  size=967  [class]
+// 00D2AC60  cChainComboParts::create  size=967  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cChainComboParts::vf14(int param_1)
+void __fastcall cChainComboParts::create(int param_1)
 
 {
   undefined4 uVar1;

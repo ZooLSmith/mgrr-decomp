@@ -1,5 +1,5 @@
 // src/misc/cResultBg.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC32A0..00D36AF0, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC32A0..00D36AF0, 6 functions
 
 #include "mgrr.h"
 #include "cResultBg.h"
@@ -117,8 +117,44 @@ LAB_00cc33ff:
   return;
 }
 
-// 00CDBDE0  cResultBg::vf14  size=304  [class]
-void __fastcall cResultBg::vf14(int param_1)
+// 00CDBD50  cResultBg::~cResultBg  size=131  [class]
+void __fastcall cResultBg::~cResultBg(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  FUN_00f972f0();
+  param_1[9] = 0;
+  param_1[10] = 0;
+  param_1[0xb] = 0;
+  param_1[0xc] = 0;
+  param_1[0xd] = 0;
+  if (param_1[7] != 0) {
+    FUN_00e9d6a0(param_1[7]);
+    param_1[7] = 0;
+  }
+  if (param_1[8] != 0) {
+    FUN_00e9d6a0(param_1[8]);
+    param_1[8] = 0;
+  }
+  *(undefined1 *)((int)param_1 + 0x55) = 0;
+  Hw::cTexture::~cTexture();
+  iVar1 = param_1[5];
+  *param_1 = cCustomObjCtrlManager::vftable;
+  param_1[6] = 0;
+  if (iVar1 != 0) {
+    if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
+      *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
+      *(undefined4 *)(iVar1 + 4) = 0;
+    }
+    param_1[5] = 0;
+  }
+  return;
+}
+
+// 00CDBDE0  cResultBg::create  size=304  [class]
+void __fastcall cResultBg::create(int param_1)
 
 {
   int iVar1;
@@ -173,7 +209,7 @@ void __fastcall cResultBg::vf14(int param_1)
 undefined4 __thiscall cResultBg::vf00(undefined4 param_1,byte param_2)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager();
+  ~cResultBg();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -196,7 +232,7 @@ undefined4 * cResultBg::cResultBg(void)
     puVar1[5] = 0;
     puVar1[6] = 0;
     *puVar1 = vftable;
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     puVar1[3] = "cResultBg";
     puVar1[2] = 0;
     uVar2 = FUN_00d29960(0x83);

@@ -30,7 +30,7 @@ undefined4 * __thiscall cFilterShader02::vf00(undefined4 *param_1,byte param_2)
   param_1[0x13] = 0xffffffff;
   param_1[0x14] = 0xffffffff;
   param_1[0x15] = 0x1111111;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

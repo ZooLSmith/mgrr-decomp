@@ -1,5 +1,5 @@
 // src/misc/cBodyLineMark.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD0370..00D20EE0, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD0370..00D20EE0, 5 functions
 
 #include "mgrr.h"
 #include "cBodyLineMark.h"
@@ -27,6 +27,30 @@ void __thiscall cBodyLineMark::vf0C(int param_1,undefined4 param_2)
               (param_2,0,*(undefined4 *)(extraout_ECX + 0x30),uVar1,auStack_10,auStack_10,0);
   }
   return;
+}
+
+// 00CEAB90  cBodyLineMark::cBodyLineMark  size=93  [class]
+undefined4 * __fastcall cBodyLineMark::cBodyLineMark(undefined4 *param_1)
+
+{
+  param_1[1] = 0;
+  param_1[10] = 0;
+  param_1[2] = 0;
+  param_1[0xb] = 0;
+  param_1[0xc] = 0;
+  param_1[3] = 1;
+  param_1[4] = 0xffffffff;
+  param_1[5] = 0xffffffff;
+  param_1[6] = 0;
+  param_1[7] = 0;
+  param_1[8] = 0;
+  *param_1 = cUIWorkBase::vftable;
+  cUICtrl::cUICtrl();
+  param_1[0x78] = 0;
+  param_1[0x7a] = 0;
+  *param_1 = vftable;
+  param_1[0x79] = 8;
+  return param_1;
 }
 
 // 00CFE190  cBodyLineMark::vf00  size=62  [class]

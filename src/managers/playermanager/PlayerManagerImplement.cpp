@@ -1,5 +1,5 @@
 // src/managers/playermanager/PlayerManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C13520..00C4CF00, 48 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C13520..00C4CF00, 49 functions
 
 #include "mgrr.h"
 #include "PlayerManagerImplement.h"
@@ -1012,11 +1012,31 @@ PlayerManagerImplement::vf1C(int param_1,undefined4 param_2,undefined4 param_3,u
   return;
 }
 
+// 00C4CEB0  PlayerManagerImplement::~PlayerManagerImplement  size=73  [class]
+void __fastcall PlayerManagerImplement::~PlayerManagerImplement(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0x3e] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x3e])(1);
+    param_1[0x3e] = 0;
+  }
+  iVar1 = 4;
+  do {
+    Hw::cTexture::~cTexture();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  *param_1 = PlayerManager::vftable;
+  return;
+}
+
 // 00C4CF00  PlayerManagerImplement::vf00  size=30  [class]
 undefined4 __thiscall PlayerManagerImplement::vf00(undefined4 param_1,byte param_2)
 
 {
-  PlayerManager::PlayerManager();
+  ~PlayerManagerImplement();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

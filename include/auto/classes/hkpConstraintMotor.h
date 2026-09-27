@@ -10,9 +10,4 @@ struct hkpConstraintMotor : public hkReferencedObject {
     virtual void vf0C() = 0;  // 00FDB68B slot 0xC
     // non-virtual members
     hkpConstraintMotor(int param_2);  // 011A9A70
-    void ctor_011A9C10(int param_2);  // 011A9C10
-    void ctor_011A9DA0(int param_2);  // 011A9DA0
-    void ctor_011DCC20(int param_2);  // 011DCC20
-    void ctor_011DD370(int param_2);  // 011DD370
-    void ctor_011DFE00(int param_2);  // 011DFE00
 };

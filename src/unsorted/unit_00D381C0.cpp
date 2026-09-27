@@ -335,7 +335,7 @@ int __thiscall FUN_00d38740(int param_1,int param_2,int param_3)
             FUN_00dd5650(&DAT_016bbf9c);
           }
         }
-        cTouchArea::cTouchArea_3();
+        cTouchArea::cTouchArea();
         if ((iVar4 == 1) && (iVar4 = FUN_00982e20(param_2,local_4c), iVar4 == 1)) {
           local_64 = local_7c;
           local_68 = local_80;

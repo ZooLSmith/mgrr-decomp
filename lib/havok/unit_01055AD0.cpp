@@ -1178,7 +1178,7 @@ int __fastcall hkBinaryPackfileReader::vf30(int *param_1)
     pvVar4 = TlsGetValue(DAT_01f8fc4c);
     iVar1 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x20);
     *(undefined2 *)(iVar1 + 4) = 0x20;
-    iVar1 = hkDynamicClassNameRegistry::hkDynamicClassNameRegistry(0);
+    iVar1 = hkChainedClassNameRegistry::hkChainedClassNameRegistry(0);
     if (iVar1 != 0) {
       FUN_01006000();
     }
@@ -1499,7 +1499,7 @@ void __fastcall hkBinaryPackfileReader::~hkBinaryPackfileReader(undefined4 *para
   }
   param_1[9] = 0;
   param_1[0xb] = 0x80000000;
-  hkBaseObject::hkBaseObject_48();
+  hkPackfileReader::~hkPackfileReader();
   return;
 }
 
@@ -1745,7 +1745,7 @@ undefined4 __fastcall hkBaseObject::hkBaseObject_122(int *param_1)
         uVar2 = FUN_0104ed70(iVar1);
       }
     }
-    iVar1 = hkDynamicClassNameRegistry::hkDynamicClassNameRegistry(uVar2);
+    iVar1 = hkChainedClassNameRegistry::hkChainedClassNameRegistry(uVar2);
     if (iVar1 != 0) {
       FUN_01006000();
     }
@@ -1935,7 +1935,7 @@ bool __thiscall hkBinaryPackfileReader::vf0C(int param_1,undefined4 param_2)
             iVar1 = iVar1 + 1;
           } while (iVar1 < *(int *)(*(int *)(param_1 + 0x1c) + 0x14));
         }
-        iVar1 = hkBaseObject::hkBaseObject_122();
+        iVar1 = ::hkBaseObject::hkBaseObject_122();
         return iVar1 == 1;
       }
     }
@@ -2022,7 +2022,7 @@ undefined4 __thiscall hkBinaryPackfileReader::vf38(int *param_1,int *param_2)
       iVar1 = FUN_010093a0();
       *(int *)(param_1[7] + 0x24) = iVar1 - *(int *)(param_1[9] + iVar4 * 4);
     }
-    uVar2 = hkBaseObject::hkBaseObject_122();
+    uVar2 = ::hkBaseObject::hkBaseObject_122();
     return uVar2;
   }
   return 1;
@@ -2337,7 +2337,7 @@ int __thiscall hkBinaryPackfileReader::BinaryPackfileData::vf00(int param_1,byte
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_24();
+  ::hkBaseObject::hkBaseObject_24();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -2382,8 +2382,8 @@ void FUN_01058c30(undefined4 param_1)
   return;
 }
 
-// 01058C80  hkObjectInspector::ObjectListener::ObjectListener_2  size=34  [run]
-void __fastcall hkObjectInspector::ObjectListener::ObjectListener_2(undefined4 *param_1)
+// 01058C80  hkObjectInspector::ObjectListener::~ObjectListener  size=34  [run]
+void __fastcall hkObjectInspector::ObjectListener::~ObjectListener(undefined4 *param_1)
 
 {
   FUN_01010310(&PTR_vftable_018e9b94);
@@ -2392,8 +2392,8 @@ void __fastcall hkObjectInspector::ObjectListener::ObjectListener_2(undefined4 *
   return;
 }
 
-// 01058CD0  hkObjectInspector::ObjectListener::ObjectListener_3  size=34  [run]
-void __fastcall hkObjectInspector::ObjectListener::ObjectListener_3(undefined4 *param_1)
+// 01058CD0  hkObjectInspector::ObjectListener::~ObjectListener  size=34  [run]
+void __fastcall hkObjectInspector::ObjectListener::~ObjectListener(undefined4 *param_1)
 
 {
   FUN_01010310(&PTR_vftable_018e9b94);
@@ -2402,8 +2402,8 @@ void __fastcall hkObjectInspector::ObjectListener::ObjectListener_3(undefined4 *
   return;
 }
 
-// 01058D20  hkObjectInspector::ObjectListener::ObjectListener  size=34  [run]
-void __fastcall hkObjectInspector::ObjectListener::ObjectListener(undefined4 *param_1)
+// 01058D20  hkObjectInspector::ObjectListener::~ObjectListener  size=34  [run]
+void __fastcall hkObjectInspector::ObjectListener::~ObjectListener(undefined4 *param_1)
 
 {
   FUN_01010310(&PTR_vftable_018e9b94);
@@ -2672,8 +2672,10 @@ void FUN_01059290(int param_1)
   return;
 }
 
-// 010592E0  FUN_010592e0  size=59  [run]
-void __thiscall FUN_010592e0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+// 010592E0  _anon_8D865E27::hkContentsUpdateTracker::vf18  size=59  [run]
+void __thiscall
+_anon_8D865E27::hkContentsUpdateTracker::vf18
+          (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int *piVar1;
@@ -2688,8 +2690,8 @@ void __thiscall FUN_010592e0(int param_1,undefined4 param_2,undefined4 param_3,u
   return;
 }
 
-// 01059320  FUN_01059320  size=51  [run]
-void __thiscall FUN_01059320(int param_1,undefined4 param_2)
+// 01059320  _anon_8D865E27::hkContentsUpdateTracker::vf20  size=51  [run]
+void __thiscall _anon_8D865E27::hkContentsUpdateTracker::vf20(int param_1,undefined4 param_2)
 
 {
   int *piVar1;
@@ -2710,7 +2712,7 @@ int __thiscall _anon_8D865E27::hkContentsUpdateTracker::vf00(int param_1,byte pa
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_53();
+  ::hkBaseObject::hkBaseObject_53();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -2724,7 +2726,7 @@ undefined4 * __thiscall hkObjectUpdateTracker::vf00(undefined4 *param_1,byte par
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -3945,7 +3947,7 @@ int __thiscall _anon_8D865E27::ClassUpdateTracker::vf00(int param_1,byte param_2
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_13();
+  ::hkBaseObject::hkBaseObject_13();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -4285,7 +4287,7 @@ int __fastcall hkXmlPackfileReader::vf30(int *param_1)
     pvVar4 = TlsGetValue(DAT_01f8fc4c);
     iVar1 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x20);
     *(undefined2 *)(iVar1 + 4) = 0x20;
-    iVar1 = hkDynamicClassNameRegistry::hkDynamicClassNameRegistry(0);
+    iVar1 = hkChainedClassNameRegistry::hkChainedClassNameRegistry(0);
     if (iVar1 != 0) {
       FUN_01006000();
     }
@@ -4383,7 +4385,7 @@ void __fastcall hkXmlPackfileReader::~hkXmlPackfileReader(undefined4 *param_1)
   }
   param_1[7] = 0;
   param_1[9] = 0x80000000;
-  hkBaseObject::hkBaseObject_48();
+  hkPackfileReader::~hkPackfileReader();
   return;
 }
 

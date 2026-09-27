@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cGrenadeGuideLine.h"
 
-// 00CB92A0  cGrenadeGuideLine::cGrenadeGuideLine_2  size=52  [class]
-void __fastcall cGrenadeGuideLine::cGrenadeGuideLine_2(undefined4 *param_1)
+// 00CB92A0  cGrenadeGuideLine::cGrenadeGuideLine  size=52  [class]
+void __fastcall cGrenadeGuideLine::cGrenadeGuideLine(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -47,7 +47,7 @@ undefined4 FUN_00cb9310(void)
   
   iVar1 = FUN_00dd3500(8,&DAT_01b7be50);
   if (iVar1 != 0) {
-    uVar2 = cGrenadeGuideLine::cGrenadeGuideLine_2();
+    uVar2 = cGrenadeGuideLine::cGrenadeGuideLine();
     return uVar2;
   }
   return 0;

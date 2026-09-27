@@ -164,7 +164,7 @@ void FUN_00a201f0(char *param_1)
   uVar2 = 7;
 LAB_00a20264:
   FUN_00f98b60(0xffffffff,0x3f800000,0,uVar2);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 
@@ -242,7 +242,7 @@ void FUN_00a20810(void)
   FUN_00f98b60(0,0x3f800000,0,1);
   FUN_00f9d8f0(0);
   FUN_00f9db30(1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 
@@ -257,7 +257,7 @@ void FUN_00a20880(void)
   FUN_00f97580(0,DAT_01b83c2c,0);
   local_4 = 1;
   FUN_00fa5730(local_30,1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 

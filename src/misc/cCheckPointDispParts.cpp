@@ -57,8 +57,8 @@ void __fastcall cCheckPointDispParts::vf08(int param_1)
   return;
 }
 
-// 00CEAF50  cCheckPointDispParts::vf14  size=326  [class]
-void __fastcall cCheckPointDispParts::vf14(int param_1)
+// 00CEAF50  cCheckPointDispParts::create  size=326  [class]
+void __fastcall cCheckPointDispParts::create(int param_1)
 
 {
   float fVar1;

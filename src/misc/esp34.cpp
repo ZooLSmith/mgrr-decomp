@@ -171,8 +171,8 @@ void __fastcall esp34::vf08(int param_1)
   return;
 }
 
-// 00F360D0  esp34::vf04  size=1031  [class]
-void __thiscall esp34::vf04(int param_1,int param_2,undefined4 param_3,int *param_4)
+// 00F360D0  esp34::preTrans  size=1031  [class]
+void __thiscall esp34::preTrans(int param_1,int param_2,undefined4 param_3,int *param_4)
 
 {
   int *piVar1;
@@ -210,7 +210,7 @@ void __thiscall esp34::vf04(int param_1,int param_2,undefined4 param_3,int *para
   
   local_14 = DAT_018e8764 ^ (uint)&fStack_d8;
   local_e4 = param_4;
-  iVar8 = cEspStrip2p::vf04(param_2,param_3);
+  iVar8 = cEspStrip2p::preTrans(param_2,param_3);
   if (iVar8 == 0) {
     __security_check_cookie(local_14 ^ (uint)&fStack_d8);
     return;

@@ -11,8 +11,8 @@ void __fastcall Hw::cOtManagerBase::cOtManagerBase(undefined4 *param_1)
   return;
 }
 
-// 00F979B0  Hw::cOtManagerBase::cOtManagerBase_2  size=7  [class]
-void __fastcall Hw::cOtManagerBase::cOtManagerBase_2(undefined4 *param_1)
+// 00F979B0  Hw::cOtManagerBase::~cOtManagerBase  size=7  [class]
+void __fastcall Hw::cOtManagerBase::~cOtManagerBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;

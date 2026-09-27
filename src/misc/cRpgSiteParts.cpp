@@ -59,8 +59,8 @@ void __fastcall cRpgSiteParts::vf08(int param_1)
   return;
 }
 
-// 00D173F0  cRpgSiteParts::vf14  size=988  [class]
-void __fastcall cRpgSiteParts::vf14(int param_1)
+// 00D173F0  cRpgSiteParts::create  size=988  [class]
+void __fastcall cRpgSiteParts::create(int param_1)
 
 {
   uint uVar1;

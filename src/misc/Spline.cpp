@@ -1012,7 +1012,7 @@ void __fastcall Spline<Hw::cVec4>::Spline<Hw::cVec4>(int param_1)
   *(undefined4 *)(param_1 + 0x564) = 0;
   *(undefined4 *)(param_1 + 0x568) = 0;
   *(undefined ***)(param_1 + 0x544) = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   return;
 }
 

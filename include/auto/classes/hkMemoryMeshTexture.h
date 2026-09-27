@@ -20,7 +20,7 @@ struct hkMemoryMeshTexture : public hkMeshTexture {
     virtual undefined4 vf34();  // 0106C090 slot 0x34  overrides hkMeshTexture
     virtual void vf38(undefined4 param_2);  // 0106C0A0 slot 0x38  overrides hkMeshTexture
     // non-virtual members
-    hkMemoryMeshTexture(undefined4 * param_1, undefined4 param_2);  // 01064E50
+    ~hkMemoryMeshTexture();  // 01064E50
     hkMemoryMeshTexture();  // 01064E70
     void ctor_01064F70();  // 01064F70
     void ctor_0106C170();  // 0106C170

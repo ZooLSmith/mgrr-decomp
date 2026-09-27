@@ -14,6 +14,6 @@ struct CollisionCylinder : public Collision {
     virtual float10 vf1C();  // 00D77540 slot 0x1C  overrides Collision
     virtual void vf24();  // 00D7D330 slot 0x24  overrides Collision
     // non-virtual members
-    CollisionCylinder();  // 00D7D380
-    void ctor_00D7DEF0();  // 00D7DEF0
+    ~CollisionCylinder();  // 00D7D380
+    CollisionCylinder();  // 00D7DEF0
 };

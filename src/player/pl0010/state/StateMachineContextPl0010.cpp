@@ -1,8 +1,133 @@
 // src/player/pl0010/state/StateMachineContextPl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BD3610..00BF1BA0, 3 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BD3340..00BF1BA0, 4 functions
 
 #include "mgrr.h"
 #include "StateMachineContextPl0010.h"
+
+// 00BD3340  StateMachineContextPl0010::~StateMachineContextPl0010  size=710  [class]
+void __fastcall StateMachineContextPl0010::~StateMachineContextPl0010(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0x30] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x30])(1);
+    param_1[0x30] = 0;
+  }
+  if (param_1[0xd2] != 0) {
+    param_1[0xd4] = 0;
+    if (param_1[0xd5] != 0) {
+      FUN_00dd48d0(param_1[0xd2],0);
+      param_1[0xd5] = 0;
+    }
+    param_1[0xd2] = 0;
+    param_1[0xd3] = 0;
+  }
+  FUN_00a7c950();
+  param_1[0xc9] = 0;
+  param_1[0xca] = 0;
+  param_1[0x167] = 0;
+  param_1[0x16c] = 0;
+  param_1[0x171] = 0;
+  if (param_1[0x165] != 0) {
+    param_1[0x167] = 0;
+    if (param_1[0x168] != 0) {
+      FUN_00dd48d0(param_1[0x165],0);
+      param_1[0x168] = 0;
+    }
+    param_1[0x165] = 0;
+    param_1[0x166] = 0;
+  }
+  if (param_1[0x16a] != 0) {
+    param_1[0x16c] = 0;
+    if (param_1[0x16d] != 0) {
+      FUN_00dd48d0(param_1[0x16a],0);
+      param_1[0x16d] = 0;
+    }
+    param_1[0x16a] = 0;
+    param_1[0x16b] = 0;
+  }
+  if (param_1[0x16f] != 0) {
+    param_1[0x171] = 0;
+    if (param_1[0x172] != 0) {
+      FUN_00dd48d0(param_1[0x16f],0);
+      param_1[0x172] = 0;
+    }
+    param_1[0x16f] = 0;
+    param_1[0x170] = 0;
+  }
+  iVar1 = FUN_00a81330();
+  if (iVar1 != 0) {
+    FUN_00a805f0();
+  }
+  iVar1 = FUN_00a81330();
+  if (iVar1 != 0) {
+    FUN_00a805f0();
+  }
+  param_1[0xe3] = 0;
+  param_1[0xe4] = 0;
+  iVar1 = FUN_00a81330();
+  if (iVar1 != 0) {
+    FUN_00a805f0();
+  }
+  iVar1 = FUN_00a81330();
+  if (iVar1 != 0) {
+    FUN_00a805f0();
+  }
+  FUN_00a7c950();
+  FUN_00a7c950();
+  param_1[0x177] = 0;
+  if (param_1[0x16f] != 0) {
+    param_1[0x171] = 0;
+    if (param_1[0x172] != 0) {
+      FUN_00dd48d0(param_1[0x16f],0);
+      param_1[0x172] = 0;
+    }
+    param_1[0x16f] = 0;
+    param_1[0x170] = 0;
+  }
+  if (param_1[0x16a] != 0) {
+    param_1[0x16c] = 0;
+    if (param_1[0x16d] != 0) {
+      FUN_00dd48d0(param_1[0x16a],0);
+      param_1[0x16d] = 0;
+    }
+    param_1[0x16a] = 0;
+    param_1[0x16b] = 0;
+  }
+  if (param_1[0x165] != 0) {
+    param_1[0x167] = 0;
+    if (param_1[0x168] != 0) {
+      FUN_00dd48d0(param_1[0x165],0);
+      param_1[0x168] = 0;
+    }
+    param_1[0x165] = 0;
+    param_1[0x166] = 0;
+  }
+  if (param_1[299] != 0) {
+    param_1[0x12d] = 0;
+    if (param_1[0x12e] != 0) {
+      FUN_00dd48d0(param_1[299],0);
+      param_1[0x12e] = 0;
+    }
+    param_1[299] = 0;
+    param_1[300] = 0;
+  }
+  if (param_1[0xd2] != 0) {
+    param_1[0xd4] = 0;
+    if (param_1[0xd5] != 0) {
+      FUN_00dd48d0(param_1[0xd2],0);
+      param_1[0xd5] = 0;
+    }
+    param_1[0xd2] = 0;
+    param_1[0xd3] = 0;
+  }
+  cEspControler::~cEspControler();
+  cEspControler::~cEspControler();
+  *param_1 = StateMachineContext::vftable;
+  return;
+}
 
 // 00BD3610  StateMachineContextPl0010::vf00  size=6  [class]
 undefined * StateMachineContextPl0010::vf00(void)
@@ -15,7 +140,7 @@ undefined * StateMachineContextPl0010::vf00(void)
 undefined4 __thiscall StateMachineContextPl0010::vf04(undefined4 param_1,byte param_2)
 
 {
-  StateMachineContext::StateMachineContext();
+  ~StateMachineContextPl0010();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -59,7 +184,7 @@ StateMachineContextPl0010::StateMachineContextPl0010
   undefined4 local_28;
   undefined4 local_24;
   
-  StateMachineContext::StateMachineContext_2(param_2);
+  StateMachineContext::StateMachineContext(param_2);
   param_1[4] = 0;
   param_1[0x1c] = 0;
   param_1[3] = param_3;

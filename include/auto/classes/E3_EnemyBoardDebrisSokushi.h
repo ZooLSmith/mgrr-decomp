@@ -11,5 +11,7 @@ struct E3_EnemyBoardDebrisSokushi : public Behavior {
     virtual undefined4 startup();  // 0040AF90 slot 0x40  overrides Behavior
     virtual void vf4C();  // 0040AFB0 slot 0x4C  overrides Behavior
     // non-virtual members
+    static void vf4C_005D8210();  // 005D8210
+    static void vf4C_009FDDE0();  // 009FDDE0
     E3_EnemyBoardDebrisSokushi();  // 00AA6C40
 };

@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp17::esp17(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,15 +17,15 @@ undefined4 * __fastcall esp17::esp17(undefined4 *param_1)
 undefined4 __thiscall esp17::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00F04160  esp17::vf10  size=639  [class]
-void __fastcall esp17::vf10(int param_1)
+// 00F04160  esp17::addOtTransList  size=639  [class]
+void __fastcall esp17::addOtTransList(int param_1)
 
 {
   float fVar1;
@@ -42,7 +42,7 @@ void __fastcall esp17::vf10(int param_1)
   float local_1c;
   float local_18;
   
-  FUN_00efed20();
+  esp107::vf10();
   pfVar3 = (float *)FUN_00e9fe70();
   local_20 = *(float *)(param_1 + 400) - *pfVar3;
   local_1c = *(float *)(param_1 + 0x194) - pfVar3[1];
@@ -123,9 +123,9 @@ void __fastcall esp17::vf08(int param_1)
   return;
 }
 
-// 00F32110  esp17::vf04  size=343  [class]
+// 00F32110  esp17::preTrans  size=343  [class]
 undefined4 __thiscall
-esp17::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp17::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -133,7 +133,7 @@ esp17::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return 0;
   }

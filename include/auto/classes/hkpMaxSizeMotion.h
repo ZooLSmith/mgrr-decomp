@@ -13,5 +13,6 @@ struct hkpMaxSizeMotion : public hkpKeyframedRigidMotion {
     hkpMaxSizeMotion();  // 01190FA0
     void ctor_011914C0(int param_2);  // 011914C0
     hkpMaxSizeMotion(undefined4 * param_1, int param_2);  // 011B1430
-    void ctor_011C3C60();  // 011C3C60
+    void ctor_011B1470();  // 011B1470
+    ~hkpMaxSizeMotion();  // 011C3C60
 };

@@ -10,4 +10,6 @@ struct AnimationMapManagerImplement : public AnimationMapManager {
     virtual int addReference(int param_2, undefined4 param_3);  // 008DA6C0 slot 0x4  overrides AnimationMapManager
     virtual void vf08(int param_2);  // 008D8110 slot 0x8  overrides AnimationMapManager
     virtual undefined4 * vf0C(byte param_2);  // 008D9E20 slot 0xC  overrides AnimationMapManager
+    // non-virtual members
+    static void vf00_008D8DE0();  // 008D8DE0
 };

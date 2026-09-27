@@ -8,7 +8,7 @@
 undefined4 * __fastcall cMovieViewerBg::cMovieViewerBg(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   return param_1;
 }
@@ -21,7 +21,7 @@ undefined4 * cMovieViewerBg::cMovieViewerBg_2(void)
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x1c,&DAT_01b7be50);
   if (puVar1 != (undefined4 *)0x0) {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     *puVar1 = vftable;
     puVar1[3] = "cMovieViewerBg";
     FUN_00d29ca0(0x7a,0);
@@ -40,8 +40,8 @@ void cMovieViewerBg::vf08(void)
   return;
 }
 
-// 00991FC0  cMovieViewerBg::vf14  size=1  [class]
-void cMovieViewerBg::vf14(void)
+// 00991FC0  cMovieViewerBg::create  size=1  [class]
+void cMovieViewerBg::create(void)
 
 {
   return;
@@ -52,7 +52,7 @@ undefined4 * __thiscall cMovieViewerBg::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

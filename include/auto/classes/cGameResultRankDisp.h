@@ -8,5 +8,5 @@ struct cGameResultRankDisp : public cCustomObjCtrlManager {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00CE4140 slot 0x0  overrides cCustomObjCtrlManager
     // non-virtual members
-    cGameResultRankDisp();  // 00CF5500
+    cGameResultRankDisp();  // 00CF5320
 };

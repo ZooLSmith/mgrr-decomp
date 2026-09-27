@@ -8,4 +8,6 @@ struct cJammingDispBase : public cUIWorkBase {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00CF65D0 slot 0x0  overrides cUIWork
     virtual void vf08(undefined4 param_2);  // 00D251F0 slot 0x8  overrides cUIWork
+    // non-virtual members
+    cJammingDispBase();  // 00CEF690
 };

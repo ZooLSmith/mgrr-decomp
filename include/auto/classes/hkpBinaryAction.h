@@ -10,4 +10,7 @@ struct hkpBinaryAction : public hkpAction {
     virtual undefined * vf08();  // 01274030 slot 0x8  overrides hkReferencedObject
     virtual void vf10(int * param_2);  // 01499580 slot 0x10  overrides hkpAction
     virtual void vf18();  // 01499410 slot 0x18  overrides hkpAction
+    // non-virtual members
+    hkpBinaryAction(undefined4 param_2);  // 01274000
+    hkpBinaryAction();  // 014994D0
 };

@@ -18,5 +18,6 @@ struct cItemStageDropInstant : public cItemStageDrop {
     static void vf14();  // 0094D060
     static void vf24();  // 0094D0D0
     static void vf08(undefined4 param_2);  // 0094D120
+    cItemStageDropInstant();  // 0094D160
     static void vf28();  // 009500F0
 };

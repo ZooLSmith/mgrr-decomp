@@ -193,7 +193,7 @@ void __thiscall FUN_00fab210(int param_1,undefined4 param_2,undefined4 param_3,i
 undefined4 * __fastcall FUN_00fab300(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f1d80;
   return param_1;
 }
@@ -203,7 +203,7 @@ undefined4 * __thiscall FUN_00fab330(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f1d80;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -214,8 +214,8 @@ undefined4 * __thiscall FUN_00fab330(undefined4 *param_1,byte param_2)
 void FUN_00fab360(void)
 
 {
-  Hw::cTexture::cTexture_5();
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
+  Hw::cTexture::~cTexture();
   return;
 }
 
@@ -644,7 +644,7 @@ undefined4 * __fastcall FUN_00fac100(undefined4 *param_1)
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_33_016f1e30;
+  *param_1 = &PTR__cShaderSetting_016f1e30;
   iVar1 = 4;
   do {
     cModelShader::cModelShader();
@@ -666,16 +666,16 @@ undefined4 * __fastcall FUN_00fac100(undefined4 *param_1)
   return param_1;
 }
 
-// 00FAC210  cShaderSetting::cShaderSetting_81  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_81(undefined4 *param_1,byte param_2)
+// 00FAC210  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_81_016f1e60;
+  *param_1 = &PTR__cShaderSetting_016f1e60;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -685,16 +685,16 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_81(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FAC330  cShaderSetting::cShaderSetting_83  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_83(undefined4 *param_1,byte param_2)
+// 00FAC330  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_83_016f1e90;
+  *param_1 = &PTR__cShaderSetting_016f1e90;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -704,16 +704,16 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_83(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FAC3D0  cShaderSetting::cShaderSetting_82  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_82(undefined4 *param_1,byte param_2)
+// 00FAC3D0  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_82_016f1ec0;
+  *param_1 = &PTR__cShaderSetting_016f1ec0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -723,16 +723,16 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_82(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FAC4F0  cShaderSetting::cShaderSetting_84  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_84(undefined4 *param_1,byte param_2)
+// 00FAC4F0  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_84_016f1ef0;
+  *param_1 = &PTR__cShaderSetting_016f1ef0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -746,7 +746,7 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_84(undefined4 *param_1,by
 undefined4 * __fastcall FUN_00fac600(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f1f20;
   return param_1;
 }
@@ -756,7 +756,7 @@ undefined4 * __thiscall FUN_00fac630(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f1f20;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -767,7 +767,7 @@ undefined4 * __thiscall FUN_00fac630(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fac660(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f1f28;
   return param_1;
 }
@@ -777,7 +777,7 @@ undefined4 * __thiscall FUN_00fac690(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f1f28;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -788,7 +788,7 @@ undefined4 * __thiscall FUN_00fac690(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall FUN_00fac6c0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f1f30;
   return param_1;
 }
@@ -978,8 +978,8 @@ void __thiscall FUN_00facb40(int param_1,undefined4 param_2)
   return;
 }
 
-// 00FACB90  cShaderSetting::cShaderSetting_71  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_71(undefined4 *param_1,byte param_2)
+// 00FACB90  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -989,8 +989,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_71(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACC30  cShaderSetting::cShaderSetting_73  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_73(undefined4 *param_1,byte param_2)
+// 00FACC30  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1000,8 +1000,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_73(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACCD0  cShaderSetting::cShaderSetting_72  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_72(undefined4 *param_1,byte param_2)
+// 00FACCD0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1011,8 +1011,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_72(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACD70  cShaderSetting::cShaderSetting_76  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_76(undefined4 *param_1,byte param_2)
+// 00FACD70  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1022,17 +1022,17 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_76(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACDB0  cShaderSetting::cShaderSetting_75  size=19  [class]
-void __fastcall cShaderSetting::cShaderSetting_75(undefined4 *param_1)
+// 00FACDB0  cShaderSetting::~cShaderSetting  size=19  [class]
+void __fastcall cShaderSetting::~cShaderSetting(undefined4 *param_1)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   *param_1 = vftable;
   return;
 }
 
-// 00FACDE0  cShaderSetting::cShaderSetting_74  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_74(undefined4 *param_1,byte param_2)
+// 00FACDE0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1042,8 +1042,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_74(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACE50  cShaderSetting::cShaderSetting_78  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_78(undefined4 *param_1,byte param_2)
+// 00FACE50  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1053,8 +1053,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_78(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACEC0  cShaderSetting::cShaderSetting_77  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_77(undefined4 *param_1,byte param_2)
+// 00FACEC0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1064,8 +1064,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_77(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACF30  cShaderSetting::cShaderSetting_80  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_80(undefined4 *param_1,byte param_2)
+// 00FACF30  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1075,8 +1075,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_80(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FACFD0  cShaderSetting::cShaderSetting_79  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_79(undefined4 *param_1,byte param_2)
+// 00FACFD0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1086,8 +1086,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_79(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FAD070  cShaderSetting::cShaderSetting_67  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_67(undefined4 *param_1,byte param_2)
+// 00FAD070  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1097,8 +1097,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_67(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FAD110  cShaderSetting::cShaderSetting_69  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_69(undefined4 *param_1,byte param_2)
+// 00FAD110  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1108,8 +1108,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_69(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FAD1B0  cShaderSetting::cShaderSetting_68  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_68(undefined4 *param_1,byte param_2)
+// 00FAD1B0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1119,8 +1119,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_68(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FAD220  cShaderSetting::cShaderSetting_70  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_70(undefined4 *param_1,byte param_2)
+// 00FAD220  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -1135,7 +1135,7 @@ undefined4 * __fastcall FUN_00fad280(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_32_016f2140;
+  *param_1 = &PTR__cShaderSetting_016f2140;
   return param_1;
 }
 
@@ -3417,8 +3417,8 @@ LAB_00fb0336:
   return;
 }
 
-// 00FB0530  cShaderSetting::cShaderSetting_29  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_29(undefined4 *param_1,byte param_2)
+// 00FB0530  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3549,8 +3549,8 @@ void FUN_00fb07d0(void)
   return;
 }
 
-// 00FB0810  cShaderSetting::cShaderSetting_21  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_21(undefined4 *param_1,byte param_2)
+// 00FB0810  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3560,17 +3560,17 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_21(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB0840  cShaderSetting::cShaderSetting_20  size=19  [class]
-void __fastcall cShaderSetting::cShaderSetting_20(undefined4 *param_1)
+// 00FB0840  cShaderSetting::~cShaderSetting  size=19  [class]
+void __fastcall cShaderSetting::~cShaderSetting(undefined4 *param_1)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   *param_1 = vftable;
   return;
 }
 
-// 00FB0870  cShaderSetting::cShaderSetting_19  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_19(undefined4 *param_1,byte param_2)
+// 00FB0870  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3580,8 +3580,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_19(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB08C0  cShaderSetting::cShaderSetting_18  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_18(undefined4 *param_1,byte param_2)
+// 00FB08C0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3591,8 +3591,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_18(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB0910  cShaderSetting::cShaderSetting_24  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_24(undefined4 *param_1,byte param_2)
+// 00FB0910  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3602,8 +3602,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_24(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB0960  cShaderSetting::cShaderSetting_23  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_23(undefined4 *param_1,byte param_2)
+// 00FB0960  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3613,8 +3613,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_23(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB09B0  cShaderSetting::cShaderSetting_22  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_22(undefined4 *param_1,byte param_2)
+// 00FB09B0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3636,8 +3636,8 @@ void __thiscall FUN_00fb09e0(int param_1,undefined4 param_2)
   return;
 }
 
-// 00FB0B20  cShaderSetting::cShaderSetting_27  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_27(undefined4 *param_1,byte param_2)
+// 00FB0B20  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3647,8 +3647,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_27(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB0B90  cShaderSetting::cShaderSetting_26  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_26(undefined4 *param_1,byte param_2)
+// 00FB0B90  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3658,8 +3658,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_26(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB0BF0  cShaderSetting::cShaderSetting_25  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_25(undefined4 *param_1,byte param_2)
+// 00FB0BF0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -3678,8 +3678,8 @@ undefined4 __thiscall FUN_00fb0c20(int param_1,undefined4 param_2)
   return 1;
 }
 
-// 00FB0C70  cShaderSetting::cShaderSetting_28  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_28(undefined4 *param_1,byte param_2)
+// 00FB0C70  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4147,7 +4147,7 @@ void __fastcall FUN_00fb1a80(int param_1)
 undefined4 * __fastcall FUN_00fb1ab0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f23d0;
   return param_1;
 }
@@ -4685,7 +4685,7 @@ undefined4 * __fastcall FUN_00fb24e0(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_81_016f1e60;
+  *param_1 = &PTR__cShaderSetting_016f1e60;
   return param_1;
 }
 
@@ -4694,20 +4694,20 @@ undefined4 * __fastcall FUN_00fb2500(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_14_016f23e4;
+  *param_1 = &PTR__cShaderSetting_016f23e4;
   return param_1;
 }
 
-// 00FB2520  cShaderSetting::cShaderSetting_14  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_14(undefined4 *param_1,byte param_2)
+// 00FB2520  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_81_016f1e60;
+  *param_1 = &PTR__cShaderSetting_016f1e60;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -4722,20 +4722,20 @@ undefined4 * __fastcall FUN_00fb2570(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_13_016f2414;
+  *param_1 = &PTR__cShaderSetting_016f2414;
   return param_1;
 }
 
-// 00FB2590  cShaderSetting::cShaderSetting_13  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_13(undefined4 *param_1,byte param_2)
+// 00FB2590  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_81_016f1e60;
+  *param_1 = &PTR__cShaderSetting_016f1e60;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -4750,12 +4750,12 @@ undefined4 * __fastcall FUN_00fb25e0(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_83_016f1e90;
+  *param_1 = &PTR__cShaderSetting_016f1e90;
   return param_1;
 }
 
-// 00FB2620  cShaderSetting::cShaderSetting_16  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_16(undefined4 *param_1,byte param_2)
+// 00FB2620  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4770,7 +4770,7 @@ undefined4 * __fastcall FUN_00fb2650(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_82_016f1ec0;
+  *param_1 = &PTR__cShaderSetting_016f1ec0;
   return param_1;
 }
 
@@ -4779,20 +4779,20 @@ undefined4 * __fastcall FUN_00fb2670(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_15_016f246c;
+  *param_1 = &PTR__cShaderSetting_016f246c;
   return param_1;
 }
 
-// 00FB2690  cShaderSetting::cShaderSetting_15  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_15(undefined4 *param_1,byte param_2)
+// 00FB2690  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_82_016f1ec0;
+  *param_1 = &PTR__cShaderSetting_016f1ec0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -4807,20 +4807,20 @@ undefined4 * __fastcall FUN_00fb26e0(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_17_016f249c;
+  *param_1 = &PTR__cShaderSetting_016f249c;
   return param_1;
 }
 
-// 00FB2700  cShaderSetting::cShaderSetting_17  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_17(undefined4 *param_1,byte param_2)
+// 00FB2700  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_82_016f1ec0;
+  *param_1 = &PTR__cShaderSetting_016f1ec0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -4848,7 +4848,7 @@ undefined4 * __fastcall FUN_00fb27c0(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_84_016f1ef0;
+  *param_1 = &PTR__cShaderSetting_016f1ef0;
   return param_1;
 }
 
@@ -4857,20 +4857,20 @@ undefined4 * __fastcall FUN_00fb27e0(undefined4 *param_1)
 
 {
   FUN_00fac100();
-  *param_1 = &PTR_cShaderSetting_11_016f24cc;
+  *param_1 = &PTR__cShaderSetting_016f24cc;
   return param_1;
 }
 
-// 00FB2800  cShaderSetting::cShaderSetting_11  size=78  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_11(undefined4 *param_1,byte param_2)
+// 00FB2800  cShaderSetting::~cShaderSetting  size=78  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
-  *param_1 = &PTR_cShaderSetting_84_016f1ef0;
+  *param_1 = &PTR__cShaderSetting_016f1ef0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -4880,8 +4880,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_11(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB2990  cShaderSetting::cShaderSetting_12  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_12(undefined4 *param_1,byte param_2)
+// 00FB2990  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4891,8 +4891,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_12(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB54E0  cShaderSetting::cShaderSetting_59  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_59(undefined4 *param_1,byte param_2)
+// 00FB54E0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4902,8 +4902,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_59(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5540  cShaderSetting::cShaderSetting_62  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_62(undefined4 *param_1,byte param_2)
+// 00FB5540  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4913,8 +4913,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_62(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5590  cShaderSetting::cShaderSetting_61  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_61(undefined4 *param_1,byte param_2)
+// 00FB5590  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4924,8 +4924,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_61(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB55F0  cShaderSetting::cShaderSetting_60  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_60(undefined4 *param_1,byte param_2)
+// 00FB55F0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4935,8 +4935,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_60(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5650  cShaderSetting::cShaderSetting_64  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_64(undefined4 *param_1,byte param_2)
+// 00FB5650  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4946,8 +4946,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_64(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB56B0  cShaderSetting::cShaderSetting_63  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_63(undefined4 *param_1,byte param_2)
+// 00FB56B0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4957,8 +4957,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_63(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5710  cShaderSetting::cShaderSetting_66  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_66(undefined4 *param_1,byte param_2)
+// 00FB5710  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -4968,8 +4968,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_66(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5770  cShaderSetting::cShaderSetting_65  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_65(undefined4 *param_1,byte param_2)
+// 00FB5770  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5001,8 +5001,8 @@ void __thiscall FUN_00fb57d0(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00FB5820  cShaderSetting::cShaderSetting_39  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_39(undefined4 *param_1,byte param_2)
+// 00FB5820  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5012,8 +5012,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_39(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5880  cShaderSetting::cShaderSetting_38  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_38(undefined4 *param_1,byte param_2)
+// 00FB5880  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5023,8 +5023,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_38(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB58E0  cShaderSetting::cShaderSetting_37  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_37(undefined4 *param_1,byte param_2)
+// 00FB58E0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5034,8 +5034,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_37(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5940  cShaderSetting::cShaderSetting_41  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_41(undefined4 *param_1,byte param_2)
+// 00FB5940  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5045,8 +5045,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_41(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB59A0  cShaderSetting::cShaderSetting_40  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_40(undefined4 *param_1,byte param_2)
+// 00FB59A0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5056,8 +5056,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_40(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5A00  cShaderSetting::cShaderSetting_44  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_44(undefined4 *param_1,byte param_2)
+// 00FB5A00  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5067,8 +5067,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_44(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5A60  cShaderSetting::cShaderSetting_43  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_43(undefined4 *param_1,byte param_2)
+// 00FB5A60  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5078,8 +5078,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_43(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5AC0  cShaderSetting::cShaderSetting_42  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_42(undefined4 *param_1,byte param_2)
+// 00FB5AC0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5089,8 +5089,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_42(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5B20  cShaderSetting::cShaderSetting_47  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_47(undefined4 *param_1,byte param_2)
+// 00FB5B20  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5100,8 +5100,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_47(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5B80  cShaderSetting::cShaderSetting_46  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_46(undefined4 *param_1,byte param_2)
+// 00FB5B80  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5111,8 +5111,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_46(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5BE0  cShaderSetting::cShaderSetting_45  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_45(undefined4 *param_1,byte param_2)
+// 00FB5BE0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5122,8 +5122,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_45(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5C40  cShaderSetting::cShaderSetting_49  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_49(undefined4 *param_1,byte param_2)
+// 00FB5C40  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5133,8 +5133,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_49(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5CA0  cShaderSetting::cShaderSetting_48  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_48(undefined4 *param_1,byte param_2)
+// 00FB5CA0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5144,8 +5144,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_48(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5D00  cShaderSetting::cShaderSetting_52  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_52(undefined4 *param_1,byte param_2)
+// 00FB5D00  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5155,8 +5155,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_52(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5D60  cShaderSetting::cShaderSetting_51  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_51(undefined4 *param_1,byte param_2)
+// 00FB5D60  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5166,8 +5166,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_51(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5DC0  cShaderSetting::cShaderSetting_50  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_50(undefined4 *param_1,byte param_2)
+// 00FB5DC0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5177,8 +5177,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_50(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5E20  cShaderSetting::cShaderSetting_55  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_55(undefined4 *param_1,byte param_2)
+// 00FB5E20  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5188,8 +5188,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_55(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5E80  cShaderSetting::cShaderSetting_54  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_54(undefined4 *param_1,byte param_2)
+// 00FB5E80  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5199,8 +5199,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_54(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5EE0  cShaderSetting::cShaderSetting_53  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_53(undefined4 *param_1,byte param_2)
+// 00FB5EE0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5210,8 +5210,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_53(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5F30  cShaderSetting::cShaderSetting_58  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_58(undefined4 *param_1,byte param_2)
+// 00FB5F30  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5221,8 +5221,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_58(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5F90  cShaderSetting::cShaderSetting_57  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_57(undefined4 *param_1,byte param_2)
+// 00FB5F90  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5232,8 +5232,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_57(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB5FF0  cShaderSetting::cShaderSetting_56  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_56(undefined4 *param_1,byte param_2)
+// 00FB5FF0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5243,8 +5243,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_56(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB6050  cShaderSetting::cShaderSetting_35  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_35(undefined4 *param_1,byte param_2)
+// 00FB6050  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5254,8 +5254,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_35(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB60B0  cShaderSetting::cShaderSetting_34  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_34(undefined4 *param_1,byte param_2)
+// 00FB60B0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5265,8 +5265,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_34(undefined4 *param_1,by
   return param_1;
 }
 
-// 00FB6110  cShaderSetting::cShaderSetting_36  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_36(undefined4 *param_1,byte param_2)
+// 00FB6110  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5376,15 +5376,15 @@ void FUN_00fb66f0(undefined4 *param_1)
   return;
 }
 
-// 00FB6C50  cShaderSetting::cShaderSetting_33  size=65  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_33(undefined4 *param_1,byte param_2)
+// 00FB6C50  cShaderSetting::~cShaderSetting  size=65  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -5399,7 +5399,7 @@ undefined4 * __thiscall FUN_00fb6cb0(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f1f30;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -5592,8 +5592,8 @@ LAB_00fb70da:
   return;
 }
 
-// 00FB7140  cShaderSetting::cShaderSetting_30  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_30(undefined4 *param_1,byte param_2)
+// 00FB7140  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -5607,16 +5607,16 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_30(undefined4 *param_1,by
 undefined4 * __fastcall FUN_00fb7370(undefined4 *param_1)
 
 {
-  *param_1 = &PTR_cShaderSetting_31_016f3444;
-  Hw::cTexture::cTexture_6();
+  *param_1 = &PTR__cShaderSetting_016f3444;
+  Hw::cTexture::cTexture();
   return param_1;
 }
 
-// 00FB73A0  cShaderSetting::cShaderSetting_31  size=42  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_31(undefined4 *param_1,byte param_2)
+// 00FB73A0  cShaderSetting::~cShaderSetting  size=42  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   *param_1 = vftable;
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
@@ -5649,7 +5649,7 @@ void __thiscall FUN_00fb73d0(int *param_1,int param_2,undefined4 param_3)
       }
       else {
         FUN_00fac100();
-        *piVar1 = (int)&PTR_cShaderSetting_32_016f2140;
+        *piVar1 = (int)&PTR__cShaderSetting_016f2140;
       }
       (**(code **)(*piVar1 + 0x30))();
       piVar1[5] = (uint)((pbVar2[8] & 2) == 0);
@@ -5711,15 +5711,15 @@ void __thiscall FUN_00fb73d0(int *param_1,int param_2,undefined4 param_3)
   return;
 }
 
-// 00FB75E0  cShaderSetting::cShaderSetting_32  size=65  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_32(undefined4 *param_1,byte param_2)
+// 00FB75E0  cShaderSetting::~cShaderSetting  size=65  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   int iVar1;
   
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *param_1 = vftable;
@@ -6218,8 +6218,8 @@ LAB_00fb7a2d:
   return;
 }
 
-// 00FB8260  cShaderSetting::cShaderSetting_7  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_7(undefined4 *param_1,byte param_2)
+// 00FB8260  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -6233,16 +6233,16 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_7(undefined4 *param_1,byt
 undefined4 * __fastcall FUN_00fb8290(undefined4 *param_1)
 
 {
-  *param_1 = &PTR_cShaderSetting_6_016f3494;
-  Hw::cTexture::cTexture_6();
+  *param_1 = &PTR__cShaderSetting_016f3494;
+  Hw::cTexture::cTexture();
   return param_1;
 }
 
-// 00FB82B0  cShaderSetting::cShaderSetting_6  size=42  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_6(undefined4 *param_1,byte param_2)
+// 00FB82B0  cShaderSetting::~cShaderSetting  size=42  [class]
+undefined4 * __thiscall cShaderSetting::~cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   *param_1 = vftable;
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
@@ -6305,8 +6305,8 @@ LAB_00fb8628:
   return;
 }
 
-// 00FB86B0  cShaderSetting::cShaderSetting_8  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_8(undefined4 *param_1,byte param_2)
+// 00FB86B0  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -6404,8 +6404,8 @@ void __thiscall FUN_00fb87c0(int param_1,undefined4 param_2,int param_3,int para
   return;
 }
 
-// 00FB8920  cShaderSetting::cShaderSetting_5  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_5(undefined4 *param_1,byte param_2)
+// 00FB8920  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -6961,8 +6961,8 @@ void FUN_00fb96a0(undefined4 param_1,float *param_2,undefined4 param_3)
   return;
 }
 
-// 00FBA470  cShaderSetting::cShaderSetting_2  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_2(undefined4 *param_1,byte param_2)
+// 00FBA470  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -6983,8 +6983,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte 
   return param_1;
 }
 
-// 00FBA520  cShaderSetting::cShaderSetting_4  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_4(undefined4 *param_1,byte param_2)
+// 00FBA520  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -6994,8 +6994,8 @@ undefined4 * __thiscall cShaderSetting::cShaderSetting_4(undefined4 *param_1,byt
   return param_1;
 }
 
-// 00FBA580  cShaderSetting::cShaderSetting_3  size=34  [class]
-undefined4 * __thiscall cShaderSetting::cShaderSetting_3(undefined4 *param_1,byte param_2)
+// 00FBA580  cShaderSetting::cShaderSetting  size=34  [class]
+undefined4 * __thiscall cShaderSetting::cShaderSetting(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
@@ -7251,7 +7251,7 @@ undefined4 * __thiscall FUN_00fbade0(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f2370;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -7322,7 +7322,7 @@ undefined4 * __thiscall FUN_00fbafd0(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f2378;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -7473,7 +7473,7 @@ undefined4 * __thiscall FUN_00fbb320(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -9329,7 +9329,7 @@ undefined4 * __thiscall FUN_00fbedb0(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = &PTR_FUN_016f23d0;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -9846,7 +9846,7 @@ void FUN_015f4820(void)
 
 {
   _DAT_01f72754 = &PTR_FUN_016f1f20;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -9857,74 +9857,74 @@ void FUN_015f4840(void)
 
 {
   _DAT_01f7277c = &PTR_FUN_016f1f28;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
-// 015F4860  cShaderSetting::cShaderSetting_86  size=53  [class]
+// 015F4860  cShaderSetting::~cShaderSetting  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cShaderSetting::cShaderSetting_86(void)
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  _DAT_01f68138 = &PTR_cShaderSetting_81_016f1e60;
+  _DAT_01f68138 = &PTR__cShaderSetting_016f1e60;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   _DAT_01f68138 = vftable;
   return;
 }
 
-// 015F48A0  cShaderSetting::cShaderSetting_87  size=53  [class]
+// 015F48A0  cShaderSetting::~cShaderSetting  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cShaderSetting::cShaderSetting_87(void)
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  _DAT_01f68778 = &PTR_cShaderSetting_81_016f1e60;
+  _DAT_01f68778 = &PTR__cShaderSetting_016f1e60;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   _DAT_01f68778 = vftable;
   return;
 }
 
-// 015F48E0  cShaderSetting::cShaderSetting_88  size=53  [class]
+// 015F48E0  cShaderSetting::~cShaderSetting  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cShaderSetting::cShaderSetting_88(void)
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  _DAT_01f68db8 = &PTR_cShaderSetting_81_016f1e60;
+  _DAT_01f68db8 = &PTR__cShaderSetting_016f1e60;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   _DAT_01f68db8 = vftable;
   return;
 }
 
-// 015F4920  cShaderSetting::cShaderSetting_89  size=53  [class]
-void cShaderSetting::cShaderSetting_89(void)
+// 015F4920  cShaderSetting::~cShaderSetting  size=53  [class]
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  DAT_01f693f8 = &PTR_cShaderSetting_83_016f1e90;
+  DAT_01f693f8 = &PTR__cShaderSetting_016f1e90;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   DAT_01f693f8 = vftable;
@@ -9939,88 +9939,88 @@ void cShaderSetting::cShaderSetting_90(void)
   return;
 }
 
-// 015F4970  cShaderSetting::cShaderSetting_91  size=53  [class]
+// 015F4970  cShaderSetting::~cShaderSetting  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cShaderSetting::cShaderSetting_91(void)
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  _DAT_01f69a38 = &PTR_cShaderSetting_82_016f1ec0;
+  _DAT_01f69a38 = &PTR__cShaderSetting_016f1ec0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   _DAT_01f69a38 = vftable;
   return;
 }
 
-// 015F49B0  cShaderSetting::cShaderSetting_92  size=53  [class]
+// 015F49B0  cShaderSetting::~cShaderSetting  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cShaderSetting::cShaderSetting_92(void)
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  _DAT_01f6a078 = &PTR_cShaderSetting_82_016f1ec0;
+  _DAT_01f6a078 = &PTR__cShaderSetting_016f1ec0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   _DAT_01f6a078 = vftable;
   return;
 }
 
-// 015F49F0  cShaderSetting::cShaderSetting_93  size=53  [class]
-void cShaderSetting::cShaderSetting_93(void)
+// 015F49F0  cShaderSetting::~cShaderSetting  size=53  [class]
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  DAT_01f6a6b8 = &PTR_cShaderSetting_82_016f1ec0;
+  DAT_01f6a6b8 = &PTR__cShaderSetting_016f1ec0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   DAT_01f6a6b8 = vftable;
   return;
 }
 
-// 015F4A30  cShaderSetting::cShaderSetting_94  size=53  [class]
+// 015F4A30  cShaderSetting::~cShaderSetting  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cShaderSetting::cShaderSetting_94(void)
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  _DAT_01f6acf8 = &PTR_cShaderSetting_84_016f1ef0;
+  _DAT_01f6acf8 = &PTR__cShaderSetting_016f1ef0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   _DAT_01f6acf8 = vftable;
   return;
 }
 
-// 015F4A70  cShaderSetting::cShaderSetting_95  size=53  [class]
+// 015F4A70  cShaderSetting::~cShaderSetting  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cShaderSetting::cShaderSetting_95(void)
+void cShaderSetting::~cShaderSetting(void)
 
 {
   int iVar1;
   
-  _DAT_01f6b338 = &PTR_cShaderSetting_84_016f1ef0;
+  _DAT_01f6b338 = &PTR__cShaderSetting_016f1ef0;
   iVar1 = 4;
   do {
-    cModelShader::cModelShader_2();
+    cModelShader::~cModelShader();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   _DAT_01f6b338 = vftable;
@@ -10039,8 +10039,8 @@ void cShaderSetting::cShaderSetting_96(void)
 void FUN_015f4ac0(void)
 
 {
-  Hw::cTexture::cTexture_5();
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
+  Hw::cTexture::~cTexture();
   return;
 }
 
@@ -12388,11 +12388,11 @@ void cShaderSetting::cShaderSetting_389(void)
   return;
 }
 
-// 015F5D30  cShaderSetting::cShaderSetting_390  size=21  [class]
-void cShaderSetting::cShaderSetting_390(void)
+// 015F5D30  cShaderSetting::~cShaderSetting  size=21  [class]
+void cShaderSetting::~cShaderSetting(void)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   PTR_PTR_018e79d0 = (undefined *)vftable;
   return;
 }
@@ -12485,11 +12485,11 @@ void cShaderSetting::cShaderSetting_400(void)
   return;
 }
 
-// 015F5E00  cShaderSetting::cShaderSetting_401  size=21  [class]
-void cShaderSetting::cShaderSetting_401(void)
+// 015F5E00  cShaderSetting::~cShaderSetting  size=21  [class]
+void cShaderSetting::~cShaderSetting(void)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   PTR_PTR_018e7f50 = (undefined *)vftable;
   return;
 }
@@ -12821,7 +12821,7 @@ void FUN_015f60e0(void)
 
 {
   _DAT_01f722c8 = &PTR_FUN_016f2370;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12832,7 +12832,7 @@ void FUN_015f6100(void)
 
 {
   _DAT_01f722f0 = &PTR_FUN_016f2370;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12843,7 +12843,7 @@ void FUN_015f6120(void)
 
 {
   _DAT_01f72318 = &PTR_FUN_016f2370;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12854,7 +12854,7 @@ void FUN_015f6140(void)
 
 {
   _DAT_01f72340 = &PTR_FUN_016f2370;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12865,7 +12865,7 @@ void FUN_015f6160(void)
 
 {
   _DAT_01f72368 = &PTR_FUN_016f2370;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12876,7 +12876,7 @@ void FUN_015f6180(void)
 
 {
   _DAT_01f72390 = &PTR_FUN_016f2370;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12887,7 +12887,7 @@ void FUN_015f61a0(void)
 
 {
   _DAT_01f724b8 = &PTR_FUN_016f2378;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12898,7 +12898,7 @@ void FUN_015f61c0(void)
 
 {
   _DAT_01f724e0 = &PTR_FUN_016f2378;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12909,7 +12909,7 @@ void FUN_015f61e0(void)
 
 {
   _DAT_01f72508 = &PTR_FUN_016f2378;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12920,7 +12920,7 @@ void FUN_015f6200(void)
 
 {
   _DAT_01f72530 = &PTR_FUN_016f2378;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12931,7 +12931,7 @@ void FUN_015f6220(void)
 
 {
   _DAT_01f72558 = &PTR_FUN_016f2378;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12942,7 +12942,7 @@ void FUN_015f6240(void)
 
 {
   _DAT_01f72580 = &PTR_FUN_016f2378;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12953,7 +12953,7 @@ void FUN_015f6260(void)
 
 {
   _DAT_01f727a4 = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12964,7 +12964,7 @@ void FUN_015f6280(void)
 
 {
   _DAT_01f727cc = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12975,7 +12975,7 @@ void FUN_015f62a0(void)
 
 {
   _DAT_01f727f4 = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12986,7 +12986,7 @@ void FUN_015f62c0(void)
 
 {
   _DAT_01f7281c = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -12997,7 +12997,7 @@ void FUN_015f62e0(void)
 
 {
   _DAT_01f72844 = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -13008,7 +13008,7 @@ void FUN_015f6300(void)
 
 {
   _DAT_01f7286c = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -13019,7 +13019,7 @@ void FUN_015f6320(void)
 
 {
   _DAT_01f72894 = &PTR_FUN_016f23c8;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -13030,7 +13030,7 @@ void FUN_015f6340(void)
 
 {
   _DAT_01f8be4c = &PTR_FUN_016f23d0;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -13041,7 +13041,7 @@ void FUN_015f6360(void)
 
 {
   _DAT_01f8be74 = &PTR_FUN_016f23d0;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -13052,7 +13052,7 @@ void FUN_015f6380(void)
 
 {
   _DAT_01f8be9c = &PTR_FUN_016f23d0;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

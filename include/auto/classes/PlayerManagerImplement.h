@@ -51,4 +51,6 @@ struct PlayerManagerImplement : public PlayerManager {
     virtual undefined4 vfA8();  // 00C137F0 slot 0xA8  overrides PlayerManager
     virtual bool vfAC(uint param_2);  // 00C138B0 slot 0xAC  overrides PlayerManager
     virtual void vfB0(uint param_2);  // 00C138D0 slot 0xB0  overrides PlayerManager
+    // non-virtual members
+    ~PlayerManagerImplement();  // 00C4CEB0
 };

@@ -10,5 +10,5 @@ struct StateMachineContextPl1500 : public StateMachineContextPl0010 {
     virtual undefined4 * vf04(byte param_2);  // 008AA2F0 slot 0x4  overrides StateMachineContext
     // non-virtual members
     StateMachineContextPl1500();  // 008A4B70
-    void ctor_008A4C30();  // 008A4C30
+    ~StateMachineContextPl1500();  // 008A4C30
 };

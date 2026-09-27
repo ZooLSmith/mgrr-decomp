@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp125::esp125(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   FUN_00f5aaf0();
   return param_1;
@@ -19,18 +19,18 @@ undefined4 * __thiscall esp125::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009DA310  esp125::vf04  size=492  [class]
+// 009DA310  esp125::preTrans  size=492  [class]
 /* WARNING: Removing unreachable block (ram,0x009da489) */
 
 undefined4 __thiscall
-esp125::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp125::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -44,7 +44,7 @@ esp125::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   void *_Src;
   float10 fVar9;
   
-  iVar4 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar4 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar4 != 0) {
     if ((*(int *)(param_1 + 0x58) == 0) ||
        (puVar5 = (uint *)(*(int *)(param_1 + 0x58) + 0x30), puVar5 == (uint *)0x0)) {
@@ -157,8 +157,8 @@ void __fastcall esp125::vf08(int param_1)
   return;
 }
 
-// 009DA640  esp125::vf10  size=311  [class]
-void __fastcall esp125::vf10(int param_1)
+// 009DA640  esp125::addOtTransList  size=311  [class]
+void __fastcall esp125::addOtTransList(int param_1)
 
 {
   short sVar1;
@@ -169,7 +169,7 @@ void __fastcall esp125::vf10(int param_1)
   uint uVar6;
   
   iVar3 = FUN_00dd7ad0();
-  FUN_00efed20();
+  esp107::vf10();
   if (((0.01 < *(float *)(param_1 + 0x124)) && (DAT_01edd490 != 0)) &&
      (puVar4 = (undefined4 *)cPrimHeap::allocBuffer(0xd0,0x20), puVar4 != (undefined4 *)0x0)) {
     *puVar4 = cEspDrawWork::vftable;

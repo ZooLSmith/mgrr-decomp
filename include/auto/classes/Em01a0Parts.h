@@ -17,4 +17,6 @@ struct Em01a0Parts : public BehaviorPartsModel {
     virtual void vf300();  // 0051CFF0 slot 0x300  overrides BehaviorAppBase
     virtual void vf304();  // 00519750 slot 0x304  overrides BehaviorAppBase
     virtual void vf32C();  // 0053A710 slot 0x32C  overrides BehaviorPartsModel
+    // non-virtual members
+    Em01a0Parts();  // 00AC0F40
 };

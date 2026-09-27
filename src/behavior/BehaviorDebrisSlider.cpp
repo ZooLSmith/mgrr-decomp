@@ -15,9 +15,10 @@ void __fastcall BehaviorDebrisSlider::vf44(int param_1)
   return;
 }
 
-// 005DBFB0  BehaviorDebrisSlider::vf1B8  size=34  [class]
+// 005DBFB0  BehaviorDebrisSlider::setCutCrerateInfo  size=34  [class]
 void __thiscall
-BehaviorDebrisSlider::vf1B8(int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
+BehaviorDebrisSlider::setCutCrerateInfo
+          (int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
 
 {
   if (0 < param_4) {
@@ -58,7 +59,7 @@ void __fastcall BehaviorDebrisSlider::vf30(int param_1)
 undefined4 * __fastcall BehaviorDebrisSlider::BehaviorDebrisSlider(undefined4 *param_1)
 
 {
-  BehaviorDebrisBase::BehaviorDebrisBase_3();
+  BehaviorDebrisObject::BehaviorDebrisObject();
   *param_1 = vftable;
   return param_1;
 }
@@ -75,16 +76,16 @@ void FUN_005dc070(void)
 
 {
   FUN_00905ce0();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 
-// 005DC090  BehaviorDebrisSlider::vf00  size=43  [class]
-undefined4 __thiscall BehaviorDebrisSlider::vf00(undefined4 param_1,byte param_2)
+// 005DC090  BehaviorDebrisSlider::destruct  size=43  [class]
+undefined4 __thiscall BehaviorDebrisSlider::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00905ce0();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -132,13 +133,13 @@ void __fastcall BehaviorDebrisSlider::vf50(int *param_1)
   return;
 }
 
-// 005E17B0  BehaviorDebrisSlider::vf40  size=31  [class]
-undefined4 __fastcall BehaviorDebrisSlider::vf40(int param_1)
+// 005E17B0  BehaviorDebrisSlider::startup  size=31  [class]
+undefined4 __fastcall BehaviorDebrisSlider::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorDebrisObject::vf40();
+  iVar1 = BehaviorDebrisObject::startup();
   if (iVar1 == 0) {
     return 0;
   }

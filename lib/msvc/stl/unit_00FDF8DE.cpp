@@ -105,8 +105,8 @@ exception * __thiscall std::exception::operator=(exception *this,exception *para
   return this;
 }
 
-// 00FDF9C2  std::exception::exception_2  size=11  [run]
-void __fastcall std::exception::exception_2(exception *param_1)
+// 00FDF9C2  std::exception::~exception  size=11  [run]
+void __fastcall std::exception::~exception(exception *param_1)
 
 {
   *(undefined ***)param_1 = vftable;
@@ -192,8 +192,8 @@ exception * __thiscall std::bad_cast::vf00(exception *param_1,byte param_2)
   return param_1;
 }
 
-// 00FDFABA  std::bad_cast::bad_cast_2  size=29  [run]
-exception * __thiscall std::bad_cast::bad_cast_2(exception *param_1,exception *param_2)
+// 00FDFABA  std::bad_cast::bad_cast  size=29  [run]
+exception * __thiscall std::bad_cast::bad_cast(exception *param_1,exception *param_2)
 
 {
   exception::exception(param_1,param_2);

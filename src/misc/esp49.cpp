@@ -18,7 +18,7 @@ undefined4 * __thiscall esp49::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = cEspModel::vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -60,10 +60,10 @@ void __fastcall esp49::vf0C(int param_1)
   return;
 }
 
-// 00EF63F0  esp49::vf10  size=306  [class]
+// 00EF63F0  esp49::addOtTransList  size=306  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall esp49::vf10(int param_1)
+void __fastcall esp49::addOtTransList(int param_1)
 
 {
   float fVar1;
@@ -332,13 +332,13 @@ void __fastcall esp49::vf08(int param_1)
   return;
 }
 
-// 00F38360  esp49::vf04  size=29  [class]
-bool esp49::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+// 00F38360  esp49::preTrans  size=29  [class]
+bool esp49::preTrans(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   int iVar1;
   
-  iVar1 = esp02::vf04(param_1,param_2,param_3);
+  iVar1 = esp02::preTrans(param_1,param_2,param_3);
   return iVar1 != 0;
 }
 

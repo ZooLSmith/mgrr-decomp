@@ -14,4 +14,6 @@ struct cItemStageDropViscera : public cItemStageDropInstant {
     virtual void vf24();  // 0094D510 slot 0x24  overrides cItemStageDrop
     virtual void vf28();  // 0094D560 slot 0x28  overrides cItemStageDrop
     virtual void vf2C();  // 0094D440 slot 0x2C  overrides cItemStageDrop
+    // non-virtual members
+    cItemStageDropViscera();  // 0094D3C0
 };

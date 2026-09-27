@@ -10,6 +10,4 @@ struct hkpPhantomListener {
     virtual void vf08();  // 008F7D50 slot 0x8
     virtual void vf0C(int param_2);  // 008E1690 slot 0xC
     virtual void vf10(undefined4 param_1);  // 008E16C0 slot 0x10
-    // non-virtual members
-    hkpPhantomListener();  // 0126ACB0
 };

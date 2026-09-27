@@ -88,7 +88,7 @@ FUN_00922210(int param_1,int *param_2,uint *param_3,float *param_4,int param_5)
   pvVar5 = TlsGetValue(DAT_01f8fc4c);
   iVar6 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x220);
   *(undefined2 *)(iVar6 + 4) = 0x220;
-  iVar6 = hkpRigidBody::~hkpRigidBody(param_3);
+  iVar6 = hkpRigidBody::hkpRigidBody(param_3);
   *param_2 = iVar6;
   if (iVar6 == 0) {
     FUN_00dd5650(&DAT_0164d0b4);

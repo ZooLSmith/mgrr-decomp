@@ -63,7 +63,7 @@ void __fastcall FUN_00a4f4d0(int param_1)
     FUN_00a499a0();
     iVar2 = 10;
     do {
-      Hw::cTexture::cTexture_5();
+      Hw::cTexture::~cTexture();
       iVar2 = iVar2 + -1;
     } while (-1 < iVar2);
     FUN_00dd4920(iVar1);

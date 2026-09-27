@@ -49,8 +49,8 @@ undefined * ZangekiIdleStatePl0010::vf00(void)
   return &DAT_01be9ecc;
 }
 
-// 00B91780  ZangekiIdleStatePl0010::vf0C  size=139  [class]
-void __thiscall ZangekiIdleStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00B91780  ZangekiIdleStatePl0010::SafeCheck  size=139  [class]
+void __thiscall ZangekiIdleStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -78,7 +78,7 @@ void __thiscall ZangekiIdleStatePl0010::vf0C(int param_1,undefined4 *param_2)
       }
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -181,8 +181,8 @@ void __thiscall ZangekiIdleStatePl0010::vf08(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00BE3F10  ZangekiIdleStatePl0010::vf10  size=285  [class]
-void __thiscall ZangekiIdleStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BE3F10  ZangekiIdleStatePl0010::qteSafeCheck  size=285  [class]
+void __thiscall ZangekiIdleStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -232,7 +232,7 @@ void __thiscall ZangekiIdleStatePl0010::vf10(int param_1,undefined4 *param_2)
   if (((iVar1 == 0x31) || (iVar1 == 0x45)) || (iVar1 == 0x46)) {
     FUN_00b8c400();
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

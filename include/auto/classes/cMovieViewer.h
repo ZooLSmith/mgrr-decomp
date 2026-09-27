@@ -10,4 +10,6 @@ struct cMovieViewer : public cCustomObjCtrlManager {
     virtual void vf08();  // 009A3070 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 00991240 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009B33B0 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cMovieViewer();  // 009A2F60
 };

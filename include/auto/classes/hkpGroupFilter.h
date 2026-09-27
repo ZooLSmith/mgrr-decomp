@@ -15,4 +15,5 @@ struct hkpGroupFilter : public hkpCollisionFilter {
     static void vf00();  // 01132770
     static void vf00_01132780();  // 01132780
     static void vf0C();  // 01132790
+    void ctor_01140DD0();  // 01140DD0
 };

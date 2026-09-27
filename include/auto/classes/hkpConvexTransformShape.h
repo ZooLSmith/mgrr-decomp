@@ -20,5 +20,6 @@ struct hkpConvexTransformShape : public hkpConvexTransformShapeBase {
     virtual void vf44(undefined4 * param_2);  // 0113D4E0 slot 0x44  overrides hkpConvexShape
     // non-virtual members
     hkpConvexTransformShape();  // 0113CC80
+    void ctor_0113CCD0();  // 0113CCD0
     void ctor_0113D710();  // 0113D710
 };

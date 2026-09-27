@@ -13,4 +13,6 @@ struct esp107 : public cEspModel {
     virtual void vf14();  // 009CFEE0 slot 0x14  overrides cEspBase
     // non-virtual members
     esp107();  // 009E8430
+    static void vf14_00ED5330();  // 00ED5330
+    static void vf10();  // 00EFED20
 };

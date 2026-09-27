@@ -1,12 +1,11 @@
 // src/effect/EspPrimitiveWorkCircleBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4EBE0..00F591A0, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4EBE0..00F591A0, 4 functions
 
 #include "mgrr.h"
 #include "EspPrimitiveWorkCircleBase.h"
 
-// 00F4EBE0  EspPrimitiveWorkCircleBase::EspPrimitiveWorkCircleBase_2  size=48  [class]
-undefined4 * __fastcall
-EspPrimitiveWorkCircleBase::EspPrimitiveWorkCircleBase_2(undefined4 *param_1)
+// 00F4EBE0  EspPrimitiveWorkCircleBase::EspPrimitiveWorkCircleBase  size=48  [class]
+undefined4 * __fastcall EspPrimitiveWorkCircleBase::EspPrimitiveWorkCircleBase(undefined4 *param_1)
 
 {
   int iVar1;
@@ -53,23 +52,6 @@ void __thiscall EspPrimitiveWorkCircleBase::vf0C(int param_1,int param_2)
   FUN_00f99010(0,param_1 + 4);
   FUN_00f9dfb0(6);
   return;
-}
-
-// 00F588E0  EspPrimitiveWorkCircleBase::EspPrimitiveWorkCircleBase  size=54  [class]
-undefined4 * __fastcall EspPrimitiveWorkCircleBase::EspPrimitiveWorkCircleBase(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  *param_1 = vftable;
-  FUN_00f9c880();
-  iVar1 = 3;
-  do {
-    FUN_00f9c880();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  *param_1 = EspPrimitiveWorkCircle<24>::vftable;
-  return param_1;
 }
 
 // 00F591A0  EspPrimitiveWorkCircleBase::vf00  size=73  [class]

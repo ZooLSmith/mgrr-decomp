@@ -58,5 +58,11 @@ struct Pl1500 : public PlBaseDLC {
     virtual void vf420();  // 008A20D0 slot 0x420  overrides PlBaseDLC
     virtual undefined4 vf424();  // 008A9170 slot 0x424  overrides PlBaseDLC
     // non-virtual members
+    static undefined4 vf358_008A2930();  // 008A2930
+    static bool vf35C_008A2950();  // 008A2950
+    static undefined4 vf360_008A2970();  // 008A2970
+    static undefined4 vf378_008A29B0();  // 008A29B0
+    static undefined4 vf37C_008A29E0();  // 008A29E0
+    static bool vf404_008A2A10();  // 008A2A10
     Pl1500();  // 00AC3A40
 };

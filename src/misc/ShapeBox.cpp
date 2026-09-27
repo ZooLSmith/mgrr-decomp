@@ -16,7 +16,7 @@ void __thiscall ShapeBox::vf18(int param_1,undefined4 param_2)
 undefined4 * __fastcall ShapeBox::ShapeBox(undefined4 *param_1)
 
 {
-  ShapeBase::ShapeBase_2(2);
+  ShapeBase::ShapeBase(2);
   *param_1 = vftable;
   param_1[0x34] = 0x3f800000;
   param_1[0x35] = 0x3f800000;

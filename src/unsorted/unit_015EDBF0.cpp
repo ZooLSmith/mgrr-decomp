@@ -106,7 +106,7 @@ void FUN_015edce0(void)
   
   iVar1 = 7;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return;
@@ -1173,7 +1173,7 @@ void FUN_015ee860(void)
 void FUN_015ee880(void)
 
 {
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   return;
 }
 

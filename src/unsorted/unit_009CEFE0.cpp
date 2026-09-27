@@ -26,11 +26,12 @@ void thunk_FUN_00f4ba30(void)
         *(undefined4 *)(uVar1 + 0x44) = 0;
         *(undefined1 *)(uVar1 + 0x2c) = 0;
         *(undefined4 *)(uVar1 + 8) = 0xfff;
-        FUN_00f4ace0();
+        Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+        ~cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>();
         FUN_00f4ae70();
         if (((DAT_018d72d8 != 0) && (DAT_018d72d8 <= uVar1)) &&
            (uVar1 < DAT_018d72dc * 0x58 + DAT_018d72d8)) {
-          cXml::cXml_8();
+          cXml::cXml();
           FUN_00f4c880(uVar1);
         }
         piVar3 = piVar3 + 1;
@@ -79,7 +80,7 @@ void thunk_FUN_00f4ba30(void)
     *(undefined4 *)(iVar2 + 0x18) = 0;
     *(undefined4 *)(iVar2 + 0x1c) = 0;
     iVar2 = Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
-            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3();
+            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>();
     FUN_00f3b960();
     if ((*(int *)(iVar2 + 0x18) != 0) && (*(int *)(iVar2 + 0x20) != 0)) {
       FUN_00dd3d90(*(int *)(iVar2 + 0x18),0);

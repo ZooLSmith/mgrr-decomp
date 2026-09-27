@@ -97,16 +97,16 @@ void __fastcall Em1020::vf4C(int param_1)
   return;
 }
 
-// 005C9080  Em1020::vf264  size=24  [class]
-undefined4 Em1020::vf264(undefined4 param_1)
+// 005C9080  Em1020::setEmSetInfo  size=24  [class]
+undefined4 Em1020::setEmSetInfo(undefined4 param_1)
 
 {
   FUN_0040ac60(param_1);
   return 1;
 }
 
-// 005C9140  Em1020::vf40  size=516  [class]
-undefined4 __fastcall Em1020::vf40(int *param_1)
+// 005C9140  Em1020::startup  size=516  [class]
+undefined4 __fastcall Em1020::startup(int *param_1)
 
 {
   int iVar1;
@@ -116,7 +116,7 @@ undefined4 __fastcall Em1020::vf40(int *param_1)
   char local_100 [128];
   char local_80 [128];
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -196,7 +196,7 @@ undefined4 __fastcall Em1020::vf32C(int param_1)
 undefined4 * __fastcall Em1020::Em1020(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_004ec5c0();
   return param_1;
@@ -209,11 +209,11 @@ undefined * Em1020::vf04(void)
   return &DAT_01b351e4;
 }
 
-// 00AB9390  Em1020::vf00  size=30  [class]
-undefined4 __thiscall Em1020::vf00(undefined4 param_1,byte param_2)
+// 00AB9390  Em1020::destruct  size=30  [class]
+undefined4 __thiscall Em1020::destruct(undefined4 param_1,byte param_2)
 
 {
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

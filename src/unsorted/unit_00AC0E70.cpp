@@ -7,8 +7,8 @@
 void FUN_00ac0e70(void)
 
 {
-  Hw::cTexture::cTexture_5();
-  Behavior::Behavior_124();
+  Hw::cTexture::~cTexture();
+  Behavior::~Behavior();
   return;
 }
 

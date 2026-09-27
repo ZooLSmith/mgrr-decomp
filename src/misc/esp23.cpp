@@ -1,8 +1,21 @@
 // src/misc/esp23.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0920..00F390C0, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED04C0..00F390C0, 7 functions
 
 #include "mgrr.h"
 #include "esp23.h"
+
+// 00ED04C0  esp23::esp23  size=57  [class]
+undefined4 * __fastcall esp23::esp23(undefined4 *param_1)
+
+{
+  cEsp::cEsp();
+  *param_1 = ModelShaderJackModule::vftable;
+  FUN_009e6c70();
+  FUN_009d2900();
+  FUN_00a7c930();
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00ED0920  esp23::vf00  size=54  [class]
 undefined4 __thiscall esp23::vf00(undefined4 param_1,byte param_2)
@@ -10,15 +23,15 @@ undefined4 __thiscall esp23::vf00(undefined4 param_1,byte param_2)
 {
   FUN_009de370();
   Spline<float>::Spline<float>_2();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00ED87B0  esp23::vf10  size=1  [class]
-void esp23::vf10(void)
+// 00ED87B0  esp23::addOtTransList  size=1  [class]
+void esp23::addOtTransList(void)
 
 {
   return;
@@ -252,7 +265,7 @@ void __fastcall esp23::vf08(int param_1)
   }
   FUN_00efb130(piVar1);
   FUN_00efbd40(piVar1);
-  FUN_00efed20();
+  esp107::vf10();
   ModelShaderJackModule::updateModule_4();
   FUN_00f107c0();
   if (((*(float *)(param_1 + 0x53c) == 0.0) || (*(int *)(param_1 + 900) == 1)) ||
@@ -307,9 +320,9 @@ void __fastcall esp23::vf08(int param_1)
   return;
 }
 
-// 00F390C0  esp23::vf04  size=938  [class]
+// 00F390C0  esp23::preTrans  size=938  [class]
 undefined4 __thiscall
-esp23::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp23::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -333,7 +346,7 @@ esp23::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 uVar19;
   undefined4 uVar20;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 != 0) {
     *(undefined4 *)(param_1 + 0x52c) = param_4;
     if ((*(int *)(param_1 + 0x58) != 0) &&

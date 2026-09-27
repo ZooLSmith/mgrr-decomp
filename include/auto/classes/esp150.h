@@ -13,4 +13,5 @@ struct esp150 : public ModelShaderWtrJackModule {
     virtual void vf14();  // 009D0940 slot 0x14  overrides cEspBase
     // non-virtual members
     esp150();  // 009F6D30
+    static void vf14_00EDB090();  // 00EDB090
 };

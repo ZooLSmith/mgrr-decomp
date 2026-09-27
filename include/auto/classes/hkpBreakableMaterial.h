@@ -19,8 +19,6 @@ struct hkpBreakableMaterial : public hkReferencedObject {
     virtual void vf30();  // 011D8530 slot 0x30
     virtual void vf34();  // 011D8540 slot 0x34
     // non-virtual members
-    hkpBreakableMaterial();  // 011D7FC0
-    void ctor_011D8490();  // 011D8490
+    hkpBreakableMaterial();  // 011D8490
     hkpBreakableMaterial(int param_2);  // 011D8580
-    void ctor_011DD440();  // 011DD440
 };

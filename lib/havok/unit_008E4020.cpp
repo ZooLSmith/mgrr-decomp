@@ -36,7 +36,7 @@ void __thiscall hkBaseObject::hkBaseObject_246(int param_1,float *param_2,float 
   
   if ((*(byte *)(param_1 + 0x16c) & 4) == 0) {
     FUN_00860de0();
-    hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+    hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
     FUN_01269700(local_a0);
     local_11c = local_44;
     local_a0[0] = vftable;

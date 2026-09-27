@@ -45,7 +45,7 @@ void __fastcall FUN_00843a80(int *param_1)
   param_1[0x2ae] = (int)(fVar1 - (float)param_1[0x244]);
   if (fVar1 - (float)param_1[0x244] < 0.0) {
     param_1[0x2ad] = 0;
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   return;

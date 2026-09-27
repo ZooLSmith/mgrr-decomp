@@ -22,7 +22,4 @@ struct BehaviorDebrisBase : public Behavior {
     virtual void vf1BC(int * param_2);  // 005D97E0 slot 0x1BC  overrides Behavior
     // non-virtual members
     BehaviorDebrisBase();  // 005D9E20
-    void ctor_005DA7D0();  // 005DA7D0
-    void ctor_005DBE70();  // 005DBE70
-    void ctor_005DBF20();  // 005DBF20
 };

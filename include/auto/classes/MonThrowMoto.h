@@ -11,5 +11,4 @@ struct MonThrowMoto : public BehaviorBa {
     virtual void vf4C();  // 0051B540 slot 0x4C  overrides Behavior
     // non-virtual members
     MonThrowMoto();  // 00AB12C0
-    static undefined4 vf40();  // 00AC7530
 };

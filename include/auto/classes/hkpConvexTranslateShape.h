@@ -24,5 +24,6 @@ struct hkpConvexTranslateShape : public hkpConvexTransformShapeBase {
     hkpConvexTranslateShape();  // 00925920
     void ctor_00927840();  // 00927840
     static undefined4 vf34();  // 0112EDF0
+    void ctor_01139150();  // 01139150
     hkpConvexTranslateShape(int * param_1, int * param_2, undefined4 param_3);  // 01150E30
 };

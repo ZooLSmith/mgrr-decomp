@@ -9,4 +9,5 @@ struct cOptionMenuGraphicParts : public cCustomObjCtrlManager {
     virtual undefined4 * vf00(byte param_2);  // 00996A70 slot 0x0  overrides cCustomObjCtrlManager
     // non-virtual members
     cOptionMenuGraphicParts();  // 00996A20
+    void ctor_009A8AA0();  // 009A8AA0
 };

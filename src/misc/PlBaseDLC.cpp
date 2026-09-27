@@ -1010,7 +1010,7 @@ void __fastcall PlBaseDLC::vf4C(int *param_1)
           } while (iStack_210 < iStack_19c);
         }
       }
-      hkpCdPointCollector::hkpCdPointCollector_4();
+      hkpCdPointCollector::hkpCdPointCollector();
       FUN_00406760();
     }
     if ((param_1[0x1e4] & 0x4000U) != 0) {
@@ -1070,7 +1070,7 @@ void __fastcall PlBaseDLC::vf4C(int *param_1)
         fStack_1ec = (float)param_1[0x15] - (float)param_1[0x241];
         fStack_1e8 = (float)param_1[0x16] - (float)param_1[0x242];
         fStack_1e4 = (float)param_1[0x17] - (float)param_1[0x243];
-        iVar7 = hkpCdPointCollector::hkpCdPointCollector_14(&fStack_1f0,&fStack_1e0,1,0,0x3c23d70a);
+        iVar7 = hkpCdPointCollector::hkpCdPointCollector(&fStack_1f0,&fStack_1e0,1,0,0x3c23d70a);
         if (iVar7 == 0) {
           FUN_008e4580(pfVar1,1);
           uStack_1c0 = 0;
@@ -1080,8 +1080,7 @@ void __fastcall PlBaseDLC::vf4C(int *param_1)
           iStack_1fc = param_1[0x15];
           iStack_1f8 = param_1[0x16];
           iStack_1f4 = param_1[0x17];
-          iVar7 = hkpCdPointCollector::hkpCdPointCollector_14
-                            (&uStack_1c0,&fStack_200,1,0,0x3c23d70a);
+          iVar7 = hkpCdPointCollector::hkpCdPointCollector(&uStack_1c0,&fStack_200,1,0,0x3c23d70a);
           if (iVar7 != 0) {
             param_1[0x15] = iStack_1fc;
             *(undefined4 *)(param_1[0x1d9] + 0x124) = 0;
@@ -1146,8 +1145,8 @@ void __fastcall PlBaseDLC::vf4C(int *param_1)
   return;
 }
 
-// 00AC2180  PlBaseDLC::vf40  size=3304  [class]
-undefined4 __fastcall PlBaseDLC::vf40(int *param_1)
+// 00AC2180  PlBaseDLC::startup  size=3304  [class]
+undefined4 __fastcall PlBaseDLC::startup(int *param_1)
 
 {
   uint uVar1;
@@ -1170,7 +1169,7 @@ undefined4 __fastcall PlBaseDLC::vf40(int *param_1)
   undefined4 uStack_20;
   int iStack_14;
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if ((iVar2 == 0) || (local_44 = param_1[0x13c], local_44 == 0)) {
     return 0;
   }
@@ -1735,7 +1734,7 @@ void __fastcall PlBaseDLC::vf44(int param_1)
 undefined4 * __fastcall PlBaseDLC::PlBaseDLC(undefined4 *param_1)
 
 {
-  hkpAllCdPointCollector::hkpAllCdPointCollector_34();
+  Pl0000::Pl0000();
   *param_1 = vftable;
   return param_1;
 }
@@ -1957,11 +1956,11 @@ void PlBaseDLC::vf3D8(void)
   return;
 }
 
-// 00AC3830  PlBaseDLC::vf00  size=30  [class]
-undefined4 __thiscall PlBaseDLC::vf00(undefined4 param_1,byte param_2)
+// 00AC3830  PlBaseDLC::destruct  size=30  [class]
+undefined4 __thiscall PlBaseDLC::destruct(undefined4 param_1,byte param_2)
 
 {
-  hkpCdPointCollector::hkpCdPointCollector_22();
+  hkpAllCdPointCollector::~hkpAllCdPointCollector();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -12,6 +12,5 @@ struct Pl1500Knife : public BehaviorBulletBase {
     virtual void vf304();  // 008A9C90 slot 0x304  overrides BehaviorBulletBase
     // non-virtual members
     Pl1500Knife();  // 00AB4320
-    static undefined4 vf40();  // 00ACABD0
     static void vf44();  // 00ACFB40
 };

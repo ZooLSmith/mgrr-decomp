@@ -11,11 +11,11 @@ undefined * Pl0013::vf04(void)
   return &DAT_01be9d80;
 }
 
-// 00AB6450  Pl0013::vf00  size=30  [class]
-undefined4 __thiscall Pl0013::vf00(undefined4 param_1,byte param_2)
+// 00AB6450  Pl0013::destruct  size=30  [class]
+undefined4 __thiscall Pl0013::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_31();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -52,8 +52,8 @@ void Pl0013::vf50(void)
   return;
 }
 
-// 00B78E70  Pl0013::vf40  size=159  [class]
-undefined4 __fastcall Pl0013::vf40(int param_1)
+// 00B78E70  Pl0013::startup  size=159  [class]
+undefined4 __fastcall Pl0013::startup(int param_1)
 
 {
   int iVar1;
@@ -62,7 +62,7 @@ undefined4 __fastcall Pl0013::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 != 0) {
     uVar2 = 1;
     FUN_00a92fb0(1);

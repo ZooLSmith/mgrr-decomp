@@ -1,8 +1,30 @@
 // src/misc/cJammingDispBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF65D0..00D251F0, 3 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEF690..00D251F0, 4 functions
 
 #include "mgrr.h"
 #include "cJammingDispBase.h"
+
+// 00CEF690  cJammingDispBase::cJammingDispBase  size=77  [class]
+undefined4 * __fastcall cJammingDispBase::cJammingDispBase(undefined4 *param_1)
+
+{
+  param_1[1] = 0;
+  param_1[10] = 0;
+  param_1[2] = 0;
+  param_1[0xb] = 0;
+  param_1[0xc] = 0;
+  param_1[3] = 1;
+  param_1[4] = 0xffffffff;
+  param_1[5] = 0xffffffff;
+  param_1[6] = 0;
+  param_1[7] = 0;
+  param_1[8] = 0;
+  *param_1 = cUIWorkBase::vftable;
+  cUICtrl::cUICtrl();
+  param_1[0x78] = 0;
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00CF65D0  cJammingDispBase::vf00  size=62  [class]
 undefined4 * __thiscall cJammingDispBase::vf00(undefined4 *param_1,byte param_2)

@@ -39,14 +39,14 @@ undefined * StateMachineContextPl1500::vf00(void)
   return &DAT_01b35bdc;
 }
 
-// 008A4C30  StateMachineContextPl1500::StateMachineContextPl1500_2  size=33  [class]
-void __fastcall StateMachineContextPl1500::StateMachineContextPl1500_2(undefined4 *param_1)
+// 008A4C30  StateMachineContextPl1500::~StateMachineContextPl1500  size=33  [class]
+void __fastcall StateMachineContextPl1500::~StateMachineContextPl1500(undefined4 *param_1)
 
 {
   *param_1 = vftable;
-  StateMachineContext::StateMachineContext();
+  StateMachineContextPl0010::~StateMachineContextPl0010();
   cEspControler::~cEspControler();
-  StateMachineContext::StateMachineContext();
+  StateMachineContextPl0010::~StateMachineContextPl0010();
   return;
 }
 
@@ -55,9 +55,9 @@ undefined4 * __thiscall StateMachineContextPl1500::vf04(undefined4 *param_1,byte
 
 {
   *param_1 = vftable;
-  StateMachineContext::StateMachineContext();
+  StateMachineContextPl0010::~StateMachineContextPl0010();
   cEspControler::~cEspControler();
-  StateMachineContext::StateMachineContext();
+  StateMachineContextPl0010::~StateMachineContextPl0010();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

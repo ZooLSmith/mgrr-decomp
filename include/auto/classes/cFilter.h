@@ -12,5 +12,5 @@ struct cFilter {
     virtual void vf10();  // 00EACB40 slot 0x10
     virtual void vf14();  // 00EACB50 slot 0x14
     // non-virtual members
-    cFilter(undefined4 param_2);  // 00EC1FD0
+    ~cFilter();  // 00EC1FD0
 };

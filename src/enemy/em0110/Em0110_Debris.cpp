@@ -125,8 +125,8 @@ void Em0110_Debris::thunk_vf114(void)
   return;
 }
 
-// 004B77C0  Em0110_Debris::vf1B8  size=31  [class]
-void Em0110_Debris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 004B77C0  Em0110_Debris::setCutCrerateInfo  size=31  [class]
+void Em0110_Debris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -180,8 +180,8 @@ void __thiscall Em0110_Debris::vf1BC(int param_1,undefined4 param_2)
   return;
 }
 
-// 004D8DD0  Em0110_Debris::vf40  size=1016  [class]
-undefined4 __fastcall Em0110_Debris::vf40(int param_1)
+// 004D8DD0  Em0110_Debris::startup  size=1016  [class]
+undefined4 __fastcall Em0110_Debris::startup(int param_1)
 
 {
   float fVar1;
@@ -337,7 +337,7 @@ LAB_004d91ab:
 undefined4 * __fastcall Em0110_Debris::Em0110_Debris(undefined4 *param_1)
 
 {
-  BehaviorDebrisBase::BehaviorDebrisBase_4();
+  BehaviorDebrisBase::BehaviorDebrisBase();
   *param_1 = vftable;
   return param_1;
 }
@@ -349,8 +349,8 @@ undefined * Em0110_Debris::vf04(void)
   return &DAT_01b34e9c;
 }
 
-// 00AB8920  Em0110_Debris::vf00  size=105  [class]
-undefined4 * __thiscall Em0110_Debris::vf00(undefined4 *param_1,byte param_2)
+// 00AB8920  Em0110_Debris::destruct  size=105  [class]
+undefined4 * __thiscall Em0110_Debris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -364,7 +364,7 @@ undefined4 * __thiscall Em0110_Debris::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

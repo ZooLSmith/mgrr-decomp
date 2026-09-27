@@ -14,13 +14,8 @@ struct hkpShapeContainer {
     virtual undefined1 vf18();  // 00911440 slot 0x18
     // non-virtual members
     hkpShapeContainer();  // 00911450
-    void ctor_0114F880();  // 0114F880
-    hkpShapeContainer(int param_2);  // 0114F8D0
-    void ctor_01159010();  // 01159010
     void ctor_01159140();  // 01159140
     hkpShapeContainer(undefined4 param_2);  // 0117CE30
-    void ctor_01214520(int param_2);  // 01214520
     void ctor_01214610();  // 01214610
-    void ctor_01230C30(int param_2);  // 01230C30
-    hkpShapeContainer(int * param_2);  // 01231540
+    ~hkpShapeContainer();  // 01231540
 };

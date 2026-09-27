@@ -13,4 +13,6 @@ struct cPd30 {
     virtual void vf18();  // 00D56980 slot 0x18  overrides cPhaseAbstract
     virtual void vf2C();  // 00D5D8D0 slot 0x2C  overrides cPhaseAbstract
     virtual undefined1 * vf30(byte * param_1);  // 00D5D880 slot 0x30  overrides cPhaseAbstract
+    // non-virtual members
+    cPd30();  // 00D6F9F0
 };

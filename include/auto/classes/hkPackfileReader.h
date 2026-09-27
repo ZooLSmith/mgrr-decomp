@@ -19,5 +19,6 @@ struct hkPackfileReader : public hkReferencedObject {
     virtual int vf30() = 0;  // 00FDB68B slot 0x30
     virtual int vf34() = 0;  // 00FDB68B slot 0x34
     // non-virtual members
+    ~hkPackfileReader();  // 0105FAA0
     hkPackfileReader();  // 0105FB30
 };

@@ -8,7 +8,14 @@
 struct hkpRejectChassisListener : public hkReferencedObject, public hkpPhantomOverlapListener {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpRejectChassisListener(undefined4 * param_1, int param_2);  // 01286620
     static void vf08();  // 01286720
+    hkpRejectChassisListener(int param_2);  // 01286920
+    void ctor_01287F20(undefined4 * param_1, int param_2);  // 01287F20
+    void ctor_01287F70(int param_2);  // 01287F70
+    hkpRejectChassisListener();  // 01289060
     static void vf04();  // 01289160
     static void vf00(int param_2);  // 01289180
+    void ctor_01289E00();  // 01289E00
+    void ctor_0128FC90();  // 0128FC90
 };

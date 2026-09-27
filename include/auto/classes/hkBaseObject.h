@@ -19,9 +19,9 @@ struct hkBaseObject {
     void ctor_009114C0();  // 009114C0
     void ctor_00911690();  // 00911690
     void ctor_00930740();  // 00930740
-    void ctor_010064A0();  // 010064A0
+    void ctor_01005E80();  // 01005E80
+    ~hkBaseObject();  // 010064A0
     void ctor_010112A0();  // 010112A0
-    void ctor_01011960();  // 01011960
     void ctor_01012520();  // 01012520
     void ctor_01016DB0();  // 01016DB0
     void ctor_01017640();  // 01017640
@@ -37,22 +37,16 @@ struct hkBaseObject {
     void ctor_0102BA80();  // 0102BA80
     void ctor_0102BBE0();  // 0102BBE0
     void ctor_0102C0A0();  // 0102C0A0
-    void ctor_0104CEE0();  // 0104CEE0
     void ctor_0104D060();  // 0104D060
-    void ctor_0104D1E0();  // 0104D1E0
     void ctor_0104D7A0();  // 0104D7A0
     void ctor_0104E760();  // 0104E760
     hkBaseObject(int * param_1, undefined4 param_2, uint param_3);  // 0104EB20
-    void ctor_0104F150();  // 0104F150
     void ctor_0104F1A0();  // 0104F1A0
-    void ctor_0104F300();  // 0104F300
     void ctor_01055540();  // 01055540
     void ctor_01057D90();  // 01057D90
     void ctor_0105A1A0();  // 0105A1A0
     void ctor_0105F610();  // 0105F610
-    void ctor_0105FAA0();  // 0105FAA0
     void ctor_01064FC0();  // 01064FC0
-    void ctor_01065260();  // 01065260
     void ctor_01068820();  // 01068820
     void ctor_0106AA20();  // 0106AA20
     void ctor_0106AD50();  // 0106AD50
@@ -69,7 +63,6 @@ struct hkBaseObject {
     void ctor_010B4A10();  // 010B4A10
     void ctor_010BDC90();  // 010BDC90
     void ctor_010C56A0();  // 010C56A0
-    void ctor_010CD7C0();  // 010CD7C0
     void ctor_010D1260();  // 010D1260
     void ctor_010D1420();  // 010D1420
     void ctor_010D16B0();  // 010D16B0
@@ -78,7 +71,6 @@ struct hkBaseObject {
     void ctor_010D1AE0();  // 010D1AE0
     void ctor_010D1C40();  // 010D1C40
     void ctor_010D1E00();  // 010D1E00
-    void ctor_010D1F30();  // 010D1F30
     void ctor_010D2130();  // 010D2130
     void ctor_010D2430();  // 010D2430
     void ctor_010D2590();  // 010D2590
@@ -98,24 +90,16 @@ struct hkBaseObject {
     void ctor_010D7190();  // 010D7190
     void ctor_010D7850();  // 010D7850
     void ctor_010D82F0();  // 010D82F0
-    void ctor_010D8400();  // 010D8400
-    void ctor_010D9B20();  // 010D9B20
-    void ctor_010D9C10();  // 010D9C10
     void ctor_010DA5A0();  // 010DA5A0
     void ctor_010DBC10();  // 010DBC10
     void ctor_010DCBA0();  // 010DCBA0
     void ctor_010E13C0();  // 010E13C0
     void ctor_010E30F0();  // 010E30F0
     void ctor_010E5790();  // 010E5790
-    void ctor_010E5BD0();  // 010E5BD0
     void ctor_010E7710();  // 010E7710
     void ctor_010ECD80();  // 010ECD80
-    void ctor_010F55F0();  // 010F55F0
     void ctor_010F9FA0();  // 010F9FA0
-    void ctor_010FAF90();  // 010FAF90
     void ctor_010FB870();  // 010FB870
-    void ctor_010FC7D0();  // 010FC7D0
-    void ctor_010FC880();  // 010FC880
     void ctor_010FCEC0();  // 010FCEC0
     void ctor_010FCF90();  // 010FCF90
     void ctor_010FF560();  // 010FF560
@@ -131,8 +115,6 @@ struct hkBaseObject {
     void ctor_01130990();  // 01130990
     void ctor_01132490();  // 01132490
     void ctor_01134E90();  // 01134E90
-    void ctor_01136CF0();  // 01136CF0
-    void ctor_011385B0();  // 011385B0
     void ctor_0113BCE0();  // 0113BCE0
     void ctor_0113CAC0();  // 0113CAC0
     void ctor_0113DAE0();  // 0113DAE0
@@ -152,7 +134,6 @@ struct hkBaseObject {
     void ctor_01159040();  // 01159040
     void ctor_01159820();  // 01159820
     void ctor_01159C60();  // 01159C60
-    void ctor_01159FE0();  // 01159FE0
     void ctor_0115B380();  // 0115B380
     void ctor_0115B4B0();  // 0115B4B0
     void ctor_0115BA60();  // 0115BA60
@@ -176,26 +157,18 @@ struct hkBaseObject {
     void ctor_01178500();  // 01178500
     void ctor_01178550();  // 01178550
     void ctor_01178970();  // 01178970
-    void ctor_01192170();  // 01192170
     void ctor_011971F0();  // 011971F0
     void ctor_0119F0A0();  // 0119F0A0
     void ctor_0119F1F0();  // 0119F1F0
     void ctor_011A3D00();  // 011A3D00
-    void ctor_011A6800();  // 011A6800
     void ctor_011A7650();  // 011A7650
     void ctor_011A8220();  // 011A8220
     void ctor_011A9600();  // 011A9600
     void ctor_011A96B0();  // 011A96B0
     void ctor_011A9FA0();  // 011A9FA0
     void ctor_011AA600();  // 011AA600
-    void ctor_011ADDE0();  // 011ADDE0
     void ctor_011B16C0();  // 011B16C0
     void ctor_011B2350();  // 011B2350
-    void ctor_011BD6B0();  // 011BD6B0
-    void ctor_011C2040();  // 011C2040
-    void ctor_011CCA90();  // 011CCA90
-    void ctor_011CE060();  // 011CE060
-    void ctor_011CE760();  // 011CE760
     void ctor_011CF070();  // 011CF070
     void ctor_011D4D10();  // 011D4D10
     void ctor_011D57B0();  // 011D57B0
@@ -214,11 +187,9 @@ struct hkBaseObject {
     void ctor_0120DE20();  // 0120DE20
     void ctor_0120E9F0();  // 0120E9F0
     void ctor_012146B0();  // 012146B0
-    void ctor_01230260();  // 01230260
     void ctor_01231CA0();  // 01231CA0
     void ctor_012424F0();  // 012424F0
     void ctor_01245040();  // 01245040
-    void ctor_01246130();  // 01246130
     void ctor_01269480();  // 01269480
     void ctor_0126A7F0();  // 0126A7F0
     void ctor_0126F9B0();  // 0126F9B0
@@ -232,7 +203,6 @@ struct hkBaseObject {
     void ctor_0127A5E0();  // 0127A5E0
     void ctor_0127B290();  // 0127B290
     void ctor_0127C660();  // 0127C660
-    void ctor_0127FA20();  // 0127FA20
     void ctor_0127FE40();  // 0127FE40
     void ctor_012803C0();  // 012803C0
     void ctor_01287060();  // 01287060
@@ -249,11 +219,9 @@ struct hkBaseObject {
     void ctor_0143ECD0();  // 0143ECD0
     void ctor_01441B80();  // 01441B80
     void ctor_01445850();  // 01445850
-    void ctor_01447050();  // 01447050
     void ctor_01449CC0();  // 01449CC0
     void ctor_0144BC40();  // 0144BC40
     void ctor_0146D1E0();  // 0146D1E0
-    void ctor_01499370();  // 01499370
     void ctor_01499530();  // 01499530
     void ctor_015FC120();  // 015FC120
     void ctor_015FC130();  // 015FC130

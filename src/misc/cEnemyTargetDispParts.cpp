@@ -71,8 +71,8 @@ undefined4 * __thiscall cEnemyTargetDispParts::vf00(undefined4 *param_1,byte par
   return param_1;
 }
 
-// 00D00450  cEnemyTargetDispParts::vf14  size=618  [class]
-void __fastcall cEnemyTargetDispParts::vf14(int param_1)
+// 00D00450  cEnemyTargetDispParts::create  size=618  [class]
+void __fastcall cEnemyTargetDispParts::create(int param_1)
 
 {
   float fVar1;

@@ -9,4 +9,6 @@ struct cBodyLineMark : public cUIWorkBase {
     virtual undefined4 * vf00(byte param_2);  // 00CFE190 slot 0x0  overrides cUIWork
     virtual void vf08(undefined4 param_2);  // 00D20EE0 slot 0x8  overrides cUIWork
     virtual void vf0C(undefined4 param_2);  // 00CD0370 slot 0xC  overrides cUIWork
+    // non-virtual members
+    cBodyLineMark();  // 00CEAB90
 };

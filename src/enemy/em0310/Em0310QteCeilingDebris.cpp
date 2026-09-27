@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Em0310QteCeilingDebris.h"
 
-// 0057E790  Em0310QteCeilingDebris::vf40  size=191  [class]
-undefined4 __fastcall Em0310QteCeilingDebris::vf40(int *param_1)
+// 0057E790  Em0310QteCeilingDebris::startup  size=191  [class]
+undefined4 __fastcall Em0310QteCeilingDebris::startup(int *param_1)
 
 {
   int iVar1;
@@ -14,7 +14,7 @@ undefined4 __fastcall Em0310QteCeilingDebris::vf40(int *param_1)
   float local_18;
   float local_14;
   
-  iVar1 = BehaviorDebrisBase::vf40();
+  iVar1 = BehaviorDebrisBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -82,8 +82,8 @@ void __thiscall Em0310QteCeilingDebris::vf1D0(undefined4 param_1,undefined4 para
   return;
 }
 
-// 0057E880  Em0310QteCeilingDebris::vf1B8  size=31  [class]
-void Em0310QteCeilingDebris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 0057E880  Em0310QteCeilingDebris::setCutCrerateInfo  size=31  [class]
+void Em0310QteCeilingDebris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -146,7 +146,7 @@ void __fastcall Em0310QteCeilingDebris::vf4C(int param_1)
 undefined4 * __fastcall Em0310QteCeilingDebris::Em0310QteCeilingDebris(undefined4 *param_1)
 
 {
-  BehaviorDebrisBase::BehaviorDebrisBase_4();
+  BehaviorDebrisBase::BehaviorDebrisBase();
   *param_1 = vftable;
   return param_1;
 }
@@ -158,8 +158,8 @@ undefined * Em0310QteCeilingDebris::vf04(void)
   return &DAT_01b35158;
 }
 
-// 00AB87D0  Em0310QteCeilingDebris::vf00  size=105  [class]
-undefined4 * __thiscall Em0310QteCeilingDebris::vf00(undefined4 *param_1,byte param_2)
+// 00AB87D0  Em0310QteCeilingDebris::destruct  size=105  [class]
+undefined4 * __thiscall Em0310QteCeilingDebris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -173,7 +173,7 @@ undefined4 * __thiscall Em0310QteCeilingDebris::vf00(undefined4 *param_1,byte pa
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

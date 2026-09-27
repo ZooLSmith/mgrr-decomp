@@ -129,7 +129,7 @@ undefined4 * __fastcall FUN_00a4cd30(undefined4 *param_1)
   
   iVar2 = 10;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar2 = iVar2 + -1;
   } while (-1 < iVar2);
   param_1[2] = 0;
@@ -158,7 +158,7 @@ void FUN_00a4cd90(void)
   FUN_00a499a0();
   iVar1 = 10;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return;
@@ -185,7 +185,7 @@ undefined4 __thiscall FUN_00a4cdf0(undefined4 param_1,byte param_2)
   FUN_00a499a0();
   iVar1 = 10;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   if ((param_2 & 1) != 0) {

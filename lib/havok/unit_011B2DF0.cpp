@@ -971,9 +971,9 @@ hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::vf08(int param_1,i
   return;
 }
 
-// 011B43C0  hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::MtEntityEntityBroadPhaseListener  size=280  [run]
+// 011B43C0  hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::MtBroadPhaseBorderListener  size=280  [run]
 undefined4 * __thiscall
-hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::MtEntityEntityBroadPhaseListener
+hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::MtBroadPhaseBorderListener
           (undefined4 *param_1,int param_2)
 
 {
@@ -982,12 +982,12 @@ hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::MtEntityEntityBroa
   
   hkpContinuousSimulation::hkpContinuousSimulation(param_2);
   *param_1 = hkpMultiThreadedSimulation::vftable;
-  param_1[0x14] = vftable;
+  param_1[0x14] = MtEntityEntityBroadPhaseListener::vftable;
   param_1[0x15] = 0;
   param_1[0x16] = MtPhantomBroadPhaseListener::vftable;
   param_1[0x17] = 0;
   puVar1 = param_1 + 0x18;
-  *puVar1 = MtBroadPhaseBorderListener::vftable;
+  *puVar1 = vftable;
   param_1[0x19] = 0;
   param_1[0x1b] = 0;
   param_1[0x1c] = 0;
@@ -1061,8 +1061,7 @@ void FUN_011b45b0(undefined4 param_1)
   pvVar1 = TlsGetValue(DAT_01f8fc4c);
   iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x180);
   *(undefined2 *)(iVar2 + 4) = 0x180;
-  hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::MtEntityEntityBroadPhaseListener
-            (param_1);
+  hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::MtBroadPhaseBorderListener(param_1);
   return;
 }
 

@@ -12,4 +12,6 @@ struct cItemFixVRPda : public cItemFixBase {
     virtual void vf44();  // 005EB180 slot 0x44  overrides Behavior
     virtual void vf48();  // 005ED6F0 slot 0x48  overrides Behavior
     virtual void vf54();  // 005EB190 slot 0x54  overrides Behavior
+    // non-virtual members
+    cItemFixVRPda();  // 00AC11A0
 };

@@ -4,14 +4,14 @@
 #include "mgrr.h"
 #include "Em0130Weapon.h"
 
-// 006063A0  Em0130Weapon::vf40  size=101  [class]
-undefined4 __fastcall Em0130Weapon::vf40(int param_1)
+// 006063A0  Em0130Weapon::startup  size=101  [class]
+undefined4 __fastcall Em0130Weapon::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = BehaviorWeapon::vf40();
+  iVar1 = BehaviorWeapon::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -75,7 +75,7 @@ void __fastcall Em0130Weapon::vf4C(int *param_1)
 undefined4 * __fastcall Em0130Weapon::Em0130Weapon(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   param_1[0x228] = 0;
   param_1[0x22a] = 0;
   param_1[0x22d] = 0;
@@ -91,8 +91,8 @@ undefined * Em0130Weapon::vf04(void)
   return &DAT_01b35514;
 }
 
-// 00ABA5B0  Em0130Weapon::vf00  size=105  [class]
-undefined4 * __thiscall Em0130Weapon::vf00(undefined4 *param_1,byte param_2)
+// 00ABA5B0  Em0130Weapon::destruct  size=105  [class]
+undefined4 * __thiscall Em0130Weapon::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -106,7 +106,7 @@ undefined4 * __thiscall Em0130Weapon::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

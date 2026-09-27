@@ -15,10 +15,10 @@ undefined4 __thiscall cSlashPointDispParts::vf00(undefined4 param_1,byte param_2
   return param_1;
 }
 
-// 00CF0B20  cSlashPointDispParts::vf14  size=647  [class]
+// 00CF0B20  cSlashPointDispParts::create  size=647  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cSlashPointDispParts::vf14(int param_1)
+void __fastcall cSlashPointDispParts::create(int param_1)
 
 {
   float *pfVar1;

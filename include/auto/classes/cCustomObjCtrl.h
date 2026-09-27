@@ -14,5 +14,4 @@ struct cCustomObjCtrl : public cUICtrl {
     virtual void vf18(undefined4 * param_2, uint param_3, float param_4);  // 00CCDAE0 slot 0x18
     // non-virtual members
     cCustomObjCtrl();  // 00CE4B20
-    void ctor_00CF99C0();  // 00CF99C0
 };

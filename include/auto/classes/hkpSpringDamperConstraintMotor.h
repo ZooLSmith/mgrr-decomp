@@ -9,6 +9,8 @@ struct hkpSpringDamperConstraintMotor : public hkpLimitedForceConstraintMotor {
     virtual undefined4 * vf00(byte param_2);  // 011B0DD0 slot 0x0  overrides hkBaseObject
     virtual void vf0C();  // 011DD2E0 slot 0xC  overrides hkpConstraintMotor
     // non-virtual members
-    hkpSpringDamperConstraintMotor(undefined4 * param_1);  // 011B0D50
-    hkpSpringDamperConstraintMotor();  // 011DD290
+    ~hkpSpringDamperConstraintMotor();  // 011B0D50
+    hkpSpringDamperConstraintMotor();  // 011B0D70
+    void ctor_011DD290();  // 011DD290
+    void ctor_011DD370();  // 011DD370
 };

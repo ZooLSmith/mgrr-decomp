@@ -23,7 +23,7 @@ struct NinjaRunEventManager {
     virtual undefined vf3C() = 0;  // 00FDB68B slot 0x3C
     virtual undefined vf40() = 0;  // 00FDB68B slot 0x40
     virtual undefined vf44() = 0;  // 00FDB68B slot 0x44
-    virtual undefined PointUnit() = 0;  // 00FDB68B slot 0x48
+    virtual undefined vf48() = 0;  // 00FDB68B slot 0x48
     virtual undefined vf4C() = 0;  // 00FDB68B slot 0x4C
     virtual undefined vf50() = 0;  // 00FDB68B slot 0x50
     virtual undefined vf54() = 0;  // 00FDB68B slot 0x54

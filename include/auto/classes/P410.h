@@ -12,4 +12,6 @@ struct P410 {
     virtual void vf14(undefined4 param_2, byte * param_3);  // 00D62610 slot 0x14  overrides cPhaseAbstract
     virtual void vf18();  // 00D48E10 slot 0x18  overrides cPhaseAbstract
     virtual void vf1C(undefined4 param_1, byte * param_2);  // 00D48DE0 slot 0x1C  overrides cPhaseAbstract
+    // non-virtual members
+    P410();  // 00D6F110
 };

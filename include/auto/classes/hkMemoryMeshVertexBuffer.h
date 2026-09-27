@@ -21,5 +21,5 @@ struct hkMemoryMeshVertexBuffer : public hkMeshVertexBuffer {
     // non-virtual members
     hkMemoryMeshVertexBuffer();  // 0106BC40
     void ctor_0106BCA0();  // 0106BCA0
-    ~hkMemoryMeshVertexBuffer();  // 0106BDD0
+    void ctor_0106BDD0();  // 0106BDD0
 };

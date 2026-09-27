@@ -39,8 +39,8 @@ void __fastcall cStingerMissileLockOnParts::vf08(int param_1)
   return;
 }
 
-// 00CF23A0  cStingerMissileLockOnParts::vf14  size=220  [class]
-void __fastcall cStingerMissileLockOnParts::vf14(int param_1)
+// 00CF23A0  cStingerMissileLockOnParts::create  size=220  [class]
+void __fastcall cStingerMissileLockOnParts::create(int param_1)
 
 {
   int iVar1;

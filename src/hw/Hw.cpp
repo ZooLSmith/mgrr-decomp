@@ -13830,7 +13830,7 @@ void __fastcall FUN_00dfb0b0(int param_1)
   if ((*(int *)(param_1 + 0x10) == 3) || (*(int *)(param_1 + 0x10) == 4)) {
     iVar4 = 3;
     do {
-      Hw::cTexture::cTexture_6();
+      Hw::cTexture::cTexture();
       iVar4 = iVar4 + -1;
     } while (-1 < iVar4);
     iVar4 = FUN_00dfae70(local_74);
@@ -13882,7 +13882,7 @@ void __fastcall FUN_00dfb0b0(int param_1)
     }
     iVar4 = 3;
     do {
-      Hw::cTexture::cTexture_5();
+      Hw::cTexture::~cTexture();
       iVar4 = iVar4 + -1;
     } while (-1 < iVar4);
   }
@@ -14388,7 +14388,7 @@ undefined4 * __fastcall FUN_00dfbe90(undefined4 *param_1)
   param_1[0x17] = 0;
   iVar1 = 3;
   do {
-    Hw::cTextureInstance::cTextureInstance_2();
+    Hw::cTextureInstance::cTextureInstance();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   param_1[0x91] = 0xbf800000;
@@ -14935,7 +14935,7 @@ void __fastcall FUN_00dfc6a0(int param_1)
     (*DAT_018cea0c)(&local_bc);
     iVar1 = 3;
     do {
-      Hw::cTexture::cTexture_5();
+      Hw::cTexture::~cTexture();
       iVar1 = iVar1 + -1;
     } while (-1 < iVar1);
   }
@@ -15368,7 +15368,7 @@ int __fastcall FUN_00dfcfc0(int param_1)
   
   iVar1 = 3;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   *(undefined4 *)(param_1 + 0x88) = 0xbf800000;

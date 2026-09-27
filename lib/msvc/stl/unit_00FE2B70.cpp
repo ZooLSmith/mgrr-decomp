@@ -3,8 +3,8 @@
 
 #include "mgrr.h"
 
-// 00FE2B70  std::bad_exception::bad_exception_2  size=30  [run]
-exception * __fastcall std::bad_exception::bad_exception_2(exception *param_1)
+// 00FE2B70  std::bad_exception::bad_exception  size=30  [run]
+exception * __fastcall std::bad_exception::bad_exception(exception *param_1)
 
 {
   exception::exception(param_1,(char **)&stack0x00000004);
@@ -17,7 +17,7 @@ undefined4 * __thiscall std::bad_exception::vf00(undefined4 *param_1,byte param_
 
 {
   *param_1 = vftable;
-  exception::exception_2();
+  exception::~exception();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

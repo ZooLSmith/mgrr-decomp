@@ -67,8 +67,8 @@ void __fastcall cSavingDispParts::vf08(int param_1)
   return;
 }
 
-// 00CF1E80  cSavingDispParts::vf14  size=353  [class]
-void __fastcall cSavingDispParts::vf14(int param_1)
+// 00CF1E80  cSavingDispParts::create  size=353  [class]
+void __fastcall cSavingDispParts::create(int param_1)
 
 {
   float fVar1;

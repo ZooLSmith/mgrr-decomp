@@ -1,5 +1,5 @@
 // src/collision/BoundingCylinder.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A67C30..00A6AB30, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A67C30..00A6AB30, 9 functions
 
 #include "mgrr.h"
 #include "BoundingCylinder.h"
@@ -307,6 +307,30 @@ undefined4 __thiscall BoundingCylinder::vf08(int param_1,undefined4 param_2)
             (param_2,local_e0,&local_120,&local_100,&local_110,&local_f0,
              *(undefined4 *)(param_1 + 0x100),1);
   return param_2;
+}
+
+// 00A6A8B0  BoundingCylinder::vf1C  size=170  [class]
+byte __thiscall BoundingCylinder::vf1C(int param_1,int *param_2)
+
+{
+  char cVar1;
+  byte bVar2;
+  byte bVar3;
+  
+  FUN_00a6a6e0(param_2,&DAT_01662d6c,param_1);
+  cVar1 = (**(code **)(*param_2 + 0x10))("radius",0xb);
+  if (cVar1 != '\0') {
+    (**(code **)(*param_2 + 0x1c))(param_1 + 0x100);
+    (**(code **)(*param_2 + 0x14))("radius",0xb);
+  }
+  bVar3 = 0xb;
+  cVar1 = (**(code **)(*param_2 + 0x10))("height");
+  if (cVar1 == '\0') {
+    return 0;
+  }
+  bVar2 = (**(code **)(*param_2 + 0x1c))(param_1 + 0x104);
+  (**(code **)(*param_2 + 0x14))("height",0xb);
+  return bVar2 & bVar3;
 }
 
 // 00A6AB30  BoundingCylinder::thunk_vf1C  size=5  [class]

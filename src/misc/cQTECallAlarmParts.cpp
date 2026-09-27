@@ -96,8 +96,8 @@ undefined4 * __thiscall cQTECallAlarmParts::vf00(undefined4 *param_1,byte param_
   return param_1;
 }
 
-// 00D25710  cQTECallAlarmParts::vf14  size=267  [class]
-void __fastcall cQTECallAlarmParts::vf14(int param_1)
+// 00D25710  cQTECallAlarmParts::create  size=267  [class]
+void __fastcall cQTECallAlarmParts::create(int param_1)
 
 {
   int iVar1;

@@ -8,5 +8,5 @@ struct cCodecModelOnly {
     virtual undefined4 * vf00(byte param_2);  // 00CEB190 slot 0x0
     // non-virtual members
     cCodecModelOnly();  // 00CB6BC0
-    void ctor_00CD1240();  // 00CD1240
+    ~cCodecModelOnly();  // 00CD1240
 };

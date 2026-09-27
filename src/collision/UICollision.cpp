@@ -105,7 +105,7 @@ int __thiscall FUN_00ccff90(int param_1,int param_2,uint param_3,uint *param_4)
       if (*(int *)(param_1 + 0x28) != 0) {
         EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 0x10));
       }
-      cTouchArea::cTouchArea_3();
+      cTouchArea::cTouchArea();
       iVar1 = FUN_00982e20(param_2 << 0x10 | param_3 & 0xffff,local_3c);
       if (iVar1 == 1) {
         param_4[1] = local_24;
@@ -685,7 +685,7 @@ void __fastcall UICollision::cUIHit::~cUIHit(undefined4 *param_1)
 
 {
   *param_1 = vftable;
-  cTouchManager::cTouchManager_2();
+  cTouchManager::~cTouchManager();
   if (param_1[0x18] != 0) {
     param_1[0x1a] = 0;
     if (param_1[0x1b] != 0) {
@@ -915,7 +915,7 @@ LAB_00cfcf86:
       return uVar4;
     }
     if (*piVar2 == param_2) {
-      cTouchArea::cTouchArea_3();
+      cTouchArea::cTouchArea();
       iVar3 = FUN_00982e20(param_2,local_3c);
       if (iVar3 == 1) {
         cTouchArea::cTouchArea(param_2,*param_3,param_3[1],param_3[2],param_3[3],local_30,1,1);

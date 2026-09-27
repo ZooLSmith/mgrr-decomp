@@ -368,7 +368,7 @@ undefined4 __fastcall FUN_005d0330(int param_1)
       iVar3 = 0;
     }
     else {
-      iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar3 = RigidBodyCollision::RigidBodyCollision();
     }
     *(int *)(param_1 + 0x7b0) = iVar3;
     if (iVar3 != 0) {
@@ -707,8 +707,8 @@ void __fastcall FUN_005d0ad0(int *param_1)
   return;
 }
 
-// 005D0CB0  Et0010::vf264  size=132  [class]
-undefined4 __thiscall Et0010::vf264(int param_1,undefined4 param_2)
+// 005D0CB0  Et0010::setEmSetInfo  size=132  [class]
+undefined4 __thiscall Et0010::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -801,8 +801,8 @@ void __fastcall FUN_005d0e00(int param_1)
   return;
 }
 
-// 005D0EB0  Et0010::vf40  size=804  [class]
-undefined4 __fastcall Et0010::vf40(int param_1)
+// 005D0EB0  Et0010::startup  size=804  [class]
+undefined4 __fastcall Et0010::startup(int param_1)
 
 {
   uint *puVar1;
@@ -816,7 +816,7 @@ undefined4 __fastcall Et0010::vf40(int param_1)
   bool bVar9;
   undefined4 auStack_190 [99];
   
-  iVar3 = BehaviorEmBase::vf40();
+  iVar3 = BehaviorEmBase::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -1043,7 +1043,7 @@ void __fastcall Et0010::vf4C(int param_1)
 undefined4 * __fastcall Et0010::Et0010(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_004ec5c0();
@@ -1057,11 +1057,11 @@ undefined * Et0010::vf04(void)
   return &DAT_01b352a4;
 }
 
-// 00AB7EC0  Et0010::vf00  size=30  [class]
-undefined4 __thiscall Et0010::vf00(undefined4 param_1,byte param_2)
+// 00AB7EC0  Et0010::destruct  size=30  [class]
+undefined4 __thiscall Et0010::destruct(undefined4 param_1,byte param_2)
 
 {
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -9,5 +9,7 @@ struct hkpDefaultConvexListFilter : public hkpConvexListFilter {
     virtual undefined4 * vf00(byte param_2);  // 01140F80 slot 0x0  overrides hkBaseObject
     virtual uint vf0C(undefined4 param_1, int * param_2, int * param_3);  // 01158980 slot 0xC  overrides hkpConvexListFilter
     // non-virtual members
-    hkpDefaultConvexListFilter(undefined4 * param_1);  // 01140EA0
+    ~hkpDefaultConvexListFilter();  // 01140EA0
+    hkpDefaultConvexListFilter();  // 01140ED0
+    void ctor_01198290();  // 01198290
 };

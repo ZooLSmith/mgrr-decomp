@@ -82,6 +82,5 @@ struct RigidBodyCollection {
     virtual bool vf128(int param_2);  // 008F05D0 slot 0x128
     // non-virtual members
     RigidBodyCollection();  // 008EC770
-    void ctor_008F4670();  // 008F4670
     void ctor_008F46D0();  // 008F46D0
 };

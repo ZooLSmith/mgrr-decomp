@@ -10,7 +10,9 @@ struct hkpPhysicsSystemWithContacts : public hkpPhysicsSystem {
     virtual int vf0C();  // 0127CF10 slot 0xC  overrides hkpPhysicsSystem
     virtual void vf10(undefined1 * param_1);  // 01274A50 slot 0x10  overrides hkpPhysicsSystem
     // non-virtual members
-    hkpPhysicsSystemWithContacts();  // 01278C50
+    hkpPhysicsSystemWithContacts();  // 01274870
+    void ctor_01274A20();  // 01274A20
+    void ctor_01278C50();  // 01278C50
     void ctor_012792E0();  // 012792E0
     ~hkpPhysicsSystemWithContacts();  // 0127D050
 };

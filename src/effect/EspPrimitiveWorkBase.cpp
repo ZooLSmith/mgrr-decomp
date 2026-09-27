@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "EspPrimitiveWorkBase.h"
 
-// 00F4EAC0  EspPrimitiveWorkBase::EspPrimitiveWorkBase_9  size=79  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_9(undefined4 *param_1)
+// 00F4EAC0  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=79  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   int iVar1;
@@ -23,8 +23,8 @@ void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_9(undefined4 *param_1
   return;
 }
 
-// 00F4FDF0  EspPrimitiveWorkBase::EspPrimitiveWorkBase_8  size=33  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_8(undefined4 *param_1)
+// 00F4FDF0  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=33  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   *param_1 = EspPrimitiveWorkMultiParticleBase::vftable;
@@ -34,8 +34,8 @@ void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_8(undefined4 *param_1
   return;
 }
 
-// 00F50380  EspPrimitiveWorkBase::EspPrimitiveWorkBase_6  size=60  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_6(undefined4 *param_1)
+// 00F50380  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=60  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   *param_1 = EspPrimitiveWorkMultiBillboardBase::vftable;
@@ -48,8 +48,8 @@ void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_6(undefined4 *param_1
   return;
 }
 
-// 00F506E0  EspPrimitiveWorkBase::EspPrimitiveWorkBase_7  size=60  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_7(undefined4 *param_1)
+// 00F506E0  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=60  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   *param_1 = EspPrimitiveWorkMultiLineBase::vftable;
@@ -62,8 +62,8 @@ void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_7(undefined4 *param_1
   return;
 }
 
-// 00F50990  EspPrimitiveWorkBase::EspPrimitiveWorkBase_5  size=33  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_5(undefined4 *param_1)
+// 00F50990  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=33  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   *param_1 = EspPrimitiveWorkMultiStripBase::vftable;
@@ -84,8 +84,8 @@ void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
   return;
 }
 
-// 00F58C40  EspPrimitiveWorkBase::EspPrimitiveWorkBase_2  size=60  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_2(undefined4 *param_1)
+// 00F58C40  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=60  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   *param_1 = EspPrimitiveWorkMultiBillboardBase::vftable;
@@ -98,8 +98,8 @@ void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_2(undefined4 *param_1
   return;
 }
 
-// 00F58D20  EspPrimitiveWorkBase::EspPrimitiveWorkBase_4  size=60  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_4(undefined4 *param_1)
+// 00F58D20  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=60  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   *param_1 = EspPrimitiveWorkMultiLineBase::vftable;
@@ -112,8 +112,8 @@ void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_4(undefined4 *param_1
   return;
 }
 
-// 00F58DE0  EspPrimitiveWorkBase::EspPrimitiveWorkBase_3  size=33  [class]
-void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_3(undefined4 *param_1)
+// 00F58DE0  EspPrimitiveWorkBase::EspPrimitiveWorkBase  size=33  [class]
+void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase(undefined4 *param_1)
 
 {
   *param_1 = EspPrimitiveWorkMultiStripBase::vftable;

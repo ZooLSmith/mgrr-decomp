@@ -76,7 +76,7 @@ void __fastcall Bm018f::vf4C(int *param_1)
     fVar1 = (float)param_1[0x22d] - 1.0;
     param_1[0x22d] = (int)fVar1;
     if (NAN(fVar1) || 0.0 < fVar1 == (fVar1 == 0.0)) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   if (((*(byte *)(param_1 + 0x130) & 1) != 0) && (param_1[0x27d] != 0)) {
@@ -100,8 +100,8 @@ void __fastcall Bm018f::vf50(int param_1)
   return;
 }
 
-// 00410F50  Bm018f::vf1B8  size=31  [class]
-void Bm018f::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 00410F50  Bm018f::setCutCrerateInfo  size=31  [class]
+void Bm018f::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -142,14 +142,14 @@ undefined4 * __thiscall Bm018f::cCallEfBm018fSlot::vf00(undefined4 *param_1,byte
   return param_1;
 }
 
-// 00410FD0  Bm018f::vf40  size=133  [class]
-undefined4 __fastcall Bm018f::vf40(int param_1)
+// 00410FD0  Bm018f::startup  size=133  [class]
+undefined4 __fastcall Bm018f::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -425,7 +425,7 @@ void __fastcall Bm018f::vf48(int *param_1)
       param_1[0x2d1] = iVar1;
       iVar1 = FUN_00d4f120("P140_HOTEL_BTL",1);
       if (iVar1 != 0) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
     }
     if ((param_1[0x2de] == 0) && (iVar1 = FUN_00d45a70("P140_DOGTAG_OUT"), iVar1 != 0)) {
@@ -503,8 +503,8 @@ undefined * Bm018f::vf04(void)
   return &DAT_01b34b94;
 }
 
-// 00AB8E60  Bm018f::vf00  size=54  [class]
-undefined4 __thiscall Bm018f::vf00(undefined4 param_1,byte param_2)
+// 00AB8E60  Bm018f::destruct  size=54  [class]
+undefined4 __thiscall Bm018f::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();

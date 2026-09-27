@@ -109,7 +109,7 @@ RigidBodyManager::createPlane
     uStack_d8 = 4;
     uStack_d4 = 0x10;
     uVar3 = FUN_0113c3d0();
-    iVar1 = hkpConvexVerticesShape::hkpConvexVerticesShape(&pfStack_dc,uVar3);
+    iVar1 = hkpConvexVerticesConnectivity::hkpConvexVerticesConnectivity(&pfStack_dc,uVar3);
     if (iVar1 != 0) {
       *(int *)(param_3 + 4) = iVar1;
       if (0.0 < *(float *)(param_3 + 0x90)) {
@@ -805,7 +805,7 @@ RigidBodyManager::createHexahedron
   pvVar2 = TlsGetValue(DAT_01f8fc4c);
   iVar1 = (**(code **)(**(int **)((int)pvVar2 + 0x2c) + 4))(0x70);
   *(undefined2 *)(iVar1 + 4) = 0x70;
-  iVar1 = hkpConvexVerticesShape::hkpConvexVerticesShape_5(&local_28,&local_34,DAT_01b20754);
+  iVar1 = hkpConvexVerticesShape::hkpConvexVerticesShape(&local_28,&local_34,DAT_01b20754);
   if (iVar1 == 0) {
     FUN_00dd5650(&DAT_0164d424);
     if (unaff_EBP != (undefined4 *)0x0) {

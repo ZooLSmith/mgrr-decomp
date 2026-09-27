@@ -18,15 +18,15 @@ undefined4 __thiscall esp11::vf00(undefined4 param_1,byte param_2)
 
 {
   Spline<float>::Spline<float>();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00ED7F30  esp11::vf10  size=1  [class]
-void esp11::vf10(void)
+// 00ED7F30  esp11::addOtTransList  size=1  [class]
+void esp11::addOtTransList(void)
 
 {
   return;
@@ -220,9 +220,9 @@ undefined4 __thiscall FUN_00f38b30(int param_1,int param_2)
   return 0;
 }
 
-// 00F38C30  esp11::vf04  size=539  [class]
+// 00F38C30  esp11::preTrans  size=539  [class]
 undefined4 __thiscall
-esp11::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp11::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -243,7 +243,7 @@ esp11::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 local_8;
   int local_4;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }

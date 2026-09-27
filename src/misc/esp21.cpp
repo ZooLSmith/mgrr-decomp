@@ -268,12 +268,12 @@ LAB_00f17d7e:
   return;
 }
 
-// 00F29990  esp21::vf10  size=1942  [class]
+// 00F29990  esp21::addOtTransList  size=1942  [class]
 /* WARNING: Removing unreachable block (ram,0x00f29eeb) */
 /* WARNING: Removing unreachable block (ram,0x00f29d80) */
 /* WARNING: Removing unreachable block (ram,0x00f29cbd) */
 
-void __fastcall esp21::vf10(int param_1)
+void __fastcall esp21::addOtTransList(int param_1)
 
 {
   float fVar1;
@@ -479,18 +479,18 @@ LAB_00f29f24:
   *pfVar5 = local_9c;
   pfVar5[1] = local_98;
   pfVar5[2] = local_94;
-  cEspStrip2p::vf10();
+  cEspStrip2p::addOtTransList();
   __security_check_cookie(local_14 ^ (uint)&local_a4);
   return;
 }
 
-// 00F34820  esp21::vf04  size=843  [class]
+// 00F34820  esp21::preTrans  size=843  [class]
 /* WARNING: Removing unreachable block (ram,0x00f349ce) */
 /* WARNING: Removing unreachable block (ram,0x00f34916) */
 /* WARNING: Removing unreachable block (ram,0x00f3497c) */
 /* WARNING: Removing unreachable block (ram,0x00f34a24) */
 
-undefined4 __thiscall esp21::vf04(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
+undefined4 __thiscall esp21::preTrans(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int iVar1;
@@ -514,7 +514,7 @@ undefined4 __thiscall esp21::vf04(int param_1,int param_2,undefined4 param_3,und
         FUN_009cca90(param_1,&DAT_016dbf08);
         return 0;
       }
-      iVar4 = cEspStrip2p::vf04(param_2,param_3,param_4);
+      iVar4 = cEspStrip2p::preTrans(param_2,param_3,param_4);
       if (iVar4 == 0) {
         return 0;
       }

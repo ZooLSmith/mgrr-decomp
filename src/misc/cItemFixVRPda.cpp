@@ -1,11 +1,11 @@
 // src/misc/cItemFixVRPda.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EB060..00AC1200, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EB060..00AC1200, 7 functions
 
 #include "mgrr.h"
 #include "cItemFixVRPda.h"
 
-// 005EB060  cItemFixVRPda::vf40  size=280  [class]
-undefined4 __fastcall cItemFixVRPda::vf40(int param_1)
+// 005EB060  cItemFixVRPda::startup  size=280  [class]
+undefined4 __fastcall cItemFixVRPda::startup(int param_1)
 
 {
   int iVar1;
@@ -13,7 +13,7 @@ undefined4 __fastcall cItemFixVRPda::vf40(int param_1)
   undefined4 uVar3;
   undefined4 uVar4;
   
-  iVar1 = cItemFixBase::vf40();
+  iVar1 = cItemFixBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -22,7 +22,7 @@ undefined4 __fastcall cItemFixVRPda::vf40(int param_1)
     iVar1 = 0;
   }
   else {
-    iVar1 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar1 = RigidBodyCollision::RigidBodyCollision();
   }
   *(int *)(param_1 + 0x7b0) = iVar1;
   if (iVar1 != 0) {
@@ -132,6 +132,19 @@ void __fastcall cItemFixVRPda::vf48(int param_1)
   return;
 }
 
+// 00AC11A0  cItemFixVRPda::cItemFixVRPda  size=56  [class]
+undefined4 * __fastcall cItemFixVRPda::cItemFixVRPda(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AC11E0  cItemFixVRPda::vf04  size=6  [class]
 undefined * cItemFixVRPda::vf04(void)
 
@@ -139,11 +152,11 @@ undefined * cItemFixVRPda::vf04(void)
   return &DAT_01b353bc;
 }
 
-// 00AC1200  cItemFixVRPda::vf00  size=30  [class]
-undefined4 __thiscall cItemFixVRPda::vf00(undefined4 param_1,byte param_2)
+// 00AC1200  cItemFixVRPda::destruct  size=30  [class]
+undefined4 __thiscall cItemFixVRPda::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_124();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

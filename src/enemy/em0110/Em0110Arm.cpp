@@ -124,8 +124,8 @@ void __thiscall FUN_004b6f80(int param_1,undefined4 param_2)
   return;
 }
 
-// 004B7000  Em0110Arm::vf1B8  size=78  [class]
-void Em0110Arm::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 004B7000  Em0110Arm::setCutCrerateInfo  size=78  [class]
+void Em0110Arm::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   int iVar1;
@@ -146,8 +146,8 @@ void Em0110Arm::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 004BD350  Em0110Arm::vf40  size=387  [class]
-undefined4 __fastcall Em0110Arm::vf40(int *param_1)
+// 004BD350  Em0110Arm::startup  size=387  [class]
+undefined4 __fastcall Em0110Arm::startup(int *param_1)
 
 {
   code *pcVar1;
@@ -275,7 +275,7 @@ LAB_004bd56b:
     fVar4 = (float10)*(float *)(param_1 + 0x888) - fVar4;
     *(float *)(param_1 + 0x888) = (float)fVar4;
     if (fVar4 <= (float10)0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -303,7 +303,7 @@ void __fastcall Em0110Arm::vf30(int param_1)
 undefined4 * __fastcall Em0110Arm::Em0110Arm(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   param_1[0x223] = 0;
@@ -324,8 +324,8 @@ void Em0110Arm::vf2F8(void)
   return;
 }
 
-// 00AB72C0  Em0110Arm::vf00  size=105  [class]
-undefined4 * __thiscall Em0110Arm::vf00(undefined4 *param_1,byte param_2)
+// 00AB72C0  Em0110Arm::destruct  size=105  [class]
+undefined4 * __thiscall Em0110Arm::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -339,7 +339,7 @@ undefined4 * __thiscall Em0110Arm::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

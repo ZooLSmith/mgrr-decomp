@@ -610,7 +610,7 @@ undefined4 * __thiscall cEventCutWork::cEventCutWork(undefined4 *param_1,byte pa
   return param_1;
 }
 
-// 00D7FAC0  FUN_00d7fac0  size=87  [callgraph]
+// 00D7FAC0  FUN_00d7fac0  size=87  [between]
 void FUN_00d7fac0(void)
 
 {
@@ -633,8 +633,8 @@ void FUN_00d7fac0(void)
   return;
 }
 
-// 00D7FBD0  FUN_00d7fbd0  size=111  [callgraph]
-void __fastcall FUN_00d7fbd0(int param_1)
+// 00D7FBD0  cEventCutWork::vf08  size=111  [class]
+void __fastcall cEventCutWork::vf08(int param_1)
 
 {
   int *piVar1;

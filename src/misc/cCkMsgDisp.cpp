@@ -1,8 +1,39 @@
 // src/misc/cCkMsgDisp.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0DCF0..00D29A10, 3 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF7FE0..00D29A10, 4 functions
 
 #include "mgrr.h"
 #include "cCkMsgDisp.h"
+
+// 00CF7FE0  cCkMsgDisp::cCkMsgDisp  size=141  [class]
+undefined4 * __fastcall cCkMsgDisp::cCkMsgDisp(undefined4 *param_1)
+
+{
+  param_1[1] = 0;
+  param_1[10] = 0;
+  param_1[2] = 0;
+  param_1[0xb] = 0;
+  param_1[0xc] = 0;
+  param_1[3] = 1;
+  param_1[4] = 0xffffffff;
+  param_1[5] = 0xffffffff;
+  param_1[6] = 0;
+  param_1[7] = 0;
+  param_1[8] = 0;
+  *param_1 = cUIWorkBase::vftable;
+  cUICtrl::cUICtrl();
+  param_1[1] = 0;
+  param_1[0x78] = 0;
+  param_1[0x7a] = 0;
+  param_1[0x7b] = 0;
+  param_1[0x7c] = 0;
+  param_1[0x7e] = 0;
+  param_1[0x80] = 0;
+  param_1[0x81] = 0;
+  *param_1 = vftable;
+  param_1[0x7d] = 0xffffffff;
+  param_1[0x7f] = 1;
+  return param_1;
+}
 
 // 00D0DCF0  cCkMsgDisp::vf00  size=62  [class]
 undefined4 * __thiscall cCkMsgDisp::vf00(undefined4 *param_1,byte param_2)

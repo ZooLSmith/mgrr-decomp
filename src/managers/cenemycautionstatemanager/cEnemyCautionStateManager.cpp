@@ -24,8 +24,8 @@ undefined4 * __thiscall cEnemyCautionStateManager::vf00(undefined4 *param_1,byte
   return param_1;
 }
 
-// 004EC410  cEnemyCautionStateManager::cEnemyCautionStateManager_5  size=420  [class]
-undefined4 * __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_5(undefined4 *param_1)
+// 004EC410  cEnemyCautionStateManager::cEnemyCautionStateManager  size=420  [class]
+undefined4 * __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager(undefined4 *param_1)
 
 {
   int iVar1;
@@ -109,8 +109,8 @@ undefined4 * __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_5(u
   return param_1;
 }
 
-// 004ECE70  cEnemyCautionStateManager::cEnemyCautionStateManager_3  size=106  [class]
-void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_3(int param_1)
+// 004ECE70  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=106  [class]
+void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
 
 {
   int iVar1;
@@ -126,12 +126,12 @@ void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_3(int param
   FUN_00905ce0();
   FUN_00905ce0();
   FUN_00dd7270();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 
-// 00AACF30  cEnemyCautionStateManager::cEnemyCautionStateManager_4  size=334  [class]
-void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_4(int param_1)
+// 00AACF30  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=334  [class]
+void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
 
 {
   int iVar1;
@@ -172,14 +172,14 @@ void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_4(int param
     *(undefined4 *)(param_1 + 0x11e0) = 0;
   }
   cEspControler::~cEspControler();
-  Animation::PostControl::Work::Work_2();
+  Animation::PostControl::Work::~Work();
   FUN_00905ce0();
-  cEnemyCautionStateManager_3();
+  ~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB2CD0  cEnemyCautionStateManager::cEnemyCautionStateManager  size=345  [class]
-void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager(int param_1)
+// 00AB2CD0  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=345  [class]
+void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
 
 {
   int iVar1;
@@ -220,15 +220,15 @@ void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager(int param_1
     *(undefined4 *)(param_1 + 0x12b0) = 0;
   }
   cEspControler::~cEspControler();
-  Animation::PostControl::Work::Work_2();
+  Animation::PostControl::Work::~Work();
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager_3();
+  ~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB5410  cEnemyCautionStateManager::cEnemyCautionStateManager_2  size=345  [class]
-void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_2(int param_1)
+// 00AB5410  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=345  [class]
+void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
 
 {
   int iVar1;
@@ -269,10 +269,10 @@ void __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager_2(int param
     *(undefined4 *)(param_1 + 0x12b0) = 0;
   }
   cEspControler::~cEspControler();
-  Animation::PostControl::Work::Work_2();
+  Animation::PostControl::Work::~Work();
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager_3();
+  ~cEnemyCautionStateManager();
   return;
 }
 

@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp116.h"
 
-// 009D04F0  esp116::vf10  size=1  [class]
-void esp116::vf10(void)
+// 009D04F0  esp116::addOtTransList  size=1  [class]
+void esp116::addOtTransList(void)
 
 {
   return;
@@ -29,15 +29,15 @@ void esp116::vf14(void)
 undefined4 * __fastcall esp116::esp116(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
 }
 
-// 009D98B0  esp116::vf04  size=441  [class]
+// 009D98B0  esp116::preTrans  size=441  [class]
 undefined4 __thiscall
-esp116::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp116::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -68,7 +68,7 @@ esp116::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   float local_20;
   undefined4 local_1c;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar2 != 0) && (0 < *(int *)(param_1 + 0x120))) {
     FUN_00efcb90();
     iVar2 = *(int *)(param_1 + 0x120);
@@ -157,7 +157,7 @@ void __fastcall esp116::vf0C(int param_1)
 undefined4 __thiscall esp116::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

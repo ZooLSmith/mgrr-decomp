@@ -11,6 +11,7 @@ struct hkpDefaultWorldMemoryWatchDog : public hkWorldMemoryAvailableWatchDog {
     virtual void vf10(int param_2);  // 011DF820 slot 0x10  overrides hkWorldMemoryAvailableWatchDog
     virtual void vf14(int param_1);  // 011DF7A0 slot 0x14  overrides hkWorldMemoryAvailableWatchDog
     // non-virtual members
-    hkpDefaultWorldMemoryWatchDog(undefined4 * param_1);  // 011B1920
-    hkpDefaultWorldMemoryWatchDog();  // 011DF760
+    ~hkpDefaultWorldMemoryWatchDog();  // 011B1920
+    hkpDefaultWorldMemoryWatchDog();  // 011B1940
+    void ctor_011DF760();  // 011DF760
 };

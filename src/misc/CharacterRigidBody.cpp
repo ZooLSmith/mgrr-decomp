@@ -36,7 +36,7 @@ undefined4 * __thiscall CharacterRigidBody::vf00(undefined4 *param_1,byte param_
   *param_1 = vftable;
   param_1[2] = vftable;
   param_1[3] = vftable;
-  hkBaseObject::hkBaseObject_174();
+  ::hkBaseObject::hkBaseObject_174();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -86,7 +86,7 @@ CharacterRigidBody::CharacterRigidBody
   undefined4 local_20;
   
   *(undefined4 *)(param_2 + 0x10) = 0x3e4ccccd;
-  hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo_2();
+  hkpCharacterRigidBodyCinfo::hkpCharacterRigidBodyCinfo();
   local_78 = param_7;
   local_40 = *(float *)(DAT_01885d20 + 0x10);
   fStack_3c = *(float *)(DAT_01885d20 + 0x14);
@@ -139,7 +139,7 @@ CharacterRigidBody::CharacterRigidBody
   pvVar4 = TlsGetValue(DAT_01f8fc4c);
   puVar5 = (undefined4 *)(**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x70);
   *(undefined2 *)(puVar5 + 1) = 0x70;
-  hkpEntityListener::hkpEntityListener_7(local_84);
+  hkpCharacterRigidBody::hkpCharacterRigidBody(local_84);
   *puVar5 = vftable;
   puVar5[2] = vftable;
   puVar5[3] = vftable;

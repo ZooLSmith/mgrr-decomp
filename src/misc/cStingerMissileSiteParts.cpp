@@ -90,8 +90,8 @@ void __fastcall cStingerMissileSiteParts::vf08(int param_1)
   return;
 }
 
-// 00D17BE0  cStingerMissileSiteParts::vf14  size=1028  [class]
-void __fastcall cStingerMissileSiteParts::vf14(int param_1)
+// 00D17BE0  cStingerMissileSiteParts::create  size=1028  [class]
+void __fastcall cStingerMissileSiteParts::create(int param_1)
 
 {
   uint uVar1;

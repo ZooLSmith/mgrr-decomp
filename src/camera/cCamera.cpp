@@ -28,7 +28,7 @@ undefined4 * __thiscall cCamera::vf00(undefined4 *param_1,byte param_2)
 undefined4 * __fastcall cCamera::cCamera(undefined4 *param_1)
 
 {
-  cCameraFrustum::cCameraFrustum();
+  cCameraApp::cCameraApp();
   *param_1 = cCameraGame::vftable;
   param_1[0xb0] = cCameraGame::vftable;
   FUN_00a7c930();

@@ -21,5 +21,4 @@ struct hkpConvexVerticesShape : public hkpConvexShape {
     void ctor_011308B0();  // 011308B0
     void ctor_01130960();  // 01130960
     void ctor_01130D10();  // 01130D10
-    void ctor_0113C420();  // 0113C420
 };

@@ -9,4 +9,6 @@ struct cCkMsgDisp : public cUIWorkBase {
     virtual undefined4 * vf00(byte param_2);  // 00D0DCF0 slot 0x0  overrides cUIWork
     virtual void vf08(undefined4 param_2);  // 00D0DD30 slot 0x8  overrides cUIWork
     virtual undefined4 vf14();  // 00D29A10 slot 0x14
+    // non-virtual members
+    cCkMsgDisp();  // 00CF7FE0
 };

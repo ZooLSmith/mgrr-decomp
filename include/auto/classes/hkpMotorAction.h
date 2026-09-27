@@ -10,5 +10,7 @@ struct hkpMotorAction : public hkpUnaryAction {
     virtual void vf0C(int param_2);  // 0127E3A0 slot 0xC  overrides hkpAction
     virtual int vf1C(int * param_2, int param_3);  // 0127E550 slot 0x1C  overrides hkpAction
     // non-virtual members
-    ~hkpMotorAction();  // 0127E4B0
+    hkpMotorAction(undefined4 param_2);  // 01274EB0
+    hkpMotorAction(undefined4 * param_1, undefined4 param_2);  // 01274F00
+    hkpMotorAction();  // 0127E4B0
 };

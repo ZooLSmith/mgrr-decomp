@@ -6,6 +6,4 @@
 struct cCameraFrustum {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00C12370 slot 0x0
-    // non-virtual members
-    cCameraFrustum();  // 00C40760
 };

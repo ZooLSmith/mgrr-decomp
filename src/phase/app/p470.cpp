@@ -1,5 +1,5 @@
 // src/phase/app/p470.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4A7C0..00D713F0, 13 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4A7C0..00D713F0, 14 functions
 
 #include "mgrr.h"
 #include "cP470.h"
@@ -368,6 +368,24 @@ void __thiscall cP470::vf28(int param_1,int param_2)
     }
   }
   return;
+}
+
+// 00D6D860  cP470::cP470  size=104  [class]
+undefined4 * __fastcall cP470::cP470(undefined4 *param_1)
+
+{
+  param_1[4] = param_1 + 7;
+  param_1[5] = 0;
+  param_1[6] = 0x40;
+  param_1[3] = lib::StaticArray<int,64>::vftable;
+  *param_1 = vftable;
+  FUN_00a7c930();
+  FUN_00a7c930();
+  param_1[0x49] = 0;
+  param_1[0x53] = 1;
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  return param_1;
 }
 
 // 00D6D910  cP470::vf00  size=76  [class]

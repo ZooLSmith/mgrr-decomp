@@ -456,7 +456,7 @@ FUN_009083c0(int param_1,undefined4 param_2,float param_3,undefined4 param_4,und
   pvVar6 = TlsGetValue(DAT_01f8fc4c);
   iVar5 = (**(code **)(**(int **)((int)pvVar6 + 0x2c) + 4))(0x160);
   *(undefined2 *)(iVar5 + 4) = 0x160;
-  iVar5 = hkpSimpleShapePhantom::~hkpSimpleShapePhantom(param_2,param_4,param_5);
+  iVar5 = hkpSimpleShapePhantom::hkpSimpleShapePhantom(param_2,param_4,param_5);
   FUN_01006780("setClosestPoints");
   FUN_008f8ac0(iVar5);
   if (iVar5 != 0) {
@@ -892,7 +892,7 @@ FUN_00908ef0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4
   pvVar5 = TlsGetValue(DAT_01f8fc4c);
   iVar4 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x160);
   *(undefined2 *)(iVar4 + 4) = 0x160;
-  iVar4 = hkpSimpleShapePhantom::~hkpSimpleShapePhantom(param_1,param_2,param_4);
+  iVar4 = hkpSimpleShapePhantom::hkpSimpleShapePhantom(param_1,param_2,param_4);
   FUN_01006780("setLinearCast");
   FUN_008f8ac0(iVar4);
   if (iVar4 != 0) {
@@ -1351,7 +1351,7 @@ FUN_00909ac0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4
   pvVar6 = TlsGetValue(DAT_01f8fc4c);
   iVar5 = (**(code **)(**(int **)((int)pvVar6 + 0x2c) + 4))(0x160);
   *(undefined2 *)(iVar5 + 4) = 0x160;
-  iVar5 = hkpSimpleShapePhantom::~hkpSimpleShapePhantom(param_1,param_3,param_4);
+  iVar5 = hkpSimpleShapePhantom::hkpSimpleShapePhantom(param_1,param_3,param_4);
   FUN_01006780("setPenetration");
   FUN_008f8ac0(iVar5);
   if (iVar5 != 0) {

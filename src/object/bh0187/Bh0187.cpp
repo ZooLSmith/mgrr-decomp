@@ -35,7 +35,7 @@ undefined4 __thiscall FUN_0040e9a0(undefined4 param_1,byte param_2)
 undefined4 * __fastcall Bh0187::Bh0187(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   param_1[0x220] = 0;
   param_1[0x224] = 0;
   param_1[0x21c] = 0;
@@ -252,12 +252,12 @@ LAB_0040f055:
   return;
 }
 
-// 0040F090  Bh0187::vf00  size=36  [class]
-undefined4 * __thiscall Bh0187::vf00(undefined4 *param_1,byte param_2)
+// 0040F090  Bh0187::destruct  size=36  [class]
+undefined4 * __thiscall Bh0187::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -415,8 +415,8 @@ void FUN_0040f3e0(int *param_1)
   return;
 }
 
-// 0040F570  Bh0187::vf40  size=1160  [class]
-undefined4 __fastcall Bh0187::vf40(int param_1)
+// 0040F570  Bh0187::startup  size=1160  [class]
+undefined4 __fastcall Bh0187::startup(int param_1)
 
 {
   uint uVar1;
@@ -448,7 +448,7 @@ undefined4 __fastcall Bh0187::vf40(int param_1)
     iVar2 = 0;
   }
   else {
-    iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar2 = RigidBodyCollision::RigidBodyCollision();
   }
   *(int *)(param_1 + 0x7b0) = iVar2;
   if (iVar2 == 0) {
@@ -467,7 +467,7 @@ undefined4 __fastcall Bh0187::vf40(int param_1)
   FUN_009277e0();
   lib::StaticArray<Collision*,64>::StaticArray<Collision*,64>(1,1);
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0))
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0))
   goto LAB_0040f939;
   puVar5 = *(undefined4 **)(iVar2 + 8);
   *puVar5 = 0x18a;

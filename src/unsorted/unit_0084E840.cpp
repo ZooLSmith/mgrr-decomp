@@ -15,7 +15,7 @@ undefined4 __fastcall FUN_0084e840(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 != 0) {
     FUN_00dd7240();
     *(undefined4 *)(param_1 + 0x640) = 2;
@@ -147,7 +147,7 @@ void __fastcall FUN_0084ecb0(int *param_1)
             *(undefined1 *)(param_1 + 0x2b9) = 0xfe;
           }
           else if (cVar2 == '\x05') {
-            FUN_009fdde0();
+            E3_EnemyBoardDebrisSokushi::vf4C();
           }
         }
       }
@@ -175,7 +175,7 @@ void __fastcall FUN_0084ecb0(int *param_1)
               return;
             }
             if (cVar2 == '\x03') {
-              FUN_009fdde0();
+              E3_EnemyBoardDebrisSokushi::vf4C();
               return;
             }
           }
@@ -189,7 +189,7 @@ void __fastcall FUN_0084ecb0(int *param_1)
     param_1[0x2ad] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
       param_1[0x2ac] = 0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }

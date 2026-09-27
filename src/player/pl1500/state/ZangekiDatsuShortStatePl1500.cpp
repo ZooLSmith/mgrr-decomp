@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiDatsuShortStatePl1500::ZangekiDatsuShortStatePl1500(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -72,8 +72,8 @@ undefined4 * __thiscall ZangekiDatsuShortStatePl1500::vf04(undefined4 *param_1,b
   return param_1;
 }
 
-// 008B36F0  ZangekiDatsuShortStatePl1500::vf0C  size=879  [class]
-void __thiscall ZangekiDatsuShortStatePl1500::vf0C(int param_1,undefined4 *param_2)
+// 008B36F0  ZangekiDatsuShortStatePl1500::SafeCheck  size=879  [class]
+void __thiscall ZangekiDatsuShortStatePl1500::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -203,7 +203,7 @@ void __thiscall ZangekiDatsuShortStatePl1500::vf0C(int param_1,undefined4 *param
       }
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -408,10 +408,10 @@ undefined4 __thiscall ZangekiDatsuShortStatePl1500::vf08(int param_1,undefined4 
   return 0;
 }
 
-// 008CF660  ZangekiDatsuShortStatePl1500::vf10  size=1838  [class]
+// 008CF660  ZangekiDatsuShortStatePl1500::qteSafeCheck  size=1838  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiDatsuShortStatePl1500::vf10(int param_1,undefined4 *param_2)
+void __thiscall ZangekiDatsuShortStatePl1500::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -460,7 +460,7 @@ void __thiscall ZangekiDatsuShortStatePl1500::vf10(int param_1,undefined4 *param
   iVar2 = FUN_00a81330();
   if ((iVar2 == 0) && (*(int *)(param_1 + 0x80) == 0)) {
     FUN_00d82510(1,100);
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   iVar2 = FUN_00a94e10(*(undefined4 *)(param_1 + 0x34),*(undefined4 *)(param_1 + 0x3c),
@@ -618,7 +618,7 @@ LAB_008cfcc4:
     }
   }
   *(undefined4 *)(iStack_1a0 + 0x6cc) = *(undefined4 *)(param_1 + 0x80);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

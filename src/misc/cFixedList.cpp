@@ -1274,7 +1274,7 @@ void __thiscall cFixedList::insert_4(int *param_1,int *param_2,int *param_3,unde
   }
   if (iVar3 != *param_1) {
     if (iVar3 != 0) {
-      cTouchArea::cTouchArea_2(param_4);
+      cTouchArea::cTouchArea(param_4);
     }
     iVar1 = *param_3;
     if (iVar1 == 0) {
@@ -1940,7 +1940,7 @@ void __thiscall cFixedList::insert_11(int *param_1,int *param_2,int *param_3,und
   }
   if (iVar3 != *param_1) {
     if (iVar3 != 0) {
-      cLightApplyScale::cLightApplyScale_3(param_4);
+      cLightApplyScale::cLightApplyScale(param_4);
     }
     iVar1 = *param_3;
     if (iVar1 == 0) {

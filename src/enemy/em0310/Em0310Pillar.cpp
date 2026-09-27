@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Em0310Pillar.h"
 
-// 0057E240  Em0310Pillar::vf40  size=253  [class]
-undefined4 __fastcall Em0310Pillar::vf40(int param_1)
+// 0057E240  Em0310Pillar::startup  size=253  [class]
+undefined4 __fastcall Em0310Pillar::startup(int param_1)
 
 {
   uint *puVar1;
@@ -24,7 +24,7 @@ undefined4 __fastcall Em0310Pillar::vf40(int param_1)
   undefined4 uVar14;
   undefined4 uVar15;
   
-  iVar3 = BehaviorBgBase::vf40();
+  iVar3 = BehaviorBgBase::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -206,7 +206,7 @@ void __fastcall Em0310Pillar::vf4C(int param_1)
       }
     }
     if ((*(int *)(param_1 + 0x4e4) != 0) && (*(int *)(param_1 + 0xb18) == 0)) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -273,8 +273,8 @@ undefined * Em0310Pillar::vf04(void)
   return &DAT_01b35148;
 }
 
-// 00AB7180  Em0310Pillar::vf00  size=43  [class]
-undefined4 __thiscall Em0310Pillar::vf00(undefined4 param_1,byte param_2)
+// 00AB7180  Em0310Pillar::destruct  size=43  [class]
+undefined4 __thiscall Em0310Pillar::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

@@ -24,7 +24,7 @@ undefined4 __fastcall FUN_00412240(int param_1)
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }

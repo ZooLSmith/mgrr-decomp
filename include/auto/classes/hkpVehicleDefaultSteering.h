@@ -10,5 +10,6 @@ struct hkpVehicleDefaultSteering : public hkpVehicleSteering {
     virtual undefined vf0C();  // 012924F0 slot 0xC  overrides hkpVehicleSteering
     virtual undefined vf10();  // 01292550 slot 0x10
     // non-virtual members
-    hkpVehicleDefaultSteering(undefined4 * param_1);  // 01288B50
+    ~hkpVehicleDefaultSteering();  // 01288B50
+    hkpVehicleDefaultSteering();  // 01288B70
 };

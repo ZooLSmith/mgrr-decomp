@@ -12,7 +12,8 @@ struct hkpRagdollLimitsData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011D9990 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011D9970 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpRagdollLimitsData(undefined4 * param_1, int param_2);  // 011AF660
-    hkpRagdollLimitsData();  // 011AF6B0
+    ~hkpRagdollLimitsData();  // 011AF660
+    hkpRagdollLimitsData();  // 011AF690
+    hkpRagdollLimitsData(int param_2);  // 011AF6B0
     void ctor_011D9AE0();  // 011D9AE0
 };

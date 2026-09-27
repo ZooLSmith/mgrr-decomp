@@ -1,5 +1,5 @@
 // src/enemy/emc190/Emc190.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007EEE50..00AB9F40, 191 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007EEE50..00AB9F40, 192 functions
 
 #include "mgrr.h"
 #include "Emc190.h"
@@ -102,8 +102,8 @@ void FUN_007ef020(void)
   return;
 }
 
-// 007EF050  Emc190::vf1B8  size=127  [class]
-void Emc190::vf1B8(undefined4 *param_1,int param_2,int param_3)
+// 007EF050  Emc190::setCutCrerateInfo  size=127  [class]
+void Emc190::setCutCrerateInfo(undefined4 *param_1,int param_2,int param_3)
 
 {
   undefined4 *puVar1;
@@ -1443,7 +1443,7 @@ void __fastcall Emc190::createWindAtk(int *param_1)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar3 = *(undefined4 **)(iVar2 + 8);
       *(undefined4 *)(iVar2 + 4) = 1;
@@ -2426,7 +2426,7 @@ LAB_007f345b:
     FUN_00dd5650(&DAT_01648244);
     return 0;
   }
-  iVar2 = CollisionAttackData::CollisionAttackData_3();
+  iVar2 = CollisionAttackData::CollisionAttackData();
   if (iVar2 == 0) goto LAB_007f345b;
   puVar1 = *(uint **)(iVar2 + 8);
   puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -7952,8 +7952,8 @@ LAB_008004c9:
   return;
 }
 
-// 00800950  Emc190::vf264  size=381  [class]
-undefined4 __thiscall Emc190::vf264(int *param_1,undefined4 param_2)
+// 00800950  Emc190::setEmSetInfo  size=381  [class]
+undefined4 __thiscall Emc190::setEmSetInfo(int *param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -10562,8 +10562,8 @@ LAB_0080581a:
   return 0;
 }
 
-// 00805CD0  Emc190::vf40  size=2577  [class]
-undefined4 __fastcall Emc190::vf40(int *param_1)
+// 00805CD0  Emc190::startup  size=2577  [class]
+undefined4 __fastcall Emc190::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -10588,7 +10588,7 @@ undefined4 __fastcall Emc190::vf40(int *param_1)
   undefined1 auStack_1d0 [112];
   undefined1 auStack_160 [348];
   
-  iVar2 = EmBaseDLC::vf40();
+  iVar2 = EmBaseDLC::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -10628,7 +10628,7 @@ undefined4 __fastcall Emc190::vf40(int *param_1)
       iVar3 = 0;
     }
     else {
-      iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar3 = RigidBodyCollision::RigidBodyCollision();
     }
     param_1[0x1ec] = iVar3;
     if (iVar3 != 0) {
@@ -11213,8 +11213,8 @@ void __fastcall FUN_00807670(int *param_1)
         local_200 = local_1f0 - (float)param_1[0x10];
         local_1f8 = local_1e8 - (float)param_1[0x12];
         local_1fc = (float)(float10)0;
-        hkpAllCdPointCollector::hkpAllCdPointCollector_38();
-        iVar6 = hkpCdPointCollector::hkpCdPointCollector_14
+        Emc190MoveCheckLinearCastCollector::Emc190MoveCheckLinearCastCollector();
+        iVar6 = hkpCdPointCollector::hkpCdPointCollector
                           (&local_200,&local_200,1,local_1b0,0x3c23d70a);
         if ((iVar6 == 0) ||
            ((local_1e8 - local_1f8) * (local_1e8 - local_1f8) +
@@ -12869,6 +12869,53 @@ void __fastcall Emc190::vf4C(int param_1)
   return;
 }
 
+// 00AB3380  Emc190::Emc190  size=318  [class]
+undefined4 * __fastcall Emc190::Emc190(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  param_1[0x3a4] = 0;
+  FUN_00904d60();
+  iVar1 = 1;
+  do {
+    FUN_00904d60();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  FUN_00904d60();
+  FUN_00a7c930();
+  FUN_00904d60();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_004105d0();
+  FUN_004105d0();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  param_1[0x4f8] = 0;
+  param_1[0x500] = 0;
+  FUN_009003e0();
+  FUN_00a7c930();
+  iVar1 = 7;
+  do {
+    FUN_00a7c930();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  FUN_00a603a0();
+  FUN_00a603a0();
+  FUN_00a603a0();
+  FUN_00a7c930();
+  param_1[0x588] = 0;
+  param_1[0x589] = 0;
+  param_1[0x58a] = 0;
+  param_1[0x58b] = 0;
+  param_1[0x58c] = 0;
+  return param_1;
+}
+
 // 00AB34C0  Emc190::vf04  size=6  [class]
 undefined * Emc190::vf04(void)
 
@@ -12905,12 +12952,12 @@ void __fastcall FUN_00ab34d0(int param_1)
   } while (-1 < iVar1);
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB9F40  Emc190::vf00  size=30  [class]
-undefined4 __thiscall Emc190::vf00(undefined4 param_1,byte param_2)
+// 00AB9F40  Emc190::destruct  size=30  [class]
+undefined4 __thiscall Emc190::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00ab34d0();

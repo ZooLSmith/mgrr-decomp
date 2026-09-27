@@ -8,4 +8,6 @@ struct Em0190MoveCheckLinearCastCollector : public hkpAllCdPointCollector {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00517820 slot 0x0  overrides hkpCdPointCollector
     virtual void vf04(int param_1);  // 00517780 slot 0x4  overrides hkpCdPointCollector
+    // non-virtual members
+    Em0190MoveCheckLinearCastCollector();  // 00517750
 };

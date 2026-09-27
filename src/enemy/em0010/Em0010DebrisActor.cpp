@@ -859,7 +859,7 @@ LAB_005e680b:
 LAB_005e66c3:
     if (fVar2 < (float)param_1[0x221] == (fVar2 == (float)param_1[0x221])) goto LAB_005e6836;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
 LAB_005e6836:
   iVar6 = 0;
   if (param_1[0x235] != 0) {
@@ -941,8 +941,8 @@ void __thiscall Em0010DebrisActor::ExplosionSlot::vf18(int param_1,int param_2,u
   return;
 }
 
-// 005E6A30  Em0010DebrisActor::vf40  size=2145  [class]
-undefined4 __fastcall Em0010DebrisActor::vf40(int *param_1)
+// 005E6A30  Em0010DebrisActor::startup  size=2145  [class]
+undefined4 __fastcall Em0010DebrisActor::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -1514,7 +1514,7 @@ LAB_005e7785:
   FUN_00900350(&local_1f0);
   bVar9 = local_1dc[0] != 0;
   uVar8 = (uint)bVar9;
-  hkpCdPointCollector::hkpCdPointCollector_4();
+  hkpCdPointCollector::hkpCdPointCollector();
   if (uVar8 == 0) {
     local_1e8 = local_1dc;
     local_1f0 = hkpAllCdBodyPairCollector::vftable;
@@ -1713,7 +1713,7 @@ LAB_005e7c0c:
 undefined4 * __fastcall Em0010DebrisActor::Em0010DebrisActor(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_009003e0();
   param_1[0x241] = 0;
@@ -1727,8 +1727,8 @@ undefined * Em0010DebrisActor::vf04(void)
   return &DAT_01b35360;
 }
 
-// 00AB84C0  Em0010DebrisActor::vf00  size=105  [class]
-undefined4 * __thiscall Em0010DebrisActor::vf00(undefined4 *param_1,byte param_2)
+// 00AB84C0  Em0010DebrisActor::destruct  size=105  [class]
+undefined4 * __thiscall Em0010DebrisActor::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -1742,7 +1742,7 @@ undefined4 * __thiscall Em0010DebrisActor::vf00(undefined4 *param_1,byte param_2
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

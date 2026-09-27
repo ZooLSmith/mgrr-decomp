@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp44::esp44(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp44::esp44(undefined4 *param_1)
 undefined4 __thiscall esp44::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -121,9 +121,9 @@ void __fastcall esp44::vf08(int param_1)
   return;
 }
 
-// 00F379B0  esp44::vf04  size=532  [class]
+// 00F379B0  esp44::preTrans  size=532  [class]
 undefined4 __thiscall
-esp44::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp44::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int iVar1;
@@ -135,7 +135,7 @@ esp44::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   
   *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x200000;
   *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x1000000;
-  iVar1 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar1 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar1 == 0) {
     return 0;
   }
@@ -214,8 +214,8 @@ esp44::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   return 1;
 }
 
-// 00F37BD0  esp44::vf10  size=184  [class]
-void __fastcall esp44::vf10(int param_1)
+// 00F37BD0  esp44::addOtTransList  size=184  [class]
+void __fastcall esp44::addOtTransList(int param_1)
 
 {
   undefined4 local_7c;

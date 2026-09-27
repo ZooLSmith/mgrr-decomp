@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "BehaviorImpactWave.h"
 
-// 00602C20  BehaviorImpactWave::vf40  size=39  [class]
-undefined4 __fastcall BehaviorImpactWave::vf40(int param_1)
+// 00602C20  BehaviorImpactWave::startup  size=39  [class]
+undefined4 __fastcall BehaviorImpactWave::startup(int param_1)
 
 {
   int iVar1;
@@ -97,7 +97,7 @@ void __fastcall BehaviorImpactWave::vf50(int param_1)
 undefined4 * __fastcall BehaviorImpactWave::BehaviorImpactWave(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -109,8 +109,8 @@ undefined * BehaviorImpactWave::vf04(void)
   return &DAT_01b354b8;
 }
 
-// 00AB7AC0  BehaviorImpactWave::vf00  size=105  [class]
-undefined4 * __thiscall BehaviorImpactWave::vf00(undefined4 *param_1,byte param_2)
+// 00AB7AC0  BehaviorImpactWave::destruct  size=105  [class]
+undefined4 * __thiscall BehaviorImpactWave::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -124,7 +124,7 @@ undefined4 * __thiscall BehaviorImpactWave::vf00(undefined4 *param_1,byte param_
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

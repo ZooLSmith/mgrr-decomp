@@ -8,6 +8,6 @@ struct cModelShader {
     virtual undefined4 vf00(byte param_2);  // 00F94610 slot 0x0  overrides Hw::cShader
     virtual void vf04();  // 00F930A0 slot 0x4  overrides Hw::cShader
     // non-virtual members
-    cModelShader();  // 00F8FEA0
-    void ctor_00F931D0();  // 00F931D0
+    ~cModelShader();  // 00F8FEA0
+    cModelShader();  // 00F931D0
 };

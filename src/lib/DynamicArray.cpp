@@ -1,5 +1,5 @@
 // src/lib/DynamicArray.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D9250..00E9BD40, 119 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D9250..00E9BD40, 122 functions
 
 #include "mgrr.h"
 
@@ -1889,13 +1889,13 @@ lib::DynamicArray<waypoint::WaypointNode,sys::AllocatorByHeap>::vf14(int param_1
           iVar6 = iVar6 + -1;
         } while (iVar6 != 0);
       }
-      Array<unsigned_short>::Array<unsigned_short>_2();
+      Array<unsigned_short>::Array<unsigned_short>();
       if (*(int *)(param_1 + 4) != 0) {
         FUN_00dd48d0(*(int *)(param_1 + 4),0);
         *(undefined4 *)(param_1 + 4) = 0;
         *(undefined4 *)(param_1 + 0xc) = 0;
       }
-      Array<unsigned_short>::Array<unsigned_short>_2();
+      Array<unsigned_short>::Array<unsigned_short>();
       *(int *)(param_1 + 4) = iVar3;
       *(int *)(param_1 + 8) = iVar1;
       *(uint *)(param_1 + 0xc) = (param_2 * 0x18) / 0x18;
@@ -1936,14 +1936,14 @@ lib::DynamicArray<waypoint::WaypointNode,sys::AllocatorByHeap>::vf00
 
 {
   *param_1 = vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   if (param_1[1] != 0) {
     FUN_00dd48d0(param_1[1],0);
     param_1[1] = 0;
     param_1[3] = 0;
   }
   *param_1 = Array<waypoint::WaypointNode>::vftable;
-  Array<unsigned_short>::Array<unsigned_short>_2();
+  Array<unsigned_short>::Array<unsigned_short>();
   param_1[1] = 0;
   param_1[3] = 0;
   if ((param_2 & 1) != 0) {
@@ -2876,6 +2876,35 @@ lib::DynamicArray<char,lib::detail::AllocatorFromStd<sys::StringSystem::StdAlloc
   return param_1;
 }
 
+// 00E997F0  FUN_00e997f0  size=118  [callgraph]
+int * __thiscall FUN_00e997f0(int *param_1,int *param_2)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  
+  iVar2 = *param_2;
+  *param_1 = iVar2;
+  if (iVar2 != 0) {
+    EnterCriticalSection((LPCRITICAL_SECTION)&DAT_01880260);
+    if (iVar2 != 0) {
+      *(int *)(iVar2 + 0x18) = *(int *)(iVar2 + 0x18) + 1;
+    }
+    LeaveCriticalSection((LPCRITICAL_SECTION)&DAT_01880260);
+  }
+  if ((int *)param_2[1] != (int *)0x0) {
+    uVar1 = (**(code **)(*(int *)param_2[1] + 0xc))();
+    iVar2 = FUN_00dd29b0(uVar1,0x20,0,0);
+    if (iVar2 != 0) {
+      (**(code **)(*(int *)param_2[1] + 8))(iVar2);
+      param_1[1] = iVar2;
+      return param_1;
+    }
+  }
+  param_1[1] = 0;
+  return param_1;
+}
+
 // 00E99870  FUN_00e99870  size=64  [callgraph]
 void __fastcall FUN_00e99870(int *param_1)
 
@@ -2999,8 +3028,11 @@ DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib:
   return 0xffffffff;
 }
 
-// 00E9AC90  FUN_00e9ac90  size=45  [callgraph]
-void __thiscall FUN_00e9ac90(int param_1,int param_2)
+// 00E9AC90  lib::DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>::vf18  size=45  [class]
+void __thiscall
+lib::
+DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>
+::vf18(int param_1,int param_2)
 
 {
   undefined4 uVar1;
@@ -3017,8 +3049,11 @@ void __thiscall FUN_00e9ac90(int param_1,int param_2)
   return;
 }
 
-// 00E9ACC0  FUN_00e9acc0  size=95  [callgraph]
-uint __thiscall FUN_00e9acc0(int *param_1,undefined4 param_2)
+// 00E9ACC0  lib::DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>::vf08  size=95  [class]
+uint __thiscall
+lib::
+DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>
+::vf08(int *param_1,undefined4 param_2)
 
 {
   uint uVar1;
@@ -3047,6 +3082,87 @@ LAB_00e9ace6:
   }
 LAB_00e9ad19:
   return uVar1 & 0xffffff00;
+}
+
+// 00E9AD20  lib::DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>::vf0C  size=117  [class]
+int __thiscall
+lib::
+DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>
+::vf0C(int *param_1,int param_2,undefined4 param_3)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  int iVar4;
+  
+  uVar1 = param_1[2];
+  uVar3 = (param_2 - param_1[1]) / 0xc;
+  if (uVar1 < uVar3) {
+    return param_1[1] + uVar1 * 0xc;
+  }
+  uVar2 = param_1[3];
+  if (uVar1 == uVar2) {
+    if (uVar2 == 0) {
+      (**(code **)(*param_1 + 0x14))(0x20);
+    }
+    else {
+      (**(code **)(*param_1 + 0x14))(uVar2 * 2);
+    }
+    param_2 = param_1[1] + uVar3 * 0xc;
+  }
+  iVar4 = Array<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>_>
+          ::vf0C(param_2,param_3);
+  return iVar4;
+}
+
+// 00E9ADE0  lib::DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>::vf14  size=193  [class]
+void __thiscall
+lib::
+DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>
+::vf14(int param_1,uint param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  
+  if (*(uint *)(param_1 + 0xc) < param_2) {
+    uVar3 = param_2;
+    if (param_2 < 0x21) {
+      uVar3 = 0x20;
+    }
+    iVar4 = FUN_00dd29b0(uVar3 * 0xc,0x20,0,0);
+    if (iVar4 != 0) {
+      iVar1 = *(int *)(param_1 + 4);
+      iVar2 = *(int *)(param_1 + 8);
+      if (iVar2 != 0) {
+        iVar5 = iVar2;
+        iVar6 = iVar4;
+        do {
+          if (iVar6 != 0) {
+            FUN_00e997f0((iVar1 - iVar4) + iVar6);
+          }
+          iVar6 = iVar6 + 0xc;
+          iVar5 = iVar5 + -1;
+        } while (iVar5 != 0);
+      }
+      FUN_00e9a0f0();
+      if (*(int *)(param_1 + 4) != 0) {
+        FUN_00dd48d0(*(int *)(param_1 + 4),0);
+        *(undefined4 *)(param_1 + 4) = 0;
+        *(undefined4 *)(param_1 + 0xc) = 0;
+      }
+      FUN_00e9a0f0();
+      *(uint *)(param_1 + 0xc) = (param_2 * 0xc) / 0xc;
+      *(int *)(param_1 + 4) = iVar4;
+      *(int *)(param_1 + 8) = iVar2;
+    }
+  }
+  return;
 }
 
 // 00E9AEB0  lib::DynamicArray<lib::MetaValue<lib::HashedString<sys::StringSystem::Allocator>,lib::SerializableAny<sys::MetaParamSystem::Allocator>_>,sys::MetaParamSystem::Allocator>::vf00  size=82  [class]

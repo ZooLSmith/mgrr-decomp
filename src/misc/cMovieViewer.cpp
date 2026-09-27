@@ -1,5 +1,5 @@
 // src/misc/cMovieViewer.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00991240..009B33B0, 19 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00991240..009B33B0, 21 functions
 
 #include "mgrr.h"
 #include "cMovieViewer.h"
@@ -562,6 +562,61 @@ void FUN_00991da0(void)
     iVar2 = iVar2 + 1;
   } while (iVar2 < 0x33);
   return;
+}
+
+// 009A2F60  cMovieViewer::~cMovieViewer  size=177  [class]
+void __fastcall cMovieViewer::~cMovieViewer(undefined4 *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  
+  *param_1 = vftable;
+  if ((undefined4 *)param_1[0x4c] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x4c])(1);
+    param_1[0x4c] = 0;
+  }
+  piVar2 = &DAT_01b388c0;
+  do {
+    if (*piVar2 != 0) {
+      FUN_00e9d6a0(*piVar2);
+      *piVar2 = 0;
+    }
+    piVar2 = piVar2 + 1;
+  } while ((int)piVar2 < 0x1b3898c);
+  FUN_00cfe0f0(0x16);
+  iVar1 = 0x32;
+  do {
+    Hw::cTexture::~cTexture();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  param_1[0x48] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[0x49] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x49])(1);
+    param_1[0x49] = 0;
+  }
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 009A3020  FUN_009a3020  size=68  [between]
+int FUN_009a3020(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00dd3500(0xadc,&DAT_01b7be50);
+  if (iVar1 != 0) {
+    iVar1 = cMessWindowCtrl::cMessWindowCtrl();
+    if (iVar1 != 0) {
+      *(char **)(iVar1 + 0xc) = "cMovieViewer";
+      FUN_00d29ca0(0x79,10);
+      *(undefined4 *)(iVar1 + 0x10) = 0;
+    }
+    return iVar1;
+  }
+  return 0;
 }
 
 // 009A3070  cMovieViewer::vf08  size=1266  [class]
@@ -1476,15 +1531,15 @@ switchD_009a4473_default:
 undefined4 __thiscall cMovieViewer::vf00(undefined4 param_1,byte param_2)
 
 {
-  cMessWindowCtrl::cMessWindowCtrl_12();
+  ~cMovieViewer();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009B33B0  cMovieViewer::vf14  size=1786  [class]
-void __fastcall cMovieViewer::vf14(int param_1)
+// 009B33B0  cMovieViewer::create  size=1786  [class]
+void __fastcall cMovieViewer::create(int param_1)
 
 {
   float fVar1;

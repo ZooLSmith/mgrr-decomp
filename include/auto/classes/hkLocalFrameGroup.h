@@ -9,6 +9,6 @@ struct hkLocalFrameGroup : public hkReferencedObject {
     virtual undefined4 * vf00(byte param_2);  // 01011BA0 slot 0x0  overrides hkBaseObject
     // non-virtual members
     hkLocalFrameGroup(undefined4 param_2);  // 01011940
-    hkLocalFrameGroup(undefined4 * param_1, undefined4 param_2);  // 010119B0
+    ~hkLocalFrameGroup();  // 010119B0
     hkLocalFrameGroup();  // 010119E0
 };

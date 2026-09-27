@@ -9,4 +9,6 @@ struct cPf09 {
     virtual void vf08();  // 00D5F6A0 slot 0x8  overrides cPhaseAbstract
     virtual void vf0C();  // 00D5F7E0 slot 0xC  overrides cPhaseAbstract
     virtual void vf10();  // 00D50BD0 slot 0x10  overrides cPhaseAbstract
+    // non-virtual members
+    cPf09();  // 00D6E820
 };

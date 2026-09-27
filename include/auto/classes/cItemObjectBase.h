@@ -17,13 +17,4 @@ struct cItemObjectBase : public Behavior {
     virtual undefined4 vf308();  // 00AA7350 slot 0x308
     // non-virtual members
     cItemObjectBase();  // 00AA7300
-    void ctor_00AB1360();  // 00AB1360
-    void ctor_00AB13C0();  // 00AB13C0
-    void ctor_00AB1420();  // 00AB1420
-    void ctor_00AB1490();  // 00AB1490
-    void ctor_00AB1A60();  // 00AB1A60
-    void ctor_00AB6700();  // 00AB6700
-    void ctor_00AC0D90();  // 00AC0D90
-    void ctor_00AC0E10();  // 00AC0E10
-    void ctor_00AC11A0();  // 00AC11A0
 };

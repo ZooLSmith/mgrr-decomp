@@ -19,4 +19,6 @@ struct KamaitatiObj : public BehaviorAppBase {
     virtual int getAttackInfo(ushort * param_2);  // 00870310 slot 0x130  overrides Behavior
     virtual void vf19C(int param_2, undefined4 param_3);  // 00870640 slot 0x19C  overrides Behavior
     virtual void vf1A4(undefined4 param_2, uint param_3);  // 0085EF10 slot 0x1A4  overrides Behavior
+    // non-virtual members
+    KamaitatiObj();  // 00AB1B60
 };

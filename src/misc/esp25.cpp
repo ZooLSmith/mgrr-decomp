@@ -14,8 +14,8 @@ void __fastcall esp25::vf14(int param_1)
   return;
 }
 
-// 00ED8850  esp25::vf10  size=1  [class]
-void esp25::vf10(void)
+// 00ED8850  esp25::addOtTransList  size=1  [class]
+void esp25::addOtTransList(void)
 
 {
   return;
@@ -25,7 +25,7 @@ void esp25::vf10(void)
 undefined4 * __fastcall esp25::esp25(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   param_1[0x114] = 0;
   param_1[0x115] = 0;
   param_1[0x116] = 0;
@@ -78,9 +78,9 @@ void __fastcall esp25::vf08(int param_1)
   return;
 }
 
-// 00F34D30  esp25::vf04  size=276  [class]
+// 00F34D30  esp25::preTrans  size=276  [class]
 undefined4 __thiscall
-esp25::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp25::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -88,7 +88,7 @@ esp25::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return 0;
   }

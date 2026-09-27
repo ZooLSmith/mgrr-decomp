@@ -1,8 +1,21 @@
 // src/misc/esp12.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED08A0..00F38E60, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0480..00F38E60, 6 functions
 
 #include "mgrr.h"
 #include "esp12.h"
+
+// 00ED0480  esp12::esp12  size=57  [class]
+undefined4 * __fastcall esp12::esp12(undefined4 *param_1)
+
+{
+  cEsp::cEsp();
+  *param_1 = ModelShaderJackModule::vftable;
+  FUN_009e6c70();
+  FUN_009d2900();
+  FUN_00a7c930();
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00ED08A0  esp12::vf00  size=54  [class]
 undefined4 __thiscall esp12::vf00(undefined4 param_1,byte param_2)
@@ -10,15 +23,15 @@ undefined4 __thiscall esp12::vf00(undefined4 param_1,byte param_2)
 {
   FUN_009de370();
   Spline<float>::Spline<float>_2();
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00ED8050  esp12::vf10  size=1  [class]
-void esp12::vf10(void)
+// 00ED8050  esp12::addOtTransList  size=1  [class]
+void esp12::addOtTransList(void)
 
 {
   return;
@@ -143,9 +156,9 @@ void __fastcall esp12::vf08(int param_1)
   return;
 }
 
-// 00F38E60  esp12::vf04  size=575  [class]
+// 00F38E60  esp12::preTrans  size=575  [class]
 undefined4 __thiscall
-esp12::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp12::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -167,7 +180,7 @@ esp12::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 local_8;
   int local_4;
   
-  iVar4 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar4 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar4 == 0) {
     return 0;
   }

@@ -8,5 +8,5 @@ struct cUIExtendFactory {
     virtual undefined4 * vf00(byte param_2);  // 00D28FA0 slot 0x0
     // non-virtual members
     cUIExtendFactory();  // 00D28F50
-    void ctor_00D29160();  // 00D29160
+    void ctor_00D28FF0();  // 00D28FF0
 };

@@ -13,7 +13,6 @@ struct cUIPrimWork : public cUIPrimWorkBase {
     // non-virtual members
     cUIPrimWork();  // 00A4C6A0
     void ctor_00A4EB30();  // 00A4EB30
-    static void vf04();  // 00CCBA80
     void ctor_00CF9BF0();  // 00CF9BF0
     cUIPrimWork(int * param_1, int param_2, float * param_3, undefined4 param_4);  // 00CF9DF0
     cUIPrimWork(int * param_1, float * param_2, int param_3, undefined4 param_4);  // 00CFA750

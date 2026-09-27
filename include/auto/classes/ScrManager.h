@@ -35,6 +35,4 @@ struct ScrManager {
     virtual void vf6C() = 0;  // 00FDB68B slot 0x6C
     virtual void vf70() = 0;  // 00FDB68B slot 0x70
     virtual undefined4 * vf74(byte param_2);  // 00C14270 slot 0x74
-    // non-virtual members
-    ScrManager();  // 00C24BC0
 };

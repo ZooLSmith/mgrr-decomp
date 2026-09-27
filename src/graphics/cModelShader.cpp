@@ -4,12 +4,12 @@
 #include "mgrr.h"
 #include "cModelShader.h"
 
-// 00F8FEA0  cModelShader::cModelShader_2  size=11  [class]
-void __fastcall cModelShader::cModelShader_2(undefined4 *param_1)
+// 00F8FEA0  cModelShader::~cModelShader  size=11  [class]
+void __fastcall cModelShader::~cModelShader(undefined4 *param_1)
 
 {
   *param_1 = vftable;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -44,7 +44,7 @@ undefined4 * __fastcall cModelShader::cModelShader(undefined4 *param_1)
   undefined4 *puVar1;
   int local_4;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   puVar1 = param_1 + 10;
   local_4 = 0xf;
@@ -75,7 +75,7 @@ undefined4 * __thiscall cModelShader::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

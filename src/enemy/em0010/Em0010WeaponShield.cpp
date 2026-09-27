@@ -1,8 +1,22 @@
 // src/enemy/em0010/Em0010WeaponShield.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF200..00B5CA00, 13 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF1C0..00B5CA00, 14 functions
 
 #include "mgrr.h"
 #include "Em0010WeaponShield.h"
+
+// 00AAF1C0  Em0010WeaponShield::Em0010WeaponShield  size=55  [class]
+undefined4 * __fastcall Em0010WeaponShield::Em0010WeaponShield(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  param_1[0x228] = 0;
+  param_1[0x22a] = 0;
+  param_1[0x22d] = 0;
+  *param_1 = cEm0010Weapon::vftable;
+  FUN_00a7c930();
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00AAF200  Em0010WeaponShield::vf04  size=6  [class]
 undefined * Em0010WeaponShield::vf04(void)
@@ -18,8 +32,8 @@ void Em0010WeaponShield::vf1D0(void)
   return;
 }
 
-// 00AB7C80  Em0010WeaponShield::vf00  size=105  [class]
-undefined4 * __thiscall Em0010WeaponShield::vf00(undefined4 *param_1,byte param_2)
+// 00AB7C80  Em0010WeaponShield::destruct  size=105  [class]
+undefined4 * __thiscall Em0010WeaponShield::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -33,7 +47,7 @@ undefined4 * __thiscall Em0010WeaponShield::vf00(undefined4 *param_1,byte param_
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -70,7 +84,7 @@ void __fastcall Em0010WeaponShield::vf54(int param_1)
       switchD_0080dbae::default();
       if ((((*(int *)(param_1 + 0x87c) != 0) && (*(char *)(param_1 + 0x470) != '\0')) &&
           ((*(byte *)(param_1 + 0x472) & 0x80) != 0)) && (*(char *)(param_1 + 0x471) != '\0')) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -129,13 +143,13 @@ undefined4 __thiscall Em0010WeaponShield::vfD8(int param_1,int param_2)
   return 0;
 }
 
-// 00B33200  Em0010WeaponShield::vf40  size=218  [class]
-undefined4 __fastcall Em0010WeaponShield::vf40(int param_1)
+// 00B33200  Em0010WeaponShield::startup  size=218  [class]
+undefined4 __fastcall Em0010WeaponShield::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = cEm0010Weapon::vf40();
+  iVar1 = cEm0010Weapon::startup();
   if (iVar1 == 0) {
     return 0;
   }

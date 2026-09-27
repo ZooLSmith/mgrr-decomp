@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "SlashTestContents.h"
 
-// 008DB520  SlashTestContents::SlashTestContents  size=61  [class]
-void __fastcall SlashTestContents::SlashTestContents(undefined4 *param_1)
+// 008DB520  SlashTestContents::~SlashTestContents  size=61  [class]
+void __fastcall SlashTestContents::~SlashTestContents(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -17,7 +17,7 @@ void __fastcall SlashTestContents::SlashTestContents(undefined4 *param_1)
     (*(code *)**(undefined4 **)param_1[6])(1);
     param_1[6] = 0;
   }
-  ContentsBase::ContentsBase_2();
+  ContentsBase::~ContentsBase();
   return;
 }
 
@@ -41,7 +41,7 @@ undefined4 * __thiscall SlashTestContents::vf04(undefined4 *param_1,byte param_2
     (*(code *)**(undefined4 **)param_1[6])(1);
     param_1[6] = 0;
   }
-  ContentsBase::ContentsBase_2();
+  ContentsBase::~ContentsBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

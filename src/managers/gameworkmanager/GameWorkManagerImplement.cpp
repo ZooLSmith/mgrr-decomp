@@ -1200,8 +1200,8 @@ void GameWorkManagerImplement::vf04(void)
   return;
 }
 
-// 00C50480  GameWorkManagerImplement::GameWorkManagerImplement  size=114  [class]
-bool GameWorkManagerImplement::GameWorkManagerImplement(undefined4 param_1)
+// 00C50480  GameWorkManagerImplement::~GameWorkManagerImplement  size=114  [class]
+bool GameWorkManagerImplement::~GameWorkManagerImplement(undefined4 param_1)
 
 {
   undefined4 *puVar1;
@@ -1229,8 +1229,8 @@ bool GameWorkManagerImplement::GameWorkManagerImplement(undefined4 param_1)
   return false;
 }
 
-// 00C50500  GameWorkManagerImplement::GameWorkManagerImplement  size=5  [class]
-bool GameWorkManagerImplement::GameWorkManagerImplement(undefined4 param_1)
+// 00C50500  GameWorkManagerImplement::~GameWorkManagerImplement  size=5  [class]
+bool GameWorkManagerImplement::~GameWorkManagerImplement(undefined4 param_1)
 
 {
   undefined4 *puVar1;

@@ -58,10 +58,10 @@ undefined4 * __thiscall cItemTargetCursorParts::vf00(undefined4 *param_1,byte pa
   return param_1;
 }
 
-// 00D01450  cItemTargetCursorParts::vf14  size=808  [class]
+// 00D01450  cItemTargetCursorParts::create  size=808  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cItemTargetCursorParts::vf14(int param_1)
+void __fastcall cItemTargetCursorParts::create(int param_1)
 
 {
   float fVar1;

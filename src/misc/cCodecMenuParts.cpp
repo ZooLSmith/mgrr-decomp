@@ -1,5 +1,5 @@
 // src/misc/cCodecMenuParts.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098A510..009AD850, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098A510..009AD850, 8 functions
 
 #include "mgrr.h"
 #include "cCodecMenuParts.h"
@@ -103,6 +103,47 @@ void __fastcall FUN_0098a580(int param_1)
     }
   }
   return;
+}
+
+// 0099B110  cCodecMenuParts::~cCodecMenuParts  size=93  [class]
+void __fastcall cCodecMenuParts::~cCodecMenuParts(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  FUN_00cfe0f0(3);
+  param_1[0x8e] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[0x8f] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x8f])(1);
+    param_1[0x8f] = 0;
+  }
+  iVar1 = 7;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 0099B170  FUN_0099b170  size=68  [between]
+int FUN_0099b170(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00dd3500(0x260,&DAT_01b7be50);
+  if (iVar1 != 0) {
+    iVar1 = cMessWindowCtrl::cMessWindowCtrl();
+    if (iVar1 != 0) {
+      *(char **)(iVar1 + 0xc) = "cCodecMenuParts";
+      FUN_00d29ca0(0x5b,9);
+      *(undefined4 *)(iVar1 + 0x10) = 0;
+    }
+    return iVar1;
+  }
+  return 0;
 }
 
 // 0099B1C0  cCodecMenuParts::vf08  size=1549  [class]
@@ -723,17 +764,17 @@ LAB_0099c4fb:
 undefined4 __thiscall cCodecMenuParts::vf00(undefined4 param_1,byte param_2)
 
 {
-  cMessWindowCtrl::cMessWindowCtrl_2();
+  ~cCodecMenuParts();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009AD850  cCodecMenuParts::vf14  size=308  [class]
+// 009AD850  cCodecMenuParts::create  size=308  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cCodecMenuParts::vf14(int param_1)
+void __fastcall cCodecMenuParts::create(int param_1)
 
 {
   int iVar1;

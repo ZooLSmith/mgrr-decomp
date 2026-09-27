@@ -44,8 +44,8 @@ LAB_00cd90d3:
   return;
 }
 
-// 00CD90E0  cUIFadeParts::vf14  size=420  [class]
-void __fastcall cUIFadeParts::vf14(int param_1)
+// 00CD90E0  cUIFadeParts::create  size=420  [class]
+void __fastcall cUIFadeParts::create(int param_1)
 
 {
   int iVar1;

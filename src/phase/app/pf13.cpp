@@ -509,7 +509,7 @@ LAB_00d70e40:
         *(undefined4 *)(param_1 + 0x138) = 1;
       }
 LAB_00d70fff:
-      hkpCdPointCollector::hkpCdPointCollector_4();
+      hkpCdPointCollector::hkpCdPointCollector();
       if (DAT_01885d68 != 1) {
         piVar7 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
         *piVar7 = *piVar7 + -1;

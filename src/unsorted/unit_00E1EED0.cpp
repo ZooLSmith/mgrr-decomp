@@ -20,7 +20,7 @@ void __thiscall FUN_00e1eed0(int *param_1,uint param_2)
   ExceptionList = &local_10;
   if (0x1fffffff < param_2) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("vector<T> too long");
+    std::length_error::length_error("vector<T> too long");
   }
   if ((uint)(param_1[2] - *param_1 >> 3) < param_2) {
     if (DAT_01b7b794 == (code *)0x0) {
@@ -399,7 +399,7 @@ void __thiscall FUN_00e1fa30(int *param_1,int param_2)
   uVar1 = (param_1[1] - *param_1) / 0xc;
   if (0x15555555U - param_2 < uVar1) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("vector<T> too long");
+    std::length_error::length_error("vector<T> too long");
   }
   if ((uint)((param_1[2] - *param_1) / 0xc) < uVar1 + param_2) {
     FUN_00e1e650();
@@ -537,7 +537,7 @@ void __thiscall FUN_00e1fee0(int *param_1,int param_2)
   uVar1 = param_1[1] - *param_1 >> 3;
   if (0x1fffffffU - param_2 < uVar1) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("vector<T> too long");
+    std::length_error::length_error("vector<T> too long");
   }
   if ((uint)(param_1[2] - *param_1 >> 3) < uVar1 + param_2) {
     FUN_00e1eed0();

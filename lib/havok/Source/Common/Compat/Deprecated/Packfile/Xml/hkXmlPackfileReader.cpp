@@ -187,7 +187,7 @@ undefined4 __thiscall hkXmlPackfileReader::vf38(int *param_1,uint param_2,int *p
       }
       FUN_01010310(&PTR_vftable_018e9b94);
       FUN_0100fd10();
-      hkBaseObject::hkBaseObject_76();
+      ::hkBaseObject::hkBaseObject();
       FUN_01025870();
       FUN_01025870();
       FUN_01025870();
@@ -196,8 +196,8 @@ undefined4 __thiscall hkXmlPackfileReader::vf38(int *param_1,uint param_2,int *p
       FUN_0105d070();
       FUN_01025870();
       FUN_010f79a0();
-      hkBaseObject::hkBaseObject();
-      hkBaseObject::hkBaseObject_55();
+      ::hkBaseObject::hkBaseObject();
+      ::hkBaseObject::hkBaseObject();
       iVar8 = local_c;
       iVar11 = local_10;
       if (local_10 == local_1c) {
@@ -235,7 +235,7 @@ undefined4 __thiscall hkXmlPackfileReader::vf38(int *param_1,uint param_2,int *p
             uVar6 = (*pcVar2)();
             return uVar6;
           }
-          hkBaseObject::hkBaseObject_38();
+          ::hkBaseObject::hkBaseObject_38();
         }
         else {
           FUN_010fb630(0);
@@ -243,7 +243,7 @@ undefined4 __thiscall hkXmlPackfileReader::vf38(int *param_1,uint param_2,int *p
           if (0 < iVar11) {
             FUN_01010310(&PTR_vftable_018e9b94);
             FUN_0100fd10();
-            hkBaseObject::hkBaseObject_76();
+            ::hkBaseObject::hkBaseObject();
             FUN_01025870();
             FUN_01025870();
             FUN_01025870();
@@ -252,8 +252,8 @@ undefined4 __thiscall hkXmlPackfileReader::vf38(int *param_1,uint param_2,int *p
             FUN_0105d070();
             FUN_01025870();
             FUN_010f79a0();
-            hkBaseObject::hkBaseObject();
-            hkBaseObject::hkBaseObject_55();
+            ::hkBaseObject::hkBaseObject();
+            ::hkBaseObject::hkBaseObject();
             iVar8 = local_c;
             iVar11 = local_10;
             if (local_10 == local_1c) {
@@ -320,7 +320,7 @@ undefined4 __thiscall hkXmlPackfileReader::vf38(int *param_1,uint param_2,int *p
 LAB_0105c099:
           FUN_01010310(&PTR_vftable_018e9b94);
           FUN_0100fd10();
-          hkBaseObject::hkBaseObject_76();
+          ::hkBaseObject::hkBaseObject();
           FUN_01025870();
           FUN_01025870();
           FUN_01025870();
@@ -329,8 +329,8 @@ LAB_0105c099:
           FUN_0105d070();
           FUN_01025870();
           FUN_010f79a0();
-          hkBaseObject::hkBaseObject();
-          hkBaseObject::hkBaseObject_55();
+          ::hkBaseObject::hkBaseObject();
+          ::hkBaseObject::hkBaseObject();
           if (local_10 == local_1c) {
             local_18 = 0;
           }
@@ -399,7 +399,7 @@ LAB_0105bd93:
         if (local_40 == 0) {
           FUN_01010310(&PTR_vftable_018e9b94);
           FUN_0100fd10();
-          hkBaseObject::hkBaseObject_76();
+          ::hkBaseObject::hkBaseObject();
           FUN_01025870();
           FUN_01025870();
           FUN_01025870();
@@ -408,8 +408,8 @@ LAB_0105bd93:
           FUN_0105d070();
           FUN_01025870();
           FUN_010f79a0();
-          hkBaseObject::hkBaseObject();
-          hkBaseObject::hkBaseObject_55();
+          ::hkBaseObject::hkBaseObject();
+          ::hkBaseObject::hkBaseObject();
           if (local_10 == local_1c) {
             local_18 = 0;
           }
@@ -591,9 +591,9 @@ void __thiscall FUN_0105c4c0(int param_1,int param_2)
   return;
 }
 
-// 0105C4F0  hkXmlPackfileUpdateTracker::hkXmlPackfileUpdateTracker_2  size=41  [between]
+// 0105C4F0  hkXmlPackfileUpdateTracker::hkXmlPackfileUpdateTracker  size=41  [between]
 undefined4 * __thiscall
-hkXmlPackfileUpdateTracker::hkXmlPackfileUpdateTracker_2
+hkXmlPackfileUpdateTracker::hkXmlPackfileUpdateTracker
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -875,7 +875,7 @@ int __thiscall _anon_EC4D7004::hkPatchClassInstanceXmlParser::vf00(int param_1,b
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

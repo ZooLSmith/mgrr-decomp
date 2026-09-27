@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Em01a0Line.h"
 
-// 0051AE70  Em01a0Line::vf40  size=95  [class]
-undefined4 __fastcall Em01a0Line::vf40(int param_1)
+// 0051AE70  Em01a0Line::startup  size=95  [class]
+undefined4 __fastcall Em01a0Line::startup(int param_1)
 
 {
   int iVar1;
@@ -197,7 +197,7 @@ void __fastcall Em01a0Line::vf50(int param_1)
 undefined4 * __fastcall Em01a0Line::Em01a0Line(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -212,11 +212,11 @@ undefined * Em01a0Line::vf04(void)
   return &DAT_01b34f54;
 }
 
-// 00AB74C0  Em01a0Line::vf00  size=30  [class]
-undefined4 __thiscall Em01a0Line::vf00(undefined4 param_1,byte param_2)
+// 00AB74C0  Em01a0Line::destruct  size=30  [class]
+undefined4 __thiscall Em01a0Line::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_116();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

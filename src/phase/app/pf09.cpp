@@ -1,5 +1,5 @@
 // src/phase/app/pf09.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D50BD0..00D6FE50, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D50BD0..00D6FE50, 5 functions
 
 #include "mgrr.h"
 #include "cPf09.h"
@@ -171,6 +171,20 @@ LAB_00d5f8b4:
     FUN_00d37460();
   }
   return;
+}
+
+// 00D6E820  cPf09::cPf09  size=62  [class]
+undefined4 * __fastcall cPf09::cPf09(undefined4 *param_1)
+
+{
+  param_1[4] = param_1 + 7;
+  param_1[5] = 0;
+  param_1[6] = 0x40;
+  param_1[3] = lib::StaticArray<int,64>::vftable;
+  *param_1 = vftable;
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  return param_1;
 }
 
 // 00D6FE50  cPf09::vf00  size=76  [class]

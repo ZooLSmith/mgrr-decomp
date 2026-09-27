@@ -106,8 +106,8 @@ undefined4 * __thiscall cEnemyNameParts::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00D00040  cEnemyNameParts::vf14  size=1016  [class]
-void __fastcall cEnemyNameParts::vf14(int param_1)
+// 00D00040  cEnemyNameParts::create  size=1016  [class]
+void __fastcall cEnemyNameParts::create(int param_1)
 
 {
   float fVar1;

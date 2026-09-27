@@ -615,8 +615,8 @@ void __thiscall FUN_00efee50(int param_1,int param_2)
   return;
 }
 
-// 00EFF650  esp02::thunk_vf10  size=5  [class]
-void __fastcall esp02::thunk_vf10(int param_1)
+// 00EFF650  esp02::addOtTransList  size=5  [class]
+void __fastcall esp02::addOtTransList(int param_1)
 
 {
   float fVar1;
@@ -772,7 +772,7 @@ void __thiscall FUN_00f22bb0(int param_1,int *param_2)
   local_94 = 0;
   local_84 = 0;
   local_88 = 0;
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   if ((*(uint *)(param_1 + 0x38) >> 0x1b & 1) != 0) {
     iVar2 = cEsp::FixTexture(&local_84,&local_88,*(undefined4 *)(param_1 + 0x45c),
                              *(undefined2 *)(param_1 + 0x432),*(undefined4 *)(param_1 + 0x458),1);
@@ -850,7 +850,7 @@ LAB_00f22d50:
       local_90 = local_90 + 1;
     } while (local_90 < local_7c);
   }
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
 LAB_00f22eab:
   iVar2 = FUN_009d5b00(param_1);
   if (iVar2 != 0) {
@@ -1006,7 +1006,7 @@ undefined4 __fastcall FUN_00f27000(int param_1)
   uVar6 = (uint)*(ushort *)(uVar5 + 4);
   if ((*(int *)(param_1 + 100) == 0) || (iVar4 = FUN_00f4a2d0(uVar6,piVar1), iVar4 == 0)) {
     iVar4 = Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
-            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3();
+            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>();
     if (uVar6 - 0xf000 < 0x20) {
       iVar4 = *(int *)(iVar4 + -0x37fd8 + uVar6 * 4);
 LAB_00f27072:
@@ -1329,9 +1329,9 @@ bool FUN_00f2dbf0(void)
   return false;
 }
 
-// 00F2DC30  esp02::vf04  size=606  [class]
+// 00F2DC30  esp02::preTrans  size=606  [class]
 undefined4 __thiscall
-esp02::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp02::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   char cVar1;
@@ -1341,7 +1341,7 @@ esp02::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 uVar5;
   short *psVar6;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }

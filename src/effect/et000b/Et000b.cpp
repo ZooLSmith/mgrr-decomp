@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Et000b.h"
 
-// 005CB230  Et000b::vf40  size=134  [class]
-undefined4 __fastcall Et000b::vf40(int param_1)
+// 005CB230  Et000b::startup  size=134  [class]
+undefined4 __fastcall Et000b::startup(int param_1)
 
 {
   int iVar1;
@@ -327,7 +327,7 @@ void __fastcall Et000b::vf4C(int *param_1)
 undefined4 * __fastcall Et000b::Et000b(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -340,8 +340,8 @@ undefined * Et000b::vf04(void)
   return &DAT_01b35284;
 }
 
-// 00AB8B70  Et000b::vf00  size=105  [class]
-undefined4 * __thiscall Et000b::vf00(undefined4 *param_1,byte param_2)
+// 00AB8B70  Et000b::destruct  size=105  [class]
+undefined4 * __thiscall Et000b::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -355,7 +355,7 @@ undefined4 * __thiscall Et000b::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

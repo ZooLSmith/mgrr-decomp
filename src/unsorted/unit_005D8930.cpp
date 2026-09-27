@@ -8,7 +8,7 @@ void FUN_005d8930(void)
 
 {
   FUN_00905ce0();
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   return;
 }
 

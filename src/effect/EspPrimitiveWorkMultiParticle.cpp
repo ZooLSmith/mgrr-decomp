@@ -1,7 +1,20 @@
 // src/effect/EspPrimitiveWorkMultiParticle.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58BB0..00F59840, 2 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58B50..00F59840, 3 functions
 
 #include "mgrr.h"
+
+// 00F58B50  EspPrimitiveWorkMultiParticle<1024>::EspPrimitiveWorkMultiParticle<1024>  size=42  [class]
+undefined4 * __fastcall
+EspPrimitiveWorkMultiParticle<1024>::EspPrimitiveWorkMultiParticle<1024>(undefined4 *param_1)
+
+{
+  *param_1 = EspPrimitiveWorkMultiParticleBase::vftable;
+  FUN_00f9c880();
+  FUN_00f9c880();
+  param_1[0x15] = 0;
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00F58BB0  EspPrimitiveWorkMultiParticle<1024>::vf00  size=53  [class]
 undefined4 * __thiscall EspPrimitiveWorkMultiParticle<1024>::vf00(undefined4 *param_1,byte param_2)

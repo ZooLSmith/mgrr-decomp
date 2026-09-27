@@ -2,7 +2,7 @@
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010E57F0..010E5DB0, 9 functions
 
 #include "mgrr.h"
-#include "hkBaseObject.h"
+#include "hkPackfileWriter.h"
 #include "hkXmlPackfileWriter.h"
 
 // 010E57F0  FUN_010e57f0  size=429  [__FILE__]
@@ -177,8 +177,8 @@ FUN_010e5b10(int param_1,undefined4 param_2,undefined *param_3,undefined4 param_
   return;
 }
 
-// 010E5BD0  hkBaseObject::hkBaseObject_239  size=474  [between]
-void __fastcall hkBaseObject::hkBaseObject_239(undefined4 *param_1)
+// 010E5BD0  hkPackfileWriter::~hkPackfileWriter  size=474  [between]
+void __fastcall hkPackfileWriter::~hkPackfileWriter(undefined4 *param_1)
 
 {
   undefined4 uVar1;
@@ -186,7 +186,7 @@ void __fastcall hkBaseObject::hkBaseObject_239(undefined4 *param_1)
   int iVar3;
   
   iVar3 = 0;
-  *param_1 = hkPackfileWriter::vftable;
+  *param_1 = vftable;
   if (0 < (int)param_1[0x1a]) {
     do {
       uVar1 = *(undefined4 *)(param_1[0x19] + iVar3 * 4);
@@ -235,7 +235,7 @@ void __fastcall hkBaseObject::hkBaseObject_239(undefined4 *param_1)
   }
   param_1[4] = 0x80000000;
   param_1[2] = 0;
-  *param_1 = vftable;
+  *param_1 = ::hkBaseObject::vftable;
   return;
 }
 

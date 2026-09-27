@@ -34,7 +34,7 @@ LAB_00f2cfe7:
   if (*(int *)(param_1 + 100) == 0) {
 LAB_00f2d027:
     iVar5 = Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
-            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3();
+            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>();
     if (uVar6 - 0xf000 < 0x20) {
       iVar5 = *(int *)(iVar5 + -0x37fd8 + uVar6 * 4);
 LAB_00f2d03e:
@@ -96,7 +96,7 @@ LAB_00f2d0d7:
   if (*(int *)(param_1 + 100) == 0) {
 LAB_00f2d117:
     iVar5 = Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
-            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3();
+            cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>();
     if (uVar6 - 0xf000 < 0x20) {
       iVar5 = *(int *)(iVar5 + -0x37fd8 + uVar6 * 4);
 LAB_00f2d12e:

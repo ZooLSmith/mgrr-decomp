@@ -1,5 +1,5 @@
 // src/object/bh0140/Bh0140.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B0B70..00AC79B0, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B0B70..00AC7940, 5 functions
 
 #include "mgrr.h"
 #include "Bh0140.h"
@@ -27,8 +27,8 @@ undefined * Bh0140::vf04(void)
   return &DAT_01b351d8;
 }
 
-// 00AB7680  Bh0140::vf00  size=54  [class]
-undefined4 __thiscall Bh0140::vf00(undefined4 param_1,byte param_2)
+// 00AB7680  Bh0140::destruct  size=54  [class]
+undefined4 __thiscall Bh0140::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
@@ -58,40 +58,5 @@ void __fastcall Bh0140::vf54(int param_1)
     FUN_00912220(param_1 + 0x40,local_20);
   }
   return;
-}
-
-// 00AC79B0  Bh0140::vf40  size=247  [class]
-undefined4 __fastcall Bh0140::vf40(int *param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = BehaviorBgBase::vf40();
-  if (iVar1 == 0) {
-    return 0;
-  }
-  param_1[0x29e] = param_1[0x29e] | 0x80000000;
-  param_1[0x29c] = 0;
-  if (param_1[300] == 0xe009c) {
-    if ((int *)param_1[0x1ec] != (int *)0x0) {
-      (**(code **)(*(int *)param_1[0x1ec] + 0x10c))(0x1f,"hvk_smoke",0);
-    }
-    param_1[0x29e] = param_1[0x29e] | 0x4000000;
-    param_1[0x29c] = 0x41200000;
-    (**(code **)(*param_1 + 0x20))();
-  }
-  if (((param_1[300] == 0xe009b) || (param_1[300] == 0xe009d)) && (param_1[0x1ec] != 0)) {
-    FUN_008f18c0(0x80000);
-  }
-  iVar1 = param_1[300];
-  if ((((iVar1 == 0xe0040) || (iVar1 == 0xe00d4)) || (iVar1 == 0xe0121)) && (param_1[0x1ec] != 0)) {
-    FUN_008f18c0(0x80000);
-  }
-  iVar1 = param_1[300];
-  if ((((iVar1 == 0xe51d0) || (iVar1 == 0xe00a9)) || (iVar1 == 0xe00aa)) &&
-     ((int *)param_1[0x1ec] != (int *)0x0)) {
-    (**(code **)(*(int *)param_1[0x1ec] + 0x108))(1);
-  }
-  return 1;
 }
 

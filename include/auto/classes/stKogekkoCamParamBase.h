@@ -9,5 +9,5 @@ struct stKogekkoCamParamBase {
     virtual void vf04();  // 005F43D0 slot 0x4
     // non-virtual members
     stKogekkoCamParamBase();  // 005F5640
-    void ctor_005F5650();  // 005F5650
+    ~stKogekkoCamParamBase();  // 005F5650
 };

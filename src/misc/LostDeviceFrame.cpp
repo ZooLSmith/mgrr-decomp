@@ -4,11 +4,11 @@
 #include "mgrr.h"
 #include "LostDeviceFrame.h"
 
-// 00989650  LostDeviceFrame::LostDeviceFrame_2  size=25  [class]
-undefined4 * __fastcall LostDeviceFrame::LostDeviceFrame_2(undefined4 *param_1)
+// 00989650  LostDeviceFrame::LostDeviceFrame  size=25  [class]
+undefined4 * __fastcall LostDeviceFrame::LostDeviceFrame(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   param_1[7] = 0;
   return param_1;
@@ -19,7 +19,7 @@ undefined4 * __thiscall LostDeviceFrame::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -146,8 +146,8 @@ void __fastcall LostDeviceFrame::vf08(int param_1)
   return;
 }
 
-// 00999070  LostDeviceFrame::vf14  size=8  [class]
-void __fastcall LostDeviceFrame::vf14(int param_1)
+// 00999070  LostDeviceFrame::create  size=8  [class]
+void __fastcall LostDeviceFrame::create(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1c) = 1;
@@ -160,12 +160,12 @@ undefined4 * __fastcall LostDeviceFrame::LostDeviceFrame(undefined4 *param_1)
 {
   undefined4 *puVar1;
   
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = LostDeviceWindow::vftable;
   param_1[7] = 0;
   puVar1 = (undefined4 *)FUN_00dd3500(0xa4,&DAT_01b7be50);
   if (puVar1 != (undefined4 *)0x0) {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     *puVar1 = vftable;
     puVar1[7] = 0;
     puVar1[3] = "LostDeviceCheck";

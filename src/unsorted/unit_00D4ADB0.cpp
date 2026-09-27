@@ -104,7 +104,7 @@ LAB_00d4af99:
     cVar1 = FUN_00c9db20(0);
     iVar2 = FUN_00a97e60(0x3fc00000,0);
     if ((iVar2 != 0) && (cVar1 != '\0')) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }

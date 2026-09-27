@@ -14,14 +14,14 @@ void Bm0235::vf44(void)
   return;
 }
 
-// 00411770  Bm0235::vf40  size=92  [class]
-undefined4 __fastcall Bm0235::vf40(int param_1)
+// 00411770  Bm0235::startup  size=92  [class]
+undefined4 __fastcall Bm0235::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -135,8 +135,8 @@ undefined * Bm0235::vf04(void)
   return &DAT_01b34ba4;
 }
 
-// 00AB8F70  Bm0235::vf00  size=65  [class]
-undefined4 __thiscall Bm0235::vf00(undefined4 param_1,byte param_2)
+// 00AB8F70  Bm0235::destruct  size=65  [class]
+undefined4 __thiscall Bm0235::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();

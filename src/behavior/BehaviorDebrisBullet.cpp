@@ -1,5 +1,5 @@
 // src/behavior/BehaviorDebrisBullet.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8EC0..005E2C20, 12 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8EC0..005E2C20, 13 functions
 
 #include "mgrr.h"
 #include "BehaviorDebrisBullet.h"
@@ -83,8 +83,8 @@ void __fastcall BehaviorDebrisBullet::vf50(int *param_1)
   return;
 }
 
-// 005D8EE0  BehaviorDebrisBullet::vf1B8  size=31  [class]
-void BehaviorDebrisBullet::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 005D8EE0  BehaviorDebrisBullet::setCutCrerateInfo  size=31  [class]
+void BehaviorDebrisBullet::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -259,6 +259,23 @@ void __fastcall BehaviorDebrisBullet::vf30(int param_1)
   return;
 }
 
+// 005DBE70  BehaviorDebrisBullet::BehaviorDebrisBullet  size=80  [class]
+undefined4 * __fastcall BehaviorDebrisBullet::BehaviorDebrisBullet(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = BehaviorDebrisBase::vftable;
+  FUN_009003e0();
+  param_1[0x227] = 0;
+  param_1[0x241] = 0;
+  param_1[0x242] = 0;
+  FUN_00a7c930();
+  param_1[599] = 0;
+  param_1[0x24f] = 0;
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 005DBEC0  BehaviorDebrisBullet::vf04  size=6  [class]
 undefined * BehaviorDebrisBullet::vf04(void)
 
@@ -266,11 +283,11 @@ undefined * BehaviorDebrisBullet::vf04(void)
   return &DAT_01b35320;
 }
 
-// 005DBEE0  BehaviorDebrisBullet::vf00  size=30  [class]
-undefined4 __thiscall BehaviorDebrisBullet::vf00(undefined4 param_1,byte param_2)
+// 005DBEE0  BehaviorDebrisBullet::destruct  size=30  [class]
+undefined4 __thiscall BehaviorDebrisBullet::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_96();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -308,7 +325,7 @@ void __fastcall BehaviorDebrisBullet::vf4C(int param_1)
     *(undefined4 *)(param_1 + 0x948) = 0;
   }
   if (DAT_01b372f8 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   if (*(int *)(param_1 + 0x928) != 0) {
@@ -420,12 +437,12 @@ void __fastcall BehaviorDebrisBullet::vf4C(int param_1)
     fStack_8 = *(float *)(param_1 + 0x900) + 7.0;
   }
   if (fStack_8 < *(float *)(param_1 + 0x884) != (fStack_8 == *(float *)(param_1 + 0x884))) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
 LAB_005ddd03:
   if ((((*(int *)(param_1 + 0x894) != 0) && (*(char *)(param_1 + 0x470) != '\0')) &&
       ((*(byte *)(param_1 + 0x472) & 0x80) != 0)) && (*(char *)(param_1 + 0x471) != '\0')) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   if (*(int *)(param_1 + 0x8e4) != 0) {
     fVar3 = *(float *)(param_1 + 0x8e0) - 0.011111111;
@@ -464,15 +481,15 @@ LAB_005ddd03:
   return;
 }
 
-// 005E1730  BehaviorDebrisBullet::vf40  size=100  [class]
-undefined4 __fastcall BehaviorDebrisBullet::vf40(int param_1)
+// 005E1730  BehaviorDebrisBullet::startup  size=100  [class]
+undefined4 __fastcall BehaviorDebrisBullet::startup(int param_1)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
   
-  iVar1 = BehaviorDebrisBase::vf40();
+  iVar1 = BehaviorDebrisBase::startup();
   if (iVar1 != 0) {
     *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) & 0xfffffffd;
     *(undefined4 *)(param_1 + 0x970) = 1;
@@ -557,7 +574,7 @@ LAB_005e18b2:
   aiStack_1dc[0] = 0;
   FUN_00900350(&ppuStack_1f0);
   fStack_224 = (float)(uint)(aiStack_1dc[0] != 0);
-  hkpCdPointCollector::hkpCdPointCollector_4();
+  hkpCdPointCollector::hkpCdPointCollector();
   if (fStack_224 == 0.0) {
     piStack_1e8 = aiStack_1dc;
     ppuStack_1f0 = hkpAllCdBodyPairCollector::vftable;

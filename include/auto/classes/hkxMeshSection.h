@@ -8,6 +8,7 @@ struct hkxMeshSection : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D3120 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxMeshSection(undefined4 * param_1);  // 010D2A30
+    ~hkxMeshSection();  // 010D2A30
+    hkxMeshSection();  // 010D2A50
     hkxMeshSection(int param_2);  // 010D8A90
 };

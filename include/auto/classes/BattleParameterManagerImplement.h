@@ -10,4 +10,6 @@ struct BattleParameterManagerImplement : public BattleParameterManager {
     virtual undefined addReference();  // 00D76860 slot 0x4  overrides BattleParameterManager
     virtual void vf08(int param_2);  // 00D731A0 slot 0x8  overrides BattleParameterManager
     virtual undefined4 * vf0C(byte param_2);  // 00D76190 slot 0xC  overrides BattleParameterManager
+    // non-virtual members
+    static void vf00_00D73C20();  // 00D73C20
 };

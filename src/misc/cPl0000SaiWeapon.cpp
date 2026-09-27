@@ -1,8 +1,29 @@
 // src/misc/cPl0000SaiWeapon.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF310..00BEC5A0, 74 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF280..00BEC5A0, 75 functions
 
 #include "mgrr.h"
 #include "cPl0000SaiWeapon.h"
+
+// 00AAF280  cPl0000SaiWeapon::cPl0000SaiWeapon  size=132  [class]
+undefined4 * __fastcall cPl0000SaiWeapon::cPl0000SaiWeapon(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  param_1[0x228] = 0;
+  param_1[0x22a] = 0;
+  param_1[0x22d] = 0;
+  *param_1 = cPl0000Weapon::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  cEspControler::cEspControler();
+  FUN_004105d0();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00445db0();
+  FUN_00405230();
+  FUN_00904d60();
+  return param_1;
+}
 
 // 00AAF310  cPl0000SaiWeapon::vf04  size=6  [class]
 undefined * cPl0000SaiWeapon::vf04(void)
@@ -11,13 +32,13 @@ undefined * cPl0000SaiWeapon::vf04(void)
   return &DAT_01be9dd0;
 }
 
-// 00AB7D80  cPl0000SaiWeapon::vf00  size=54  [class]
-undefined4 __thiscall cPl0000SaiWeapon::vf00(undefined4 param_1,byte param_2)
+// 00AB7D80  cPl0000SaiWeapon::destruct  size=54  [class]
+undefined4 __thiscall cPl0000SaiWeapon::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00905ce0();
   cEspControler::~cEspControler();
-  Behavior::Behavior_121();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -72,8 +93,8 @@ void __thiscall FUN_00b80760(int param_1,int param_2,undefined4 param_3)
   return;
 }
 
-// 00B8FF70  cPl0000SaiWeapon::vf40  size=212  [class]
-undefined4 __fastcall cPl0000SaiWeapon::vf40(int param_1)
+// 00B8FF70  cPl0000SaiWeapon::startup  size=212  [class]
+undefined4 __fastcall cPl0000SaiWeapon::startup(int param_1)
 
 {
   int iVar1;
@@ -83,7 +104,7 @@ undefined4 __fastcall cPl0000SaiWeapon::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = cPl0000Weapon::vf40();
+  iVar1 = cPl0000Weapon::startup();
   if (iVar1 != 0) {
     uVar2 = FUN_009f8b40();
     uVar3 = 1;

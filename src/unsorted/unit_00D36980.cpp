@@ -12,7 +12,7 @@ int FUN_00d36980(void)
   
   iVar1 = FUN_00dd3500(0x73c,&DAT_01b7be50);
   if (iVar1 != 0) {
-    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager_15();
+    iVar1 = cCustomObjCtrlManager::cCustomObjCtrlManager();
     if (iVar1 != 0) {
       *(char **)(iVar1 + 0xc) = "cChapterResult";
       *(undefined4 *)(iVar1 + 8) = 10;

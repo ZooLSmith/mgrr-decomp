@@ -148,7 +148,7 @@ LAB_00f113e5:
   else {
     FUN_00f078a0(&local_100);
   }
-  FUN_00efed20();
+  esp107::vf10();
   if ((*(uint *)(param_1 + 0x3c) & 0x100000) != 0) {
     uVar5 = 0;
     if ((*(uint **)(param_1 + 0x58) != (uint *)0x0) &&

@@ -8,17 +8,17 @@
 undefined4 * __fastcall esp102::esp102(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
 
-// 009D68B0  esp102::vf04  size=1352  [class]
+// 009D68B0  esp102::preTrans  size=1352  [class]
 /* WARNING: Removing unreachable block (ram,0x009d6b1e) */
 /* WARNING: Removing unreachable block (ram,0x009d6ae2) */
 /* WARNING: Removing unreachable block (ram,0x009d6b5a) */
 
-undefined4 __thiscall esp102::vf04(int param_1,int param_2,int param_3,int param_4)
+undefined4 __thiscall esp102::preTrans(int param_1,int param_2,int param_3,int param_4)
 
 {
   float *pfVar1;
@@ -45,7 +45,7 @@ undefined4 __thiscall esp102::vf04(int param_1,int param_2,int param_3,int param
   int iVar22;
   int local_8;
   
-  iVar12 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar12 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar12 == 0) || (iVar12 = FUN_00f12b50(), iVar12 == 0)) {
     return 0;
   }
@@ -207,7 +207,7 @@ LAB_009d69cd:
 void __fastcall esp102::vf14(int param_1)
 
 {
-  FUN_00ee0ac0();
+  esp162::vf14();
   if ((*(int *)(param_1 + 0x4a4) != 0) && (*(int *)(param_1 + 0x4a4) != 0)) {
     FUN_00dd48d0(*(int *)(param_1 + 0x4a4),0);
     *(undefined4 *)(param_1 + 0x4a4) = 0;
@@ -219,7 +219,7 @@ void __fastcall esp102::vf14(int param_1)
 undefined4 __thiscall esp102::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

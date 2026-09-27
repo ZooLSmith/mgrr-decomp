@@ -295,10 +295,10 @@ LAB_00d3c76f:
   return;
 }
 
-// 00D3C7D0  cEnergyGaugeWhiteRaiden::vf14  size=2088  [class]
+// 00D3C7D0  cEnergyGaugeWhiteRaiden::create  size=2088  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cEnergyGaugeWhiteRaiden::vf14(int param_1)
+void __fastcall cEnergyGaugeWhiteRaiden::create(int param_1)
 
 {
   uint *puVar1;

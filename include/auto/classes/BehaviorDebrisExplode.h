@@ -16,4 +16,6 @@ struct BehaviorDebrisExplode : public BehaviorDebrisBase {
     virtual void vf50();  // 005D8F10 slot 0x50  overrides Behavior
     virtual void vf54();  // 005E2C30 slot 0x54  overrides Behavior
     virtual void setCutCrerateInfo(undefined4 * param_1, undefined4 param_2, int param_3);  // 005D8F20 slot 0x1B8  overrides Behavior
+    // non-virtual members
+    BehaviorDebrisExplode();  // 005DBF20
 };

@@ -50,14 +50,14 @@ void __fastcall Bm0429::vf44(int param_1)
   return;
 }
 
-// 00413DB0  Bm0429::vf40  size=91  [class]
-undefined4 __fastcall Bm0429::vf40(int param_1)
+// 00413DB0  Bm0429::startup  size=91  [class]
+undefined4 __fastcall Bm0429::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -115,8 +115,8 @@ undefined * Bm0429::vf04(void)
   return &DAT_01b34be0;
 }
 
-// 00AB92A0  Bm0429::vf00  size=54  [class]
-undefined4 __thiscall Bm0429::vf00(undefined4 param_1,byte param_2)
+// 00AB92A0  Bm0429::destruct  size=54  [class]
+undefined4 __thiscall Bm0429::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

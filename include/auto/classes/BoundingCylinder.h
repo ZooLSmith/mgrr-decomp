@@ -14,4 +14,6 @@ struct BoundingCylinder : public BoundingVolumeBase {
     virtual undefined4 vf14(float * param_2, float * param_3);  // 00A67FF0 slot 0x14  overrides BoundingVolumeBase
     virtual undefined4 vf18(undefined4 param_2);  // 00A67F50 slot 0x18  overrides BoundingVolumeBase
     virtual byte vf1C(int * param_2);  // 00A6AB30 slot 0x1C  overrides BoundingVolumeBase
+    // non-virtual members
+    static byte vf1C_00A6A8B0(int * param_2);  // 00A6A8B0
 };

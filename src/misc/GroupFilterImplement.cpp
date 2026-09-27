@@ -7,8 +7,8 @@
 #include "HkSystemGroupManagerImplement.h"
 #include "hkpCollisionFilter.h"
 
-// 008FD540  GroupFilterImplement::GroupFilterImplement_2  size=46  [class]
-undefined4 * __fastcall GroupFilterImplement::GroupFilterImplement_2(undefined4 *param_1)
+// 008FD540  GroupFilterImplement::GroupFilterImplement  size=46  [class]
+undefined4 * __fastcall GroupFilterImplement::GroupFilterImplement(undefined4 *param_1)
 
 {
   hkpGroupFilter::hkpGroupFilter();
@@ -341,7 +341,7 @@ int __thiscall GroupFilterImplement::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_98();
+  ::hkBaseObject::hkBaseObject_98();
   if (((param_2 & 1) != 0) && (param_1 != 0)) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,0x100);
@@ -371,8 +371,8 @@ float10 __fastcall HkSystemGroupManagerImplement::vf10(int param_1)
   return fVar2 * (float10)0.00024431958 * (float10)100.0;
 }
 
-// 008FDE50  HkSystemGroupManager::HkSystemGroupManager  size=19  [between]
-void __fastcall HkSystemGroupManager::HkSystemGroupManager(undefined4 *param_1)
+// 008FDE50  HkSystemGroupManager::~HkSystemGroupManager  size=19  [between]
+void __fastcall HkSystemGroupManager::~HkSystemGroupManager(undefined4 *param_1)
 
 {
   FUN_00dd7270();

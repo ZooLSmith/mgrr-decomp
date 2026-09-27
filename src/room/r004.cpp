@@ -92,7 +92,7 @@ void __fastcall cR004::vf00(int param_1)
 undefined4 * __thiscall cR004::vf14(undefined4 *param_1,byte param_2)
 
 {
-  EspControllerBullet::EspControllerBullet_6();
+  EspControllerBullet::~EspControllerBullet();
   cEspControler::~cEspControler();
   *param_1 = cRoomAbstract::vftable;
   FUN_00dd7270();

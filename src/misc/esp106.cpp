@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp106.h"
 
-// 009CFEB0  esp106::vf04  size=5  [class]
-undefined4 esp106::vf04(void)
+// 009CFEB0  esp106::preTrans  size=5  [class]
+undefined4 esp106::preTrans(void)
 
 {
   return 0;
@@ -27,18 +27,18 @@ undefined4 * __fastcall esp106::esp106(undefined4 *param_1)
 {
   int iVar1;
   
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   iVar1 = 3;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return param_1;
 }
 
-// 009D8930  esp106::vf10  size=335  [class]
-void __fastcall esp106::vf10(int param_1)
+// 009D8930  esp106::addOtTransList  size=335  [class]
+void __fastcall esp106::addOtTransList(int param_1)
 
 {
   uint uVar1;
@@ -51,7 +51,7 @@ void __fastcall esp106::vf10(int param_1)
   if (((*(uint *)(param_1 + 0x30) & 0x200000) == 0) &&
      (iVar2 = FUN_00dfc0b0(param_1 + 0x454,*(undefined4 *)(param_1 + 0x450)), iVar2 != 0)) {
     iVar2 = FUN_00dd7ad0();
-    FUN_00efed20();
+    esp107::vf10();
     if ((0.01 < *(float *)(param_1 + 0x124)) &&
        ((DAT_01edd490 != 0 &&
         (puVar3 = (undefined4 *)cPrimHeap::allocBuffer(0xd0,0x20), puVar3 != (undefined4 *)0x0)))) {
@@ -95,10 +95,10 @@ undefined4 __thiscall esp106::vf00(undefined4 param_1,byte param_2)
   
   iVar1 = 3;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

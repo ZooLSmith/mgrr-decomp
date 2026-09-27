@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "EffectStencilMaskDrawWork.h"
 
-// 009CF690  EffectStencilMaskDrawWork::vf04  size=211  [class]
-void __fastcall EffectStencilMaskDrawWork::vf04(int param_1)
+// 009CF690  EffectStencilMaskDrawWork::draw  size=211  [class]
+void __fastcall EffectStencilMaskDrawWork::draw(int param_1)
 
 {
   int iVar1;

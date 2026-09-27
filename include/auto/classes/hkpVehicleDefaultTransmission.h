@@ -14,5 +14,6 @@ struct hkpVehicleDefaultTransmission : public hkpVehicleTransmission {
     virtual undefined vf1C();  // 012923B0 slot 0x1C
     virtual float10 vf20(undefined4 param_2, int param_3);  // 01292150 slot 0x20
     // non-virtual members
-    hkpVehicleDefaultTransmission(undefined4 * param_1);  // 01288960
+    ~hkpVehicleDefaultTransmission();  // 01288960
+    hkpVehicleDefaultTransmission();  // 01288980
 };

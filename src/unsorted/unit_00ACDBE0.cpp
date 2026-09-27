@@ -29,7 +29,7 @@ void __fastcall FUN_00acdbe0(int param_1)
   fVar1 = fVar1 - 0.006666667;
   if (fVar1 < 0.0) {
     *(int *)(param_1 + 0x61c) = *(int *)(param_1 + 0x61c) + 1;
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     fVar1 = 0.0;
   }
   iVar3 = 0;

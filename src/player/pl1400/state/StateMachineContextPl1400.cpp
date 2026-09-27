@@ -94,7 +94,7 @@ void __fastcall StateMachineContextPl1400::~StateMachineContextPl1400(undefined4
     param_1[0x1aa] = 0;
     param_1[0x1ab] = 0;
   }
-  StateMachineContext::StateMachineContext();
+  StateMachineContextPl0010::~StateMachineContextPl0010();
   if (param_1[0x1aa] != 0) {
     param_1[0x1ac] = 0;
     if (param_1[0x1ad] != 0) {
@@ -104,7 +104,7 @@ void __fastcall StateMachineContextPl1400::~StateMachineContextPl1400(undefined4
     param_1[0x1aa] = 0;
     param_1[0x1ab] = 0;
   }
-  StateMachineContext::StateMachineContext();
+  StateMachineContextPl0010::~StateMachineContextPl0010();
   return;
 }
 

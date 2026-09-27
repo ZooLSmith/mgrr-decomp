@@ -15,7 +15,7 @@ bool __fastcall FUN_00aca2b0(int param_1)
   undefined1 auStack_58 [8];
   undefined1 local_50 [76];
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 != 0) {
     iVar2 = FUN_00a7c890();
     iVar3 = FUN_00de4500("pl0010_0000.mot");

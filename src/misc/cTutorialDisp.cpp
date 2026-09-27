@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cTutorialDisp.h"
 
-// 00CC0970  cTutorialDisp::cTutorialDisp_2  size=105  [class]
-void __fastcall cTutorialDisp::cTutorialDisp_2(undefined4 *param_1)
+// 00CC0970  cTutorialDisp::cTutorialDisp  size=105  [class]
+void __fastcall cTutorialDisp::cTutorialDisp(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -62,7 +62,7 @@ undefined4 FUN_00cc0a10(void)
   
   iVar1 = FUN_00dd3500(0x78,&DAT_01b7be50);
   if (iVar1 != 0) {
-    uVar2 = cTutorialDisp::cTutorialDisp_2();
+    uVar2 = cTutorialDisp::cTutorialDisp();
     return uVar2;
   }
   return 0;

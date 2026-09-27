@@ -10,11 +10,9 @@ struct hkpPhysicsSystem : public hkReferencedObject {
     virtual int vf0C();  // 011ADED0 slot 0xC
     virtual void vf10(undefined1 * param_1);  // 011AEC50 slot 0x10
     // non-virtual members
-    ~hkpPhysicsSystem();  // 011ADD80
-    hkpPhysicsSystem(undefined4 * param_1, undefined4 param_2);  // 011B12C0
-    hkpPhysicsSystem();  // 011B12E0
+    hkpPhysicsSystem();  // 011ADD80
+    ~hkpPhysicsSystem();  // 011ADDE0
+    void ctor_011B12E0();  // 011B12E0
     hkpPhysicsSystem(undefined4 param_2);  // 011B1380
-    void ctor_01274870(undefined4 * param_1, undefined4 param_2);  // 01274870
     void ctor_012748A0();  // 012748A0
-    void ctor_01274A20(undefined4 param_2);  // 01274A20
 };

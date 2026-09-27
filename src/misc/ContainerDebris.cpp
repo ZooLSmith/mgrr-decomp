@@ -4,15 +4,15 @@
 #include "mgrr.h"
 #include "ContainerDebris.h"
 
-// 0047F130  ContainerDebris::vf40  size=114  [class]
-undefined4 __fastcall ContainerDebris::vf40(int param_1)
+// 0047F130  ContainerDebris::startup  size=114  [class]
+undefined4 __fastcall ContainerDebris::startup(int param_1)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
   
-  iVar1 = RayArmorDebris::vf40();
+  iVar1 = RayArmorDebris::startup();
   if (iVar1 != 0) {
     *(undefined4 *)(param_1 + 0x980) = 0;
     FUN_005d85f0();
@@ -35,8 +35,8 @@ undefined4 __fastcall ContainerDebris::vf40(int param_1)
   return 0;
 }
 
-// 0047F1C0  ContainerDebris::vf1B8  size=31  [class]
-void ContainerDebris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 0047F1C0  ContainerDebris::setCutCrerateInfo  size=31  [class]
+void ContainerDebris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -194,8 +194,8 @@ undefined * ContainerDebris::vf04(void)
   return &DAT_01b34d7c;
 }
 
-// 00AB8680  ContainerDebris::vf00  size=105  [class]
-undefined4 * __thiscall ContainerDebris::vf00(undefined4 *param_1,byte param_2)
+// 00AB8680  ContainerDebris::destruct  size=105  [class]
+undefined4 * __thiscall ContainerDebris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -209,7 +209,7 @@ undefined4 * __thiscall ContainerDebris::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -294,7 +294,7 @@ void __fastcall ContainerDebris::vf4C(int param_1)
     *(undefined4 *)(param_1 + 0x948) = 0;
   }
   if (DAT_01b372f8 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   if (*(int *)(param_1 + 0x928) != 0) {
@@ -406,12 +406,12 @@ void __fastcall ContainerDebris::vf4C(int param_1)
     fStack_8 = *(float *)(param_1 + 0x900) + 7.0;
   }
   if (fStack_8 < *(float *)(param_1 + 0x884) != (fStack_8 == *(float *)(param_1 + 0x884))) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
 LAB_005ddd03:
   if ((((*(int *)(param_1 + 0x894) != 0) && (*(char *)(param_1 + 0x470) != '\0')) &&
       ((*(byte *)(param_1 + 0x472) & 0x80) != 0)) && (*(char *)(param_1 + 0x471) != '\0')) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   if (*(int *)(param_1 + 0x8e4) != 0) {
     fVar3 = *(float *)(param_1 + 0x8e0) - 0.011111111;
@@ -554,7 +554,7 @@ LAB_005e18b2:
   aiStack_1dc[0] = 0;
   FUN_00900350(&ppuStack_1f0);
   fStack_224 = (float)(uint)(aiStack_1dc[0] != 0);
-  hkpCdPointCollector::hkpCdPointCollector_4();
+  hkpCdPointCollector::hkpCdPointCollector();
   if (fStack_224 == 0.0) {
     piStack_1e8 = aiStack_1dc;
     ppuStack_1f0 = hkpAllCdBodyPairCollector::vftable;

@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bm0201.h"
 
-// 00411650  Bm0201::vf40  size=38  [class]
-undefined4 __fastcall Bm0201::vf40(int param_1)
+// 00411650  Bm0201::startup  size=38  [class]
+undefined4 __fastcall Bm0201::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -36,8 +36,8 @@ undefined * Bm0201::vf04(void)
   return &DAT_01b34b98;
 }
 
-// 00AB8EA0  Bm0201::vf00  size=43  [class]
-undefined4 __thiscall Bm0201::vf00(undefined4 param_1,byte param_2)
+// 00AB8EA0  Bm0201::destruct  size=43  [class]
+undefined4 __thiscall Bm0201::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
@@ -145,7 +145,7 @@ void __thiscall Bm0201::vf1D0(int *param_1,undefined4 param_2)
       FUN_00a963e0(local_160);
       iVar1 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
       if (iVar1 != 0) {
-        piVar2 = (int *)CollisionAttackData::CollisionAttackData_3();
+        piVar2 = (int *)CollisionAttackData::CollisionAttackData();
         if (piVar2 != (int *)0x0) {
           *(undefined4 *)(piVar2[2] + 4) = 100;
           *(undefined4 *)(piVar2[2] + 0xc) = 1;

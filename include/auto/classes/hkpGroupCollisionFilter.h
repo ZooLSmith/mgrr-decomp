@@ -7,11 +7,12 @@
 struct hkpGroupCollisionFilter : public hkpCollisionFilter {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpGroupCollisionFilter();  // 01275070
     static void vf00();  // 01275100
     static void vf0C();  // 01275110
     static void vf04();  // 01275120
     static void vf00_01275130();  // 01275130
-    hkpGroupCollisionFilter();  // 0127E600
+    void ctor_0127E600();  // 0127E600
     static undefined4 vf04_0127E960(undefined4 param_1, int param_2, int param_3);  // 0127E960
     static undefined vf04_0127E990();  // 0127E990
     static undefined4 vf00_0127E9E0(undefined4 param_1);  // 0127E9E0

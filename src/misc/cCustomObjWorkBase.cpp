@@ -1,5 +1,5 @@
 // src/misc/cCustomObjWorkBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB3870..00D120A0, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB3870..00D120A0, 7 functions
 
 #include "mgrr.h"
 #include "cCustomObjWorkBase.h"
@@ -74,6 +74,35 @@ void __thiscall cCustomObjWorkBase::vf0C(int param_1,undefined4 param_2)
                *(undefined4 *)(extraout_ECX + 0x204),local_10,local_10,0);
   }
   return;
+}
+
+// 00CF99C0  cCustomObjWorkBase::cCustomObjWorkBase  size=126  [class]
+undefined4 * __fastcall cCustomObjWorkBase::cCustomObjWorkBase(undefined4 *param_1)
+
+{
+  param_1[1] = 0;
+  param_1[10] = 0;
+  param_1[2] = 0;
+  param_1[0xb] = 0;
+  param_1[0xc] = 0;
+  param_1[3] = 1;
+  param_1[4] = 0xffffffff;
+  param_1[5] = 0xffffffff;
+  param_1[6] = 0;
+  param_1[7] = 0;
+  param_1[8] = 0;
+  *param_1 = vftable;
+  cUICtrl::cUICtrl();
+  param_1[0x78] = 0;
+  param_1[0x7a] = 0;
+  param_1[0x7b] = 0;
+  param_1[0x10] = cCustomObjCtrl::vftable;
+  param_1[0x79] = 1;
+  param_1[0x7c] = 0;
+  param_1[0x7d] = 0;
+  param_1[0x7e] = 0;
+  param_1[0x80] = 0;
+  return param_1;
 }
 
 // 00CF9A40  cCustomObjWorkBase::vf14  size=5  [class]

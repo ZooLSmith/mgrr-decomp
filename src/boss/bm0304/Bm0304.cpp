@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bm0304.h"
 
-// 00412490  Bm0304::vf40  size=114  [class]
-undefined4 __fastcall Bm0304::vf40(int param_1)
+// 00412490  Bm0304::startup  size=114  [class]
+undefined4 __fastcall Bm0304::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -143,8 +143,8 @@ undefined * Bm0304::vf04(void)
   return &DAT_01b34bd4;
 }
 
-// 00AB9080  Bm0304::vf00  size=43  [class]
-undefined4 __thiscall Bm0304::vf00(undefined4 param_1,byte param_2)
+// 00AB9080  Bm0304::destruct  size=43  [class]
+undefined4 __thiscall Bm0304::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

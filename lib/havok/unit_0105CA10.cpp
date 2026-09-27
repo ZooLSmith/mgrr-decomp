@@ -264,7 +264,7 @@ int __thiscall hkXmlPackfileUpdateTracker::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_53();
+  ::hkBaseObject::hkBaseObject_53();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -1478,7 +1478,7 @@ hkBindingClassNameRegistry::hkBindingClassNameRegistry
   int *piVar3;
   int iVar4;
   
-  hkDynamicClassNameRegistry::hkDynamicClassNameRegistry(param_3);
+  hkChainedClassNameRegistry::hkChainedClassNameRegistry(param_3);
   *param_1 = vftable;
   FUN_0105e530();
   uVar1 = param_3 >> 8;
@@ -1513,7 +1513,7 @@ void __fastcall hkBindingClassNameRegistry::~hkBindingClassNameRegistry(undefine
   FUN_01025870();
   FUN_01025870();
   FUN_0105e550();
-  hkBaseObject::hkBaseObject_11();
+  hkChainedClassNameRegistry::~hkChainedClassNameRegistry();
   return;
 }
 
@@ -2534,7 +2534,7 @@ int __thiscall hkPackfileObjectUpdateTracker::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_53();
+  ::hkBaseObject::hkBaseObject_53();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

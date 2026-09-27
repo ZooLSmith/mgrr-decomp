@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "RadarMapObj.h"
 
-// 005FF430  RadarMapObj::vf40  size=28  [class]
-undefined4 RadarMapObj::vf40(void)
+// 005FF430  RadarMapObj::startup  size=28  [class]
+undefined4 RadarMapObj::startup(void)
 
 {
   int iVar1;
@@ -139,7 +139,7 @@ void __fastcall RadarMapObj::vf4C(int param_1)
 undefined4 * __fastcall RadarMapObj::RadarMapObj(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   return param_1;
 }
@@ -151,8 +151,8 @@ undefined * RadarMapObj::vf04(void)
   return &DAT_01b35434;
 }
 
-// 00AB8C70  RadarMapObj::vf00  size=105  [class]
-undefined4 * __thiscall RadarMapObj::vf00(undefined4 *param_1,byte param_2)
+// 00AB8C70  RadarMapObj::destruct  size=105  [class]
+undefined4 * __thiscall RadarMapObj::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -166,7 +166,7 @@ undefined4 * __thiscall RadarMapObj::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

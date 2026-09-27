@@ -28,7 +28,7 @@ struct hkDataArrayNative : public hkDataArrayImpl {
     virtual void vf50(int param_2, undefined4 param_3);  // 010E4B30 slot 0x50  overrides hkDataArrayImpl
     virtual void vf54(int param_2);  // 010E4260 slot 0x54  overrides hkDataArrayImpl
     virtual undefined vf58();  // 010E4B60 slot 0x58  overrides hkDataArrayImpl
-    virtual void Object(int param_2);  // 010E4930 slot 0x5C  overrides hkDataArrayImpl
+    virtual void vf5C(int param_2);  // 010E4930 slot 0x5C  overrides hkDataArrayImpl
     virtual void vf60(int param_2, undefined4 param_3);  // 010E2CA0 slot 0x60  overrides hkDataArrayImpl
     virtual void vf64(int param_2);  // 010E4290 slot 0x64  overrides hkDataArrayImpl
     virtual void vf68(int param_2, int param_3);  // 010E4190 slot 0x68  overrides hkDataArrayImpl
@@ -45,5 +45,5 @@ struct hkDataArrayNative : public hkDataArrayImpl {
     virtual void vf94();  // 010E3EB0 slot 0x94  overrides hkDataArrayImpl
     virtual void vf98();  // 010E3E70 slot 0x98  overrides hkDataArrayImpl
     // non-virtual members
-    ~hkDataArrayNative();  // 010E3C30
+    hkDataArrayNative();  // 010E3C30
 };

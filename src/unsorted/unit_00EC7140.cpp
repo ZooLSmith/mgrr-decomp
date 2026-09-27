@@ -204,7 +204,7 @@ int __fastcall FUN_00ec75e0(int param_1)
 {
   FUN_00de3610(0,0);
   *(undefined4 *)(param_1 + 8) = 0xfff;
-  cXmlBinary::cXmlBinary_103();
+  cXmlBinary::cXmlBinary();
   return param_1;
 }
 

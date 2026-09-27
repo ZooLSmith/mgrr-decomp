@@ -1,5 +1,5 @@
 // src/hw/cHwLFFreeListTemp.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00986400..015F44D0, 208 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00986400..015F44D0, 253 functions
 
 #include "mgrr.h"
 
@@ -4480,9 +4480,9 @@ void __fastcall FUN_00d8d200(int param_1)
   return;
 }
 
-// 00E08FB0  Hw::cHwLFFreeListTemp<cSlowRateUnit>::cHwLFFreeListTemp<cSlowRateUnit>_3  size=82  [class]
+// 00E08FB0  Hw::cHwLFFreeListTemp<cSlowRateUnit>::cHwLFFreeListTemp<cSlowRateUnit>  size=82  [class]
 undefined4 * __fastcall
-Hw::cHwLFFreeListTemp<cSlowRateUnit>::cHwLFFreeListTemp<cSlowRateUnit>_3(undefined4 *param_1)
+Hw::cHwLFFreeListTemp<cSlowRateUnit>::cHwLFFreeListTemp<cSlowRateUnit>(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -4837,7 +4837,7 @@ int * __thiscall FUN_00e1b3f0(int *param_1,int *param_2,uint param_3,uint param_
   
   uVar1 = param_2[4];
   if (uVar1 < param_3) {
-    std::out_of_range::out_of_range_2("invalid string position");
+    std::out_of_range::out_of_range("invalid string position");
   }
   uVar1 = uVar1 - param_3;
   if (param_4 < uVar1) {
@@ -4850,7 +4850,7 @@ int * __thiscall FUN_00e1b3f0(int *param_1,int *param_2,uint param_3,uint param_
   }
   if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if ((uint)param_1[5] < uVar1) {
     FUN_00e18570(uVar1,param_1[4]);
@@ -5062,7 +5062,7 @@ int * __thiscall FUN_00e1b9d0(int *param_1,int *param_2,uint param_3)
   }
   if (param_3 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if ((uint)param_1[5] < param_3) {
     FUN_00e18570(param_3,param_1[4]);
@@ -5103,13 +5103,13 @@ int * __thiscall FUN_00e1bb00(int *param_1,uint param_2,undefined4 param_3)
   iVar2 = param_1[4];
   if (-iVar2 - 1U <= param_2) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if (param_2 != 0) {
     uVar1 = iVar2 + param_2;
     if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-      std::length_error::length_error_3("string too long");
+      std::length_error::length_error("string too long");
     }
     if ((uint)param_1[5] < uVar1) {
       FUN_00e19eb0(uVar1,iVar2);
@@ -5170,7 +5170,7 @@ int * __thiscall FUN_00e1bc20(int *param_1,undefined4 *param_2,uint param_3,uint
   uVar2 = param_2[4];
   uVar4 = param_3;
   if (uVar2 < param_3) {
-    uVar2 = std::out_of_range::out_of_range_2("invalid string position");
+    uVar2 = std::out_of_range::out_of_range("invalid string position");
     uVar4 = extraout_ECX;
   }
   if (uVar2 - uVar4 < param_4) {
@@ -5179,13 +5179,13 @@ int * __thiscall FUN_00e1bc20(int *param_1,undefined4 *param_2,uint param_3,uint
   iVar1 = param_1[4];
   if (-iVar1 - 1U <= param_4) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if (param_4 != 0) {
     uVar2 = iVar1 + param_4;
     if (uVar2 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-      std::length_error::length_error_3("string too long");
+      std::length_error::length_error("string too long");
     }
     if ((uint)param_1[5] < uVar2) {
       FUN_00e19eb0(uVar2,iVar1);
@@ -5398,17 +5398,17 @@ int * __thiscall FUN_00e1c050(int *param_1,uint param_2,uint param_3,undefined4 
   
   uVar3 = param_1[4];
   if (uVar3 < param_2) {
-    uVar3 = std::out_of_range::out_of_range_2("invalid string position");
+    uVar3 = std::out_of_range::out_of_range("invalid string position");
   }
   if (-uVar3 - 1 <= param_3) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if (param_3 != 0) {
     uVar1 = uVar3 + param_3;
     if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-      std::length_error::length_error_3("string too long");
+      std::length_error::length_error("string too long");
     }
     if ((uint)param_1[5] < uVar1) {
       FUN_00e19eb0(uVar1,uVar3);
@@ -5454,7 +5454,7 @@ int * __thiscall FUN_00e1c140(int *param_1,int *param_2,uint param_3,uint param_
   
   uVar1 = param_2[4];
   if (uVar1 < param_3) {
-    std::out_of_range::out_of_range_2("invalid string position");
+    std::out_of_range::out_of_range("invalid string position");
   }
   uVar1 = uVar1 - param_3;
   if (param_4 < uVar1) {
@@ -5467,7 +5467,7 @@ int * __thiscall FUN_00e1c140(int *param_1,int *param_2,uint param_3,uint param_
   }
   if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if ((uint)param_1[5] < uVar1) {
     FUN_00e19eb0(uVar1,param_1[4]);
@@ -6385,12 +6385,12 @@ Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::vf00
   return param_1;
 }
 
-// 00F405C0  Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3  size=105  [class]
+// 00F405C0  Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>  size=105  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 undefined *
 Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
-cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3(void)
+cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>(void)
 
 {
   if ((_DAT_01ee53f0 & 1) == 0) {
@@ -6406,6 +6406,1372 @@ cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>_3(void)
     _atexit((_func_4879 *)&LAB_015f2110);
   }
   return &DAT_01ee1348;
+}
+
+// 00F4AA90  FUN_00f4aa90  size=197  [callgraph]
+undefined4 __thiscall FUN_00f4aa90(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  undefined4 *puVar3;
+  
+  iVar1 = Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+          cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>_3();
+  if (*(int *)(iVar1 + 0x18) != 0) {
+    puVar2 = (undefined4 *)FUN_00f4cb30();
+    if (puVar2 != (undefined4 *)0x0) {
+      Hw::cTexture::cTexture();
+      *puVar2 = *(undefined4 *)(param_1 + 8);
+      puVar2[1] = param_2;
+      iVar1 = FUN_00fa25d0(param_3);
+      if (iVar1 == 0) {
+        Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+        cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>_3();
+        FUN_00f4e050(puVar2);
+        FUN_00dd5650(&DAT_016dffb0,param_1 + 0x2c,param_2);
+        return 0;
+      }
+      puVar3 = puVar2;
+      Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+      cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>_3(puVar2);
+      FUN_00f4cfd0(puVar3);
+      if (*(int *)(param_1 + 0x4c) == 0) {
+        *(undefined4 **)(param_1 + 0x4c) = puVar2;
+        puVar2[9] = 0;
+        puVar2[10] = 0;
+        return 1;
+      }
+      FUN_00f4c4a0(puVar2);
+      return 1;
+    }
+  }
+  FUN_00dd5650(&DAT_016dff70,param_1 + 0x2c,param_2);
+  return 0;
+}
+
+// 00F4AB60  FUN_00f4ab60  size=218  [callgraph]
+undefined4 __thiscall FUN_00f4ab60(int param_1,undefined4 param_2,int param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  undefined4 *puVar3;
+  
+  iVar1 = Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+          cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>_3();
+  if (*(int *)(iVar1 + 0x18) != 0) {
+    puVar2 = (undefined4 *)FUN_00f4cb30();
+    if (puVar2 != (undefined4 *)0x0) {
+      Hw::cTexture::cTexture();
+      *puVar2 = *(undefined4 *)(param_1 + 8);
+      puVar2[1] = param_2;
+      if (param_3 == 0) {
+        iVar1 = FUN_00fa25d0(param_4);
+      }
+      else {
+        iVar1 = FUN_00fa4d00(param_3,param_4);
+      }
+      if (iVar1 == 0) {
+        Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+        cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>_3();
+        FUN_00f4e050(puVar2);
+        FUN_00dd5650(&DAT_016e0038,param_1 + 0x2c,param_2);
+        return 0;
+      }
+      puVar3 = puVar2;
+      Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+      cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>_3(puVar2);
+      FUN_00f4cfd0(puVar3);
+      if (*(int *)(param_1 + 0x4c) == 0) {
+        *(undefined4 **)(param_1 + 0x4c) = puVar2;
+        puVar2[9] = 0;
+        puVar2[10] = 0;
+        return 1;
+      }
+      FUN_00f4c4a0(puVar2);
+      return 1;
+    }
+  }
+  FUN_00dd5650(&DAT_016dfff8,param_1 + 0x2c,param_2);
+  return 0;
+}
+
+// 00F4AC40  FUN_00f4ac40  size=158  [callgraph]
+undefined4 __thiscall
+FUN_00f4ac40(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  undefined4 *puVar4;
+  
+  iVar2 = Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
+          cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>();
+  if (*(int *)(iVar2 + 0x18) != 0) {
+    puVar3 = (undefined4 *)FUN_00f4cc20();
+    if (puVar3 != (undefined4 *)0x0) {
+      FUN_00f49a20();
+      uVar1 = *(undefined4 *)(param_1 + 8);
+      puVar3[1] = param_2;
+      *puVar3 = uVar1;
+      FUN_00f49ab0(param_3,param_4,param_2);
+      puVar4 = puVar3;
+      Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
+      cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>(puVar3);
+      FUN_00f4d0d0(puVar4);
+      if (*(int *)(param_1 + 0x50) == 0) {
+        *(undefined4 **)(param_1 + 0x50) = puVar3;
+        puVar3[0x28] = 0;
+        puVar3[0x29] = 0;
+        return 1;
+      }
+      FUN_00f4c520(puVar3);
+      return 1;
+    }
+  }
+  FUN_00dd5650(&DAT_016dff34,param_1 + 0x2c,param_2);
+  return 0;
+}
+
+// 00F4ACE0  Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::~cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>  size=386  [class]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void __fastcall
+Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+~cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>(int param_1)
+
+{
+  uint uVar1;
+  
+  for (uVar1 = *(uint *)(param_1 + 0x4c); uVar1 != 0; uVar1 = *(uint *)(uVar1 + 0x28)) {
+    if ((_DAT_01be85b0 & 1) == 0) {
+      _DAT_01be85b0 = _DAT_01be85b0 | 1;
+      _DAT_01be7568 = vftable;
+      _DAT_01be7570 = 0;
+      _DAT_01be7574 = 0;
+      _DAT_01be7578 = 0;
+      DAT_01be7588 = 0;
+      DAT_01be7580 = 0;
+      DAT_01be7584 = 0;
+      FUN_00a2a170();
+      _atexit((_func_4879 *)&LAB_015edb50);
+    }
+    FUN_00f4d040(uVar1);
+    if ((_DAT_01be85b0 & 1) == 0) {
+      _DAT_01be85b0 = _DAT_01be85b0 | 1;
+      _DAT_01be7568 = vftable;
+      _DAT_01be7570 = 0;
+      _DAT_01be7574 = 0;
+      _DAT_01be7578 = 0;
+      DAT_01be7588 = 0;
+      DAT_01be7580 = 0;
+      DAT_01be7584 = 0;
+      FUN_00a2a170();
+      _atexit((_func_4879 *)&LAB_015edb50);
+    }
+    if (((uVar1 < DAT_01be7580) || (DAT_01be7580 + DAT_01be7584 * 0x3c <= uVar1)) ||
+       ((uVar1 - DAT_01be7580) / 0x3c == 0xffffffff)) {
+      FUN_00dd5650(&DAT_016e0c38,uVar1);
+    }
+    else {
+      FUN_00f972f0();
+      if (((DAT_01be7580 != 0) && (DAT_01be7580 <= uVar1)) &&
+         (uVar1 < DAT_01be7580 + DAT_01be7584 * 0x3c)) {
+        cTexture::~cTexture();
+        FUN_00f4cae0(uVar1);
+      }
+    }
+  }
+  *(undefined4 *)(param_1 + 0x4c) = 0;
+  return;
+}
+
+// 00F4AE70  FUN_00f4ae70  size=369  [callgraph]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void __fastcall FUN_00f4ae70(int param_1)
+
+{
+  uint uVar1;
+  
+  for (uVar1 = *(uint *)(param_1 + 0x50); uVar1 != 0; uVar1 = *(uint *)(uVar1 + 0xa4)) {
+    if ((_DAT_01ee53f0 & 1) == 0) {
+      _DAT_01ee53f0 = _DAT_01ee53f0 | 1;
+      _DAT_01ee1348 =
+           Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::vftable;
+      _DAT_01ee1350 = 0;
+      _DAT_01ee1354 = 0;
+      _DAT_01ee1358 = 0;
+      DAT_01ee1368 = 0;
+      DAT_01ee1360 = 0;
+      DAT_01ee1364 = 0;
+      FUN_00f3b960();
+      _atexit((_func_4879 *)&LAB_015f2110);
+    }
+    FUN_00f4d130(uVar1);
+    if ((_DAT_01ee53f0 & 1) == 0) {
+      _DAT_01ee53f0 = _DAT_01ee53f0 | 1;
+      _DAT_01ee1348 =
+           Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::vftable;
+      _DAT_01ee1350 = 0;
+      _DAT_01ee1354 = 0;
+      _DAT_01ee1358 = 0;
+      DAT_01ee1368 = 0;
+      DAT_01ee1360 = 0;
+      DAT_01ee1364 = 0;
+      FUN_00f3b960();
+      _atexit((_func_4879 *)&LAB_015f2110);
+    }
+    if (((uVar1 < DAT_01ee1360) || (DAT_01ee1364 * 0xb8 + DAT_01ee1360 <= uVar1)) ||
+       ((uVar1 - DAT_01ee1360) / 0xb8 == 0xffffffff)) {
+      FUN_00dd5650(&DAT_016e0d00,uVar1);
+    }
+    else {
+      FUN_00f49d20();
+      if (((DAT_01ee1360 != 0) && (DAT_01ee1360 <= uVar1)) &&
+         (uVar1 < DAT_01ee1364 * 0xb8 + DAT_01ee1360)) {
+        FUN_00f4cbd0(uVar1);
+      }
+    }
+  }
+  *(undefined4 *)(param_1 + 0x50) = 0;
+  return;
+}
+
+// 00F4AFF0  FUN_00f4aff0  size=188  [callgraph]
+bool FUN_00f4aff0(int param_1)
+
+{
+  int iVar1;
+  
+  if (param_1 == 0) {
+    FUN_00ec4790(&DAT_016e0098);
+    return false;
+  }
+  iVar1 = FUN_00dd7240();
+  if (iVar1 == 0) {
+    FUN_00ec4790(&DAT_016e00c0);
+    return false;
+  }
+  iVar1 = FUN_00dd7240();
+  if (iVar1 == 0) {
+    FUN_00ec4790(&DAT_016e00ec);
+    return false;
+  }
+  Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+  cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>_3();
+  iVar1 = FUN_00f4dc70(0x400,param_1);
+  if (iVar1 == 0) {
+    FUN_00ec4790(&DAT_016e0118);
+    return false;
+  }
+  Hw::cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>::
+  cHwLFFreeListTemp<cEffResource<cEffectModelData,eEffDataManager>_>();
+  iVar1 = FUN_00f4dd40(0x400,param_1);
+  if (iVar1 == 0) {
+    FUN_00ec4790(&DAT_016e013c);
+    return false;
+  }
+  FUN_00f4a060();
+  iVar1 = FUN_00f4aa40(param_1);
+  return iVar1 != 0;
+}
+
+// 00F4B0B0  FUN_00f4b0b0  size=116  [callgraph]
+undefined * FUN_00f4b0b0(int param_1)
+
+{
+  void *pvVar1;
+  int iVar2;
+  int *piVar3;
+  
+  if (param_1 < 4) {
+    return &DAT_01ee5430 + param_1 * 0x54;
+  }
+  if ((((int)DAT_018d72b4 < 1) ||
+      (pvVar1 = _bsearch(&param_1,DAT_018d72ac,DAT_018d72b4,4,(_PtFuncCompare *)&LAB_00f4d510),
+      pvVar1 == (void *)0x0)) || (iVar2 = (int)pvVar1 - (int)DAT_018d72ac >> 2, iVar2 < 0)) {
+    piVar3 = (int *)((int)DAT_018d72ac + DAT_018d72b4 * 4);
+  }
+  else {
+    piVar3 = (int *)((int)DAT_018d72ac + iVar2 * 4);
+  }
+  if (piVar3 == (int *)((int)DAT_018d72ac + DAT_018d72b4 * 4)) {
+    return (undefined *)0x0;
+  }
+  return *(undefined **)(*piVar3 + 4);
+}
+
+// 00F4B130  FUN_00f4b130  size=45  [callgraph]
+void __fastcall FUN_00f4b130(int param_1)
+
+{
+  *(undefined4 *)(param_1 + 0x44) = 0;
+  *(undefined2 *)(param_1 + 0x48) = 0;
+  *(undefined4 *)(param_1 + 0x3c) = 0;
+  *(undefined4 *)(param_1 + 0x40) = 0;
+  *(undefined1 *)(param_1 + 0x2c) = 0;
+  *(undefined4 *)(param_1 + 8) = 0xfff;
+  Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+  ~cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>();
+  FUN_00f4ae70();
+  return;
+}
+
+// 00F4B160  FUN_00f4b160  size=453  [callgraph]
+void __fastcall FUN_00f4b160(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  undefined1 auStack_24 [4];
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined2 uStack_18;
+  undefined1 uStack_16;
+  undefined1 uStack_15;
+  undefined4 uStack_14;
+  undefined4 uStack_10;
+  uint local_c;
+  
+  local_c = DAT_018e8764 ^ (uint)auStack_24;
+  iVar1 = (**(code **)(*(int *)(param_1 + 0xc) + 8))();
+  if (iVar1 == 0) {
+    uVar5 = 0;
+    do {
+      uStack_1c = CONCAT13(0x2e,(int3)(&DAT_016cacf0)[uVar5]);
+      uStack_18 = 0x7477;
+      uStack_16 = 0x61;
+      uStack_15 = 0;
+      uVar2 = FUN_00de3d80(0,&uStack_1c);
+      uStack_16 = 0x70;
+      iVar1 = FUN_00de3d80(1,&uStack_1c);
+      if ((iVar1 == 0) || (iVar1 = FUN_00f4ab60(uVar5,uVar2,iVar1), iVar1 == 0)) {
+        uStack_14 = CONCAT13(0x2e,(int3)(&DAT_016cacf0)[uVar5]);
+        uStack_10 = 0x627477;
+        iVar1 = FUN_00de3d80(1,&uStack_14);
+        if ((iVar1 == 0) || (iVar1 = FUN_00f4aa90(uVar5,iVar1), iVar1 == 0)) goto LAB_00f4b25e;
+      }
+      uVar5 = uVar5 + 1;
+    } while (uVar5 < 0xff);
+  }
+  else {
+    iVar4 = 0;
+    iVar1 = (**(code **)(*(int *)(param_1 + 0xc) + 8))();
+    if (iVar1 != 0) {
+      uStack_1c = *(int *)(param_1 + 0xc);
+      uVar2 = (**(code **)(uStack_1c + 4))(1);
+      iVar1 = (**(code **)(uStack_1c + 0x14))(uVar2);
+      if ((iVar1 != -1) && (iVar1 = (**(code **)(*(int *)(param_1 + 0xc) + 0x10))(iVar1), 0 < iVar1)
+         ) {
+        do {
+          uStack_1c = 0;
+          uStack_20 = 0;
+          uStack_14 = 0xffff;
+          iVar3 = FUN_00ec78f0(&uStack_14,&uStack_1c,&uStack_20,iVar4);
+          if (((iVar3 == 0) || (iVar3 = FUN_00f4ab60(uStack_14,uStack_1c,uStack_20), iVar3 == 0)) &&
+             ((iVar3 = FUN_00ec77e0(&uStack_14,&uStack_20,iVar4), iVar3 == 0 ||
+              (iVar3 = FUN_00f4aa90(uStack_14,uStack_20), iVar3 == 0)))) {
+LAB_00f4b25e:
+            __security_check_cookie(local_c ^ (uint)auStack_24);
+            return;
+          }
+          iVar4 = iVar4 + 1;
+        } while (iVar4 < iVar1);
+      }
+    }
+  }
+  __security_check_cookie(local_c ^ (uint)auStack_24);
+  return;
+}
+
+// 00F4B330  FUN_00f4b330  size=427  [callgraph]
+void __fastcall FUN_00f4b330(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  undefined4 uStack_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  char cStack_1c;
+  char cStack_1b;
+  char cStack_1a;
+  char cStack_19;
+  undefined1 uStack_18;
+  undefined1 *puStack_17;
+  char cStack_10;
+  char cStack_f;
+  char cStack_e;
+  char cStack_d;
+  undefined1 uStack_c;
+  undefined4 uStack_b;
+  uint local_4;
+  
+  local_4 = DAT_018e8764 ^ (uint)&uStack_28;
+  iVar1 = (**(code **)(*(int *)(param_1 + 0xc) + 8))();
+  if (iVar1 == 0) {
+    uVar5 = 0;
+    do {
+      cStack_1c = "0123456789abcdef"[uVar5 >> 0xc & 0xf];
+      cStack_1b = "0123456789abcdef"[uVar5 >> 8 & 0xf];
+      cStack_1a = "0123456789abcdef"[uVar5 >> 4 & 0xf];
+      cStack_19 = "0123456789abcdef"[uVar5 & 0xf];
+      uStack_18 = 0x2e;
+      puStack_17 = &LAB_00746164;
+      uStack_c = 0x2e;
+      uStack_b = 0x747464;
+      cStack_10 = cStack_1c;
+      cStack_f = cStack_1b;
+      cStack_e = cStack_1a;
+      cStack_d = cStack_19;
+      iVar1 = FUN_00de3d80(0,&cStack_1c);
+      uVar2 = FUN_00de3d80(1,&cStack_10);
+      if ((iVar1 != 0) && (iVar1 = FUN_00f4ac40(uVar5,iVar1,uVar2), iVar1 == 0)) goto LAB_00f4b3f2;
+      uVar5 = uVar5 + 1;
+    } while (uVar5 < 0x255);
+  }
+  else {
+    iVar4 = 0;
+    iVar1 = (**(code **)(*(int *)(param_1 + 0xc) + 8))();
+    if (iVar1 != 0) {
+      iVar1 = *(int *)(param_1 + 0xc);
+      uVar2 = (**(code **)(iVar1 + 4))(2);
+      iVar1 = (**(code **)(iVar1 + 0x14))(uVar2);
+      if ((iVar1 != -1) && (iVar1 = (**(code **)(*(int *)(param_1 + 0xc) + 0x10))(iVar1), 0 < iVar1)
+         ) {
+        do {
+          uStack_28 = 0xffff;
+          uStack_20 = 0;
+          uStack_24 = 0;
+          iVar3 = FUN_00ec7a30(&uStack_28,&uStack_20,&uStack_24,iVar4);
+          if ((iVar3 == 0) || (iVar3 = FUN_00f4ac40(uStack_28,uStack_20,uStack_24), iVar3 == 0)) {
+LAB_00f4b3f2:
+            __security_check_cookie(local_4 ^ (uint)&uStack_28);
+            return;
+          }
+          iVar4 = iVar4 + 1;
+        } while (iVar4 < iVar1);
+      }
+    }
+  }
+  __security_check_cookie(local_4 ^ (uint)&uStack_28);
+  return;
+}
+
+// 00F4C4A0  FUN_00f4c4a0  size=47  [callgraph]
+void __thiscall FUN_00f4c4a0(int param_1,int param_2)
+
+{
+  int iVar1;
+  
+  iVar1 = *(int *)(param_1 + 0x28);
+  while (iVar1 != 0) {
+    param_1 = *(int *)(param_1 + 0x28);
+    iVar1 = *(int *)(param_1 + 0x28);
+  }
+  *(int *)(param_1 + 0x28) = param_2;
+  *(int *)(param_2 + 0x24) = param_1;
+  *(undefined4 *)(param_2 + 0x28) = 0;
+  return;
+}
+
+// 00F4C520  FUN_00f4c520  size=62  [callgraph]
+void __thiscall FUN_00f4c520(int param_1,int param_2)
+
+{
+  int iVar1;
+  
+  iVar1 = *(int *)(param_1 + 0xa4);
+  while (iVar1 != 0) {
+    param_1 = *(int *)(param_1 + 0xa4);
+    iVar1 = *(int *)(param_1 + 0xa4);
+  }
+  *(int *)(param_1 + 0xa4) = param_2;
+  *(int *)(param_2 + 0xa0) = param_1;
+  *(undefined4 *)(param_2 + 0xa4) = 0;
+  return;
+}
+
+// 00F4C640  FUN_00f4c640  size=30  [callgraph]
+undefined4 __thiscall FUN_00f4c640(undefined4 param_1,byte param_2)
+
+{
+  cXml::cXml();
+  if ((param_2 & 1) != 0) {
+    FUN_00dd4920(param_1);
+  }
+  return param_1;
+}
+
+// 00F4C7D0  FUN_00f4c7d0  size=120  [callgraph]
+undefined4 __thiscall FUN_00f4c7d0(int param_1,int param_2,int *param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  if (*(int *)(param_1 + 4) != 0) {
+    return 0;
+  }
+  iVar1 = FUN_00dd29b0(param_2 * 4,0x20,0,0);
+  *(int *)(param_1 + 4) = iVar1;
+  if (iVar1 == 0) {
+    uVar2 = (**(code **)(*param_3 + 0x18))();
+    uVar2 = FUN_00dd2960(param_2 * 4,uVar2);
+    FUN_00dd5650(&DAT_016e0d60,uVar2);
+    return 0;
+  }
+  *(int *)(param_1 + 8) = param_2;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 1;
+  return 1;
+}
+
+// 00F4C880  FUN_00f4c880  size=71  [callgraph]
+void __thiscall FUN_00f4c880(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  do {
+    iVar2 = *param_1;
+    *(int *)(param_2 + 0x54) = iVar2;
+    LOCK();
+    iVar1 = *param_1;
+    if (iVar2 == iVar1) {
+      *param_1 = param_2;
+    }
+    UNLOCK();
+  } while (iVar2 != iVar1);
+                    /* WARNING: Could not recover jumptable at 0x00f4c8c1. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  InterlockedIncrement(param_1 + 2);
+  return;
+}
+
+// 00F4C8D0  FUN_00f4c8d0  size=155  [callgraph]
+longlong __fastcall FUN_00f4c8d0(longlong *param_1,uint param_2)
+
+{
+  longlong lVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  undefined4 extraout_EDX;
+  bool bVar5;
+  
+  iVar2 = (int)*param_1;
+  uVar3 = *(uint *)((int)param_1 + 4);
+  while( true ) {
+    uVar4 = uVar3;
+    if (iVar2 == 0) {
+      return (ulonglong)param_2 << 0x20;
+    }
+    LOCK();
+    lVar1 = *param_1;
+    bVar5 = CONCAT44(uVar4,iVar2) == lVar1;
+    if (bVar5) {
+      *param_1 = CONCAT44(uVar4 + 1,*(undefined4 *)(iVar2 + 0x54));
+    }
+    else {
+      uVar4 = (uint)((ulonglong)lVar1 >> 0x20);
+    }
+    UNLOCK();
+    if (bVar5) break;
+    iVar2 = (int)*param_1;
+    uVar3 = *(uint *)((int)param_1 + 4);
+    param_2 = uVar4;
+  }
+  InterlockedDecrement((LONG *)(param_1 + 1));
+  return CONCAT44(extraout_EDX,iVar2);
+}
+
+// 00F4CA10  FUN_00f4ca10  size=15  [callgraph]
+undefined4 __fastcall FUN_00f4ca10(undefined4 param_1)
+
+{
+  Hw::cTexture::cTexture();
+  return param_1;
+}
+
+// 00F4CA20  FUN_00f4ca20  size=15  [callgraph]
+undefined4 __fastcall FUN_00f4ca20(undefined4 param_1)
+
+{
+  FUN_00f49a20();
+  return param_1;
+}
+
+// 00F4CA90  FUN_00f4ca90  size=71  [callgraph]
+void __thiscall FUN_00f4ca90(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  do {
+    iVar2 = *param_1;
+    *(int *)(param_2 + 8) = iVar2;
+    LOCK();
+    iVar1 = *param_1;
+    if (iVar2 == iVar1) {
+      *param_1 = param_2;
+    }
+    UNLOCK();
+  } while (iVar2 != iVar1);
+                    /* WARNING: Could not recover jumptable at 0x00f4cad1. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  InterlockedIncrement(param_1 + 2);
+  return;
+}
+
+// 00F4CAE0  FUN_00f4cae0  size=71  [callgraph]
+void __thiscall FUN_00f4cae0(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  do {
+    iVar2 = *param_1;
+    *(int *)(param_2 + 0x38) = iVar2;
+    LOCK();
+    iVar1 = *param_1;
+    if (iVar2 == iVar1) {
+      *param_1 = param_2;
+    }
+    UNLOCK();
+  } while (iVar2 != iVar1);
+                    /* WARNING: Could not recover jumptable at 0x00f4cb21. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  InterlockedIncrement(param_1 + 2);
+  return;
+}
+
+// 00F4CB30  FUN_00f4cb30  size=155  [callgraph]
+longlong __fastcall FUN_00f4cb30(longlong *param_1,uint param_2)
+
+{
+  longlong lVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  undefined4 extraout_EDX;
+  bool bVar5;
+  
+  iVar2 = (int)*param_1;
+  uVar3 = *(uint *)((int)param_1 + 4);
+  while( true ) {
+    uVar4 = uVar3;
+    if (iVar2 == 0) {
+      return (ulonglong)param_2 << 0x20;
+    }
+    LOCK();
+    lVar1 = *param_1;
+    bVar5 = CONCAT44(uVar4,iVar2) == lVar1;
+    if (bVar5) {
+      *param_1 = CONCAT44(uVar4 + 1,*(undefined4 *)(iVar2 + 0x38));
+    }
+    else {
+      uVar4 = (uint)((ulonglong)lVar1 >> 0x20);
+    }
+    UNLOCK();
+    if (bVar5) break;
+    iVar2 = (int)*param_1;
+    uVar3 = *(uint *)((int)param_1 + 4);
+    param_2 = uVar4;
+  }
+  InterlockedDecrement((LONG *)(param_1 + 1));
+  return CONCAT44(extraout_EDX,iVar2);
+}
+
+// 00F4CBD0  FUN_00f4cbd0  size=74  [callgraph]
+void __thiscall FUN_00f4cbd0(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  do {
+    iVar2 = *param_1;
+    *(int *)(param_2 + 0xb4) = iVar2;
+    LOCK();
+    iVar1 = *param_1;
+    if (iVar2 == iVar1) {
+      *param_1 = param_2;
+    }
+    UNLOCK();
+  } while (iVar2 != iVar1);
+                    /* WARNING: Could not recover jumptable at 0x00f4cc14. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  InterlockedIncrement(param_1 + 2);
+  return;
+}
+
+// 00F4CC20  FUN_00f4cc20  size=158  [callgraph]
+longlong __fastcall FUN_00f4cc20(longlong *param_1,uint param_2)
+
+{
+  longlong lVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  undefined4 extraout_EDX;
+  bool bVar5;
+  
+  iVar2 = (int)*param_1;
+  uVar3 = *(uint *)((int)param_1 + 4);
+  while( true ) {
+    uVar4 = uVar3;
+    if (iVar2 == 0) {
+      return (ulonglong)param_2 << 0x20;
+    }
+    LOCK();
+    lVar1 = *param_1;
+    bVar5 = CONCAT44(uVar4,iVar2) == lVar1;
+    if (bVar5) {
+      *param_1 = CONCAT44(uVar4 + 1,*(undefined4 *)(iVar2 + 0xb4));
+    }
+    else {
+      uVar4 = (uint)((ulonglong)lVar1 >> 0x20);
+    }
+    UNLOCK();
+    if (bVar5) break;
+    iVar2 = (int)*param_1;
+    uVar3 = *(uint *)((int)param_1 + 4);
+    param_2 = uVar4;
+  }
+  InterlockedDecrement((LONG *)(param_1 + 1));
+  return CONCAT44(extraout_EDX,iVar2);
+}
+
+// 00F4CD70  FUN_00f4cd70  size=155  [callgraph]
+longlong __fastcall FUN_00f4cd70(longlong *param_1,uint param_2)
+
+{
+  longlong lVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  undefined4 extraout_EDX;
+  bool bVar5;
+  
+  iVar2 = (int)*param_1;
+  uVar3 = *(uint *)((int)param_1 + 4);
+  while( true ) {
+    uVar4 = uVar3;
+    if (iVar2 == 0) {
+      return (ulonglong)param_2 << 0x20;
+    }
+    LOCK();
+    lVar1 = *param_1;
+    bVar5 = CONCAT44(uVar4,iVar2) == lVar1;
+    if (bVar5) {
+      *param_1 = CONCAT44(uVar4 + 1,*(undefined4 *)(iVar2 + 8));
+    }
+    else {
+      uVar4 = (uint)((ulonglong)lVar1 >> 0x20);
+    }
+    UNLOCK();
+    if (bVar5) break;
+    iVar2 = (int)*param_1;
+    uVar3 = *(uint *)((int)param_1 + 4);
+    param_2 = uVar4;
+  }
+  InterlockedDecrement((LONG *)(param_1 + 1));
+  return CONCAT44(extraout_EDX,iVar2);
+}
+
+// 00F4CF80  FUN_00f4cf80  size=68  [callgraph]
+undefined4 __thiscall FUN_00f4cf80(int param_1,uint param_2)
+
+{
+  uint uVar1;
+  
+  uVar1 = *(uint *)(param_1 + 0x18);
+  if (uVar1 == 0) {
+    return 0;
+  }
+  if ((uVar1 <= param_2) && (param_2 < *(int *)(param_1 + 0x1c) * 0x58 + uVar1)) {
+    cXml::cXml();
+    FUN_00f4c880(param_2);
+    return 1;
+  }
+  return 0;
+}
+
+// 00F4CFD0  FUN_00f4cfd0  size=111  [callgraph]
+void __thiscall FUN_00f4cfd0(int param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  
+  iVar1 = *(int *)(param_2 + 4);
+  if ((iVar1 < 0xf000) || (0xf01f < iVar1)) {
+    if (999 < iVar1) {
+      FUN_00dd5650(&DAT_016e0ba0,iVar1,1000);
+      return;
+    }
+    piVar3 = (int *)(param_1 + 0x28 + iVar1 * 4);
+  }
+  else {
+    piVar3 = (int *)(param_1 + -0x3b038 + iVar1 * 4);
+  }
+  iVar1 = *piVar3;
+  if (iVar1 != 0) {
+    iVar2 = *(int *)(iVar1 + 0x30);
+    while (iVar2 != 0) {
+      iVar1 = *(int *)(iVar1 + 0x30);
+      iVar2 = *(int *)(iVar1 + 0x30);
+    }
+    *(int *)(iVar1 + 0x30) = param_2;
+    *(int *)(param_2 + 0x2c) = iVar1;
+    *(undefined4 *)(param_2 + 0x30) = 0;
+    return;
+  }
+  *piVar3 = param_2;
+  *(undefined4 *)(param_2 + 0x2c) = 0;
+  *(undefined4 *)(param_2 + 0x30) = 0;
+  return;
+}
+
+// 00F4D040  FUN_00f4d040  size=143  [callgraph]
+void __thiscall FUN_00f4d040(int param_1,int param_2)
+
+{
+  int iVar1;
+  int *piVar2;
+  
+  iVar1 = *(int *)(param_2 + 4);
+  if ((iVar1 < 0xf000) || (0xf01f < iVar1)) {
+    if (999 < iVar1) {
+      FUN_00dd5650(&DAT_016e0bdc,iVar1,1000);
+      return;
+    }
+    piVar2 = (int *)(param_1 + 0x28 + iVar1 * 4);
+  }
+  else {
+    piVar2 = (int *)(param_1 + -0x3b038 + iVar1 * 4);
+  }
+  if (*(int *)(param_2 + 0x2c) == 0) {
+    if (*(int *)(param_2 + 0x30) == 0) {
+      if (*piVar2 == 0) {
+        FUN_00dd5650(&DAT_016e0c0c,iVar1);
+      }
+      *piVar2 = 0;
+      return;
+    }
+  }
+  else {
+    *(undefined4 *)(*(int *)(param_2 + 0x2c) + 0x30) = *(undefined4 *)(param_2 + 0x30);
+  }
+  if (*(int *)(param_2 + 0x30) != 0) {
+    *(undefined4 *)(*(int *)(param_2 + 0x30) + 0x2c) = *(undefined4 *)(param_2 + 0x2c);
+  }
+  if (*(int *)(param_2 + 0x2c) != 0) {
+    return;
+  }
+  *piVar2 = *(int *)(param_2 + 0x30);
+  return;
+}
+
+// 00F4D0D0  FUN_00f4d0d0  size=157  [callgraph]
+void __thiscall FUN_00f4d0d0(int param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  
+  iVar2 = *(int *)(param_2 + 4);
+  if ((iVar2 < 0xf000) || (0xf01f < iVar2)) {
+    if (0xfff < iVar2) {
+      FUN_00dd5650(&DAT_016e0c68,iVar2,0x1000);
+      return;
+    }
+    piVar3 = (int *)(param_1 + 0x28 + iVar2 * 4);
+  }
+  else {
+    piVar3 = (int *)(param_1 + -0x37fd8 + iVar2 * 4);
+  }
+  iVar2 = *piVar3;
+  if (iVar2 != 0) {
+    iVar1 = *(int *)(iVar2 + 0xac);
+    while (iVar1 != 0) {
+      iVar2 = *(int *)(iVar2 + 0xac);
+      iVar1 = *(int *)(iVar2 + 0xac);
+    }
+    *(int *)(iVar2 + 0xac) = param_2;
+    *(int *)(param_2 + 0xa8) = iVar2;
+    *(undefined4 *)(param_2 + 0xac) = 0;
+    return;
+  }
+  *piVar3 = param_2;
+  *(undefined4 *)(param_2 + 0xa8) = 0;
+  *(undefined4 *)(param_2 + 0xac) = 0;
+  return;
+}
+
+// 00F4D130  FUN_00f4d130  size=170  [callgraph]
+void __thiscall FUN_00f4d130(int param_1,int param_2)
+
+{
+  int iVar1;
+  int *piVar2;
+  
+  iVar1 = *(int *)(param_2 + 4);
+  if ((iVar1 < 0xf000) || (0xf01f < iVar1)) {
+    if (0xfff < iVar1) {
+      FUN_00dd5650(&DAT_016e0ca4,iVar1,0x1000);
+      return;
+    }
+    piVar2 = (int *)(param_1 + 0x28 + iVar1 * 4);
+  }
+  else {
+    piVar2 = (int *)(param_1 + -0x37fd8 + iVar1 * 4);
+  }
+  if (*(int *)(param_2 + 0xa8) == 0) {
+    if (*(int *)(param_2 + 0xac) == 0) {
+      if (*piVar2 == 0) {
+        FUN_00dd5650(&DAT_016e0cd4,iVar1);
+      }
+      *piVar2 = 0;
+      return;
+    }
+  }
+  else {
+    *(undefined4 *)(*(int *)(param_2 + 0xa8) + 0xac) = *(undefined4 *)(param_2 + 0xac);
+  }
+  if (*(int *)(param_2 + 0xac) != 0) {
+    *(undefined4 *)(*(int *)(param_2 + 0xac) + 0xa8) = *(undefined4 *)(param_2 + 0xa8);
+  }
+  if (*(int *)(param_2 + 0xa8) != 0) {
+    return;
+  }
+  *piVar2 = *(int *)(param_2 + 0xac);
+  return;
+}
+
+// 00F4D250  FUN_00f4d250  size=43  [callgraph]
+void __fastcall FUN_00f4d250(int param_1)
+
+{
+  if (*(int *)(param_1 + 4) != 0) {
+    *(undefined4 *)(param_1 + 0xc) = 0;
+    if (*(int *)(param_1 + 0x10) != 0) {
+      FUN_00dd48d0(*(int *)(param_1 + 4),0);
+      *(undefined4 *)(param_1 + 0x10) = 0;
+    }
+    *(undefined4 *)(param_1 + 4) = 0;
+    *(undefined4 *)(param_1 + 8) = 0;
+  }
+  return;
+}
+
+// 00F4D3A0  FUN_00f4d3a0  size=114  [callgraph]
+void __fastcall FUN_00f4d3a0(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  undefined4 local_10;
+  
+  iVar5 = 0;
+  piVar1 = (int *)(param_1 + 8);
+  *piVar1 = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  if (0 < *(int *)(param_1 + 0x1c)) {
+    local_10 = 0;
+    do {
+      iVar4 = *(int *)(param_1 + 0x18) + local_10;
+      do {
+        iVar3 = *piVar1;
+        *(int *)(iVar4 + 0x54) = iVar3;
+        LOCK();
+        iVar2 = *piVar1;
+        if (iVar3 == iVar2) {
+          *piVar1 = iVar4;
+        }
+        UNLOCK();
+      } while (iVar3 != iVar2);
+      InterlockedIncrement((LONG *)(param_1 + 0x10));
+      local_10 = local_10 + 0x58;
+      iVar5 = iVar5 + 1;
+    } while (iVar5 < *(int *)(param_1 + 0x1c));
+  }
+  return;
+}
+
+// 00F4D4D0  FUN_00f4d4d0  size=33  [callgraph]
+undefined4 __thiscall FUN_00f4d4d0(undefined4 param_1,byte param_2)
+
+{
+  Hw::cTexture::~cTexture();
+  if ((param_2 & 1) != 0) {
+    FUN_00dd4920(param_1);
+  }
+  return param_1;
+}
+
+// 00F4D540  FUN_00f4d540  size=114  [callgraph]
+void __fastcall FUN_00f4d540(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  undefined4 local_10;
+  
+  iVar5 = 0;
+  piVar1 = (int *)(param_1 + 8);
+  *piVar1 = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  if (0 < *(int *)(param_1 + 0x1c)) {
+    local_10 = 0;
+    do {
+      iVar4 = *(int *)(param_1 + 0x18) + local_10;
+      do {
+        iVar3 = *piVar1;
+        *(int *)(iVar4 + 8) = iVar3;
+        LOCK();
+        iVar2 = *piVar1;
+        if (iVar3 == iVar2) {
+          *piVar1 = iVar4;
+        }
+        UNLOCK();
+      } while (iVar3 != iVar2);
+      InterlockedIncrement((LONG *)(param_1 + 0x10));
+      local_10 = local_10 + 0xc;
+      iVar5 = iVar5 + 1;
+    } while (iVar5 < *(int *)(param_1 + 0x1c));
+  }
+  return;
+}
+
+// 00F4D5C0  FUN_00f4d5c0  size=114  [callgraph]
+void __fastcall FUN_00f4d5c0(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  undefined4 local_10;
+  
+  iVar5 = 0;
+  piVar1 = (int *)(param_1 + 8);
+  *piVar1 = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  if (0 < *(int *)(param_1 + 0x1c)) {
+    local_10 = 0;
+    do {
+      iVar4 = *(int *)(param_1 + 0x18) + local_10;
+      do {
+        iVar3 = *piVar1;
+        *(int *)(iVar4 + 0x38) = iVar3;
+        LOCK();
+        iVar2 = *piVar1;
+        if (iVar3 == iVar2) {
+          *piVar1 = iVar4;
+        }
+        UNLOCK();
+      } while (iVar3 != iVar2);
+      InterlockedIncrement((LONG *)(param_1 + 0x10));
+      local_10 = local_10 + 0x3c;
+      iVar5 = iVar5 + 1;
+    } while (iVar5 < *(int *)(param_1 + 0x1c));
+  }
+  return;
+}
+
+// 00F4D640  FUN_00f4d640  size=120  [callgraph]
+void __fastcall FUN_00f4d640(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  undefined4 local_10;
+  
+  iVar5 = 0;
+  piVar1 = (int *)(param_1 + 8);
+  *piVar1 = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  if (0 < *(int *)(param_1 + 0x1c)) {
+    local_10 = 0;
+    do {
+      iVar4 = *(int *)(param_1 + 0x18) + local_10;
+      do {
+        iVar3 = *piVar1;
+        *(int *)(iVar4 + 0xb4) = iVar3;
+        LOCK();
+        iVar2 = *piVar1;
+        if (iVar3 == iVar2) {
+          *piVar1 = iVar4;
+        }
+        UNLOCK();
+      } while (iVar3 != iVar2);
+      InterlockedIncrement((LONG *)(param_1 + 0x10));
+      local_10 = local_10 + 0xb8;
+      iVar5 = iVar5 + 1;
+    } while (iVar5 < *(int *)(param_1 + 0x1c));
+  }
+  return;
+}
+
+// 00F4D6C0  FUN_00f4d6c0  size=131  [callgraph]
+char FUN_00f4d6c0(undefined4 param_1,int param_2,int param_3,int param_4,code *param_5,int *param_6)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  if (param_3 < param_4) {
+    do {
+      iVar2 = param_4 + param_3 >> 1;
+      iVar1 = (*param_5)(param_1,*(int *)(param_2 + 4) + iVar2 * 4);
+      if (iVar1 == 0) {
+        if (param_6 == (int *)0x0) {
+          return '\0';
+        }
+        *param_6 = iVar2;
+        return '\0';
+      }
+      if (iVar1 < 1) {
+        param_4 = iVar2 + -1;
+      }
+      else {
+        param_3 = iVar2 + 1;
+      }
+    } while (param_3 < param_4);
+  }
+  if (param_6 != (int *)0x0) {
+    *param_6 = param_3;
+  }
+  iVar1 = (*param_5)(param_1,*(int *)(param_2 + 4) + param_3 * 4);
+  if (iVar1 == 0) {
+    return '\0';
+  }
+  return (0 < iVar1) + '\x01';
+}
+
+// 00F4D890  FUN_00f4d890  size=48  [callgraph]
+void __fastcall FUN_00f4d890(int param_1)
+
+{
+  if ((*(int *)(param_1 + 0x18) != 0) && (*(int *)(param_1 + 0x20) != 0)) {
+    FUN_00dd3d90(*(int *)(param_1 + 0x18),0);
+  }
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x20) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  return;
+}
+
+// 00F4D940  FUN_00f4d940  size=48  [callgraph]
+void __fastcall FUN_00f4d940(int param_1)
+
+{
+  if ((*(int *)(param_1 + 0x18) != 0) && (*(int *)(param_1 + 0x20) != 0)) {
+    FUN_00dd3d90(*(int *)(param_1 + 0x18),0);
+  }
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x20) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  return;
+}
+
+// 00F4D970  FUN_00f4d970  size=113  [callgraph]
+undefined4 __thiscall FUN_00f4d970(int param_1,int param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  
+  if ((*(int *)(param_1 + 0x18) != 0) && (*(int *)(param_1 + 0x20) != 0)) {
+    FUN_00dd3d90(*(int *)(param_1 + 0x18),0);
+  }
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x20) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  iVar1 = FUN_00dd29b0(param_2 * 0x58,0x20,0,0);
+  *(int *)(param_1 + 0x18) = iVar1;
+  if (iVar1 == 0) {
+    return 0;
+  }
+  *(undefined4 *)(param_1 + 0x20) = param_3;
+  *(int *)(param_1 + 0x1c) = param_2;
+  FUN_00f4d3a0();
+  return 1;
+}
+
+// 00F4DB10  FUN_00f4db10  size=43  [callgraph]
+void __fastcall FUN_00f4db10(int param_1)
+
+{
+  if (*(int *)(param_1 + 4) != 0) {
+    *(undefined4 *)(param_1 + 0xc) = 0;
+    if (*(int *)(param_1 + 0x10) != 0) {
+      FUN_00dd48d0(*(int *)(param_1 + 4),0);
+      *(undefined4 *)(param_1 + 0x10) = 0;
+    }
+    *(undefined4 *)(param_1 + 4) = 0;
+    *(undefined4 *)(param_1 + 8) = 0;
+  }
+  return;
+}
+
+// 00F4DB70  FUN_00f4db70  size=115  [callgraph]
+undefined4 __thiscall FUN_00f4db70(int param_1,int param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  
+  if ((*(int *)(param_1 + 0x18) != 0) && (*(int *)(param_1 + 0x20) != 0)) {
+    FUN_00dd3d90(*(int *)(param_1 + 0x18),0);
+  }
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x20) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  iVar1 = FUN_00dd29b0(param_2 * 0xc,0x20,0,0);
+  *(int *)(param_1 + 0x18) = iVar1;
+  if (iVar1 == 0) {
+    return 0;
+  }
+  *(undefined4 *)(param_1 + 0x20) = param_3;
+  *(int *)(param_1 + 0x1c) = param_2;
+  FUN_00f4d540();
+  return 1;
+}
+
+// 00F4DBF0  FUN_00f4dbf0  size=88  [callgraph]
+void __fastcall FUN_00f4dbf0(int param_1)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint *puVar3;
+  
+  puVar3 = *(uint **)(param_1 + 0x2c);
+  if (puVar3 != puVar3 + *(int *)(param_1 + 0x34)) {
+    do {
+      uVar1 = *puVar3;
+      if (uVar1 != 0) {
+        uVar2 = *(uint *)(param_1 + 0x18);
+        if (((uVar2 != 0) && (uVar2 <= uVar1)) && (uVar1 < uVar2 + *(int *)(param_1 + 0x1c) * 0xc))
+        {
+          FUN_00f4ca90(uVar1);
+        }
+        *puVar3 = 0;
+      }
+      puVar3 = puVar3 + 1;
+    } while (puVar3 != (uint *)(*(int *)(param_1 + 0x2c) + *(int *)(param_1 + 0x34) * 4));
+  }
+  *(undefined4 *)(param_1 + 0x34) = 0;
+  return;
+}
+
+// 00F4DC70  FUN_00f4dc70  size=119  [callgraph]
+undefined4 __thiscall FUN_00f4dc70(int param_1,int param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  
+  if ((*(int *)(param_1 + 0x18) != 0) && (*(int *)(param_1 + 0x20) != 0)) {
+    FUN_00dd3d90(*(int *)(param_1 + 0x18),0);
+  }
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x20) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  iVar1 = FUN_00dd29b0(param_2 * 0x3c,0x20,0,0);
+  *(int *)(param_1 + 0x18) = iVar1;
+  if (iVar1 == 0) {
+    return 0;
+  }
+  *(undefined4 *)(param_1 + 0x20) = param_3;
+  *(int *)(param_1 + 0x1c) = param_2;
+  FUN_00f4d5c0();
+  return 1;
+}
+
+// 00F4DD40  FUN_00f4dd40  size=116  [callgraph]
+undefined4 __thiscall FUN_00f4dd40(int param_1,int param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  
+  if ((*(int *)(param_1 + 0x18) != 0) && (*(int *)(param_1 + 0x20) != 0)) {
+    FUN_00dd3d90(*(int *)(param_1 + 0x18),0);
+  }
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x20) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  iVar1 = FUN_00dd29b0(param_2 * 0xb8,0x20,0,0);
+  *(int *)(param_1 + 0x18) = iVar1;
+  if (iVar1 == 0) {
+    return 0;
+  }
+  *(undefined4 *)(param_1 + 0x20) = param_3;
+  *(int *)(param_1 + 0x1c) = param_2;
+  FUN_00f4d640();
+  return 1;
+}
+
+// 00F4DE60  FUN_00f4de60  size=48  [callgraph]
+void __fastcall FUN_00f4de60(int param_1)
+
+{
+  if ((*(int *)(param_1 + 0x18) != 0) && (*(int *)(param_1 + 0x20) != 0)) {
+    FUN_00dd3d90(*(int *)(param_1 + 0x18),0);
+  }
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x20) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  return;
 }
 
 // 00F4DE90  Hw::cHwLFFreeListTemp<effect::utility::MappedData<eEffDataManager,cEffectData*,effect::utility::MappedFixedVector2<eEffDataManager,cEffectData*>_>_>::cHwLFFreeListTemp<effect::utility::MappedData<eEffDataManager,cEffectData*,effect::utility::MappedFixedVector2<eEffDataManager,cEffectData*>_>_>_2  size=63  [class]
@@ -6526,7 +7892,7 @@ void __thiscall FUN_00f4e050(int param_1,uint param_2)
     uVar1 = *(uint *)(param_1 + 0x18);
     if (((uVar1 != 0) && (uVar1 <= param_2)) && (param_2 < uVar1 + *(int *)(param_1 + 0x1c) * 0x3c))
     {
-      Hw::cTexture::cTexture_5();
+      Hw::cTexture::~cTexture();
       FUN_00f4cae0(param_2);
     }
     return;

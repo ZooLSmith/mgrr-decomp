@@ -168,8 +168,8 @@ void __fastcall FUN_0059da40(int param_1)
   return;
 }
 
-// 0059DDD0  Em0600::vf264  size=8  [class]
-undefined4 Em0600::vf264(void)
+// 0059DDD0  Em0600::setEmSetInfo  size=8  [class]
+undefined4 Em0600::setEmSetInfo(void)
 
 {
   return 1;
@@ -184,7 +184,7 @@ void __fastcall Em0600::vf50(int param_1)
   if (*(int *)(param_1 + 0x7b0) != 0) {
     FUN_008f3cb0(param_1);
   }
-  BehaviorEmBase::vf128();
+  BehaviorEmBase::setSeqAtk();
   return;
 }
 
@@ -1492,7 +1492,7 @@ void __fastcall FUN_0059fee0(int param_1)
     uVar3 = 0;
   }
   else {
-    uVar3 = RigidBodyCollection::RigidBodyCollection_2();
+    uVar3 = RigidBodyCollision::RigidBodyCollision();
   }
   uVar1 = *(undefined4 *)(param_1 + 0x4f0);
   *(undefined4 *)(param_1 + 0x7b0) = uVar3;
@@ -2113,7 +2113,7 @@ int __thiscall Em0600::getAttackInfo(int param_1,undefined2 *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(undefined4 **)(iVar2 + 8);
       puVar1[5] = *(undefined4 *)(param_1 + 0x4f0);
@@ -4937,15 +4937,15 @@ LAB_005a5967:
   return;
 }
 
-// 005A5E90  Em0600::vf40  size=803  [class]
-undefined4 __fastcall Em0600::vf40(int *param_1)
+// 005A5E90  Em0600::startup  size=803  [class]
+undefined4 __fastcall Em0600::startup(int *param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   int *piVar3;
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -7531,7 +7531,7 @@ undefined4 * __fastcall Em0600::Em0600(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   FUN_00a826e0();
   iVar1 = 1;
@@ -7577,15 +7577,15 @@ undefined * Em0600::vf04(void)
   return &DAT_01b351a0;
 }
 
-// 00AB6AA0  Em0600::vf00  size=76  [class]
-undefined4 __thiscall Em0600::vf00(undefined4 param_1,byte param_2)
+// 00AB6AA0  Em0600::destruct  size=76  [class]
+undefined4 __thiscall Em0600::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

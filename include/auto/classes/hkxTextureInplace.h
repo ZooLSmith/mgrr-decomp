@@ -8,7 +8,7 @@ struct hkxTextureInplace : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D1E60 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxTextureInplace(undefined4 * param_1, undefined4 param_2);  // 010D1D30
+    ~hkxTextureInplace();  // 010D1D30
     hkxTextureInplace();  // 010D1D60
-    void ctor_010D1DA0();  // 010D1DA0
+    hkxTextureInplace(undefined4 param_2);  // 010D1DA0
 };

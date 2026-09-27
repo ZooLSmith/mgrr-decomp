@@ -38,9 +38,9 @@ undefined1 lib::InputTextArchive<char_const*,32>::vf00(void)
   return 1;
 }
 
-// 00E91480  lib::InputTextArchive<char_const*,32>::InputTextArchive<char_const*,32>_3  size=83  [class]
+// 00E91480  lib::InputTextArchive<char_const*,32>::InputTextArchive<char_const*,32>  size=83  [class]
 undefined4 * __fastcall
-lib::InputTextArchive<char_const*,32>::InputTextArchive<char_const*,32>_3(undefined4 *param_1)
+lib::InputTextArchive<char_const*,32>::InputTextArchive<char_const*,32>(undefined4 *param_1)
 
 {
   param_1[1] = 0;
@@ -73,7 +73,7 @@ lib::InputTextArchive<char_const*,32>::InputTextArchive<char_const*,32>_4(undefi
   param_1[0xd] = 0xf;
   param_1[0xc] = 0;
   *(undefined1 *)(param_1 + 8) = 0;
-  cXmlBinary::cXmlBinary_103();
+  cXmlBinary::cXmlBinary();
   param_1[0x18] = 0;
   param_1[0x19] = 0;
   param_1[0x1a] = 0;

@@ -16,4 +16,6 @@ struct PowGaObjDLC : public BehaviorAppBase {
     virtual int getAttackInfo(ushort * param_2);  // 0084E160 slot 0x130  overrides Behavior
     virtual void vf19C(int param_2, undefined4 param_3);  // 0084E780 slot 0x19C  overrides Behavior
     virtual void vf1A4(undefined4 param_2, uint param_3);  // 00847AA0 slot 0x1A4  overrides Behavior
+    // non-virtual members
+    PowGaObjDLC();  // 00AB3E50
 };

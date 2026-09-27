@@ -12,4 +12,6 @@ struct Em0600Gun : public BehaviorAppBase {
     virtual void vf44();  // 0059FDA0 slot 0x44  overrides Behavior
     virtual void vf4C();  // 005A5A10 slot 0x4C  overrides Behavior
     virtual void vf50();  // 0059FDB0 slot 0x50  overrides Behavior
+    // non-virtual members
+    Em0600Gun();  // 00AAC4F0
 };

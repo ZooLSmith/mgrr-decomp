@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ExcelStage.h"
 
-// 005B0AB0  ExcelStage::vf40  size=183  [class]
-undefined4 __fastcall ExcelStage::vf40(int *param_1)
+// 005B0AB0  ExcelStage::startup  size=183  [class]
+undefined4 __fastcall ExcelStage::startup(int *param_1)
 
 {
   int iVar1;
@@ -14,7 +14,7 @@ undefined4 __fastcall ExcelStage::vf40(int *param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 != 0) {
     FUN_00dd7240();
     uVar2 = 2;
@@ -55,8 +55,8 @@ undefined * ExcelStage::vf04(void)
   return &DAT_01b351d4;
 }
 
-// 00AB7700  ExcelStage::vf00  size=54  [class]
-undefined4 __thiscall ExcelStage::vf00(undefined4 param_1,byte param_2)
+// 00AB7700  ExcelStage::destruct  size=54  [class]
+undefined4 __thiscall ExcelStage::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();

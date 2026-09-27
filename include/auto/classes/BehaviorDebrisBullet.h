@@ -18,4 +18,6 @@ struct BehaviorDebrisBullet : public BehaviorDebrisBase {
     virtual void setCutCrerateInfo(undefined4 * param_1, undefined4 param_2, int param_3);  // 005D8EE0 slot 0x1B8  overrides Behavior
     virtual void vf1BC(int * param_2);  // 005DBB10 slot 0x1BC  overrides Behavior
     virtual void vf300();  // 005DBB60 slot 0x300
+    // non-virtual members
+    BehaviorDebrisBullet();  // 005DBE70
 };

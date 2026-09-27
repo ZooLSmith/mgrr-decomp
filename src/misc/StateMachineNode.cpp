@@ -22,8 +22,8 @@ undefined4 * __thiscall StateMachineNode::vf04(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 0085F010  StateMachineNode::StateMachineNode  size=19  [class]
-void __fastcall StateMachineNode::StateMachineNode(undefined4 *param_1)
+// 0085F010  StateMachineNode::~StateMachineNode  size=19  [class]
+void __fastcall StateMachineNode::~StateMachineNode(undefined4 *param_1)
 
 {
   cEspControler::~cEspControler();
@@ -31,8 +31,8 @@ void __fastcall StateMachineNode::StateMachineNode(undefined4 *param_1)
   return;
 }
 
-// 00860270  StateMachineNode::StateMachineNode_5  size=22  [class]
-void __fastcall StateMachineNode::StateMachineNode_5(undefined4 *param_1)
+// 00860270  StateMachineNode::~StateMachineNode  size=22  [class]
+void __fastcall StateMachineNode::~StateMachineNode(undefined4 *param_1)
 
 {
   cXml::cXml_7();
@@ -40,8 +40,8 @@ void __fastcall StateMachineNode::StateMachineNode_5(undefined4 *param_1)
   return;
 }
 
-// 008A4010  StateMachineNode::StateMachineNode_7  size=19  [class]
-void __fastcall StateMachineNode::StateMachineNode_7(undefined4 *param_1)
+// 008A4010  StateMachineNode::~StateMachineNode  size=19  [class]
+void __fastcall StateMachineNode::~StateMachineNode(undefined4 *param_1)
 
 {
   cEspControler::~cEspControler();
@@ -49,8 +49,8 @@ void __fastcall StateMachineNode::StateMachineNode_7(undefined4 *param_1)
   return;
 }
 
-// 008A4A50  StateMachineNode::StateMachineNode_6  size=22  [class]
-void __fastcall StateMachineNode::StateMachineNode_6(undefined4 *param_1)
+// 008A4A50  StateMachineNode::~StateMachineNode  size=22  [class]
+void __fastcall StateMachineNode::~StateMachineNode(undefined4 *param_1)
 
 {
   cXml::cXml_7();
@@ -58,8 +58,8 @@ void __fastcall StateMachineNode::StateMachineNode_6(undefined4 *param_1)
   return;
 }
 
-// 00B81330  StateMachineNode::StateMachineNode_4  size=19  [class]
-void __fastcall StateMachineNode::StateMachineNode_4(undefined4 *param_1)
+// 00B81330  StateMachineNode::~StateMachineNode  size=19  [class]
+void __fastcall StateMachineNode::~StateMachineNode(undefined4 *param_1)
 
 {
   cEspControler::~cEspControler();
@@ -67,8 +67,8 @@ void __fastcall StateMachineNode::StateMachineNode_4(undefined4 *param_1)
   return;
 }
 
-// 00B82010  StateMachineNode::StateMachineNode_3  size=19  [class]
-void __fastcall StateMachineNode::StateMachineNode_3(undefined4 *param_1)
+// 00B82010  StateMachineNode::~StateMachineNode  size=19  [class]
+void __fastcall StateMachineNode::~StateMachineNode(undefined4 *param_1)
 
 {
   cXml::cXml_7();
@@ -76,8 +76,8 @@ void __fastcall StateMachineNode::StateMachineNode_3(undefined4 *param_1)
   return;
 }
 
-// 00B837E0  StateMachineNode::StateMachineNode_2  size=22  [class]
-void __fastcall StateMachineNode::StateMachineNode_2(undefined4 *param_1)
+// 00B837E0  StateMachineNode::~StateMachineNode  size=22  [class]
+void __fastcall StateMachineNode::~StateMachineNode(undefined4 *param_1)
 
 {
   cXml::cXml_7();
@@ -94,8 +94,8 @@ void __fastcall StateMachineNode::vf08(int param_1)
   return;
 }
 
-// 00D82220  StateMachineNode::vf0C  size=64  [class]
-void __thiscall StateMachineNode::vf0C(int param_1,undefined4 param_2)
+// 00D82220  StateMachineNode::SafeCheck  size=64  [class]
+void __thiscall StateMachineNode::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -111,8 +111,8 @@ void __thiscall StateMachineNode::vf0C(int param_1,undefined4 param_2)
   return;
 }
 
-// 00D82260  StateMachineNode::vf10  size=64  [class]
-undefined4 __thiscall StateMachineNode::vf10(int param_1,int param_2)
+// 00D82260  StateMachineNode::qteSafeCheck  size=64  [class]
+undefined4 __thiscall StateMachineNode::qteSafeCheck(int param_1,int param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -274,8 +274,8 @@ void __thiscall FUN_00d82510(int param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 00D82530  StateMachineNode::StateMachineNode_8  size=50  [class]
-void __thiscall StateMachineNode::StateMachineNode_8(undefined4 *param_1,undefined4 param_2)
+// 00D82530  StateMachineNode::StateMachineNode  size=50  [class]
+void __thiscall StateMachineNode::StateMachineNode(undefined4 *param_1,undefined4 param_2)
 
 {
   param_1[1] = param_2;

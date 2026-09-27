@@ -54,8 +54,8 @@ undefined4 * __thiscall cFreeMissionDispParts::vf00(undefined4 *param_1,byte par
   return param_1;
 }
 
-// 00CEE160  cFreeMissionDispParts::vf14  size=1898  [class]
-void __fastcall cFreeMissionDispParts::vf14(int param_1)
+// 00CEE160  cFreeMissionDispParts::create  size=1898  [class]
+void __fastcall cFreeMissionDispParts::create(int param_1)
 
 {
   float fVar1;

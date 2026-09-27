@@ -65,7 +65,7 @@ void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_16(int param_1)
         FUN_00a7c960(uVar2);
         FUN_00a8caf0(0x3e,0,0,0);
       }
-      hkpCdPointCollector::hkpCdPointCollector_4();
+      hkpCdPointCollector::hkpCdPointCollector();
     }
     return;
   }

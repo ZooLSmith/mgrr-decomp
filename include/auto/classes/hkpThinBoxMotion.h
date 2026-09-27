@@ -8,5 +8,8 @@ struct hkpThinBoxMotion : public hkpBoxMotion {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 011918B0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpThinBoxMotion();  // 011D1FA0
+    hkpThinBoxMotion(int param_2);  // 01191830
+    hkpThinBoxMotion(undefined4 * param_1, int param_2);  // 011B0C50
+    hkpThinBoxMotion();  // 011B0C90
+    void ctor_011D1FA0();  // 011D1FA0
 };

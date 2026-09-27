@@ -425,8 +425,8 @@ void __thiscall FUN_0049bf70(int param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 0049BFD0  Em0090::vf40  size=658  [class]
-undefined4 __fastcall Em0090::vf40(int param_1)
+// 0049BFD0  Em0090::startup  size=658  [class]
+undefined4 __fastcall Em0090::startup(int param_1)
 
 {
   int iVar1;
@@ -437,7 +437,7 @@ undefined4 __fastcall Em0090::vf40(int param_1)
   undefined4 local_88;
   undefined1 local_80 [124];
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 != 0) {
     local_90 = 1;
     local_8c = 1;
@@ -610,7 +610,7 @@ void __fastcall FUN_0049c460(int *param_1)
     fVar1 = (float)param_1[0x248];
     param_1[0x248] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -831,11 +831,11 @@ undefined * Em0090::vf04(void)
   return &DAT_01b34d84;
 }
 
-// 00AB6ED0  Em0090::vf00  size=30  [class]
-undefined4 __thiscall Em0090::vf00(undefined4 param_1,byte param_2)
+// 00AB6ED0  Em0090::destruct  size=30  [class]
+undefined4 __thiscall Em0090::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_92();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

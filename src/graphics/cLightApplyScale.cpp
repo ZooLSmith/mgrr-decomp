@@ -1,5 +1,5 @@
 // src/graphics/cLightApplyScale.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A2D7F0..00EC9940, 19 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A2D7F0..00EC9940, 18 functions
 
 #include "mgrr.h"
 #include "cLightApplyScale.h"
@@ -22,8 +22,8 @@ undefined4 * __thiscall cLightApplyScale::vf04(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00A34F70  cLightApplyScale::cLightApplyScale_4  size=241  [class]
-void __thiscall cLightApplyScale::cLightApplyScale_4(undefined4 *param_1,int param_2)
+// 00A34F70  cLightApplyScale::cLightApplyScale  size=241  [class]
+void __thiscall cLightApplyScale::cLightApplyScale(undefined4 *param_1,int param_2)
 
 {
   *param_1 = cLightSaveWork::vftable;
@@ -1579,8 +1579,8 @@ void __fastcall cLightApplyScale::cLightApplyScale(int param_1)
   return;
 }
 
-// 00A3E950  cLightApplyScale::cLightApplyScale_3  size=7867  [class]
-undefined4 * __thiscall cLightApplyScale::cLightApplyScale_3(undefined4 *param_1,int param_2)
+// 00A3E950  cLightApplyScale::cLightApplyScale  size=7867  [class]
+undefined4 * __thiscall cLightApplyScale::cLightApplyScale(undefined4 *param_1,int param_2)
 
 {
   int iVar1;
@@ -2333,61 +2333,11 @@ undefined4 * __thiscall cLightApplyScale::cLightApplyScale_3(undefined4 *param_1
   param_1[0x2fc] = *(undefined4 *)(param_2 + 0xbf0);
   param_1[0x2fd] = *(undefined4 *)(param_2 + 0xbf4);
   do {
-    cLightApplyScale_4(iVar1);
+    cLightApplyScale(iVar1);
     iVar1 = iVar1 + 0x90;
     iVar2 = iVar2 + -1;
   } while (-1 < iVar2);
   return param_1;
-}
-
-// 00A409E0  cLightApplyScale::cLightApplyScale_8  size=244  [class]
-void __fastcall cLightApplyScale::cLightApplyScale_8(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  *param_1 = cLightDataMinimum::vftable;
-  param_1[0x52] = vftable;
-  param_1[0x59] = vftable;
-  param_1[0x60] = vftable;
-  param_1[0x67] = vftable;
-  param_1[0x6e] = vftable;
-  param_1[0x75] = vftable;
-  param_1[0x7c] = vftable;
-  param_1[0x83] = vftable;
-  param_1[0xd6] = vftable;
-  param_1[0xdd] = vftable;
-  param_1[0xe4] = vftable;
-  param_1[0xeb] = vftable;
-  param_1[0xf2] = vftable;
-  param_1[0xf9] = vftable;
-  param_1[0x100] = vftable;
-  param_1[0x107] = vftable;
-  param_1[0x11e] = vftable;
-  param_1[0x125] = vftable;
-  param_1[300] = vftable;
-  param_1[0x133] = vftable;
-  param_1[0x13a] = vftable;
-  param_1[0x141] = vftable;
-  param_1[0x148] = vftable;
-  param_1[0x14f] = vftable;
-  param_1[0x156] = vftable;
-  param_1[0x15d] = vftable;
-  param_1[0x164] = vftable;
-  param_1[0x16b] = vftable;
-  param_1[0x172] = vftable;
-  param_1[0x179] = vftable;
-  param_1[0x180] = vftable;
-  param_1[0x187] = vftable;
-  param_1 = param_1 + 0x300;
-  iVar1 = 0x1f;
-  do {
-    *param_1 = cLightSaveWork::vftable;
-    param_1[0x19] = vftable;
-    param_1 = param_1 + 0x24;
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  return;
 }
 
 // 00A40B40  cLightApplyScale::cLightApplyScale_9  size=113  [class]
@@ -2398,7 +2348,7 @@ undefined4 * __fastcall cLightApplyScale::cLightApplyScale_9(undefined4 *param_1
   int iVar2;
   
   *param_1 = cLightManager::vftable;
-  cLightApplyScale_8();
+  cLightDataMinimum::cLightDataMinimum();
   iVar2 = 0x3ff;
   puVar1 = param_1 + 0x858;
   do {
@@ -2414,7 +2364,7 @@ undefined4 * __fastcall cLightApplyScale::cLightApplyScale_9(undefined4 *param_1
     iVar2 = iVar2 + -1;
   } while (-1 < iVar2);
   param_1[0x16858] = vftable;
-  cLightApplyScale_8();
+  cLightDataMinimum::cLightDataMinimum();
   param_1[0x16ff0] = 0;
   return param_1;
 }

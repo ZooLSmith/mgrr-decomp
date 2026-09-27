@@ -36,8 +36,8 @@ void __fastcall FUN_0083f010(int param_1)
   return;
 }
 
-// 0083F090  cMetalGearRayBoard::vf40  size=309  [class]
-undefined4 __fastcall cMetalGearRayBoard::vf40(int param_1)
+// 0083F090  cMetalGearRayBoard::startup  size=309  [class]
+undefined4 __fastcall cMetalGearRayBoard::startup(int param_1)
 
 {
   int iVar1;
@@ -45,7 +45,7 @@ undefined4 __fastcall cMetalGearRayBoard::vf40(int param_1)
   int iStack_4;
   
   iStack_4 = param_1;
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if ((iVar1 == 0) || (iVar1 = FUN_00dd7240(), iVar1 == 0)) {
     return 0;
   }
@@ -241,8 +241,8 @@ undefined * cMetalGearRayBoard::vf04(void)
   return &DAT_01b35a54;
 }
 
-// 00AB99E0  cMetalGearRayBoard::vf00  size=54  [class]
-undefined4 __thiscall cMetalGearRayBoard::vf00(undefined4 param_1,byte param_2)
+// 00AB99E0  cMetalGearRayBoard::destruct  size=54  [class]
+undefined4 __thiscall cMetalGearRayBoard::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();

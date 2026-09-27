@@ -1,14 +1,14 @@
 // src/behavior/BehaviorEmBody.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6180..00AD2E80, 17 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6180..00AD2E80, 16 functions
 
 #include "mgrr.h"
 #include "BehaviorEmBody.h"
 
-// 00AA6180  BehaviorEmBody::BehaviorEmBody_2  size=29  [class]
-undefined4 * __fastcall BehaviorEmBody::BehaviorEmBody_2(undefined4 *param_1)
+// 00AA6180  BehaviorEmBody::BehaviorEmBody  size=29  [class]
+undefined4 * __fastcall BehaviorEmBody::BehaviorEmBody(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -28,19 +28,8 @@ void BehaviorEmBody::vf1D0(void)
   return;
 }
 
-// 00AB20E0  BehaviorEmBody::BehaviorEmBody  size=35  [class]
-undefined4 * __fastcall BehaviorEmBody::BehaviorEmBody(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  FUN_00a7c930();
-  *param_1 = EmBodyDLC::vftable;
-  return param_1;
-}
-
-// 00AB6840  BehaviorEmBody::vf00  size=105  [class]
-undefined4 * __thiscall BehaviorEmBody::vf00(undefined4 *param_1,byte param_2)
+// 00AB6840  BehaviorEmBody::destruct  size=105  [class]
+undefined4 * __thiscall BehaviorEmBody::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -54,7 +43,7 @@ undefined4 * __thiscall BehaviorEmBody::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -93,8 +82,8 @@ void BehaviorEmBody::vf50(void)
   return;
 }
 
-// 00ACDD60  BehaviorEmBody::vf40  size=313  [class]
-undefined4 __fastcall BehaviorEmBody::vf40(int param_1)
+// 00ACDD60  BehaviorEmBody::startup  size=313  [class]
+undefined4 __fastcall BehaviorEmBody::startup(int param_1)
 
 {
   uint uVar1;
@@ -208,8 +197,8 @@ void __fastcall BehaviorEmBody::vf30(int param_1)
   return;
 }
 
-// 00AD2CF0  BehaviorEmBody::vf1B8  size=86  [class]
-void BehaviorEmBody::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 00AD2CF0  BehaviorEmBody::setCutCrerateInfo  size=86  [class]
+void BehaviorEmBody::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   int *piVar1;

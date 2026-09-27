@@ -70,8 +70,8 @@ undefined4 * __thiscall NarrowScaffoldRunStatePl0010::vf04(undefined4 *param_1,b
   return param_1;
 }
 
-// 00BAE330  NarrowScaffoldRunStatePl0010::vf0C  size=163  [class]
-void __thiscall NarrowScaffoldRunStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BAE330  NarrowScaffoldRunStatePl0010::SafeCheck  size=163  [class]
+void __thiscall NarrowScaffoldRunStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -107,14 +107,14 @@ void __thiscall NarrowScaffoldRunStatePl0010::vf0C(int param_1,undefined4 *param
     }
     *(undefined4 *)(uVar2 + 0x4170) = 1;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00BAE3E0  NarrowScaffoldRunStatePl0010::vf10  size=2034  [class]
+// 00BAE3E0  NarrowScaffoldRunStatePl0010::qteSafeCheck  size=2034  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void NarrowScaffoldRunStatePl0010::vf10(undefined4 *param_1)
+void NarrowScaffoldRunStatePl0010::qteSafeCheck(undefined4 *param_1)
 
 {
   float fVar1;
@@ -310,12 +310,12 @@ void NarrowScaffoldRunStatePl0010::vf10(undefined4 *param_1)
         local_108 = pfVar4[2] * -0.05;
         fStack_104 = pfVar4[3] * -0.05;
         (**(code **)(*piVar6 + 0x70))(&local_110);
-        StateMachineNode::vf10(param_1);
+        StateMachineNode::qteSafeCheck(param_1);
         return;
       }
     }
   }
-  StateMachineNode::vf10(param_1);
+  StateMachineNode::qteSafeCheck(param_1);
   return;
 }
 

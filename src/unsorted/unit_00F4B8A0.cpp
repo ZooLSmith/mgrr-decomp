@@ -17,7 +17,8 @@ void FUN_00f4b8a0(void)
     *(undefined2 *)(puVar1 + 2) = 0;
     *(undefined1 *)(puVar1 + -5) = 0;
     puVar1[-0xe] = 0xfff;
-    FUN_00f4ace0();
+    Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+    ~cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>();
     FUN_00f4ae70();
     puVar1 = puVar1 + 0x15;
   } while ((int)puVar1 < 0x1ee556c);
@@ -40,7 +41,8 @@ void FUN_00f4b8f0(int param_1)
       (&DAT_01ee5470)[param_1 * 0x15] = 0;
       (&DAT_01ee545c)[param_1 * 0x54] = 0;
       (&DAT_01ee5438)[param_1 * 0x15] = 0xfff;
-      FUN_00f4ace0();
+      Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+      ~cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>();
       FUN_00f4ae70();
       return;
     }
@@ -51,7 +53,8 @@ void FUN_00f4b8f0(int param_1)
       (&DAT_01ee5478)[param_1 * 0x2a] = 0;
       (&DAT_01ee545c)[param_1 * 0x54] = 0;
       (&DAT_01ee5438)[param_1 * 0x15] = 0xfff;
-      FUN_00f4ace0();
+      Hw::cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>::
+      ~cHwLFFreeListTemp<cEffResource<Hw::cTexture,eEffDataManager>_>();
       FUN_00f4ae70();
       return;
     }

@@ -11,6 +11,5 @@ struct CollisionAttackData : public CollisionUserData {
     // non-virtual members
     CollisionAttackData();  // 00D73030
     CollisionAttackData(undefined4 param_1);  // 00D73120
-    void ctor_00D73B90();  // 00D73B90
     void ctor_00D73BD0(undefined4 param_1);  // 00D73BD0
 };

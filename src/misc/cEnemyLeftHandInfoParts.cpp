@@ -120,8 +120,8 @@ void __fastcall FUN_00cedf70(int param_1)
   return;
 }
 
-// 00CFFC80  cEnemyLeftHandInfoParts::vf14  size=937  [class]
-void __fastcall cEnemyLeftHandInfoParts::vf14(int param_1)
+// 00CFFC80  cEnemyLeftHandInfoParts::create  size=937  [class]
+void __fastcall cEnemyLeftHandInfoParts::create(int param_1)
 
 {
   float fVar1;

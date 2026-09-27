@@ -7464,8 +7464,8 @@ void FUN_01080840(void)
   return;
 }
 
-// 01080850  hkBaseObject::hkBaseObject_223  size=51  [between]
-void __fastcall hkBaseObject::hkBaseObject_223(undefined4 *param_1)
+// 01080850  hkBaseObject::hkBaseObject  size=51  [between]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkgpAbstractMesh<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkContainerHeapAllocator>
@@ -8502,7 +8502,7 @@ hkgpAbstractMesh<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexH
   FUN_0107ea90();
   FUN_0107f200();
   FUN_0107ea20();
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -12239,7 +12239,7 @@ int __thiscall hkgpConvexHull::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_27();
+  ::hkBaseObject::hkBaseObject_27();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

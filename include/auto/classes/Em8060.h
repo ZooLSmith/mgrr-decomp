@@ -60,4 +60,5 @@ struct Em8060 : public EmBaseDLC {
     static void R0_ExplodeDie();  // 006946F0
     static void R0_ExplodeDie_2();  // 0069A620
     static void R0_ChanceAttack();  // 0069B620
+    Em8060();  // 00AB4C70
 };

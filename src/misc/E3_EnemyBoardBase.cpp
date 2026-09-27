@@ -63,9 +63,9 @@ void __thiscall E3_EnemyBoardBase::vf1D0(int param_1,int param_2)
   return;
 }
 
-// 0040AF60  E3_EnemyBoardBase::vf1B8  size=47  [class]
+// 0040AF60  E3_EnemyBoardBase::setCutCrerateInfo  size=47  [class]
 void __thiscall
-E3_EnemyBoardBase::vf1B8(int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
+E3_EnemyBoardBase::setCutCrerateInfo(int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
 
 {
   if (*(char *)(param_1 + 0xb98) != '\0') {
@@ -82,8 +82,8 @@ E3_EnemyBoardBase::vf1B8(int param_1,undefined4 *param_2,undefined4 param_3,int 
   return;
 }
 
-// 0040B6F0  E3_EnemyBoardBase::vf40  size=407  [class]
-undefined4 __fastcall E3_EnemyBoardBase::vf40(int *param_1)
+// 0040B6F0  E3_EnemyBoardBase::startup  size=407  [class]
+undefined4 __fastcall E3_EnemyBoardBase::startup(int *param_1)
 
 {
   uint *puVar1;
@@ -95,7 +95,7 @@ undefined4 __fastcall E3_EnemyBoardBase::vf40(int *param_1)
   int *piVar7;
   bool bVar8;
   
-  iVar3 = Bm6041::vf40();
+  iVar3 = BehaviorBm::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -563,8 +563,8 @@ undefined * E3_EnemyBoardBase::vf04(void)
   return &DAT_01b34b50;
 }
 
-// 00AB9470  E3_EnemyBoardBase::vf00  size=43  [class]
-undefined4 __thiscall E3_EnemyBoardBase::vf00(undefined4 param_1,byte param_2)
+// 00AB9470  E3_EnemyBoardBase::destruct  size=43  [class]
+undefined4 __thiscall E3_EnemyBoardBase::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

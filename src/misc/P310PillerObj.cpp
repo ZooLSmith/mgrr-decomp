@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "P310PillerObj.h"
 
-// 00415830  P310PillerObj::vf40  size=30  [class]
-undefined4 __fastcall P310PillerObj::vf40(int param_1)
+// 00415830  P310PillerObj::startup  size=30  [class]
+undefined4 __fastcall P310PillerObj::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -141,8 +141,8 @@ undefined * P310PillerObj::vf04(void)
   return &DAT_01b34c14;
 }
 
-// 00AB9030  P310PillerObj::vf00  size=43  [class]
-undefined4 __thiscall P310PillerObj::vf00(undefined4 param_1,byte param_2)
+// 00AB9030  P310PillerObj::destruct  size=43  [class]
+undefined4 __thiscall P310PillerObj::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

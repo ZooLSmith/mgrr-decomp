@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp46::esp46(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp46::esp46(undefined4 *param_1)
 undefined4 __thiscall esp46::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -106,13 +106,13 @@ void __fastcall esp46::vf08(int param_1)
   return;
 }
 
-// 00F2C0F0  esp46::vf10  size=472  [class]
-void __fastcall esp46::vf10(int param_1)
+// 00F2C0F0  esp46::addOtTransList  size=472  [class]
+void __fastcall esp46::addOtTransList(int param_1)
 
 {
   uint uVar1;
   int iVar2;
-  _AFX_EDIT_STATE *this;
+  EspPrimitiveWorkMultiParticleBase *this;
   undefined4 uVar3;
   undefined4 *puVar4;
   uint uVar5;
@@ -145,17 +145,17 @@ void __fastcall esp46::vf10(int param_1)
       (&DAT_01eddb38)[uVar6 + iVar2] = (&DAT_01eddb38)[uVar6 + iVar2] | uVar5;
     }
   }
-  FUN_00efed20();
+  esp107::vf10();
   if (*(float *)(param_1 + 0x124) <= 0.01) {
     return;
   }
   if ((DAT_01edd490 == 0) ||
-     (this = (_AFX_EDIT_STATE *)cPrimHeap::allocBuffer(0x58,0x20), this == (_AFX_EDIT_STATE *)0x0))
-  {
+     (this = (EspPrimitiveWorkMultiParticleBase *)cPrimHeap::allocBuffer(0x58,0x20),
+     this == (EspPrimitiveWorkMultiParticleBase *)0x0)) {
     FUN_009cca90(param_1,&DAT_016dd19c);
     return;
   }
-  _AFX_EDIT_STATE::_AFX_EDIT_STATE(this);
+  EspPrimitiveWorkMultiParticleBase::EspPrimitiveWorkMultiParticleBase(this);
   *(undefined ***)this = EspPrimitiveWorkMultiParticle_Esp64::vftable;
   if (*(int *)(param_1 + 0x4d0) == 0) {
     iVar2 = *(int *)(param_1 + 0x4c4) + *(int *)(param_1 + 0x4cc) * 0xc;
@@ -189,9 +189,9 @@ void __fastcall esp46::vf10(int param_1)
   return;
 }
 
-// 00F37FF0  esp46::vf04  size=231  [class]
+// 00F37FF0  esp46::preTrans  size=231  [class]
 undefined4 __thiscall
-esp46::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp46::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int iVar1;
@@ -199,7 +199,7 @@ esp46::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   short *psVar3;
   undefined4 uVar4;
   
-  iVar1 = esp41::vf04(param_2,param_3,param_4);
+  iVar1 = esp41::preTrans(param_2,param_3,param_4);
   if (iVar1 != 0) {
     *(undefined4 *)(param_1 + 0x4d4) = 1;
     if ((*(int *)(param_1 + 0x58) == 0) ||

@@ -8,7 +8,7 @@ struct hkxNodeSelectionSet : public hkxAttributeHolder {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D27D0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxNodeSelectionSet(undefined4 * param_1, undefined4 param_2);  // 010D26A0
+    ~hkxNodeSelectionSet();  // 010D26A0
     hkxNodeSelectionSet();  // 010D26C0
     void ctor_010D2700();  // 010D2700
 };

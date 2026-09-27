@@ -11,4 +11,9 @@ struct hkpConstraintChainInstanceAction : public hkpAction {
     virtual void vf10(int * param_2);  // 011D7980 slot 0x10  overrides hkpAction
     virtual void vf18();  // 011D7970 slot 0x18  overrides hkpAction
     virtual int vf1C(int * param_2, int param_3);  // 011D7960 slot 0x1C  overrides hkpAction
+    // non-virtual members
+    hkpConstraintChainInstanceAction();  // 011A9670
+    void ctor_011A97A0();  // 011A97A0
+    void ctor_011B1C40();  // 011B1C40
+    void ctor_011B1CD0();  // 011B1CD0
 };

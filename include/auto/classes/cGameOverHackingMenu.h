@@ -10,4 +10,6 @@ struct cGameOverHackingMenu : public cCustomObjCtrlManager {
     virtual void vf08();  // 00990A20 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 00990B90 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009A21E0 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cGameOverHackingMenu();  // 009A2120
 };

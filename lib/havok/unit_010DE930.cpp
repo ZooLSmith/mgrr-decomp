@@ -865,7 +865,7 @@ undefined4 * __thiscall hkDefaultClassWrapper::vf00(undefined4 *param_1,byte par
     FUN_010060a0();
   }
   param_1[2] = 0;
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -1572,7 +1572,7 @@ int __thiscall hkVersionPatchManager::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_73();
+  ::hkBaseObject::hkBaseObject_73();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -1637,9 +1637,9 @@ undefined4 __thiscall hkStaticClassNameRegistry::vf10(int param_1,undefined4 par
   return *(undefined4 *)(*(int *)(param_1 + 0xc) + iVar3 * 4);
 }
 
-// 010E07F0  hkStaticClassNameRegistry::hkStaticClassNameRegistry_2  size=49  [run]
+// 010E07F0  hkStaticClassNameRegistry::hkStaticClassNameRegistry  size=49  [run]
 void __thiscall
-hkStaticClassNameRegistry::hkStaticClassNameRegistry_2
+hkStaticClassNameRegistry::hkStaticClassNameRegistry
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
@@ -1733,7 +1733,7 @@ undefined4 * __thiscall hkStaticClassNameRegistry::vf00(undefined4 *param_1,byte
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -2365,8 +2365,8 @@ void FUN_010e1360(int param_1,int *param_2)
   return;
 }
 
-// 010E13C0  hkBaseObject::hkBaseObject_221  size=51  [run]
-void __fastcall hkBaseObject::hkBaseObject_221(undefined4 *param_1)
+// 010E13C0  hkBaseObject::hkBaseObject  size=51  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = hkTypeManager::vftable;
@@ -2828,7 +2828,7 @@ undefined4 FUN_010e1b80(undefined4 param_1)
   local_10 = 0;
   local_c = 0;
   local_8 = 0x80000000;
-  hkOstream::hkOstream_3(&local_10);
+  hkOstream::hkOstream(&local_10);
   FUN_010e0eb0(local_1c);
   if (local_c == (local_8 & 0x3fffffff)) {
     FUN_0100a290(&PTR_vftable_018e9b94,&local_10,1);
@@ -3600,7 +3600,7 @@ int __thiscall hkTypeManager::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_221();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

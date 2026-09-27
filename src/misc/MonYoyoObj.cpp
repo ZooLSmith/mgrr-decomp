@@ -307,7 +307,7 @@ int __thiscall MonYoyoObj::getAttackInfo(int param_1,ushort *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7bd48);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(uint **)(iVar2 + 8);
       puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -1034,10 +1034,10 @@ LAB_00534ecd:
   return;
 }
 
-// 00538D00  MonYoyoObj::vf40  size=934  [class]
+// 00538D00  MonYoyoObj::startup  size=934  [class]
 /* WARNING: Type propagation algorithm not settling */
 
-undefined4 __fastcall MonYoyoObj::vf40(int param_1)
+undefined4 __fastcall MonYoyoObj::startup(int param_1)
 
 {
   uint *puVar1;
@@ -1053,7 +1053,7 @@ undefined4 __fastcall MonYoyoObj::vf40(int param_1)
   undefined4 uStack_16c;
   undefined4 uStack_168;
   
-  iVar3 = BehaviorEmBase::vf40();
+  iVar3 = BehaviorEmBase::startup();
   if (iVar3 != 0) {
     if (*(int *)(param_1 + 0x4b0) == 0xf00d5) {
       FUN_00acf600(0xf00df,"YoyoBody");
@@ -1082,7 +1082,7 @@ undefined4 __fastcall MonYoyoObj::vf40(int param_1)
         iVar3 = 0;
       }
       else {
-        iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar3 = RigidBodyCollision::RigidBodyCollision();
       }
       *(int *)(param_1 + 0x7b0) = iVar3;
       if (iVar3 != 0) {
@@ -1525,7 +1525,7 @@ void __fastcall MonYoyoObj::vf4C(int *param_1)
     param_1[0x578] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
       param_1[0x577] = 0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -1546,15 +1546,15 @@ float10 __fastcall MonYoyoObj::vf24(int param_1)
   return (float10)*(float *)(param_1 + 0x910);
 }
 
-// 00AB9740  MonYoyoObj::vf00  size=76  [class]
-undefined4 __thiscall MonYoyoObj::vf00(undefined4 param_1,byte param_2)
+// 00AB9740  MonYoyoObj::destruct  size=76  [class]
+undefined4 __thiscall MonYoyoObj::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cXml::cXml_7();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

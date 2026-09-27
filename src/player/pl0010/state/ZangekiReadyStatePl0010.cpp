@@ -46,8 +46,8 @@ undefined4 * __thiscall ZangekiReadyStatePl0010::vf04(undefined4 *param_1,byte p
   return param_1;
 }
 
-// 00BB8000  ZangekiReadyStatePl0010::vf0C  size=259  [class]
-void __thiscall ZangekiReadyStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB8000  ZangekiReadyStatePl0010::SafeCheck  size=259  [class]
+void __thiscall ZangekiReadyStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -96,7 +96,7 @@ void __thiscall ZangekiReadyStatePl0010::vf0C(int param_1,undefined4 *param_2)
       }
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -228,8 +228,8 @@ undefined4 __thiscall ZangekiReadyStatePl0010::vf08(int param_1,undefined4 *para
   return 1;
 }
 
-// 00BE4D00  ZangekiReadyStatePl0010::vf10  size=1052  [class]
-void __thiscall ZangekiReadyStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BE4D00  ZangekiReadyStatePl0010::qteSafeCheck  size=1052  [class]
+void __thiscall ZangekiReadyStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -366,7 +366,7 @@ LAB_00be5047:
   if (((iVar3 == 0x31) || (iVar3 == 0x45)) || (iVar3 == 0x46)) {
     FUN_00b8c400();
   }
-  StateMachineNode::vf10(puVar2);
+  StateMachineNode::qteSafeCheck(puVar2);
   return;
 }
 

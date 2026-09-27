@@ -99,7 +99,7 @@ void __fastcall FUN_007edf50(int *param_1)
 LAB_007ee2b4:
     iVar2 = thunk_FUN_00e58ed0(param_1[0x509]);
     if (iVar2 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   default:

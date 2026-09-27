@@ -21,7 +21,7 @@ undefined4 * __fastcall
 cWeaponSelectItemMessageBase::cWeaponSelectItemMessageBase(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

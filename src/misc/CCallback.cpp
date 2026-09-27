@@ -128,10 +128,10 @@ CCallback<CSteamAchievements,UserStatsReceived_t,0>_2(int param_1,byte param_2)
   return param_1;
 }
 
-// 009820D0  CCallback<CSteamAchievements,UserStatsReceived_t,0>::CCallback<CSteamAchievements,UserStatsReceived_t,0>  size=205  [class]
+// 009820D0  CCallback<CSteamAchievements,UserAchievementStored_t,0>::CCallback<CSteamAchievements,UserAchievementStored_t,0>  size=205  [class]
 undefined4 * __thiscall
-CCallback<CSteamAchievements,UserStatsReceived_t,0>::
-CCallback<CSteamAchievements,UserStatsReceived_t,0>
+CCallback<CSteamAchievements,UserAchievementStored_t,0>::
+CCallback<CSteamAchievements,UserAchievementStored_t,0>
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -142,7 +142,7 @@ CCallback<CSteamAchievements,UserStatsReceived_t,0>
   param_1[1] = 0;
   *(undefined1 *)(param_1 + 5) = 0;
   param_1[6] = 0;
-  param_1[4] = vftable;
+  param_1[4] = CCallback<CSteamAchievements,UserStatsReceived_t,0>::vftable;
   param_1[7] = param_1;
   param_1[8] = &LAB_00981bd0;
   param_1[7] = param_1;
@@ -158,7 +158,7 @@ CCallback<CSteamAchievements,UserStatsReceived_t,0>
   SteamAPI_RegisterCallback(param_1 + 9,0x44e);
   *(undefined1 *)(param_1 + 0xf) = 0;
   param_1[0x10] = 0;
-  param_1[0xe] = CCallback<CSteamAchievements,UserAchievementStored_t,0>::vftable;
+  param_1[0xe] = vftable;
   param_1[0x11] = param_1;
   param_1[0x12] = &LAB_00981c50;
   param_1[0x11] = param_1;
@@ -188,8 +188,8 @@ void __fastcall FUN_009821a0(int param_1)
     *(undefined4 *)(param_1 + 0x10) = 0;
     iVar1 = FUN_00dd3500(0x4c,&DAT_01b7bcf0);
     if (iVar1 != 0) {
-      uVar3 = CCallback<CSteamAchievements,UserStatsReceived_t,0>::
-              CCallback<CSteamAchievements,UserStatsReceived_t,0>(&DAT_01887c70,0x3c);
+      uVar3 = CCallback<CSteamAchievements,UserAchievementStored_t,0>::
+              CCallback<CSteamAchievements,UserAchievementStored_t,0>(&DAT_01887c70,0x3c);
       *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
       *(undefined4 *)(param_1 + 0x18) = uVar3;
       return;

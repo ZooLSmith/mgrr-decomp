@@ -36,7 +36,7 @@ hkpAllRayHitCollector::hkpAllRayHitCollector_5
   
   iVar4 = 0;
   local_368 = 0;
-  hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector();
   local_360 = *param_3;
   local_33c = (float)param_3[1] + param_4;
   local_358 = param_3[2];

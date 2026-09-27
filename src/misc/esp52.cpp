@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp52::esp52(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,18 +17,18 @@ undefined4 * __fastcall esp52::esp52(undefined4 *param_1)
 undefined4 __thiscall esp52::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 00F38780  esp52::vf04  size=5  [class]
+// 00F38780  esp52::preTrans  size=5  [class]
 /* WARNING: Removing unreachable block (ram,0x00f2d2ca) */
 /* WARNING: Removing unreachable block (ram,0x00f2d32b) */
 
-void __thiscall esp52::vf04(int param_1,undefined4 *param_2,float *param_3,undefined4 param_4)
+void __thiscall esp52::preTrans(int param_1,undefined4 *param_2,float *param_3,undefined4 param_4)
 
 {
   float *pfVar1;

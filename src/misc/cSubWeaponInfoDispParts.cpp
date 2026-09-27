@@ -28,8 +28,8 @@ void __fastcall FUN_00cf24a0(int param_1)
   return;
 }
 
-// 00D26190  cSubWeaponInfoDispParts::vf14  size=3018  [class]
-void __fastcall cSubWeaponInfoDispParts::vf14(int param_1)
+// 00D26190  cSubWeaponInfoDispParts::create  size=3018  [class]
+void __fastcall cSubWeaponInfoDispParts::create(int param_1)
 
 {
   float *pfVar1;

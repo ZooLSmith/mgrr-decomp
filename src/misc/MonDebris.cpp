@@ -49,8 +49,8 @@ void __fastcall MonDebris::vf300(int param_1)
   return;
 }
 
-// 0051B6F0  MonDebris::vf1B8  size=31  [class]
-void MonDebris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 0051B6F0  MonDebris::setCutCrerateInfo  size=31  [class]
+void MonDebris::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -63,13 +63,13 @@ void MonDebris::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 0051EA60  MonDebris::vf40  size=73  [class]
-void __fastcall MonDebris::vf40(int param_1)
+// 0051EA60  MonDebris::startup  size=73  [class]
+void __fastcall MonDebris::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = RayArmorDebris::vf40();
+  iVar1 = RayArmorDebris::startup();
   if (iVar1 == 0) {
     return;
   }
@@ -122,8 +122,8 @@ undefined * MonDebris::vf04(void)
   return &DAT_01b34f64;
 }
 
-// 00AB8760  MonDebris::vf00  size=105  [class]
-undefined4 * __thiscall MonDebris::vf00(undefined4 *param_1,byte param_2)
+// 00AB8760  MonDebris::destruct  size=105  [class]
+undefined4 * __thiscall MonDebris::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -137,7 +137,7 @@ undefined4 * __thiscall MonDebris::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

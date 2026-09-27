@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiOnPartsStatePl0010::ZangekiOnPartsStatePl0010(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a603a0();
   return param_1;
@@ -267,8 +267,8 @@ undefined4 __thiscall ZangekiOnPartsStatePl0010::vf08(int param_1,undefined4 *pa
   return 1;
 }
 
-// 00BCFF40  ZangekiOnPartsStatePl0010::vf0C  size=1606  [class]
-void __thiscall ZangekiOnPartsStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BCFF40  ZangekiOnPartsStatePl0010::SafeCheck  size=1606  [class]
+void __thiscall ZangekiOnPartsStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -517,7 +517,7 @@ LAB_00bd04d4:
 LAB_00bd0572:
   local_244 = param_2;
   local_248 = (float *)0xbd057d;
-  StateMachineNode::vf0C();
+  StateMachineNode::SafeCheck();
   return;
 }
 
@@ -583,7 +583,7 @@ undefined4 __thiscall ZangekiOnPartsStatePl0010::vf20(undefined4 param_1,undefin
     FUN_00a7c950();
     iVar2 = FUN_00a7c8a0();
     if (iVar2 != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   DAT_01d61a88 = 0;
@@ -1594,10 +1594,10 @@ FUN_00bd1d40(int param_1,float *param_2,int param_3,int param_4,float param_5,fl
   return;
 }
 
-// 00BFFF20  ZangekiOnPartsStatePl0010::vf10  size=9928  [class]
+// 00BFFF20  ZangekiOnPartsStatePl0010::qteSafeCheck  size=9928  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiOnPartsStatePl0010::vf10(int param_1,undefined4 *param_2)
+void __thiscall ZangekiOnPartsStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   code *pcVar1;
@@ -2627,7 +2627,7 @@ LAB_00c01eb3:
     *(undefined4 *)(param_1 + 500) = *(undefined4 *)(param_1 + 0x84);
     *(undefined4 *)(param_1 + 0x1f8) = *(undefined4 *)(param_1 + 0x88);
     *(undefined4 *)(param_1 + 0x1fc) = *(undefined4 *)(param_1 + 0x8c);
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   *(undefined4 *)(param_1 + 0x70) = *(undefined4 *)(param_1 + 0x1e0);
@@ -2638,7 +2638,7 @@ LAB_00c01eb3:
   *(undefined4 *)(param_1 + 0x84) = *(undefined4 *)(param_1 + 500);
   *(undefined4 *)(param_1 + 0x88) = *(undefined4 *)(param_1 + 0x1f8);
   *(undefined4 *)(param_1 + 0x8c) = *(undefined4 *)(param_1 + 0x1fc);
-  StateMachineNode::vf10();
+  StateMachineNode::qteSafeCheck();
   return;
 }
 

@@ -1,5 +1,5 @@
 // src/misc/cPauseMenu.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00993F60..009B4730, 7 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00993F60..009B4730, 9 functions
 
 #include "mgrr.h"
 #include "cPauseMenu.h"
@@ -109,6 +109,40 @@ void __thiscall FUN_00994150(int param_1,int param_2)
 switchD_00994167_caseD_5:
   FUN_00ce4d70(5);
   return;
+}
+
+// 009A4FC0  cPauseMenu::~cPauseMenu  size=65  [class]
+void __fastcall cPauseMenu::~cPauseMenu(undefined4 *param_1)
+
+{
+  *param_1 = vftable;
+  FUN_00cfe0f0(2);
+  param_1[0x2e] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[0x2f] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x2f])(1);
+    param_1[0x2f] = 0;
+  }
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 009A5010  FUN_009a5010  size=68  [between]
+int FUN_009a5010(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00dd3500(0xcc,&DAT_01b7be50);
+  if (iVar1 != 0) {
+    iVar1 = cMessWindowCtrl::cMessWindowCtrl();
+    if (iVar1 != 0) {
+      *(char **)(iVar1 + 0xc) = "cPauseMenu";
+      FUN_00d29ca0(0x6f,10);
+      *(undefined4 *)(iVar1 + 0x10) = 0;
+    }
+    return iVar1;
+  }
+  return 0;
 }
 
 // 009A5060  cPauseMenu::vf08  size=916  [class]
@@ -372,15 +406,15 @@ undefined4 * __thiscall cPauseMenu::vf00(undefined4 *param_1,byte param_2)
     (*(code *)**(undefined4 **)param_1[0x2f])(1);
     param_1[0x2f] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009B4730  cPauseMenu::vf14  size=472  [class]
-void __fastcall cPauseMenu::vf14(int param_1)
+// 009B4730  cPauseMenu::create  size=472  [class]
+void __fastcall cPauseMenu::create(int param_1)
 
 {
   int iVar1;

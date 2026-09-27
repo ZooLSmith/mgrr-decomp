@@ -10,5 +10,5 @@ struct ContentCheckWindow : public cCustomObjCtrlManager {
     virtual void vf08();  // 00999880 slot 0x8  overrides cCustomObjCtrlManager
     virtual void create();  // 00999950 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
-    ContentCheckWindow();  // 009997C0
+    ~ContentCheckWindow();  // 009997C0
 };

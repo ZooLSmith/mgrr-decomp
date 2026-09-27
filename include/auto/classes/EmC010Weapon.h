@@ -11,4 +11,6 @@ struct EmC010Weapon : public cEm0010Weapon {
     virtual undefined4 startup();  // 00710D40 slot 0x40  overrides Behavior
     virtual undefined4 vf94();  // 00AB40E0 slot 0x94  overrides Behavior
     virtual undefined4 vf98();  // 00710EB0 slot 0x98  overrides Behavior
+    // non-virtual members
+    EmC010Weapon();  // 00AB4090
 };

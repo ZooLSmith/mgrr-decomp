@@ -188,7 +188,7 @@ waypoint::WaypointLinkNodeArray::WaypointLinkNodeArray(int param_1,int *param_2)
       uVar3 = FUN_00dd29b0(*piVar1 << 4,0x80,0,0);
       *(undefined4 *)(param_1 + 0x4c) = uVar3;
     }
-    lib::Array<unsigned_short>::Array<unsigned_short>_2();
+    lib::Array<unsigned_short>::Array<unsigned_short>();
     (**(code **)(*(int *)(param_1 + 0x2c) + 0x14))(*(undefined4 *)(param_1 + 0x50));
     uStack_2c = 0;
     if (0 < *(int *)(param_1 + 0x44)) {

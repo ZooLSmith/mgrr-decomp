@@ -9,5 +9,6 @@ struct ValidatedClassNameRegistry : public hkDynamicClassNameRegistry {
     virtual undefined4 * vf00(byte param_2);  // 0104FEF0 slot 0x0  overrides hkBaseObject
     virtual void vf1C(undefined4 param_1, uint param_2);  // 0104E0A0 slot 0x1C  overrides hkDynamicClassNameRegistry
     // non-virtual members
+    ValidatedClassNameRegistry();  // 0104E6C0
     static void vf28(undefined4 param_2);  // 0104F690
 };

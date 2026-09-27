@@ -52,6 +52,5 @@ struct GameWorkManagerImplement : public GameWorkManager {
     virtual int vfAC();  // 00C42B10 slot 0xAC  overrides GameWorkManager
     virtual void vfB0();  // 00C1B930 slot 0xB0  overrides GameWorkManager
     // non-virtual members
-    GameWorkManagerImplement(undefined4 param_1);  // 00C50480
-    void ctor_00C50500(undefined4 param_1);  // 00C50500
+    ~GameWorkManagerImplement();  // 00C50480
 };

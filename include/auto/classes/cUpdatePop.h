@@ -12,5 +12,5 @@ struct cUpdatePop : public cCustomObjCtrlManager {
     virtual void create();  // 009A2050 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
     cUpdatePop();  // 00990760
-    void ctor_00990780();  // 00990780
+    ~cUpdatePop();  // 00990780
 };

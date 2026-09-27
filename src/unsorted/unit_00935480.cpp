@@ -34,8 +34,8 @@ undefined4 * __fastcall FUN_009354f0(undefined4 *param_1)
   param_1[0x210] = 0;
   param_1[0x212] = 0;
   param_1[0x213] = 0;
-  Hw::cTexture::cTexture_6();
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
+  Hw::cTexture::cTexture();
   puVar2 = param_1;
   for (iVar1 = 0x200; iVar1 != 0; iVar1 = iVar1 + -1) {
     *puVar2 = 0;

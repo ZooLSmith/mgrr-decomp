@@ -20,8 +20,8 @@ void cEspList::preTrans(void)
   return;
 }
 
-// 00F435A0  cEspList::vf04  size=27  [class]
-bool cEspList::vf04(undefined4 param_1,undefined4 param_2)
+// 00F435A0  cEspList::startup  size=27  [class]
+bool cEspList::startup(undefined4 param_1,undefined4 param_2)
 
 {
   int iVar1;

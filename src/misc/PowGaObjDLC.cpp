@@ -28,8 +28,8 @@ void __fastcall PowGaObjDLC::vf48(int param_1)
   return;
 }
 
-// 008477B0  PowGaObjDLC::vf40  size=361  [class]
-undefined4 __fastcall PowGaObjDLC::vf40(int param_1)
+// 008477B0  PowGaObjDLC::startup  size=361  [class]
+undefined4 __fastcall PowGaObjDLC::startup(int param_1)
 
 {
   int iVar1;
@@ -38,7 +38,7 @@ undefined4 __fastcall PowGaObjDLC::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -249,7 +249,7 @@ int __thiscall PowGaObjDLC::getAttackInfo(int param_1,ushort *param_2)
   uint local_8;
   
   iVar3 = FUN_00dd3500(0x110,&DAT_01b7bd48);
-  if ((iVar3 == 0) || (iVar3 = CollisionAttackData::CollisionAttackData_3(), iVar3 == 0)) {
+  if ((iVar3 == 0) || (iVar3 = CollisionAttackData::CollisionAttackData(), iVar3 == 0)) {
     FUN_00dd5650(&DAT_01648c34);
     return 0;
   }
@@ -561,7 +561,7 @@ void __fastcall PowGaObjDLC::vf4C(int *param_1)
   if ((fVar1 - (float)param_1[0x244] < 0.0) && (param_1[0x2a6] == 0)) {
     (**(code **)(param_1[0x280] + 8))(0x3f800000,0,0);
     param_1[0x2ac] = 0;
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   return;
@@ -574,11 +574,11 @@ undefined * PowGaObjDLC::vf04(void)
   return &DAT_01b35abc;
 }
 
-// 00ABA050  PowGaObjDLC::vf00  size=30  [class]
-undefined4 __thiscall PowGaObjDLC::vf00(undefined4 param_1,byte param_2)
+// 00ABA050  PowGaObjDLC::destruct  size=30  [class]
+undefined4 __thiscall PowGaObjDLC::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_3();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -9,4 +9,6 @@ struct Pf32 {
     virtual void vf08();  // 00D65B90 slot 0x8  overrides cPhaseAbstract
     virtual void vf0C();  // 00D65CF0 slot 0xC  overrides cPhaseAbstract
     virtual void vf10();  // 00D57030 slot 0x10  overrides cPhaseAbstract
+    // non-virtual members
+    Pf32();  // 00D6FB70
 };

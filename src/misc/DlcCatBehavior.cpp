@@ -80,8 +80,8 @@ undefined4 __fastcall DlcCatBehavior::vf94(int param_1)
   return *(undefined4 *)(param_1 + 0xa28);
 }
 
-// 00603780  DlcCatBehavior::vf40  size=500  [class]
-undefined4 __fastcall DlcCatBehavior::vf40(int *param_1)
+// 00603780  DlcCatBehavior::startup  size=500  [class]
+undefined4 __fastcall DlcCatBehavior::startup(int *param_1)
 
 {
   int iVar1;
@@ -89,7 +89,7 @@ undefined4 __fastcall DlcCatBehavior::vf40(int *param_1)
   undefined4 uVar3;
   undefined4 *puVar4;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -264,8 +264,8 @@ undefined * DlcCatBehavior::vf04(void)
   return &DAT_01b354d4;
 }
 
-// 00AB9BE0  DlcCatBehavior::vf00  size=105  [class]
-undefined4 * __thiscall DlcCatBehavior::vf00(undefined4 *param_1,byte param_2)
+// 00AB9BE0  DlcCatBehavior::destruct  size=105  [class]
+undefined4 * __thiscall DlcCatBehavior::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -279,7 +279,7 @@ undefined4 * __thiscall DlcCatBehavior::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

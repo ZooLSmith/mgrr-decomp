@@ -4,14 +4,14 @@
 #include "mgrr.h"
 #include "Ba5002.h"
 
-// 00408E10  Ba5002::vf40  size=58  [class]
-int __fastcall Ba5002::vf40(int param_1)
+// 00408E10  Ba5002::startup  size=58  [class]
+int __fastcall Ba5002::startup(int param_1)
 
 {
   int iVar1;
   int iVar2;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -196,8 +196,8 @@ undefined * Ba5002::vf04(void)
   return &DAT_01b34b40;
 }
 
-// 00AB9640  Ba5002::vf00  size=43  [class]
-undefined4 __thiscall Ba5002::vf00(undefined4 param_1,byte param_2)
+// 00AB9640  Ba5002::destruct  size=43  [class]
+undefined4 __thiscall Ba5002::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

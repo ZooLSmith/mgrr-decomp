@@ -34,14 +34,14 @@ undefined4 * __fastcall hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape(und
   return param_1;
 }
 
-// 01065C40  hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape_2  size=37  [run]
+// 01065C40  hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape  size=37  [run]
 undefined4 * __thiscall
-hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape_2(undefined4 *param_1,undefined4 param_2)
+hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape(undefined4 *param_1,undefined4 param_2)
 
 {
   undefined4 extraout_EDX;
   
-  hkSkinnedMeshShape::hkSkinnedMeshShape_2(param_2);
+  hkSkinnedMeshShape::hkSkinnedMeshShape(param_2);
   *param_1 = vftable;
   FUN_010065b0(extraout_EDX);
   return param_1;
@@ -274,7 +274,7 @@ int __thiscall hkSkinnedMeshShape::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_242();
+  ::hkBaseObject::~hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -531,7 +531,7 @@ void __fastcall FUN_01066660(int param_1)
   }
   *(undefined4 *)(param_1 + 8) = 0;
   *(undefined4 *)(param_1 + 0x10) = 0x80000000;
-  hkBaseObject::hkBaseObject_242();
+  hkBaseObject::~hkBaseObject();
   return;
 }
 
@@ -838,7 +838,7 @@ int __thiscall FUN_010669f0(int param_1,int *param_2,int param_3)
     pvVar3 = TlsGetValue(DAT_01f8fc4c);
     iVar6 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x1a8);
     *(undefined2 *)(iVar6 + 4) = 0x1a8;
-    iVar8 = hkMemoryMeshVertexBuffer::~hkMemoryMeshVertexBuffer(local_1d0,iVar8);
+    iVar8 = hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer(local_1d0,iVar8);
     if (iVar8 != 0) {
       FUN_01006000();
     }
@@ -1016,9 +1016,9 @@ void __thiscall FUN_01066fc0(int param_1,int param_2)
   return;
 }
 
-// 01067040  hkMultipleVertexBuffer::hkMultipleVertexBuffer_2  size=230  [run]
+// 01067040  hkMultipleVertexBuffer::hkMultipleVertexBuffer  size=230  [run]
 undefined4 * __thiscall
-hkMultipleVertexBuffer::hkMultipleVertexBuffer_2(undefined4 *param_1,int param_2,undefined4 param_3)
+hkMultipleVertexBuffer::hkMultipleVertexBuffer(undefined4 *param_1,int param_2,undefined4 param_3)
 
 {
   int iVar1;
@@ -1060,17 +1060,17 @@ hkMultipleVertexBuffer::hkMultipleVertexBuffer_2(undefined4 *param_1,int param_2
   return param_1;
 }
 
-// 01067130  hkMultipleVertexBuffer::hkMultipleVertexBuffer  size=11  [run]
-void __fastcall hkMultipleVertexBuffer::hkMultipleVertexBuffer(undefined4 *param_1)
+// 01067130  hkMultipleVertexBuffer::~hkMultipleVertexBuffer  size=11  [run]
+void __fastcall hkMultipleVertexBuffer::~hkMultipleVertexBuffer(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   return;
 }
 
-// 01067140  hkMultipleVertexBuffer::~hkMultipleVertexBuffer  size=799  [run]
+// 01067140  hkMultipleVertexBuffer::hkMultipleVertexBuffer  size=799  [run]
 undefined4 * __thiscall
-hkMultipleVertexBuffer::~hkMultipleVertexBuffer(undefined4 *param_1,int param_2)
+hkMultipleVertexBuffer::hkMultipleVertexBuffer(undefined4 *param_1,int param_2)
 
 {
   int iVar1;
@@ -1247,7 +1247,7 @@ int __fastcall hkMultipleVertexBuffer::vf0C(int param_1)
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x144);
     *(undefined2 *)(iVar2 + 4) = 0x144;
-    iVar2 = ~hkMultipleVertexBuffer(param_1);
+    iVar2 = hkMultipleVertexBuffer(param_1);
     FUN_01066810();
     return iVar2;
   }
@@ -1731,7 +1731,7 @@ undefined4 * __thiscall hkMeshVertexBuffer::vf00(undefined4 *param_1,byte param_
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -2407,7 +2407,7 @@ int __thiscall hkMultipleVertexBuffer::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_170();
+  ::hkBaseObject::hkBaseObject_170();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -2537,17 +2537,17 @@ void __thiscall FUN_01068f90(int param_1,int param_2,int param_3,int param_4)
   return;
 }
 
-// 01069850  hkIndexedTransformSet::hkIndexedTransformSet  size=11  [run]
-void __fastcall hkIndexedTransformSet::hkIndexedTransformSet(undefined4 *param_1)
+// 01069850  hkIndexedTransformSet::~hkIndexedTransformSet  size=11  [run]
+void __fastcall hkIndexedTransformSet::~hkIndexedTransformSet(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   return;
 }
 
-// 01069860  hkIndexedTransformSet::hkIndexedTransformSet_2  size=919  [run]
+// 01069860  hkIndexedTransformSet::hkIndexedTransformSet  size=919  [run]
 undefined4 * __thiscall
-hkIndexedTransformSet::hkIndexedTransformSet_2(undefined4 *param_1,int *param_2)
+hkIndexedTransformSet::hkIndexedTransformSet(undefined4 *param_1,int *param_2)
 
 {
   int *piVar1;
@@ -3507,7 +3507,7 @@ int __thiscall hkIndexedTransformSet::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_156();
+  ::hkBaseObject::hkBaseObject_156();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -3558,9 +3558,9 @@ uint __fastcall hkSkinnedRefMeshShape::vf18(int param_1)
   return *(uint *)(param_1 + 0x24) & 0xfffffffe;
 }
 
-// 0106AC40  hkSkinnedRefMeshShape::hkSkinnedRefMeshShape_2  size=140  [run]
+// 0106AC40  hkSkinnedRefMeshShape::hkSkinnedRefMeshShape  size=140  [run]
 undefined4 * __thiscall
-hkSkinnedRefMeshShape::hkSkinnedRefMeshShape_2
+hkSkinnedRefMeshShape::hkSkinnedRefMeshShape
           (undefined4 *param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5)
 
 {
@@ -3582,9 +3582,9 @@ hkSkinnedRefMeshShape::hkSkinnedRefMeshShape_2
   return param_1;
 }
 
-// 0106ACD0  hkSkinnedRefMeshShape::hkSkinnedRefMeshShape_3  size=83  [run]
+// 0106ACD0  hkSkinnedRefMeshShape::hkSkinnedRefMeshShape  size=83  [run]
 undefined4 * __thiscall
-hkSkinnedRefMeshShape::hkSkinnedRefMeshShape_3(undefined4 *param_1,int param_2)
+hkSkinnedRefMeshShape::hkSkinnedRefMeshShape(undefined4 *param_1,int param_2)
 
 {
   *(undefined2 *)((int)param_1 + 6) = 1;
@@ -3684,7 +3684,7 @@ int FUN_0106ae20(int param_1,int param_2,int param_3)
   pvVar3 = TlsGetValue(DAT_01f8fc4c);
   iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x28);
   *(undefined2 *)(iVar4 + 4) = 0x28;
-  iVar8 = hkSkinnedRefMeshShape::hkSkinnedRefMeshShape_3(iVar8);
+  iVar8 = hkSkinnedRefMeshShape::hkSkinnedRefMeshShape(iVar8);
   uVar5 = *(uint *)(iVar8 + 0x14) & 0x3fffffff;
   if ((int)uVar5 < iVar6) {
     iVar4 = uVar5 * 2;
@@ -3979,7 +3979,7 @@ undefined4 * __thiscall hkMeshShape::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -4150,7 +4150,7 @@ int __thiscall hkSkinnedRefMeshShape::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_157();
+  ::hkBaseObject::hkBaseObject_157();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -4507,9 +4507,9 @@ undefined4 * __fastcall hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer(undef
   return param_1;
 }
 
-// 0106BCA0  hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer_2  size=39  [run]
+// 0106BCA0  hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer  size=39  [run]
 undefined4 * __thiscall
-hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer_2(undefined4 *param_1,int param_2)
+hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer(undefined4 *param_1,int param_2)
 
 {
   *param_1 = vftable;
@@ -4575,9 +4575,9 @@ void __fastcall hkBaseObject::hkBaseObject_153(undefined4 *param_1)
   return;
 }
 
-// 0106BDD0  hkMemoryMeshVertexBuffer::~hkMemoryMeshVertexBuffer  size=96  [run]
+// 0106BDD0  hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer  size=96  [run]
 undefined4 * __thiscall
-hkMemoryMeshVertexBuffer::~hkMemoryMeshVertexBuffer
+hkMemoryMeshVertexBuffer::hkMemoryMeshVertexBuffer
           (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -4612,7 +4612,7 @@ int __fastcall hkMemoryMeshVertexBuffer::vf0C(int param_1)
     pvVar4 = TlsGetValue(DAT_01f8fc4c);
     iVar5 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x1a8);
     *(undefined2 *)(iVar5 + 4) = 0x1a8;
-    iVar5 = ~hkMemoryMeshVertexBuffer(param_1 + 8,*(undefined4 *)(param_1 + 0x1a0));
+    iVar5 = hkMemoryMeshVertexBuffer(param_1 + 8,*(undefined4 *)(param_1 + 0x1a0));
     iVar8 = *(int *)(param_1 + 0x198) * *(int *)(param_1 + 0x1a0);
     puVar7 = *(undefined4 **)(param_1 + 0x18c);
     puVar6 = *(undefined4 **)(iVar5 + 0x18c);
@@ -4751,7 +4751,7 @@ int __thiscall hkMemoryMeshVertexBuffer::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_153();
+  ::hkBaseObject::hkBaseObject_153();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -5096,8 +5096,8 @@ LAB_0106c55d:
   } while( true );
 }
 
-// 0106C5A0  hkMemoryMeshShape::hkMemoryMeshShape_2  size=164  [run]
-undefined4 * __thiscall hkMemoryMeshShape::hkMemoryMeshShape_2(undefined4 *param_1,int param_2)
+// 0106C5A0  hkMemoryMeshShape::hkMemoryMeshShape  size=164  [run]
+undefined4 * __thiscall hkMemoryMeshShape::hkMemoryMeshShape(undefined4 *param_1,int param_2)
 
 {
   char cVar1;
@@ -5435,7 +5435,7 @@ int __thiscall hkMemoryMeshShape::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_203();
+  ::hkBaseObject::hkBaseObject_203();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -5699,9 +5699,9 @@ hkMemoryMeshMaterial::hkMemoryMeshMaterial(undefined4 *param_1,undefined4 param_
   return param_1;
 }
 
-// 0106CF90  hkMemoryMeshMaterial::hkMemoryMeshMaterial_2  size=31  [run]
+// 0106CF90  hkMemoryMeshMaterial::hkMemoryMeshMaterial  size=31  [run]
 undefined4 * __thiscall
-hkMemoryMeshMaterial::hkMemoryMeshMaterial_2(undefined4 *param_1,undefined4 param_2)
+hkMemoryMeshMaterial::hkMemoryMeshMaterial(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -5868,7 +5868,7 @@ undefined4 * __thiscall hkMeshMaterial::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -6074,7 +6074,7 @@ int __thiscall hkMemoryMeshMaterial::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_194();
+  ::hkBaseObject::hkBaseObject_194();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -6368,7 +6368,7 @@ undefined4 * __thiscall hkMeshBody::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -6446,8 +6446,8 @@ void __fastcall FUN_0106dc50(undefined4 *param_1)
   return;
 }
 
-// 0106DC90  hkMemoryMeshBody::hkMemoryMeshBody_2  size=31  [run]
-undefined4 * __thiscall hkMemoryMeshBody::hkMemoryMeshBody_2(undefined4 *param_1,undefined4 param_2)
+// 0106DC90  hkMemoryMeshBody::hkMemoryMeshBody  size=31  [run]
+undefined4 * __thiscall hkMemoryMeshBody::hkMemoryMeshBody(undefined4 *param_1,undefined4 param_2)
 
 {
   *param_1 = vftable;
@@ -6541,7 +6541,7 @@ hkMemoryMeshBody::hkMemoryMeshBody
     pvVar4 = TlsGetValue(DAT_01f8fc4c);
     iVar5 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x48);
     *(undefined2 *)(iVar5 + 4) = 0x48;
-    iVar5 = hkIndexedTransformSet::hkIndexedTransformSet_2(param_5);
+    iVar5 = hkIndexedTransformSet::hkIndexedTransformSet(param_5);
     if (iVar5 != 0) {
       FUN_01006000();
     }
@@ -7081,7 +7081,7 @@ int __thiscall hkMemoryMeshBody::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_189();
+  ::hkBaseObject::hkBaseObject_189();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

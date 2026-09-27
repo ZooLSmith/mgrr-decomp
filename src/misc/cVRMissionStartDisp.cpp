@@ -347,8 +347,8 @@ LAB_00d0430c:
   return;
 }
 
-// 00D43990  cVRMissionStartDisp::vf14  size=240  [class]
-void __fastcall cVRMissionStartDisp::vf14(int param_1)
+// 00D43990  cVRMissionStartDisp::create  size=240  [class]
+void __fastcall cVRMissionStartDisp::create(int param_1)
 
 {
   float fVar1;

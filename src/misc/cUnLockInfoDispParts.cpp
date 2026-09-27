@@ -242,8 +242,8 @@ undefined4 __fastcall FUN_00d40350(int param_1)
   return uVar3;
 }
 
-// 00D43790  cUnLockInfoDispParts::vf14  size=492  [class]
-void __fastcall cUnLockInfoDispParts::vf14(int param_1)
+// 00D43790  cUnLockInfoDispParts::create  size=492  [class]
+void __fastcall cUnLockInfoDispParts::create(int param_1)
 
 {
   int iVar1;

@@ -258,8 +258,8 @@ undefined4 * __thiscall hkDataWorldNative::hkDataWorldNative(undefined4 *param_1
   return param_1;
 }
 
-// 010E30F0  hkBaseObject::hkBaseObject_207  size=237  [run]
-void __fastcall hkBaseObject::hkBaseObject_207(undefined4 *param_1)
+// 010E30F0  hkBaseObject::hkBaseObject  size=237  [run]
+void __fastcall hkBaseObject::hkBaseObject(undefined4 *param_1)
 
 {
   undefined4 uVar1;
@@ -284,7 +284,7 @@ void __fastcall hkBaseObject::hkBaseObject_207(undefined4 *param_1)
   }
   param_1[0x2e] = 0;
   param_1[0x30] = 0x80000000;
-  hkBaseObject_221();
+  hkBaseObject();
   FUN_01025870();
   if (param_1[4] != 0) {
     FUN_010060a0();
@@ -1056,9 +1056,9 @@ void __thiscall FUN_010e3bc0(int param_1,int *param_2)
   return;
 }
 
-// 010E3C30  hkDataArrayNative::~hkDataArrayNative  size=102  [run]
+// 010E3C30  hkDataArrayNative::hkDataArrayNative  size=102  [run]
 undefined4 * __thiscall
-hkDataArrayNative::~hkDataArrayNative
+hkDataArrayNative::hkDataArrayNative
           (undefined4 *param_1,int *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5
           ,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,
           undefined4 param_10)
@@ -1458,9 +1458,9 @@ undefined4 __thiscall hkDataArrayNative::vf64(int param_1,int param_2)
     pvVar2 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar2 + 0x2c) + 4))(0x34);
     *(undefined2 *)(iVar3 + 4) = 0x34;
-    uVar4 = ~hkDataArrayNative(*(undefined4 *)(param_1 + 0xc),puVar5,*(undefined4 *)(param_1 + 0x2c)
-                               ,iVar1,*(undefined4 *)(param_1 + 0x1c),
-                               *(undefined4 *)(param_1 + 0x20),*(undefined4 *)(param_1 + 0x24),0,0);
+    uVar4 = hkDataArrayNative(*(undefined4 *)(param_1 + 0xc),puVar5,*(undefined4 *)(param_1 + 0x2c),
+                              iVar1,*(undefined4 *)(param_1 + 0x1c),*(undefined4 *)(param_1 + 0x20),
+                              *(undefined4 *)(param_1 + 0x24),0,0);
     return uVar4;
   }
   if (*(int *)(param_1 + 0x1c) == 0x16) {
@@ -1468,9 +1468,9 @@ undefined4 __thiscall hkDataArrayNative::vf64(int param_1,int param_2)
     pvVar2 = TlsGetValue(DAT_01f8fc4c);
     iVar1 = (**(code **)(**(int **)((int)pvVar2 + 0x2c) + 4))(0x34);
     *(undefined2 *)(iVar1 + 4) = 0x34;
-    uVar4 = ~hkDataArrayNative(*(undefined4 *)(param_1 + 0xc),*puVar5,puVar5[1],uVar4,
-                               *(undefined4 *)(param_1 + 0x20),0,*(undefined4 *)(param_1 + 0x24),0,0
-                              );
+    uVar4 = hkDataArrayNative(*(undefined4 *)(param_1 + 0xc),*puVar5,puVar5[1],uVar4,
+                              *(undefined4 *)(param_1 + 0x20),0,*(undefined4 *)(param_1 + 0x24),0,0)
+    ;
     return uVar4;
   }
   return 0;
@@ -1511,9 +1511,9 @@ undefined4 * __thiscall hkDataArrayImpl::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 010E4430  hkDataObjectNative::hkDataObjectNative_2  size=77  [run]
+// 010E4430  hkDataObjectNative::hkDataObjectNative  size=77  [run]
 undefined4 * __thiscall
-hkDataObjectNative::hkDataObjectNative_2(undefined4 *param_1,undefined4 *param_2,int param_3)
+hkDataObjectNative::hkDataObjectNative(undefined4 *param_1,undefined4 *param_2,int param_3)
 
 {
   int iVar1;
@@ -1628,7 +1628,7 @@ undefined4 * __thiscall hkDataWorld::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -2000,8 +2000,8 @@ LAB_010e4c1f:
       iVar7 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x34);
       *(undefined2 *)(iVar7 + 4) = 0x34;
       puVar5 = (undefined4 *)
-               hkDataArrayNative::~hkDataArrayNative
-                         (*(undefined4 *)(param_1 + 0x14),0,0,0,0,0,0,0,0);
+               hkDataArrayNative::hkDataArrayNative(*(undefined4 *)(param_1 + 0x14),0,0,0,0,0,0,0,0)
+      ;
       return puVar5;
     }
     if (param_2 == -1) {
@@ -2246,7 +2246,7 @@ int __thiscall hkDataWorldNative::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_207();
+  ::hkBaseObject::hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));

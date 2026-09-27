@@ -23,8 +23,8 @@ void __fastcall cVRMissionBackPanel::vf08(int param_1)
   return;
 }
 
-// 00CD9820  cVRMissionBackPanel::vf14  size=112  [class]
-void __fastcall cVRMissionBackPanel::vf14(int param_1)
+// 00CD9820  cVRMissionBackPanel::create  size=112  [class]
+void __fastcall cVRMissionBackPanel::create(int param_1)
 
 {
   int *piVar1;

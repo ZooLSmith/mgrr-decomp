@@ -262,7 +262,7 @@ LAB_00ba6f3d:
     iStack_6c = param_1[0x11];
     iStack_68 = param_1[0x12];
     iStack_64 = param_1[0x13];
-    iVar3 = hkpCdPointCollector::hkpCdPointCollector_14(&uStack_60,&iStack_70,1,0,0x3c23d70a);
+    iVar3 = hkpCdPointCollector::hkpCdPointCollector(&uStack_60,&iStack_70,1,0,0x3c23d70a);
     if (iVar3 != 0) {
       param_1[0x14] = iStack_70;
       param_1[0x15] = iStack_6c;

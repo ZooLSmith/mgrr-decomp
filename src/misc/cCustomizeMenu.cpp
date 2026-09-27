@@ -1,5 +1,5 @@
 // src/misc/cCustomizeMenu.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098F7E0..009BADE0, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098F7E0..009BADE0, 10 functions
 
 #include "mgrr.h"
 #include "cCustomizeMenu.h"
@@ -40,11 +40,337 @@ void __fastcall cCustomizeMenu::vf0C(int param_1)
   return;
 }
 
+// 009A0370  cCustomizeMenu::~cCustomizeMenu  size=124  [class]
+void __fastcall cCustomizeMenu::~cCustomizeMenu(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if (param_1[0x11a] != 0) {
+    FUN_00a805f0();
+    param_1[0x11a] = 0;
+  }
+  FUN_00cfe0f0(0xc);
+  iVar1 = 6;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  param_1[0x19] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[0x1a] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x1a])(1);
+    param_1[0x1a] = 0;
+  }
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 009A03F0  FUN_009a03f0  size=68  [callgraph]
+int FUN_009a03f0(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00dd3500(0x478,&DAT_01b7be50);
+  if (iVar1 != 0) {
+    iVar1 = cCustomizeMenuParts::cCustomizeMenuParts();
+    if (iVar1 != 0) {
+      *(char **)(iVar1 + 0xc) = "cCustomizeMenu";
+      FUN_00d29ca0(0x67,9);
+      *(undefined4 *)(iVar1 + 0x10) = 0;
+    }
+    return iVar1;
+  }
+  return 0;
+}
+
+// 009A04A0  FUN_009a04a0  size=141  [callgraph]
+void __fastcall FUN_009a04a0(int param_1)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00cb25d0(1);
+  *(undefined4 *)(param_1 + 0x1c) = uVar1;
+  uVar1 = FUN_00cb25d0(2);
+  *(undefined4 *)(param_1 + 0x20) = uVar1;
+  uVar1 = FUN_00cb25d0(3);
+  *(undefined4 *)(param_1 + 0x24) = uVar1;
+  uVar1 = FUN_00cb25d0(10);
+  *(undefined4 *)(param_1 + 0x28) = uVar1;
+  uVar1 = FUN_00cb25d0(0xb);
+  *(undefined4 *)(param_1 + 0x2c) = uVar1;
+  uVar1 = FUN_00cb25d0(0xc);
+  *(undefined4 *)(param_1 + 0x30) = uVar1;
+  uVar1 = FUN_00cb25d0(0x14);
+  *(undefined4 *)(param_1 + 0x34) = uVar1;
+  FUN_00cb2310(uVar1,0);
+  FUN_00ce4d70(1);
+  FUN_00cf9770(*(undefined4 *)(param_1 + 0x34),&DAT_016416fa,0,0xffffffff);
+  *(undefined2 *)(param_1 + 0x38) = 0;
+  *(undefined4 *)(param_1 + 0x40) = 0;
+  *(undefined4 *)(param_1 + 0x44) = 0;
+  *(undefined4 *)(param_1 + 0x3c) = 0;
+  return;
+}
+
+// 009A0530  FUN_009a0530  size=1121  [callgraph]
+void __fastcall FUN_009a0530(int param_1)
+
+{
+  char cVar1;
+  int iVar2;
+  float fVar3;
+  int iVar4;
+  float10 fVar5;
+  float local_ac [2];
+  float local_a4 [2];
+  float local_9c [21];
+  float local_48 [2];
+  undefined1 local_40 [32];
+  undefined1 local_20 [32];
+  
+  cVar1 = *(char *)(param_1 + 0x38);
+  if (cVar1 == '\x01') {
+    FUN_00ca84a0(*(undefined4 *)(param_1 + 0x40),local_40,0x20);
+    FUN_00cce090(*(undefined4 *)(param_1 + 0x20),local_40);
+    FUN_00cce090(*(undefined4 *)(param_1 + 0x24),local_40);
+    fVar5 = (float10)FUN_0098fb60(1,local_40,0);
+    FUN_00cb32a0(local_a4,*(undefined4 *)(param_1 + 0x1c));
+    local_ac[0] = 0.0;
+    local_9c[0x11] = 0.0;
+    local_9c[0] = 0.0;
+    local_9c[0x12] = 0.0;
+    local_9c[1] = 0.0;
+    local_9c[2] = 0.0;
+    local_9c[3] = 0.0;
+    local_9c[4] = 0.0;
+    local_9c[5] = 0.0;
+    local_9c[6] = 0.0;
+    local_9c[7] = 0.0;
+    local_9c[8] = 0.0;
+    local_9c[9] = 0.0;
+    local_9c[10] = 0.0;
+    local_9c[0xb] = 0.0;
+    local_9c[0xc] = 0.0;
+    local_9c[0xd] = 0.0;
+    local_9c[0xe] = 0.0;
+    local_9c[0xf] = 0.0;
+    local_9c[0x10] = 0.0;
+    local_9c[0x13] = -NAN;
+    iVar4 = FUN_00d29cc0(*(undefined4 *)(param_1 + 0x2c),local_9c);
+    if (iVar4 != 0) {
+      local_ac[0] = local_9c[0x11] + local_9c[0];
+    }
+    iVar4 = FUN_00cb2790(*(undefined4 *)(param_1 + 0x2c));
+    FUN_00cb28a0(*(undefined4 *)(param_1 + 0x34),
+                 (local_a4[0] - 4.0) * 3.0 + *(float *)(iVar4 + 0x10) * local_ac[0] + (float)fVar5);
+    FUN_00cce0e0(*(undefined4 *)(param_1 + 0x20),1,3);
+    FUN_00cce0e0(*(undefined4 *)(param_1 + 0x24),1,3);
+    *(char *)(param_1 + 0x38) = *(char *)(param_1 + 0x38) + '\x01';
+  }
+  else if (cVar1 == '\x02') {
+    FUN_00ca84a0(*(undefined4 *)(param_1 + 0x40),local_40,0x20);
+    fVar5 = (float10)FUN_0098fb60(1,local_40,0);
+    FUN_00cb32a0(local_a4,*(undefined4 *)(param_1 + 0x1c));
+    FUN_00cb28a0(*(undefined4 *)(param_1 + 0x28),(local_a4[0] + (float)fVar5) - 4.0);
+    local_ac[0] = 0.0;
+    local_9c[0x11] = 0.0;
+    local_9c[0] = 0.0;
+    local_9c[0x12] = 0.0;
+    local_9c[1] = 0.0;
+    local_9c[2] = 0.0;
+    local_9c[3] = 0.0;
+    local_9c[4] = 0.0;
+    local_9c[5] = 0.0;
+    local_9c[6] = 0.0;
+    local_9c[7] = 0.0;
+    local_9c[8] = 0.0;
+    local_9c[9] = 0.0;
+    local_9c[10] = 0.0;
+    local_9c[0xb] = 0.0;
+    local_9c[0xc] = 0.0;
+    local_9c[0xd] = 0.0;
+    local_9c[0xe] = 0.0;
+    local_9c[0xf] = 0.0;
+    local_9c[0x10] = 0.0;
+    local_9c[0x13] = -NAN;
+    iVar4 = FUN_00d29cc0(*(undefined4 *)(param_1 + 0x2c),local_9c);
+    if (iVar4 != 0) {
+      local_ac[0] = local_9c[0x11] + local_9c[0];
+    }
+    iVar4 = FUN_00cb2790(*(undefined4 *)(param_1 + 0x2c));
+    fVar3 = (local_a4[0] - 4.0) * 3.0 + *(float *)(iVar4 + 0x10) * local_ac[0] + (float)fVar5;
+    FUN_00cb3240(local_ac,*(undefined4 *)(param_1 + 0x1c));
+    FUN_00cb2bc0(*(undefined4 *)(param_1 + 0x1c),fVar3 / local_ac[0]);
+    iVar4 = FUN_00cb2760(*(undefined4 *)(param_1 + 0x34));
+    if (*(float *)(iVar4 + 0xc0) < fVar3) {
+      FUN_00cb28a0(*(undefined4 *)(param_1 + 0x34),fVar3);
+    }
+    iVar4 = FUN_00cb31a0(*(undefined4 *)(param_1 + 0x20));
+    if (iVar4 == 0) {
+      *(char *)(param_1 + 0x38) = *(char *)(param_1 + 0x38) + '\x01';
+      return;
+    }
+  }
+  else if (cVar1 == '\n') {
+    iVar4 = *(int *)(param_1 + 0x40);
+    iVar2 = *(int *)(param_1 + 0x3c);
+    if (iVar4 == iVar2) {
+      *(undefined1 *)(param_1 + 0x38) = 0;
+    }
+    else if (iVar4 < iVar2) {
+      iVar4 = iVar4 + *(int *)(param_1 + 0x44);
+      *(int *)(param_1 + 0x40) = iVar4;
+      if (iVar2 < iVar4) {
+        *(int *)(param_1 + 0x40) = iVar2;
+      }
+    }
+    else if ((iVar2 < iVar4) &&
+            (iVar4 = iVar4 + *(int *)(param_1 + 0x44), *(int *)(param_1 + 0x40) = iVar4,
+            iVar4 < iVar2)) {
+      *(int *)(param_1 + 0x40) = iVar2;
+    }
+    FUN_00ca84a0(*(undefined4 *)(param_1 + 0x40),local_20,0x20);
+    FUN_00cce090(*(undefined4 *)(param_1 + 0x20),local_20);
+    FUN_00cce090(*(undefined4 *)(param_1 + 0x24),local_20);
+    fVar5 = (float10)FUN_0098fb60(1,local_20,0);
+    FUN_00cb32a0(local_48,*(undefined4 *)(param_1 + 0x1c));
+    FUN_00cb28a0(*(undefined4 *)(param_1 + 0x28),(local_48[0] + (float)fVar5) - 4.0);
+    local_ac[0] = 0.0;
+    local_9c[0x11] = 0.0;
+    local_9c[0x12] = 0.0;
+    local_9c[0] = 0.0;
+    local_9c[1] = 0.0;
+    local_9c[2] = 0.0;
+    local_9c[3] = 0.0;
+    local_9c[4] = 0.0;
+    local_9c[5] = 0.0;
+    local_9c[6] = 0.0;
+    local_9c[7] = 0.0;
+    local_9c[8] = 0.0;
+    local_9c[9] = 0.0;
+    local_9c[10] = 0.0;
+    local_9c[0xb] = 0.0;
+    local_9c[0xc] = 0.0;
+    local_9c[0xd] = 0.0;
+    local_9c[0xe] = 0.0;
+    local_9c[0xf] = 0.0;
+    local_9c[0x10] = 0.0;
+    local_9c[0x13] = -NAN;
+    iVar4 = FUN_00d29cc0(*(undefined4 *)(param_1 + 0x2c),local_9c);
+    if (iVar4 != 0) {
+      local_ac[0] = local_9c[0x11] + local_9c[0];
+    }
+    iVar4 = FUN_00cb2790(*(undefined4 *)(param_1 + 0x2c));
+    fVar3 = (local_48[0] - 4.0) * 3.0 + *(float *)(iVar4 + 0x10) * local_ac[0] + (float)fVar5;
+    FUN_00cb3240(local_a4,*(undefined4 *)(param_1 + 0x1c));
+    FUN_00cb2bc0(*(undefined4 *)(param_1 + 0x1c),fVar3 / local_a4[0]);
+    FUN_00cb28a0(*(undefined4 *)(param_1 + 0x34),fVar3);
+    return;
+  }
+  return;
+}
+
+// 009B2110  FUN_009b2110  size=460  [callgraph]
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void __fastcall FUN_009b2110(int param_1)
+
+{
+  char cVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  int iVar4;
+  undefined1 local_20 [28];
+  
+  switch(*(undefined1 *)(param_1 + 0x44)) {
+  case 0:
+    iVar4 = FUN_009a03f0();
+    *(int *)(param_1 + 0x38) = iVar4;
+    if (iVar4 != 0) {
+      FUN_00cca0a0();
+      *(char *)(param_1 + 0x44) = *(char *)(param_1 + 0x44) + '\x01';
+      break;
+    }
+    goto LAB_009b213c;
+  case 1:
+    iVar4 = FUN_00cad770();
+    if ((iVar4 != 0) && (iVar4 = FUN_0098f4e0(), iVar4 != 0)) {
+      iVar4 = FUN_00cad7e0();
+      if (iVar4 == 0) {
+        FUN_00ce1c20();
+      }
+      *(undefined1 *)(*(int *)(param_1 + 0x38) + 0x427) = 1;
+      iVar4 = FUN_009a29d0();
+      *(int *)(param_1 + 0x40) = iVar4;
+      if (iVar4 != 0) {
+        FUN_0098f930(local_20);
+        FUN_009ab030("customize",local_20,0x41700000,0);
+      }
+      _DAT_01b391f0 = 1;
+      *(char *)(param_1 + 0x44) = *(char *)(param_1 + 0x44) + '\x01';
+    }
+    break;
+  case 2:
+    cVar1 = *(char *)(*(int *)(param_1 + 0x38) + 0x426);
+    if (cVar1 != '\f') {
+      if (cVar1 == 'f') {
+        FUN_00ce1ba0();
+        *(undefined1 *)(param_1 + 0x44) = 10;
+      }
+      break;
+    }
+    iVar4 = FUN_009a0b90();
+    *(int *)(param_1 + 0x3c) = iVar4;
+    if (iVar4 != 0) {
+      iVar2 = *(int *)(param_1 + 0x38);
+      *(undefined4 *)(param_1 + 0x48) =
+           *(undefined4 *)(iVar2 + 0x444 + *(char *)(iVar2 + 0x42a) * 4);
+      *(undefined4 *)(iVar4 + 0x358) = *(undefined4 *)(iVar2 + 0x444 + *(char *)(iVar2 + 0x42a) * 4)
+      ;
+      *(undefined4 *)(*(int *)(param_1 + 0x3c) + 0x220) = *(undefined4 *)(param_1 + 0x38);
+      *(undefined4 *)(*(int *)(param_1 + 0x3c) + 0x228) = *(undefined4 *)(param_1 + 0x4c);
+      *(undefined4 *)(*(int *)(param_1 + 0x3c) + 0x21c) = *(undefined4 *)(param_1 + 0x40);
+      *(int *)(*(int *)(param_1 + 0x3c) + 0x224) = param_1;
+      *(char *)(param_1 + 0x44) = *(char *)(param_1 + 0x44) + '\x01';
+      break;
+    }
+LAB_009b213c:
+    FUN_00dd5650(&DAT_01657e00);
+    *(undefined1 *)(param_1 + 0x44) = 99;
+    break;
+  case 3:
+    puVar3 = *(undefined4 **)(param_1 + 0x3c);
+    if (*(char *)(puVar3 + 0xc6) == 'e') {
+      if (puVar3 != (undefined4 *)0x0) {
+        (**(code **)*puVar3)(1);
+        *(undefined4 *)(param_1 + 0x3c) = 0;
+      }
+      *(undefined1 *)(*(int *)(param_1 + 0x38) + 0x427) = 1;
+      *(undefined4 *)(param_1 + 0x48) = 0xffffffff;
+      *(undefined1 *)(param_1 + 0x44) = 2;
+    }
+  }
+  if (*(int **)(param_1 + 0x38) != (int *)0x0) {
+    (**(code **)(**(int **)(param_1 + 0x38) + 4))();
+  }
+  if (*(int **)(param_1 + 0x3c) != (int *)0x0) {
+    (**(code **)(**(int **)(param_1 + 0x3c) + 4))();
+  }
+  if (*(int *)(param_1 + 0x40) != 0) {
+    FUN_009a2a10();
+  }
+  return;
+}
+
 // 009B22F0  cCustomizeMenu::vf00  size=30  [class]
 undefined4 __thiscall cCustomizeMenu::vf00(undefined4 param_1,byte param_2)
 
 {
-  cMessWindowCtrl::cMessWindowCtrl_20();
+  ~cCustomizeMenu();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -563,7 +889,7 @@ LAB_009ba943:
     break;
   case 2:
     local_60 = DAT_01b7588c;
-    cXmlBinary::cXmlBinary_103();
+    cXmlBinary::cXmlBinary();
     local_58 = DAT_018b92f0;
     local_54 = DAT_018b92f4;
     iVar3 = FUN_00de4550("Customize_Info.bxm",0);
@@ -584,8 +910,8 @@ LAB_009ba943:
       local_68 = 0x18;
     }
     FUN_00e062b0(iVar3,0);
-    uVar2 = FUN_00e041c0();
-    uVar2 = FUN_00e06390(uVar2,"SubWepon");
+    uVar2 = cXmlBinary::vf04();
+    uVar2 = cXmlBinary::vf18(uVar2,"SubWepon");
     local_28 = 0;
     local_27 = 0;
     local_23 = 0;
@@ -596,13 +922,13 @@ LAB_009ba943:
     local_f = 0;
     local_b = 0;
     local_9 = 0;
-    local_60 = FUN_00e053e0(uVar2);
+    local_60 = cXmlBinary::vf10(uVar2);
     iVar3 = 0;
     if (0 < local_60) {
       do {
-        uVar4 = FUN_00e05410(uVar2,iVar3);
-        uVar5 = FUN_00e06390(uVar4,&DAT_01655cd0);
-        FUN_00e068f0(uVar5,local_78);
+        uVar4 = cXmlBinary::vf14(uVar2,iVar3);
+        uVar5 = cXmlBinary::vf18(uVar4,&DAT_01655cd0);
+        cXmlBinary::vf5C(uVar5,local_78);
         if (local_78[0] == local_68) goto LAB_009bac4f;
         iVar3 = iVar3 + 1;
         iVar7 = local_70;
@@ -611,7 +937,7 @@ LAB_009ba943:
     goto LAB_009bac82;
   case 3:
     local_60 = FUN_009c4ed0(0);
-    cXmlBinary::cXmlBinary_103();
+    cXmlBinary::cXmlBinary();
     local_50 = DAT_018b92f0;
     local_4c = DAT_018b92f4;
     iVar3 = FUN_00de4550("Customize_Info.bxm",0);
@@ -627,8 +953,8 @@ LAB_009ba943:
         local_68 = 0x1b;
       }
       FUN_00e062b0(iVar3,0);
-      uVar2 = FUN_00e041c0();
-      uVar2 = FUN_00e06390(uVar2,&DAT_01656470);
+      uVar2 = cXmlBinary::vf04();
+      uVar2 = cXmlBinary::vf18(uVar2,&DAT_01656470);
       local_28 = 0;
       local_27 = 0;
       local_23 = 0;
@@ -639,13 +965,13 @@ LAB_009ba943:
       local_f = 0;
       local_b = 0;
       local_9 = 0;
-      local_60 = FUN_00e053e0(uVar2);
+      local_60 = cXmlBinary::vf10(uVar2);
       iVar3 = 0;
       if (0 < local_60) {
         do {
-          uVar4 = FUN_00e05410(uVar2,iVar3);
-          uVar5 = FUN_00e06390(uVar4,&DAT_01655cd0);
-          FUN_00e068f0(uVar5,local_74);
+          uVar4 = cXmlBinary::vf14(uVar2,iVar3);
+          uVar5 = cXmlBinary::vf18(uVar4,&DAT_01655cd0);
+          cXmlBinary::vf5C(uVar5,local_74);
           if (local_74[0] == local_68) goto LAB_009bac4f;
           iVar3 = iVar3 + 1;
           iVar7 = local_70;
@@ -659,7 +985,7 @@ LAB_009ba943:
   }
   goto switchD_009ba980_default;
 LAB_009bac4f:
-  uVar2 = FUN_00e06390(uVar4,&DAT_016511c4);
+  uVar2 = cXmlBinary::vf18(uVar4,&DAT_016511c4);
   (*(code *)local_48[0x1d])(uVar2,&local_28,0x20);
   FUN_00ce4d70(8);
   iVar7 = local_70;
@@ -706,10 +1032,10 @@ LAB_009bad12:
   goto LAB_009ba943;
 }
 
-// 009BADE0  cCustomizeMenu::vf14  size=5506  [class]
+// 009BADE0  cCustomizeMenu::create  size=5506  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cCustomizeMenu::vf14(int param_1)
+void __fastcall cCustomizeMenu::create(int param_1)
 
 {
   uint uVar1;
@@ -1067,7 +1393,7 @@ LAB_009bb455:
         cXmlBinary::cXmlBinary_25(uVar4,uVar5);
         break;
       case 2:
-        cXmlBinary::cXmlBinary_103();
+        cXmlBinary::cXmlBinary();
         local_94 = DAT_018b92f4;
         local_98 = DAT_018b92f0;
         iVar9 = FUN_00de4550("Customize_Info.bxm",0);
@@ -1086,8 +1412,8 @@ LAB_009bb455:
             local_11c = 0x18;
           }
           FUN_00e062b0(iVar9,0);
-          uVar4 = FUN_00e041c0();
-          local_120 = FUN_00e06390(uVar4,"SubWepon");
+          uVar4 = cXmlBinary::vf04();
+          local_120 = cXmlBinary::vf18(uVar4,"SubWepon");
           local_c8 = (char *)0x0;
           local_c4 = 0;
           local_c0 = 0;
@@ -1098,15 +1424,15 @@ LAB_009bb455:
           local_af = 0;
           local_ab = 0;
           local_a9 = 0;
-          local_108 = FUN_00e053e0(local_120);
+          local_108 = cXmlBinary::vf10(local_120);
           iVar9 = 0;
           if (0 < local_108) {
             do {
-              local_110[0] = FUN_00e05410(local_120,iVar9);
-              uVar4 = FUN_00e06390(local_110[0],&DAT_01655cd0);
-              FUN_00e068f0(uVar4,local_124);
+              local_110[0] = cXmlBinary::vf14(local_120,iVar9);
+              uVar4 = cXmlBinary::vf18(local_110[0],&DAT_01655cd0);
+              cXmlBinary::vf5C(uVar4,local_124);
               if ((short)local_124[0] == local_11c) {
-                uVar4 = FUN_00e06390(local_110[0],&DAT_016511c4);
+                uVar4 = cXmlBinary::vf18(local_110[0],&DAT_016511c4);
                 (*(code *)local_e8[0x1d])(uVar4,&local_c8,0x20);
                 FUN_00ce4d70(8);
                 break;
@@ -1121,7 +1447,7 @@ LAB_009bbc4a:
         goto LAB_009bbc72;
       case 3:
         iVar9 = FUN_009c4ed0(0);
-        cXmlBinary::cXmlBinary_103();
+        cXmlBinary::cXmlBinary();
         local_100 = DAT_018b92f0;
         local_fc = DAT_018b92f4;
         iVar6 = FUN_00de4550("Customize_Info.bxm",0);
@@ -1137,8 +1463,8 @@ LAB_009bbc4a:
             local_11c = 0x1b;
           }
           FUN_00e062b0(iVar6,0);
-          uVar4 = FUN_00e041c0();
-          local_110[0] = FUN_00e06390(uVar4,&DAT_01656470);
+          uVar4 = cXmlBinary::vf04();
+          local_110[0] = cXmlBinary::vf18(uVar4,&DAT_01656470);
           local_c8 = (char *)0x0;
           local_c4 = 0;
           local_c0 = 0;
@@ -1149,15 +1475,15 @@ LAB_009bbc4a:
           local_af = 0;
           local_ab = 0;
           local_a9 = 0;
-          local_108 = FUN_00e053e0(local_110[0]);
+          local_108 = cXmlBinary::vf10(local_110[0]);
           iVar9 = 0;
           if (0 < local_108) {
             do {
-              uVar4 = FUN_00e05410(local_110[0],iVar9);
-              uVar5 = FUN_00e06390(uVar4,&DAT_01655cd0);
-              FUN_00e068f0(uVar5,local_104);
+              uVar4 = cXmlBinary::vf14(local_110[0],iVar9);
+              uVar5 = cXmlBinary::vf18(uVar4,&DAT_01655cd0);
+              cXmlBinary::vf5C(uVar5,local_104);
               if (local_104[0] == local_11c) {
-                uVar4 = FUN_00e06390(uVar4,&DAT_016511c4);
+                uVar4 = cXmlBinary::vf18(uVar4,&DAT_016511c4);
                 (*(code *)local_e8[0x1d])(uVar4,&local_c8,0x20);
                 FUN_00ce4d70(8);
                 iVar11 = local_120;

@@ -77,7 +77,7 @@ undefined4 * __thiscall
 ZangekiIaiAttackStatePl1400::ZangekiIaiAttackStatePl1400(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -597,10 +597,10 @@ LAB_008724f9:
   return;
 }
 
-// 00896930  ZangekiIaiAttackStatePl1400::vf0C  size=246  [class]
+// 00896930  ZangekiIaiAttackStatePl1400::SafeCheck  size=246  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiIaiAttackStatePl1400::vf0C(int param_1,undefined4 *param_2)
+void __thiscall ZangekiIaiAttackStatePl1400::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -630,18 +630,18 @@ void __thiscall ZangekiIaiAttackStatePl1400::vf0C(int param_1,undefined4 *param_
       _DAT_01bea940 = 0x41f00000;
       FUN_00da8810(0x41f00000);
       FUN_00db3e80(0x41f00000,1,&DAT_01bea1d0);
-      StateMachineNode::vf0C(param_2);
+      StateMachineNode::SafeCheck(param_2);
       return;
     }
     _DAT_01bea940 = 0;
     FUN_00da8810(0);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00896A30  ZangekiIaiAttackStatePl1400::vf10  size=340  [class]
-void __thiscall ZangekiIaiAttackStatePl1400::vf10(int param_1,undefined4 *param_2)
+// 00896A30  ZangekiIaiAttackStatePl1400::qteSafeCheck  size=340  [class]
+void __thiscall ZangekiIaiAttackStatePl1400::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -707,7 +707,7 @@ void __thiscall ZangekiIaiAttackStatePl1400::vf10(int param_1,undefined4 *param_
   if ((*(int *)(param_1 + 0x7c) == 0) && ((piVar4[0x33e] & piVar4[0x389]) == 0)) {
     *(undefined4 *)(param_1 + 0x7c) = 1;
   }
-  StateMachineNode::vf10(puVar2);
+  StateMachineNode::qteSafeCheck(puVar2);
   return;
 }
 

@@ -1,11 +1,11 @@
 // src/effect/cEspBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED4C70..00F40950, 20 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED4C70..00F40950, 18 functions
 
 #include "mgrr.h"
 #include "cEspBase.h"
 
-// 00ED4C70  cEspBase::vf10  size=8  [class]
-void __fastcall cEspBase::vf10(int param_1)
+// 00ED4C70  cEspBase::addOtTransList  size=8  [class]
+void __fastcall cEspBase::addOtTransList(int param_1)
 
 {
   *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x400000;
@@ -128,8 +128,8 @@ void __fastcall cEspBase::addOtTransList(int param_1)
   return;
 }
 
-// 00F128E0  cEspBase::cEspBase_3  size=51  [class]
-void __fastcall cEspBase::cEspBase_3(undefined4 *param_1)
+// 00F128E0  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -142,34 +142,8 @@ void __fastcall cEspBase::cEspBase_3(undefined4 *param_1)
   return;
 }
 
-// 00F12970  cEspBase::cEspBase_4  size=130  [class]
-undefined4 * __fastcall cEspBase::cEspBase_4(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  FUN_00f59e40();
-  FUN_00ec9bf0();
-  FUN_00ddbbb0();
-  param_1[0x101] = 0;
-  *(undefined2 *)(param_1 + 0x10a) = 0;
-  param_1[0x102] = 0xc0000000;
-  param_1[0x108] = 0;
-  param_1[0x109] = 0;
-  param_1[0x10c] = 0;
-  param_1[0x10d] = 0;
-  param_1[0x10e] = 0;
-  *(undefined1 *)(param_1 + 0x110) = 0;
-  *param_1 = cEsp::vftable;
-  return param_1;
-}
-
-// 00F12A00  cEspBase::cEspBase_5  size=51  [class]
-void __fastcall cEspBase::cEspBase_5(undefined4 *param_1)
+// 00F12A00  cEspBase::cEspBase  size=51  [class]
+void __fastcall cEspBase::cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -182,8 +156,8 @@ void __fastcall cEspBase::cEspBase_5(undefined4 *param_1)
   return;
 }
 
-// 00F17660  cEspBase::cEspBase_6  size=51  [class]
-void __fastcall cEspBase::cEspBase_6(undefined4 *param_1)
+// 00F17660  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -196,8 +170,8 @@ void __fastcall cEspBase::cEspBase_6(undefined4 *param_1)
   return;
 }
 
-// 00F1E960  cEspBase::cEspBase_2  size=51  [class]
-void __fastcall cEspBase::cEspBase_2(undefined4 *param_1)
+// 00F1E960  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -208,32 +182,6 @@ void __fastcall cEspBase::cEspBase_2(undefined4 *param_1)
   FUN_00ddbbc0();
   FUN_00ec4840();
   return;
-}
-
-// 00F200E0  cEspBase::cEspBase_8  size=132  [class]
-undefined4 * __fastcall cEspBase::cEspBase_8(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  FUN_00f59e40();
-  FUN_00ec9bf0();
-  FUN_00ddbbb0();
-  param_1[0x101] = 0;
-  *param_1 = EspEmtBase::vftable;
-  param_1[0x108] = 0;
-  param_1[0x102] = 0xc0000000;
-  param_1[0x109] = 0;
-  param_1[0x10a] = 0;
-  param_1[0x114] = 0;
-  param_1[0x10c] = 0;
-  param_1[0x10d] = 0;
-  FUN_00dd7240();
-  return param_1;
 }
 
 // 00F20170  cEspBase::cEspBase_9  size=97  [class]
@@ -347,8 +295,8 @@ void __fastcall cEspBase::addOtTransList_2(int param_1)
   return;
 }
 
-// 00F403F0  cEspBase::cEspBase_10  size=51  [class]
-void __fastcall cEspBase::cEspBase_10(undefined4 *param_1)
+// 00F403F0  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -376,8 +324,8 @@ void FUN_00f40430(undefined4 *param_1,undefined4 param_2,undefined4 param_3,unde
   return;
 }
 
-// 00F40470  cEspBase::cEspBase_13  size=51  [class]
-void __fastcall cEspBase::cEspBase_13(undefined4 *param_1)
+// 00F40470  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -390,8 +338,8 @@ void __fastcall cEspBase::cEspBase_13(undefined4 *param_1)
   return;
 }
 
-// 00F404B0  cEspBase::cEspBase_12  size=51  [class]
-void __fastcall cEspBase::cEspBase_12(undefined4 *param_1)
+// 00F404B0  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -404,8 +352,8 @@ void __fastcall cEspBase::cEspBase_12(undefined4 *param_1)
   return;
 }
 
-// 00F404F0  cEspBase::cEspBase_11  size=51  [class]
-void __fastcall cEspBase::cEspBase_11(undefined4 *param_1)
+// 00F404F0  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -418,8 +366,8 @@ void __fastcall cEspBase::cEspBase_11(undefined4 *param_1)
   return;
 }
 
-// 00F40530  cEspBase::cEspBase_14  size=51  [class]
-void __fastcall cEspBase::cEspBase_14(undefined4 *param_1)
+// 00F40530  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -449,8 +397,8 @@ undefined4 * __thiscall cEspBase::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00F40950  cEspBase::cEspBase_7  size=51  [class]
-void __fastcall cEspBase::cEspBase_7(undefined4 *param_1)
+// 00F40950  cEspBase::~cEspBase  size=51  [class]
+void __fastcall cEspBase::~cEspBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;

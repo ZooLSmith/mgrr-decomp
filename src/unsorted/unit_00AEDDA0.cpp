@@ -671,7 +671,7 @@ void __fastcall FUN_00aef3a0(int param_1)
     }
     if ((iVar1 == 2) && (*(int *)(param_1 + 0x61c) == 0)) {
       *(undefined4 *)(param_1 + 0x61c) = 1;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -684,7 +684,7 @@ undefined4 __fastcall FUN_00aef470(int param_1)
 {
   int iVar1;
   
-  iVar1 = BehaviorPartsModel::vf40();
+  iVar1 = BehaviorPartsModel::startup();
   if (iVar1 == 0) {
     return 0;
   }

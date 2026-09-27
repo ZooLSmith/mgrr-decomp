@@ -14,4 +14,6 @@ struct DebrisExplodeParameterManagerImplement : public DebrisExplodeParameterMan
     virtual void vf14();  // 00943E40 slot 0x14  overrides DebrisExplodeParameterManager
     virtual void vf18();  // 00943E80 slot 0x18  overrides DebrisExplodeParameterManager
     virtual undefined4 * vf1C(byte param_2);  // 00943EE0 slot 0x1C  overrides DebrisExplodeParameterManager
+    // non-virtual members
+    static void vf00_00942810();  // 00942810
 };

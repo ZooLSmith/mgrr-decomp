@@ -59,7 +59,7 @@ void __thiscall FUN_00ec24a0(undefined4 *param_1,undefined4 *param_2)
 undefined4 __fastcall FUN_00ec2620(undefined4 param_1)
 
 {
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   return param_1;
 }
 
@@ -122,7 +122,7 @@ int __fastcall FUN_00ec2c80(int param_1)
   iVar2 = 5;
   iVar1 = param_1 + 8;
   do {
-    FUN_00401040(iVar1,0x1c,0x20,Hw::cTexture::cTexture_6);
+    FUN_00401040(iVar1,0x1c,0x20,Hw::cTexture::cTexture);
     iVar1 = iVar1 + 0x388;
     iVar2 = iVar2 + -1;
   } while (-1 < iVar2);

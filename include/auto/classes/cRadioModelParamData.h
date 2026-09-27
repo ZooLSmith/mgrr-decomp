@@ -7,6 +7,6 @@ struct cRadioModelParamData {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 00CDABF0 slot 0x0
     // non-virtual members
-    cRadioModelParamData();  // 00CC1F40
-    void ctor_00CDABD0();  // 00CDABD0
+    ~cRadioModelParamData();  // 00CC1F40
+    cRadioModelParamData();  // 00CDABD0
 };

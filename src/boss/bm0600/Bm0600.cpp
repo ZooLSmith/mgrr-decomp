@@ -76,8 +76,8 @@ void __fastcall Bm0600::thunk_vf44(int param_1)
   return;
 }
 
-// 00413ED0  Bm0600::vf40  size=874  [class]
-undefined4 __fastcall Bm0600::vf40(int param_1)
+// 00413ED0  Bm0600::startup  size=874  [class]
+undefined4 __fastcall Bm0600::startup(int param_1)
 
 {
   byte bVar1;
@@ -89,7 +89,7 @@ undefined4 __fastcall Bm0600::vf40(int param_1)
   int *piVar7;
   bool bVar8;
   
-  iVar2 = Bm6041::vf40();
+  iVar2 = BehaviorBm::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -499,8 +499,8 @@ undefined * Bm0600::vf04(void)
   return &DAT_01b34be4;
 }
 
-// 00AB90B0  Bm0600::vf00  size=43  [class]
-undefined4 __thiscall Bm0600::vf00(undefined4 param_1,byte param_2)
+// 00AB90B0  Bm0600::destruct  size=43  [class]
+undefined4 __thiscall Bm0600::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

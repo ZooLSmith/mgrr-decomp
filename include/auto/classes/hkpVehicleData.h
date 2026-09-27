@@ -9,5 +9,6 @@ struct hkpVehicleData : public hkReferencedObject {
     virtual undefined4 * vf00(byte param_2);  // 01287990 slot 0x0  overrides hkBaseObject
     virtual void vf0C(undefined4 * param_2, int param_3);  // 0128E9B0 slot 0xC
     // non-virtual members
-    hkpVehicleData(undefined4 * param_1);  // 012875D0
+    ~hkpVehicleData();  // 012875D0
+    hkpVehicleData();  // 012875F0
 };

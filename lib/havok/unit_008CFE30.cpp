@@ -35,7 +35,7 @@ hkpAllRayHitCollector::hkpAllRayHitCollector_7(float *param_1,float *param_2,flo
   param_1[2] = 0.0;
   local_348 = 0;
   param_1[3] = 1.0;
-  hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector();
   iVar7 = RayCastMultiHitWork::RayCastMultiHitWork
                     (local_330,param_2,param_3,0xffff0006,"DatsuJump::CollisionCheck");
   uVar10 = 0;
@@ -118,7 +118,7 @@ hkpAllRayHitCollector::hkpAllRayHitCollector_3(float *param_1,float *param_2,flo
   param_1[2] = 0.0;
   local_348 = 0;
   param_1[3] = 1.0;
-  hkpAllRayHitCollector_8();
+  hkpAllRayHitCollector();
   iVar7 = RayCastMultiHitWork::RayCastMultiHitWork
                     (local_330,param_2,param_3,0xffff0006,"ZangekiReady::RoofCheck");
   uVar10 = 0;

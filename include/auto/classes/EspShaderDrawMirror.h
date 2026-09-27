@@ -10,6 +10,5 @@ struct EspShaderDrawMirror : public cEspShaderShimmer {
     virtual undefined4 vf08();  // 009E68B0 slot 0x8  overrides cEspShaderBase
     // non-virtual members
     EspShaderDrawMirror();  // 009D2550
-    void ctor_015ECC90();  // 015ECC90
-    void ctor_015ECCB0();  // 015ECCB0
+    ~EspShaderDrawMirror();  // 015ECC90
 };

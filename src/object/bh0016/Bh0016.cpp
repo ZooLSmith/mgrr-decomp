@@ -30,8 +30,8 @@ undefined * Bh0016::vf04(void)
   return &DAT_01b34b64;
 }
 
-// 00AB8D50  Bh0016::vf00  size=54  [class]
-undefined4 __thiscall Bh0016::vf00(undefined4 param_1,byte param_2)
+// 00AB8D50  Bh0016::destruct  size=54  [class]
+undefined4 __thiscall Bh0016::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

@@ -363,8 +363,8 @@ void __fastcall FUN_00409930(int param_1)
   return;
 }
 
-// 00409A20  DoorBehaviorBase::vf40  size=1188  [class]
-undefined4 __fastcall DoorBehaviorBase::vf40(int param_1)
+// 00409A20  DoorBehaviorBase::startup  size=1188  [class]
+undefined4 __fastcall DoorBehaviorBase::startup(int param_1)
 
 {
   uint *puVar1;
@@ -381,7 +381,7 @@ undefined4 __fastcall DoorBehaviorBase::vf40(int param_1)
   int local_4;
   
   local_4 = param_1;
-  iVar3 = MonThrowMoto::vf40();
+  iVar3 = BehaviorBa::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -984,8 +984,8 @@ undefined * DoorBehaviorBase::vf04(void)
   return &DAT_01b34b48;
 }
 
-// 00ABAB00  DoorBehaviorBase::vf00  size=43  [class]
-undefined4 __thiscall DoorBehaviorBase::vf00(undefined4 param_1,byte param_2)
+// 00ABAB00  DoorBehaviorBase::destruct  size=43  [class]
+undefined4 __thiscall DoorBehaviorBase::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

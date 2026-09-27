@@ -11,5 +11,5 @@ struct EspShaderMosaic : public cEspShaderBase {
     // non-virtual members
     EspShaderMosaic();  // 009DCC90
     static void vf0C();  // 00F5C110
-    void ctor_015ECC20();  // 015ECC20
+    ~EspShaderMosaic();  // 015ECC20
 };

@@ -10,6 +10,5 @@ struct EspShaderOutlineExtraction : public cEspShaderBase {
     virtual undefined4 vf08();  // 009E65C0 slot 0x8  overrides cEspShaderBase
     // non-virtual members
     EspShaderOutlineExtraction();  // 009F0D70
-    void ctor_015ECC40();  // 015ECC40
-    void ctor_015ECC60();  // 015ECC60
+    ~EspShaderOutlineExtraction();  // 015ECC40
 };

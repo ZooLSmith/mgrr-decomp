@@ -14,4 +14,6 @@ struct esp36 : public esp27 {
     virtual void vf20();  // 00F04AD0 slot 0x20  overrides cEspStrip
     // non-virtual members
     esp36();  // 00ED0610
+    static void vf1C_00ED9190();  // 00ED9190
+    static void vf20_00EF3F50(undefined4 param_2);  // 00EF3F50
 };

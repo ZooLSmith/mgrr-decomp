@@ -1,5 +1,5 @@
 // src/lib/StaticArray.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00420A50..00E955B0, 443 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00420A50..00E955B0, 437 functions
 
 #include "mgrr.h"
 
@@ -792,9 +792,9 @@ undefined4 * __thiscall lib::StaticArray<Collision*,8>::vf00(undefined4 *param_1
   return param_1;
 }
 
-// 004D2660  lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>_8  size=380  [class]
+// 004D2660  lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>  size=380  [class]
 int * __thiscall
-lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>_8(int param_1,undefined4 param_2,int param_3)
+lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>(int param_1,undefined4 param_2,int param_3)
 
 {
   int *piVar1;
@@ -1581,7 +1581,7 @@ void __fastcall FUN_004d4140(int *param_1)
   iVar2 = FUN_00a81330();
   if ((((iVar2 == 0) || (piVar3 = (int *)FUN_00a7c8a0(), piVar3 == (int *)0x0)) ||
       (piVar3[0x139] != 0)) || (iVar2 = (**(code **)(*piVar3 + 0x14c))(0x53,0), iVar2 == 0)) {
-    piVar3 = (int *)lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>_8(0x41a00000,0);
+    piVar3 = (int *)lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>(0x41a00000,0);
   }
   iVar2 = param_1[0x187];
   if (iVar2 == 0) {
@@ -1691,7 +1691,7 @@ void __fastcall FUN_004d45f0(int *param_1)
   iVar1 = FUN_00a81330();
   if ((((iVar1 == 0) || (piVar2 = (int *)FUN_00a7c8a0(), piVar2 == (int *)0x0)) ||
       (piVar2[0x139] != 0)) || (iVar1 = (**(code **)(*piVar2 + 0x14c))(0x53,0), iVar1 == 0)) {
-    piVar2 = (int *)lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>_8(0x41a00000,0);
+    piVar2 = (int *)lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>(0x41a00000,0);
   }
   switch(param_1[0x187]) {
   case 0:
@@ -2507,7 +2507,7 @@ LAB_004d7116:
       if (piVar3 != (int *)0x0) {
         FUN_00a9e0d0(piVar3[0x13c]);
         (**(code **)(*piVar3 + 0x20))();
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         FUN_00a7c950();
       }
       piVar3 = (int *)FUN_004ba0c0();
@@ -2618,7 +2618,7 @@ void __fastcall lib::StaticArray<Collision*,8>::StaticArray<Collision*,8>(int pa
       uVar5 = 0;
     }
     else {
-      uVar5 = RigidBodyCollection::RigidBodyCollection_2();
+      uVar5 = RigidBodyCollision::RigidBodyCollision();
     }
     *(undefined4 *)(param_1 + 0x7b0) = uVar5;
     iVar1 = FUN_008f6410(*(undefined4 *)(param_1 + 0x4f0),iVar1,uStack_3c);
@@ -2806,7 +2806,7 @@ LAB_004e9611:
 LAB_004e9906:
     iVar2 = thunk_FUN_00e58ed0(param_1[0x4d5]);
     if (iVar2 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   default:
@@ -2963,7 +2963,7 @@ void __fastcall FUN_004e9950(int *param_1)
 LAB_004e9e60:
     iVar3 = thunk_FUN_00e58ed0(param_1[0x4d5]);
     if (iVar3 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -5411,7 +5411,7 @@ void lib::StaticArray<Entity*,256>::StaticArray<Entity*,256>(undefined4 param_1)
   if (local_40c != local_40c + local_408 * 4) {
     do {
       FUN_00a7c8a0();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       puVar1 = puVar1 + 4;
     } while (puVar1 != local_40c + local_408 * 4);
   }
@@ -5494,7 +5494,7 @@ void lib::StaticArray<Entity*,256>::StaticArray<Entity*,256>_5(undefined4 param_
   if (local_40c != local_40c + local_408 * 4) {
     do {
       FUN_00a7c8a0();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       puVar1 = puVar1 + 4;
     } while (puVar1 != local_40c + local_408 * 4);
   }
@@ -5908,7 +5908,7 @@ LAB_005fdb3b:
         local_2c = (float)param_1[0x11];
         local_28 = (float)param_1[0x12];
         local_24 = (float)param_1[0x13];
-        iVar7 = hkpCdPointCollector::hkpCdPointCollector_14(local_20,&local_30,1,0,0x3c23d70a);
+        iVar7 = hkpCdPointCollector::hkpCdPointCollector(local_20,&local_30,1,0,0x3c23d70a);
         if (iVar7 != 0) {
           param_1[0x14] = (int)local_30;
           param_1[0x15] = (int)local_2c;
@@ -7456,7 +7456,7 @@ LAB_007ec331:
 LAB_007ec5e2:
     iVar2 = thunk_FUN_00e58ed0(param_1[0x509]);
     if (iVar2 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   default:
@@ -7614,7 +7614,7 @@ void __fastcall FUN_007ec630(int *param_1)
 LAB_007ecb46:
     iVar3 = thunk_FUN_00e58ed0(param_1[0x509]);
     if (iVar3 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -8327,7 +8327,7 @@ void lib::StaticArray<Entity*,256>::StaticArray<Entity*,256>_2(undefined4 param_
   if (local_40c != local_40c + local_408 * 4) {
     do {
       FUN_00a7c8a0();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       puVar1 = puVar1 + 4;
     } while (puVar1 != local_40c + local_408 * 4);
   }
@@ -13920,9 +13920,9 @@ lib::StaticArray<cAntiqueScrollWork::TunnelEntityHolder,512>::vf00(undefined4 *p
   return param_1;
 }
 
-// 00A60250  lib::StaticArray<eObjId,10>::StaticArray<eObjId,10>_3  size=57  [class]
+// 00A60250  lib::StaticArray<eObjId,10>::StaticArray<eObjId,10>  size=57  [class]
 undefined4 * __thiscall
-lib::StaticArray<eObjId,10>::StaticArray<eObjId,10>_3(undefined4 *param_1,int param_2)
+lib::StaticArray<eObjId,10>::StaticArray<eObjId,10>(undefined4 *param_1,int param_2)
 
 {
   param_1[1] = param_1 + 4;
@@ -13937,7 +13937,7 @@ lib::StaticArray<eObjId,10>::StaticArray<eObjId,10>_3(undefined4 *param_1,int pa
 undefined2 * __fastcall FUN_00a603a0(undefined2 *param_1)
 
 {
-  cXmlBinary::cXmlBinary_103();
+  cXmlBinary::cXmlBinary();
   FUN_00a7c930();
   *(undefined4 *)(param_1 + 0x1c) = 0;
   *(undefined4 *)(param_1 + 0x1e) = 0;
@@ -14843,7 +14843,7 @@ lib::StaticArray<cRoomAbstract::stRoomEspUnit*,16>::StaticArray<cRoomAbstract::s
   param_1[0x20] = 0;
   *param_1 = cR004::vftable;
   cEspControler::cEspControler();
-  EspControllerBullet::EspControllerBullet_5();
+  EspControllerBullet::EspControllerBullet();
   return param_1;
 }
 
@@ -16176,22 +16176,22 @@ undefined4 * __thiscall lib::StaticArray<Hw::cVec4,16>::vf00(undefined4 *param_1
   return param_1;
 }
 
-// 00AAB5C0  lib::StaticArray<Entity*,32>::StaticArray<Entity*,32>_2  size=116  [class]
-undefined4 * __fastcall lib::StaticArray<Entity*,32>::StaticArray<Entity*,32>_2(undefined4 *param_1)
+// 00AAB5C0  lib::StaticArray<int,32>::StaticArray<int,32>  size=116  [class]
+undefined4 * __fastcall lib::StaticArray<int,32>::StaticArray<int,32>(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = Pl0800::vftable;
   FUN_00a603a0();
   param_1[0x39c] = 0;
   param_1[0x39e] = param_1 + 0x3a1;
   param_1[0x39f] = 0;
-  param_1[0x39d] = vftable;
+  param_1[0x39d] = StaticArray<Entity*,32>::vftable;
   param_1[0x3a0] = 0x20;
   param_1[0x3c3] = 0;
   param_1[0x3c2] = param_1 + 0x3c5;
   param_1[0x3c4] = 0x20;
-  param_1[0x3c1] = StaticArray<int,32>::vftable;
+  param_1[0x3c1] = vftable;
   param_1[0x3ec] = 0;
   return param_1;
 }
@@ -16200,7 +16200,7 @@ undefined4 * __fastcall lib::StaticArray<Entity*,32>::StaticArray<Entity*,32>_2(
 undefined4 * __fastcall lib::StaticArray<Entity*,3>::StaticArray<Entity*,3>(undefined4 *param_1)
 
 {
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = E3_EnemyBoard::vftable;
   param_1[0x378] = 0;
   param_1[0x37b] = param_1 + 0x37e;
@@ -16682,7 +16682,7 @@ void lib::StaticArray<Entity*,256>::StaticArray<Entity*,256>_7(undefined4 param_
   if (local_40c != local_40c + local_408 * 4) {
     do {
       FUN_00a7c8a0();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       puVar1 = puVar1 + 4;
     } while (puVar1 != local_40c + local_408 * 4);
   }
@@ -22570,7 +22570,7 @@ lib::StaticArray<EntityHandle,2>::StaticArray<EntityHandle,2>(undefined4 *param_
   param_1[2] = 0;
   iVar2 = 4;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar2 = iVar2 + -1;
   } while (-1 < iVar2);
   param_1[0x27] = 0;
@@ -27237,24 +27237,6 @@ undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_21(undefin
   return param_1;
 }
 
-// 00D6D860  lib::StaticArray<int,64>::StaticArray<int,64>_20  size=104  [class]
-undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_20(undefined4 *param_1)
-
-{
-  param_1[4] = param_1 + 7;
-  param_1[5] = 0;
-  param_1[6] = 0x40;
-  param_1[3] = vftable;
-  *param_1 = cP470::vftable;
-  FUN_00a7c930();
-  FUN_00a7c930();
-  param_1[0x49] = 0;
-  param_1[0x53] = 1;
-  cEspControler::cEspControler();
-  cEspControler::cEspControler();
-  return param_1;
-}
-
 // 00D6E160  lib::StaticArray<int,64>::StaticArray<int,64>_18  size=51  [class]
 undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_18(undefined4 *param_1)
 
@@ -27277,38 +27259,7 @@ undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_19(undefin
   param_1[6] = 0x40;
   param_1[3] = vftable;
   *param_1 = cPf07::vftable;
-  cMessWindowCtrl::cMessWindowCtrl_5();
-  return param_1;
-}
-
-// 00D6E820  lib::StaticArray<int,64>::StaticArray<int,64>_14  size=62  [class]
-undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_14(undefined4 *param_1)
-
-{
-  param_1[4] = param_1 + 7;
-  param_1[5] = 0;
-  param_1[6] = 0x40;
-  param_1[3] = vftable;
-  *param_1 = cPf09::vftable;
-  cEspControler::cEspControler();
-  cEspControler::cEspControler();
-  return param_1;
-}
-
-// 00D6EA80  lib::StaticArray<int,64>::StaticArray<int,64>_15  size=88  [class]
-undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_15(undefined4 *param_1)
-
-{
-  param_1[4] = param_1 + 7;
-  param_1[5] = 0;
-  param_1[6] = 0x40;
-  param_1[3] = vftable;
-  *param_1 = cPa15::vftable;
-  param_1[0x49] = 0;
-  FUN_00a7c930();
-  FUN_00a7c930();
-  FUN_00a7c930();
-  cEspControler::cEspControler();
+  cMessWindowCtrl::cMessWindowCtrl();
   return param_1;
 }
 
@@ -27365,22 +27316,8 @@ undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_6(undefine
   return param_1;
 }
 
-// 00D6F110  lib::StaticArray<int,64>::StaticArray<int,64>_8  size=51  [class]
-undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_8(undefined4 *param_1)
-
-{
-  param_1[4] = param_1 + 7;
-  param_1[5] = 0;
-  param_1[6] = 0x40;
-  param_1[3] = vftable;
-  *param_1 = P410::vftable;
-  cEspControler::cEspControler();
-  return param_1;
-}
-
-// 00D6F180  lib::StaticArray<EntityHandle,8>::StaticArray<EntityHandle,8>_2  size=132  [class]
-undefined4 * __fastcall
-lib::StaticArray<EntityHandle,8>::StaticArray<EntityHandle,8>_2(undefined4 *param_1)
+// 00D6F180  lib::StaticArray<int,8>::StaticArray<int,8>  size=132  [class]
+undefined4 * __fastcall lib::StaticArray<int,8>::StaticArray<int,8>(undefined4 *param_1)
 
 {
   param_1[4] = param_1 + 7;
@@ -27391,12 +27328,12 @@ lib::StaticArray<EntityHandle,8>::StaticArray<EntityHandle,8>_2(undefined4 *para
   cEspControler::cEspControler();
   param_1[0x7e] = 0;
   param_1[0x7f] = 8;
-  param_1[0x7c] = vftable;
+  param_1[0x7c] = StaticArray<EntityHandle,8>::vftable;
   param_1[0x7d] = param_1 + 0x80;
   param_1[0x8b] = 8;
   param_1[0x89] = param_1 + 0x8c;
   param_1[0x8a] = 0;
-  param_1[0x88] = StaticArray<int,8>::vftable;
+  param_1[0x88] = vftable;
   return param_1;
 }
 
@@ -27451,7 +27388,7 @@ undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_11(undefin
   param_1[6] = 0x40;
   param_1[3] = vftable;
   *param_1 = VRPhase::vftable;
-  cMessWindowCtrl::cMessWindowCtrl_5();
+  cMessWindowCtrl::cMessWindowCtrl();
   return param_1;
 }
 
@@ -27494,19 +27431,6 @@ undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_3(undefine
   return param_1;
 }
 
-// 00D6F9F0  lib::StaticArray<int,64>::StaticArray<int,64>_2  size=51  [class]
-undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_2(undefined4 *param_1)
-
-{
-  param_1[4] = param_1 + 7;
-  param_1[5] = 0;
-  param_1[6] = 0x40;
-  param_1[3] = vftable;
-  *param_1 = cPd30::vftable;
-  cEspControler::cEspControler();
-  return param_1;
-}
-
 // 00D6FB00  lib::StaticArray<int,64>::StaticArray<int,64>_5  size=51  [class]
 undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_5(undefined4 *param_1)
 
@@ -27516,21 +27440,7 @@ undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_5(undefine
   param_1[6] = 0x40;
   param_1[3] = vftable;
   *param_1 = Pf31::vftable;
-  cMessWindowCtrl::cMessWindowCtrl_5();
-  return param_1;
-}
-
-// 00D6FB70  lib::StaticArray<int,64>::StaticArray<int,64>_4  size=62  [class]
-undefined4 * __fastcall lib::StaticArray<int,64>::StaticArray<int,64>_4(undefined4 *param_1)
-
-{
-  param_1[4] = param_1 + 7;
-  param_1[5] = 0;
-  param_1[6] = 0x40;
-  param_1[3] = vftable;
-  *param_1 = Pf32::vftable;
-  cEspControler::cEspControler();
-  cEspControler::cEspControler();
+  cMessWindowCtrl::cMessWindowCtrl();
   return param_1;
 }
 
@@ -29066,7 +28976,7 @@ int __fastcall FUN_00d85250(int param_1)
   local_5a8 = local_568 + local_5b8;
   local_5a4 = *(float *)(param_1 + 0xd8c) * fVar1 + local_5b4;
   FUN_00a84140(0xff000000,0x1a,&DAT_016c24fc);
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar8 = BehaviorUtility::checkRay(local_530,&local_5c0);
   if (iVar8 != 0) {
     FUN_00a84420(0xff000000,0x1a,&DAT_016c24fc);
@@ -29196,7 +29106,7 @@ int __fastcall FUN_00d85790(int param_1)
   local_568 = local_538 + local_578;
   local_564 = *(float *)(param_1 + 0xd8c) * fVar1 + local_574;
   FUN_00a84140(0xff404040,0x1a,"avoid");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar2 = BehaviorUtility::checkRay(local_530,&local_580);
   if (iVar2 != 0) {
     uVar3 = 0;
@@ -29272,7 +29182,7 @@ int __fastcall FUN_00d859e0(int param_1)
   local_568 = local_538 + local_578;
   local_564 = *(float *)(param_1 + 0xd7c) * -1.0 + local_574;
   FUN_00a84140(0xff404040,0x1a,"avoid");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar1 = BehaviorUtility::checkRay(local_530,&local_580);
   if (iVar1 != 0) {
     uVar2 = 0;
@@ -29340,7 +29250,7 @@ int __fastcall FUN_00d85b80(int param_1)
   local_568 = local_538 + local_578;
   local_564 = *(float *)(param_1 + 0xd8c) * fVar1 + local_574;
   FUN_00a84140(0xff404040,0x1a,"diveroll");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar2 = BehaviorUtility::checkRay(local_530,&local_580);
   if (iVar2 != 0) {
     uVar3 = 0;
@@ -29510,7 +29420,7 @@ int __fastcall FUN_00d85e10(int param_1)
   local_588 = local_538 + local_598;
   local_584 = *(float *)(param_1 + 0xd8c) * fVar1 + local_594;
   FUN_00a84140(0xff808080,0x1a,"sliding");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar5 = BehaviorUtility::checkRay(local_530,&local_5a0);
   if (iVar5 != 0) {
     uVar7 = 0;
@@ -29636,7 +29546,7 @@ float * __fastcall FUN_00d863e0(float *param_1)
     local_588 = local_5b8;
     local_584 = local_5b4;
     FUN_00a84140(0xffff00ff,0x1a,"downwardCliff");
-    hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+    hkpAllCdPointCollector::hkpAllCdPointCollector();
     iVar5 = BehaviorUtility::checkRay(local_530,&local_5a0);
     if ((iVar5 == 0) ||
        (FUN_00a84420(0xffff00ff,0x1a,"downwardCliff"),
@@ -29917,7 +29827,7 @@ float * __fastcall FUN_00d87200(float *param_1)
     local_570 = local_580;
     local_568 = local_578;
     FUN_00a84140(0xffff0000,0x1a,"cliffAheadToGround");
-    hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+    hkpAllCdPointCollector::hkpAllCdPointCollector();
     iVar2 = BehaviorUtility::checkRay(local_530,&local_580);
     if (iVar2 != 0) {
       param_1[3] = 1.4013e-45;
@@ -30014,7 +29924,7 @@ undefined4 __thiscall FUN_00d87330(int param_1,int param_2,float *param_3)
   local_588 = local_5b8;
   local_584 = local_5b4;
   FUN_00a84140(fVar3,0x1a,"overjump");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar10 = BehaviorUtility::checkRay(&local_530,&local_5a0);
   if (iVar10 != 0) {
     FUN_00a84420(fVar3,0x1a,"overjump");
@@ -30161,7 +30071,7 @@ int __fastcall FUN_00d87970(int param_1)
   local_568 = local_538 + local_578;
   local_564 = *(float *)(param_1 + 0xd8c) * fVar1 + local_574;
   FUN_00a84140(0xff404040,0x1a,"forceLongCliff");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar2 = BehaviorUtility::checkRay(local_530,&local_580);
   if (iVar2 != 0) {
     uVar3 = 0;
@@ -30289,7 +30199,7 @@ float * __fastcall FUN_00d87f90(float *param_1)
   local_558 = local_5a8 + local_568;
   local_554 = param_1[0x363] * fVar2 + local_564;
   FUN_00a84140(0xffff0000,0x1a,"cliffAhead");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   iVar5 = BehaviorUtility::checkRay(local_530,&local_570);
   if (iVar5 != 0) {
     FUN_00a84420(0xffff0000,0x1a,"cliffAhead");
@@ -30451,7 +30361,7 @@ float * __fastcall FUN_00d883a0(float *param_1)
   local_608 = fVar3 * param_1[0x362] + local_618;
   local_604 = fVar3 * param_1[0x363] + local_614;
   FUN_00a84140(0xff0000ff,0x1a,"cliffover");
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   local_674 = 3.4028235e+38;
   local_664 = 0.0;
   local_660[0] = -2.0;

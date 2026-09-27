@@ -175,7 +175,7 @@ undefined4 __thiscall FUN_004d7ff0(int param_1,undefined4 param_2,undefined4 par
   undefined4 uVar5;
   float10 fVar6;
   
-  iVar3 = lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>_8(param_2,param_3);
+  iVar3 = lib::StaticArray<Entity*,16>::StaticArray<Entity*,16>(param_2,param_3);
   if (iVar3 == 0) {
     return 0;
   }

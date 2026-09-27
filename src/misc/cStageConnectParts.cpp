@@ -409,8 +409,8 @@ LAB_00d34048:
   return;
 }
 
-// 00D3EDF0  cStageConnectParts::vf14  size=584  [class]
-void __fastcall cStageConnectParts::vf14(int param_1)
+// 00D3EDF0  cStageConnectParts::create  size=584  [class]
+void __fastcall cStageConnectParts::create(int param_1)
 
 {
   float fVar1;

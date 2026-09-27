@@ -8,7 +8,7 @@
 undefined4 * __fastcall espEmt03::espEmt03(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_8();
+  EspEmtBase::EspEmtBase();
   param_1[0x148] = 0;
   *param_1 = vftable;
   return param_1;
@@ -57,9 +57,9 @@ void __thiscall espEmt03::vf20(int param_1,int param_2,int param_3,int param_4)
   return;
 }
 
-// 00F0A4E0  espEmt03::vf04  size=321  [class]
+// 00F0A4E0  espEmt03::preTrans  size=321  [class]
 undefined4 __thiscall
-espEmt03::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+espEmt03::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -69,7 +69,7 @@ espEmt03::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 para
   undefined4 uVar5;
   float10 fVar6;
   
-  iVar3 = espEmt00::vf04(param_2,param_3,param_4);
+  iVar3 = espEmt00::preTrans(param_2,param_3,param_4);
   if (iVar3 != 0) {
     *(undefined4 *)(param_1 + 0x554) = 0x40c90fdb;
     if ((*(int *)(param_1 + 0x58) != 0) &&

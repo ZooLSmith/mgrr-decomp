@@ -166,8 +166,8 @@ undefined4 * __thiscall cHeadMarkAngryParts::vf00(undefined4 *param_1,byte param
   return param_1;
 }
 
-// 00CEF150  cHeadMarkAngryParts::vf14  size=371  [class]
-void __fastcall cHeadMarkAngryParts::vf14(int param_1)
+// 00CEF150  cHeadMarkAngryParts::create  size=371  [class]
+void __fastcall cHeadMarkAngryParts::create(int param_1)
 
 {
   float fVar1;

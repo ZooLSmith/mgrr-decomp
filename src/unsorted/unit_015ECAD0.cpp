@@ -7,7 +7,7 @@
 void FUN_015ecad0(void)
 
 {
-  cRadioModelParamData::cRadioModelParamData_2();
+  cRadioModelParamData::~cRadioModelParamData();
   return;
 }
 

@@ -1069,7 +1069,7 @@ void FUN_00ec69d0(void)
   FUN_00f98b60(0,0,0,1);
   DAT_01eddaf0 = 1;
   thunk_FUN_00fa5730(local_34,1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   __security_check_cookie(local_4 ^ (uint)local_34);
   return;
 }

@@ -13,7 +13,7 @@ undefined4 * __fastcall cEspShaderPsMaskBase::cEspShaderPsMaskBase(undefined4 *p
 {
   uint uVar1;
   
-  cEspShaderBase::cEspShaderBase_3();
+  cEspShaderBase::cEspShaderBase();
   *param_1 = vftable;
   param_1[0x13] = 0xffffffff;
   param_1[0x14] = 0xffffffff;
@@ -52,7 +52,7 @@ undefined4 * __thiscall cEspShaderPsMaskBase::vf00(undefined4 *param_1,byte para
   param_1[0x1a] = 0xffffffff;
   param_1[0x1b] = 0x1111111;
   *param_1 = cEspShaderBase::vftable;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

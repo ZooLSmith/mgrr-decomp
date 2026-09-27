@@ -45,8 +45,8 @@ void __fastcall Em01a0Parts::vf304(int param_1)
   return;
 }
 
-// 00519770  Em01a0Parts::vf1B8  size=31  [class]
-void Em01a0Parts::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 00519770  Em01a0Parts::setCutCrerateInfo  size=31  [class]
+void Em01a0Parts::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -115,8 +115,8 @@ void __fastcall FUN_0051d010(int param_1)
   return;
 }
 
-// 005331C0  Em01a0Parts::vf40  size=1920  [class]
-undefined4 __fastcall Em01a0Parts::vf40(int param_1)
+// 005331C0  Em01a0Parts::startup  size=1920  [class]
+undefined4 __fastcall Em01a0Parts::startup(int param_1)
 
 {
   uint uVar1;
@@ -136,7 +136,7 @@ undefined4 __fastcall Em01a0Parts::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar3 = BehaviorPartsModel::vf40();
+  iVar3 = BehaviorPartsModel::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -1042,11 +1042,11 @@ undefined * Em01a0Parts::vf04(void)
   return &DAT_01b34f38;
 }
 
-// 00AC1050  Em01a0Parts::vf00  size=30  [class]
-undefined4 __thiscall Em01a0Parts::vf00(undefined4 param_1,byte param_2)
+// 00AC1050  Em01a0Parts::destruct  size=30  [class]
+undefined4 __thiscall Em01a0Parts::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_99();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

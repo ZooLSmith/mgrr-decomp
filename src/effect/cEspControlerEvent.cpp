@@ -4,11 +4,11 @@
 #include "mgrr.h"
 #include "cEspControlerEvent.h"
 
-// 00EAAA30  cEspControlerEvent::cEspControlerEvent_2  size=45  [class]
-undefined4 * __fastcall cEspControlerEvent::cEspControlerEvent_2(undefined4 *param_1)
+// 00EAAA30  cEspControlerEvent::cEspControlerEvent  size=45  [class]
+undefined4 * __fastcall cEspControlerEvent::cEspControlerEvent(undefined4 *param_1)
 
 {
-  cEspControler::cEspControler_2(6);
+  cEspControler::cEspControler(6);
   *param_1 = vftable;
   param_1[0x2d] = 0xffffffff;
   param_1[0x2e] = 0xffffffff;
@@ -16,8 +16,8 @@ undefined4 * __fastcall cEspControlerEvent::cEspControlerEvent_2(undefined4 *par
   return param_1;
 }
 
-// 00EAAAA0  cEspControlerEvent::cEspControlerEvent  size=11  [class]
-void __fastcall cEspControlerEvent::cEspControlerEvent(undefined4 *param_1)
+// 00EAAAA0  cEspControlerEvent::~cEspControlerEvent  size=11  [class]
+void __fastcall cEspControlerEvent::~cEspControlerEvent(undefined4 *param_1)
 
 {
   *param_1 = vftable;

@@ -15,8 +15,8 @@ void __fastcall ArmThrowObj::vf54(int param_1)
   return;
 }
 
-// 00843B80  ArmThrowObj::vf1B8  size=52  [class]
-void ArmThrowObj::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 00843B80  ArmThrowObj::setCutCrerateInfo  size=52  [class]
+void ArmThrowObj::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   FUN_00eaa6e0(0x3f800000,0);
@@ -434,7 +434,7 @@ int __thiscall ArmThrowObj::getAttackInfo(int param_1,ushort *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7bd48);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(uint **)(iVar2 + 8);
       puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -674,10 +674,10 @@ void __thiscall FUN_0084f540(int param_1,undefined4 param_2,undefined4 param_3)
   return;
 }
 
-// 008565C0  ArmThrowObj::vf40  size=1420  [class]
+// 008565C0  ArmThrowObj::startup  size=1420  [class]
 /* WARNING: Type propagation algorithm not settling */
 
-undefined4 __fastcall ArmThrowObj::vf40(int param_1)
+undefined4 __fastcall ArmThrowObj::startup(int param_1)
 
 {
   uint *puVar1;
@@ -695,7 +695,7 @@ undefined4 __fastcall ArmThrowObj::vf40(int param_1)
   undefined1 auStack_1d0 [112];
   undefined1 auStack_160 [348];
   
-  iVar3 = BehaviorAppBase::vf40();
+  iVar3 = BehaviorAppBase::startup();
   if (iVar3 != 0) {
     FUN_009fd240();
     FUN_00dd7240();
@@ -726,7 +726,7 @@ undefined4 __fastcall ArmThrowObj::vf40(int param_1)
         iVar3 = 0;
       }
       else {
-        iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar3 = RigidBodyCollision::RigidBodyCollision();
       }
       *(int *)(param_1 + 0x7b0) = iVar3;
       if (iVar3 != 0) {
@@ -1649,7 +1649,7 @@ void __fastcall ArmThrowObj::vf4C(int *param_1)
     param_1[0x488] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
       param_1[0x487] = 0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -1684,11 +1684,11 @@ undefined4 ArmThrowObj::vf98(void)
   return 0x20190;
 }
 
-// 00ABA070  ArmThrowObj::vf00  size=30  [class]
-undefined4 __thiscall ArmThrowObj::vf00(undefined4 param_1,byte param_2)
+// 00ABA070  ArmThrowObj::destruct  size=30  [class]
+undefined4 __thiscall ArmThrowObj::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_24();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -11,5 +11,6 @@ struct hkpVehicleDefaultAerodynamics : public hkpVehicleAerodynamics {
     virtual float10 vf10(float param_2);  // 012928E0 slot 0x10
     virtual float10 vf14(float param_2);  // 01292850 slot 0x14
     // non-virtual members
-    hkpVehicleDefaultAerodynamics(undefined4 * param_1);  // 01288EC0
+    ~hkpVehicleDefaultAerodynamics();  // 01288EC0
+    hkpVehicleDefaultAerodynamics();  // 01288EE0
 };

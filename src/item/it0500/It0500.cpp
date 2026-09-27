@@ -1,5 +1,5 @@
 // src/item/it0500/It0500.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8070..00AC1240, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8070..00AC1240, 6 functions
 
 #include "mgrr.h"
 #include "It0500.h"
@@ -140,6 +140,21 @@ LAB_005e8301:
   return;
 }
 
+// 00AC0D90  It0500::It0500  size=73  [class]
+undefined4 * __fastcall It0500::It0500(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = cItemViscelaBase::vftable;
+  Hw::cTexture::cTexture();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AC0DE0  It0500::vf04  size=6  [class]
 undefined * It0500::vf04(void)
 
@@ -147,12 +162,12 @@ undefined * It0500::vf04(void)
   return &DAT_01b35380;
 }
 
-// 00AC1240  It0500::vf00  size=43  [class]
-undefined4 __thiscall It0500::vf00(undefined4 param_1,byte param_2)
+// 00AC1240  It0500::destruct  size=43  [class]
+undefined4 __thiscall It0500::destruct(undefined4 param_1,byte param_2)
 
 {
-  Hw::cTexture::cTexture_5();
-  Behavior::Behavior_124();
+  Hw::cTexture::~cTexture();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -165,8 +165,8 @@ undefined4 * __thiscall EffectCollisionMaterialImplement::vf08(undefined4 *param
   return param_1;
 }
 
-// 00900280  EffectCollisionMaterialImplement::EffectCollisionMaterialImplement_2  size=65  [class]
-undefined4 EffectCollisionMaterialImplement::EffectCollisionMaterialImplement_2(void)
+// 00900280  EffectCollisionMaterialImplement::~EffectCollisionMaterialImplement  size=65  [class]
+undefined4 EffectCollisionMaterialImplement::~EffectCollisionMaterialImplement(void)
 
 {
   undefined4 *puVar1;

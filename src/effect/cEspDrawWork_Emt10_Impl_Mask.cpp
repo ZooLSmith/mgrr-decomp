@@ -1,11 +1,11 @@
 // src/effect/cEspDrawWork_Emt10_Impl_Mask.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EDAEB0..00F3FB10, 2 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EDAEB0..00F3FB10, 3 functions
 
 #include "mgrr.h"
 #include "cEspDrawWork_Emt10_Impl_Mask.h"
 
-// 00EDAEB0  cEspDrawWork_Emt10_Impl_Mask::vf04  size=126  [class]
-void __fastcall cEspDrawWork_Emt10_Impl_Mask::vf04(int param_1)
+// 00EDAEB0  cEspDrawWork_Emt10_Impl_Mask::draw  size=126  [class]
+void __fastcall cEspDrawWork_Emt10_Impl_Mask::draw(int param_1)
 
 {
   FUN_00f45d30(1);
@@ -20,6 +20,23 @@ void __fastcall cEspDrawWork_Emt10_Impl_Mask::vf04(int param_1)
   FUN_00f9f6d0(4,*(undefined4 *)(param_1 + 0xd0));
   FUN_009ce3e0(param_1);
   return;
+}
+
+// 00F3F700  cEspDrawWork_Emt10_Impl_Mask::cEspDrawWork_Emt10_Impl_Mask  size=85  [class]
+undefined4 * __fastcall
+cEspDrawWork_Emt10_Impl_Mask::cEspDrawWork_Emt10_Impl_Mask(undefined4 *param_1)
+
+{
+  param_1[9] = 0;
+  param_1[0x34] = 0;
+  *param_1 = cEspDrawWork_Emt10_Impl::vftable;
+  FUN_00f9c880();
+  FUN_00f9c880();
+  FUN_00f9c880();
+  FUN_00f9c880();
+  FUN_00f9c7b0();
+  *param_1 = vftable;
+  return param_1;
 }
 
 // 00F3FB10  cEspDrawWork_Emt10_Impl_Mask::vf00  size=86  [class]

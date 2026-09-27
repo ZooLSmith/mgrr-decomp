@@ -9,4 +9,6 @@ struct cDryCellGauge2 : public cCustomObjCtrlManagerEx {
     virtual undefined4 * vf00(byte param_2);  // 00CEC1E0 slot 0x0  overrides cCustomObjCtrlManager
     virtual void vf08();  // 00D3AD30 slot 0x8  overrides cCustomObjCtrlManager
     virtual void create();  // 00D426F0 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cDryCellGauge2();  // 00CD2050
 };

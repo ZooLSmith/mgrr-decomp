@@ -9,7 +9,7 @@ void __fastcall hkpRayHitCollector::hkpRayHitCollector(undefined4 *param_1)
 
 {
   *param_1 = RayCastMultiHitWork::vftable;
-  FUN_009059e0();
+  RayCastMultiHitWork::vf14();
   param_1[0x18] = hkpAllRayHitCollector::vftable;
   param_1[0x1d] = 0;
   if (-1 < (int)param_1[0x1e]) {

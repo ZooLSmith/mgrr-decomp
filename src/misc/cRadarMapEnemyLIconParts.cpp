@@ -34,8 +34,8 @@ void __fastcall cRadarMapEnemyLIconParts::cRadarMapEnemyLIconParts(undefined4 *p
   return;
 }
 
-// 00CD6A70  cRadarMapEnemyLIconParts::vf14  size=246  [class]
-void __fastcall cRadarMapEnemyLIconParts::vf14(int param_1)
+// 00CD6A70  cRadarMapEnemyLIconParts::create  size=246  [class]
+void __fastcall cRadarMapEnemyLIconParts::create(int param_1)
 
 {
   int iVar1;

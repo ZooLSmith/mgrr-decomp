@@ -8,5 +8,5 @@ struct cMesh : public cMeshBase {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual int vf00(byte param_2);  // 00A11F50 slot 0x0  overrides cMeshBase
     // non-virtual members
-    cMesh(int param_2, undefined4 param_3);  // 00A11E20
+    ~cMesh();  // 00A11E20
 };

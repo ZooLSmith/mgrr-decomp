@@ -14,8 +14,8 @@ void __fastcall cJammingWallParts::vf08(int param_1)
   return;
 }
 
-// 00CBB800  cJammingWallParts::vf14  size=20  [class]
-void __fastcall cJammingWallParts::vf14(int param_1)
+// 00CBB800  cJammingWallParts::create  size=20  [class]
+void __fastcall cJammingWallParts::create(int param_1)
 
 {
   if ((*(int *)(param_1 + 0x20) == 0) && (*(int *)(param_1 + 0x24) == 0)) {

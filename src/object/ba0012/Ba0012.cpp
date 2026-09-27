@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Ba0012.h"
 
-// 00402820  Ba0012::vf40  size=59  [class]
-undefined4 __fastcall Ba0012::vf40(int param_1)
+// 00402820  Ba0012::startup  size=59  [class]
+undefined4 __fastcall Ba0012::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -327,7 +327,7 @@ void FUN_004031c0(void)
         FUN_00a81330();
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   iVar1 = FUN_00a81330();
@@ -340,7 +340,7 @@ void FUN_004031c0(void)
         FUN_00a81330();
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   iVar1 = FUN_00a81330();
@@ -353,7 +353,7 @@ void FUN_004031c0(void)
         FUN_00a81330();
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   iVar1 = FUN_00a81330();
@@ -366,7 +366,7 @@ void FUN_004031c0(void)
         FUN_00a81330();
         FUN_00a7c8a0();
       }
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -401,7 +401,7 @@ void __fastcall FUN_00403490(int *param_1)
   case 2:
     param_1[0x188] = param_1[0x188] + 1;
   case 3:
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   default:
     return;
@@ -1025,8 +1025,8 @@ undefined * Ba0012::vf04(void)
   return &DAT_01b34b04;
 }
 
-// 00AB8D90  Ba0012::vf00  size=54  [class]
-undefined4 __thiscall Ba0012::vf00(undefined4 param_1,byte param_2)
+// 00AB8D90  Ba0012::destruct  size=54  [class]
+undefined4 __thiscall Ba0012::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "Stage4AutoBroken.h"
 
-// 0040D0D0  Stage4AutoBroken::vf40  size=169  [class]
-undefined4 __fastcall Stage4AutoBroken::vf40(int param_1)
+// 0040D0D0  Stage4AutoBroken::startup  size=169  [class]
+undefined4 __fastcall Stage4AutoBroken::startup(int param_1)
 
 {
   uint *puVar1;
@@ -14,7 +14,7 @@ undefined4 __fastcall Stage4AutoBroken::vf40(int param_1)
   int iVar4;
   int iVar5;
   
-  iVar3 = MonThrowMoto::vf40();
+  iVar3 = BehaviorBa::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -139,8 +139,8 @@ undefined * Stage4AutoBroken::vf04(void)
   return &DAT_01b34b60;
 }
 
-// 00AB9670  Stage4AutoBroken::vf00  size=43  [class]
-undefined4 __thiscall Stage4AutoBroken::vf00(undefined4 param_1,byte param_2)
+// 00AB9670  Stage4AutoBroken::destruct  size=43  [class]
+undefined4 __thiscall Stage4AutoBroken::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

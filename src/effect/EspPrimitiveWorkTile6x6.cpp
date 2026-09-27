@@ -1,8 +1,25 @@
 // src/effect/EspPrimitiveWorkTile6x6.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F56450..00F59600, 2 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4FD20..00F59600, 3 functions
 
 #include "mgrr.h"
 #include "EspPrimitiveWorkTile6x6.h"
+
+// 00F4FD20  EspPrimitiveWorkTile6x6::EspPrimitiveWorkTile6x6  size=54  [class]
+undefined4 * __fastcall EspPrimitiveWorkTile6x6::EspPrimitiveWorkTile6x6(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = EspPrimitiveWorkTileBase::vftable;
+  FUN_00f9c880();
+  iVar1 = 3;
+  do {
+    FUN_00f9c880();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  *param_1 = vftable;
+  return param_1;
+}
 
 // 00F56450  EspPrimitiveWorkTile6x6::vf04  size=2439  [class]
 /* WARNING: Function: __alloca_probe replaced with injection: alloca_probe */

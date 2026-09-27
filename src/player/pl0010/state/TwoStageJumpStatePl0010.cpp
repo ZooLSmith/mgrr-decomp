@@ -56,8 +56,8 @@ undefined4 * __thiscall TwoStageJumpStatePl0010::vf04(undefined4 *param_1,byte p
   return param_1;
 }
 
-// 00BB2030  TwoStageJumpStatePl0010::vf0C  size=258  [class]
-void __thiscall TwoStageJumpStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB2030  TwoStageJumpStatePl0010::SafeCheck  size=258  [class]
+void __thiscall TwoStageJumpStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -101,7 +101,7 @@ void __thiscall TwoStageJumpStatePl0010::vf0C(int param_1,undefined4 *param_2)
     local_20[2] = local_20[0];
     FUN_00a95ff0(local_20);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -194,8 +194,8 @@ void __thiscall TwoStageJumpStatePl0010::vf14(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00BE0D50  TwoStageJumpStatePl0010::vf10  size=220  [class]
-void __thiscall TwoStageJumpStatePl0010::vf10(undefined4 param_1,undefined4 *param_2)
+// 00BE0D50  TwoStageJumpStatePl0010::qteSafeCheck  size=220  [class]
+void __thiscall TwoStageJumpStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -234,7 +234,7 @@ void __thiscall TwoStageJumpStatePl0010::vf10(undefined4 param_1,undefined4 *par
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

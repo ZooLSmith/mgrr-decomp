@@ -3,8 +3,8 @@
 
 #include "mgrr.h"
 
-// 00F99FA0  Hw::cDepthSurface::cDepthSurface_2  size=23  [class]
-void __fastcall Hw::cDepthSurface::cDepthSurface_2(undefined4 *param_1)
+// 00F99FA0  Hw::cDepthSurface::cDepthSurface  size=23  [class]
+void __fastcall Hw::cDepthSurface::cDepthSurface(undefined4 *param_1)
 
 {
   *param_1 = vftable;

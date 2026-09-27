@@ -437,8 +437,8 @@ LAB_00d2c962:
   } while( true );
 }
 
-// 00D43DD0  cCutPointDispParts::vf14  size=1849  [class]
-void __fastcall cCutPointDispParts::vf14(int param_1)
+// 00D43DD0  cCutPointDispParts::create  size=1849  [class]
+void __fastcall cCutPointDispParts::create(int param_1)
 
 {
   float fVar1;

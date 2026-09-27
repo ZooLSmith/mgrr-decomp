@@ -792,7 +792,7 @@ void FUN_015eda70(void)
 void FUN_015eda80(void)
 
 {
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 

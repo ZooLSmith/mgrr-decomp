@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp114.h"
 
-// 009D00D0  esp114::vf10  size=1  [class]
-void esp114::vf10(void)
+// 009D00D0  esp114::addOtTransList  size=1  [class]
+void esp114::addOtTransList(void)
 
 {
   return;
@@ -15,14 +15,14 @@ void esp114::vf10(void)
 undefined4 * __fastcall esp114::esp114(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
 
-// 009D94E0  esp114::vf04  size=226  [class]
+// 009D94E0  esp114::preTrans  size=226  [class]
 undefined4 __thiscall
-esp114::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp114::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -30,7 +30,7 @@ esp114::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   undefined4 *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 != 0) {
     if ((*(int *)(param_1 + 0x58) != 0) &&
        (puVar3 = (undefined4 *)(*(int *)(param_1 + 0x58) + 0x80), puVar3 != (undefined4 *)0x0)) {
@@ -101,7 +101,7 @@ void __fastcall esp114::vf08(int param_1)
 undefined4 __thiscall esp114::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

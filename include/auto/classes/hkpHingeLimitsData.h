@@ -12,6 +12,7 @@ struct hkpHingeLimitsData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011DBBC0 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011DBBA0 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpHingeLimitsData(undefined4 * param_1);  // 011B0220
-    hkpHingeLimitsData();  // 011DBC50
+    ~hkpHingeLimitsData();  // 011B0220
+    hkpHingeLimitsData();  // 011B0240
+    void ctor_011DBC50();  // 011DBC50
 };

@@ -12,4 +12,6 @@ struct cItemStageDropLeftHand : public cItemStageDropInstant {
     virtual char * vf10();  // 0094D630 slot 0x10  overrides cItemStageDrop
     virtual void vf1C();  // 009504C0 slot 0x1C  overrides cItemStageDrop
     virtual void vf28();  // 0094D750 slot 0x28  overrides cItemStageDrop
+    // non-virtual members
+    cItemStageDropLeftHand();  // 0094D5D0
 };

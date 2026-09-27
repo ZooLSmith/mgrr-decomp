@@ -9,6 +9,7 @@ struct EspPrimitiveWorkMultiParticle_Esp64 : public EspPrimitiveWorkMultiParticl
     virtual undefined4 * vf00(byte param_2);  // 00F3FAB0 slot 0x0  overrides EspPrimitiveWorkBase
     virtual void vf04(undefined4 param_1);  // 00F3B5C0 slot 0x4  overrides EspPrimitiveWorkBase
     // non-virtual members
+    EspPrimitiveWorkMultiParticle_Esp64();  // 00F3B5A0
     static void vf08();  // 00F4FE20
     static void vf0C(int param_2);  // 00F4FE40
 };

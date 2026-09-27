@@ -5,8 +5,8 @@
 #include "hkpAllRayHitCollector.h"
 #include "hkpRayHitCollector.h"
 
-// 005EC620  hkpAllRayHitCollector::hkpAllRayHitCollector_8  size=259  [run]
-void __fastcall hkpAllRayHitCollector::hkpAllRayHitCollector_8(undefined4 *param_1)
+// 005EC620  hkpAllRayHitCollector::hkpAllRayHitCollector  size=259  [run]
+void __fastcall hkpAllRayHitCollector::hkpAllRayHitCollector(undefined4 *param_1)
 
 {
   param_1[1] = 0x3f800000;

@@ -77,14 +77,14 @@ void __fastcall cManupilateDoor::vf31C(int *param_1)
   return;
 }
 
-// 005E3460  cManupilateDoor::vf40  size=212  [class]
-undefined4 __fastcall cManupilateDoor::vf40(int *param_1)
+// 005E3460  cManupilateDoor::startup  size=212  [class]
+undefined4 __fastcall cManupilateDoor::startup(int *param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = GimmickBehaviorBase::vf40();
+  iVar1 = GimmickBehaviorBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -138,8 +138,8 @@ void cManupilateDoor::vf324(void)
   return;
 }
 
-// 00ABAA40  cManupilateDoor::vf00  size=43  [class]
-undefined4 __thiscall cManupilateDoor::vf00(undefined4 param_1,byte param_2)
+// 00ABAA40  cManupilateDoor::destruct  size=43  [class]
+undefined4 __thiscall cManupilateDoor::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

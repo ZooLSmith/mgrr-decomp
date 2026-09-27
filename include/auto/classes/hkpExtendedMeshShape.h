@@ -15,6 +15,7 @@ struct hkpExtendedMeshShape : public hkpShapeCollection {
     static uint vf0C(uint param_2);  // 01135800
     static undefined4 * vf14(uint param_2, undefined4 * param_3);  // 01135D70
     hkpExtendedMeshShape();  // 01136860
-    void ctor_01136E00();  // 01136E00
+    ~hkpExtendedMeshShape();  // 01136CF0
+    hkpExtendedMeshShape(int param_2);  // 01136E00
     static void vf00();  // 01138500
 };

@@ -14,6 +14,4 @@ struct hkpMultiSphereTriangleAgent : public hkpIterativeLinearCastAgent {
     // non-virtual members
     hkpMultiSphereTriangleAgent();  // 0116A360
     void ctor_0116A430();  // 0116A430
-    void ctor_0116A4F0();  // 0116A4F0
-    void ctor_0116ADB0();  // 0116ADB0
 };

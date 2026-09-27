@@ -1,5 +1,5 @@
 // src/misc/cCustomizeSelMenu.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098F900..009C52D0, 62 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098F900..009C52D0, 65 functions
 
 #include "mgrr.h"
 #include "cCustomizeSelMenu.h"
@@ -228,11 +228,85 @@ void cCustomizeSelMenu::setItemState(uint param_1,undefined4 param_2)
   return;
 }
 
+// 009A0AD0  cCustomizeSelMenu::~cCustomizeSelMenu  size=190  [class]
+void __fastcall cCustomizeSelMenu::~cCustomizeSelMenu(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  *param_1 = vftable;
+  if (param_1[0xd9] != 0) {
+    FUN_00a805f0();
+    param_1[0xd9] = 0;
+  }
+  if (param_1[0xda] != -1) {
+    FUN_00a00bd0(param_1[0xda],0);
+    param_1[0xda] = 0xffffffff;
+  }
+  if ((undefined4 *)param_1[0x86] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0x86])(1);
+    param_1[0x86] = 0;
+  }
+  FUN_00cfe0f0(0xd);
+  Hw::cTexture::~cTexture();
+  iVar1 = 0xe;
+  do {
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  param_1[7] = cMessWindowCtrl::vftable;
+  if ((undefined4 *)param_1[8] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[8])(1);
+    param_1[8] = 0;
+  }
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
+  return;
+}
+
+// 009A0B90  FUN_009a0b90  size=68  [callgraph]
+int FUN_009a0b90(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_00dd3500(0x3b0,&DAT_01b7be50);
+  if (iVar1 != 0) {
+    iVar1 = cCustomizePointDisp::cCustomizePointDisp();
+    if (iVar1 != 0) {
+      *(char **)(iVar1 + 0xc) = "cCustomizeSelMenu";
+      FUN_00d29ca0(0x68,9);
+      *(undefined4 *)(iVar1 + 0x10) = 0;
+    }
+    return iVar1;
+  }
+  return 0;
+}
+
+// 009A0BE0  FUN_009a0be0  size=171  [callgraph]
+void __thiscall FUN_009a0be0(int param_1,byte param_2)
+
+{
+  undefined4 uVar1;
+  
+  if (param_2 < 0xf) {
+    uVar1 = FUN_00e03ea0("c_item_01");
+    FUN_00cb2ce0(*(undefined4 *)(param_1 + 0x2f0),uVar1);
+    FUN_00cb2310(*(undefined4 *)(param_1 + 0x310),0);
+    FUN_00cb2310(*(undefined4 *)(param_1 + 0x314),0);
+    FUN_00cb2310(*(undefined4 *)(param_1 + 0x2f8),0);
+    FUN_00cb2310(*(undefined4 *)(param_1 + 0x304),1);
+    FUN_00cce090(*(undefined4 *)(param_1 + 0x308),&DAT_016416fa);
+    FUN_00cf9770(*(undefined4 *)(param_1 + 0x30c),&DAT_016416fa,0,0xffffffff);
+  }
+  return;
+}
+
 // 009B2B00  cCustomizeSelMenu::vf00  size=30  [class]
 undefined4 __thiscall cCustomizeSelMenu::vf00(undefined4 param_1,byte param_2)
 
 {
-  cMessWindowCtrl::cMessWindowCtrl_19();
+  ~cCustomizeSelMenu();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -936,7 +1010,7 @@ switchD_009c10e1_default:
     puVar3 = (undefined4 *)0x0;
   }
   else {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     *puVar3 = cUpdatePop::vftable;
     puVar3[3] = "cCustomizeSelMenu";
     FUN_00d29ca0(0x74,9);
@@ -947,8 +1021,8 @@ switchD_009c10e1_default:
   return;
 }
 
-// 009C1220  cCustomizeSelMenu::vf14  size=10202  [class]
-void __fastcall cCustomizeSelMenu::vf14(int param_1)
+// 009C1220  cCustomizeSelMenu::create  size=10202  [class]
+void __fastcall cCustomizeSelMenu::create(int param_1)
 
 {
   bool bVar1;

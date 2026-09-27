@@ -249,8 +249,8 @@ void __fastcall cManupilateNodeSingleDlc::vf31C(int param_1)
   return;
 }
 
-// 0085ACF0  cManupilateNodeSingleDlc::vf40  size=294  [class]
-undefined4 __fastcall cManupilateNodeSingleDlc::vf40(int param_1)
+// 0085ACF0  cManupilateNodeSingleDlc::startup  size=294  [class]
+undefined4 __fastcall cManupilateNodeSingleDlc::startup(int param_1)
 
 {
   int iVar1;
@@ -258,7 +258,7 @@ undefined4 __fastcall cManupilateNodeSingleDlc::vf40(int param_1)
   undefined8 uVar3;
   char *pcVar4;
   
-  iVar1 = GimmickBehaviorBase::vf40();
+  iVar1 = GimmickBehaviorBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -308,8 +308,8 @@ undefined * cManupilateNodeSingleDlc::vf04(void)
   return &DAT_01b35adc;
 }
 
-// 00AB9C70  cManupilateNodeSingleDlc::vf00  size=43  [class]
-undefined4 __thiscall cManupilateNodeSingleDlc::vf00(undefined4 param_1,byte param_2)
+// 00AB9C70  cManupilateNodeSingleDlc::destruct  size=43  [class]
+undefined4 __thiscall cManupilateNodeSingleDlc::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

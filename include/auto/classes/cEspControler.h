@@ -10,6 +10,7 @@ struct cEspControler {
     virtual void vf08(undefined4 param_1, undefined4 param_2, int param_3);  // 009D4750 slot 0x8
     virtual void vf0C();  // 009D4780 slot 0xC
     // non-virtual members
+    static void vf0C_00EA9EB0();  // 00EA9EB0
     cEspControler();  // 00EAA060
     cEspControler(undefined4 param_2);  // 00EAA120
     ~cEspControler();  // 00EAA9B0

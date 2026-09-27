@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp31::esp31(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp31::esp31(undefined4 *param_1)
 undefined4 __thiscall esp31::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -242,12 +242,12 @@ LAB_00f1a5e0:
   return;
 }
 
-// 00F358C0  esp31::vf04  size=755  [class]
+// 00F358C0  esp31::preTrans  size=755  [class]
 /* WARNING: Removing unreachable block (ram,0x00f35a45) */
 /* WARNING: Removing unreachable block (ram,0x00f35ab0) */
 
 undefined4 __thiscall
-esp31::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp31::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   float fVar1;
@@ -264,7 +264,7 @@ esp31::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   float local_1c;
   float local_18;
   
-  iVar5 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar5 = cEsp::preTrans(param_2,param_3,param_4);
   if ((iVar5 == 0) || (iVar5 = FUN_00f12b50(), iVar5 == 0)) {
     return 0;
   }

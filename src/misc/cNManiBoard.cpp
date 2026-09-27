@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "cNManiBoard.h"
 
-// 00707E80  cNManiBoard::vf40  size=105  [class]
-undefined4 __fastcall cNManiBoard::vf40(int param_1)
+// 00707E80  cNManiBoard::startup  size=105  [class]
+undefined4 __fastcall cNManiBoard::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -149,8 +149,8 @@ undefined * cNManiBoard::vf04(void)
   return &DAT_01b35764;
 }
 
-// 00AB9B50  cNManiBoard::vf00  size=43  [class]
-undefined4 __thiscall cNManiBoard::vf00(undefined4 param_1,byte param_2)
+// 00AB9B50  cNManiBoard::destruct  size=43  [class]
+undefined4 __thiscall cNManiBoard::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

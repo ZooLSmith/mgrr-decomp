@@ -33,4 +33,5 @@ struct Emc190 : public EmBaseDLC {
     virtual void vf34C();  // 00800AD0 slot 0x34C  overrides BehaviorEmBase
     // non-virtual members
     static void createWindAtk();  // 007F1C50
+    Emc190();  // 00AB3380
 };

@@ -7,6 +7,7 @@
 struct hkpPairCollisionFilter : public hkpCollisionFilter {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpPairCollisionFilter();  // 011AFEF0
     static void vf00();  // 011B0000
     static void vf0C();  // 011B0010
     static void vf04();  // 011B0020
@@ -16,5 +17,5 @@ struct hkpPairCollisionFilter : public hkpCollisionFilter {
     static undefined vf00_011DB070();  // 011DB070
     static undefined vf04_011DB0C0();  // 011DB0C0
     static undefined vf04_011DB1E0();  // 011DB1E0
-    hkpPairCollisionFilter();  // 011DB320
+    void ctor_011DB320();  // 011DB320
 };

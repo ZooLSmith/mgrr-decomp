@@ -39,8 +39,8 @@ void __fastcall cEffectZanDispParts::vf08(int param_1)
   return;
 }
 
-// 00CECF30  cEffectZanDispParts::vf14  size=122  [class]
-void __fastcall cEffectZanDispParts::vf14(int param_1)
+// 00CECF30  cEffectZanDispParts::create  size=122  [class]
+void __fastcall cEffectZanDispParts::create(int param_1)
 
 {
   float fVar1;

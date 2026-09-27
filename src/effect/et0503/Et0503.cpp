@@ -77,7 +77,7 @@ void __fastcall Et0503::vf50(int param_1)
 undefined4 * __fastcall Et0503::Et0503(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
@@ -90,8 +90,8 @@ undefined * Et0503::vf04(void)
   return &DAT_01b352b8;
 }
 
-// 00AB8BE0  Et0503::vf00  size=105  [class]
-undefined4 * __thiscall Et0503::vf00(undefined4 *param_1,byte param_2)
+// 00AB8BE0  Et0503::destruct  size=105  [class]
+undefined4 * __thiscall Et0503::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -105,7 +105,7 @@ undefined4 * __thiscall Et0503::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

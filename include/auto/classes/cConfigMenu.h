@@ -11,5 +11,6 @@ struct cConfigMenu : public cCustomObjCtrlManager {
     virtual void vf0C();  // 0098EC00 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009B1D30 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
+    ~cConfigMenu();  // 0099E970
     static void create_009BF9E0();  // 009BF9E0
 };

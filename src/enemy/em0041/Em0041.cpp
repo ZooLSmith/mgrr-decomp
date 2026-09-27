@@ -757,8 +757,8 @@ void __fastcall Em0041::vf30(int param_1)
   return;
 }
 
-// 0043D110  Em0041::vf40  size=653  [class]
-undefined4 __fastcall Em0041::vf40(int param_1)
+// 0043D110  Em0041::startup  size=653  [class]
+undefined4 __fastcall Em0041::startup(int param_1)
 
 {
   int iVar1;
@@ -796,7 +796,7 @@ undefined4 __fastcall Em0041::vf40(int param_1)
           uVar3 = 0;
         }
         else {
-          uVar3 = RigidBodyCollection::RigidBodyCollection_2();
+          uVar3 = RigidBodyCollision::RigidBodyCollision();
         }
         *(undefined4 *)(param_1 + 0x7b0) = uVar3;
         iVar1 = FUN_008f6410(*(undefined4 *)(param_1 + 0x4f0),iVar1,uStack_170);
@@ -1199,7 +1199,7 @@ void __fastcall FUN_0043dbe0(int param_1)
 undefined4 * __fastcall Em0041::Em0041(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   FUN_00de3530();
   FUN_00de3530();
@@ -1214,8 +1214,8 @@ undefined * Em0041::vf04(void)
   return &DAT_01b34c54;
 }
 
-// 00AB6D00  Em0041::vf00  size=105  [class]
-undefined4 * __thiscall Em0041::vf00(undefined4 *param_1,byte param_2)
+// 00AB6D00  Em0041::destruct  size=105  [class]
+undefined4 * __thiscall Em0041::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -1229,7 +1229,7 @@ undefined4 * __thiscall Em0041::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -14,8 +14,8 @@ void __fastcall cSampleCustomObjDispParts::vf08(int param_1)
   return;
 }
 
-// 00CC5530  cSampleCustomObjDispParts::vf14  size=1  [class]
-void cSampleCustomObjDispParts::vf14(void)
+// 00CC5530  cSampleCustomObjDispParts::create  size=1  [class]
+void cSampleCustomObjDispParts::create(void)
 
 {
   return;

@@ -12,6 +12,7 @@ struct hkpPointToPlaneConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011D5FA0 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011D5F80 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpPointToPlaneConstraintData(undefined4 * param_1);  // 011AFD70
-    hkpPointToPlaneConstraintData();  // 011D6040
+    ~hkpPointToPlaneConstraintData();  // 011AFD70
+    hkpPointToPlaneConstraintData();  // 011AFD90
+    void ctor_011D6040();  // 011D6040
 };

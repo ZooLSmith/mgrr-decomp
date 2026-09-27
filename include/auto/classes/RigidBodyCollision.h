@@ -17,6 +17,7 @@ struct RigidBodyCollision : public RigidBodyCollection {
     virtual undefined4 vf120();  // 008F46C0 slot 0x120  overrides RigidBodyCollection
     virtual undefined4 vf12C(undefined4 param_2, int param_3);  // 008F0A90 slot 0x12C
     // non-virtual members
+    RigidBodyCollision();  // 008F4670
     static void applyTransForm(int param_2, undefined4 param_3);  // 008F7020
     static void applyTransForm_2(int param_2);  // 008F71E0
 };

@@ -1,11 +1,11 @@
 // src/misc/cItemLeftHand.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA9F0..00AB9860, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA9F0..00AB9860, 7 functions
 
 #include "mgrr.h"
 #include "cItemLeftHand.h"
 
-// 005EA9F0  cItemLeftHand::vf40  size=365  [class]
-undefined4 __fastcall cItemLeftHand::vf40(int param_1)
+// 005EA9F0  cItemLeftHand::startup  size=365  [class]
+undefined4 __fastcall cItemLeftHand::startup(int param_1)
 
 {
   byte bVar1;
@@ -19,7 +19,7 @@ undefined4 __fastcall cItemLeftHand::vf40(int param_1)
   
   uVar2 = FUN_0094b770();
   *(undefined4 *)(param_1 + 0x920) = uVar2;
-  iVar3 = cItemObjectBase::vf40();
+  iVar3 = cItemObjectBase::startup();
   if (iVar3 == 0) {
     return 0;
   }
@@ -205,7 +205,7 @@ LAB_005eac96:
   if (bVar7) {
     FUN_0094ea90(0x6f2396e8);
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -317,11 +317,24 @@ LAB_005ed665:
         }
         FUN_00d5ea40("P140_DOGTAG_GET",1,0);
         FUN_00945210(1,1);
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
     }
   }
   return;
+}
+
+// 00AB13C0  cItemLeftHand::cItemLeftHand  size=56  [class]
+undefined4 * __fastcall cItemLeftHand::cItemLeftHand(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = vftable;
+  return param_1;
 }
 
 // 00AB1400  cItemLeftHand::vf04  size=6  [class]
@@ -331,11 +344,11 @@ undefined * cItemLeftHand::vf04(void)
   return &DAT_01b353b0;
 }
 
-// 00AB9860  cItemLeftHand::vf00  size=30  [class]
-undefined4 __thiscall cItemLeftHand::vf00(undefined4 param_1,byte param_2)
+// 00AB9860  cItemLeftHand::destruct  size=30  [class]
+undefined4 __thiscall cItemLeftHand::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_124();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

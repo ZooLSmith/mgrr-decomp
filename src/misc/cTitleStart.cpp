@@ -10,13 +10,13 @@ undefined4 * __fastcall cTitleStart::cTitleStart(undefined4 *param_1)
 {
   int iVar1;
   
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   param_1[0xe] = 1;
   param_1[0xf] = 0;
   iVar1 = 3;
   do {
-    Hw::cTexture::cTexture_6();
+    Hw::cTexture::cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   param_1[0x2c] = 0;
@@ -42,10 +42,10 @@ void __fastcall cTitleStart::~cTitleStart(undefined4 *param_1)
   FUN_00cfdc10();
   iVar1 = 3;
   do {
-    Hw::cTexture::cTexture_5();
+    Hw::cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -112,8 +112,8 @@ undefined4 __thiscall cTitleStart::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 009A7220  cTitleStart::vf14  size=629  [class]
-void __fastcall cTitleStart::vf14(int param_1)
+// 009A7220  cTitleStart::create  size=629  [class]
+void __fastcall cTitleStart::create(int param_1)
 
 {
   float fVar1;

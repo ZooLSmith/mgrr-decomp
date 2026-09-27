@@ -11,4 +11,6 @@ struct BehaviorTest : public BehaviorAppBase {
     virtual undefined4 startup();  // 00AC53F0 slot 0x40  overrides Behavior
     virtual void vf4C();  // 00AC5460 slot 0x4C  overrides Behavior
     virtual void vf50();  // 00AC5480 slot 0x50  overrides Behavior
+    // non-virtual members
+    BehaviorTest();  // 00AAB8A0
 };

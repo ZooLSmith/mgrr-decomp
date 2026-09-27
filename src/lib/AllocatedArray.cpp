@@ -4608,9 +4608,9 @@ void __fastcall FUN_00a821a0(int param_1)
   return;
 }
 
-// 00A82230  lib::AllocatedArray<Entity*>::AllocatedArray<Entity*>_2  size=169  [class]
+// 00A82230  lib::AllocatedArray<Entity*>::AllocatedArray<Entity*>  size=169  [class]
 undefined4 * __thiscall
-lib::AllocatedArray<Entity*>::AllocatedArray<Entity*>_2(undefined4 *param_1,undefined4 *param_2)
+lib::AllocatedArray<Entity*>::AllocatedArray<Entity*>(undefined4 *param_1,undefined4 *param_2)
 
 {
   *param_1 = *param_2;
@@ -4706,7 +4706,7 @@ undefined4 FUN_00a89440(undefined4 param_1)
   undefined4 uVar1;
   undefined1 local_530 [1324];
   
-  hkpAllCdPointCollector::hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   uVar1 = BehaviorUtility::checkRay(local_530,param_1);
   hkpCdPointCollector::hkpCdPointCollector_16();
   return uVar1;

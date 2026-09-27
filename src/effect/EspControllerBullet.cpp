@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "EspControllerBullet.h"
 
-// 009CF2E0  EspControllerBullet::EspControllerBullet_5  size=18  [class]
-undefined4 * __fastcall EspControllerBullet::EspControllerBullet_5(undefined4 *param_1)
+// 009CF2E0  EspControllerBullet::EspControllerBullet  size=18  [class]
+undefined4 * __fastcall EspControllerBullet::EspControllerBullet(undefined4 *param_1)
 
 {
   EspControllerHitStrip::EspControllerHitStrip();
@@ -13,12 +13,12 @@ undefined4 * __fastcall EspControllerBullet::EspControllerBullet_5(undefined4 *p
   return param_1;
 }
 
-// 009CF300  EspControllerBullet::EspControllerBullet_6  size=11  [class]
-void __fastcall EspControllerBullet::EspControllerBullet_6(undefined4 *param_1)
+// 009CF300  EspControllerBullet::~EspControllerBullet  size=11  [class]
+void __fastcall EspControllerBullet::~EspControllerBullet(undefined4 *param_1)
 
 {
   *param_1 = vftable;
-  EspControllerHitStrip::EspControllerHitStrip_2();
+  EspControllerHitStrip::~EspControllerHitStrip();
   return;
 }
 
@@ -27,27 +27,27 @@ undefined4 * __thiscall EspControllerBullet::vf00(undefined4 *param_1,byte param
 
 {
   *param_1 = vftable;
-  EspControllerHitStrip::EspControllerHitStrip_2();
+  EspControllerHitStrip::~EspControllerHitStrip();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009DE420  EspControllerBullet::EspControllerBullet  size=36  [class]
-undefined4 * __thiscall EspControllerBullet::EspControllerBullet(undefined4 *param_1,byte param_2)
+// 009DE420  EspControllerBullet::~EspControllerBullet  size=36  [class]
+undefined4 * __thiscall EspControllerBullet::~EspControllerBullet(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  EspControllerHitStrip::EspControllerHitStrip_2();
+  EspControllerHitStrip::~EspControllerHitStrip();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009DE450  EspControllerBullet::EspControllerBullet_2  size=28  [class]
-undefined4 * __fastcall EspControllerBullet::EspControllerBullet_2(undefined4 *param_1)
+// 009DE450  EspControllerBullet::EspControllerBullet  size=28  [class]
+undefined4 * __fastcall EspControllerBullet::EspControllerBullet(undefined4 *param_1)
 
 {
   EspControllerHitStrip::EspControllerHitStrip();
@@ -56,8 +56,8 @@ undefined4 * __fastcall EspControllerBullet::EspControllerBullet_2(undefined4 *p
   return param_1;
 }
 
-// 009ED510  EspControllerBullet::EspControllerBullet_7  size=246  [class]
-void EspControllerBullet::EspControllerBullet_7(void)
+// 009ED510  EspControllerBullet::~EspControllerBullet  size=246  [class]
+void EspControllerBullet::~EspControllerBullet(void)
 
 {
   int *piVar1;
@@ -71,7 +71,7 @@ void EspControllerBullet::EspControllerBullet_7(void)
       puVar2 = (undefined4 *)*piVar3;
       if (puVar2 != (undefined4 *)0x0) {
         *puVar2 = vftable;
-        EspControllerHitStrip::EspControllerHitStrip_2();
+        EspControllerHitStrip::~EspControllerHitStrip();
         FUN_00dd4920(puVar2);
         *piVar3 = 0;
       }
@@ -111,8 +111,8 @@ void EspControllerBullet::EspControllerBullet_7(void)
   return;
 }
 
-// 009F1110  EspControllerBullet::EspControllerBullet_4  size=175  [class]
-void EspControllerBullet::EspControllerBullet_4(void)
+// 009F1110  EspControllerBullet::~EspControllerBullet  size=175  [class]
+void EspControllerBullet::~EspControllerBullet(void)
 
 {
   undefined4 *puVar1;
@@ -130,7 +130,7 @@ void EspControllerBullet::EspControllerBullet_4(void)
     if (puVar1[0x48] == 3) {
       if (puVar1 != (undefined4 *)0x0) {
         *puVar1 = vftable;
-        EspControllerHitStrip::EspControllerHitStrip_2();
+        EspControllerHitStrip::~EspControllerHitStrip();
         FUN_00dd4920(puVar1);
         *piVar4 = 0;
       }
@@ -277,7 +277,7 @@ void FUN_009f1410(void)
 void FUN_009f17e0(void)
 
 {
-  EspControllerBullet::EspControllerBullet_7();
+  EspControllerBullet::~EspControllerBullet();
   FUN_00dd7270();
   _DAT_01b7a908 = 0;
   _DAT_01b7a90c = 0;

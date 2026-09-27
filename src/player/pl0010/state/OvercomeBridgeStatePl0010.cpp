@@ -49,7 +49,7 @@ undefined4 * __thiscall
 OvercomeBridgeStatePl0010::OvercomeBridgeStatePl0010(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a603a0();
   return param_1;
@@ -74,8 +74,8 @@ undefined4 * __thiscall OvercomeBridgeStatePl0010::vf04(undefined4 *param_1,byte
   return param_1;
 }
 
-// 00BAF730  OvercomeBridgeStatePl0010::vf10  size=643  [class]
-void __thiscall OvercomeBridgeStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BAF730  OvercomeBridgeStatePl0010::qteSafeCheck  size=643  [class]
+void __thiscall OvercomeBridgeStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -167,12 +167,12 @@ void __thiscall OvercomeBridgeStatePl0010::vf10(int param_1,undefined4 *param_2)
     uStack_1c = local_48;
     (**(code **)(*piVar5 + 0x6c))(&local_24);
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 
-// 00BCB190  OvercomeBridgeStatePl0010::vf0C  size=1051  [class]
-void __thiscall OvercomeBridgeStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BCB190  OvercomeBridgeStatePl0010::SafeCheck  size=1051  [class]
+void __thiscall OvercomeBridgeStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float *pfVar1;
@@ -341,7 +341,7 @@ void __thiscall OvercomeBridgeStatePl0010::vf0C(int param_1,undefined4 *param_2)
     FUN_00a94bc0(3,0);
     FUN_00a94bc0(2,0);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 

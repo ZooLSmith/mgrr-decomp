@@ -86,8 +86,8 @@ undefined4 * __thiscall cUnLockDisp::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00D1AC10  cUnLockDisp::vf14  size=2184  [class]
-void __fastcall cUnLockDisp::vf14(int param_1)
+// 00D1AC10  cUnLockDisp::create  size=2184  [class]
+void __fastcall cUnLockDisp::create(int param_1)
 
 {
   float fVar1;

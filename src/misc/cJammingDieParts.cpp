@@ -50,8 +50,8 @@ void __fastcall cJammingDieParts::vf08(int param_1)
   return;
 }
 
-// 00CEF600  cJammingDieParts::vf14  size=137  [class]
-void __fastcall cJammingDieParts::vf14(int param_1)
+// 00CEF600  cJammingDieParts::create  size=137  [class]
+void __fastcall cJammingDieParts::create(int param_1)
 
 {
   float fVar1;

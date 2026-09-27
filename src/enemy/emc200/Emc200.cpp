@@ -1,11 +1,11 @@
 // src/enemy/emc200/Emc200.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00808890..00AB9FF0, 72 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00808890..00AB9FF0, 73 functions
 
 #include "mgrr.h"
 #include "Emc200.h"
 
-// 00808890  Emc200::vf264  size=54  [class]
-undefined4 __thiscall Emc200::vf264(int param_1,int param_2)
+// 00808890  Emc200::setEmSetInfo  size=54  [class]
+undefined4 __thiscall Emc200::setEmSetInfo(int param_1,int param_2)
 
 {
   FUN_00aa0920(*(undefined4 *)(param_2 + 0x5c));
@@ -675,12 +675,12 @@ void __fastcall FUN_0080a4f0(int param_1)
   iVar4 = FUN_00a81330();
   if (((iVar4 != 0) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)
      ) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   iVar4 = FUN_00a81330();
   if (((iVar4 != 0) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)
      ) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   iVar4 = 0;
   if ((*(byte *)(param_1 + 0xe94) & 1) == 0) {
@@ -913,12 +913,12 @@ void __fastcall FUN_0080aa10(int *param_1)
   iVar4 = FUN_00a81330();
   if (((iVar4 != 0) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)
      ) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   iVar4 = FUN_00a81330();
   if (((iVar4 != 0) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)
      ) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   iVar4 = 0;
   if ((*(byte *)(param_1 + 0x3a5) & 1) == 0) {
@@ -1270,7 +1270,7 @@ void __fastcall Emc200::vf44(int param_1)
   if (iVar1 != 0) {
     FUN_00a81330();
     FUN_00a7c8a0();
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   *(undefined4 *)(param_1 + 0x1d64) = 0;
   iVar1 = FUN_00a81330();
@@ -1327,7 +1327,7 @@ undefined4 __thiscall Emc200::getAttackInfo(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar3 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar3 == 0) || (iVar3 = CollisionAttackData::CollisionAttackData_3(), iVar3 == 0)) {
+  if ((iVar3 == 0) || (iVar3 = CollisionAttackData::CollisionAttackData(), iVar3 == 0)) {
     FUN_00dd5650(&DAT_016484a4);
     return 0;
   }
@@ -1732,7 +1732,7 @@ switchD_00814fcc_caseD_5:
     FUN_00ac80a0(0x3f800000,0x3f800000);
     iVar3 = FUN_00a94ce0(0);
     if (iVar3 != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     iVar3 = FUN_00a8c760(10);
     if (iVar3 != 0) {
@@ -1759,7 +1759,7 @@ LAB_008153c6:
     param_1[0x248] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
       param_1[0x187] = param_1[0x187] + 1;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   switchD_0080dbae::default();
@@ -1807,11 +1807,11 @@ void __fastcall FUN_00815540(int param_1)
   return;
 }
 
-// 00815570  Emc200::vf40  size=8144  [class]
+// 00815570  Emc200::startup  size=8144  [class]
 /* WARNING: Type propagation algorithm not settling */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 __fastcall Emc200::vf40(int *param_1)
+undefined4 __fastcall Emc200::startup(int *param_1)
 
 {
   int iVar1;
@@ -1847,7 +1847,7 @@ undefined4 __fastcall Emc200::vf40(int *param_1)
   undefined4 uStack_c8;
   
   local_214 = (int *)0x815586;
-  iVar1 = EmBaseDLC::vf40();
+  iVar1 = EmBaseDLC::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -2226,7 +2226,7 @@ undefined4 __fastcall Emc200::vf40(int *param_1)
   }
   else {
     local_214 = (int *)0x815dfb;
-    iVar1 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar1 = RigidBodyCollision::RigidBodyCollision();
   }
   piVar4 = (int *)param_1[0x13c];
   local_214 = (int *)0x0;
@@ -3907,7 +3907,7 @@ void __fastcall FUN_00819260(int param_1)
     FUN_00dffb30(param_1 + 0x1b30);
     FUN_00e02d50(param_1,0x1d,local_120);
     if (*(int *)(param_1 + 0x2124) != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     *(undefined4 *)(param_1 + 0x2124) = 0;
   case 1:
@@ -3957,7 +3957,7 @@ void __fastcall FUN_00819260(int param_1)
     FUN_00a94bc0(5,0x3e888889);
     (**(code **)(*(int *)(param_1 + 0x1b30) + 8))(0x41200000,0,0);
     if (*(int *)(param_1 + 0x2124) != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     *(undefined4 *)(param_1 + 0x2124) = 0;
   case 5:
@@ -4016,7 +4016,7 @@ void __fastcall FUN_00819630(int param_1)
     FUN_00dffb30(param_1 + 0x1b30);
     FUN_00e02d50(param_1,0x1d,local_120);
     if (*(int *)(param_1 + 0x2124) != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     *(undefined4 *)(param_1 + 0x2124) = 0;
   case 1:
@@ -4066,7 +4066,7 @@ void __fastcall FUN_00819630(int param_1)
     FUN_00a94bc0(5,0x3e888889);
     (**(code **)(*(int *)(param_1 + 0x1b30) + 8))(0x40a00000,0,0);
     if (*(int *)(param_1 + 0x2124) != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     *(undefined4 *)(param_1 + 0x2124) = 0;
   case 5:
@@ -7383,6 +7383,73 @@ void __fastcall Emc200::vf4C(int *param_1)
   return;
 }
 
+// 00AB3840  Emc200::Emc200  size=480  [class]
+undefined4 * __fastcall Emc200::Emc200(undefined4 *param_1)
+
+{
+  int iVar1;
+  
+  BehaviorEmBase::BehaviorEmBase();
+  *param_1 = EmBaseDLC::vftable;
+  cEspControler::cEspControler();
+  *param_1 = vftable;
+  iVar1 = 2;
+  do {
+    FUN_00a826e0();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  iVar1 = 2;
+  do {
+    FUN_00a826e0();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  iVar1 = 2;
+  do {
+    FUN_00a826e0();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  cEspControler::cEspControler();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  FUN_00a7c930();
+  iVar1 = 1;
+  do {
+    FUN_004105d0();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  param_1[0x811] = 0;
+  param_1[0x812] = 0;
+  param_1[0x813] = 0;
+  param_1[0x814] = 0;
+  param_1[0x815] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00904d60();
+  FUN_00a7c930();
+  FUN_00445db0();
+  iVar1 = 0x11;
+  do {
+    cEspControler::cEspControler();
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  FUN_00a603a0();
+  cEspControler::cEspControler();
+  FUN_00a7c930();
+  return param_1;
+}
+
 // 00AB3A30  Emc200::vf04  size=6  [class]
 undefined * Emc200::vf04(void)
 
@@ -7438,12 +7505,12 @@ void FUN_00ab3a70(void)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB9FF0  Emc200::vf00  size=30  [class]
-undefined4 __thiscall Emc200::vf00(undefined4 param_1,byte param_2)
+// 00AB9FF0  Emc200::destruct  size=30  [class]
+undefined4 __thiscall Emc200::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00ab3a70();

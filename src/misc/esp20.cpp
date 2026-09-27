@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp20.h"
 
-// 00ED8630  esp20::vf10  size=1  [class]
-void esp20::vf10(void)
+// 00ED8630  esp20::addOtTransList  size=1  [class]
+void esp20::addOtTransList(void)
 
 {
   return;
@@ -15,7 +15,7 @@ void esp20::vf10(void)
 undefined4 * __fastcall esp20::esp20(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   param_1[0x114] = 0;
   param_1[0x115] = 0;
   param_1[0x11a] = 0;
@@ -89,7 +89,7 @@ void __fastcall esp20::vf08(int param_1)
         local_38 = fVar2;
       }
     }
-    FUN_00efed20();
+    esp107::vf10();
     local_3c = *(float *)(param_1 + 0x124) * local_3c;
     iVar4 = *(int *)(param_1 + 0x84);
     if ((iVar4 != 0) && ((*(byte *)(iVar4 + 0x68) & 8) != 0)) {
@@ -118,8 +118,9 @@ void __fastcall esp20::vf08(int param_1)
   return;
 }
 
-// 00F34640  esp20::vf04  size=468  [class]
-undefined4 __thiscall esp20::vf04(int param_1,undefined4 param_2,undefined4 param_3,float param_4)
+// 00F34640  esp20::preTrans  size=468  [class]
+undefined4 __thiscall
+esp20::preTrans(int param_1,undefined4 param_2,undefined4 param_3,float param_4)
 
 {
   float fVar1;
@@ -131,7 +132,7 @@ undefined4 __thiscall esp20::vf04(int param_1,undefined4 param_2,undefined4 para
   uint *puVar7;
   uint uVar8;
   
-  iVar4 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar4 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar4 == 0) {
     return 0;
   }

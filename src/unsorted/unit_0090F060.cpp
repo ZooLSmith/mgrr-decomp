@@ -14,7 +14,7 @@ void FUN_0090f060(void)
     return;
   }
   _memset(_Dst,0,0x210);
-  hkpAllCdPointCollector::hkpAllCdPointCollector_30();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   return;
 }
 

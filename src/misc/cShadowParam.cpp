@@ -106,7 +106,7 @@ int __fastcall cShadowParam::cShadowParam_2(int param_1)
   *(undefined4 *)(param_1 + 0x1e8) = 0;
   *(undefined4 *)(param_1 + 0x1ec) = 0;
   *(undefined4 *)(param_1 + 0x1f0) = 0;
-  cLightApplyScale::cLightApplyScale_8();
+  cLightDataMinimum::cLightDataMinimum();
   *(undefined ***)(param_1 + 0x2aa4) = vftable;
   *(undefined ***)(param_1 + 0x2af0) = sAirScatterParam::vftable;
   *(undefined4 *)(param_1 + 0x3610) = 3;

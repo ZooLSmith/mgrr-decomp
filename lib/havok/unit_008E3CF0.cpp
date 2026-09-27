@@ -35,7 +35,7 @@ void __thiscall hkBaseObject::hkBaseObject_205(int param_1,float *param_2,float 
   
   if ((*(byte *)(param_1 + 0x16c) & 4) == 0) {
     FUN_00860de0();
-    hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2();
+    hkpCharacterProxyCinfo::hkpCharacterProxyCinfo();
     FUN_01269700(local_a0);
     if ((*(byte *)(param_1 + 0x16c) & 4) == 0) {
       iVar6 = FUN_012696c0();

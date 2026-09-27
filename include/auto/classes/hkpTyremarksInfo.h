@@ -10,6 +10,7 @@ struct hkpTyremarksInfo : public hkReferencedObject {
     virtual void vf0C(undefined4 param_1, int param_2);  // 0128F040 slot 0xC
     virtual undefined vf10();  // 0128EF70 slot 0x10
     // non-virtual members
-    hkpTyremarksInfo(undefined4 * param_1);  // 01287A70
-    hkpTyremarksInfo();  // 0128F2C0
+    ~hkpTyremarksInfo();  // 01287A70
+    hkpTyremarksInfo();  // 01287A90
+    void ctor_0128F2C0();  // 0128F2C0
 };

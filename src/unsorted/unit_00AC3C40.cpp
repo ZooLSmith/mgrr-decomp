@@ -16,7 +16,7 @@ void FUN_00ac3c40(void)
     FUN_00905ce0();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
-  hkpCdPointCollector::hkpCdPointCollector_22();
+  hkpAllCdPointCollector::~hkpAllCdPointCollector();
   return;
 }
 

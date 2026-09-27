@@ -143,7 +143,7 @@ void __fastcall FUN_005ec7b0(int *param_1)
         }
       }
       if (((float)param_1[0x232] < 0.0) || (0.0 < (float)param_1[0x232])) {
-        hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+        hkpAllRayHitCollector::hkpAllRayHitCollector();
         local_3b0 = 0.0;
         local_3ac = 0.0;
         local_3a8 = 0.0;

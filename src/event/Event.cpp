@@ -1352,36 +1352,36 @@ undefined4 Event::ReadUnit::vf30(void)
   return 0;
 }
 
-// 00E6AAF0  FUN_00e6aaf0  size=18  [between]
-bool __fastcall FUN_00e6aaf0(int param_1)
+// 00E6AAF0  Event::ReadUnitDebug::vf10  size=18  [class]
+bool __fastcall Event::ReadUnitDebug::vf10(int param_1)
 
 {
   return 1 < *(int *)(param_1 + 8) - 4U;
 }
 
-// 00E6AB10  FUN_00e6ab10  size=10  [between]
-bool __fastcall FUN_00e6ab10(int param_1)
+// 00E6AB10  Event::ReadUnitDebug::vf14  size=10  [class]
+bool __fastcall Event::ReadUnitDebug::vf14(int param_1)
 
 {
   return *(int *)(param_1 + 8) == 4;
 }
 
-// 00E6AB20  FUN_00e6ab20  size=4  [between]
-int __fastcall FUN_00e6ab20(int param_1)
+// 00E6AB20  Event::ReadUnitDebug::vf20  size=4  [class]
+int __fastcall Event::ReadUnitDebug::vf20(int param_1)
 
 {
   return param_1 + 0x70;
 }
 
-// 00E6AB30  FUN_00e6ab30  size=9  [between]
-bool __fastcall FUN_00e6ab30(int param_1)
+// 00E6AB30  Event::ReadUnitDebug::vf1C  size=9  [class]
+bool __fastcall Event::ReadUnitDebug::vf1C(int param_1)
 
 {
   return *(int *)(param_1 + 8) != 0;
 }
 
-// 00E6ABA0  FUN_00e6aba0  size=25  [between]
-void __thiscall FUN_00e6aba0(int param_1,char *param_2,rsize_t param_3)
+// 00E6ABA0  Event::ReadUnitDebug::vf28  size=25  [class]
+void __thiscall Event::ReadUnitDebug::vf28(int param_1,char *param_2,rsize_t param_3)
 
 {
   _strcpy_s(param_2,param_3,(char *)(param_1 + 0x28));
@@ -4409,9 +4409,9 @@ LAB_00e711f5:
   return;
 }
 
-// 00E712D0  FUN_00e712d0  size=57  [between]
+// 00E712D0  Event::ReadUnitDebug::vf04  size=57  [class]
 undefined4 __thiscall
-FUN_00e712d0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+Event::ReadUnitDebug::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   *(undefined4 *)(param_1 + 8) = 0;
@@ -4482,16 +4482,17 @@ undefined4 __fastcall FUN_00e71380(int param_1)
   return 0;
 }
 
-// 00E713D0  FUN_00e713d0  size=23  [between]
-undefined4 FUN_00e713d0(undefined4 param_1,undefined4 param_2)
+// 00E713D0  Event::ReadUnitDebug::vf24  size=23  [class]
+undefined4 Event::ReadUnitDebug::vf24(undefined4 param_1,undefined4 param_2)
 
 {
-  Event::DataUnit::debugCreateData(param_1,param_2);
+  DataUnit::debugCreateData(param_1,param_2);
   return 0;
 }
 
-// 00E713F0  FUN_00e713f0  size=107  [between]
-bool __thiscall FUN_00e713f0(int param_1,undefined4 param_2,undefined4 param_3,int param_4)
+// 00E713F0  Event::ReadUnitDebug::vf30  size=107  [class]
+bool __thiscall
+Event::ReadUnitDebug::vf30(int param_1,undefined4 param_2,undefined4 param_3,int param_4)
 
 {
   undefined4 uVar1;
@@ -6684,7 +6685,7 @@ undefined4 * __fastcall FUN_00e753f0(undefined4 *param_1)
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;
-  cEspControlerEvent::cEspControlerEvent_2();
+  cEspControlerEvent::cEspControlerEvent();
   iVar1 = 0x1f;
   do {
     cEspControler::cEspControler();
@@ -6708,7 +6709,7 @@ void FUN_00e75440(void)
     cEspControler::~cEspControler();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
-  cEspControlerEvent::cEspControlerEvent();
+  cEspControlerEvent::~cEspControlerEvent();
   return;
 }
 
@@ -7622,8 +7623,8 @@ undefined4 __thiscall FUN_00e76e10(undefined4 *param_1,undefined4 param_2,int pa
   return 1;
 }
 
-// 00E76E50  FUN_00e76e50  size=104  [between]
-void __fastcall FUN_00e76e50(int param_1)
+// 00E76E50  Event::ReadUnitDebug::vf18  size=104  [class]
+void __fastcall Event::ReadUnitDebug::vf18(int param_1)
 
 {
   FUN_00931f80(param_1 + 0x70,0);
@@ -7642,8 +7643,8 @@ void __fastcall FUN_00e76e50(int param_1)
   return;
 }
 
-// 00E76EC0  thunk_FUN_00e76e50  size=5  [between]
-void __fastcall thunk_FUN_00e76e50(int param_1)
+// 00E76EC0  Event::ReadUnitDebug::vf18  size=5  [class]
+void __fastcall Event::ReadUnitDebug::vf18(int param_1)
 
 {
   FUN_00931f80(param_1 + 0x70,0);
@@ -7838,8 +7839,8 @@ void __thiscall Event::ReadUnitNorm::vf04(int param_1,int param_2,uint param_3)
   return;
 }
 
-// 00E77270  FUN_00e77270  size=121  [between]
-void __fastcall FUN_00e77270(int param_1)
+// 00E77270  Event::ReadUnitNorm::vf18  size=121  [class]
+void __fastcall Event::ReadUnitNorm::vf18(int param_1)
 
 {
   FUN_00931f80(param_1 + 0x1c,*(int *)(param_1 + 0x10) != 0);
@@ -8238,8 +8239,8 @@ LAB_00e77e64:
   return *(int *)(param_1 + 0x58) + -1;
 }
 
-// 00E77F00  Event::DataHolderBase::DataHolderBase_3  size=94  [class]
-void __fastcall Event::DataHolderBase::DataHolderBase_3(undefined4 *param_1)
+// 00E77F00  Event::VibDataHolder::~VibDataHolder  size=94  [class]
+void __fastcall Event::VibDataHolder::~VibDataHolder(undefined4 *param_1)
 
 {
   *param_1 = CutDataHolder::vftable;
@@ -8262,7 +8263,7 @@ void __fastcall Event::DataHolderBase::DataHolderBase_3(undefined4 *param_1)
     param_1[4] = 0;
     param_1[5] = 0;
   }
-  *param_1 = vftable;
+  *param_1 = DataHolderBase::vftable;
   return;
 }
 
@@ -10165,8 +10166,8 @@ switchD_00e7a283_caseD_0:
   return;
 }
 
-// 00E7A310  FUN_00e7a310  size=222  [between]
-int __fastcall FUN_00e7a310(int param_1)
+// 00E7A310  Event::ReadUnitDebug::vf08  size=222  [class]
+int __fastcall Event::ReadUnitDebug::vf08(int param_1)
 
 {
   int iVar1;
@@ -12270,8 +12271,8 @@ void __fastcall FUN_00e7d500(int *param_1)
   return;
 }
 
-// 00E7D560  FUN_00e7d560  size=209  [between]
-undefined4 __thiscall FUN_00e7d560(int param_1,undefined4 *param_2)
+// 00E7D560  Event::ReadUnitDebug::vf2C  size=209  [class]
+undefined4 __thiscall Event::ReadUnitDebug::vf2C(int param_1,undefined4 *param_2)
 
 {
   undefined4 *puVar1;
@@ -12289,7 +12290,7 @@ undefined4 __thiscall FUN_00e7d560(int param_1,undefined4 *param_2)
   iVar4 = FUN_00a00f80(uVar2,uVar3);
   while( true ) {
     if (iVar4 != 0) {
-      uVar2 = Event::ActorDataHolder::debugAddActor(param_2);
+      uVar2 = ActorDataHolder::debugAddActor(param_2);
       return uVar2;
     }
     uVar2 = FUN_00931fa0(*param_2);
@@ -12470,8 +12471,8 @@ undefined4 __thiscall Event::ActorDataHolder::vf08(int param_1,undefined4 *param
   return 0;
 }
 
-// 00E7DAA0  Event::BgmDataHolder::BgmDataHolder  size=22  [class]
-void __fastcall Event::BgmDataHolder::BgmDataHolder(undefined4 *param_1)
+// 00E7DAA0  Event::BgmDataHolder::~BgmDataHolder  size=22  [class]
+void __fastcall Event::BgmDataHolder::~BgmDataHolder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -12506,8 +12507,8 @@ void __fastcall Event::CameraDataHolder::~CameraDataHolder(undefined4 *param_1)
   return;
 }
 
-// 00E7DB20  Event::ControlDataHolder::ControlDataHolder  size=83  [class]
-void __fastcall Event::ControlDataHolder::ControlDataHolder(undefined4 *param_1)
+// 00E7DB20  Event::ControlDataHolder::~ControlDataHolder  size=83  [class]
+void __fastcall Event::ControlDataHolder::~ControlDataHolder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -12566,8 +12567,8 @@ bool __fastcall Event::CutDataHolder::vf08(int param_1)
   return false;
 }
 
-// 00E7DC10  Event::EffectDataHolder::EffectDataHolder  size=22  [class]
-void __fastcall Event::EffectDataHolder::EffectDataHolder(undefined4 *param_1)
+// 00E7DC10  Event::EffectDataHolder::~EffectDataHolder  size=22  [class]
+void __fastcall Event::EffectDataHolder::~EffectDataHolder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -12576,8 +12577,8 @@ void __fastcall Event::EffectDataHolder::EffectDataHolder(undefined4 *param_1)
   return;
 }
 
-// 00E7DC30  Event::GraphicDataHolder::GraphicDataHolder  size=22  [class]
-void __fastcall Event::GraphicDataHolder::GraphicDataHolder(undefined4 *param_1)
+// 00E7DC30  Event::GraphicDataHolder::~GraphicDataHolder  size=22  [class]
+void __fastcall Event::GraphicDataHolder::~GraphicDataHolder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -12586,8 +12587,8 @@ void __fastcall Event::GraphicDataHolder::GraphicDataHolder(undefined4 *param_1)
   return;
 }
 
-// 00E7DC50  Event::SeDataHolder::SeDataHolder  size=22  [class]
-void __fastcall Event::SeDataHolder::SeDataHolder(undefined4 *param_1)
+// 00E7DC50  Event::SeDataHolder::~SeDataHolder  size=22  [class]
+void __fastcall Event::SeDataHolder::~SeDataHolder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -12596,8 +12597,8 @@ void __fastcall Event::SeDataHolder::SeDataHolder(undefined4 *param_1)
   return;
 }
 
-// 00E7DC70  Event::VibDataHolder::VibDataHolder  size=83  [class]
-void __fastcall Event::VibDataHolder::VibDataHolder(undefined4 *param_1)
+// 00E7DC70  Event::VibDataHolder::~VibDataHolder  size=83  [class]
+void __fastcall Event::VibDataHolder::~VibDataHolder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -12620,8 +12621,8 @@ void __fastcall Event::VibDataHolder::VibDataHolder(undefined4 *param_1)
   return;
 }
 
-// 00E7DCD0  Event::UiDataHolder::UiDataHolder  size=83  [class]
-void __fastcall Event::UiDataHolder::UiDataHolder(undefined4 *param_1)
+// 00E7DCD0  Event::UiDataHolder::~UiDataHolder  size=83  [class]
+void __fastcall Event::UiDataHolder::~UiDataHolder(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -13417,15 +13418,15 @@ void thunk_FUN_00e7d700(void)
   return;
 }
 
-// 00E7EF20  Event::StateDataHolder::StateDataHolder  size=890  [class]
-undefined4 * __fastcall Event::StateDataHolder::StateDataHolder(undefined4 *param_1)
+// 00E7EF20  Event::VibDataHolder::VibDataHolder  size=890  [class]
+undefined4 * __fastcall Event::VibDataHolder::VibDataHolder(undefined4 *param_1)
 
 {
   *param_1 = 3;
   param_1[1] = 0xffffffff;
   param_1[2] = 0xffffffff;
   FUN_00de3530();
-  param_1[5] = vftable;
+  param_1[5] = StateDataHolder::vftable;
   param_1[6] = 0;
   param_1[0xf] = 0;
   param_1[0xe] = CutDataHolder::vftable;
@@ -13565,15 +13566,15 @@ undefined4 * __fastcall Event::StateDataHolder::StateDataHolder(undefined4 *para
   param_1[0x10a] = 0;
   param_1[0x103] = 0;
   param_1[0x104] = 0;
-  param_1[0x101] = VibDataHolder::vftable;
+  param_1[0x101] = vftable;
   return param_1;
 }
 
-// 00E7F2A0  Event::DataHolderBase::DataHolderBase  size=590  [class]
-void __fastcall Event::DataHolderBase::DataHolderBase(int param_1)
+// 00E7F2A0  Event::VibDataHolder::~VibDataHolder  size=590  [class]
+void __fastcall Event::VibDataHolder::~VibDataHolder(int param_1)
 
 {
-  *(undefined ***)(param_1 + 0x404) = VibDataHolder::vftable;
+  *(undefined ***)(param_1 + 0x404) = vftable;
   if (*(int *)(param_1 + 0x428) != 0) {
     FUN_00dd48d0(*(int *)(param_1 + 0x428),0);
     *(undefined4 *)(param_1 + 0x428) = 0;
@@ -13589,7 +13590,7 @@ void __fastcall Event::DataHolderBase::DataHolderBase(int param_1)
   }
   *(undefined4 *)(param_1 + 0x40c) = 0;
   *(undefined4 *)(param_1 + 0x410) = 0;
-  DataHolderBase_2();
+  DataHolderBase::DataHolderBase_2();
   *(undefined ***)(param_1 + 0x3c0) = UiDataHolder::vftable;
   if (*(int *)(param_1 + 0x3e4) != 0) {
     FUN_00dd48d0(*(int *)(param_1 + 0x3e4),0);
@@ -13606,25 +13607,25 @@ void __fastcall Event::DataHolderBase::DataHolderBase(int param_1)
   }
   *(undefined4 *)(param_1 + 0x3c8) = 0;
   *(undefined4 *)(param_1 + 0x3cc) = 0;
-  DataHolderBase_8();
+  DataHolderBase::DataHolderBase_8();
   *(undefined ***)(param_1 + 0x370) = BgmDataHolder::vftable;
   BgmDataHolder::vf0C();
-  DataHolderBase_9();
+  DataHolderBase::DataHolderBase_9();
   *(undefined ***)(param_1 + 800) = SeDataHolder::vftable;
   SeDataHolder::vf0C();
-  DataHolderBase_10();
+  DataHolderBase::DataHolderBase_10();
   *(undefined ***)(param_1 + 0x2dc) = ScrDataHolder::vftable;
-  DataHolderBase_11();
+  ~VibDataHolder();
   *(undefined ***)(param_1 + 0x298) = ModelControlDataHolder::vftable;
-  DataHolderBase_12();
+  ~VibDataHolder();
   *(undefined ***)(param_1 + 0x240) = GraphicDataHolder::vftable;
   GraphicDataHolder::vf0C();
-  DataHolderBase_13();
+  DataHolderBase::DataHolderBase_13();
   *(undefined ***)(param_1 + 0x1ec) = EffectDataHolder::vftable;
   EffectDataHolder::vf0C();
-  DataHolderBase_14();
+  DataHolderBase::DataHolderBase_14();
   *(undefined ***)(param_1 + 0x1a8) = MoveDataHolder::vftable;
-  DataHolderBase_4();
+  ~VibDataHolder();
   *(undefined ***)(param_1 + 0x164) = ControlDataHolder::vftable;
   if (*(int *)(param_1 + 0x188) != 0) {
     FUN_00dd48d0(*(int *)(param_1 + 0x188),0);
@@ -13641,10 +13642,10 @@ void __fastcall Event::DataHolderBase::DataHolderBase(int param_1)
   }
   *(undefined4 *)(param_1 + 0x16c) = 0;
   *(undefined4 *)(param_1 + 0x170) = 0;
-  DataHolderBase_5();
+  DataHolderBase::DataHolderBase_5();
   ActorDataHolder::~ActorDataHolder();
   CameraDataHolder::~CameraDataHolder();
-  DataHolderBase_3();
+  ~VibDataHolder();
   *(undefined4 *)(param_1 + 0x1c) = 0;
   *(undefined1 *)(param_1 + 0x20) = 0;
   *(undefined1 *)(param_1 + 0x24) = 0;
@@ -13653,7 +13654,7 @@ void __fastcall Event::DataHolderBase::DataHolderBase(int param_1)
   *(undefined4 *)(param_1 + 0x2c) = 0;
   *(undefined4 *)(param_1 + 0x30) = 0;
   *(undefined4 *)(param_1 + 0x34) = 0;
-  *(undefined ***)(param_1 + 0x14) = vftable;
+  *(undefined ***)(param_1 + 0x14) = DataHolderBase::vftable;
   return;
 }
 
@@ -14011,7 +14012,7 @@ void __fastcall Event::ReadUnit::ReadUnit(undefined4 *param_1)
 
 {
   *param_1 = ReadUnitDebug::vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = vftable;
   return;
 }
@@ -14021,17 +14022,17 @@ undefined4 * __fastcall Event::ReadUnitExternal::ReadUnitExternal(undefined4 *pa
 
 {
   *param_1 = vftable;
-  StateDataHolder::StateDataHolder();
+  VibDataHolder::VibDataHolder();
   param_1[0x117] = 0;
   return param_1;
 }
 
-// 00E7FD10  Event::ReadUnit::ReadUnit_4  size=25  [class]
-void __fastcall Event::ReadUnit::ReadUnit_4(undefined4 *param_1)
+// 00E7FD10  Event::ReadUnit::ReadUnit  size=25  [class]
+void __fastcall Event::ReadUnit::ReadUnit(undefined4 *param_1)
 
 {
   *param_1 = ReadUnitExternal::vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = vftable;
   return;
 }
@@ -14044,59 +14045,59 @@ undefined4 * __fastcall Event::ReadUnitNorm::ReadUnitNorm(undefined4 *param_1)
   param_1[4] = 0;
   param_1[5] = 0;
   param_1[6] = 0;
-  StateDataHolder::StateDataHolder();
+  VibDataHolder::VibDataHolder();
   param_1[0x11a] = 0;
   return param_1;
 }
 
-// 00E7FD60  Event::ReadUnit::ReadUnit_3  size=25  [class]
-void __fastcall Event::ReadUnit::ReadUnit_3(undefined4 *param_1)
+// 00E7FD60  Event::ReadUnit::ReadUnit  size=25  [class]
+void __fastcall Event::ReadUnit::ReadUnit(undefined4 *param_1)
 
 {
   *param_1 = ReadUnitNorm::vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = vftable;
   return;
 }
 
-// 00E7FD80  Event::ReadUnitExternal::ReadUnitExternal_3  size=37  [class]
-undefined4 * __fastcall Event::ReadUnitExternal::ReadUnitExternal_3(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  StateDataHolder::StateDataHolder();
-  param_1[0x117] = 0;
-  *param_1 = ReadUnitPhase::vftable;
-  return param_1;
-}
-
-// 00E7FDB0  Event::ReadUnit::ReadUnit_2  size=25  [class]
-void __fastcall Event::ReadUnit::ReadUnit_2(undefined4 *param_1)
+// 00E7FD80  Event::ReadUnitPhase::ReadUnitPhase  size=37  [class]
+undefined4 * __fastcall Event::ReadUnitPhase::ReadUnitPhase(undefined4 *param_1)
 
 {
   *param_1 = ReadUnitExternal::vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::VibDataHolder();
+  param_1[0x117] = 0;
+  *param_1 = vftable;
+  return param_1;
+}
+
+// 00E7FDB0  Event::ReadUnit::ReadUnit  size=25  [class]
+void __fastcall Event::ReadUnit::ReadUnit(undefined4 *param_1)
+
+{
+  *param_1 = ReadUnitExternal::vftable;
+  VibDataHolder::~VibDataHolder();
   *param_1 = vftable;
   return;
 }
 
-// 00E7FDD0  Event::ReadUnitExternal::ReadUnitExternal_2  size=37  [class]
-undefined4 * __fastcall Event::ReadUnitExternal::ReadUnitExternal_2(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  StateDataHolder::StateDataHolder();
-  param_1[0x117] = 0;
-  *param_1 = ReadUnitRoom::vftable;
-  return param_1;
-}
-
-// 00E7FE00  Event::ReadUnit::ReadUnit_5  size=25  [class]
-void __fastcall Event::ReadUnit::ReadUnit_5(undefined4 *param_1)
+// 00E7FDD0  Event::ReadUnitRoom::ReadUnitRoom  size=37  [class]
+undefined4 * __fastcall Event::ReadUnitRoom::ReadUnitRoom(undefined4 *param_1)
 
 {
   *param_1 = ReadUnitExternal::vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::VibDataHolder();
+  param_1[0x117] = 0;
+  *param_1 = vftable;
+  return param_1;
+}
+
+// 00E7FE00  Event::ReadUnit::ReadUnit  size=25  [class]
+void __fastcall Event::ReadUnit::ReadUnit(undefined4 *param_1)
+
+{
+  *param_1 = ReadUnitExternal::vftable;
+  VibDataHolder::~VibDataHolder();
   *param_1 = vftable;
   return;
 }
@@ -14244,7 +14245,7 @@ int * Event::ReadUnitDebug::ReadUnitDebug(int *param_1,int param_2,undefined4 pa
       return (int *)0x0;
     }
     *piVar1 = (int)vftable;
-    StateDataHolder::StateDataHolder();
+    VibDataHolder::VibDataHolder();
     piVar1[0x12f] = 0;
   }
   else {
@@ -14261,7 +14262,7 @@ int * Event::ReadUnitDebug::ReadUnitDebug(int *param_1,int param_2,undefined4 pa
       if (iVar2 == 0) {
         return (int *)0x0;
       }
-      piVar1 = (int *)ReadUnitExternal::ReadUnitExternal_2();
+      piVar1 = (int *)ReadUnitRoom::ReadUnitRoom();
     }
     else {
       if (iVar2 != 2) {
@@ -14271,7 +14272,7 @@ int * Event::ReadUnitDebug::ReadUnitDebug(int *param_1,int param_2,undefined4 pa
       if (iVar2 == 0) {
         return (int *)0x0;
       }
-      piVar1 = (int *)ReadUnitExternal::ReadUnitExternal_3();
+      piVar1 = (int *)ReadUnitPhase::ReadUnitPhase();
     }
   }
   if (piVar1 != (int *)0x0) {
@@ -18001,8 +18002,8 @@ void Event::SeqDataHolderType<Event::MoveSeq>::vf68
   return;
 }
 
-// 00E8B760  Event::DataHolderBase::DataHolderBase_4  size=117  [class]
-void __fastcall Event::DataHolderBase::DataHolderBase_4(undefined4 *param_1)
+// 00E8B760  Event::VibDataHolder::~VibDataHolder  size=117  [class]
+void __fastcall Event::VibDataHolder::~VibDataHolder(undefined4 *param_1)
 
 {
   *param_1 = SeqDataHolderType<Event::MoveSeq>::vftable;
@@ -18030,7 +18031,7 @@ void __fastcall Event::DataHolderBase::DataHolderBase_4(undefined4 *param_1)
     param_1[5] = 0;
     param_1[6] = 0;
   }
-  *param_1 = vftable;
+  *param_1 = DataHolderBase::vftable;
   return;
 }
 
@@ -19859,8 +19860,8 @@ void Event::SeqDataHolderType<Event::ModelControlSeq>::vf68
   return;
 }
 
-// 00E8D680  Event::DataHolderBase::DataHolderBase_12  size=117  [class]
-void __fastcall Event::DataHolderBase::DataHolderBase_12(undefined4 *param_1)
+// 00E8D680  Event::VibDataHolder::~VibDataHolder  size=117  [class]
+void __fastcall Event::VibDataHolder::~VibDataHolder(undefined4 *param_1)
 
 {
   *param_1 = SeqDataHolderType<Event::ModelControlSeq>::vftable;
@@ -19888,7 +19889,7 @@ void __fastcall Event::DataHolderBase::DataHolderBase_12(undefined4 *param_1)
     param_1[5] = 0;
     param_1[6] = 0;
   }
-  *param_1 = vftable;
+  *param_1 = DataHolderBase::vftable;
   return;
 }
 
@@ -20478,8 +20479,8 @@ void Event::SeqDataHolderType<Event::ScrSeq>::vf68
   return;
 }
 
-// 00E8E0B0  Event::DataHolderBase::DataHolderBase_11  size=117  [class]
-void __fastcall Event::DataHolderBase::DataHolderBase_11(undefined4 *param_1)
+// 00E8E0B0  Event::VibDataHolder::~VibDataHolder  size=117  [class]
+void __fastcall Event::VibDataHolder::~VibDataHolder(undefined4 *param_1)
 
 {
   *param_1 = SeqDataHolderType<Event::ScrSeq>::vftable;
@@ -20507,7 +20508,7 @@ void __fastcall Event::DataHolderBase::DataHolderBase_11(undefined4 *param_1)
     param_1[5] = 0;
     param_1[6] = 0;
   }
-  *param_1 = vftable;
+  *param_1 = DataHolderBase::vftable;
   return;
 }
 
@@ -23051,7 +23052,7 @@ undefined4 __thiscall
 Event::SeqDataHolderType<Event::MoveSeq>::vf00(undefined4 param_1,byte param_2)
 
 {
-  DataHolderBase::DataHolderBase_4();
+  VibDataHolder::~VibDataHolder();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -23087,7 +23088,7 @@ undefined4 __thiscall
 Event::SeqDataHolderType<Event::ModelControlSeq>::vf00(undefined4 param_1,byte param_2)
 
 {
-  DataHolderBase::DataHolderBase_12();
+  VibDataHolder::~VibDataHolder();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -23098,7 +23099,7 @@ Event::SeqDataHolderType<Event::ModelControlSeq>::vf00(undefined4 param_1,byte p
 undefined4 __thiscall Event::SeqDataHolderType<Event::ScrSeq>::vf00(undefined4 param_1,byte param_2)
 
 {
-  DataHolderBase::DataHolderBase_11();
+  VibDataHolder::~VibDataHolder();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -23153,7 +23154,7 @@ undefined4 __thiscall Event::SeqDataHolderType<Event::VibSeq>::vf00(undefined4 p
 undefined4 __thiscall Event::CutDataHolder::vf00(undefined4 param_1,byte param_2)
 
 {
-  DataHolderBase::DataHolderBase_3();
+  VibDataHolder::~VibDataHolder();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -23199,7 +23200,7 @@ undefined4 * __thiscall Event::ModelControlDataHolder::vf00(undefined4 *param_1,
 
 {
   *param_1 = vftable;
-  DataHolderBase::DataHolderBase_12();
+  VibDataHolder::~VibDataHolder();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -23211,7 +23212,7 @@ undefined4 * __thiscall Event::MoveDataHolder::vf00(undefined4 *param_1,byte par
 
 {
   *param_1 = vftable;
-  DataHolderBase::DataHolderBase_4();
+  VibDataHolder::~VibDataHolder();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -23223,7 +23224,7 @@ undefined4 * __thiscall Event::ScrDataHolder::vf00(undefined4 *param_1,byte para
 
 {
   *param_1 = vftable;
-  DataHolderBase::DataHolderBase_11();
+  VibDataHolder::~VibDataHolder();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -23390,7 +23391,7 @@ undefined4 * __thiscall Event::ReadUnitDebug::vf00(undefined4 *param_1,byte para
 
 {
   *param_1 = vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = ReadUnit::vftable;
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
@@ -23403,7 +23404,7 @@ undefined4 * __thiscall Event::ReadUnitExternal::vf00(undefined4 *param_1,byte p
 
 {
   *param_1 = vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = ReadUnit::vftable;
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
@@ -23416,7 +23417,7 @@ undefined4 * __thiscall Event::ReadUnitNorm::vf00(undefined4 *param_1,byte param
 
 {
   *param_1 = vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = ReadUnit::vftable;
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
@@ -23429,7 +23430,7 @@ undefined4 * __thiscall Event::ReadUnitPhase::vf00(undefined4 *param_1,byte para
 
 {
   *param_1 = ReadUnitExternal::vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = ReadUnit::vftable;
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
@@ -23442,7 +23443,7 @@ undefined4 * __thiscall Event::ReadUnitRoom::vf00(undefined4 *param_1,byte param
 
 {
   *param_1 = ReadUnitExternal::vftable;
-  DataHolderBase::DataHolderBase();
+  VibDataHolder::~VibDataHolder();
   *param_1 = ReadUnit::vftable;
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);

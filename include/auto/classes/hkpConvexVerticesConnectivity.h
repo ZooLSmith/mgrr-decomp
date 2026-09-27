@@ -9,7 +9,9 @@ struct hkpConvexVerticesConnectivity : public hkReferencedObject {
     virtual undefined4 * vf00(byte param_2);  // 0113CB30 slot 0x0  overrides hkBaseObject
     virtual void vf0C();  // 0114FF10 slot 0xC
     // non-virtual members
-    hkpConvexVerticesConnectivity(undefined4 * param_1);  // 011410E0
-    hkpConvexVerticesConnectivity();  // 0117A310
+    hkpConvexVerticesConnectivity();  // 0113C420
+    ~hkpConvexVerticesConnectivity();  // 011410E0
+    void ctor_01141100();  // 01141100
+    void ctor_0117A310();  // 0117A310
     void ctor_0117AF50();  // 0117AF50
 };

@@ -144,8 +144,8 @@ undefined4 __fastcall cItemTreasureBox::vf94(int param_1)
   return *(undefined4 *)(param_1 + 0xa7c);
 }
 
-// 005EAD20  cItemTreasureBox::vf40  size=649  [class]
-undefined4 __fastcall cItemTreasureBox::vf40(int param_1)
+// 005EAD20  cItemTreasureBox::startup  size=649  [class]
+undefined4 __fastcall cItemTreasureBox::startup(int param_1)
 
 {
   uint *puVar1;
@@ -158,7 +158,7 @@ undefined4 __fastcall cItemTreasureBox::vf40(int param_1)
   undefined4 local_18;
   undefined4 local_14;
   
-  iVar2 = BehaviorBgBase::vf40();
+  iVar2 = BehaviorBgBase::startup();
   if (iVar2 != 0) {
     *(undefined4 *)(param_1 + 0xa78) = 0;
     *(undefined4 *)(param_1 + 0xa80) = 0;
@@ -403,7 +403,7 @@ LAB_005ec1ae:
       iVar3 = iVar3 + 0x70;
     } while (iVar2 < *(short *)(param_1 + 0x324));
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -424,8 +424,8 @@ undefined * cItemTreasureBox::vf04(void)
   return &DAT_01b353b4;
 }
 
-// 00AB9810  cItemTreasureBox::vf00  size=43  [class]
-undefined4 __thiscall cItemTreasureBox::vf00(undefined4 param_1,byte param_2)
+// 00AB9810  cItemTreasureBox::destruct  size=43  [class]
+undefined4 __thiscall cItemTreasureBox::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00dd7270();

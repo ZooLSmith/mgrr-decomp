@@ -10,4 +10,6 @@ struct cCollectionSelectParts : public cCustomObjCtrlManager {
     virtual void vf08();  // 009B9B40 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 0098C7D0 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009BFDB0 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cCollectionSelectParts();  // 009B01B0
 };

@@ -25,7 +25,7 @@ undefined4 * __fastcall cVertexFormatF16_PRXR::cVertexFormatF16_PRXR(undefined4 
 undefined4 __thiscall cVertexFormatF16_PRXR::vf04(undefined4 param_1,byte param_2)
 
 {
-  Hw::cVertexFormat::cVertexFormat_2();
+  Hw::cVertexFormat::~cVertexFormat();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -3,8 +3,8 @@
 
 #include "mgrr.h"
 
-// 00DD2C00  Hw::cHeapFixed::vf30  size=18  [class]
-undefined4 Hw::cHeapFixed::vf30(void)
+// 00DD2C00  Hw::cHeapFixed::createChildHeap  size=18  [class]
+undefined4 Hw::cHeapFixed::createChildHeap(void)
 
 {
   FUN_00dd56a0(&DAT_016c4430);

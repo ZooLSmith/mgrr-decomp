@@ -49,11 +49,11 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_22
   }
   iVar1 = FUN_00dbea90(&local_1b0);
   if (iVar1 == 0) {
-    hkpCdPointCollector::hkpCdPointCollector_4();
+    hkpCdPointCollector::hkpCdPointCollector();
     return 0;
   }
   FUN_00db5bc0(param_1,param_2,iVar1,param_5);
-  hkpCdPointCollector::hkpCdPointCollector_4();
+  hkpCdPointCollector::hkpCdPointCollector();
   return 1;
 }
 

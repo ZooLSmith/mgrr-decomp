@@ -33,8 +33,8 @@ undefined4 * __thiscall cEspDrawStrip::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00ED6050  cEspDrawStrip::vf04  size=191  [class]
-void __fastcall cEspDrawStrip::vf04(int param_1)
+// 00ED6050  cEspDrawStrip::draw  size=191  [class]
+void __fastcall cEspDrawStrip::draw(int param_1)
 
 {
   FUN_00f45d30(0);

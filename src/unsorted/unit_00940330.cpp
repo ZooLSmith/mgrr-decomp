@@ -56,7 +56,7 @@ void __fastcall FUN_009403a0(int param_1)
         (**(code **)(*piVar3 + 4))(&DAT_01b35300);
         iVar2 = FUN_00dd6d80(puVar5);
         if (iVar2 != 0) {
-          thunk_FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
         }
       }
     }

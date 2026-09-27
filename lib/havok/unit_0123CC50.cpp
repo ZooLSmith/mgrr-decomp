@@ -3016,7 +3016,7 @@ int __thiscall hkpBvCompressedMeshShape::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_104();
+  ::hkBaseObject::hkBaseObject_104();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -3052,8 +3052,8 @@ void __fastcall FUN_01242310(int param_1)
   return;
 }
 
-// 01242390  hkpMoppCode::hkpMoppCode_2  size=256  [run]
-undefined4 * __fastcall hkpMoppCode::hkpMoppCode_2(int param_1)
+// 01242390  hkpMoppCode::hkpMoppCode  size=256  [run]
+undefined4 * __fastcall hkpMoppCode::hkpMoppCode(int param_1)
 
 {
   undefined4 *puVar1;
@@ -3231,7 +3231,7 @@ int __thiscall hkpMoppCodeGenerator::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_214();
+  ::hkBaseObject::hkBaseObject_214();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -4943,7 +4943,7 @@ void __thiscall hkpMoppDefaultAssembler::vf14(int *param_1,int param_2,int param
     param_1[4] = (int)local_30;
     FUN_01244460(param_2,local_78,local_c0,&local_10);
     FUN_01244150(param_2,*(undefined4 *)(param_2 + 0x40),0);
-    hkBaseObject::hkBaseObject_214();
+    ::hkBaseObject::hkBaseObject_214();
     local_c = 0;
     if (-1 < local_8) {
       (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_10,local_8 * 4);
@@ -4964,7 +4964,7 @@ void __thiscall hkpMoppDefaultAssembler::vf14(int *param_1,int param_2,int param
     *piVar1 = param_1[4];
     FUN_01006000();
     piVar1[1] = *(int *)(param_1[4] + 0xc);
-    hkBaseObject::hkBaseObject_214();
+    ::hkBaseObject::hkBaseObject_214();
     local_c = 0;
     if (-1 < local_8) {
       (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_10,local_8 * 4);
@@ -5526,7 +5526,7 @@ undefined4 * __thiscall hkpMoppAssembler::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -5928,7 +5928,7 @@ int __thiscall hkpMoppDefaultAssembler::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_241();
+  ::hkBaseObject::hkBaseObject_241();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -6087,8 +6087,8 @@ void __fastcall hkpMoppDefaultSplitter::hkpMoppDefaultSplitter(undefined4 *param
   return;
 }
 
-// 01246130  hkBaseObject::hkBaseObject_236  size=7  [run]
-void __fastcall hkBaseObject::hkBaseObject_236(undefined4 *param_1)
+// 01246130  hkBaseObject::~hkBaseObject  size=7  [run]
+void __fastcall hkBaseObject::~hkBaseObject(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -7094,7 +7094,7 @@ undefined4 * __thiscall hkpMoppSplitter::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -7108,7 +7108,7 @@ undefined4 * __thiscall hkpMoppNodeMgr::vf00(undefined4 *param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  *param_1 = hkBaseObject::vftable;
+  *param_1 = ::hkBaseObject::vftable;
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 1));
@@ -7405,7 +7405,7 @@ int __thiscall hkpMoppDefaultSplitter::vf00(int param_1,byte param_2)
 {
   LPVOID pvVar1;
   
-  hkBaseObject::hkBaseObject_236();
+  ::hkBaseObject::~hkBaseObject();
   if ((param_2 & 1) != 0) {
     pvVar1 = TlsGetValue(DAT_01f8fc4c);
     (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 8))(param_1,*(undefined2 *)(param_1 + 4));
@@ -10331,9 +10331,10 @@ void FUN_0124b8d0(void)
   return;
 }
 
-// 0124B910  hkpBvCompressedMeshShape::vf10  size=71  [run]
+// 0124B910  hkpBvCompressedMeshShape::getAabb  size=71  [run]
 void __thiscall
-hkpBvCompressedMeshShape::vf10(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+hkpBvCompressedMeshShape::getAabb
+          (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined4 local_20;

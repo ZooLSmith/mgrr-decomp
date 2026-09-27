@@ -14,7 +14,7 @@ undefined4 * __fastcall Hw::cPrimFTyuva::cPrimFTyuva(undefined4 *param_1)
   FUN_00f9c880();
   iVar1 = 3;
   do {
-    cTexture::cTexture_6();
+    cTexture::cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   return param_1;
@@ -28,7 +28,7 @@ undefined4 * __thiscall Hw::cPrimFTyuva::vf00(undefined4 *param_1,byte param_2)
   
   iVar1 = 3;
   do {
-    cTexture::cTexture_5();
+    cTexture::~cTexture();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   thunk_FUN_00fa45a0();
@@ -40,8 +40,8 @@ undefined4 * __thiscall Hw::cPrimFTyuva::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00FA5350  Hw::cPrimFTyuva::vf04  size=356  [class]
-void __fastcall Hw::cPrimFTyuva::vf04(int param_1)
+// 00FA5350  Hw::cPrimFTyuva::draw  size=356  [class]
+void __fastcall Hw::cPrimFTyuva::draw(int param_1)
 
 {
   int iVar1;

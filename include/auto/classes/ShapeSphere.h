@@ -14,4 +14,5 @@ struct ShapeSphere : public ShapeBase {
     virtual byte vf1C(undefined4 param_2);  // 00A6C9B0 slot 0x1C  overrides ShapeBase
     // non-virtual members
     ShapeSphere();  // 00A6B210
+    static byte vf1C_00A6C720(int * param_2);  // 00A6C720
 };

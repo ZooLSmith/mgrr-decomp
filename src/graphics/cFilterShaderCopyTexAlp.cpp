@@ -8,7 +8,7 @@
 undefined4 * __fastcall cFilterShaderCopyTexAlp::cFilterShaderCopyTexAlp(undefined4 *param_1)
 
 {
-  cFilterShaderCopyTex::cFilterShaderCopyTex_2();
+  cFilterShaderCopyTex::cFilterShaderCopyTex();
   *param_1 = vftable;
   return param_1;
 }

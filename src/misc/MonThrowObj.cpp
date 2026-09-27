@@ -25,8 +25,8 @@ void __fastcall MonThrowObj::vf54(int param_1)
   return;
 }
 
-// 0051B170  MonThrowObj::vf1B8  size=92  [class]
-void MonThrowObj::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 0051B170  MonThrowObj::setCutCrerateInfo  size=92  [class]
+void MonThrowObj::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   int iVar1;
@@ -219,7 +219,7 @@ int __thiscall MonThrowObj::getAttackInfo(int param_1,ushort *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7bd48);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(uint **)(iVar2 + 8);
       puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -876,8 +876,8 @@ void __thiscall MonThrowObj::vf1A4(int param_1,undefined4 param_2,uint param_3)
   return;
 }
 
-// 00537890  MonThrowObj::vf40  size=1099  [class]
-undefined4 __fastcall MonThrowObj::vf40(int param_1)
+// 00537890  MonThrowObj::startup  size=1099  [class]
+undefined4 __fastcall MonThrowObj::startup(int param_1)
 
 {
   uint *puVar1;
@@ -895,7 +895,7 @@ undefined4 __fastcall MonThrowObj::vf40(int param_1)
   undefined1 auStack_1d0 [92];
   undefined1 auStack_174 [368];
   
-  iVar3 = BehaviorAppBase::vf40();
+  iVar3 = BehaviorAppBase::startup();
   if (iVar3 != 0) {
     FUN_009fd240();
     FUN_00dd7240();
@@ -920,7 +920,7 @@ undefined4 __fastcall MonThrowObj::vf40(int param_1)
         iVar3 = 0;
       }
       else {
-        iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+        iVar3 = RigidBodyCollision::RigidBodyCollision();
       }
       *(int *)(param_1 + 0x7b0) = iVar3;
       if (iVar3 != 0) {
@@ -1412,7 +1412,7 @@ void __fastcall MonThrowObj::vf4C(int *param_1)
       return;
     }
     param_1[0x483] = 0;
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   Behavior::vf4C();
@@ -1432,7 +1432,7 @@ void __fastcall MonThrowObj::vf4C(int *param_1)
     fVar1 = (float)param_1[0x248];
     param_1[0x248] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     break;
   case 4:
@@ -1468,11 +1468,11 @@ float10 __fastcall MonThrowObj::vf24(int param_1)
   return (float10)*(float *)(param_1 + 0x910);
 }
 
-// 00AB9720  MonThrowObj::vf00  size=30  [class]
-undefined4 __thiscall MonThrowObj::vf00(undefined4 param_1,byte param_2)
+// 00AB9720  MonThrowObj::destruct  size=30  [class]
+undefined4 __thiscall MonThrowObj::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_11();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

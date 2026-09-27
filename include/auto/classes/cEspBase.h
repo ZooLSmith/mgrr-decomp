@@ -15,18 +15,8 @@ struct cEspBase {
     // non-virtual members
     cEspBase();  // 00EDB150
     static void addOtTransList_00F099B0();  // 00F099B0
-    void ctor_00F128E0();  // 00F128E0
-    void ctor_00F12970();  // 00F12970
+    ~cEspBase();  // 00F128E0
     void ctor_00F12A00();  // 00F12A00
-    void ctor_00F17660();  // 00F17660
-    void ctor_00F1E960();  // 00F1E960
-    void ctor_00F200E0();  // 00F200E0
     void ctor_00F20170();  // 00F20170
     static void addOtTransList_2();  // 00F2C540
-    void ctor_00F403F0();  // 00F403F0
-    void ctor_00F40470();  // 00F40470
-    void ctor_00F404B0();  // 00F404B0
-    void ctor_00F404F0();  // 00F404F0
-    void ctor_00F40530();  // 00F40530
-    void ctor_00F40950();  // 00F40950
 };

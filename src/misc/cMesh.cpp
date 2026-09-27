@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cMesh.h"
 
-// 00A11E20  cMesh::cMesh  size=290  [class]
-undefined4 __thiscall cMesh::cMesh(int param_1,int param_2,undefined4 param_3)
+// 00A11E20  cMesh::~cMesh  size=290  [class]
+undefined4 __thiscall cMesh::~cMesh(int param_1,int param_2,undefined4 param_3)
 
 {
   uint uVar1;

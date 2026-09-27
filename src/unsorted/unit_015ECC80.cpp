@@ -7,7 +7,7 @@
 void FUN_015ecc80(void)
 
 {
-  cEspShaderBase::cEspShaderBase_2();
+  cEspShaderBase::~cEspShaderBase();
   return;
 }
 

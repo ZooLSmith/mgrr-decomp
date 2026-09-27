@@ -9,6 +9,5 @@ struct cModelShaderEventFixed_I {
     virtual void vf04();  // 00F90150 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cModelShaderEventFixed_I();  // 00F8FE20
-    void ctor_00F8FE40();  // 00F8FE40
-    void ctor_015F4140();  // 015F4140
+    ~cModelShaderEventFixed_I();  // 00F8FE40
 };

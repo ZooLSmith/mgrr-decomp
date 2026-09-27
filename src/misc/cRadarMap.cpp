@@ -534,8 +534,8 @@ LAB_00d3ecea:
   return;
 }
 
-// 00D43400  cRadarMap::vf14  size=908  [class]
-void __fastcall cRadarMap::vf14(int param_1)
+// 00D43400  cRadarMap::create  size=908  [class]
+void __fastcall cRadarMap::create(int param_1)
 
 {
   uint uVar1;

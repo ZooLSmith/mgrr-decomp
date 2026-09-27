@@ -13,4 +13,5 @@ struct esp162 : public cEspStrip {
     virtual void vf1C();  // 009D0C20 slot 0x1C  overrides cEspStrip
     // non-virtual members
     esp162();  // 009DAC70
+    static void vf14_00EE0AC0();  // 00EE0AC0
 };

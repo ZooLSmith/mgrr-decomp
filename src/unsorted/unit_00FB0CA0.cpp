@@ -141,7 +141,7 @@ bool FUN_00fb0f00(undefined4 param_1,undefined4 param_2)
 undefined4 * __fastcall FUN_00fb0f20(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f2370;
   return param_1;
 }
@@ -171,7 +171,7 @@ void __thiscall FUN_00fb0f70(int param_1,undefined4 param_2,undefined4 param_3)
 undefined4 * __fastcall FUN_00fb0fa0(undefined4 *param_1)
 
 {
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = &PTR_FUN_016f2378;
   return param_1;
 }

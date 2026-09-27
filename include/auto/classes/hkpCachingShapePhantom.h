@@ -21,5 +21,6 @@ struct hkpCachingShapePhantom : public hkpShapePhantom {
     virtual void vf48(int param_2, int param_3);  // 011DFEF0 slot 0x48  overrides hkpShapePhantom
     // non-virtual members
     hkpCachingShapePhantom();  // 011B2180
-    ~hkpCachingShapePhantom();  // 011E0140
+    void ctor_011E0140();  // 011E0140
+    ~hkpCachingShapePhantom();  // 011E0190
 };

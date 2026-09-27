@@ -8,4 +8,6 @@ struct CollisionAttackDataProxy : public CollisionAttackData {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined * vf00();  // 00D730E0 slot 0x0  overrides CollisionUserData
     virtual undefined4 * vf04(byte param_2);  // 00D73100 slot 0x4  overrides CollisionUserData
+    // non-virtual members
+    CollisionAttackDataProxy();  // 00D73B90
 };

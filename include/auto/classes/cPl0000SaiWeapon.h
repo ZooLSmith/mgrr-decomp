@@ -13,4 +13,6 @@ struct cPl0000SaiWeapon : public cPl0000Weapon {
     virtual void vf48();  // 00BDC0F0 slot 0x48  overrides Behavior
     virtual void vf4C();  // 00BEC5A0 slot 0x4C  overrides Behavior
     virtual void vf1A4(undefined4 param_2, uint param_3);  // 00BA65D0 slot 0x1A4  overrides Behavior
+    // non-virtual members
+    cPl0000SaiWeapon();  // 00AAF280
 };

@@ -9,5 +9,5 @@ struct cFilterShaderZCopy {
     virtual void vf04();  // 00EC11E0 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShaderZCopy();  // 00EC10D0
-    void ctor_015F1C60();  // 015F1C60
+    ~cFilterShaderZCopy();  // 015F1C60
 };

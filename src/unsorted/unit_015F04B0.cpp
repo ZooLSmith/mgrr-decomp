@@ -7,7 +7,7 @@
 void FUN_015f04b0(void)
 
 {
-  cMsgCtrl::cMsgCtrl_4();
+  cMsgSystem::~cMsgSystem();
   return;
 }
 
@@ -23,7 +23,7 @@ void FUN_015f04c0(void)
 void FUN_015f04d0(void)
 
 {
-  cMsgCtrl::cMsgCtrl_11();
+  cUIDataManager::~cUIDataManager();
   return;
 }
 
@@ -31,7 +31,7 @@ void FUN_015f04d0(void)
 void FUN_015f04e0(void)
 
 {
-  cMsgCtrl::cMsgCtrl_7();
+  cCkMsgDataManager::~cCkMsgDataManager();
   return;
 }
 

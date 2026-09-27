@@ -20,4 +20,6 @@ struct cPhaseAbstract {
     virtual undefined1 * vf30(byte * param_1);  // 00D66420 slot 0x30
     virtual undefined4 vf34(byte * param_1);  // 00D66430 slot 0x34
     virtual undefined4 vf38();  // 00D66440 slot 0x38
+    // non-virtual members
+    ~cPhaseAbstract();  // 00D6D8D0
 };

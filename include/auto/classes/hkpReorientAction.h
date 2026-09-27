@@ -10,5 +10,7 @@ struct hkpReorientAction : public hkpUnaryAction {
     virtual void vf0C(int param_2);  // 0127C030 slot 0xC  overrides hkpAction
     virtual int vf1C(int * param_2, int param_3);  // 0127BFB0 slot 0x1C  overrides hkpAction
     // non-virtual members
-    ~hkpReorientAction();  // 0127BF60
+    hkpReorientAction(undefined4 param_2);  // 012745F0
+    hkpReorientAction(undefined4 * param_1, undefined4 param_2);  // 01274640
+    hkpReorientAction();  // 0127BF60
 };

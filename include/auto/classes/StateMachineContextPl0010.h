@@ -9,5 +9,6 @@ struct StateMachineContextPl0010 : public StateMachineContext {
     virtual undefined * vf00();  // 00BD3610 slot 0x0  overrides StateMachineContext
     virtual undefined4 * vf04(byte param_2);  // 00BE6600 slot 0x4  overrides StateMachineContext
     // non-virtual members
+    ~StateMachineContextPl0010();  // 00BD3340
     StateMachineContextPl0010();  // 00BF1BA0
 };

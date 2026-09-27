@@ -39,8 +39,8 @@ void __fastcall cEffectDatsuDispParts::vf08(int param_1)
   return;
 }
 
-// 00CECDD0  cEffectDatsuDispParts::vf14  size=122  [class]
-void __fastcall cEffectDatsuDispParts::vf14(int param_1)
+// 00CECDD0  cEffectDatsuDispParts::create  size=122  [class]
+void __fastcall cEffectDatsuDispParts::create(int param_1)
 
 {
   float fVar1;

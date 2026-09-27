@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp30::esp30(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp30::esp30(undefined4 *param_1)
 undefined4 __thiscall esp30::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -74,8 +74,8 @@ void __fastcall esp30::vf08(int param_1)
   return;
 }
 
-// 00F2A6D0  esp30::vf10  size=458  [class]
-void __fastcall esp30::vf10(int param_1)
+// 00F2A6D0  esp30::addOtTransList  size=458  [class]
+void __fastcall esp30::addOtTransList(int param_1)
 
 {
   uint uVar1;
@@ -92,7 +92,7 @@ void __fastcall esp30::vf10(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  FUN_00efed20();
+  esp107::vf10();
   if (*(float *)(param_1 + 0x124) <= 0.01) {
     return;
   }
@@ -155,13 +155,13 @@ void __fastcall esp30::vf10(int param_1)
   return;
 }
 
-// 00F358A0  esp30::vf04  size=29  [class]
-bool esp30::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+// 00F358A0  esp30::preTrans  size=29  [class]
+bool esp30::preTrans(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   int iVar1;
   
-  iVar1 = cEspModel::vf04(param_1,param_2,param_3);
+  iVar1 = cEsp::preTrans(param_1,param_2,param_3);
   return iVar1 != 0;
 }
 

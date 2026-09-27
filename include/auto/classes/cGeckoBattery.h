@@ -14,4 +14,6 @@ struct cGeckoBattery : public BehaviorAppBase {
     virtual void vf4C();  // 00B77D30 slot 0x4C  overrides Behavior
     virtual void vf50();  // 00B769E0 slot 0x50  overrides Behavior
     virtual void vf25C(undefined4 param_2, int param_3, int param_4);  // 00B76D50 slot 0x25C  overrides Behavior
+    // non-virtual members
+    cGeckoBattery();  // 00AAEE90
 };

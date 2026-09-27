@@ -12,13 +12,11 @@ struct hkpSingleShapeContainer : public hkpShapeContainer {
     virtual undefined4 vf0C();  // 00911490 slot 0xC  overrides hkpShapeContainer
     virtual undefined4 vf14();  // 01138F00 slot 0x14  overrides hkpShapeContainer
     // non-virtual members
-    hkpSingleShapeContainer();  // 0112EF50
-    void ctor_0112F090();  // 0112F090
-    void ctor_01139150();  // 01139150
+    hkpSingleShapeContainer();  // 0112F090
     void ctor_01139450();  // 01139450
-    void ctor_0113CCD0();  // 0113CCD0
     void ctor_0113DFF0();  // 0113DFF0
-    hkpSingleShapeContainer(undefined4 * param_1);  // 0113F0B0
+    ~hkpSingleShapeContainer();  // 0113F0B0
+    void ctor_0113F0D0();  // 0113F0D0
     hkpSingleShapeContainer(undefined4 * param_1, int param_2);  // 0113F1D0
     void ctor_0113F2A0();  // 0113F2A0
     void ctor_01157560();  // 01157560

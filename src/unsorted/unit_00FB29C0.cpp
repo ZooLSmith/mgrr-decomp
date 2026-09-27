@@ -7,8 +7,8 @@
 undefined4 __fastcall FUN_00fb29c0(undefined4 param_1)
 
 {
-  Hw::cTexture::cTexture_6();
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
+  Hw::cTexture::cTexture();
   return param_1;
 }
 

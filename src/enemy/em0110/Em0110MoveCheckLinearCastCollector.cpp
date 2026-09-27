@@ -135,7 +135,7 @@ void __fastcall Em0110MoveCheckLinearCastCollector::Em0110MoveCheckLinearCastCol
     fStack_218 = fStack_228 - (float)param_1[0x16];
     fStack_214 = fStack_224 - (float)param_1[0x17];
     uStack_1ac = 0x7f7fffee;
-    iVar1 = hkpCdPointCollector::hkpCdPointCollector_14
+    iVar1 = hkpCdPointCollector::hkpCdPointCollector
                       (&fStack_220,auStack_200,1,&ppuStack_1b0,0x3c23d70a);
     param_1[600] = param_1[0x14];
     param_1[0x259] = param_1[0x15];
@@ -189,7 +189,7 @@ void __fastcall Em0110MoveCheckLinearCastCollector::Em0110MoveCheckLinearCastCol
       if ((iVar1 != 0) && (piVar4 = (int *)FUN_00a7c8a0(), piVar4 != (int *)0x0)) {
         FUN_00a9e0d0(piVar4[0x13c]);
         (**(code **)(*piVar4 + 0x20))();
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         FUN_00a7c950();
       }
       FUN_008e0ae0(1);
@@ -206,7 +206,7 @@ void __fastcall Em0110MoveCheckLinearCastCollector::Em0110MoveCheckLinearCastCol
     if ((iVar1 != 0) && (piVar4 = (int *)FUN_00a7c8a0(), piVar4 != (int *)0x0)) {
       FUN_00a9e0d0(piVar4[0x13c]);
       (**(code **)(*piVar4 + 0x20))();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       FUN_00a7c950();
     }
     (**(code **)(*param_1 + 0x1f8))(1);

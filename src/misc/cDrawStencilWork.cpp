@@ -132,8 +132,8 @@ undefined4 FUN_00a28f00(float *param_1,float *param_2)
   return 0x24;
 }
 
-// 00A29350  cDrawStencilWork::vf04  size=109  [class]
-void __fastcall cDrawStencilWork::vf04(int param_1)
+// 00A29350  cDrawStencilWork::draw  size=109  [class]
+void __fastcall cDrawStencilWork::draw(int param_1)
 
 {
   FUN_00f9de50(8,*(undefined1 *)(param_1 + 0x31),*(undefined1 *)(param_1 + 0x31));
@@ -411,8 +411,8 @@ void FUN_00a2a030(char *param_1,char *param_2)
   return;
 }
 
-// 00A2A050  cDrawStencilWork::cDrawStencilWork_2  size=21  [class]
-undefined4 * __fastcall cDrawStencilWork::cDrawStencilWork_2(undefined4 *param_1)
+// 00A2A050  cDrawStencilWork::cDrawStencilWork  size=21  [class]
+undefined4 * __fastcall cDrawStencilWork::cDrawStencilWork(undefined4 *param_1)
 
 {
   *param_1 = vftable;

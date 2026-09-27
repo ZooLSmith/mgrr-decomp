@@ -91,8 +91,8 @@ int __thiscall FUN_00bab310(int param_1,undefined4 *param_2)
   return (iVar3 != 3) + 10;
 }
 
-// 00BAB440  IdleStatePl0010::vf0C  size=303  [class]
-void __thiscall IdleStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BAB440  IdleStatePl0010::SafeCheck  size=303  [class]
+void __thiscall IdleStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -156,7 +156,7 @@ void __thiscall IdleStatePl0010::vf0C(int param_1,undefined4 *param_2)
       FUN_00a94bc0(4,0);
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -313,8 +313,8 @@ undefined4 IdleStatePl0010::vf20(undefined4 *param_1)
   return 1;
 }
 
-// 00BCA750  IdleStatePl0010::vf10  size=693  [class]
-void __thiscall IdleStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BCA750  IdleStatePl0010::qteSafeCheck  size=693  [class]
+void __thiscall IdleStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -384,7 +384,7 @@ LAB_00bca894:
   if (((*(uint *)(uVar7 + 0xcf8) & *(uint *)(uVar7 + 0xe48)) == 0) &&
      (160000.0 < *(float *)(uVar7 + 0xd28))) {
     fVar1 = *(float *)(*(int *)(uVar7 + 0x764) + 0xfc);
-    fVar8 = (float10)hkBaseObject::hkBaseObject_209();
+    fVar8 = (float10)::hkBaseObject::hkBaseObject_209();
     iVar5 = *(int *)(*(int *)((int)param_2 + 0xc0) + 4);
     fVar8 = fVar8 + fVar8 + (float10)fVar1;
     if ((*(int *)(iVar5 + 900) != 0) && ((float10)*(float *)(iVar5 + 0x388) <= fVar8)) {
@@ -400,7 +400,7 @@ LAB_00bca894:
      (fVar1 = *(float *)(param_1 + 8), !NAN(fVar1) && 1.0 < fVar1 != (fVar1 == 1.0))) {
     FUN_00aa9280(7);
   }
-  StateMachineNode::vf10(puVar4);
+  StateMachineNode::qteSafeCheck(puVar4);
   return;
 }
 

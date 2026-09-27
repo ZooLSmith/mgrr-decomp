@@ -14,4 +14,6 @@ struct EmAfterImage : public BehaviorAppBase {
     virtual void vf4C();  // 00ACF790 slot 0x4C  overrides Behavior
     virtual void vf50();  // 00AC4E20 slot 0x50  overrides Behavior
     virtual void vf54();  // 00AC4E30 slot 0x54  overrides Behavior
+    // non-virtual members
+    EmAfterImage();  // 00AABDC0
 };

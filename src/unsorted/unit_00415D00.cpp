@@ -9,7 +9,7 @@ undefined4 __fastcall FUN_00415d00(int param_1)
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -212,7 +212,7 @@ void __fastcall FUN_00415fd0(int *param_1)
   fVar4 = (float10)FUN_00e049b0();
   param_1[0x2d2] = (int)(float)((float10)fVar1 - fVar4);
   if ((float10)fVar1 - fVar4 < (float10)0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   return;
 }

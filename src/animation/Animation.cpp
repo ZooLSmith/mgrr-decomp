@@ -2322,23 +2322,23 @@ void __thiscall Animation::Motion::NodePlay::vf28(int param_1,undefined4 param_2
   return;
 }
 
-// 00E26870  Animation::Motion::NodePlay::vf34  size=7  [class]
-float10 __fastcall Animation::Motion::NodePlay::vf34(int param_1)
+// 00E26870  Animation::Motion::NodePlay::getCurrentTime  size=7  [class]
+float10 __fastcall Animation::Motion::NodePlay::getCurrentTime(int param_1)
 
 {
   return (float10)*(float *)(param_1 + 0xfc);
 }
 
-// 00E26880  Animation::Motion::NodePlay::vf38  size=27  [class]
-float10 __fastcall Animation::Motion::NodePlay::vf38(int param_1)
+// 00E26880  Animation::Motion::NodePlay::getElapsedTime  size=27  [class]
+float10 __fastcall Animation::Motion::NodePlay::getElapsedTime(int param_1)
 
 {
   return (float10)((float)*(int *)(param_1 + 0x118) * *(float *)(param_1 + 0x110) +
                   *(float *)(param_1 + 0xfc));
 }
 
-// 00E268A0  Animation::Motion::NodePlay::vf3C  size=7  [class]
-float10 __fastcall Animation::Motion::NodePlay::vf3C(int param_1)
+// 00E268A0  Animation::Motion::NodePlay::getMaxTime  size=7  [class]
+float10 __fastcall Animation::Motion::NodePlay::getMaxTime(int param_1)
 
 {
   return (float10)*(float *)(param_1 + 0x110);
@@ -4796,8 +4796,8 @@ float10 FUN_00e2c540(undefined4 *param_1)
   }
 }
 
-// 00E2C5D0  Animation::PostControl::Work::Work_2  size=7  [class]
-void __fastcall Animation::PostControl::Work::Work_2(undefined4 *param_1)
+// 00E2C5D0  Animation::PostControl::Work::~Work  size=7  [class]
+void __fastcall Animation::PostControl::Work::~Work(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -5052,8 +5052,8 @@ void __fastcall Animation::HandIk::HandIk(undefined4 *param_1)
   return;
 }
 
-// 00E2CDB0  Animation::PostControl::Work::Work  size=7  [class]
-void __fastcall Animation::PostControl::Work::Work(undefined4 *param_1)
+// 00E2CDB0  Animation::PostControl::Work::~Work  size=7  [class]
+void __fastcall Animation::PostControl::Work::~Work(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -6409,8 +6409,8 @@ Animation::Motion::NodeBlend::setCurrentTimeSlide(int param_1,float param_2,int 
   return;
 }
 
-// 00E2EA70  Animation::Motion::NodeBlend::vf34  size=123  [class]
-float10 __fastcall Animation::Motion::NodeBlend::vf34(int *param_1)
+// 00E2EA70  Animation::Motion::NodeBlend::getCurrentTime  size=123  [class]
+float10 __fastcall Animation::Motion::NodeBlend::getCurrentTime(int *param_1)
 
 {
   int *piVar1;
@@ -6432,8 +6432,8 @@ float10 __fastcall Animation::Motion::NodeBlend::vf34(int *param_1)
   return fVar4;
 }
 
-// 00E2EAF0  Animation::Motion::NodeBlend::vf38  size=21  [class]
-float10 __fastcall Animation::Motion::NodeBlend::vf38(int param_1)
+// 00E2EAF0  Animation::Motion::NodeBlend::getElapsedTime  size=21  [class]
+float10 __fastcall Animation::Motion::NodeBlend::getElapsedTime(int param_1)
 
 {
   float10 fVar1;
@@ -18677,8 +18677,8 @@ undefined4 * __thiscall Animation::Motion::Unit::NodeHandler::vf00(undefined4 *p
   return param_1;
 }
 
-// 00E41CA0  Animation::PostControl::Work::vf08  size=3  [class]
-void Animation::PostControl::Work::vf08(void)
+// 00E41CA0  Animation::PostControl::Work::update  size=3  [class]
+void Animation::PostControl::Work::update(void)
 
 {
   return;
@@ -20531,8 +20531,8 @@ undefined * Animation::Motion::NodeBlend::vf00(void)
   return &DAT_01dd943c;
 }
 
-// 00E445A0  Animation::Motion::NodeBlend::vf3C  size=7  [class]
-float10 __fastcall Animation::Motion::NodeBlend::vf3C(int param_1)
+// 00E445A0  Animation::Motion::NodeBlend::getMaxTime  size=7  [class]
+float10 __fastcall Animation::Motion::NodeBlend::getMaxTime(int param_1)
 
 {
   return (float10)*(float *)(param_1 + 0xa8);
@@ -20571,8 +20571,8 @@ undefined * Animation::Motion::NodeParallel::vf00(void)
   return &DAT_01dd9444;
 }
 
-// 00E44640  Animation::Motion::NodeGridBlend::NodeGridBlend_2  size=18  [class]
-undefined4 * __fastcall Animation::Motion::NodeGridBlend::NodeGridBlend_2(undefined4 *param_1)
+// 00E44640  Animation::Motion::NodeGridBlend::NodeGridBlend  size=18  [class]
+undefined4 * __fastcall Animation::Motion::NodeGridBlend::NodeGridBlend(undefined4 *param_1)
 
 {
   NodeBlend::NodeBlend();
@@ -20587,8 +20587,8 @@ undefined * Animation::Motion::NodeGridBlend::vf00(void)
   return &DAT_01dd9440;
 }
 
-// 00E44680  Animation::Motion::NodeRingBlend::NodeRingBlend_2  size=18  [class]
-undefined4 * __fastcall Animation::Motion::NodeRingBlend::NodeRingBlend_2(undefined4 *param_1)
+// 00E44680  Animation::Motion::NodeRingBlend::NodeRingBlend  size=18  [class]
+undefined4 * __fastcall Animation::Motion::NodeRingBlend::NodeRingBlend(undefined4 *param_1)
 
 {
   NodeBlend::NodeBlend();
@@ -21374,8 +21374,8 @@ void __fastcall Animation::Motion::NodeSlot::NodeHandler::NodeHandler(undefined4
   return;
 }
 
-// 00E45430  Animation::Motion::NodeListener::NodeListener_2  size=53  [class]
-void __fastcall Animation::Motion::NodeListener::NodeListener_2(int param_1)
+// 00E45430  Animation::Motion::NodeListener::NodeListener  size=53  [class]
+void __fastcall Animation::Motion::NodeListener::NodeListener(int param_1)
 
 {
   undefined4 *puVar1;

@@ -7,8 +7,8 @@
 void FUN_00c14300(void)
 
 {
-  Hw::cTexture::cTexture_5();
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
+  Hw::cTexture::~cTexture();
   return;
 }
 

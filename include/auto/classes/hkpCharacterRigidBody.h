@@ -12,6 +12,7 @@ struct hkpCharacterRigidBody : public hkReferencedObject, public hkpEntityListen
     virtual undefined4 vf10(int param_1, int * param_2);  // 0126FA60 slot 0x10
     virtual void vf14(int * param_2, char param_3, int param_4);  // 0126F540 slot 0x14
     // non-virtual members
+    hkpCharacterRigidBody();  // 0126F810
     static void vf00();  // 01270840
     static void vf00_01270850();  // 01270850
 };

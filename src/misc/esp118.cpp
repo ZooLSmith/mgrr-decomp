@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "esp118.h"
 
-// 009D0660  esp118::vf04  size=29  [class]
-bool esp118::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+// 009D0660  esp118::preTrans  size=29  [class]
+bool esp118::preTrans(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   int iVar1;
   
-  iVar1 = cEspModel::vf04(param_1,param_2,param_3);
+  iVar1 = cEsp::preTrans(param_1,param_2,param_3);
   return iVar1 != 0;
 }
 
@@ -18,7 +18,7 @@ bool esp118::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 undefined4 * __fastcall esp118::esp118(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -27,18 +27,18 @@ undefined4 * __fastcall esp118::esp118(undefined4 *param_1)
 undefined4 __thiscall esp118::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009EA550  esp118::vf10  size=16  [class]
-void esp118::vf10(void)
+// 009EA550  esp118::addOtTransList  size=16  [class]
+void esp118::addOtTransList(void)
 
 {
-  esp108::vf10();
+  cEsp::addOtTransList();
   cEspDrawWork::cEspDrawWork_5();
   return;
 }

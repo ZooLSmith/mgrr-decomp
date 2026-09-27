@@ -555,8 +555,8 @@ void VRMission::cVRPhase::vf10(void)
   return;
 }
 
-// 0095AB40  FUN_0095ab40  size=15  [between]
-void __fastcall FUN_0095ab40(int param_1)
+// 0095AB40  VRMission::cVRPhaseE02::vf04  size=15  [class]
+void __fastcall VRMission::cVRPhaseE02::vf04(int param_1)
 
 {
   *(undefined4 *)(param_1 + 4) = 0;
@@ -564,15 +564,15 @@ void __fastcall FUN_0095ab40(int param_1)
   return;
 }
 
-// 0095AB50  FUN_0095ab50  size=6  [between]
-undefined4 FUN_0095ab50(void)
+// 0095AB50  VRMission::cVRPhaseE02::vf08  size=6  [class]
+undefined4 VRMission::cVRPhaseE02::vf08(void)
 
 {
   return 1;
 }
 
-// 0095AB60  FUN_0095ab60  size=95  [between]
-void __fastcall FUN_0095ab60(int param_1)
+// 0095AB60  VRMission::cVRPhaseE02::vf0C  size=95  [class]
+void __fastcall VRMission::cVRPhaseE02::vf0C(int param_1)
 
 {
   undefined4 uVar1;
@@ -598,8 +598,8 @@ void __fastcall FUN_0095ab60(int param_1)
   return;
 }
 
-// 0095ABC0  FUN_0095abc0  size=15  [between]
-void __fastcall FUN_0095abc0(int param_1)
+// 0095ABC0  VRMission::cVRPhaseE02::vf10  size=15  [class]
+void __fastcall VRMission::cVRPhaseE02::vf10(int param_1)
 
 {
   FUN_009df830(0,*(undefined4 *)(param_1 + 8));
@@ -1074,8 +1074,8 @@ undefined4 __thiscall FUN_0095bb10(int param_1,int param_2)
   return 1;
 }
 
-// 0095BC40  VRMission::cVRPhaseE02::cVRPhaseE02  size=253  [class]
-undefined4 __thiscall VRMission::cVRPhaseE02::cVRPhaseE02(undefined4 *param_1,int param_2)
+// 0095BC40  VRMission::cVRPhaseE02::~cVRPhaseE02  size=253  [class]
+undefined4 __thiscall VRMission::cVRPhaseE02::~cVRPhaseE02(undefined4 *param_1,int param_2)
 
 {
   undefined4 *puVar1;
@@ -3420,7 +3420,7 @@ int __thiscall FUN_0095f7a0(int param_1,undefined4 *param_2)
     puVar2 = puVar2 + 1;
     puVar3 = puVar3 + 1;
   }
-  iVar1 = VRMission::cVRPhaseE02::cVRPhaseE02(param_2);
+  iVar1 = VRMission::cVRPhaseE02::~cVRPhaseE02(param_2);
   if (iVar1 == 0) {
     _memset(_Dst,0,0x108);
     *(undefined4 *)(param_1 + 0x118) = 0xffffffff;

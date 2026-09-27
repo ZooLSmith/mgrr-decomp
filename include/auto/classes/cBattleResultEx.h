@@ -10,5 +10,5 @@ struct cBattleResultEx : public cCustomObjCtrlManager {
     virtual void vf08();  // 00D08B10 slot 0x8  overrides cCustomObjCtrlManager
     virtual void create();  // 00D28A00 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
-    cBattleResultEx();  // 00D36BD0
+    ~cBattleResultEx();  // 00D36BD0
 };

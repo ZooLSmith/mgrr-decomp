@@ -8,8 +8,5 @@ struct cEnemyCautionStateManager {
     virtual undefined4 * vf00(byte param_2);  // 004EC010 slot 0x0
     // non-virtual members
     cEnemyCautionStateManager();  // 004EC410
-    void ctor_004ECE70();  // 004ECE70
-    void ctor_00AACF30();  // 00AACF30
-    void ctor_00AB2CD0();  // 00AB2CD0
-    void ctor_00AB5410();  // 00AB5410
+    ~cEnemyCautionStateManager();  // 004ECE70
 };

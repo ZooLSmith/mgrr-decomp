@@ -11,5 +11,5 @@ struct HkSystemGroupManager {
     virtual int vf0C() = 0;  // 00FDB68B slot 0xC
     virtual float10 vf10() = 0;  // 00FDB68B slot 0x10
     // non-virtual members
-    HkSystemGroupManager();  // 008FDE50
+    ~HkSystemGroupManager();  // 008FDE50
 };

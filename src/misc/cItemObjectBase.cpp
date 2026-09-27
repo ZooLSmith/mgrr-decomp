@@ -1,5 +1,5 @@
 // src/misc/cItemObjectBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E86F0..00AC11A0, 24 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E86F0..00AA8C00, 15 functions
 
 #include "mgrr.h"
 #include "cItemObjectBase.h"
@@ -54,8 +54,8 @@ void __fastcall FUN_005e8780(int param_1)
   return;
 }
 
-// 005E9630  cItemObjectBase::vf40  size=331  [class]
-undefined4 __fastcall cItemObjectBase::vf40(int param_1)
+// 005E9630  cItemObjectBase::startup  size=331  [class]
+undefined4 __fastcall cItemObjectBase::startup(int param_1)
 
 {
   float fVar1;
@@ -397,11 +397,11 @@ undefined4 cItemObjectBase::vf304(int param_1)
   return uVar4;
 }
 
-// 00AA7300  cItemObjectBase::cItemObjectBase_10  size=50  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_10(undefined4 *param_1)
+// 00AA7300  cItemObjectBase::cItemObjectBase  size=50  [class]
+undefined4 * __fastcall cItemObjectBase::cItemObjectBase(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   param_1[0x23e] = 0;
   FUN_00904d60();
@@ -423,136 +423,14 @@ undefined4 cItemObjectBase::vf308(void)
   return 0;
 }
 
-// 00AA8C00  cItemObjectBase::vf00  size=30  [class]
-undefined4 __thiscall cItemObjectBase::vf00(undefined4 param_1,byte param_2)
+// 00AA8C00  cItemObjectBase::destruct  size=30  [class]
+undefined4 __thiscall cItemObjectBase::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_124();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
-  return param_1;
-}
-
-// 00AB1360  cItemObjectBase::cItemObjectBase_3  size=56  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_3(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemBox::vftable;
-  return param_1;
-}
-
-// 00AB13C0  cItemObjectBase::cItemObjectBase_2  size=56  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_2(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemLeftHand::vftable;
-  return param_1;
-}
-
-// 00AB1420  cItemObjectBase::cItemObjectBase_5  size=56  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_5(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemFixBase::vftable;
-  return param_1;
-}
-
-// 00AB1490  cItemObjectBase::cItemObjectBase_4  size=56  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_4(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemChip::vftable;
-  return param_1;
-}
-
-// 00AB1A60  cItemObjectBase::cItemObjectBase  size=56  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemFixVRPdaDlc::vftable;
-  return param_1;
-}
-
-// 00AB6700  cItemObjectBase::cItemObjectBase_6  size=67  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_6(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemViscelaBase::vftable;
-  Hw::cTexture::cTexture_6();
-  return param_1;
-}
-
-// 00AC0D90  cItemObjectBase::cItemObjectBase_8  size=73  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_8(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemViscelaBase::vftable;
-  Hw::cTexture::cTexture_6();
-  *param_1 = It0500::vftable;
-  return param_1;
-}
-
-// 00AC0E10  cItemObjectBase::cItemObjectBase_9  size=73  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_9(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemViscelaBase::vftable;
-  Hw::cTexture::cTexture_6();
-  *param_1 = It0510::vftable;
-  return param_1;
-}
-
-// 00AC11A0  cItemObjectBase::cItemObjectBase_7  size=56  [class]
-undefined4 * __fastcall cItemObjectBase::cItemObjectBase_7(undefined4 *param_1)
-
-{
-  Behavior::Behavior_95();
-  *param_1 = vftable;
-  param_1[0x23e] = 0;
-  FUN_00904d60();
-  FUN_00904d60();
-  *param_1 = cItemFixVRPda::vftable;
   return param_1;
 }
 

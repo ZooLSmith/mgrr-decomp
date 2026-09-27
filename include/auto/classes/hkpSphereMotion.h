@@ -21,5 +21,8 @@ struct hkpSphereMotion : public hkpMotion {
     virtual void vf60(float param_2, float * param_3);  // 011C7460 slot 0x60  overrides hkpMotion
     virtual void vf64(float param_2, float * param_3);  // 011C73B0 slot 0x64  overrides hkpMotion
     // non-virtual members
+    hkpSphereMotion(int param_2);  // 011916C0
     hkpSphereMotion();  // 011A0C50
+    hkpSphereMotion(undefined4 * param_1, int param_2);  // 011B0E30
+    void ctor_011B0E70();  // 011B0E70
 };

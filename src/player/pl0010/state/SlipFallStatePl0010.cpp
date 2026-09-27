@@ -14,8 +14,8 @@ bool SlipFallStatePl0010::vf08(undefined4 param_1)
   return iVar1 != 0;
 }
 
-// 00B826A0  SlipFallStatePl0010::vf0C  size=5  [class]
-void __thiscall SlipFallStatePl0010::vf0C(int param_1,undefined4 param_2)
+// 00B826A0  SlipFallStatePl0010::SafeCheck  size=5  [class]
+void __thiscall SlipFallStatePl0010::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -83,8 +83,8 @@ undefined4 * __thiscall SlipFallStatePl0010::vf04(undefined4 *param_1,byte param
   return param_1;
 }
 
-// 00BB19A0  SlipFallStatePl0010::vf10  size=343  [class]
-void __thiscall SlipFallStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BB19A0  SlipFallStatePl0010::qteSafeCheck  size=343  [class]
+void __thiscall SlipFallStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -147,7 +147,7 @@ void __thiscall SlipFallStatePl0010::vf10(int param_1,undefined4 *param_2)
   *(float *)(uVar6 + 0x58) = *(float *)(uVar6 + 0x58) + fVar3;
   *(float *)(uVar6 + 0x5c) = fVar5 + *(float *)(uVar6 + 0x5c);
   switchD_0080dbae::default();
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

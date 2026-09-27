@@ -32,8 +32,8 @@ void __fastcall thunk_FUN_00a935d0(int param_1)
   return;
 }
 
-// 00404370  Ba0015::vf40  size=330  [class]
-undefined4 __fastcall Ba0015::vf40(int *param_1)
+// 00404370  Ba0015::startup  size=330  [class]
+undefined4 __fastcall Ba0015::startup(int *param_1)
 
 {
   int iVar1;
@@ -45,7 +45,7 @@ undefined4 __fastcall Ba0015::vf40(int *param_1)
   int iVar6;
   int iStack_18;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 != 0) {
     iStack_18 = 0x40438c;
     lib::AllocatedArray<Behavior::InstructionContainer>::
@@ -126,8 +126,8 @@ undefined * Ba0015::vf04(void)
   return &DAT_01b34b08;
 }
 
-// 00AB8DD0  Ba0015::vf00  size=43  [class]
-undefined4 __thiscall Ba0015::vf00(undefined4 param_1,byte param_2)
+// 00AB8DD0  Ba0015::destruct  size=43  [class]
+undefined4 __thiscall Ba0015::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

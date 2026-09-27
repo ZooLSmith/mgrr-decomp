@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiDatsuJumpStatePl0010::ZangekiDatsuJumpStatePl0010(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -300,10 +300,10 @@ undefined4 __thiscall ZangekiDatsuJumpStatePl0010::vf08(int param_1,undefined4 *
   return 1;
 }
 
-// 00BEF4C0  ZangekiDatsuJumpStatePl0010::vf10  size=4184  [class]
+// 00BEF4C0  ZangekiDatsuJumpStatePl0010::qteSafeCheck  size=4184  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiDatsuJumpStatePl0010::vf10(int param_1,undefined4 *param_2)
+void __thiscall ZangekiDatsuJumpStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -385,7 +385,7 @@ void __thiscall ZangekiDatsuJumpStatePl0010::vf10(int param_1,undefined4 *param_
   iVar2 = FUN_00a81330();
   if ((iVar2 == 0) && (*(int *)(param_1 + 0xd4) == 0)) {
     FUN_00d82510(0xb,100);
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   switch(*(undefined4 *)(param_1 + 0x30)) {
@@ -830,7 +830,7 @@ switchD_00bef561_default:
     FUN_00bbc310(param_2);
   }
   (**(code **)((int)*pfVar8 + 0x220))(0x41200000);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

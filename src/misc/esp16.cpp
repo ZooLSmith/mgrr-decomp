@@ -18,7 +18,7 @@ undefined4 * __thiscall esp16::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = cEspModel::vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -73,8 +73,8 @@ FUN_00ed8380(undefined4 *param_1,int param_2,undefined4 *param_3,int param_4,und
   return;
 }
 
-// 00ED8460  esp16::vf10  size=1  [class]
-void esp16::vf10(void)
+// 00ED8460  esp16::addOtTransList  size=1  [class]
+void esp16::addOtTransList(void)
 
 {
   return;
@@ -318,9 +318,9 @@ void __fastcall esp16::vf08(int param_1)
   return;
 }
 
-// 00F31C70  esp16::vf04  size=1174  [class]
+// 00F31C70  esp16::preTrans  size=1174  [class]
 void __thiscall
-esp16::vf04(undefined *param_1,undefined4 param_2,undefined *param_3,undefined *param_4)
+esp16::preTrans(undefined *param_1,undefined4 param_2,undefined *param_3,undefined *param_4)
 
 {
   int iVar1;
@@ -356,7 +356,7 @@ esp16::vf04(undefined *param_1,undefined4 param_2,undefined *param_3,undefined *
   local_14 = DAT_018e8764 ^ (uint)local_c4;
   puStack_d4 = param_4;
   puStack_d8 = param_3;
-  iVar1 = cEspModel::vf04(param_2);
+  iVar1 = cEsp::preTrans(param_2);
   if (iVar1 != 0) {
     puStack_d4 = (undefined *)0xf31cb1;
     iVar1 = FUN_00f26e90();

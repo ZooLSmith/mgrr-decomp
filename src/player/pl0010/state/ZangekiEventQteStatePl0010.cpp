@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiEventQteStatePl0010::ZangekiEventQteStatePl0010(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a831e0();
@@ -539,7 +539,7 @@ undefined4 ZangekiEventQteStatePl0010::vf20(undefined4 *param_1)
     iVar1 = FUN_00a81330();
     if ((iVar1 != 0) && (*(int *)(local_28 + 0x30) != 0)) {
       FUN_00a7c950();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     DAT_01dc08d4 = 0;
     FUN_00a8ca50(0xe,0x3f800000,0);
@@ -935,8 +935,8 @@ void __thiscall FUN_00bcf2b0(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00BE2090  ZangekiEventQteStatePl0010::vf0C  size=744  [class]
-void __thiscall ZangekiEventQteStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BE2090  ZangekiEventQteStatePl0010::SafeCheck  size=744  [class]
+void __thiscall ZangekiEventQteStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -1087,12 +1087,12 @@ void __thiscall ZangekiEventQteStatePl0010::vf0C(int param_1,undefined4 *param_2
       FUN_00a8c8b0(0x10010,auStack_160);
     }
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00C05F10  ZangekiEventQteStatePl0010::vf10  size=1041  [class]
-void __thiscall ZangekiEventQteStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00C05F10  ZangekiEventQteStatePl0010::qteSafeCheck  size=1041  [class]
+void __thiscall ZangekiEventQteStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;
@@ -1298,7 +1298,7 @@ void __thiscall ZangekiEventQteStatePl0010::vf10(int param_1,undefined4 *param_2
     local_14 = local_34 - local_24;
     FUN_00b7dab0(&local_20);
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

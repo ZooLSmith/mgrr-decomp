@@ -29,7 +29,7 @@ struct hkDataArrayImpl : public hkDataRefCounted {
     virtual void vf50(int param_2, undefined4 param_3);  // 010E3850 slot 0x50
     virtual void vf54(int param_2);  // 010E3860 slot 0x54
     virtual undefined vf58();  // 010E3870 slot 0x58
-    virtual void Object(int param_2);  // 010E3880 slot 0x5C
+    virtual void vf5C(int param_2);  // 010E3880 slot 0x5C
     virtual void vf60(int param_2, undefined4 param_3);  // 010E3890 slot 0x60
     virtual void vf64(int param_2);  // 010E38A0 slot 0x64
     virtual void vf68(int param_2, int param_3);  // 010E38B0 slot 0x68

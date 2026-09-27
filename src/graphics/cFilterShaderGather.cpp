@@ -4,7 +4,7 @@
 #include "mgrr.h"
 #include "cFilterShaderGather.h"
 
-// 00EC0D20  cFilterShaderGather::cFilterShaderGather_2  size=772  [class]
+// 00EC0D20  cFilterShaderGather::cFilterShaderGather  size=772  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec0d70) */
 /* WARNING: Removing unreachable block (ram,0x00ec0de1) */
 /* WARNING: Removing unreachable block (ram,0x00ec0f5b) */
@@ -12,12 +12,12 @@
 /* WARNING: Removing unreachable block (ram,0x00ec0ebd) */
 /* WARNING: Removing unreachable block (ram,0x00ec0fdf) */
 
-undefined4 * __fastcall cFilterShaderGather::cFilterShaderGather_2(undefined4 *param_1)
+undefined4 * __fastcall cFilterShaderGather::cFilterShaderGather(undefined4 *param_1)
 
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
@@ -137,7 +137,7 @@ void __fastcall cFilterShaderGather::cFilterShaderGather(undefined4 *param_1)
   param_1[0x23] = 0xffffffff;
   param_1[0x24] = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 
@@ -159,17 +159,17 @@ undefined4 * __thiscall cFilterShaderGather::vf00(undefined4 *param_1,byte param
   param_1[0x23] = 0xffffffff;
   param_1[0x24] = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 015F1BF0  cFilterShaderGather::cFilterShaderGather_3  size=100  [class]
+// 015F1BF0  cFilterShaderGather::~cFilterShaderGather  size=100  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cFilterShaderGather::cFilterShaderGather_3(void)
+void cFilterShaderGather::~cFilterShaderGather(void)
 
 {
   _DAT_01edce58 = 0x1111111;
@@ -186,7 +186,7 @@ void cFilterShaderGather::cFilterShaderGather_3(void)
   _DAT_01edce98 = 0xffffffff;
   _DAT_01edce9c = 0xffffffff;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

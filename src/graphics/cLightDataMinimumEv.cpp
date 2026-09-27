@@ -8,7 +8,7 @@
 undefined4 * __fastcall cLightDataMinimumEv::cLightDataMinimumEv(undefined4 *param_1)
 
 {
-  cLightApplyScale::cLightApplyScale_8();
+  cLightDataMinimum::cLightDataMinimum();
   *param_1 = vftable;
   return param_1;
 }
@@ -24,7 +24,7 @@ undefined ** cLightDataMinimumEv::vf00(void)
 undefined4 __thiscall cLightDataMinimumEv::vf04(undefined4 param_1,byte param_2)
 
 {
-  cObject::cObject_2();
+  cObject::cObject();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

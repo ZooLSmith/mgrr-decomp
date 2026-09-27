@@ -93,8 +93,8 @@ void __fastcall PhaseReadManagerImplement::vf24(int param_1)
   }
 }
 
-// 00D4D4B0  PhaseReadManagerImplement::PhaseReadManagerImplement_2  size=113  [class]
-undefined4 * __fastcall PhaseReadManagerImplement::PhaseReadManagerImplement_2(undefined4 *param_1)
+// 00D4D4B0  PhaseReadManagerImplement::PhaseReadManagerImplement  size=113  [class]
+undefined4 * __fastcall PhaseReadManagerImplement::PhaseReadManagerImplement(undefined4 *param_1)
 
 {
   code *pcVar1;

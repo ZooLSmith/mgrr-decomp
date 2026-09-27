@@ -23,4 +23,6 @@ struct hkpVehicleLinearCastWheelCollide : public hkpVehicleWheelCollide {
     virtual undefined vf40();  // 012899A0 slot 0x40
     virtual void vf44(int param_1, byte param_2, float * param_3, float * param_4);  // 012895B0 slot 0x44
     virtual void vf48(int param_1, byte param_2, undefined4 * param_3);  // 01289740 slot 0x48
+    // non-virtual members
+    hkpVehicleLinearCastWheelCollide();  // 01286660
 };

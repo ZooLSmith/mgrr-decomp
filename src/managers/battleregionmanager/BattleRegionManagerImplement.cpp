@@ -1,5 +1,5 @@
 // src/managers/battleregionmanager/BattleRegionManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401100..004024C0, 7 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401100..004024C0, 8 functions
 
 #include "mgrr.h"
 #include "BattleRegionManagerImplement.h"
@@ -176,6 +176,17 @@ void __thiscall BattleRegionManagerImplement::vf08(int *param_1,int param_2)
     iStack_130 = param_2;
     (**(code **)(**(int **)(iStack_134 + 4) + 8))(&iStack_130);
   }
+  return;
+}
+
+// 004024A0  BattleRegionManagerImplement::~BattleRegionManagerImplement  size=30  [class]
+void __fastcall BattleRegionManagerImplement::~BattleRegionManagerImplement(undefined4 *param_1)
+
+{
+  *param_1 = vftable;
+  FUN_00401a90();
+  cEspControler::~cEspControler();
+  *param_1 = BattleRegionManager::vftable;
   return;
 }
 

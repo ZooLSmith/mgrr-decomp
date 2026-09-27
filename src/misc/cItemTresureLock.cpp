@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "cItemTresureLock.h"
 
-// 005E8D90  cItemTresureLock::vf40  size=92  [class]
-void __fastcall cItemTresureLock::vf40(int param_1)
+// 005E8D90  cItemTresureLock::startup  size=92  [class]
+void __fastcall cItemTresureLock::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorBgBase::vf40();
+  iVar1 = BehaviorBgBase::startup();
   if (iVar1 == 0) {
     return;
   }
@@ -88,8 +88,8 @@ undefined * cItemTresureLock::vf04(void)
   return &DAT_01b353b8;
 }
 
-// 00AB9840  cItemTresureLock::vf00  size=30  [class]
-undefined4 __thiscall cItemTresureLock::vf00(undefined4 param_1,byte param_2)
+// 00AB9840  cItemTresureLock::destruct  size=30  [class]
+undefined4 __thiscall cItemTresureLock::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_0040d3f0();

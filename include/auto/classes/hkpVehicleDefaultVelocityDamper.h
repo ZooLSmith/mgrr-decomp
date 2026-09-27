@@ -9,5 +9,6 @@ struct hkpVehicleDefaultVelocityDamper : public hkpVehicleVelocityDamper {
     virtual undefined4 * vf00(byte param_2);  // 012888F0 slot 0x0  overrides hkBaseObject
     virtual void vf0C(float param_2, int param_3);  // 01292040 slot 0xC  overrides hkpVehicleVelocityDamper
     // non-virtual members
-    hkpVehicleDefaultVelocityDamper(undefined4 * param_1);  // 012887E0
+    ~hkpVehicleDefaultVelocityDamper();  // 012887E0
+    hkpVehicleDefaultVelocityDamper();  // 01288800
 };

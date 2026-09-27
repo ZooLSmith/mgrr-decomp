@@ -122,14 +122,14 @@ uint FUN_00602f90(int *param_1)
   return -(uint)(iVar1 != 0) & (uint)param_1;
 }
 
-// 00602FC0  Ba6010::vf40  size=307  [class]
-undefined4 __fastcall Ba6010::vf40(int param_1)
+// 00602FC0  Ba6010::startup  size=307  [class]
+undefined4 __fastcall Ba6010::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -151,12 +151,12 @@ undefined4 __fastcall Ba6010::vf40(int param_1)
   *(undefined4 *)(param_1 + 0xb5c) = 0;
   iVar1 = FUN_00de4550("_param.bxm",0);
   if (iVar1 != 0) {
-    cXmlBinary::cXmlBinary_103();
+    cXmlBinary::cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    uVar2 = FUN_00e041c0();
-    iVar1 = FUN_00e06390(uVar2,"CamAlphaRate");
+    uVar2 = cXmlBinary::vf04();
+    iVar1 = cXmlBinary::vf18(uVar2,"CamAlphaRate");
     if (iVar1 != -1) {
-      FUN_00e06970(iVar1,param_1 + 0xb50);
+      cXmlBinary::vf54(iVar1,param_1 + 0xb50);
     }
     FUN_00e04180();
     FUN_00e04180();
@@ -405,8 +405,8 @@ undefined * Ba6010::vf04(void)
   return &DAT_01b354d0;
 }
 
-// 00ABA950  Ba6010::vf00  size=54  [class]
-undefined4 __thiscall Ba6010::vf00(undefined4 param_1,byte param_2)
+// 00ABA950  Ba6010::destruct  size=54  [class]
+undefined4 __thiscall Ba6010::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00905ce0();

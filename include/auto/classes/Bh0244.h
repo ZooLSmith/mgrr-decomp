@@ -15,6 +15,6 @@ struct Bh0244 : public BehaviorBh {
     virtual void vf50();  // 00410110 slot 0x50  overrides Behavior
     virtual void vf54();  // 00410340 slot 0x54  overrides Behavior
     // non-virtual members
-    Bh0244();  // 00410420
-    void ctor_00410470();  // 00410470
+    ~Bh0244();  // 00410420
+    Bh0244();  // 00410470
 };

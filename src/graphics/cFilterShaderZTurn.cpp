@@ -13,7 +13,7 @@ undefined4 * __fastcall cFilterShaderZTurn::cFilterShaderZTurn(undefined4 *param
 {
   uint uVar1;
   
-  Hw::cVertexShader::cVertexShader();
+  Hw::cPixelShader::cPixelShader();
   *param_1 = vftable;
   param_1[10] = 0xffffffff;
   param_1[0xb] = 0xffffffff;
@@ -60,17 +60,17 @@ undefined4 * __thiscall cFilterShaderZTurn::vf00(undefined4 *param_1,byte param_
   param_1[0xe] = 0xffffffff;
   param_1[0xf] = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 015F1E70  cFilterShaderZTurn::cFilterShaderZTurn_2  size=68  [class]
+// 015F1E70  cFilterShaderZTurn::~cFilterShaderZTurn  size=68  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void cFilterShaderZTurn::cFilterShaderZTurn_2(void)
+void cFilterShaderZTurn::~cFilterShaderZTurn(void)
 
 {
   _DAT_01edd148 = vftable;
@@ -81,7 +81,7 @@ void cFilterShaderZTurn::cFilterShaderZTurn_2(void)
   _DAT_01edd180 = 0xffffffff;
   _DAT_01edd184 = 0x1111111;
   Hw::cShader::vf04();
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

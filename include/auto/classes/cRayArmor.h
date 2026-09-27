@@ -14,4 +14,6 @@ struct cRayArmor : public BehaviorPartsModel {
     virtual void vf4C();  // 00AEA9D0 slot 0x4C  overrides Behavior
     virtual void setCutCrerateInfo(undefined4 * param_1, undefined4 param_2, int param_3);  // 00AEABE0 slot 0x1B8  overrides Behavior
     virtual void vf1D0(undefined4 param_2);  // 00AEA920 slot 0x1D0  overrides Behavior
+    // non-virtual members
+    cRayArmor();  // 00AB6BA0
 };

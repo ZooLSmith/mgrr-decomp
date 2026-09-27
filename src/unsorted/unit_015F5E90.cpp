@@ -10,7 +10,7 @@ void FUN_015f5e90(void)
 
 {
   _DAT_01f6b944 = &PTR_FUN_016f1f30;
-  Hw::cVertexShader::cVertexShader_8();
+  Hw::cVertexShader::cVertexShader();
   return;
 }
 

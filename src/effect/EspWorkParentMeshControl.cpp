@@ -24,7 +24,7 @@ void EspWorkParentMeshControl::vf24(void)
 undefined4 * __fastcall EspWorkParentMeshControl::EspWorkParentMeshControl(undefined4 *param_1)
 
 {
-  EspWorkParentMeshControlBase::EspWorkParentMeshControlBase_3();
+  EspWorkParentMeshControlBase::EspWorkParentMeshControlBase();
   *param_1 = vftable;
   param_1[0x124] = 0;
   param_1[0x125] = 0;
@@ -67,7 +67,7 @@ undefined4 * __thiscall EspWorkParentMeshControl::vf00(undefined4 *param_1,byte 
   *param_1 = vftable;
   Spline<float>::Spline<float>_2();
   *param_1 = EspWorkParentMeshControlBase::vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

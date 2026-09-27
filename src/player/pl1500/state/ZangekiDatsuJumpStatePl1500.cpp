@@ -33,7 +33,7 @@ undefined4 * __thiscall
 ZangekiDatsuJumpStatePl1500::ZangekiDatsuJumpStatePl1500(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -305,10 +305,10 @@ undefined4 __thiscall ZangekiDatsuJumpStatePl1500::vf08(int param_1,undefined4 *
   return 1;
 }
 
-// 008D3810  ZangekiDatsuJumpStatePl1500::vf10  size=4321  [class]
+// 008D3810  ZangekiDatsuJumpStatePl1500::qteSafeCheck  size=4321  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiDatsuJumpStatePl1500::vf10(int param_1,undefined4 *param_2)
+void __thiscall ZangekiDatsuJumpStatePl1500::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -384,7 +384,7 @@ void __thiscall ZangekiDatsuJumpStatePl1500::vf10(int param_1,undefined4 *param_
   iVar4 = FUN_00a81330();
   if ((iVar4 == 0) && (*(int *)(param_1 + 0xd4) == 0)) {
     FUN_00d82510(1,100);
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   switch(*(undefined4 *)(param_1 + 0x30)) {
@@ -461,7 +461,7 @@ switchD_008d38b2_caseD_2:
     if ((iVar4 != 0) && (iVar4 = FUN_00a7c8a0(), iVar4 != 0)) {
       FUN_009f8b40();
     }
-    hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+    hkpAllRayHitCollector::hkpAllRayHitCollector();
     iVar4 = RayCastMultiHitWork::RayCastMultiHitWork
                       (local_330,&local_540,&local_500,uVar5,"DatsuJump::groundCheck");
     if (iVar4 != 0) {
@@ -828,7 +828,7 @@ switchD_008d38b2_default:
   }
   (**(code **)(*piVar8 + 0x220))(0x41200000);
   *(undefined4 *)((int)unaff_EBX + 0x6cc) = *(undefined4 *)(param_1 + 0xd4);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

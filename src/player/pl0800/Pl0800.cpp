@@ -878,8 +878,8 @@ void __fastcall FUN_005f2000(int *param_1)
   return;
 }
 
-// 005F2210  Pl0800::vf40  size=730  [class]
-undefined4 __fastcall Pl0800::vf40(int param_1)
+// 005F2210  Pl0800::startup  size=730  [class]
+undefined4 __fastcall Pl0800::startup(int param_1)
 
 {
   int iVar1;
@@ -890,7 +890,7 @@ undefined4 __fastcall Pl0800::vf40(int param_1)
   undefined4 local_18;
   undefined4 local_14;
   
-  iVar1 = BehaviorEmBase::vf40();
+  iVar1 = BehaviorEmBase::startup();
   if (iVar1 != 0) {
     *(undefined1 *)(param_1 + 0xdc3) = 0;
     *(undefined4 *)(param_1 + 0x870) = 100;
@@ -970,8 +970,8 @@ undefined4 __fastcall Pl0800::vf40(int param_1)
   return 0;
 }
 
-// 005F24F0  Pl0800::vf264  size=618  [class]
-undefined4 __thiscall Pl0800::vf264(int *param_1,undefined4 param_2)
+// 005F24F0  Pl0800::setEmSetInfo  size=618  [class]
+undefined4 __thiscall Pl0800::setEmSetInfo(int *param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -1277,7 +1277,7 @@ LAB_005f2892:
     (**(code **)(*param_1 + 0x308))(0x3f333333,0x3bab92a6,0x3d567750,0);
     iVar3 = FUN_005f12a0();
     if (iVar3 == 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     break;
   case 6:
@@ -2248,8 +2248,8 @@ undefined * Pl0800::vf04(void)
   return &DAT_01b353f0;
 }
 
-// 00AC1220  Pl0800::vf00  size=30  [class]
-undefined4 __thiscall Pl0800::vf00(undefined4 param_1,byte param_2)
+// 00AC1220  Pl0800::destruct  size=30  [class]
+undefined4 __thiscall Pl0800::destruct(undefined4 param_1,byte param_2)
 
 {
   lib::Array<Entity*>::Array<Entity*>();

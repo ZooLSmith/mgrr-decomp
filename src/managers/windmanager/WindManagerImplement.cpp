@@ -61,7 +61,7 @@ void WindManagerImplement::vf0C(float param_1,undefined4 *param_2)
   pvVar3 = TlsGetValue(DAT_01f8fc4c);
   iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x28);
   *(undefined2 *)(iVar4 + 4) = 0x28;
-  iVar4 = hkpWindAction::~hkpWindAction
+  iVar4 = hkpWindAction::hkpWindAction
                     (uVar2,*(undefined4 *)(unaff_retaddr + 4),
                      *(float *)(unaff_retaddr + 8) * param_1,*(undefined4 *)(unaff_retaddr + 0xc));
   if (iVar4 != 0) {

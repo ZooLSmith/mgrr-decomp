@@ -9,5 +9,5 @@ struct EspControllerHitStrip : public cEspControler {
     virtual undefined4 * vf00(byte param_2);  // 00EAAD60 slot 0x0  overrides cEspControler
     // non-virtual members
     EspControllerHitStrip();  // 00EAAAB0
-    void ctor_00EAAB00();  // 00EAAB00
+    ~EspControllerHitStrip();  // 00EAAB00
 };

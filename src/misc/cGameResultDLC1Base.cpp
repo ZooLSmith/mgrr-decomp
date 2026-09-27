@@ -8,7 +8,7 @@
 undefined4 * __fastcall cGameResultDLC1Base::cGameResultDLC1Base(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

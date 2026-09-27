@@ -78,4 +78,5 @@ struct Em8010 : public EmBaseDLC {
     virtual undefined4 vf368();  // 00620BA0 slot 0x368  overrides BehaviorEmBase
     // non-virtual members
     static void setRayCast(undefined4 * param_2);  // 0061E040
+    Em8010();  // 00AB4360
 };

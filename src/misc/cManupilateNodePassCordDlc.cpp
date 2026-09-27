@@ -114,8 +114,8 @@ void __fastcall cManupilateNodePassCordDlc::vf330(int param_1)
   return;
 }
 
-// 0085A6A0  cManupilateNodePassCordDlc::vf40  size=316  [class]
-undefined4 __fastcall cManupilateNodePassCordDlc::vf40(int param_1)
+// 0085A6A0  cManupilateNodePassCordDlc::startup  size=316  [class]
+undefined4 __fastcall cManupilateNodePassCordDlc::startup(int param_1)
 
 {
   int iVar1;
@@ -125,7 +125,7 @@ undefined4 __fastcall cManupilateNodePassCordDlc::vf40(int param_1)
   
   *(undefined4 *)(param_1 + 0xb54) = 0;
   *(undefined4 *)(param_1 + 0xb5c) = 0;
-  iVar1 = GimmickBehaviorBase::vf40();
+  iVar1 = GimmickBehaviorBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -413,8 +413,8 @@ undefined * cManupilateNodePassCordDlc::vf04(void)
   return &DAT_01b35ae0;
 }
 
-// 00AB9CA0  cManupilateNodePassCordDlc::vf00  size=43  [class]
-undefined4 __thiscall cManupilateNodePassCordDlc::vf00(undefined4 param_1,byte param_2)
+// 00AB9CA0  cManupilateNodePassCordDlc::destruct  size=43  [class]
+undefined4 __thiscall cManupilateNodePassCordDlc::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

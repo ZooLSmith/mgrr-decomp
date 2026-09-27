@@ -8,7 +8,7 @@
 undefined4 * __fastcall cCollectionMenu::cCollectionMenu(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   param_1[7] = 0;
   param_1[8] = 0;
   param_1[9] = 0;
@@ -41,7 +41,7 @@ void __fastcall cCollectionMenu::~cCollectionMenu(undefined4 *param_1)
     (*(code *)**(undefined4 **)param_1[8])(1);
     param_1[8] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -53,7 +53,7 @@ undefined4 * cCollectionMenu::cCollectionMenu_2(void)
   
   puVar1 = (undefined4 *)FUN_00dd3500(0x50,&DAT_01b7be50);
   if (puVar1 != (undefined4 *)0x0) {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     *puVar1 = vftable;
     puVar1[7] = 0;
     puVar1[8] = 0;
@@ -103,7 +103,7 @@ void __fastcall cCollectionMenu::vf08(int param_1)
     iVar1 = 0;
   }
   else {
-    iVar1 = cMessWindowCtrl::cMessWindowCtrl_7();
+    iVar1 = cMessWindowCtrl::cMessWindowCtrl();
     if (iVar1 != 0) {
       *(char **)(iVar1 + 0xc) = "cCollectionSelectParts";
       FUN_00d29ca0(0x62,5);
@@ -139,8 +139,8 @@ void __fastcall cCollectionMenu::vf08(int param_1)
   return;
 }
 
-// 009AFF70  cCollectionMenu::vf14  size=554  [class]
-void __fastcall cCollectionMenu::vf14(int param_1)
+// 009AFF70  cCollectionMenu::create  size=554  [class]
+void __fastcall cCollectionMenu::create(int param_1)
 
 {
   float fVar1;

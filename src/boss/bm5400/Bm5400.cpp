@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bm5400.h"
 
-// 00414930  Bm5400::vf40  size=41  [class]
-undefined4 __fastcall Bm5400::vf40(int param_1)
+// 00414930  Bm5400::startup  size=41  [class]
+undefined4 __fastcall Bm5400::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = P458AtqScr::vf40();
+  iVar1 = P458AtqScr::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -37,7 +37,7 @@ void __fastcall Bm5400::vf4C(int *param_1)
     fVar1 = (float)param_1[0x22d] - 1.0;
     param_1[0x22d] = (int)fVar1;
     if (NAN(fVar1) || 0.0 < fVar1 == (fVar1 == 0.0)) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   if (((*(byte *)(param_1 + 0x130) & 1) != 0) && (param_1[0x27d] != 0)) {
@@ -202,8 +202,8 @@ void FUN_00ac1150(void)
   return;
 }
 
-// 00AC1170  Bm5400::vf00  size=43  [class]
-undefined4 __thiscall Bm5400::vf00(undefined4 param_1,byte param_2)
+// 00AC1170  Bm5400::destruct  size=43  [class]
+undefined4 __thiscall Bm5400::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

@@ -8,7 +8,7 @@
 undefined4 * __fastcall cCameraGame::cCameraGame(undefined4 *param_1)
 
 {
-  cCameraFrustum::cCameraFrustum();
+  cCameraApp::cCameraApp();
   *param_1 = vftable;
   param_1[0xb0] = vftable;
   FUN_00a7c930();

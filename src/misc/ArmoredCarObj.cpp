@@ -36,7 +36,7 @@ void __fastcall ArmoredCarObj::vf4C(int *param_1)
     fVar1 = (float)param_1[0x22d] - 1.0;
     param_1[0x22d] = (int)fVar1;
     if (NAN(fVar1) || 0.0 < fVar1 == (fVar1 == 0.0)) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   if (((*(byte *)(param_1 + 0x130) & 1) != 0) && (param_1[0x27d] != 0)) {
@@ -130,8 +130,8 @@ void FUN_00414ce0(void)
   return;
 }
 
-// 00414DD0  ArmoredCarObj::vf40  size=358  [class]
-undefined4 __fastcall ArmoredCarObj::vf40(int *param_1)
+// 00414DD0  ArmoredCarObj::startup  size=358  [class]
+undefined4 __fastcall ArmoredCarObj::startup(int *param_1)
 
 {
   int iVar1;
@@ -140,7 +140,7 @@ undefined4 __fastcall ArmoredCarObj::vf40(int *param_1)
   int unaff_EDI;
   int iVar4;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 != 0) {
     (**(code **)(*param_1 + 0x1f0))(0);
     param_1[0x2d2] = 0;
@@ -277,7 +277,7 @@ void __fastcall FUN_00415050(int *param_1)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar3 = *(undefined4 **)(iVar2 + 8);
       *(undefined4 *)(iVar2 + 4) = 1;
@@ -600,8 +600,8 @@ undefined * ArmoredCarObj::vf04(void)
   return &DAT_01b34c10;
 }
 
-// 00AB94A0  ArmoredCarObj::vf00  size=43  [class]
-undefined4 __thiscall ArmoredCarObj::vf00(undefined4 param_1,byte param_2)
+// 00AB94A0  ArmoredCarObj::destruct  size=43  [class]
+undefined4 __thiscall ArmoredCarObj::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

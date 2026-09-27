@@ -8,7 +8,7 @@ undefined4 * __thiscall std::bad_alloc::vf00(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = vftable;
-  exception::exception_2();
+  exception::~exception();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

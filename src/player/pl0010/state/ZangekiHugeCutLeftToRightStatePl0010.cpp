@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "ZangekiHugeCutLeftToRightStatePl0010.h"
 
-// 00B83240  ZangekiHugeCutLeftToRightStatePl0010::vf0C  size=5  [class]
-void __thiscall ZangekiHugeCutLeftToRightStatePl0010::vf0C(int param_1,undefined4 param_2)
+// 00B83240  ZangekiHugeCutLeftToRightStatePl0010::SafeCheck  size=5  [class]
+void __thiscall ZangekiHugeCutLeftToRightStatePl0010::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int **)(param_1 + 0xc) != (int *)0x0) {
@@ -210,8 +210,9 @@ undefined4 ZangekiHugeCutLeftToRightStatePl0010::vf20(undefined4 *param_1)
   return 0;
 }
 
-// 00BE3740  ZangekiHugeCutLeftToRightStatePl0010::vf10  size=389  [class]
-void __thiscall ZangekiHugeCutLeftToRightStatePl0010::vf10(undefined4 param_1,undefined4 *param_2)
+// 00BE3740  ZangekiHugeCutLeftToRightStatePl0010::qteSafeCheck  size=389  [class]
+void __thiscall
+ZangekiHugeCutLeftToRightStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -254,7 +255,7 @@ void __thiscall ZangekiHugeCutLeftToRightStatePl0010::vf10(undefined4 param_1,un
   *(uint *)(uVar4 + 0x2f8) = (uint)(iVar1 == 0);
   iVar1 = FUN_00a8c760(0xb);
   if (iVar1 == 0) {
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   FUN_00b92a30(local_20,param_2,0x43e10000);

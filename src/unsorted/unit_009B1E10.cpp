@@ -1,5 +1,5 @@
 // src/unsorted/unit_009B1E10.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009B1E10..009B2110, 3 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009B1E10..009B20F0, 2 functions
 
 #include "mgrr.h"
 
@@ -194,97 +194,5 @@ undefined4 FUN_009b20f0(void)
     return uVar2;
   }
   return 0;
-}
-
-// 009B2110  FUN_009b2110  size=460  [run]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall FUN_009b2110(int param_1)
-
-{
-  char cVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  undefined1 local_20 [28];
-  
-  switch(*(undefined1 *)(param_1 + 0x44)) {
-  case 0:
-    iVar4 = FUN_009a03f0();
-    *(int *)(param_1 + 0x38) = iVar4;
-    if (iVar4 != 0) {
-      FUN_00cca0a0();
-      *(char *)(param_1 + 0x44) = *(char *)(param_1 + 0x44) + '\x01';
-      break;
-    }
-    goto LAB_009b213c;
-  case 1:
-    iVar4 = FUN_00cad770();
-    if ((iVar4 != 0) && (iVar4 = FUN_0098f4e0(), iVar4 != 0)) {
-      iVar4 = FUN_00cad7e0();
-      if (iVar4 == 0) {
-        FUN_00ce1c20();
-      }
-      *(undefined1 *)(*(int *)(param_1 + 0x38) + 0x427) = 1;
-      iVar4 = FUN_009a29d0();
-      *(int *)(param_1 + 0x40) = iVar4;
-      if (iVar4 != 0) {
-        FUN_0098f930(local_20);
-        FUN_009ab030("customize",local_20,0x41700000,0);
-      }
-      _DAT_01b391f0 = 1;
-      *(char *)(param_1 + 0x44) = *(char *)(param_1 + 0x44) + '\x01';
-    }
-    break;
-  case 2:
-    cVar1 = *(char *)(*(int *)(param_1 + 0x38) + 0x426);
-    if (cVar1 != '\f') {
-      if (cVar1 == 'f') {
-        FUN_00ce1ba0();
-        *(undefined1 *)(param_1 + 0x44) = 10;
-      }
-      break;
-    }
-    iVar4 = FUN_009a0b90();
-    *(int *)(param_1 + 0x3c) = iVar4;
-    if (iVar4 != 0) {
-      iVar2 = *(int *)(param_1 + 0x38);
-      *(undefined4 *)(param_1 + 0x48) =
-           *(undefined4 *)(iVar2 + 0x444 + *(char *)(iVar2 + 0x42a) * 4);
-      *(undefined4 *)(iVar4 + 0x358) = *(undefined4 *)(iVar2 + 0x444 + *(char *)(iVar2 + 0x42a) * 4)
-      ;
-      *(undefined4 *)(*(int *)(param_1 + 0x3c) + 0x220) = *(undefined4 *)(param_1 + 0x38);
-      *(undefined4 *)(*(int *)(param_1 + 0x3c) + 0x228) = *(undefined4 *)(param_1 + 0x4c);
-      *(undefined4 *)(*(int *)(param_1 + 0x3c) + 0x21c) = *(undefined4 *)(param_1 + 0x40);
-      *(int *)(*(int *)(param_1 + 0x3c) + 0x224) = param_1;
-      *(char *)(param_1 + 0x44) = *(char *)(param_1 + 0x44) + '\x01';
-      break;
-    }
-LAB_009b213c:
-    FUN_00dd5650(&DAT_01657e00);
-    *(undefined1 *)(param_1 + 0x44) = 99;
-    break;
-  case 3:
-    puVar3 = *(undefined4 **)(param_1 + 0x3c);
-    if (*(char *)(puVar3 + 0xc6) == 'e') {
-      if (puVar3 != (undefined4 *)0x0) {
-        (**(code **)*puVar3)(1);
-        *(undefined4 *)(param_1 + 0x3c) = 0;
-      }
-      *(undefined1 *)(*(int *)(param_1 + 0x38) + 0x427) = 1;
-      *(undefined4 *)(param_1 + 0x48) = 0xffffffff;
-      *(undefined1 *)(param_1 + 0x44) = 2;
-    }
-  }
-  if (*(int **)(param_1 + 0x38) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x38) + 4))();
-  }
-  if (*(int **)(param_1 + 0x3c) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x3c) + 4))();
-  }
-  if (*(int *)(param_1 + 0x40) != 0) {
-    FUN_009a2a10();
-  }
-  return;
 }
 

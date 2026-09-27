@@ -11,8 +11,8 @@ undefined * cRayArmor::vf04(void)
   return &DAT_01be9cd8;
 }
 
-// 00ABABD0  cRayArmor::vf00  size=105  [class]
-undefined4 * __thiscall cRayArmor::vf00(undefined4 *param_1,byte param_2)
+// 00ABABD0  cRayArmor::destruct  size=105  [class]
+undefined4 * __thiscall cRayArmor::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -26,7 +26,7 @@ undefined4 * __thiscall cRayArmor::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -68,13 +68,13 @@ void __thiscall cRayArmor::vf1D0(undefined4 param_1,undefined4 param_2)
   return;
 }
 
-// 00AEA930  cRayArmor::vf40  size=129  [class]
-undefined4 __fastcall cRayArmor::vf40(int param_1)
+// 00AEA930  cRayArmor::startup  size=129  [class]
+undefined4 __fastcall cRayArmor::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = BehaviorPartsModel::vf40();
+  iVar1 = BehaviorPartsModel::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -169,7 +169,7 @@ void __fastcall cRayArmor::vf4C(int param_1)
       fVar5 = (float10)*(float *)(param_1 + 0xa6c) - (float10)0.016666668;
       *(float *)(param_1 + 0xa6c) = (float)fVar5;
       if (fVar5 < fVar1 != (fVar5 == fVar1)) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         return;
       }
     }
@@ -177,8 +177,8 @@ void __fastcall cRayArmor::vf4C(int param_1)
   return;
 }
 
-// 00AEABE0  cRayArmor::vf1B8  size=31  [class]
-void cRayArmor::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 00AEABE0  cRayArmor::setCutCrerateInfo  size=31  [class]
+void cRayArmor::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {

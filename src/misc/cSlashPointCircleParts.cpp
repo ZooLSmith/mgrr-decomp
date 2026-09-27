@@ -4,10 +4,10 @@
 #include "mgrr.h"
 #include "cSlashPointCircleParts.h"
 
-// 00CBD800  cSlashPointCircleParts::vf14  size=158  [class]
+// 00CBD800  cSlashPointCircleParts::create  size=158  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cSlashPointCircleParts::vf14(int param_1)
+void __fastcall cSlashPointCircleParts::create(int param_1)
 
 {
   int iVar1;

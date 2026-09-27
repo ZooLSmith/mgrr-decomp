@@ -102,8 +102,8 @@ void __fastcall Et002f::vf50(int param_1)
   return;
 }
 
-// 005D1560  Et002f::vf264  size=127  [class]
-undefined4 __thiscall Et002f::vf264(int param_1,undefined4 param_2)
+// 005D1560  Et002f::setEmSetInfo  size=127  [class]
+undefined4 __thiscall Et002f::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -406,15 +406,15 @@ void __fastcall Et002f::vf4C(int *param_1)
   return;
 }
 
-// 005D1DE0  Et002f::vf40  size=279  [class]
-undefined4 __fastcall Et002f::vf40(int param_1)
+// 005D1DE0  Et002f::startup  size=279  [class]
+undefined4 __fastcall Et002f::startup(int param_1)
 
 {
   int iVar1;
   uint uVar2;
   undefined1 local_120 [284];
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -454,11 +454,11 @@ undefined * Et002f::vf04(void)
   return &DAT_01b352a8;
 }
 
-// 00AB8190  Et002f::vf00  size=30  [class]
-undefined4 __thiscall Et002f::vf00(undefined4 param_1,byte param_2)
+// 00AB8190  Et002f::destruct  size=30  [class]
+undefined4 __thiscall Et002f::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_70();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

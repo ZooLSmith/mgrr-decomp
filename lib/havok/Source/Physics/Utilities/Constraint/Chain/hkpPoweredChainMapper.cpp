@@ -122,7 +122,7 @@ hkpPoweredChainMapper::hkpPoweredChainMapper(undefined8 param_1,int *param_2,int
                   (1,0xabbaaa88,local_260,
                    "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Utilities\\Constraint\\Chain\\hkpPoweredChainMapper.cpp"
                    ,0x44);
-        hkBaseObject::hkBaseObject_38();
+        ::hkBaseObject::hkBaseObject_38();
         FUN_010060a0();
 joined_r0x0127afd8:
         local_c = 0;
@@ -161,7 +161,7 @@ LAB_0127b077:
                   (1,0xabbaddaa,local_260,
                    "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Utilities\\Constraint\\Chain\\hkpPoweredChainMapper.cpp"
                    ,0x4e);
-        hkBaseObject::hkBaseObject_38();
+        ::hkBaseObject::hkBaseObject_38();
         FUN_010060a0();
         goto joined_r0x0127afd8;
       }
@@ -181,7 +181,7 @@ LAB_0127b077:
                       (1,0xabba99dd,local_260,
                        "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Utilities\\Constraint\\Chain\\hkpPoweredChainMapper.cpp"
                        ,0x5d);
-            hkBaseObject::hkBaseObject_38();
+            ::hkBaseObject::hkBaseObject_38();
             FUN_010060a0();
             FUN_010060a0();
             goto joined_r0x0127afd8;
@@ -206,7 +206,7 @@ LAB_0127b077:
                       (1,0xabba9d6d,local_260,
                        "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Physics\\Utilities\\Constraint\\Chain\\hkpPoweredChainMapper.cpp"
                        ,0x6c);
-            hkBaseObject::hkBaseObject_38();
+            ::hkBaseObject::hkBaseObject_38();
             FUN_010060a0();
             FUN_010060a0();
             local_c = 0;

@@ -10,5 +10,7 @@ struct hkpSpringAction : public hkpBinaryAction {
     virtual void vf0C(int param_2);  // 0127BB90 slot 0xC  overrides hkpAction
     virtual int vf1C(int * param_2, int param_3);  // 0127B9A0 slot 0x1C  overrides hkpAction
     // non-virtual members
-    ~hkpSpringAction();  // 0127B940
+    hkpSpringAction(undefined4 param_2);  // 01274050
+    hkpSpringAction(undefined4 * param_1, undefined4 param_2);  // 012740A0
+    hkpSpringAction();  // 0127B940
 };

@@ -69,8 +69,8 @@ void __fastcall cRadarMapDestIconParts::cRadarMapDestIconParts(undefined4 *param
   return;
 }
 
-// 00CD6710  cRadarMapDestIconParts::vf14  size=199  [class]
-void __fastcall cRadarMapDestIconParts::vf14(int param_1)
+// 00CD6710  cRadarMapDestIconParts::create  size=199  [class]
+void __fastcall cRadarMapDestIconParts::create(int param_1)
 
 {
   int iVar1;

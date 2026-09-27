@@ -33,8 +33,8 @@ undefined4 * __thiscall cStealthKillTargetParts::vf00(undefined4 *param_1,byte p
   return param_1;
 }
 
-// 00CF2240  cStealthKillTargetParts::vf14  size=299  [class]
-void __fastcall cStealthKillTargetParts::vf14(int param_1)
+// 00CF2240  cStealthKillTargetParts::create  size=299  [class]
+void __fastcall cStealthKillTargetParts::create(int param_1)
 
 {
   undefined4 uVar1;

@@ -16,7 +16,7 @@ void __fastcall FUN_009bf7d0(int param_1)
   if (iVar3 == 0) {
     iVar3 = FUN_00dd3500(0x608,&DAT_01b7be50);
     if (iVar3 != 0) {
-      iVar3 = cMessWindowCtrl::cMessWindowCtrl_21();
+      iVar3 = cMessWindowCtrl::cMessWindowCtrl();
       if (iVar3 != 0) {
         *(char **)(iVar3 + 0xc) = "cVRMissionMenuParts";
         FUN_00d29ca0(0x75,9);

@@ -427,8 +427,8 @@ int FUN_00d2b270(void)
   return 0;
 }
 
-// 00D2B2D0  cCodecRealTimeDispParts::vf14  size=4198  [class]
-void __fastcall cCodecRealTimeDispParts::vf14(int param_1)
+// 00D2B2D0  cCodecRealTimeDispParts::create  size=4198  [class]
+void __fastcall cCodecRealTimeDispParts::create(int param_1)
 
 {
   uint *puVar1;

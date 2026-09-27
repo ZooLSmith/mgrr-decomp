@@ -8,6 +8,6 @@ struct hkIndexedTransformSet : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 0106ABA0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkIndexedTransformSet();  // 01069850
-    void ctor_01069860();  // 01069860
+    ~hkIndexedTransformSet();  // 01069850
+    hkIndexedTransformSet();  // 01069860
 };

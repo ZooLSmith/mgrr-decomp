@@ -37,4 +37,5 @@ struct hkpBroadPhase : public hkReferencedObject {
     virtual undefined vf78() = 0;  // 00FDB68B slot 0x78
     // non-virtual members
     hkpBroadPhase();  // 01159F10
+    ~hkpBroadPhase();  // 01159FE0
 };

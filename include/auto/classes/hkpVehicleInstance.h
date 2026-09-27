@@ -19,5 +19,8 @@ struct hkpVehicleInstance : public hkpUnaryAction {
     virtual float10 vf38();  // 0128C0A0 slot 0x38
     virtual void vf3C(undefined4 param_1, undefined2 * param_2);  // 0128A710 slot 0x3C
     // non-virtual members
-    ~hkpVehicleInstance();  // 0128C120
+    hkpVehicleInstance(undefined4 * param_1, undefined4 param_2);  // 01286A10
+    hkpVehicleInstance();  // 01286BE0
+    void ctor_0128C120();  // 0128C120
+    ~hkpVehicleInstance();  // 0128C210
 };

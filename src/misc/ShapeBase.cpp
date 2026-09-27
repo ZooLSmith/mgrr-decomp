@@ -18,40 +18,40 @@ undefined * ShapeBase::vf00(void)
   return &DAT_01be9a0c;
 }
 
-// 00A6AD30  ShapeBase::ShapeBase_4  size=7  [class]
-void __fastcall ShapeBase::ShapeBase_4(undefined4 *param_1)
+// 00A6AD30  ShapeBase::~ShapeBase  size=7  [class]
+void __fastcall ShapeBase::~ShapeBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   return;
 }
 
-// 00A6ADA0  ShapeBase::ShapeBase_3  size=7  [class]
-void __fastcall ShapeBase::ShapeBase_3(undefined4 *param_1)
+// 00A6ADA0  ShapeBase::~ShapeBase  size=7  [class]
+void __fastcall ShapeBase::~ShapeBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   return;
 }
 
-// 00A6AE10  ShapeBase::ShapeBase_6  size=7  [class]
-void __fastcall ShapeBase::ShapeBase_6(undefined4 *param_1)
+// 00A6AE10  ShapeBase::~ShapeBase  size=7  [class]
+void __fastcall ShapeBase::~ShapeBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   return;
 }
 
-// 00A6AE30  ShapeBase::ShapeBase_5  size=7  [class]
-void __fastcall ShapeBase::ShapeBase_5(undefined4 *param_1)
+// 00A6AE30  ShapeBase::~ShapeBase  size=7  [class]
+void __fastcall ShapeBase::~ShapeBase(undefined4 *param_1)
 
 {
   *param_1 = vftable;
   return;
 }
 
-// 00A6B000  ShapeBase::ShapeBase_2  size=241  [class]
-void __thiscall ShapeBase::ShapeBase_2(undefined4 *param_1,undefined4 param_2)
+// 00A6B000  ShapeBase::ShapeBase  size=241  [class]
+void __thiscall ShapeBase::ShapeBase(undefined4 *param_1,undefined4 param_2)
 
 {
   int iVar1;

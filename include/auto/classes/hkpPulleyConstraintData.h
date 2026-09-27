@@ -12,6 +12,7 @@ struct hkpPulleyConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011DAE00 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011DADE0 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpPulleyConstraintData(undefined4 * param_1);  // 011AFA90
-    hkpPulleyConstraintData();  // 011DAE70
+    ~hkpPulleyConstraintData();  // 011AFA90
+    hkpPulleyConstraintData();  // 011AFAB0
+    void ctor_011DAE70();  // 011DAE70
 };

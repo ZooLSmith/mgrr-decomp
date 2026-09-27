@@ -19,6 +19,7 @@ struct hkpBallAndSocketConstraintData : public hkpConstraintData {
     virtual void vf30(char param_2, undefined4 * param_3);  // 011D6500 slot 0x30  overrides hkpConstraintData
     virtual void vf48(undefined4 param_2);  // 011D64E0 slot 0x48  overrides hkpConstraintData
     // non-virtual members
-    hkpBallAndSocketConstraintData(undefined4 * param_1);  // 011B0920
-    hkpBallAndSocketConstraintData();  // 011D6620
+    ~hkpBallAndSocketConstraintData();  // 011B0920
+    hkpBallAndSocketConstraintData();  // 011B0940
+    void ctor_011D6620();  // 011D6620
 };

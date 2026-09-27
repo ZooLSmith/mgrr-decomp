@@ -33,16 +33,6 @@ struct hkpMotion : public hkReferencedObject {
     virtual void vf68(int param_2);  // 011A2A90 slot 0x68
     // non-virtual members
     hkpMotion(int param_2);  // 01191340
-    void ctor_01191600(int param_2);  // 01191600
-    void ctor_011916C0(int param_2);  // 011916C0
-    void ctor_01191780(int param_2);  // 01191780
-    void ctor_01191830(int param_2);  // 01191830
-    void ctor_011918F0(int param_2);  // 011918F0
     hkpMotion();  // 011A2870
     void ctor_011A2950();  // 011A2950
-    hkpMotion(undefined4 * param_1, int param_2);  // 011B0C50
-    void ctor_011B0E30(undefined4 * param_1, int param_2);  // 011B0E30
-    void ctor_011B1820(undefined4 * param_1, int param_2);  // 011B1820
-    void ctor_011B1E40(undefined4 * param_1, int param_2);  // 011B1E40
-    void ctor_011B2490(undefined4 * param_1, int param_2);  // 011B2490
 };

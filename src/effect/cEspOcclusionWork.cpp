@@ -27,7 +27,7 @@ void __fastcall cEspOcclusionWork::draw(int param_1)
     return;
   }
   FUN_00eca020(iVar1);
-  cEspDrawWork::vf04();
+  cEspDrawWork::draw();
   FUN_00ec6ac0(iVar1);
   return;
 }

@@ -1,11 +1,18 @@
 // src/managers/ccustomobjctrlmanager/cCustomObjCtrlManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB21E0..00D0A5B0, 41 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098E6E0..00D0A5B0, 39 functions
 
 #include "mgrr.h"
 #include "cCustomObjCtrlManager.h"
 
-// 00CB21E0  cCustomObjCtrlManager::cCustomObjCtrlManager_17  size=33  [class]
-void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_17(undefined4 *param_1)
+// 0098E6E0  cCustomObjCtrlManager::create  size=1  [class]
+void cCustomObjCtrlManager::create(void)
+
+{
+  return;
+}
+
+// 00CB21E0  cCustomObjCtrlManager::cCustomObjCtrlManager  size=33  [class]
+void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -18,8 +25,8 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_17(undefined4 *para
   return;
 }
 
-// 00CCDD30  cCustomObjCtrlManager::cCustomObjCtrlManager_37  size=48  [class]
-void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_37(undefined4 *param_1)
+// 00CCDD30  cCustomObjCtrlManager::~cCustomObjCtrlManager  size=48  [class]
+void __fastcall cCustomObjCtrlManager::~cCustomObjCtrlManager(undefined4 *param_1)
 
 {
   int iVar1;
@@ -255,10 +262,10 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_19(undefined4 *para
   return;
 }
 
-// 00CD1D10  cCustomObjCtrlManager::cCustomObjCtrlManager_18  size=825  [class]
+// 00CD1D10  cCustomObjCtrlManager::cCustomObjCtrlManager  size=825  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 * __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_18(undefined4 *param_1)
+undefined4 * __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -407,88 +414,6 @@ undefined4 * __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_18(undefine
   return param_1;
 }
 
-// 00CD2050  cCustomObjCtrlManager::cCustomObjCtrlManager_16  size=336  [class]
-void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_16(undefined4 *param_1)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  
-  *param_1 = cDryCellGauge2::vftable;
-  DAT_01dc087c = 0;
-  if (param_1[0xba] != 0) {
-    (**(code **)(param_1[0x94] + 8))(0,0,0);
-  }
-  if ((undefined4 *)param_1[0xf8] != (undefined4 *)0x0) {
-    (*(code *)**(undefined4 **)param_1[0xf8])(1);
-    param_1[0xf8] = 0;
-  }
-  DAT_01dc14f8 = 0;
-  iVar3 = param_1[0x8d];
-  if (iVar3 != 0) {
-    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
-      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
-      *(undefined4 *)(iVar3 + 4) = 0;
-    }
-    param_1[0x8d] = 0;
-  }
-  iVar3 = param_1[0x8e];
-  if (iVar3 != 0) {
-    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
-      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
-      *(undefined4 *)(iVar3 + 4) = 0;
-    }
-    param_1[0x8e] = 0;
-  }
-  iVar3 = param_1[0x8f];
-  if (iVar3 != 0) {
-    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
-      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
-      *(undefined4 *)(iVar3 + 4) = 0;
-    }
-    param_1[0x8f] = 0;
-  }
-  iVar3 = param_1[0xf6];
-  param_1[0xf1] = vftable;
-  param_1[0xf7] = 0;
-  if (iVar3 != 0) {
-    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
-      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
-      *(undefined4 *)(iVar3 + 4) = 0;
-    }
-    param_1[0xf6] = 0;
-  }
-  iVar3 = 4;
-  puVar2 = param_1 + 0xe6;
-  do {
-    iVar1 = puVar2[-2];
-    puVar2[-7] = vftable;
-    puVar2[-1] = 0;
-    if (iVar1 != 0) {
-      if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
-        *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
-        *(undefined4 *)(iVar1 + 4) = 0;
-      }
-      puVar2[-2] = 0;
-    }
-    iVar3 = iVar3 + -1;
-    puVar2 = puVar2 + -7;
-  } while (-1 < iVar3);
-  cEspControler::~cEspControler();
-  iVar3 = param_1[5];
-  *param_1 = vftable;
-  param_1[6] = 0;
-  if (iVar3 != 0) {
-    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
-      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
-      *(undefined4 *)(iVar3 + 4) = 0;
-    }
-    param_1[5] = 0;
-  }
-  return;
-}
-
 // 00CD3250  cCustomObjCtrlManager::cCustomObjCtrlManager_14  size=143  [class]
 void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_14(undefined4 *param_1)
 
@@ -623,8 +548,8 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_34(undefined4 *para
   return;
 }
 
-// 00CD4A70  cCustomObjCtrlManager::cCustomObjCtrlManager_31  size=275  [class]
-undefined4 * cCustomObjCtrlManager::cCustomObjCtrlManager_31(void)
+// 00CD4A70  cCustomObjCtrlManager::cCustomObjCtrlManager  size=275  [class]
+undefined4 * cCustomObjCtrlManager::cCustomObjCtrlManager(void)
 
 {
   undefined4 *extraout_EDX;
@@ -772,8 +697,8 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_33(undefined4 *para
   return;
 }
 
-// 00CD5B60  cCustomObjCtrlManager::cCustomObjCtrlManager_27  size=257  [class]
-void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_27(undefined4 *param_1)
+// 00CD5B60  cCustomObjCtrlManager::cCustomObjCtrlManager  size=257  [class]
+void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager(undefined4 *param_1)
 
 {
   param_1[1] = 0;
@@ -958,8 +883,8 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_26(undefined4 *para
   return;
 }
 
-// 00CD7150  cCustomObjCtrlManager::cCustomObjCtrlManager_24  size=1087  [class]
-undefined4 * cCustomObjCtrlManager::cCustomObjCtrlManager_24(void)
+// 00CD7150  cCustomObjCtrlManager::cCustomObjCtrlManager  size=1087  [class]
+undefined4 * cCustomObjCtrlManager::cCustomObjCtrlManager(void)
 
 {
   undefined4 *puVar1;
@@ -1215,8 +1140,8 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_25(undefined4 *para
   return;
 }
 
-// 00CD8810  cCustomObjCtrlManager::cCustomObjCtrlManager_7  size=337  [class]
-undefined4 * cCustomObjCtrlManager::cCustomObjCtrlManager_7(void)
+// 00CD8810  cCustomObjCtrlManager::cCustomObjCtrlManager  size=337  [class]
+undefined4 * cCustomObjCtrlManager::cCustomObjCtrlManager(void)
 
 {
   undefined4 *extraout_EDX;
@@ -1756,44 +1681,126 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_2(undefined4 *param
   return;
 }
 
-// 00CDBD50  cCustomObjCtrlManager::cCustomObjCtrlManager  size=131  [class]
+// 00CDAFD0  cCustomObjCtrlManager::cCustomObjCtrlManager  size=567  [class]
 void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager(undefined4 *param_1)
 
 {
-  int iVar1;
+  byte bVar1;
+  byte bVar2;
   
-  *param_1 = cResultBg::vftable;
-  FUN_00f972f0();
+  *param_1 = cChapterResultParts::vftable;
+  param_1[1] = 0;
+  param_1[2] = 0;
+  param_1[3] = 0;
+  param_1[5] = 0;
+  param_1[6] = 0;
+  param_1[4] = 1;
+  param_1[8] = 0;
   param_1[9] = 0;
   param_1[10] = 0;
-  param_1[0xb] = 0;
+  param_1[0xb] = 1;
   param_1[0xc] = 0;
   param_1[0xd] = 0;
-  if (param_1[7] != 0) {
-    FUN_00e9d6a0(param_1[7]);
-    param_1[7] = 0;
-  }
-  if (param_1[8] != 0) {
-    FUN_00e9d6a0(param_1[8]);
-    param_1[8] = 0;
-  }
-  *(undefined1 *)((int)param_1 + 0x55) = 0;
-  Hw::cTexture::cTexture_5();
-  iVar1 = param_1[5];
-  *param_1 = vftable;
-  param_1[6] = 0;
-  if (iVar1 != 0) {
-    if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
-      *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
-      *(undefined4 *)(iVar1 + 4) = 0;
-    }
-    param_1[5] = 0;
-  }
+  param_1[0xf] = 0;
+  param_1[0x10] = 0;
+  param_1[0x11] = 0;
+  param_1[0x12] = 1;
+  param_1[0x13] = 0;
+  param_1[0x14] = 0;
+  param_1[0x16] = 0;
+  param_1[0x17] = 0;
+  param_1[0x18] = 0;
+  param_1[0x19] = 1;
+  param_1[0x1a] = 0;
+  param_1[0x1b] = 0;
+  param_1[0x1d] = 0;
+  param_1[0x1e] = 0;
+  param_1[0x1f] = 0;
+  param_1[0x20] = 1;
+  param_1[0x21] = 0;
+  param_1[0x22] = 0;
+  param_1[0x24] = 0;
+  param_1[0x25] = 0;
+  param_1[0x26] = 0;
+  param_1[0x27] = 1;
+  param_1[0x28] = 0;
+  param_1[0x29] = 0;
+  param_1[0x2b] = 0;
+  param_1[0x2c] = 0;
+  param_1[0x2d] = 0;
+  param_1[0x2e] = 1;
+  param_1[0x2f] = 0;
+  param_1[0x30] = 0;
+  param_1[0x32] = 0;
+  param_1[0x33] = 0;
+  param_1[0x34] = 0;
+  param_1[0x35] = 1;
+  param_1[0x36] = 0;
+  param_1[0x37] = 0;
+  param_1[0x39] = 0;
+  param_1[0x3a] = 0;
+  param_1[0x3b] = 0;
+  param_1[0x3c] = 1;
+  param_1[0x3d] = 0;
+  param_1[0x3e] = 0;
+  param_1[0x40] = 0;
+  param_1[0x41] = 0;
+  param_1[0x42] = 0;
+  param_1[0x43] = 1;
+  param_1[0x44] = 0;
+  param_1[0x45] = 0;
+  param_1[7] = vftable;
+  param_1[0xe] = vftable;
+  param_1[0x15] = vftable;
+  param_1[0x1c] = vftable;
+  param_1[0x23] = vftable;
+  param_1[0x2a] = vftable;
+  param_1[0x31] = vftable;
+  param_1[0x38] = vftable;
+  param_1[0x3f] = vftable;
+  *(undefined2 *)(param_1 + 0x91) = 0;
+  *(undefined1 *)((int)param_1 + 0x246) = 1;
+  param_1[0x92] = 0;
+  param_1[0x93] = 0xffffffff;
+  param_1[0x94] = 0;
+  param_1[0x95] = 0;
+  param_1[0x96] = 0;
+  param_1[0x97] = 0;
+  param_1[0x98] = 0;
+  param_1[0x99] = 0;
+  param_1[0x9a] = 0;
+  param_1[0x9b] = 0;
+  param_1[0x9c] = 0;
+  param_1[0xb0] = 0;
+  param_1[0xb1] = 0;
+  param_1[0xb2] = 0;
+  param_1[0xb3] = 0;
+  param_1[0xb4] = 0;
+  param_1[0xb5] = 0;
+  param_1[0xb7] = 0;
+  param_1[0xb8] = 0;
+  param_1[0xb9] = 0;
+  param_1[0xba] = 0;
+  param_1[0xbb] = 0;
+  param_1[0xbc] = 0;
+  param_1[0xbd] = 0;
+  param_1[0xbe] = 0;
+  param_1[0xbf] = 0;
+  param_1[0xc0] = 0;
+  param_1[0xc1] = 0;
+  param_1[0xb6] = 5;
+  bVar1 = 0;
+  do {
+    bVar2 = bVar1 + 1;
+    param_1[(char)bVar1 + 0xc2] = 0;
+    param_1[(char)bVar1 + 0xcb] = 0;
+    bVar1 = bVar2;
+  } while (bVar2 < 9);
   return;
 }
 
-// 00CDBFA0  cCustomObjCtrlManager::cCustomObjCtrlManager_40  size=557  [class]
-void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_40(undefined4 *param_1)
+// 00CDBFA0  cCustomObjCtrlManager::~cCustomObjCtrlManager  size=557  [class]
+void __fastcall cCustomObjCtrlManager::~cCustomObjCtrlManager(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -1910,30 +1917,6 @@ void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_40(undefined4 *para
   return;
 }
 
-// 00CDD000  cCustomObjCtrlManager::cCustomObjCtrlManager_10  size=100  [class]
-void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_10(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  *param_1 = cCreditParts::vftable;
-  if (param_1[0x42] != 0) {
-    (**(code **)(param_1[0x1c] + 8))(0,0,0);
-  }
-  cEspControler::~cEspControler();
-  iVar1 = param_1[5];
-  *param_1 = vftable;
-  param_1[6] = 0;
-  if (iVar1 != 0) {
-    if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
-      *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
-      *(undefined4 *)(iVar1 + 4) = 0;
-    }
-    param_1[5] = 0;
-  }
-  return;
-}
-
 // 00CE3BC0  cCustomObjCtrlManager::cCustomObjCtrlManager_38  size=155  [class]
 void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_38(undefined4 *param_1)
 
@@ -2042,8 +2025,8 @@ undefined4 * __thiscall cCustomObjCtrlManager::vf00(undefined4 *param_1,byte par
   return param_1;
 }
 
-// 00CF37A0  cCustomObjCtrlManager::cCustomObjCtrlManager_15  size=158  [class]
-undefined4 * __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_15(undefined4 *param_1)
+// 00CF37A0  cCustomObjCtrlManager::cCustomObjCtrlManager  size=158  [class]
+undefined4 * __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager(undefined4 *param_1)
 
 {
   byte bVar1;
@@ -2057,7 +2040,7 @@ undefined4 * __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_15(undefine
   param_1[5] = 0;
   param_1[6] = 0;
   *param_1 = cChapterResult::vftable;
-  cChapterResultParts::cChapterResultParts_2();
+  cCustomObjCtrlManager();
   puVar2 = param_1 + 0xdb;
   iVar3 = 0x17;
   do {
@@ -2084,53 +2067,6 @@ undefined4 * __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_15(undefine
   } while (bVar1 < 4);
   param_1[0x1b6] = 0;
   return param_1;
-}
-
-// 00CF3840  cCustomObjCtrlManager::cCustomObjCtrlManager_11  size=164  [class]
-void __fastcall cCustomObjCtrlManager::cCustomObjCtrlManager_11(undefined4 *param_1)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  
-  *param_1 = cChapterResult::vftable;
-  if ((undefined4 *)param_1[0x183] != (undefined4 *)0x0) {
-    (*(code *)**(undefined4 **)param_1[0x183])(1);
-    param_1[0x183] = 0;
-  }
-  if ((undefined4 *)param_1[0x184] != (undefined4 *)0x0) {
-    (*(code *)**(undefined4 **)param_1[0x184])(1);
-    param_1[0x184] = 0;
-  }
-  iVar3 = 0x17;
-  puVar2 = param_1 + 0x183;
-  do {
-    iVar1 = puVar2[-2];
-    puVar2[-7] = vftable;
-    puVar2[-1] = 0;
-    if (iVar1 != 0) {
-      if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
-        *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
-        *(undefined4 *)(iVar1 + 4) = 0;
-      }
-      puVar2[-2] = 0;
-    }
-    iVar3 = iVar3 + -1;
-    puVar2 = puVar2 + -7;
-  } while (-1 < iVar3);
-  cChapterResultParts::cChapterResultParts_3();
-  iVar3 = param_1[5];
-  *param_1 = vftable;
-  param_1[6] = 0;
-  if (iVar3 != 0) {
-    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
-      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
-      *(undefined4 *)(iVar3 + 4) = 0;
-    }
-    param_1[5] = 0;
-  }
-  return;
 }
 
 // 00CF3960  cCustomObjCtrlManager::cCustomObjCtrlManager_13  size=82  [class]

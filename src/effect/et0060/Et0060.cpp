@@ -17,8 +17,8 @@ void __fastcall Et0060::vf44(int param_1)
   return;
 }
 
-// 005D1FE0  Et0060::vf40  size=148  [class]
-undefined4 __fastcall Et0060::vf40(int param_1)
+// 005D1FE0  Et0060::startup  size=148  [class]
+undefined4 __fastcall Et0060::startup(int param_1)
 
 {
   int iVar1;
@@ -75,7 +75,7 @@ void __fastcall Et0060::vf50(int param_1)
 undefined4 * __fastcall Et0060::Et0060(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   param_1[0x21c] = 0;
   return param_1;
@@ -88,8 +88,8 @@ undefined * Et0060::vf04(void)
   return &DAT_01b352ac;
 }
 
-// 00AB81B0  Et0060::vf00  size=105  [class]
-undefined4 * __thiscall Et0060::vf00(undefined4 *param_1,byte param_2)
+// 00AB81B0  Et0060::destruct  size=105  [class]
+undefined4 * __thiscall Et0060::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -103,7 +103,7 @@ undefined4 * __thiscall Et0060::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

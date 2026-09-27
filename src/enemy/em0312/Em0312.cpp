@@ -463,7 +463,7 @@ LAB_0059793d:
         if (param_1[0x2fe] != 0) {
           LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 0x2f8));
         }
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
         param_1[0x187] = param_1[0x187] + 1;
       }
     }
@@ -1313,15 +1313,15 @@ void __fastcall FUN_005993a0(int *param_1)
   return;
 }
 
-// 0059A0A0  Em0312::vf40  size=303  [class]
-undefined4 __fastcall Em0312::vf40(int *param_1)
+// 0059A0A0  Em0312::startup  size=303  [class]
+undefined4 __fastcall Em0312::startup(int *param_1)
 
 {
   int iVar1;
   int *piVar2;
   undefined4 uVar3;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 != 0) {
     iVar1 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>();
     if (iVar1 != 0) {
@@ -1363,8 +1363,8 @@ undefined4 __fastcall Em0312::vf40(int *param_1)
   return 0;
 }
 
-// 0059A1D0  Em0312::vf264  size=36  [class]
-undefined4 __thiscall Em0312::vf264(int param_1,int param_2)
+// 0059A1D0  Em0312::setEmSetInfo  size=36  [class]
+undefined4 __thiscall Em0312::setEmSetInfo(int param_1,int param_2)
 
 {
   cXmlBinary::cXmlBinary_13(*(undefined4 *)(param_2 + 0x44));
@@ -2337,8 +2337,8 @@ undefined * Em0312::vf04(void)
   return &DAT_01b3516c;
 }
 
-// 00AC1310  Em0312::vf00  size=30  [class]
-undefined4 __thiscall Em0312::vf00(undefined4 param_1,byte param_2)
+// 00AC1310  Em0312::destruct  size=30  [class]
+undefined4 __thiscall Em0312::destruct(undefined4 param_1,byte param_2)
 
 {
   lib::Array<Hw::cVec4>::Array<Hw::cVec4>();

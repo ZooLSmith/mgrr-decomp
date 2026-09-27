@@ -56,8 +56,8 @@ undefined4 * __thiscall AvoidSlidingStatePl0010::vf04(undefined4 *param_1,byte p
   return param_1;
 }
 
-// 00BA9400  AvoidSlidingStatePl0010::vf0C  size=173  [class]
-void __thiscall AvoidSlidingStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BA9400  AvoidSlidingStatePl0010::SafeCheck  size=173  [class]
+void __thiscall AvoidSlidingStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -92,12 +92,12 @@ void __thiscall AvoidSlidingStatePl0010::vf0C(int param_1,undefined4 *param_2)
     FUN_00aa92c0(4);
     *(undefined4 *)(uVar2 + 0x4170) = 1;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00BA94B0  AvoidSlidingStatePl0010::vf10  size=144  [class]
-void AvoidSlidingStatePl0010::vf10(undefined4 *param_1)
+// 00BA94B0  AvoidSlidingStatePl0010::qteSafeCheck  size=144  [class]
+void AvoidSlidingStatePl0010::qteSafeCheck(undefined4 *param_1)
 
 {
   float fVar1;
@@ -130,7 +130,7 @@ void AvoidSlidingStatePl0010::vf10(undefined4 *param_1)
   *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(*(int *)(uVar3 + 0x40d4) + 0x24);
   *(float *)(uVar3 + 0x417c) = fVar1 * 0.017453292;
   *(undefined4 *)(uVar3 + 0x4184) = 0;
-  StateMachineNode::vf10(param_1);
+  StateMachineNode::qteSafeCheck(param_1);
   return;
 }
 

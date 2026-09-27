@@ -4,14 +4,14 @@
 #include "mgrr.h"
 #include "DlcMoveBlock.h"
 
-// 00603BE0  DlcMoveBlock::vf40  size=196  [class]
-undefined4 __fastcall DlcMoveBlock::vf40(int param_1)
+// 00603BE0  DlcMoveBlock::startup  size=196  [class]
+undefined4 __fastcall DlcMoveBlock::startup(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = MonThrowMoto::vf40();
+  iVar1 = BehaviorBa::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -95,8 +95,8 @@ undefined * DlcMoveBlock::vf04(void)
   return &DAT_01b354d8;
 }
 
-// 00AB9BB0  DlcMoveBlock::vf00  size=43  [class]
-undefined4 __thiscall DlcMoveBlock::vf00(undefined4 param_1,byte param_2)
+// 00AB9BB0  DlcMoveBlock::destruct  size=43  [class]
+undefined4 __thiscall DlcMoveBlock::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

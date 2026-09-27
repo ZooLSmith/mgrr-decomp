@@ -1,5 +1,5 @@
 // src/unsorted/unit_00A980D0.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A980D0..00A98280, 4 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A980D0..00A98220, 3 functions
 
 #include "mgrr.h"
 
@@ -86,37 +86,5 @@ LAB_00a9824c:
   uVar3 = FUN_00a1b020(param_1,uVar3,*(undefined4 *)(param_2 + 0xec),*(undefined4 *)(param_2 + 0xf0)
                        ,0);
   return uVar3;
-}
-
-// 00A98280  FUN_00a98280  size=102  [run]
-void __fastcall FUN_00a98280(int param_1)
-
-{
-  uint uVar1;
-  uint uVar2;
-  bool bVar3;
-  
-  uVar1 = *(uint *)(param_1 + 0x4c0);
-  if ((uVar1 & 0x20000) == 0) {
-    return;
-  }
-  if ((uVar1 & 0x40000) != 0) {
-    *(int *)(param_1 + 0x834) = *(int *)(param_1 + 0x834) + 1;
-    if (6 < *(int *)(param_1 + 0x834)) {
-      *(uint *)(param_1 + 0x4c0) = uVar1 & 0xfff8ffff;
-      return;
-    }
-    uVar2 = (*(int *)(param_1 + 0x834) + -1) / 2 & 0x80000001;
-    bVar3 = uVar2 == 0;
-    if ((int)uVar2 < 0) {
-      bVar3 = (uVar2 - 1 | 0xfffffffe) == 0xffffffff;
-    }
-    if (!bVar3) {
-      *(uint *)(param_1 + 0x4c0) = uVar1 & 0xfffeffff;
-      return;
-    }
-  }
-  *(uint *)(param_1 + 0x4c0) = uVar1 | 0x10000;
-  return;
 }
 

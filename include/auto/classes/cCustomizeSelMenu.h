@@ -12,5 +12,6 @@ struct cCustomizeSelMenu : public cCustomObjCtrlManager {
     virtual void create();  // 009C1220 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
     static void setItemState(uint param_1, undefined4 param_2);  // 00990730
+    ~cCustomizeSelMenu();  // 009A0AD0
     static void setItemState_3(byte param_2);  // 009BC430
 };

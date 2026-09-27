@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "cManupilatePanel.h"
 
-// 005E2F70  cManupilatePanel::vf40  size=35  [class]
-undefined4 __fastcall cManupilatePanel::vf40(int param_1)
+// 005E2F70  cManupilatePanel::startup  size=35  [class]
+undefined4 __fastcall cManupilatePanel::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = GimmickBehaviorBase::vf40();
+  iVar1 = GimmickBehaviorBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -126,8 +126,8 @@ undefined * cManupilatePanel::vf04(void)
   return &DAT_01b3533c;
 }
 
-// 00ABAA10  cManupilatePanel::vf00  size=43  [class]
-undefined4 __thiscall cManupilatePanel::vf00(undefined4 param_1,byte param_2)
+// 00ABAA10  cManupilatePanel::destruct  size=43  [class]
+undefined4 __thiscall cManupilatePanel::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

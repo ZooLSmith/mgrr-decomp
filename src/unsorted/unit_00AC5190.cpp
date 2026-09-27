@@ -9,7 +9,7 @@ undefined4 FUN_00ac5190(void)
 {
   int iVar1;
   
-  iVar1 = BehaviorAppBase::vf40();
+  iVar1 = BehaviorAppBase::startup();
   if (iVar1 == 0) {
     return 0;
   }

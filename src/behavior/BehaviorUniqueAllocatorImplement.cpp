@@ -68,9 +68,9 @@ void __fastcall FUN_00a914f0(int *param_1)
   return;
 }
 
-// 00A91670  BehaviorUniqueAllocatorImplement::BehaviorUniqueAllocatorImplement_2  size=31  [class]
+// 00A91670  BehaviorUniqueAllocatorImplement::BehaviorUniqueAllocatorImplement  size=31  [class]
 undefined4 * __fastcall
-BehaviorUniqueAllocatorImplement::BehaviorUniqueAllocatorImplement_2(undefined4 *param_1)
+BehaviorUniqueAllocatorImplement::BehaviorUniqueAllocatorImplement(undefined4 *param_1)
 
 {
   *param_1 = vftable;

@@ -10,8 +10,8 @@ undefined4 * __fastcall FUN_00d5e140(undefined4 *param_1)
   *param_1 = 0;
   FUN_00d4d890();
   FUN_00de3530();
-  cXmlBinary::cXmlBinary_103();
-  cXmlBinary::cXmlBinary_103();
+  cXmlBinary::cXmlBinary();
+  cXmlBinary::cXmlBinary();
   param_1[0x7f] = 0;
   param_1[0x80] = 0;
   param_1[0x81] = 0;

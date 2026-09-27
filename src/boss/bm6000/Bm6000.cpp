@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bm6000.h"
 
-// 00603E80  Bm6000::vf40  size=29  [class]
-undefined4 __fastcall Bm6000::vf40(int param_1)
+// 00603E80  Bm6000::startup  size=29  [class]
+undefined4 __fastcall Bm6000::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -57,8 +57,8 @@ undefined * Bm6000::vf04(void)
   return &DAT_01b354e8;
 }
 
-// 00AB98A0  Bm6000::vf00  size=43  [class]
-undefined4 __thiscall Bm6000::vf00(undefined4 param_1,byte param_2)
+// 00AB98A0  Bm6000::destruct  size=43  [class]
+undefined4 __thiscall Bm6000::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

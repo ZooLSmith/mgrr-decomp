@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "esp104.h"
 
-// 009CFE70  esp104::vf10  size=1  [class]
-void esp104::vf10(void)
+// 009CFE70  esp104::addOtTransList  size=1  [class]
+void esp104::addOtTransList(void)
 
 {
   return;
@@ -15,15 +15,15 @@ void esp104::vf10(void)
 undefined4 * __fastcall esp104::esp104(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   FUN_00a7c930();
   return param_1;
 }
 
-// 009D86D0  esp104::vf04  size=446  [class]
+// 009D86D0  esp104::preTrans  size=446  [class]
 undefined4 __thiscall
-esp104::vf04(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param_4)
+esp104::preTrans(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param_4)
 
 {
   short sVar1;
@@ -36,7 +36,7 @@ esp104::vf04(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param
   undefined4 *puVar8;
   undefined4 *puVar9;
   
-  iVar4 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar4 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar4 == 0) {
     return 0;
   }
@@ -134,7 +134,7 @@ esp104::vf04(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param
 undefined4 __thiscall esp104::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

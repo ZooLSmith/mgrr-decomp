@@ -8,7 +8,7 @@
 undefined4 * __fastcall cStingerMissileSiteBase::cStingerMissileSiteBase(undefined4 *param_1)
 
 {
-  cCustomObjCtrl::cCustomObjCtrl();
+  cCustomObjWorkBase::cCustomObjWorkBase();
   *param_1 = vftable;
   return param_1;
 }

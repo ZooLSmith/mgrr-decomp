@@ -8,5 +8,5 @@ struct hkxMesh : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D7F50 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxMesh();  // 010D7840
+    ~hkxMesh();  // 010D7840
 };

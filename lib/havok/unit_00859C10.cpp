@@ -68,7 +68,7 @@ void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_4(int param_1)
              (((byte)*(undefined4 *)(iVar2 + 0x2c) & 0x1f) == 0xb)) {
             iVar2 = FUN_008f7780(iVar2);
             if (iVar2 == 0) {
-              hkpCdPointCollector::hkpCdPointCollector_4();
+              hkpCdPointCollector::hkpCdPointCollector();
               FUN_00406760();
               return;
             }

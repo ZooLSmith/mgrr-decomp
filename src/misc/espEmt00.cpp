@@ -8,7 +8,7 @@
 undefined4 * __fastcall espEmt00::espEmt00(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_8();
+  EspEmtBase::EspEmtBase();
   *param_1 = vftable;
   param_1[0x148] = 0;
   return param_1;
@@ -32,8 +32,8 @@ void espEmt00::vf20(void)
   return;
 }
 
-// 00EF6600  espEmt00::vf10  size=584  [class]
-void __fastcall espEmt00::vf10(int param_1)
+// 00EF6600  espEmt00::addOtTransList  size=584  [class]
+void __fastcall espEmt00::addOtTransList(int param_1)
 
 {
   int *piVar1;
@@ -139,8 +139,8 @@ void espEmt00::vf1C(void *param_1,void *param_2)
   return;
 }
 
-// 00F09BA0  espEmt00::vf04  size=1586  [class]
-void __thiscall espEmt00::vf04(int param_1,undefined4 *param_2,void *param_3,undefined4 param_4)
+// 00F09BA0  espEmt00::preTrans  size=1586  [class]
+void __thiscall espEmt00::preTrans(int param_1,undefined4 *param_2,void *param_3,undefined4 param_4)
 
 {
   void *_Dst;

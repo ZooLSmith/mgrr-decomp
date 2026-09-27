@@ -157,7 +157,7 @@ uint FUN_00a497e0(uint param_1)
 undefined4 __fastcall FUN_00a49940(undefined4 param_1)
 
 {
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   return param_1;
 }
 
@@ -1134,7 +1134,7 @@ void FUN_00a4b210(void)
 undefined4 __fastcall FUN_00a4b270(undefined4 param_1)
 
 {
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   return param_1;
 }
 

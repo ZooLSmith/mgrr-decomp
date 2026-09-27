@@ -10,4 +10,6 @@ struct cOptionMenu : public cCustomObjCtrlManager {
     virtual void vf08();  // 009B7460 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 009A8C70 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009BF9E0 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cOptionMenu();  // 009A8B90
 };

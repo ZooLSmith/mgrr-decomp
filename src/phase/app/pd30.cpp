@@ -1,5 +1,5 @@
 // src/phase/app/pd30.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B9B0..00D70A20, 10 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B9B0..00D70A20, 11 functions
 
 #include "mgrr.h"
 #include "cPd30.h"
@@ -571,6 +571,19 @@ LAB_00d65918:
   uVar2 = FUN_00e03ea0("lobbysofa",uVar10);
   FUN_00d4bac0(uVar2,uVar10);
   return;
+}
+
+// 00D6F9F0  cPd30::cPd30  size=51  [class]
+undefined4 * __fastcall cPd30::cPd30(undefined4 *param_1)
+
+{
+  param_1[4] = param_1 + 7;
+  param_1[5] = 0;
+  param_1[6] = 0x40;
+  param_1[3] = lib::StaticArray<int,64>::vftable;
+  *param_1 = vftable;
+  cEspControler::cEspControler();
+  return param_1;
 }
 
 // 00D70A20  cPd30::vf00  size=65  [class]

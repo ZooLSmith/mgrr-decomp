@@ -40,7 +40,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 3:
     puVar2 = (undefined4 *)FUN_00dd3500(0x34,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiChanceStatePl1400::vftable;
       return puVar2;
     }
@@ -69,7 +69,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 7:
     puVar2 = (undefined4 *)FUN_00dd3500(0x30,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiForbidStatePl1400::vftable;
       return puVar2;
     }
@@ -77,7 +77,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 8:
     puVar2 = (undefined4 *)FUN_00dd3500(0xa0,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiHoldStatePl1400::vftable;
       return puVar2;
     }
@@ -92,7 +92,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 10:
     puVar2 = (undefined4 *)FUN_00dd3500(0x34,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiIaiIdleStatePl1400::vftable;
       return puVar2;
     }
@@ -100,7 +100,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 0xb:
     puVar2 = (undefined4 *)FUN_00dd3500(0x30,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiIaiReadyStatePl1400::vftable;
       return puVar2;
     }
@@ -108,7 +108,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 0xc:
     puVar2 = (undefined4 *)FUN_00dd3500(0x34,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiIaiStatePl1400::vftable;
       return puVar2;
     }
@@ -116,7 +116,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 0xd:
     puVar2 = (undefined4 *)FUN_00dd3500(0x38,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiIdleStatePl1400::vftable;
       return puVar2;
     }
@@ -124,7 +124,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 0xe:
     puVar2 = (undefined4 *)FUN_00dd3500(0x3c,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiInterceptStatePl1400::vftable;
       return puVar2;
     }
@@ -132,7 +132,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 0xf:
     puVar2 = (undefined4 *)FUN_00dd3500(0x34,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiLandingStatePl1400::vftable;
       return puVar2;
     }
@@ -147,7 +147,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 0x11:
     puVar2 = (undefined4 *)FUN_00dd3500(0x40,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiNormalStatePl1400::vftable;
       return puVar2;
     }
@@ -162,7 +162,7 @@ undefined4 * StateMachineFactoryPl1400::vf00(undefined4 param_1)
   case 0x13:
     puVar2 = (undefined4 *)FUN_00dd3500(0xa0,&DAT_01b7bd48);
     if (puVar2 != (undefined4 *)0x0) {
-      StateMachineNode::StateMachineNode_8(param_1);
+      StateMachineNode::StateMachineNode(param_1);
       *puVar2 = ZangekiReadyStatePl1400::vftable;
       return puVar2;
     }

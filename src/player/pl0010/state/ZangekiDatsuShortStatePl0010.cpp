@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiDatsuShortStatePl0010::ZangekiDatsuShortStatePl0010(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a7c930();
   FUN_00a7c930();
@@ -72,8 +72,8 @@ undefined4 * __thiscall ZangekiDatsuShortStatePl0010::vf04(undefined4 *param_1,b
   return param_1;
 }
 
-// 00BB2F50  ZangekiDatsuShortStatePl0010::vf0C  size=1223  [class]
-void __thiscall ZangekiDatsuShortStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BB2F50  ZangekiDatsuShortStatePl0010::SafeCheck  size=1223  [class]
+void __thiscall ZangekiDatsuShortStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -259,7 +259,7 @@ LAB_00bb3394:
     }
   }
 LAB_00bb3403:
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -457,8 +457,8 @@ void __thiscall ZangekiDatsuShortStatePl0010::vf08(int param_1,undefined4 *param
   return;
 }
 
-// 00BF0530  ZangekiDatsuShortStatePl0010::vf10  size=1749  [class]
-void __thiscall ZangekiDatsuShortStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BF0530  ZangekiDatsuShortStatePl0010::qteSafeCheck  size=1749  [class]
+void __thiscall ZangekiDatsuShortStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -514,7 +514,7 @@ void __thiscall ZangekiDatsuShortStatePl0010::vf10(int param_1,undefined4 *param
   iVar2 = FUN_00a81330();
   if ((iVar2 == 0) && (*(int *)(param_1 + 0x80) == 0)) {
     FUN_00d82510(0xb,100);
-    StateMachineNode::vf10(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
     return;
   }
   iVar2 = FUN_00a94e10(*(undefined4 *)(param_1 + 0x34),*(undefined4 *)(param_1 + 0x3c),
@@ -654,7 +654,7 @@ LAB_00bf0bdf:
   if (iVar2 != 0) {
     FUN_00bbc310(param_2);
   }
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

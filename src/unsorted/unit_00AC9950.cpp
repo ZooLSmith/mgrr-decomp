@@ -77,7 +77,7 @@ void __fastcall FUN_00ac9a60(int param_1)
     *(undefined4 *)(param_1 + 0xa08) = uVar3;
   }
   if (*(int *)(param_1 + 0xa08) == 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     return;
   }
   *(ushort *)(param_1 + 0xa2) = *(ushort *)(param_1 + 0xa2) | 4;

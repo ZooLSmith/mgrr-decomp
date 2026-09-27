@@ -14,6 +14,6 @@ struct CollisionCapsule : public Collision {
     virtual float10 vf1C();  // 00D773D0 slot 0x1C  overrides Collision
     virtual void vf24();  // 00D7D050 slot 0x24  overrides Collision
     // non-virtual members
-    CollisionCapsule();  // 00D7D0A0
-    void ctor_00D7DEA0();  // 00D7DEA0
+    ~CollisionCapsule();  // 00D7D0A0
+    CollisionCapsule();  // 00D7DEA0
 };

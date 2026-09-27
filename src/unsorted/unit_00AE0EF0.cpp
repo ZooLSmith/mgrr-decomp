@@ -773,7 +773,7 @@ LAB_00ae2201:
       fVar10 = (float10)FUN_00e049b0();
       param_1[0x261] = (int)(float)((float10)fVar1 - fVar10);
       if ((float10)fVar1 - fVar10 < (float10)0) {
-        FUN_009fdde0();
+        E3_EnemyBoardDebrisSokushi::vf4C();
       }
     }
   }

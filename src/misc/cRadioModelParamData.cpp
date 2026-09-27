@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cRadioModelParamData.h"
 
-// 00CC1F40  cRadioModelParamData::cRadioModelParamData_2  size=7  [class]
-void __fastcall cRadioModelParamData::cRadioModelParamData_2(undefined4 *param_1)
+// 00CC1F40  cRadioModelParamData::~cRadioModelParamData  size=7  [class]
+void __fastcall cRadioModelParamData::~cRadioModelParamData(undefined4 *param_1)
 
 {
   *param_1 = vftable;

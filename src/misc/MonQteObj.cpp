@@ -99,8 +99,8 @@ void MonQteObj::vf1A4(void)
   return;
 }
 
-// 0051E780  MonQteObj::vf40  size=558  [class]
-undefined4 __fastcall MonQteObj::vf40(int param_1)
+// 0051E780  MonQteObj::startup  size=558  [class]
+undefined4 __fastcall MonQteObj::startup(int param_1)
 
 {
   uint *puVar1;
@@ -115,7 +115,7 @@ undefined4 __fastcall MonQteObj::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar4 = BehaviorAppBase::vf40();
+  iVar4 = BehaviorAppBase::startup();
   if (iVar4 == 0) {
     return 0;
   }
@@ -139,7 +139,7 @@ undefined4 __fastcall MonQteObj::vf40(int param_1)
       iVar4 = 0;
     }
     else {
-      iVar4 = RigidBodyCollection::RigidBodyCollection_2();
+      iVar4 = RigidBodyCollision::RigidBodyCollision();
     }
     *(int *)(param_1 + 0x7b0) = iVar4;
     if (iVar4 != 0) {
@@ -196,8 +196,9 @@ undefined4 __fastcall MonQteObj::vf40(int param_1)
   return 0;
 }
 
-// 0051E9C0  MonQteObj::vf1B8  size=76  [class]
-void __thiscall MonQteObj::vf1B8(int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
+// 0051E9C0  MonQteObj::setCutCrerateInfo  size=76  [class]
+void __thiscall
+MonQteObj::setCutCrerateInfo(int param_1,undefined4 *param_2,undefined4 param_3,int param_4)
 
 {
   if ((*(int *)(param_1 + 0x4b0) == 0xf5010) || (*(int *)(param_1 + 0x4b0) == 0x201b7)) {
@@ -302,11 +303,11 @@ undefined * MonQteObj::vf04(void)
   return &DAT_01b34f60;
 }
 
-// 00AB77E0  MonQteObj::vf00  size=30  [class]
-undefined4 __thiscall MonQteObj::vf00(undefined4 param_1,byte param_2)
+// 00AB77E0  MonQteObj::destruct  size=30  [class]
+undefined4 __thiscall MonQteObj::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_87();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

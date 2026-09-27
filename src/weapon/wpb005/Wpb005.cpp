@@ -470,8 +470,8 @@ void __fastcall Wpb005::vf304(int *param_1)
   return;
 }
 
-// 00601B40  Wpb005::vf40  size=230  [class]
-undefined4 __fastcall Wpb005::vf40(int param_1)
+// 00601B40  Wpb005::startup  size=230  [class]
+undefined4 __fastcall Wpb005::startup(int param_1)
 
 {
   undefined4 uVar1;
@@ -482,7 +482,7 @@ undefined4 __fastcall Wpb005::vf40(int param_1)
   undefined1 *puVar6;
   undefined1 local_160 [348];
   
-  iVar2 = Pl1500Knife::vf40();
+  iVar2 = BehaviorBulletBase::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -491,7 +491,7 @@ undefined4 __fastcall Wpb005::vf40(int param_1)
     uVar3 = 0;
   }
   else {
-    uVar3 = RigidBodyCollection::RigidBodyCollection_2();
+    uVar3 = RigidBodyCollision::RigidBodyCollision();
   }
   uVar1 = *(undefined4 *)(param_1 + 0x4f0);
   *(undefined4 *)(param_1 + 0x7b0) = uVar3;
@@ -527,11 +527,11 @@ undefined * Wpb005::vf04(void)
   return &DAT_01b35490;
 }
 
-// 00AB6B80  Wpb005::vf00  size=30  [class]
-undefined4 __thiscall Wpb005::vf00(undefined4 param_1,byte param_2)
+// 00AB6B80  Wpb005::destruct  size=30  [class]
+undefined4 __thiscall Wpb005::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_120();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

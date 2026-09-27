@@ -17,14 +17,14 @@ void esp113::vf14(void)
 undefined4 * __fastcall esp113::esp113(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
 
-// 009D93D0  esp113::vf04  size=257  [class]
+// 009D93D0  esp113::preTrans  size=257  [class]
 undefined4 __thiscall
-esp113::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp113::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short *psVar1;
@@ -32,7 +32,7 @@ esp113::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   undefined4 *puVar3;
   undefined4 uVar4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return 0;
   }
@@ -76,7 +76,7 @@ esp113::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
 undefined4 __thiscall esp113::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

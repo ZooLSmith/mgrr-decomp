@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cCodecModelOnly.h"
 
-// 00CB6BC0  cCodecModelOnly::cCodecModelOnly_2  size=130  [class]
-undefined4 * __fastcall cCodecModelOnly::cCodecModelOnly_2(undefined4 *param_1)
+// 00CB6BC0  cCodecModelOnly::cCodecModelOnly  size=130  [class]
+undefined4 * __fastcall cCodecModelOnly::cCodecModelOnly(undefined4 *param_1)
 
 {
   int iVar1;
@@ -54,7 +54,7 @@ undefined4 FUN_00cb6c50(void)
   
   iVar1 = FUN_00dd3500(0x78,&DAT_01b7be50);
   if (iVar1 != 0) {
-    uVar2 = cCodecModelOnly::cCodecModelOnly_2();
+    uVar2 = cCodecModelOnly::cCodecModelOnly();
     return uVar2;
   }
   return 0;
@@ -88,8 +88,8 @@ int FUN_00cb6c80(void)
   return iVar2;
 }
 
-// 00CD1240  cCodecModelOnly::cCodecModelOnly  size=35  [class]
-void __fastcall cCodecModelOnly::cCodecModelOnly(undefined4 *param_1)
+// 00CD1240  cCodecModelOnly::~cCodecModelOnly  size=35  [class]
+void __fastcall cCodecModelOnly::~cCodecModelOnly(undefined4 *param_1)
 
 {
   *param_1 = vftable;

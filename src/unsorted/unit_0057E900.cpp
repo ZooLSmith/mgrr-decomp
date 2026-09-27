@@ -116,7 +116,7 @@ void __fastcall FUN_0057ea60(int param_1)
 LAB_0057eb5e:
   if ((DAT_01bea060 & 0x20000000) != 0) {
     (**(code **)(*(int *)(param_1 + 0xef0) + 4))();
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   if (bVar2) {
     fVar6 = (float10)FUN_00a5be50(0);
@@ -125,7 +125,7 @@ LAB_0057eb5e:
     *(float *)(param_1 + 0x54) = (float)fVar6;
     if (fVar6 <= (float10)0) {
       (**(code **)(*(int *)(param_1 + 0xef0) + 4))();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -183,7 +183,7 @@ LAB_0057ece0:
       piVar2 = (int *)FUN_00c1b9a0();
       (**(code **)(*piVar2 + 0x44))(8,0);
       (**(code **)(*param_1 + 0x20))();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -208,7 +208,7 @@ void __fastcall FUN_0057edb0(int *param_1)
   FUN_00ac80a0(0x3f800000,0x3f800000);
   iVar1 = FUN_00a94ce0(0);
   if (iVar1 != 0) {
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
     param_1[0x187] = param_1[0x187] + 1;
   }
   fVar2 = (float10)FUN_00a5be50(0);
@@ -219,7 +219,7 @@ void __fastcall FUN_0057edb0(int *param_1)
     return;
   }
   (**(code **)(param_1[0x3bc] + 4))();
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -421,7 +421,7 @@ LAB_0057f2f1:
     iVar1 = FUN_00a94ce0(0);
     if (iVar1 != 0) {
       (**(code **)(*param_1 + 0x20))();
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }

@@ -10,4 +10,6 @@ struct cVRMissionMenuParts : public cCustomObjCtrlManager {
     virtual void vf08();  // 009BE340 slot 0x8  overrides cCustomObjCtrlManager
     virtual void vf0C();  // 00995420 slot 0xC  overrides cCustomObjCtrlManager
     virtual void create();  // 009BE770 slot 0x14  overrides cCustomObjCtrlManager
+    // non-virtual members
+    ~cVRMissionMenuParts();  // 009A75F0
 };

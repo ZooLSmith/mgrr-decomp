@@ -214,7 +214,7 @@ LAB_00927889:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x70);
     *(undefined2 *)(iVar3 + 4) = 0x70;
-    uVar4 = hkpConvexVerticesShape::hkpConvexVerticesShape_5(&local_304,&local_2e4,param_2[4]);
+    uVar4 = hkpConvexVerticesShape::hkpConvexVerticesShape(&local_304,&local_2e4,param_2[4]);
     (**(code **)(*param_1 + 0xc))(uVar4);
     FUN_010060a0();
     FUN_009211c0();
@@ -266,7 +266,7 @@ LAB_00927889:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x70);
     *(undefined2 *)(iVar3 + 4) = 0x70;
-    iVar3 = hkpListShape::hkpListShape_2(unaff_ESI,unaff_EBX,1);
+    iVar3 = hkpListShape::hkpListShape(unaff_ESI,unaff_EBX,1);
     iVar7 = 0;
     iStack_2d4 = iVar3;
     if (0 < unaff_EBX) {
@@ -289,7 +289,7 @@ LAB_00927889:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     iVar7 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x40);
     *(undefined2 *)(iVar7 + 4) = 0x40;
-    uVar4 = hkpSingleShapeContainer::hkpSingleShapeContainer_8(iVar3,uVar4);
+    uVar4 = hkpSingleShapeContainer::hkpSingleShapeContainer(iVar3,uVar4);
     FUN_010060a0();
     goto LAB_00927f43;
   case '\t':
@@ -313,7 +313,7 @@ LAB_00927889:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x70);
     *(undefined2 *)(iVar3 + 4) = 0x70;
-    fVar6 = (float)hkpListShape::hkpListShape_2(uStack_310,local_30c,1);
+    fVar6 = (float)hkpListShape::hkpListShape(uStack_310,local_30c,1);
     iVar3 = 0;
     fStack_2e8 = fVar6;
     if (0 < (int)local_30c) {
@@ -336,7 +336,7 @@ LAB_00927889:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x40);
     *(undefined2 *)(iVar3 + 4) = 0x40;
-    uVar4 = hkpSingleShapeContainer::hkpSingleShapeContainer_8(fVar6,uVar4);
+    uVar4 = hkpSingleShapeContainer::hkpSingleShapeContainer(fVar6,uVar4);
     FUN_010060a0();
 LAB_00927f43:
     FUN_010060a0();
@@ -363,7 +363,8 @@ LAB_00927f79:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     puVar8 = (undefined4 *)(**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x30);
     *(undefined2 *)(puVar8 + 1) = 0x30;
-    hkpSingleShapeContainer::hkpSingleShapeContainer_14(10,*(undefined4 *)(iVar3 + 0x10),iVar3,1);
+    hkpConvexTransformShapeBase::hkpConvexTransformShapeBase
+              (10,*(undefined4 *)(iVar3 + 0x10),iVar3,1);
     *puVar8 = vftable;
     puVar8[8] = local_304;
     puVar8[9] = local_300;
@@ -385,7 +386,7 @@ LAB_00927f79:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x60);
     *(undefined2 *)(iVar3 + 4) = 0x60;
-    uVar4 = hkpConvexTransformShape::hkpConvexTransformShape_2(uVar4,auStack_2c4,1);
+    uVar4 = hkpConvexTransformShape::hkpConvexTransformShape(uVar4,auStack_2c4,1);
     (**(code **)(*param_1 + 0xc))(uVar4);
     FUN_010060a0();
     return;
@@ -426,7 +427,7 @@ LAB_00927f79:
     pvVar5 = TlsGetValue(DAT_01f8fc4c);
     iVar3 = (**(code **)(**(int **)((int)pvVar5 + 0x2c) + 4))(0x40);
     *(undefined2 *)(iVar3 + 4) = 0x40;
-    puVar8 = (undefined4 *)hkpSingleShapeContainer::hkpSingleShapeContainer_8(piVar2,uVar4);
+    puVar8 = (undefined4 *)hkpSingleShapeContainer::hkpSingleShapeContainer(piVar2,uVar4);
     FUN_010060a0();
     FUN_010060a0();
 LAB_00927908:

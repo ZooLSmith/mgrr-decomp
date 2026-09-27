@@ -13,9 +13,4 @@ struct cEm0010Weapon : public BehaviorWeapon {
     virtual void vf4C();  // 00B32420 slot 0x4C  overrides Behavior
     // non-virtual members
     cEm0010Weapon();  // 00AA6830
-    void ctor_00AAF1C0();  // 00AAF1C0
-    void ctor_00AB4090();  // 00AB4090
-    void ctor_00AB4260();  // 00AB4260
-    void ctor_00AB5EA0();  // 00AB5EA0
-    void ctor_00AB6070();  // 00AB6070
 };

@@ -1,16 +1,16 @@
 // src/misc/cItemFixBase.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA440..00AB1470, 6 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA440..00AB1470, 7 functions
 
 #include "mgrr.h"
 #include "cItemFixBase.h"
 
-// 005EA440  cItemFixBase::vf40  size=154  [class]
-undefined4 __fastcall cItemFixBase::vf40(int param_1)
+// 005EA440  cItemFixBase::startup  size=154  [class]
+undefined4 __fastcall cItemFixBase::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = cItemObjectBase::vf40();
+  iVar1 = cItemObjectBase::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -140,6 +140,19 @@ void __fastcall cItemFixBase::vf48(int param_1)
   return;
 }
 
+// 00AB1420  cItemFixBase::cItemFixBase  size=56  [class]
+undefined4 * __fastcall cItemFixBase::cItemFixBase(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  *param_1 = cItemObjectBase::vftable;
+  param_1[0x23e] = 0;
+  FUN_00904d60();
+  FUN_00904d60();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB1460  cItemFixBase::vf04  size=6  [class]
 undefined * cItemFixBase::vf04(void)
 
@@ -147,11 +160,11 @@ undefined * cItemFixBase::vf04(void)
   return &DAT_01b35394;
 }
 
-// 00AB1470  cItemFixBase::vf00  size=30  [class]
-undefined4 __thiscall cItemFixBase::vf00(undefined4 param_1,byte param_2)
+// 00AB1470  cItemFixBase::destruct  size=30  [class]
+undefined4 __thiscall cItemFixBase::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_124();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

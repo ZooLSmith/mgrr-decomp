@@ -381,7 +381,7 @@ LAB_0124bca4:
         (*pcVar5)();
         return;
       }
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
     }
     uVar13 = (uint)*(byte *)(local_78 + local_4c * 4);
     uVar4 = *(ushort *)(local_6c + uVar13 * 2);
@@ -397,7 +397,7 @@ LAB_0124bca4:
       }
       else {
         local_14 = (undefined4 *)
-                   hkpConvexVerticesShape::hkpConvexVerticesShape_3(*(undefined4 *)(local_28 + 4));
+                   hkpConvexVerticesShape::hkpConvexVerticesShape(*(undefined4 *)(local_28 + 4));
       }
       uVar13 = (int)local_18 + 3U & 0xfffffffc;
       iVar18 = (int)((int)local_18 + 3U) >> 2;
@@ -496,7 +496,7 @@ LAB_0124bca4:
         (*pcVar5)();
         return;
       }
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       *pfVar19 = (float)local_d0;
       *(float *)(iVar18 + 0x20a0bf4) = local_d0._4_4_;
       *(float *)(&DAT_020a0bf8 + iVar18) = (float)uStack_c8;
@@ -550,7 +550,7 @@ LAB_0124bca4:
       hkErrStream::hkErrStream(local_320,0x200);
       FUN_01018d00("Primitve type not implemented");
       (**(code **)(*DAT_01f8fc58 + 0xc))(0,0,local_320,0,0);
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
     }
     else {
       uVar13 = (uint)*(byte *)(local_78 + uVar13 * 4);
@@ -739,9 +739,10 @@ uint __thiscall FUN_0124ca00(int param_1,undefined4 param_2)
   return *(uint *)(*(int *)(param_1 + 0x2c) + (uVar1 >> 8 & 0xff) * 4);
 }
 
-// 0124CA40  hkpBvCompressedMeshShape::vf48  size=124  [between]
+// 0124CA40  hkpBvCompressedMeshShape::castAabb  size=124  [between]
 void __thiscall
-hkpBvCompressedMeshShape::vf48(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+hkpBvCompressedMeshShape::castAabb
+          (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined4 local_a0;
@@ -785,9 +786,9 @@ hkpBvCompressedMeshShape::vf48(int param_1,undefined4 param_2,undefined4 param_3
   return;
 }
 
-// 0124CAC0  hkpBvCompressedMeshShape::vf4C  size=369  [between]
+// 0124CAC0  hkpBvCompressedMeshShape::queryAabbImpl  size=369  [between]
 undefined4 __thiscall
-hkpBvCompressedMeshShape::vf4C
+hkpBvCompressedMeshShape::queryAabbImpl
           (int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4)
 
 {
@@ -894,8 +895,9 @@ hkpBvCompressedMeshShape::vf4C
   return local_68;
 }
 
-// 0124CC40  hkpBvCompressedMeshShape::vf44  size=359  [between]
-void __thiscall hkpBvCompressedMeshShape::vf44(int param_1,undefined4 *param_2,undefined4 param_3)
+// 0124CC40  hkpBvCompressedMeshShape::queryAabb  size=359  [between]
+void __thiscall
+hkpBvCompressedMeshShape::queryAabb(int param_1,undefined4 *param_2,undefined4 param_3)
 
 {
   int iVar1;
@@ -997,9 +999,10 @@ void __thiscall hkpBvCompressedMeshShape::vf44(int param_1,undefined4 *param_2,u
   return;
 }
 
-// 0124CDB0  hkpBvCompressedMeshShape::vf18  size=232  [between]
+// 0124CDB0  hkpBvCompressedMeshShape::castRayWithCollector  size=232  [between]
 void __thiscall
-hkpBvCompressedMeshShape::vf18(int param_1,float *param_2,undefined4 param_3,int param_4)
+hkpBvCompressedMeshShape::castRayWithCollector
+          (int param_1,float *param_2,undefined4 param_3,int param_4)
 
 {
   float fVar1;
@@ -1095,9 +1098,9 @@ hkpBvCompressedMeshShape::vf18(int param_1,float *param_2,undefined4 param_3,int
   return;
 }
 
-// 0124CEA0  hkpBvCompressedMeshShape::vf14  size=467  [between]
+// 0124CEA0  hkpBvCompressedMeshShape::castRay  size=467  [between]
 void __thiscall
-hkpBvCompressedMeshShape::vf14(int param_1,undefined1 *param_2,float *param_3,float *param_4)
+hkpBvCompressedMeshShape::castRay(int param_1,undefined1 *param_2,float *param_3,float *param_4)
 
 {
   float fVar1;
@@ -1587,7 +1590,7 @@ undefined4 FUN_0124d860(int *param_1,undefined4 param_2)
   undefined4 uVar1;
   
   if (*param_1 != 0) {
-    uVar1 = hkpConvexVerticesShape::hkpConvexVerticesShape_3(param_2);
+    uVar1 = hkpConvexVerticesShape::hkpConvexVerticesShape(param_2);
     *param_1 = *param_1 + 0x70;
     return uVar1;
   }
@@ -3207,9 +3210,9 @@ FUN_0124f180(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undef
   return;
 }
 
-// 0124F1C0  hkpTriangleShape::hkpTriangleShape_3  size=91  [between]
+// 0124F1C0  hkpTriangleShape::hkpTriangleShape  size=91  [between]
 undefined4 *
-hkpTriangleShape::hkpTriangleShape_3
+hkpTriangleShape::hkpTriangleShape
           (int *param_1,undefined4 param_2,undefined1 param_3,undefined2 param_4)
 
 {
@@ -7615,7 +7618,7 @@ LAB_01259951:
       (*pcVar4)();
       return;
     }
-    hkBaseObject::hkBaseObject_38();
+    ::hkBaseObject::hkBaseObject_38();
   }
   uVar15 = FUN_0124dbd0(param_2);
   FUN_01255a70(local_1250,pfVar17,uVar15,param_3);
@@ -8447,7 +8450,7 @@ LAB_0125d486:
         (*pcVar2)();
         return;
       }
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
     }
     local_1d0 = (local_210[8] - local_210[0]) + local_210[4];
     fStack_1cc = (local_210[9] - local_210[1]) + local_210[5];
@@ -8675,7 +8678,7 @@ LAB_0125d486:
         (*pcVar2)();
         return;
       }
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
     }
     local_18 = (float *)((int)*(short *)((int)param_1[0x15] + 4 +
                                         (uint)*(byte *)(local_24 + (int)param_1[0x12]) * 2) << 0x10)
@@ -8943,7 +8946,7 @@ LAB_0125d486:
         (*pcVar2)();
         return;
       }
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
     }
     local_120 = local_100[0] - local_110[0];
     fStack_11c = local_100[1] - local_110[1];
@@ -9372,7 +9375,7 @@ LAB_0125d486:
         (*pcVar2)();
         return;
       }
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
     }
     fVar60 = local_100[8] - local_100[4];
     fVar63 = local_100[9] - local_100[5];
@@ -9587,7 +9590,7 @@ LAB_0125d486:
                        (3,0x93d510b9,local_d10,
                         "Collide\\BvCompressedMesh\\hkpBvCompressedMeshShape.cpp",0xa1);
     if (iVar11 == 0) {
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       return;
     }
     pcVar2 = (code *)swi(3);

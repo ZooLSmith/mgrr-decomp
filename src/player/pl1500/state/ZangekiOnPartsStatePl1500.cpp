@@ -47,7 +47,7 @@ undefined4 * __thiscall
 ZangekiOnPartsStatePl1500::ZangekiOnPartsStatePl1500(undefined4 *param_1,undefined4 param_2)
 
 {
-  StateMachineNode::StateMachineNode_8(param_2);
+  StateMachineNode::StateMachineNode(param_2);
   *param_1 = vftable;
   FUN_00a603a0();
   return param_1;
@@ -258,8 +258,8 @@ void __thiscall ZangekiOnPartsStatePl1500::vf08(int param_1,undefined4 *param_2)
   return;
 }
 
-// 008BD7C0  ZangekiOnPartsStatePl1500::vf0C  size=1496  [class]
-void __thiscall ZangekiOnPartsStatePl1500::vf0C(int param_1,undefined4 *param_2)
+// 008BD7C0  ZangekiOnPartsStatePl1500::SafeCheck  size=1496  [class]
+void __thiscall ZangekiOnPartsStatePl1500::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -481,7 +481,7 @@ void __thiscall ZangekiOnPartsStatePl1500::vf0C(int param_1,undefined4 *param_2)
   }
   local_234 = param_2;
   local_238 = (float *)0x8bdd8f;
-  StateMachineNode::vf0C();
+  StateMachineNode::SafeCheck();
   return;
 }
 
@@ -546,7 +546,7 @@ undefined4 __thiscall ZangekiOnPartsStatePl1500::vf20(undefined4 param_1,undefin
     FUN_00a7c950();
     iVar2 = FUN_00a7c8a0();
     if (iVar2 != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   uVar3 = 0;
@@ -1603,10 +1603,10 @@ LAB_008bf77d:
   return;
 }
 
-// 008D15E0  ZangekiOnPartsStatePl1500::vf10  size=7209  [class]
+// 008D15E0  ZangekiOnPartsStatePl1500::qteSafeCheck  size=7209  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __thiscall ZangekiOnPartsStatePl1500::vf10(undefined4 **param_1,undefined4 **param_2)
+void __thiscall ZangekiOnPartsStatePl1500::qteSafeCheck(undefined4 **param_1,undefined4 **param_2)
 
 {
   code *pcVar1;
@@ -2707,7 +2707,7 @@ LAB_008d28b2:
       param_1[0x7d] = param_1[0x21];
       param_1[0x7e] = param_1[0x22];
       param_1[0x7f] = param_1[0x23];
-      StateMachineNode::vf10(param_2);
+      StateMachineNode::qteSafeCheck(param_2);
       return;
     }
   }
@@ -2721,7 +2721,7 @@ LAB_008d28b2:
   param_1[0x22] = param_1[0x7e];
   param_1[0x23] = param_1[0x7f];
   local_1d8 = (undefined4 **)0x8d3200;
-  StateMachineNode::vf10();
+  StateMachineNode::qteSafeCheck();
   return;
 }
 

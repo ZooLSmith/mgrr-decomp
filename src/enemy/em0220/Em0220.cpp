@@ -70,7 +70,7 @@ void __fastcall Em0220::vf2F8(int *param_1)
     (**(code **)(*param_1 + 0x344))(7,0,1);
     param_1[0x1af] = 1;
   }
-  FUN_009fdde0();
+  E3_EnemyBoardDebrisSokushi::vf4C();
   return;
 }
 
@@ -2241,7 +2241,7 @@ undefined4 __fastcall FUN_0055ebe0(int param_1)
       local_30[2] = *(float *)(param_1 + 0x1338) - *(float *)(param_1 + 0x48);
       local_24 = *(float *)(param_1 + 0x133c) - *(float *)(param_1 + 0x4c);
       local_30[1] = 0.0;
-      iVar3 = hkpCdPointCollector::hkpCdPointCollector_14(local_30,local_20,1,0,0x3c23d70a);
+      iVar3 = hkpCdPointCollector::hkpCdPointCollector(local_30,local_20,1,0,0x3c23d70a);
       if ((iVar3 == 0) ||
          (local_20[0] = local_20[0] - *(float *)(param_1 + 0x1330),
          local_18 = local_18 - *(float *)(param_1 + 0x1338),
@@ -3003,8 +3003,8 @@ undefined4 __fastcall FUN_005602d0(int param_1)
   return 0;
 }
 
-// 00560330  Em0220::vf130  size=766  [class]
-undefined4 __thiscall Em0220::vf130(int param_1,ushort *param_2)
+// 00560330  Em0220::getAttackInfo  size=766  [class]
+undefined4 __thiscall Em0220::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -3017,7 +3017,7 @@ undefined4 __thiscall Em0220::vf130(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData_3(), iVar2 == 0)) {
+  if ((iVar2 == 0) || (iVar2 = CollisionAttackData::CollisionAttackData(), iVar2 == 0)) {
     FUN_00dd5650(&DAT_01641a54);
     return 0;
   }
@@ -8277,7 +8277,7 @@ void __fastcall FUN_0056a720(int param_1)
           uVar3 = 0;
         }
         else {
-          uVar3 = RigidBodyCollection::RigidBodyCollection_2();
+          uVar3 = RigidBodyCollision::RigidBodyCollision();
         }
         *(undefined4 *)(param_1 + 0x7b0) = uVar3;
         iVar1 = FUN_008f6410(*(undefined4 *)(param_1 + 0x4f0),iVar1,local_24[0]);
@@ -14352,8 +14352,8 @@ void __fastcall FUN_005766f0(int param_1)
   return;
 }
 
-// 00577DD0  Em0220::vf40  size=2870  [class]
-undefined4 __fastcall Em0220::vf40(int *param_1)
+// 00577DD0  Em0220::startup  size=2870  [class]
+undefined4 __fastcall Em0220::startup(int *param_1)
 
 {
   code *pcVar1;
@@ -14408,7 +14408,7 @@ undefined4 __fastcall Em0220::vf40(int *param_1)
   undefined4 uStack_24;
   undefined4 uStack_1c;
   
-  iVar2 = BehaviorEmBase::vf40();
+  iVar2 = BehaviorEmBase::startup();
   if (iVar2 != 0) {
     param_1[0x370] = 0;
     FUN_00a7c950();
@@ -14598,7 +14598,7 @@ undefined4 __fastcall Em0220::vf40(int *param_1)
           iVar3 = 0;
         }
         else {
-          iVar3 = RigidBodyCollection::RigidBodyCollection_2();
+          iVar3 = RigidBodyCollision::RigidBodyCollision();
         }
         param_1[0x1ec] = iVar3;
         iVar2 = FUN_008f6410(param_1[0x13c],iVar2,local_1e4);
@@ -14772,8 +14772,8 @@ void Em0220::vf54(void)
   return;
 }
 
-// 00578920  Em0220::vf264  size=983  [class]
-undefined4 __thiscall Em0220::vf264(int param_1,undefined4 param_2)
+// 00578920  Em0220::setEmSetInfo  size=983  [class]
+undefined4 __thiscall Em0220::setEmSetInfo(int param_1,undefined4 param_2)
 
 {
   float *pfVar1;
@@ -15553,7 +15553,7 @@ undefined4 * __fastcall Em0220::Em0220(undefined4 *param_1)
   undefined4 *puVar1;
   int iVar2;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   param_1[0x370] = 0;
   param_1[0x371] = 0;
@@ -15624,12 +15624,12 @@ void FUN_00aad2f0(void)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB6EF0  Em0220::vf00  size=30  [class]
-undefined4 __thiscall Em0220::vf00(undefined4 param_1,byte param_2)
+// 00AB6EF0  Em0220::destruct  size=30  [class]
+undefined4 __thiscall Em0220::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00aad2f0();

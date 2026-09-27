@@ -64,8 +64,8 @@ undefined4 * __thiscall AnywayHighJumpStatePl0010::vf04(undefined4 *param_1,byte
   return param_1;
 }
 
-// 00BA8CD0  AnywayHighJumpStatePl0010::vf0C  size=330  [class]
-void __thiscall AnywayHighJumpStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BA8CD0  AnywayHighJumpStatePl0010::SafeCheck  size=330  [class]
+void __thiscall AnywayHighJumpStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -123,7 +123,7 @@ void __thiscall AnywayHighJumpStatePl0010::vf0C(int param_1,undefined4 *param_2)
     *(undefined4 *)(param_1 + 0x44) = *(undefined4 *)(uVar5 + 0x44);
     *(undefined4 *)(param_1 + 0x4c) = 0;
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -219,8 +219,8 @@ void __thiscall AnywayHighJumpStatePl0010::vf14(int param_1,undefined4 *param_2)
   return;
 }
 
-// 00BDCC40  AnywayHighJumpStatePl0010::vf10  size=604  [class]
-void __thiscall AnywayHighJumpStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BDCC40  AnywayHighJumpStatePl0010::qteSafeCheck  size=604  [class]
+void __thiscall AnywayHighJumpStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -314,7 +314,7 @@ void __thiscall AnywayHighJumpStatePl0010::vf10(int param_1,undefined4 *param_2)
   FUN_00bd37f0(param_2,param_1,0xd);
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

@@ -28,8 +28,8 @@ void __fastcall ExcelObj::vf48(int param_1)
   return;
 }
 
-// 005B7760  ExcelObj::vf130  size=198  [class]
-int __thiscall ExcelObj::vf130(int param_1,ushort *param_2)
+// 005B7760  ExcelObj::getAttackInfo  size=198  [class]
+int __thiscall ExcelObj::getAttackInfo(int param_1,ushort *param_2)
 
 {
   uint *puVar1;
@@ -40,7 +40,7 @@ int __thiscall ExcelObj::vf130(int param_1,ushort *param_2)
   
   iVar2 = FUN_00dd3500(0x110,&DAT_01b7bd48);
   if (iVar2 != 0) {
-    iVar2 = CollisionAttackData::CollisionAttackData_3();
+    iVar2 = CollisionAttackData::CollisionAttackData();
     if (iVar2 != 0) {
       puVar1 = *(uint **)(iVar2 + 8);
       puVar1[5] = *(uint *)(param_1 + 0x4f0);
@@ -118,8 +118,8 @@ uint FUN_005b7860(void)
   return 0;
 }
 
-// 005BDF10  ExcelObj::vf40  size=873  [class]
-undefined4 __fastcall ExcelObj::vf40(int param_1)
+// 005BDF10  ExcelObj::startup  size=873  [class]
+undefined4 __fastcall ExcelObj::startup(int param_1)
 
 {
   uint *puVar1;
@@ -130,7 +130,7 @@ undefined4 __fastcall ExcelObj::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 != 0) {
     FUN_00dd7240();
     *(undefined4 *)(param_1 + 0x640) = 2;
@@ -309,7 +309,7 @@ void __fastcall ExcelObj::vf4C(int *param_1)
             *(undefined1 *)(param_1 + 0x2b9) = 0xfe;
           }
           else if (cVar2 == '\x05') {
-            FUN_009fdde0();
+            E3_EnemyBoardDebrisSokushi::vf4C();
           }
         }
       }
@@ -337,7 +337,7 @@ void __fastcall ExcelObj::vf4C(int *param_1)
               return;
             }
             if (cVar2 == '\x03') {
-              FUN_009fdde0();
+              E3_EnemyBoardDebrisSokushi::vf4C();
               return;
             }
           }
@@ -351,7 +351,7 @@ void __fastcall ExcelObj::vf4C(int *param_1)
     param_1[0x2ad] = (int)(fVar1 - (float)param_1[0x244]);
     if (fVar1 - (float)param_1[0x244] < 0.0) {
       param_1[0x2ac] = 0;
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
       return;
     }
   }
@@ -365,11 +365,11 @@ undefined * ExcelObj::vf04(void)
   return &DAT_01b351cc;
 }
 
-// 00AB76C0  ExcelObj::vf00  size=30  [class]
-undefined4 __thiscall ExcelObj::vf00(undefined4 param_1,byte param_2)
+// 00AB76C0  ExcelObj::destruct  size=30  [class]
+undefined4 __thiscall ExcelObj::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_85();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

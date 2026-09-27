@@ -8,11 +8,11 @@
 undefined4 * __fastcall cCollectionDiskItemParts::cCollectionDiskItemParts(undefined4 *param_1)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   param_1[8] = 0xffffffff;
   param_1[9] = 0xffffffff;
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   param_1[0x16] = 0xffffffff;
   param_1[0x17] = 0;
   param_1[7] = 0;
@@ -54,8 +54,8 @@ void __fastcall FUN_0098ba10(int param_1)
   return;
 }
 
-// 0099D270  cCollectionDiskItemParts::vf14  size=279  [class]
-void __fastcall cCollectionDiskItemParts::vf14(int param_1)
+// 0099D270  cCollectionDiskItemParts::create  size=279  [class]
+void __fastcall cCollectionDiskItemParts::create(int param_1)
 
 {
   int iVar1;
@@ -123,8 +123,8 @@ undefined4 * __thiscall cCollectionDiskItemParts::vf00(undefined4 *param_1,byte 
     FUN_00e9d6a0(param_1[0x16]);
     param_1[0x16] = 0xffffffff;
   }
-  Hw::cTexture::cTexture_5();
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  Hw::cTexture::~cTexture();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

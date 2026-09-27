@@ -17,4 +17,6 @@ struct cItemViscelaBase : public cItemObjectBase {
     virtual void vf30C();  // 005EC210 slot 0x30C
     virtual void vf310();  // 005E9390 slot 0x310
     virtual void vf314();  // 00AB6760 slot 0x314
+    // non-virtual members
+    cItemViscelaBase();  // 00AB6700
 };

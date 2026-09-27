@@ -1,14 +1,136 @@
 // src/misc/cDryCellGauge2.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEC1E0..00D426F0, 10 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD2050..00D426F0, 12 functions
 
 #include "mgrr.h"
 #include "cDryCellGauge2.h"
+
+// 00CD2050  cDryCellGauge2::~cDryCellGauge2  size=336  [class]
+void __fastcall cDryCellGauge2::~cDryCellGauge2(undefined4 *param_1)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  
+  *param_1 = vftable;
+  DAT_01dc087c = 0;
+  if (param_1[0xba] != 0) {
+    (**(code **)(param_1[0x94] + 8))(0,0,0);
+  }
+  if ((undefined4 *)param_1[0xf8] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)param_1[0xf8])(1);
+    param_1[0xf8] = 0;
+  }
+  DAT_01dc14f8 = 0;
+  iVar3 = param_1[0x8d];
+  if (iVar3 != 0) {
+    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
+      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
+      *(undefined4 *)(iVar3 + 4) = 0;
+    }
+    param_1[0x8d] = 0;
+  }
+  iVar3 = param_1[0x8e];
+  if (iVar3 != 0) {
+    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
+      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
+      *(undefined4 *)(iVar3 + 4) = 0;
+    }
+    param_1[0x8e] = 0;
+  }
+  iVar3 = param_1[0x8f];
+  if (iVar3 != 0) {
+    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
+      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
+      *(undefined4 *)(iVar3 + 4) = 0;
+    }
+    param_1[0x8f] = 0;
+  }
+  iVar3 = param_1[0xf6];
+  param_1[0xf1] = cCustomObjCtrlManager::vftable;
+  param_1[0xf7] = 0;
+  if (iVar3 != 0) {
+    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
+      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
+      *(undefined4 *)(iVar3 + 4) = 0;
+    }
+    param_1[0xf6] = 0;
+  }
+  iVar3 = 4;
+  puVar2 = param_1 + 0xe6;
+  do {
+    iVar1 = puVar2[-2];
+    puVar2[-7] = cCustomObjCtrlManager::vftable;
+    puVar2[-1] = 0;
+    if (iVar1 != 0) {
+      if ((*(uint *)(iVar1 + 0x24) & 1) == 0) {
+        *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
+        *(undefined4 *)(iVar1 + 4) = 0;
+      }
+      puVar2[-2] = 0;
+    }
+    iVar3 = iVar3 + -1;
+    puVar2 = puVar2 + -7;
+  } while (-1 < iVar3);
+  cEspControler::~cEspControler();
+  iVar3 = param_1[5];
+  *param_1 = cCustomObjCtrlManager::vftable;
+  param_1[6] = 0;
+  if (iVar3 != 0) {
+    if ((*(uint *)(iVar3 + 0x24) & 1) == 0) {
+      *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) | 1;
+      *(undefined4 *)(iVar3 + 4) = 0;
+    }
+    param_1[5] = 0;
+  }
+  return;
+}
+
+// 00CD21A0  FUN_00cd21a0  size=182  [callgraph]
+undefined4 __fastcall FUN_00cd21a0(int param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  
+  uVar3 = 0;
+  switch(*(undefined4 *)(param_1 + 0x1d0)) {
+  case 0:
+    if (*(int *)(param_1 + 0x1cc) != 0) {
+      *(undefined4 *)(param_1 + 0x1cc) = 0;
+      *(undefined4 *)(param_1 + 0x1d0) = 1;
+      return 0;
+    }
+    break;
+  case 1:
+    iVar2 = *(int *)(param_1 + 0x18);
+    uVar1 = DAT_01bea094 >> 0x12;
+    if (((iVar2 != 0) && (*(uint *)(param_1 + 0x90) < *(uint *)(iVar2 + 0x80))) &&
+       (iVar2 = *(uint *)(param_1 + 0x90) * 0x400 + *(int *)(iVar2 + 0x7c), iVar2 != 0)) {
+      *(undefined4 *)(iVar2 + 0x3b0) = 1;
+    }
+    FUN_00ccdf90(*(undefined4 *)(param_1 + 0x90),~uVar1 & 1,3);
+    *(int *)(param_1 + 0x1d0) = *(int *)(param_1 + 0x1d0) + 1;
+    return 0;
+  case 2:
+    iVar2 = FUN_00cb2e50(*(undefined4 *)(param_1 + 0x90));
+    if (iVar2 == 0) {
+      *(int *)(param_1 + 0x1d0) = *(int *)(param_1 + 0x1d0) + 1;
+      return 0;
+    }
+    break;
+  case 3:
+    uVar3 = 1;
+  }
+  return uVar3;
+}
 
 // 00CEC1E0  cDryCellGauge2::vf00  size=30  [class]
 undefined4 __thiscall cDryCellGauge2::vf00(undefined4 param_1,byte param_2)
 
 {
-  cCustomObjCtrlManager::cCustomObjCtrlManager_16();
+  ~cDryCellGauge2();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -1183,10 +1305,10 @@ LAB_00d3bcda:
   return local_4;
 }
 
-// 00D426F0  cDryCellGauge2::vf14  size=3237  [class]
+// 00D426F0  cDryCellGauge2::create  size=3237  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cDryCellGauge2::vf14(int param_1)
+void __fastcall cDryCellGauge2::create(int param_1)
 
 {
   float fVar1;

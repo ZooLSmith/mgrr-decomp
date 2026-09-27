@@ -14,11 +14,11 @@ undefined4 * __fastcall cComboListMenu::cComboListMenu(undefined4 *param_1)
   uint *puVar4;
   int iVar5;
   
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   iVar5 = 8;
   do {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     iVar5 = iVar5 + -1;
   } while (-1 < iVar5);
   param_1[0x93] = 0;
@@ -42,7 +42,7 @@ undefined4 * __fastcall cComboListMenu::cComboListMenu(undefined4 *param_1)
   param_1[0xe0] = 0;
   param_1[0xe1] = 0xffffffff;
   param_1[0xe2] = 0;
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   puVar2 = param_1 + 0x103;
   iVar5 = 0x37;
   do {
@@ -85,13 +85,13 @@ void __fastcall cComboListMenu::~cComboListMenu(undefined4 *param_1)
   }
   FUN_00e9d6a0(param_1[0xe2]);
   FUN_00cfe0f0(8);
-  Hw::cTexture::cTexture_5();
+  Hw::cTexture::~cTexture();
   iVar1 = 8;
   do {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -609,7 +609,7 @@ LAB_009b0f77:
         puVar4 = (undefined4 *)0x0;
       }
       else {
-        cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+        cCustomObjCtrlManager::cCustomObjCtrlManager();
         puVar4[9] = 0;
         *puVar4 = cControllerHelpMenu::vftable;
         puVar4[8] = 0;
@@ -625,7 +625,7 @@ LAB_009b0f77:
         puVar4 = (undefined4 *)0x0;
       }
       else {
-        cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+        cCustomObjCtrlManager::cCustomObjCtrlManager();
         puVar4[0x20] = 0;
         *puVar4 = cKeyConfigHelpMenu::vftable;
         puVar4[0x1f] = 0;
@@ -840,8 +840,8 @@ void __fastcall FUN_009b17a0(int param_1)
   return;
 }
 
-// 009BA4A0  cComboListMenu::vf14  size=671  [class]
-void __fastcall cComboListMenu::vf14(int param_1)
+// 009BA4A0  cComboListMenu::create  size=671  [class]
+void __fastcall cComboListMenu::create(int param_1)
 
 {
   int iVar1;

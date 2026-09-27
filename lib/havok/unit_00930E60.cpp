@@ -26,7 +26,7 @@ undefined4 __fastcall hkpWorldCinfo::hkpWorldCinfo_2(int *param_1)
   int iStack_9c;
   undefined1 local_27;
   
-  hkpWorldCinfo_3();
+  hkpWorldCinfo();
   FUN_011c00b0(1);
   local_f0 = 0;
   uStack_ec = 0xc11ccccd;
@@ -42,7 +42,7 @@ undefined4 __fastcall hkpWorldCinfo::hkpWorldCinfo_2(int *param_1)
   pvVar1 = TlsGetValue(DAT_01f8fc4c);
   iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x380);
   *(undefined2 *)(iVar2 + 4) = 0x380;
-  iVar2 = hkpNullCollisionFilter::hkpNullCollisionFilter_2(appuStack_104,&LAB_0132dbdc);
+  iVar2 = hkpDefaultConvexListFilter::hkpDefaultConvexListFilter(appuStack_104,&LAB_0132dbdc);
   *param_1 = iVar2;
   if (iVar2 == 0) {
     FUN_00dd5650(&DAT_0164e9ac);

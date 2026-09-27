@@ -18,5 +18,6 @@ struct hkpAabbPhantom : public hkpPhantom {
     virtual void vf38();  // 011ACA30 slot 0x38  overrides hkpPhantom
     // non-virtual members
     ~hkpAabbPhantom();  // 011AC9D0
+    hkpAabbPhantom();  // 011ACA90
     hkpAabbPhantom(undefined4 param_2);  // 011B2570
 };

@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "HkPhysicsSystemContainer.h"
 
-// 00904420  HkPhysicsSystemContainer::HkPhysicsSystemContainer_2  size=17  [run]
-void __fastcall HkPhysicsSystemContainer::HkPhysicsSystemContainer_2(undefined4 *param_1)
+// 00904420  HkPhysicsSystemContainer::HkPhysicsSystemContainer  size=17  [run]
+void __fastcall HkPhysicsSystemContainer::HkPhysicsSystemContainer(undefined4 *param_1)
 
 {
   *param_1 = vftable;

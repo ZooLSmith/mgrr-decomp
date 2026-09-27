@@ -16,12 +16,6 @@ struct StateMachineNode {
     virtual undefined4 vf20(undefined4 * param_1);  // 00D82360 slot 0x20
     virtual bool vf24(undefined4 param_1);  // 00D823A0 slot 0x24
     // non-virtual members
-    StateMachineNode();  // 0085F010
-    void ctor_00860270();  // 00860270
-    void ctor_008A4010();  // 008A4010
-    void ctor_008A4A50();  // 008A4A50
-    void ctor_00B81330();  // 00B81330
-    void ctor_00B82010();  // 00B82010
-    void ctor_00B837E0();  // 00B837E0
+    ~StateMachineNode();  // 0085F010
     StateMachineNode(undefined4 param_2);  // 00D82530
 };

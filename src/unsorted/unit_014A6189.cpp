@@ -1444,7 +1444,7 @@ void Unwind_014a7a71(void)
 void Unwind_014a7a94(void)
 
 {
-  std::locale::facet::facet_2();
+  std::locale::facet::~facet();
   return;
 }
 

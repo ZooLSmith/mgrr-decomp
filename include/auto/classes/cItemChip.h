@@ -13,4 +13,6 @@ struct cItemChip : public cItemObjectBase {
     virtual void vf48();  // 005ED1A0 slot 0x48  overrides Behavior
     virtual void vf50();  // 005EBAB0 slot 0x50  overrides Behavior
     virtual void vf54();  // 005EA830 slot 0x54  overrides Behavior
+    // non-virtual members
+    cItemChip();  // 00AB1490
 };

@@ -69,7 +69,7 @@ void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)
             (0,0xffffffff,local_398,
              "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\GeometryUtilities\\Mesh\\Skin\\hkSkinnedMeshShape.cpp"
              ,0x3d);
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   FUN_010262e0(&local_198,"Num bone sections: %d. Num parts: %d.",iVar2,local_30);
   hkErrStream::hkErrStream(local_398,0x200);
   FUN_010192f0(&local_198);
@@ -77,7 +77,7 @@ void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)
             (0,0xffffffff,local_398,
              "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\GeometryUtilities\\Mesh\\Skin\\hkSkinnedMeshShape.cpp"
              ,0x3f);
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   local_20 = 0;
   if (0 < iVar2) {
     do {
@@ -97,7 +97,7 @@ void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)
                 (0,0xffffffff,local_398,
                  "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\GeometryUtilities\\Mesh\\Skin\\hkSkinnedMeshShape.cpp"
                  ,0x4a);
-      hkBaseObject::hkBaseObject_38();
+      ::hkBaseObject::hkBaseObject_38();
       local_24 = 0;
       if (0 < local_30) {
         do {
@@ -114,7 +114,7 @@ void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)
                       (0,0xffffffff,local_398,
                        "D:\\project\\PRJ_012\\p1\\common\\mw\\hk2011_3_0_r1\\Source\\Common\\GeometryUtilities\\Mesh\\Skin\\hkSkinnedMeshShape.cpp"
                        ,0x59);
-            hkBaseObject::hkBaseObject_38();
+            ::hkBaseObject::hkBaseObject_38();
             piVar5 = local_e8;
             local_8c = local_7c;
             local_90 = local_80;
@@ -147,7 +147,7 @@ void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)
                 hkErrStream::hkErrStream(local_598,0x200);
                 FUN_010192f0();
                 (**(code **)(*DAT_01f8fc58 + 0xc))();
-                hkBaseObject::hkBaseObject_38();
+                ::hkBaseObject::hkBaseObject_38();
                 iVar2 = iVar2 + 1;
                 iVar6 = iVar6 + 0x10;
                 piVar5 = local_3c;
@@ -166,7 +166,7 @@ void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)
                   hkErrStream::hkErrStream();
                   FUN_010192f0(&local_198);
                   (**(code **)(*DAT_01f8fc58 + 0xc))();
-                  hkBaseObject::hkBaseObject_38();
+                  ::hkBaseObject::hkBaseObject_38();
                   iVar6 = iVar6 + 3;
                 } while (iVar6 < local_74);
               }
@@ -180,7 +180,7 @@ void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)
                 hkErrStream::hkErrStream();
                 FUN_010192f0(&local_198);
                 (**(code **)(*DAT_01f8fc58 + 0xc))();
-                hkBaseObject::hkBaseObject_38();
+                ::hkBaseObject::hkBaseObject_38();
                 iVar6 = iVar6 + 3;
               } while (iVar6 < local_74);
             }

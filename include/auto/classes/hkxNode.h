@@ -9,7 +9,6 @@ struct hkxNode : public hkxAttributeHolder {
     virtual undefined4 * vf00(byte param_2);  // 010CE940 slot 0x0  overrides hkBaseObject
     // non-virtual members
     ~hkxNode();  // 010CE370
-    hkxNode(undefined4 * param_1, undefined4 param_2);  // 010D0600
     hkxNode();  // 010D0630
     hkxNode(undefined4 param_2);  // 010D06F0
 };

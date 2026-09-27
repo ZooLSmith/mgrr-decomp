@@ -9,8 +9,4 @@ struct EspPrimitiveWorkTileBase : public EspPrimitiveWorkBase {
     virtual undefined4 * vf00(byte param_2);  // 00F59510 slot 0x0  overrides EspPrimitiveWorkBase
     virtual void vf08();  // 00F4F910 slot 0x8  overrides EspPrimitiveWorkBase
     virtual void vf0C(int param_2);  // 00F4F940 slot 0xC  overrides EspPrimitiveWorkBase
-    // non-virtual members
-    EspPrimitiveWorkTileBase();  // 00F4FBE0
-    void ctor_00F4FC80();  // 00F4FC80
-    void ctor_00F4FD20();  // 00F4FD20
 };

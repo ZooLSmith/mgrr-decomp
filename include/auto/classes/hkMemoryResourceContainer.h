@@ -19,6 +19,6 @@ struct hkMemoryResourceContainer : public hkResourceContainer {
     virtual int vf34(int param_2, int param_3);  // 01110800 slot 0x34  overrides hkResourceContainer
     virtual undefined4 vf38(int * param_2);  // 01111200 slot 0x38  overrides hkResourceContainer
     // non-virtual members
-    ~hkMemoryResourceContainer();  // 01111720
-    hkMemoryResourceContainer();  // 01111770
+    hkMemoryResourceContainer();  // 01111720
+    void ctor_01111770();  // 01111770
 };

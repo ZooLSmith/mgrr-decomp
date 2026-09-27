@@ -1,8 +1,15 @@
 // src/file/cXmlBinary.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CC40..00FB2B80, 761 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CC30..00FB2B80, 838 functions
 
 #include "mgrr.h"
 #include "cXmlBinary.h"
+
+// 0049CC30  cXmlBinary::vf08  size=9  [class]
+bool __fastcall cXmlBinary::vf08(int param_1)
+
+{
+  return *(int *)(param_1 + 0xc) != 0;
+}
 
 // 0049CC40  cXmlBinary::vf00  size=42  [class]
 undefined4 * __thiscall cXmlBinary::vf00(undefined4 *param_1,byte param_2)
@@ -38,16 +45,16 @@ void __fastcall cXmlBinary::cXmlBinary_62(int param_1)
   iVar2 = FUN_00d46690(1);
   iVar6 = 0;
   if (iVar2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar2,0);
     if (local_14 == 0) {
       local_20 = vftable;
       FUN_00e04180();
       return;
     }
-    uVar3 = FUN_00e041c0();
-    uVar3 = FUN_00e06390(uVar3,"POINTLIST");
-    iVar2 = FUN_00e053e0(uVar3);
+    uVar3 = vf04();
+    uVar3 = vf18(uVar3,"POINTLIST");
+    iVar2 = vf10(uVar3);
     local_34 = 0;
     local_30 = (undefined4 *)0x0;
     local_2c = 0;
@@ -63,8 +70,8 @@ void __fastcall cXmlBinary::cXmlBinary_62(int param_1)
     if (0 < iVar2) {
       iVar5 = 0;
       do {
-        uVar4 = FUN_00e05410(uVar3,iVar6);
-        FUN_00e06a30(uVar4,iVar5 + (int)local_30);
+        uVar4 = vf14(uVar3,iVar6);
+        vf48(uVar4,iVar5 + (int)local_30);
         iVar6 = iVar6 + 1;
         iVar5 = iVar5 + 0xc;
       } while (iVar6 < iVar2);
@@ -309,49 +316,49 @@ void __thiscall cXmlBinary::cXmlBinary_13(int *param_1,int param_2)
       param_1[0x288] = 0x3d4ccccd;
       iVar2 = FUN_00de4550("P_Param.bxm",0);
       if (iVar2 != 0) {
-        cXmlBinary_103();
+        cXmlBinary();
         FUN_00e062b0(iVar2,0);
-        iVar2 = FUN_00e041c0();
+        iVar2 = vf04();
         if (iVar2 != -1) {
-          iVar7 = FUN_00e06390(iVar2,"SunDownerLen");
+          iVar7 = vf18(iVar2,"SunDownerLen");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x280);
+            vf54(iVar7,param_1 + 0x280);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerLenHigh");
+          iVar7 = vf18(iVar2,"SunDownerLenHigh");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x281);
+            vf54(iVar7,param_1 + 0x281);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerMoveMotSpeed");
+          iVar7 = vf18(iVar2,"SunDownerMoveMotSpeed");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x282);
+            vf54(iVar7,param_1 + 0x282);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerRunAdd");
+          iVar7 = vf18(iVar2,"SunDownerRunAdd");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x283);
+            vf54(iVar7,param_1 + 0x283);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerJumpMax");
+          iVar7 = vf18(iVar2,"SunDownerJumpMax");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x285);
+            vf54(iVar7,param_1 + 0x285);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerJumpMin");
+          iVar7 = vf18(iVar2,"SunDownerJumpMin");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x286);
+            vf54(iVar7,param_1 + 0x286);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerDivideRate");
+          iVar7 = vf18(iVar2,"SunDownerDivideRate");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x284);
+            vf54(iVar7,param_1 + 0x284);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerStartRate");
+          iVar7 = vf18(iVar2,"SunDownerStartRate");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x287);
+            vf54(iVar7,param_1 + 0x287);
           }
-          iVar7 = FUN_00e06390(iVar2,"SunDownerSubRate");
+          iVar7 = vf18(iVar2,"SunDownerSubRate");
           if (iVar7 != -1) {
-            FUN_00e06970(iVar7,param_1 + 0x288);
+            vf54(iVar7,param_1 + 0x288);
           }
-          iVar2 = FUN_00e06390(iVar2,"SunDownerCamWait");
+          iVar2 = vf18(iVar2,"SunDownerCamWait");
           if (iVar2 != -1) {
-            FUN_00e06970(iVar2,param_1 + 0x289);
+            vf54(iVar2,param_1 + 0x289);
           }
         }
         local_c8 = vftable;
@@ -444,23 +451,23 @@ void cXmlBinary::cXmlBinary_74(int param_1,short param_2,char *param_3,short par
   byte abStack_40 [64];
   
   if (param_1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_1,0);
-    uVar3 = FUN_00e041c0();
-    uVar3 = FUN_00e06390(uVar3,"DamageRigidList");
+    uVar3 = vf04();
+    uVar3 = vf18(uVar3,"DamageRigidList");
     iVar8 = 0;
-    iVar4 = FUN_00e053e0(uVar3);
+    iVar4 = vf10(uVar3);
     if (0 < iVar4) {
       bVar2 = (byte)param_4;
       do {
-        uVar5 = FUN_00e05410(uVar3,iVar8);
+        uVar5 = vf14(uVar3,iVar8);
         iVar4 = (**(code **)(local_60 + 0x9c))(uVar5,&DAT_0164a424);
         if (iVar4 != -1) {
           (**(code **)(local_60 + 0xec))(iVar4,&param_4);
         }
         if (param_4 == param_2) {
-          uVar5 = FUN_00e06390(uVar5,"Comment");
-          FUN_00e066f0(uVar5,abStack_40,0x40);
+          uVar5 = vf18(uVar5,"Comment");
+          vf74(uVar5,abStack_40,0x40);
           pbVar7 = &DAT_016416fa;
           pbVar6 = abStack_40;
           do {
@@ -485,7 +492,7 @@ LAB_00928f95:
           }
         }
         iVar8 = iVar8 + 1;
-        iVar4 = FUN_00e053e0(uVar3);
+        iVar4 = vf10(uVar3);
       } while (iVar8 < iVar4);
     }
     FUN_00e04180();
@@ -509,9 +516,9 @@ cXmlBinary::cXmlBinary_58(int param_1,int param_2,undefined4 param_3,undefined4 
   
   iVar1 = param_2;
   if (param_2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 == -1) {
       FUN_00e04180();
       return;
@@ -521,9 +528,9 @@ cXmlBinary::cXmlBinary_58(int param_1,int param_2,undefined4 param_3,undefined4 
     uVar5 = 0;
     do {
       param_2 = -1;
-      iVar2 = FUN_00e05410(iVar1,uVar5);
-      if ((iVar2 != -1) && (iVar2 = FUN_00e05410(iVar2,0), iVar2 != -1)) {
-        FUN_00e06930(iVar2,&param_2);
+      iVar2 = vf14(iVar1,uVar5);
+      if ((iVar2 != -1) && (iVar2 = vf14(iVar2,0), iVar2 != -1)) {
+        vf58(iVar2,&param_2);
       }
       if (((param_2 != -1) && (*piVar7 == 0)) &&
          (iVar2 = FUN_00de4550("_col.hkx",param_2), iVar2 != 0)) {
@@ -532,7 +539,7 @@ cXmlBinary::cXmlBinary_58(int param_1,int param_2,undefined4 param_3,undefined4 
           iVar2 = 0;
         }
         else {
-          iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+          iVar2 = RigidBodyCollision::RigidBodyCollision();
         }
         *piVar7 = iVar2;
         if (param_1 == -0x800) {
@@ -1028,10 +1035,10 @@ undefined4 __thiscall cXmlBinary::cXmlBinary(int *param_1,undefined4 *param_2)
   undefined4 local_24;
   undefined **local_20 [8];
   
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_2,0);
-  uVar2 = FUN_00e041c0();
-  uVar3 = FUN_00e053e0(uVar2);
+  uVar2 = vf04();
+  uVar3 = vf10(uVar2);
   if (uVar3 != 0) {
     param_2 = &DAT_01b7bd48;
     cVar1 = FUN_0093b860(uVar3,&param_2);
@@ -1039,7 +1046,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary(int *param_1,undefined4 *param_2)
       uVar4 = 0;
       if (uVar3 != 0) {
         do {
-          local_24 = FUN_00e05410(uVar2,uVar4);
+          local_24 = vf14(uVar2,uVar4);
           param_2 = (undefined4 *)FUN_00dd3500(0x20,&DAT_01b7bd48);
           if (param_2 == (undefined4 *)0x0) {
             param_2 = (undefined4 *)0x0;
@@ -1142,20 +1149,20 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_75(int *param_1,undefined4 *param_2
   if (param_2 == (undefined4 *)0x0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(iVar2,0);
   if (param_1[1] != 0) {
     param_1[2] = 0;
   }
   FUN_00948cf0();
-  iVar2 = FUN_00e041c0();
+  iVar2 = vf04();
   if (iVar2 != -1) {
-    uVar3 = FUN_00e053e0(iVar2);
+    uVar3 = vf10(iVar2);
     param_2 = &DAT_01b7bd48;
     cVar1 = FUN_00948d60(uVar3,&param_2);
     if ((cVar1 == '\x01') && (uVar7 = 0, uVar3 != 0)) {
       do {
-        local_24 = FUN_00e05410(iVar2,uVar7);
+        local_24 = vf14(iVar2,uVar7);
         iVar4 = FUN_00dd3500(0x90,&DAT_01b7bd48);
         if (iVar4 == 0) {
           param_2 = (undefined4 *)0x0;
@@ -2003,9 +2010,9 @@ void cXmlBinary::cXmlBinary_65(void)
   
   iVar1 = FUN_00de4500("ItemGenericParam.bxm");
   if (iVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    local_24 = FUN_00e041c0();
+    local_24 = vf04();
     FUN_0094ae80(local_20,&local_24);
     FUN_0094b1f0(local_20,&local_24);
     FUN_0094b2f0(local_20,&local_24);
@@ -2016,9 +2023,9 @@ void cXmlBinary::cXmlBinary_65(void)
     FUN_00e04180();
     iVar1 = FUN_00de4500("ItemCureParam.bxm");
     if (iVar1 != 0) {
-      cXmlBinary_103();
+      cXmlBinary();
       FUN_00e062b0(iVar1,0);
-      local_24 = FUN_00e041c0();
+      local_24 = vf04();
       FUN_0094ac80(local_20,&local_24);
       local_20[0] = vftable;
       FUN_00e04180();
@@ -2816,17 +2823,17 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_45(int *param_1,int *param_2,int pa
   if (param_2 == (int *)0x0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(piVar6,0);
-  uVar4 = FUN_00e041c0();
-  iVar5 = FUN_00e06390(uVar4,"InstaList");
+  uVar4 = vf04();
+  iVar5 = vf18(uVar4,"InstaList");
   local_28 = iVar5;
   if (iVar5 != -1) {
-    local_24 = FUN_00e053e0(iVar5);
+    local_24 = vf10(iVar5);
     iVar8 = 0;
     if (0 < local_24) {
       do {
-        local_2c = FUN_00e05410(iVar5,iVar8);
+        local_2c = vf14(iVar5,iVar8);
         iVar5 = FUN_00dd3500(0x80,&DAT_01b7bd48);
         if (iVar5 == 0) {
           param_2 = (int *)0x0;
@@ -3289,9 +3296,9 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_38(int *param_1,undefined4 *param_2
   undefined **local_24;
   undefined1 local_20 [32];
   
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_2,0);
-  local_24 = (undefined **)FUN_00e041c0();
+  local_24 = (undefined **)vf04();
   param_2 = (undefined4 *)FUN_00dd3500(0x10,&DAT_01b7bd48);
   if (param_2 == (undefined4 *)0x0) {
     param_2 = (undefined4 *)0x0;
@@ -4033,10 +4040,10 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_59(int *param_1)
   if (iVar2 == 0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(iVar2,0);
-  uVar3 = FUN_00e041c0();
-  uVar4 = FUN_00e053e0(uVar3);
+  uVar3 = vf04();
+  uVar4 = vf10(uVar3);
   if (uVar4 != 0) {
     local_28 = &DAT_01b7bcf0;
     cVar1 = FUN_00955980(uVar4,&local_28);
@@ -4044,7 +4051,7 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_59(int *param_1)
       uVar5 = 0;
       if (uVar4 != 0) {
         do {
-          local_28 = (undefined4 *)FUN_00e05410(uVar3,uVar5);
+          local_28 = (undefined4 *)vf14(uVar3,uVar5);
           local_24 = FUN_00dd3500(0x48,&DAT_01b7bcf0);
           FUN_0094cb90(local_20,&local_28);
           (**(code **)(*param_1 + 8))(&local_24);
@@ -4080,10 +4087,10 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_60(int param_1,undefined4 *param_2)
   if (iVar2 == 0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(iVar2,0);
-  uVar3 = FUN_00e041c0();
-  uVar4 = FUN_00e053e0(uVar3);
+  uVar3 = vf04();
+  uVar4 = vf10(uVar3);
   if (uVar4 != 0) {
     param_2 = &DAT_01b7bcf0;
     cVar1 = FUN_00955980(uVar4,&param_2);
@@ -4091,7 +4098,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_60(int param_1,undefined4 *param_2)
       uVar5 = 0;
       if (uVar4 != 0) {
         do {
-          param_2 = (undefined4 *)FUN_00e05410(uVar3,uVar5);
+          param_2 = (undefined4 *)vf14(uVar3,uVar5);
           local_24 = FUN_00dd3500(0x48,&DAT_01b7bcf0);
           FUN_0094cb90(local_20,&param_2);
           (**(code **)(*(int *)(param_1 + 0x18) + 8))(&local_24);
@@ -4257,10 +4264,10 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_55(int *param_1,undefined4 *param_2
   undefined4 local_24;
   undefined **local_20 [8];
   
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_2,0);
-  uVar2 = FUN_00e041c0();
-  uVar3 = FUN_00e053e0(uVar2);
+  uVar2 = vf04();
+  uVar3 = vf10(uVar2);
   if (uVar3 != 0) {
     param_2 = &DAT_01b7bd48;
     cVar1 = FUN_00955a80(uVar3,&param_2);
@@ -4272,7 +4279,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_55(int *param_1,undefined4 *param_2
     uVar5 = 0;
     if (uVar3 != 0) {
       do {
-        local_24 = FUN_00e05410(uVar2,uVar5);
+        local_24 = vf14(uVar2,uVar5);
         iVar4 = FUN_00dd3500(0x2c,&DAT_01b7bd48);
         if (iVar4 == 0) {
           param_2 = (undefined4 *)0x0;
@@ -4654,16 +4661,16 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_14(int *param_1,undefined4 *param_2
   
   puVar1 = param_2;
   if (param_2 != (undefined4 *)0x0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(puVar1,0);
-    uVar2 = FUN_00e041c0();
-    iVar3 = FUN_00e06390(uVar2,"QTEList");
+    uVar2 = vf04();
+    iVar3 = vf18(uVar2,"QTEList");
     if (iVar3 != -1) {
-      iVar4 = FUN_00e053e0(iVar3);
+      iVar4 = vf10(iVar3);
       iVar5 = 0;
       if (0 < iVar4) {
         do {
-          local_24 = FUN_00e05410(iVar3,iVar5);
+          local_24 = vf14(iVar3,iVar5);
           param_2 = (undefined4 *)FUN_00dd3500(0x30,&DAT_01b7bd48);
           if (param_2 == (undefined4 *)0x0) {
             param_2 = (undefined4 *)0x0;
@@ -4744,35 +4751,35 @@ void __fastcall cXmlBinary::cXmlBinary_79(int param_1)
 LAB_0098d545:
   iVar4 = FUN_00de4500(local_20);
   if (iVar4 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar4,0);
-    iVar4 = FUN_00e041c0();
+    iVar4 = vf04();
     if (iVar4 != -1) {
-      iVar5 = FUN_00e053e0(iVar4);
+      iVar5 = vf10(iVar4);
       local_64 = 0;
       if (0 < iVar5) {
         do {
-          iVar6 = FUN_00e05410(iVar4,local_64);
+          iVar6 = vf14(iVar4,local_64);
           if (iVar6 != -1) {
             local_50 = -1;
             local_4c = -1;
             local_48 = 0;
             local_44 = -1;
-            iVar7 = FUN_00e06390(iVar6,&DAT_0164fcc8);
+            iVar7 = vf18(iVar6,&DAT_0164fcc8);
             if (iVar7 != -1) {
-              FUN_00e06930(iVar7,&local_50);
+              vf58(iVar7,&local_50);
             }
-            iVar7 = FUN_00e06390(iVar6,&DAT_01655cd0);
+            iVar7 = vf18(iVar6,&DAT_01655cd0);
             if (iVar7 != -1) {
-              FUN_00e06930(iVar7,&local_4c);
+              vf58(iVar7,&local_4c);
             }
-            iVar7 = FUN_00e06390(iVar6,"ExFlag");
+            iVar7 = vf18(iVar6,"ExFlag");
             if (iVar7 != -1) {
-              FUN_00e06930(iVar7,&local_48);
+              vf58(iVar7,&local_48);
             }
-            iVar6 = FUN_00e06390(iVar6,"ShopNo");
+            iVar6 = vf18(iVar6,"ShopNo");
             if (iVar6 != -1) {
-              FUN_00e06930(iVar6,&local_44);
+              vf58(iVar6,&local_44);
             }
             if (*(int *)(param_1 + 600) != -1) {
               if (local_50 == 0) {
@@ -5116,7 +5123,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_50(int param_1,short param_2)
   undefined **local_20 [8];
   
   local_2c = 0;
-  cXmlBinary_103();
+  cXmlBinary();
   local_24 = DAT_018b92f4;
   local_28 = DAT_018b92f0;
   iVar1 = FUN_00de4550("Customize_Info.bxm",0);
@@ -5128,16 +5135,16 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_50(int param_1,short param_2)
   }
   FUN_00e062b0(iVar1,0);
   uVar2 = FUN_00990340(local_20,*(undefined4 *)(param_1 + 0x358));
-  iVar1 = FUN_00e053e0(uVar2);
+  iVar1 = vf10(uVar2);
   iVar5 = 0;
   if (0 < iVar1) {
     do {
-      uVar3 = FUN_00e05410(uVar2,iVar5);
-      uVar4 = FUN_00e06390(uVar3,&DAT_01655cd0);
-      FUN_00e068f0(uVar4,local_30);
+      uVar3 = vf14(uVar2,iVar5);
+      uVar4 = vf18(uVar3,&DAT_01655cd0);
+      vf5C(uVar4,local_30);
       if (local_30[0] == param_2) {
-        uVar2 = FUN_00e06390(uVar3,"Price");
-        FUN_00e06930(uVar2,&local_2c);
+        uVar2 = vf18(uVar3,"Price");
+        vf58(uVar2,&local_2c);
         break;
       }
       iVar5 = iVar5 + 1;
@@ -5204,7 +5211,7 @@ void __thiscall cXmlBinary::cXmlBinary_57(int param_1,int param_2)
   char local_30 [16];
   undefined **local_20;
   
-  cXmlBinary_103();
+  cXmlBinary();
   uVar4 = FUN_00a4d610();
   FUN_00a4c830(uVar4);
   iVar5 = FUN_00de4550("VR_Mission_Data.bxm",0);
@@ -5215,8 +5222,8 @@ void __thiscall cXmlBinary::cXmlBinary_57(int param_1,int param_2)
     return;
   }
   FUN_00e062b0(iVar5,0);
-  uVar4 = FUN_00e041c0();
-  iVar5 = FUN_00e053e0(uVar4);
+  uVar4 = vf04();
+  iVar5 = vf10(uVar4);
   if (iVar5 <= param_2) {
     _sprintf_s(local_30,0x10,"%02d:%02d.%02d",0,0,0);
     FUN_00cce090(*(undefined4 *)(param_1 + 0x530),local_30);
@@ -5231,19 +5238,19 @@ void __thiscall cXmlBinary::cXmlBinary_57(int param_1,int param_2)
     FUN_00e04180();
     return;
   }
-  uVar4 = FUN_00e05410(uVar4,param_2);
-  uVar4 = FUN_00e06390(uVar4,&DAT_01651108);
+  uVar4 = vf14(uVar4,param_2);
+  uVar4 = vf18(uVar4,&DAT_01651108);
   local_44 = (char *)0x0;
-  uVar6 = FUN_00e05410(uVar4,0);
-  FUN_00e066f0(uVar6,local_40,0x10);
+  uVar6 = vf14(uVar4,0);
+  vf74(uVar6,local_40,0x10);
   pcVar7 = _strtok_s(local_40,".",&local_44);
   cVar1 = FUN_00fdd33b(pcVar7);
   pcVar7 = _strtok_s((char *)0x0,".",&local_44);
   cVar2 = FUN_00fdd33b(pcVar7);
   cVar3 = FUN_00fdd33b(local_44);
   FUN_00995910(1,(int)cVar1,(int)cVar2,(int)cVar3);
-  uVar6 = FUN_00e05410(uVar4,1);
-  FUN_00e066f0(uVar6,local_40,0x10);
+  uVar6 = vf14(uVar4,1);
+  vf74(uVar6,local_40,0x10);
   pcVar7 = _strtok_s(local_40,".",&local_44);
   cVar1 = FUN_00fdd33b(pcVar7);
   pcVar7 = _strtok_s((char *)0x0,".",&local_44);
@@ -5257,8 +5264,8 @@ void __thiscall cXmlBinary::cXmlBinary_57(int param_1,int param_2)
   }
   FUN_00cce090(*(undefined4 *)(param_1 + 0x538),local_30);
   FUN_00cce090(*(undefined4 *)(param_1 + 0x53c),local_30);
-  uVar4 = FUN_00e05410(uVar4,2);
-  FUN_00e066f0(uVar4,local_40,0x10);
+  uVar4 = vf14(uVar4,2);
+  vf74(uVar4,local_40,0x10);
   pcVar7 = _strtok_s(local_40,".",&local_44);
   cVar1 = FUN_00fdd33b(pcVar7);
   pcVar7 = _strtok_s((char *)0x0,".",&local_44);
@@ -5290,7 +5297,7 @@ float10 cXmlBinary::cXmlBinary_61(int param_1,int param_2)
   char local_30 [16];
   undefined **local_20;
   
-  cXmlBinary_103();
+  cXmlBinary();
   uVar1 = FUN_00a4d610();
   FUN_00a4c830(uVar1);
   iVar2 = FUN_00de4550("VR_Mission_Data.bxm",0);
@@ -5301,18 +5308,18 @@ float10 cXmlBinary::cXmlBinary_61(int param_1,int param_2)
     return (float10)0;
   }
   FUN_00e062b0(iVar2,0);
-  uVar1 = FUN_00e041c0();
-  iVar2 = FUN_00e053e0(uVar1);
+  uVar1 = vf04();
+  iVar2 = vf10(uVar1);
   if (iVar2 <= param_1) {
     local_20 = vftable;
     FUN_00e04180();
     return (float10)0;
   }
-  uVar1 = FUN_00e05410(uVar1,param_1);
-  uVar1 = FUN_00e06390(uVar1,&DAT_01651108);
+  uVar1 = vf14(uVar1,param_1);
+  uVar1 = vf18(uVar1,&DAT_01651108);
   local_34 = (char *)0x0;
-  uVar1 = FUN_00e05410(uVar1,param_2 + -1);
-  FUN_00e066f0(uVar1,local_30,0x10);
+  uVar1 = vf14(uVar1,param_2 + -1);
+  vf74(uVar1,local_30,0x10);
   pcVar3 = _strtok_s(local_30,".",&local_34);
   iVar2 = FUN_00fdd33b(pcVar3);
   pcVar3 = _strtok_s((char *)0x0,".",&local_34);
@@ -5372,7 +5379,7 @@ void __thiscall cXmlBinary::cXmlBinary_56(int param_1,int param_2)
   undefined1 local_30 [16];
   undefined **local_20;
   
-  cXmlBinary_103();
+  cXmlBinary();
   uVar1 = FUN_00a4d610();
   FUN_00a4c830(uVar1);
   iVar2 = FUN_00de4550("VR_Mission_Data.bxm",0);
@@ -5383,12 +5390,12 @@ void __thiscall cXmlBinary::cXmlBinary_56(int param_1,int param_2)
     return;
   }
   FUN_00e062b0(iVar2,0);
-  uVar1 = FUN_00e041c0();
-  iVar2 = FUN_00e053e0(uVar1);
+  uVar1 = vf04();
+  iVar2 = vf10(uVar1);
   if (param_2 < iVar2) {
-    uVar1 = FUN_00e05410(uVar1,param_2);
-    uVar1 = FUN_00e06390(uVar1,"Objectiv");
-    FUN_00e066f0(uVar1,local_30,0x10);
+    uVar1 = vf14(uVar1,param_2);
+    uVar1 = vf18(uVar1,"Objectiv");
+    vf74(uVar1,local_30,0x10);
     FUN_00cf9770(*(undefined4 *)(param_1 + 0x504),local_30,0,0xffffffff);
     FUN_00cb2310(*(undefined4 *)(param_1 + 0x504),1);
   }
@@ -5418,7 +5425,7 @@ void cXmlBinary::cXmlBinary_17(void)
   undefined4 local_24;
   undefined **local_20;
   
-  cXmlBinary_103();
+  cXmlBinary();
   local_24 = DAT_018b92f4;
   local_28 = DAT_018b92f0;
   iVar2 = FUN_00de4550("Customize_Info.bxm",0);
@@ -5429,23 +5436,23 @@ void cXmlBinary::cXmlBinary_17(void)
     return;
   }
   FUN_00e062b0(iVar2,0);
-  uVar3 = FUN_00e041c0();
+  uVar3 = vf04();
   local_34 = uVar3;
-  local_2c = FUN_00e053e0(uVar3);
+  local_2c = vf10(uVar3);
   local_38 = 0;
   if (0 < local_2c) {
     do {
       iVar2 = local_38;
-      uVar3 = FUN_00e05410(uVar3,local_38);
-      local_30 = FUN_00e053e0(uVar3);
+      uVar3 = vf14(uVar3,local_38);
+      local_30 = vf10(uVar3);
       if (0 < local_30) {
         iVar7 = 0;
         do {
-          uVar4 = FUN_00e05410(uVar3,iVar7);
-          uVar5 = FUN_00e06390(uVar4,"UnLock");
-          FUN_00e068f0(uVar5,local_3c);
-          uVar4 = FUN_00e06390(uVar4,&DAT_01655cd0);
-          FUN_00e068f0(uVar4,local_40);
+          uVar4 = vf14(uVar3,iVar7);
+          uVar5 = vf18(uVar4,"UnLock");
+          vf5C(uVar5,local_3c);
+          uVar4 = vf18(uVar4,&DAT_01655cd0);
+          vf5C(uVar4,local_40);
           if (local_3c[0] == -1) {
 LAB_0099fa3f:
             uVar6 = (uint)local_40[0];
@@ -5532,7 +5539,7 @@ void __thiscall cXmlBinary::cXmlBinary_25(int param_1,int param_2,int param_3)
   undefined2 uStack_3;
   undefined1 uStack_1;
   
-  cXmlBinary_103();
+  cXmlBinary();
   iVar1 = FUN_00de4550("Customize_Info.bxm",0);
   uVar3 = param_3;
   if (iVar1 == 0) {
@@ -5637,7 +5644,7 @@ void __thiscall cXmlBinary::cXmlBinary_25(int param_1,int param_2,int param_3)
     }
   }
   FUN_00e062b0(iVar1,0);
-  uVar2 = FUN_00e041c0();
+  uVar2 = vf04();
   uVar4 = 0xffffffff;
   switch(uVar3) {
   case 0:
@@ -5655,7 +5662,7 @@ void __thiscall cXmlBinary::cXmlBinary_25(int param_1,int param_2,int param_3)
   default:
     goto switchD_009a010c_default;
   }
-  uVar4 = FUN_00e06390(uVar2,pcVar6);
+  uVar4 = vf18(uVar2,pcVar6);
 switchD_009a010c_default:
   uStack_20 = 0;
   uStack_1f = 0;
@@ -5667,15 +5674,15 @@ switchD_009a010c_default:
   uStack_7 = 0;
   uStack_3 = 0;
   uStack_1 = 0;
-  param_3 = FUN_00e053e0(uVar4);
+  param_3 = vf10(uVar4);
   iVar1 = 0;
   if (0 < param_3) {
     do {
-      uVar3 = FUN_00e05410(uVar4,iVar1);
-      uVar2 = FUN_00e06390(uVar3,&DAT_01655cd0);
-      FUN_00e068f0(uVar2,&param_2);
+      uVar3 = vf14(uVar4,iVar1);
+      uVar2 = vf18(uVar3,&DAT_01655cd0);
+      vf5C(uVar2,&param_2);
       if ((short)param_2 == sVar5) {
-        uVar3 = FUN_00e06390(uVar3,&DAT_016511c4);
+        uVar3 = vf18(uVar3,&DAT_016511c4);
         (**(code **)(local_40 + 0x74))(uVar3,&uStack_20,0x20);
         FUN_00ce4d70(8);
         break;
@@ -5812,7 +5819,7 @@ void cXmlBinary::cXmlBinary_24(int param_1,undefined4 param_2,undefined4 param_3
     }
   }
   FUN_00e062b0(in_EAX,0);
-  uVar1 = FUN_00e041c0();
+  uVar1 = vf04();
   uVar3 = 0xffffffff;
   switch(uVar2) {
   case 0:
@@ -5830,7 +5837,7 @@ void cXmlBinary::cXmlBinary_24(int param_1,undefined4 param_2,undefined4 param_3
   default:
     goto switchD_009a010c_default;
   }
-  uVar3 = FUN_00e06390(uVar1,pcVar6);
+  uVar3 = vf18(uVar1,pcVar6);
 switchD_009a010c_default:
   in_stack_00000030 = 0;
   uStack00000031 = 0;
@@ -5842,16 +5849,16 @@ switchD_009a010c_default:
   uStack00000049 = 0;
   uStack0000004d = 0;
   uStack0000004f = 0;
-  in_stack_00000058 = FUN_00e053e0(uVar3);
+  in_stack_00000058 = vf10(uVar3);
   iVar5 = 0;
   if (0 < in_stack_00000058) {
     do {
-      uVar2 = FUN_00e05410(uVar3,iVar5);
-      uVar1 = FUN_00e06390(uVar2,&DAT_01655cd0);
-      FUN_00e068f0(uVar1,&stack0x00000054);
+      uVar2 = vf14(uVar3,iVar5);
+      uVar1 = vf18(uVar2,&DAT_01655cd0);
+      vf5C(uVar1,&stack0x00000054);
       unaff_EDI = param_1;
       if (sStack00000054 == sVar4) {
-        uVar2 = FUN_00e06390(uVar2,&DAT_016511c4);
+        uVar2 = vf18(uVar2,&DAT_016511c4);
         (**(code **)(param_4 + 0x74))(uVar2,&stack0x00000030,0x20);
         FUN_00ce4d70(8);
         break;
@@ -5862,25 +5869,6 @@ switchD_009a010c_default:
   FUN_00cf9770(*(undefined4 *)(unaff_EDI + 0x38),&stack0x00000030,0,0xffffffff);
   FUN_00cf9770(*(undefined4 *)(unaff_EDI + 0x3c),&stack0x00000030,0,0xffffffff);
   FUN_00e04180();
-  return;
-}
-
-// 009A0BE0  FUN_009a0be0  size=171  [callgraph]
-void __thiscall FUN_009a0be0(int param_1,byte param_2)
-
-{
-  undefined4 uVar1;
-  
-  if (param_2 < 0xf) {
-    uVar1 = FUN_00e03ea0("c_item_01");
-    FUN_00cb2ce0(*(undefined4 *)(param_1 + 0x2f0),uVar1);
-    FUN_00cb2310(*(undefined4 *)(param_1 + 0x310),0);
-    FUN_00cb2310(*(undefined4 *)(param_1 + 0x314),0);
-    FUN_00cb2310(*(undefined4 *)(param_1 + 0x2f8),0);
-    FUN_00cb2310(*(undefined4 *)(param_1 + 0x304),1);
-    FUN_00cce090(*(undefined4 *)(param_1 + 0x308),&DAT_016416fa);
-    FUN_00cf9770(*(undefined4 *)(param_1 + 0x30c),&DAT_016416fa,0,0xffffffff);
-  }
   return;
 }
 
@@ -5905,7 +5893,7 @@ void __thiscall cXmlBinary::cXmlBinary_89(int param_1,short param_2)
   char local_40 [32];
   char local_20 [32];
   
-  cXmlBinary_103();
+  cXmlBinary();
   local_74 = DAT_018b92f4;
   local_78 = DAT_018b92f0;
   iVar2 = FUN_00de4550("Customize_Info.bxm",0);
@@ -5915,17 +5903,17 @@ void __thiscall cXmlBinary::cXmlBinary_89(int param_1,short param_2)
   else {
     FUN_00e062b0(iVar2,0);
     uVar3 = FUN_00990340(local_60,*(undefined4 *)(param_1 + 0x358));
-    local_7c = FUN_00e053e0(uVar3);
+    local_7c = vf10(uVar3);
     iVar2 = 0;
     if (0 < local_7c) {
       do {
-        uVar4 = FUN_00e05410(uVar3,iVar2);
-        uVar5 = FUN_00e06390(uVar4,&DAT_01655cd0);
-        FUN_00e068f0(uVar5,local_80);
+        uVar4 = vf14(uVar3,iVar2);
+        uVar5 = vf18(uVar4,&DAT_01655cd0);
+        vf5C(uVar5,local_80);
         if (local_80[0] == param_2) {
-          uVar3 = FUN_00e06390(uVar4,&DAT_016511c4);
+          uVar3 = vf18(uVar4,&DAT_016511c4);
           (*(code *)local_60[0][0x1d])(uVar3,local_40,0x20);
-          uVar3 = FUN_00e06390(uVar4,&DAT_016574bc);
+          uVar3 = vf18(uVar4,&DAT_016574bc);
           (**(code **)(iStack_6c + 0x74))(uVar3,&local_7c,0x10);
           break;
         }
@@ -6450,23 +6438,23 @@ int cXmlBinary::cXmlBinary_88(uint param_1)
   
   uVar2 = param_1;
   if (param_1 != 0x14) {
-    cXmlBinary_103();
+    cXmlBinary();
     local_24 = DAT_018b92f4;
     local_28 = DAT_018b92f0;
     iVar3 = FUN_00de4550("Customize_Info.bxm",0);
     if (iVar3 != 0) {
       FUN_00e062b0(iVar3,0);
       uVar4 = FUN_00990340(local_20,uVar2);
-      iVar3 = FUN_00e053e0(uVar4);
+      iVar3 = vf10(uVar4);
       iVar8 = 0;
       iVar9 = 0;
       if (0 < iVar3) {
         do {
-          uVar5 = FUN_00e05410(uVar4,iVar9);
-          uVar6 = FUN_00e06390(uVar5,&DAT_01655cd0);
-          FUN_00e06930(uVar6,&param_1);
-          uVar5 = FUN_00e06390(uVar5,"UnLock");
-          FUN_00e06930(uVar5,local_2c);
+          uVar5 = vf14(uVar4,iVar9);
+          uVar6 = vf18(uVar5,&DAT_01655cd0);
+          vf58(uVar6,&param_1);
+          uVar5 = vf18(uVar5,"UnLock");
+          vf58(uVar5,local_2c);
           if ((param_1 < 0xd9) &&
              (((cVar1 = (&DAT_01b73860)[param_1 * 0x20], cVar1 == '\x01' || (cVar1 == '\x02')) ||
               (cVar1 == '\x03')))) {
@@ -6519,7 +6507,7 @@ uint __thiscall cXmlBinary::cXmlBinary_84(int param_1,short param_2)
   undefined **local_20 [8];
   
   local_34 = 0xffffffff;
-  cXmlBinary_103();
+  cXmlBinary();
   local_2c = DAT_018b92f4;
   local_30 = DAT_018b92f0;
   iVar2 = FUN_00de4550("Customize_Info.bxm",0);
@@ -6531,18 +6519,18 @@ uint __thiscall cXmlBinary::cXmlBinary_84(int param_1,short param_2)
   }
   FUN_00e062b0(iVar2,0);
   uVar3 = FUN_00990340(local_20,*(undefined4 *)(param_1 + 0x358));
-  iVar2 = FUN_00e053e0(uVar3);
+  iVar2 = vf10(uVar3);
   iVar9 = 0;
   if (0 < iVar2) {
     do {
-      uVar4 = FUN_00e05410(uVar3,iVar9);
-      uVar5 = FUN_00e06390(uVar4,&DAT_01655cd0);
-      FUN_00e068f0(uVar5,local_38);
+      uVar4 = vf14(uVar3,iVar9);
+      uVar5 = vf18(uVar4,&DAT_01655cd0);
+      vf5C(uVar5,local_38);
       if (local_38[0] == param_2) {
-        uVar3 = FUN_00e06390(uVar4,"Category");
+        uVar3 = vf18(uVar4,"Category");
         (*(code *)local_20[0][0x1d])(uVar3,local_28,8);
-        uVar3 = FUN_00e06390(uVar4,"ObjId");
-        FUN_00e06930(uVar3,&local_34);
+        uVar3 = vf18(uVar4,"ObjId");
+        vf58(uVar3,&local_34);
         uVar8 = 0xffffffff;
         pbVar6 = local_28;
         pbVar7 = &DAT_016574c8;
@@ -6667,7 +6655,7 @@ void __thiscall cXmlBinary::cXmlBinary_86(int param_1,int param_2,int param_3)
         FUN_009a0be0(local_6c);
       }
       else if (local_64 < *(int *)(param_1 + 0x324)) {
-        cXmlBinary_103();
+        cXmlBinary();
         local_44 = DAT_018b92f4;
         local_48 = DAT_018b92f0;
         iVar7 = FUN_00de4550("Customize_Info.bxm",0);
@@ -6679,16 +6667,16 @@ void __thiscall cXmlBinary::cXmlBinary_86(int param_1,int param_2,int param_3)
         }
         FUN_00e062b0(iVar7,0);
         uVar10 = FUN_00990340(local_40,param_2);
-        local_54 = FUN_00e053e0(uVar10);
+        local_54 = vf10(uVar10);
         iVar7 = (int)cVar6;
         local_6d = cVar6;
         if (iVar7 < local_54) {
           do {
-            uVar3 = FUN_00e05410(uVar10,iVar7);
-            uVar4 = FUN_00e06390(uVar3,&DAT_01655cd0);
-            FUN_00e06930(uVar4,&local_58);
-            uVar4 = FUN_00e06390(uVar3,"UnLock");
-            FUN_00e06930(uVar4,&local_4c);
+            uVar3 = vf14(uVar10,iVar7);
+            uVar4 = vf18(uVar3,&DAT_01655cd0);
+            vf58(uVar4,&local_58);
+            uVar4 = vf18(uVar3,"UnLock");
+            vf58(uVar4,&local_4c);
             cVar1 = (&DAT_01b73860)[local_58 * 0x20];
             if (((cVar1 == '\x01') || (cVar1 == '\x02')) || (cVar1 == '\x03')) {
               switch(local_58) {
@@ -6722,20 +6710,20 @@ void __thiscall cXmlBinary::cXmlBinary_86(int param_1,int param_2,int param_3)
               if (iVar7 != 0) {
 switchD_009a1c65_caseD_d:
                 if (*(short *)(param_1 + 0x31e) <= local_68) {
-                  uVar10 = FUN_00e06390(uVar3,&DAT_01655cd0);
+                  uVar10 = vf18(uVar3,&DAT_01655cd0);
                   psVar8 = local_50;
-                  FUN_00e068f0(uVar10,local_50);
-                  uVar10 = FUN_00e06390(uVar3,&DAT_016511c4);
+                  vf5C(uVar10,local_50);
+                  uVar10 = vf18(uVar3,&DAT_016511c4);
                   (*(code *)local_40[0][0x1d])(uVar10,local_20,0x20);
                   if (unaff_DI < 0xf) {
                     FUN_00cf9770(*(undefined4 *)(param_1 + 0x30c),auStack_2c,0,0xffffffff);
                   }
-                  uVar10 = FUN_00e06390(uVar3,&DAT_016574d8);
+                  uVar10 = vf18(uVar3,&DAT_016574d8);
                   (**(code **)(local_4c + 0x74))(uVar10,auStack_2c,0x20);
                   FUN_0098ff40(local_6c,local_20);
-                  uVar10 = FUN_00e06390(uVar3,"Price");
+                  uVar10 = vf18(uVar3,"Price");
                   uStack_5c = 0;
-                  FUN_00e06930(uVar10,&uStack_5c);
+                  vf58(uVar10,&uStack_5c);
                   FUN_0098fe20(local_6c,uStack_5c,0);
                   cVar6 = (&DAT_01b73860)[*psVar8 * 0x20];
                   if (cVar6 == '\x01') {
@@ -6816,69 +6804,6 @@ LAB_009a1ee2:
   return;
 }
 
-// 009A76D0  FUN_009a76d0  size=236  [callgraph]
-void __fastcall FUN_009a76d0(int param_1)
-
-{
-  int iVar1;
-  float *pfVar2;
-  int iVar3;
-  float10 fVar4;
-  int local_8;
-  int local_4;
-  
-  iVar1 = 0;
-  local_8 = 0;
-  pfVar2 = (float *)&DAT_01b6efe0;
-  local_4 = 0x14;
-  iVar3 = 0;
-  do {
-    if (*pfVar2 != 0.0) {
-      iVar1 = iVar1 + 1;
-      fVar4 = (float10)cXmlBinary::cXmlBinary_61(iVar3,1);
-      if ((float10)*pfVar2 < fVar4) {
-        local_8 = local_8 + 1;
-      }
-    }
-    iVar3 = iVar3 + 1;
-    pfVar2 = pfVar2 + 4;
-    local_4 = local_4 + -1;
-  } while (local_4 != 0);
-  if (iVar1 == 0x14) {
-    FUN_009c6540(0x30);
-  }
-  if (local_8 == 0x14) {
-    FUN_009c6540(0x31);
-    *(undefined1 *)(param_1 + 0x5a3) = 1;
-  }
-  iVar1 = 0;
-  if (*(short *)(param_1 + 0x5c8) != 0) {
-    local_8 = 0;
-    iVar3 = 0x19;
-    pfVar2 = (float *)&DAT_01b6f120;
-    local_4 = 0x1e;
-    do {
-      if (*pfVar2 != 0.0) {
-        iVar1 = iVar1 + 1;
-        fVar4 = (float10)cXmlBinary::cXmlBinary_61(iVar3,1);
-        if ((float10)*pfVar2 < fVar4) {
-          local_8 = local_8 + 1;
-        }
-      }
-      pfVar2 = pfVar2 + 4;
-      iVar3 = iVar3 + 1;
-      local_4 = local_4 + -1;
-    } while (local_4 != 0);
-    if (iVar1 == 0x1e) {
-      FUN_009c6540(0x32);
-    }
-    if (local_8 == 0x1e) {
-      FUN_009c6540(0x33);
-    }
-  }
-  return;
-}
-
 // 009A77C0  cXmlBinary::cXmlBinary_98  size=406  [class]
 int cXmlBinary::cXmlBinary_98(undefined4 param_1)
 
@@ -6891,7 +6816,7 @@ int cXmlBinary::cXmlBinary_98(undefined4 param_1)
   char local_28 [8];
   undefined **local_20;
   
-  cXmlBinary_103();
+  cXmlBinary();
   uVar1 = FUN_00a4d610();
   FUN_00a4c830(uVar1);
   iVar2 = FUN_00de4550("VR_Mission_Data.bxm",0);
@@ -6902,9 +6827,9 @@ int cXmlBinary::cXmlBinary_98(undefined4 param_1)
     return -1;
   }
   FUN_00e062b0(iVar2,0);
-  uVar1 = FUN_00e041c0();
-  uVar1 = FUN_00e05410(uVar1,param_1);
-  iVar2 = FUN_00e06390(uVar1,"PhaseNo");
+  uVar1 = vf04();
+  uVar1 = vf14(uVar1,param_1);
+  iVar2 = vf18(uVar1,"PhaseNo");
   iVar5 = 0;
   if (iVar2 != -1) {
     (**(code **)((int)local_20 + 0x74))(iVar2,local_28,8);
@@ -7460,11 +7385,11 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_63(uint *param_1)
   
   iVar1 = FUN_00de4500("SeAttr.bxm");
   if (iVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      uVar2 = FUN_00e053e0(iVar1);
+      uVar2 = vf10(iVar1);
       *param_1 = uVar2;
       uVar3 = FUN_00dd3580(-(uint)((int)((ulonglong)uVar2 * 0x2c >> 0x20) != 0) |
                            (uint)((ulonglong)uVar2 * 0x2c),&DAT_01b7bd48);
@@ -7486,7 +7411,7 @@ LAB_009cbdbc:
       if (0 < (int)*param_1) {
         iVar6 = 0;
         do {
-          iVar4 = FUN_00e05410(iVar1,iVar7);
+          iVar4 = vf14(iVar1,iVar7);
           if (iVar4 != -1) {
             puVar5 = (undefined4 *)(param_1[1] + iVar6);
             *puVar5 = 0;
@@ -7550,11 +7475,11 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_30(int *param_1)
   
   iVar1 = FUN_00de4500("effectattr.bxm");
   if (iVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      uVar2 = FUN_00e053e0(iVar1);
+      uVar2 = vf10(iVar1);
       param_1[1] = uVar2;
       iVar3 = FUN_00dd3580(-(uint)((int)((ulonglong)uVar2 * 0x1c >> 0x20) != 0) |
                            (uint)((ulonglong)uVar2 * 0x1c),&DAT_01b7bd48);
@@ -7576,7 +7501,7 @@ LAB_009dca42:
       if (param_1[1] != 0) {
         iVar3 = 0;
         do {
-          iVar4 = FUN_00e05410(iVar1,uVar2);
+          iVar4 = vf14(iVar1,uVar2);
           if (iVar4 != -1) {
             puVar5 = (undefined4 *)(*param_1 + iVar3);
             puVar5[5] = 0;
@@ -8956,33 +8881,33 @@ void __thiscall cXmlBinary::cXmlBinary_3(int param_1,int param_2)
     return;
   }
   FUN_009fa430();
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_2,0);
-  iVar1 = FUN_00e041c0();
+  iVar1 = vf04();
   if (iVar1 != -1) {
-    iVar2 = FUN_00e06390(iVar1,"SpringRate");
+    iVar2 = vf18(iVar1,"SpringRate");
     if (iVar2 != -1) {
-      FUN_00e06970(iVar2,param_1);
+      vf54(iVar2,param_1);
     }
-    iVar2 = FUN_00e06390(iVar1,"SpdRate");
+    iVar2 = vf18(iVar1,"SpdRate");
     if (iVar2 != -1) {
-      FUN_00e06970(iVar2,param_1 + 4);
+      vf54(iVar2,param_1 + 4);
     }
-    iVar2 = FUN_00e06390(iVar1,"PosRate");
+    iVar2 = vf18(iVar1,"PosRate");
     if (iVar2 != -1) {
-      FUN_00e06970(iVar2,param_1 + 8);
+      vf54(iVar2,param_1 + 8);
     }
-    iVar2 = FUN_00e06390(iVar1,"GravityVec");
+    iVar2 = vf18(iVar1,"GravityVec");
     if (iVar2 != -1) {
-      FUN_00e06a30(iVar2,param_1 + 0xc);
+      vf48(iVar2,param_1 + 0xc);
     }
-    iVar2 = FUN_00e06390(iVar1,"GravityPartsNo");
+    iVar2 = vf18(iVar1,"GravityPartsNo");
     if (iVar2 != -1) {
-      FUN_00e06930(iVar2,param_1 + 0x18);
+      vf58(iVar2,param_1 + 0x18);
     }
-    iVar1 = FUN_00e06390(iVar1,"SpringWorkList");
+    iVar1 = vf18(iVar1,"SpringWorkList");
     if (iVar1 != -1) {
-      uVar3 = FUN_00e053e0(iVar1);
+      uVar3 = vf10(iVar1);
       if (0x10 < uVar3) {
         uVar3 = 0x10;
       }
@@ -8990,23 +8915,23 @@ void __thiscall cXmlBinary::cXmlBinary_3(int param_1,int param_2)
       if (uVar3 != 0) {
         param_1 = param_1 + 0x20;
         do {
-          iVar2 = FUN_00e05410(iVar1,uVar5);
+          iVar2 = vf14(iVar1,uVar5);
           if (iVar2 == -1) break;
-          iVar4 = FUN_00e06390(iVar2,"PartsNo");
+          iVar4 = vf18(iVar2,"PartsNo");
           if (iVar4 != -1) {
-            FUN_00e06930(iVar4,param_1 + -4);
+            vf58(iVar4,param_1 + -4);
           }
-          iVar4 = FUN_00e06390(iVar2,"LimitLen");
+          iVar4 = vf18(iVar2,"LimitLen");
           if (iVar4 != -1) {
-            FUN_00e06970(iVar4,param_1);
+            vf54(iVar4,param_1);
           }
-          iVar4 = FUN_00e06390(iVar2,&DAT_016514a4);
+          iVar4 = vf18(iVar2,&DAT_016514a4);
           if (iVar4 != -1) {
-            FUN_00e06830(iVar4,param_1 + 4);
+            vf68(iVar4,param_1 + 4);
           }
-          iVar2 = FUN_00e06390(iVar2,"MaxRot");
+          iVar2 = vf18(iVar2,"MaxRot");
           if (iVar2 != -1) {
-            FUN_00e06970(iVar2,param_1 + 8);
+            vf54(iVar2,param_1 + 8);
           }
           uVar5 = uVar5 + 1;
           param_1 = param_1 + 0x34;
@@ -9201,12 +9126,12 @@ int cXmlBinary::cXmlBinary_32(int param_1)
   
   iVar1 = param_1;
   if (param_1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      uVar2 = FUN_00e06390(iVar1,"CLOTH_AT_NUM");
-      FUN_00e06830(uVar2,&param_1);
+      uVar2 = vf18(iVar1,"CLOTH_AT_NUM");
+      vf68(uVar2,&param_1);
       iVar1 = param_1;
       FUN_00e04180();
       return iVar1;
@@ -9230,19 +9155,19 @@ uint cXmlBinary::cXmlBinary_31(uint param_1,int param_2,uint param_3)
   
   uVar3 = param_1;
   if (param_1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(uVar3,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      uVar2 = FUN_00e06390(iVar1,"CLOTH_AT_NUM");
-      FUN_00e06830(uVar2,&param_1);
-      iVar1 = FUN_00e06390(iVar1,"CLOTH_AT_WK_LIST");
+      uVar2 = vf18(iVar1,"CLOTH_AT_NUM");
+      vf68(uVar2,&param_1);
+      iVar1 = vf18(iVar1,"CLOTH_AT_WK_LIST");
       if (iVar1 == -1) {
         local_20[0] = vftable;
         FUN_00e04180();
         return 0;
       }
-      uVar3 = FUN_00e053e0(iVar1);
+      uVar3 = vf10(iVar1);
       if (uVar3 == param_1) {
         if (param_3 < uVar3) {
           uVar3 = param_3;
@@ -9251,7 +9176,7 @@ uint cXmlBinary::cXmlBinary_31(uint param_1,int param_2,uint param_3)
         iVar6 = param_2;
         if (uVar3 != 0) {
           do {
-            iVar4 = FUN_00e05410(iVar1,uVar5);
+            iVar4 = vf14(iVar1,uVar5);
             if (iVar4 == -1) {
               local_20[0] = vftable;
               FUN_00e04180();
@@ -9285,12 +9210,12 @@ int cXmlBinary::cXmlBinary_33(int param_1)
   
   iVar1 = param_1;
   if (param_1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      uVar2 = FUN_00e06390(iVar1,"CLOTH_WIND_NUM");
-      FUN_00e06830(uVar2,&param_1);
+      uVar2 = vf18(iVar1,"CLOTH_WIND_NUM");
+      vf68(uVar2,&param_1);
       iVar1 = param_1;
       FUN_00e04180();
       return iVar1;
@@ -9978,11 +9903,11 @@ undefined4 cXmlBinary::cXmlBinary_19(int param_1,undefined4 param_2)
   undefined **local_20 [8];
   
   if (param_1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      iVar1 = FUN_00e06390(iVar1,"CLOTH_HEADER");
+      iVar1 = vf18(iVar1,"CLOTH_HEADER");
       if (iVar1 == -1) {
         local_20[0] = vftable;
         FUN_00e04180();
@@ -10010,24 +9935,24 @@ undefined4 cXmlBinary::cXmlBinary_21(int param_1,int param_2,uint param_3)
   undefined **local_20 [8];
   
   if (param_1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      iVar1 = FUN_00e06390(iVar1,"CLOTH_WK_LIST");
+      iVar1 = vf18(iVar1,"CLOTH_WK_LIST");
       if (iVar1 == -1) {
         local_20[0] = vftable;
         FUN_00e04180();
         return 0;
       }
-      uVar2 = FUN_00e053e0(iVar1);
+      uVar2 = vf10(iVar1);
       if (param_3 < uVar2) {
         uVar2 = param_3;
       }
       uVar4 = 0;
       if (uVar2 != 0) {
         do {
-          iVar3 = FUN_00e05410(iVar1,uVar4);
+          iVar3 = vf14(iVar1,uVar4);
           if (iVar3 == -1) {
             local_20[0] = vftable;
             FUN_00e04180();
@@ -10062,19 +9987,19 @@ uint cXmlBinary::cXmlBinary_22(uint param_1,int param_2,uint param_3)
   
   uVar3 = param_1;
   if (param_1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(uVar3,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      uVar2 = FUN_00e06390(iVar1,"CLOTH_WIND_NUM");
-      FUN_00e06830(uVar2,&param_1);
-      iVar1 = FUN_00e06390(iVar1,"CLOTH_WIND_WK_LIST");
+      uVar2 = vf18(iVar1,"CLOTH_WIND_NUM");
+      vf68(uVar2,&param_1);
+      iVar1 = vf18(iVar1,"CLOTH_WIND_WK_LIST");
       if (iVar1 == -1) {
         local_20[0] = vftable;
         FUN_00e04180();
         return 0;
       }
-      uVar3 = FUN_00e053e0(iVar1);
+      uVar3 = vf10(iVar1);
       if (uVar3 == param_1) {
         if (param_3 < uVar3) {
           uVar3 = param_3;
@@ -10083,7 +10008,7 @@ uint cXmlBinary::cXmlBinary_22(uint param_1,int param_2,uint param_3)
         iVar6 = param_2;
         if (uVar3 != 0) {
           do {
-            iVar4 = FUN_00e05410(iVar1,uVar5);
+            iVar4 = vf14(iVar1,uVar5);
             if (iVar4 == -1) {
               local_20[0] = vftable;
               FUN_00e04180();
@@ -12573,36 +12498,36 @@ cXmlBinary::cXmlBinary_49(int *param_1,int param_2,int param_3,undefined4 param_
   undefined **local_60 [8];
   char local_40 [64];
   
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00a071e0();
   if ((param_2 != 0) && (0 < param_3)) {
     iVar1 = FUN_00e062b0(param_2,0);
     if (iVar1 != 0) {
-      uVar2 = FUN_00e041c0();
+      uVar2 = vf04();
       (*(code *)local_60[0][9])(uVar2,local_40,0x40);
       iVar1 = __strnicmp(local_40,"CutInfo",0x40);
       if (iVar1 == 0) {
-        iVar1 = FUN_00e06390(uVar2,"BoxList");
-        iVar3 = FUN_00e06390(uVar2,"ClsInfoList");
+        iVar1 = vf18(uVar2,"BoxList");
+        iVar3 = vf18(uVar2,"ClsInfoList");
         if ((iVar1 != -1) && (iVar3 != -1)) {
-          iVar4 = FUN_00e053e0(iVar1);
+          iVar4 = vf10(iVar1);
           iVar5 = FUN_00a101d0(iVar4,param_3,param_4);
           if (iVar5 != 0) {
             iVar5 = 0;
             if (0 < iVar4) {
               iVar6 = 0;
               do {
-                uVar2 = FUN_00e05410(iVar1,iVar5);
+                uVar2 = vf14(iVar1,iVar5);
                 FUN_00a10300(local_60,uVar2,*param_1 + iVar6);
                 iVar5 = iVar5 + 1;
                 iVar6 = iVar6 + 0x30;
               } while (iVar5 < iVar4);
             }
-            iVar1 = FUN_00e053e0(iVar3);
+            iVar1 = vf10(iVar3);
             iVar4 = 0;
             if (0 < iVar1) {
               do {
-                uVar2 = FUN_00e05410(iVar3,iVar4);
+                uVar2 = vf14(iVar3,iVar4);
                 FUN_00a10470(local_60,uVar2);
                 iVar4 = iVar4 + 1;
               } while (iVar4 < iVar1);
@@ -13111,15 +13036,15 @@ void __thiscall cXmlBinary::cXmlBinary_43(int param_1,float param_2)
   
   fVar2 = param_2;
   if ((0 < *(short *)(param_1 + 0x324)) && (param_2 != 0.0)) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(fVar2,0);
-    local_48 = FUN_00e041c0();
-    local_44 = FUN_00e053e0(local_48);
+    local_48 = vf04();
+    local_44 = vf10(local_48);
     iVar7 = 0;
     if (0 < local_44) {
       do {
-        uVar3 = FUN_00e05410(local_48,iVar7);
-        FUN_00e065f0(uVar3,local_20,0x20);
+        uVar3 = vf14(local_48,iVar7);
+        vf24(uVar3,local_20,0x20);
         pcVar6 = "DistRate0";
         pbVar4 = local_20;
         do {
@@ -13140,7 +13065,7 @@ LAB_00a12bce:
         iVar5 = 0;
 LAB_00a12bd3:
         if (iVar5 == 0) {
-          FUN_00e06970(uVar3,&param_2);
+          vf54(uVar3,&param_2);
           if (param_2 != 0.0) {
             *(float *)(param_1 + 0x180) = param_2;
           }
@@ -13166,7 +13091,7 @@ LAB_00a12c2e:
           iVar5 = 0;
 LAB_00a12c33:
           if (iVar5 == 0) {
-            FUN_00e06970(uVar3,&param_2);
+            vf54(uVar3,&param_2);
             if (param_2 != 0.0) {
               *(float *)(param_1 + 0x184) = param_2;
             }
@@ -13192,7 +13117,7 @@ LAB_00a12c8e:
             iVar5 = 0;
 LAB_00a12c93:
             if (iVar5 == 0) {
-              FUN_00e06970(uVar3,&param_2);
+              vf54(uVar3,&param_2);
               if (param_2 != 0.0) {
                 *(float *)(param_1 + 0x188) = param_2;
               }
@@ -13218,7 +13143,7 @@ LAB_00a12cee:
               iVar5 = 0;
 LAB_00a12cf3:
               if (iVar5 == 0) {
-                FUN_00e06970(uVar3,&param_2);
+                vf54(uVar3,&param_2);
                 *(float *)(param_1 + 0x18c) = param_2;
               }
               else {
@@ -13242,7 +13167,7 @@ LAB_00a12d3e:
                 iVar5 = 0;
 LAB_00a12d43:
                 if (iVar5 == 0) {
-                  FUN_00e06930(uVar3,&local_4c);
+                  vf58(uVar3,&local_4c);
                   *(undefined1 *)(param_1 + 0x473) = (undefined1)local_4c;
                 }
                 else {
@@ -13266,7 +13191,7 @@ LAB_00a12d8e:
                   iVar5 = 0;
 LAB_00a12d93:
                   if (iVar5 == 0) {
-                    FUN_00e06930(uVar3,&local_4c);
+                    vf58(uVar3,&local_4c);
                     *(int *)(param_1 + 0x43c) = local_4c;
                   }
                   else {
@@ -13290,7 +13215,7 @@ LAB_00a12dde:
                     iVar5 = 0;
 LAB_00a12de3:
                     if (iVar5 == 0) {
-                      FUN_00e06930(uVar3,&local_50);
+                      vf58(uVar3,&local_50);
                       FUN_00a0ba60(local_50);
                     }
                     else {
@@ -13338,7 +13263,7 @@ LAB_00a12e6e:
 LAB_00a12e73:
                         if (iVar5 == 0) {
                           param_2 = 0.3;
-                          FUN_00e06970(uVar3,&param_2);
+                          vf54(uVar3,&param_2);
                           *(float *)(param_1 + 0x460) = param_2;
                         }
                         else {
@@ -13362,7 +13287,7 @@ LAB_00a12ec6:
                           iVar5 = 0;
 LAB_00a12ecb:
                           if (iVar5 == 0) {
-                            FUN_00e06930(uVar3,&local_50);
+                            vf58(uVar3,&local_50);
                             if (local_50 == 0) {
                               *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) & 0xfdffffff;
                             }
@@ -13391,7 +13316,7 @@ LAB_00a12f2e:
                             iVar5 = 0;
 LAB_00a12f33:
                             if (iVar5 == 0) {
-                              FUN_00e06930(uVar3,&local_50);
+                              vf58(uVar3,&local_50);
                               if (local_50 == 0) {
                                 *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) & 0xfffffffb
                                 ;
@@ -13421,7 +13346,7 @@ LAB_00a12f8e:
                               iVar5 = 0;
 LAB_00a12f93:
                               if (iVar5 == 0) {
-                                FUN_00e06830(uVar3,param_1 + 0x444);
+                                vf68(uVar3,param_1 + 0x444);
                               }
                               else {
                                 pcVar6 = "AnisotropicType";
@@ -13444,7 +13369,7 @@ LAB_00a12fd1:
                                 iVar5 = 0;
 LAB_00a12fd6:
                                 if (iVar5 == 0) {
-                                  FUN_00e06930(uVar3,&local_4c);
+                                  vf58(uVar3,&local_4c);
                                   if (local_4c == 0) {
                                     *(undefined4 *)(param_1 + 0x340) = 1;
                                   }
@@ -15605,7 +15530,7 @@ void FUN_00a2e730(void)
   if (DAT_01be8e40 < 0x100) {
     FUN_00f98b60(0,0x3f800000,0,1);
   }
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 
@@ -15624,7 +15549,7 @@ void FUN_00a2eaf0(void)
   FUN_00f9da90(1);
   FUN_00f9db30(0);
   FUN_00f9d850(0);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 
@@ -15638,7 +15563,7 @@ void FUN_00a2ebe0(void)
   FUN_00f97580(0,DAT_01b83c28 + 0xa0,1);
   FUN_00fa5730(local_30,1);
   FUN_00f9d760(1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 
@@ -15867,7 +15792,7 @@ void FUN_00a2f2c0(void)
     DAT_01b83c10 = DAT_01b83c14;
   }
   FUN_00fa5730(local_40,1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 
@@ -16082,7 +16007,7 @@ void FUN_00a2f820(void)
   FUN_00f98f80(&PTR_vftable_018da4d8);
   FUN_00f9dfb0(5);
   FUN_00fa5730(local_30,1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   return;
 }
 
@@ -16098,7 +16023,7 @@ void FUN_00a2fd70(undefined4 param_1,int param_2)
   }
   FUN_00f975c0(&DAT_01be0518);
   FUN_00fa5730(local_30,1);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   if (*(int *)(param_2 + 4) == 0) {
     FUN_00f9db30(1);
     FUN_00f9d8f0(0);
@@ -16899,14 +16824,14 @@ void cXmlBinary::cXmlBinary_107(undefined4 param_1)
   undefined1 auStack_80 [64];
   undefined1 auStack_40 [64];
   
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_1,0);
-  uVar2 = FUN_00e041c0();
+  uVar2 = vf04();
   iVar9 = 0;
-  iVar3 = FUN_00e053e0(uVar2);
+  iVar3 = vf10(uVar2);
   if (0 < iVar3) {
     do {
-      uVar4 = FUN_00e05410(uVar2,iVar9);
+      uVar4 = vf14(uVar2,iVar9);
       (**(code **)(local_e0 + 0x24))(uVar4,local_c0,0x40);
       pcVar8 = "autoVertexShader";
       pbVar5 = local_c0;
@@ -16929,16 +16854,16 @@ LAB_00a31480:
 LAB_00a31485:
       if (iVar3 == 0) {
         iVar10 = 0;
-        iVar3 = FUN_00e053e0(uVar4);
+        iVar3 = vf10(uVar4);
         if (0 < iVar3) {
           do {
-            uVar6 = FUN_00e05410(uVar4,iVar10);
+            uVar6 = vf14(uVar4,iVar10);
             (**(code **)(local_e0 + 0x74))(uVar6,local_c0,0x40);
             FUN_00a2a030(auStack_80,"%s.vso",local_c0);
             uVar6 = FUN_00de4500(auStack_80);
             FUN_00fc9a30(local_c0,uVar6);
             iVar10 = iVar10 + 1;
-            iVar3 = FUN_00e053e0(uVar4);
+            iVar3 = vf10(uVar4);
           } while (iVar10 < iVar3);
         }
       }
@@ -16963,10 +16888,10 @@ LAB_00a31530:
 LAB_00a31535:
       if (iVar3 == 0) {
         iVar10 = 0;
-        iVar3 = FUN_00e053e0(uVar4);
+        iVar3 = vf10(uVar4);
         if (0 < iVar3) {
           do {
-            uVar6 = FUN_00e05410(uVar4,iVar10);
+            uVar6 = vf14(uVar4,iVar10);
             (**(code **)(local_e0 + 0x74))(uVar6,local_c0,0x40);
             FUN_00a2a030(auStack_80,"%s.vso",local_c0);
             FUN_00a2a030(auStack_40,"%s.pso",local_c0);
@@ -16974,12 +16899,12 @@ LAB_00a31535:
             uVar7 = FUN_00de4500(auStack_80);
             FUN_00fca150(local_c0,uVar7,uVar6);
             iVar10 = iVar10 + 1;
-            iVar3 = FUN_00e053e0(uVar4);
+            iVar3 = vf10(uVar4);
           } while (iVar10 < iVar3);
         }
       }
       iVar9 = iVar9 + 1;
-      iVar3 = FUN_00e053e0(uVar2);
+      iVar3 = vf10(uVar2);
     } while (iVar9 < iVar3);
   }
   FUN_00e04180();
@@ -17036,11 +16961,11 @@ void __thiscall cXmlBinary::cXmlBinary_104(int param_1,undefined4 *param_2)
   } while (iVar3 != 0);
   iVar3 = FUN_00de44b0(&DAT_0166183c,0);
   if (iVar3 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar3,0);
     uVar4 = 0;
-    uVar2 = FUN_00e041c0(0);
-    uVar2 = FUN_00e05410(uVar2,uVar4);
+    uVar2 = vf04(0);
+    uVar2 = vf14(uVar2,uVar4);
     FUN_00e04ff0(uVar2,param_1 + 0x10);
     FUN_00a42730(*param_2,iVar3);
     FUN_00e04180();
@@ -17389,20 +17314,20 @@ undefined4 cXmlBinary::cXmlBinary_102(undefined4 param_1,int param_2)
   if (param_2 == 0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_2,0);
-  uVar2 = FUN_00e041c0();
+  uVar2 = vf04();
   local_198 = 0;
   local_194 = uVar2;
-  iVar3 = FUN_00e053e0(uVar2);
+  iVar3 = vf10(uVar2);
   if (0 < iVar3) {
     do {
-      uVar2 = FUN_00e05410(uVar2,local_198);
+      uVar2 = vf14(uVar2,local_198);
       local_190 = 0;
       local_16c = uVar2;
-      iVar3 = FUN_00e05410(uVar2,0);
+      iVar3 = vf14(uVar2,0);
       while (local_1a0 = iVar3, iVar3 != -1) {
-        FUN_00e065f0(iVar3,local_90,0x40);
+        vf24(iVar3,local_90,0x40);
         pbVar7 = &DAT_01661874;
         pbVar4 = local_90;
         do {
@@ -17441,8 +17366,8 @@ LAB_00a452b5:
           local_114 = 0;
           _memset(local_110,0,0x80);
           puVar13 = local_140;
-          uVar6 = FUN_00e05490(iVar3,1);
-          FUN_00e06f70(uVar6,puVar13);
+          uVar6 = vfA0(iVar3,1);
+          vfEC(uVar6,puVar13);
           local_13c = param_1;
           FUN_00a1edd0(local_18c,&local_1a0);
           if (local_158 <= 0.0) {
@@ -17451,10 +17376,10 @@ LAB_00a452b5:
           if (local_148 <= 0.0) {
             local_148 = (float)*(int *)(local_19c + 0x35e4);
           }
-          FUN_00e064c0(iVar3,"AtPrim",local_50);
-          iVar3 = FUN_00e05410(iVar3,0);
+          vf1C(iVar3,"AtPrim",local_50);
+          iVar3 = vf14(iVar3,0);
           if (iVar3 == -1) break;
-          FUN_00e065f0(iVar3,local_90,0x40);
+          vf24(iVar3,local_90,0x40);
           pcVar8 = "Filter";
           pbVar4 = local_90;
           do {
@@ -17479,8 +17404,8 @@ LAB_00a45406:
           if (local_140[0] != 0) {
             do {
               local_1a1 = 0x7f;
-              uVar2 = FUN_00e06390(local_50[iVar3],&DAT_0164fcc8);
-              FUN_00e067b0(uVar2,&local_1a1);
+              uVar2 = vf18(local_50[iVar3],&DAT_0164fcc8);
+              vf70(uVar2,&local_1a1);
               uVar14 = 0;
               uVar11 = 0;
               uVar6 = 0x20;
@@ -17515,11 +17440,11 @@ LAB_00a454f8:
           cFixedList::insert_6(puVar10,piVar12,&local_160);
         }
         local_190 = local_190 + 1;
-        iVar3 = FUN_00e05410(uVar2,local_190);
+        iVar3 = vf14(uVar2,local_190);
       }
       iVar5 = local_198 + 1;
       local_198 = iVar5;
-      iVar3 = FUN_00e053e0(local_194);
+      iVar3 = vf10(local_194);
       uVar2 = local_194;
     } while (iVar5 < iVar3);
   }
@@ -17669,30 +17594,30 @@ void __thiscall cXmlBinary::cXmlBinary_97(int param_1,uint param_2,int param_3)
     }
   }
   if (param_3 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_3,0);
-    uVar2 = FUN_00e041c0();
+    uVar2 = vf04();
     local_3efc = uVar2;
-    cLightApplyScale::cLightApplyScale_8();
+    cLightDataMinimum::cLightDataMinimum();
     local_3ed8 = cShadowParam::vftable;
     local_3ce0 = sAirScatterParam::vftable;
     FUN_00a35200();
     FUN_00a2a8a0();
     FUN_00a2ab30();
-    cLightApplyScale::cLightApplyScale_8();
+    cLightDataMinimum::cLightDataMinimum();
     local_1e10[0] = cLightDataMinimumEv::vftable;
     FUN_00a35200();
     local_3f2c = 0;
     local_3f04 = 0;
-    iVar3 = FUN_00e053e0(uVar2);
+    iVar3 = vf10(uVar2);
     if (0 < iVar3) {
       do {
-        local_3ef8 = FUN_00e05410(uVar2,local_3f04);
+        local_3ef8 = vf14(uVar2,local_3f04);
         local_3f00 = 0;
-        iVar3 = FUN_00e053e0(local_3ef8);
+        iVar3 = vf10(local_3ef8);
         if (0 < iVar3) {
           do {
-            uVar2 = FUN_00e05410(local_3ef8,local_3f00);
+            uVar2 = vf14(local_3ef8,local_3f00);
             (**(code **)((int)local_3f28 + 0x24))(uVar2,local_3e68,0x100);
             pbVar8 = &DAT_01655cd0;
             pbVar4 = local_3e68;
@@ -17714,7 +17639,7 @@ LAB_00a47894:
             iVar3 = 0;
 LAB_00a47899:
             if (iVar3 == 0) {
-              FUN_00e06830(uVar2,&uStack_3f30);
+              vf68(uVar2,&uStack_3f30);
               local_3f2c = uStack_3f30;
             }
             pcVar9 = "Filter";
@@ -17737,16 +17662,16 @@ LAB_00a478e0:
             iVar3 = 0;
 LAB_00a478e5:
             if (iVar3 == 0) {
-              iVar5 = FUN_00e053e0(uVar2);
+              iVar5 = vf10(uVar2);
               iVar3 = local_3f34;
               iStack_3f3c = 0;
               if (0 < iVar5) {
                 do {
-                  uVar6 = FUN_00e05410(uVar2,iStack_3f3c);
+                  uVar6 = vf14(uVar2,iStack_3f3c);
                   (**(code **)((int)local_3f28 + 0x24))(uVar6,local_3e68,0x100);
-                  FUN_00e06970(uVar6,&uStack_3f08);
-                  FUN_00e06830(uVar6,&uStack_3f30);
-                  FUN_00e06a70(uVar6,&uStack_3ef0);
+                  vf54(uVar6,&uStack_3f08);
+                  vf68(uVar6,&uStack_3f30);
+                  vf44(uVar6,&uStack_3ef0);
                   pcVar9 = "pointNum";
                   pbVar4 = local_3e68;
                   do {
@@ -18113,16 +18038,16 @@ LAB_00a47dc0:
 LAB_00a47dc5:
                   if (iVar5 == 0) {
                     iVar12 = 0;
-                    iVar5 = FUN_00e053e0(uVar6);
+                    iVar5 = vf10(uVar6);
                     if (0 < iVar5) {
                       puVar14 = (undefined4 *)(iVar3 + 0x2bc0);
                       do {
-                        uVar7 = FUN_00e05410(uVar6,iVar12);
-                        FUN_00e06830(uVar7,&uStack_3f30);
+                        uVar7 = vf14(uVar6,iVar12);
+                        vf68(uVar7,&uStack_3f30);
                         *puVar14 = uStack_3f30;
                         iVar12 = iVar12 + 1;
                         puVar14 = puVar14 + 1;
-                        iVar5 = FUN_00e053e0(uVar6);
+                        iVar5 = vf10(uVar6);
                       } while (iVar12 < iVar5);
                     }
                   }
@@ -18147,11 +18072,11 @@ LAB_00a47e50:
 LAB_00a47e55:
                   if (iVar5 == 0) {
                     uVar13 = 0;
-                    iVar5 = FUN_00e053e0(uVar6);
+                    iVar5 = vf10(uVar6);
                     if (0 < iVar5) {
                       do {
-                        uVar7 = FUN_00e05410(uVar6,uVar13);
-                        FUN_00e067b0(uVar7,&uStack_3f35);
+                        uVar7 = vf14(uVar6,uVar13);
+                        vf70(uVar7,&uStack_3f35);
                         uVar10 = uVar13 & 0x80000001;
                         bVar15 = uVar10 == 0;
                         if ((int)uVar10 < 0) {
@@ -18164,12 +18089,12 @@ LAB_00a47e55:
                           *(undefined1 *)(iVar3 + 0x2bd5 + ((int)uVar13 / 2) * 2) = uStack_3f35;
                         }
                         uVar13 = uVar13 + 1;
-                        iVar5 = FUN_00e053e0(uVar6);
+                        iVar5 = vf10(uVar6);
                       } while ((int)uVar13 < iVar5);
                     }
                   }
                   iStack_3f3c = iStack_3f3c + 1;
-                  iVar5 = FUN_00e053e0(uVar2);
+                  iVar5 = vf10(uVar2);
                 } while (iStack_3f3c < iVar5);
               }
               *(uint *)(iVar3 + 0x2c40) = param_2;
@@ -18195,21 +18120,21 @@ LAB_00a47f30:
             iVar3 = 0;
 LAB_00a47f35:
             if (iVar3 == 0) {
-              iVar3 = FUN_00e053e0(uVar2);
+              iVar3 = vf10(uVar2);
               if (0 < iVar3) {
                 puStack_3f44 = (undefined4 *)(local_3f34 + 0x2c68);
                 iStack_3f3c = 0;
                 do {
-                  uVar6 = FUN_00e05410(uVar2,iStack_3f3c);
+                  uVar6 = vf14(uVar2,iStack_3f3c);
                   iVar5 = 0;
-                  iVar3 = FUN_00e053e0(uVar6);
+                  iVar3 = vf10(uVar6);
                   if (0 < iVar3) {
                     do {
-                      uVar7 = FUN_00e05410(uVar6,iVar5);
+                      uVar7 = vf14(uVar6,iVar5);
                       (**(code **)((int)local_3f28 + 0x24))(uVar7,local_3e68,0x100);
-                      FUN_00e06970(uVar7,&uStack_3f08);
-                      FUN_00e06830(uVar6,&uStack_3f30);
-                      FUN_00e06a70(uVar7,&uStack_3ef0);
+                      vf54(uVar7,&uStack_3f08);
+                      vf68(uVar6,&uStack_3f30);
+                      vf44(uVar7,&uStack_3ef0);
                       pcVar9 = "fogColor";
                       pbVar4 = local_3e68;
                       do {
@@ -18327,12 +18252,12 @@ LAB_00a48145:
                         puStack_3f44[10] = uStack_3f30;
                       }
                       iVar5 = iVar5 + 1;
-                      iVar3 = FUN_00e053e0(uVar6);
+                      iVar3 = vf10(uVar6);
                     } while (iVar5 < iVar3);
                   }
                   puStack_3f44 = puStack_3f44 + 0x20;
                   iStack_3f3c = iStack_3f3c + 1;
-                  iVar3 = FUN_00e053e0(uVar2);
+                  iVar3 = vf10(uVar2);
                 } while (iStack_3f3c < iVar3);
               }
               if (*(int *)(local_3f34 + 0x360c) == 0) {
@@ -18409,19 +18334,19 @@ LAB_00a48307:
             if (iVar3 == 0) {
               FUN_00a1ebc0();
               iStack_3f3c = 0;
-              iVar3 = FUN_00e053e0(uVar2);
+              iVar3 = vf10(uVar2);
               if (0 < iVar3) {
                 puStack_3f44 = auStack_3d58;
                 do {
-                  uStack_3ef4 = FUN_00e05410(uVar2,iStack_3f3c);
+                  uStack_3ef4 = vf14(uVar2,iStack_3f3c);
                   iVar12 = 0;
-                  iVar5 = FUN_00e053e0(uStack_3ef4);
+                  iVar5 = vf10(uStack_3ef4);
                   iVar3 = local_3f34;
                   if (0 < iVar5) {
                     do {
-                      uVar6 = FUN_00e05410(uStack_3ef4,iVar12);
+                      uVar6 = vf14(uStack_3ef4,iVar12);
                       (**(code **)((int)local_3f28 + 0x24))(uVar6,local_3e68,0x100);
-                      FUN_00e06970(uVar6,&uStack_3f08);
+                      vf54(uVar6,&uStack_3f08);
                       pcVar9 = "FocusOffset";
                       pbVar4 = local_3e68;
                       do {
@@ -18623,12 +18548,12 @@ LAB_00a485b9:
                         }
                       }
                       iVar12 = iVar12 + 1;
-                      iVar5 = FUN_00e053e0(uStack_3ef4);
+                      iVar5 = vf10(uStack_3ef4);
                     } while (iVar12 < iVar5);
                   }
                   puStack_3f44 = puStack_3f44 + 10;
                   iStack_3f3c = iStack_3f3c + 1;
-                  iVar3 = FUN_00e053e0(uVar2);
+                  iVar3 = vf10(uVar2);
                 } while (iStack_3f3c < iVar3);
               }
               uStack_3d68 = param_2;
@@ -18714,19 +18639,19 @@ LAB_00a48785:
             }
             iVar5 = local_3f00 + 1;
             local_3f00 = iVar5;
-            iVar3 = FUN_00e053e0(local_3ef8);
+            iVar3 = vf10(local_3ef8);
           } while (iVar5 < iVar3);
         }
         iVar5 = local_3f04 + 1;
         local_3f04 = iVar5;
-        iVar3 = FUN_00e053e0(local_3efc);
+        iVar3 = vf10(local_3efc);
         uVar2 = local_3efc;
       } while (iVar5 < iVar3);
     }
-    cObject::cObject_2();
+    cObject::cObject();
     local_3ce0 = cObject::vftable;
     local_3ed8 = cObject::vftable;
-    cObject::cObject_2();
+    cObject::cObject();
     local_3f28 = vftable;
     FUN_00e04180();
   }
@@ -18852,22 +18777,22 @@ void __thiscall cXmlBinary::cXmlBinary_81(undefined4 *param_1,int param_2)
   byte local_100 [256];
   
   if (param_2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_2,0);
     param_1[8] = 0x3f59999a;
-    uVar2 = FUN_00e041c0();
+    uVar2 = vf04();
     local_12c = 0;
-    iVar3 = FUN_00e053e0(uVar2);
+    iVar3 = vf10(uVar2);
     if (0 < iVar3) {
       do {
-        uVar4 = FUN_00e05410(uVar2,local_12c);
+        uVar4 = vf14(uVar2,local_12c);
         iVar9 = 0;
-        iVar3 = FUN_00e053e0(uVar4);
+        iVar3 = vf10(uVar4);
         if (0 < iVar3) {
           do {
-            uVar5 = FUN_00e05410(uVar4,iVar9);
+            uVar5 = vf14(uVar4,iVar9);
             (**(code **)((int)local_120 + 0x24))(uVar5,local_100,0x100);
-            FUN_00e06970(uVar5,&uStack_124);
+            vf54(uVar5,&uStack_124);
             pbVar6 = local_100;
             pbVar7 = &DAT_01661e40;
             do {
@@ -19067,11 +18992,11 @@ LAB_00a4d0d1:
               param_1[8] = uStack_124;
             }
             iVar9 = iVar9 + 1;
-            iVar3 = FUN_00e053e0(uVar4);
+            iVar3 = vf10(uVar4);
           } while (iVar9 < iVar3);
         }
         local_12c = local_12c + 1;
-        iVar3 = FUN_00e053e0(uVar2);
+        iVar3 = vf10(uVar2);
       } while (local_12c < iVar3);
     }
     local_120 = vftable;
@@ -19888,7 +19813,7 @@ uint cXmlBinary::cXmlBinary_41(void)
   undefined **local_20;
   
   uVar3 = 0;
-  cXmlBinary_103();
+  cXmlBinary();
   iVar1 = FUN_00de3dd0(0,"_param.bxm",0);
   if (iVar1 == 0) {
     local_20 = vftable;
@@ -19896,137 +19821,137 @@ uint cXmlBinary::cXmlBinary_41(void)
     return 0;
   }
   FUN_00e062b0(iVar1,0);
-  uVar2 = FUN_00e041c0();
+  uVar2 = vf04();
   local_24 = 0;
-  iVar1 = FUN_00e06390(uVar2,&DAT_01665228);
+  iVar1 = vf18(uVar2,&DAT_01665228);
   if (iVar1 == -1) {
 LAB_00a93d01:
     uVar3 = 1;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93d01;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_01665220);
+  iVar1 = vf18(uVar2,&DAT_01665220);
   if (iVar1 == -1) {
 LAB_00a93d30:
     uVar3 = uVar3 | 2;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93d30;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_01665218);
+  iVar1 = vf18(uVar2,&DAT_01665218);
   if (iVar1 == -1) {
 LAB_00a93d5d:
     uVar3 = uVar3 | 4;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93d5d;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_01665210);
+  iVar1 = vf18(uVar2,&DAT_01665210);
   if (iVar1 == -1) {
 LAB_00a93d8a:
     uVar3 = uVar3 | 8;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93d8a;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_01665208);
+  iVar1 = vf18(uVar2,&DAT_01665208);
   if (iVar1 == -1) {
 LAB_00a93db7:
     uVar3 = uVar3 | 0x10;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93db7;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_01665200);
+  iVar1 = vf18(uVar2,&DAT_01665200);
   if (iVar1 == -1) {
 LAB_00a93de4:
     uVar3 = uVar3 | 0x10000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93de4;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651f8);
+  iVar1 = vf18(uVar2,&DAT_016651f8);
   if (iVar1 == -1) {
 LAB_00a93e14:
     uVar3 = uVar3 | 0x20000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93e14;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651f0);
+  iVar1 = vf18(uVar2,&DAT_016651f0);
   if (iVar1 == -1) {
 LAB_00a93e44:
     uVar3 = uVar3 | 0x40000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93e44;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651e8);
+  iVar1 = vf18(uVar2,&DAT_016651e8);
   if (iVar1 == -1) {
 LAB_00a93e74:
     uVar3 = uVar3 | 0x80000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93e74;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651e0);
+  iVar1 = vf18(uVar2,&DAT_016651e0);
   if (iVar1 == -1) {
 LAB_00a93ea4:
     uVar3 = uVar3 | 0x100000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93ea4;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651d8);
+  iVar1 = vf18(uVar2,&DAT_016651d8);
   if (iVar1 == -1) {
 LAB_00a93ed4:
     uVar3 = uVar3 | 0x200000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93ed4;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651d0);
+  iVar1 = vf18(uVar2,&DAT_016651d0);
   if (iVar1 == -1) {
 LAB_00a93f04:
     uVar3 = uVar3 | 0x400000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93f04;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651c8);
+  iVar1 = vf18(uVar2,&DAT_016651c8);
   if (iVar1 == -1) {
 LAB_00a93f34:
     uVar3 = uVar3 | 0x800000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93f34;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651c0);
+  iVar1 = vf18(uVar2,&DAT_016651c0);
   if (iVar1 == -1) {
 LAB_00a93f64:
     uVar3 = uVar3 | 0x1000000;
   }
   else {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 != 0) goto LAB_00a93f64;
   }
-  iVar1 = FUN_00e06390(uVar2,&DAT_016651b8);
+  iVar1 = vf18(uVar2,&DAT_016651b8);
   if (iVar1 != -1) {
-    FUN_00e06830(iVar1,&local_24);
+    vf68(iVar1,&local_24);
     if (local_24 == 0) goto LAB_00a93f9a;
   }
   uVar3 = uVar3 | 0x2000000;
@@ -20075,17 +20000,17 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_36(int param_1,int param_2)
   int local_20;
   
   if (param_2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_2,0);
-    uVar1 = FUN_00e041c0();
-    iVar2 = FUN_00e06390(uVar1,"ObjectiveList");
+    uVar1 = vf04();
+    iVar2 = vf18(uVar1,"ObjectiveList");
     if (iVar2 != -1) {
-      iVar3 = FUN_00e053e0(iVar2);
+      iVar3 = vf10(iVar2);
       iVar6 = 0;
       if (0 < iVar3) {
         iVar5 = param_1 + 0x14;
         do {
-          uVar1 = FUN_00e05410(iVar2,iVar6);
+          uVar1 = vf14(iVar2,iVar6);
           iVar4 = (**(code **)(local_20 + 0x18))(uVar1,&DAT_0164fcc4);
           if (iVar4 != -1) {
             (**(code **)(unaff_EBP + 0x58))(iVar4,iVar5 + -4);
@@ -20125,17 +20050,17 @@ void cXmlBinary::cXmlBinary_28(int param_1)
   
   iVar1 = FUN_00de4500("radarmapinfo.bxm");
   if (iVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
-      iVar2 = FUN_00e053e0(iVar1);
+      iVar2 = vf10(iVar1);
       iVar5 = 0;
       if (0 < iVar2) {
         do {
-          iVar3 = FUN_00e05410(iVar1,iVar5);
-          if (((iVar3 != -1) && (iVar4 = FUN_00e06390(iVar3,&DAT_01655cd0), iVar4 != -1)) &&
-             (FUN_00e06930(iVar4,&local_28), param_1 == local_28)) {
+          iVar3 = vf14(iVar1,iVar5);
+          if (((iVar3 != -1) && (iVar4 = vf18(iVar3,&DAT_01655cd0), iVar4 != -1)) &&
+             (vf58(iVar4,&local_28), param_1 == local_28)) {
             if (*(int *)(local_24 + 0x33c) == 0) {
               iVar1 = FUN_00dd3500(0xc,&DAT_01b7bd48);
               if (iVar1 == 0) {
@@ -20689,25 +20614,25 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_27(int param_1,uint param_2)
   iVar1 = FUN_00a4c830(param_2);
   if (((iVar1 != 0) && (iVar1 = FUN_00de3560(), iVar1 != 0)) &&
      (iVar1 = FUN_00de44b0(&DAT_016a3a6c,0), iVar1 != 0)) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    uVar2 = FUN_00e041c0();
-    uVar2 = FUN_00e06390(uVar2,&DAT_016a3a64);
-    uVar3 = FUN_00e053e0(uVar2);
+    uVar2 = vf04();
+    uVar2 = vf18(uVar2,&DAT_016a3a64);
+    uVar3 = vf10(uVar2);
     *(undefined4 *)(param_1 + 0x2590) = uVar3;
     iVar5 = 0;
     iVar6 = 0;
-    iVar1 = FUN_00e053e0(uVar2);
+    iVar1 = vf10(uVar2);
     if (0 < iVar1) {
       do {
-        uVar3 = FUN_00e05410(uVar2,iVar6);
+        uVar3 = vf14(uVar2,iVar6);
         param_2 = CONCAT31(param_2._1_3_,0xff);
-        uVar3 = FUN_00e06390(uVar3,&DAT_0164fcc8);
-        FUN_00e067b0(uVar3,&param_2);
+        uVar3 = vf18(uVar3,&DAT_0164fcc8);
+        vf70(uVar3,&param_2);
         iVar1 = FUN_00d90360(param_2 & 0xff);
         iVar5 = iVar5 + iVar1;
         iVar6 = iVar6 + 1;
-        iVar1 = FUN_00e053e0(uVar2);
+        iVar1 = vf10(uVar2);
       } while (iVar6 < iVar1);
       if (iVar5 != 0) {
         iVar1 = FUN_00dd29b0(iVar5,0x20,0,0);
@@ -20719,21 +20644,21 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_27(int param_1,uint param_2)
           return 0;
         }
         iVar6 = 0;
-        iVar5 = FUN_00e053e0(uVar2);
+        iVar5 = vf10(uVar2);
         if (0 < iVar5) {
           piVar4 = (int *)(param_1 + 0x10);
           do {
-            local_24 = FUN_00e05410(uVar2,iVar6);
+            local_24 = vf14(uVar2,iVar6);
             param_2 = CONCAT31(param_2._1_3_,0xff);
-            uVar3 = FUN_00e06390(local_24,&DAT_0164fcc8);
-            FUN_00e067b0(uVar3,&param_2);
+            uVar3 = vf18(local_24,&DAT_0164fcc8);
+            vf70(uVar3,&param_2);
             *piVar4 = iVar1;
             FUN_00d95780(iVar1,param_2 & 0xff,local_20,&local_24);
             iVar5 = FUN_00d90360(param_2 & 0xff);
             iVar1 = iVar1 + iVar5;
             iVar6 = iVar6 + 1;
             piVar4 = piVar4 + 0x18;
-            iVar5 = FUN_00e053e0(uVar2);
+            iVar5 = vf10(uVar2);
           } while (iVar6 < iVar5);
         }
       }
@@ -20804,18 +20729,18 @@ void __thiscall cXmlBinary::cXmlBinary_105(uint param_1,undefined4 param_2)
   }
   *(int *)(param_1 + 0xe2e20) = iVar6;
   puStack_54 = (undefined1 *)0xc2a3b0;
-  cXmlBinary_103();
+  cXmlBinary();
   pppuStack_58 = *(undefined ****)(param_1 + 0xe2e20);
   puStack_54 = (undefined1 *)0x0;
   pppuStack_5c = (undefined ***)0xc2a3c2;
   FUN_00e062b0();
   puStack_54 = (undefined1 *)0xc2a3cb;
-  pppuVar7 = (undefined ***)FUN_00e041c0();
+  pppuVar7 = (undefined ***)vf04();
   puStack_54 = (undefined1 *)0x20;
   pppuStack_58 = (undefined ***)abStack_20;
   puStack_60 = (undefined1 *)0xc2a3de;
   pppuStack_5c = pppuVar7;
-  FUN_00e065f0();
+  vf24();
   pcVar9 = "NewEmSetRoot";
   pbVar8 = abStack_20;
   do {
@@ -20841,7 +20766,7 @@ LAB_00c2a40c:
       pppuStack_5c = (undefined ***)0xc2a420;
       pppuStack_58 = pppuVar7;
       puStack_54 = puVar14;
-      pppuStack_58 = (undefined ***)FUN_00e05410();
+      pppuStack_58 = (undefined ***)vf14();
       puStack_54 = *(undefined1 **)(param_1 + 0xe2e20);
       pppuStack_5c = &ppuStack_40;
       uStack_68 = 0xc2a436;
@@ -20878,53 +20803,53 @@ LAB_00c2a40c:
   puStack_88 = &DAT_01c722d8;
   _DAT_01c78c5c = FUN_00a54ae0(&DAT_01c78c60,param_2,"_esc.bxm",unaff_ESI,unaff_EBX);
   if ((_DAT_01c78c5c != 0) && (0 < _DAT_01c78c60)) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(_DAT_01c78c5c,0);
-    uStack_7c = FUN_00e041c0();
-    DAT_01c78c58 = FUN_00e053e0(uStack_7c);
+    uStack_7c = vf04();
+    DAT_01c78c58 = vf10(uStack_7c);
     uStack_8c = 0;
     if (DAT_01c78c58 != 0) {
       puVar13 = &DAT_01c72620;
       do {
         uVar10 = uStack_8c;
-        iVar6 = FUN_00e05410(uStack_7c,uStack_8c);
+        iVar6 = vf14(uStack_7c,uStack_8c);
         if (iVar6 != -1) {
-          uVar3 = FUN_00e06390(iVar6,"PointList");
+          uVar3 = vf18(iVar6,"PointList");
           uStack_80 = uVar3;
-          iStack_84 = FUN_00e053e0(uVar3);
+          iStack_84 = vf10(uVar3);
           iVar12 = 0;
           if (0 < iStack_84) {
             do {
               uStack_78 = 0;
               uStack_70 = 0xffffffff;
-              uVar3 = FUN_00e05410(uVar3,iVar12);
-              iVar4 = FUN_00e06390(uVar3,"HashNo");
+              uVar3 = vf14(uVar3,iVar12);
+              iVar4 = vf18(uVar3,"HashNo");
               if (iVar4 != -1) {
-                FUN_00e06830(iVar4,&uStack_74);
+                vf68(iVar4,&uStack_74);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a35a4);
+              iVar4 = vf18(uVar3,&DAT_016a35a4);
               if (iVar4 != -1) {
-                FUN_00e06930(iVar4,&uStack_70);
+                vf58(iVar4,&uStack_70);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a3dd0);
+              iVar4 = vf18(uVar3,&DAT_016a3dd0);
               if (iVar4 != -1) {
-                FUN_00e06a30(iVar4,&uStack_6c);
+                vf48(iVar4,&uStack_6c);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a3dc8);
+              iVar4 = vf18(uVar3,&DAT_016a3dc8);
               if (iVar4 != -1) {
-                FUN_00e06a30(iVar4,&puStack_60);
+                vf48(iVar4,&puStack_60);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a3dc0);
+              iVar4 = vf18(uVar3,&DAT_016a3dc0);
               if (iVar4 != -1) {
-                FUN_00e06970(iVar4,&puStack_54);
+                vf54(iVar4,&puStack_54);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_0164fcc8);
+              iVar4 = vf18(uVar3,&DAT_0164fcc8);
               if (iVar4 != -1) {
-                FUN_00e06830(iVar4,&stack0xffffffb0);
+                vf68(iVar4,&stack0xffffffb0);
               }
-              iVar4 = FUN_00e06390(uVar3,"Filter");
+              iVar4 = vf18(uVar3,"Filter");
               if (iVar4 != -1) {
-                FUN_00e06830(iVar4,&stack0xffffffb4);
+                vf68(iVar4,&stack0xffffffb4);
               }
               if (unaff_EBP == 0) {
                 unaff_EBP = 0xffffffff;
@@ -20954,7 +20879,7 @@ LAB_00c2a40c:
               uVar3 = uStack_80;
             } while (iVar12 < iStack_84);
           }
-          uVar3 = FUN_00e06390(iVar6,&DAT_016a3db8);
+          uVar3 = vf18(iVar6,&DAT_016a3db8);
           FUN_00a7c930();
           uStack_38 = 0;
           uStack_34 = 0;
@@ -21060,18 +20985,18 @@ void cXmlBinary::cXmlBinary_67
   
   *(undefined4 *)(unaff_EDI + 0xe2e20) = in_EAX;
   puStack_10 = (undefined1 *)0xc2a3b0;
-  cXmlBinary_103();
+  cXmlBinary();
   puStack_14 = *(undefined4 **)(unaff_EDI + 0xe2e20);
   puStack_10 = (undefined1 *)0x0;
   puStack_18 = (undefined4 *)0xc2a3c2;
   FUN_00e062b0();
   puStack_10 = (undefined1 *)0xc2a3cb;
-  puVar6 = (undefined4 *)FUN_00e041c0();
+  puVar6 = (undefined4 *)vf04();
   puStack_10 = (undefined1 *)0x20;
   puStack_14 = &param_9;
   puStack_1c = (undefined1 *)0xc2a3de;
   puStack_18 = puVar6;
-  FUN_00e065f0();
+  vf24();
   pcVar9 = "NewEmSetRoot";
   pbVar7 = (byte *)&param_9;
   do {
@@ -21097,7 +21022,7 @@ LAB_00c2a40c:
       puStack_18 = (undefined4 *)0xc2a420;
       puStack_14 = puVar6;
       puStack_10 = puVar13;
-      puStack_14 = (undefined4 *)FUN_00e05410();
+      puStack_14 = (undefined4 *)vf14();
       puStack_10 = *(undefined1 **)(unaff_EDI + 0xe2e20);
       puStack_18 = &param_1;
       uStack_24 = 0xc2a436;
@@ -21134,53 +21059,53 @@ LAB_00c2a40c:
   puStack_44 = &DAT_01c722d8;
   _DAT_01c78c5c = FUN_00a54ae0(&DAT_01c78c60,param_18,"_esc.bxm",unaff_ESI,unaff_EBX);
   if ((_DAT_01c78c5c != 0) && (0 < _DAT_01c78c60)) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(_DAT_01c78c5c,0);
-    uStack_38 = FUN_00e041c0();
-    DAT_01c78c58 = FUN_00e053e0(uStack_38);
+    uStack_38 = vf04();
+    DAT_01c78c58 = vf10(uStack_38);
     uStack_48 = 0;
     if (DAT_01c78c58 != 0) {
       puVar12 = &DAT_01c72620;
       do {
         uVar10 = uStack_48;
-        iVar8 = FUN_00e05410(uStack_38,uStack_48);
+        iVar8 = vf14(uStack_38,uStack_48);
         if (iVar8 != -1) {
-          uVar3 = FUN_00e06390(iVar8,"PointList");
+          uVar3 = vf18(iVar8,"PointList");
           uStack_3c = uVar3;
-          iStack_40 = FUN_00e053e0(uVar3);
+          iStack_40 = vf10(uVar3);
           iVar11 = 0;
           if (0 < iStack_40) {
             do {
               uStack_34 = 0;
               uStack_2c = 0xffffffff;
-              uVar3 = FUN_00e05410(uVar3,iVar11);
-              iVar4 = FUN_00e06390(uVar3,"HashNo");
+              uVar3 = vf14(uVar3,iVar11);
+              iVar4 = vf18(uVar3,"HashNo");
               if (iVar4 != -1) {
-                FUN_00e06830(iVar4,&uStack_30);
+                vf68(iVar4,&uStack_30);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a35a4);
+              iVar4 = vf18(uVar3,&DAT_016a35a4);
               if (iVar4 != -1) {
-                FUN_00e06930(iVar4,&uStack_2c);
+                vf58(iVar4,&uStack_2c);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a3dd0);
+              iVar4 = vf18(uVar3,&DAT_016a3dd0);
               if (iVar4 != -1) {
-                FUN_00e06a30(iVar4,&uStack_28);
+                vf48(iVar4,&uStack_28);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a3dc8);
+              iVar4 = vf18(uVar3,&DAT_016a3dc8);
               if (iVar4 != -1) {
-                FUN_00e06a30(iVar4,&puStack_1c);
+                vf48(iVar4,&puStack_1c);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_016a3dc0);
+              iVar4 = vf18(uVar3,&DAT_016a3dc0);
               if (iVar4 != -1) {
-                FUN_00e06970(iVar4,&puStack_10);
+                vf54(iVar4,&puStack_10);
               }
-              iVar4 = FUN_00e06390(uVar3,&DAT_0164fcc8);
+              iVar4 = vf18(uVar3,&DAT_0164fcc8);
               if (iVar4 != -1) {
-                FUN_00e06830(iVar4,&stack0xfffffff4);
+                vf68(iVar4,&stack0xfffffff4);
               }
-              iVar4 = FUN_00e06390(uVar3,"Filter");
+              iVar4 = vf18(uVar3,"Filter");
               if (iVar4 != -1) {
-                FUN_00e06830(iVar4,&stack0xfffffff8);
+                vf68(iVar4,&stack0xfffffff8);
               }
               if (unaff_EBP == 0) {
                 unaff_EBP = 0xffffffff;
@@ -21210,7 +21135,7 @@ LAB_00c2a40c:
               uVar3 = uStack_3c;
             } while (iVar11 < iStack_40);
           }
-          uVar3 = FUN_00e06390(iVar8,&DAT_016a3db8);
+          uVar3 = vf18(iVar8,&DAT_016a3db8);
           FUN_00a7c930();
           param_3 = 0;
           param_4 = 0;
@@ -21625,17 +21550,17 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_66(int param_1,uint param_2)
   if (param_2 != 0) {
     *(uint *)(param_1 + 0x5004) = param_2;
     local_38 = param_1;
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(*(undefined4 *)(param_1 + 0x5004),0);
-    uVar1 = FUN_00e041c0();
-    iVar2 = FUN_00e06390(uVar1,"ChainList");
+    uVar1 = vf04();
+    iVar2 = vf18(uVar1,"ChainList");
     if (iVar2 != -1) {
-      local_34 = FUN_00e053e0(iVar2);
+      local_34 = vf10(iVar2);
       local_40 = 0;
       if (0 < local_34) {
         param_1 = param_1 + 0xc;
         do {
-          iVar3 = FUN_00e05410(iVar2,local_40);
+          iVar3 = vf14(iVar2,local_40);
           iVar8 = iVar3;
           iVar4 = (**(code **)((int)local_20 + 0x18))(iVar3,&DAT_0164fcc4);
           if (iVar4 != -1) {
@@ -22233,19 +22158,18 @@ void cXmlBinary::cXmlBinary_64
   }
   iVar3 = FUN_00de4550("battleresult.bxm",0);
   if (iVar3 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar3,0);
-    iVar3 = FUN_00e041c0();
+    iVar3 = vf04();
     if (iVar3 != -1) {
-      iVar4 = FUN_00e053e0(iVar3);
+      iVar4 = vf10(iVar3);
       iVar7 = 0;
       local_1cc = iVar4;
       if (0 < iVar4) {
 LAB_00c2b8e7:
-        local_1fc[10] = FUN_00e05410(iVar3,iVar7);
+        local_1fc[10] = vf14(iVar3,iVar7);
         if ((local_1fc[10] == -1) ||
-           (iVar5 = FUN_00e06390(local_1fc[10],"Label"), iVar4 = local_1cc, iVar5 == -1))
-        goto LAB_00c2b962;
+           (iVar5 = vf18(local_1fc[10],"Label"), iVar4 = local_1cc, iVar5 == -1)) goto LAB_00c2b962;
         local_40 = 0;
         _memset(local_3f,0,0x3f);
         (**(code **)(local_21c + 0x74))(iVar5,&local_40,0x40);
@@ -22282,84 +22206,84 @@ LAB_00c2b8e7:
         apiStack_190[6] = local_174 + 0x41;
         uVar6 = 0;
         do {
-          iVar3 = FUN_00e06390(local_1fc[10],*(undefined4 *)((int)apcStack_5c + uVar6));
+          iVar3 = vf18(local_1fc[10],*(undefined4 *)((int)apcStack_5c + uVar6));
           if (iVar3 != -1) {
-            iVar4 = FUN_00e06390(iVar3,"Rank_S");
+            iVar4 = vf18(iVar3,"Rank_S");
             if (iVar4 != -1) {
-              iVar7 = FUN_00e06390(iVar4,"Border");
-              iVar4 = FUN_00e06390(iVar4,"Bonus");
+              iVar7 = vf18(iVar4,"Border");
+              iVar4 = vf18(iVar4,"Bonus");
               if ((iVar7 != -1) && (iVar4 != -1)) {
                 uVar2 = *(undefined4 *)((int)apiStack_1c8 + uVar6);
                 **(undefined4 **)((int)apiStack_1ac + uVar6) = 1;
-                FUN_00e06930(iVar7,uVar2);
-                FUN_00e06930(iVar4,*(undefined4 *)((int)apiStack_190 + uVar6));
+                vf58(iVar7,uVar2);
+                vf58(iVar4,*(undefined4 *)((int)apiStack_190 + uVar6));
               }
             }
-            iVar4 = FUN_00e06390(iVar3,"Rank_A");
+            iVar4 = vf18(iVar3,"Rank_A");
             if (iVar4 != -1) {
-              iVar7 = FUN_00e06390(iVar4,"Border");
-              iVar4 = FUN_00e06390(iVar4,"Bonus");
+              iVar7 = vf18(iVar4,"Border");
+              iVar4 = vf18(iVar4,"Bonus");
               if ((iVar7 != -1) && (iVar4 != -1)) {
                 iVar5 = *(int *)((int)apiStack_1c8 + uVar6);
                 **(undefined4 **)((int)apiStack_1ac + uVar6) = 1;
-                FUN_00e06930(iVar7,iVar5 + 4);
-                FUN_00e06930(iVar4,*(int *)((int)apiStack_190 + uVar6) + 4);
+                vf58(iVar7,iVar5 + 4);
+                vf58(iVar4,*(int *)((int)apiStack_190 + uVar6) + 4);
               }
             }
-            iVar4 = FUN_00e06390(iVar3,"Rank_B");
+            iVar4 = vf18(iVar3,"Rank_B");
             if (iVar4 != -1) {
-              iVar7 = FUN_00e06390(iVar4,"Border");
-              iVar4 = FUN_00e06390(iVar4,"Bonus");
+              iVar7 = vf18(iVar4,"Border");
+              iVar4 = vf18(iVar4,"Bonus");
               if ((iVar7 != -1) && (iVar4 != -1)) {
                 iVar5 = *(int *)((int)apiStack_1c8 + uVar6);
                 **(undefined4 **)((int)apiStack_1ac + uVar6) = 1;
-                FUN_00e06930(iVar7,iVar5 + 8);
-                FUN_00e06930(iVar4,*(int *)((int)apiStack_190 + uVar6) + 8);
+                vf58(iVar7,iVar5 + 8);
+                vf58(iVar4,*(int *)((int)apiStack_190 + uVar6) + 8);
               }
             }
-            iVar4 = FUN_00e06390(iVar3,"Rank_C");
+            iVar4 = vf18(iVar3,"Rank_C");
             if (iVar4 != -1) {
-              iVar7 = FUN_00e06390(iVar4,"Border");
-              iVar4 = FUN_00e06390(iVar4,"Bonus");
+              iVar7 = vf18(iVar4,"Border");
+              iVar4 = vf18(iVar4,"Bonus");
               if ((iVar7 != -1) && (iVar4 != -1)) {
                 iVar5 = *(int *)((int)apiStack_1c8 + uVar6);
                 **(undefined4 **)((int)apiStack_1ac + uVar6) = 1;
-                FUN_00e06930(iVar7,iVar5 + 0xc);
-                FUN_00e06930(iVar4,*(int *)((int)apiStack_190 + uVar6) + 0xc);
+                vf58(iVar7,iVar5 + 0xc);
+                vf58(iVar4,*(int *)((int)apiStack_190 + uVar6) + 0xc);
               }
             }
-            iVar3 = FUN_00e06390(iVar3,"Rank_D");
+            iVar3 = vf18(iVar3,"Rank_D");
             if (iVar3 != -1) {
-              iVar4 = FUN_00e06390(iVar3,"Border");
-              iVar3 = FUN_00e06390(iVar3,"Bonus");
+              iVar4 = vf18(iVar3,"Border");
+              iVar3 = vf18(iVar3,"Bonus");
               if ((iVar4 != -1) && (iVar3 != -1)) {
                 iVar7 = *(int *)((int)apiStack_1c8 + uVar6);
                 **(undefined4 **)((int)apiStack_1ac + uVar6) = 1;
-                FUN_00e06930(iVar4,iVar7 + 0x10);
-                FUN_00e06930(iVar3,*(int *)((int)apiStack_190 + uVar6) + 0x10);
+                vf58(iVar4,iVar7 + 0x10);
+                vf58(iVar3,*(int *)((int)apiStack_190 + uVar6) + 0x10);
               }
             }
           }
           iVar3 = local_1fc[10];
           uVar6 = uVar6 + 4;
         } while (uVar6 < 0x1c);
-        iVar4 = FUN_00e06390(local_1fc[10],"ID_NODAMAGE");
-        if ((iVar4 != -1) && (iVar4 = FUN_00e06390(iVar4,"Bonus"), iVar4 != -1)) {
-          FUN_00e06930(iVar4,local_1fc + 2);
+        iVar4 = vf18(local_1fc[10],"ID_NODAMAGE");
+        if ((iVar4 != -1) && (iVar4 = vf18(iVar4,"Bonus"), iVar4 != -1)) {
+          vf58(iVar4,local_1fc + 2);
           *param_9 = 1;
         }
-        iVar4 = FUN_00e06390(iVar3,"ID_NOPARTS");
-        if ((iVar4 != -1) && (iVar4 = FUN_00e06390(iVar4,"Bonus"), iVar4 != -1)) {
-          FUN_00e06930(iVar4,local_1fc + 1);
+        iVar4 = vf18(iVar3,"ID_NOPARTS");
+        if ((iVar4 != -1) && (iVar4 = vf18(iVar4,"Bonus"), iVar4 != -1)) {
+          vf58(iVar4,local_1fc + 1);
         }
-        iVar4 = FUN_00e06390(iVar3,"ID_NOKILLED");
-        if ((iVar4 != -1) && (iVar4 = FUN_00e06390(iVar4,"Bonus"), iVar4 != -1)) {
-          FUN_00e06930(iVar4,local_1fc + 5);
+        iVar4 = vf18(iVar3,"ID_NOKILLED");
+        if ((iVar4 != -1) && (iVar4 = vf18(iVar4,"Bonus"), iVar4 != -1)) {
+          vf58(iVar4,local_1fc + 5);
           *param_11 = 1;
         }
-        iVar3 = FUN_00e06390(iVar3,"ID_NOALERT");
-        if ((iVar3 != -1) && (iVar3 = FUN_00e06390(iVar3,"Bonus"), iVar3 != -1)) {
-          FUN_00e06930(iVar3,local_1fc + 8);
+        iVar3 = vf18(iVar3,"ID_NOALERT");
+        if ((iVar3 != -1) && (iVar3 = vf18(iVar3,"Bonus"), iVar3 != -1)) {
+          vf58(iVar3,local_1fc + 8);
           *param_10 = 1;
         }
         bVar1 = true;
@@ -22458,6 +22382,271 @@ LAB_00c2b962:
   iVar7 = iVar7 + 1;
   if (iVar4 <= iVar7) goto LAB_00c2be58;
   goto LAB_00c2b8e7;
+}
+
+// 00C49270  FUN_00c49270  size=779  [callgraph]
+void __fastcall FUN_00c49270(int *param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  int iVar3;
+  float10 fVar4;
+  float10 fVar5;
+  
+  iVar3 = *(int *)(*param_1 + 4);
+  if (iVar3 != iVar3 + *(int *)(*param_1 + 8) * 4) {
+    do {
+      FUN_00a89560();
+      iVar3 = iVar3 + 4;
+    } while (iVar3 != *(int *)(*param_1 + 4) + *(int *)(*param_1 + 8) * 4);
+  }
+  fVar4 = (float10)FUN_00e049b0();
+  fVar5 = (float10)FUN_00c3c970();
+  fVar1 = (float)fVar5;
+  switch(param_1[1]) {
+  case 1:
+  case 3:
+    if ((param_1[0xb] != 2) &&
+       (fVar2 = (float)param_1[0xc] + (float)fVar4, param_1[0xc] = (int)fVar2,
+       (float)param_1[9] <= fVar2)) {
+      param_1[0xc] = 0;
+      param_1[0xb] = param_1[0xb] + 1;
+    }
+    if (fVar5 < (float10)(float)param_1[0xe]) {
+      if (fVar5 < (float10)(float)param_1[0xd]) {
+        fVar2 = 1.0 / (float)param_1[param_1[0xb] + 0x10];
+      }
+      else {
+        fVar2 = 1.0 / (float)param_1[param_1[0xb] + 0x13];
+      }
+    }
+    else {
+      fVar2 = 1.0 / (float)param_1[param_1[0xb] + 0x16];
+    }
+    if (*(int *)(DAT_01bea190 + 0xa0) != 0) {
+      FUN_00cbdad0(fVar2 + 0.01,param_1[2]);
+    }
+    fVar2 = (float)param_1[2] - (fVar2 + 0.01);
+    param_1[2] = (int)fVar2;
+    if (fVar2 <= 0.0) {
+      if (param_1[1] == 3) {
+        param_1[2] = 0x42c7fae1;
+        param_1[1] = 1;
+        iVar3 = *(int *)(*param_1 + 4);
+        if (iVar3 != iVar3 + *(int *)(*param_1 + 8) * 4) {
+          do {
+            FUN_00a885d0(0);
+            iVar3 = iVar3 + 4;
+          } while (iVar3 != *(int *)(*param_1 + 4) + *(int *)(*param_1 + 8) * 4);
+        }
+        param_1[4] = 0;
+        FUN_009c9490();
+        param_1[4] = 0;
+      }
+      else if (param_1[1] == 1) {
+        param_1[4] = 1;
+      }
+    }
+    iVar3 = FUN_00c3d150();
+    if (iVar3 != 0) {
+      param_1[4] = 1;
+    }
+    iVar3 = FUN_00c3cfe0();
+    if (iVar3 != 0) {
+      FUN_00c3ccb0(0);
+      param_1[4] = 0;
+    }
+    break;
+  case 2:
+    if (*(int *)(DAT_01bea190 + 0xa0) != 0) {
+      FUN_00cbd9a0();
+    }
+    iVar3 = FUN_00c3ca80();
+    if (iVar3 == 0) {
+      fVar2 = (float)fVar4 + (float)param_1[5];
+      param_1[5] = (int)fVar2;
+      if ((((float)param_1[10] <= fVar2) && (iVar3 = FUN_00c3cf00(), iVar3 != 0)) &&
+         (FUN_00c3cda0(1), *(int *)(DAT_01bea190 + 0xa0) != 0)) {
+        FUN_00cbda10();
+        param_1[4] = 0;
+        goto LAB_00c494a2;
+      }
+    }
+    else {
+      param_1[5] = 0;
+    }
+    param_1[4] = 0;
+    goto LAB_00c494a2;
+  case 4:
+    if (*(int *)(DAT_01bea190 + 0xa0) != 0) {
+      FUN_00cbd9a0();
+    }
+    param_1[4] = 0;
+    break;
+  case 5:
+    if (*(int *)(DAT_01bea190 + 0xa0) != 0) {
+      FUN_00cbd9f0();
+    }
+    param_1[4] = 0;
+    break;
+  default:
+    param_1[0xb] = 0;
+LAB_00c494a2:
+    param_1[0xc] = 0;
+  }
+  if ((param_1[1] == 4) || (param_1[1] == 0)) goto LAB_00c4950d;
+  iVar3 = FUN_00d466f0();
+  if (iVar3 == 0) {
+    if ((*(int *)(*param_1 + 8) != 0) &&
+       ((float)param_1[0xf] < fVar1 == ((float)param_1[0xf] == fVar1))) {
+      iVar3 = FUN_00c3cc30();
+      goto LAB_00c49506;
+    }
+  }
+  else {
+    if (((*(int *)(*param_1 + 8) != 0) &&
+        ((float)param_1[0xf] < fVar1 == ((float)param_1[0xf] == fVar1))) &&
+       (iVar3 = FUN_00c3cc30(), iVar3 == 0)) goto LAB_00c4950d;
+    iVar3 = FUN_00c3cf00();
+LAB_00c49506:
+    if (iVar3 == 0) goto LAB_00c4950d;
+  }
+  param_1[4] = 1;
+LAB_00c4950d:
+  if (((DAT_01bea060 & 0x2000000) == 0) && (param_1[4] != 0)) {
+    param_1[1] = 0;
+    iVar3 = *(int *)(*param_1 + 4);
+    if (iVar3 != iVar3 + *(int *)(*param_1 + 8) * 4) {
+      do {
+        FUN_00a88600(0);
+        iVar3 = iVar3 + 4;
+      } while (iVar3 != *(int *)(*param_1 + 4) + *(int *)(*param_1 + 8) * 4);
+    }
+    param_1[4] = 0;
+    FUN_009c9440();
+    if (*(int *)(DAT_01bea190 + 0xa0) != 0) {
+      FUN_00cbd9c0(0);
+    }
+    param_1[4] = 0;
+    FUN_009c9440();
+    param_1[4] = 0;
+  }
+  return;
+}
+
+// 00C49590  FUN_00c49590  size=160  [callgraph]
+undefined4 __thiscall FUN_00c49590(int *param_1,int param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  uint uVar3;
+  int iVar4;
+  int *piVar5;
+  undefined4 uVar6;
+  
+  uVar6 = 0;
+  if (param_1[0x20] == 0) {
+    return 0;
+  }
+  if (param_1[0x20] != 0) {
+    EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 0x1a));
+  }
+  iVar2 = *param_1;
+  piVar5 = *(int **)(iVar2 + 4);
+  if (piVar5 != piVar5 + *(int *)(iVar2 + 8)) {
+    piVar1 = piVar5 + *(int *)(iVar2 + 8);
+    do {
+      if (param_2 == *piVar5) {
+        uVar3 = *(uint *)(iVar2 + 8);
+        iVar4 = *(int *)(iVar2 + 4);
+        piVar1 = (int *)(iVar4 + uVar3 * 4);
+        if ((((piVar5 != piVar1) && (iVar4 != 0)) && (uVar3 != 0)) &&
+           ((uint)((int)piVar5 - iVar4 >> 2) < uVar3)) {
+          for (; piVar5 != piVar1 + -1; piVar5 = piVar5 + 1) {
+            *piVar5 = piVar5[1];
+          }
+          *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + -1;
+        }
+        uVar6 = 1;
+        break;
+      }
+      piVar5 = piVar5 + 1;
+    } while (piVar5 != piVar1);
+  }
+  if (param_1[0x20] != 0) {
+    LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 0x1a));
+  }
+  return uVar6;
+}
+
+// 00C49630  FUN_00c49630  size=144  [callgraph]
+void __fastcall FUN_00c49630(int *param_1)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  
+  iVar5 = *(int *)(*param_1 + 4);
+  if (iVar5 != iVar5 + *(int *)(*param_1 + 8) * 4) {
+    do {
+      iVar4 = FUN_00a81330();
+      if ((iVar4 == 0) || ((*(byte *)(iVar4 + 0x28) & 2) != 0)) {
+        iVar1 = *param_1;
+        uVar2 = *(uint *)(iVar1 + 8);
+        iVar3 = *(int *)(iVar1 + 4);
+        iVar4 = iVar3 + uVar2 * 4;
+        if ((iVar5 != iVar4) &&
+           (((iVar3 != 0 && (uVar2 != 0)) && ((uint)(iVar5 - iVar3 >> 2) < uVar2)))) {
+          iVar3 = iVar5;
+          while (iVar3 != iVar4 + -4) {
+            iVar3 = iVar3 + 4;
+            FUN_00a7c960(iVar3);
+          }
+          *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + -1;
+          iVar4 = iVar5;
+        }
+      }
+      else {
+        iVar4 = iVar5 + 4;
+      }
+      iVar5 = iVar4;
+    } while (iVar4 != *(int *)(*param_1 + 4) + *(int *)(*param_1 + 8) * 4);
+  }
+  return;
+}
+
+// 00C496C0  FUN_00c496c0  size=111  [callgraph]
+void __thiscall FUN_00c496c0(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  if (param_1[8] != 0) {
+    if (param_1[8] != 0) {
+      EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 2));
+    }
+    iVar2 = *(int *)(*param_1 + 4);
+    if (iVar2 != iVar2 + *(int *)(*param_1 + 8) * 4) {
+      do {
+        iVar1 = FUN_00a81330();
+        if ((iVar1 != 0) && (iVar1 == param_2)) {
+          FUN_008f8520(iVar2);
+          break;
+        }
+        iVar2 = iVar2 + 4;
+      } while (iVar2 != *(int *)(*param_1 + 4) + *(int *)(*param_1 + 8) * 4);
+    }
+    if (param_1[8] != 0) {
+      LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 2));
+    }
+  }
+  return;
 }
 
 // 00C49730  FUN_00c49730  size=323  [callgraph]
@@ -22637,23 +22826,23 @@ void __thiscall cXmlBinary::cXmlBinary_69(int param_1,uint param_2)
   
   uVar1 = param_2;
   if (param_2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(uVar1,0);
-    uVar2 = FUN_00e041c0();
-    uVar2 = FUN_00e06390(uVar2,&DAT_01661874);
+    uVar2 = vf04();
+    uVar2 = vf18(uVar2,&DAT_01661874);
     iVar5 = 0;
     iVar6 = 0;
-    iVar3 = FUN_00e053e0(uVar2);
+    iVar3 = vf10(uVar2);
     if (0 < iVar3) {
       do {
-        uVar4 = FUN_00e05410(uVar2,iVar6);
+        uVar4 = vf14(uVar2,iVar6);
         param_2 = CONCAT31(param_2._1_3_,0xff);
-        uVar4 = FUN_00e06390(uVar4,&DAT_0164fcc8);
-        FUN_00e067b0(uVar4,&param_2);
+        uVar4 = vf18(uVar4,&DAT_0164fcc8);
+        vf70(uVar4,&param_2);
         iVar3 = FUN_00d90360(param_2 & 0xff);
         iVar5 = iVar5 + iVar3;
         iVar6 = iVar6 + 1;
-        iVar3 = FUN_00e053e0(uVar2);
+        iVar3 = vf10(uVar2);
       } while (iVar6 < iVar3);
     }
     iVar3 = FUN_00dd29b0(iVar5,0x20,0,0);
@@ -22663,13 +22852,13 @@ void __thiscall cXmlBinary::cXmlBinary_69(int param_1,uint param_2)
     }
     else {
       iVar6 = 0;
-      iVar5 = FUN_00e053e0(uVar2);
+      iVar5 = vf10(uVar2);
       if (0 < iVar5) {
         do {
-          local_44 = FUN_00e05410(uVar2,iVar6);
+          local_44 = vf14(uVar2,iVar6);
           param_2 = CONCAT31(param_2._1_3_,0xff);
-          uVar4 = FUN_00e06390(local_44,&DAT_0164fcc8);
-          FUN_00e067b0(uVar4,&param_2);
+          uVar4 = vf18(local_44,&DAT_0164fcc8);
+          vf70(uVar4,&param_2);
           local_20[0] = local_20[0] | 0x80000000;
           local_20[1] = 0;
           local_20[6] = 0;
@@ -22685,7 +22874,7 @@ void __thiscall cXmlBinary::cXmlBinary_69(int param_1,uint param_2)
           iVar5 = FUN_00d90360(param_2 & 0xff);
           iVar3 = iVar3 + iVar5;
           iVar6 = iVar6 + 1;
-          iVar5 = FUN_00e053e0(uVar2);
+          iVar5 = vf10(uVar2);
         } while (iVar6 < iVar5);
       }
     }
@@ -22748,12 +22937,12 @@ void __thiscall cXmlBinary::cXmlBinary_48(int *param_1,int *param_2)
     }
     *param_1 = 1;
     param_1[2] = iVar4;
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar3,0);
-    iVar4 = FUN_00e041c0();
+    iVar4 = vf04();
     local_804 = iVar4;
     if (iVar4 != -1) {
-      uVar9 = FUN_00e053e0(iVar4);
+      uVar9 = vf10(iVar4);
       param_1[1] = uVar9;
       if (uVar9 != 0) {
         iVar3 = FUN_00dd3580(-(uint)((int)((ulonglong)uVar9 * 0x1c >> 0x20) != 0) |
@@ -22770,32 +22959,32 @@ void __thiscall cXmlBinary::cXmlBinary_48(int *param_1,int *param_2)
           local_834 = 0;
           do {
             iVar3 = local_834;
-            uVar5 = FUN_00e05410(iVar4,local_830);
-            uVar6 = FUN_00e06390(uVar5,&DAT_016a6734);
-            uVar7 = FUN_00e06390(uVar5,"Frame");
-            local_838 = FUN_00e06390(uVar5,"Priority");
+            uVar5 = vf14(iVar4,local_830);
+            uVar6 = vf18(uVar5,&DAT_016a6734);
+            uVar7 = vf18(uVar5,"Frame");
+            local_838 = vf18(uVar5,"Priority");
             local_840 = 0.0;
-            FUN_00e06970(uVar6,&local_840);
+            vf54(uVar6,&local_840);
             *(float *)(iVar3 + 0x14 + param_1[3]) = 1.0 - local_840;
-            FUN_00e06970(uVar7,&local_840);
+            vf54(uVar7,&local_840);
             fVar1 = local_840;
             if (local_840 <= 1.0) {
               fVar1 = 1.0;
             }
             *(float *)(param_1[3] + 0x18 + iVar3) = fVar1;
             local_80c = 0;
-            FUN_00e06830(local_838,&local_80c);
+            vf68(local_838,&local_80c);
             *(undefined4 *)(iVar3 + 0x10 + param_1[3]) = local_80c;
-            iVar4 = FUN_00e064c0(uVar5,&DAT_016a6724,local_200);
-            iVar8 = FUN_00e064c0(uVar5,"Cylinder",local_580);
+            iVar4 = vf1C(uVar5,&DAT_016a6724,local_200);
+            iVar8 = vf1C(uVar5,"Cylinder",local_580);
             iVar10 = 0;
             if (0 < iVar4) {
               iVar11 = 0;
               do {
-                local_838 = FUN_00e06390(local_200[iVar10],&DAT_016a3dd0);
-                local_83c = FUN_00e06390(local_200[iVar10],&DAT_016a3598);
-                FUN_00e06a30(local_838,local_700 + iVar11);
-                FUN_00e06a30(local_83c,local_380 + iVar11);
+                local_838 = vf18(local_200[iVar10],&DAT_016a3dd0);
+                local_83c = vf18(local_200[iVar10],&DAT_016a3598);
+                vf48(local_838,local_700 + iVar11);
+                vf48(local_83c,local_380 + iVar11);
                 iVar10 = iVar10 + 1;
                 iVar11 = iVar11 + 0xc;
                 iVar3 = local_834;
@@ -22806,12 +22995,12 @@ void __thiscall cXmlBinary::cXmlBinary_48(int *param_1,int *param_2)
             if (0 < iVar8) {
               puVar12 = local_700;
               do {
-                uVar5 = FUN_00e06390(local_580[iVar4],&DAT_016a3dd0);
-                uVar6 = FUN_00e06390(local_580[iVar4],"Radius");
-                local_83c = FUN_00e06390(local_580[iVar4],"Height");
-                FUN_00e06a30(uVar5,puVar12);
-                FUN_00e06970(uVar6,local_800 + iVar4 * 4);
-                FUN_00e06970(local_83c,local_780 + iVar4 * 4);
+                uVar5 = vf18(local_580[iVar4],&DAT_016a3dd0);
+                uVar6 = vf18(local_580[iVar4],"Radius");
+                local_83c = vf18(local_580[iVar4],"Height");
+                vf48(uVar5,puVar12);
+                vf54(uVar6,local_800 + iVar4 * 4);
+                vf54(local_83c,local_780 + iVar4 * 4);
                 iVar4 = iVar4 + 1;
                 puVar12 = puVar12 + 0xc;
                 param_1 = local_808;
@@ -22845,7 +23034,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_83(int param_1,undefined4 param_2,i
   if (param_3 == 0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   *(int *)(param_1 + 0x20) = param_3;
   FUN_00e062b0(param_3,0);
   uVar1 = FUN_00c5e700(param_2,local_20);
@@ -23137,14 +23326,14 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_53(int *param_1)
   
   iVar1 = FUN_00de4500("EffectBullet.bxm");
   if (iVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 == -1) {
       puVar6 = &DAT_016a7e1c;
     }
     else {
-      uVar2 = FUN_00e053e0(iVar1);
+      uVar2 = vf10(iVar1);
       param_1[1] = uVar2;
       if (uVar2 != 0) {
         iVar3 = FUN_00dd3580(-(uint)((int)((ulonglong)uVar2 * 0x18 >> 0x20) != 0) |
@@ -23167,7 +23356,7 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_53(int *param_1)
         if (param_1[1] != 0) {
           iVar3 = 0;
           do {
-            iVar4 = FUN_00e05410(iVar1,uVar2);
+            iVar4 = vf14(iVar1,uVar2);
             if (iVar4 != -1) {
               puVar5 = (undefined4 *)(*param_1 + iVar3);
               *puVar5 = 0;
@@ -23280,14 +23469,14 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_54(int *param_1)
   
   iVar2 = FUN_00de4500("SeBullet.bxm");
   if (iVar2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar2,0);
-    iVar2 = FUN_00e041c0();
+    iVar2 = vf04();
     if (iVar2 == -1) {
       puVar6 = &DAT_016a7fc8;
     }
     else {
-      uVar3 = FUN_00e053e0(iVar2);
+      uVar3 = vf10(iVar2);
       param_1[1] = uVar3;
       if (uVar3 != 0) {
         iVar4 = FUN_00dd3580(-(uint)((int)((ulonglong)uVar3 * 0x1c >> 0x20) != 0) |
@@ -23310,7 +23499,7 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_54(int *param_1)
         if (param_1[1] != 0) {
           iVar4 = 0;
           do {
-            iVar5 = FUN_00e05410(iVar2,uVar3);
+            iVar5 = vf14(iVar2,uVar3);
             if (iVar5 != -1) {
               iVar1 = *param_1;
               *(undefined4 *)(iVar1 + iVar4) = 0;
@@ -23633,7 +23822,7 @@ void __thiscall cXmlBinary::cXmlBinary_16(int param_1,undefined4 *param_2)
   int local_4;
   
   local_4 = param_1;
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_2,0);
   param_2 = (undefined4 *)(param_1 + 0x6c);
   iVar4 = 0x20;
@@ -23646,15 +23835,15 @@ void __thiscall cXmlBinary::cXmlBinary_16(int param_1,undefined4 *param_2)
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
   *(undefined4 *)(param_1 + 0x40) = 0;
-  uVar2 = FUN_00e041c0();
-  iVar4 = FUN_00e06390(uVar2,"TriggerPos");
+  uVar2 = vf04();
+  iVar4 = vf18(uVar2,"TriggerPos");
   if (iVar4 != -1) {
-    iVar3 = FUN_00e053e0(iVar4);
+    iVar3 = vf10(iVar4);
     *(int *)(param_1 + 0x40) = iVar3;
     uVar5 = 0;
     if (iVar3 != 0) {
       do {
-        param_2 = (undefined4 *)FUN_00e05410(iVar4,uVar5);
+        param_2 = (undefined4 *)vf14(iVar4,uVar5);
         FUN_00c781e0(local_24,&param_2);
         uVar5 = uVar5 + 1;
       } while (uVar5 < *(uint *)(local_4 + 0x40));
@@ -23691,7 +23880,7 @@ void __thiscall cXmlBinary::cXmlBinary_101(int *param_1,int param_2)
      (param_1[param_2 * 0x198 + 0x18] = param_1[param_2 * 0x198 + 0x18] + -1,
      param_1[param_2 * 0x198 + 0x18] < 1)) {
     param_1[param_2 * 0x198 + 0x18] = 1;
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_1[0xd],0);
     iVar5 = param_1[param_2 + 0x1a20];
     local_154 = iVar5;
@@ -23711,11 +23900,11 @@ void __thiscall cXmlBinary::cXmlBinary_101(int *param_1,int param_2)
               uVar1 = param_1[param_2 * 0x198 + 0x17];
               if (0xf < uVar1) goto LAB_00ca61c6;
               param_1[param_2 * 0x198 + 0x17] = uVar1 + 1;
-              iVar3 = FUN_00e05410(iVar5,uVar1);
+              iVar3 = vf14(iVar5,uVar1);
               iVar5 = local_154;
-            } while ((iVar3 == -1) ||
-                    (iVar4 = FUN_00e06390(iVar3,"SetNo"), iVar5 = local_154, iVar4 == -1));
-            FUN_00e068f0(iVar4,&uStack_158);
+            } while ((iVar3 == -1) || (iVar4 = vf18(iVar3,"SetNo"), iVar5 = local_154, iVar4 == -1))
+            ;
+            vf5C(iVar4,&uStack_158);
             iVar5 = local_154;
           } while ((param_1[param_2 * 0x198 + ((uint)(int)(short)uStack_158 >> 5) + 0x127] &
                    0x80000000U >> ((byte)uStack_158 & 0x1f)) == 0);
@@ -23788,7 +23977,7 @@ void __thiscall cXmlBinary::cXmlBinary_100(int param_1,uint param_2)
   
   if (*(int *)(param_1 + 0xc) != 0) {
     local_164 = param_1;
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(*(undefined4 *)(param_1 + 0x34),0);
     local_160 = (int *)(param_1 + 0x6880);
     local_168 = 0;
@@ -23804,7 +23993,7 @@ void __thiscall cXmlBinary::cXmlBinary_100(int param_1,uint param_2)
         if (piVar8[3] < 0) {
           local_154 = *local_160;
           if (((local_154 != -1) && (piVar8[1] < piVar8[-2])) &&
-             (local_15c = FUN_00e053e0(local_154), piVar8[2] < local_15c)) {
+             (local_15c = vf10(local_154), piVar8[2] < local_15c)) {
             iVar3 = FUN_00c18550(*(undefined4 *)(param_1 + 4));
             if (iVar3 == 0) {
               FUN_00dd5650(&DAT_016b21b0,*(undefined4 *)(param_1 + 4),uVar7);
@@ -23817,9 +24006,9 @@ void __thiscall cXmlBinary::cXmlBinary_100(int param_1,uint param_2)
               else if (piVar8[2] < local_15c) {
                 do {
                   if (piVar8[-2] <= piVar8[1]) break;
-                  iVar3 = FUN_00e05410(local_154,piVar8[2]);
-                  if ((iVar3 != -1) && (iVar4 = FUN_00e06390(iVar3,"SetNo"), iVar4 != -1)) {
-                    FUN_00e068f0(iVar4,&uStack_16c);
+                  iVar3 = vf14(local_154,piVar8[2]);
+                  if ((iVar3 != -1) && (iVar4 = vf18(iVar3,"SetNo"), iVar4 != -1)) {
+                    vf5C(iVar4,&uStack_16c);
                     uVar2 = (ushort)uStack_16c;
                     if (uVar2 < 0x10) {
                       if ((float)piVar8[((short)uVar2 + 1) * 0x10 + -4] <= 0.0) {
@@ -23937,7 +24126,7 @@ int __thiscall cXmlBinary::cXmlBinary_95(int param_1,int *param_2)
   }
   *(undefined4 *)((int)param_2 + 0xc) = 0;
   local_40 = 0;
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(*(undefined4 *)(param_1 + 0x34),0);
   param_2 = (int *)(param_1 + 0x6880);
   param_1 = param_1 + 0x40;
@@ -23946,12 +24135,12 @@ int __thiscall cXmlBinary::cXmlBinary_95(int param_1,int *param_2)
     iVar2 = *param_2;
     local_30 = iVar2;
     if (iVar2 != -1) {
-      local_2c = FUN_00e053e0(iVar2);
+      local_2c = vf10(iVar2);
       local_38 = -1;
       if (-1 < local_2c) {
         do {
           iVar3 = local_38;
-          iVar2 = FUN_00e05410(iVar2,local_38);
+          iVar2 = vf14(iVar2,local_38);
           if (iVar2 != -1) {
             if (iVar3 < 0) {
               if ((*(int *)(param_1 + 0x620) == 1) && (*(int *)(param_1 + 0x47c) != -1)) {
@@ -24753,7 +24942,7 @@ void __thiscall cXmlBinary::cXmlBinary_82(int param_1,int param_2)
   undefined **local_20;
   
   if (-1 < param_2) {
-    cXmlBinary_103();
+    cXmlBinary();
     local_54[0] = DAT_018b92f4;
     iVar1 = FUN_00de4550("stageresult.bxm",0);
     if (iVar1 == 0) {
@@ -24765,32 +24954,32 @@ void __thiscall cXmlBinary::cXmlBinary_82(int param_1,int param_2)
       return;
     }
     FUN_00e062b0(iVar1,0);
-    uVar2 = FUN_00e041c0();
-    iVar1 = FUN_00e053e0(uVar2);
+    uVar2 = vf04();
+    iVar1 = vf10(uVar2);
     if (iVar1 <= param_2) {
       local_20 = vftable;
       FUN_00e04180();
       return;
     }
-    iVar1 = FUN_00e05410(uVar2,param_2);
+    iVar1 = vf14(uVar2,param_2);
     if (iVar1 != -1) {
-      iVar3 = FUN_00e06390(iVar1,"BattleNum");
+      iVar3 = vf18(iVar1,"BattleNum");
       if (iVar3 != -1) {
-        FUN_00e06930(iVar3,param_1 + 0x304);
+        vf58(iVar3,param_1 + 0x304);
       }
-      if (((DAT_01b76144 == 0) && (iVar3 = FUN_00e06390(iVar1,"ID_NODAMAGE"), iVar3 != -1)) &&
-         (iVar3 = FUN_00e06390(iVar3,"Bonus"), iVar3 != -1)) {
-        FUN_00e06930(iVar3,(int *)(param_1 + 0x2f4));
+      if (((DAT_01b76144 == 0) && (iVar3 = vf18(iVar1,"ID_NODAMAGE"), iVar3 != -1)) &&
+         (iVar3 = vf18(iVar3,"Bonus"), iVar3 != -1)) {
+        vf58(iVar3,(int *)(param_1 + 0x2f4));
         *(int *)(param_1 + 0x300) = *(int *)(param_1 + 0x300) + *(int *)(param_1 + 0x2f4);
       }
-      if (((DAT_01b76174 == 0) && (iVar3 = FUN_00e06390(iVar1,"ID_NOALERT"), iVar3 != -1)) &&
-         (iVar3 = FUN_00e06390(iVar3,"Bonus"), iVar3 != -1)) {
-        FUN_00e06930(iVar3,(int *)(param_1 + 0x2f8));
+      if (((DAT_01b76174 == 0) && (iVar3 = vf18(iVar1,"ID_NOALERT"), iVar3 != -1)) &&
+         (iVar3 = vf18(iVar3,"Bonus"), iVar3 != -1)) {
+        vf58(iVar3,(int *)(param_1 + 0x2f8));
         *(int *)(param_1 + 0x300) = *(int *)(param_1 + 0x300) + *(int *)(param_1 + 0x2f8);
       }
-      if (((DAT_01b76148 == 0) && (iVar3 = FUN_00e06390(iVar1,"ID_NOKILLED"), iVar3 != -1)) &&
-         (iVar3 = FUN_00e06390(iVar3,"Bonus"), iVar3 != -1)) {
-        FUN_00e06930(iVar3,(int *)(param_1 + 0x2fc));
+      if (((DAT_01b76148 == 0) && (iVar3 = vf18(iVar1,"ID_NOKILLED"), iVar3 != -1)) &&
+         (iVar3 = vf18(iVar3,"Bonus"), iVar3 != -1)) {
+        vf58(iVar3,(int *)(param_1 + 0x2fc));
         *(int *)(param_1 + 0x300) = *(int *)(param_1 + 0x300) + *(int *)(param_1 + 0x2fc);
       }
       iVar3 = *(int *)(param_1 + 0x304);
@@ -24826,51 +25015,51 @@ void __thiscall cXmlBinary::cXmlBinary_82(int param_1,int param_2)
       local_54[3] = 0;
       local_54[4] = 0;
       local_54[5] = 0;
-      iVar1 = FUN_00e06390(iVar1,"ID_RANK");
+      iVar1 = vf18(iVar1,"ID_RANK");
       if (iVar1 != -1) {
-        iVar3 = FUN_00e06390(iVar1,"Rank_S");
+        iVar3 = vf18(iVar1,"Rank_S");
         if (iVar3 != -1) {
-          iVar4 = FUN_00e06390(iVar3,"Border");
-          iVar3 = FUN_00e06390(iVar3,"Bonus");
+          iVar4 = vf18(iVar3,"Border");
+          iVar3 = vf18(iVar3,"Bonus");
           if ((iVar4 != -1) && (iVar3 != -1)) {
-            FUN_00e06930(iVar4,local_54 + 6);
-            FUN_00e06930(iVar3,local_54 + 1);
+            vf58(iVar4,local_54 + 6);
+            vf58(iVar3,local_54 + 1);
           }
         }
-        iVar3 = FUN_00e06390(iVar1,"Rank_A");
+        iVar3 = vf18(iVar1,"Rank_A");
         if (iVar3 != -1) {
-          iVar4 = FUN_00e06390(iVar3,"Border");
-          iVar3 = FUN_00e06390(iVar3,"Bonus");
+          iVar4 = vf18(iVar3,"Border");
+          iVar3 = vf18(iVar3,"Bonus");
           if ((iVar4 != -1) && (iVar3 != -1)) {
-            FUN_00e06930(iVar4,local_54 + 7);
-            FUN_00e06930(iVar3,local_54 + 2);
+            vf58(iVar4,local_54 + 7);
+            vf58(iVar3,local_54 + 2);
           }
         }
-        iVar3 = FUN_00e06390(iVar1,"Rank_B");
+        iVar3 = vf18(iVar1,"Rank_B");
         if (iVar3 != -1) {
-          iVar4 = FUN_00e06390(iVar3,"Border");
-          iVar3 = FUN_00e06390(iVar3,"Bonus");
+          iVar4 = vf18(iVar3,"Border");
+          iVar3 = vf18(iVar3,"Bonus");
           if ((iVar4 != -1) && (iVar3 != -1)) {
-            FUN_00e06930(iVar4,local_54 + 8);
-            FUN_00e06930(iVar3,local_54 + 3);
+            vf58(iVar4,local_54 + 8);
+            vf58(iVar3,local_54 + 3);
           }
         }
-        iVar3 = FUN_00e06390(iVar1,"Rank_C");
+        iVar3 = vf18(iVar1,"Rank_C");
         if (iVar3 != -1) {
-          iVar4 = FUN_00e06390(iVar3,"Border");
-          iVar3 = FUN_00e06390(iVar3,"Bonus");
+          iVar4 = vf18(iVar3,"Border");
+          iVar3 = vf18(iVar3,"Bonus");
           if ((iVar4 != -1) && (iVar3 != -1)) {
-            FUN_00e06930(iVar4,local_54 + 9);
-            FUN_00e06930(iVar3,local_54 + 4);
+            vf58(iVar4,local_54 + 9);
+            vf58(iVar3,local_54 + 4);
           }
         }
-        iVar1 = FUN_00e06390(iVar1,"Rank_D");
+        iVar1 = vf18(iVar1,"Rank_D");
         if (iVar1 != -1) {
-          iVar3 = FUN_00e06390(iVar1,"Border");
-          iVar1 = FUN_00e06390(iVar1,"Bonus");
+          iVar3 = vf18(iVar1,"Border");
+          iVar1 = vf18(iVar1,"Bonus");
           if ((iVar3 != -1) && (iVar1 != -1)) {
-            FUN_00e06930(iVar3,local_54 + 10);
-            FUN_00e06930(iVar1,local_54 + 5);
+            vf58(iVar3,local_54 + 10);
+            vf58(iVar1,local_54 + 5);
           }
         }
       }
@@ -26156,23 +26345,23 @@ void __thiscall cXmlBinary::cXmlBinary_68(int param_1,undefined4 *param_2,int pa
   *(undefined4 *)(param_1 + 0xf6c) = 0;
   *(undefined4 *)(param_1 + 0xf70) = 0;
   if (*piVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(*piVar1,0);
-    iVar4 = FUN_00e041c0();
+    iVar4 = vf04();
     param_4 = iVar4;
-    if ((iVar4 != -1) && (iVar5 = FUN_00e053e0(iVar4), 0 < iVar5)) {
+    if ((iVar4 != -1) && (iVar5 = vf10(iVar4), 0 < iVar5)) {
       do {
-        iVar6 = FUN_00e05410(iVar4,iVar3);
+        iVar6 = vf14(iVar4,iVar3);
         if (iVar6 != -1) {
           local_40 = 0;
           _memset(local_3f,0,0x3f);
-          FUN_00e065f0(iVar6,&local_40,0x40);
+          vf24(iVar6,&local_40,0x40);
           iVar7 = FUN_00e03ea0(&local_40);
           iVar4 = param_4;
           if (iVar7 == param_3) {
-            uVar8 = FUN_00e06df0(iVar6,&DAT_016b7934);
+            uVar8 = vf9C(iVar6,&DAT_016b7934);
             param_4 = 0;
-            FUN_00e07030(uVar8,&param_4);
+            vfD8(uVar8,&param_4);
             if (5 < param_4) {
               param_4 = 5;
             }
@@ -26182,8 +26371,8 @@ void __thiscall cXmlBinary::cXmlBinary_68(int param_1,undefined4 *param_2,int pa
             if (1 < param_4) {
               puVar9 = (undefined4 *)(param_1 + 0xf64);
               do {
-                uVar8 = FUN_00e05410(iVar6,iVar4 + -1);
-                FUN_00e066f0(uVar8,&local_40,0x40);
+                uVar8 = vf14(iVar6,iVar4 + -1);
+                vf74(uVar8,&local_40,0x40);
                 uVar8 = FUN_00e03ea0(&local_40);
                 *puVar9 = uVar8;
                 iVar4 = iVar4 + 1;
@@ -26239,33 +26428,33 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_70(int param_1,int param_2,int para
     }
   }
   if (*(int *)(iVar2 * 0xd4 + 0x38 + param_1) != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(*(undefined4 *)(iVar2 * 0xd4 + 0x38 + param_1),0);
-    iVar2 = FUN_00e041c0();
+    iVar2 = vf04();
     if (iVar2 != -1) {
-      iVar1 = FUN_00e053e0(iVar2);
+      iVar1 = vf10(iVar2);
       iVar6 = 0;
       param_3 = iVar1;
       if (0 < iVar1) {
         do {
-          iVar3 = FUN_00e05410(iVar2,iVar6);
+          iVar3 = vf14(iVar2,iVar6);
           if (iVar3 != -1) {
-            uVar4 = FUN_00e06df0(iVar3,&DAT_016b7944);
+            uVar4 = vf9C(iVar3,&DAT_016b7944);
             local_40 = 0;
             _memset(local_3f,0,0x3f);
-            FUN_00e071d0(uVar4,&local_40,0x40);
+            vfA4(uVar4,&local_40,0x40);
             iVar5 = FUN_00e03ea0(&local_40);
             iVar1 = param_3;
             if (iVar5 == param_2) {
               if ((DAT_01bea064 & 0x8000) == 0) {
-                iVar2 = FUN_00e06390(iVar3,&DAT_016b793c);
+                iVar2 = vf18(iVar3,&DAT_016b793c);
               }
               else {
-                iVar2 = FUN_00e06390(iVar3,&DAT_016b7940);
+                iVar2 = vf18(iVar3,&DAT_016b7940);
               }
               if (iVar2 != -1) {
                 param_3 = 0;
-                FUN_00e06970(iVar2,&param_3);
+                vf54(iVar2,&param_3);
                 uVar4 = FUN_00fdbc60();
                 FUN_00e04180();
                 return uVar4;
@@ -26309,29 +26498,29 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_71(int param_1,int param_2,int para
     }
   }
   if (*(int *)(iVar3 * 0xd4 + 0x40 + param_1) != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(*(undefined4 *)(iVar3 * 0xd4 + 0x40 + param_1),0);
-    iVar3 = FUN_00e041c0();
+    iVar3 = vf04();
     if (iVar3 != -1) {
-      iVar2 = FUN_00e053e0(iVar3);
+      iVar2 = vf10(iVar3);
       iVar6 = 0;
       param_3 = iVar2;
       if (0 < iVar2) {
         do {
-          iVar4 = FUN_00e05410(iVar3,iVar6);
+          iVar4 = vf14(iVar3,iVar6);
           if (iVar4 != -1) {
-            iVar5 = FUN_00e06390(iVar4,"MessageID");
-            iVar4 = FUN_00e06390(iVar4,"DrawFrame");
+            iVar5 = vf18(iVar4,"MessageID");
+            iVar4 = vf18(iVar4,"DrawFrame");
             iVar2 = param_3;
             if ((iVar5 != -1) && (iVar4 != -1)) {
               local_40 = 0;
               _memset(local_3f,0,0x3f);
-              FUN_00e066f0(iVar5,&local_40,0x40);
+              vf74(iVar5,&local_40,0x40);
               iVar5 = FUN_00e03ea0(&local_40);
               iVar2 = param_3;
               if (param_2 == iVar5) {
                 param_3 = 0;
-                FUN_00e06930(iVar4,&param_3);
+                vf58(iVar4,&param_3);
                 uVar1 = param_3;
                 FUN_00e04180();
                 return uVar1;
@@ -26600,32 +26789,32 @@ void __fastcall cXmlBinary::cXmlBinary_52(int param_1)
   }
   iVar2 = FUN_00de4550("battleresult.bxm",0);
   if (iVar2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar2,0);
-    iVar2 = FUN_00e041c0();
+    iVar2 = vf04();
     if (iVar2 != -1) {
-      iVar3 = FUN_00e053e0(iVar2);
+      iVar3 = vf10(iVar2);
       iVar7 = 0;
       if (0 < iVar3) {
 LAB_00cd7d45:
-        iVar4 = FUN_00e05410(iVar2,iVar7);
-        if ((iVar4 == -1) || (iVar5 = FUN_00e06390(iVar4,"Label"), iVar5 == -1)) goto LAB_00cd7dc1;
+        iVar4 = vf14(iVar2,iVar7);
+        if ((iVar4 == -1) || (iVar5 = vf18(iVar4,"Label"), iVar5 == -1)) goto LAB_00cd7dc1;
         local_40 = 0;
         _memset(local_3f,0,0x3f);
         (**(code **)(local_dc + 0x74))(iVar5,&local_40,0x40);
         iVar5 = FUN_00e03ea0(&local_40);
         if (iVar5 != *(int *)(param_1 + 800)) goto LAB_00cd7dc1;
-        iVar2 = FUN_00e06390(iVar4,"Index");
+        iVar2 = vf18(iVar4,"Index");
         if (iVar2 != -1) {
-          FUN_00e06930(iVar2,param_1 + 0x488);
+          vf58(iVar2,param_1 + 0x488);
         }
-        iVar2 = FUN_00e06390(iVar4,"POS_X");
+        iVar2 = vf18(iVar4,"POS_X");
         if (iVar2 != -1) {
-          FUN_00e06970(iVar2,param_1 + 0x48c);
+          vf54(iVar2,param_1 + 0x48c);
         }
-        iVar2 = FUN_00e06390(iVar4,"POS_Y");
+        iVar2 = vf18(iVar4,"POS_Y");
         if (iVar2 != -1) {
-          FUN_00e06970(iVar2,param_1 + 0x490);
+          vf54(iVar2,param_1 + 0x490);
         }
         aiStack_b0[0] = param_1 + 0x494;
         aiStack_b0[1] = param_1 + 0x4c0;
@@ -26657,81 +26846,81 @@ LAB_00cd7d45:
         aiStack_78[6] = param_1 + 0x5c4;
         uVar6 = 0;
         do {
-          iVar2 = FUN_00e06390(iVar4,*(undefined4 *)((int)apcStack_5c + uVar6));
+          iVar2 = vf18(iVar4,*(undefined4 *)((int)apcStack_5c + uVar6));
           if (iVar2 != -1) {
-            iVar3 = FUN_00e06390(iVar2,"Rank_S");
+            iVar3 = vf18(iVar2,"Rank_S");
             if (iVar3 != -1) {
-              iVar7 = FUN_00e06390(iVar3,"Border");
-              iVar3 = FUN_00e06390(iVar3,"Bonus");
+              iVar7 = vf18(iVar3,"Border");
+              iVar3 = vf18(iVar3,"Bonus");
               if ((iVar7 != -1) && (iVar3 != -1)) {
                 uVar1 = *(undefined4 *)((int)aiStack_94 + uVar6);
                 **(undefined4 **)((int)aiStack_b0 + uVar6) = 1;
-                FUN_00e06930(iVar7,uVar1);
-                FUN_00e06930(iVar3,*(undefined4 *)((int)aiStack_78 + uVar6));
+                vf58(iVar7,uVar1);
+                vf58(iVar3,*(undefined4 *)((int)aiStack_78 + uVar6));
               }
             }
-            iVar3 = FUN_00e06390(iVar2,"Rank_A");
+            iVar3 = vf18(iVar2,"Rank_A");
             if (iVar3 != -1) {
-              iVar7 = FUN_00e06390(iVar3,"Border");
-              iVar3 = FUN_00e06390(iVar3,"Bonus");
+              iVar7 = vf18(iVar3,"Border");
+              iVar3 = vf18(iVar3,"Bonus");
               if ((iVar7 != -1) && (iVar3 != -1)) {
                 iVar5 = *(int *)((int)aiStack_94 + uVar6);
                 **(undefined4 **)((int)aiStack_b0 + uVar6) = 1;
-                FUN_00e06930(iVar7,iVar5 + 4);
-                FUN_00e06930(iVar3,*(int *)((int)aiStack_78 + uVar6) + 4);
+                vf58(iVar7,iVar5 + 4);
+                vf58(iVar3,*(int *)((int)aiStack_78 + uVar6) + 4);
               }
             }
-            iVar3 = FUN_00e06390(iVar2,"Rank_B");
+            iVar3 = vf18(iVar2,"Rank_B");
             if (iVar3 != -1) {
-              iVar7 = FUN_00e06390(iVar3,"Border");
-              iVar3 = FUN_00e06390(iVar3,"Bonus");
+              iVar7 = vf18(iVar3,"Border");
+              iVar3 = vf18(iVar3,"Bonus");
               if ((iVar7 != -1) && (iVar3 != -1)) {
                 iVar5 = *(int *)((int)aiStack_94 + uVar6);
                 **(undefined4 **)((int)aiStack_b0 + uVar6) = 1;
-                FUN_00e06930(iVar7,iVar5 + 8);
-                FUN_00e06930(iVar3,*(int *)((int)aiStack_78 + uVar6) + 8);
+                vf58(iVar7,iVar5 + 8);
+                vf58(iVar3,*(int *)((int)aiStack_78 + uVar6) + 8);
               }
             }
-            iVar3 = FUN_00e06390(iVar2,"Rank_C");
+            iVar3 = vf18(iVar2,"Rank_C");
             if (iVar3 != -1) {
-              iVar7 = FUN_00e06390(iVar3,"Border");
-              iVar3 = FUN_00e06390(iVar3,"Bonus");
+              iVar7 = vf18(iVar3,"Border");
+              iVar3 = vf18(iVar3,"Bonus");
               if ((iVar7 != -1) && (iVar3 != -1)) {
                 iVar5 = *(int *)((int)aiStack_94 + uVar6);
                 **(undefined4 **)((int)aiStack_b0 + uVar6) = 1;
-                FUN_00e06930(iVar7,iVar5 + 0xc);
-                FUN_00e06930(iVar3,*(int *)((int)aiStack_78 + uVar6) + 0xc);
+                vf58(iVar7,iVar5 + 0xc);
+                vf58(iVar3,*(int *)((int)aiStack_78 + uVar6) + 0xc);
               }
             }
-            iVar2 = FUN_00e06390(iVar2,"Rank_D");
+            iVar2 = vf18(iVar2,"Rank_D");
             if (iVar2 != -1) {
-              iVar3 = FUN_00e06390(iVar2,"Border");
-              iVar2 = FUN_00e06390(iVar2,"Bonus");
+              iVar3 = vf18(iVar2,"Border");
+              iVar2 = vf18(iVar2,"Bonus");
               if ((iVar3 != -1) && (iVar2 != -1)) {
                 iVar7 = *(int *)((int)aiStack_94 + uVar6);
                 **(undefined4 **)((int)aiStack_b0 + uVar6) = 1;
-                FUN_00e06930(iVar3,iVar7 + 0x10);
-                FUN_00e06930(iVar2,*(int *)((int)aiStack_78 + uVar6) + 0x10);
+                vf58(iVar3,iVar7 + 0x10);
+                vf58(iVar2,*(int *)((int)aiStack_78 + uVar6) + 0x10);
               }
             }
           }
           uVar6 = uVar6 + 4;
         } while (uVar6 < 0x1c);
-        iVar2 = FUN_00e06390(iVar4,"ID_NODAMAGE");
-        if ((iVar2 != -1) && (iVar2 = FUN_00e06390(iVar2,"Bonus"), iVar2 != -1)) {
-          FUN_00e06930(iVar2,param_1 + 0x570);
+        iVar2 = vf18(iVar4,"ID_NODAMAGE");
+        if ((iVar2 != -1) && (iVar2 = vf18(iVar2,"Bonus"), iVar2 != -1)) {
+          vf58(iVar2,param_1 + 0x570);
         }
-        iVar2 = FUN_00e06390(iVar4,"ID_NOPARTS");
-        if ((iVar2 != -1) && (iVar2 = FUN_00e06390(iVar2,"Bonus"), iVar2 != -1)) {
-          FUN_00e06930(iVar2,param_1 + 0x574);
+        iVar2 = vf18(iVar4,"ID_NOPARTS");
+        if ((iVar2 != -1) && (iVar2 = vf18(iVar2,"Bonus"), iVar2 != -1)) {
+          vf58(iVar2,param_1 + 0x574);
         }
-        iVar2 = FUN_00e06390(iVar4,"ID_NOKILLED");
-        if ((iVar2 != -1) && (iVar2 = FUN_00e06390(iVar2,"Bonus"), iVar2 != -1)) {
-          FUN_00e06930(iVar2,param_1 + 0x578);
+        iVar2 = vf18(iVar4,"ID_NOKILLED");
+        if ((iVar2 != -1) && (iVar2 = vf18(iVar2,"Bonus"), iVar2 != -1)) {
+          vf58(iVar2,param_1 + 0x578);
         }
-        iVar2 = FUN_00e06390(iVar4,"ID_NOALERT");
-        if ((iVar2 != -1) && (iVar2 = FUN_00e06390(iVar2,"Bonus"), iVar2 != -1)) {
-          FUN_00e06930(iVar2,param_1 + 0x57c);
+        iVar2 = vf18(iVar4,"ID_NOALERT");
+        if ((iVar2 != -1) && (iVar2 = vf18(iVar2,"Bonus"), iVar2 != -1)) {
+          vf58(iVar2,param_1 + 0x57c);
         }
         *(undefined4 *)(param_1 + 0x5d8) = 1;
       }
@@ -26777,15 +26966,15 @@ void __fastcall cXmlBinary::cXmlBinary_12(int param_1)
     iVar3 = FUN_00de4550("battleresult.bxm",0);
     if (iVar3 == 0) goto LAB_00cda486;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(iVar3,0);
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   local_b8[0] = iVar3;
-  if ((iVar3 != -1) && (local_b0[0] = FUN_00e053e0(iVar3), 0 < local_b0[0])) {
+  if ((iVar3 != -1) && (local_b0[0] = vf10(iVar3), 0 < local_b0[0])) {
     iVar7 = 0;
 LAB_00cda000:
-    iVar5 = FUN_00e05410(iVar3,iVar7);
-    if ((iVar5 == -1) || (iVar6 = FUN_00e06390(iVar5,"Label"), iVar3 = local_b8[0], iVar6 == -1))
+    iVar5 = vf14(iVar3,iVar7);
+    if ((iVar5 == -1) || (iVar6 = vf18(iVar5,"Label"), iVar3 = local_b8[0], iVar6 == -1))
     goto LAB_00cda07c;
     local_48 = 0;
     _memset(local_47,0,0x3f);
@@ -26819,73 +27008,73 @@ LAB_00cda000:
     aiStack_78[5] = param_1 + 0x450;
     iVar3 = 0;
     do {
-      local_b8[0] = FUN_00e06390(iVar5,*(undefined4 *)((int)apcStack_60 + iVar3));
+      local_b8[0] = vf18(iVar5,*(undefined4 *)((int)apcStack_60 + iVar3));
       if (local_b8[0] != -1) {
-        iVar7 = FUN_00e06390(local_b8[0],"Rank_S");
+        iVar7 = vf18(local_b8[0],"Rank_S");
         if (iVar7 != -1) {
-          iVar6 = FUN_00e06390(iVar7,"Border");
-          iVar7 = FUN_00e06390(iVar7,"Bonus");
+          iVar6 = vf18(iVar7,"Border");
+          iVar7 = vf18(iVar7,"Bonus");
           if ((iVar6 != -1) && (iVar7 != -1)) {
             uVar4 = *(undefined4 *)((int)aiStack_a8 + iVar3);
             **(undefined4 **)((int)aiStack_90 + iVar3) = 1;
-            FUN_00e06930(iVar6,uVar4);
-            FUN_00e06930(iVar7,*(undefined4 *)((int)aiStack_78 + iVar3));
+            vf58(iVar6,uVar4);
+            vf58(iVar7,*(undefined4 *)((int)aiStack_78 + iVar3));
           }
         }
-        iVar7 = FUN_00e06390(local_b8[0],"Rank_A");
+        iVar7 = vf18(local_b8[0],"Rank_A");
         if (iVar7 != -1) {
-          iVar6 = FUN_00e06390(iVar7,"Border");
-          iVar7 = FUN_00e06390(iVar7,"Bonus");
+          iVar6 = vf18(iVar7,"Border");
+          iVar7 = vf18(iVar7,"Bonus");
           if ((iVar6 != -1) && (iVar7 != -1)) {
             iVar1 = *(int *)((int)aiStack_a8 + iVar3);
             **(undefined4 **)((int)aiStack_90 + iVar3) = 1;
-            FUN_00e06930(iVar6,iVar1 + 4);
-            FUN_00e06930(iVar7,*(int *)((int)aiStack_78 + iVar3) + 4);
+            vf58(iVar6,iVar1 + 4);
+            vf58(iVar7,*(int *)((int)aiStack_78 + iVar3) + 4);
           }
         }
-        iVar7 = FUN_00e06390(local_b8[0],"Rank_B");
+        iVar7 = vf18(local_b8[0],"Rank_B");
         if (iVar7 != -1) {
-          iVar6 = FUN_00e06390(iVar7,"Border");
-          iVar7 = FUN_00e06390(iVar7,"Bonus");
+          iVar6 = vf18(iVar7,"Border");
+          iVar7 = vf18(iVar7,"Bonus");
           if ((iVar6 != -1) && (iVar7 != -1)) {
             iVar1 = *(int *)((int)aiStack_a8 + iVar3);
             **(undefined4 **)((int)aiStack_90 + iVar3) = 1;
-            FUN_00e06930(iVar6,iVar1 + 8);
-            FUN_00e06930(iVar7,*(int *)((int)aiStack_78 + iVar3) + 8);
+            vf58(iVar6,iVar1 + 8);
+            vf58(iVar7,*(int *)((int)aiStack_78 + iVar3) + 8);
           }
         }
-        iVar7 = FUN_00e06390(local_b8[0],"Rank_C");
+        iVar7 = vf18(local_b8[0],"Rank_C");
         if (iVar7 != -1) {
-          iVar6 = FUN_00e06390(iVar7,"Border");
-          iVar7 = FUN_00e06390(iVar7,"Bonus");
+          iVar6 = vf18(iVar7,"Border");
+          iVar7 = vf18(iVar7,"Bonus");
           if ((iVar6 != -1) && (iVar7 != -1)) {
             iVar1 = *(int *)((int)aiStack_a8 + iVar3);
             **(undefined4 **)((int)aiStack_90 + iVar3) = 1;
-            FUN_00e06930(iVar6,iVar1 + 0xc);
-            FUN_00e06930(iVar7,*(int *)((int)aiStack_78 + iVar3) + 0xc);
+            vf58(iVar6,iVar1 + 0xc);
+            vf58(iVar7,*(int *)((int)aiStack_78 + iVar3) + 0xc);
           }
         }
-        iVar7 = FUN_00e06390(local_b8[0],"Rank_D");
+        iVar7 = vf18(local_b8[0],"Rank_D");
         if (iVar7 != -1) {
-          iVar6 = FUN_00e06390(iVar7,"Border");
-          iVar7 = FUN_00e06390(iVar7,"Bonus");
+          iVar6 = vf18(iVar7,"Border");
+          iVar7 = vf18(iVar7,"Bonus");
           if ((iVar6 != -1) && (iVar7 != -1)) {
             iVar1 = *(int *)((int)aiStack_a8 + iVar3);
             **(undefined4 **)((int)aiStack_90 + iVar3) = 1;
-            FUN_00e06930(iVar6,iVar1 + 0x10);
-            FUN_00e06930(iVar7,*(int *)((int)aiStack_78 + iVar3) + 0x10);
+            vf58(iVar6,iVar1 + 0x10);
+            vf58(iVar7,*(int *)((int)aiStack_78 + iVar3) + 0x10);
           }
         }
       }
       iVar3 = iVar3 + 4;
     } while (iVar3 < 0x18);
-    iVar3 = FUN_00e06390(iVar5,"ID_NODAMAGE");
-    if ((iVar3 != -1) && (iVar3 = FUN_00e06390(iVar3,"Bonus"), iVar3 != -1)) {
-      FUN_00e06930(iVar3,param_1 + 0x430);
+    iVar3 = vf18(iVar5,"ID_NODAMAGE");
+    if ((iVar3 != -1) && (iVar3 = vf18(iVar3,"Bonus"), iVar3 != -1)) {
+      vf58(iVar3,param_1 + 0x430);
     }
-    iVar3 = FUN_00e06390(iVar5,"ID_NOKILLED");
-    if ((iVar3 != -1) && (iVar3 = FUN_00e06390(iVar3,"Bonus"), iVar3 != -1)) {
-      FUN_00e06930(iVar3,param_1 + 0x434);
+    iVar3 = vf18(iVar5,"ID_NOKILLED");
+    if ((iVar3 != -1) && (iVar3 = vf18(iVar3,"Bonus"), iVar3 != -1)) {
+      vf58(iVar3,param_1 + 0x434);
     }
     *(undefined4 *)(param_1 + 0x464) = 1;
   }
@@ -26961,19 +27150,19 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_6(int param_1,undefined4 param_2)
   int local_60;
   char local_40 [64];
   
-  cXmlBinary_103();
+  cXmlBinary();
   uVar9 = 0;
   iVar1 = FUN_00e062b0(param_2,0);
   if (iVar1 != 0) {
-    uVar2 = FUN_00e041c0();
+    uVar2 = vf04();
     (**(code **)(local_60 + 0x24))(uVar2,local_40,0x40);
     iVar1 = __strnicmp(local_40,"RadioModelParam",0x40);
-    if ((iVar1 == 0) && (iVar1 = FUN_00e06390(uVar2,"ParamList"), iVar1 != -1)) {
-      iVar3 = FUN_00e053e0(iVar1);
+    if ((iVar1 == 0) && (iVar1 = vf18(uVar2,"ParamList"), iVar1 != -1)) {
+      iVar3 = vf10(iVar1);
       iVar8 = 0;
       if (0 < iVar3) {
         do {
-          iVar4 = FUN_00e05410(iVar1,iVar8);
+          iVar4 = vf14(iVar1,iVar8);
           if (iVar4 == -1) {
             FUN_00e04180();
             return 0;
@@ -27099,7 +27288,7 @@ void __thiscall cXmlBinary::cXmlBinary_35(int param_1,int param_2)
   undefined1 local_40;
   undefined1 local_3f [63];
   
-  cXmlBinary_103();
+  cXmlBinary();
   local_6c = DAT_018b92f0;
   uVar1 = DAT_018b9148 & 0xf00;
   local_68 = DAT_018b92f4;
@@ -27123,41 +27312,39 @@ void __thiscall cXmlBinary::cXmlBinary_35(int param_1,int param_2)
     return;
   }
   FUN_00e062b0(iVar2,0);
-  uVar3 = FUN_00e041c0();
+  uVar3 = vf04();
   local_60 = uVar3;
-  local_64 = FUN_00e053e0(uVar3);
+  local_64 = vf10(uVar3);
   local_7c = 0;
   if (0 < local_64) {
     do {
-      iVar2 = FUN_00e05410(uVar3,local_7c);
+      iVar2 = vf14(uVar3,local_7c);
       local_70 = iVar2;
-      if ((iVar2 != -1) && (iVar4 = FUN_00e06390(iVar2,"Label"), iVar4 != -1)) {
+      if ((iVar2 != -1) && (iVar4 = vf18(iVar2,"Label"), iVar4 != -1)) {
         local_40 = 0;
         _memset(local_3f,0,0x3f);
         (**(code **)((int)local_9c + 0x74))(iVar4,&local_40,0x40);
         iVar4 = FUN_00e03ea0(&local_40);
         if (iVar4 == param_2) {
           iStack_74 = local_7c;
-          iVar4 = FUN_00e06390(iVar2,"Index");
+          iVar4 = vf18(iVar2,"Index");
           if (iVar4 != -1) {
-            FUN_00e06930(iVar4,&iStack_74);
+            vf58(iVar4,&iStack_74);
           }
-          if (((*(int *)(param_1 + 0x2d8) == 0) &&
-              (iVar4 = FUN_00e06390(iVar2,"ID_NODAMAGE"), iVar4 != -1)) &&
-             (iVar4 = FUN_00e06390(iVar4,"Bonus"), iVar4 != -1)) {
-            FUN_00e06930(iVar4,(int *)(param_1 + 0x2f8));
+          if (((*(int *)(param_1 + 0x2d8) == 0) && (iVar4 = vf18(iVar2,"ID_NODAMAGE"), iVar4 != -1))
+             && (iVar4 = vf18(iVar4,"Bonus"), iVar4 != -1)) {
+            vf58(iVar4,(int *)(param_1 + 0x2f8));
             *(int *)(param_1 + 0x304) = *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x2f8);
           }
-          if (((*(int *)(param_1 + 0x2dc) != 0) &&
-              (iVar4 = FUN_00e06390(iVar2,"ID_NOALERT"), iVar4 != -1)) &&
-             (iVar4 = FUN_00e06390(iVar4,"Bonus"), iVar4 != -1)) {
-            FUN_00e06930(iVar4,(int *)(param_1 + 0x2fc));
+          if (((*(int *)(param_1 + 0x2dc) != 0) && (iVar4 = vf18(iVar2,"ID_NOALERT"), iVar4 != -1))
+             && (iVar4 = vf18(iVar4,"Bonus"), iVar4 != -1)) {
+            vf58(iVar4,(int *)(param_1 + 0x2fc));
             *(int *)(param_1 + 0x304) = *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x2fc);
           }
           if (((*(int *)(param_1 + 0x2c8) == 0) && (0 < *(int *)(param_1 + 0x2d4))) &&
-             ((iVar4 = FUN_00e06390(iVar2,"ID_NOKILLED"), iVar4 != -1 &&
-              (iVar4 = FUN_00e06390(iVar4,"Bonus"), iVar4 != -1)))) {
-            FUN_00e06930(iVar4,(int *)(param_1 + 0x300));
+             ((iVar4 = vf18(iVar2,"ID_NOKILLED"), iVar4 != -1 &&
+              (iVar4 = vf18(iVar4,"Bonus"), iVar4 != -1)))) {
+            vf58(iVar4,(int *)(param_1 + 0x300));
             *(int *)(param_1 + 0x304) = *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x300);
           }
           apcStack_5c[0] = "ID_TIME";
@@ -27180,55 +27367,55 @@ void __thiscall cXmlBinary::cXmlBinary_35(int param_1,int param_2)
             iStack_a8 = 0;
             iStack_a4 = 0;
             uStack_a0 = 0;
-            iVar5 = FUN_00e06390(iVar2,apcStack_5c[iStack_78]);
+            iVar5 = vf18(iVar2,apcStack_5c[iStack_78]);
             if (iVar5 != -1) {
-              iVar2 = FUN_00e06390(iVar5,"Rank_S");
+              iVar2 = vf18(iVar5,"Rank_S");
               if (iVar2 != -1) {
-                iVar4 = FUN_00e06390(iVar2,"Border");
-                iVar2 = FUN_00e06390(iVar2,"Bonus");
+                iVar4 = vf18(iVar2,"Border");
+                iVar2 = vf18(iVar2,"Bonus");
                 if ((iVar4 != -1) && (iVar2 != -1)) {
-                  FUN_00e06930(iVar4,&iStack_c4);
-                  FUN_00e06930(iVar2,&iStack_b0);
+                  vf58(iVar4,&iStack_c4);
+                  vf58(iVar2,&iStack_b0);
                 }
               }
-              iVar2 = FUN_00e06390(iVar5,"Rank_A");
+              iVar2 = vf18(iVar5,"Rank_A");
               if (iVar2 != -1) {
-                iVar4 = FUN_00e06390(iVar2,"Border");
-                iVar2 = FUN_00e06390(iVar2,"Bonus");
+                iVar4 = vf18(iVar2,"Border");
+                iVar2 = vf18(iVar2,"Bonus");
                 if ((iVar4 != -1) && (iVar2 != -1)) {
-                  FUN_00e06930(iVar4,&iStack_c0);
-                  FUN_00e06930(iVar2,&uStack_ac);
+                  vf58(iVar4,&iStack_c0);
+                  vf58(iVar2,&uStack_ac);
                 }
               }
-              iVar2 = FUN_00e06390(iVar5,"Rank_B");
+              iVar2 = vf18(iVar5,"Rank_B");
               if (iVar2 != -1) {
-                iVar4 = FUN_00e06390(iVar2,"Border");
-                iVar2 = FUN_00e06390(iVar2,"Bonus");
+                iVar4 = vf18(iVar2,"Border");
+                iVar2 = vf18(iVar2,"Bonus");
                 if ((iVar4 != -1) && (iVar2 != -1)) {
-                  FUN_00e06930(iVar4,&iStack_bc);
-                  FUN_00e06930(iVar2,&iStack_a8);
+                  vf58(iVar4,&iStack_bc);
+                  vf58(iVar2,&iStack_a8);
                 }
               }
-              iVar2 = FUN_00e06390(iVar5,"Rank_C");
+              iVar2 = vf18(iVar5,"Rank_C");
               if (iVar2 != -1) {
-                iVar4 = FUN_00e06390(iVar2,"Border");
-                iVar2 = FUN_00e06390(iVar2,"Bonus");
+                iVar4 = vf18(iVar2,"Border");
+                iVar2 = vf18(iVar2,"Bonus");
                 if ((iVar4 != -1) && (iVar2 != -1)) {
-                  FUN_00e06930(iVar4,&iStack_b8);
-                  FUN_00e06930(iVar2,&iStack_a4);
+                  vf58(iVar4,&iStack_b8);
+                  vf58(iVar2,&iStack_a4);
                 }
               }
-              iVar5 = FUN_00e06390(iVar5,"Rank_D");
+              iVar5 = vf18(iVar5,"Rank_D");
               iVar2 = local_70;
               iVar4 = iStack_78;
               if (iVar5 != -1) {
-                iVar6 = FUN_00e06390(iVar5,"Border");
-                iVar5 = FUN_00e06390(iVar5,"Bonus");
+                iVar6 = vf18(iVar5,"Border");
+                iVar5 = vf18(iVar5,"Bonus");
                 iVar2 = local_70;
                 iVar4 = iStack_78;
                 if ((iVar6 != -1) && (iVar5 != -1)) {
-                  FUN_00e06930(iVar6,&iStack_b4);
-                  FUN_00e06930(iVar5,&uStack_a0);
+                  vf58(iVar6,&iStack_b4);
+                  vf58(iVar5,&uStack_a0);
                   iVar2 = local_70;
                   iVar4 = iStack_78;
                 }
@@ -27742,7 +27929,7 @@ LAB_00cdd743:
   cVar6 = '\0';
   do {
     local_40 = 0;
-    cXmlBinary_103();
+    cXmlBinary();
     local_3c = DAT_018b92f0;
     local_38 = DAT_018b92f4;
     iVar7 = FUN_00de4550("stageresult.bxm",0);
@@ -27753,17 +27940,17 @@ LAB_00cdd743:
       return;
     }
     FUN_00e062b0(iVar7,0);
-    uVar2 = FUN_00e041c0();
+    uVar2 = vf04();
     iVar8 = (int)cVar6;
-    iVar7 = FUN_00e053e0(uVar2);
-    if ((iVar7 <= iVar8) || (iVar7 = FUN_00e05410(uVar2,iVar8), iVar7 == -1)) {
+    iVar7 = vf10(uVar2);
+    if ((iVar7 <= iVar8) || (iVar7 = vf14(uVar2,iVar8), iVar7 == -1)) {
       local_20[0] = vftable;
       FUN_00e04180();
       return;
     }
-    iVar7 = FUN_00e06390(iVar7,"BattleNum");
+    iVar7 = vf18(iVar7,"BattleNum");
     if (iVar7 != -1) {
-      FUN_00e06930(iVar7,&local_40);
+      vf58(iVar7,&local_40);
     }
     iVar7 = 0;
     if (0 < local_40) {
@@ -27847,9 +28034,9 @@ undefined4 __fastcall cXmlBinary::cXmlBinary_39(int param_1)
   
   iVar1 = FUN_00de4550("credit_us",0);
   if (iVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
       puVar2 = (undefined4 *)FUN_00dd3500(0xc,&DAT_01b7bd48);
       if (puVar2 == (undefined4 *)0x0) {
@@ -29127,11 +29314,11 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_15(int param_1,undefined4 param_2)
     }
     *(undefined4 *)(param_1 + 0xb8) = 0;
     *(undefined4 *)(param_1 + 0xa0) = 0;
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar3,0);
-    iVar3 = FUN_00e041c0();
+    iVar3 = vf04();
     if (iVar3 != -1) {
-      iVar4 = FUN_00e053e0(iVar3);
+      iVar4 = vf10(iVar3);
       local_3c[0] = 0;
       local_3c[1] = -1;
       local_3c[2] = -1;
@@ -29141,31 +29328,31 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_15(int param_1,undefined4 param_2)
       local_3c[6] = 1;
       if (0 < iVar4) {
         do {
-          iVar5 = FUN_00e05410(iVar3,iVar10);
+          iVar5 = vf14(iVar3,iVar10);
           if (iVar5 != -1) {
-            iVar6 = FUN_00e06390(iVar5,"MessageID");
+            iVar6 = vf18(iVar5,"MessageID");
             if (iVar6 != -1) {
-              FUN_00e06830(iVar6,local_3c);
+              vf68(iVar6,local_3c);
             }
-            iVar6 = FUN_00e06390(iVar5,"CutNo");
+            iVar6 = vf18(iVar5,"CutNo");
             if (iVar6 != -1) {
-              FUN_00e06930(iVar6,local_3c + 1);
+              vf58(iVar6,local_3c + 1);
             }
-            iVar6 = FUN_00e06390(iVar5,"StartFrame");
+            iVar6 = vf18(iVar5,"StartFrame");
             if (iVar6 != -1) {
-              FUN_00e06930(iVar6,local_3c + 2);
+              vf58(iVar6,local_3c + 2);
             }
-            iVar6 = FUN_00e06390(iVar5,"DrawFrame");
+            iVar6 = vf18(iVar5,"DrawFrame");
             if (iVar6 != -1) {
-              FUN_00e06930(iVar6,local_3c + 3);
+              vf58(iVar6,local_3c + 3);
             }
-            iVar6 = FUN_00e06390(iVar5,&DAT_016b9238);
+            iVar6 = vf18(iVar5,&DAT_016b9238);
             if (iVar6 != -1) {
-              FUN_00e06930(iVar6,local_3c + 4);
+              vf58(iVar6,local_3c + 4);
             }
-            iVar5 = FUN_00e06390(iVar5,"Terop");
+            iVar5 = vf18(iVar5,"Terop");
             if (iVar5 != -1) {
-              FUN_00e06930(iVar5,local_3c + 5);
+              vf58(iVar5,local_3c + 5);
             }
             local_3c[6] = 0;
             if (local_3c[1] == *(int *)(param_1 + 0x8c)) {
@@ -29294,37 +29481,37 @@ void __fastcall cXmlBinary::cXmlBinary_34(int param_1)
   *(undefined4 *)(param_1 + 0xa8) = 0;
   iVar1 = FUN_00de4550("P_Param.bxm",0);
   if (iVar1 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(iVar1,0);
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
       local_30 = 1.0;
-      iVar2 = FUN_00e06390(iVar1,"RebornBoardTime");
+      iVar2 = vf18(iVar1,"RebornBoardTime");
       if (iVar2 != -1) {
-        FUN_00e06970(iVar2,&local_30);
+        vf54(iVar2,&local_30);
       }
       *(float *)(param_1 + 0x90) = local_30 * 60.0;
       local_30 = 240.0;
-      iVar2 = FUN_00e06390(iVar1,"SlashTimeLimit");
+      iVar2 = vf18(iVar1,"SlashTimeLimit");
       if (iVar2 != -1) {
-        FUN_00e06970(iVar2,&local_30);
+        vf54(iVar2,&local_30);
       }
       *(float *)(param_1 + 0xb0) = local_30 * 60.0;
-      iVar2 = FUN_00e06390(iVar1,"MoveSpeed");
+      iVar2 = vf18(iVar1,"MoveSpeed");
       if (iVar2 != -1) {
-        FUN_00e06970(iVar2,(undefined4 *)(param_1 + 0x9c));
+        vf54(iVar2,(undefined4 *)(param_1 + 0x9c));
       }
-      iVar2 = FUN_00e06390(iVar1,"WaitTime");
+      iVar2 = vf18(iVar1,"WaitTime");
       if (iVar2 != -1) {
-        FUN_00e06970(iVar2,local_2c);
+        vf54(iVar2,local_2c);
       }
-      iVar2 = FUN_00e06390(iVar1,"EnemyBoardMaxNum");
+      iVar2 = vf18(iVar1,"EnemyBoardMaxNum");
       if (iVar2 != -1) {
-        FUN_00e06930(iVar2,local_28);
+        vf58(iVar2,local_28);
       }
-      iVar1 = FUN_00e06390(iVar1,"ZangekiCircle");
+      iVar1 = vf18(iVar1,"ZangekiCircle");
       if (iVar1 != -1) {
-        FUN_00e06970(iVar1,local_24);
+        vf54(iVar1,local_24);
       }
     }
     local_20 = vftable;
@@ -29352,20 +29539,20 @@ undefined4 cXmlBinary::cXmlBinary_90(undefined4 param_1,undefined4 param_2)
   if (iVar2 == 0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(iVar2,0);
-  uVar3 = FUN_00e041c0();
-  iVar2 = FUN_00e06390(uVar3,"EventCutWorkArray");
+  uVar3 = vf04();
+  iVar2 = vf18(uVar3,"EventCutWorkArray");
   if (iVar2 == -1) {
     local_120[0] = vftable;
     FUN_00e04180();
     return 0;
   }
   local_124 = 0;
-  iVar4 = FUN_00e053e0(iVar2);
+  iVar4 = vf10(iVar2);
   if (0 < iVar4) {
     do {
-      iVar4 = FUN_00e05410(iVar2,local_124);
+      iVar4 = vf14(iVar2,local_124);
       if (iVar4 != -1) {
         if (DAT_01dc5358 <= DAT_01dc535c) break;
         puVar5 = (undefined4 *)FUN_00dd3500(0x60,DAT_01dc5338);
@@ -29392,7 +29579,7 @@ undefined4 cXmlBinary::cXmlBinary_90(undefined4 param_1,undefined4 param_2)
         }
       }
       local_124 = local_124 + 1;
-      iVar4 = FUN_00e053e0(iVar2);
+      iVar4 = vf10(iVar2);
     } while (local_124 < iVar4);
   }
   local_120[0] = vftable;
@@ -29432,11 +29619,11 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_87(int param_1,undefined4 param_2,u
   if (iVar3 == 0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(iVar3,0);
-  uVar4 = FUN_00e041c0();
+  uVar4 = vf04();
   local_104 = uVar4;
-  uVar2 = FUN_00e053e0(uVar4);
+  uVar2 = vf10(uVar4);
   *(ushort *)(param_1 + 0x3004) = uVar2;
   if (uVar2 == 0) {
     FUN_00e04180();
@@ -29460,11 +29647,11 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_87(int param_1,undefined4 param_2,u
   }
   iVar8 = 0;
   local_110 = 0;
-  iVar3 = FUN_00e053e0(uVar4);
+  iVar3 = vf10(uVar4);
   if (0 < iVar3) {
     local_134 = 0;
     do {
-      iVar3 = FUN_00e05410(uVar4,iVar8);
+      iVar3 = vf14(uVar4,iVar8);
       if (iVar3 != -1) {
         puVar10 = (undefined2 *)(*(int *)(local_108 + 0x3000) + local_134);
         *puVar10 = 0;
@@ -29518,7 +29705,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_87(int param_1,undefined4 param_2,u
       local_134 = local_134 + 0x18;
       iVar8 = local_110 + 1;
       local_110 = iVar8;
-      iVar3 = FUN_00e053e0(local_104);
+      iVar3 = vf10(local_104);
     } while (iVar8 < iVar3);
   }
   FUN_00e04180();
@@ -29608,16 +29795,16 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_85(int *param_1,undefined4 param_2)
   if (iVar1 == 0) {
     return 0;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(iVar1,0);
-  uVar2 = FUN_00e041c0();
-  iVar1 = FUN_00e06390(uVar2,"EffectAreaDataArray");
+  uVar2 = vf04();
+  iVar1 = vf18(uVar2,"EffectAreaDataArray");
   if (iVar1 == -1) {
     local_120[0] = vftable;
     FUN_00e04180();
     return 0;
   }
-  uVar3 = FUN_00e053e0(iVar1);
+  uVar3 = vf10(iVar1);
   uVar6 = -(uint)((int)((ulonglong)uVar3 * 0x1c >> 0x20) != 0) | (uint)((ulonglong)uVar3 * 0x1c);
   puVar4 = (uint *)FUN_00dd3580(-(uint)(0xfffffffb < uVar6) | uVar6 + 4,DAT_01dc5384);
   if (puVar4 == (uint *)0x0) {
@@ -29637,7 +29824,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_85(int *param_1,undefined4 param_2)
     *(undefined2 *)(param_1 + 0xc08) = 0;
     if (0 < (int)uVar3) {
       do {
-        iVar5 = FUN_00e05410(iVar1,iVar8);
+        iVar5 = vf14(iVar1,iVar8);
         if (iVar5 != -1) {
           iVar5 = (**(code **)(*(int *)(*param_1 + (uint)*(ushort *)(param_1 + 0xc08) * 0x1c) + 4))
                             (local_120,iVar5);
@@ -29685,10 +29872,10 @@ void cXmlBinary::cXmlBinary_11(void)
   }
   iVar2 = FUN_00dec4d0(&local_24,pcVar1,&DAT_01b7c320,0x1000,0);
   if (iVar2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     iVar2 = FUN_00e062b0(local_24,0);
     if (iVar2 != 0) {
-      uVar3 = FUN_00e041c0();
+      uVar3 = vf04();
       FUN_00dafb00(local_20,uVar3);
     }
     FUN_00dd48d0(local_24,0);
@@ -29732,7 +29919,7 @@ void cXmlBinary::cXmlBinary_10(void)
   ppuStack_30 = (undefined **)&DAT_01b7c320;
   iVar2 = FUN_00dec4d0(&local_24,pcVar1);
   if (iVar2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     pcStack_2c = (char *)local_24;
     ppuStack_30 = (undefined **)0xdba852;
     iVar2 = FUN_00e062b0();
@@ -29745,7 +29932,7 @@ void cXmlBinary::cXmlBinary_10(void)
       return;
     }
     pcStack_2c = (char *)0xdba883;
-    ppuVar3 = (undefined **)FUN_00e041c0();
+    ppuVar3 = (undefined **)vf04();
     pcStack_2c = "Battle";
     ppuStack_30 = ppuVar3;
     uVar4 = (**(code **)((int)local_20 + 0x18))();
@@ -29800,7 +29987,7 @@ void cXmlBinary::cXmlBinary_2(void)
   }
   iVar2 = FUN_00dec4d0(&local_28,pcVar1,&DAT_01b7c320,0x1000,0);
   if (iVar2 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     iVar2 = FUN_00e062b0(local_28,0);
     if (iVar2 == 0) {
       FUN_00dd48d0(local_28,0);
@@ -29808,13 +29995,13 @@ void cXmlBinary::cXmlBinary_2(void)
       FUN_00e04180();
       return;
     }
-    uVar3 = FUN_00e041c0();
-    local_24 = FUN_00e053e0(uVar3);
+    uVar3 = vf04();
+    local_24 = vf10(uVar3);
     if (0 < local_24) {
       puVar6 = &DAT_018bc5f4;
       iVar2 = 0;
       do {
-        uVar4 = FUN_00e05410(uVar3,iVar2);
+        uVar4 = vf14(uVar3,iVar2);
         iVar5 = (*(code *)local_20[0][0x27])(uVar4,&DAT_016511c4);
         if (iVar5 != -1) {
           (**(code **)(local_28 + 0xa4))(iVar5,puVar6 + -0x18,0x14);
@@ -29936,7 +30123,7 @@ void cXmlBinary::cXmlBinary_4(void)
   }
   iVar3 = FUN_00dec4d0(&local_28,pcVar2,&DAT_01b7c320,0x1000,0);
   if (iVar3 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     iVar3 = FUN_00e062b0(local_28,0);
     if (iVar3 == 0) {
       FUN_00dd48d0(local_28,0);
@@ -29944,9 +30131,9 @@ void cXmlBinary::cXmlBinary_4(void)
       FUN_00e04180();
       return;
     }
-    uVar5 = FUN_00e041c0();
+    uVar5 = vf04();
     local_24 = uVar5;
-    local_2c = FUN_00e053e0(uVar5);
+    local_2c = vf10(uVar5);
     if (0x41 < local_2c) {
       local_2c = 0x41;
     }
@@ -29954,8 +30141,8 @@ void cXmlBinary::cXmlBinary_4(void)
     if (0 < local_2c) {
       puVar1 = &DAT_018c95f4;
       do {
-        uVar5 = FUN_00e05410(uVar5,iVar3);
-        iVar4 = FUN_00e06650(uVar5,&DAT_016c41c4);
+        uVar5 = vf14(uVar5,iVar3);
+        iVar4 = vf2C(uVar5,&DAT_016c41c4);
         if (iVar4 == 0) {
           iVar4 = (*(code *)local_20[0][0x27])(uVar5,&DAT_016511c4);
           if (iVar4 != -1) {
@@ -30030,7 +30217,7 @@ void cXmlBinary::cXmlBinary_7(void)
   }
   iVar4 = FUN_00dec4d0(&local_24,pcVar3,&DAT_01b7c320,0x1000,0);
   if (iVar4 != 0) {
-    cXmlBinary_103();
+    cXmlBinary();
     iVar4 = FUN_00e062b0(local_24,0);
     if (iVar4 == 0) {
       FUN_00dd48d0(local_24,0);
@@ -30038,12 +30225,12 @@ void cXmlBinary::cXmlBinary_7(void)
       FUN_00e04180();
       return;
     }
-    uVar5 = FUN_00e041c0();
+    uVar5 = vf04();
     iVar7 = 0;
-    iVar4 = FUN_00e053e0(uVar5);
+    iVar4 = vf10(uVar5);
     if (0 < iVar4) {
       do {
-        uVar6 = FUN_00e05410(uVar5,iVar7);
+        uVar6 = vf14(uVar5,iVar7);
         FUN_00db0780(local_20,uVar6);
         iVar7 = iVar7 + 1;
       } while (iVar7 < iVar4);
@@ -30065,12 +30252,12 @@ void cXmlBinary::cXmlBinary_8(undefined **param_1)
   int iVar4;
   undefined4 unaff_retaddr;
   
-  uVar1 = FUN_00e041c0();
+  uVar1 = vf04();
   iVar4 = 0;
-  iVar2 = FUN_00e053e0(uVar1);
+  iVar2 = vf10(uVar1);
   if (0 < iVar2) {
     do {
-      uVar3 = FUN_00e05410(uVar1,iVar4);
+      uVar3 = vf14(uVar1,iVar4);
       FUN_00db0780(&param_1,uVar3);
       iVar4 = iVar4 + 1;
     } while (iVar4 < iVar2);
@@ -30215,15 +30402,15 @@ void __fastcall FUN_00e04180(int param_1)
   return;
 }
 
-// 00E041C0  FUN_00e041c0  size=3  [callgraph]
-undefined4 FUN_00e041c0(void)
+// 00E041C0  cXmlBinary::vf04  size=3  [class]
+undefined4 cXmlBinary::vf04(void)
 
 {
   return 0;
 }
 
-// 00E041D0  FUN_00e041d0  size=23  [callgraph]
-undefined4 __thiscall FUN_00e041d0(int param_1,int param_2)
+// 00E041D0  cXmlBinary::vf0C  size=23  [class]
+undefined4 __thiscall cXmlBinary::vf0C(int param_1,int param_2)
 
 {
   if (*(int *)(param_1 + 8) != 0) {
@@ -30232,28 +30419,28 @@ undefined4 __thiscall FUN_00e041d0(int param_1,int param_2)
   return 0xffffffff;
 }
 
-// 00E04210  FUN_00e04210  size=3  [callgraph]
+// 00E04210  FUN_00e04210  size=3  [between]
 undefined4 __fastcall FUN_00e04210(undefined4 *param_1)
 
 {
   return *param_1;
 }
 
-// 00E04220  FUN_00e04220  size=4  [callgraph]
+// 00E04220  FUN_00e04220  size=4  [between]
 undefined4 __fastcall FUN_00e04220(int param_1)
 
 {
   return *(undefined4 *)(param_1 + 0x10);
 }
 
-// 00E04240  FUN_00e04240  size=4  [callgraph]
+// 00E04240  FUN_00e04240  size=4  [between]
 undefined4 __fastcall FUN_00e04240(int param_1)
 
 {
   return *(undefined4 *)(param_1 + 4);
 }
 
-// 00E04370  FUN_00e04370  size=71  [callgraph]
+// 00E04370  FUN_00e04370  size=71  [between]
 char * __thiscall FUN_00e04370(int *param_1,char *param_2)
 
 {
@@ -30285,7 +30472,7 @@ char * __thiscall FUN_00e04370(int *param_1,char *param_2)
   } while( true );
 }
 
-// 00E043C0  FUN_00e043c0  size=116  [callgraph]
+// 00E043C0  FUN_00e043c0  size=116  [between]
 char * __thiscall FUN_00e043c0(int *param_1,char *param_2,char *param_3)
 
 {
@@ -30332,7 +30519,7 @@ char * __thiscall FUN_00e043c0(int *param_1,char *param_2,char *param_3)
   } while( true );
 }
 
-// 00E04440  FUN_00e04440  size=82  [callgraph]
+// 00E04440  FUN_00e04440  size=82  [between]
 void __fastcall FUN_00e04440(int *param_1)
 
 {
@@ -30355,7 +30542,7 @@ void __fastcall FUN_00e04440(int *param_1)
   return;
 }
 
-// 00E044E0  FUN_00e044e0  size=58  [callgraph]
+// 00E044E0  FUN_00e044e0  size=58  [between]
 int FUN_00e044e0(byte *param_1,undefined4 *param_2)
 
 {
@@ -30375,7 +30562,7 @@ int FUN_00e044e0(byte *param_1,undefined4 *param_2)
   return iVar2;
 }
 
-// 00E04560  FUN_00e04560  size=160  [callgraph]
+// 00E04560  FUN_00e04560  size=160  [between]
 void FUN_00e04560(char *param_1,undefined4 param_2,uint param_3,int param_4,int param_5)
 
 {
@@ -30413,7 +30600,7 @@ void FUN_00e04560(char *param_1,undefined4 param_2,uint param_3,int param_4,int 
   return;
 }
 
-// 00E04780  FUN_00e04780  size=71  [callgraph]
+// 00E04780  FUN_00e04780  size=71  [between]
 float10 FUN_00e04780(float param_1,float param_2,float param_3)
 
 {
@@ -30423,7 +30610,7 @@ float10 FUN_00e04780(float param_1,float param_2,float param_3)
   return (float10)(float)((float10)(param_2 - param_1) / (float10)(param_3 - param_1));
 }
 
-// 00E049A0  FUN_00e049a0  size=12  [callgraph]
+// 00E049A0  FUN_00e049a0  size=12  [between]
 void __fastcall FUN_00e049a0(int *param_1)
 
 {
@@ -30434,7 +30621,7 @@ void __fastcall FUN_00e049a0(int *param_1)
   return;
 }
 
-// 00E049B0  FUN_00e049b0  size=39  [callgraph]
+// 00E049B0  FUN_00e049b0  size=39  [between]
 float10 __fastcall FUN_00e049b0(int *param_1)
 
 {
@@ -30448,7 +30635,7 @@ float10 __fastcall FUN_00e049b0(int *param_1)
   return (float10)*(float *)(DAT_01dd9160 + 0x78);
 }
 
-// 00E04A00  FUN_00e04a00  size=77  [callgraph]
+// 00E04A00  FUN_00e04a00  size=77  [between]
 void __thiscall FUN_00e04a00(int *param_1,undefined4 param_2,int param_3,int param_4)
 
 {
@@ -30480,7 +30667,7 @@ void __thiscall FUN_00e04a00(int *param_1,undefined4 param_2,int param_3,int par
   return;
 }
 
-// 00E04A50  FUN_00e04a50  size=13  [callgraph]
+// 00E04A50  FUN_00e04a50  size=13  [between]
 float10 __fastcall FUN_00e04a50(int *param_1)
 
 {
@@ -30490,7 +30677,7 @@ float10 __fastcall FUN_00e04a50(int *param_1)
   return (float10)*(float *)(*param_1 + 0xc);
 }
 
-// 00E04A60  FUN_00e04a60  size=26  [callgraph]
+// 00E04A60  FUN_00e04a60  size=26  [between]
 undefined4 __thiscall FUN_00e04a60(int *param_1,undefined4 *param_2)
 
 {
@@ -30501,7 +30688,7 @@ undefined4 __thiscall FUN_00e04a60(int *param_1,undefined4 *param_2)
   return 1;
 }
 
-// 00E04FF0  FUN_00e04ff0  size=335  [callgraph]
+// 00E04FF0  FUN_00e04ff0  size=335  [between]
 void __thiscall FUN_00e04ff0(int *param_1,undefined4 param_2,undefined4 *param_3)
 
 {
@@ -30585,7 +30772,7 @@ LAB_00e050b5:
   return;
 }
 
-// 00E05140  FUN_00e05140  size=474  [callgraph]
+// 00E05140  FUN_00e05140  size=474  [between]
 void __thiscall FUN_00e05140(int *param_1,undefined4 param_2,int param_3,int param_4,int param_5)
 
 {
@@ -30646,8 +30833,8 @@ void __thiscall FUN_00e05140(int *param_1,undefined4 param_2,int param_3,int par
   return;
 }
 
-// 00E05360  cXmlBinary::cXmlBinary_103  size=32  [class]
-void __fastcall cXmlBinary::cXmlBinary_103(undefined4 *param_1)
+// 00E05360  cXmlBinary::cXmlBinary  size=32  [class]
+void __fastcall cXmlBinary::cXmlBinary(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -30661,7 +30848,7 @@ void __fastcall cXmlBinary::cXmlBinary_103(undefined4 *param_1)
   return;
 }
 
-// 00E05380  FUN_00e05380  size=87  [callgraph]
+// 00E05380  FUN_00e05380  size=87  [between]
 void __thiscall FUN_00e05380(int param_1,int param_2)
 
 {
@@ -30684,8 +30871,8 @@ void __thiscall FUN_00e05380(int param_1,int param_2)
   return;
 }
 
-// 00E053E0  FUN_00e053e0  size=42  [callgraph]
-undefined2 __thiscall FUN_00e053e0(int param_1,int param_2)
+// 00E053E0  cXmlBinary::vf10  size=42  [class]
+undefined2 __thiscall cXmlBinary::vf10(int param_1,int param_2)
 
 {
   if (param_2 == -1) {
@@ -30697,8 +30884,8 @@ undefined2 __thiscall FUN_00e053e0(int param_1,int param_2)
   return (undefined2)param_2;
 }
 
-// 00E05410  FUN_00e05410  size=65  [callgraph]
-int __thiscall FUN_00e05410(int *param_1,int param_2)
+// 00E05410  cXmlBinary::vf14  size=65  [class]
+int __thiscall cXmlBinary::vf14(int *param_1,int param_2)
 
 {
   int iVar1;
@@ -30711,8 +30898,8 @@ int __thiscall FUN_00e05410(int *param_1,int param_2)
                         *(undefined1 *)(param_1[4] + 3 + param_2 * 8)) + param_2;
 }
 
-// 00E05460  FUN_00e05460  size=33  [callgraph]
-undefined2 __thiscall FUN_00e05460(int param_1,int param_2)
+// 00E05460  cXmlBinary::vf98  size=33  [class]
+undefined2 __thiscall cXmlBinary::vf98(int param_1,int param_2)
 
 {
   param_2._0_2_ =
@@ -30721,14 +30908,1342 @@ undefined2 __thiscall FUN_00e05460(int param_1,int param_2)
   return (undefined2)param_2;
 }
 
-// 00E05490  FUN_00e05490  size=41  [callgraph]
-int __thiscall FUN_00e05490(int param_1,int param_2,int param_3)
+// 00E05490  cXmlBinary::vfA0  size=41  [class]
+int __thiscall cXmlBinary::vfA0(int param_1,int param_2,int param_3)
 
 {
   param_2._0_2_ =
        CONCAT11(*(undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8),
                 *(undefined1 *)(*(int *)(param_1 + 0x10) + 7 + param_2 * 8));
   return (ushort)param_2 + 1 + param_3;
+}
+
+// 00E054C0  FUN_00e054c0  size=90  [between]
+int __thiscall FUN_00e054c0(int param_1,uint param_2)
+
+{
+  undefined1 *puVar1;
+  
+  if ((*(byte *)(param_1 + 0x1c) & 1) != 0) {
+    puVar1 = (undefined1 *)(*(int *)(param_1 + 0x14) + param_2 * 8);
+    param_2 = CONCAT13(*puVar1,CONCAT12(puVar1[1],CONCAT11(puVar1[2],puVar1[3])));
+    return *(int *)(param_1 + 0x18) + param_2;
+  }
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x14) + param_2 * 4);
+  param_2 = (uint)CONCAT11(*puVar1,puVar1[1]);
+  return param_2 + *(int *)(param_1 + 0x18);
+}
+
+// 00E05520  FUN_00e05520  size=110  [between]
+undefined * __thiscall FUN_00e05520(int param_1,uint param_2)
+
+{
+  undefined1 *puVar1;
+  
+  if ((*(byte *)(param_1 + 0x1c) & 1) == 0) {
+    puVar1 = (undefined1 *)(*(int *)(param_1 + 0x14) + 2 + param_2 * 4);
+    param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+    param_2 = (uint)(ushort)param_2;
+    if (param_2 == 0xffff) {
+      return &DAT_016cc1ab;
+    }
+  }
+  else {
+    puVar1 = (undefined1 *)(*(int *)(param_1 + 0x14) + 4 + param_2 * 8);
+    param_2._0_2_ = CONCAT11(puVar1[2],puVar1[3]);
+    param_2 = CONCAT13(*puVar1,CONCAT12(puVar1[1],(ushort)param_2));
+  }
+  if ((int)param_2 < 0) {
+    return &DAT_016cc1ab;
+  }
+  return (undefined *)(*(int *)(param_1 + 0x18) + param_2);
+}
+
+// 00E05590  cXmlBinary::vf138  size=23  [class]
+undefined4 cXmlBinary::vf138(int param_1)
+
+{
+  undefined4 uVar1;
+  
+  if (param_1 == -1) {
+    return 0;
+  }
+  uVar1 = FUN_00e05520();
+  return uVar1;
+}
+
+// 00E062B0  FUN_00e062b0  size=220  [callgraph]
+undefined4 __thiscall FUN_00e062b0(int param_1,uint param_2,int param_3)
+
+{
+  undefined1 *puVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  undefined4 *puVar5;
+  
+  iVar4 = param_2;
+  *(uint *)(param_1 + 0xc) = param_2;
+  if (param_2 == 0) {
+    return 0;
+  }
+  puVar1 = (undefined1 *)(param_2 + 0xd);
+  param_2._0_2_ = CONCAT11(*(undefined1 *)(param_2 + 0xe),*(undefined1 *)(param_2 + 0xf));
+  param_2 = CONCAT13(*(undefined1 *)(iVar4 + 0xc),CONCAT12(*puVar1,(ushort)param_2));
+  if (0xfffe < param_2) {
+    *(uint *)(param_1 + 0x1c) = *(uint *)(param_1 + 0x1c) | 1;
+  }
+  *(int *)(param_1 + 0x10) = iVar4 + 0x10;
+  param_2._0_2_ = CONCAT11(*(undefined1 *)(iVar4 + 8),*(undefined1 *)(iVar4 + 9));
+  iVar3 = iVar4 + 0x10 + (uint)(ushort)param_2 * 8;
+  *(int *)(param_1 + 0x14) = iVar3;
+  param_2._0_2_ = CONCAT11(*(undefined1 *)(iVar4 + 10),*(undefined1 *)(iVar4 + 0xb));
+  if ((*(byte *)(param_1 + 0x1c) & 1) == 0) {
+    iVar2 = (uint)(ushort)param_2 * 4;
+  }
+  else {
+    iVar2 = (uint)(ushort)param_2 * 8;
+  }
+  *(int *)(param_1 + 0x18) = iVar3 + iVar2;
+  *(int *)(param_1 + 4) = param_3;
+  if (param_3 == 0) {
+    *(undefined4 *)(param_1 + 8) = 0;
+    return 1;
+  }
+  param_2._0_2_ = CONCAT11(*(undefined1 *)(iVar4 + 8),*(undefined1 *)(iVar4 + 9));
+  puVar5 = (undefined4 *)FUN_00dd29b0((uint)(ushort)param_2 * 4,0x20,0,0);
+  *(undefined4 **)(param_1 + 8) = puVar5;
+  *puVar5 = 0xffffffff;
+  FUN_00e05380(0);
+  return 1;
+}
+
+// 00E06390  cXmlBinary::vf18  size=291  [class]
+int __thiscall cXmlBinary::vf18(int param_1,int param_2,byte *param_3)
+
+{
+  undefined1 *puVar1;
+  byte bVar2;
+  int iVar3;
+  byte *pbVar4;
+  int iVar5;
+  undefined1 *puVar6;
+  byte *pbVar7;
+  uint uVar8;
+  int iVar9;
+  bool bVar10;
+  undefined2 local_10;
+  undefined2 local_c;
+  undefined4 local_8;
+  
+  iVar5 = param_2;
+  if (param_2 == -1) {
+    return -1;
+  }
+  iVar3 = *(int *)(param_1 + 0x10);
+  param_2._0_2_ =
+       CONCAT11(*(undefined1 *)(iVar3 + param_2 * 8),*(undefined1 *)(iVar3 + 1 + param_2 * 8));
+  uVar8 = (uint)(ushort)param_2;
+  iVar9 = 0;
+  param_2._0_2_ =
+       CONCAT11(*(undefined1 *)(iVar3 + 2 + iVar5 * 8),*(undefined1 *)(iVar3 + 3 + iVar5 * 8));
+  if (uVar8 != 0) {
+    puVar6 = (undefined1 *)(iVar3 + 6 + (uint)(ushort)param_2 * 8);
+    do {
+      local_10 = CONCAT11(*puVar6,puVar6[1]);
+      pbVar7 = param_3;
+      if ((*(uint *)(param_1 + 0x1c) & 1) == 0) {
+        puVar1 = (undefined1 *)(*(int *)(param_1 + 0x14) + (uint)local_10 * 4);
+        local_c = CONCAT11(*puVar1,puVar1[1]);
+        pbVar4 = (byte *)((uint)local_c + *(int *)(param_1 + 0x18));
+      }
+      else {
+        puVar1 = (undefined1 *)(*(int *)(param_1 + 0x14) + (uint)local_10 * 8);
+        local_8 = CONCAT13(*puVar1,CONCAT12(puVar1[1],CONCAT11(puVar1[2],puVar1[3])));
+        pbVar4 = (byte *)(*(int *)(param_1 + 0x18) + local_8);
+      }
+      do {
+        bVar2 = *pbVar7;
+        bVar10 = bVar2 < *pbVar4;
+        if (bVar2 != *pbVar4) {
+LAB_00e06480:
+          iVar5 = (1 - (uint)bVar10) - (uint)(bVar10 != 0);
+          goto LAB_00e06485;
+        }
+        if (bVar2 == 0) break;
+        bVar2 = pbVar7[1];
+        bVar10 = bVar2 < pbVar4[1];
+        if (bVar2 != pbVar4[1]) goto LAB_00e06480;
+        pbVar4 = pbVar4 + 2;
+        pbVar7 = pbVar7 + 2;
+      } while (bVar2 != 0);
+      iVar5 = 0;
+LAB_00e06485:
+      if (iVar5 == 0) {
+        return (uint)(ushort)param_2 + iVar9;
+      }
+      iVar9 = iVar9 + 1;
+      puVar6 = puVar6 + 8;
+    } while (iVar9 < (int)uVar8);
+  }
+  return -1;
+}
+
+// 00E064C0  cXmlBinary::vf1C  size=295  [class]
+int __thiscall cXmlBinary::vf1C(int param_1,int param_2,byte *param_3,int param_4)
+
+{
+  undefined1 *puVar1;
+  byte bVar2;
+  uint uVar3;
+  uint uVar4;
+  byte *pbVar5;
+  int iVar6;
+  int iVar7;
+  byte *pbVar8;
+  int iVar9;
+  bool bVar10;
+  undefined2 local_10;
+  undefined2 local_c;
+  int local_8;
+  undefined4 local_4;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar3 = (uint)(ushort)param_2;
+  iVar9 = 0;
+  param_2._0_2_ = CONCAT11(puVar1[2],puVar1[3]);
+  local_8 = 0;
+  if (uVar3 == 0) {
+    return 0;
+  }
+  iVar7 = (uint)(ushort)param_2 * 8;
+  do {
+    iVar6 = *(int *)(param_1 + 0x14);
+    local_10 = CONCAT11(*(undefined1 *)(*(int *)(param_1 + 0x10) + 6 + iVar7),
+                        *(undefined1 *)(*(int *)(param_1 + 0x10) + 7 + iVar7));
+    uVar4 = (uint)local_10;
+    pbVar8 = param_3;
+    if ((*(byte *)(param_1 + 0x1c) & 1) == 0) {
+      local_c = CONCAT11(*(undefined1 *)(iVar6 + uVar4 * 4),*(undefined1 *)(iVar6 + 1 + uVar4 * 4));
+      pbVar5 = (byte *)((uint)local_c + *(int *)(param_1 + 0x18));
+    }
+    else {
+      puVar1 = (undefined1 *)(iVar6 + uVar4 * 8);
+      local_4 = CONCAT13(*puVar1,CONCAT12(puVar1[1],
+                                          CONCAT11(puVar1[2],*(undefined1 *)(iVar6 + 3 + uVar4 * 8))
+                                         ));
+      pbVar5 = (byte *)(*(int *)(param_1 + 0x18) + local_4);
+    }
+    do {
+      bVar2 = *pbVar8;
+      bVar10 = bVar2 < *pbVar5;
+      if (bVar2 != *pbVar5) {
+LAB_00e065a0:
+        iVar6 = (1 - (uint)bVar10) - (uint)(bVar10 != 0);
+        goto LAB_00e065a5;
+      }
+      if (bVar2 == 0) break;
+      bVar2 = pbVar8[1];
+      bVar10 = bVar2 < pbVar5[1];
+      if (bVar2 != pbVar5[1]) goto LAB_00e065a0;
+      pbVar5 = pbVar5 + 2;
+      pbVar8 = pbVar8 + 2;
+    } while (bVar2 != 0);
+    iVar6 = 0;
+LAB_00e065a5:
+    if (iVar6 == 0) {
+      if (param_4 != 0) {
+        *(uint *)(param_4 + local_8 * 4) = (uint)(ushort)param_2 + iVar9;
+      }
+      local_8 = local_8 + 1;
+    }
+    iVar9 = iVar9 + 1;
+    iVar7 = iVar7 + 8;
+    if ((int)uVar3 <= iVar9) {
+      return local_8;
+    }
+  } while( true );
+}
+
+// 00E065F0  cXmlBinary::vf24  size=86  [class]
+int __thiscall cXmlBinary::vf24(int param_1,int param_2,char *param_3,rsize_t param_4)
+
+{
+  char *pcVar1;
+  undefined1 *puVar2;
+  char cVar3;
+  char *_Src;
+  
+  puVar2 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar2,puVar2[1]);
+  _Src = (char *)FUN_00e054c0((undefined2)param_2);
+  if (param_3 == (char *)0x0) {
+    pcVar1 = _Src + 1;
+    do {
+      cVar3 = *_Src;
+      _Src = _Src + 1;
+    } while (cVar3 != '\0');
+    return (int)_Src - (int)pcVar1;
+  }
+  _strncpy_s(param_3,param_4,_Src,param_4 - 1);
+  return 0;
+}
+
+// 00E06650  cXmlBinary::vf2C  size=98  [class]
+bool __thiscall cXmlBinary::vf2C(int param_1,int param_2,byte *param_3)
+
+{
+  undefined1 *puVar1;
+  byte bVar2;
+  byte *pbVar3;
+  bool bVar4;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  pbVar3 = (byte *)FUN_00e054c0((undefined2)param_2);
+  while( true ) {
+    bVar2 = *pbVar3;
+    bVar4 = bVar2 < *param_3;
+    if (bVar2 != *param_3) break;
+    if (bVar2 == 0) {
+      return true;
+    }
+    bVar2 = pbVar3[1];
+    bVar4 = bVar2 < param_3[1];
+    if (bVar2 != param_3[1]) break;
+    pbVar3 = pbVar3 + 2;
+    param_3 = param_3 + 2;
+    if (bVar2 == 0) {
+      return true;
+    }
+  }
+  return 1 - bVar4 == (uint)(bVar4 != 0);
+}
+
+// 00E066F0  cXmlBinary::vf74  size=86  [class]
+int __thiscall cXmlBinary::vf74(int param_1,int param_2,char *param_3,rsize_t param_4)
+
+{
+  char *pcVar1;
+  undefined1 *puVar2;
+  char cVar3;
+  char *_Src;
+  
+  puVar2 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar2,puVar2[1]);
+  _Src = (char *)FUN_00e05520((undefined2)param_2);
+  if (param_3 == (char *)0x0) {
+    pcVar1 = _Src + 1;
+    do {
+      cVar3 = *_Src;
+      _Src = _Src + 1;
+    } while (cVar3 != '\0');
+    return (int)_Src - (int)pcVar1;
+  }
+  _strncpy_s(param_3,param_4,_Src,param_4 - 1);
+  return 0;
+}
+
+// 00E06750  cXmlBinary::vf78  size=86  [class]
+int __thiscall cXmlBinary::vf78(int param_1,int param_2,char *param_3,rsize_t param_4)
+
+{
+  char *pcVar1;
+  undefined1 *puVar2;
+  char cVar3;
+  char *_Src;
+  
+  puVar2 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar2,puVar2[1]);
+  _Src = (char *)FUN_00e05520((undefined2)param_2);
+  if (param_3 == (char *)0x0) {
+    pcVar1 = _Src + 1;
+    do {
+      cVar3 = *_Src;
+      _Src = _Src + 1;
+    } while (cVar3 != '\0');
+    return (int)_Src - (int)pcVar1;
+  }
+  _strncpy_s(param_3,param_4,_Src,param_4 - 1);
+  return 0;
+}
+
+// 00E067B0  cXmlBinary::vf70  size=57  [class]
+void __thiscall cXmlBinary::vf70(int param_1,int param_2,undefined1 *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  ulong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = _strtoul(_Str,(char **)0x0,10);
+  *param_3 = (char)uVar2;
+  return;
+}
+
+// 00E067F0  cXmlBinary::vf6C  size=58  [class]
+void __thiscall cXmlBinary::vf6C(int param_1,int param_2,undefined2 *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  ulong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = _strtoul(_Str,(char **)0x0,10);
+  *param_3 = (short)uVar2;
+  return;
+}
+
+// 00E06830  cXmlBinary::vf68  size=57  [class]
+void __thiscall cXmlBinary::vf68(int param_1,int param_2,ulong *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  ulong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = _strtoul(_Str,(char **)0x0,10);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E06870  cXmlBinary::vf64  size=60  [class]
+void __thiscall cXmlBinary::vf64(int param_1,int param_2,ulonglong *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_String;
+  ulonglong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _String = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = __strtoui64(_String,(char **)0x0,10);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E068B0  cXmlBinary::vf60  size=53  [class]
+void __thiscall cXmlBinary::vf60(int param_1,int param_2,undefined1 *param_3)
+
+{
+  undefined1 *puVar1;
+  undefined1 uVar2;
+  undefined4 uVar3;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar3 = FUN_00e05520((undefined2)param_2);
+  uVar2 = FUN_00fdd33b(uVar3);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E068F0  cXmlBinary::vf5C  size=54  [class]
+void __thiscall cXmlBinary::vf5C(int param_1,int param_2,undefined2 *param_3)
+
+{
+  undefined1 *puVar1;
+  undefined2 uVar2;
+  undefined4 uVar3;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar3 = FUN_00e05520((undefined2)param_2);
+  uVar2 = FUN_00fdd33b(uVar3);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E06930  cXmlBinary::vf58  size=53  [class]
+void __thiscall cXmlBinary::vf58(int param_1,int param_2,undefined4 *param_3)
+
+{
+  undefined1 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar2 = FUN_00e05520((undefined2)param_2);
+  uVar2 = FUN_00fdd33b(uVar2);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E06970  cXmlBinary::vf54  size=53  [class]
+void __thiscall cXmlBinary::vf54(int param_1,int param_2,float *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_String;
+  double dVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _String = (char *)FUN_00e05520((undefined2)param_2);
+  dVar2 = _atof(_String);
+  *param_3 = (float)dVar2;
+  return;
+}
+
+// 00E069B0  cXmlBinary::vf50  size=53  [class]
+void __thiscall cXmlBinary::vf50(int param_1,int param_2,double *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_String;
+  double dVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _String = (char *)FUN_00e05520((undefined2)param_2);
+  dVar2 = _atof(_String);
+  *param_3 = dVar2;
+  return;
+}
+
+// 00E069F0  cXmlBinary::vf4C  size=52  [class]
+void __thiscall cXmlBinary::vf4C(int param_1,int param_2,undefined4 param_3)
+
+{
+  undefined1 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar2 = FUN_00e05520((undefined2)param_2);
+  FUN_00e144a0(uVar2,param_3);
+  return;
+}
+
+// 00E06A30  cXmlBinary::vf48  size=52  [class]
+void __thiscall cXmlBinary::vf48(int param_1,int param_2,undefined4 param_3)
+
+{
+  undefined1 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar2 = FUN_00e05520((undefined2)param_2);
+  FUN_00e14500(uVar2,param_3);
+  return;
+}
+
+// 00E06A70  cXmlBinary::vf44  size=52  [class]
+void __thiscall cXmlBinary::vf44(int param_1,int param_2,undefined4 param_3)
+
+{
+  undefined1 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar2 = FUN_00e05520((undefined2)param_2);
+  FUN_00e14560(uVar2,param_3);
+  return;
+}
+
+// 00E06AB0  cXmlBinary::vf40  size=52  [class]
+void __thiscall cXmlBinary::vf40(int param_1,int param_2,undefined4 param_3)
+
+{
+  undefined1 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar2 = FUN_00e05520((undefined2)param_2);
+  FUN_00e145c0(uVar2,param_3);
+  return;
+}
+
+// 00E06AF0  cXmlBinary::vf3C  size=52  [class]
+void __thiscall cXmlBinary::vf3C(int param_1,int param_2,undefined4 param_3)
+
+{
+  undefined1 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar2 = FUN_00e05520((undefined2)param_2);
+  FUN_00e14650(uVar2,param_3);
+  return;
+}
+
+// 00E06B30  cXmlBinary::vf38  size=53  [class]
+void __thiscall cXmlBinary::vf38(int param_1,int param_2,undefined1 *param_3)
+
+{
+  undefined1 *puVar1;
+  undefined1 uVar2;
+  undefined4 uVar3;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar3 = FUN_00e05520((undefined2)param_2);
+  uVar2 = FUN_00fdd33b(uVar3);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E06B70  cXmlBinary::vf34  size=52  [class]
+void __thiscall cXmlBinary::vf34(int param_1,int param_2,undefined4 param_3)
+
+{
+  undefined1 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  uVar2 = FUN_00e05520((undefined2)param_2);
+  FUN_00e146d0(uVar2,param_3);
+  return;
+}
+
+// 00E06BF0  cXmlBinary::vf30  size=53  [class]
+void __thiscall cXmlBinary::vf30(int param_1,int param_2,float *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_String;
+  double dVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _String = (char *)FUN_00e05520((undefined2)param_2);
+  dVar2 = _atof(_String);
+  *param_3 = (float)dVar2;
+  return;
+}
+
+// 00E06C30  cXmlBinary::vf94  size=57  [class]
+void __thiscall cXmlBinary::vf94(int param_1,int param_2,undefined1 *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  ulong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = _strtoul(_Str,(char **)0x0,0x10);
+  *param_3 = (char)uVar2;
+  return;
+}
+
+// 00E06C70  cXmlBinary::vf90  size=58  [class]
+void __thiscall cXmlBinary::vf90(int param_1,int param_2,undefined2 *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  ulong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = _strtoul(_Str,(char **)0x0,0x10);
+  *param_3 = (short)uVar2;
+  return;
+}
+
+// 00E06CB0  cXmlBinary::vf8C  size=57  [class]
+void __thiscall cXmlBinary::vf8C(int param_1,int param_2,ulong *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  ulong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = _strtoul(_Str,(char **)0x0,0x10);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E06CF0  cXmlBinary::vf88  size=60  [class]
+void __thiscall cXmlBinary::vf88(int param_1,int param_2,ulonglong *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_String;
+  ulonglong uVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _String = (char *)FUN_00e05520((undefined2)param_2);
+  uVar2 = __strtoui64(_String,(char **)0x0,0x10);
+  *param_3 = uVar2;
+  return;
+}
+
+// 00E06D30  cXmlBinary::vf84  size=57  [class]
+void __thiscall cXmlBinary::vf84(int param_1,int param_2,undefined1 *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  long lVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  lVar2 = _strtol(_Str,(char **)0x0,0x10);
+  *param_3 = (char)lVar2;
+  return;
+}
+
+// 00E06D70  cXmlBinary::vf80  size=58  [class]
+void __thiscall cXmlBinary::vf80(int param_1,int param_2,undefined2 *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  long lVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  lVar2 = _strtol(_Str,(char **)0x0,0x10);
+  *param_3 = (short)lVar2;
+  return;
+}
+
+// 00E06DB0  cXmlBinary::vf7C  size=57  [class]
+void __thiscall cXmlBinary::vf7C(int param_1,int param_2,long *param_3)
+
+{
+  undefined1 *puVar1;
+  char *_Str;
+  long lVar2;
+  
+  puVar1 = (undefined1 *)(*(int *)(param_1 + 0x10) + 6 + param_2 * 8);
+  param_2._0_2_ = CONCAT11(*puVar1,puVar1[1]);
+  _Str = (char *)FUN_00e05520((undefined2)param_2);
+  lVar2 = _strtol(_Str,(char **)0x0,0x10);
+  *param_3 = lVar2;
+  return;
+}
+
+// 00E06DF0  cXmlBinary::vf9C  size=202  [class]
+int __thiscall cXmlBinary::vf9C(int param_1,int param_2,char *param_3)
+
+{
+  int iVar1;
+  undefined1 *puVar2;
+  int iVar3;
+  char *_Str2;
+  int iVar4;
+  int iVar5;
+  undefined2 local_c;
+  undefined2 local_8;
+  undefined4 local_4;
+  
+  iVar1 = *(int *)(param_1 + 0x10) + param_2 * 8;
+  iVar5 = 0;
+  while( true ) {
+    param_2._0_2_ = CONCAT11(*(undefined1 *)(iVar1 + 4),*(undefined1 *)(iVar1 + 5));
+    if ((int)(uint)(ushort)param_2 <= iVar5) {
+      return -1;
+    }
+    local_c = CONCAT11(*(undefined1 *)(iVar1 + 6),*(undefined1 *)(iVar1 + 7));
+    iVar3 = local_c + 1 + iVar5;
+    if ((*(byte *)(param_1 + 0x1c) & 1) == 0) {
+      local_8 = CONCAT11(*(undefined1 *)(*(int *)(param_1 + 0x14) + iVar3 * 4),
+                         *(undefined1 *)(*(int *)(param_1 + 0x14) + 1 + iVar3 * 4));
+      _Str2 = (char *)((uint)local_8 + *(int *)(param_1 + 0x18));
+    }
+    else {
+      puVar2 = (undefined1 *)(*(int *)(param_1 + 0x14) + iVar3 * 8);
+      local_4 = CONCAT13(*puVar2,CONCAT12(puVar2[1],
+                                          CONCAT11(puVar2[2],
+                                                   *(undefined1 *)
+                                                    (*(int *)(param_1 + 0x14) + 3 + iVar3 * 8))));
+      _Str2 = (char *)(*(int *)(param_1 + 0x18) + local_4);
+    }
+    iVar4 = __stricmp(param_3,_Str2);
+    if (iVar4 == 0) break;
+    iVar5 = iVar5 + 1;
+  }
+  return iVar3;
+}
+
+// 00E06EC0  cXmlBinary::vf20  size=59  [class]
+int cXmlBinary::vf20(undefined4 param_1,char *param_2,rsize_t param_3)
+
+{
+  char *pcVar1;
+  char cVar2;
+  char *_Src;
+  
+  _Src = (char *)FUN_00e054c0(param_1);
+  if (param_2 == (char *)0x0) {
+    pcVar1 = _Src + 1;
+    do {
+      cVar2 = *_Src;
+      _Src = _Src + 1;
+    } while (cVar2 != '\0');
+    return (int)_Src - (int)pcVar1;
+  }
+  _strncpy_s(param_2,param_3,_Src,param_3 - 1);
+  return 0;
+}
+
+// 00E06F00  cXmlBinary::vf28  size=75  [class]
+bool cXmlBinary::vf28(undefined4 param_1,byte *param_2)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  bool bVar3;
+  
+  pbVar2 = (byte *)FUN_00e054c0(param_1);
+  while( true ) {
+    bVar1 = *pbVar2;
+    bVar3 = bVar1 < *param_2;
+    if (bVar1 != *param_2) break;
+    if (bVar1 == 0) {
+      return true;
+    }
+    bVar1 = pbVar2[1];
+    bVar3 = bVar1 < param_2[1];
+    if (bVar1 != param_2[1]) break;
+    pbVar2 = pbVar2 + 2;
+    param_2 = param_2 + 2;
+    if (bVar1 == 0) {
+      return true;
+    }
+  }
+  return 1 - bVar3 == (uint)(bVar3 != 0);
+}
+
+// 00E06F50  cXmlBinary::vfF0  size=32  [class]
+void cXmlBinary::vfF0(undefined4 param_1,undefined1 *param_2)
+
+{
+  char *_Str;
+  ulong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  uVar1 = _strtoul(_Str,_EndPtr,_Radix);
+  *param_2 = (char)uVar1;
+  return;
+}
+
+// 00E06F70  cXmlBinary::vfEC  size=33  [class]
+void cXmlBinary::vfEC(undefined4 param_1,undefined2 *param_2)
+
+{
+  char *_Str;
+  ulong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  uVar1 = _strtoul(_Str,_EndPtr,_Radix);
+  *param_2 = (short)uVar1;
+  return;
+}
+
+// 00E06FA0  cXmlBinary::vfE8  size=32  [class]
+void cXmlBinary::vfE8(undefined4 param_1,ulong *param_2)
+
+{
+  char *_Str;
+  ulong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  uVar1 = _strtoul(_Str,_EndPtr,_Radix);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E06FC0  cXmlBinary::vfE4  size=35  [class]
+void cXmlBinary::vfE4(undefined4 param_1,ulonglong *param_2)
+
+{
+  char *_String;
+  ulonglong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 10;
+  _EndPtr = (char **)0x0;
+  _String = (char *)FUN_00e05520(param_1);
+  uVar1 = __strtoui64(_String,_EndPtr,_Radix);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E06FF0  cXmlBinary::vfE0  size=28  [class]
+void cXmlBinary::vfE0(undefined4 param_1,undefined1 *param_2)
+
+{
+  undefined1 uVar1;
+  undefined4 uVar2;
+  
+  uVar2 = FUN_00e05520(param_1);
+  uVar1 = FUN_00fdd33b(uVar2);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E07010  cXmlBinary::vfDC  size=29  [class]
+void cXmlBinary::vfDC(undefined4 param_1,undefined2 *param_2)
+
+{
+  undefined2 uVar1;
+  undefined4 uVar2;
+  
+  uVar2 = FUN_00e05520(param_1);
+  uVar1 = FUN_00fdd33b(uVar2);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E07030  cXmlBinary::vfD8  size=28  [class]
+void cXmlBinary::vfD8(undefined4 param_1,undefined4 *param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  uVar1 = FUN_00fdd33b(uVar1);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E07050  cXmlBinary::vfD4  size=28  [class]
+void cXmlBinary::vfD4(undefined4 param_1,float *param_2)
+
+{
+  char *_String;
+  double dVar1;
+  
+  _String = (char *)FUN_00e05520(param_1);
+  dVar1 = _atof(_String);
+  *param_2 = (float)dVar1;
+  return;
+}
+
+// 00E07070  cXmlBinary::vfD0  size=28  [class]
+void cXmlBinary::vfD0(undefined4 param_1,double *param_2)
+
+{
+  char *_String;
+  double dVar1;
+  
+  _String = (char *)FUN_00e05520(param_1);
+  dVar1 = _atof(_String);
+  *param_2 = dVar1;
+  return;
+}
+
+// 00E07090  cXmlBinary::vfCC  size=32  [class]
+void cXmlBinary::vfCC(undefined4 param_1,ulong *param_2)
+
+{
+  char *_Str;
+  ulong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  uVar1 = _strtoul(_Str,_EndPtr,_Radix);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E070B0  cXmlBinary::vfC8  size=27  [class]
+void cXmlBinary::vfC8(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e144a0(uVar1,param_2);
+  return;
+}
+
+// 00E070D0  cXmlBinary::vfC4  size=27  [class]
+void cXmlBinary::vfC4(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14500(uVar1,param_2);
+  return;
+}
+
+// 00E070F0  cXmlBinary::vfC0  size=27  [class]
+void cXmlBinary::vfC0(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14560(uVar1,param_2);
+  return;
+}
+
+// 00E07110  cXmlBinary::vfBC  size=27  [class]
+void cXmlBinary::vfBC(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e145c0(uVar1,param_2);
+  return;
+}
+
+// 00E07130  cXmlBinary::vfB8  size=27  [class]
+void cXmlBinary::vfB8(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14650(uVar1,param_2);
+  return;
+}
+
+// 00E07150  cXmlBinary::vfB4  size=28  [class]
+void cXmlBinary::vfB4(undefined4 param_1,undefined1 *param_2)
+
+{
+  undefined1 uVar1;
+  undefined4 uVar2;
+  
+  uVar2 = FUN_00e05520(param_1);
+  uVar1 = FUN_00fdd33b(uVar2);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E07170  cXmlBinary::vfB0  size=27  [class]
+void cXmlBinary::vfB0(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e146d0(uVar1,param_2);
+  return;
+}
+
+// 00E07190  cXmlBinary::vfAC  size=27  [class]
+void cXmlBinary::vfAC(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14730(uVar1,param_2);
+  return;
+}
+
+// 00E071B0  cXmlBinary::vfA8  size=28  [class]
+void cXmlBinary::vfA8(undefined4 param_1,float *param_2)
+
+{
+  char *_String;
+  double dVar1;
+  
+  _String = (char *)FUN_00e05520(param_1);
+  dVar1 = _atof(_String);
+  *param_2 = (float)dVar1;
+  return;
+}
+
+// 00E071D0  cXmlBinary::vfA4  size=59  [class]
+int cXmlBinary::vfA4(undefined4 param_1,char *param_2,rsize_t param_3)
+
+{
+  char *pcVar1;
+  char cVar2;
+  char *_Src;
+  
+  _Src = (char *)FUN_00e05520(param_1);
+  if (param_2 == (char *)0x0) {
+    pcVar1 = _Src + 1;
+    do {
+      cVar2 = *_Src;
+      _Src = _Src + 1;
+    } while (cVar2 != '\0');
+    return (int)_Src - (int)pcVar1;
+  }
+  _strncpy_s(param_2,param_3,_Src,param_3 - 1);
+  return 0;
+}
+
+// 00E07210  cXmlBinary::vfF4  size=59  [class]
+int cXmlBinary::vfF4(undefined4 param_1,char *param_2,rsize_t param_3)
+
+{
+  char *pcVar1;
+  char cVar2;
+  char *_Src;
+  
+  _Src = (char *)FUN_00e05520(param_1);
+  if (param_2 == (char *)0x0) {
+    pcVar1 = _Src + 1;
+    do {
+      cVar2 = *_Src;
+      _Src = _Src + 1;
+    } while (cVar2 != '\0');
+    return (int)_Src - (int)pcVar1;
+  }
+  _strncpy_s(param_2,param_3,_Src,param_3 - 1);
+  return 0;
+}
+
+// 00E07250  cXmlBinary::vf114  size=32  [class]
+void cXmlBinary::vf114(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e147b0(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E07270  cXmlBinary::vf110  size=32  [class]
+void cXmlBinary::vf110(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14810(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E07290  cXmlBinary::vf10C  size=32  [class]
+void cXmlBinary::vf10C(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14870(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E072B0  cXmlBinary::vf108  size=32  [class]
+void cXmlBinary::vf108(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e148d0(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E072D0  cXmlBinary::vf104  size=32  [class]
+void cXmlBinary::vf104(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14930(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E072F0  cXmlBinary::vf100  size=32  [class]
+void cXmlBinary::vf100(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14990(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E07310  cXmlBinary::vfFC  size=32  [class]
+void cXmlBinary::vfFC(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e149f0(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E07330  cXmlBinary::vfF8  size=32  [class]
+void cXmlBinary::vfF8(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00e05520(param_1);
+  FUN_00e14a50(uVar1,param_2,param_3);
+  return;
+}
+
+// 00E07350  cXmlBinary::vf130  size=32  [class]
+void cXmlBinary::vf130(undefined4 param_1,undefined1 *param_2)
+
+{
+  char *_Str;
+  ulong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 0x10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  uVar1 = _strtoul(_Str,_EndPtr,_Radix);
+  *param_2 = (char)uVar1;
+  return;
+}
+
+// 00E07370  cXmlBinary::vf12C  size=33  [class]
+void cXmlBinary::vf12C(undefined4 param_1,undefined2 *param_2)
+
+{
+  char *_Str;
+  ulong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 0x10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  uVar1 = _strtoul(_Str,_EndPtr,_Radix);
+  *param_2 = (short)uVar1;
+  return;
+}
+
+// 00E073A0  cXmlBinary::vf128  size=32  [class]
+void cXmlBinary::vf128(undefined4 param_1,ulong *param_2)
+
+{
+  char *_Str;
+  ulong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 0x10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  uVar1 = _strtoul(_Str,_EndPtr,_Radix);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E073C0  cXmlBinary::vf124  size=35  [class]
+void cXmlBinary::vf124(undefined4 param_1,ulonglong *param_2)
+
+{
+  char *_String;
+  ulonglong uVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 0x10;
+  _EndPtr = (char **)0x0;
+  _String = (char *)FUN_00e05520(param_1);
+  uVar1 = __strtoui64(_String,_EndPtr,_Radix);
+  *param_2 = uVar1;
+  return;
+}
+
+// 00E073F0  cXmlBinary::vf120  size=32  [class]
+void cXmlBinary::vf120(undefined4 param_1,undefined1 *param_2)
+
+{
+  char *_Str;
+  long lVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 0x10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  lVar1 = _strtol(_Str,_EndPtr,_Radix);
+  *param_2 = (char)lVar1;
+  return;
+}
+
+// 00E07410  cXmlBinary::vf11C  size=33  [class]
+void cXmlBinary::vf11C(undefined4 param_1,undefined2 *param_2)
+
+{
+  char *_Str;
+  long lVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 0x10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  lVar1 = _strtol(_Str,_EndPtr,_Radix);
+  *param_2 = (short)lVar1;
+  return;
+}
+
+// 00E07440  cXmlBinary::vf118  size=32  [class]
+void cXmlBinary::vf118(undefined4 param_1,long *param_2)
+
+{
+  char *_Str;
+  long lVar1;
+  char **_EndPtr;
+  int _Radix;
+  
+  _Radix = 0x10;
+  _EndPtr = (char **)0x0;
+  _Str = (char *)FUN_00e05520(param_1);
+  lVar1 = _strtol(_Str,_EndPtr,_Radix);
+  *param_2 = lVar1;
+  return;
+}
+
+// 00E07460  cXmlBinary::vf134  size=49  [class]
+undefined4 cXmlBinary::vf134(int param_1)
+
+{
+  undefined4 uVar1;
+  
+  if (param_1 == -1) {
+    return 0;
+  }
+  uVar1 = FUN_00e05520();
+  return uVar1;
 }
 
 // 00E09E10  FUN_00e09e10  size=158  [callgraph]
@@ -31911,7 +33426,7 @@ LAB_00e11788:
             ppppuStack_98 = (undefined4 ****)0x16cc198;
                     /* WARNING: Subroutine does not return */
             ppppiStack_9c = (int ****)&UNK_00e11792;
-            std::length_error::length_error_3();
+            std::length_error::length_error();
           }
           uVar13 = uVar13 + 1;
           uVar14 = (int)*(int ***)(iStack_34 + 0x54) - *(int *)(iStack_34 + 0x4c) >> 2;
@@ -32431,7 +33946,7 @@ uint __thiscall FUN_00e12400(int param_1,undefined4 *param_2)
       uVar6 = (int)puVar4 - (int)puVar5 >> 4;
       if (0xffffffe < uVar6) {
                     /* WARNING: Subroutine does not return */
-        std::length_error::length_error_3("vector<T> too long");
+        std::length_error::length_error("vector<T> too long");
       }
       uVar6 = uVar6 + 1;
       uVar10 = (int)*(undefined4 **)(param_1 + 0x78) - (int)puVar5 >> 4;
@@ -32456,7 +33971,7 @@ uint __thiscall FUN_00e12400(int param_1,undefined4 *param_2)
       uVar6 = (int)puVar4 - *piVar1 >> 4;
       if (0xffffffe < uVar6) {
                     /* WARNING: Subroutine does not return */
-        std::length_error::length_error_3("vector<T> too long");
+        std::length_error::length_error("vector<T> too long");
       }
       uVar6 = uVar6 + 1;
       uVar10 = (int)*(undefined4 **)(param_1 + 0x78) - *piVar1 >> 4;
@@ -32521,7 +34036,7 @@ void __thiscall FUN_00e12580(int param_1,int param_2,int *param_3)
           if (0x1ffffffe < uVar2) {
 LAB_00e127c1:
                     /* WARNING: Subroutine does not return */
-            std::length_error::length_error_3("vector<T> too long");
+            std::length_error::length_error("vector<T> too long");
           }
           uVar2 = uVar2 + 1;
           uVar4 = (int)local_18[4] - (int)ppppuVar5 >> 3;
@@ -32753,7 +34268,7 @@ void __thiscall FUN_00e127d0(int param_1,undefined4 *param_2,size_t *param_3,und
           if (0x3ffffffe < uVar5) {
 LAB_00e129e4:
                     /* WARNING: Subroutine does not return */
-            std::length_error::length_error_3("vector<T> too long");
+            std::length_error::length_error("vector<T> too long");
           }
           uVar5 = uVar5 + 1;
           uVar8 = (int)*(undefined4 **)(param_1 + 0xac) - *(int *)(param_1 + 0xa4) >> 2;
@@ -34290,7 +35805,7 @@ int * __thiscall FUN_00e18220(int *param_1,uint param_2,uint param_3)
   
   uVar2 = param_1[4];
   if (uVar2 < param_2) {
-    uVar2 = std::out_of_range::out_of_range_2("invalid string position");
+    uVar2 = std::out_of_range::out_of_range("invalid string position");
     param_2 = extraout_ECX;
   }
   uVar2 = uVar2 - param_2;
@@ -34330,7 +35845,7 @@ int * __thiscall FUN_00e183d0(int *param_1,uint param_2,uint param_3)
   
   uVar2 = param_1[4];
   if (uVar2 < param_2) {
-    uVar2 = std::out_of_range::out_of_range_2("invalid string position");
+    uVar2 = std::out_of_range::out_of_range("invalid string position");
     param_2 = extraout_ECX;
   }
   uVar2 = uVar2 - param_2;
@@ -35284,13 +36799,13 @@ int * __thiscall FUN_00e1a910(int *param_1,uint param_2,undefined4 param_3)
   iVar2 = param_1[4];
   if (-iVar2 - 1U <= param_2) {
                     /* WARNING: Subroutine does not return */
-    std::length_error::length_error_3("string too long");
+    std::length_error::length_error("string too long");
   }
   if (param_2 != 0) {
     uVar1 = iVar2 + param_2;
     if (uVar1 == 0xffffffff) {
                     /* WARNING: Subroutine does not return */
-      std::length_error::length_error_3("string too long");
+      std::length_error::length_error("string too long");
     }
     if ((uint)param_1[5] < uVar1) {
       FUN_00e18570(uVar1,iVar2);
@@ -35331,12 +36846,12 @@ cXmlBinary::cXmlBinary_26(char *param_1,int param_2,char *param_3,undefined4 par
     return 0;
   }
   if ((param_3 != (char *)0x0) && (*param_3 != '\0')) {
-    cXmlBinary_103();
+    cXmlBinary();
     iVar1 = FUN_00e062b0(param_2,0);
     if (iVar1 != 0) {
       _strcpy_s(param_1,0x20,param_3);
       *(undefined4 *)(param_1 + 0x20) = param_4;
-      uVar2 = FUN_00e041c0();
+      uVar2 = vf04();
       iVar1 = FUN_00e3eaf0(local_20,uVar2,param_4);
       local_20[0] = vftable;
       if (iVar1 != 0) {
@@ -35367,17 +36882,17 @@ void cXmlBinary::cXmlBinary_46(undefined4 param_1,int param_2)
   int local_20;
   
   if ((param_2 == 0) && (iVar1 = FUN_00de4500("ListenerPreset.bxm"), iVar1 != 0)) {
-    cXmlBinary_103();
+    cXmlBinary();
     iVar1 = FUN_00e062b0(iVar1,0);
     if (iVar1 == 0) {
       FUN_00e04180();
       return;
     }
-    uVar2 = FUN_00e041c0();
+    uVar2 = vf04();
     uVar7 = 0;
     puVar8 = &DAT_01dd9a70;
     do {
-      iVar3 = FUN_00e05410(uVar2,uVar7);
+      iVar3 = vf14(uVar2,uVar7);
       iVar1 = iVar3;
       iVar4 = (**(code **)(local_20 + 0x9c))(iVar3,"Offset");
       if (iVar4 != -1) {
@@ -36672,7 +38187,7 @@ void cXmlBinary::cXmlBinary_18(undefined4 *param_1)
   iVar2 = FUN_00de44b0(&DAT_016cec50,0);
   if (iVar2 != 0) {
     while( true ) {
-      cXmlBinary_103();
+      cXmlBinary();
       iVar2 = FUN_00e062b0(iVar2,0);
       if (iVar2 == 0) break;
       puVar3 = (undefined4 *)FUN_00dd3500(0x1c,&DAT_01b7bda0);
@@ -36750,7 +38265,7 @@ void cXmlBinary::cXmlBinary_20(undefined4 *param_1)
   iVar2 = FUN_00de44b0(&DAT_016cec54,0);
   if (iVar2 != 0) {
     while( true ) {
-      cXmlBinary_103();
+      cXmlBinary();
       iVar2 = FUN_00e062b0(iVar2,0);
       if (iVar2 == 0) break;
       puVar3 = (undefined4 *)FUN_00dd3500(0x1c,&DAT_01b7bda0);
@@ -36854,7 +38369,7 @@ void cXmlBinary::cXmlBinary_23(undefined4 *param_1)
   iVar2 = FUN_00de44b0(&DAT_016cec58,0);
   if (iVar2 != 0) {
     while( true ) {
-      cXmlBinary_103();
+      cXmlBinary();
       iVar2 = FUN_00e062b0(iVar2,0);
       if (iVar2 == 0) break;
       puVar3 = (undefined4 *)FUN_00dd3500(0x1c,&DAT_01b7bda0);
@@ -37207,13 +38722,13 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_80(int param_1,undefined4 param_2)
   int iVar1;
   undefined4 uVar2;
   
-  cXmlBinary_103();
+  cXmlBinary();
   iVar1 = FUN_00e062b0(param_2,0);
   if (iVar1 != 0) {
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
       *(undefined4 *)(param_1 + 0x4c) = 0;
-      uVar2 = FUN_00e053e0(iVar1);
+      uVar2 = vf10(iVar1);
       *(undefined4 *)(param_1 + 0x4c) = uVar2;
       FUN_00e04180();
       return 1;
@@ -37243,14 +38758,14 @@ void __thiscall cXmlBinary::cXmlBinary_106(int param_1,undefined4 param_2,undefi
   uint local_4;
   
   local_4 = DAT_018e8764 ^ (uint)&local_a4;
-  cXmlBinary_103();
+  cXmlBinary();
   iVar2 = FUN_00e062b0(param_2,0);
-  if ((iVar2 == 0) || (iVar2 = FUN_00e041c0(), local_7c = iVar2, iVar2 == -1)) {
+  if ((iVar2 == 0) || (iVar2 = vf04(), local_7c = iVar2, iVar2 == -1)) {
     local_a0[0] = vftable;
     FUN_00e04180();
   }
   else {
-    local_80 = FUN_00e053e0(iVar2);
+    local_80 = vf10(iVar2);
     if (local_80 == 0) {
       local_a0[0] = vftable;
       FUN_00e04180();
@@ -37259,7 +38774,7 @@ void __thiscall cXmlBinary::cXmlBinary_106(int param_1,undefined4 param_2,undefi
       local_a4 = 0;
       if (0 < local_80) {
         do {
-          iVar2 = FUN_00e05410(iVar2,local_a4);
+          iVar2 = vf14(iVar2,local_a4);
           if (iVar2 == -1) {
 LAB_00e726cd:
             local_a0[0] = vftable;
@@ -37364,10 +38879,10 @@ undefined4 cXmlBinary::cXmlBinary_40(undefined4 param_1)
   int iVar1;
   undefined **local_20 [8];
   
-  cXmlBinary_103();
+  cXmlBinary();
   iVar1 = FUN_00e062b0(param_1,0);
   if (iVar1 != 0) {
-    iVar1 = FUN_00e041c0();
+    iVar1 = vf04();
     if (iVar1 != -1) {
       iVar1 = FUN_00e6ee60(local_20,iVar1);
       local_20[0] = vftable;
@@ -37392,20 +38907,20 @@ undefined4 cXmlBinary::cXmlBinary_51(undefined4 param_1,undefined4 param_2)
   int iVar4;
   undefined **local_20 [8];
   
-  cXmlBinary_103();
+  cXmlBinary();
   iVar1 = FUN_00e062b0(param_1,0);
   if (iVar1 == 0) {
     local_20[0] = vftable;
     FUN_00e04180();
     return 0;
   }
-  iVar1 = FUN_00e041c0();
+  iVar1 = vf04();
   if (iVar1 == -1) {
     local_20[0] = vftable;
     FUN_00e04180();
     return 0;
   }
-  iVar2 = FUN_00e053e0(iVar1);
+  iVar2 = vf10(iVar1);
   if (iVar2 == 0) {
     local_20[0] = vftable;
     FUN_00e04180();
@@ -37420,7 +38935,7 @@ undefined4 cXmlBinary::cXmlBinary_51(undefined4 param_1,undefined4 param_2)
   iVar3 = 0;
   if (0 < iVar2) {
     do {
-      iVar4 = FUN_00e05410(iVar1,iVar3);
+      iVar4 = vf14(iVar1,iVar3);
       if (iVar4 == -1) {
 LAB_00e77c89:
         local_20[0] = vftable;
@@ -37499,7 +39014,7 @@ void __thiscall cXmlBinary::cXmlBinary_5(int param_1,undefined4 param_2)
   uint local_4;
   
   local_4 = DAT_018e8764 ^ (uint)local_3c;
-  cXmlBinary_103();
+  cXmlBinary();
   iVar5 = 0;
   iVar1 = FUN_00e062b0(param_2,0);
   if (iVar1 == 0) {
@@ -37508,9 +39023,9 @@ void __thiscall cXmlBinary::cXmlBinary_5(int param_1,undefined4 param_2)
     __security_check_cookie(local_4 ^ (uint)local_3c);
     return;
   }
-  iVar1 = FUN_00e041c0();
+  iVar1 = vf04();
   if (iVar1 != -1) {
-    uVar2 = FUN_00e05410(iVar1,0);
+    uVar2 = vf14(iVar1,0);
     local_10 = 0;
     local_c = 0;
     local_8 = 0;
@@ -37524,12 +39039,12 @@ void __thiscall cXmlBinary::cXmlBinary_5(int param_1,undefined4 param_2)
           if (iVar3 != 0) {
             local_1c = 0;
             local_18 = 0;
-            local_14 = FUN_00e05410(iVar1,1);
+            local_14 = vf14(iVar1,1);
             iVar1 = local_10;
             if (0 < local_10) {
               iVar3 = 0;
               do {
-                iVar4 = FUN_00e05410(local_14,iVar5);
+                iVar4 = vf14(local_14,iVar5);
                 if (iVar4 == -1) goto LAB_00e7ab88;
                 iVar4 = FUN_00e77cb0(*(int *)(param_1 + 100) + iVar3,local_3c,iVar4,&local_1c,
                                      &local_18);
@@ -37571,14 +39086,14 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_9(int param_1,int param_2)
   int iVar5;
   undefined **local_20 [8];
   
-  cXmlBinary_103();
+  cXmlBinary();
   iVar1 = FUN_00e062b0(param_2,0);
   if (iVar1 == 0) {
     local_20[0] = vftable;
     FUN_00e04180();
     return 0;
   }
-  iVar1 = FUN_00e041c0();
+  iVar1 = vf04();
   if (iVar1 == -1) {
     local_20[0] = vftable;
     FUN_00e04180();
@@ -37609,7 +39124,7 @@ LAB_00e7afa5:
   if (*(char *)(param_1 + 10) == '\0') {
     *(undefined1 *)(param_1 + 10) = 0x3c;
   }
-  iVar2 = FUN_00e053e0(iVar1);
+  iVar2 = vf10(iVar1);
   iVar3 = FUN_00e86810(iVar2);
   if (iVar3 != 0) {
     iVar3 = 0;
@@ -37622,7 +39137,7 @@ LAB_00e7afa5:
     if (0 < iVar2) {
       iVar3 = 0;
       do {
-        iVar4 = FUN_00e05410(iVar1,iVar3);
+        iVar4 = vf14(iVar1,iVar3);
         if (iVar4 == -1) {
           local_20[0] = vftable;
           FUN_00e04180();
@@ -37673,7 +39188,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_94(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe87258;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar3 = FUN_00e062b0(param_2);
   if (iVar3 == 0) {
@@ -37682,7 +39197,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_94(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe8728a;
-  uVar4 = FUN_00e041c0();
+  uVar4 = vf04();
   pcVar2 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar1 = -1;
@@ -37705,7 +39220,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_94(int param_1,int param_2)
       uVar6 = 0;
       if (auStack_14[0] != 0) {
         do {
-          uVar5 = FUN_00e05410(uVar4,uVar6);
+          uVar5 = vf14(uVar4,uVar6);
           FUN_00e6d690(0);
           iVar3 = FUN_00e72a90(&ppuStack_38,uVar5);
           if (iVar3 == 0) goto LAB_00e873a1;
@@ -37786,13 +39301,13 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_96(int param_1,int param_2)
   if (param_2 == 0) {
     return 1;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   iVar3 = FUN_00e062b0(param_2,0);
   if (iVar3 == 0) {
     FUN_00e04180();
     return 0;
   }
-  iVar4 = FUN_00e041c0();
+  iVar4 = vf04();
   pcVar2 = *(code **)(local_20 + 0x9c);
   *pcVar1 = -1;
   iVar3 = iVar4;
@@ -37816,7 +39331,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_96(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar8 = (undefined2 *)(*(int *)(param_1 + 0x14) + 8);
         do {
-          uVar6 = FUN_00e05410(iVar4,uVar7);
+          uVar6 = vf14(iVar4,uVar7);
           *puVar8 = 0;
           puVar8[1] = 0;
           puVar8[2] = 0;
@@ -37947,7 +39462,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_99(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe877e8;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar3 = FUN_00e062b0(param_2);
   if (iVar3 == 0) {
@@ -37956,7 +39471,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_99(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe8781a;
-  uVar4 = FUN_00e041c0();
+  uVar4 = vf04();
   pcVar2 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar1 = -1;
@@ -37979,7 +39494,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_99(int param_1,int param_2)
       uVar6 = 0;
       if (auStack_14[0] != 0) {
         do {
-          uVar5 = FUN_00e05410(uVar4,uVar6);
+          uVar5 = vf14(uVar4,uVar6);
           FUN_00e6ea80();
           iVar3 = FUN_00e73540(&ppuStack_38,uVar5);
           if (iVar3 == 0) goto LAB_00e87932;
@@ -38062,7 +39577,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_91(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe87a29;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar2 = FUN_00e062b0(param_2);
   if (iVar2 == 0) {
@@ -38071,7 +39586,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_91(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe87a5a;
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   pcVar1 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar6 = -1;
@@ -38096,7 +39611,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_91(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar7 = (undefined2 *)(*(int *)(iVar2 + 0x14) + 8);
         do {
-          uVar5 = FUN_00e05410(iVar3,uVar8);
+          uVar5 = vf14(iVar3,uVar8);
           *(undefined4 *)(puVar7 + -4) = 0xffffffff;
           *(undefined4 *)(puVar7 + -2) = 0;
           *puVar7 = 0;
@@ -38197,7 +39712,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_92(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe87ca9;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar2 = FUN_00e062b0(param_2);
   if (iVar2 == 0) {
@@ -38206,7 +39721,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_92(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe87cda;
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   pcVar1 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar6 = -1;
@@ -38231,7 +39746,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_92(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar7 = (undefined4 *)(*(int *)(iVar2 + 0x14) + 4);
         do {
-          uVar5 = FUN_00e05410(iVar3,uVar8);
+          uVar5 = vf14(iVar3,uVar8);
           puVar7[-1] = 0xffffffff;
           *puVar7 = 0;
           *(undefined2 *)(puVar7 + 1) = 0;
@@ -38325,7 +39840,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_93(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe87f17;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar2 = FUN_00e062b0(param_2);
   if (iVar2 == 0) {
@@ -38334,7 +39849,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_93(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe87f48;
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   pcVar1 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar6 = -1;
@@ -38359,7 +39874,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_93(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar7 = (undefined4 *)(*(int *)(iVar2 + 0x14) + 4);
         do {
-          uVar5 = FUN_00e05410(iVar3,uVar8);
+          uVar5 = vf14(iVar3,uVar8);
           puVar7[-1] = 0xffffffff;
           *puVar7 = 0;
           *(undefined2 *)(puVar7 + 1) = 0;
@@ -38459,7 +39974,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_76(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe88199;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar2 = FUN_00e062b0(param_2);
   if (iVar2 == 0) {
@@ -38468,7 +39983,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_76(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe881ca;
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   pcVar1 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar6 = -1;
@@ -38493,7 +40008,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_76(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar7 = (undefined4 *)(*(int *)(iVar2 + 0x14) + 0x28);
         do {
-          uVar5 = FUN_00e05410(iVar3,uVar8);
+          uVar5 = vf14(iVar3,uVar8);
           puVar7[-10] = 0xffffffff;
           puVar7[-9] = 0;
           *(undefined2 *)(puVar7 + -8) = 0;
@@ -38589,7 +40104,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_77(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe88407;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar2 = FUN_00e062b0(param_2);
   if (iVar2 == 0) {
@@ -38598,7 +40113,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_77(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe88438;
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   pcVar1 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar6 = -1;
@@ -38623,7 +40138,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_77(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar7 = (undefined2 *)(*(int *)(iVar2 + 0x14) + 8);
         do {
-          uVar5 = FUN_00e05410(iVar3,uVar8);
+          uVar5 = vf14(iVar3,uVar8);
           *(undefined4 *)(puVar7 + -4) = 0xffffffff;
           *(undefined4 *)(puVar7 + -2) = 0;
           *puVar7 = 0;
@@ -38716,13 +40231,13 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_78(int param_1,int param_2)
   if (param_2 == 0) {
     return 1;
   }
-  cXmlBinary_103();
+  cXmlBinary();
   iVar3 = FUN_00e062b0(param_2,0);
   if (iVar3 == 0) {
     FUN_00e04180();
     return 0;
   }
-  iVar4 = FUN_00e041c0();
+  iVar4 = vf04();
   pcVar2 = *(code **)(local_20 + 0x9c);
   *pcVar1 = -1;
   iVar3 = iVar4;
@@ -38746,7 +40261,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_78(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar8 = (undefined2 *)(*(int *)(param_1 + 0x14) + 8);
         do {
-          uVar6 = FUN_00e05410(iVar4,uVar7);
+          uVar6 = vf14(iVar4,uVar7);
           *puVar8 = 0;
           puVar8[1] = 0;
           puVar8[2] = 0;
@@ -38841,7 +40356,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_72(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe88939;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar2 = FUN_00e062b0(param_2);
   if (iVar2 == 0) {
@@ -38850,7 +40365,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_72(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe8896a;
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   pcVar1 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar6 = -1;
@@ -38875,7 +40390,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_72(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         puVar7 = (undefined2 *)(*(int *)(iVar2 + 0x14) + 8);
         do {
-          uVar5 = FUN_00e05410(iVar3,uVar8);
+          uVar5 = vf14(iVar3,uVar8);
           *(undefined4 *)(puVar7 + -4) = 0xffffffff;
           *(undefined4 *)(puVar7 + -2) = 0;
           *puVar7 = 0;
@@ -38969,7 +40484,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_73(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe88ba8;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar3 = FUN_00e062b0(param_2);
   if (iVar3 == 0) {
@@ -38978,7 +40493,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_73(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe88bda;
-  uVar4 = FUN_00e041c0();
+  uVar4 = vf04();
   pcVar2 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar1 = -1;
@@ -39001,7 +40516,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_73(int param_1,int param_2)
       uVar6 = 0;
       if (auStack_14[0] != 0) {
         do {
-          uVar5 = FUN_00e05410(uVar4,uVar6);
+          uVar5 = vf14(uVar4,uVar6);
           FUN_00e693c0();
           iVar3 = FUN_00e6efc0(&ppuStack_38,uVar5);
           if (iVar3 == 0) goto LAB_00e88cef;
@@ -39045,7 +40560,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_47(int param_1,int param_2)
     return 1;
   }
   ppuStack_38 = (undefined **)0xe90c59;
-  cXmlBinary_103();
+  cXmlBinary();
   ppuStack_38 = (undefined **)0x0;
   iVar2 = FUN_00e062b0(param_2);
   if (iVar2 == 0) {
@@ -39054,7 +40569,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_47(int param_1,int param_2)
     return 0;
   }
   ppuStack_38 = (undefined **)0xe90c8a;
-  iVar3 = FUN_00e041c0();
+  iVar3 = vf04();
   pcVar1 = *(code **)(local_20 + 0x9c);
   ppuStack_38 = (undefined **)0x16d0304;
   *pcVar6 = -1;
@@ -39079,7 +40594,7 @@ undefined4 __thiscall cXmlBinary::cXmlBinary_47(int param_1,int param_2)
       if (auStack_14[0] != 0) {
         iVar2 = *(int *)(iVar2 + 0x14) + 0x1e;
         do {
-          uVar5 = FUN_00e05410(iVar3,uVar7);
+          uVar5 = vf14(iVar3,uVar7);
           *(undefined4 *)(iVar2 + -0x1e) = 0xffffffff;
           *(undefined4 *)(iVar2 + -0x1a) = 0;
           *(undefined2 *)(iVar2 + -0x16) = 0;
@@ -39134,25 +40649,25 @@ void __thiscall cXmlBinary::cXmlBinary_37(int param_1,int param_2,int param_3,in
     if (*(int *)(param_1 + 0xc) == 0) {
       FUN_00fa25d0(param_3);
     }
-    cXmlBinary_103();
+    cXmlBinary();
     FUN_00e062b0(param_4,0);
-    uVar1 = FUN_00e041c0();
-    iVar2 = FUN_00e06390(uVar1,"Textures");
+    uVar1 = vf04();
+    iVar2 = vf18(uVar1,"Textures");
     if (iVar2 == -1) {
       local_124 = vftable;
       FUN_00e04180();
     }
     else {
-      iVar3 = FUN_00e053e0(iVar2);
+      iVar3 = vf10(iVar2);
       local_128 = 0;
       local_12c = 0;
       if (0 < iVar3) {
         do {
-          uVar1 = FUN_00e05410(iVar2,iVar5);
-          uVar4 = FUN_00e06df0(uVar1,"OriginalHashCode");
-          FUN_00e073a0(uVar4,&local_128);
-          uVar1 = FUN_00e06df0(uVar1,"HashCode");
-          FUN_00e073a0(uVar1,&local_12c);
+          uVar1 = vf14(iVar2,iVar5);
+          uVar4 = vf9C(uVar1,"OriginalHashCode");
+          vf128(uVar4,&local_128);
+          uVar1 = vf9C(uVar1,"HashCode");
+          vf128(uVar1,&local_12c);
           iVar5 = iVar5 + 1;
         } while (iVar5 < iVar3);
       }
@@ -39235,24 +40750,24 @@ void __thiscall cXmlBinary::cXmlBinary_42(int param_1,undefined4 param_2)
   FUN_0099a390(&DAT_01f21dac,&DAT_016f258c);
   FUN_0099a460(&DAT_01f21dcc,&DAT_016f258c);
   FUN_0099a460(&DAT_01f21ddc,&DAT_016f258c);
-  cXmlBinary_103();
+  cXmlBinary();
   FUN_00e062b0(param_2,0);
-  uVar2 = FUN_00e041c0();
+  uVar2 = vf04();
   iVar8 = 3;
   local_10c = 3;
-  iVar3 = FUN_00e053e0(uVar2);
+  iVar3 = vf10(uVar2);
   if (0 < iVar3) {
     local_114 = 0;
     puVar9 = &DAT_01f21edc;
     do {
-      uVar4 = FUN_00e05410(uVar2,local_114);
+      uVar4 = vf14(uVar2,local_114);
       *(undefined **)(puVar9 + -0xa4) = &DAT_01f69a38;
       *puVar9 = 0;
       local_110 = 0;
-      iVar8 = FUN_00e053e0(uVar4);
+      iVar8 = vf10(uVar4);
       if (0 < iVar8) {
         do {
-          uVar5 = FUN_00e05410(uVar4,local_110);
+          uVar5 = vf14(uVar4,local_110);
           (**(code **)(local_134 + 0x24))(uVar5,local_108,0x100);
           pcVar7 = "shader_name";
           pbVar6 = local_108;
@@ -39431,13 +40946,13 @@ LAB_00fb2fd5:
             (**(code **)(local_134 + 0x74))(uVar5,puVar9,0x18);
           }
           local_110 = local_110 + 1;
-          iVar8 = FUN_00e053e0(uVar4);
+          iVar8 = vf10(uVar4);
         } while (local_110 < iVar8);
       }
       iVar8 = local_10c + 1;
       local_114 = local_114 + 1;
       puVar9 = puVar9 + 0xc0;
-      iVar3 = FUN_00e053e0(uVar2);
+      iVar3 = vf10(uVar2);
       local_10c = iVar8;
     } while (local_114 < iVar3);
   }

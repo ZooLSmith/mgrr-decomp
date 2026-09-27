@@ -8,6 +8,7 @@
 struct hkpRemoveTerminalsMoppModifier : public hkReferencedObject, public hkpMoppModifier {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpRemoveTerminalsMoppModifier();  // 011409A0
     static void vf00();  // 011409D0
     static void vf04(undefined4 param_2, int param_3);  // 01157D20
     static void vf08(int param_2);  // 01157D90

@@ -19,7 +19,7 @@ FUN_0090ed90(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_
   if (((*param_5 == 0.0) || (param_5[1] == 0.0)) || (param_5[2] == 0.0)) {
     return 0;
   }
-  hkpAllCdPointCollector::hkpAllCdPointCollector_30();
+  hkpAllCdPointCollector::hkpAllCdPointCollector();
   FUN_0090c850(0xffffffff,param_3,param_4,param_5,param_6,param_7,0,0,0,param_8,4);
   local_209 = 0;
   if (local_205 != '\0') {
@@ -57,7 +57,7 @@ FUN_0090eea0(int param_1,undefined4 param_2,undefined4 param_3,float param_4,und
   char local_205;
   
   if (param_4 != 0.0) {
-    hkpAllCdPointCollector::hkpAllCdPointCollector_30();
+    hkpAllCdPointCollector::hkpAllCdPointCollector();
     FUN_0090ca20(0xffffffff,param_3,param_4,param_5,param_6,0,0,0,param_7,4);
     local_209 = 0;
     if (local_205 != '\0') {

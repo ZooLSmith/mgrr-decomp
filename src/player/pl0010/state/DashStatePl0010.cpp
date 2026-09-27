@@ -536,8 +536,8 @@ undefined4 __thiscall DashStatePl0010::vf20(int param_1,undefined4 *param_2)
   return 1;
 }
 
-// 00BC9C70  DashStatePl0010::vf0C  size=1306  [class]
-void __thiscall DashStatePl0010::vf0C(int param_1,undefined4 *param_2)
+// 00BC9C70  DashStatePl0010::SafeCheck  size=1306  [class]
+void __thiscall DashStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;
@@ -708,12 +708,12 @@ LAB_00bca11b:
     }
   }
 LAB_00bca176:
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
-// 00BDD4E0  DashStatePl0010::vf10  size=4115  [class]
-void __thiscall DashStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BDD4E0  DashStatePl0010::qteSafeCheck  size=4115  [class]
+void __thiscall DashStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -1171,7 +1171,7 @@ LAB_00bde431:
   }
   FUN_00bd3910(param_2,param_1,0xb,10);
   FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::vf10(param_2);
+  StateMachineNode::qteSafeCheck(param_2);
   return;
 }
 

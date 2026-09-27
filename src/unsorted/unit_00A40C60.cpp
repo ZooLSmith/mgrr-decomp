@@ -1018,7 +1018,7 @@ void FUN_00a42ba0(undefined4 param_1,undefined4 *param_2)
   }
   FUN_00fa5730(local_30,1);
   FUN_00f98b60(0xff000000,0x3f800000,0,3);
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
   puVar2 = param_2;
   uVar1 = *param_2;
   iVar3 = FUN_00e6b900();

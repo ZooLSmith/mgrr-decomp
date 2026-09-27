@@ -56,8 +56,8 @@ void Wind::Geometry::GlobalModule::vf04(void)
   return;
 }
 
-// 00C1E5E0  FUN_00c1e5e0  size=36  [between]
-void __thiscall FUN_00c1e5e0(int param_1,undefined4 *param_2)
+// 00C1E5E0  Wind::Geometry::GlobalModule::vf14  size=36  [class]
+void __thiscall Wind::Geometry::GlobalModule::vf14(int param_1,undefined4 *param_2)
 
 {
   if (*(int *)(param_1 + 4) != 0) {
@@ -284,9 +284,10 @@ undefined4 * __thiscall Wind::Geometry::GlobalModule::vf00(undefined4 *param_1,b
   return param_1;
 }
 
-// 00C31A20  FUN_00c31a20  size=149  [between]
+// 00C31A20  Wind::Geometry::GlobalModule::vf1C  size=149  [class]
 void __thiscall
-FUN_00c31a20(int param_1,undefined4 *param_2,float *param_3,float *param_4,float param_5)
+Wind::Geometry::GlobalModule::vf1C
+          (int param_1,undefined4 *param_2,float *param_3,float *param_4,float param_5)
 
 {
   float10 fVar1;

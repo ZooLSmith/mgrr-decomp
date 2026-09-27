@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "RoomBaseUnit.h"
 
-// 005E3EF0  RoomBaseUnit::vf40  size=32  [class]
-undefined4 RoomBaseUnit::vf40(void)
+// 005E3EF0  RoomBaseUnit::startup  size=32  [class]
+undefined4 RoomBaseUnit::startup(void)
 
 {
   int iVar1;
@@ -31,7 +31,7 @@ void RoomBaseUnit::vf44(void)
 undefined4 * __fastcall RoomBaseUnit::RoomBaseUnit(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   param_1[0x222] = 0;
   return param_1;
@@ -44,11 +44,11 @@ undefined * RoomBaseUnit::vf04(void)
   return &DAT_01b3534c;
 }
 
-// 00ABAA70  RoomBaseUnit::vf00  size=30  [class]
-undefined4 __thiscall RoomBaseUnit::vf00(undefined4 param_1,byte param_2)
+// 00ABAA70  RoomBaseUnit::destruct  size=30  [class]
+undefined4 __thiscall RoomBaseUnit::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_46();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

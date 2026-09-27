@@ -13,5 +13,6 @@ struct GameStageManagerImplement : public GameStageManager {
     virtual void vf10();  // 008DFC00 slot 0x10  overrides GameStageManager
     virtual undefined4 * vf14(byte param_2);  // 008DFCB0 slot 0x14  overrides GameStageManager
     // non-virtual members
+    static void vf10_008DC7C0();  // 008DC7C0
     GameStageManagerImplement(undefined4 param_1);  // 008DFD10
 };

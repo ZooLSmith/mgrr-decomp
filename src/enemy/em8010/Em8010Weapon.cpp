@@ -1,16 +1,16 @@
 // src/enemy/em8010/Em8010Weapon.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0061E740..00ABA790, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0061E740..00ABA790, 6 functions
 
 #include "mgrr.h"
 #include "Em8010Weapon.h"
 
-// 0061E740  Em8010Weapon::vf40  size=354  [class]
-undefined4 __fastcall Em8010Weapon::vf40(int param_1)
+// 0061E740  Em8010Weapon::startup  size=354  [class]
+undefined4 __fastcall Em8010Weapon::startup(int param_1)
 
 {
   int iVar1;
   
-  iVar1 = cEm0010Weapon::vf40();
+  iVar1 = cEm0010Weapon::startup();
   if (iVar1 == 0) {
     return 0;
   }
@@ -81,6 +81,20 @@ int __fastcall Em8010Weapon::vf98(int param_1)
   return (-(uint)(iVar1 != 0x38080) & 0xffffffb0) + 0x30080;
 }
 
+// 00AB5EA0  Em8010Weapon::Em8010Weapon  size=55  [class]
+undefined4 * __fastcall Em8010Weapon::Em8010Weapon(undefined4 *param_1)
+
+{
+  Behavior::Behavior();
+  param_1[0x228] = 0;
+  param_1[0x22a] = 0;
+  param_1[0x22d] = 0;
+  *param_1 = cEm0010Weapon::vftable;
+  FUN_00a7c930();
+  *param_1 = vftable;
+  return param_1;
+}
+
 // 00AB5EE0  Em8010Weapon::vf04  size=6  [class]
 undefined * Em8010Weapon::vf04(void)
 
@@ -95,8 +109,8 @@ undefined4 Em8010Weapon::vf94(void)
   return 3;
 }
 
-// 00ABA790  Em8010Weapon::vf00  size=105  [class]
-undefined4 * __thiscall Em8010Weapon::vf00(undefined4 *param_1,byte param_2)
+// 00ABA790  Em8010Weapon::destruct  size=105  [class]
+undefined4 * __thiscall Em8010Weapon::destruct(undefined4 *param_1,byte param_2)
 
 {
   *param_1 = Behavior::vftable;
@@ -110,7 +124,7 @@ undefined4 * __thiscall Em8010Weapon::vf00(undefined4 *param_1,byte param_2)
     param_1[0x19f] = 0;
     param_1[0x1a0] = 0;
   }
-  cXml::cXml_2();
+  cObj::~cObj();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

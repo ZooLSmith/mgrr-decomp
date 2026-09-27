@@ -478,7 +478,7 @@ undefined4 __fastcall HoldEntitySlot::HoldEntitySlot_3(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar2 = BehaviorAppBase::vf40();
+  iVar2 = BehaviorAppBase::startup();
   if (iVar2 == 0) {
     return 0;
   }
@@ -503,7 +503,7 @@ undefined4 __fastcall HoldEntitySlot::HoldEntitySlot_3(int param_1)
     iVar2 = 0;
   }
   else {
-    iVar2 = RigidBodyCollection::RigidBodyCollection_2();
+    iVar2 = RigidBodyCollision::RigidBodyCollision();
   }
   *(int *)(param_1 + 0x7b0) = iVar2;
   if (iVar2 != 0) {

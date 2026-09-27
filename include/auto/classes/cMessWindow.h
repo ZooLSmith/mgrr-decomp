@@ -11,5 +11,5 @@ struct cMessWindow : public cCustomObjCtrlManager {
     virtual void create();  // 009AA670 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
     cMessWindow();  // 00999A60
-    void ctor_00999AB0();  // 00999AB0
+    ~cMessWindow();  // 00999AB0
 };

@@ -19,6 +19,7 @@ struct hkpSimpleShapePhantom : public hkpShapePhantom {
     virtual void vf44(undefined4 param_2, int param_3);  // 011A16B0 slot 0x44  overrides hkpShapePhantom
     virtual void vf48(int param_2, int param_3);  // 011A1730 slot 0x48  overrides hkpShapePhantom
     // non-virtual members
-    ~hkpSimpleShapePhantom();  // 011A1B80
-    hkpSimpleShapePhantom();  // 011AF430
+    hkpSimpleShapePhantom();  // 011A1B80
+    ~hkpSimpleShapePhantom();  // 011A1BD0
+    void ctor_011AF430();  // 011AF430
 };

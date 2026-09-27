@@ -89,7 +89,7 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_36
   local_a8c = *(undefined4 *)(param_1 + 0xda0);
   local_a90 = 0x1a;
   local_a84 = 1;
-  hkpAllCdPointCollector_21();
+  hkpAllCdPointCollector();
   iVar15 = BehaviorUtility::checkRay(local_530,&local_ab0);
   if (iVar15 != 0) {
     FUN_0112c170();
@@ -121,7 +121,7 @@ hkpAllCdPointCollector::hkpAllCdPointCollector_36
         FUN_00910a40(0);
         local_a4c = 0;
         local_a20 = 0;
-        hkpAllRayHitCollector::hkpAllRayHitCollector_8();
+        hkpAllRayHitCollector::hkpAllRayHitCollector();
         local_6ec = 0x7f7fffee;
         local_a40 = 0;
         local_a3c = 0;

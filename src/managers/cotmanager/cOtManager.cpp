@@ -18,8 +18,8 @@ undefined4 * __fastcall cOtManager::cOtManager(undefined4 *param_1)
 void FUN_00a21020(void)
 
 {
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
-  Hw::cOtManagerBase::cOtManagerBase_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
+  Hw::cOtManagerBase::~cOtManagerBase();
   return;
 }
 
@@ -27,8 +27,8 @@ void FUN_00a21020(void)
 undefined4 __thiscall cOtManager::vf00(undefined4 param_1,byte param_2)
 
 {
-  Hw::cRenderTargetInfo::cRenderTargetInfo_2();
-  Hw::cOtManagerBase::cOtManagerBase_2();
+  Hw::cRenderTargetInfo::~cRenderTargetInfo();
+  Hw::cOtManagerBase::~cOtManagerBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

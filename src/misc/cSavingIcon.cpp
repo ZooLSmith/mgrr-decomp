@@ -97,8 +97,8 @@ void __fastcall cSavingIcon::vf08(int param_1)
   return;
 }
 
-// 00CF20A0  cSavingIcon::vf14  size=326  [class]
-void __fastcall cSavingIcon::vf14(int param_1)
+// 00CF20A0  cSavingIcon::create  size=326  [class]
+void __fastcall cSavingIcon::create(int param_1)
 
 {
   int iVar1;

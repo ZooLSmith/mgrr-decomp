@@ -12,5 +12,6 @@ struct cEsp : public cEspBase {
     virtual void addOtTransList();  // 00F2D650 slot 0x10  overrides cEspBase
     virtual bool vf18(int param_2);  // 00EE00A0 slot 0x18  overrides cEspBase
     // non-virtual members
+    cEsp();  // 00F12970
     static undefined FixTexture();  // 00F20660
 };

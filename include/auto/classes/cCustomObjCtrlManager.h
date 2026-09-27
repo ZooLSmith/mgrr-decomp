@@ -14,14 +14,13 @@ struct cCustomObjCtrlManager {
     virtual void vf18();  // 009891B0 slot 0x18
     // non-virtual members
     cCustomObjCtrlManager();  // 00CB21E0
-    void ctor_00CCDD30();  // 00CCDD30
+    ~cCustomObjCtrlManager();  // 00CCDD30
     void ctor_00CD0260();  // 00CD0260
     void ctor_00CD0450();  // 00CD0450
     void ctor_00CD0610();  // 00CD0610
     void ctor_00CD0F20();  // 00CD0F20
     void ctor_00CD1660();  // 00CD1660
     void ctor_00CD1D10();  // 00CD1D10
-    void ctor_00CD2050();  // 00CD2050
     void ctor_00CD3250();  // 00CD3250
     void ctor_00CD3990();  // 00CD3990
     void ctor_00CD40A0();  // 00CD40A0
@@ -41,13 +40,10 @@ struct cCustomObjCtrlManager {
     void ctor_00CD9930();  // 00CD9930
     void ctor_00CD9CC0();  // 00CD9CC0
     void ctor_00CDAA80();  // 00CDAA80
-    void ctor_00CDBD50();  // 00CDBD50
-    void ctor_00CDBFA0();  // 00CDBFA0
-    void ctor_00CDD000();  // 00CDD000
+    void ctor_00CDAFD0();  // 00CDAFD0
     void ctor_00CE3BC0();  // 00CE3BC0
     void ctor_00CE3FA0();  // 00CE3FA0
     void ctor_00CF37A0();  // 00CF37A0
-    void ctor_00CF3840();  // 00CF3840
     void ctor_00CF3960();  // 00CF3960
     void ctor_00CF53F0();  // 00CF53F0
     void ctor_00CF5660();  // 00CF5660

@@ -153,7 +153,7 @@ FUN_0091fd10(int param_1,uint *param_2,int *param_3,int *param_4,undefined4 para
   pvVar6 = TlsGetValue(DAT_01f8fc4c);
   iVar7 = (**(code **)(**(int **)((int)pvVar6 + 0x2c) + 4))(0x220);
   *(undefined2 *)(iVar7 + 4) = 0x220;
-  iVar7 = hkpRigidBody::~hkpRigidBody(param_3);
+  iVar7 = hkpRigidBody::hkpRigidBody(param_3);
   *unaff_retaddr = iVar7;
   if (iVar7 == 0) {
     FUN_00dd5650(&DAT_0164d0b4);
@@ -997,7 +997,7 @@ RigidBodyManagerImplement::vf20
   pvVar3 = TlsGetValue(DAT_01f8fc4c);
   iVar1 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x70);
   *(undefined2 *)(iVar1 + 4) = 0x70;
-  iVar1 = hkpListShape::hkpListShape_2(param_4,param_5,1);
+  iVar1 = hkpListShape::hkpListShape(param_4,param_5,1);
   if (iVar1 == 0) {
     if (local_4 != (undefined4 *)0x0) {
       FUN_00dd4920(local_4);
@@ -1466,8 +1466,7 @@ RigidBodyManagerImplement::vf1C
         pvVar10 = TlsGetValue(DAT_01f8fc4c);
         iVar15 = (**(code **)(**(int **)((int)pvVar10 + 0x2c) + 4))(0x70);
         *(undefined2 *)(iVar15 + 4) = 0x70;
-        iVar15 = hkpConvexVerticesShape::hkpConvexVerticesShape_5
-                           (&local_314,&p_Stack_228,0x3c23d70a);
+        iVar15 = hkpConvexVerticesShape::hkpConvexVerticesShape(&local_314,&p_Stack_228,0x3c23d70a);
         *(int *)(param_3 + 4) = iVar15;
         if (iVar15 == 0) {
           FUN_009211c0();

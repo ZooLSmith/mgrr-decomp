@@ -8,6 +8,7 @@ struct hkpTyremarksWheel : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 01287DF0 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkpTyremarksWheel(undefined4 * param_1);  // 01287A40
-    hkpTyremarksWheel();  // 0128F290
+    ~hkpTyremarksWheel();  // 01287A40
+    hkpTyremarksWheel();  // 01287A60
+    void ctor_0128F290();  // 0128F290
 };

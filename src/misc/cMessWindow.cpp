@@ -1,16 +1,16 @@
 // src/misc/cMessWindow.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00999A60..009AA670, 8 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00999A60..009AA670, 6 functions
 
 #include "mgrr.h"
 #include "cMessWindow.h"
 
-// 00999A60  cMessWindow::cMessWindow_2  size=79  [class]
-undefined4 * __fastcall cMessWindow::cMessWindow_2(undefined4 *param_1)
+// 00999A60  cMessWindow::cMessWindow  size=79  [class]
+undefined4 * __fastcall cMessWindow::cMessWindow(undefined4 *param_1)
 
 {
   int iVar1;
   
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   *(undefined1 *)(param_1 + 0x28) = 0;
   param_1[0x2d] = 0;
@@ -27,8 +27,8 @@ undefined4 * __fastcall cMessWindow::cMessWindow_2(undefined4 *param_1)
   return param_1;
 }
 
-// 00999AB0  cMessWindow::cMessWindow  size=81  [class]
-void __fastcall cMessWindow::cMessWindow(undefined4 *param_1)
+// 00999AB0  cMessWindow::~cMessWindow  size=81  [class]
+void __fastcall cMessWindow::~cMessWindow(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -40,7 +40,7 @@ void __fastcall cMessWindow::cMessWindow(undefined4 *param_1)
   if (param_1[0x2e] != 0) {
     (&DAT_01b3920c)[param_1[0x2e]] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -156,57 +156,6 @@ void FUN_00999d20(int param_1)
   return;
 }
 
-// 00999DA0  FUN_00999da0  size=81  [callgraph]
-void __thiscall FUN_00999da0(int param_1,char param_2)
-
-{
-  FUN_00ce4d70(5);
-  if (param_2 != '\0') {
-    if (*(int *)(param_1 + 0xa4) == 0) {
-      FUN_00ce4d70(1);
-      return;
-    }
-    FUN_00ce4d70(7);
-    return;
-  }
-  if (*(int *)(param_1 + 0xa4) == 0) {
-    FUN_00ce4d70(0);
-    return;
-  }
-  FUN_00ce4d70(6);
-  return;
-}
-
-// 00999E10  FUN_00999e10  size=263  [callgraph]
-void __fastcall FUN_00999e10(int param_1)
-
-{
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  
-  iVar1 = *(int *)(param_1 + 0xb8);
-  if ((iVar1 != 0) && (iVar2 = *(int *)(param_1 + 0x18), iVar2 != 0)) {
-    iVar3 = *(int *)(param_1 + 0xa4);
-    if (iVar3 == 0) {
-      FUN_00d389f0(iVar1,0,0,0,iVar2,0x15,1);
-      FUN_00d389f0(*(undefined4 *)(param_1 + 0xb8),1,0,0,*(undefined4 *)(param_1 + 0x18),0x17,1);
-    }
-    else {
-      if (iVar3 == 1) {
-        FUN_00d389f0(iVar1,2,0,0,iVar2,0x19,1);
-        return;
-      }
-      if (iVar3 == 2) {
-        FUN_00d389f0(iVar1,0,0,0,iVar2,0x1a,1);
-        FUN_00d389f0(*(undefined4 *)(param_1 + 0xb8),1,0,0,*(undefined4 *)(param_1 + 0x18),0x1c,1);
-        return;
-      }
-    }
-  }
-  return;
-}
-
 // 009AA600  cMessWindow::vf00  size=102  [class]
 undefined4 * __thiscall cMessWindow::vf00(undefined4 *param_1,byte param_2)
 
@@ -220,15 +169,15 @@ undefined4 * __thiscall cMessWindow::vf00(undefined4 *param_1,byte param_2)
   if (param_1[0x2e] != 0) {
     (&DAT_01b3920c)[param_1[0x2e]] = 0;
   }
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009AA670  cMessWindow::vf14  size=1348  [class]
-void __fastcall cMessWindow::vf14(int param_1)
+// 009AA670  cMessWindow::create  size=1348  [class]
+void __fastcall cMessWindow::create(int param_1)
 
 {
   undefined4 *puVar1;

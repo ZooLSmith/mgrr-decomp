@@ -8,7 +8,7 @@
 undefined4 * __fastcall esp41::esp41(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   *param_1 = vftable;
   return param_1;
 }
@@ -17,7 +17,7 @@ undefined4 * __fastcall esp41::esp41(undefined4 *param_1)
 undefined4 __thiscall esp41::vf00(undefined4 param_1,byte param_2)
 
 {
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -34,8 +34,8 @@ void esp41::vf08(void)
   return;
 }
 
-// 00F2B7C0  esp41::vf10  size=403  [class]
-void __fastcall esp41::vf10(int param_1)
+// 00F2B7C0  esp41::addOtTransList  size=403  [class]
+void __fastcall esp41::addOtTransList(int param_1)
 
 {
   uint uVar1;
@@ -50,7 +50,7 @@ void __fastcall esp41::vf10(int param_1)
   if (local_8 != 0) {
     *(undefined4 *)(param_1 + 0x4ac) = *(undefined4 *)(*(int *)(param_1 + 0x28) + 0x1ed0);
     iVar2 = FUN_00dd7ad0();
-    FUN_00efed20();
+    esp107::vf10();
     if (0.01 < *(float *)(param_1 + 0x124)) {
       if ((DAT_01edd490 == 0) ||
          (puVar3 = (undefined4 *)cPrimHeap::allocBuffer(0x140,0x20), puVar3 == (undefined4 *)0x0)) {
@@ -92,9 +92,9 @@ void __fastcall esp41::vf10(int param_1)
   return;
 }
 
-// 00F372B0  esp41::vf04  size=718  [class]
+// 00F372B0  esp41::preTrans  size=718  [class]
 undefined4 __thiscall
-esp41::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp41::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   byte bVar1;
@@ -107,7 +107,7 @@ esp41::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   float10 extraout_ST1;
   undefined6 uVar7;
   
-  iVar3 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar3 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar3 == 0) {
     return 0;
   }

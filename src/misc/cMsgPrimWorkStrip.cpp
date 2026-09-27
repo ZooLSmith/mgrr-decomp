@@ -4,8 +4,8 @@
 #include "mgrr.h"
 #include "cMsgPrimWorkStrip.h"
 
-// 00CCD3C0  cMsgPrimWorkStrip::cMsgPrimWorkStrip_3  size=18  [class]
-undefined4 * __fastcall cMsgPrimWorkStrip::cMsgPrimWorkStrip_3(undefined4 *param_1)
+// 00CCD3C0  cMsgPrimWorkStrip::cMsgPrimWorkStrip  size=18  [class]
+undefined4 * __fastcall cMsgPrimWorkStrip::cMsgPrimWorkStrip(undefined4 *param_1)
 
 {
   cMsgPrimWorkBase::cMsgPrimWorkBase();

@@ -387,9 +387,9 @@ void __fastcall esp05::vf08(int param_1)
   return;
 }
 
-// 00F2E570  esp05::vf04  size=945  [class]
+// 00F2E570  esp05::preTrans  size=945  [class]
 undefined4 __thiscall
-esp05::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+esp05::preTrans(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined4 *puVar1;
@@ -407,7 +407,7 @@ esp05::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
   undefined4 local_18;
   undefined4 local_14;
   
-  iVar2 = cEspStrip2p::vf04(param_2,param_3,param_4);
+  iVar2 = cEspStrip2p::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return 0;
   }

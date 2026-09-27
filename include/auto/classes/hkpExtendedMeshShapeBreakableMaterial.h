@@ -19,6 +19,6 @@ struct hkpExtendedMeshShapeBreakableMaterial : public hkpBreakableMultiMaterial 
     virtual void vf34();  // 011DF440 slot 0x34  overrides hkpBreakableMaterial
     // non-virtual members
     hkpExtendedMeshShapeBreakableMaterial();  // 011DF4E0
-    ~hkpExtendedMeshShapeBreakableMaterial();  // 011DF500
+    void ctor_011DF500();  // 011DF500
     void ctor_011DF550();  // 011DF550
 };

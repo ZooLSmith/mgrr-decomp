@@ -4,13 +4,13 @@
 #include "mgrr.h"
 #include "Bm0111.h"
 
-// 00410D20  Bm0111::vf40  size=12  [class]
-bool Bm0111::vf40(void)
+// 00410D20  Bm0111::startup  size=12  [class]
+bool Bm0111::startup(void)
 
 {
   int iVar1;
   
-  iVar1 = Bm6041::vf40();
+  iVar1 = BehaviorBm::startup();
   return iVar1 != 0;
 }
 
@@ -31,7 +31,7 @@ void __fastcall Bm0111::vf4C(int *param_1)
     fVar1 = (float)param_1[0x22d] - 1.0;
     param_1[0x22d] = (int)fVar1;
     if (NAN(fVar1) || 0.0 < fVar1 == (fVar1 == 0.0)) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
   }
   if (((*(byte *)(param_1 + 0x130) & 1) != 0) && (param_1[0x27d] != 0)) {
@@ -157,8 +157,8 @@ undefined * Bm0111::vf04(void)
   return &DAT_01b34b80;
 }
 
-// 00AB8ED0  Bm0111::vf00  size=43  [class]
-undefined4 __thiscall Bm0111::vf00(undefined4 param_1,byte param_2)
+// 00AB8ED0  Bm0111::destruct  size=43  [class]
+undefined4 __thiscall Bm0111::destruct(undefined4 param_1,byte param_2)
 
 {
   cEspControler::~cEspControler();

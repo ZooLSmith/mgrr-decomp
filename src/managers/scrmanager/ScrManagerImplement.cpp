@@ -1,5 +1,5 @@
 // src/managers/scrmanager/ScrManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C14320..00C24C30, 31 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C14320..00C24C30, 32 functions
 
 #include "mgrr.h"
 #include "ScrManagerImplement.h"
@@ -645,11 +645,38 @@ ScrManagerImplement::ScrManagerImplement(undefined4 *param_1,undefined4 param_2)
   return param_1;
 }
 
+// 00C24BC0  ScrManagerImplement::~ScrManagerImplement  size=91  [class]
+void __fastcall ScrManagerImplement::~ScrManagerImplement(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  
+  *param_1 = vftable;
+  puVar1 = param_1 + 2;
+  iVar2 = 8;
+  do {
+    if (puVar1[0x213] != 0) {
+      FUN_00935620();
+    }
+    puVar1 = puVar1 + 0x222;
+    iVar2 = iVar2 + -1;
+  } while (iVar2 != 0);
+  iVar2 = 7;
+  do {
+    Hw::cTexture::~cTexture();
+    Hw::cTexture::~cTexture();
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  *param_1 = ScrManager::vftable;
+  return;
+}
+
 // 00C24C30  ScrManagerImplement::vf74  size=30  [class]
 undefined4 __thiscall ScrManagerImplement::vf74(undefined4 param_1,byte param_2)
 
 {
-  ScrManager::ScrManager();
+  ~ScrManagerImplement();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

@@ -137,15 +137,15 @@ LAB_00bcd242:
   return 1;
 }
 
-// 00BCD270  ZangekiChanceStatePl0010::vf0C  size=74  [class]
-void __thiscall ZangekiChanceStatePl0010::vf0C(int param_1,undefined4 param_2)
+// 00BCD270  ZangekiChanceStatePl0010::SafeCheck  size=74  [class]
+void __thiscall ZangekiChanceStatePl0010::SafeCheck(int param_1,undefined4 param_2)
 
 {
   if (*(int *)(param_1 + 0x20) == 0) {
     FUN_00bbc0e0(param_2,0x3dcccccd,0x43340000,0x3f800000,0x3dcccccd);
     FUN_00bbc2a0(param_2);
   }
-  StateMachineNode::vf0C(param_2);
+  StateMachineNode::SafeCheck(param_2);
   return;
 }
 
@@ -196,8 +196,8 @@ undefined4 __thiscall ZangekiChanceStatePl0010::vf20(undefined4 param_1,undefine
   return 0;
 }
 
-// 00BF89B0  ZangekiChanceStatePl0010::vf10  size=541  [class]
-void __thiscall ZangekiChanceStatePl0010::vf10(int param_1,undefined4 *param_2)
+// 00BF89B0  ZangekiChanceStatePl0010::qteSafeCheck  size=541  [class]
+void __thiscall ZangekiChanceStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
 
 {
   float fVar1;
@@ -276,10 +276,10 @@ void __thiscall ZangekiChanceStatePl0010::vf10(int param_1,undefined4 *param_2)
   *(float *)(param_1 + 0x30) = fVar1;
   if (fVar1 < 0.0) {
     *(undefined4 *)(param_1 + 0x30) = 0;
-    StateMachineNode::vf10(puVar2);
+    StateMachineNode::qteSafeCheck(puVar2);
     return;
   }
-  StateMachineNode::vf10(puVar2);
+  StateMachineNode::qteSafeCheck(puVar2);
   return;
 }
 

@@ -1,5 +1,5 @@
 // src/managers/cckmsgdatamanager/cCkMsgDataManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCA390..00CF7E60, 5 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCA390..00CF7E60, 6 functions
 
 #include "mgrr.h"
 #include "cCkMsgDataManager.h"
@@ -71,11 +71,44 @@ void FUN_00cca3f0(undefined4 *param_1,int param_2)
   return;
 }
 
+// 00CE14C0  cCkMsgDataManager::~cCkMsgDataManager  size=133  [class]
+void __fastcall cCkMsgDataManager::~cCkMsgDataManager(undefined4 *param_1)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  
+  *param_1 = vftable;
+  Hw::cHeap::cHeap_4();
+  Hw::cHeap::cHeap_4();
+  iVar1 = 5;
+  puVar2 = param_1 + 0x167;
+  do {
+    puVar2[-0x37] = cMsgCtrl::vftable;
+    FUN_00f972f0();
+    puVar2[-0x36] = 0;
+    puVar2[-0x35] = 0;
+    puVar2[-0x2d] = 0;
+    *(undefined2 *)((int)puVar2 + -0xaf) = 0;
+    Hw::cTexture::~cTexture();
+    puVar2[-0x4d] = cMsgCtrl::vftable;
+    FUN_00f972f0();
+    puVar2[-0x4c] = 0;
+    puVar2[-0x4b] = 0;
+    puVar2[-0x43] = 0;
+    *(undefined2 *)((int)puVar2 + -0x107) = 0;
+    Hw::cTexture::~cTexture();
+    iVar1 = iVar1 + -1;
+    puVar2 = puVar2 + -0x35;
+  } while (-1 < iVar1);
+  return;
+}
+
 // 00CF7580  cCkMsgDataManager::vf00  size=30  [class]
 undefined4 __thiscall cCkMsgDataManager::vf00(undefined4 param_1,byte param_2)
 
 {
-  cMsgCtrl::cMsgCtrl_7();
+  ~cCkMsgDataManager();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

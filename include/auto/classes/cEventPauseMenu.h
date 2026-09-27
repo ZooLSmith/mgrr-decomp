@@ -13,6 +13,6 @@ struct cEventPauseMenu : public cCustomObjCtrlManager {
     virtual void create();  // 009A5930 slot 0x14  overrides cCustomObjCtrlManager
     // non-virtual members
     cEventPauseMenu();  // 009944A0
-    void ctor_009944E0();  // 009944E0
+    ~cEventPauseMenu();  // 009944E0
     void ctor_00994520();  // 00994520
 };

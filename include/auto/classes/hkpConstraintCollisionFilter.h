@@ -13,6 +13,7 @@ struct hkpConstraintCollisionFilter : public hkpPairCollisionFilter, public hkpC
     static void vf00_011B1B70();  // 011B1B70
     static void vf0C();  // 011B1B80
     static void vf04();  // 011B1B90
+    hkpConstraintCollisionFilter();  // 011DF910
     static void vf04_011DFA90(int param_1);  // 011DFA90
     static void vf08(int param_2);  // 011DFB50
     static void vf14(int * param_2);  // 011DFC20

@@ -24,7 +24,7 @@ undefined4 hkgpMesh::IConvexOverlap::IConvexShape::vf04(void)
     uVar3 = (*pcVar1)();
     return uVar3;
   }
-  hkBaseObject::hkBaseObject_38();
+  ::hkBaseObject::hkBaseObject_38();
   return 0;
 }
 

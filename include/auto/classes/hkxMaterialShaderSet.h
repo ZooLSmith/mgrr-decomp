@@ -8,5 +8,5 @@ struct hkxMaterialShaderSet : public hkReferencedObject {
     // virtual functions, in vftable order (slot = byte offset / 4)
     virtual undefined4 * vf00(byte param_2);  // 010D8360 slot 0x0  overrides hkBaseObject
     // non-virtual members
-    hkxMaterialShaderSet();  // 010D82B0
+    ~hkxMaterialShaderSet();  // 010D82B0
 };

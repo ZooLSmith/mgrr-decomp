@@ -8,7 +8,7 @@
 undefined4 * __fastcall Pl0012::Pl0012(undefined4 *param_1)
 
 {
-  Behavior::Behavior_95();
+  Behavior::Behavior();
   *param_1 = vftable;
   cEspControler::cEspControler();
   return param_1;
@@ -21,11 +21,11 @@ undefined * Pl0012::vf04(void)
   return &DAT_01be9f20;
 }
 
-// 00AB64E0  Pl0012::vf00  size=30  [class]
-undefined4 __thiscall Pl0012::vf00(undefined4 param_1,byte param_2)
+// 00AB64E0  Pl0012::destruct  size=30  [class]
+undefined4 __thiscall Pl0012::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_129();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
@@ -379,8 +379,8 @@ void __fastcall FUN_00c11fd0(int param_1)
   return;
 }
 
-// 00C12120  Pl0012::vf40  size=567  [class]
-undefined4 __fastcall Pl0012::vf40(int param_1)
+// 00C12120  Pl0012::startup  size=567  [class]
+undefined4 __fastcall Pl0012::startup(int param_1)
 
 {
   int iVar1;

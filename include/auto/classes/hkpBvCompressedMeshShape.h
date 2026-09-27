@@ -8,6 +8,7 @@
 struct hkpBvCompressedMeshShape : public hkpBvTreeShape, public hkpShapeContainer {
     // virtual functions, in vftable order (slot = byte offset / 4)
     // non-virtual members
+    hkpBvCompressedMeshShape();  // 01230C30
     static void vf00();  // 012387F0
     static undefined4 vf04();  // 0124B970
     static int vf08();  // 0124BAB0

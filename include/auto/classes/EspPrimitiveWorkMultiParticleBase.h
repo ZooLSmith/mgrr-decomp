@@ -10,5 +10,5 @@ struct EspPrimitiveWorkMultiParticleBase : public EspPrimitiveWorkBase {
     virtual void vf08();  // 00F4FE20 slot 0x8  overrides EspPrimitiveWorkBase
     virtual void vf0C(int param_2);  // 00F4FE40 slot 0xC  overrides EspPrimitiveWorkBase
     // non-virtual members
-    EspPrimitiveWorkMultiParticleBase();  // 00F58B50
+    EspPrimitiveWorkMultiParticleBase();  // 00F4FDC0
 };

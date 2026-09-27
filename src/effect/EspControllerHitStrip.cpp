@@ -22,8 +22,8 @@ undefined4 * __fastcall EspControllerHitStrip::EspControllerHitStrip(undefined4 
   return param_1;
 }
 
-// 00EAAB00  EspControllerHitStrip::EspControllerHitStrip_2  size=11  [class]
-void __fastcall EspControllerHitStrip::EspControllerHitStrip_2(undefined4 *param_1)
+// 00EAAB00  EspControllerHitStrip::~EspControllerHitStrip  size=11  [class]
+void __fastcall EspControllerHitStrip::~EspControllerHitStrip(undefined4 *param_1)
 
 {
   *param_1 = vftable;

@@ -20,14 +20,14 @@ undefined4 * __fastcall cWeaponSelectMenu::cWeaponSelectMenu(undefined4 *param_1
 {
   int local_4;
   
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
   param_1[7] = 0;
   param_1[8] = 0;
   param_1[9] = 0;
   local_4 = 3;
   do {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     local_4 = local_4 + -1;
   } while (-1 < local_4);
   param_1[0xd4] = 0xffffffff;
@@ -50,7 +50,7 @@ undefined4 * __fastcall cWeaponSelectMenu::cWeaponSelectMenu(undefined4 *param_1
   param_1[0x135] = 1;
   local_4 = 2;
   do {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     local_4 = local_4 + -1;
   } while (-1 < local_4);
   param_1[0x159] = 0;
@@ -116,15 +116,15 @@ void __fastcall cWeaponSelectMenu::~cWeaponSelectMenu(undefined4 *param_1)
   FUN_00cfe0f0(0x12);
   iVar1 = 2;
   do {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
   iVar1 = 3;
   do {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+    cCustomObjCtrlManager::~cCustomObjCtrlManager();
     iVar1 = iVar1 + -1;
   } while (-1 < iVar1);
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -1905,7 +1905,7 @@ LAB_009b4184:
     puVar7 = (undefined4 *)0x0;
   }
   else {
-    cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+    cCustomObjCtrlManager::cCustomObjCtrlManager();
     *puVar7 = cWeaponSelectItemMessageParts::vftable;
     puVar7[0xb] = 0;
     puVar7[0xc] = 0;
@@ -2122,10 +2122,10 @@ LAB_009b461c:
   return uVar5;
 }
 
-// 009BC940  cWeaponSelectMenu::vf14  size=3563  [class]
+// 009BC940  cWeaponSelectMenu::create  size=3563  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void __fastcall cWeaponSelectMenu::vf14(int param_1)
+void __fastcall cWeaponSelectMenu::create(int param_1)
 
 {
   int iVar1;

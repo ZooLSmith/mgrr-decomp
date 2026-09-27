@@ -9,4 +9,5 @@ struct cCustomizeMenuParts : public cCustomObjCtrlManager {
     virtual undefined4 * vf00(byte param_2);  // 0098F7C0 slot 0x0  overrides cCustomObjCtrlManager
     // non-virtual members
     cCustomizeMenuParts();  // 0098F770
+    void ctor_009A02B0();  // 009A02B0
 };

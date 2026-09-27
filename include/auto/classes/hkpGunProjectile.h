@@ -11,6 +11,7 @@ struct hkpGunProjectile : public hkReferencedObject, public hkpContactListener {
     virtual void vf10();  // 0127CCA0 slot 0x10
     virtual void vf14();  // 0127CC40 slot 0x14
     // non-virtual members
+    static void vf0C_0127C4D0();  // 0127C4D0
     static void vf00();  // 0127CC50
     static void vf0C_0127CC60();  // 0127CC60
 };

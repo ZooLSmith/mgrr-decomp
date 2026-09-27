@@ -9,5 +9,5 @@ struct cFilterShaderOculus {
     virtual void vf04();  // 00EBDB30 slot 0x4  overrides Hw::cShader
     // non-virtual members
     cFilterShaderOculus();  // 00EC0BF0
-    void ctor_015F1AF0();  // 015F1AF0
+    ~cFilterShaderOculus();  // 015F1AF0
 };

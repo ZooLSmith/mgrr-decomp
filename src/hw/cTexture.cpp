@@ -3,8 +3,8 @@
 
 #include "mgrr.h"
 
-// 00F972C0  Hw::cTexture::cTexture_6  size=29  [class]
-void __fastcall Hw::cTexture::cTexture_6(undefined4 *param_1)
+// 00F972C0  Hw::cTexture::cTexture  size=29  [class]
+void __fastcall Hw::cTexture::cTexture(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -17,8 +17,8 @@ void __fastcall Hw::cTexture::cTexture_6(undefined4 *param_1)
   return;
 }
 
-// 00F972E0  Hw::cTexture::cTexture_5  size=7  [class]
-void __fastcall Hw::cTexture::cTexture_5(undefined4 *param_1)
+// 00F972E0  Hw::cTexture::~cTexture  size=7  [class]
+void __fastcall Hw::cTexture::~cTexture(undefined4 *param_1)
 
 {
   *param_1 = vftable;

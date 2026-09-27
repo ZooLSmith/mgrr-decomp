@@ -98,7 +98,7 @@ undefined4 FUN_010ddf20(int *param_1,int *param_2,int *param_3)
       local_30 = local_30 + 1;
     } while (local_30 < local_28);
   }
-  hkDataWorldDict::hkDataWorldDict_2();
+  hkDataWorldDict::hkDataWorldDict();
   iVar10 = 0;
   local_58 = 0;
   local_54 = 0;
@@ -116,7 +116,7 @@ undefined4 FUN_010ddf20(int *param_1,int *param_2,int *param_3)
         FUN_0100fe00();
         FUN_010107e0(&PTR_vftable_018e9b94);
         FUN_0100fe00();
-        hkBaseObject::hkBaseObject_200();
+        hkBaseObject::hkBaseObject();
         local_10 = 0;
         if (-1 < (int)local_c) {
           (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_14,local_c * 8);
@@ -134,7 +134,7 @@ undefined4 FUN_010ddf20(int *param_1,int *param_2,int *param_3)
           FUN_0100fe00();
           FUN_010107e0(&PTR_vftable_018e9b94);
           FUN_0100fe00();
-          hkBaseObject::hkBaseObject_200();
+          hkBaseObject::hkBaseObject();
           local_10 = 0;
           if (-1 < (int)local_c) {
             (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_14,local_c * 8);
@@ -247,7 +247,7 @@ LAB_010de442:
             FUN_0100fe00();
             FUN_010107e0(&PTR_vftable_018e9b94);
             FUN_0100fe00();
-            hkBaseObject::hkBaseObject_200();
+            hkBaseObject::hkBaseObject();
             local_10 = 0;
             if ((local_c & 0x80000000) == 0) {
               (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_14,local_c * 8);
@@ -401,7 +401,7 @@ LAB_010de1ee:
   FUN_0100fe00();
   FUN_010107e0(&PTR_vftable_018e9b94);
   FUN_0100fe00();
-  hkBaseObject::hkBaseObject_200();
+  hkBaseObject::hkBaseObject();
   local_10 = 0;
   if (-1 < (int)local_c) {
     (**(code **)(PTR_vftable_018e9b94 + 0x10))(local_14,local_c * 8);

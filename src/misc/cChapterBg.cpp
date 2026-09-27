@@ -11,9 +11,9 @@ undefined4 * __fastcall cChapterBg::cChapterBg(undefined4 *param_1)
   undefined4 *puVar1;
   int iVar2;
   
-  cCustomObjCtrlManager::cCustomObjCtrlManager_17();
+  cCustomObjCtrlManager::cCustomObjCtrlManager();
   *param_1 = vftable;
-  Hw::cTexture::cTexture_6();
+  Hw::cTexture::cTexture();
   *(undefined1 *)((int)param_1 + 0xf7) = 0xff;
   *(undefined1 *)((int)param_1 + 0xf6) = 0xff;
   *(undefined2 *)(param_1 + 0x3d) = 0;
@@ -188,8 +188,8 @@ void __fastcall cChapterBg::~cChapterBg(undefined4 *param_1)
     FUN_00e9d6a0(param_1[0x29]);
     param_1[0x29] = 0;
   }
-  Hw::cTexture::cTexture_5();
-  cCustomObjCtrlManager::cCustomObjCtrlManager_37();
+  Hw::cTexture::~cTexture();
+  cCustomObjCtrlManager::~cCustomObjCtrlManager();
   return;
 }
 
@@ -242,8 +242,8 @@ undefined4 __thiscall cChapterBg::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 009AADF0  cChapterBg::vf14  size=576  [class]
-void __fastcall cChapterBg::vf14(int param_1)
+// 009AADF0  cChapterBg::create  size=576  [class]
+void __fastcall cChapterBg::create(int param_1)
 
 {
   char cVar1;

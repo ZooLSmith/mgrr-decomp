@@ -13,4 +13,6 @@ struct cItemBox : public cItemObjectBase {
     virtual void vf48();  // 005ED000 slot 0x48  overrides Behavior
     virtual void vf50();  // 005EA580 slot 0x50  overrides Behavior
     virtual undefined4 vf308();  // 005E89D0 slot 0x308  overrides cItemObjectBase
+    // non-virtual members
+    cItemBox();  // 00AB1360
 };

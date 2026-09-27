@@ -12,4 +12,6 @@ struct Pl0013 : public BehaviorAppBase {
     virtual void vf44();  // 00B78E20 slot 0x44  overrides Behavior
     virtual void vf4C();  // 00B78E40 slot 0x4C  overrides Behavior
     virtual void vf50();  // 00B78E60 slot 0x50  overrides Behavior
+    // non-virtual members
+    Pl0013();  // 00AAB520
 };

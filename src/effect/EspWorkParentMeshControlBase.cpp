@@ -9,15 +9,15 @@ void __fastcall EspWorkParentMeshControlBase::vf08(int *param_1)
 
 {
   esp39::vf08();
-  FUN_00efed20();
+  esp107::vf10();
                     /* WARNING: Could not recover jumptable at 0x009d14d7. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(*param_1 + 0x28))();
   return;
 }
 
-// 009D14E0  EspWorkParentMeshControlBase::vf10  size=1  [class]
-void EspWorkParentMeshControlBase::vf10(void)
+// 009D14E0  EspWorkParentMeshControlBase::addOtTransList  size=1  [class]
+void EspWorkParentMeshControlBase::addOtTransList(void)
 
 {
   return;
@@ -35,19 +35,19 @@ undefined4 * __thiscall EspWorkParentMeshControlBase::vf00(undefined4 *param_1,b
 
 {
   *param_1 = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }
   return param_1;
 }
 
-// 009E4D40  EspWorkParentMeshControlBase::EspWorkParentMeshControlBase_3  size=92  [class]
+// 009E4D40  EspWorkParentMeshControlBase::EspWorkParentMeshControlBase  size=92  [class]
 undefined4 * __fastcall
-EspWorkParentMeshControlBase::EspWorkParentMeshControlBase_3(undefined4 *param_1)
+EspWorkParentMeshControlBase::EspWorkParentMeshControlBase(undefined4 *param_1)
 
 {
-  cEspBase::cEspBase_4();
+  cEsp::cEsp();
   param_1[0x114] = 0;
   param_1[0x115] = 0;
   param_1[0x116] = 0;
@@ -172,9 +172,9 @@ undefined4 __thiscall FUN_009e4df0(int param_1,short param_2,short param_3)
   return 0;
 }
 
-// 009F0840  EspWorkParentMeshControlBase::vf04  size=422  [class]
+// 009F0840  EspWorkParentMeshControlBase::preTrans  size=422  [class]
 bool __thiscall
-EspWorkParentMeshControlBase::vf04
+EspWorkParentMeshControlBase::preTrans
           (int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
@@ -193,7 +193,7 @@ EspWorkParentMeshControlBase::vf04
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar2 = cEspModel::vf04(param_2,param_3,param_4);
+  iVar2 = cEsp::preTrans(param_2,param_3,param_4);
   if (iVar2 == 0) {
     return false;
   }
@@ -264,18 +264,18 @@ void __fastcall EspWorkParentMeshControlBase::EspWorkParentMeshControlBase(undef
   *param_1 = EspWorkParentMeshControl::vftable;
   Spline<float>::Spline<float>_2();
   *param_1 = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   return;
 }
 
-// 009F6C70  EspWorkParentMeshControlBase::EspWorkParentMeshControlBase_2  size=34  [class]
-void __fastcall EspWorkParentMeshControlBase::EspWorkParentMeshControlBase_2(undefined4 *param_1)
+// 009F6C70  EspWorkParentMeshControlBase::EspWorkParentMeshControlBase  size=34  [class]
+void __fastcall EspWorkParentMeshControlBase::EspWorkParentMeshControlBase(undefined4 *param_1)
 
 {
   *param_1 = EspWorkParentMeshControlWtr::vftable;
   Spline<float>::Spline<float>();
   *param_1 = vftable;
-  cEspBase::cEspBase_5();
+  cEspBase::cEspBase();
   return;
 }
 

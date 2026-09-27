@@ -13,4 +13,6 @@ struct Em8010Magazine : public BehaviorPartsModel {
     virtual void vf4C();  // 0061E3F0 slot 0x4C  overrides Behavior
     virtual void vf50();  // 00619490 slot 0x50  overrides Behavior
     virtual void vf54();  // 006194A0 slot 0x54  overrides Behavior
+    // non-virtual members
+    Em8010Magazine();  // 00AB5F00
 };

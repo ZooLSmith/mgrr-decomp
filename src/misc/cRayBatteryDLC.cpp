@@ -88,8 +88,8 @@ void __thiscall cRayBatteryDLC::vf1D0(undefined4 param_1,undefined4 param_2)
   return;
 }
 
-// 008D4C60  cRayBatteryDLC::vf1B8  size=31  [class]
-void cRayBatteryDLC::vf1B8(undefined4 *param_1,undefined4 param_2,int param_3)
+// 008D4C60  cRayBatteryDLC::setCutCrerateInfo  size=31  [class]
+void cRayBatteryDLC::setCutCrerateInfo(undefined4 *param_1,undefined4 param_2,int param_3)
 
 {
   if (0 < param_3) {
@@ -539,8 +539,8 @@ void __thiscall FUN_008d5630(int param_1,undefined4 param_2,int param_3)
   return;
 }
 
-// 008D56A0  cRayBatteryDLC::vf40  size=768  [class]
-undefined4 __fastcall cRayBatteryDLC::vf40(int param_1)
+// 008D56A0  cRayBatteryDLC::startup  size=768  [class]
+undefined4 __fastcall cRayBatteryDLC::startup(int param_1)
 
 {
   uint *puVar1;
@@ -555,7 +555,7 @@ undefined4 __fastcall cRayBatteryDLC::vf40(int param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  iVar3 = BehaviorAppBase::vf40();
+  iVar3 = BehaviorAppBase::startup();
   if ((iVar3 != 0) &&
      (iVar3 = lib::StaticArray<Constraints,32>::StaticArray<Constraints,32>(), iVar3 != 0)) {
     local_18 = 1;
@@ -1430,11 +1430,11 @@ undefined4 cRayBatteryDLC::vf238(void)
   return 1;
 }
 
-// 00ABA010  cRayBatteryDLC::vf00  size=30  [class]
-undefined4 __thiscall cRayBatteryDLC::vf00(undefined4 param_1,byte param_2)
+// 00ABA010  cRayBatteryDLC::destruct  size=30  [class]
+undefined4 __thiscall cRayBatteryDLC::destruct(undefined4 param_1,byte param_2)
 
 {
-  Behavior::Behavior_2();
+  Behavior::~Behavior();
   if ((param_2 & 1) != 0) {
     FUN_00dd4920(param_1);
   }

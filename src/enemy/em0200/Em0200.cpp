@@ -10,7 +10,7 @@ undefined4 * __fastcall Em0200::Em0200(undefined4 *param_1)
 {
   int iVar1;
   
-  BehaviorAppBase::BehaviorAppBase_34();
+  BehaviorEmBase::BehaviorEmBase();
   *param_1 = vftable;
   iVar1 = 2;
   do {
@@ -122,12 +122,12 @@ void FUN_00aae1e0(void)
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
   cEspControler::~cEspControler();
-  cEnemyCautionStateManager::cEnemyCautionStateManager_3();
+  cEnemyCautionStateManager::~cEnemyCautionStateManager();
   return;
 }
 
-// 00AB74E0  Em0200::vf00  size=30  [class]
-undefined4 __thiscall Em0200::vf00(undefined4 param_1,byte param_2)
+// 00AB74E0  Em0200::destruct  size=30  [class]
+undefined4 __thiscall Em0200::destruct(undefined4 param_1,byte param_2)
 
 {
   FUN_00aae1e0();
@@ -137,8 +137,8 @@ undefined4 __thiscall Em0200::vf00(undefined4 param_1,byte param_2)
   return param_1;
 }
 
-// 00AE8D70  Em0200::vf264  size=54  [class]
-undefined4 __thiscall Em0200::vf264(int param_1,int param_2)
+// 00AE8D70  Em0200::setEmSetInfo  size=54  [class]
+undefined4 __thiscall Em0200::setEmSetInfo(int param_1,int param_2)
 
 {
   FUN_00aa0920(*(undefined4 *)(param_2 + 0x5c));
@@ -813,7 +813,7 @@ void __fastcall Em0200::vf44(int param_1)
   if (iVar1 != 0) {
     FUN_00a81330();
     FUN_00a7c8a0();
-    FUN_009fdde0();
+    E3_EnemyBoardDebrisSokushi::vf4C();
   }
   *(undefined4 *)(param_1 + 0x1c94) = 0;
   iVar1 = FUN_00a81330();
@@ -1260,7 +1260,7 @@ undefined4 __thiscall Em0200::getAttackInfo(int param_1,ushort *param_2)
   undefined1 uStack_8;
   
   iVar3 = FUN_00dd3500(0x110,&DAT_01b7c0b8);
-  if ((iVar3 == 0) || (iVar3 = CollisionAttackData::CollisionAttackData_3(), iVar3 == 0)) {
+  if ((iVar3 == 0) || (iVar3 = CollisionAttackData::CollisionAttackData(), iVar3 == 0)) {
     FUN_00dd5650(&DAT_016a0514);
     return 0;
   }
@@ -1955,10 +1955,10 @@ LAB_00af6d38:
   return;
 }
 
-// 00AF6E90  Em0200::vf40  size=8825  [class]
+// 00AF6E90  Em0200::startup  size=8825  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 __fastcall Em0200::vf40(char *param_1)
+undefined4 __fastcall Em0200::startup(char *param_1)
 
 {
   uint *puVar1;
@@ -2026,7 +2026,7 @@ undefined4 __fastcall Em0200::vf40(char *param_1)
   char local_120 [284];
   
   local_2d4 = (char *)0xaf6ea6;
-  iVar2 = BehaviorEmBase::vf40();
+  iVar2 = BehaviorEmBase::startup();
   if (iVar2 != 0) {
     *(uint *)(param_1 + 0x364) = *(uint *)(param_1 + 0x364) & 0xffefffff;
     local_2d4 = (char *)0xaf6ec4;
@@ -2580,7 +2580,7 @@ undefined4 __fastcall Em0200::vf40(char *param_1)
     }
     else {
       local_2d4 = (char *)0xaf773a;
-      uVar4 = RigidBodyCollection::RigidBodyCollection_2();
+      uVar4 = RigidBodyCollision::RigidBodyCollision();
     }
     pcVar11 = *(char **)(param_1 + 0x4f0);
     local_2d4 = (char *)0x0;
@@ -3676,7 +3676,7 @@ undefined4 __fastcall Em0200::vf40(char *param_1)
         if (iVar2 != 0) {
           FUN_00a81330();
           FUN_00a7c8a0();
-          FUN_009fdde0();
+          E3_EnemyBoardDebrisSokushi::vf4C();
         }
         FUN_00a7c950();
         param_1[0x870] = '\0';
@@ -4106,7 +4106,7 @@ void __fastcall FUN_00af9eb0(int param_1)
     FUN_00dffb30(param_1 + 0x1a60);
     FUN_00e02d50(param_1,0x1d,local_120);
     if (*(int *)(param_1 + 0x2040) != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     *(undefined4 *)(param_1 + 0x2040) = 0;
   case 1:
@@ -4145,7 +4145,7 @@ void __fastcall FUN_00af9eb0(int param_1)
     FUN_00a94bc0(5,0x3e888889);
     (**(code **)(*(int *)(param_1 + 0x1a60) + 8))(0x41200000,0,0);
     if (*(int *)(param_1 + 0x2040) != 0) {
-      FUN_009fdde0();
+      E3_EnemyBoardDebrisSokushi::vf4C();
     }
     *(undefined4 *)(param_1 + 0x2040) = 0;
   case 5:

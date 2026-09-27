@@ -70,8 +70,8 @@ undefined4 * __thiscall cCodecCallAlarm::vf00(undefined4 *param_1,byte param_2)
   return param_1;
 }
 
-// 00CFE990  cCodecCallAlarm::vf14  size=578  [class]
-void __fastcall cCodecCallAlarm::vf14(int param_1)
+// 00CFE990  cCodecCallAlarm::create  size=578  [class]
+void __fastcall cCodecCallAlarm::create(int param_1)
 
 {
   undefined4 uVar1;

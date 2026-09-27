@@ -13,28 +13,17 @@ struct cMessWindowCtrl {
     void ctor_0099AE10();  // 0099AE10
     void ctor_0099AF30();  // 0099AF30
     void ctor_0099B020();  // 0099B020
-    void ctor_0099B110();  // 0099B110
     void ctor_0099C790();  // 0099C790
-    void ctor_0099C930();  // 0099C930
     void ctor_0099D6D0();  // 0099D6D0
-    void ctor_009A0370();  // 009A0370
-    void ctor_009A0AD0();  // 009A0AD0
+    void ctor_0099E8B0();  // 0099E8B0
     void ctor_009A20D0();  // 009A20D0
-    void ctor_009A2120();  // 009A2120
     void ctor_009A2160();  // 009A2160
     void ctor_009A24F0();  // 009A24F0
-    void ctor_009A2540();  // 009A2540
     void ctor_009A2580();  // 009A2580
     void ctor_009A2E80();  // 009A2E80
-    void ctor_009A2F60();  // 009A2F60
     void ctor_009A4F20();  // 009A4F20
-    void ctor_009A4FC0();  // 009A4FC0
     void ctor_009A5C70();  // 009A5C70
-    void ctor_009A5D80();  // 009A5D80
     void ctor_009A6460();  // 009A6460
-    void ctor_009A64E0();  // 009A64E0
     void ctor_009A74F0();  // 009A74F0
-    void ctor_009A75F0();  // 009A75F0
-    void ctor_009B01B0();  // 009B01B0
     void ctor_009B9A40();  // 009B9A40
 };
