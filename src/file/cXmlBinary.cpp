@@ -1,5 +1,5 @@
 // src/file/cXmlBinary.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CC30..00FB2B80, 838 functions
+// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CC30..00FB2B80, 839 functions
 
 #include "mgrr.h"
 #include "cXmlBinary.h"
@@ -23852,6 +23852,33 @@ void __thiscall cXmlBinary::cXmlBinary_16(int param_1,undefined4 *param_2)
   local_24[0] = vftable;
   FUN_00e04180();
   return;
+}
+
+// 00C78580  FUN_00c78580  size=80  [callgraph]
+undefined4 __thiscall FUN_00c78580(int param_1,int param_2,undefined4 *param_3)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  int *piVar4;
+  
+  uVar1 = 0;
+  piVar4 = (int *)(param_1 + 0x50);
+  do {
+    if (*piVar4 == param_2) {
+      iVar2 = (uVar1 * 3 + 6) * 0x10;
+      iVar3 = iVar2 + param_1;
+      *param_3 = *(undefined4 *)(iVar2 + param_1);
+      param_3[1] = *(undefined4 *)(iVar3 + 4);
+      param_3[2] = *(undefined4 *)(iVar3 + 8);
+      param_3[3] = *(undefined4 *)(iVar3 + 0xc);
+      return 1;
+    }
+    uVar1 = uVar1 + 1;
+    piVar4 = piVar4 + 0xc;
+  } while (uVar1 < 0x20);
+  return 0;
 }
 
 // 00CA5F90  cXmlBinary::cXmlBinary_101  size=601  [class]

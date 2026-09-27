@@ -208,17 +208,21 @@ def build_units(funcs):
         ev = file_evidence(f)
         if ev:
             assign[i], reason[i] = ev[0], ev[1]
+        elif kind[i] == "game" and f["ns"] in ("Trigger::Act", "Trigger::Cond"):
+            # debug strings name trigger actions/conditions "Trigger::Act::<ID>"; each ID is its own
+            # file, as in the leaked managers/triggermanager/actions/TrgActResultSetDisp.cpp
+            assign[i], reason[i] = class_file(f["ns"] + "::" + re.sub(r"_\d+$", "", f["name"])), "class"
         elif kind[i] == "game" and f["ns"]:
             assign[i], reason[i] = class_file(f["ns"]), "class"
 
     # 1b. a class with a function carrying __FILE__ evidence lives in that file
     cls_file = {}
     for i, f in enumerate(funcs):
-        if reason[i] == "__FILE__" and f["ns"] and kind[i] == "game":
-            cls_file[strip_templates(f["ns"]).split("::")[0]] = assign[i]
+        if reason[i] == "__FILE__" and f["ns"] and kind[i] == "game" and not f["ns"].startswith("Trigger::"):
+            cls_file[strip_templates(f["ns"])] = assign[i]
     for i, f in enumerate(funcs):
         if reason[i] == "class":
-            c = strip_templates(f["ns"]).split("::")[0]
+            c = strip_templates(f["ns"])
             if c in cls_file:
                 assign[i] = cls_file[c]
             if assign[i].startswith("lib/"):
