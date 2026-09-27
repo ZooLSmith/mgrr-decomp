@@ -1,238 +1,196 @@
-// src/player/pl0010/state/ZangekiIdleStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B834A0..00BE3F10, 9 functions
-
+// src/player/pl0010/state/ZangekiIdleStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "ZangekiIdleStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 / cObj::vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9ecc[];  // ZangekiIdleStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+extern unsigned char DAT_01b35260[];  // type of the lock-on target that has FUN_005ca1a0
+
+namespace ZangekiIdleStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __cdecl call of a function whose generated prototype has the wrong parameter list
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __thiscall call of a function whose generated prototype has the wrong parameter list
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// obj when its type record (from the vftable slot at `typeSlot`) derives from `type`, else 0
+inline char *downcast(const void *obj, unsigned int typeSlot, const void *type)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(obj, typeSlot), (undefined4 *)type);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+inline StateMachineContextPl0010 *asContext(const void *obj)
+{
+    return (StateMachineContextPl0010 *)downcast(obj, 0x0, DAT_01be9ef4);
+}
+
+inline Pl0000 *asPl0000(const void *obj)
+{
+    return (Pl0000 *)downcast(obj, 0x4, DAT_01be9db8);
+}
+
+// 00E35DE0 (ECX = animation + 0xF4): blend a motion out
+typedef void (__thiscall *BlendOutFn)(int self, int motionSet, unsigned int motionId, float blendTime);
+
+}  // namespace ZangekiIdleStatePl0010_p1
+
 // 00B834A0  ZangekiIdleStatePl0010::vf14  size=5  [class]
-undefined4 __thiscall ZangekiIdleStatePl0010::vf14(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x14))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x14))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 4;
-  return 1;
+// A tail jump to StateMachineNode::vf14 (the raw body shown by Ghidra is the base's).
+void ZangekiIdleStatePl0010::vf14(undefined4 *context)
+{
+    StateMachineNode::vf14(context);
 }
 
 // 00B834B0  ZangekiIdleStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall ZangekiIdleStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base's).
+undefined4 ZangekiIdleStatePl0010::vf18(undefined4 arg)
+{
+    return StateMachineNode::vf18(arg);
 }
 
 // 00B834C0  ZangekiIdleStatePl0010::vf24  size=19  [class]
-bool ZangekiIdleStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool ZangekiIdleStatePl0010::vf24(undefined4 arg)
+{
+    return StateMachineNode::vf24(arg) != 0;
 }
 
 // 00B83500  ZangekiIdleStatePl0010::vf00  size=6  [class]
-undefined * ZangekiIdleStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9ecc;
+undefined *ZangekiIdleStatePl0010::vf00()
+{
+    return DAT_01be9ecc;
 }
 
 // 00B91780  ZangekiIdleStatePl0010::SafeCheck  size=139  [class]
-void __thiscall ZangekiIdleStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  int *piVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar3 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar1 = FUN_00dd6d80(puVar4);
-      uVar3 = -(uint)(iVar1 != 0) & (uint)param_2;
-    }
-    iVar1 = FUN_00a81330();
-    if ((iVar1 != 0) && (piVar2 = (int *)FUN_00a7c8a0(), piVar2 != (int *)0x0)) {
-      puVar4 = &DAT_01b35260;
-      (**(code **)(*piVar2 + 4))(&DAT_01b35260);
-      iVar1 = FUN_00dd6d80(puVar4);
-      if (iVar1 != 0) {
-        FUN_005ca1a0(*(int *)(uVar3 + 0x528) == 0);
-      }
-    }
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// First frame (StateMachineNode+0x20 still 0): tells the lock-on target (context +0x4BC handle)
+// FUN_005ca1a0(context +0x528 == 0), then runs the base SafeCheck.
+void ZangekiIdleStatePl0010::SafeCheck(undefined4 *context)
+{
+    using namespace ZangekiIdleStatePl0010_p1;
+
+    if (*(int *)((char *)this + 0x20) == 0) {  /* StateMachineNode+0x20: started flag */
+        StateMachineContextPl0010 *ctx = asContext(context);
+        int handle = FUN_00a81330((uint *)((char *)ctx + 0x4BC));  /* StateMachineContextPl0010+0x4BC: target handle */
+        if (handle != 0) {
+            void *target = (void *)FUN_00a7c8a0(handle);
+            if (target != 0 &&
+                FUN_00dd6d80((undefined4 *)vcall<void *>(target, 0x4), (undefined4 *)DAT_01b35260) != 0) {
+                FUN_005ca1a0((int)target, fld<int>(ctx, 0x528) == 0);  /* StateMachineContextPl0010+0x528: ? */
+            }
+        }
+    }
+    StateMachineNode::SafeCheck(context);
 }
 
 // 00B91810  ZangekiIdleStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall ZangekiIdleStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *ZangekiIdleStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB6A70  ZangekiIdleStatePl0010::vf20  size=184  [class]
-undefined4 __thiscall ZangekiIdleStatePl0010::vf20(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  undefined4 uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  iVar3 = StateMachineNode::vf20(param_2);
-  if (iVar3 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  iVar3 = FUN_00a92f90();
-  if ((iVar3 != 0) && (*(int *)(uVar4 + 0x40c8) == 8)) {
-    uVar2 = *(undefined4 *)(param_1 + 0x34);
-    iVar3 = FUN_00a92f90();
-    FUN_00e26e90();
-    FUN_00e35de0(iVar3 + 0x98,uVar2,0x41200000);
-    *(undefined4 *)(param_1 + 0x34) = 0xffffffff;
-  }
-  return 1;
+// Leave: in player mode 8 the layer motion is blended out over 10 frames and cleared.
+undefined4 ZangekiIdleStatePl0010::vf20(undefined4 *context)
+{
+    using namespace ZangekiIdleStatePl0010_p1;
+
+    if (StateMachineNode::vf20(context) == 0) {
+        return 0;
+    }
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+    if (FUN_00a92f90((int)player) != 0 && fld<int>(player, 0x40C8) == 8) {  /* Pl0000+0x40C8: mode */
+        unsigned int motionId = layerMotion();
+        int animation = FUN_00a92f90((int)player);
+        FUN_00e26e90(animation);
+        ((BlendOutFn)FUN_00e35de0)(animation + 0xF4, animation + 0x98, motionId, 10.0f);
+        layerMotion() = 0xFFFFFFFF;
+    }
+    return 1;
 }
 
 // 00BE3E60  ZangekiIdleStatePl0010::vf08  size=172  [class]
-void __thiscall ZangekiIdleStatePl0010::vf08(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined *puVar6;
-  
-  iVar2 = StateMachineNode::vf08(param_2);
-  if (iVar2 == 0) {
-    return;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar6);
-    uVar5 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar5 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  uVar3 = FUN_00bbc5f0(param_2);
-  *(undefined4 *)(param_1 + 0x34) = uVar3;
-  *(undefined4 *)(param_1 + 0x30) = 0xeb;
-  *(undefined4 *)(uVar5 + 0x564) = 0;
-  *(undefined4 *)(uVar5 + 0x570) = 0;
-  FUN_00bd6370(param_2,param_1,*(undefined4 *)(param_1 + 0x30),*(undefined4 *)(param_1 + 0x34));
-  *(undefined4 *)(uVar4 + 0x40bc) = 1;
-  return;
+// Enter: starts motion 0xEB with the layer motion from FUN_00bbc5f0.
+bool ZangekiIdleStatePl0010::vf08(undefined4 contextArg)
+{
+    using namespace ZangekiIdleStatePl0010_p1;
+
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    undefined4 *context = (undefined4 *)contextArg;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+    layerMotion() = FUN_00bbc5f0(context);
+    motion() = 0xEB;
+    fld<int>(ctx, 0x564) = 0;  /* StateMachineContextPl0010+0x564: ? */
+    fld<int>(ctx, 0x570) = 0;  /* StateMachineContextPl0010+0x570: ? */
+    FUN_00bd6370(context, (int)this, motion(), layerMotion());
+    fld<int>(player, 0x40BC) = 1;  /* Pl0000+0x40BC: ? */
+    return true;
 }
 
 // 00BE3F10  ZangekiIdleStatePl0010::qteSafeCheck  size=285  [class]
-void __thiscall ZangekiIdleStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  uint uVar2;
-  undefined *puVar3;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar3 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar3);
-    uVar2 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  if (*(int **)(uVar2 + 0xc) != (int *)0x0) {
-    puVar3 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar2 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar3);
-  }
-  if (*(int *)(uVar2 + 0x330) == 1) {
-    FUN_00a92f90();
-    iVar1 = FUN_00e26e90();
-    if (iVar1 != 0) {
-      FUN_00e36ac0(0,0x3f800000);
-    }
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar3 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar3);
-    uVar2 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  if (*(int *)(uVar2 + 0x56c) != 0) {
-    FUN_00d82510(0x35,100);
-  }
-  FUN_00bd61b0(param_2);
-  FUN_00bd6ca0(param_2,param_1,0x19);
-  FUN_00bd6dd0(param_2,param_1,0x19);
-  FUN_00bd6eb0(param_2,param_1,0x32,0);
-  FUN_00bbad20(param_2,param_1,0x32);
-  FUN_00bbb430(param_2,param_1,100);
-  iVar1 = *(int *)(param_1 + 0x24);
-  if (((iVar1 == 0x31) || (iVar1 == 0x45)) || (iVar1 == 0x46)) {
-    FUN_00b8c400();
-  }
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Per-frame update: in context mode 1 the animation runs at rate 1.0; zangeki input checks.
+void ZangekiIdleStatePl0010::qteSafeCheck(undefined4 *context)
+{
+    using namespace ZangekiIdleStatePl0010_p1;
 
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+    if (fld<int>(ctx, 0x330) == 1) {  /* StateMachineContextPl0010+0x330: ? */
+        int animation = FUN_00a92f90((int)player);
+        if (thiscall<int>(FUN_00e26e90, (void *)animation) != 0) {
+            thiscall<void>(FUN_00e36ac0, (void *)(animation + 0xF4), 0, 1.0f);
+        }
+    }
+    if (fld<int>(asContext(context), 0x56C) != 0) {  /* StateMachineContextPl0010+0x56C: ? */
+        FUN_00d82510((int)this, 0x35, 100);  // request state 0x35, priority 100
+    }
+    FUN_00bd61b0(context);
+    FUN_00bd6ca0(context, (undefined4)this, 0x19);
+    FUN_00bd6dd0(context, (undefined4)this, 0x19);
+    cdeclcall<void>(FUN_00bd6eb0, context, this, 0x32, 0);
+    cdeclcall<void>(FUN_00bbad20, context, this, 0x32);
+    FUN_00bbb430(context, (undefined4)this, 100);
+    int kind = *(int *)((char *)this + 0x24);  /* StateMachineNode+0x24: ? */
+    if (kind == 0x31 || kind == 0x45 || kind == 0x46) {
+        FUN_00b8c400((int)player);
+    }
+    StateMachineNode::qteSafeCheck(context);
+}

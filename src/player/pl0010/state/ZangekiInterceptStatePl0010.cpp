@@ -1,453 +1,411 @@
-// src/player/pl0010/state/ZangekiInterceptStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83520..00BFF980, 9 functions
-
+// src/player/pl0010/state/ZangekiInterceptStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "ZangekiInterceptStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------------------------
+// CRT (the compiler emitted fsqrt / fabs inline)
+extern "C" double __cdecl sqrt(double x);
+extern "C" double __cdecl fabs(double x);
+
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 / cObj::vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9ed0[];  // ZangekiInterceptStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+extern unsigned char DAT_01b35260[];  // type of the lock-on target that has FUN_005ca330
+// object table: FUN_00a7f600 (find by id)
+extern unsigned char DAT_01be9a98[];
+extern unsigned char DAT_01beb908[];  // ECX of FUN_00c58e90
+extern unsigned char DAT_01d616d0[];  // ECX of FUN_00c5bbb0
+extern unsigned int DAT_01bea090;     // bit 31: read the gauge from Pl0000+0x3830 instead of summing it
+extern int DAT_01d61924;              // non-zero: the intercept timer does not run
+
+namespace ZangekiInterceptStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __cdecl call of a function whose generated prototype has the wrong parameter list
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __thiscall call of a function whose generated prototype has the wrong parameter list
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// obj when its type record (from the vftable slot at `typeSlot`) derives from `type`, else 0
+inline char *downcast(const void *obj, unsigned int typeSlot, const void *type)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(obj, typeSlot), (undefined4 *)type);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+inline StateMachineContextPl0010 *asContext(const void *obj)
+{
+    return (StateMachineContextPl0010 *)downcast(obj, 0x0, DAT_01be9ef4);
+}
+
+inline Pl0000 *asPl0000(const void *obj)
+{
+    return (Pl0000 *)downcast(obj, 0x4, DAT_01be9db8);
+}
+
+// Resolves a handle (FUN_00a81330) to its object (FUN_00a7c8a0); 0 when either step fails.
+// The machine code calls FUN_00a7c8a0 only when FUN_00a81330 returned non-zero.
+inline int handleObject(void *handle)
+{
+    int id = FUN_00a81330((uint *)handle);
+    if (id == 0) {
+        return 0;
+    }
+    return FUN_00a7c8a0(id);
+}
+
+}  // namespace ZangekiInterceptStatePl0010_p1
+
 // 00B83520  ZangekiInterceptStatePl0010::vf14  size=5  [class]
-undefined4 __thiscall ZangekiInterceptStatePl0010::vf14(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x14))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x14))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 4;
-  return 1;
+// A tail jump to StateMachineNode::vf14 (the raw body shown by Ghidra is the base's).
+void ZangekiInterceptStatePl0010::vf14(undefined4 *context)
+{
+    StateMachineNode::vf14(context);
 }
 
 // 00B83530  ZangekiInterceptStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall ZangekiInterceptStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base's).
+undefined4 ZangekiInterceptStatePl0010::vf18(undefined4 arg)
+{
+    return StateMachineNode::vf18(arg);
 }
 
 // 00B83540  ZangekiInterceptStatePl0010::vf24  size=19  [class]
-bool ZangekiInterceptStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool ZangekiInterceptStatePl0010::vf24(undefined4 arg)
+{
+    return StateMachineNode::vf24(arg) != 0;
 }
 
 // 00B83580  ZangekiInterceptStatePl0010::vf00  size=6  [class]
-undefined * ZangekiInterceptStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9ed0;
+undefined *ZangekiInterceptStatePl0010::vf00()
+{
+    return DAT_01be9ed0;
 }
 
 // 00B91830  ZangekiInterceptStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall ZangekiInterceptStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *ZangekiInterceptStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB6B30  ZangekiInterceptStatePl0010::vf20  size=259  [class]
-undefined4 __thiscall ZangekiInterceptStatePl0010::vf20(int param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  uint uVar2;
-  int *piVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  iVar1 = StateMachineNode::vf20(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  piVar3 = *(int **)(uVar4 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar1 = FUN_00dd6d80(puVar5);
-    uVar2 = -(uint)(iVar1 != 0) & (uint)piVar3;
-  }
-  *(undefined4 *)(uVar2 + 0x40c8) = 0;
-  *(undefined4 *)(uVar2 + 0x341c) = 0;
-  *(undefined4 *)(uVar4 + 0x2fc) = 0;
-  iVar1 = FUN_00a81330();
-  if (iVar1 != 0) {
-    piVar3 = (int *)FUN_00a7c8a0();
-    if (piVar3 != (int *)0x0) {
-      puVar5 = &DAT_01b35260;
-      (**(code **)(*piVar3 + 4))(&DAT_01b35260);
-      iVar1 = FUN_00dd6d80(puVar5);
-      if (iVar1 != 0) {
-        FUN_005ca330(0x3f800000);
-      }
-    }
-  }
-  if (*(int *)(param_1 + 0x38) != 0) {
-    if (*(int *)(uVar4 + 0x38c) != 0) {
-      FUN_005edc60(0x40400000);
-    }
-    if (*(int *)(uVar4 + 0x390) != 0) {
-      FUN_005edc60(0x40400000);
-    }
-  }
-  return 1;
+// Leave: resets the player mode, restores the lock-on target (FUN_005ca330(1.0)) and, when
+// SafeCheck changed it, the weapons' speed (3.0).
+undefined4 ZangekiInterceptStatePl0010::vf20(undefined4 *context)
+{
+    using namespace ZangekiInterceptStatePl0010_p1;
+
+    if (StateMachineNode::vf20(context) == 0) {
+        return 0;
+    }
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+    fld<int>(player, 0x40C8) = 0;       /* Pl0000+0x40C8: mode */
+    fld<float>(player, 0x341C) = 0.0f;  /* Pl0000+0x341C: slow timer */
+    fld<int>(ctx, 0x2FC) = 0;           /* StateMachineContextPl0010+0x2FC: ? */
+    int handle = FUN_00a81330((uint *)((char *)ctx + 0x4BC));  /* StateMachineContextPl0010+0x4BC: target handle */
+    if (handle != 0) {
+        void *target = (void *)FUN_00a7c8a0(handle);
+        if (target != 0 &&
+            FUN_00dd6d80((undefined4 *)vcall<void *>(target, 0x4), (undefined4 *)DAT_01b35260) != 0) {
+            thiscall<void>(FUN_005ca330, target, 1.0f);
+        }
+    }
+    if (weaponSpeedSet() != 0) {
+        int weapon = fld<int>(ctx, 0x38C);  /* StateMachineContextPl0010+0x38C: weapon 0 */
+        if (weapon != 0) {
+            FUN_005edc60(weapon, 3.0f);
+        }
+        weapon = fld<int>(ctx, 0x390);  /* StateMachineContextPl0010+0x390: weapon 1 */
+        if (weapon != 0) {
+            FUN_005edc60(weapon, 3.0f);
+        }
+    }
+    return 1;
 }
 
 // 00BCFB70  ZangekiInterceptStatePl0010::vf08  size=287  [class]
-undefined4 __thiscall ZangekiInterceptStatePl0010::vf08(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined4 uVar4;
-  uint uVar5;
-  undefined4 uVar6;
-  undefined *puVar7;
-  
-  iVar2 = StateMachineNode::vf08(param_2);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar7);
-    uVar5 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar5 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar7);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(uVar3 + 0x40c8) = 0x14;
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar7);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  if (*(int *)(uVar3 + 0x4c4) != 1) {
-    FUN_00b92d70(param_2);
-    *(undefined4 *)(uVar3 + 0x4c4) = 1;
-    FUN_00e5e1b0("bgm_Zangeki_SP_Enter");
-  }
-  FUN_00bbc0e0(param_2,0x3dcccccd,0x43340000,0x3f800000,0x3dcccccd);
-  FUN_00bbc2a0(param_2);
-  uVar6 = 0x43;
-  uVar4 = (*(code *)**(undefined4 **)param_2[1])(0x43,param_2);
-  FUN_00d82bf0(uVar4,uVar6);
-  *(undefined4 *)(uVar5 + 0x2fc) = 0;
-  *(undefined4 *)(param_1 + 0x34) = 0;
-  *(undefined4 *)(param_1 + 0x30) = 0x43960000;
-  *(undefined4 *)(param_1 + 0x38) = 0;
-  return 1;
+// Enter: player mode 0x14, the "SP" bgm once per context (context +0x4C4), camera setup and
+// state 0x43 from the factory (context +0x4) pushed with FUN_00d82bf0.
+bool ZangekiInterceptStatePl0010::vf08(undefined4 contextArg)
+{
+    using namespace ZangekiInterceptStatePl0010_p1;
+
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    undefined4 *context = (undefined4 *)contextArg;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+    fld<int>(player, 0x40C8) = 0x14;  /* Pl0000+0x40C8: mode */
+    StateMachineContextPl0010 *ctx2 = asContext(context);
+    if (fld<int>(ctx2, 0x4C4) != 1) {  /* StateMachineContextPl0010+0x4C4: SP bgm played */
+        FUN_00b92d70(context);
+        fld<int>(ctx2, 0x4C4) = 1;
+        FUN_00e5e1b0((undefined4)"bgm_Zangeki_SP_Enter");
+    }
+    cdeclcall<void>(FUN_00bbc0e0, context, 0.1f, 180.0f, 1.0f, 0.1f);
+    FUN_00bbc2a0(context);
+    // context +0x4: the state factory; its slot 0 creates the state with the given id
+    void *factory = (void *)context[1];
+    int *node = vcall<int *>(factory, 0x0, 0x43);
+    FUN_00d82bf0((int)this, node, (undefined4)context);
+    fld<int>(ctx, 0x2FC) = 0;  /* StateMachineContextPl0010+0x2FC: ? */
+    stickMoved() = 0.0f;
+    timer() = 300.0f;
+    weaponSpeedSet() = 0;
+    return true;
 }
 
 // 00BCFC90  ZangekiInterceptStatePl0010::SafeCheck  size=555  [class]
-void __thiscall ZangekiInterceptStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  int iVar5;
-  float *pfVar6;
-  uint uVar7;
-  uint uVar8;
-  undefined *puVar9;
-  float local_170;
-  float local_16c;
-  float local_168;
-  undefined1 auStack_160 [348];
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar8 = 0;
-    }
-    else {
-      puVar9 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar5 = FUN_00dd6d80(puVar9);
-      uVar8 = -(uint)(iVar5 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar8 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar7 = 0;
-    }
-    else {
-      puVar9 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar5 = FUN_00dd6d80(puVar9);
-      uVar7 = -(uint)(iVar5 != 0) & (uint)piVar1;
-    }
-    iVar5 = FUN_00a7f600(0x201a0);
-    if (iVar5 != 0) {
-      *(undefined4 *)(param_1 + 0x38) = 1;
-      if (*(int *)(uVar8 + 0x38c) != 0) {
-        FUN_005edc60(0x40a00000);
-      }
-      if (*(int *)(uVar8 + 0x390) != 0) {
-        FUN_005edc60(0x40a00000);
-      }
-    }
-    iVar5 = FUN_00a7f600(0x20020);
-    if (iVar5 != 0) {
-      pfVar6 = (float *)FUN_00a925a0(&local_170);
-      local_170 = *(float *)(uVar7 + 0x40) + *pfVar6 * 3.0;
-      local_16c = *(float *)(uVar7 + 0x44) + pfVar6[1] * 3.0;
-      local_168 = pfVar6[2] * 3.0 + *(float *)(uVar7 + 0x48);
-      iVar5 = FUN_00a7c8a0();
-      fVar2 = local_170;
-      fVar3 = local_168;
-      fVar4 = local_16c;
-      if (iVar5 != 0) {
-        fVar2 = *(float *)(iVar5 + 0x40);
-        fVar3 = *(float *)(iVar5 + 0x48);
-        fVar4 = *(float *)(iVar5 + 0x44);
-      }
-      *(undefined4 *)(param_1 + 0x38) = 1;
-      fVar2 = fVar2 - *(float *)(uVar7 + 0x40);
-      fVar4 = fVar4 - *(float *)(uVar7 + 0x44);
-      fVar3 = fVar3 - *(float *)(uVar7 + 0x48);
-      fVar2 = SQRT(fVar4 * fVar4 + fVar2 * fVar2 + fVar3 * fVar3) * 0.9;
-      if (*(int *)(uVar8 + 0x38c) != 0) {
-        FUN_005edc60(fVar2);
-      }
-      if (*(int *)(uVar8 + 0x390) != 0) {
-        FUN_005edc60(fVar2);
-      }
-    }
-    (**(code **)(*(int *)(uVar8 + 400) + 8))(0,0,0);
-    FUN_004039a0(1,uVar7,0);
-    FUN_00dffb30(uVar8 + 400);
-    FUN_00e03080(*(undefined4 *)(uVar7 + 0x4f0),0);
-    iVar5 = FUN_00a81330();
-    if (iVar5 != 0) {
-      FUN_00e03080(iVar5,1);
-    }
-    FUN_00a8c8b0(0x10010,auStack_160);
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// First frame (StateMachineNode+0x20 still 0): weapons' speed 5.0 when object 0x201A0 exists,
+// or 0.9 x the distance to object 0x20020 (or to the point 3 ahead of the player); then resets
+// the context's +0x190 object and sends request 0x10010 built with FUN_004039a0.
+void ZangekiInterceptStatePl0010::SafeCheck(undefined4 *context)
+{
+    using namespace ZangekiInterceptStatePl0010_p1;
+
+    if (*(int *)((char *)this + 0x20) == 0) {  /* StateMachineNode+0x20: started flag */
+        StateMachineContextPl0010 *ctx = asContext(context);
+        Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+        if (FUN_00a7f600((int)DAT_01be9a98, 0x201A0) != 0) {
+            weaponSpeedSet() = 1;
+            int weapon = fld<int>(ctx, 0x38C);  /* StateMachineContextPl0010+0x38C: weapon 0 */
+            if (weapon != 0) {
+                FUN_005edc60(weapon, 5.0f);
+            }
+            weapon = fld<int>(ctx, 0x390);  /* StateMachineContextPl0010+0x390: weapon 1 */
+            if (weapon != 0) {
+                FUN_005edc60(weapon, 5.0f);
+            }
+        }
+        int found = FUN_00a7f600((int)DAT_01be9a98, 0x20020);
+        if (found != 0) {
+            float point[3];
+            float *forward = FUN_00a925a0((int)player, point);
+            point[0] = fld<float>(player, 0x40) + forward[0] * 3.0f;  /* Pl0000+0x40: position */
+            point[1] = fld<float>(player, 0x44) + forward[1] * 3.0f;
+            point[2] = forward[2] * 3.0f + fld<float>(player, 0x48);
+            char *object = (char *)FUN_00a7c8a0(found);
+            float x;
+            float y;
+            float z;
+            if (object != 0) {
+                x = fld<float>(object, 0x40);
+                y = fld<float>(object, 0x44);
+                z = fld<float>(object, 0x48);
+            }
+            else {
+                x = point[0];
+                y = point[1];
+                z = point[2];
+            }
+            weaponSpeedSet() = 1;
+            double dx = x - fld<float>(player, 0x40);
+            double dy = y - fld<float>(player, 0x44);
+            double dz = z - fld<float>(player, 0x48);
+            float speed = (float)(sqrt(dy * dy + dx * dx + dz * dz) * 0.9f);
+            int weapon = fld<int>(ctx, 0x38C);  /* StateMachineContextPl0010+0x38C: weapon 0 */
+            if (weapon != 0) {
+                FUN_005edc60(weapon, speed);
+            }
+            weapon = fld<int>(ctx, 0x390);  /* StateMachineContextPl0010+0x390: weapon 1 */
+            if (weapon != 0) {
+                FUN_005edc60(weapon, speed);
+            }
+        }
+        char *object190 = (char *)ctx + 0x190;  /* StateMachineContextPl0010+0x190: embedded object */
+        vcall<void>(object190, 0x8, 0.0f, 0.0f, 0);
+
+        unsigned char request[348];  // ? object built by FUN_004039a0 (FUN_004039a0 / FUN_00dffb30 / FUN_00e03080)
+        FUN_004039a0((int)request, 1, (int)player, 0);
+        FUN_00dffb30((int)request, (undefined4)object190);
+        thiscall<void>(FUN_00e03080, request, fld<undefined4>(player, 0x4F0), 0);  /* Pl0000+0x4F0: ? */
+        int target = FUN_00a81330((uint *)((char *)player + 0xFF0));  /* Pl0000+0xFF0: handle */
+        if (target != 0) {
+            thiscall<void>(FUN_00e03080, request, target, 1);
+        }
+        FUN_00a8c8b0((int)player, 0x10010, (int)request);
+    }
+    StateMachineNode::SafeCheck(context);
 }
 
 // 00BFF980  ZangekiInterceptStatePl0010::qteSafeCheck  size=1437  [class]
-void __thiscall ZangekiInterceptStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  float *pfVar4;
-  uint uVar5;
-  int *piVar6;
-  undefined4 uVar7;
-  float fVar8;
-  undefined *puVar9;
-  int *local_28;
-  undefined1 local_24 [4];
-  float local_20;
-  float local_1c;
-  float local_18;
-  undefined4 uStack_14;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar9);
-    uVar5 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  local_28 = *(int **)(uVar5 + 0xc);
-  if (local_28 == (int *)0x0) {
-    piVar6 = (int *)0x0;
-  }
-  else {
-    puVar9 = &DAT_01be9db8;
-    (**(code **)(*local_28 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar9);
-    piVar6 = (int *)(-(uint)(iVar2 != 0) & (uint)local_28);
-  }
-  fVar8 = 0.0;
-  if ((DAT_01bea090 & 0x80000000) == 0) {
-    iVar1 = piVar6[0xe08];
-    iVar2 = iVar1 + piVar6[0xe0a] * 0x18;
-    for (; iVar1 != iVar2; iVar1 = iVar1 + 0x18) {
-      if (*(int *)(iVar1 + 0x14) == 0) {
-        fVar8 = fVar8 + *(float *)(iVar1 + 4);
-      }
-    }
-  }
-  else {
-    fVar8 = (float)piVar6[0xe0c];
-  }
-  if (fVar8 == 0.0) {
-    FUN_00b92be0(param_2,param_1,100,1);
-  }
-  if ((100.0 < ABS((float)piVar6[0xef5])) || (100.0 < ABS((float)piVar6[0xef6]))) {
-    *(undefined4 *)(param_1 + 0x34) = 0x3f800000;
-  }
-  if (*(float *)(param_1 + 0x34) == 0.0) {
-    iVar2 = FUN_00a81330();
-    if (iVar2 != 0) {
-      FUN_00a81330();
-      iVar2 = FUN_00a7c8a0();
-      if (iVar2 != 0) {
-        FUN_00a81330();
-        iVar2 = FUN_00a7c8a0();
-        thunk_FUN_00dde510(&local_28,local_24,iVar2 + 0x40,piVar6 + 0x10);
-        FUN_00b8bb40(-(float)local_28);
-        FUN_00a81330();
-        iVar2 = FUN_00a7c8a0();
-        *(undefined4 *)(uVar5 + 0x580) = *(undefined4 *)(iVar2 + 0x40);
-        *(undefined4 *)(uVar5 + 0x584) = *(undefined4 *)(iVar2 + 0x44);
-        *(undefined4 *)(uVar5 + 0x588) = *(undefined4 *)(iVar2 + 0x48);
-        *(undefined4 *)(uVar5 + 0x58c) = *(undefined4 *)(iVar2 + 0x4c);
-        goto LAB_00bffc82;
-      }
-    }
-    *(undefined4 *)(uVar5 + 0x5c4) = 0;
-    local_28 = (int *)piVar6[0x13c];
-    fVar8 = *(float *)(uVar5 + 0x574) * 1.2 * 30.0;
-    uVar7 = 0x3f490fdb;
-    iVar2 = (**(code **)(*piVar6 + 0x84))(0x3f490fdb,fVar8);
-    FUN_00c58e90(uVar5 + 0x5b8,local_28,*(undefined4 *)(iVar2 + 4),uVar7,fVar8);
-    if (*(int *)(uVar5 + 0x5c4) < 1) {
-      if (((*(float *)(uVar5 + 0x580) == 0.0) && (*(float *)(uVar5 + 0x584) == 0.0)) &&
-         (*(float *)(uVar5 + 0x588) == 0.0)) {
-        FUN_00b8bb40(0xbe32b8c2);
-        if ((DAT_01d61924 == 0) &&
-           (fVar8 = *(float *)(param_1 + 0x30) - (float)piVar6[0x244],
-           *(float *)(param_1 + 0x30) = fVar8, fVar8 < 0.0)) {
-          *(undefined4 *)(uVar5 + 0x2fc) = 0;
-        }
-      }
-      else {
-        FUN_00c15010(uVar5 + 0x580);
-        thunk_FUN_00dde510(&local_28,local_24,uVar5 + 0x580,piVar6 + 0x10);
-        FUN_00b8bb40(-(float)local_28);
-      }
-    }
-    else {
-      FUN_00c15010(&local_20);
-      thunk_FUN_00dde510(&local_28,local_24,&local_20,piVar6 + 0x10);
-      FUN_00b8bb40(-(float)local_28);
-      *(float *)(uVar5 + 0x580) = local_20;
-      *(float *)(uVar5 + 0x584) = local_1c;
-      *(float *)(uVar5 + 0x588) = local_18;
-      *(undefined4 *)(uVar5 + 0x58c) = uStack_14;
-    }
-  }
-LAB_00bffc82:
-  iVar2 = FUN_00a7f600(0x2070a);
-  if (iVar2 != 0) {
-    iVar2 = FUN_00a81330();
-    if ((iVar2 != 0) && (piVar6 = (int *)FUN_00a7c8a0(), piVar6 != (int *)0x0)) {
-      puVar9 = &DAT_01b35260;
-      (**(code **)(*piVar6 + 4))(&DAT_01b35260);
-      iVar2 = FUN_00dd6d80(puVar9);
-      if (iVar2 != 0) {
-        FUN_005ca330(0x407d70a4);
-      }
-    }
-    goto LAB_00bffe93;
-  }
-  iVar2 = FUN_00a81330();
-  if (iVar2 == 0) {
-LAB_00bffded:
-    if (*(int *)(uVar5 + 0x5c4) < 1) {
-      iVar2 = FUN_00a81330();
-      if (((iVar2 == 0) || (iVar2 = FUN_00a7c8a0(), iVar2 == 0)) ||
-         (iVar2 = FUN_00860b50(iVar2), iVar2 == 0)) goto LAB_00bffe93;
-      fVar8 = 1.0;
-    }
-    else {
-      FUN_00c15010(&local_20);
-      iVar2 = FUN_00a81330();
-      if (((iVar2 == 0) || (iVar2 = FUN_00a7c8a0(), iVar2 == 0)) ||
-         (iVar2 = FUN_00860b50(iVar2), iVar2 == 0)) goto LAB_00bffe93;
-      fVar8 = SQRT((local_18 - (float)piVar6[0x12]) * (local_18 - (float)piVar6[0x12]) +
-                   (local_1c - (float)piVar6[0x11]) * (local_1c - (float)piVar6[0x11]) +
-                   (local_20 - (float)piVar6[0x10]) * (local_20 - (float)piVar6[0x10])) * 0.33;
-    }
-  }
-  else {
-    FUN_00a81330();
-    iVar2 = FUN_00a7c8a0();
-    if (iVar2 == 0) goto LAB_00bffded;
-    FUN_00a81330();
-    piVar3 = (int *)FUN_00a7c8a0();
-    pfVar4 = (float *)(**(code **)(*piVar3 + 0x68))();
-    local_20 = *pfVar4;
-    local_1c = pfVar4[1];
-    local_18 = pfVar4[2];
-    iVar2 = FUN_00a81330();
-    if (((iVar2 == 0) || (iVar2 = FUN_00a7c8a0(), iVar2 == 0)) ||
-       (iVar2 = FUN_00860b50(iVar2), iVar2 == 0)) goto LAB_00bffe93;
-    fVar8 = SQRT((local_20 - (float)piVar6[0x10]) * (local_20 - (float)piVar6[0x10]) +
-                 (local_1c - (float)piVar6[0x11]) * (local_1c - (float)piVar6[0x11]) +
-                 (local_18 - (float)piVar6[0x12]) * (local_18 - (float)piVar6[0x12])) * 0.33;
-  }
-  FUN_005ca330(fVar8);
-LAB_00bffe93:
-  FUN_00c5bbb0(0x10);
-  if (param_2 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar9);
-    uVar5 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  if (*(int *)(uVar5 + 0x2f4) == 0) {
-    FUN_00bbb050(param_2);
-  }
-  FUN_00bd5f40(param_2,0x420c0000,0xc2700000,0,0);
-  FUN_00bbc310(param_2);
-  FUN_00bf24f0(param_2,0x3f800000);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Per-frame update.  Rebuilt from the machine code where Ghidra lost the ECX arguments.
+void ZangekiInterceptStatePl0010::qteSafeCheck(undefined4 *context)
+{
+    using namespace ZangekiInterceptStatePl0010_p1;
 
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+
+    // gauge: the sum of the active entries (+0x14 == 0) of the list at Pl0000+0x3820 (0x18 bytes each)
+    double gauge = 0.0;
+    if ((DAT_01bea090 & 0x80000000) == 0) {
+        char *entry = fld<char *>(player, 0x3820);                   /* Pl0000+0x3820: entries */
+        char *end = entry + fld<int>(player, 0x3828) * 0x18;         /* Pl0000+0x3828: count */
+        for (; entry != end; entry = entry + 0x18) {
+            if (*(int *)(entry + 0x14) == 0) {
+                gauge = gauge + *(float *)(entry + 4);
+            }
+        }
+    }
+    else {
+        gauge = fld<float>(player, 0x3830);  /* Pl0000+0x3830: gauge */
+    }
+    if (gauge == 0.0) {
+        FUN_00b92be0(context, (undefined4)this, 100, 1);
+    }
+    if (100.0f < fabs(fld<float>(player, 0x3BD4)) || 100.0f < fabs(fld<float>(player, 0x3BD8))) {  /* Pl0000+0x3BD4/+0x3BD8: stick axes */
+        stickMoved() = 1.0f;
+    }
+
+    if (stickMoved() == 0.0f) {
+        float angles[2];  // [0] yaw, [1] second angle from FUN_00dde510
+        char *lockHandle = (char *)player + 0xFE0;  /* Pl0000+0xFE0: lock-on handle */
+        if (FUN_00a81330((uint *)lockHandle) != 0 && FUN_00a7c8a0(FUN_00a81330((uint *)lockHandle)) != 0) {
+            // turn toward the locked object and remember its position
+            char *object = (char *)FUN_00a7c8a0(FUN_00a81330((uint *)lockHandle));
+            thunk_FUN_00dde510(&angles[0], &angles[1], (float *)(object + 0x40), (float *)((char *)player + 0x40));
+            FUN_00b8bb40((int)player, -angles[0]);
+            object = (char *)FUN_00a7c8a0(FUN_00a81330((uint *)lockHandle));
+            fld<float>(ctx, 0x580) = fld<float>(object, 0x40);  /* StateMachineContextPl0010+0x580: target position */
+            fld<float>(ctx, 0x584) = fld<float>(object, 0x44);
+            fld<float>(ctx, 0x588) = fld<float>(object, 0x48);
+            fld<float>(ctx, 0x58C) = fld<float>(object, 0x4C);
+        }
+        else {
+            fld<int>(ctx, 0x5C4) = 0;  /* StateMachineContextPl0010+0x5C4: found count */
+            int owner = fld<int>(player, 0x4F0);  /* Pl0000+0x4F0: ? */
+            float range = fld<float>(ctx, 0x574) * 1.2f * 30.0f;  /* StateMachineContextPl0010+0x574: ? */
+            // Pl0000 slot 0x84 (00A92950) takes no arguments; the two floats pushed before the call
+            // are the last two arguments of FUN_00c58e90 (right-to-left argument evaluation).
+            char *result = vcall<char *>(player, 0x84);
+            thiscall<void>(FUN_00c58e90, DAT_01beb908, (char *)ctx + 0x5B8, owner, fld<float>(result, 4),
+                           0.7853982f, range);
+            if (0 < fld<int>(ctx, 0x5C4)) {
+                float position[4];
+                FUN_00c15010(fld<int>(ctx, 0x5BC), position);  /* StateMachineContextPl0010+0x5BC: ? */
+                thunk_FUN_00dde510(&angles[0], &angles[1], position, (float *)((char *)player + 0x40));
+                FUN_00b8bb40((int)player, -angles[0]);
+                fld<float>(ctx, 0x580) = position[0];
+                fld<float>(ctx, 0x584) = position[1];
+                fld<float>(ctx, 0x588) = position[2];
+                fld<float>(ctx, 0x58C) = position[3];
+            }
+            else {
+                float *last = (float *)((char *)ctx + 0x580);
+                if (last[0] == 0.0f && last[1] == 0.0f && last[2] == 0.0f) {
+                    FUN_00b8bb40((int)player, -0.17453292f);
+                    if (DAT_01d61924 == 0) {
+                        float remaining = timer() - fld<float>(player, 0x910);  /* Pl0000+0x910: frame time */
+                        timer() = remaining;
+                        if (remaining < 0.0f) {
+                            fld<int>(ctx, 0x2FC) = 0;  /* StateMachineContextPl0010+0x2FC: ? */
+                        }
+                    }
+                }
+                else {
+                    FUN_00c15010(fld<int>(ctx, 0x5BC), last);
+                    thunk_FUN_00dde510(&angles[0], &angles[1], last, (float *)((char *)player + 0x40));
+                    FUN_00b8bb40((int)player, -angles[0]);
+                }
+            }
+        }
+    }
+
+    if (FUN_00a7f600((int)DAT_01be9a98, 0x2070A) != 0) {
+        int handle = FUN_00a81330((uint *)((char *)ctx + 0x4BC));  /* StateMachineContextPl0010+0x4BC: target handle */
+        if (handle != 0) {
+            void *target = (void *)FUN_00a7c8a0(handle);
+            if (target != 0 &&
+                FUN_00dd6d80((undefined4 *)vcall<void *>(target, 0x4), (undefined4 *)DAT_01b35260) != 0) {
+                thiscall<void>(FUN_005ca330, target, 3.96f);
+            }
+        }
+    }
+    else {
+        float position[3];
+        float scale;
+        int target;
+        char *lockHandle = (char *)player + 0xFE0;  /* Pl0000+0xFE0: lock-on handle */
+        if (FUN_00a81330((uint *)lockHandle) != 0 && FUN_00a7c8a0(FUN_00a81330((uint *)lockHandle)) != 0) {
+            char *object = (char *)FUN_00a7c8a0(FUN_00a81330((uint *)lockHandle));
+            float *p = vcall<float *>(object, 0x68);
+            position[0] = p[0];
+            position[1] = p[1];
+            position[2] = p[2];
+            target = handleObject((char *)ctx + 0x4BC);  /* StateMachineContextPl0010+0x4BC: target handle */
+            if (target == 0 || (target = (int)FUN_00860b50((int *)target)) == 0) {
+                goto done;
+            }
+            double dx = position[0] - fld<float>(player, 0x40);
+            double dy = position[1] - fld<float>(player, 0x44);
+            double dz = position[2] - fld<float>(player, 0x48);
+            scale = (float)(sqrt(dx * dx + dy * dy + dz * dz) * 0.33f);
+        }
+        else if (0 < fld<int>(ctx, 0x5C4)) {  /* StateMachineContextPl0010+0x5C4: found count */
+            FUN_00c15010(fld<int>(ctx, 0x5BC), position);  /* StateMachineContextPl0010+0x5BC: ? */
+            target = handleObject((char *)ctx + 0x4BC);
+            if (target == 0 || (target = (int)FUN_00860b50((int *)target)) == 0) {
+                goto done;
+            }
+            double dx = position[0] - fld<float>(player, 0x40);
+            double dy = position[1] - fld<float>(player, 0x44);
+            double dz = position[2] - fld<float>(player, 0x48);
+            scale = (float)(sqrt(dx * dx + dy * dy + dz * dz) * 0.33f);
+        }
+        else {
+            target = handleObject((char *)ctx + 0x4BC);
+            if (target == 0 || (target = (int)FUN_00860b50((int *)target)) == 0) {
+                goto done;
+            }
+            scale = 1.0f;
+        }
+        thiscall<void>(FUN_005ca330, (void *)target, scale);
+    }
+done:
+    FUN_00c5bbb0((int)DAT_01d616d0, 0x10);
+    if (fld<int>(asContext(context), 0x2F4) == 0) {  /* StateMachineContextPl0010+0x2F4: ? */
+        FUN_00bbb050(context);
+    }
+    FUN_00bd5f40(context, 35.0f, -60.0f, 0, 0);
+    FUN_00bbc310(context);
+    cdeclcall<void>(FUN_00bf24f0, context, 1.0f);
+    StateMachineNode::qteSafeCheck(context);
+}

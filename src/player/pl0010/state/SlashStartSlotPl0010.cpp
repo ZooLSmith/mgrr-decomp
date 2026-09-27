@@ -1,53 +1,69 @@
-// src/player/pl0010/state/SlashStartSlotPl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B79DF0..00B84B70, 4 functions
-
+// src/player/pl0010/state/SlashStartSlotPl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "SlashStartSlotPl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+extern unsigned char DAT_01dc53d8[];  // type record of the event sender tested by vf18
+
+namespace SlashStartSlotPl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// event ids handled by vf18
+const int kEventSetValue = 0x11;
+const int kEventVibrate = 0xE;
+
+}  // namespace SlashStartSlotPl0010_p1
+
 // 00B79DF0  SlashStartSlotPl0010::vf10  size=1  [class]
-void SlashStartSlotPl0010::vf10(void)
-
-{
-  return;
+void SlashStartSlotPl0010::vf10()
+{
 }
 
 // 00B79E00  SlashStartSlotPl0010::vf14  size=1  [class]
-void SlashStartSlotPl0010::vf14(void)
-
-{
-  return;
+void SlashStartSlotPl0010::vf14()
+{
 }
 
 // 00B84AC0  SlashStartSlotPl0010::vf18  size=99  [class]
-void __thiscall SlashStartSlotPl0010::vf18(int param_1,int param_2,undefined4 *param_3)
-
-{
-  int iVar1;
-  undefined *puVar2;
-  
-  if (param_3 != (undefined4 *)0x0) {
-    puVar2 = &DAT_01dc53d8;
-    (**(code **)*param_3)(&DAT_01dc53d8);
-    iVar1 = FUN_00dd6d80(puVar2);
-    if ((iVar1 != 0) && (param_2 == 0x11)) {
-      *(undefined4 *)(*(int *)(param_1 + 4) + 0x41a8) = param_3[1];
-      return;
-    }
-  }
-  if (param_2 == 0xe) {
-    FUN_00dda360(0,0x3f800000,0x3f800000,2);
-  }
-  return;
+// Event handler.
+void SlashStartSlotPl0010::vf18(int eventId, undefined4 *sender)
+{
+    using namespace SlashStartSlotPl0010_p1;
+
+    if (sender != 0) {
+        int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(sender, 0x0), (undefined4 *)DAT_01dc53d8);
+        if (isKind != 0 && eventId == kEventSetValue) {
+            void *owner = fld<void *>(this, 4);  /* Slot+0x4: owner (the player) */
+            fld<float>(owner, 0x41A8) = fld<float>(sender, 4);  /* Pl0000+0x41A8: ? */
+            return;
+        }
+    }
+    if (eventId == kEventVibrate) {
+        FUN_00dda360(0, 0x3F800000, 0x3F800000, 2);  // (0, 1.0f, 1.0f, 2)
+    }
 }
 
 // 00B84B70  SlashStartSlotPl0010::vf00  size=31  [class]
-undefined4 * __thiscall SlashStartSlotPl0010::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = Slot::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *SlashStartSlotPl0010::vf00(byte flags)
+{
+    // vftable = Slot::vftable (0x0163B780)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
-

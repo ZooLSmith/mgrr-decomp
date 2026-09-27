@@ -1,3514 +1,2360 @@
-// src/player/pl0010/state/ZangekiYokoStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83AC0..00BE6000, 66 functions
-
+// src/player/pl0010/state/ZangekiYokoStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "ZangekiYokoStatePl0010.h"
 
+// D3DX9_43.DLL imports
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" float *__stdcall D3DXMatrixMultiply(float *out, const float *m1, const float *m2);
+extern "C" float *__stdcall D3DXMatrixRotationX(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationY(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationZ(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixInverse(float *out, float *determinant, const float *m);
+extern "C" float *__stdcall D3DXMatrixRotationAxis(float *out, const float *v, float angle);
+// CRT (x87 fsqrt)
+extern "C" double __cdecl sqrt(double x);
+// CRT (x87 fpatan)
+extern "C" double __cdecl atan2(double y, double x);
+
+namespace ZangekiYokoStatePl0010_p1 {
+
+// Field at byte offset `offset` of an object whose class header is not owned by this file.
+template <class T> inline T &at(const void *base, int offset) { return *(T *)((char *)base + offset); }
+
+// Virtual function at byte offset `slot` of obj's vftable (thiscall: `this` is passed first).
+template <class Fn> inline Fn vfunc(const void *obj, int slot) { return *(Fn *)(*(char *const *)obj + slot); }
+
+// Type descriptors returned by the type-info virtuals.
+undefined4 *const kStateMachineContextPl0010Type = (undefined4 *)0x01BE9EF4;  // DAT_01be9ef4 (vftable slot 0x0)
+undefined4 *const kPl0000Type                    = (undefined4 *)0x01BE9DB8;  // DAT_01be9db8 (vftable slot 0x4)
+undefined4 *const kKogekkoBallType               = (undefined4 *)0x01DC53D8;  // DAT_01dc53d8 (vftable slot 0x0)
+undefined4 *const kSlashTargetType               = (undefined4 *)0x01B35260;  // DAT_01b35260 (vftable slot 0x4)
+
+// obj->typeVirtual()->isKindOf(type): FUN_00dd6d80 on the descriptor returned by the vftable slot.
+inline undefined4 isKindOf(const void *obj, int typeSlot, undefined4 *type)
+{
+    typedef undefined4 *(*GetTypeFn)(const void *self);
+    return FUN_00dd6d80(vfunc<GetTypeFn>(obj, typeSlot)(obj), type);
+}
+
+// Checked downcasts (0 when the object is null or of another type).
+inline StateMachineContextPl0010 *asContext(const void *obj)
+{
+    if (obj == 0) return 0;
+    return isKindOf(obj, 0x0, kStateMachineContextPl0010Type) != 0 ? (StateMachineContextPl0010 *)obj : 0;
+}
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) return 0;
+    return isKindOf(obj, 0x4, kPl0000Type) != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player owning a StateMachineContextPl0010 (context+0xC), checked against Pl0000.
+inline Pl0000 *ownerOf(StateMachineContextPl0010 *ctx)
+{
+    return asPl0000(at<void *>(ctx, 0xC));  /* StateMachineContext+0xC: owner */
+}
+
+// Global blade-mode cut-plane description at 0x01D61850.
+inline char *cutPlaneInfo() { return (char *)0x01D61850; }
+// Flag at 0x01D61AC4 raised by EntryCutTargetSlot.
+inline int &entryCutTargetFlag() { return *(int *)0x01D61AC4; }
+
+// "[Hw::VecNormalize] zero vector" warning string (0x0163D0AC) printed by FUN_00dd5650.
+inline void vecNormalizeWarning()
+{
+    typedef void (*PrintFn)(const char *format);
+    ((PrintFn)FUN_00dd5650)((const char *)0x0163D0AC);
+}
+
+// Callees whose generated prototypes do not match the machine-code call sites.
+typedef float (*WrapAngleFn)(float angle);                                             // FUN_00ddba30
+typedef void (*BlendOutFn)(int self, int motionSet, int motionId, float blendTime);    // FUN_00e35de0
+typedef void (*ListRemoveFn)(int listId, int *object);                                 // FUN_00d8a1d0
+typedef void (*ResetFn)(int self, int a, int b, int c, int d);                         // FUN_00a8caf0
+typedef void (*SetFlagsFn)(void *self, int a, int mask, int value);                    // FUN_00a96070
+typedef void (*SetRotationFn)(void *self, int motion, float x, float y, float z);      // FUN_00a947e0
+typedef int (__fastcall *GetBreakTypeFn)(int self);                                    // FUN_00b8b610
+typedef bool (*CanStartFn)(undefined4 *context, undefined4 node);                      // FUN_00bbb3a0
+typedef void (*CutPlaneFn)(undefined4 *context, float *matrix, float size, float extra,
+                           float angle, int mode, float *scale);                        // FUN_00b93000
+typedef void (*PlayerUpdateFn)(void *self);                                            // 0x00A17A40
+
+}  // namespace ZangekiYokoStatePl0010_p1
+
 // 00B83AC0  ZangekiYokoStatePl0010::SlashFirstHitSlot::vf10  size=1  [class]
-void ZangekiYokoStatePl0010::SlashFirstHitSlot::vf10(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::SlashFirstHitSlot::vf10()
+{
 }
 
 // 00B83AD0  ZangekiYokoStatePl0010::SlashFirstHitSlot::vf14  size=1  [class]
-void ZangekiYokoStatePl0010::SlashFirstHitSlot::vf14(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::SlashFirstHitSlot::vf14()
+{
 }
 
 // 00B83AF0  ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf10  size=1  [class]
-void ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf10(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf10()
+{
 }
 
 // 00B83B00  ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf14  size=1  [class]
-void ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf14(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf14()
+{
 }
 
 // 00B83B20  ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf10  size=1  [class]
-void ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf10(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf10()
+{
 }
 
 // 00B83B30  ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf14  size=1  [class]
-void ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf14(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf14()
+{
 }
 
 // 00B83B50  ZangekiYokoStatePl0010::EntryCutTargetSlot::vf10  size=1  [class]
-void ZangekiYokoStatePl0010::EntryCutTargetSlot::vf10(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::EntryCutTargetSlot::vf10()
+{
 }
 
 // 00B83B60  ZangekiYokoStatePl0010::EntryCutTargetSlot::vf14  size=1  [class]
-void ZangekiYokoStatePl0010::EntryCutTargetSlot::vf14(void)
-
-{
-  return;
+void ZangekiYokoStatePl0010::EntryCutTargetSlot::vf14()
+{
 }
 
 // 00B83B70  ZangekiYokoStatePl0010::EntryCutTargetSlot::vf18  size=13  [class]
-void ZangekiYokoStatePl0010::EntryCutTargetSlot::vf18(void)
-
-{
-  DAT_01d61ac4 = 1;
-  return;
+void ZangekiYokoStatePl0010::EntryCutTargetSlot::vf18(undefined4 arg, undefined4 *sender)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    entryCutTargetFlag() = 1;  // DAT_01d61ac4
 }
 
 // 00B83BC0  ZangekiYokoStatePl0010::SafeCheck  size=5  [class]
-void __thiscall ZangekiYokoStatePl0010::SafeCheck(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0xc))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0xc))(param_2);
-  }
-  if (*(int *)(param_1 + 0x20) == 0) {
-    *(undefined4 *)(param_1 + 0x14) = 2;
-    *(undefined4 *)(param_1 + 0x20) = 1;
-  }
-  return;
+void ZangekiYokoStatePl0010::SafeCheck(undefined4 *param_2)
+{
+    StateMachineNode::SafeCheck(param_2);  // jmp 0x00D82220
 }
 
 // 00B83BD0  ZangekiYokoStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall ZangekiYokoStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+undefined4 ZangekiYokoStatePl0010::vf18(undefined4 param_2)
+{
+    return StateMachineNode::vf18(param_2);  // jmp 0x00D822E0
 }
 
 // 00B83BE0  ZangekiYokoStatePl0010::vf24  size=19  [class]
-bool ZangekiYokoStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool ZangekiYokoStatePl0010::vf24(undefined4 param_1)
+{
+    return StateMachineNode::vf24(param_1) != 0;
 }
 
 // 00B83C00  ZangekiYokoStatePl0010::ZangekiYokoStatePl0010  size=53  [class]
-undefined4 * __thiscall
-ZangekiYokoStatePl0010::ZangekiYokoStatePl0010(undefined4 *param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  StateMachineNode::StateMachineNode(param_2);
-  *param_1 = vftable;
-  iVar1 = 1;
-  do {
-    FUN_00a7c930();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  return param_1;
+ZangekiYokoStatePl0010::ZangekiYokoStatePl0010(undefined4 param_2)
+    : StateMachineNode(param_2)
+{
+    // vftable = ZangekiYokoStatePl0010::vftable (0x016A2180)
+    undefined4 *handle = &handle94();
+    int remaining = 1;
+    do {
+        FUN_00a7c930(handle);  // handle94, handle98
+        handle++;
+        remaining--;
+    } while (-1 < remaining);
 }
 
 // 00B83C40  ZangekiYokoStatePl0010::vf00  size=6  [class]
-undefined * ZangekiYokoStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9ef0;
+undefined *ZangekiYokoStatePl0010::vf00()
+{
+    return (undefined *)0x01BE9EF0;  // &DAT_01be9ef0: type descriptor
 }
 
 // 00B91AD0  ZangekiYokoStatePl0010::SlashFirstHitSlot::vf18  size=76  [class]
-void ZangekiYokoStatePl0010::SlashFirstHitSlot::vf18(void)
-
-{
-  undefined4 *puVar1;
-  int *piVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  piVar2 = (int *)FUN_00c13920();
-  (**(code **)(*piVar2 + 0x28))(0);
-  iVar3 = FUN_00a7c8a0();
-  if ((iVar3 != 0) && (puVar1 = *(undefined4 **)(iVar3 + 2000), puVar1 != (undefined4 *)0x0)) {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*puVar1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    if (iVar3 != 0) {
-      puVar1[0xf8] = 1;
-    }
-  }
-  return;
+void ZangekiYokoStatePl0010::SlashFirstHitSlot::vf18(undefined4 arg, undefined4 *sender)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef int (*GetObjectFn)(void *self, int index);
+    int *manager = (int *)FUN_00c13920();
+    int entity = vfunc<GetObjectFn>(manager, 0x28)(manager, 0);
+    int player = FUN_00a7c8a0(entity);
+    if (player != 0) {
+        undefined4 *context = at<undefined4 *>((void *)player, 0x7D0);  /* Pl0000+0x7D0: state machine context */
+        if (context != 0 && isKindOf(context, 0x0, kStateMachineContextPl0010Type) != 0) {
+            context[0xF8] = 1;  /* StateMachineContextPl0010+0x3E0: first slash hit */
+        }
+    }
 }
 
 // 00B91B20  ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf18  size=76  [class]
-void ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf18(void)
-
-{
-  undefined4 *puVar1;
-  int *piVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  piVar2 = (int *)FUN_00c13920();
-  (**(code **)(*piVar2 + 0x28))(0);
-  iVar3 = FUN_00a7c8a0();
-  if ((iVar3 != 0) && (puVar1 = *(undefined4 **)(iVar3 + 2000), puVar1 != (undefined4 *)0x0)) {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*puVar1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    if (iVar3 != 0) {
-      puVar1[0xf9] = 1;
-    }
-  }
-  return;
+void ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf18(undefined4 arg, undefined4 *sender)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef int (*GetObjectFn)(void *self, int index);
+    int *manager = (int *)FUN_00c13920();
+    int entity = vfunc<GetObjectFn>(manager, 0x28)(manager, 0);
+    int player = FUN_00a7c8a0(entity);
+    if (player != 0) {
+        undefined4 *context = at<undefined4 *>((void *)player, 0x7D0);  /* Pl0000+0x7D0: state machine context */
+        if (context != 0 && isKindOf(context, 0x0, kStateMachineContextPl0010Type) != 0) {
+            context[0xF9] = 1;  /* StateMachineContextPl0010+0x3E4: datsu target created */
+        }
+    }
 }
 
 // 00B91B70  ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf18  size=106  [class]
-void ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf18(undefined4 param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01dc53d8;
-    (**(code **)*param_2)(&DAT_01dc53d8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = (int *)FUN_00c13920();
-  (**(code **)(*piVar1 + 0x28))(0);
-  iVar2 = FUN_00a7c8a0();
-  if ((iVar2 != 0) && (uVar4 != 0)) {
-    uVar3 = FUN_00a7c8b0();
-    FUN_00b8be50(uVar3);
-  }
-  return;
+void ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf18(undefined4 arg, undefined4 *sender)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef int (*GetObjectFn)(void *self, int index);
+    undefined4 *ball;
+    if (sender == 0) {
+        ball = 0;
+    }
+    else {
+        ball = isKindOf(sender, 0x0, kKogekkoBallType) != 0 ? sender : 0;
+    }
+    int ballTarget = 0;
+    if (ball != 0) {
+        ballTarget = (int)ball[2];  /* kogekko ball +0x8 */
+    }
+    int *manager = (int *)FUN_00c13920();
+    int entity = vfunc<GetObjectFn>(manager, 0x28)(manager, 0);
+    int player = FUN_00a7c8a0(entity);
+    if (player != 0 && ball != 0) {
+        FUN_00b8be50(player, FUN_00a7c8b0(ballTarget));
+    }
 }
 
 // 00B91BE0  ZangekiYokoStatePl0010::SlashFirstHitSlot::vf00  size=31  [class]
-undefined4 * __thiscall
-ZangekiYokoStatePl0010::SlashFirstHitSlot::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = Slot::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *ZangekiYokoStatePl0010::SlashFirstHitSlot::vf00(byte flags)
+{
+    // vftable = Slot::vftable (0x0163B780)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00B91C00  ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf00  size=31  [class]
-undefined4 * __thiscall
-ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = Slot::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *ZangekiYokoStatePl0010::DatsuTargetCreateSlot::vf00(byte flags)
+{
+    // vftable = Slot::vftable (0x0163B780)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00B91C20  ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf00  size=31  [class]
-undefined4 * __thiscall
-ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = Slot::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *ZangekiYokoStatePl0010::SlashKogekkoBallSlot::vf00(byte flags)
+{
+    // vftable = Slot::vftable (0x0163B780)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00B91C40  ZangekiYokoStatePl0010::EntryCutTargetSlot::vf00  size=31  [class]
-undefined4 * __thiscall
-ZangekiYokoStatePl0010::EntryCutTargetSlot::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = Slot::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *ZangekiYokoStatePl0010::EntryCutTargetSlot::vf00(byte flags)
+{
+    // vftable = Slot::vftable (0x0163B780)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00B91C60  ZangekiYokoStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall ZangekiYokoStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *ZangekiYokoStatePl0010::vf04(byte param_2)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((param_2 & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB8850  ZangekiYokoStatePl0010::vf14  size=126  [class]
-void __thiscall ZangekiYokoStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined *puVar3;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar3 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar3);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  if (*(int **)(uVar1 + 0xc) != (int *)0x0) {
-    puVar3 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar1 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar3);
-  }
-  if ((*(int *)(param_1 + 0x30) == -1) ||
-     (iVar2 = FUN_00a94ce0(*(int *)(param_1 + 0x30)), iVar2 != 0)) {
-    FUN_00d82510(0x3d,0x19);
-  }
-  StateMachineNode::vf14(param_2);
-  return;
+void ZangekiYokoStatePl0010::vf14(undefined4 *param_2)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(param_2);
+    Pl0000 *player = ownerOf(ctx);
+    if (motion30() == -1 || FUN_00a94ce0((int)player, motion30())) {
+        FUN_00d82510((int)this, 0x3D, 0x19);  // request state 0x3D, priority 0x19
+    }
+    StateMachineNode::vf14(param_2);
 }
 
 // 00BB88D0  ZangekiYokoStatePl0010::vf20  size=526  [class]
-undefined4 __thiscall ZangekiYokoStatePl0010::vf20(int param_1,undefined4 *param_2)
-
-{
-  undefined4 uVar1;
-  int iVar2;
-  undefined *puVar3;
-  
-  iVar2 = StateMachineNode::vf20(param_2);
-  if (iVar2 != 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      param_2 = (undefined4 *)0x0;
-    }
-    else {
-      puVar3 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar2 = FUN_00dd6d80(puVar3);
-      param_2 = (undefined4 *)(-(uint)(iVar2 != 0) & (uint)param_2);
-    }
-    if (*(int **)((int)param_2 + 0xc) != (int *)0x0) {
-      puVar3 = &DAT_01be9db8;
-      (**(code **)(**(int **)((int)param_2 + 0xc) + 4))(&DAT_01be9db8);
-      FUN_00dd6d80(puVar3);
-    }
-    iVar2 = FUN_00a92f90();
-    if (iVar2 != 0) {
-      uVar1 = *(undefined4 *)(param_1 + 0x30);
-      iVar2 = FUN_00a92f90();
-      FUN_00e26e90();
-      FUN_00e35de0(iVar2 + 0x98,uVar1,0x3d4ccccd);
-      uVar1 = *(undefined4 *)(param_1 + 0x34);
-      iVar2 = FUN_00a92f90();
-      FUN_00e26e90();
-      FUN_00e35de0(iVar2 + 0x98,uVar1,0x3d4ccccd);
-    }
-    *(undefined4 *)((int)param_2 + 0x3c0) = 0;
-    *(undefined4 *)((int)param_2 + 0x30c) = 1;
-    *(undefined4 *)((int)param_2 + 0x2f8) = 0;
-    if ((*(int *)(param_1 + 0x78) != 0) && (*(int *)((int)param_2 + 0x3c8) != 0)) {
-      FUN_00b8bd70();
-    }
-    *(undefined4 *)((int)param_2 + 0x3e4) = 0;
-    if (*(int *)(param_1 + 0x9c) != 0) {
-      FUN_00d8a1d0(0x13,*(int *)(param_1 + 0x9c));
-      if (*(undefined4 **)(param_1 + 0x9c) != (undefined4 *)0x0) {
-        (**(code **)**(undefined4 **)(param_1 + 0x9c))(1);
-        *(undefined4 *)(param_1 + 0x9c) = 0;
-      }
-    }
-    if (*(int *)(param_1 + 0xa0) != 0) {
-      FUN_00d8a1d0(0x14,*(int *)(param_1 + 0xa0));
-      if (*(undefined4 **)(param_1 + 0xa0) != (undefined4 *)0x0) {
-        (**(code **)**(undefined4 **)(param_1 + 0xa0))(1);
-        *(undefined4 *)(param_1 + 0xa0) = 0;
-      }
-    }
-    if (*(int *)(param_1 + 0xa4) != 0) {
-      FUN_00d8a1d0(0x1d,*(int *)(param_1 + 0xa4));
-      if (*(undefined4 **)(param_1 + 0xa4) != (undefined4 *)0x0) {
-        (**(code **)**(undefined4 **)(param_1 + 0xa4))(1);
-        *(undefined4 *)(param_1 + 0xa4) = 0;
-      }
-    }
-    if (*(int *)(param_1 + 0xa8) != 0) {
-      FUN_00d8a1d0(0x12,*(int *)(param_1 + 0xa8));
-      if (*(undefined4 **)(param_1 + 0xa8) != (undefined4 *)0x0) {
-        (**(code **)**(undefined4 **)(param_1 + 0xa8))(1);
-        *(undefined4 *)(param_1 + 0xa8) = 0;
-      }
-    }
-    iVar2 = FUN_00a81330();
-    if (iVar2 != 0) {
-      FUN_00a8caf0(0,0,0,0);
-    }
-    iVar2 = FUN_00a81330();
-    if (iVar2 != 0) {
-      FUN_00a8caf0(0,0,0,0);
-    }
-    return 1;
-  }
-  return 0;
+undefined4 ZangekiYokoStatePl0010::vf20(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    if (StateMachineNode::vf20(param_1) == 0) {
+        return 0;
+    }
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    if (FUN_00a92f90((int)player) != 0) {
+        int motion = motion30();
+        int animation = FUN_00a92f90((int)player);
+        FUN_00e26e90(animation);
+        ((BlendOutFn)FUN_00e35de0)(animation + 0xF4, animation + 0x98, motion, 0.05f);
+        motion = motion34();
+        animation = FUN_00a92f90((int)player);
+        FUN_00e26e90(animation);
+        ((BlendOutFn)FUN_00e35de0)(animation + 0xF4, animation + 0x98, motion, 0.05f);
+    }
+    at<float>(ctx, 0x3C0) = 0.0f;  /* StateMachineContextPl0010+0x3C0: ? */
+    at<int>(ctx, 0x30C) = 1;       /* StateMachineContextPl0010+0x30C: ? */
+    at<int>(ctx, 0x2F8) = 0;       /* StateMachineContextPl0010+0x2F8: ? */
+    if (flag78() != 0 && at<int>(ctx, 0x3C8) != 0) {  /* StateMachineContextPl0010+0x3C8: ? */
+        FUN_00b8bd70((int)player);
+    }
+    at<int>(ctx, 0x3E4) = 0;       /* StateMachineContextPl0010+0x3E4: datsu target created */
+    if (object9C() != 0) {
+        ((ListRemoveFn)FUN_00d8a1d0)(0x13, object9C());
+        if (object9C() != 0) {
+            typedef void (*DeleteFn)(void *self, int flags);
+            vfunc<DeleteFn>(object9C(), 0x0)(object9C(), 1);
+            object9C() = 0;
+        }
+    }
+    if (objectA0() != 0) {
+        ((ListRemoveFn)FUN_00d8a1d0)(0x14, objectA0());
+        if (objectA0() != 0) {
+            typedef void (*DeleteFn)(void *self, int flags);
+            vfunc<DeleteFn>(objectA0(), 0x0)(objectA0(), 1);
+            objectA0() = 0;
+        }
+    }
+    if (objectA4() != 0) {
+        ((ListRemoveFn)FUN_00d8a1d0)(0x1D, objectA4());
+        if (objectA4() != 0) {
+            typedef void (*DeleteFn)(void *self, int flags);
+            vfunc<DeleteFn>(objectA4(), 0x0)(objectA4(), 1);
+            objectA4() = 0;
+        }
+    }
+    if (objectA8() != 0) {
+        ((ListRemoveFn)FUN_00d8a1d0)(0x12, objectA8());
+        if (objectA8() != 0) {
+            typedef void (*DeleteFn)(void *self, int flags);
+            vfunc<DeleteFn>(objectA8(), 0x0)(objectA8(), 1);
+            objectA8() = 0;
+        }
+    }
+    if (FUN_00a81330(&handle94()) != 0) {
+        ((ResetFn)FUN_00a8caf0)(at<int>(ctx, 0x38C), 0, 0, 0, 0);  /* StateMachineContextPl0010+0x38C: ? */
+    }
+    if (FUN_00a81330(&handle98()) != 0) {
+        ((ResetFn)FUN_00a8caf0)(at<int>(ctx, 0x390), 0, 0, 0, 0);  /* StateMachineContextPl0010+0x390: ? */
+    }
+    return 1;
 }
 
 // 00BB8AE0  FUN_00bb8ae0  size=473  [callgraph]
-undefined4 FUN_00bb8ae0(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
-
-{
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  if (*(int **)(uVar1 + 0xc) != (int *)0x0) {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar1 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar4);
-  }
-  iVar2 = FUN_00b8b610();
-  if ((iVar2 != 0) && (iVar3 = FUN_00d45a70("breakdown_test"), iVar3 != 0)) {
-    FUN_00d82510(2,param_3);
-    return 1;
-  }
-  switch(iVar2) {
-  case 1:
-    FUN_00d82510(0x15,param_3);
-    return 1;
-  case 2:
-    FUN_00d82510(0x17,param_3);
-    return 1;
-  case 3:
-    FUN_00d82510(0x18,param_3);
-    return 1;
-  case 4:
-    FUN_00d82510(0x16,param_3);
-    return 1;
-  case 5:
-    FUN_00d82510(0x10,param_3);
-    return 1;
-  case 6:
-    FUN_00d82510(4,param_3);
-    return 1;
-  case 7:
-    FUN_00d82510(0x2a,param_3);
-    return 1;
-  case 8:
-    FUN_00d82510(0x14,param_3);
-    return 1;
-  case 9:
-    FUN_00d82510(0x25,param_3);
-    return 1;
-  case 0xb:
-    FUN_00d82510(0x2b,param_3);
-    return 1;
-  case 0xc:
-    FUN_00d82510(0xd,param_3);
-    return 1;
-  case 0xd:
-    FUN_00d82510(9,param_3);
-    break;
-  case 0x10:
-    FUN_00d82510(0x26,param_3);
-    return 1;
-  case 0x11:
-    FUN_00d82510(0xc,param_3);
-    return 1;
-  }
-  return 1;
+// Picks the follow-up state from the player's break type (FUN_00b8b610).
+undefined4 FUN_00bb8ae0(undefined4 *context, undefined4 node, undefined4 priority)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int breakType = ((GetBreakTypeFn)FUN_00b8b610)((int)player);
+    if (breakType != 0 && FUN_00d45a70(0x018B9140, (undefined4)"breakdown_test")) {
+        FUN_00d82510(node, 2, priority);
+        return 1;
+    }
+    switch (breakType) {
+    case 1:
+        FUN_00d82510(node, 0x15, priority);
+        return 1;
+    case 2:
+        FUN_00d82510(node, 0x17, priority);
+        return 1;
+    case 3:
+        FUN_00d82510(node, 0x18, priority);
+        return 1;
+    case 4:
+        FUN_00d82510(node, 0x16, priority);
+        return 1;
+    case 5:
+        FUN_00d82510(node, 0x10, priority);
+        return 1;
+    case 6:
+        FUN_00d82510(node, 4, priority);
+        return 1;
+    case 7:
+        FUN_00d82510(node, 0x2A, priority);
+        return 1;
+    case 8:
+        FUN_00d82510(node, 0x14, priority);
+        return 1;
+    case 9:
+        FUN_00d82510(node, 0x25, priority);
+        return 1;
+    case 0xB:
+        FUN_00d82510(node, 0x2B, priority);
+        return 1;
+    case 0xC:
+        FUN_00d82510(node, 0xD, priority);
+        return 1;
+    case 0xD:
+        FUN_00d82510(node, 9, priority);
+        break;
+    case 0x10:
+        FUN_00d82510(node, 0x26, priority);
+        return 1;
+    case 0x11:
+        FUN_00d82510(node, 0xC, priority);
+        return 1;
+    }
+    return 1;
 }
 
 // 00BB8D00  FUN_00bb8d00  size=198  [callgraph]
-undefined4 FUN_00bb8d00(undefined4 *param_1,int param_2,undefined4 param_3,int param_4,int param_5)
-
-{
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  bool bVar5;
-  undefined *puVar6;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c);
-  if (fVar1 * fVar1 < *(float *)(uVar3 + 0xd28)) {
-    bVar5 = (*(uint *)(uVar3 + 0xe48) & *(uint *)(uVar3 + 0xcf8)) != 0;
-  }
-  else {
-    bVar5 = false;
-  }
-  iVar4 = -1;
-  if (bVar5) {
-    if (bVar5) {
-      iVar4 = 10;
-    }
-  }
-  else {
-    iVar4 = 0x11;
-  }
-  if (((param_4 == 0) || (iVar4 != 0x11)) && ((param_5 == 0 || (iVar4 != *(int *)(param_2 + 4))))) {
-    FUN_00d82510(iVar4,param_3);
-    return 1;
-  }
-  return 0;
+undefined4 FUN_00bb8d00(undefined4 *context, int node, undefined4 priority, int rejectIdle, int rejectSame)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    float speed = at<float>(at<void *>(player, 0x40D4), 0x14C);  /* Pl0000+0x40D4: ? */
+    bool moving;
+    if (speed * speed < at<float>(player, 0xD28)) {  /* Pl0000+0xD28: ? */
+        moving = (at<unsigned int>(player, 0xE48) & at<unsigned int>(player, 0xCF8)) != 0;  /* Pl0000+0xE48/+0xCF8: input masks */
+    }
+    else {
+        moving = false;
+    }
+    int nextState = -1;
+    if (moving) {
+        if (moving) {
+            nextState = 10;
+        }
+    }
+    else {
+        nextState = 0x11;
+    }
+    if ((rejectIdle == 0 || nextState != 0x11) &&
+        (rejectSame == 0 || nextState != *(int *)(node + 4))) {  /* StateMachineNode+0x4: ? */
+        FUN_00d82510(node, nextState, priority);
+        return 1;
+    }
+    return 0;
 }
 
 // 00BB8DD0  FUN_00bb8dd0  size=592  [callgraph]
-undefined4 FUN_00bb8dd0(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
-
-{
-  float fVar1;
-  int *piVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  float10 fVar6;
-  float10 fVar7;
-  float *pfStack_104;
-  undefined1 *puStack_100;
-  undefined1 *puStack_fc;
-  float *pfStack_f8;
-  float *pfStack_f4;
-  float local_e0 [5];
-  undefined4 uStack_cc;
-  undefined4 uStack_c8;
-  undefined4 uStack_c4;
-  float local_c0 [4];
-  undefined1 local_b0 [4];
-  undefined1 auStack_ac [12];
-  undefined1 local_a0 [52];
-  undefined1 auStack_6c [4];
-  undefined1 auStack_68 [100];
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    pfStack_f4 = (float *)&DAT_01be9ef4;
-    pfStack_f8 = (float *)0xbb8df7;
-    (**(code **)*param_1)();
-    pfStack_f8 = (float *)0xbb8dfe;
-    iVar3 = FUN_00dd6d80();
-    uVar5 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(uVar5 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    pfStack_f4 = (float *)&DAT_01be9db8;
-    pfStack_f8 = (float *)0xbb8e1f;
-    (**(code **)(*piVar2 + 4))();
-    pfStack_f8 = (float *)0xbb8e26;
-    iVar3 = FUN_00dd6d80();
-    uVar4 = -(uint)(iVar3 != 0) & (uint)piVar2;
-  }
-  if (((*(uint *)(uVar4 + 0xcf8) & *(uint *)(uVar4 + 0xe48)) != 0) &&
-     (fVar1 = *(float *)(*(int *)(uVar4 + 0x40d4) + 0x14c),
-     fVar1 * fVar1 < *(float *)(uVar4 + 0xd28))) {
-    local_e0[2] = -*(float *)(uVar4 + 0xd0c);
-    local_e0[0] = -*(float *)(uVar4 + 0xd08);
-    local_e0[1] = 0.0;
-    fVar1 = local_e0[2] * local_e0[2] + local_e0[0] * local_e0[0];
-    if (fVar1 < 0.0 == (fVar1 == 0.0)) {
-      pfStack_f8 = local_e0;
-      puStack_fc = (undefined1 *)0xbb8eb7;
-      pfStack_f4 = pfStack_f8;
-      FUN_00ddf460();
-    }
-    else {
-      pfStack_f4 = (float *)&DAT_0163d0ac;
-      pfStack_f8 = (float *)0xbb8ecc;
-      FUN_00dd5650();
-      local_e0[0] = 0.0;
-      local_e0[1] = 1.0;
-      local_e0[2] = 0.0;
-    }
-    local_c0[0] = 0.0;
-    pfStack_f4 = (float *)0x5;
-    local_c0[1] = 0.0;
-    puStack_fc = local_a0;
-    local_c0[2] = 1.0;
-    puStack_100 = (undefined1 *)0xbb8f00;
-    pfStack_f8 = (float *)(uVar4 + 0x90);
-    FUN_00ddc1d0();
-    pfStack_f4 = (float *)local_a0;
-    pfStack_f8 = local_c0;
-    puStack_fc = local_b0;
-    puStack_100 = (undefined1 *)0xbb8f17;
-    D3DXVec3TransformNormal();
-    uStack_cc = 0x3f800000;
-    puStack_100 = (undefined1 *)0x5;
-    uStack_c8 = 0;
-    uStack_c4 = 0;
-    pfStack_104 = (float *)(uVar4 + 0x90);
-    FUN_00ddc1d0(auStack_ac);
-    puStack_100 = auStack_ac;
-    pfStack_104 = (float *)&uStack_cc;
-    D3DXVec3TransformNormal(auStack_6c);
-    FUN_00db6410(auStack_68,&DAT_01bea380,&DAT_01bea390,&DAT_01bea3a0);
-    D3DXVec3TransformNormal(&pfStack_f8,&pfStack_f8,auStack_68);
-    pfStack_104 = (float *)(*(float *)(uVar4 + 0x40) + (float)pfStack_104);
-    puStack_100 = (undefined1 *)(*(float *)(uVar4 + 0x44) + (float)puStack_100);
-    puStack_fc = (undefined1 *)(*(float *)(uVar4 + 0x48) + (float)puStack_fc);
-    pfStack_f8 = (float *)(*(float *)(uVar4 + 0x4c) + (float)pfStack_f8);
-    fVar6 = (float10)FUN_00a8ec30(&pfStack_104);
-    fVar7 = (float10)FUN_00ddba30((float)((float10)*(float *)(uVar4 + 0x94) - fVar6));
-    if ((fVar7 < (float10)-0.7853982) ||
-       (fVar7 < (float10)0.7853982 == (fVar7 == (float10)0.7853982))) {
-      *(undefined4 *)(uVar4 + 0x416c) = 1;
-      *(float *)(uVar5 + 0x74) = (float)fVar6;
-      FUN_00d82510(0x29,param_3);
-      return 1;
-    }
-  }
-  return 0;
+undefined4 FUN_00bb8dd0(undefined4 *context, undefined4 node, undefined4 priority)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if ((at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE48)) != 0) {  /* Pl0000+0xCF8/+0xE48: input masks */
+        float speed = at<float>(at<void *>(player, 0x40D4), 0x14C);  /* Pl0000+0x40D4: ? */
+        if (speed * speed < at<float>(player, 0xD28)) {  /* Pl0000+0xD28: ? */
+            float dir[4];  // dir[3] is never initialised
+            dir[2] = -at<float>(player, 0xD0C);  /* Pl0000+0xD0C: ? */
+            dir[0] = -at<float>(player, 0xD08);  /* Pl0000+0xD08: ? */
+            dir[1] = 0.0f;
+            float lenSq = dir[2] * dir[2] + dir[0] * dir[0];
+            if (lenSq > 0.0f) {  // inlined Hw::VecNormalize guard
+                FUN_00ddf460(dir, dir);
+            }
+            else {
+                vecNormalizeWarning();
+                dir[0] = 0.0f;
+                dir[1] = 1.0f;
+                dir[2] = 0.0f;
+            }
+            float axis[3];
+            float rotation[16];
+            float upWorld[3];    // computed but unused
+            float sideWorld[3];  // computed but unused
+            float lookMatrix[16];
+            axis[0] = 0.0f;
+            axis[1] = 0.0f;
+            axis[2] = 1.0f;
+            FUN_00ddc1d0((undefined4 *)rotation, &at<float>(player, 0x90), 5);  /* Pl0000+0x90: rotation */
+            D3DXVec3TransformNormal(upWorld, axis, rotation);
+            axis[0] = 1.0f;
+            axis[1] = 0.0f;
+            axis[2] = 0.0f;
+            FUN_00ddc1d0((undefined4 *)rotation, &at<float>(player, 0x90), 5);
+            D3DXVec3TransformNormal(sideWorld, axis, rotation);
+            FUN_00db6410((undefined4 *)lookMatrix, (float *)0x01BEA380, (float *)0x01BEA390, (undefined4)0x01BEA3A0);
+            D3DXVec3TransformNormal(dir, dir, lookMatrix);
+            dir[0] = at<float>(player, 0x40) + dir[0];  /* Pl0000+0x40: position */
+            dir[1] = at<float>(player, 0x44) + dir[1];
+            dir[2] = at<float>(player, 0x48) + dir[2];
+            dir[3] = at<float>(player, 0x4C) + dir[3];
+            float yaw = (float)FUN_00a8ec30((int)player, dir);
+            float diff = ((WrapAngleFn)FUN_00ddba30)(at<float>(player, 0x94) - yaw);  /* Pl0000+0x94: yaw */
+            if (diff < -0.7853982f || diff > 0.7853982f) {
+                at<int>(player, 0x416C) = 1;  /* Pl0000+0x416C: ? */
+                at<float>(ctx, 0x74) = yaw;   /* StateMachineContextPl0010+0x74: turn yaw */
+                FUN_00d82510(node, 0x29, priority);
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
 
 // 00BB9020  FUN_00bb9020  size=147  [callgraph]
-undefined4 FUN_00bb9020(undefined4 *param_1)
-
-{
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
-  undefined *puVar6;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar5 = -(uint)(iVar4 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(uVar5 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  if (((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe48)) != 0) &&
-     (fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c),
-     fVar1 * fVar1 < *(float *)(uVar3 + 0xd28))) {
-    *(undefined4 *)(uVar5 + 0x7c) = 0;
-    return *(undefined4 *)(uVar5 + 0x7c);
-  }
-  *(undefined4 *)(uVar5 + 0x7c) = 1;
-  return *(undefined4 *)(uVar5 + 0x7c);
+undefined4 FUN_00bb9020(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if ((at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE48)) != 0) {
+        float speed = at<float>(at<void *>(player, 0x40D4), 0x14C);
+        if (speed * speed < at<float>(player, 0xD28)) {
+            at<int>(ctx, 0x7C) = 0;  /* StateMachineContextPl0010+0x7C: ? */
+            return at<undefined4>(ctx, 0x7C);
+        }
+    }
+    at<int>(ctx, 0x7C) = 1;
+    return at<undefined4>(ctx, 0x7C);
 }
 
 // 00BB90C0  FUN_00bb90c0  size=303  [callgraph]
-undefined4 FUN_00bb90c0(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-  }
-  iVar2 = FUN_008e2740();
-  if ((iVar2 == 0) &&
-     ((*(int *)(uVar3 + 0x41e0) == 0 ||
-      (*(float *)(*(int *)(uVar3 + 0x40d4) + 0x160) <= *(float *)(uVar3 + 0x41e4))))) {
-    *(undefined4 *)(uVar4 + 0x14) = 1;
-    *(undefined4 *)(uVar4 + 0x20) = *(undefined4 *)(uVar3 + 0x560);
-    *(undefined4 *)(uVar4 + 0x24) = *(undefined4 *)(uVar3 + 0x564);
-    *(undefined4 *)(uVar4 + 0x28) = *(undefined4 *)(uVar3 + 0x568);
-    *(undefined4 *)(uVar4 + 0x2c) = *(undefined4 *)(uVar3 + 0x56c);
-    FUN_008e0c00(uVar3 + 0x560);
-    FUN_00d82510(0xe,100);
-    return 1;
-  }
-  if ((*(int *)(uVar3 + 0x41e0) == 0) || (0.36 < *(float *)(uVar3 + 0x41e4))) {
-    iVar2 = FUN_008e2740();
-    if (iVar2 == 0) {
-      return 0;
-    }
-  }
-  FUN_00d82510(0x13,100);
-  return 1;
+// Takes the state node as a second argument (the generated one-parameter prototype drops it).
+undefined4 FUN_00bb90c0(undefined4 *context, undefined4 node)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int controller = at<int>(player, 0x764);  /* Behavior+0x764: controller */
+    if (*(int *)(controller + 0x104) != 0) {
+        *(int *)(controller + 0x104) = 0;
+    }
+    if (!FUN_008e2740(at<int>(player, 0x764)) &&
+        (at<int>(player, 0x41E0) == 0 ||  /* Pl0000+0x41E0: ? */
+         at<float>(at<void *>(player, 0x40D4), 0x160) <= at<float>(player, 0x41E4))) {  /* Pl0000+0x41E4: ? */
+        at<int>(ctx, 0x14) = 1;  /* StateMachineContextPl0010+0x14: ? */
+        at<float>(ctx, 0x20) = at<float>(player, 0x560);  /* Pl0000+0x560: vec4 */
+        at<float>(ctx, 0x24) = at<float>(player, 0x564);
+        at<float>(ctx, 0x28) = at<float>(player, 0x568);
+        at<float>(ctx, 0x2C) = at<float>(player, 0x56C);
+        FUN_008e0c00(at<int>(player, 0x764), &at<undefined4>(player, 0x560));
+        FUN_00d82510(node, 0xE, 100);
+        return 1;
+    }
+    if (at<int>(player, 0x41E0) == 0 || 0.36f < at<float>(player, 0x41E4)) {
+        if (!FUN_008e2740(at<int>(player, 0x764))) {
+            return 0;
+        }
+    }
+    FUN_00d82510(node, 0x13, 100);
+    return 1;
 }
 
 // 00BB91F0  FUN_00bb91f0  size=250  [callgraph]
-undefined4 FUN_00bb91f0(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar4 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar4 + 0x764) + 0x104) = 0;
-  }
-  if ((*(int *)(uVar4 + 0x41e0) == 0) || (0.36 < *(float *)(uVar4 + 0x41e4))) {
-    iVar2 = FUN_008e2740();
-    if (iVar2 == 0) {
-      *(undefined4 *)(uVar3 + 0x14) = 1;
-      *(undefined4 *)(uVar3 + 0x20) = *(undefined4 *)(uVar4 + 0x560);
-      *(undefined4 *)(uVar3 + 0x24) = *(undefined4 *)(uVar4 + 0x564);
-      *(undefined4 *)(uVar3 + 0x28) = *(undefined4 *)(uVar4 + 0x568);
-      *(undefined4 *)(uVar3 + 0x2c) = *(undefined4 *)(uVar4 + 0x56c);
-      FUN_008e0c00(uVar4 + 0x560);
-      FUN_00d82510(0xe,100);
-      return 1;
-    }
-  }
-  FUN_00d82510(0x13,100);
-  return 1;
+// Takes the state node as a second argument (the generated one-parameter prototype drops it).
+undefined4 FUN_00bb91f0(undefined4 *context, undefined4 node)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int controller = at<int>(player, 0x764);  /* Behavior+0x764: controller */
+    if (*(int *)(controller + 0x104) != 0) {
+        *(int *)(controller + 0x104) = 0;
+    }
+    if (at<int>(player, 0x41E0) == 0 || 0.36f < at<float>(player, 0x41E4)) {
+        if (!FUN_008e2740(at<int>(player, 0x764))) {
+            at<int>(ctx, 0x14) = 1;
+            at<float>(ctx, 0x20) = at<float>(player, 0x560);
+            at<float>(ctx, 0x24) = at<float>(player, 0x564);
+            at<float>(ctx, 0x28) = at<float>(player, 0x568);
+            at<float>(ctx, 0x2C) = at<float>(player, 0x56C);
+            FUN_008e0c00(at<int>(player, 0x764), &at<undefined4>(player, 0x560));
+            FUN_00d82510(node, 0xE, 100);
+            return 1;
+        }
+    }
+    FUN_00d82510(node, 0x13, 100);
+    return 1;
 }
 
 // 00BB92F0  FUN_00bb92f0  size=231  [callgraph]
-void FUN_00bb92f0(undefined4 *param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  int *piVar3;
-  undefined *puVar4;
-  undefined4 local_20;
-  undefined4 local_1c;
-  float local_18;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar3 = *(int **)(uVar1 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    piVar3 = (int *)0x0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    piVar3 = (int *)(-(uint)(iVar2 != 0) & (uint)piVar3);
-  }
-  iVar2 = piVar3[0x1d9];
-  if (*(int *)(iVar2 + 0x104) != 1) {
-    *(undefined4 *)(iVar2 + 0x104) = 1;
-    *(undefined4 *)(*(int *)(iVar2 + 0xd0) + 4) = 0;
-  }
-  FUN_008e0be0();
-  local_18 = 0.75;
-  if (piVar3[0x1078] != 0) {
-    local_18 = 0.5;
-  }
-  local_18 = *(float *)(piVar3[0x109a] + 0x548) - local_18;
-  local_20 = 0;
-  local_1c = 0;
-  FUN_00a8bdd0(&local_20);
-  (**(code **)(*piVar3 + 0x70))(&local_20);
-  FUN_00a96070(0,0x80,1);
-  return;
+void FUN_00bb92f0(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef void (*SetOffsetFn)(void *self, float *offset);
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int controller = at<int>(player, 0x764);  /* Behavior+0x764: controller */
+    if (*(int *)(controller + 0x104) != 1) {
+        *(int *)(controller + 0x104) = 1;
+        *(float *)(*(int *)(controller + 0xD0) + 4) = 0.0f;
+    }
+    FUN_008e0be0(at<int>(player, 0x764));
+    float height = 0.75f;
+    if (at<int>(player, 0x41E0) != 0) {
+        height = 0.5f;
+    }
+    float offset[4];  // offset[3] is never initialised
+    offset[2] = at<float>(at<void *>(player, 0x4268), 0x548) - height;  /* Pl0000+0x4268: ? */
+    offset[0] = 0.0f;
+    offset[1] = 0.0f;
+    FUN_00a8bdd0((int)player, offset);
+    vfunc<SetOffsetFn>(player, 0x70)(player, offset);  // Behavior::vf70
+    ((SetFlagsFn)FUN_00a96070)(player, 0, 0x80, 1);
 }
 
 // 00BB93E0  FUN_00bb93e0  size=234  [callgraph]
-void FUN_00bb93e0(undefined4 *param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  int *piVar3;
-  undefined *puVar4;
-  undefined4 local_20;
-  float local_1c;
-  float local_18;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar3 = *(int **)(uVar1 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    piVar3 = (int *)0x0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    piVar3 = (int *)(-(uint)(iVar2 != 0) & (uint)piVar3);
-  }
-  iVar2 = piVar3[0x1d9];
-  if (*(int *)(iVar2 + 0x104) != 1) {
-    *(undefined4 *)(iVar2 + 0x104) = 1;
-    *(undefined4 *)(*(int *)(iVar2 + 0xd0) + 4) = 0;
-  }
-  FUN_008e0be0();
-  local_1c = *(float *)(piVar3[0x109a] + 0x54c) - *(float *)(piVar3[0x1035] + 0x128);
-  local_18 = *(float *)(piVar3[0x109a] + 0x548) - *(float *)(piVar3[0x1035] + 0x124);
-  local_20 = 0;
-  FUN_00a8bdd0(&local_20);
-  (**(code **)(*piVar3 + 0x70))(&local_20);
-  FUN_00a96070(0,0x80,1);
-  return;
+void FUN_00bb93e0(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef void (*SetOffsetFn)(void *self, float *offset);
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int controller = at<int>(player, 0x764);  /* Behavior+0x764: controller */
+    if (*(int *)(controller + 0x104) != 1) {
+        *(int *)(controller + 0x104) = 1;
+        *(float *)(*(int *)(controller + 0xD0) + 4) = 0.0f;
+    }
+    FUN_008e0be0(at<int>(player, 0x764));
+    float offset[4];  // offset[3] is never initialised
+    offset[1] = at<float>(at<void *>(player, 0x4268), 0x54C) - at<float>(at<void *>(player, 0x40D4), 0x128);
+    offset[2] = at<float>(at<void *>(player, 0x4268), 0x548) - at<float>(at<void *>(player, 0x40D4), 0x124);
+    offset[0] = 0.0f;
+    FUN_00a8bdd0((int)player, offset);
+    vfunc<SetOffsetFn>(player, 0x70)(player, offset);  // Behavior::vf70
+    ((SetFlagsFn)FUN_00a96070)(player, 0, 0x80, 1);
 }
 
 // 00BB94D0  FUN_00bb94d0  size=234  [callgraph]
-void FUN_00bb94d0(undefined4 *param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  int *piVar3;
-  undefined *puVar4;
-  undefined4 local_20;
-  float local_1c;
-  float local_18;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar3 = *(int **)(uVar1 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    piVar3 = (int *)0x0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    piVar3 = (int *)(-(uint)(iVar2 != 0) & (uint)piVar3);
-  }
-  iVar2 = piVar3[0x1d9];
-  if (*(int *)(iVar2 + 0x104) != 1) {
-    *(undefined4 *)(iVar2 + 0x104) = 1;
-    *(undefined4 *)(*(int *)(iVar2 + 0xd0) + 4) = 0;
-  }
-  FUN_008e0be0();
-  local_1c = *(float *)(piVar3[0x109a] + 0x54c) - *(float *)(piVar3[0x1035] + 0x13c);
-  local_18 = *(float *)(piVar3[0x109a] + 0x548) - *(float *)(piVar3[0x1035] + 0x138);
-  local_20 = 0;
-  FUN_00a8bdd0(&local_20);
-  (**(code **)(*piVar3 + 0x70))(&local_20);
-  FUN_00a96070(0,0x80,1);
-  return;
+void FUN_00bb94d0(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef void (*SetOffsetFn)(void *self, float *offset);
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int controller = at<int>(player, 0x764);  /* Behavior+0x764: controller */
+    if (*(int *)(controller + 0x104) != 1) {
+        *(int *)(controller + 0x104) = 1;
+        *(float *)(*(int *)(controller + 0xD0) + 4) = 0.0f;
+    }
+    FUN_008e0be0(at<int>(player, 0x764));
+    float offset[4];  // offset[3] is never initialised
+    offset[1] = at<float>(at<void *>(player, 0x4268), 0x54C) - at<float>(at<void *>(player, 0x40D4), 0x13C);
+    offset[2] = at<float>(at<void *>(player, 0x4268), 0x548) - at<float>(at<void *>(player, 0x40D4), 0x138);
+    offset[0] = 0.0f;
+    FUN_00a8bdd0((int)player, offset);
+    vfunc<SetOffsetFn>(player, 0x70)(player, offset);  // Behavior::vf70
+    ((SetFlagsFn)FUN_00a96070)(player, 0, 0x80, 1);
 }
 
 // 00BB95C0  FUN_00bb95c0  size=638  [callgraph]
-void FUN_00bb95c0(undefined4 *param_1,undefined4 param_2,undefined4 param_3,float *param_4,
-                 int param_5)
-
-{
-  undefined4 *puVar1;
-  int *piVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  int iVar6;
-  float *pfVar7;
-  uint uVar8;
-  int unaff_EDI;
-  float10 fVar9;
-  undefined *puVar10;
-  float fVar11;
-  uint local_44;
-  float fStack_3c;
-  float fStack_38;
-  float fStack_34;
-  float fStack_2c;
-  float fStack_28;
-  float fStack_24;
-  undefined4 local_14;
-  
-  uVar8 = 0;
-  if (param_1 == (undefined4 *)0x0) {
-    local_44 = 0;
-  }
-  else {
-    puVar10 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar6 = FUN_00dd6d80(puVar10);
-    local_44 = -(uint)(iVar6 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(local_44 + 0xc);
-  if (piVar2 != (int *)0x0) {
-    puVar10 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar6 = FUN_00dd6d80(puVar10);
-    uVar8 = -(uint)(iVar6 != 0) & (uint)piVar2;
-  }
-  puVar1 = (undefined4 *)(uVar8 + 0xb0);
-  *(undefined4 *)(uVar8 + 0x90) = 0;
-  *(undefined4 *)(uVar8 + 0x94) = 0;
-  *(undefined4 *)(uVar8 + 0x98) = 0;
-  *(undefined4 *)(uVar8 + 0x9c) = local_14;
-  *(undefined4 *)(uVar8 + 0xe8) = 0;
-  *(undefined4 *)(uVar8 + 0xe4) = 0;
-  *(undefined4 *)(uVar8 + 0xe0) = 0;
-  *(undefined4 *)(uVar8 + 0xdc) = 0;
-  *(undefined4 *)(uVar8 + 0xd4) = 0;
-  *(undefined4 *)(uVar8 + 0xd0) = 0;
-  *(undefined4 *)(uVar8 + 0xcc) = 0;
-  *(undefined4 *)(uVar8 + 200) = 0;
-  *(undefined4 *)(uVar8 + 0xc0) = 0;
-  *(undefined4 *)(uVar8 + 0xbc) = 0;
-  *(undefined4 *)(uVar8 + 0xb8) = 0;
-  *(undefined4 *)(uVar8 + 0xb4) = 0;
-  *(undefined4 *)(uVar8 + 0xec) = 0x3f800000;
-  *(undefined4 *)(uVar8 + 0xd8) = 0x3f800000;
-  *(undefined4 *)(uVar8 + 0xc4) = 0x3f800000;
-  *puVar1 = 0x3f800000;
-  D3DXMatrixInverse(uVar8 + 0xf0,0,puVar1);
-  fVar11 = 1.0;
-  if (param_4[2] * 0.0 + param_4[1] * 0.0 + *param_4 <= 0.0) {
-    fVar3 = -1.0;
-  }
-  else {
-    fVar3 = 1.0;
-    fVar11 = -1.0;
-  }
-  fVar4 = *param_4 * fVar3;
-  fVar5 = param_4[1] * fVar3;
-  fVar3 = param_4[2] * fVar3;
-  fVar9 = (float10)FUN_00ddbb50(((fVar5 + fVar4) * 0.0 + fVar3) /
-                                (SQRT(fVar5 * fVar5 + fVar4 * fVar4 + fVar3 * fVar3) * 1.0));
-  if (fVar11 < 0.0) {
-    fVar9 = fVar9 - (float10)3.1415927;
-  }
-  *(float *)(uVar8 + 0x94) = (float)fVar9;
-  *(float *)(unaff_EDI + 0x70) = (float)fVar9;
-  pfVar7 = (float *)FUN_00a92640(&fStack_3c);
-  fVar11 = pfVar7[1] * param_4[2] - pfVar7[2] * param_4[1];
-  fVar3 = pfVar7[2] * *param_4 - *pfVar7 * param_4[2];
-  fVar4 = *pfVar7 * param_4[1] - pfVar7[1] * *param_4;
-  fVar9 = (float10)FUN_00ddbb50((param_4[2] * fVar4 + *param_4 * fVar11 + param_4[1] * fVar3) /
-                                (SQRT(param_4[1] * param_4[1] + *param_4 * *param_4 +
-                                      param_4[2] * param_4[2]) *
-                                SQRT(fVar3 * fVar3 + fVar11 * fVar11 + fVar4 * fVar4)));
-  fStack_3c = param_4[2] * fVar3 - param_4[1] * fVar4;
-  fStack_38 = *param_4 * fVar4 - param_4[2] * fVar11;
-  fStack_34 = param_4[1] * fVar11 - fVar3 * *param_4;
-  fStack_2c = fStack_3c;
-  fStack_28 = fStack_38;
-  fStack_24 = fStack_34;
-  D3DXMatrixRotationAxis(puVar1,&fStack_2c,(float)fVar9);
-  D3DXMatrixInverse(uVar8 + 0xf0,0,puVar1);
-  if (param_5 != 0) {
-    switchD_0080dbae::default();
-  }
-  return;
+// Orients the player (+0xB0 matrix and its inverse at +0xF0) onto the cut-plane normal.
+void FUN_00bb95c0(undefined4 *context, undefined4 param_2, undefined4 param_3, float *normal, int refresh)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = 0;
+    void *owner = at<void *>(ctx, 0xC);
+    if (owner != 0) {
+        player = asPl0000(owner);
+    }
+    float uninitialised;  // stack slot never written before this read
+    float *matrix = &at<float>(player, 0xB0);  /* Pl0000+0xB0: orientation matrix */
+    at<float>(player, 0x90) = 0.0f;  /* Pl0000+0x90: rotation */
+    at<float>(player, 0x94) = 0.0f;
+    at<float>(player, 0x98) = 0.0f;
+    at<float>(player, 0x9C) = uninitialised;
+    matrix[14] = 0.0f;
+    matrix[13] = 0.0f;
+    matrix[12] = 0.0f;
+    matrix[11] = 0.0f;
+    matrix[9] = 0.0f;
+    matrix[8] = 0.0f;
+    matrix[7] = 0.0f;
+    matrix[6] = 0.0f;
+    matrix[4] = 0.0f;
+    matrix[3] = 0.0f;
+    matrix[2] = 0.0f;
+    matrix[1] = 0.0f;
+    matrix[15] = 1.0f;
+    matrix[10] = 1.0f;
+    matrix[5] = 1.0f;
+    matrix[0] = 1.0f;
+    D3DXMatrixInverse(&at<float>(player, 0xF0), 0, matrix);  /* Pl0000+0xF0: inverse orientation */
+    float flip = 1.0f;
+    float sign;
+    if ((normal[1] * 0.0f + normal[0]) + normal[2] * 0.0f <= 0.0f) {
+        sign = -1.0f;
+    }
+    else {
+        sign = 1.0f;
+        flip = -1.0f;
+    }
+    float x = normal[0] * sign;
+    float y = normal[1] * sign;
+    float z = normal[2] * sign;
+    float yaw = (float)FUN_00ddbb50((float)(((y + x) * 0.0f + z) /
+                                            (sqrt(y * y + x * x + z * z) * sqrt(1.0))));
+    if (flip < 0.0f) {
+        yaw = yaw - 3.1415927f;
+    }
+    at<float>(player, 0x94) = yaw;
+    at<float>(ctx, 0x70) = yaw;  /* StateMachineContextPl0010+0x70: cut yaw */
+    float upBuffer[4];
+    float *up = FUN_00a92640((int)player, upBuffer);
+    float crossX = up[1] * normal[2] - up[2] * normal[1];
+    float crossY = up[2] * normal[0] - up[0] * normal[2];
+    float crossZ = up[0] * normal[1] - up[1] * normal[0];
+    float tilt = (float)FUN_00ddbb50((float)(((normal[1] * crossY + normal[0] * crossX) + normal[2] * crossZ) /
+        (sqrt((crossX * crossX + crossY * crossY) + crossZ * crossZ) *
+         sqrt((normal[1] * normal[1] + normal[0] * normal[0]) + normal[2] * normal[2]))));
+    float axis[3];
+    axis[0] = normal[2] * crossY - normal[1] * crossZ;
+    axis[1] = normal[0] * crossZ - normal[2] * crossX;
+    axis[2] = normal[1] * crossX - crossY * normal[0];
+    D3DXMatrixRotationAxis(matrix, axis, tilt);
+    D3DXMatrixInverse(&at<float>(player, 0xF0), 0, matrix);
+    if (refresh != 0) {
+        ((PlayerUpdateFn)0x00A17A40)(player);  // switchD_0080dbae::default (0x00A17A40)
+    }
 }
 
 // 00BB9840  FUN_00bb9840  size=122  [callgraph]
-void FUN_00bb9840(undefined4 *param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  iVar2 = *(int *)(uVar1 + 0x178);
-  uVar1 = 0;
-  if (*(int *)(iVar2 + 8) != 1) {
-    puVar4 = *(undefined4 **)(iVar2 + 4);
-    puVar3 = puVar4 + 6;
-    do {
-      uVar1 = uVar1 + 1;
-      *puVar4 = puVar3[-2];
-      puVar4 = puVar4 + 4;
-      puVar3[-5] = puVar3[-1];
-      puVar3[-4] = *puVar3;
-      puVar3[-3] = puVar3[1];
-      puVar3 = puVar3 + 4;
-    } while (uVar1 < *(int *)(iVar2 + 8) - 1U);
-  }
-  if ((*(int *)(iVar2 + 4) != 0) && (*(int *)(iVar2 + 8) != 0)) {
-    *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + -1;
-  }
-  return;
+// Removes the first 16-byte entry of the array at context+0x178.
+void FUN_00bb9840(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    int *array = at<int *>(ctx, 0x178);  /* StateMachineContextPl0010+0x178: array { vftable, data, count, capacity } */
+    unsigned int index = 0;
+    if (array[2] != 1) {
+        float *entry = (float *)array[1];
+        do {
+            index++;
+            entry[0] = entry[4];
+            entry[1] = entry[5];
+            entry[2] = entry[6];
+            entry[3] = entry[7];
+            entry += 4;
+        } while (index < array[2] - 1U);
+    }
+    if (array[1] != 0 && array[2] != 0) {
+        array[2] = array[2] + -1;
+    }
 }
 
 // 00BB98C0  FUN_00bb98c0  size=92  [callgraph]
-void FUN_00bb98c0(int *param_1,undefined4 param_2)
-
-{
-  undefined4 *puVar1;
-  uint uVar2;
-  int iVar3;
-  
-  if ((uint)param_1[3] <= (uint)param_1[2]) {
-    uVar2 = 0;
-    if (param_1[2] != 1) {
-      iVar3 = 0;
-      do {
-        puVar1 = (undefined4 *)(param_1[1] + iVar3);
-        *puVar1 = *(undefined4 *)(param_1[1] + 0x10 + iVar3);
-        uVar2 = uVar2 + 1;
-        iVar3 = iVar3 + 0x10;
-        puVar1[1] = puVar1[5];
-        puVar1[2] = puVar1[6];
-        puVar1[3] = puVar1[7];
-      } while (uVar2 < param_1[2] - 1U);
-    }
-    if ((param_1[1] != 0) && (param_1[2] != 0)) {
-      param_1[2] = param_1[2] + -1;
-    }
-  }
-  (**(code **)(*param_1 + 8))(param_2);
-  return;
+// Pushes `item` into a bounded array { vftable, data, count, capacity }, dropping the oldest
+// 16-byte entry when full.
+void FUN_00bb98c0(int *array, undefined4 item)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef void (*PushBackFn)(void *self, undefined4 item);
+    if ((unsigned int)array[3] <= (unsigned int)array[2]) {
+        unsigned int index = 0;
+        if (array[2] != 1) {
+            int offset = 0;
+            do {
+                float *entry = (float *)(array[1] + offset);
+                entry[0] = *(float *)(array[1] + 0x10 + offset);
+                index++;
+                offset += 0x10;
+                entry[1] = entry[5];
+                entry[2] = entry[6];
+                entry[3] = entry[7];
+            } while (index < array[2] - 1U);
+        }
+        if (array[1] != 0 && array[2] != 0) {
+            array[2] = array[2] + -1;
+        }
+    }
+    vfunc<PushBackFn>(array, 0x8)(array, item);
 }
 
 // 00BB9B10  FUN_00bb9b10  size=1078  [callgraph]
-void FUN_00bb9b10(undefined4 *param_1,undefined4 param_2,float param_3,int param_4)
-
-{
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  undefined4 uVar4;
-  uint uVar5;
-  undefined *puVar6;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar6);
-    uVar5 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  if (*(int **)(uVar5 + 0xc) != (int *)0x0) {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar5 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar6);
-  }
-  if (param_4 == 0) {
-    uVar4 = FUN_00a9f560("AirSlash",0x3d4ccccd,0x8002000,param_2);
-    *(undefined4 *)(uVar5 + 0x118) = uVar4;
-    FUN_00a9f600(0xffffffff,param_2,0,1,0,0x124,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0,0,0x11c,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0x2d,0,0x121,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0x5a,0,0x11e,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0x87,0,0x11f,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xb4,0,0x123,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xffffff4d,0,0x11b,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xffffff79,0,0x122,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xffffffa6,0,0x11d,0x3d4ccccd,0x8002000);
-    uVar4 = 0x120;
-  }
-  else {
-    uVar4 = FUN_00a9f560("GroundSlash",0x3d4ccccd,0x8002000,param_2);
-    *(undefined4 *)(uVar5 + 0x118) = uVar4;
-    FUN_00a9f600(0xffffffff,param_2,0,1,0,0xfa,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0,0,0xf2,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0x2d,0,0xf7,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0x5a,0,0xf4,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0x87,0,0xf5,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xb4,0,0xf9,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xffffff4d,0,0xf1,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xffffff79,0,0xf8,0x3d4ccccd,0x8002000);
-    FUN_00a9f600(0xffffffff,param_2,0,0xffffffa6,0,0xf3,0x3d4ccccd,0x8002000);
-    uVar4 = 0xf6;
-  }
-  FUN_00a9f600(0xffffffff,param_2,0,0xffffffd3,0,uVar4,0x3d4ccccd,0x8002000);
-  fVar1 = (param_3 + 1.5707964) * 57.29578;
-  if (180.0 < fVar1) {
-    fVar1 = fVar1 - 360.0;
-  }
-  if ((((NAN(fVar1) || 0.0 < fVar1 == (fVar1 == 0.0)) || (fVar2 = 1.0, 1.0 < fVar1)) &&
-      (fVar2 = -179.0, fVar1 < 180.0)) && (-179.0 < fVar1)) {
-    if ((-160.0 <= fVar1) || (fVar1 <= -179.0)) {
-      fVar2 = fVar1;
-      if ((160.0 < fVar1) && (fVar1 < 180.0)) {
-        fVar2 = 180.0;
-      }
-    }
-    else {
-      fVar2 = -179.9;
-    }
-  }
-  FUN_00a947e0(param_2,0,fVar2,0);
-  return;
+// Registers the air/ground slash animation set and aims the slash direction.
+void FUN_00bb9b10(undefined4 *context, undefined4 motion, float angle, int onGround)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int self = (int)player;
+    int lastName;
+    if (onGround == 0) {
+        at<int>(ctx, 0x118) = FUN_00a9f560(self, (char *)"AirSlash", 0.05f, 0x8002000, motion);  /* StateMachineContextPl0010+0x118: slash animation */
+        FUN_00a9f600(self, -1, motion, 0, 1, 0, 0x124, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 0, 0, 0x11C, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 45, 0, 0x121, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 90, 0, 0x11E, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 135, 0, 0x11F, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 180, 0, 0x123, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, -179, 0, 0x11B, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, -135, 0, 0x122, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, -90, 0, 0x11D, 0.05f, 0x8002000);
+        lastName = 0x120;
+    }
+    else {
+        at<int>(ctx, 0x118) = FUN_00a9f560(self, (char *)"GroundSlash", 0.05f, 0x8002000, motion);
+        FUN_00a9f600(self, -1, motion, 0, 1, 0, 0xFA, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 0, 0, 0xF2, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 45, 0, 0xF7, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 90, 0, 0xF4, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 135, 0, 0xF5, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, 180, 0, 0xF9, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, -179, 0, 0xF1, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, -135, 0, 0xF8, 0.05f, 0x8002000);
+        FUN_00a9f600(self, -1, motion, 0, -90, 0, 0xF3, 0.05f, 0x8002000);
+        lastName = 0xF6;
+    }
+    FUN_00a9f600(self, -1, motion, 0, -45, 0, lastName, 0.05f, 0x8002000);
+    float degrees = (angle + 1.5707964f) * 57.29578f;
+    if (180.0f < degrees) {
+        degrees = degrees - 360.0f;
+    }
+    float slashAngle;
+    if (degrees >= 0.0f && degrees <= 1.0f) {
+        slashAngle = 1.0f;
+    }
+    else if (!(degrees < 180.0f) || !(-179.0f < degrees)) {
+        slashAngle = -179.0f;
+    }
+    else if (degrees < -160.0f) {
+        slashAngle = -179.9f;
+    }
+    else if (160.0f < degrees && degrees < 180.0f) {
+        slashAngle = 180.0f;
+    }
+    else {
+        slashAngle = degrees;
+    }
+    ((SetRotationFn)FUN_00a947e0)(player, motion, 0.0f, slashAngle, 0.0f);
 }
 
 // 00BB9F50  FUN_00bb9f50  size=2831  [callgraph]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void FUN_00bb9f50(undefined4 *param_1,float *param_2)
-
-{
-  void *_Src;
-  float *pfVar1;
-  undefined4 *puVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  void **ppvVar6;
-  float *pfVar7;
-  float *pfVar8;
-  int iVar9;
-  float *pfVar10;
-  undefined4 uVar11;
-  int *piVar12;
-  uint uVar13;
-  undefined *puVar14;
-  undefined1 *puVar15;
-  void *pvStack_1bc;
-  float *pfStack_1b8;
-  float *pfStack_1b4;
-  float *pfStack_1b0;
-  float *pfStack_1ac;
-  float *pfStack_1a8;
-  void **local_1a4;
-  float local_190;
-  float local_18c;
-  float local_188;
-  float local_184;
-  float local_180;
-  float local_17c;
-  undefined4 local_178;
-  float local_174;
-  float local_170;
-  float local_16c;
-  float local_168;
-  float local_164;
-  float local_160;
-  float local_15c;
-  undefined4 local_158;
-  float local_154;
-  float local_150;
-  float local_14c;
-  float local_148;
-  float local_144;
-  float local_140;
-  float local_13c;
-  float local_138;
-  float local_134;
-  float fStack_12c;
-  float fStack_128;
-  float fStack_124;
-  float local_120;
-  float local_11c;
-  undefined4 local_118;
-  float local_114;
-  float fStack_10c;
-  float fStack_108;
-  void *local_104;
-  float local_100;
-  float local_fc;
-  float local_f8;
-  float local_f4;
-  void *local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e4;
-  undefined1 auStack_e0 [16];
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c4 [18];
-  undefined1 auStack_7c [8];
-  undefined1 auStack_74 [20];
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar13 = 0;
-  }
-  else {
-    local_1a4 = (void **)&DAT_01be9ef4;
-    pfStack_1a8 = (float *)0xbb9f77;
-    (**(code **)*param_1)();
-    pfStack_1a8 = (float *)0xbb9f7e;
-    iVar9 = FUN_00dd6d80();
-    uVar13 = -(uint)(iVar9 != 0) & (uint)param_1;
-  }
-  piVar12 = *(int **)(uVar13 + 0xc);
-  if (piVar12 == (int *)0x0) {
-    piVar12 = (int *)0x0;
-  }
-  else {
-    local_1a4 = (void **)&DAT_01be9db8;
-    pfStack_1a8 = (float *)0xbb9f9f;
-    (**(code **)(*piVar12 + 4))();
-    pfStack_1a8 = (float *)0xbb9fa6;
-    iVar9 = FUN_00dd6d80();
-    piVar12 = (int *)(-(uint)(iVar9 != 0) & (uint)piVar12);
-  }
-  piVar12[0xe4b] = 3;
-  local_1a4 = (void **)0xbb9fbd;
-  iVar9 = FUN_00f98a90();
-  local_104 = (void *)((float)iVar9 * 0.5);
-  local_1a4 = (void **)0xbb9fd7;
-  iVar9 = FUN_00f98aa0();
-  local_ec = (float)iVar9 * 0.5;
-  local_f0 = local_104;
-  local_e8 = 0.0;
-  local_140 = *param_2;
-  local_13c = param_2[1];
-  local_138 = 0.0;
-  local_170 = param_2[2];
-  local_16c = param_2[3];
-  local_168 = 0.0;
-  local_100 = (local_170 + local_140) * 0.5;
-  local_fc = (local_13c + local_16c) * 0.5;
-  local_f4 = (local_164 + local_134) * 0.5;
-  local_160 = (local_140 - local_100) * 100.0 + local_140;
-  local_15c = (local_13c - local_fc) * 100.0 + local_13c;
-  local_158 = 0;
-  local_154 = (local_134 - local_f4) * 100.0 + local_134;
-  local_120 = (local_170 - local_100) * 100.0;
-  local_11c = (local_16c - local_fc) * 100.0;
-  local_190 = local_120 + local_170;
-  local_18c = local_16c + local_11c;
-  local_188 = 0.0;
-  local_184 = (local_164 - local_f4) * 100.0 + local_164;
-  local_180 = local_100 - local_160;
-  local_17c = local_fc - local_15c;
-  local_174 = local_f4 - local_154;
-  local_178 = 0;
-  if ((local_180 != 0.0) || (local_17c != 0.0)) {
-    fVar3 = local_180 * local_180 + local_17c * local_17c;
-    if (fVar3 < 0.0 == (fVar3 == 0.0)) {
-      pfStack_1a8 = &local_180;
-      pfStack_1ac = (float *)0xbba1b2;
-      local_1a4 = (void **)pfStack_1a8;
-      FUN_00ddf460();
-    }
-    else {
-      local_1a4 = (void **)&DAT_0163d0ac;
-      pfStack_1a8 = (float *)0xbba1c7;
-      FUN_00dd5650();
-      local_180 = 0.0;
-      local_17c = 1.0;
-      local_178 = 0;
-    }
-  }
-  local_120 = 0.0;
-  local_11c = 0.0;
-  pfStack_1a8 = &local_120;
-  local_118 = 0;
-  pfStack_1ac = &local_180;
-  pfStack_1b0 = &local_160;
-  local_1a4 = (void **)0x461c4000;
-  pfStack_1b4 = &local_140;
-  pfStack_1b8 = (float *)0xbba21b;
-  FUN_00b83ee0();
-  local_180 = local_100 - local_190;
-  local_17c = local_fc - local_18c;
-  local_174 = local_f4 - local_184;
-  local_178 = 0;
-  if ((local_180 != 0.0) || (local_17c != 0.0)) {
-    fVar3 = local_180 * local_180 + local_17c * local_17c;
-    if (fVar3 < 0.0 == (fVar3 == 0.0)) {
-      pfStack_1a8 = &local_180;
-      pfStack_1ac = (float *)0xbba2a9;
-      local_1a4 = (void **)pfStack_1a8;
-      FUN_00ddf460();
-    }
-    else {
-      local_1a4 = (void **)&DAT_0163d0ac;
-      pfStack_1a8 = (float *)0xbba2be;
-      FUN_00dd5650();
-      local_180 = 0.0;
-      local_17c = 1.0;
-      local_178 = 0;
-    }
-  }
-  local_120 = 0.0;
-  local_11c = 0.0;
-  pfStack_1a8 = &local_120;
-  local_118 = 0;
-  pfStack_1ac = &local_180;
-  pfStack_1b0 = &local_190;
-  local_1a4 = (void **)0x461c4000;
-  pfStack_1b4 = &local_170;
-  pfStack_1b8 = (float *)0xbba312;
-  FUN_00b83ee0();
-  local_190 = (local_140 + local_170) * 0.5;
-  local_18c = (local_13c + local_16c) * 0.5;
-  local_188 = (local_138 + local_168) * 0.5;
-  local_184 = (local_134 + local_164) * 0.5;
-  fVar3 = local_170 - local_190;
-  fVar4 = local_16c - local_18c;
-  fVar5 = local_168 - local_188;
-  local_1a4 = (void **)((fVar3 * 300.0 + fVar4 * 0.0 + fVar5 * 0.0) /
-                       (SQRT(fVar3 * fVar3 + fVar4 * fVar4 + fVar5 * fVar5) * 300.0));
-  pfStack_1a8 = (float *)0xbba3af;
-  FUN_00ddbb50();
-  local_180 = (local_170 * 0.4 + (float)local_f0) - (local_140 * 0.4 + (float)local_f0);
-  local_17c = (local_16c * 0.4 + local_ec) - (local_13c * 0.4 + local_ec);
-  local_174 = local_114 - local_114;
-  local_178 = 0;
-  if ((local_180 != 0.0) || (local_17c != 0.0)) {
-    fVar3 = local_17c * local_17c + local_180 * local_180;
-    if (fVar3 < 0.0 == (fVar3 == 0.0)) {
-      pfStack_1a8 = &local_180;
-      pfStack_1ac = (float *)0xbba489;
-      local_1a4 = (void **)pfStack_1a8;
-      FUN_00ddf460();
-    }
-    else {
-      local_1a4 = (void **)&DAT_0163d0ac;
-      pfStack_1a8 = (float *)0xbba49c;
-      FUN_00dd5650();
-      local_180 = 0.0;
-      local_17c = 1.0;
-      local_178 = 0;
-    }
-  }
-  local_1a4 = &local_f0;
-  pfStack_1a8 = &local_150;
-  pfStack_1ac = (float *)0xbba4ce;
-  FUN_00d9fab0();
-  local_1a4 = (void **)&local_100;
-  pfStack_1a8 = &local_d0;
-  local_100 = local_190 * 0.0 + (float)local_f0;
-  local_fc = local_18c * 0.0 + local_ec;
-  local_f8 = local_188 * 0.0 + local_e8;
-  local_f4 = local_184 * 0.0 + local_e4;
-  pfStack_1ac = (float *)0xbba53e;
-  FUN_00d9fab0();
-  local_1a4 = (void **)&local_120;
-  pfStack_1a8 = (float *)0xbba54d;
-  pfVar10 = (float *)FUN_00a925a0();
-  local_1a4 = (void **)&local_120;
-  local_150 = local_150 - *pfVar10;
-  local_14c = local_14c - pfVar10[1];
-  local_148 = local_148 - pfVar10[2];
-  local_144 = local_144 - pfVar10[3];
-  pfStack_1a8 = (float *)0xbba591;
-  pfVar10 = (float *)FUN_00a925a0();
-  local_d0 = (local_d0 - *pfVar10) - local_150;
-  local_cc = (local_cc - pfVar10[1]) - local_14c;
-  local_c8 = (local_c8 - pfVar10[2]) - local_148;
-  local_c4[0] = (local_c4[0] - pfVar10[3]) - local_144;
-  local_1a4 = (void **)0xffffffff;
-  local_150 = local_d0 + local_150;
-  local_14c = local_14c + local_cc;
-  local_148 = local_c8 + local_148;
-  local_144 = local_c4[0] + local_144;
-  pfStack_1a8 = (float *)0xbba625;
-  iVar9 = FUN_00a12210();
-  _Src = (void *)(iVar9 + 0x10);
-  local_1a4 = (void **)-(*(float *)(iVar9 + 0x18) /
-                        SQRT(*(float *)(iVar9 + 0x38) * *(float *)(iVar9 + 0x38) +
-                             *(float *)(iVar9 + 0x34) * *(float *)(iVar9 + 0x34) +
-                             *(float *)(iVar9 + 0x30) * *(float *)(iVar9 + 0x30)));
-  pfStack_1a8 = (float *)0xbba651;
-  FUN_00ddbaa0();
-  local_60 = 0;
-  pfStack_1ac = (float *)&local_60;
-  local_5c = 0;
-  local_58 = 0x3f800000;
-  pfStack_1b0 = (float *)0xbba680;
-  pfStack_1a8 = pfStack_1ac;
-  local_1a4 = _Src;
-  D3DXVec3TransformNormal();
-  local_cc = 1.0;
-  pfStack_1b8 = &local_cc;
-  local_c8 = 0.0;
-  local_c4[0] = 0.0;
-  pvStack_1bc = (void *)0xbba6aa;
-  pfStack_1b4 = pfStack_1b8;
-  pfStack_1b0 = _Src;
-  D3DXVec3TransformNormal();
-  local_f8 = 0.0;
-  local_f4 = 1.0;
-  local_f0 = (void *)0x0;
-  pvStack_1bc = _Src;
-  D3DXVec3TransformNormal(&local_f8,&local_f8);
-  local_c4[0xe] = 0.0;
-  local_c4[0xd] = 0.0;
-  local_c4[0xc] = 0.0;
-  local_c4[0xb] = 0.0;
-  local_c4[9] = 0.0;
-  local_c4[8] = 0.0;
-  local_c4[7] = 0.0;
-  local_c4[6] = 0.0;
-  local_c4[4] = 0.0;
-  local_c4[3] = 0.0;
-  local_c4[2] = 0.0;
-  local_c4[1] = 0.0;
-  local_c4[0xf] = 1.0;
-  local_c4[10] = 1.0;
-  local_c4[5] = 1.0;
-  local_c4[0] = 1.0;
-  FID_conflict__memcpy(local_c4,_Src,0x40);
-  puVar15 = auStack_74;
-  D3DXMatrixRotationX(puVar15,*(float *)(uVar13 + 0x3b0) + *(float *)(uVar13 + 0x374));
-  pfVar10 = &local_cc;
-  D3DXMatrixMultiply(pfVar10,auStack_7c,pfVar10);
-  pfVar1 = local_c4 + 0xf;
-  D3DXMatrixRotationZ();
-  D3DXMatrixMultiply(auStack_e0,local_c4 + 0xd,auStack_e0);
-  fVar3 = *(float *)(uVar13 + 0x3a4) + 1.35;
-  pfStack_1ac = (float *)(fStack_12c * fVar3);
-  pfStack_1a8 = (float *)(fStack_128 * fVar3);
-  local_1a4 = (void **)(fStack_124 * fVar3);
-  local_14c = (float)pvStack_1bc - local_18c;
-  local_148 = (float)pfStack_1b8 - local_188;
-  local_144 = (float)pfStack_1b4 - local_184;
-  local_140 = (float)pfStack_1b0 - local_180;
-  iVar9 = FUN_00b83fb0(&local_18c,&local_14c,&local_13c,0x43480000);
-  ppvVar6 = local_1a4;
-  pfVar7 = pfStack_1a8;
-  pfVar8 = pfStack_1ac;
-  if (iVar9 != 0) {
-    fVar3 = (float)pfVar10 * 0.0011111111;
-    fVar4 = (float)puVar15 * 0.0011111111;
-    ppvVar6 = (void **)(((float)local_1a4 - fStack_124 * fVar3) - (float)local_104 * fVar4);
-    pfVar7 = (float *)(((float)pfStack_1a8 - fStack_128 * fVar3) - fStack_108 * fVar4);
-    pfVar8 = (float *)(((float)pfStack_1ac - fStack_12c * fVar3) - fVar4 * fStack_10c);
-  }
-  local_c4[2] = local_c4[2] + (float)pfVar8;
-  local_c4[3] = (float)pfVar7 + local_c4[3];
-  local_c4[4] = (float)ppvVar6 + local_c4[4];
-  uVar11 = (**(code **)(*piVar12 + 0x270))();
-  if (piVar12[0x1032] == 4) {
-    uVar11 = 3;
-  }
-  if (*(int *)(uVar13 + 0x528) == 0) {
-    uVar11 = 0;
-  }
-  if ((piVar12[0x1032] == 8) && (*(int *)(uVar13 + 0x330) == 1)) {
-    uVar11 = 3;
-  }
-  local_150 = *(float *)(uVar13 + 0x18c);
-  *(float **)(uVar13 + 0x3c0) = pfVar1;
-  DAT_01d61850 = 1;
-  pvStack_1bc = (void *)((float)puVar15 * 0.0011111111);
-  pfStack_1b8 = (float *)((float)pfVar10 * 0.0011111111);
-  local_170 = (float)pfStack_1b8;
-  local_f0 = pvStack_1bc;
-  FID_conflict__memcpy(&DAT_01d61860,&local_ec,0x40);
-  _DAT_01d618b4 = pvStack_1bc;
-  _DAT_01d618a0 = local_150;
-  _DAT_01d618ac = 1;
-  _DAT_01d618b0 = 0xffffffff;
-  pvStack_1bc = local_f0;
-  _DAT_01d618b8 = (float)pfStack_1b8;
-  puVar2 = (undefined4 *)piVar12[500];
-  pfStack_1b8 = (float *)local_170;
-  local_170 = 0.0;
-  fVar3 = 0.0;
-  _DAT_01d618a4 = pfVar1;
-  _DAT_01d618a8 = uVar11;
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar14 = &DAT_01be9ef4;
-    (**(code **)*puVar2)(&DAT_01be9ef4);
-    iVar9 = FUN_00dd6d80(puVar14);
-    fVar3 = local_170;
-    if (iVar9 != 0) {
-      fVar3 = (float)puVar2[0xdd];
-    }
-  }
-  FUN_00b93000(param_1,&local_ec,0x42c80000,fVar3,pfVar1,uVar11,&pvStack_1bc);
-  return;
+// Builds the blade-mode cut plane from a 2D screen segment `segment` = { x0, y0, x1, y1 } and
+// publishes it in the global cut-plane description (0x01D61850).
+void FUN_00bb9f50(undefined4 *context, float *segment)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef undefined4 (*GetCutModeFn)(void *self);
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    // 4th components of the vectors below are never initialised, exactly as in the original.
+    float start[4];      // segment start
+    float end[4];        // segment end, later { scale.x, scale.y } handed to FUN_00b93000
+    float mid[4];        // segment midpoint, later reused as center / end - start
+    float center[4];     // screen center
+    float farStart[4];   // start pushed 100x away from the midpoint, later forward offset
+    float farEnd[4];     // end pushed 100x away from the midpoint, later midpoint again
+    float dir[4];
+    float zero[3];
+    float projStart[4];
+    float projEnd[4];
+    float unused114;     // never written
+    float up[3];
+    float right[3];
+    float forward[3];
+    float cutMatrix[16];
+    float rotation[16];
+
+    at<int>(player, 0x392C) = 3;  /* Pl0000+0x392C: ? */
+    float halfWidth = (float)(int)FUN_00f98a90() * 0.5f;
+    center[1] = (float)(int)FUN_00f98aa0() * 0.5f;
+    center[0] = halfWidth;
+    center[2] = 0.0f;
+    start[0] = segment[0];
+    start[1] = segment[1];
+    start[2] = 0.0f;
+    end[0] = segment[2];
+    end[1] = segment[3];
+    end[2] = 0.0f;
+    mid[0] = (end[0] + start[0]) * 0.5f;
+    mid[1] = (start[1] + end[1]) * 0.5f;
+    mid[3] = (end[3] + start[3]) * 0.5f;
+    farStart[0] = (start[0] - mid[0]) * 100.0f + start[0];
+    farStart[1] = (start[1] - mid[1]) * 100.0f + start[1];
+    farStart[2] = 0.0f;
+    farStart[3] = (start[3] - mid[3]) * 100.0f + start[3];
+    zero[0] = (end[0] - mid[0]) * 100.0f;
+    zero[1] = (end[1] - mid[1]) * 100.0f;
+    farEnd[0] = zero[0] + end[0];
+    farEnd[1] = end[1] + zero[1];
+    farEnd[2] = 0.0f;
+    farEnd[3] = (end[3] - mid[3]) * 100.0f + end[3];
+
+    dir[0] = mid[0] - farStart[0];
+    dir[1] = mid[1] - farStart[1];
+    dir[3] = mid[3] - farStart[3];
+    dir[2] = 0.0f;
+    if (dir[0] != 0.0f || dir[1] != 0.0f) {
+        float lenSq = dir[0] * dir[0] + dir[1] * dir[1];
+        if (lenSq > 0.0f) {  // inlined Hw::VecNormalize guard
+            FUN_00ddf460(dir, dir);
+        }
+        else {
+            vecNormalizeWarning();
+            dir[0] = 0.0f;
+            dir[1] = 1.0f;
+            dir[2] = 0.0f;
+        }
+    }
+    zero[0] = 0.0f;
+    zero[1] = 0.0f;
+    zero[2] = 0.0f;
+    FUN_00b83ee0(start, farStart, dir, zero, 10000.0f);
+
+    dir[0] = mid[0] - farEnd[0];
+    dir[1] = mid[1] - farEnd[1];
+    dir[3] = mid[3] - farEnd[3];
+    dir[2] = 0.0f;
+    if (dir[0] != 0.0f || dir[1] != 0.0f) {
+        float lenSq = dir[0] * dir[0] + dir[1] * dir[1];
+        if (lenSq > 0.0f) {
+            FUN_00ddf460(dir, dir);
+        }
+        else {
+            vecNormalizeWarning();
+            dir[0] = 0.0f;
+            dir[1] = 1.0f;
+            dir[2] = 0.0f;
+        }
+    }
+    zero[0] = 0.0f;
+    zero[1] = 0.0f;
+    zero[2] = 0.0f;
+    FUN_00b83ee0(end, farEnd, dir, zero, 10000.0f);
+
+    farEnd[0] = (start[0] + end[0]) * 0.5f;
+    farEnd[1] = (start[1] + end[1]) * 0.5f;
+    farEnd[2] = (start[2] + end[2]) * 0.5f;
+    farEnd[3] = (start[3] + end[3]) * 0.5f;
+    float dx = end[0] - farEnd[0];
+    float dy = end[1] - farEnd[1];
+    float dz = end[2] - farEnd[2];
+    float angle = (float)FUN_00ddbb50((float)((dx * 300.0f + dy * 0.0f + dz * 0.0f) /
+                                               (sqrt(dx * dx + dy * dy + dz * dz) * sqrt(90000.0))));
+    if (end[1] < start[1]) {
+        angle = angle * -1.0f;
+    }
+
+    dir[0] = (end[0] * 0.4f + center[0]) - (start[0] * 0.4f + center[0]);
+    dir[1] = (end[1] * 0.4f + center[1]) - (start[1] * 0.4f + center[1]);
+    dir[2] = 0.0f;
+    dir[3] = unused114 - unused114;
+    if (dir[0] != 0.0f || dir[1] != 0.0f) {
+        float lenSq = dir[1] * dir[1] + dir[0] * dir[0];
+        if (lenSq > 0.0f) {
+            FUN_00ddf460(dir, dir);
+        }
+        else {
+            vecNormalizeWarning();
+            dir[0] = 0.0f;
+            dir[1] = 1.0f;
+            dir[2] = 0.0f;
+        }
+    }
+    FUN_00d9fab0(0x01BEA1D0, (undefined4)projStart, (undefined4)center);  // unproject screen center
+    mid[0] = farEnd[0] * 0.0f + center[0];
+    mid[1] = farEnd[1] * 0.0f + center[1];
+    mid[2] = farEnd[2] * 0.0f + center[2];
+    mid[3] = farEnd[3] * 0.0f + center[3];
+    FUN_00d9fab0(0x01BEA1D0, (undefined4)projEnd, (undefined4)mid);
+    float *origin = FUN_00a925a0((int)player, zero);
+    projStart[0] = projStart[0] - origin[0];
+    projStart[1] = projStart[1] - origin[1];
+    projStart[2] = projStart[2] - origin[2];
+    projStart[3] = projStart[3] - origin[3];
+    origin = FUN_00a925a0((int)player, zero);
+    projEnd[0] = (projEnd[0] - origin[0]) - projStart[0];
+    projEnd[1] = (projEnd[1] - origin[1]) - projStart[1];
+    projEnd[2] = (projEnd[2] - origin[2]) - projStart[2];
+    projEnd[3] = (projEnd[3] - origin[3]) - projStart[3];
+    projStart[0] = projEnd[0] + projStart[0];
+    projStart[1] = projEnd[1] + projStart[1];
+    projStart[2] = projEnd[2] + projStart[2];
+    projStart[3] = projEnd[3] + projStart[3];
+
+    int parts = FUN_00a12210((int)player, -1);
+    float *partsMatrix = (float *)(parts + 0x10);
+    FUN_00ddbaa0((float)-(partsMatrix[2] / sqrt((partsMatrix[8] * partsMatrix[8] + partsMatrix[9] * partsMatrix[9]) +
+                                        partsMatrix[10] * partsMatrix[10])));  // result unused
+    up[0] = 0.0f;
+    up[1] = 0.0f;
+    up[2] = 1.0f;
+    D3DXVec3TransformNormal(up, up, partsMatrix);
+    right[0] = 1.0f;
+    right[1] = 0.0f;
+    right[2] = 0.0f;
+    D3DXVec3TransformNormal(right, right, partsMatrix);
+    forward[0] = 0.0f;
+    forward[1] = 1.0f;
+    forward[2] = 0.0f;
+    D3DXVec3TransformNormal(forward, forward, partsMatrix);
+    cutMatrix[14] = 0.0f;
+    cutMatrix[13] = 0.0f;
+    cutMatrix[12] = 0.0f;
+    cutMatrix[11] = 0.0f;
+    cutMatrix[9] = 0.0f;
+    cutMatrix[8] = 0.0f;
+    cutMatrix[7] = 0.0f;
+    cutMatrix[6] = 0.0f;
+    cutMatrix[4] = 0.0f;
+    cutMatrix[3] = 0.0f;
+    cutMatrix[2] = 0.0f;
+    cutMatrix[1] = 0.0f;
+    cutMatrix[15] = 1.0f;
+    cutMatrix[10] = 1.0f;
+    cutMatrix[5] = 1.0f;
+    cutMatrix[0] = 1.0f;
+    FID_conflict__memcpy(cutMatrix, partsMatrix, 0x40);
+    D3DXMatrixRotationX(rotation, at<float>(ctx, 0x3B0) + at<float>(ctx, 0x374));  /* StateMachineContextPl0010+0x3B0/+0x374: ? */
+    D3DXMatrixMultiply(cutMatrix, rotation, cutMatrix);
+    D3DXMatrixRotationZ(rotation, angle);
+    D3DXMatrixMultiply(cutMatrix, rotation, cutMatrix);
+    float reach = at<float>(ctx, 0x3A4) + 1.35f;  /* StateMachineContextPl0010+0x3A4: ? */
+    farStart[0] = forward[0] * reach;
+    farStart[1] = forward[1] * reach;
+    farStart[2] = reach * forward[2];
+    mid[0] = end[0] - start[0];
+    mid[1] = end[1] - start[1];
+    mid[2] = end[2] - start[2];
+    mid[3] = end[3] - start[3];
+    float offsetX;
+    float offsetY;
+    float offsetZ;
+    if (FUN_00b83fb0(start, mid, center, 200.0f) != 0) {
+        float along = farEnd[1] * 0.0011111111f;
+        float across = 0.0011111111f * farEnd[0];
+        offsetX = (farStart[0] - forward[0] * along) - across * right[0];
+        offsetY = (farStart[1] - forward[1] * along) - right[1] * across;
+        offsetZ = (farStart[2] - along * forward[2]) - across * right[2];
+    }
+    else {
+        offsetX = farStart[0];
+        offsetY = farStart[1];
+        offsetZ = farStart[2];
+    }
+    cutMatrix[12] = offsetX + cutMatrix[12];
+    cutMatrix[13] = offsetY + cutMatrix[13];
+    cutMatrix[14] = offsetZ + cutMatrix[14];
+    int mode = vfunc<GetCutModeFn>(player, 0x270)(player);  // Pl0000::vf270
+    int playerState = at<int>(player, 0x40C8);  /* Pl0000+0x40C8: ? */
+    if (playerState == 4) {
+        mode = 3;
+    }
+    if (at<int>(ctx, 0x528) == 0) {  /* StateMachineContextPl0010+0x528: ? */
+        mode = 0;
+    }
+    if (playerState == 8 && at<int>(ctx, 0x330) == 1) {  /* StateMachineContextPl0010+0x330: ? */
+        mode = 3;
+    }
+    halfWidth = at<float>(ctx, 0x18C);  /* StateMachineContextPl0010+0x18C: ? */
+    at<float>(ctx, 0x3C0) = angle;      /* StateMachineContextPl0010+0x3C0: cut angle */
+    at<int>(cutPlaneInfo(), 0x0) = 1;   // DAT_01d61850
+    float scaleX = farEnd[0] * 0.0011111111f;
+    end[0] = scaleX;
+    float scaleY = 0.0011111111f * farEnd[1];
+    end[1] = scaleY;
+    FID_conflict__memcpy(cutPlaneInfo() + 0x10, cutMatrix, 0x40);  // DAT_01d61860
+    at<float>(cutPlaneInfo(), 0x50) = halfWidth;  // DAT_01d618a0
+    at<int>(cutPlaneInfo(), 0x58) = mode;         // DAT_01d618a8
+    at<float>(cutPlaneInfo(), 0x54) = angle;      // DAT_01d618a4
+    at<int>(cutPlaneInfo(), 0x5C) = 1;            // DAT_01d618ac
+    at<int>(cutPlaneInfo(), 0x60) = -1;           // DAT_01d618b0
+    end[0] = scaleX;
+    at<float>(cutPlaneInfo(), 0x64) = end[0];     // DAT_01d618b4
+    at<float>(cutPlaneInfo(), 0x68) = end[1];     // DAT_01d618b8
+    undefined4 *playerContext = at<undefined4 *>(player, 0x7D0);  /* Pl0000+0x7D0: state machine context */
+    end[1] = scaleY;
+    float extra = 0.0f;
+    if (playerContext != 0 && isKindOf(playerContext, 0x0, kStateMachineContextPl0010Type) != 0) {
+        extra = (float &)playerContext[0xDD];  /* StateMachineContextPl0010+0x374: ? */
+    }
+    ((CutPlaneFn)0x00B93000)(context, cutMatrix, 100.0f, extra, angle, mode, end);  // FUN_00b93000
 }
 
 // 00BBAA60  FUN_00bbaa60  size=682  [callgraph]
-void FUN_00bbaa60(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  short sVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  undefined4 *puVar9;
-  undefined4 *puVar10;
-  undefined4 uVar11;
-  undefined *puVar12;
-  undefined4 uVar13;
-  int local_138;
-  float local_130;
-  undefined4 local_128 [2];
-  undefined4 local_120;
-  undefined4 local_11c;
-  undefined4 local_118;
-  undefined4 local_114;
-  undefined4 local_110;
-  undefined4 local_10c;
-  undefined4 local_108;
-  undefined4 local_104;
-  undefined4 local_100;
-  undefined4 local_fc;
-  undefined4 local_f8;
-  undefined4 local_f4;
-  float local_f0;
-  undefined4 local_ec;
-  undefined4 local_e8;
-  undefined4 local_e4;
-  float local_e0;
-  float local_dc;
-  undefined1 auStack_d8 [8];
-  undefined1 local_d0 [64];
-  undefined4 local_90 [16];
-  int local_50 [19];
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar12 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar5 = FUN_00dd6d80(puVar12);
-    uVar4 = -(uint)(iVar5 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar12 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar5 = FUN_00dd6d80(puVar12);
-    uVar4 = -(uint)(iVar5 != 0) & (uint)piVar1;
-  }
-  iVar5 = FUN_00a96130(local_50,0x10);
-  local_138 = 0;
-  if (0 < iVar5) {
-    do {
-      iVar2 = local_50[local_138];
-      FID_conflict__memcpy(local_90,(void *)(uVar4 + 0x10),0x40);
-      uVar13 = 0x40;
-      uVar11 = 0;
-      FUN_00a92f90(0,0x40);
-      iVar6 = FUN_00e3a1e0(uVar11,uVar13);
-      sVar3 = *(short *)(iVar2 + 6);
-      if (iVar6 != 0) {
-        sVar3 = FUN_00a96170(sVar3);
-      }
-      uVar7 = uVar4;
-      if (sVar3 != -1) {
-        uVar7 = FUN_00a12210((int)sVar3);
-      }
-      if (uVar7 != 0) {
-        puVar9 = (undefined4 *)(uVar7 + 0x10);
-        puVar10 = local_90;
-        for (iVar8 = 0x10; iVar8 != 0; iVar8 = iVar8 + -1) {
-          *puVar10 = *puVar9;
-          puVar9 = puVar9 + 1;
-          puVar10 = puVar10 + 1;
-        }
-      }
-      local_130 = *(float *)(iVar2 + 0xc);
-      uVar11 = *(undefined4 *)(iVar2 + 0x10);
-      local_128[0] = *(undefined4 *)(iVar2 + 0x14);
-      local_e0 = *(float *)(iVar2 + 0x18);
-      local_dc = *(float *)(iVar2 + 0x1c);
-      if (iVar6 != 0) {
-        local_dc = local_dc * -1.0;
-        local_130 = local_130 * -1.0;
-      }
-      local_e8 = 0;
-      local_ec = 0;
-      local_f0 = 0.0;
-      local_f4 = 0;
-      local_fc = 0;
-      local_100 = 0;
-      local_104 = 0;
-      local_108 = 0;
-      local_110 = 0;
-      local_114 = 0;
-      local_118 = 0;
-      local_11c = 0;
-      local_e4 = 0x3f800000;
-      local_f8 = 0x3f800000;
-      local_10c = 0x3f800000;
-      local_120 = 0x3f800000;
-      if (*(float *)(iVar2 + 0x20) != 0.0) {
-        D3DXMatrixRotationZ(local_d0,*(float *)(iVar2 + 0x20));
-        D3DXMatrixMultiply(local_128,auStack_d8,local_128);
-      }
-      if (local_dc != 0.0) {
-        D3DXMatrixRotationY(local_d0,local_dc);
-        D3DXMatrixMultiply(local_128,auStack_d8,local_128);
-      }
-      if (local_e0 != 0.0) {
-        D3DXMatrixRotationX(local_d0,local_e0);
-        D3DXMatrixMultiply(local_128,auStack_d8,local_128);
-      }
-      local_f0 = local_130;
-      local_e8 = local_128[0];
-      local_ec = uVar11;
-      D3DXMatrixMultiply(&local_120,&local_120,local_90);
-    } while ((*(char *)(iVar2 + 2) != '\x03') && (local_138 = local_138 + 1, local_138 < iVar5));
-  }
-  return;
+// Builds the world matrix of every attached effect entry of the player (result discarded).
+void FUN_00bbaa60(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int entries[16];
+    float baseMatrix[16];
+    float localMatrix[16];
+    float rotation[16];
+    int count = FUN_00a96130((int)player, (undefined4)entries, 0x10);
+    int index = 0;
+    int entry;
+    if (0 < count) {
+        do {
+            entry = entries[index];
+            FID_conflict__memcpy(baseMatrix, &at<float>(player, 0x10), 0x40);  /* Pl0000+0x10: world matrix */
+            int mirrored = 0;
+            int animation = FUN_00a92f90((int)player);
+            if (FUN_00e3a1e0(animation, 0, 0x40) != 0) {
+                mirrored = 1;
+            }
+            short partsNo = *(short *)(entry + 6);
+            if (mirrored != 0) {
+                partsNo = FUN_00a96170((int)player, partsNo);
+            }
+            int source = (int)player;
+            if (partsNo != -1) {
+                source = FUN_00a12210((int)player, (int)partsNo);
+            }
+            if (source != 0) {
+                undefined4 *from = (undefined4 *)(source + 0x10);
+                undefined4 *to = (undefined4 *)baseMatrix;
+                for (int words = 0x10; words != 0; words--) {
+                    *to = *from;
+                    from++;
+                    to++;
+                }
+            }
+            float posX = *(float *)(entry + 0xC);
+            float posY = *(float *)(entry + 0x10);
+            float posZ = *(float *)(entry + 0x14);
+            float rotX = *(float *)(entry + 0x18);
+            float rotY = *(float *)(entry + 0x1C);
+            float rotZ = *(float *)(entry + 0x20);
+            if (mirrored != 0) {
+                rotY = rotY * -1.0f;
+                posX = posX * -1.0f;
+            }
+            localMatrix[14] = 0.0f;
+            localMatrix[13] = 0.0f;
+            localMatrix[12] = 0.0f;
+            localMatrix[11] = 0.0f;
+            localMatrix[9] = 0.0f;
+            localMatrix[8] = 0.0f;
+            localMatrix[7] = 0.0f;
+            localMatrix[6] = 0.0f;
+            localMatrix[4] = 0.0f;
+            localMatrix[3] = 0.0f;
+            localMatrix[2] = 0.0f;
+            localMatrix[1] = 0.0f;
+            localMatrix[15] = 1.0f;
+            localMatrix[10] = 1.0f;
+            localMatrix[5] = 1.0f;
+            localMatrix[0] = 1.0f;
+            if (rotZ != 0.0f) {
+                D3DXMatrixRotationZ(rotation, rotZ);
+                D3DXMatrixMultiply(localMatrix, rotation, localMatrix);
+            }
+            if (rotY != 0.0f) {
+                D3DXMatrixRotationY(rotation, rotY);
+                D3DXMatrixMultiply(localMatrix, rotation, localMatrix);
+            }
+            if (rotX != 0.0f) {
+                D3DXMatrixRotationX(rotation, rotX);
+                D3DXMatrixMultiply(localMatrix, rotation, localMatrix);
+            }
+            localMatrix[12] = posX;
+            localMatrix[13] = posY;
+            localMatrix[14] = posZ;
+            D3DXMatrixMultiply(localMatrix, localMatrix, baseMatrix);
+        } while (*(char *)(entry + 2) != '\x03' && (index = index + 1, index < count));
+    }
 }
 
 // 00BBAD20  FUN_00bbad20  size=417  [callgraph]
-void FUN_00bbad20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined1 *puStack_a8;
-  undefined4 *puStack_a4;
-  undefined4 *puStack_a0;
-  undefined4 *puStack_9c;
-  undefined1 *puStack_98;
-  undefined4 *local_94;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined1 auStack_64 [4];
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58 [2];
-  undefined1 local_50 [76];
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    local_94 = (undefined4 *)&DAT_01be9ef4;
-    puStack_98 = (undefined1 *)0xbbad44;
-    (**(code **)*param_1)();
-    puStack_98 = (undefined1 *)0xbbad4b;
-    iVar2 = FUN_00dd6d80();
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    local_94 = (undefined4 *)&DAT_01be9db8;
-    puStack_98 = (undefined1 *)0xbbad6c;
-    (**(code **)(*piVar1 + 4))();
-    puStack_98 = (undefined1 *)0xbbad73;
-    iVar2 = FUN_00dd6d80();
-    uVar4 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if ((*(int *)(uVar3 + 0x500) == 0) && ((*(uint *)(uVar4 + 0xcf8) & *(uint *)(uVar4 + 0xe50)) != 0)
-     ) {
-    if (*(int *)(uVar4 + 0x40c8) == 8) {
-      local_94 = param_1;
-      puStack_98 = (undefined1 *)0xbbadad;
-      iVar2 = FUN_00b92c60();
-      if (iVar2 != 0) {
-        return;
-      }
-    }
-    if ((*(byte *)(uVar4 + 0xcfc) & 0xc0) != 0) {
-      puStack_98 = local_50;
-      *(undefined4 *)(uVar3 + 0x568) = 0;
-      local_7c = 0xc47a0000;
-      local_78 = 0;
-      local_74 = 0x447a0000;
-      local_5c = 0x447a0000;
-      local_70 = 0;
-      local_68 = 0;
-      local_60 = 0;
-      local_58[0] = 0;
-      local_6c = 0xc47a0000;
-      local_94 = (undefined4 *)(*(float *)(uVar3 + 0x3f8) * 0.017453292);
-      puStack_9c = (undefined4 *)0xbbae1d;
-      D3DXMatrixRotationZ();
-      puStack_9c = local_58;
-      puStack_a4 = &local_78;
-      puStack_a8 = (undefined1 *)0xbbae2f;
-      puStack_a0 = puStack_a4;
-      D3DXVec3TransformNormal();
-      puStack_a8 = (undefined1 *)(*(float *)(uVar3 + 0x3f8) * 0.017453292);
-      D3DXMatrixRotationZ(auStack_64);
-      D3DXVec3TransformNormal(&local_7c,&local_7c,&local_6c);
-      puStack_a8 = puStack_98;
-      puStack_a4 = local_94;
-      FUN_00bb98c0(*(undefined4 *)(uVar3 + 0x178),&puStack_a8);
-      FUN_00bb98c0(*(undefined4 *)(uVar3 + 0x17c),&puStack_a8);
-      if (*(int *)(*(int *)(uVar3 + 0x170) + 4) != 0) {
-        *(undefined4 *)(*(int *)(uVar3 + 0x170) + 8) = 0;
-      }
-      FUN_00d82510(0x31,0x32);
-    }
-  }
-  return;
+// Takes the state node as a second argument (the generated one-parameter prototype drops it).
+void FUN_00bbad20(undefined4 *context, undefined4 node)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(ctx, 0x500) == 0 &&  /* StateMachineContextPl0010+0x500: ? */
+        (at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE50)) != 0) {  /* Pl0000+0xCF8/+0xE50: input masks */
+        if (at<int>(player, 0x40C8) == 8) {  /* Pl0000+0x40C8: ? */
+            if (FUN_00b92c60(context) != 0) {
+                return;
+            }
+        }
+        if ((at<unsigned char>(player, 0xCFC) & 0xC0) != 0) {  /* Pl0000+0xCFC: input bits */
+            float segment[4];    // { x0, y0, x1, y1 }
+            float lower[4];      // lower[3] is never initialised
+            float upper[3];
+            float rotation[16];
+            segment[0] = 0.0f;
+            at<int>(ctx, 0x568) = 0;  /* StateMachineContextPl0010+0x568: ? */
+            segment[1] = -1000.0f;
+            segment[2] = 0.0f;
+            segment[3] = 1000.0f;
+            upper[1] = 1000.0f;
+            lower[0] = 0.0f;
+            lower[2] = 0.0f;
+            upper[0] = 0.0f;
+            upper[2] = 0.0f;
+            lower[1] = -1000.0f;
+            D3DXMatrixRotationZ(rotation, at<float>(ctx, 0x3F8) * 0.017453292f);  /* StateMachineContextPl0010+0x3F8: degrees */
+            D3DXVec3TransformNormal(lower, lower, rotation);
+            D3DXMatrixRotationZ(rotation, at<float>(ctx, 0x3F8) * 0.017453292f);
+            D3DXVec3TransformNormal(upper, upper, rotation);
+            segment[0] = lower[0];
+            segment[1] = lower[1];
+            segment[2] = upper[0];
+            segment[3] = upper[1];
+            FUN_00bb98c0(at<int *>(ctx, 0x178), (undefined4)segment);  /* StateMachineContextPl0010+0x178: segment history */
+            FUN_00bb98c0(at<int *>(ctx, 0x17C), (undefined4)segment);  /* StateMachineContextPl0010+0x17C: segment history */
+            int *array = at<int *>(ctx, 0x170);  /* StateMachineContextPl0010+0x170: array */
+            if (array[1] != 0) {
+                array[2] = 0;
+            }
+            FUN_00d82510(node, 0x31, 0x32);
+        }
+    }
 }
 
 // 00BBAED0  FUN_00bbaed0  size=180  [callgraph]
-void FUN_00bbaed0(undefined4 *param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(uVar4 + 0x500) == 0) {
-    if ((*(int *)(uVar3 + 0x40c8) == 8) && (iVar2 = FUN_00b92c60(param_1), iVar2 != 0)) {
-      return;
-    }
-    if (((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe50)) != 0) &&
-       ((((*(byte *)(uVar3 + 0xcfc) & 0x80) != 0 || (param_4 != 0)) &&
-        (FUN_00d82510(0x45,param_3), param_5 != 0)))) {
-      *(int *)(uVar4 + 0x570) = *(int *)(uVar4 + 0x570) + 1;
-    }
-  }
-  return;
+void FUN_00bbaed0(undefined4 *context, undefined4 node, undefined4 priority, int force, int countUp)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(ctx, 0x500) == 0) {
+        if (at<int>(player, 0x40C8) == 8 && FUN_00b92c60(context) != 0) {
+            return;
+        }
+        if ((at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE50)) != 0 &&
+            ((at<unsigned char>(player, 0xCFC) & 0x80) != 0 || force != 0)) {
+            FUN_00d82510(node, 0x45, priority);
+            if (countUp != 0) {
+                at<int>(ctx, 0x570) = at<int>(ctx, 0x570) + 1;  /* StateMachineContextPl0010+0x570: ? */
+            }
+        }
+    }
 }
 
 // 00BBAF90  FUN_00bbaf90  size=180  [callgraph]
-void FUN_00bbaf90(undefined4 *param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(uVar4 + 0x500) == 0) {
-    if ((*(int *)(uVar3 + 0x40c8) == 8) && (iVar2 = FUN_00b92c60(param_1), iVar2 != 0)) {
-      return;
-    }
-    if (((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe50)) != 0) &&
-       ((((*(byte *)(uVar3 + 0xcfc) & 0x40) != 0 || (param_4 != 0)) &&
-        (FUN_00d82510(0x46,param_3), param_5 != 0)))) {
-      *(int *)(uVar4 + 0x570) = *(int *)(uVar4 + 0x570) + 1;
-    }
-  }
-  return;
+void FUN_00bbaf90(undefined4 *context, undefined4 node, undefined4 priority, int force, int countUp)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(ctx, 0x500) == 0) {
+        if (at<int>(player, 0x40C8) == 8 && FUN_00b92c60(context) != 0) {
+            return;
+        }
+        if ((at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE50)) != 0 &&
+            ((at<unsigned char>(player, 0xCFC) & 0x40) != 0 || force != 0)) {
+            FUN_00d82510(node, 0x46, priority);
+            if (countUp != 0) {
+                at<int>(ctx, 0x570) = at<int>(ctx, 0x570) + 1;
+            }
+        }
+    }
 }
 
 // 00BBB050  FUN_00bbb050  size=684  [callgraph]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void FUN_00bbb050(undefined4 *param_1)
-
-{
-  float fVar1;
-  int iVar2;
-  int *piVar3;
-  int unaff_ESI;
-  uint uVar4;
-  float10 fVar5;
-  float10 fVar6;
-  undefined *puVar7;
-  undefined4 uVar8;
-  float fStack_bc;
-  float fStack_b8;
-  float local_b4;
-  float fStack_b0;
-  float fStack_ac;
-  undefined4 uStack_a8;
-  undefined1 auStack_9c [4];
-  undefined4 uStack_98;
-  undefined4 uStack_94;
-  float fStack_90;
-  float fStack_8c;
-  float fStack_88;
-  float fStack_84;
-  undefined1 auStack_70 [4];
-  undefined4 auStack_6c [4];
-  undefined1 auStack_5c [12];
-  undefined1 auStack_50 [76];
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar7);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar3 = *(int **)(uVar4 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    local_b4 = 0.0;
-  }
-  else {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar7);
-    local_b4 = (float)(-(uint)(iVar2 != 0) & (uint)piVar3);
-  }
-  iVar2 = FUN_00a81330();
-  if ((iVar2 != 0) && (piVar3 = (int *)FUN_00a7c8a0(), piVar3 != (int *)0x0)) {
-    puVar7 = &DAT_01b35260;
-    (**(code **)(*piVar3 + 4))(&DAT_01b35260);
-    iVar2 = FUN_00dd6d80(puVar7);
-    if (iVar2 != 0) {
-      iVar2 = FUN_00a12210(0xffffffff);
-      fStack_b0 = SQRT(*(float *)(iVar2 + 0x14) * *(float *)(iVar2 + 0x14) +
-                       *(float *)(iVar2 + 0x10) * *(float *)(iVar2 + 0x10) +
-                       *(float *)(iVar2 + 0x18) * *(float *)(iVar2 + 0x18));
-      fStack_ac = SQRT(*(float *)(iVar2 + 0x20) * *(float *)(iVar2 + 0x20) +
-                       *(float *)(iVar2 + 0x24) * *(float *)(iVar2 + 0x24) +
-                       *(float *)(iVar2 + 0x28) * *(float *)(iVar2 + 0x28));
-      fVar1 = SQRT(*(float *)(iVar2 + 0x38) * *(float *)(iVar2 + 0x38) +
-                   *(float *)(iVar2 + 0x34) * *(float *)(iVar2 + 0x34) +
-                   *(float *)(iVar2 + 0x30) * *(float *)(iVar2 + 0x30));
-      fStack_bc = *(float *)(iVar2 + 0x28) / fVar1;
-      fStack_b8 = *(float *)(iVar2 + 0x38) / fVar1;
-      fVar5 = (float10)FUN_00ddbaa0(-(*(float *)(iVar2 + 0x18) / fVar1));
-      fVar6 = (float10)fpatan((float10)fStack_bc,(float10)fStack_b8);
-      fStack_90 = (float)fVar6;
-      fStack_8c = (float)fVar5;
-      fVar5 = (float10)fpatan((float10)*(float *)(iVar2 + 0x14) / (float10)fStack_ac,
-                              (float10)*(float *)(iVar2 + 0x10) / (float10)fStack_b0);
-      fStack_88 = (float)fVar5;
-      fStack_b0 = 0.0;
-      fStack_ac = 1.0;
-      uStack_a8 = 0;
-      FUN_00ddc1d0(auStack_50,&fStack_90,5);
-      D3DXVec3TransformNormal(auStack_70,&fStack_b0,auStack_50);
-      fStack_bc = 1.0;
-      fStack_b8 = 0.0;
-      local_b4 = 0.0;
-      FUN_00ddc1d0(auStack_5c,auStack_9c,5);
-      D3DXVec3TransformNormal(auStack_6c,&fStack_bc,auStack_5c);
-      fStack_b8 = 0.0;
-      local_b4 = *(float *)(unaff_ESI + 0x44) + fStack_84 * 1.35;
-      fStack_b0 = 0.0;
-      uVar8 = *(undefined4 *)(uVar4 + 0x374);
-      fVar5 = (float10)FUN_00ddba30((*(float *)(uVar4 + 0x3f8) + 90.0) * 0.017453292);
-      uStack_94 = 0;
-      fStack_90 = (float)fVar5;
-      if (*(int *)(uVar4 + 0x568) != 0) {
-        fStack_b8 = _DAT_01d618b4;
-        local_b4 = _DAT_01d618b8;
-        fStack_b0 = 0.0;
-        fStack_ac = (float)auStack_6c[0];
-      }
-      uStack_98 = uVar8;
-      FUN_005ca2a0((float *)(iVar2 + 0x10),&fStack_b8,&uStack_98);
-      piVar3[0x234] = 1;
-      piVar3[0x235] = 10;
-      if (*(int *)(uVar4 + 0x528) == 0) {
-        FUN_005ca1a0(1);
-      }
-    }
-  }
-  return;
+// Aligns the locked slash target (resolved from context+0x4BC) with the player's matrix.
+void FUN_00bbb050(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int handleObject = FUN_00a81330(&at<uint>(ctx, 0x4BC));  /* StateMachineContextPl0010+0x4BC: target handle */
+    if (handleObject == 0) {
+        return;
+    }
+    int *target = (int *)FUN_00a7c8a0(handleObject);
+    if (target == 0 || isKindOf(target, 0x4, kSlashTargetType) == 0) {
+        return;
+    }
+    int parts = FUN_00a12210((int)player, -1);
+    float *m = (float *)(parts + 0x10);
+    float m9 = m[9];
+    float m10 = m[10];
+    float scaleX = (float)sqrt((m[0] * m[0] + m[1] * m[1]) + m[2] * m[2]);
+    float scaleY = (float)sqrt((m[4] * m[4] + m[5] * m[5]) + m[6] * m[6]);
+    double scaleZ = sqrt((m[8] * m[8] + m9 * m9) + m10 * m10);  // kept in x87 precision (never stored)
+    float m6n = (float)(m[6] / scaleZ);
+    float m10n = (float)(m[10] / scaleZ);
+    float euler[3];
+    euler[1] = (float)FUN_00ddbaa0((float)-(m[2] / scaleZ));
+    float m1n = m[1] / scaleY;
+    float m0n = m[0] / scaleX;
+    euler[0] = (float)atan2((double)m6n, (double)m10n);
+    euler[2] = (float)atan2((double)m1n, (double)m0n);
+    float axis[3];
+    float rotation[16];
+    float yAxis[4];  // yAxis[3] is never initialised
+    float xAxis[4];  // xAxis[3] is never initialised
+    axis[0] = 0.0f;
+    axis[1] = 1.0f;
+    axis[2] = 0.0f;
+    FUN_00ddc1d0((undefined4 *)rotation, euler, 5);
+    D3DXVec3TransformNormal(yAxis, axis, rotation);
+    axis[0] = 1.0f;
+    axis[1] = 0.0f;
+    axis[2] = 0.0f;
+    FUN_00ddc1d0((undefined4 *)rotation, euler, 5);
+    D3DXVec3TransformNormal(xAxis, axis, rotation);
+    float position[4];  // position[3] is only written when context+0x568 is set
+    position[0] = 0.0f;
+    position[1] = yAxis[1] * 1.35f + at<float>(player, 0x44);  /* Pl0000+0x44: position.y */
+    position[2] = 0.0f;
+    float pitch = at<float>(ctx, 0x374);  /* StateMachineContextPl0010+0x374: ? */
+    float yaw = ((WrapAngleFn)FUN_00ddba30)((at<float>(ctx, 0x3F8) + 90.0f) * 0.017453292f);  /* StateMachineContextPl0010+0x3F8: degrees */
+    float angles[4];  // angles[3] is never initialised
+    angles[0] = pitch;
+    angles[1] = 0.0f;
+    angles[2] = yaw;
+    if (at<int>(ctx, 0x568) != 0) {  /* StateMachineContextPl0010+0x568: use published cut plane */
+        position[0] = at<float>(cutPlaneInfo(), 0x64);  // DAT_01d618b4
+        position[1] = at<float>(cutPlaneInfo(), 0x68);  // DAT_01d618b8
+        position[2] = 0.0f;
+        position[3] = xAxis[3];
+    }
+    FUN_005ca2a0((int)target, m, (undefined4 *)position, (undefined4 *)angles);
+    target[0x234] = 1;   /* target+0x8D0: ? */
+    target[0x235] = 10;  /* target+0x8D4: ? */
+    if (at<int>(ctx, 0x528) == 0) {  /* StateMachineContextPl0010+0x528: ? */
+        FUN_005ca1a0((int)target, 1);
+    }
 }
 
 // 00BBB3A0  FUN_00bbb3a0  size=144  [callgraph]
-bool FUN_00bbb3a0(undefined4 *param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar1 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    piVar2 = (int *)0x0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar1 = FUN_00dd6d80(puVar4);
-    piVar2 = (int *)(-(uint)(iVar1 != 0) & (uint)piVar2);
-  }
-  if (piVar2[0x1032] != 9) {
-    iVar1 = FUN_00a81330();
-    if (iVar1 == 0) {
-      iVar1 = (**(code **)(*piVar2 + 800))(0x3c888889);
-      return iVar1 != 0;
-    }
-  }
-  return false;
+bool FUN_00bbb3a0(undefined4 *context)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    typedef undefined4 (*CheckFn)(void *self, float frameTime);
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(player, 0x40C8) != 9) {  /* Pl0000+0x40C8: ? */
+        if (FUN_00a81330(&at<uint>(ctx, 0x404)) == 0) {  /* StateMachineContextPl0010+0x404: handle */
+            return vfunc<CheckFn>(player, 0x320)(player, 0.016666668f) != 0;  // Pl0000::vf320
+        }
+    }
+    return false;
 }
 
 // 00BBB430  FUN_00bbb430  size=196  [callgraph]
-void FUN_00bbb430(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if ((((((*(int *)(uVar4 + 0x2f4) == 0) && (*(int *)(uVar4 + 0x2f8) == 0)) &&
-        (*(int *)(uVar4 + 0x2fc) == 0)) &&
-       ((*(int *)(uVar4 + 0x300) == 0 && (*(int *)(uVar4 + 0x304) < 1)))) &&
-      ((*(float *)(uVar4 + 0x5d8) <= 0.0 &&
-       ((*(int *)(uVar3 + 0x40c8) != 8 && (*(int *)(uVar3 + 0x40c8) != 0xf)))))) &&
-     (*(int *)(uVar4 + 0x3c4) != 0)) {
-    *(undefined4 *)(uVar4 + 0x3c4) = 0;
-    FUN_00d82510(0x3f,param_3);
-  }
-  return;
+void FUN_00bbb430(undefined4 *context, undefined4 node, undefined4 priority)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(ctx, 0x2F4) == 0 && at<int>(ctx, 0x2F8) == 0 &&  /* StateMachineContextPl0010+0x2F4..+0x304: ? */
+        at<int>(ctx, 0x2FC) == 0 &&
+        at<int>(ctx, 0x300) == 0 && at<int>(ctx, 0x304) < 1 &&
+        at<float>(ctx, 0x5D8) <= 0.0f &&  /* StateMachineContextPl0010+0x5D8: ? */
+        at<int>(player, 0x40C8) != 8 && at<int>(player, 0x40C8) != 0xF &&
+        at<int>(ctx, 0x3C4) != 0) {  /* StateMachineContextPl0010+0x3C4: ? */
+        at<int>(ctx, 0x3C4) = 0;
+        FUN_00d82510(node, 0x3F, priority);
+    }
 }
 
 // 00BBB500  FUN_00bbb500  size=103  [callgraph]
-void FUN_00bbb500(undefined4 *param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar1 != 0) & (uint)param_1;
-  }
-  iVar1 = FUN_00d821d0(0x3f);
-  if (iVar1 != 0) {
-    *(undefined4 *)(uVar3 + 0x3c4) = 0;
-    return;
-  }
-  if (*(int *)(uVar3 + 0x188) != 0) {
-    uVar2 = FUN_00bbb3a0(param_1,param_2);
-    *(undefined4 *)(uVar3 + 0x3c4) = uVar2;
-  }
-  return;
+void FUN_00bbb500(undefined4 *context, undefined4 node)
+{
+    using namespace ZangekiYokoStatePl0010_p1;
+    StateMachineContextPl0010 *ctx = asContext(context);
+    if (FUN_00d821d0(node, 0x3F) != 0) {
+        at<int>(ctx, 0x3C4) = 0;
+        return;
+    }
+    if (at<int>(ctx, 0x188) != 0) {  /* StateMachineContextPl0010+0x188: ? */
+        at<int>(ctx, 0x3C4) = ((CanStartFn)FUN_00bbb3a0)(context, node);
+    }
 }
 
+// D3DX9_43.DLL imports
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" float *__stdcall D3DXMatrixMultiply(float *out, const float *m1, const float *m2);
+extern "C" float *__stdcall D3DXMatrixRotationX(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationZ(float *out, float angle);
+// CRT (x87 fsqrt)
+extern "C" double __cdecl sqrt(double x);
+// CRT (x87 fabs)
+extern "C" double __cdecl fabs(double x);
+
+// StaticArray.cpp: not present in the generated functions.h
+void FUN_00bd3af0(undefined4 *param_1, float *param_2, undefined4 *param_3, undefined4 *param_4, int param_5);
+
+extern int          DAT_01d61ac4;   // raised by EntryCutTargetSlot
+extern unsigned int DAT_01bea090;
+extern unsigned int DAT_01bea094;
+extern int          DAT_01b7c168;   // allocation tag passed to FUN_00dd3500
+extern int          DAT_01b77e30;
+extern int          DAT_01dc08bc;
+
+namespace ZangekiYokoStatePl0010_p2 {
+
+// Field at byte offset `offset` of an object whose class header is not owned by this file.
+template <class T> inline T &at(const void *base, int offset) { return *(T *)((char *)base + offset); }
+
+// Virtual function at byte offset `slot` of obj's vftable (thiscall: `this` is passed first).
+template <class Fn> inline Fn vfunc(const void *obj, int slot) { return *(Fn *)(*(char *const *)obj + slot); }
+
+// Bit pattern of a stack argument declared as undefined4 but used as a float.
+inline float asFloat(undefined4 bits) { return *(float *)&bits; }
+
+// Type descriptors returned by the type-info virtuals.
+undefined4 *const kStateMachineContextPl0010Type = (undefined4 *)0x01BE9EF4;  // DAT_01be9ef4 (vftable slot 0x0)
+undefined4 *const kPl0000Type                    = (undefined4 *)0x01BE9DB8;  // DAT_01be9db8 (vftable slot 0x4)
+undefined4 *const kSlashTargetType               = (undefined4 *)0x01B35260;  // DAT_01b35260 (vftable slot 0x4)
+
+// Global objects used as `this` of thiscall callees.
+const int kFrameTimer   = 0x01BE9448;   // FUN_00e049b0: frame delta
+const int kCamera       = 0x01BEB908;   // FUN_00c58e90
+const int kEntityList   = 0x01BE9A98;   // FUN_00a7ca20
+const int kBreakManager = 0x01D616D0;   // FUN_00c5bc40
+
+// Slot vftables stored by the inlined slot constructors in vf08.
+const undefined4 kSlashFirstHitSlotVftable     = 0x016A2100;
+const undefined4 kDatsuTargetCreateSlotVftable = 0x016A2120;
+const undefined4 kSlashKogekkoBallSlotVftable  = 0x016A2140;
+const undefined4 kEntryCutTargetSlotVftable    = 0x016A2160;
+
+// Global blade-mode cut matrix (DAT_01d61860, part of the cut-plane description at 0x01D61850).
+inline undefined4 *cutPlaneMatrix() { return (undefined4 *)0x01D61860; }
+
+// obj->typeVirtual()->isKindOf(type): FUN_00dd6d80 on the descriptor returned by the vftable slot.
+inline undefined4 isKindOf(const void *obj, int typeSlot, undefined4 *type)
+{
+    typedef undefined4 *(*GetTypeFn)(const void *self);
+    return FUN_00dd6d80(vfunc<GetTypeFn>(obj, typeSlot)(obj), type);
+}
+
+// Checked downcasts (0 when the object is null or of another type).
+inline StateMachineContextPl0010 *asContext(const void *obj)
+{
+    if (obj == 0) return 0;
+    return isKindOf(obj, 0x0, kStateMachineContextPl0010Type) != 0 ? (StateMachineContextPl0010 *)obj : 0;
+}
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) return 0;
+    return isKindOf(obj, 0x4, kPl0000Type) != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player owning a StateMachineContextPl0010 (context+0xC), checked against Pl0000.
+inline Pl0000 *ownerOf(StateMachineContextPl0010 *ctx)
+{
+    return asPl0000(at<void *>(ctx, 0xC));  /* StateMachineContext+0xC: owner */
+}
+
+// "[Hw::VecNormalize] zero vector" warning string (0x0163D0AC) printed by FUN_00dd5650.
+inline void vecNormalizeWarning()
+{
+    typedef void (*PrintFn)(const char *format);
+    ((PrintFn)FUN_00dd5650)((const char *)0x0163D0AC);
+}
+
+// Callees whose generated prototypes do not match the machine-code call sites.
+typedef float *(*GetVec84Fn)(void *self);                                             // Pl0000 vftable +0x84
+typedef void (*SetVec88Fn)(void *self, float *value);                                 // Pl0000 vftable +0x88
+typedef void (*PlayerVf214Fn)(void *self, int a, float b, int c);                     // Pl0000 vftable +0x214
+typedef undefined4 (*CheckFn)(void *self, float frameTime);                           // Pl0000 vftable +0x320
+typedef void (*ListAddFn)(int listId, void *object);                                  // FUN_00d89ec0
+typedef void *(*AllocFn)(int size, int *tag);                                         // FUN_00dd3500
+typedef void (*CameraFn)(int self, void *target, int value, float y, float angle, float distance);  // FUN_00c58e90
+typedef undefined4 (*FrameReachedFn)(int self, int motion, float frame);              // FUN_00a952e0
+typedef int (*CurrentFrameFn)(int self, int motion);                                  // FUN_00a959f0
+typedef void (*PlayerFn)(int self);                                                   // FUN_0085c270
+typedef void (*CutAtFn)(undefined4 *context, float *target, int mode);                // FUN_00bd43f0
+typedef void (*FollowUpFn)(undefined4 *context, void *node, int priority, int flag);  // FUN_00bd6eb0
+typedef void (*CameraShakeFn)(undefined4 *context, float a, float b, float c, float d);  // FUN_00bbc0e0 (last two unused)
+// FUN_00b85350 (thiscall on the player): the first three floats, the fourth value, a flag and a blend time.
+typedef void (*PlayerB85350Fn)(void *self, float duration, float a, float b, float c, int flag, float blend);
+
+}  // namespace ZangekiYokoStatePl0010_p2
+
 // 00BBB570  FUN_00bbb570  size=107  [callgraph]
-bool FUN_00bbb570(undefined4 *param_1)
-
-{
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar1 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(uVar1 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    piVar2 = (int *)0x0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    piVar2 = (int *)(-(uint)(iVar3 != 0) & (uint)piVar2);
-  }
-  iVar3 = (**(code **)(*piVar2 + 800))(0x3c888889);
-  return iVar3 != 0;
+bool FUN_00bbb570(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    return vfunc<CheckFn>(player, 0x320)(player, 0.016666668f) != 0;  // Pl0000::vf320
 }
 
 // 00BBB5E0  FUN_00bbb5e0  size=1585  [callgraph]
-undefined4 FUN_00bbb5e0(undefined4 *param_1)
-
-{
-  float fVar1;
-  float fVar2;
-  bool bVar3;
-  int iVar4;
-  float *pfVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  undefined *puVar9;
-  float local_c0;
-  float local_bc;
-  undefined4 local_b8;
-  float local_b4;
-  uint local_a8;
-  float local_a4;
-  float local_a0;
-  int local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  undefined4 local_88;
-  float local_84;
-  float *local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  uint local_5c;
-  float *local_58;
-  uint local_54;
-  float local_50;
-  float local_4c;
-  undefined4 local_48;
-  float local_44;
-  float local_40;
-  float local_3c;
-  float local_38;
-  uint local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  float local_20;
-  float local_1c;
-  float local_14;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    local_a8 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar9);
-    local_a8 = -(uint)(iVar4 != 0) & (uint)param_1;
-  }
-  local_5c = *(uint *)(*(int *)(local_a8 + 0x170) + 8);
-  local_9c = 0;
-  if (2 < local_5c) {
-    local_a4 = 0.0;
-    local_a0 = 0.0;
-    if (local_5c != 1) {
-      local_74 = *(float **)(*(int *)(local_a8 + 0x170) + 4);
-      fVar1 = 0.0;
-      uVar7 = 0;
-      do {
-        local_98 = *local_74;
-        local_94 = local_74[1];
-        local_34 = uVar7 + 1;
-        if (local_34 < local_5c) {
-          local_54 = local_34 - uVar7;
-          local_58 = local_74 + 2;
-          uVar8 = local_34;
-          do {
-            if (7 < local_54) break;
-            local_a4 = *local_58;
-            fVar1 = local_58[1];
-            local_40 = local_a4 - local_98;
-            local_a0 = fVar1;
-            if (1200.0 < SQRT((fVar1 - local_94) * (fVar1 - local_94) + local_40 * local_40)) {
-              bVar3 = true;
-              local_9c = 1;
-              if (uVar7 <= uVar8) {
-                local_38 = (local_94 - fVar1) * (local_94 - fVar1);
-                local_3c = (local_98 - local_a4) * (local_98 - local_a4);
-                pfVar5 = local_74;
-                uVar6 = uVar7;
-                do {
-                  local_c0 = *pfVar5;
-                  local_bc = pfVar5[1];
-                  if ((bVar3) && (SQRT(local_c0 * local_c0 + local_bc * local_bc) < 950.0)) {
-                    bVar3 = false;
-                  }
-                  fVar2 = -local_94;
-                  if (local_3c <= local_38) {
-                    if (200.0 < ABS(local_c0 -
-                                    ((local_40 / (-fVar1 - fVar2)) * (-local_bc - fVar2) + local_98)
-                                   )) {
-                      local_9c = 0;
-                      break;
-                    }
-                  }
-                  else if (200.0 < ABS(local_bc -
-                                       -(fVar2 + (local_c0 - local_98) *
-                                                 ((-fVar1 - fVar2) / local_40)))) {
-                    local_9c = 0;
-                    break;
-                  }
-                  uVar6 = uVar6 + 1;
-                  pfVar5 = pfVar5 + 2;
-                } while (uVar6 <= uVar8);
-              }
-              if ((*(int *)(local_a8 + 0x3f4) != 0) && (bVar3)) {
-                local_9c = 0;
-                goto LAB_00bbb83f;
-              }
-              if (local_9c != 0) goto LAB_00bbb865;
-            }
-            uVar8 = uVar8 + 1;
-            local_54 = local_54 + 1;
-            local_58 = local_58 + 2;
-          } while (uVar8 < local_5c);
-        }
-        if (local_9c != 0) {
-LAB_00bbb865:
-          if (*(int *)(local_a8 + 0x570) == 0) {
-            local_20 = (local_98 + local_a4) * 0.5;
-            local_1c = (local_94 + fVar1) * 0.5;
-            local_84 = (local_14 + local_64) * 0.5;
-            local_70 = local_98 - local_20;
-            local_6c = local_94 - local_1c;
-            local_44 = local_64 - local_84;
-            local_20 = local_a4 - local_20;
-            local_1c = fVar1 - local_1c;
-            local_84 = local_14 - local_84;
-            local_50 = local_70 * 100.0 + local_70;
-            local_4c = local_6c + local_6c * 100.0;
-            local_48 = 0;
-            local_44 = local_44 * 100.0 + local_44;
-            local_90 = local_20 * 100.0 + local_20;
-            local_8c = local_1c + local_1c * 100.0;
-            local_88 = 0;
-            local_84 = local_84 * 100.0 + local_84;
-            local_c0 = -local_50;
-            local_bc = -local_4c;
-            local_b4 = -local_44;
-            local_b8 = 0;
-            if ((local_c0 != 0.0) || (local_bc != 0.0)) {
-              fVar1 = local_bc * local_bc + local_c0 * local_c0;
-              if (fVar1 < 0.0 == (fVar1 == 0.0)) {
-                FUN_00ddf460(&local_c0,&local_c0);
-              }
-              else {
-                FUN_00dd5650(&DAT_0163d0ac);
-                local_c0 = 0.0;
-                local_bc = 1.0;
-                local_b8 = 0;
-              }
-            }
-            local_30 = 0;
-            local_2c = 0;
-            local_28 = 0;
-            FUN_00b83ee0(&local_70,&local_50,&local_c0,&local_30,0x447a0000);
-            local_c0 = -local_90;
-            local_bc = -local_8c;
-            local_b4 = -local_84;
-            local_b8 = 0;
-            if ((local_c0 != 0.0) || (local_bc != 0.0)) {
-              fVar1 = local_bc * local_bc + local_c0 * local_c0;
-              if (fVar1 < 0.0 == (fVar1 == 0.0)) {
-                FUN_00ddf460(&local_c0,&local_c0);
-              }
-              else {
-                FUN_00dd5650(&DAT_0163d0ac);
-                local_c0 = 0.0;
-                local_bc = 1.0;
-                local_b8 = 0;
-              }
-            }
-            local_30 = 0;
-            local_2c = 0;
-            local_28 = 0;
-            FUN_00b83ee0(&local_20,&local_90,&local_c0,&local_30,0x447a0000);
-            local_98 = local_70;
-            local_94 = local_6c;
-            local_a4 = local_20;
-            local_a0 = local_1c;
-            fVar1 = local_1c;
-          }
-          local_68 = local_a4;
-          local_70 = local_98;
-          local_6c = local_94;
-          local_64 = fVar1;
-          FUN_00bb98c0(*(undefined4 *)(local_a8 + 0x178),&local_70);
-          uVar7 = local_a8;
-          local_70 = local_98;
-          local_6c = local_94;
-          local_68 = local_a4;
-          local_64 = local_a0;
-          FUN_00bb98c0(*(undefined4 *)(local_a8 + 0x17c),&local_70);
-          if (*(int *)(*(int *)(uVar7 + 0x170) + 4) != 0) {
-            *(undefined4 *)(*(int *)(uVar7 + 0x170) + 8) = 0;
-          }
-          return 1;
-        }
-LAB_00bbb83f:
-        local_74 = local_74 + 2;
-        uVar7 = local_34;
-      } while (local_34 < local_5c - 1);
-    }
-  }
-  return 0;
+// Scans the recorded 2D stroke points (context+0x170, 8-byte { x, y } entries) for a long, nearly
+// straight stroke; on success pushes it into the segment histories at +0x178 / +0x17C.
+undefined4 FUN_00bbb5e0(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    /* StateMachineContextPl0010+0x170: array { vftable, data, count, capacity } of stroke points */
+    unsigned int count = at<unsigned int>(at<void *>(ctx, 0x170), 0x8);
+    int found = 0;
+    float ax;            // stroke start
+    float ay;
+    float bx;            // stroke end
+    float by;
+    float fy;            // stroke end y as used by the line test
+    float dx;
+    float dx2;
+    float dy2;
+    float px;
+    float py;
+    float t;
+    float lenSq;
+    float midX;
+    float midY;
+    float midW;
+    bool nearOrigin;
+    unsigned int i;
+    unsigned int next;
+    unsigned int j;
+    unsigned int k;
+    unsigned int span;
+    float *p;
+    float *q;
+    float *r;
+    int *points;
+    // 4th components of start/end are never initialised, exactly as in the original.
+    float start[4];
+    float end[4];
+    float farStart[4];
+    float farEnd[4];
+    float dir[4];
+    float zero[3];
+
+    if (2 < count) {
+        bx = 0.0f;
+        by = 0.0f;
+        if (count != 1) {
+            p = at<float *>(at<void *>(ctx, 0x170), 0x4);
+            fy = 0.0f;
+            i = 0;
+            do {
+                ax = p[0];
+                ay = p[1];
+                next = i + 1;
+                if (next < count) {
+                    span = next - i;
+                    q = p + 2;
+                    j = next;
+                    do {
+                        if (7 < span) break;
+                        bx = q[0];
+                        fy = q[1];
+                        dx = bx - ax;
+                        by = fy;
+                        if (1200.0f < sqrt((fy - ay) * (fy - ay) + dx * dx)) {
+                            nearOrigin = true;
+                            found = 1;
+                            if (i <= j) {
+                                dy2 = (ay - fy) * (ay - fy);
+                                dx2 = (ax - bx) * (ax - bx);
+                                r = p;
+                                k = i;
+                                do {
+                                    px = r[0];
+                                    py = r[1];
+                                    if (nearOrigin && sqrt(px * px + py * py) < 950.0f) {
+                                        nearOrigin = false;
+                                    }
+                                    t = -ay;
+                                    if (dx2 <= dy2) {
+                                        if (200.0f < fabs(px - ((dx / (-fy - t)) * (-py - t) + ax))) {
+                                            found = 0;
+                                            break;
+                                        }
+                                    }
+                                    else if (200.0f < fabs(py - -(t + (px - ax) * ((-fy - t) / dx)))) {
+                                        found = 0;
+                                        break;
+                                    }
+                                    k = k + 1;
+                                    r = r + 2;
+                                } while (k <= j);
+                            }
+                            if (at<int>(ctx, 0x3F4) != 0 && nearOrigin) {  /* StateMachineContextPl0010+0x3F4: ? */
+                                found = 0;
+                                goto nextStart;
+                            }
+                            if (found != 0) goto accept;
+                        }
+                        j = j + 1;
+                        span = span + 1;
+                        q = q + 2;
+                    } while (j < count);
+                }
+                if (found != 0) goto accept;
+            nextStart:
+                p = p + 2;
+                i = next;
+            } while (next < count - 1);
+        }
+    }
+    return 0;
+
+accept:
+    if (at<int>(ctx, 0x570) == 0) {  /* StateMachineContextPl0010+0x570: ? */
+        // Extend the stroke 100x around its midpoint and clip both ends (FUN_00b83ee0).
+        midX = (ax + bx) * 0.5f;
+        midY = (ay + fy) * 0.5f;
+        midW = (end[3] + start[3]) * 0.5f;
+        start[0] = ax - midX;
+        start[1] = ay - midY;
+        farStart[3] = start[3] - midW;
+        end[0] = bx - midX;
+        end[1] = fy - midY;
+        farEnd[3] = end[3] - midW;
+        farStart[0] = start[0] * 100.0f + start[0];
+        farStart[1] = start[1] + start[1] * 100.0f;
+        farStart[2] = 0.0f;
+        farStart[3] = farStart[3] * 100.0f + farStart[3];
+        farEnd[0] = end[0] * 100.0f + end[0];
+        farEnd[1] = end[1] + end[1] * 100.0f;
+        farEnd[2] = 0.0f;
+        farEnd[3] = farEnd[3] * 100.0f + farEnd[3];
+
+        dir[0] = -farStart[0];
+        dir[1] = -farStart[1];
+        dir[3] = -farStart[3];
+        dir[2] = 0.0f;
+        if (dir[0] != 0.0f || dir[1] != 0.0f) {
+            lenSq = dir[1] * dir[1] + dir[0] * dir[0];
+            if (lenSq > 0.0f) {  // inlined Hw::VecNormalize guard
+                FUN_00ddf460(dir, dir);
+            }
+            else {
+                vecNormalizeWarning();
+                dir[0] = 0.0f;
+                dir[1] = 1.0f;
+                dir[2] = 0.0f;
+            }
+        }
+        zero[0] = 0.0f;
+        zero[1] = 0.0f;
+        zero[2] = 0.0f;
+        FUN_00b83ee0(start, farStart, dir, zero, 1000.0f);
+
+        dir[0] = -farEnd[0];
+        dir[1] = -farEnd[1];
+        dir[3] = -farEnd[3];
+        dir[2] = 0.0f;
+        if (dir[0] != 0.0f || dir[1] != 0.0f) {
+            lenSq = dir[1] * dir[1] + dir[0] * dir[0];
+            if (lenSq > 0.0f) {
+                FUN_00ddf460(dir, dir);
+            }
+            else {
+                vecNormalizeWarning();
+                dir[0] = 0.0f;
+                dir[1] = 1.0f;
+                dir[2] = 0.0f;
+            }
+        }
+        zero[0] = 0.0f;
+        zero[1] = 0.0f;
+        zero[2] = 0.0f;
+        FUN_00b83ee0(end, farEnd, dir, zero, 1000.0f);
+        ax = start[0];
+        ay = start[1];
+        bx = end[0];
+        by = end[1];
+        fy = end[1];
+    }
+    start[2] = bx;
+    start[0] = ax;
+    start[1] = ay;
+    start[3] = fy;
+    FUN_00bb98c0(at<int *>(ctx, 0x178), (undefined4)start);  /* StateMachineContextPl0010+0x178: segment history */
+    start[0] = ax;
+    start[1] = ay;
+    start[2] = bx;
+    start[3] = by;
+    FUN_00bb98c0(at<int *>(ctx, 0x17C), (undefined4)start);  /* StateMachineContextPl0010+0x17C: segment history */
+    points = at<int *>(ctx, 0x170);
+    if (points[1] != 0) {
+        points[2] = 0;
+    }
+    return 1;
 }
 
 // 00BBBC20  FUN_00bbbc20  size=712  [callgraph]
-undefined4 FUN_00bbbc20(undefined4 *param_1)
-
-{
-  uint uVar1;
-  float fVar2;
-  float fVar3;
-  float *pfVar4;
-  int iVar5;
-  float *pfVar6;
-  int iVar7;
-  uint uVar8;
-  uint uVar9;
-  float *pfVar10;
-  undefined *puVar11;
-  undefined4 *local_54;
-  uint local_4c;
-  float local_38;
-  float local_34;
-  float local_30;
-  float local_2c;
-  float local_28;
-  float local_24;
-  float local_18;
-  float local_14;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    local_54 = param_1;
-  }
-  else {
-    puVar11 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar5 = FUN_00dd6d80(puVar11);
-    local_54 = (undefined4 *)(-(uint)(iVar5 != 0) & (uint)param_1);
-  }
-  iVar5 = local_54[0x5c];
-  uVar1 = *(uint *)(iVar5 + 8);
-  if (2 < uVar1) {
-    local_38 = 0.0;
-    local_34 = 0.0;
-    local_4c = 0;
-    local_30 = 0.0;
-    local_2c = 0.0;
-    local_18 = 0.0;
-    local_14 = 0.0;
-    if (uVar1 != 1) {
-      pfVar10 = *(float **)(iVar5 + 4);
-      uVar8 = 1;
-      do {
-        local_28 = *pfVar10;
-        local_24 = pfVar10[1];
-        if (uVar8 < uVar1) {
-          iVar7 = uVar8 - local_4c;
-          uVar9 = uVar8;
-          pfVar4 = pfVar10;
-          do {
-            pfVar6 = pfVar4 + 2;
-            if (1 < uVar9) {
-              local_18 = local_30;
-              local_14 = local_2c;
-            }
-            if (uVar9 != 0) {
-              local_30 = local_38;
-              local_2c = local_34;
-            }
-            local_38 = *pfVar6;
-            local_34 = pfVar4[3];
-            fVar2 = (float)iVar7;
-            if (iVar7 < 0) {
-              fVar2 = fVar2 + 4.2949673e+09;
-            }
-            if ((((((fVar2 < 5.0) &&
-                   (750.0 < SQRT((local_34 - local_24) * (local_34 - local_24) +
-                                 (local_38 - local_28) * (local_38 - local_28)))) &&
-                  (750.0 < SQRT(local_28 * local_28 + local_24 * local_24))) &&
-                 ((ABS(local_38) < 50.0 && (ABS(local_34) < 50.0)))) &&
-                ((ABS(local_30) < 50.0 && ((ABS(local_2c) < 50.0 && (ABS(local_18) < 50.0)))))) &&
-               (ABS(local_14) < 50.0)) {
-              fVar2 = pfVar4[3];
-              fVar3 = *pfVar6;
-              local_28 = -local_28;
-              local_24 = -local_24;
-              if (*(int *)(iVar5 + 4) != 0) {
-                *(undefined4 *)(iVar5 + 8) = 0;
-              }
-              local_30 = fVar3;
-              local_2c = fVar2;
-              local_18 = local_28;
-              local_14 = local_24;
-              FUN_00bb98c0(local_54[0x5e],&local_30);
-              local_28 = local_18;
-              local_24 = local_14;
-              local_30 = fVar3;
-              local_2c = fVar2;
-              FUN_00bb98c0(local_54[0x5f],&local_30);
-              return 1;
-            }
-            uVar9 = uVar9 + 1;
-            iVar7 = iVar7 + 1;
-            pfVar4 = pfVar6;
-          } while (uVar9 < uVar1);
-        }
-        local_4c = local_4c + 1;
-        pfVar10 = pfVar10 + 2;
-        uVar8 = uVar8 + 1;
-      } while (local_4c < uVar1 - 1);
-    }
-  }
-  return 0;
+// Looks for a short stroke that jumps far from the screen center after resting near it (<50 px);
+// on success pushes the reversed segment into the histories at +0x178 / +0x17C.
+undefined4 FUN_00bbbc20(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    int *points = at<int *>(ctx, 0x170);  /* StateMachineContextPl0010+0x170: stroke points { vftable, data, count, capacity } */
+    unsigned int count = (unsigned int)points[2];
+    if (2 < count) {
+        float curX = 0.0f;
+        float curY = 0.0f;
+        unsigned int first = 0;
+        float prevX = 0.0f;
+        float prevY = 0.0f;
+        float prev2X = 0.0f;
+        float prev2Y = 0.0f;
+        if (count != 1) {
+            float *p = (float *)points[1];
+            unsigned int firstNext = 1;
+            do {
+                float ax = p[0];
+                float ay = p[1];
+                if (firstNext < count) {
+                    int span = firstNext - first;
+                    unsigned int j = firstNext;
+                    float *q = p;
+                    do {
+                        float *nextPoint = q + 2;
+                        if (1 < j) {
+                            prev2X = prevX;
+                            prev2Y = prevY;
+                        }
+                        if (j != 0) {
+                            prevX = curX;
+                            prevY = curY;
+                        }
+                        curX = *nextPoint;
+                        curY = q[3];
+                        float spanF = (float)span;  // unsigned -> float conversion
+                        if (span < 0) {
+                            spanF = spanF + 4294967296.0f;
+                        }
+                        if (spanF < 5.0f &&
+                            750.0f < sqrt((curY - ay) * (curY - ay) + (curX - ax) * (curX - ax)) &&
+                            750.0f < sqrt(ax * ax + ay * ay) &&
+                            fabs(curX) < 50.0f && fabs(curY) < 50.0f &&
+                            fabs(prevX) < 50.0f && fabs(prevY) < 50.0f && fabs(prev2X) < 50.0f &&
+                            fabs(prev2Y) < 50.0f) {
+                            float y = q[3];
+                            float x = *nextPoint;
+                            if (points[1] != 0) {
+                                points[2] = 0;
+                            }
+                            float segment[4];
+                            segment[0] = x;
+                            segment[1] = y;
+                            segment[2] = -ax;
+                            segment[3] = -ay;
+                            FUN_00bb98c0(at<int *>(ctx, 0x178), (undefined4)segment);  /* StateMachineContextPl0010+0x178: segment history */
+                            segment[2] = -ax;
+                            segment[3] = -ay;
+                            segment[0] = x;
+                            segment[1] = y;
+                            FUN_00bb98c0(at<int *>(ctx, 0x17C), (undefined4)segment);  /* StateMachineContextPl0010+0x17C: segment history */
+                            return 1;
+                        }
+                        j = j + 1;
+                        span = span + 1;
+                        q = nextPoint;
+                    } while (j < count);
+                }
+                first = first + 1;
+                p = p + 2;
+                firstNext = firstNext + 1;
+            } while (first < count - 1);
+        }
+    }
+    return 0;
 }
 
 // 00BBBEF0  FUN_00bbbef0  size=269  [callgraph]
-void FUN_00bbbef0(undefined4 *param_1,int param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  param_1 = (undefined4 *)0x42700000;
-  local_4 = 0x3c23d70a;
-  local_8 = 0x3c23d70a;
-  if (param_2 != 0) {
-    local_4 = 0x3ccccccd;
-    local_8 = 0x3ccccccd;
-    param_1 = (undefined4 *)0x42480000;
-  }
-  FUN_00b8bcd0();
-  if (((*(int *)(uVar4 + 0xe0) == 0) && (*(int *)(uVar4 + 0x188) == 0)) &&
-     (*(int *)(uVar4 + 0x330) != 0x13)) {
-    local_8 = *(undefined4 *)(uVar4 + 0x5d0);
-  }
-  *(undefined4 *)(uVar3 + 0x341c) = 0x3f800000;
-  FUN_00b85350(param_1,local_4,local_8,0,1,0x3e99999a);
-  *(undefined4 *)(uVar3 + 0x3428) = 0;
-  *(undefined4 *)(uVar3 + 0x342c) = 0;
-  *(undefined4 **)(uVar4 + 0x5cc) = param_1;
-  return;
+void FUN_00bbbef0(undefined4 *param_1, int param_2)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    float duration = 60.0f;
+    float a = 0.01f;
+    float b = 0.01f;
+    if (param_2 != 0) {
+        a = 0.1f;
+        b = 0.1f;
+        duration = 50.0f;
+    }
+    FUN_00b8bcd0((int)player);
+    /* StateMachineContextPl0010+0xE0 / +0x188 / +0x330 / +0x5D0: ? */
+    if (at<int>(ctx, 0xE0) == 0 && at<int>(ctx, 0x188) == 0 && at<int>(ctx, 0x330) != 0x13) {
+        b = at<float>(ctx, 0x5D0);
+    }
+    at<float>(player, 0x341C) = 1.0f;  /* Pl0000+0x341C: ? */
+    ((PlayerB85350Fn)FUN_00b85350)(player, duration, a, b, 0.0f, 1, 0.3f);
+    at<float>(player, 0x3428) = 0.0f;  /* Pl0000+0x3428: ? */
+    at<float>(player, 0x342C) = 0.0f;  /* Pl0000+0x342C: ? */
+    at<float>(ctx, 0x5CC) = duration;  /* StateMachineContextPl0010+0x5CC: timer */
 }
 
 // 00BBC000  FUN_00bbc000  size=218  [callgraph]
-void FUN_00bbc000(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int *piVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  int iVar6;
-  float *pfVar7;
-  uint uVar8;
-  uint uVar9;
-  undefined *puVar10;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar8 = 0;
-  }
-  else {
-    puVar10 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar6 = FUN_00dd6d80(puVar10);
-    uVar8 = -(uint)(iVar6 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar8 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar9 = 0;
-  }
-  else {
-    puVar10 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar6 = FUN_00dd6d80(puVar10);
-    uVar9 = -(uint)(iVar6 != 0) & (uint)piVar1;
-  }
-  iVar6 = FUN_00a7ca20();
-  piVar2 = *(int **)(iVar6 + 0x18);
-  for (piVar1 = *(int **)(iVar6 + 0x14); piVar1 != piVar2; piVar1 = (int *)piVar1[2]) {
-    iVar6 = *(int *)(*piVar1 + 0x24);
-    if ((((iVar6 == 0xf0086) || (iVar6 == 0xf0087)) || (iVar6 == 0xf0089)) &&
-       (pfVar7 = (float *)FUN_00a7c8b0(), fVar3 = *(float *)(uVar9 + 0x40) - *pfVar7,
-       fVar5 = *(float *)(uVar9 + 0x44) - pfVar7[1], fVar4 = *(float *)(uVar9 + 0x48) - pfVar7[2],
-       SQRT(fVar3 * fVar3 + fVar5 * fVar5 + fVar4 * fVar4) < *(float *)(uVar8 + 0x574))) {
-      FUN_00c5bc40(*piVar1,1);
-    }
-  }
-  return;
+// Calls FUN_00c5bc40(obj, 1) on every entity of type 0xF0086 / 0xF0087 / 0xF0089 closer to the
+// player than context+0x574.
+void FUN_00bbc000(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    int list = FUN_00a7ca20(kEntityList);
+    int *last = *(int **)(list + 0x18);
+    for (int *node = *(int **)(list + 0x14); node != last; node = (int *)node[2]) {
+        int typeId = *(int *)(*node + 0x24);
+        if (typeId == 0xF0086 || typeId == 0xF0087 || typeId == 0xF0089) {
+            float *position = (float *)FUN_00a7c8b0(*node);
+            float dx = at<float>(player, 0x40) - position[0];  /* Pl0000+0x40: position */
+            float dy = at<float>(player, 0x44) - position[1];
+            float dz = at<float>(player, 0x48) - position[2];
+            if (sqrt(dx * dx + dy * dy + dz * dz) < at<float>(ctx, 0x574)) {  /* StateMachineContextPl0010+0x574: radius */
+                FUN_00c5bc40(kBreakManager, *node, 1);
+            }
+        }
+    }
 }
 
 // 00BBC0E0  FUN_00bbc0e0  size=236  [callgraph]
-void FUN_00bbc0e0(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
-
-{
-  undefined4 uVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
-  undefined *puVar7;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar6 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar5 = FUN_00dd6d80(puVar7);
-    uVar6 = -(uint)(iVar5 != 0) & (uint)param_1;
-  }
-  piVar3 = *(int **)(uVar6 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar5 = FUN_00dd6d80(puVar7);
-    uVar4 = -(uint)(iVar5 != 0) & (uint)piVar3;
-  }
-  if (*(int *)(uVar6 + 0x52c) == 0) {
-    if (*(int *)(uVar6 + 0x530) == 0) {
-      uVar1 = *(undefined4 *)(uVar4 + 0x4060);
-      uVar2 = *(undefined4 *)(uVar4 + 0x4064);
-    }
-    else {
-      uVar1 = *(undefined4 *)(uVar4 + 0x4068);
-      uVar2 = *(undefined4 *)(uVar4 + 0x406c);
-      if (((((DAT_01bea094 & 0x800) != 0) && (iVar5 = *(int *)(uVar4 + 0x40c8), iVar5 != 0x14)) &&
-          (iVar5 != 0xc)) && (iVar5 != 8)) {
-        uVar1 = 0x3f800000;
-        uVar2 = 0x3f800000;
-      }
-    }
-  }
-  else {
-    uVar1 = *(undefined4 *)(uVar4 + 0x4070);
-    uVar2 = *(undefined4 *)(uVar4 + 0x4074);
-  }
-  *(undefined4 *)(uVar4 + 0x341c) = 0x3f800000;
-  FUN_00b85350(param_3,uVar1,uVar2,*(undefined4 *)(uVar4 + 0x3450),0,param_2);
-  return;
+// param_2 / param_3 are floats; callers push two more floats that are not read.
+void FUN_00bbc0e0(undefined4 *param_1, undefined4 param_2, undefined4 param_3)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    float a;
+    float b;
+    if (at<int>(ctx, 0x52C) == 0) {  /* StateMachineContextPl0010+0x52C: ? */
+        if (at<int>(ctx, 0x530) == 0) {  /* StateMachineContextPl0010+0x530: ? */
+            a = at<float>(player, 0x4060);  /* Pl0000+0x4060..+0x4074: three value pairs */
+            b = at<float>(player, 0x4064);
+        }
+        else {
+            a = at<float>(player, 0x4068);
+            b = at<float>(player, 0x406C);
+            if ((DAT_01bea094 & 0x800) != 0) {
+                int mode = at<int>(player, 0x40C8);  /* Pl0000+0x40C8: ? */
+                if (mode != 0x14 && mode != 0xC && mode != 8) {
+                    a = 1.0f;
+                    b = 1.0f;
+                }
+            }
+        }
+    }
+    else {
+        a = at<float>(player, 0x4070);
+        b = at<float>(player, 0x4074);
+    }
+    at<float>(player, 0x341C) = 1.0f;  /* Pl0000+0x341C: ? */
+    ((PlayerB85350Fn)FUN_00b85350)(player, asFloat(param_3), a, b, at<float>(player, 0x3450), 0,
+                                   asFloat(param_2));  /* Pl0000+0x3450: ? */
 }
 
 // 00BBC2A0  FUN_00bbc2a0  size=108  [callgraph]
-void FUN_00bbc2a0(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    *(undefined4 *)(uVar3 + 0x524) = uRam0000341c;
-    return;
-  }
-  puVar4 = &DAT_01be9db8;
-  (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-  iVar2 = FUN_00dd6d80(puVar4);
-  *(undefined4 *)(uVar3 + 0x524) = *(undefined4 *)((-(uint)(iVar2 != 0) & (uint)piVar1) + 0x341c);
-  return;
+void FUN_00bbc2a0(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    // A null player reads address 0x341C, exactly as in the original.
+    at<float>(ctx, 0x524) = at<float>(player, 0x341C);  /* StateMachineContextPl0010+0x524 <- Pl0000+0x341C */
 }
 
 // 00BBC310  FUN_00bbc310  size=115  [callgraph]
-void FUN_00bbc310(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (0.0 < *(float *)(uVar3 + 0x341c)) {
-    *(undefined4 *)(uVar3 + 0x341c) = *(undefined4 *)(uVar4 + 0x524);
-    return;
-  }
-  return;
+void FUN_00bbc310(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    if (0.0f < at<float>(player, 0x341C)) {  /* Pl0000+0x341C: ? */
+        at<undefined4>(player, 0x341C) = at<undefined4>(ctx, 0x524);  /* StateMachineContextPl0010+0x524: saved value */
+    }
 }
 
 // 00BBC390  FUN_00bbc390  size=605  [callgraph]
-void FUN_00bbc390(undefined4 *param_1)
-
-{
-  void *_Src;
-  float fVar1;
-  int iVar2;
-  uint uVar3;
-  void **ppvVar4;
-  undefined4 *puVar5;
-  undefined1 *puVar6;
-  float fVar7;
-  undefined1 *puVar8;
-  void *apvStack_fc [5];
-  undefined4 *puStack_e8;
-  undefined *local_e4;
-  undefined4 uStack_d4;
-  undefined4 uStack_d0;
-  float fStack_cc;
-  float local_c8;
-  float local_c4;
-  undefined4 uStack_c0;
-  undefined4 uStack_bc;
-  undefined4 uStack_b8;
-  undefined4 uStack_b4;
-  undefined4 uStack_b0;
-  undefined4 uStack_ac;
-  undefined4 uStack_a8;
-  undefined4 uStack_a4;
-  undefined4 uStack_a0;
-  undefined4 uStack_9c;
-  undefined4 uStack_98;
-  undefined1 auStack_90 [8];
-  undefined1 auStack_88 [12];
-  undefined1 auStack_7c [8];
-  undefined1 auStack_74 [4];
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 uStack_64;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    local_e4 = &DAT_01be9ef4;
-    puStack_e8 = (undefined4 *)0xbbc3b7;
-    (**(code **)*param_1)();
-    puStack_e8 = (undefined4 *)0xbbc3be;
-    iVar2 = FUN_00dd6d80();
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  if (*(int **)(uVar3 + 0xc) != (int *)0x0) {
-    local_e4 = &DAT_01be9db8;
-    puStack_e8 = (undefined4 *)0xbbc3df;
-    (**(code **)(**(int **)(uVar3 + 0xc) + 4))();
-    puStack_e8 = (undefined4 *)0xbbc3e6;
-    FUN_00dd6d80();
-  }
-  local_e4 = (undefined *)0x0;
-  local_c8 = 0.0;
-  puStack_e8 = (undefined4 *)0xbbc403;
-  iVar2 = FUN_00a8cbe0();
-  if (iVar2 != 0) {
-    local_e4 = (undefined *)0x0;
-    puStack_e8 = (undefined4 *)0xbbc414;
-    iVar2 = FUN_00a8cbe0();
-    if (iVar2 == 0) {
-      local_c8 = 1.4013e-45;
-    }
-  }
-  local_c4 = *(float *)(*(int *)(uVar3 + 0x38c + (int)local_c8 * 4) + 0x8d8);
-  local_e4 = (undefined *)0xffffffff;
-  puStack_e8 = (undefined4 *)0xbbc43e;
-  iVar2 = FUN_00a12210();
-  _Src = (void *)(iVar2 + 0x10);
-  local_e4 = (undefined *)
-             -(*(float *)(iVar2 + 0x18) /
-              SQRT(*(float *)(iVar2 + 0x38) * *(float *)(iVar2 + 0x38) +
-                   *(float *)(iVar2 + 0x34) * *(float *)(iVar2 + 0x34) +
-                   *(float *)(iVar2 + 0x30) * *(float *)(iVar2 + 0x30)));
-  puStack_e8 = (undefined4 *)0xbbc46a;
-  FUN_00ddbaa0();
-  local_70 = 0;
-  apvStack_fc[4] = &local_70;
-  local_6c = 0;
-  local_68 = 0x3f800000;
-  apvStack_fc[3] = (void *)0xbbc490;
-  puStack_e8 = apvStack_fc[4];
-  local_e4 = _Src;
-  D3DXVec3TransformNormal();
-  local_6c = 0x3f800000;
-  apvStack_fc[1] = &local_6c;
-  local_68 = 0;
-  uStack_64 = 0;
-  apvStack_fc[0] = (void *)0xbbc4ba;
-  apvStack_fc[2] = apvStack_fc[1];
-  apvStack_fc[3] = _Src;
-  D3DXVec3TransformNormal();
-  puVar8 = &stack0xffffff28;
-  uStack_d4 = 0x3f800000;
-  uStack_d0 = 0;
-  apvStack_fc[0] = _Src;
-  D3DXVec3TransformNormal(puVar8,puVar8);
-  uStack_9c = 0;
-  uStack_a0 = 0;
-  uStack_a4 = 0;
-  uStack_a8 = 0;
-  uStack_b0 = 0;
-  uStack_b4 = 0;
-  uStack_b8 = 0;
-  uStack_bc = 0;
-  local_c4 = 0.0;
-  local_c8 = 0.0;
-  fStack_cc = 0.0;
-  uStack_d0 = 0;
-  uStack_98 = 0x3f800000;
-  uStack_ac = 0x3f800000;
-  uStack_c0 = 0x3f800000;
-  uStack_d4 = 0x3f800000;
-  FID_conflict__memcpy(&uStack_d4,_Src,0x40);
-  fVar7 = *(float *)(uVar3 + 0x3b0) + *(float *)(uVar3 + 0x374);
-  puVar6 = auStack_74;
-  D3DXMatrixRotationX(puVar6,fVar7);
-  D3DXMatrixMultiply(&stack0xffffff24,auStack_7c,&stack0xffffff24);
-  D3DXMatrixRotationZ(auStack_88,apvStack_fc[0]);
-  D3DXMatrixMultiply(apvStack_fc + 3,auStack_90,apvStack_fc + 3);
-  fVar1 = *(float *)(uVar3 + 0x3a4) + 1.35;
-  fStack_cc = fStack_cc + (float)puVar6 * fVar1;
-  local_c8 = fVar7 * fVar1 + local_c8;
-  local_c4 = (float)puVar8 * fVar1 + local_c4;
-  ppvVar4 = apvStack_fc;
-  puVar5 = &DAT_01d61860;
-  for (iVar2 = 0x10; iVar2 != 0; iVar2 = iVar2 + -1) {
-    *puVar5 = *ppvVar4;
-    ppvVar4 = ppvVar4 + 1;
-    puVar5 = puVar5 + 1;
-  }
-  FUN_005ee3d0(apvStack_fc);
-  return;
+// Rebuilds the blade matrix from the player's root part and publishes it (DAT_01d61860).
+void FUN_00bbc390(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    /* StateMachineContextPl0010+0x38C / +0x390: two objects (+0x8D8 float angle) */
+    int index = 0;
+    if (FUN_00a8cbe0(at<int>(ctx, 0x38C), 0)) {
+        if (!FUN_00a8cbe0(at<int>(ctx, 0x390), 0)) {
+            index = 1;
+        }
+    }
+    float roll = at<float>(at<void *>(ctx, 0x38C + index * 4), 0x8D8);
+    int parts = FUN_00a12210((int)player, -1);
+    float *partsMatrix = (float *)(parts + 0x10);
+    FUN_00ddbaa0((float)-(partsMatrix[2] / sqrt((partsMatrix[8] * partsMatrix[8] + partsMatrix[9] * partsMatrix[9]) +
+                                                partsMatrix[10] * partsMatrix[10])));  // result unused
+    float up[3];       // computed but unused
+    float right[3];    // computed but unused
+    float forward[3];
+    float matrix[16];
+    float rotation[16];
+    up[0] = 0.0f;
+    up[1] = 0.0f;
+    up[2] = 1.0f;
+    D3DXVec3TransformNormal(up, up, partsMatrix);
+    right[0] = 1.0f;
+    right[1] = 0.0f;
+    right[2] = 0.0f;
+    D3DXVec3TransformNormal(right, right, partsMatrix);
+    forward[0] = 0.0f;
+    forward[1] = 1.0f;
+    forward[2] = 0.0f;
+    D3DXVec3TransformNormal(forward, forward, partsMatrix);
+    matrix[14] = 0.0f;
+    matrix[13] = 0.0f;
+    matrix[12] = 0.0f;
+    matrix[11] = 0.0f;
+    matrix[9] = 0.0f;
+    matrix[8] = 0.0f;
+    matrix[7] = 0.0f;
+    matrix[6] = 0.0f;
+    matrix[4] = 0.0f;
+    matrix[3] = 0.0f;
+    matrix[2] = 0.0f;
+    matrix[1] = 0.0f;
+    matrix[15] = 1.0f;
+    matrix[10] = 1.0f;
+    matrix[5] = 1.0f;
+    matrix[0] = 1.0f;
+    FID_conflict__memcpy(matrix, partsMatrix, 0x40);
+    D3DXMatrixRotationX(rotation, at<float>(ctx, 0x3B0) + at<float>(ctx, 0x374));  /* StateMachineContextPl0010+0x3B0/+0x374: ? */
+    D3DXMatrixMultiply(matrix, rotation, matrix);
+    D3DXMatrixRotationZ(rotation, roll);
+    D3DXMatrixMultiply(matrix, rotation, matrix);
+    float reach = at<float>(ctx, 0x3A4) + 1.35f;  /* StateMachineContextPl0010+0x3A4: ? */
+    matrix[12] = forward[0] * reach + matrix[12];
+    matrix[13] = forward[1] * reach + matrix[13];
+    matrix[14] = reach * forward[2] + matrix[14];
+    undefined4 *from = (undefined4 *)matrix;
+    undefined4 *to = cutPlaneMatrix();  // DAT_01d61860
+    for (int words = 0x10; words != 0; words--) {
+        *to = *from;
+        from++;
+        to++;
+    }
+    FUN_005ee3d0(at<int>(ctx, 0x38C + index * 4), matrix);
 }
 
 // 00BBC5F0  FUN_00bbc5f0  size=132  [callgraph]
-undefined4 FUN_00bbc5f0(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if ((((*(int *)(uVar2 + 0x40c8) != 8) && (iVar3 = *(int *)(uVar4 + 0x330), iVar3 != 3)) &&
-      (iVar3 != 4)) && ((iVar3 != 5 && (*(int *)(uVar2 + 0x40c8) != 0x12)))) {
-    return 0;
-  }
-  return 1;
+undefined4 FUN_00bbc5f0(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    int state;
+    /* Pl0000+0x40C8: ?  StateMachineContextPl0010+0x330: ? */
+    if (at<int>(player, 0x40C8) != 8 && (state = at<int>(ctx, 0x330), state != 3) && state != 4 &&
+        state != 5 && at<int>(player, 0x40C8) != 0x12) {
+        return 0;
+    }
+    return 1;
 }
 
 // 00BBC680  FUN_00bbc680  size=132  [callgraph]
-undefined4 FUN_00bbc680(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if ((((*(int *)(uVar2 + 0x40c8) != 8) && (iVar3 = *(int *)(uVar4 + 0x330), iVar3 != 3)) &&
-      (iVar3 != 4)) && ((iVar3 != 5 && (*(int *)(uVar2 + 0x40c8) != 0x12)))) {
-    return 0;
-  }
-  return 2;
+undefined4 FUN_00bbc680(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    int state;
+    if (at<int>(player, 0x40C8) != 8 && (state = at<int>(ctx, 0x330), state != 3) && state != 4 &&
+        state != 5 && at<int>(player, 0x40C8) != 0x12) {
+        return 0;
+    }
+    return 2;
 }
 
 // 00BBC710  FUN_00bbc710  size=105  [callgraph]
-undefined4 FUN_00bbc710(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if ((*(int *)(uVar2 + 0x40c8) != 8) && (*(int *)(uVar2 + 0x40c8) != 0x12)) {
-    return 0;
-  }
-  return 1;
+undefined4 FUN_00bbc710(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(player, 0x40C8) != 8 && at<int>(player, 0x40C8) != 0x12) {  /* Pl0000+0x40C8: ? */
+        return 0;
+    }
+    return 1;
 }
 
 // 00BBC780  FUN_00bbc780  size=105  [callgraph]
-undefined4 FUN_00bbc780(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if ((*(int *)(uVar2 + 0x40c8) != 8) && (*(int *)(uVar2 + 0x40c8) != 0x12)) {
-    return 0;
-  }
-  return 1;
+undefined4 FUN_00bbc780(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(player, 0x40C8) != 8 && at<int>(player, 0x40C8) != 0x12) {
+        return 0;
+    }
+    return 1;
 }
 
 // 00BBC7F0  FUN_00bbc7f0  size=96  [callgraph]
-void FUN_00bbc7f0(undefined4 *param_1,int param_2)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined *puVar3;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar3 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar3);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  if (*(int **)(uVar1 + 0xc) != (int *)0x0) {
-    puVar3 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar1 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar3);
-  }
-  if ((*(int *)(param_2 + 0x24) != 0x33) && (*(int *)(param_2 + 0x24) != 0x32)) {
-    DAT_01dc08bc = 0;
-  }
-  return;
+void FUN_00bbc7f0(undefined4 *param_1, int param_2)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    void *owner = at<void *>(ctx, 0xC);  /* StateMachineContext+0xC: owner */
+    if (owner != 0) {
+        isKindOf(owner, 0x4, kPl0000Type);  // result unused
+    }
+    int stateId = *(int *)(param_2 + 0x24);  /* param_2+0x24: state id */
+    if (stateId != 0x33 && stateId != 0x32) {
+        DAT_01dc08bc = 0;
+    }
 }
 
 // 00BBC850  FUN_00bbc850  size=160  [callgraph]
-undefined4 FUN_00bbc850(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  iVar3 = *(int *)(uVar2 + 0x40c8);
-  if ((((iVar3 != 0xd) && (iVar3 != 9)) && (iVar3 != 0xf)) && (iVar3 != 0xc)) {
-    iVar3 = FUN_00a81330();
-    if (iVar3 == 0) {
-      iVar3 = FUN_00bbb570(param_1);
-      if ((iVar3 != 0) && (*(int *)(uVar4 + 0xe0) == 0)) {
-        return 0;
-      }
-    }
-  }
-  return 1;
+undefined4 FUN_00bbc850(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    int mode = at<int>(player, 0x40C8);  /* Pl0000+0x40C8: ? */
+    if (mode != 0xD && mode != 9 && mode != 0xF && mode != 0xC) {
+        if (FUN_00a81330(&at<uint>(ctx, 0x404)) == 0) {  /* StateMachineContextPl0010+0x404: handle */
+            if (FUN_00bbb570(param_1) && at<int>(ctx, 0xE0) == 0) {  /* StateMachineContextPl0010+0xE0: ? */
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 // 00BBC8F0  FUN_00bbc8f0  size=106  [callgraph]
-undefined4 FUN_00bbc8f0(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(uVar2 + 0x40c8) == 8) {
-    return *(undefined4 *)(uVar4 + 0xe8);
-  }
-  return 1;
+undefined4 FUN_00bbc8f0(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    if (at<int>(player, 0x40C8) == 8) {  /* Pl0000+0x40C8: ? */
+        return at<undefined4>(ctx, 0xE8);  /* StateMachineContextPl0010+0xE8: ? */
+    }
+    return 1;
 }
 
 // 00BBC960  FUN_00bbc960  size=140  [callgraph]
-void FUN_00bbc960(undefined4 *param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  int *piVar3;
-  undefined *puVar4;
-  undefined4 uStack_20;
-  undefined4 uStack_1c;
-  undefined4 uStack_18;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar3 = *(int **)(uVar1 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    piVar3 = (int *)0x0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    piVar3 = (int *)(-(uint)(iVar2 != 0) & (uint)piVar3);
-  }
-  iVar2 = (**(code **)(*piVar3 + 0x84))();
-  uStack_1c = *(undefined4 *)(iVar2 + 4);
-  uStack_20 = 0;
-  uStack_18 = 0;
-  (**(code **)(*piVar3 + 0x88))(&uStack_20);
-  return;
+// Replaces the player's vf84 vector by { 0, y, 0 } through vf88.
+void FUN_00bbc960(undefined4 *param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_1);
+    Pl0000 *player = ownerOf(ctx);
+    float *current = vfunc<GetVec84Fn>(player, 0x84)(player);  // Pl0000::vf84
+    float value[4];  // value[3] is never initialised
+    value[1] = current[1];
+    value[0] = 0.0f;
+    value[2] = 0.0f;
+    vfunc<SetVec88Fn>(player, 0x88)(player, value);  // Pl0000::vf88
 }
 
 // 00BBC9F0  FUN_00bbc9f0  size=366  [callgraph]
-void FUN_00bbc9f0(float *param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  float fVar2;
-  int *piVar3;
-  float fVar4;
-  uint uVar5;
-  int iVar6;
-  undefined *puVar7;
-  float local_20;
-  float local_1c;
-  undefined4 local_18;
-  float local_14;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar6 = FUN_00dd6d80(puVar7);
-    uVar5 = -(uint)(iVar6 != 0) & (uint)param_2;
-  }
-  piVar3 = *(int **)(uVar5 + 0xc);
-  if (piVar3 == (int *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*piVar3 + 4))(&DAT_01be9db8);
-    iVar6 = FUN_00dd6d80(puVar7);
-    uVar5 = -(uint)(iVar6 != 0) & (uint)piVar3;
-  }
-  if ((DAT_01b77e30 == 1) || (DAT_01b77e30 == 3)) {
-    fVar1 = *(float *)(uVar5 + 0x3bd4);
-    fVar2 = *(float *)(uVar5 + 0x3bd8);
-  }
-  else {
-    fVar1 = *(float *)(uVar5 + 0x3bdc);
-    fVar2 = *(float *)(uVar5 + 0x3be0);
-  }
-  local_18 = 0;
-  local_14 = local_14 - local_14;
-  local_20 = fVar1;
-  local_1c = fVar2;
-  if ((fVar1 != 0.0) || (fVar2 != 0.0)) {
-    fVar4 = fVar1 * fVar1 + fVar2 * fVar2;
-    if (fVar4 < 0.0 == (fVar4 == 0.0)) {
-      FUN_00ddf460(&local_20,&local_20);
-    }
-    else {
-      FUN_00dd5650(&DAT_0163d0ac);
-      local_20 = 0.0;
-      local_1c = 1.0;
-    }
-  }
-  fVar1 = ABS(fVar2) + ABS(fVar1);
-  if (1000.0 < fVar1) {
-    *param_1 = local_20 * 1000.0;
-    param_1[1] = local_1c * 1000.0;
-    return;
-  }
-  *param_1 = local_20 * fVar1;
-  param_1[1] = fVar1 * local_1c;
-  return;
+// Writes the player's 2D stick vector (normalized direction scaled by |x|+|y|, capped at 1000).
+void FUN_00bbc9f0(float *param_1, undefined4 *param_2)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_2);
+    Pl0000 *player = ownerOf(ctx);
+    float x;
+    float y;
+    /* Pl0000+0x3BD4..+0x3BE0: two stick vectors selected by DAT_01b77e30 */
+    if (DAT_01b77e30 == 1 || DAT_01b77e30 == 3) {
+        x = at<float>(player, 0x3BD4);
+        y = at<float>(player, 0x3BD8);
+    }
+    else {
+        x = at<float>(player, 0x3BDC);
+        y = at<float>(player, 0x3BE0);
+    }
+    float dir[4];
+    dir[2] = 0.0f;
+    dir[3] = dir[3] - dir[3];  // uninitialised stack slot, as in the original
+    dir[0] = x;
+    dir[1] = y;
+    if (x != 0.0f || y != 0.0f) {
+        float lenSq = x * x + y * y;
+        if (lenSq > 0.0f) {  // inlined Hw::VecNormalize guard
+            FUN_00ddf460(dir, dir);
+        }
+        else {
+            vecNormalizeWarning();
+            dir[0] = 0.0f;
+            dir[1] = 1.0f;
+        }
+    }
+    float magnitude = (float)(fabs(y) + fabs(x));
+    if (1000.0f < magnitude) {
+        param_1[0] = dir[0] * 1000.0f;
+        param_1[1] = dir[1] * 1000.0f;
+        return;
+    }
+    param_1[0] = dir[0] * magnitude;
+    param_1[1] = magnitude * dir[1];
 }
 
 // 00BE5C40  ZangekiYokoStatePl0010::vf08  size=948  [class]
-undefined4 __thiscall ZangekiYokoStatePl0010::vf08(int param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  uint uVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  uint uVar6;
-  undefined *puVar7;
-  undefined4 uVar8;
-  undefined4 local_28;
-  int *local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  undefined4 local_14;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar6 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar7);
-    uVar6 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  local_24 = *(int **)(uVar6 + 0xc);
-  if (local_24 == (int *)0x0) {
-    local_24 = (int *)0x0;
-  }
-  else {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*local_24 + 4))(&DAT_01be9db8);
-    iVar1 = FUN_00dd6d80(puVar7);
-    local_24 = (int *)(-(uint)(iVar1 != 0) & (uint)local_24);
-  }
-  uVar2 = FUN_00bbc710(param_2);
-  *(undefined4 *)(param_1 + 0x38) = 0x41300000;
-  *(undefined4 *)(param_1 + 0x30) = uVar2;
-  *(undefined4 *)(param_1 + 0x8c) = 0;
-  *(undefined4 *)(param_1 + 0x3c) = 0;
-  *(undefined4 *)(param_1 + 0x40) = 0x42340000;
-  *(undefined4 *)(param_1 + 0x90) = 1;
-  *(undefined4 *)(param_1 + 0x44) = 0;
-  *(undefined4 *)(param_1 + 0x88) = 0;
-  *(undefined4 *)(param_1 + 0x58) = 0;
-  if (100 < *(uint *)(uVar6 + 0x308)) {
-    *(undefined4 *)(uVar6 + 0x308) = 0;
-  }
-  if (*(int *)(uVar6 + 0x30c) == 0) {
-    *(undefined4 *)(uVar6 + 0x308) = 0;
-  }
-  FUN_00b92af0(&local_20,param_2,
-               *(undefined4 *)
-                (*(int *)(*(int *)(uVar6 + 0x318) + 4) +
-                (*(uint *)(uVar6 + 0x308) % *(uint *)(*(int *)(uVar6 + 0x318) + 8)) * 4));
-  *(int *)(uVar6 + 0x308) = *(int *)(uVar6 + 0x308) + 1;
-  *(undefined4 *)(param_1 + 0x60) = local_20;
-  *(undefined4 *)(param_1 + 100) = local_1c;
-  local_28 = 0;
-  *(undefined4 *)(param_1 + 0x68) = local_18;
-  *(undefined4 *)(param_1 + 0x6c) = local_14;
-  *(undefined4 *)(param_1 + 0x84) = 0;
-  *(undefined4 *)(param_1 + 0x80) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x70) = 0x40a00000;
-  *(undefined4 *)(param_1 + 0x74) = 1;
-  *(undefined4 *)(param_1 + 0x78) = 0;
-  *(undefined4 *)(param_1 + 0x7c) = 0;
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar7);
-    uVar3 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  if (*(int *)(uVar3 + 0xe4) == 0) {
-    iVar1 = FUN_00bbc850(param_2);
-    if (iVar1 == 0) {
-      iVar1 = FUN_00bbb570(param_2);
-      if ((iVar1 != 0) || (*(int *)(uVar6 + 0x188) == 0)) {
-        local_28 = 1;
-      }
-    }
-    else {
-      local_28 = 0;
-    }
-  }
-  else {
-    local_28 = 1;
-  }
-  *(int *)(param_1 + 0x34) = *(int *)(param_1 + 0x30) + 1;
-  FUN_00bd3af0(param_2,&local_20,param_1 + 0x30,(int *)(param_1 + 0x34),local_28);
-  uVar8 = 0x41200000;
-  *(undefined4 *)(uVar6 + 0x5c4) = 0;
-  iVar1 = local_24[0x13c];
-  uVar2 = 0x3f490fdb;
-  iVar4 = (**(code **)(*local_24 + 0x84))(0x3f490fdb,0x41200000);
-  FUN_00c58e90(uVar6 + 0x5b8,iVar1,*(undefined4 *)(iVar4 + 4),uVar2,uVar8);
-  FUN_00bb9f50(param_2,param_1 + 0x60);
-  FUN_00b92f30(param_2,0);
-  *(undefined4 *)(param_1 + 0x48) = 0;
-  *(undefined4 *)(param_1 + 0x4c) = 0;
-  *(undefined4 *)(param_1 + 0x50) = 0;
-  *(undefined4 *)(uVar6 + 0x2f8) = 1;
-  puVar5 = (undefined4 *)FUN_00dd3500(4,&DAT_01b7c168);
-  if (puVar5 == (undefined4 *)0x0) {
-    puVar5 = (undefined4 *)0x0;
-  }
-  else {
-    *puVar5 = SlashFirstHitSlot::vftable;
-  }
-  *(undefined4 **)(param_1 + 0x9c) = puVar5;
-  puVar5 = (undefined4 *)FUN_00dd3500(4,&DAT_01b7c168);
-  if (puVar5 == (undefined4 *)0x0) {
-    puVar5 = (undefined4 *)0x0;
-  }
-  else {
-    *puVar5 = DatsuTargetCreateSlot::vftable;
-  }
-  *(undefined4 **)(param_1 + 0xa0) = puVar5;
-  puVar5 = (undefined4 *)FUN_00dd3500(4,&DAT_01b7c168);
-  if (puVar5 == (undefined4 *)0x0) {
-    puVar5 = (undefined4 *)0x0;
-  }
-  else {
-    *puVar5 = SlashKogekkoBallSlot::vftable;
-  }
-  *(undefined4 **)(param_1 + 0xa4) = puVar5;
-  puVar5 = (undefined4 *)FUN_00dd3500(4,&DAT_01b7c168);
-  if (puVar5 == (undefined4 *)0x0) {
-    puVar5 = (undefined4 *)0x0;
-  }
-  else {
-    *puVar5 = EntryCutTargetSlot::vftable;
-  }
-  *(undefined4 **)(param_1 + 0xa8) = puVar5;
-  if (*(int *)(param_1 + 0x9c) != 0) {
-    FUN_00d89ec0(0x13,*(int *)(param_1 + 0x9c));
-  }
-  if (*(int *)(param_1 + 0xa0) != 0) {
-    FUN_00d89ec0(0x14,*(int *)(param_1 + 0xa0));
-  }
-  if (*(int *)(param_1 + 0xa4) != 0) {
-    FUN_00d89ec0(0x1d,*(int *)(param_1 + 0xa4));
-  }
-  if (*(int *)(param_1 + 0xa8) != 0) {
-    FUN_00d89ec0(0x12,*(int *)(param_1 + 0xa8));
-  }
-  *(float *)(uVar6 + 0x3f8) = *(float *)(uVar6 + 0x3c0) * 57.29578 - 90.0;
-  local_24[0xb01] = 0x41200000;
-  *(undefined4 *)(param_1 + 0xb0) = 0;
-  *(undefined4 *)(param_1 + 0xb4) = 0;
-  *(undefined4 *)(param_1 + 0xb8) = 0;
-  uVar2 = FUN_00a7c7f0();
-  FUN_00a7c960(uVar2);
-  uVar2 = FUN_00a7c7f0();
-  FUN_00a7c960(uVar2);
-  return 1;
+bool ZangekiYokoStatePl0010::vf08(undefined4 param_1)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    undefined4 *context = (undefined4 *)param_1;
+    if (!StateMachineNode::vf08(param_1)) {
+        return false;
+    }
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    int motion = (int)FUN_00bbc710(context);
+    frameA() = 11.0f;
+    motion30() = motion;
+    delayTimer() = 0.0f;
+    frameAReached() = 0;
+    frameB() = 45.0f;
+    delayDone() = 1;
+    frameBReached() = 0;
+    firstHit() = 0;
+    field58() = 0;
+    /* StateMachineContextPl0010+0x308: cut-target table index, +0x30C: ? (0 = reset index) */
+    if (100 < at<unsigned int>(ctx, 0x308)) {
+        at<unsigned int>(ctx, 0x308) = 0;
+    }
+    if (at<int>(ctx, 0x30C) == 0) {
+        at<unsigned int>(ctx, 0x308) = 0;
+    }
+    /* StateMachineContextPl0010+0x318: table {+4 float data, +8 count} */
+    void *table = at<void *>(ctx, 0x318);
+    float target[4];
+    FUN_00b92af0((int *)target, context,
+                 at<float *>(table, 0x4)[at<unsigned int>(ctx, 0x308) % at<unsigned int>(table, 0x8)]);
+    at<unsigned int>(ctx, 0x308) = at<unsigned int>(ctx, 0x308) + 1;
+    cutTarget()[0] = target[0];
+    cutTarget()[1] = target[1];
+    int useAlternate = 0;
+    cutTarget()[2] = target[2];
+    cutTarget()[3] = target[3];
+    flag84() = 0;
+    counter80() = -1;
+    cutFrame() = 5.0f;
+    cutMode() = 1;
+    flag78() = 0;
+    flag7C() = 0;
+    StateMachineContextPl0010 *ctx2 = asContext(context);
+    if (at<int>(ctx2, 0xE4) != 0) {  /* StateMachineContextPl0010+0xE4: ? */
+        useAlternate = 1;
+    }
+    else if (FUN_00bbc850(context) != 0) {
+        useAlternate = 0;
+    }
+    else if (FUN_00bbb570(context) || at<int>(ctx, 0x188) == 0) {  /* StateMachineContextPl0010+0x188: ? */
+        useAlternate = 1;
+    }
+    motion34() = motion30() + 1;
+    FUN_00bd3af0(context, target, (undefined4 *)&motion30(), (undefined4 *)&motion34(), useAlternate);
+    at<int>(ctx, 0x5C4) = 0;  /* StateMachineContextPl0010+0x5C4: ? */
+    int value4F0 = at<int>(player, 0x4F0);  /* Pl0000+0x4F0: ? */
+    float *vec84 = vfunc<GetVec84Fn>(player, 0x84)(player);  // Pl0000::vf84
+    // The two float arguments are stored on the stack before the vf84 call (Ghidra attributed them to it).
+    ((CameraFn)FUN_00c58e90)(kCamera, (char *)ctx + 0x5B8, value4F0, vec84[1], 0.7853982f, 10.0f);
+    FUN_00bb9f50(context, cutTarget());
+    FUN_00b92f30(context, 0);
+    latch80() = 0;
+    latch40() = 0;
+    latch20() = 0;
+    at<int>(ctx, 0x2F8) = 1;  /* StateMachineContextPl0010+0x2F8: ? */
+    void *slot = ((AllocFn)FUN_00dd3500)(4, &DAT_01b7c168);
+    if (slot == 0) {
+        slot = 0;
+    }
+    else {
+        *(undefined4 *)slot = kSlashFirstHitSlotVftable;  // inlined SlashFirstHitSlot constructor
+    }
+    object9C() = (int *)slot;
+    slot = ((AllocFn)FUN_00dd3500)(4, &DAT_01b7c168);
+    if (slot == 0) {
+        slot = 0;
+    }
+    else {
+        *(undefined4 *)slot = kDatsuTargetCreateSlotVftable;  // inlined DatsuTargetCreateSlot constructor
+    }
+    objectA0() = (int *)slot;
+    slot = ((AllocFn)FUN_00dd3500)(4, &DAT_01b7c168);
+    if (slot == 0) {
+        slot = 0;
+    }
+    else {
+        *(undefined4 *)slot = kSlashKogekkoBallSlotVftable;  // inlined SlashKogekkoBallSlot constructor
+    }
+    objectA4() = (int *)slot;
+    slot = ((AllocFn)FUN_00dd3500)(4, &DAT_01b7c168);
+    if (slot == 0) {
+        slot = 0;
+    }
+    else {
+        *(undefined4 *)slot = kEntryCutTargetSlotVftable;  // inlined EntryCutTargetSlot constructor
+    }
+    objectA8() = (int *)slot;
+    if (object9C() != 0) {
+        ((ListAddFn)FUN_00d89ec0)(0x13, object9C());
+    }
+    if (objectA0() != 0) {
+        ((ListAddFn)FUN_00d89ec0)(0x14, objectA0());
+    }
+    if (objectA4() != 0) {
+        ((ListAddFn)FUN_00d89ec0)(0x1D, objectA4());
+    }
+    if (objectA8() != 0) {
+        ((ListAddFn)FUN_00d89ec0)(0x12, objectA8());
+    }
+    /* StateMachineContextPl0010+0x3F8 / +0x3C0: angle in degrees from radians */
+    at<float>(ctx, 0x3F8) = at<float>(ctx, 0x3C0) * 57.29578f - 90.0f;
+    at<float>(player, 0x2C04) = 10.0f;  /* Pl0000+0x2C04: ? */
+    vf214Count() = 0;
+    vf214Pending() = 0;
+    flagB8() = 0;
+    /* StateMachineContextPl0010+0x38C / +0x390: objects whose +0x4F0 handle is copied */
+    FUN_00a7c960(&handle94(), (undefined4 *)FUN_00a7c7f0(at<int>(at<void *>(ctx, 0x38C), 0x4F0)));
+    FUN_00a7c960(&handle98(), (undefined4 *)FUN_00a7c7f0(at<int>(at<void *>(ctx, 0x390), 0x4F0)));
+    return true;
 }
 
 // 00BE6000  ZangekiYokoStatePl0010::qteSafeCheck  size=1532  [class]
-void __thiscall ZangekiYokoStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  uint uVar4;
-  int *piVar5;
-  undefined4 uVar6;
-  int *piVar7;
-  float10 fVar8;
-  undefined *puVar9;
-  float fStack_8;
-  float fStack_4;
-  
-  puVar2 = param_2;
-  piVar7 = (int *)0x0;
-  if (param_2 == (undefined4 *)0x0) {
-    param_2 = (undefined4 *)0x0;
-  }
-  else {
-    puVar9 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar9);
-    param_2 = (undefined4 *)(-(uint)(iVar3 != 0) & (uint)param_2);
-  }
-  piVar5 = *(int **)((int)param_2 + 0xc);
-  if (piVar5 != (int *)0x0) {
-    puVar9 = &DAT_01be9db8;
-    (**(code **)(*piVar5 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar9);
-    piVar7 = (int *)(-(uint)(iVar3 != 0) & (uint)piVar5);
-  }
-  if (puVar2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9ef4;
-    (**(code **)*puVar2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar9);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)puVar2;
-  }
-  if (*(int *)(uVar4 + 0x56c) != 0) {
-    FUN_00d82510(0x35,100);
-  }
-  if ((((*(int *)((int)param_2 + 0x528) != 0) &&
-       (iVar3 = FUN_00a952e0(*(undefined4 *)(param_1 + 0x30),0x41200000), iVar3 != 0)) &&
-      (iVar3 = FUN_00a81330(), iVar3 != 0)) &&
-     (piVar5 = (int *)FUN_00a7c8a0(), piVar5 != (int *)0x0)) {
-    puVar9 = &DAT_01b35260;
-    (**(code **)(*piVar5 + 4))(&DAT_01b35260);
-    iVar3 = FUN_00dd6d80(puVar9);
-    if (iVar3 != 0) {
-      FUN_005ca1a0(2);
-    }
-  }
-  if (DAT_01d61ac4 != 0) {
-    *(undefined4 *)(param_1 + 0x44) = 0;
-    *(undefined4 *)(param_1 + 0x8c) = 0x40a00000;
-    DAT_01d61ac4 = 0;
-    *(undefined4 *)(param_1 + 0xb4) = 1;
-  }
-  if ((*(int *)(param_1 + 0x90) == 0) && (0.0 < *(float *)(param_1 + 0x8c))) {
-    fVar8 = (float10)FUN_00e049b0();
-    fVar8 = (float10)*(float *)(param_1 + 0x8c) - fVar8;
-    *(float *)(param_1 + 0x8c) = (float)fVar8;
-    if (fVar8 < (float10)0) {
-      *(undefined4 *)(param_1 + 0x90) = 1;
-    }
-  }
-  if (((piVar7[0x1023] != 0) && (*(int *)(param_1 + 0xb4) != 0)) &&
-     (*(int *)(param_1 + 0xb0) < piVar7[0x1024])) {
-    iVar3 = *piVar7;
-    uVar6 = FUN_00fdbc60();
-    uVar6 = FUN_00fdbc60(piVar7[0x1026],uVar6);
-    (**(code **)(iVar3 + 0x214))(uVar6);
-    *(int *)(param_1 + 0xb0) = *(int *)(param_1 + 0xb0) + 1;
-    *(undefined4 *)(param_1 + 0xb4) = 0;
-  }
-  FUN_00bbc9f0(&fStack_8,puVar2);
-  FUN_00bd61b0(puVar2);
-  if (*(int *)(param_1 + 0x30) != -1) {
-    iVar3 = FUN_00a952e0(*(int *)(param_1 + 0x30),*(undefined4 *)(param_1 + 0x70));
-    if (iVar3 != 0) {
-      FUN_00bd43f0(puVar2,param_1 + 0x60,*(undefined4 *)(param_1 + 0x74));
-      if (*(int *)((int)param_2 + 0x520) != 0) {
-        FUN_00bd5700(puVar2,param_1 + 0x60,1);
-      }
-    }
-    if (*(int *)((int)param_2 + 0x3e0) != 0) {
-      *(undefined4 *)(param_1 + 0x88) = 1;
-      *(undefined4 *)((int)param_2 + 0x3e0) = 0;
-      FUN_00bd43f0(puVar2,param_1 + 0x60,*(undefined4 *)(param_1 + 0x74));
-    }
-    iVar3 = piVar7[0x1032];
-    if (((((iVar3 == 2) || (iVar3 == 0xe)) || (iVar3 == 8)) &&
-        (((DAT_01bea090 & 0x80000800) == 0 &&
-         ((*(int *)((int)param_2 + 0x3e4) != 0 || (*(int *)((int)param_2 + 1000) != 0)))))) &&
-       (*(int *)(param_1 + 0x84) == 0)) {
-      *(undefined4 *)(param_1 + 0x84) = 1;
-      *(undefined4 *)(param_1 + 0x80) = 1;
-    }
-    piVar5 = (int *)(param_1 + 0x80);
-    *piVar5 = *piVar5 + -1;
-    if (*piVar5 < 0) {
-      *(undefined4 *)(param_1 + 0x80) = 0;
-    }
-    if (((*(int *)(param_1 + 0x84) != 0) && (*(int *)(param_1 + 0x78) == 0)) &&
-       (fStack_8 = (float)FUN_00a959f0(*(undefined4 *)(param_1 + 0x30)),
-       12.0 <= (float)(int)fStack_8)) {
-      *(undefined4 *)(param_1 + 0x78) = 1;
-      *(undefined4 *)(param_1 + 0x7c) = 1;
-      FUN_0085c270();
-      *(undefined4 *)((int)param_2 + 0x3e4) = 0;
-      *(undefined4 *)((int)param_2 + 0x2f4) = 1;
-    }
-    if ((*(int *)(param_1 + 0x7c) != 0) &&
-       (fStack_8 = (float)FUN_00a959f0(*(undefined4 *)(param_1 + 0x30)),
-       12.0 <= (float)(int)fStack_8)) {
-      *(undefined4 *)(param_1 + 0x7c) = 0;
-      FUN_00bbbef0(puVar2,0);
-      *(undefined4 *)(param_1 + 0xb8) = 1;
-    }
-  }
-  if ((*(int *)(param_1 + 0x3c) == 0) &&
-     (iVar3 = FUN_00a952e0(*(undefined4 *)(param_1 + 0x30),*(undefined4 *)(param_1 + 0x38)),
-     iVar3 != 0)) {
-    *(undefined4 *)(param_1 + 0x3c) = 1;
-  }
-  if ((*(int *)(param_1 + 0x44) == 0) &&
-     (iVar3 = FUN_00a952e0(*(undefined4 *)(param_1 + 0x30),*(undefined4 *)(param_1 + 0x40)),
-     iVar3 != 0)) {
-    *(undefined4 *)(param_1 + 0x44) = 1;
-  }
-  if ((*(int *)(param_1 + 0x3c) == 0) || (*(int *)(param_1 + 0x90) == 0)) {
-    if ((*(byte *)(piVar7 + 0x33f) & 0x40) != 0) {
-      *(undefined4 *)(param_1 + 0x4c) = 1;
-    }
-    if ((*(byte *)(piVar7 + 0x33f) & 0x80) != 0) {
-      *(undefined4 *)(param_1 + 0x48) = 1;
-    }
-    if ((*(byte *)(piVar7 + 0x33f) & 0x20) != 0) {
-      *(undefined4 *)(param_1 + 0x50) = 1;
-    }
-  }
-  else {
-    *(undefined4 *)((int)param_2 + 0x2f8) = 0;
-    if (*(int *)((int)param_2 + 0x500) == 0) {
-      if (((*(byte *)(piVar7 + 0x33f) & 0x40) != 0) || (*(int *)(param_1 + 0x4c) != 0)) {
-        FUN_00bbaf90(puVar2,param_1,0x50,1,0);
-      }
-      if (((*(byte *)(piVar7 + 0x33f) & 0x80) != 0) || (*(int *)(param_1 + 0x48) != 0)) {
-        FUN_00bbaed0(puVar2,param_1,0x50,1,0);
-      }
-    }
-    FUN_00bd6eb0(puVar2,param_1,0x32,0);
-  }
-  if (((*(int *)(param_1 + 0x3c) != 0) || (iVar3 = FUN_00a8c760(0), iVar3 != 0)) &&
-     (*(int *)(param_1 + 0xb8) == 0)) {
-    *(undefined4 *)((int)param_2 + 0x2f8) = 0;
-    FUN_00bbc9f0(&fStack_8,puVar2);
-    if (200.0 < ABS(fStack_4) + ABS(fStack_8)) {
-      FUN_00d82510(0x36,0x19);
-    }
-  }
-  iVar3 = FUN_00a952e0(*(undefined4 *)(param_1 + 0x30),0x42700000);
-  if ((iVar3 != 0) && (*(int *)(param_1 + 0x88) != 0)) {
-    *(undefined4 *)(param_1 + 0x88) = 0;
-    if ((*(int *)(param_1 + 0x78) == 0) &&
-       ((0.0 < (float)piVar7[0xd07] && ((float)piVar7[0xd08] < 0.1)))) {
-      FUN_00bbc0e0(puVar2,0x3e99999a,(float)piVar7[0xd07] * 5.0000005,0x3f4ccccd,0x3dcccccd);
-    }
-    if ((*(int *)(param_1 + 0x78) != 0) && (*(int *)((int)param_2 + 0x3c8) != 0)) {
-      FUN_00b8bd70();
-    }
-  }
-  if ((*(int *)((int)param_2 + 0x2f4) != 0) && ((float)piVar7[0xd0f] < 0.0)) {
-    *(undefined4 *)((int)param_2 + 0x2f4) = 0;
-  }
-  if (*(int *)(param_1 + 0xb8) != 0) {
-    puVar1 = (undefined4 *)piVar7[500];
-    if (puVar1 != (undefined4 *)0x0) {
-      puVar9 = &DAT_01be9ef4;
-      (**(code **)*puVar1)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar9);
-      if (iVar3 != 0) {
-        puVar1[0x176] = 0x41200000;
-      }
-    }
-    if ((*(int *)(param_1 + 0xb8) != 0) && (*(float *)((int)param_2 + 0x5cc) < 0.0)) {
-      *(undefined4 *)(param_1 + 0xb8) = 0;
-      FUN_00bbc0e0(puVar2,0x3e99999a,0x43340000,0x3f800000,0x3dcccccd);
-    }
-  }
-  FUN_00bbb430(puVar2,param_1,100);
-  FUN_00bbc390(puVar2);
-  StateMachineNode::qteSafeCheck(puVar2);
-  return;
+void ZangekiYokoStatePl0010::qteSafeCheck(undefined4 *param_2)
+{
+    using namespace ZangekiYokoStatePl0010_p2;
+    StateMachineContextPl0010 *ctx = asContext(param_2);
+    Pl0000 *player = ownerOf(ctx);
+    StateMachineContextPl0010 *ctx2 = asContext(param_2);
+    if (at<int>(ctx2, 0x56C) != 0) {  /* StateMachineContextPl0010+0x56C: ? */
+        FUN_00d82510((int)this, 0x35, 100);
+    }
+    if (at<int>(ctx, 0x528) != 0 &&  /* StateMachineContextPl0010+0x528: ? */
+        ((FrameReachedFn)FUN_00a952e0)((int)player, motion30(), 10.0f) != 0) {
+        /* StateMachineContextPl0010+0x4BC: target handle */
+        undefined4 handle = FUN_00a81330(&at<uint>(ctx, 0x4BC));
+        if (handle != 0) {
+            int targetObject = (int)FUN_00a7c8a0((int)handle);
+            if (targetObject != 0 && isKindOf((void *)targetObject, 0x4, kSlashTargetType) != 0) {
+                FUN_005ca1a0(targetObject, 2);
+            }
+        }
+    }
+    if (DAT_01d61ac4 != 0) {
+        frameBReached() = 0;
+        delayTimer() = 5.0f;
+        DAT_01d61ac4 = 0;
+        vf214Pending() = 1;
+    }
+    if (delayDone() == 0 && 0.0f < delayTimer()) {
+        float10 remaining = (float10)delayTimer() - FUN_00e049b0((int *)kFrameTimer);
+        delayTimer() = (float)remaining;
+        if (remaining < (float10)0) {
+            delayDone() = 1;
+        }
+    }
+    if (at<int>(player, 0x408C) != 0 && vf214Pending() != 0 &&  /* Pl0000+0x408C: ? */
+        vf214Count() < at<int>(player, 0x4090)) {                 /* Pl0000+0x4090: ? */
+        int c = (int)at<float>(player, 0x409C);  // _ftol2 (FUN_00fdbc60)  /* Pl0000+0x409C: ? */
+        float b = at<float>(player, 0x4098);                                /* Pl0000+0x4098: ? */
+        int a = (int)at<float>(player, 0x4094);  // _ftol2 (FUN_00fdbc60)  /* Pl0000+0x4094: ? */
+        vfunc<PlayerVf214Fn>(player, 0x214)(player, a, b, c);
+        vf214Count() = vf214Count() + 1;
+        vf214Pending() = 0;
+    }
+    float stick[2];
+    FUN_00bbc9f0(stick, param_2);
+    FUN_00bd61b0(param_2);
+    if (motion30() != -1) {
+        if (((FrameReachedFn)FUN_00a952e0)((int)player, motion30(), cutFrame()) != 0) {
+            ((CutAtFn)FUN_00bd43f0)(param_2, cutTarget(), cutMode());
+            if (at<int>(ctx, 0x520) != 0) {  /* StateMachineContextPl0010+0x520: ? */
+                FUN_00bd5700(param_2, cutTarget(), 1);
+            }
+        }
+        if (at<int>(ctx, 0x3E0) != 0) {  /* StateMachineContextPl0010+0x3E0: first slash hit */
+            firstHit() = 1;
+            at<int>(ctx, 0x3E0) = 0;
+            ((CutAtFn)FUN_00bd43f0)(param_2, cutTarget(), cutMode());
+        }
+        int mode = at<int>(player, 0x40C8);  /* Pl0000+0x40C8: ? */
+        if ((mode == 2 || mode == 0xE || mode == 8) &&
+            (DAT_01bea090 & 0x80000800) == 0 &&
+            (at<int>(ctx, 0x3E4) != 0 || at<int>(ctx, 0x3E8) != 0) &&  /* StateMachineContextPl0010+0x3E4/+0x3E8 */
+            flag84() == 0) {
+            flag84() = 1;
+            counter80() = 1;
+        }
+        counter80() = counter80() - 1;
+        if (counter80() < 0) {
+            counter80() = 0;
+        }
+        if (flag84() != 0 && flag78() == 0 &&
+            12.0f <= (float)((CurrentFrameFn)FUN_00a959f0)((int)player, motion30())) {
+            flag78() = 1;
+            flag7C() = 1;
+            ((PlayerFn)FUN_0085c270)((int)player);
+            at<int>(ctx, 0x3E4) = 0;
+            at<int>(ctx, 0x2F4) = 1;  /* StateMachineContextPl0010+0x2F4: ? */
+        }
+        if (flag7C() != 0 &&
+            12.0f <= (float)((CurrentFrameFn)FUN_00a959f0)((int)player, motion30())) {
+            flag7C() = 0;
+            FUN_00bbbef0(param_2, 0);
+            flagB8() = 1;
+        }
+    }
+    if (frameAReached() == 0 &&
+        ((FrameReachedFn)FUN_00a952e0)((int)player, motion30(), frameA()) != 0) {
+        frameAReached() = 1;
+    }
+    if (frameBReached() == 0 &&
+        ((FrameReachedFn)FUN_00a952e0)((int)player, motion30(), frameB()) != 0) {
+        frameBReached() = 1;
+    }
+    /* Pl0000+0xCFC: pressed-button mask */
+    if (frameAReached() == 0 || delayDone() == 0) {
+        if ((at<unsigned char>(player, 0xCFC) & 0x40) != 0) {
+            latch40() = 1;
+        }
+        if ((at<unsigned char>(player, 0xCFC) & 0x80) != 0) {
+            latch80() = 1;
+        }
+        if ((at<unsigned char>(player, 0xCFC) & 0x20) != 0) {
+            latch20() = 1;
+        }
+    }
+    else {
+        at<int>(ctx, 0x2F8) = 0;  /* StateMachineContextPl0010+0x2F8: ? */
+        if (at<int>(ctx, 0x500) == 0) {  /* StateMachineContextPl0010+0x500: ? */
+            if ((at<unsigned char>(player, 0xCFC) & 0x40) != 0 || latch40() != 0) {
+                FUN_00bbaf90(param_2, (undefined4)this, 0x50, 1, 0);
+            }
+            if ((at<unsigned char>(player, 0xCFC) & 0x80) != 0 || latch80() != 0) {
+                FUN_00bbaed0(param_2, (undefined4)this, 0x50, 1, 0);
+            }
+        }
+        ((FollowUpFn)FUN_00bd6eb0)(param_2, this, 0x32, 0);
+    }
+    if ((frameAReached() != 0 || FUN_00a8c760((int)player, 0)) && flagB8() == 0) {
+        at<int>(ctx, 0x2F8) = 0;
+        FUN_00bbc9f0(stick, param_2);
+        if (200.0f < fabs(stick[1]) + fabs(stick[0])) {
+            FUN_00d82510((int)this, 0x36, 0x19);
+        }
+    }
+    if (((FrameReachedFn)FUN_00a952e0)((int)player, motion30(), 60.0f) != 0 && firstHit() != 0) {
+        firstHit() = 0;
+        if (flag78() == 0) {
+            /* Pl0000+0x341C / +0x3420: ? */
+            if (0.0f < at<float>(player, 0x341C) && at<float>(player, 0x3420) < 0.1f) {
+                ((CameraShakeFn)FUN_00bbc0e0)(param_2, 0.3f, at<float>(player, 0x341C) * 5.0000005f, 0.8f, 0.1f);
+            }
+        }
+        if (flag78() != 0 && at<int>(ctx, 0x3C8) != 0) {  /* StateMachineContextPl0010+0x3C8: ? */
+            FUN_00b8bd70((int)player);
+        }
+    }
+    if (at<int>(ctx, 0x2F4) != 0 && at<float>(player, 0x343C) < 0.0f) {  /* Pl0000+0x343C: ? */
+        at<int>(ctx, 0x2F4) = 0;
+    }
+    if (flagB8() != 0) {
+        undefined4 *playerContext = at<undefined4 *>(player, 0x7D0);  /* Pl0000+0x7D0: state machine context */
+        if (playerContext != 0 && isKindOf(playerContext, 0x0, kStateMachineContextPl0010Type) != 0) {
+            at<float>(playerContext, 0x5D8) = 10.0f;  /* StateMachineContextPl0010+0x5D8: ? */
+        }
+        if (flagB8() != 0 && at<float>(ctx, 0x5CC) < 0.0f) {  /* StateMachineContextPl0010+0x5CC: timer */
+            flagB8() = 0;
+            ((CameraShakeFn)FUN_00bbc0e0)(param_2, 0.3f, 180.0f, 1.0f, 0.1f);
+        }
+    }
+    FUN_00bbb430(param_2, (undefined4)this, 100);
+    FUN_00bbc390(param_2);
+    StateMachineNode::qteSafeCheck(param_2);
 }
-
