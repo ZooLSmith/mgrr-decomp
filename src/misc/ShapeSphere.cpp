@@ -1,7 +1,8 @@
 // src/misc/ShapeSphere.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6AD40..00A6CA80, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ShapeSphere.h"
 
 // 00A6AD40  ShapeSphere::vf18  size=34  [class]
 void __thiscall ShapeSphere::vf18(int param_1,undefined4 param_2)

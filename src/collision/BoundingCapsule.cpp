@@ -1,7 +1,8 @@
 // src/collision/BoundingCapsule.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A68250..00A6AB40, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BoundingCapsule.h"
 
 // 00A68250  BoundingCapsule::vf14  size=481  [class]
 undefined4 __thiscall BoundingCapsule::vf14(int *param_1,float *param_2,float *param_3)

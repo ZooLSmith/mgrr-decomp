@@ -1,7 +1,8 @@
 // src/room/r301.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A71440..00A7B6F0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R301.h"
 
 // 00A71440  R301::vf04  size=26  [class]
 void __fastcall R301::vf04(int param_1)

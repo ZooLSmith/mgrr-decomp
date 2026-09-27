@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CDD260.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDD260..00CDD410, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CDD260  FUN_00cdd260  size=424  [run]
 void __fastcall FUN_00cdd260(int param_1)

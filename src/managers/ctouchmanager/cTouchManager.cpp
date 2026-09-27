@@ -1,7 +1,8 @@
 // src/managers/ctouchmanager/cTouchManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009835F0..00983780, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTouchManager.h"
 
 // 009835F0  cTouchManager::cTouchManager  size=74  [class]
 void __fastcall cTouchManager::cTouchManager(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/ui/cUIDrawBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CA8880..00CE5320, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDrawBase.h"
 
 // 00CA8880  cUIDrawBase::vf04  size=1  [class]
 void cUIDrawBase::vf04(void)

@@ -1,7 +1,8 @@
 // src/misc/DebrisExplodeParameterImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093DDB0..009445C0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DebrisExplodeParameterImplement.h"
 
 // 0093DDB0  DebrisExplodeParameterImplement::vf28  size=3  [class]
 void DebrisExplodeParameterImplement::vf28(void)

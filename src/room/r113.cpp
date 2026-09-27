@@ -1,7 +1,8 @@
 // src/room/r113.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A71190..00A7B5B0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R113.h"
 
 // 00A71190  R113::vf04  size=26  [class]
 void __fastcall R113::vf04(int param_1)

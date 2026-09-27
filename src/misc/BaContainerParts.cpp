@@ -1,7 +1,9 @@
 // src/misc/BaContainerParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0047F010..00AB9700, 26 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BaContainerParts.h"
+#include "hkpCdPointCollector.h"
 
 // 0047F010  BaContainerParts::vf50  size=41  [class]
 void __fastcall BaContainerParts::vf50(int param_1)

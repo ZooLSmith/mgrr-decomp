@@ -1,7 +1,8 @@
 // src/misc/RadarMapObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005FF430..00AB8C70, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RadarMapObj.h"
 
 // 005FF430  RadarMapObj::vf40  size=28  [class]
 undefined4 RadarMapObj::vf40(void)

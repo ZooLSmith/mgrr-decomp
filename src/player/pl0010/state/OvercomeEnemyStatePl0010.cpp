@@ -1,7 +1,8 @@
 // src/player/pl0010/state/OvercomeEnemyStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B820E0..00BE02E0, 17 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "OvercomeEnemyStatePl0010.h"
 
 // 00B820E0  OvercomeEnemyStatePl0010::vf08  size=49  [class]
 undefined4 __thiscall OvercomeEnemyStatePl0010::vf08(int param_1,undefined4 param_2)

@@ -1,7 +1,7 @@
 // src/lib/OutputTextArchive.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E932F0..00EA8170, 23 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E932F0  lib::OutputTextArchive<lib::Array<char>,32>::vf00  size=3  [class]
 undefined1 lib::OutputTextArchive<lib::Array<char>,32>::vf00(void)

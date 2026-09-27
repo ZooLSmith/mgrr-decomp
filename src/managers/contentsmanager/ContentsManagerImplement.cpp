@@ -1,7 +1,8 @@
 // src/managers/contentsmanager/ContentsManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DF6D0..008DF870, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContentsManagerImplement.h"
 
 // 008DF6D0  ContentsManagerImplement::vf10  size=44  [class]
 undefined4 __fastcall ContentsManagerImplement::vf10(int param_1)

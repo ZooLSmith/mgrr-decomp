@@ -1,7 +1,8 @@
 // src/managers/cuidatamanager/cUIDataManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF72B0..00CF72B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDataManager.h"
 
 // 00CF72B0  cUIDataManager::vf00  size=30  [class]
 undefined4 __thiscall cUIDataManager::vf00(undefined4 param_1,byte param_2)

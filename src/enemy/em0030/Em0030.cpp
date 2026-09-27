@@ -1,7 +1,8 @@
 // src/enemy/em0030/Em0030.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAC5A0..00B741F0, 208 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0030.h"
 
 // 00AAC5A0  Em0030::Em0030  size=230  [class]
 undefined4 * __fastcall Em0030::Em0030(undefined4 *param_1)

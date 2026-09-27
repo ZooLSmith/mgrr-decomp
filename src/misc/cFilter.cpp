@@ -1,7 +1,8 @@
 // src/misc/cFilter.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EBDF20..00EC2D70, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilter.h"
 
 // 00EBDF20  cFilter::vf04  size=4316  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

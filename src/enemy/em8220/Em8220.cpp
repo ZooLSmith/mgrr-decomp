@@ -1,7 +1,8 @@
 // src/enemy/em8220/Em8220.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006E94B0..00ABA700, 255 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8220.h"
 
 // 006E94B0  FUN_006e94b0  size=28  [callgraph]
 undefined4 __fastcall FUN_006e94b0(int param_1)

@@ -1,7 +1,8 @@
 // src/effect/et9200/Et9200.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D7860..00AB8F50, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et9200.h"
 
 // 005D7860  Et9200::vf50  size=32  [class]
 void __fastcall Et9200::vf50(int param_1)

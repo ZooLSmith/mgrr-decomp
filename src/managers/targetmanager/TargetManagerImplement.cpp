@@ -1,7 +1,8 @@
 // src/managers/targetmanager/TargetManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C15740..00C59850, 25 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "TargetManagerImplement.h"
 
 // 00C15740  TargetManagerImplement::TargetManagerImplement  size=29  [class]
 undefined4 * __fastcall TargetManagerImplement::TargetManagerImplement(undefined4 *param_1)

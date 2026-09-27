@@ -1,7 +1,8 @@
 // src/misc/cEnemyTargetDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C6F0..00D23F20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyTargetDispBase.h"
 
 // 00D0C6F0  cEnemyTargetDispBase::cEnemyTargetDispBase  size=18  [class]
 undefined4 * __fastcall cEnemyTargetDispBase::cEnemyTargetDispBase(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/boss/bm6040/Bm6040.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00604170..00AB9AD0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm6040.h"
 
 // 00604170  Bm6040::vf40  size=58  [class]
 undefined4 __fastcall Bm6040::vf40(int param_1)

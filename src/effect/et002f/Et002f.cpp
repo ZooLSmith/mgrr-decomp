@@ -1,7 +1,8 @@
 // src/effect/et002f/Et002f.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D1260..00AB8190, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et002f.h"
 
 // 005D1260  Et002f::vf44  size=39  [class]
 void __fastcall Et002f::vf44(int param_1)

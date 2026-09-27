@@ -1,7 +1,7 @@
 // src/graphics/Vram.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A1D7B0..00A1D7B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A1D7B0  Vram::transfarVramToMainMemory  size=59  [class]
 void Vram::transfarVramToMainMemory(void)

@@ -1,7 +1,8 @@
 // src/misc/cRpgSiteBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F3B0..00D25CB0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRpgSiteBase.h"
 
 // 00D0F3B0  cRpgSiteBase::cRpgSiteBase  size=18  [class]
 undefined4 * __fastcall cRpgSiteBase::cRpgSiteBase(undefined4 *param_1)

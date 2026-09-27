@@ -1,7 +1,8 @@
 // src/misc/cEnemyLogParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEDFD0..00D3C200, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyLogParts.h"
 
 // 00CEDFD0  cEnemyLogParts::vf00  size=30  [class]
 undefined4 __thiscall cEnemyLogParts::vf00(undefined4 param_1,byte param_2)

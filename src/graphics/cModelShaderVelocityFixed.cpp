@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderVelocityFixed.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F934B0..00F95380, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderVelocityFixed.h"
 
 // 00F934B0  cModelShaderVelocityFixed::cModelShaderVelocityFixed  size=265  [class]
 /* WARNING: Removing unreachable block (ram,0x00f934ed) */

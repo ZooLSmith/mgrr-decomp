@@ -1,7 +1,8 @@
 // lib/havok/unit_00BEA280.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BEA280..00BEA280, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpAllCdPointCollector.h"
 
 // 00BEA280  hkpAllCdPointCollector::hkpAllCdPointCollector_20  size=1143  [run]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

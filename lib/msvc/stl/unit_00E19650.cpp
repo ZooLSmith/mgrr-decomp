@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E19650.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E19650..00E19700, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E19650  std::basic_iostream<char,std::char_traits<char>_>::vf00  size=85  [run]
 ios_base * __thiscall

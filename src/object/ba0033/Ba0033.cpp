@@ -1,7 +1,8 @@
 // src/object/ba0033/Ba0033.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00404C00..00AB96A0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0033.h"
 
 // 00404C00  Ba0033::vf4C  size=206  [class]
 void __fastcall Ba0033::vf4C(int param_1)

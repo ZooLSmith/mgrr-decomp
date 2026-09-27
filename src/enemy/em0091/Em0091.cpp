@@ -1,7 +1,8 @@
 // src/enemy/em0091/Em0091.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CC90..00AB9220, 35 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0091.h"
 
 // 0049CC90  FUN_0049cc90  size=31  [callgraph]
 void FUN_0049cc90(uint param_1)

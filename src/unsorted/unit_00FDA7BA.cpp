@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FDA7BA.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDA7BA..00FDA7BA, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDA7BA  FUN_00fda7ba  size=41  [run]
 void FUN_00fda7ba(void)

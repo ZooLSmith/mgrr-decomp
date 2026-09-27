@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPT.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C500..00F8AEB0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPT.h"
 
 // 00F5C500  cEspShaderSoftPT::vf0C  size=1  [class]
 void cEspShaderSoftPT::vf0C(void)

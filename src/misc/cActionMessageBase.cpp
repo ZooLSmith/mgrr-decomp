@@ -1,7 +1,8 @@
 // src/misc/cActionMessageBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0BCF0..00D20D10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cActionMessageBase.h"
 
 // 00D0BCF0  cActionMessageBase::cActionMessageBase  size=18  [class]
 undefined4 * __fastcall cActionMessageBase::cActionMessageBase(undefined4 *param_1)

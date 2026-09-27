@@ -1,7 +1,8 @@
 // src/effect/cEsp22DrawWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED8650..00F3F9E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEsp22DrawWork.h"
 
 // 00ED8650  cEsp22DrawWork::vf04  size=25  [class]
 void cEsp22DrawWork::vf04(void)

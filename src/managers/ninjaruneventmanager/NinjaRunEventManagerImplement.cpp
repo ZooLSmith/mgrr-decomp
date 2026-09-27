@@ -1,7 +1,8 @@
 // src/managers/ninjaruneventmanager/NinjaRunEventManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1BA90..00C629B0, 29 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "NinjaRunEventManagerImplement.h"
 
 // 00C1BA90  NinjaRunEventManagerImplement::PhantomUnit::vf00  size=31  [class]
 void __fastcall NinjaRunEventManagerImplement::PhantomUnit::vf00(int *param_1)

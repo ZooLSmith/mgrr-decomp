@@ -1,7 +1,8 @@
 // src/misc/cCodecCallAlarm.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB6190..00D2B1F0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecCallAlarm.h"
 
 // 00CB6190  cCodecCallAlarm::vf08  size=101  [class]
 void __fastcall cCodecCallAlarm::vf08(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/TelegraphNetContents.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DC430..008DF470, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "TelegraphNetContents.h"
 
 // 008DC430  TelegraphNetContents::RoomReadySlot::vf10  size=1  [class]
 void TelegraphNetContents::RoomReadySlot::vf10(void)

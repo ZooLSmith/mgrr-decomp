@@ -1,7 +1,7 @@
 // src/misc/cHeapFixed.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD3DD0..00DD3DD0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD3DD0  cHeapFixed::allocImpl  size=198  [class]
 undefined4 * __thiscall cHeapFixed::allocImpl(int param_1,int param_2,int param_3,int param_4)

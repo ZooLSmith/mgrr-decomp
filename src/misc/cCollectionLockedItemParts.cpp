@@ -1,7 +1,8 @@
 // src/misc/cCollectionLockedItemParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098BBA0..0099D510, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionLockedItemParts.h"
 
 // 0098BBA0  cCollectionLockedItemParts::cCollectionLockedItemParts  size=55  [class]
 undefined4 * __fastcall cCollectionLockedItemParts::cCollectionLockedItemParts(undefined4 *param_1)

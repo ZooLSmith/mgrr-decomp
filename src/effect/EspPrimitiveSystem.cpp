@@ -1,7 +1,7 @@
 // src/effect/EspPrimitiveSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F51100..00F51100, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F51100  EspPrimitiveSystem::createIndexBuffer  size=84  [class]
 bool EspPrimitiveSystem::createIndexBuffer(undefined4 param_1,uint param_2,int param_3)

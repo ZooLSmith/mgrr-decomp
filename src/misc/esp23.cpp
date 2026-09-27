@@ -1,7 +1,8 @@
 // src/misc/esp23.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0920..00F390C0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp23.h"
 
 // 00ED0920  esp23::vf00  size=54  [class]
 undefined4 __thiscall esp23::vf00(undefined4 param_1,byte param_2)

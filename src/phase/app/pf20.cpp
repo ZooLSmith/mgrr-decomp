@@ -1,7 +1,8 @@
 // src/phase/app/pf20.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47730..00D707E0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pf20.h"
 
 // 00D47730  Pf20::vf18  size=1  [class]
 void Pf20::vf18(void)

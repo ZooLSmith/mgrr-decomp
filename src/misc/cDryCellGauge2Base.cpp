@@ -1,7 +1,8 @@
 // src/misc/cDryCellGauge2Base.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0BA70..00D22B70, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDryCellGauge2Base.h"
 
 // 00D0BA70  cDryCellGauge2Base::cDryCellGauge2Base  size=18  [class]
 undefined4 * __fastcall cDryCellGauge2Base::cDryCellGauge2Base(undefined4 *param_1)

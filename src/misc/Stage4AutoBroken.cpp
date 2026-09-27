@@ -1,7 +1,8 @@
 // src/misc/Stage4AutoBroken.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040D0D0..00AB9670, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Stage4AutoBroken.h"
 
 // 0040D0D0  Stage4AutoBroken::vf40  size=169  [class]
 undefined4 __fastcall Stage4AutoBroken::vf40(int param_1)

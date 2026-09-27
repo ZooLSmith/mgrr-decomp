@@ -1,7 +1,8 @@
 // src/misc/esp31.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED05B0..00F358C0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp31.h"
 
 // 00ED05B0  esp31::esp31  size=18  [class]
 undefined4 * __fastcall esp31::esp31(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/misc/esp20.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED8630..00F40860, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp20.h"
 
 // 00ED8630  esp20::vf10  size=1  [class]
 void esp20::vf10(void)

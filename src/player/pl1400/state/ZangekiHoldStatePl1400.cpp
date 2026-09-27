@@ -1,7 +1,8 @@
 // src/player/pl1400/state/ZangekiHoldStatePl1400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085F6D0..00895EC0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiHoldStatePl1400.h"
 
 // 0085F6D0  ZangekiHoldStatePl1400::vf0C  size=5  [class]
 void __thiscall ZangekiHoldStatePl1400::vf0C(int param_1,undefined4 param_2)

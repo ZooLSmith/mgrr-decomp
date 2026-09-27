@@ -1,7 +1,8 @@
 // src/misc/esp51DrawWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EDAC40..00F3FAD0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp51DrawWork.h"
 
 // 00EDAC40  esp51DrawWork::vf04  size=144  [class]
 void __fastcall esp51DrawWork::vf04(int param_1)

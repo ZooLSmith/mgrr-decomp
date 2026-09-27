@@ -1,7 +1,7 @@
 // src/hw/cInfoHash.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9E0E0..00F9E260, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9E0E0  Hw::cInfoHash::pushNormal  size=113  [class]
 undefined4 __thiscall Hw::cInfoHash::pushNormal(int *param_1,undefined4 param_2)

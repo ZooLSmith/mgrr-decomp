@@ -1,7 +1,8 @@
 // src/misc/cSavingIcon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD8430..00D33A50, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSavingIcon.h"
 
 // 00CD8430  cSavingIcon::cSavingIcon  size=97  [class]
 void __fastcall cSavingIcon::cSavingIcon(undefined4 *param_1)

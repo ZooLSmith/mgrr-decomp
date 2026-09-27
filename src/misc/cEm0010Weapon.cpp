@@ -1,7 +1,8 @@
 // src/misc/cEm0010Weapon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6830..00B32420, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEm0010Weapon.h"
 
 // 00AA6830  cEm0010Weapon::cEm0010Weapon_6  size=49  [class]
 undefined4 * __fastcall cEm0010Weapon::cEm0010Weapon_6(undefined4 *param_1)

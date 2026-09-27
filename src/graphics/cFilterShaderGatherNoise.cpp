@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderGatherNoise.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC1D30..00EC4550, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderGatherNoise.h"
 
 // 00EC1D30  cFilterShaderGatherNoise::cFilterShaderGatherNoise  size=265  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec1d6d) */

@@ -1,7 +1,8 @@
 // src/misc/WindAction.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD2290..00DD2300, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "WindAction.h"
 
 // 00DD2290  WindAction::vf00  size=31  [class]
 undefined4 * __thiscall WindAction::vf00(undefined4 *param_1,byte param_2)

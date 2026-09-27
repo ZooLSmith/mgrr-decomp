@@ -1,7 +1,8 @@
 // src/misc/ContentCheckFrame.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009896C0..00999750, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContentCheckFrame.h"
 
 // 009896C0  ContentCheckFrame::ContentCheckFrame_2  size=25  [class]
 undefined4 * __fastcall ContentCheckFrame::ContentCheckFrame_2(undefined4 *param_1)

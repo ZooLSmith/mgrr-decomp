@@ -1,7 +1,9 @@
 // src/enemy/emc190/Emc190MoveCheckLinearCastCollector.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008074C0..00807560, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc190MoveCheckLinearCastCollector.h"
+#include "hkpCdPointCollector.h"
 
 // 008074C0  Emc190MoveCheckLinearCastCollector::vf04  size=67  [class]
 void Emc190MoveCheckLinearCastCollector::vf04(int param_1)

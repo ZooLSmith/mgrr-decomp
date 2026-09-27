@@ -1,7 +1,8 @@
 // lib/havok/Source/Physics/Collide/Util/ShapeShrinker/hkpShapeShrinker.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01150810..01151960, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpConvexTranslateShape.h"
 
 // 01150810  FUN_01150810  size=799  [__FILE__]
 int FUN_01150810(uint param_1,char param_2)

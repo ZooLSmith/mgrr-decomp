@@ -1,7 +1,8 @@
 // src/misc/cManupilateNodePassCordDlc.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085A1A0..00AB9CA0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cManupilateNodePassCordDlc.h"
 
 // 0085A1A0  cManupilateNodePassCordDlc::vf44  size=16  [class]
 void cManupilateNodePassCordDlc::vf44(void)

@@ -1,7 +1,8 @@
 // src/misc/CharacterProxy.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E1130..008E8420, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CharacterProxy.h"
 
 // 008E1130  CharacterProxy::vf00  size=8  [class]
 void CharacterProxy::vf00(void)

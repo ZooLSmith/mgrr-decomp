@@ -1,7 +1,8 @@
 // src/ui/cUIEx0501.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB47F0..00D29DF0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIEx0501.h"
 
 // 00CB47F0  cUIEx0501::vf04  size=28  [class]
 void __fastcall cUIEx0501::vf04(int param_1)

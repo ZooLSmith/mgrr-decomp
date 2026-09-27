@@ -1,7 +1,8 @@
 // src/enemy/em060c/Em060c.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0059FC80..00AB6AF0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em060c.h"
 
 // 0059FC80  Em060c::vf40  size=71  [class]
 undefined4 __fastcall Em060c::vf40(int param_1)

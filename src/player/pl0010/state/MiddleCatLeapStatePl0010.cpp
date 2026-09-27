@@ -1,7 +1,8 @@
 // src/player/pl0010/state/MiddleCatLeapStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81970..00BDF590, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "MiddleCatLeapStatePl0010.h"
 
 // 00B81970  MiddleCatLeapStatePl0010::vf08  size=58  [class]
 undefined4 __thiscall MiddleCatLeapStatePl0010::vf08(int param_1,undefined4 param_2)

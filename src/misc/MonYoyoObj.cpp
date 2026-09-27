@@ -1,7 +1,8 @@
 // src/misc/MonYoyoObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0051BC80..00AB9740, 30 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "MonYoyoObj.h"
 
 // 0051BC80  FUN_0051bc80  size=190  [callgraph]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

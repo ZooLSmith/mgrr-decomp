@@ -1,7 +1,8 @@
 // src/misc/cGameAllResultBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D100D0..00D28E80, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameAllResultBase.h"
 
 // 00D100D0  cGameAllResultBase::cGameAllResultBase  size=18  [class]
 undefined4 * __fastcall cGameAllResultBase::cGameAllResultBase(undefined4 *param_1)

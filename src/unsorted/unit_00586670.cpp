@@ -1,7 +1,7 @@
 // src/unsorted/unit_00586670.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00586670..00588340, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00586670  FUN_00586670  size=190  [run]
 void __thiscall FUN_00586670(int *param_1,int param_2)

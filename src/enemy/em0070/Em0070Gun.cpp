@@ -1,7 +1,8 @@
 // src/enemy/em0070/Em0070Gun.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00468680..00AB7A50, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0070Gun.h"
 
 // 00468680  Em0070Gun::vf44  size=23  [class]
 void Em0070Gun::vf44(void)

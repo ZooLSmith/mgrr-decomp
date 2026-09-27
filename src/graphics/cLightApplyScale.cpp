@@ -1,7 +1,8 @@
 // src/graphics/cLightApplyScale.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A2D7F0..00EC9940, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLightApplyScale.h"
 
 // 00A2D7F0  cLightApplyScale::vf00  size=6  [class]
 undefined ** cLightApplyScale::vf00(void)

@@ -1,7 +1,8 @@
 // src/misc/esp151.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0A50..009F6E20, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp151.h"
 
 // 009D0A50  esp151::vf10  size=1  [class]
 void esp151::vf10(void)

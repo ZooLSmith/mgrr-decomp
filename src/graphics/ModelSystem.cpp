@@ -1,7 +1,8 @@
 // src/graphics/ModelSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A0C980..00A19710, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ModelSystem.h"
 
 // 00A0C980  ModelSystem::vf00  size=31  [class]
 undefined4 * __thiscall ModelSystem::vf00(undefined4 *param_1,byte param_2)

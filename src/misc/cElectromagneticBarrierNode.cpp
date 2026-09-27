@@ -1,7 +1,8 @@
 // src/misc/cElectromagneticBarrierNode.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E2EF0..00ABA9B0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cElectromagneticBarrierNode.h"
 
 // 005E2EF0  cElectromagneticBarrierNode::vf44  size=30  [class]
 void cElectromagneticBarrierNode::vf44(void)

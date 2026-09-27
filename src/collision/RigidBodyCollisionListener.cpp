@@ -1,7 +1,8 @@
 // src/collision/RigidBodyCollisionListener.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00910CD0..0091D690, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RigidBodyCollisionListener.h"
 
 // 00910CD0  RigidBodyCollisionListener::vf18  size=3  [class]
 void RigidBodyCollisionListener::vf18(void)

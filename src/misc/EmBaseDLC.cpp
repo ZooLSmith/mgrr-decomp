@@ -1,7 +1,8 @@
 // src/misc/EmBaseDLC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A8FF30..00AB5B90, 45 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EmBaseDLC.h"
 
 // 00A8FF30  EmBaseDLC::vf40  size=49  [class]
 undefined4 __fastcall EmBaseDLC::vf40(int param_1)

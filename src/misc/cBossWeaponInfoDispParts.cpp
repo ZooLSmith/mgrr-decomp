@@ -1,7 +1,8 @@
 // src/misc/cBossWeaponInfoDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD03A0..00D2A5F0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cBossWeaponInfoDispParts.h"
 
 // 00CD03A0  cBossWeaponInfoDispParts::cBossWeaponInfoDispParts  size=174  [class]
 undefined4 * cBossWeaponInfoDispParts::cBossWeaponInfoDispParts(void)

@@ -1,7 +1,13 @@
 // lib/havok/unit_010058E0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010058E0..0100B1B0, 236 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkCrc32StreamWriter.h"
+#include "hkErrStream.h"
+#include "hkReferencedObject.h"
+#include "hkReferencedObjectLock.h"
+#include "hkStreamWriter.h"
 
 // 010058E0  hkContainerTempAllocator::Allocator::vf04  size=26  [run]
 void hkContainerTempAllocator::Allocator::vf04(void)

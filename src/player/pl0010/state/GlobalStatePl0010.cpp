@@ -1,7 +1,8 @@
 // src/player/pl0010/state/GlobalStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81550..00BAAF90, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GlobalStatePl0010.h"
 
 // 00B81550  GlobalStatePl0010::vf0C  size=5  [class]
 void __thiscall GlobalStatePl0010::vf0C(int param_1,undefined4 param_2)

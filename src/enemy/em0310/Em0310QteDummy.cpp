@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310QteDummy.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057E8A0..00AB70A0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310QteDummy.h"
 
 // 0057E8A0  Em0310QteDummy::vf40  size=32  [class]
 undefined4 Em0310QteDummy::vf40(void)

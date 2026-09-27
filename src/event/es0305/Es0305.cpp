@@ -1,7 +1,8 @@
 // src/event/es0305/Es0305.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005C97A0..00AB69B0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Es0305.h"
 
 // 005C97A0  Es0305::thunk_vf48  size=5  [class]
 void __fastcall Es0305::thunk_vf48(int *param_1)

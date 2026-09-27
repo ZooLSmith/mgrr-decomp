@@ -1,7 +1,7 @@
 // src/effect/EspBullet.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E7720..009ED4D0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009E7720  EspBullet::Work::update  size=219  [class]
 void __fastcall EspBullet::Work::update(int *param_1)

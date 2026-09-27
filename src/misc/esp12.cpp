@@ -1,7 +1,8 @@
 // src/misc/esp12.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED08A0..00F38E60, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp12.h"
 
 // 00ED08A0  esp12::vf00  size=54  [class]
 undefined4 __thiscall esp12::vf00(undefined4 param_1,byte param_2)

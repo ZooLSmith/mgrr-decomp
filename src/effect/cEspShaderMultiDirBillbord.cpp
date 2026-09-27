@@ -1,7 +1,8 @@
 // src/effect/cEspShaderMultiDirBillbord.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F63F50..00F8C910, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderMultiDirBillbord.h"
 
 // 00F63F50  cEspShaderMultiDirBillbord::vf08  size=306  [class]
 undefined4 __fastcall cEspShaderMultiDirBillbord::vf08(int *param_1)

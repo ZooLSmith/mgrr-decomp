@@ -1,7 +1,8 @@
 // src/managers/phasereadmanager/PhaseReadManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D445E0..00D58370, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PhaseReadManagerImplement.h"
 
 // 00D445E0  FUN_00d445e0  size=59  [callgraph]
 void __fastcall FUN_00d445e0(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/espEmt03.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED1CC0..00F0A4E0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "espEmt03.h"
 
 // 00ED1CC0  espEmt03::espEmt03  size=28  [class]
 undefined4 * __fastcall espEmt03::espEmt03(undefined4 *param_1)

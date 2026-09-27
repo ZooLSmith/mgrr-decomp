@@ -1,7 +1,8 @@
 // lib/havok/unit_008E1F40.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E1F40..008E2140, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
 
 // 008E1F40  hkBaseObject::hkBaseObject_218  size=142  [run]
 void hkBaseObject::hkBaseObject_218(undefined4 param_1)

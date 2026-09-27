@@ -1,7 +1,8 @@
 // src/misc/cSavingDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF1DD0..00D339D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSavingDispParts.h"
 
 // 00CF1DD0  cSavingDispParts::vf00  size=63  [class]
 undefined4 * __thiscall cSavingDispParts::vf00(undefined4 *param_1,byte param_2)

@@ -1,7 +1,7 @@
 // src/misc/CCallback.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00981D70..00982280, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00981D70  CCallback<CSteamAchievements,UserStatsReceived_t,0>::vf04  size=10  [class]
 void __fastcall CCallback<CSteamAchievements,UserStatsReceived_t,0>::vf04(int param_1)

@@ -1,7 +1,8 @@
 // src/effect/cEspOcclusionWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009DE8C0..00ED8470, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspOcclusionWork.h"
 
 // 009DE8C0  cEspOcclusionWork::vf00  size=31  [class]
 undefined4 * __thiscall cEspOcclusionWork::vf00(undefined4 *param_1,byte param_2)

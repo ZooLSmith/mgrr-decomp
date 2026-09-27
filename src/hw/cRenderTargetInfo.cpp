@@ -1,7 +1,7 @@
 // src/hw/cRenderTargetInfo.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F97540..015F4430, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F97540  Hw::cRenderTargetInfo::cRenderTargetInfo_2  size=7  [class]
 void __fastcall Hw::cRenderTargetInfo::cRenderTargetInfo_2(undefined4 *param_1)

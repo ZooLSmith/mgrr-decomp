@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisSlider.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8F80..005E2C40, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisSlider.h"
 
 // 005D8F80  BehaviorDebrisSlider::vf44  size=42  [class]
 void __fastcall BehaviorDebrisSlider::vf44(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/cItemStageDropInstant.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00949590..009501D0, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemStageDropInstant.h"
 
 // 00949590  cItemStageDropInstant::vf18  size=39  [class]
 void __thiscall cItemStageDropInstant::vf18(int param_1,undefined4 param_2)

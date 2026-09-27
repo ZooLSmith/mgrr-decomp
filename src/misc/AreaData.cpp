@@ -1,7 +1,7 @@
 // src/misc/AreaData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00963590..00963590, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00963590  AreaData::setParentInfo  size=417  [class]
 undefined4 __fastcall AreaData::setParentInfo(undefined4 *param_1)

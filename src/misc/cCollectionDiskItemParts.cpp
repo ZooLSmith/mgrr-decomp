@@ -1,7 +1,8 @@
 // src/misc/cCollectionDiskItemParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098B950..009AFDE0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionDiskItemParts.h"
 
 // 0098B950  cCollectionDiskItemParts::cCollectionDiskItemParts  size=80  [class]
 undefined4 * __fastcall cCollectionDiskItemParts::cCollectionDiskItemParts(undefined4 *param_1)

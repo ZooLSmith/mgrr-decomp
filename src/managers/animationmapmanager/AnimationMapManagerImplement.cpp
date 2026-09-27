@@ -1,7 +1,8 @@
 // src/managers/animationmapmanager/AnimationMapManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D8110..008D9E20, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AnimationMapManagerImplement.h"
 
 // 008D8110  AnimationMapManagerImplement::vf08  size=98  [class]
 void __thiscall AnimationMapManagerImplement::vf08(int param_1,int param_2)

@@ -1,7 +1,8 @@
 // src/effect/cEspDrawWorkMulti.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F3FA20..00F3FA20, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspDrawWorkMulti.h"
 
 // 00F3FA20  cEspDrawWorkMulti::vf00  size=31  [class]
 undefined4 * __thiscall cEspDrawWorkMulti::vf00(undefined4 *param_1,byte param_2)

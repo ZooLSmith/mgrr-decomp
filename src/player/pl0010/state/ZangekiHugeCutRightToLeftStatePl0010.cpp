@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiHugeCutRightToLeftStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83360..00BE3BE0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiHugeCutRightToLeftStatePl0010.h"
 
 // 00B83360  ZangekiHugeCutRightToLeftStatePl0010::thunk_vf0C  size=5  [class]
 void __thiscall ZangekiHugeCutRightToLeftStatePl0010::thunk_vf0C(int param_1,undefined4 param_2)

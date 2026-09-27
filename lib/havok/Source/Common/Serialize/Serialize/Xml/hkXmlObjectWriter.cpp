@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Serialize/Serialize/Xml/hkXmlObjectWriter.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010F8DD0..010F8DD0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 010F8DD0  FUN_010f8dd0  size=1540  [__FILE__]
 void FUN_010f8dd0(undefined4 *param_1,int *param_2,int param_3,undefined4 param_4,int param_5)

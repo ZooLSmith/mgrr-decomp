@@ -1,7 +1,8 @@
 // src/misc/esp114.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D00D0..009DF570, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp114.h"
 
 // 009D00D0  esp114::vf10  size=1  [class]
 void esp114::vf10(void)

@@ -1,7 +1,8 @@
 // src/misc/esp50.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EDA250..00F40990, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp50.h"
 
 // 00EDA250  esp50::vf1C  size=2533  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

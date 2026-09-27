@@ -1,7 +1,8 @@
 // src/managers/gamestagemanager/GameStageManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DFB70..008DFB70, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GameStageManager.h"
 
 // 008DFB70  GameStageManager::vf14  size=31  [class]
 undefined4 * __thiscall GameStageManager::vf14(undefined4 *param_1,byte param_2)

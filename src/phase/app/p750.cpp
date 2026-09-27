@@ -1,7 +1,8 @@
 // src/phase/app/p750.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4ABC0..00D70610, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP750.h"
 
 // 00D4ABC0  cP750::vf08  size=15  [class]
 void __fastcall cP750::vf08(int param_1)

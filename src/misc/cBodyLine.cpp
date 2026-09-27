@@ -1,7 +1,8 @@
 // src/misc/cBodyLine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD0360..00D20E00, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cBodyLine.h"
 
 // 00CD0360  cBodyLine::thunk_vf0C  size=5  [class]
 void __thiscall cBodyLine::thunk_vf0C(int param_1,undefined4 param_2)

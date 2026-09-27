@@ -1,7 +1,8 @@
 // src/effect/EspModelShaderSetting.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D21D0..009E6240, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspModelShaderSetting.h"
 
 // 009D21D0  EspModelShaderSetting::vf24  size=24  [class]
 void __fastcall EspModelShaderSetting::vf24(int param_1)

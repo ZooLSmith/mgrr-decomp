@@ -1,7 +1,8 @@
 // src/misc/cVRGoalPointSignParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF2B40..00D35BC0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVRGoalPointSignParts.h"
 
 // 00CF2B40  cVRGoalPointSignParts::vf00  size=30  [class]
 undefined4 __thiscall cVRGoalPointSignParts::vf00(undefined4 param_1,byte param_2)

@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderZLinearConversion.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC1340..015F1D10, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderZLinearConversion.h"
 
 // 00EC1340  cFilterShaderZLinearConversion::cFilterShaderZLinearConversion  size=266  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec1395) */

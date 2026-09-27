@@ -1,7 +1,8 @@
 // src/phase/app/p470.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4A7C0..00D713F0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP470.h"
 
 // 00D4A7C0  cP470::vf08  size=101  [class]
 void __fastcall cP470::vf08(int param_1)

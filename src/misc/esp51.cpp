@@ -1,7 +1,8 @@
 // src/misc/esp51.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD580..00F386D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp51.h"
 
 // 00ECD580  esp51::esp51  size=18  [class]
 undefined4 * __fastcall esp51::esp51(undefined4 *param_1)

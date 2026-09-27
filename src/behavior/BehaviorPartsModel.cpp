@@ -1,7 +1,8 @@
 // src/behavior/BehaviorPartsModel.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAE2F0..00ACA930, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorPartsModel.h"
 
 // 00AAE2F0  BehaviorPartsModel::vf04  size=6  [class]
 undefined * BehaviorPartsModel::vf04(void)

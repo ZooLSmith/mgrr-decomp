@@ -1,7 +1,8 @@
 // src/misc/cManupilatePanel.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E2F70..00ABAA10, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cManupilatePanel.h"
 
 // 005E2F70  cManupilatePanel::vf40  size=35  [class]
 undefined4 __fastcall cManupilatePanel::vf40(int param_1)

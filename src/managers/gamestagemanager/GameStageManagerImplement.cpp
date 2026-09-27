@@ -1,7 +1,8 @@
 // src/managers/gamestagemanager/GameStageManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DFBD0..008DFD10, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GameStageManagerImplement.h"
 
 // 008DFBD0  GameStageManagerImplement::vf08  size=11  [class]
 void __fastcall GameStageManagerImplement::vf08(int param_1)

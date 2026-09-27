@@ -1,7 +1,8 @@
 // src/misc/cSlashFinishLine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF3F0..00CD85C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSlashFinishLine.h"
 
 // 00CBF3F0  cSlashFinishLine::cSlashFinishLine  size=86  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

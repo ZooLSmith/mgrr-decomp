@@ -1,7 +1,8 @@
 // lib/havok/unit_008FE850.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008FE850..008FE850, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkSystemGroupManagerImplement.h"
 
 // 008FE850  HkSystemGroupManagerImplement::HkSystemGroupManagerImplement  size=217  [run]
 void HkSystemGroupManagerImplement::HkSystemGroupManagerImplement(void)

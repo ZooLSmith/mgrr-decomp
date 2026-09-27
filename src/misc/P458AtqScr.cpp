@@ -1,7 +1,8 @@
 // src/misc/P458AtqScr.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00415A90..00AB07F0, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P458AtqScr.h"
 
 // 00415A90  P458AtqScr::vf40  size=65  [class]
 undefined4 __fastcall P458AtqScr::vf40(int param_1)

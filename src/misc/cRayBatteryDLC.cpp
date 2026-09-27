@@ -1,7 +1,8 @@
 // src/misc/cRayBatteryDLC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D4BE0..00ABA010, 23 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRayBatteryDLC.h"
 
 // 008D4BE0  cRayBatteryDLC::vf30  size=89  [class]
 void __fastcall cRayBatteryDLC::vf30(int param_1)

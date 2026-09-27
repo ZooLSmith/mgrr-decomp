@@ -1,7 +1,8 @@
 // src/ui/cUIWorkList.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D1E700..00D1E700, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIWorkList.h"
 
 // 00D1E700  cUIWorkList::vf00  size=30  [class]
 undefined4 __thiscall cUIWorkList::vf00(undefined4 param_1,byte param_2)

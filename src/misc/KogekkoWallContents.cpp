@@ -1,7 +1,8 @@
 // src/misc/KogekkoWallContents.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DD6B0..008DF500, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "KogekkoWallContents.h"
 
 // 008DD6B0  KogekkoWallContents::KogekkoWallContents  size=54  [class]
 undefined4 * __thiscall

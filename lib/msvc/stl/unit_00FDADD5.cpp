@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FDADD5.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDADD5..00FDAE9B, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDADD5  std::error_condition::operator==  size=33  [run]
 /* Library Function - Single Match

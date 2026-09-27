@@ -1,7 +1,8 @@
 // src/graphics/cTexRenderComposition.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6B6D0..00F8E7D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTexRenderComposition.h"
 
 // 00F6B6D0  cTexRenderComposition::vf08  size=190  [class]
 undefined4 __fastcall cTexRenderComposition::vf08(int param_1)

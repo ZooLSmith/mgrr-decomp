@@ -1,7 +1,8 @@
 // src/misc/ProgressFlagDlc3.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C82A40..00C88F10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ProgressFlagDlc3.h"
 
 // 00C82A40  ProgressFlagDlc3::SAVE  size=141  [class]
 undefined1 __fastcall ProgressFlagDlc3::SAVE(int param_1)

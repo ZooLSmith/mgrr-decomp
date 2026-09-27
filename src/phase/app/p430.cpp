@@ -1,7 +1,8 @@
 // src/phase/app/p430.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D491A0..00D6D020, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P430.h"
 
 // 00D491A0  P430::vf20  size=104  [class]
 void P430::vf20(int *param_1)

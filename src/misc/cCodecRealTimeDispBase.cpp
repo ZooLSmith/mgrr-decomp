@@ -1,7 +1,8 @@
 // src/misc/cCodecRealTimeDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E0F0..00D212D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecRealTimeDispBase.h"
 
 // 00D0E0F0  cCodecRealTimeDispBase::cCodecRealTimeDispBase  size=18  [class]
 undefined4 * __fastcall cCodecRealTimeDispBase::cCodecRealTimeDispBase(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/misc/cRayArmor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AB6BE0..00AEABE0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRayArmor.h"
 
 // 00AB6BE0  cRayArmor::vf04  size=6  [class]
 undefined * cRayArmor::vf04(void)

@@ -1,7 +1,8 @@
 // lib/havok/Source/Physics/Internal/Collide/BvCompressedMesh/hkpBvCompressedMeshShapeInternals.inl
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01237E70..01237E70, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpSingleShapeContainer.h"
 
 // 01237E70  hkpSingleShapeContainer::hkpSingleShapeContainer_11  size=2224  [__FILE__]
 void __thiscall

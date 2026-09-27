@@ -1,7 +1,7 @@
 // lib/msvc/crt/unit_01298448.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01298448..01298448, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01298448  __raise_excf  size=33  [run]
 /* Library Function - Single Match

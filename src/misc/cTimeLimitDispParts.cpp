@@ -1,7 +1,8 @@
 // src/misc/cTimeLimitDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD8DE0..00D35000, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTimeLimitDispParts.h"
 
 // 00CD8DE0  cTimeLimitDispParts::cTimeLimitDispParts  size=77  [class]
 undefined4 * cTimeLimitDispParts::cTimeLimitDispParts(void)

@@ -1,7 +1,8 @@
 // src/misc/esp13.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F16B00..00F40770, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp13.h"
 
 // 00F16B00  esp13::esp13  size=94  [class]
 undefined4 * __fastcall esp13::esp13(undefined4 *param_1)

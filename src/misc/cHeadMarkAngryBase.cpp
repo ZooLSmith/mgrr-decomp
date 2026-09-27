@@ -1,7 +1,8 @@
 // src/misc/cHeadMarkAngryBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E9B0..00D24770, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cHeadMarkAngryBase.h"
 
 // 00D0E9B0  cHeadMarkAngryBase::cHeadMarkAngryBase  size=18  [class]
 undefined4 * __fastcall cHeadMarkAngryBase::cHeadMarkAngryBase(undefined4 *param_1)

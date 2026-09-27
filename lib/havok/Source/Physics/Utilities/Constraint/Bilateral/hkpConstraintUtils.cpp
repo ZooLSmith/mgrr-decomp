@@ -1,7 +1,7 @@
 // lib/havok/Source/Physics/Utilities/Constraint/Bilateral/hkpConstraintUtils.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 012834C0..012841B0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 012834C0  FUN_012834c0  size=242  [__FILE__]
 undefined4 FUN_012834c0(int param_1,int *param_2,int *param_3)

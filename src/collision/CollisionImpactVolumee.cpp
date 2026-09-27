@@ -1,7 +1,7 @@
 // src/collision/CollisionImpactVolumee.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D78D50..00D78D50, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D78D50  CollisionImpactVolumee::detectionForPenetration  size=73  [class]
 void __fastcall CollisionImpactVolumee::detectionForPenetration(int param_1)

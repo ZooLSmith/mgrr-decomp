@@ -1,7 +1,8 @@
 // src/effect/cEsp28Strip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D4570..00F35270, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEsp28Strip.h"
 
 // 009D4570  cEsp28Strip::cEsp28Strip  size=18  [class]
 undefined4 * __fastcall cEsp28Strip::cEsp28Strip(undefined4 *param_1)

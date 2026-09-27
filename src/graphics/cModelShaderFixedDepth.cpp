@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderFixedDepth.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F921E0..015F41A0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderFixedDepth.h"
 
 // 00F921E0  cModelShaderFixedDepth::cModelShaderFixedDepth  size=30  [class]
 undefined4 * __fastcall cModelShaderFixedDepth::cModelShaderFixedDepth(undefined4 *param_1)

@@ -1,7 +1,7 @@
 // src/managers/cobjreadmanager/cObjReadManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A01170..00A06EC0, 50 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A01170  cObjReadManager::getDataAtSet  size=267  [class]
 undefined4 __thiscall

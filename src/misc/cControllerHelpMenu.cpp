@@ -1,7 +1,8 @@
 // src/misc/cControllerHelpMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098E1B0..0098E2D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cControllerHelpMenu.h"
 
 // 0098E1B0  cControllerHelpMenu::cControllerHelpMenu  size=39  [class]
 undefined4 * __fastcall cControllerHelpMenu::cControllerHelpMenu(undefined4 *param_1)

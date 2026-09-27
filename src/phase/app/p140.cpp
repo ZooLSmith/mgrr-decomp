@@ -1,7 +1,8 @@
 // src/phase/app/p140.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47E70..00D70180, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P140.h"
 
 // 00D47E70  P140::vf18  size=1  [class]
 void P140::vf18(void)

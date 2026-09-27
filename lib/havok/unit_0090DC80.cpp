@@ -1,7 +1,8 @@
 // lib/havok/unit_0090DC80.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0090DC80..0090DC80, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpFirstCdBodyPairCollector.h"
 
 // 0090DC80  hkpFirstCdBodyPairCollector::hkpFirstCdBodyPairCollector  size=283  [run]
 /* WARNING: Removing unreachable block (ram,0x0090dd58) */

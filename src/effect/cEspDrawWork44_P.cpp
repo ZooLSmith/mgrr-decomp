@@ -1,7 +1,8 @@
 // src/effect/cEspDrawWork44_P.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EDA100..00F3FA40, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspDrawWork44_P.h"
 
 // 00EDA100  cEspDrawWork44_P::vf04  size=59  [class]
 void __fastcall cEspDrawWork44_P::vf04(int param_1)

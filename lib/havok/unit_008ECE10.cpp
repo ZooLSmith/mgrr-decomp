@@ -1,7 +1,9 @@
 // lib/havok/unit_008ECE10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008ECE10..008ECF20, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkRemoveContainer.h"
+#include "HkRemovePhysicsSystem.h"
 
 // 008ECE10  HkRemoveContainer::vf10  size=3  [run]
 undefined4 HkRemoveContainer::vf10(void)

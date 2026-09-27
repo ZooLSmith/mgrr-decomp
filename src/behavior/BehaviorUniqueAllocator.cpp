@@ -1,7 +1,8 @@
 // src/behavior/BehaviorUniqueAllocator.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A8A780..00A9C990, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorUniqueAllocator.h"
 
 // 00A8A780  BehaviorUniqueAllocator::vf14  size=31  [class]
 undefined4 * __thiscall BehaviorUniqueAllocator::vf14(undefined4 *param_1,byte param_2)

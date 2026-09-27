@@ -1,7 +1,8 @@
 // src/weapon/wpb005/Wpb005.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006012C0..00AB6B80, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Wpb005.h"
 
 // 006012C0  Wpb005::vf44  size=5  [class]
 void __fastcall Wpb005::vf44(int param_1)

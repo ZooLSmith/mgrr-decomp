@@ -1,7 +1,8 @@
 // src/misc/esp100.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CF8F0..009DF3C0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp100.h"
 
 // 009CF8F0  esp100::vf08  size=109  [class]
 void __fastcall esp100::vf08(int param_1)

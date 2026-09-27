@@ -1,7 +1,8 @@
 // src/misc/CharacterRigidBodyListener.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E0A90..008E3BA0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CharacterRigidBodyListener.h"
 
 // 008E0A90  CharacterRigidBodyListener::vf0C  size=3  [class]
 void CharacterRigidBodyListener::vf0C(void)

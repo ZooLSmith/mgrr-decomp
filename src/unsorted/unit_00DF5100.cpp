@@ -1,7 +1,7 @@
 // src/unsorted/unit_00DF5100.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DF5100..00DF5100, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DF5100  FUN_00df5100  size=211  [run]
 undefined4 FUN_00df5100(LPCWSTR param_1,int param_2,char param_3,char param_4,undefined4 *param_5)

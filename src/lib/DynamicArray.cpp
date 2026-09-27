@@ -1,7 +1,7 @@
 // src/lib/DynamicArray.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D9250..00E9BD40, 119 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 008D9250  lib::DynamicArray<char,sys::StringSystem::Allocator>::vf04  size=4  [class]
 undefined4 lib::DynamicArray<char,sys::StringSystem::Allocator>::vf04(void)

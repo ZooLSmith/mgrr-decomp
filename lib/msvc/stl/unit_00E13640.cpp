@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E13640.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E13640..00E13690, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E13640  std::locale::facet::vf00  size=31  [run]
 undefined4 * __thiscall std::locale::facet::vf00(undefined4 *param_1,byte param_2)

@@ -1,7 +1,8 @@
 // src/misc/cChainComboBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0DE70..00D20FD0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cChainComboBase.h"
 
 // 00D0DE70  cChainComboBase::cChainComboBase  size=18  [class]
 undefined4 * __fastcall cChainComboBase::cChainComboBase(undefined4 *param_1)

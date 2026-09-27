@@ -1,7 +1,8 @@
 // src/misc/cConfigMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098E7E0..009BF9E0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cConfigMenu.h"
 
 // 0098E7E0  FUN_0098e7e0  size=503  [callgraph]
 void __thiscall FUN_0098e7e0(int param_1,undefined4 param_2)

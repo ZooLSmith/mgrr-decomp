@@ -1,7 +1,9 @@
 // src/collision/RayCastClosestPointsWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0090E600..0090E6A0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RayCastClosestPointsWork.h"
+#include "hkpCdPointCollector.h"
 
 // 0090E600  RayCastClosestPointsWork::vf00  size=6  [class]
 undefined * RayCastClosestPointsWork::vf00(void)

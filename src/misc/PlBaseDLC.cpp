@@ -1,7 +1,8 @@
 // src/misc/PlBaseDLC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A8FCC0..00AC3830, 52 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PlBaseDLC.h"
 
 // 00A8FCC0  PlBaseDLC::vf104  size=90  [class]
 void __fastcall PlBaseDLC::vf104(int *param_1)

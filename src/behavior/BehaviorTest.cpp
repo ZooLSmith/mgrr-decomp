@@ -1,7 +1,8 @@
 // src/behavior/BehaviorTest.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAB8D0..00AC5480, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorTest.h"
 
 // 00AAB8D0  BehaviorTest::vf04  size=6  [class]
 undefined * BehaviorTest::vf04(void)

@@ -1,7 +1,8 @@
 // src/player/pl1500/state/ZangekiOnPartsStatePl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A49D0..008D15E0, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiOnPartsStatePl1500.h"
 
 // 008A49D0  ZangekiOnPartsStatePl1500::vf14  size=5  [class]
 undefined4 __thiscall ZangekiOnPartsStatePl1500::vf14(int param_1,undefined4 param_2)

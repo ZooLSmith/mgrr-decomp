@@ -1,7 +1,8 @@
 // src/misc/cManupilateDoor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E30F0..00ABAA40, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cManupilateDoor.h"
 
 // 005E30F0  cManupilateDoor::vf44  size=30  [class]
 void cManupilateDoor::vf44(void)

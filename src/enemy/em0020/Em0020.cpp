@@ -1,7 +1,10 @@
 // src/enemy/em0020/Em0020.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004161B0..00AB6990, 388 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0020.h"
+#include "hkpAllCdPointCollector.h"
+#include "hkpCdPointCollector.h"
 
 // 004161B0  FUN_004161b0  size=29  [callgraph]
 undefined4 __fastcall FUN_004161b0(int param_1)

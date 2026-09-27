@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83870..00BF1210, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiStatePl0010.h"
 
 // 00B83870  ZangekiStatePl0010::thunk_vf14  size=5  [class]
 undefined4 __thiscall ZangekiStatePl0010::thunk_vf14(int param_1,undefined4 param_2)

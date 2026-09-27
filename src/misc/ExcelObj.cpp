@@ -1,7 +1,8 @@
 // src/misc/ExcelObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B0980..00AB76C0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ExcelObj.h"
 
 // 005B0980  ExcelObj::vf44  size=30  [class]
 void ExcelObj::vf44(void)

@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Serialize/Tagfile/Xml/hkXmlTagfileReader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 011010B0..011010B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 011010B0  FUN_011010b0  size=721  [__FILE__]
 int FUN_011010b0(int *param_1)

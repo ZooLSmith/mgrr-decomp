@@ -1,7 +1,8 @@
 // src/graphics/cFilterShader02.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EBF730..00EC3D20, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShader02.h"
 
 // 00EBF730  cFilterShader02::cFilterShader02  size=18  [class]
 undefined4 * __fastcall cFilterShader02::cFilterShader02(undefined4 *param_1)

@@ -1,7 +1,7 @@
 // src/misc/debug.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DA880..008DB3C0, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 008DA880  debug::RoomNoChecker::vf04  size=6  [class]
 undefined4 debug::RoomNoChecker::vf04(void)

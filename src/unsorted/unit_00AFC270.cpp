@@ -1,7 +1,7 @@
 // src/unsorted/unit_00AFC270.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AFC270..00AFC430, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00AFC270  FUN_00afc270  size=103  [run]
 void __thiscall FUN_00afc270(int param_1,undefined4 param_2,int param_3)

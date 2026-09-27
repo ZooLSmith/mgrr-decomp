@@ -1,7 +1,8 @@
 // src/misc/ContainerDebris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0047F130..00AEF4C0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContainerDebris.h"
 
 // 0047F130  ContainerDebris::vf40  size=114  [class]
 undefined4 __fastcall ContainerDebris::vf40(int param_1)

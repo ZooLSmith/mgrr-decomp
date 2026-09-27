@@ -1,7 +1,8 @@
 // src/misc/esp47.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD540..00F380E0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp47.h"
 
 // 00ECD540  esp47::esp47  size=29  [class]
 undefined4 * __fastcall esp47::esp47(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/phase/app/dlc/pc60.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B8C0..00D709A0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPc60.h"
 
 // 00D4B8C0  cPc60::vf08  size=15  [class]
 void __fastcall cPc60::vf08(int param_1)

@@ -1,7 +1,8 @@
 // lib/wwise/CAkDefaultLowLevelIODispatcher.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DEE9B0..00DF5A50, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CAkDefaultLowLevelIODispatcher.h"
 
 // 00DEE9B0  CAkDefaultLowLevelIODispatcher::vf08  size=84  [class]
 void __thiscall

@@ -1,7 +1,7 @@
 // src/managers/effectattrdatamanager/EffectAttrDataManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E5E80..009E5FD0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009E5E80  FUN_009e5e80  size=80  [callgraph]
 void __thiscall FUN_009e5e80(int param_1,int param_2)

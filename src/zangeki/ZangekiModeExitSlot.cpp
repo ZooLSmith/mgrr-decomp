@@ -1,7 +1,8 @@
 // src/zangeki/ZangekiModeExitSlot.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093D9E0..00943500, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiModeExitSlot.h"
 
 // 0093D9E0  ZangekiModeExitSlot::vf10  size=1  [class]
 void ZangekiModeExitSlot::vf10(void)

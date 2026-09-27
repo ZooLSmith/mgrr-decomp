@@ -1,7 +1,8 @@
 // src/effect/EspControllerBullet.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CF2E0..009F3CA0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspControllerBullet.h"
 
 // 009CF2E0  EspControllerBullet::EspControllerBullet_5  size=18  [class]
 undefined4 * __fastcall EspControllerBullet::EspControllerBullet_5(undefined4 *param_1)

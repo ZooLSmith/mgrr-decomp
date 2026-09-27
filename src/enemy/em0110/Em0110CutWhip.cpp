@@ -1,7 +1,8 @@
 // src/enemy/em0110/Em0110CutWhip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004B6D80..00AB7250, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0110CutWhip.h"
 
 // 004B6D80  Em0110CutWhip::thunk_vf30  size=5  [class]
 void __fastcall Em0110CutWhip::thunk_vf30(int param_1)

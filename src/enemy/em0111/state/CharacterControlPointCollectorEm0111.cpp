@@ -1,7 +1,8 @@
 // src/enemy/em0111/state/CharacterControlPointCollectorEm0111.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004D9D40..004DAA90, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CharacterControlPointCollectorEm0111.h"
 
 // 004D9D40  CharacterControlPointCollectorEm0111::vf04  size=167  [class]
 void CharacterControlPointCollectorEm0111::vf04(int param_1)

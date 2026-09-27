@@ -1,7 +1,8 @@
 // src/misc/cTutorialDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0BD90..00D26E60, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTutorialDispBase.h"
 
 // 00D0BD90  cTutorialDispBase::cTutorialDispBase  size=18  [class]
 undefined4 * __fastcall cTutorialDispBase::cTutorialDispBase(undefined4 *param_1)

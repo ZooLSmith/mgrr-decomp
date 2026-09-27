@@ -1,7 +1,8 @@
 // src/misc/cPointGetBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0EF50..00D25470, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPointGetBase.h"
 
 // 00D0EF50  cPointGetBase::cPointGetBase  size=18  [class]
 undefined4 * __fastcall cPointGetBase::cPointGetBase(undefined4 *param_1)

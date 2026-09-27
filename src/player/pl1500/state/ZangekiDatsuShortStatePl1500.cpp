@@ -1,7 +1,8 @@
 // src/player/pl1500/state/ZangekiDatsuShortStatePl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A4510..008CF660, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiDatsuShortStatePl1500.h"
 
 // 008A4510  ZangekiDatsuShortStatePl1500::vf14  size=5  [class]
 undefined4 __thiscall ZangekiDatsuShortStatePl1500::vf14(int param_1,undefined4 param_2)

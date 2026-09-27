@@ -1,7 +1,8 @@
 // src/misc/cItemPossessionWeaponHeatKnife.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00949780..0094F600, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemPossessionWeaponHeatKnife.h"
 
 // 00949780  cItemPossessionWeaponHeatKnife::vf08  size=13  [class]
 void __thiscall cItemPossessionWeaponHeatKnife::vf08(int param_1,int param_2)

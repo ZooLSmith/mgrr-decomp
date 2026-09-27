@@ -1,7 +1,8 @@
 // src/misc/esp17.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD420..00F32110, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp17.h"
 
 // 00ECD420  esp17::esp17  size=18  [class]
 undefined4 * __fastcall esp17::esp17(undefined4 *param_1)

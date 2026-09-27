@@ -1,7 +1,8 @@
 // src/misc/cItemInfoDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEF300..00D30800, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemInfoDispParts.h"
 
 // 00CEF300  cItemInfoDispParts::vf00  size=30  [class]
 undefined4 __thiscall cItemInfoDispParts::vf00(undefined4 param_1,byte param_2)

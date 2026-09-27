@@ -1,7 +1,7 @@
 // src/havok/RigidBodyList.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0091D140..0091D1D0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0091D140  RigidBodyList::add  size=143  [class]
 void __thiscall RigidBodyList::add(int *param_1,undefined4 param_2,undefined4 *param_3)

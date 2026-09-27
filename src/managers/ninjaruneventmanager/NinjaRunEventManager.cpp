@@ -1,7 +1,8 @@
 // src/managers/ninjaruneventmanager/NinjaRunEventManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1BA20..00C62A40, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "NinjaRunEventManager.h"
 
 // 00C1BA20  NinjaRunEventManager::vf94  size=31  [class]
 undefined4 * __thiscall NinjaRunEventManager::vf94(undefined4 *param_1,byte param_2)

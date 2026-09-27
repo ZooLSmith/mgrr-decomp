@@ -1,7 +1,7 @@
 // src/effect/EffectShaderSetting.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6DA20..00F78730, 110 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F6DA20  EffectShaderSetting::ShaderSetUpShimmerSubFade  size=423  [class]
 void EffectShaderSetting::ShaderSetUpShimmerSubFade(int param_1)

@@ -1,7 +1,8 @@
 // src/enemy/em0060/Em0060Battery.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004424B0..00AB79E0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0060Battery.h"
 
 // 004424B0  Em0060Battery::vf50  size=16  [class]
 void Em0060Battery::vf50(void)

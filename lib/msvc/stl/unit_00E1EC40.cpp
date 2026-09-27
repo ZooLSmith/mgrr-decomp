@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E1EC40.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E1EC40..00E1EE60, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E1EC40  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>_>_>::vf1C  size=125  [run]
 void __thiscall

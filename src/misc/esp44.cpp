@@ -1,7 +1,8 @@
 // src/misc/esp44.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD500..00F37BD0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp44.h"
 
 // 00ECD500  esp44::esp44  size=18  [class]
 undefined4 * __fastcall esp44::esp44(undefined4 *param_1)

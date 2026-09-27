@@ -1,7 +1,20 @@
 // lib/havok/unit_01037370.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01037370..010559E0, 563 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ValidatedClassNameRegistry.h"
+#include "hkBaseObject.h"
+#include "hkBinaryPackfileReader.h"
+#include "hkClassNameRegistry.h"
+#include "hkDynamicClassNameRegistry.h"
+#include "hkRenamedClassNameRegistry.h"
+#include "hkSerializeDeprecated.h"
+#include "hkSerializeDeprecated2.h"
+#include "hkVersionPatchManager.h"
+#include "hkVersionRegistry.h"
+#include "hkVtableClassRegistry.h"
+#include "hkXmlObjectWriter.h"
+#include "hkXmlPackfileWriter.h"
 
 // 01037370  FUN_01037370  size=74  [run]
 void FUN_01037370(undefined4 param_1,undefined4 param_2)

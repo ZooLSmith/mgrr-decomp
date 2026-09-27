@@ -1,7 +1,8 @@
 // src/misc/cEnemyTarget.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB80B0..00CD3030, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyTarget.h"
 
 // 00CB80B0  cEnemyTarget::cEnemyTarget  size=88  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

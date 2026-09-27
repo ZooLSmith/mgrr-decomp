@@ -1,7 +1,8 @@
 // src/enemy/em0042/Em0042.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0043DC50..00AB6D70, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0042.h"
 
 // 0043DC50  Em0042::thunk_vf30  size=5  [class]
 void __fastcall Em0042::thunk_vf30(int param_1)

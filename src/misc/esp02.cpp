@@ -1,7 +1,8 @@
 // src/misc/esp02.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED53B0..00F40720, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp02.h"
 
 // 00ED53B0  esp02::vf14  size=64  [class]
 void __fastcall esp02::vf14(int param_1)

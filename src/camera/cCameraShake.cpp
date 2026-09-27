@@ -1,7 +1,8 @@
 // src/camera/cCameraShake.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D9FC00..015F0BC0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCameraShake.h"
 
 // 00D9FC00  cCameraShake::vf00  size=31  [class]
 undefined4 * __thiscall cCameraShake::vf00(undefined4 *param_1,byte param_2)

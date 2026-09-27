@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Serialize/Version/hkVersionPatchManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010DDF20..010DDF20, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 010DDF20  FUN_010ddf20  size=2533  [__FILE__]
 undefined4 FUN_010ddf20(int *param_1,int *param_2,int *param_3)

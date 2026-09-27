@@ -1,7 +1,8 @@
 // src/graphics/ModelShaderJackModule.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009EE450..00F3E960, 35 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ModelShaderJackModule.h"
 
 // 009EE450  ModelShaderJackModule::updateModule  size=183  [class]
 void __thiscall ModelShaderJackModule::updateModule(int param_1,int param_2)

@@ -1,7 +1,8 @@
 // src/misc/cWeakPointLineDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC1B80..00D41320, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeakPointLineDisp.h"
 
 // 00CC1B80  cWeakPointLineDisp::~cWeakPointLineDisp  size=90  [class]
 void __fastcall cWeakPointLineDisp::~cWeakPointLineDisp(undefined4 *param_1)

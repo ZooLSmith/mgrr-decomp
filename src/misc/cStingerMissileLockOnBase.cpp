@@ -1,7 +1,8 @@
 // src/misc/cStingerMissileLockOnBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F630..00D26010, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStingerMissileLockOnBase.h"
 
 // 00D0F630  cStingerMissileLockOnBase::cStingerMissileLockOnBase  size=18  [class]
 undefined4 * __fastcall cStingerMissileLockOnBase::cStingerMissileLockOnBase(undefined4 *param_1)

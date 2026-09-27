@@ -1,7 +1,8 @@
 // src/ui/cUIFade.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD9290..00CD9290, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIFade.h"
 
 // 00CD9290  cUIFade::vf00  size=59  [class]
 undefined4 * __thiscall cUIFade::vf00(undefined4 *param_1,byte param_2)

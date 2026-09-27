@@ -1,7 +1,7 @@
 // src/lib/AllocatedArray.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00402420..00D8A480, 179 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00402420  lib::AllocatedArray<BattleRegionManagerImplement::Unit>::vf00  size=30  [class]
 undefined4 __thiscall

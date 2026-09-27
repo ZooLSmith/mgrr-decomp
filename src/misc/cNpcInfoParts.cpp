@@ -1,7 +1,8 @@
 // src/misc/cNpcInfoParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBBD10..00D31800, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cNpcInfoParts.h"
 
 // 00CBBD10  cNpcInfoParts::vf08  size=204  [class]
 void __fastcall cNpcInfoParts::vf08(int param_1)

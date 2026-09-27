@@ -1,7 +1,8 @@
 // src/misc/esp36.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0610..00F36730, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp36.h"
 
 // 00ED0610  esp36::esp36  size=18  [class]
 undefined4 * __fastcall esp36::esp36(undefined4 *param_1)

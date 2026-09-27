@@ -1,7 +1,9 @@
 // src/collision/RigidBodyCollision.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008EC9E0..008F7760, 47 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkRemovePhysicsSystem.h"
+#include "RigidBodyCollision.h"
 
 // 008EC9E0  RigidBodyCollision::vf08  size=26  [class]
 undefined4 __fastcall RigidBodyCollision::vf08(int *param_1)

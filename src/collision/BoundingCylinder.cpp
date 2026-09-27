@@ -1,7 +1,8 @@
 // src/collision/BoundingCylinder.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A67C30..00A6AB30, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BoundingCylinder.h"
 
 // 00A67C30  BoundingCylinder::vf0C  size=780  [class]
 void __thiscall BoundingCylinder::vf0C(int param_1,uint param_2)

@@ -1,7 +1,8 @@
 // src/misc/cCustomizeMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098F7E0..009BADE0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCustomizeMenu.h"
 
 // 0098F7E0  cCustomizeMenu::vf0C  size=184  [class]
 void __fastcall cCustomizeMenu::vf0C(int param_1)

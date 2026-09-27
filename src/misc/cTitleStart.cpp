@@ -1,7 +1,8 @@
 // src/misc/cTitleStart.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00995250..009B6670, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTitleStart.h"
 
 // 00995250  cTitleStart::cTitleStart  size=105  [class]
 undefined4 * __fastcall cTitleStart::cTitleStart(undefined4 *param_1)

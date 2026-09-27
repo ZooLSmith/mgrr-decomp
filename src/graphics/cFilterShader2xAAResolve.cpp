@@ -1,7 +1,8 @@
 // src/graphics/cFilterShader2xAAResolve.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC16E0..015F1E20, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShader2xAAResolve.h"
 
 // 00EC16E0  cFilterShader2xAAResolve::cFilterShader2xAAResolve  size=257  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec172c) */

@@ -1,7 +1,8 @@
 // src/boss/bm1010/Bm1010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00414490..00AB9240, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm1010.h"
 
 // 00414490  Bm1010::vf40  size=69  [class]
 undefined4 __fastcall Bm1010::vf40(int param_1)

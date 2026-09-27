@@ -1,7 +1,8 @@
 // src/camera/cCameraShakeAxis.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DA3ED0..00DBB7E0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCameraShakeAxis.h"
 
 // 00DA3ED0  cCameraShakeAxis::vf04  size=25  [class]
 void __fastcall cCameraShakeAxis::vf04(int param_1)

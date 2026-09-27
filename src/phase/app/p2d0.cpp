@@ -1,7 +1,8 @@
 // src/phase/app/p2d0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47FB0..00D702C0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP2d0.h"
 
 // 00D47FB0  cP2d0::vf08  size=65  [class]
 void __fastcall cP2d0::vf08(int param_1)

@@ -1,7 +1,8 @@
 // src/player/pl1400/Pl1400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085C6F0..00AC3C80, 272 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl1400.h"
 
 // 0085C6F0  Pl1400::vf48  size=5  [class]
 void __fastcall Pl1400::vf48(int *param_1)

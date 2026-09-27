@@ -1,7 +1,8 @@
 // src/effect/EspShaderLuminanceAlMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6C2C0..00F8EA20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderLuminanceAlMask.h"
 
 // 00F6C2C0  EspShaderLuminanceAlMask::vf08  size=315  [class]
 undefined4 __fastcall EspShaderLuminanceAlMask::vf08(int *param_1)

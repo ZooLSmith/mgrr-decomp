@@ -1,7 +1,8 @@
 // src/misc/cSentryGunSite.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF2E0..00CD8540, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSentryGunSite.h"
 
 // 00CBF2E0  cSentryGunSite::cSentryGunSite  size=45  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

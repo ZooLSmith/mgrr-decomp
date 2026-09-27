@@ -1,7 +1,8 @@
 // src/effect/et4010/Et4010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D7850..00AB8290, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et4010.h"
 
 // 005D7850  Et4010::vf50  size=16  [class]
 void Et4010::vf50(void)

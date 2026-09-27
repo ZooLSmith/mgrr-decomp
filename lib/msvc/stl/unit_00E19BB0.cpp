@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E19BB0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E19BB0..00E19CB0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E19BB0  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>_>_>::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>_>_>  size=127  [run]
 undefined4

@@ -1,7 +1,8 @@
 // src/misc/BrokenBridgeContents.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DC350..008DD1F0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BrokenBridgeContents.h"
 
 // 008DC350  BrokenBridgeContents::vf10  size=82  [class]
 void BrokenBridgeContents::vf10(void)

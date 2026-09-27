@@ -1,7 +1,8 @@
 // src/misc/cDrawStencilWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A28F00..00A3D4D0, 16 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDrawStencilWork.h"
 
 // 00A28F00  FUN_00a28f00  size=976  [callgraph]
 undefined4 FUN_00a28f00(float *param_1,float *param_2)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CBB8A0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB8A0..00CBB8A0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CBB8A0  FUN_00cbb8a0  size=58  [run]
 /* WARNING: Removing unreachable block (ram,0x00cbb8c5) */

@@ -1,7 +1,8 @@
 // src/effect/EspShaderSoftPT3DToneCurve_TexBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F60900..00F8B4F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderSoftPT3DToneCurve_TexBlend.h"
 
 // 00F60900  EspShaderSoftPT3DToneCurve_TexBlend::vf08  size=369  [class]
 /* WARNING: Removing unreachable block (ram,0x00f60a44) */

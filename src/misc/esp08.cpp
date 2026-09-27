@@ -1,7 +1,8 @@
 // src/misc/esp08.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD3A0..00F2F2D0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp08.h"
 
 // 00ECD3A0  esp08::esp08  size=18  [class]
 undefined4 * __fastcall esp08::esp08(undefined4 *param_1)

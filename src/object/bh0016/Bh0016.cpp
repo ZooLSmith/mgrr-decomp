@@ -1,7 +1,8 @@
 // src/object/bh0016/Bh0016.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040D280..00AB8D50, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bh0016.h"
 
 // 0040D280  Bh0016::vf2EC  size=32  [class]
 void __fastcall Bh0016::vf2EC(int param_1)

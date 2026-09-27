@@ -1,7 +1,8 @@
 // src/enemy/em8010/Em8010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00617100..00ABA2E0, 443 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8010.h"
 
 // 00617100  Em8010::vfFC  size=30  [class]
 void __fastcall Em8010::vfFC(int param_1)

@@ -1,7 +1,8 @@
 // src/phase/app/p450.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D49330..00D6D140, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP450.h"
 
 // 00D49330  cP450::vf14  size=3  [class]
 void cP450::vf14(void)

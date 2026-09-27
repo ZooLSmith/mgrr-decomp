@@ -1,7 +1,8 @@
 // src/managers/battlesituationmanager/BattleSituationManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D72AD0..00D76C30, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleSituationManager.h"
 
 // 00D72AD0  BattleSituationManager::vf0C  size=31  [class]
 undefined4 * __thiscall BattleSituationManager::vf0C(undefined4 *param_1,byte param_2)

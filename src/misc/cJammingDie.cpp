@@ -1,7 +1,8 @@
 // src/misc/cJammingDie.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB4A0..00CD51E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cJammingDie.h"
 
 // 00CBB4A0  cJammingDie::cJammingDie_2  size=33  [class]
 void __fastcall cJammingDie::cJammingDie_2(undefined4 *param_1)

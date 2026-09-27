@@ -1,7 +1,7 @@
 // src/hw/cHeapHook.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD3300..00DD5090, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD3300  Hw::cHeapHook::vf04  size=3  [class]
 void Hw::cHeapHook::vf04(void)

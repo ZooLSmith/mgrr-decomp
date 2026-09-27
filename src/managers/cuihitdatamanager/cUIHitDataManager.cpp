@@ -1,7 +1,7 @@
 // src/managers/cuihitdatamanager/cUIHitDataManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CFD830..00CFDA80, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CFD830  FUN_00cfd830  size=73  [callgraph]
 int __thiscall FUN_00cfd830(int param_1,int param_2,int param_3)

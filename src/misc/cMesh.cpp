@@ -1,7 +1,8 @@
 // src/misc/cMesh.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A11E20..00A11F50, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMesh.h"
 
 // 00A11E20  cMesh::cMesh  size=290  [class]
 undefined4 __thiscall cMesh::cMesh(int param_1,int param_2,undefined4 param_3)

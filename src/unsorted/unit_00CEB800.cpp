@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CEB800.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEB800..00CEB800, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CEB800  FUN_00ceb800  size=431  [run]
 void __fastcall FUN_00ceb800(int param_1)

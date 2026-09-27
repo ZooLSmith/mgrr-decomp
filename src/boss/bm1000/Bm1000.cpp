@@ -1,7 +1,8 @@
 // src/boss/bm1000/Bm1000.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00414400..00AB9000, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm1000.h"
 
 // 00414400  Bm1000::vf40  size=12  [class]
 bool Bm1000::vf40(void)

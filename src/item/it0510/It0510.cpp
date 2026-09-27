@@ -1,7 +1,8 @@
 // src/item/it0510/It0510.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8340..00AC1270, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "It0510.h"
 
 // 005E8340  It0510::vf310  size=128  [class]
 void __fastcall It0510::vf310(int param_1)

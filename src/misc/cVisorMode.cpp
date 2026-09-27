@@ -1,7 +1,8 @@
 // src/misc/cVisorMode.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC12A0..00D35A60, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVisorMode.h"
 
 // 00CC12A0  cVisorMode::vf08  size=102  [class]
 void __fastcall cVisorMode::vf08(int param_1)

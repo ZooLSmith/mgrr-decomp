@@ -1,7 +1,8 @@
 // src/phase/app/pf13.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D476C0..00D70CA0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pf13.h"
 
 // 00D476C0  Pf13::vf1C  size=3  [class]
 void Pf13::vf1C(void)

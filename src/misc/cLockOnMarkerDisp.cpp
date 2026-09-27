@@ -1,7 +1,8 @@
 // src/misc/cLockOnMarkerDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB9A0..00CD5390, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLockOnMarkerDisp.h"
 
 // 00CBB9A0  cLockOnMarkerDisp::cLockOnMarkerDisp  size=348  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

@@ -1,7 +1,9 @@
 // lib/havok/Source/Common/Serialize/Packfile/hkPackfileWriter.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010E57F0..010E5DB0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkXmlPackfileWriter.h"
 
 // 010E57F0  FUN_010e57f0  size=429  [__FILE__]
 undefined4 FUN_010e57f0(undefined4 *param_1)

@@ -1,7 +1,7 @@
 // src/misc/StaticSpline.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D2F00..00EC3380, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009D2F00  StaticSpline<float,18>::vf04  size=824  [class]
 void __thiscall StaticSpline<float,18>::vf04(int param_1,undefined4 param_2,uint param_3)

@@ -1,7 +1,8 @@
 // src/scene/SceneModelSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A0C9A0..00A197B0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SceneModelSystem.h"
 
 // 00A0C9A0  SceneModelSystem::createModel  size=18  [class]
 undefined4 SceneModelSystem::createModel(void)

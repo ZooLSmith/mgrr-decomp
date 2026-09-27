@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Compat/Deprecated/Compat/updates/hkCompat_hk201110r1_hk201120r1.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0102CD00..0102CD00, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0102CD00  FUN_0102cd00  size=98  [__FILE__]
 undefined4 FUN_0102cd00(void)

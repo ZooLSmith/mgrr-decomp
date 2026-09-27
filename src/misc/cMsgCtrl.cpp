@@ -1,7 +1,8 @@
 // src/misc/cMsgCtrl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCD450..00CF7450, 21 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMsgCtrl.h"
 
 // 00CCD450  cMsgCtrl::cMsgCtrl_6  size=36  [class]
 undefined4 * __fastcall cMsgCtrl::cMsgCtrl_6(undefined4 *param_1)

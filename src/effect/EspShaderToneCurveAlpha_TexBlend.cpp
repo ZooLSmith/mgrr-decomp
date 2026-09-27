@@ -1,7 +1,8 @@
 // src/effect/EspShaderToneCurveAlpha_TexBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F63190..00F8C200, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderToneCurveAlpha_TexBlend.h"
 
 // 00F63190  EspShaderToneCurveAlpha_TexBlend::vf08  size=272  [class]
 undefined4 __fastcall EspShaderToneCurveAlpha_TexBlend::vf08(int *param_1)

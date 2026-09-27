@@ -1,7 +1,8 @@
 // lib/havok/Source/Common/Internal/GeometryProcessing/Mesh/hkgpMesh.h
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010A8EE0..010A8EE0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkgpMesh.h"
 
 // 010A8EE0  hkgpMesh::IConvexOverlap::IConvexShape::vf04  size=98  [__FILE__]
 undefined4 hkgpMesh::IConvexOverlap::IConvexShape::vf04(void)

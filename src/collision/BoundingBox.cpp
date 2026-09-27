@@ -1,7 +1,8 @@
 // src/collision/BoundingBox.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A66FE0..00A6AB20, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BoundingBox.h"
 
 // 00A66FE0  BoundingBox::vf0C  size=1149  [class]
 void __thiscall BoundingBox::vf0C(int param_1,uint param_2)

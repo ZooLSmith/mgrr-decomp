@@ -1,7 +1,8 @@
 // src/misc/cCodecViewer.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098A950..009B9AA0, 18 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecViewer.h"
 
 // 0098A950  cCodecViewer::vf0C  size=183  [class]
 void __fastcall cCodecViewer::vf0C(int param_1)

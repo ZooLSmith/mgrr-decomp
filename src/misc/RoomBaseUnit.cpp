@@ -1,7 +1,8 @@
 // src/misc/RoomBaseUnit.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E3EF0..00ABAA70, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RoomBaseUnit.h"
 
 // 005E3EF0  RoomBaseUnit::vf40  size=32  [class]
 undefined4 RoomBaseUnit::vf40(void)

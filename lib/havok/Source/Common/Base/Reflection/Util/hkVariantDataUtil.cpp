@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Base/Reflection/Util/hkVariantDataUtil.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010281B0..010281B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 010281B0  FUN_010281b0  size=244  [__FILE__]
 undefined8 FUN_010281b0(int param_1,int param_2,undefined4 param_3,undefined4 param_4)

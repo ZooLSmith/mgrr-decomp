@@ -1,7 +1,7 @@
 // src/hw/cShaderPFTyuv.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA4090..00FAA590, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FA4090  Hw::cShaderPFTyuv::vf04  size=67  [class]
 void __fastcall Hw::cShaderPFTyuv::vf04(int param_1)

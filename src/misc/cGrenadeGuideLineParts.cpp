@@ -1,7 +1,8 @@
 // src/misc/cGrenadeGuideLineParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB8EC0..00CE3680, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGrenadeGuideLineParts.h"
 
 // 00CB8EC0  cGrenadeGuideLineParts::vf08  size=15  [class]
 void __fastcall cGrenadeGuideLineParts::vf08(int param_1)

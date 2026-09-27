@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderZTurn.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC1810..015F1E70, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderZTurn.h"
 
 // 00EC1810  cFilterShaderZTurn::cFilterShaderZTurn  size=257  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec185c) */

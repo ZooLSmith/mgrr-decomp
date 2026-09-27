@@ -1,7 +1,8 @@
 // src/misc/cItemStageDropLeftHand.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094D620..009504C0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemStageDropLeftHand.h"
 
 // 0094D620  cItemStageDropLeftHand::vf00  size=6  [class]
 char * cItemStageDropLeftHand::vf00(void)

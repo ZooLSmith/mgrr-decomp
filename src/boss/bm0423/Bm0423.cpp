@@ -1,7 +1,8 @@
 // src/boss/bm0423/Bm0423.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00413B50..00AB9270, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0423.h"
 
 // 00413B50  Bm0423::vf40  size=29  [class]
 undefined4 __fastcall Bm0423::vf40(int param_1)

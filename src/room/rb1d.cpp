@@ -1,7 +1,8 @@
 // src/room/rb1d.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A716F0..00A7B9F0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Rb1d.h"
 
 // 00A716F0  Rb1d::vf04  size=26  [class]
 void __fastcall Rb1d::vf04(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/ExcelStage.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B0AB0..00AC7740, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ExcelStage.h"
 
 // 005B0AB0  ExcelStage::vf40  size=183  [class]
 undefined4 __fastcall ExcelStage::vf40(int *param_1)

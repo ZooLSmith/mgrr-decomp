@@ -1,7 +1,8 @@
 // src/ui/cUIPrimWorkGauss.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCC500..00CCC5E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIPrimWorkGauss.h"
 
 // 00CCC500  cUIPrimWorkGauss::cUIPrimWorkGauss  size=84  [class]
 undefined4 * __fastcall cUIPrimWorkGauss::cUIPrimWorkGauss(undefined4 *param_1)

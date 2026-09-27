@@ -1,7 +1,8 @@
 // src/player/pl0010/state/IdleStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B816D0..00BCA750, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "IdleStatePl0010.h"
 
 // 00B816D0  IdleStatePl0010::vf08  size=37  [class]
 undefined4 __thiscall IdleStatePl0010::vf08(int param_1,undefined4 param_2)

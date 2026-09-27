@@ -1,7 +1,8 @@
 // src/misc/cWeakPointLine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDA770..00D27580, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeakPointLine.h"
 
 // 00CDA770  cWeakPointLine::thunk_vf0C  size=5  [class]
 void __thiscall cWeakPointLine::thunk_vf0C(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/misc/cRoomAbstract.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6D630..00A75FE0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRoomAbstract.h"
 
 // 00A6D630  cRoomAbstract::vf1C  size=1  [class]
 void cRoomAbstract::vf1C(void)

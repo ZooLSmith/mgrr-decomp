@@ -1,7 +1,8 @@
 // src/misc/cVertexFormatPTF4.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC4850..00ECBFE0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVertexFormatPTF4.h"
 
 // 00EC4850  cVertexFormatPTF4::vf00  size=11  [class]
 void cVertexFormatPTF4::vf00(void)

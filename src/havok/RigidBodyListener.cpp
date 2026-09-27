@@ -1,7 +1,9 @@
 // src/havok/RigidBodyListener.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0091D730..009212F0, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RigidBodyListener.h"
+#include "hkpEntityListener.h"
 
 // 0091D730  RigidBodyListener::vf10  size=387  [class]
 void RigidBodyListener::vf10(int *param_1)

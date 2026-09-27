@@ -1,7 +1,8 @@
 // src/player/pl0010/state/StateMachineContextPl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BD3610..00BF1BA0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "StateMachineContextPl0010.h"
 
 // 00BD3610  StateMachineContextPl0010::vf00  size=6  [class]
 undefined * StateMachineContextPl0010::vf00(void)

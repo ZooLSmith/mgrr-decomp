@@ -1,7 +1,8 @@
 // src/enemy/em01a0/Em01a0Line.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0051AE70..00AB74C0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em01a0Line.h"
 
 // 0051AE70  Em01a0Line::vf40  size=95  [class]
 undefined4 __fastcall Em01a0Line::vf40(int param_1)

@@ -1,7 +1,7 @@
 // src/effect/EffectPrimitive.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F581C0..00F58370, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F581C0  EffectPrimitive::Startup  size=379  [class]
 undefined4 EffectPrimitive::Startup(undefined4 param_1)

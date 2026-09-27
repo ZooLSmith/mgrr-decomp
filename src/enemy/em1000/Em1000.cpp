@@ -1,7 +1,8 @@
 // src/enemy/em1000/Em1000.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005C6660..00AB7740, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em1000.h"
 
 // 005C6660  Em1000::vf114  size=35  [class]
 void __thiscall Em1000::vf114(int *param_1,int param_2)

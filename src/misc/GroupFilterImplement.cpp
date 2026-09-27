@@ -1,7 +1,11 @@
 // src/misc/GroupFilterImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008FD540..008FE210, 24 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GroupFilterImplement.h"
+#include "HkSystemGroupManager.h"
+#include "HkSystemGroupManagerImplement.h"
+#include "hkpCollisionFilter.h"
 
 // 008FD540  GroupFilterImplement::GroupFilterImplement_2  size=46  [class]
 undefined4 * __fastcall GroupFilterImplement::GroupFilterImplement_2(undefined4 *param_1)

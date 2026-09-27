@@ -1,7 +1,11 @@
 // lib/havok/unit_010FAD30.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010FAD30..010FD0A0, 93 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkChainedClassNameRegistry.h"
+#include "hkDynamicClassNameRegistry.h"
+#include "hkXmlParser.h"
 
 // 010FAD30  FUN_010fad30  size=9  [run]
 void FUN_010fad30(void)

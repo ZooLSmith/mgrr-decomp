@@ -1,7 +1,8 @@
 // src/misc/cRadarMap.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD5EF0..00D43400, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRadarMap.h"
 
 // 00CD5EF0  cRadarMap::cRadarMap  size=257  [class]
 int __fastcall cRadarMap::cRadarMap(undefined4 *param_1)

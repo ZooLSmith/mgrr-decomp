@@ -1,7 +1,8 @@
 // src/managers/cotmanager/cOtManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A21000..00A21110, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cOtManager.h"
 
 // 00A21000  cOtManager::cOtManager  size=29  [class]
 undefined4 * __fastcall cOtManager::cOtManager(undefined4 *param_1)

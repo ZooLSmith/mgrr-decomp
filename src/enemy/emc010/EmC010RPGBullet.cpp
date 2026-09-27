@@ -1,7 +1,8 @@
 // src/enemy/emc010/EmC010RPGBullet.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00711D10..00ABA170, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EmC010RPGBullet.h"
 
 // 00711D10  EmC010RPGBullet::vf40  size=66  [class]
 bool __fastcall EmC010RPGBullet::vf40(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/cMissileTarget.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEDE70..00D23C00, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMissileTarget.h"
 
 // 00CEDE70  cMissileTarget::vf00  size=62  [class]
 undefined4 * __thiscall cMissileTarget::vf00(undefined4 *param_1,byte param_2)

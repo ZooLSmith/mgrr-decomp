@@ -1,7 +1,8 @@
 // src/misc/cSavingDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F450..00D25D30, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSavingDispBase.h"
 
 // 00D0F450  cSavingDispBase::cSavingDispBase  size=18  [class]
 undefined4 * __fastcall cSavingDispBase::cSavingDispBase(undefined4 *param_1)

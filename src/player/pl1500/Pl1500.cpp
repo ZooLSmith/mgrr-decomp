@@ -1,7 +1,8 @@
 // src/player/pl1500/Pl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A0B30..00AC3CA0, 278 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl1500.h"
 
 // 008A0B30  FUN_008a0b30  size=22  [callgraph]
 void __fastcall FUN_008a0b30(int param_1)

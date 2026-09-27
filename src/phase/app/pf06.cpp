@@ -1,7 +1,8 @@
 // src/phase/app/pf06.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D474F0..00D6FD80, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPf06.h"
 
 // 00D474F0  cPf06::vf0C  size=85  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

@@ -1,7 +1,8 @@
 // src/misc/cStealthKillTarget.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF670..00CD86E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStealthKillTarget.h"
 
 // 00CBF670  cStealthKillTarget::cStealthKillTarget_2  size=33  [class]
 void __fastcall cStealthKillTarget::cStealthKillTarget_2(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/effect/cEspOcclusionWorkImmediate.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED84B0..00F3F9A0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspOcclusionWorkImmediate.h"
 
 // 00ED84B0  cEspOcclusionWorkImmediate::vf04  size=76  [class]
 void __fastcall cEspOcclusionWorkImmediate::vf04(int param_1)

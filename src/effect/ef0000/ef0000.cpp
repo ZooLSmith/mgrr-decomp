@@ -1,7 +1,8 @@
 // src/effect/ef0000/ef0000.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009F84D0..00AB7DE0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ef0000.h"
 
 // 009F84D0  ef0000::vf10  size=1  [class]
 void ef0000::vf10(void)

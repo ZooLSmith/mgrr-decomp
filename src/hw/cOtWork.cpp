@@ -1,7 +1,7 @@
 // src/hw/cOtWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CC4E0..00FAAA30, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009CC4E0  Hw::cOtWork::vf00  size=31  [class]
 undefined4 * __thiscall Hw::cOtWork::vf00(undefined4 *param_1,byte param_2)

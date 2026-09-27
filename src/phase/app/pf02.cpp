@@ -1,7 +1,8 @@
 // src/phase/app/pf02.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D46E90..00D6FC80, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pf02.h"
 
 // 00D46E90  Pf02::vf0C  size=1071  [class]
 void __fastcall Pf02::vf0C(int param_1)

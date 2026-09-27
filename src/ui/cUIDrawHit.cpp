@@ -1,7 +1,8 @@
 // src/ui/cUIDrawHit.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB3ED0..00D0CAB0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDrawHit.h"
 
 // 00CB3ED0  cUIDrawHit::vf08  size=6  [class]
 undefined4 cUIDrawHit::vf08(void)

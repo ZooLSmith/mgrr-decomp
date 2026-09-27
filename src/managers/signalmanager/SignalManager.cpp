@@ -1,7 +1,8 @@
 // src/managers/signalmanager/SignalManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D897D0..00D8A650, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SignalManager.h"
 
 // 00D897D0  SignalManager::vf08  size=31  [class]
 undefined4 * __thiscall SignalManager::vf08(undefined4 *param_1,byte param_2)

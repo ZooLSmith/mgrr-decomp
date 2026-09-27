@@ -1,7 +1,8 @@
 // src/misc/cCollectionTitleItemBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0099D540..00D109E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionTitleItemBase.h"
 
 // 0099D540  cCollectionTitleItemBase::vf14  size=61  [class]
 undefined4 __thiscall cCollectionTitleItemBase::vf14(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/misc/cMsgPrimWorkBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCCB80..00CCCCD0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMsgPrimWorkBase.h"
 
 // 00CCCB80  cMsgPrimWorkBase::cMsgPrimWorkBase  size=223  [class]
 undefined4 * __fastcall cMsgPrimWorkBase::cMsgPrimWorkBase(undefined4 *param_1)

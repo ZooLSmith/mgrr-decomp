@@ -1,7 +1,7 @@
 // src/misc/DebrisHandleList.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093E4F0..009427E0, 35 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0093E4F0  FUN_0093e4f0  size=587  [callgraph]
 void __fastcall FUN_0093e4f0(int param_1)

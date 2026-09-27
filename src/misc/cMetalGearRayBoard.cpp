@@ -1,7 +1,8 @@
 // src/misc/cMetalGearRayBoard.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0083F010..00AB99E0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMetalGearRayBoard.h"
 
 // 0083F010  FUN_0083f010  size=120  [callgraph]
 void __fastcall FUN_0083f010(int param_1)

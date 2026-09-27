@@ -1,7 +1,8 @@
 // src/enemy/em01a0/Em01a0Upper.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0051A710..00AB7430, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em01a0Upper.h"
 
 // 0051A710  Em01a0Upper::vf44  size=16  [class]
 void Em01a0Upper::vf44(void)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_0040DEB0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040DEB0..0040DF80, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0040DEB0  FUN_0040deb0  size=194  [run]
 void FUN_0040deb0(float *param_1,float *param_2)

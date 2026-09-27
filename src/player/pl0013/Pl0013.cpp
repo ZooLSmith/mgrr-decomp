@@ -1,7 +1,8 @@
 // src/player/pl0013/Pl0013.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAB550..00B78E70, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl0013.h"
 
 // 00AAB550  Pl0013::vf04  size=6  [class]
 undefined * Pl0013::vf04(void)

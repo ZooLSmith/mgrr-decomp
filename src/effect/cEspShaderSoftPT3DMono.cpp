@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPT3DMono.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F60D00..00F8B5E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPT3DMono.h"
 
 // 00F60D00  cEspShaderSoftPT3DMono::vf08  size=315  [class]
 /* WARNING: Removing unreachable block (ram,0x00f60e0e) */

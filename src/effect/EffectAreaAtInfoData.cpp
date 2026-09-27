@@ -1,7 +1,8 @@
 // src/effect/EffectAreaAtInfoData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D80EF0..00D810F0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EffectAreaAtInfoData.h"
 
 // 00D80EF0  EffectAreaAtInfoData::EffectAreaAtInfoData  size=61  [class]
 void __fastcall EffectAreaAtInfoData::EffectAreaAtInfoData(undefined4 *param_1)

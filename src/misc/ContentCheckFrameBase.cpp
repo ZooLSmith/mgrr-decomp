@@ -1,7 +1,8 @@
 // src/misc/ContentCheckFrameBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009AA530..00D10440, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContentCheckFrameBase.h"
 
 // 009AA530  ContentCheckFrameBase::vf14  size=61  [class]
 undefined4 __thiscall ContentCheckFrameBase::vf14(int param_1,undefined4 param_2)

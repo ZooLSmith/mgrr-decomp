@@ -1,7 +1,12 @@
 // lib/havok/unit_0092DC00.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0092DC00..0092E020, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkRemoveContainer.h"
+#include "HkRemoveEntityBatch.h"
+#include "HkRemoveManager.h"
+#include "HkRemoveManagerImplement.h"
+#include "HkRemoveRagdoll.h"
 
 // 0092DC00  HkRemoveManagerImplement::vf04  size=21  [run]
 void HkRemoveManagerImplement::vf04(undefined4 param_1)

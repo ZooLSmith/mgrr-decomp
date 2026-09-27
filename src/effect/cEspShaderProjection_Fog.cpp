@@ -1,7 +1,8 @@
 // src/effect/cEspShaderProjection_Fog.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6BB80..00F8E8C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderProjection_Fog.h"
 
 // 00F6BB80  cEspShaderProjection_Fog::vf08  size=349  [class]
 /* WARNING: Removing unreachable block (ram,0x00f6bc7d) */

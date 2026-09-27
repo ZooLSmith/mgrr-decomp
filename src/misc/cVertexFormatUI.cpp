@@ -1,7 +1,8 @@
 // src/misc/cVertexFormatUI.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CA8F20..00D28FF0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVertexFormatUI.h"
 
 // 00CA8F20  cVertexFormatUI::cVertexFormatUI_2  size=18  [class]
 undefined4 * __fastcall cVertexFormatUI::cVertexFormatUI_2(undefined4 *param_1)

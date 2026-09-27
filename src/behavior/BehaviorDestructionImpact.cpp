@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDestructionImpact.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00602950..00AB7B30, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDestructionImpact.h"
 
 // 00602950  BehaviorDestructionImpact::vf40  size=51  [class]
 undefined4 __fastcall BehaviorDestructionImpact::vf40(int param_1)

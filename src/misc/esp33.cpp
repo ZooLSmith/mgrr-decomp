@@ -1,7 +1,8 @@
 // src/misc/esp33.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED05E0..00F35FA0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp33.h"
 
 // 00ED05E0  esp33::esp33  size=18  [class]
 undefined4 * __fastcall esp33::esp33(undefined4 *param_1)

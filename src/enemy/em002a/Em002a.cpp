@@ -1,7 +1,8 @@
 // src/enemy/em002a/Em002a.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00439D40..00AB6A40, 25 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em002a.h"
 
 // 00439D40  Em002a::vf264  size=136  [class]
 undefined4 __thiscall Em002a::vf264(int param_1,int param_2)

@@ -1,7 +1,8 @@
 // src/enemy/em0044/Em0044_ev.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F50F0..00AB6D90, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0044_ev.h"
 
 // 005F50F0  Em0044_ev::vf40  size=28  [class]
 undefined4 __fastcall Em0044_ev::vf40(int param_1)

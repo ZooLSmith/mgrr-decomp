@@ -1,7 +1,8 @@
 // src/misc/cEnemyTargetDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB88B0..00D2F590, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyTargetDispParts.h"
 
 // 00CB88B0  cEnemyTargetDispParts::vf08  size=109  [class]
 void __fastcall cEnemyTargetDispParts::vf08(int param_1)

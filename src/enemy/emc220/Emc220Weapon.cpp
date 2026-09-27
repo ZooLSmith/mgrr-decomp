@@ -1,7 +1,8 @@
 // src/enemy/emc220/Emc220Weapon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00822260..00AB9F80, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc220Weapon.h"
 
 // 00822260  Emc220Weapon::vf54  size=5  [class]
 void __fastcall Emc220Weapon::vf54(int param_1)

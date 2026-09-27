@@ -1,7 +1,7 @@
 // src/managers/occlusionquerymanager/OcclusionQueryManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9F540..00F9F540, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9F540  OcclusionQueryManager::AllocQuery  size=152  [class]
 uint OcclusionQueryManager::AllocQuery(void)

@@ -1,7 +1,8 @@
 // src/managers/situationmanager/SituationManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C3D390..00C60BC0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SituationManagerImplement.h"
 
 // 00C3D390  FUN_00c3d390  size=101  [callgraph]
 undefined4 * __thiscall

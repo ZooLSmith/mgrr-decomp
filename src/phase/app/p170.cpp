@@ -1,7 +1,8 @@
 // src/phase/app/p170.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47F60..00D70200, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P170.h"
 
 // 00D47F60  P170::vf18  size=1  [class]
 void P170::vf18(void)

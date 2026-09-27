@@ -1,7 +1,8 @@
 // src/phase/app/p410.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48DE0..00D70460, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P410.h"
 
 // 00D48DE0  P410::vf1C  size=34  [class]
 void __fastcall P410::vf1C(int param_1)

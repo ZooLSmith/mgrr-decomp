@@ -1,7 +1,8 @@
 // src/misc/cGameResultDLC1Base.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0FF90..00D28DA0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameResultDLC1Base.h"
 
 // 00D0FF90  cGameResultDLC1Base::cGameResultDLC1Base  size=18  [class]
 undefined4 * __fastcall cGameResultDLC1Base::cGameResultDLC1Base(undefined4 *param_1)

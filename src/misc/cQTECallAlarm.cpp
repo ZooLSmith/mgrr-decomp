@@ -1,7 +1,8 @@
 // src/misc/cQTECallAlarm.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBD4B0..00CD5CD0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cQTECallAlarm.h"
 
 // 00CBD4B0  cQTECallAlarm::cQTECallAlarm  size=326  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

@@ -1,7 +1,8 @@
 // src/misc/_AFX_EDIT_STATE.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4FDC0..00F4FDC0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "_AFX_EDIT_STATE.h"
 
 // 00F4FDC0  _AFX_EDIT_STATE::_AFX_EDIT_STATE  size=36  [class]
 /* Library Function - Single Match

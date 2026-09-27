@@ -1,7 +1,8 @@
 // src/misc/WpBaseDLC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A90160..00AA8CE0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "WpBaseDLC.h"
 
 // 00A90160  WpBaseDLC::vf94  size=37  [class]
 undefined4 WpBaseDLC::vf94(void)

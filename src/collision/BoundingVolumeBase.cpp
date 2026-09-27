@@ -1,7 +1,8 @@
 // src/collision/BoundingVolumeBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A66710..00A66D30, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BoundingVolumeBase.h"
 
 // 00A66710  BoundingVolumeBase::vf00  size=6  [class]
 undefined * BoundingVolumeBase::vf00(void)

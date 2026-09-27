@@ -1,7 +1,8 @@
 // src/collision/RayCastPenetrationWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00906780..009067C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RayCastPenetrationWork.h"
 
 // 00906780  RayCastPenetrationWork::vf00  size=6  [class]
 undefined * RayCastPenetrationWork::vf00(void)

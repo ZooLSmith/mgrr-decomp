@@ -1,7 +1,7 @@
 // lib/havok/unit_010367F0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010367F0..01037270, 23 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 010367F0  FUN_010367f0  size=162  [run]
 void FUN_010367f0(undefined4 param_1,undefined4 param_2,int *param_3)

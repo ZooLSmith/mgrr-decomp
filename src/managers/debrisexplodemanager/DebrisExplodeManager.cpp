@@ -1,7 +1,7 @@
 // src/managers/debrisexplodemanager/DebrisExplodeManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00942E00..00942E00, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00942E00  DebrisExplodeManager::addHandle  size=271  [class]
 undefined4 __thiscall DebrisExplodeManager::addHandle(int *param_1,int *param_2,undefined4 param_3)

@@ -1,7 +1,8 @@
 // src/misc/esp162.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0C10..009DAF30, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp162.h"
 
 // 009D0C10  esp162::thunk_vf14  size=5  [class]
 void __fastcall esp162::thunk_vf14(int param_1)

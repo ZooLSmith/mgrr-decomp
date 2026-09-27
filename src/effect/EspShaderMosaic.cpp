@@ -1,7 +1,8 @@
 // src/effect/EspShaderMosaic.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009DCC90..015ECC20, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderMosaic.h"
 
 // 009DCC90  EspShaderMosaic::EspShaderMosaic  size=30  [class]
 undefined4 * __fastcall EspShaderMosaic::EspShaderMosaic(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/player/pl1500/state/DeadStatePl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A3F60..008A9E10, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DeadStatePl1500.h"
 
 // 008A3F60  DeadStatePl1500::vf0C  size=5  [class]
 void __thiscall DeadStatePl1500::vf0C(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/misc/cDestinationDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB7720..00CD1BE0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDestinationDisp.h"
 
 // 00CB7720  cDestinationDisp::cDestinationDisp  size=224  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

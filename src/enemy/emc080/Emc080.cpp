@@ -1,7 +1,9 @@
 // src/enemy/emc080/Emc080.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007AEB10..00AB9EE0, 222 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc080.h"
+#include "hkpCdPointCollector.h"
 
 // 007AEB10  FUN_007aeb10  size=45  [callgraph]
 void __thiscall

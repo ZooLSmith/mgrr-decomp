@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4EAC0..00F59160, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkBase.h"
 
 // 00F4EAC0  EspPrimitiveWorkBase::EspPrimitiveWorkBase_9  size=79  [class]
 void __fastcall EspPrimitiveWorkBase::EspPrimitiveWorkBase_9(undefined4 *param_1)

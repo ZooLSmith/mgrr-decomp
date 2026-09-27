@@ -1,7 +1,8 @@
 // src/effect/EspShaderMultiMoveParticleSSBAtl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F63510..00F8C370, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderMultiMoveParticleSSBAtl.h"
 
 // 00F63510  EspShaderMultiMoveParticleSSBAtl::vf08  size=330  [class]
 undefined4 __fastcall EspShaderMultiMoveParticleSSBAtl::vf08(int *param_1)

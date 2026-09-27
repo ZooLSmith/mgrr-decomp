@@ -1,7 +1,8 @@
 // src/misc/cTimeLimitDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBFCF0..00CD8E30, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTimeLimitDisp.h"
 
 // 00CBFCF0  cTimeLimitDisp::cTimeLimitDisp  size=33  [class]
 void __fastcall cTimeLimitDisp::cTimeLimitDisp(undefined4 *param_1)

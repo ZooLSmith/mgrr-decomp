@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPT3DAlMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5FF90..00F8B120, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPT3DAlMask.h"
 
 // 00F5FF90  cEspShaderSoftPT3DAlMask::vf08  size=345  [class]
 /* WARNING: Removing unreachable block (ram,0x00f600bc) */

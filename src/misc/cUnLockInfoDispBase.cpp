@@ -1,7 +1,8 @@
 // src/misc/cUnLockInfoDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F810..00D26F60, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUnLockInfoDispBase.h"
 
 // 00D0F810  cUnLockInfoDispBase::cUnLockInfoDispBase  size=18  [class]
 undefined4 * __fastcall cUnLockInfoDispBase::cUnLockInfoDispBase(undefined4 *param_1)

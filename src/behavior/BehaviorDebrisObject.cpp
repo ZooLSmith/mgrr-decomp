@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisObject.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8900..005E24B0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisObject.h"
 
 // 005D8900  BehaviorDebrisObject::vf44  size=42  [class]
 void __fastcall BehaviorDebrisObject::vf44(int param_1)

@@ -1,7 +1,7 @@
 // src/lib/InputBinaryArchive.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C6AD70..00C760E0, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C6AD70  lib::InputBinaryArchive<unsigned_char_const*,unsigned_char>::vf04  size=3  [class]
 undefined1 lib::InputBinaryArchive<unsigned_char_const*,unsigned_char>::vf04(void)

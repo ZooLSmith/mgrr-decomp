@@ -1,7 +1,8 @@
 // src/enemy/em01a0/Em01a0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00519000..00AB73C0, 165 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em01a0.h"
 
 // 00519000  Em01a0::vf1CC  size=11  [class]
 void __fastcall Em01a0::vf1CC(int param_1)

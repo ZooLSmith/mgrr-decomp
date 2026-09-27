@@ -1,7 +1,8 @@
 // src/graphics/cVariationTexture.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EAF7E0..00EC2D90, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVariationTexture.h"
 
 // 00EAF7E0  cVariationTexture::cVariationTexture  size=21  [class]
 undefined4 * __fastcall cVariationTexture::cVariationTexture(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/player/pl0010/state/AvoidMiddleOverJumpStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80EC0..00BDD120, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AvoidMiddleOverJumpStatePl0010.h"
 
 // 00B80EC0  AvoidMiddleOverJumpStatePl0010::vf08  size=38  [class]
 undefined4 __thiscall AvoidMiddleOverJumpStatePl0010::vf08(int param_1,undefined4 param_2)

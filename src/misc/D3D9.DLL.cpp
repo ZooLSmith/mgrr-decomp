@@ -1,7 +1,7 @@
 // src/misc/D3D9.DLL.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01436F26..01436F26, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01436F26  D3D9.DLL::Direct3DCreate9  size=6  [class]
 void Direct3DCreate9(void)

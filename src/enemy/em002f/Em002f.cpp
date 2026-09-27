@@ -1,7 +1,8 @@
 // src/enemy/em002f/Em002f.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0043AAB0..00AB6A70, 27 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em002f.h"
 
 // 0043AAB0  Em002f::vf48  size=26  [class]
 void __fastcall Em002f::vf48(int param_1)

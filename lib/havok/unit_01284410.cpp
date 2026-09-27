@@ -1,7 +1,7 @@
 // lib/havok/unit_01284410.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01284410..01284680, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01284410  FUN_01284410  size=17  [run]
 void __fastcall FUN_01284410(int param_1)

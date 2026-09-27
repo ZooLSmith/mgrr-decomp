@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E16640.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E16640..00E16940, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E16640  std::runtime_error::vf00  size=30  [run]
 undefined4 __thiscall std::runtime_error::vf00(undefined4 param_1,byte param_2)

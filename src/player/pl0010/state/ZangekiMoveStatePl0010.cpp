@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiMoveStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83630..00BE4030, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiMoveStatePl0010.h"
 
 // 00B83630  ZangekiMoveStatePl0010::vf0C  size=5  [class]
 void __thiscall ZangekiMoveStatePl0010::vf0C(int param_1,undefined4 param_2)

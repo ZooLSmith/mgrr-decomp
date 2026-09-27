@@ -1,7 +1,7 @@
 // src/managers/cslowratemanager/cSlowRateManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E054C0..00E08740, 92 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E054C0  FUN_00e054c0  size=90  [callgraph]
 int __thiscall FUN_00e054c0(int param_1,uint param_2)

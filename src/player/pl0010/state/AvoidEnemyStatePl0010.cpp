@@ -1,7 +1,8 @@
 // src/player/pl0010/state/AvoidEnemyStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80E20..00BDCEA0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AvoidEnemyStatePl0010.h"
 
 // 00B80E20  AvoidEnemyStatePl0010::vf08  size=42  [class]
 undefined4 __thiscall AvoidEnemyStatePl0010::vf08(int param_1,undefined4 param_2)

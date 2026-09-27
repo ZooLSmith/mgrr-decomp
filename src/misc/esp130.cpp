@@ -1,7 +1,8 @@
 // src/misc/esp130.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0860..009F5840, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp130.h"
 
 // 009D0860  esp130::esp130  size=18  [class]
 undefined4 * __fastcall esp130::esp130(undefined4 *param_1)

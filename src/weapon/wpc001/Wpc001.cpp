@@ -1,7 +1,8 @@
 // src/weapon/wpc001/Wpc001.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00601C60..00AE0150, 134 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Wpc001.h"
 
 // 00601C60  Wpc001::thunk_vf44  size=5  [class]
 void __fastcall Wpc001::thunk_vf44(int param_1)

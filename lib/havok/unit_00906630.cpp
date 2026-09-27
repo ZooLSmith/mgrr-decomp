@@ -1,7 +1,8 @@
 // lib/havok/unit_00906630.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00906630..00906630, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpFirstCdBodyPairCollector.h"
 
 // 00906630  hkpFirstCdBodyPairCollector::vf00  size=47  [run]
 undefined4 * __thiscall hkpFirstCdBodyPairCollector::vf00(undefined4 *param_1,byte param_2)

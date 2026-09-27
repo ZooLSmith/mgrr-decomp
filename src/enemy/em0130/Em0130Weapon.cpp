@@ -1,7 +1,8 @@
 // src/enemy/em0130/Em0130Weapon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006063A0..00ABA5B0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0130Weapon.h"
 
 // 006063A0  Em0130Weapon::vf40  size=101  [class]
 undefined4 __fastcall Em0130Weapon::vf40(int param_1)

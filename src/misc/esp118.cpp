@@ -1,7 +1,8 @@
 // src/misc/esp118.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0660..009EA550, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp118.h"
 
 // 009D0660  esp118::vf04  size=29  [class]
 bool esp118::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)

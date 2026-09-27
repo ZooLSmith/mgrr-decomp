@@ -1,7 +1,8 @@
 // src/misc/cItemTresureLock.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8D90..00AB9840, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemTresureLock.h"
 
 // 005E8D90  cItemTresureLock::vf40  size=92  [class]
 void __fastcall cItemTresureLock::vf40(int param_1)

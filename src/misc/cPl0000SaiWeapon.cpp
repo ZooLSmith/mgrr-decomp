@@ -1,7 +1,8 @@
 // src/misc/cPl0000SaiWeapon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF310..00BEC5A0, 74 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPl0000SaiWeapon.h"
 
 // 00AAF310  cPl0000SaiWeapon::vf04  size=6  [class]
 undefined * cPl0000SaiWeapon::vf04(void)

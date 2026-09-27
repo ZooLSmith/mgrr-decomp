@@ -1,7 +1,8 @@
 // src/misc/DlcMoveBlock.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00603BE0..00AB9BB0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DlcMoveBlock.h"
 
 // 00603BE0  DlcMoveBlock::vf40  size=196  [class]
 undefined4 __fastcall DlcMoveBlock::vf40(int param_1)

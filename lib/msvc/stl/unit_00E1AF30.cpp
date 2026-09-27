@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E1AF30.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E1AF30..00E1AF30, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E1AF30  std::numpunct<char>::numpunct<char>  size=126  [run]
 undefined4 std::numpunct<char>::numpunct<char>(int *param_1,int *param_2)

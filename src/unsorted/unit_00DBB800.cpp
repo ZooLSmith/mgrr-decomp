@@ -1,7 +1,7 @@
 // src/unsorted/unit_00DBB800.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DBB800..00DBB880, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DBB800  FUN_00dbb800  size=54  [run]
 void __thiscall FUN_00dbb800(undefined4 *param_1,undefined4 param_2,undefined4 param_3)

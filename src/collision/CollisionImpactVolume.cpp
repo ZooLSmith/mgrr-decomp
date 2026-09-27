@@ -1,7 +1,8 @@
 // src/collision/CollisionImpactVolume.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D775F0..00D7E030, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionImpactVolume.h"
 
 // 00D775F0  CollisionImpactVolume::vf1C  size=33  [class]
 float10 __fastcall CollisionImpactVolume::vf1C(int param_1)

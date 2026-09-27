@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E0AB40.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E0AB40..00E0BF80, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E0AB40  std::basic_ostream<char,std::char_traits<char>_>::basic_ostream<char,std::char_traits<char>_>_13  size=338  [run]
 void std::basic_ostream<char,std::char_traits<char>_>::

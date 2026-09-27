@@ -1,7 +1,7 @@
 // src/hw/cShareHeapPhysical.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD2DD0..00DD51D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD2DD0  Hw::cShareHeapPhysical::vf48  size=66  [class]
 undefined4 __thiscall Hw::cShareHeapPhysical::vf48(int param_1,int param_2,undefined4 param_3)

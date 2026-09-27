@@ -1,7 +1,7 @@
 // src/sound/SoundArea.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E464B0..00E676F0, 486 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E464B0  FUN_00e464b0  size=159  [callgraph]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

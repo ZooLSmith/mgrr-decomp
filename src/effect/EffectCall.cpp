@@ -1,7 +1,7 @@
 // src/effect/EffectCall.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E002F0..00E002F0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E002F0  EffectCall::EffectCallSystem::callOnce  size=437  [class]
 void EffectCall::EffectCallSystem::callOnce

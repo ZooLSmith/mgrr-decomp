@@ -1,7 +1,8 @@
 // src/misc/cItemInfoDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C290..00D24950, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemInfoDispBase.h"
 
 // 00D0C290  cItemInfoDispBase::cItemInfoDispBase  size=18  [class]
 undefined4 * __fastcall cItemInfoDispBase::cItemInfoDispBase(undefined4 *param_1)

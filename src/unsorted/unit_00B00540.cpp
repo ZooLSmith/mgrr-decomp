@@ -1,7 +1,7 @@
 // src/unsorted/unit_00B00540.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B00540..00B00540, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00B00540  FUN_00b00540  size=547  [run]
 /* WARNING: Type propagation algorithm not settling */

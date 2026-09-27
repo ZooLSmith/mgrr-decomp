@@ -1,7 +1,8 @@
 // src/misc/MonThrowObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0051B0D0..00AB9720, 26 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "MonThrowObj.h"
 
 // 0051B0D0  FUN_0051b0d0  size=20  [callgraph]
 void __fastcall FUN_0051b0d0(int param_1)

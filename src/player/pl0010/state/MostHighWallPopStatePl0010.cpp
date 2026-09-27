@@ -1,7 +1,8 @@
 // src/player/pl0010/state/MostHighWallPopStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81B40..00BACFD0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "MostHighWallPopStatePl0010.h"
 
 // 00B81B40  MostHighWallPopStatePl0010::vf08  size=19  [class]
 bool MostHighWallPopStatePl0010::vf08(undefined4 param_1)

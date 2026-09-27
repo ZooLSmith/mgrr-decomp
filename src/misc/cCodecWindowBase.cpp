@@ -1,7 +1,8 @@
 // src/misc/cCodecWindowBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E190..00D213E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecWindowBase.h"
 
 // 00D0E190  cCodecWindowBase::cCodecWindowBase  size=18  [class]
 undefined4 * __fastcall cCodecWindowBase::cCodecWindowBase(undefined4 *param_1)

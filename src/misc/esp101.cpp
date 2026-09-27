@@ -1,7 +1,8 @@
 // src/misc/esp101.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D66E0..009EE720, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp101.h"
 
 // 009D66E0  esp101::esp101  size=140  [class]
 undefined4 * __fastcall esp101::esp101(undefined4 *param_1)

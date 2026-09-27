@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiCutStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82C90..00BE18E0, 26 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiCutStatePl0010.h"
 
 // 00B82C90  ZangekiCutStatePl0010::SlashFirstHitSlot::vf10  size=1  [class]
 void ZangekiCutStatePl0010::SlashFirstHitSlot::vf10(void)

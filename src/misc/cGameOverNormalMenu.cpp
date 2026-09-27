@@ -1,7 +1,8 @@
 // src/misc/cGameOverNormalMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00990D40..009B3340, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameOverNormalMenu.h"
 
 // 00990D40  cGameOverNormalMenu::vf08  size=184  [class]
 void __fastcall cGameOverNormalMenu::vf08(int param_1)

@@ -1,7 +1,8 @@
 // src/phase/app/p230.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48260..00D70280, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP230.h"
 
 // 00D48260  cP230::vf08  size=416  [class]
 void __fastcall cP230::vf08(int param_1)

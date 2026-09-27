@@ -1,7 +1,8 @@
 // src/misc/cSlashPointDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF0B00..00D32130, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSlashPointDispParts.h"
 
 // 00CF0B00  cSlashPointDispParts::vf00  size=30  [class]
 undefined4 __thiscall cSlashPointDispParts::vf00(undefined4 param_1,byte param_2)

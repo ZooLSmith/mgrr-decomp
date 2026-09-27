@@ -1,7 +1,8 @@
 // src/misc/cHeadMarkStunParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CE3840..00CE3840, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cHeadMarkStunParts.h"
 
 // 00CE3840  cHeadMarkStunParts::vf00  size=63  [class]
 undefined4 * __thiscall cHeadMarkStunParts::vf00(undefined4 *param_1,byte param_2)

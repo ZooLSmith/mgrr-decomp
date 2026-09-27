@@ -1,7 +1,7 @@
 // src/hw/MemoryDevice.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD3B80..00DD3BB0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD3B80  Hw::MemoryDevice::allocPhysical  size=48  [class]
 LPVOID __thiscall Hw::MemoryDevice::allocPhysical(int param_1,SIZE_T param_2,int param_3)

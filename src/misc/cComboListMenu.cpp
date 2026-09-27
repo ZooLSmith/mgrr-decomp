@@ -1,7 +1,8 @@
 // src/misc/cComboListMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098CFF0..009BA4A0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cComboListMenu.h"
 
 // 0098CFF0  cComboListMenu::cComboListMenu  size=270  [class]
 undefined4 * __fastcall cComboListMenu::cComboListMenu(undefined4 *param_1)

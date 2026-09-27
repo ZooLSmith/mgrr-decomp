@@ -1,7 +1,8 @@
 // src/misc/cUnLockInfoDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD92D0..00D43790, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUnLockInfoDispParts.h"
 
 // 00CD92D0  cUnLockInfoDispParts::cUnLockInfoDispParts  size=122  [class]
 undefined4 * __fastcall cUnLockInfoDispParts::cUnLockInfoDispParts(undefined4 *param_1)

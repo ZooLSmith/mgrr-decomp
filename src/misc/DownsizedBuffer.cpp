@@ -1,7 +1,7 @@
 // src/misc/DownsizedBuffer.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A43E70..00A46C60, 18 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A43E70  DownsizedBuffer::ShaderDownSample::vf04  size=39  [class]
 void __fastcall DownsizedBuffer::ShaderDownSample::vf04(int param_1)

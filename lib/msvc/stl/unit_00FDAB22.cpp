@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FDAB22.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDAB22..00FDAD3D, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDAB22  std::_Locinfo::_Locinfo_dtor  size=27  [run]
 /* Library Function - Single Match

@@ -1,7 +1,8 @@
 // src/graphics/cFilterShader10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC0840..015F1AD0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShader10.h"
 
 // 00EC0840  cFilterShader10::cFilterShader10  size=587  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec08cf) */

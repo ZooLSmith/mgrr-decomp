@@ -1,7 +1,8 @@
 // src/managers/rigidbodymanager/RigidBodyManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00913FC0..00926500, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RigidBodyManagerImplement.h"
 
 // 00913FC0  RigidBodyManagerImplement::vf2C  size=23  [class]
 void __thiscall RigidBodyManagerImplement::vf2C(int *param_1,undefined4 *param_2)

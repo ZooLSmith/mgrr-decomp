@@ -1,7 +1,8 @@
 // lib/wwise/CAkDefaultIOHookBlocking.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DEF1F0..00DF5AC0, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CAkDefaultIOHookBlocking.h"
 
 // 00DEF1F0  CAkDefaultIOHookBlocking::vf08  size=240  [class]
 void __thiscall

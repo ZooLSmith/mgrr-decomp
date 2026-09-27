@@ -1,7 +1,8 @@
 // src/behavior/BehaviorImpactWave.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00602C20..00AB7AC0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorImpactWave.h"
 
 // 00602C20  BehaviorImpactWave::vf40  size=39  [class]
 undefined4 __fastcall BehaviorImpactWave::vf40(int param_1)

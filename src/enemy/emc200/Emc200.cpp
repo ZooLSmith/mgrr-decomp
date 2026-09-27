@@ -1,7 +1,8 @@
 // src/enemy/emc200/Emc200.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00808890..00AB9FF0, 72 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc200.h"
 
 // 00808890  Emc200::vf264  size=54  [class]
 undefined4 __thiscall Emc200::vf264(int param_1,int param_2)

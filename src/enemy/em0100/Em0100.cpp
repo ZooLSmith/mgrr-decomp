@@ -1,7 +1,8 @@
 // src/enemy/em0100/Em0100.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049FEB0..00AB71B0, 138 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0100.h"
 
 // 0049FEB0  Em0100::vf118  size=80  [class]
 undefined4 __thiscall Em0100::vf118(int param_1,int param_2)

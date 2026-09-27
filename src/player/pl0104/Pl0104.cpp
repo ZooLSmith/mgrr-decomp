@@ -1,7 +1,8 @@
 // src/player/pl0104/Pl0104.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F05A0..00AB6470, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl0104.h"
 
 // 005F05A0  Pl0104::vf44  size=5  [class]
 void __fastcall Pl0104::vf44(int param_1)

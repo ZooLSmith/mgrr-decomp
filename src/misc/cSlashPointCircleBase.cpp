@@ -1,7 +1,8 @@
 // src/misc/cSlashPointCircleBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBD7D0..00D0F2C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSlashPointCircleBase.h"
 
 // 00CBD7D0  cSlashPointCircleBase::vf14  size=38  [class]
 undefined4 __fastcall cSlashPointCircleBase::vf14(int param_1)

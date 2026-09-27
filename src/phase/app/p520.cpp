@@ -1,7 +1,8 @@
 // src/phase/app/p520.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4A9D0..00D70510, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P520.h"
 
 // 00D4A9D0  P520::vf1C  size=3  [class]
 void P520::vf1C(void)

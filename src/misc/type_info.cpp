@@ -1,7 +1,8 @@
 // src/misc/type_info.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDB5AF..00FE3920, 32 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "type_info.h"
 
 // 00FDB5AF  type_info::name  size=20  [class]
 /* Library Function - Single Match

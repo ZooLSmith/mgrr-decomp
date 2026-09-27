@@ -1,7 +1,8 @@
 // src/misc/cCutPointDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD1570..00D43DD0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCutPointDispParts.h"
 
 // 00CD1570  cCutPointDispParts::cCutPointDispParts  size=231  [class]
 void __fastcall cCutPointDispParts::cCutPointDispParts(undefined4 *param_1)

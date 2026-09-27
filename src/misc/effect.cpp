@@ -1,7 +1,7 @@
 // src/misc/effect.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4E370..00F4E370, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F4E370  effect::utility::FixedFactory<effect::utility::MappedData<eEffDataManager,cEffectData*,effect::utility::MappedFixedVector2<eEffDataManager,cEffectData*>_>_>::vf00  size=30  [class]
 undefined4 __thiscall

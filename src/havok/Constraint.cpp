@@ -1,7 +1,8 @@
 // src/havok/Constraint.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008FB2D0..008FCE90, 42 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkFixedConstraintData.h"
 
 // 008FB2D0  Constraint::WorkBase::vf00  size=31  [class]
 undefined4 * __thiscall Constraint::WorkBase::vf00(undefined4 *param_1,byte param_2)

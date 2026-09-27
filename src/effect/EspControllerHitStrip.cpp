@@ -1,7 +1,8 @@
 // src/effect/EspControllerHitStrip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EAAAB0..00EAAD60, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspControllerHitStrip.h"
 
 // 00EAAAB0  EspControllerHitStrip::EspControllerHitStrip  size=75  [class]
 undefined4 * __fastcall EspControllerHitStrip::EspControllerHitStrip(undefined4 *param_1)

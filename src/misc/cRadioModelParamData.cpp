@@ -1,7 +1,8 @@
 // src/misc/cRadioModelParamData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC1F40..00CDABF0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRadioModelParamData.h"
 
 // 00CC1F40  cRadioModelParamData::cRadioModelParamData_2  size=7  [class]
 void __fastcall cRadioModelParamData::cRadioModelParamData_2(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/misc/cActionMessageParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD01A0..00D38A70, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cActionMessageParts.h"
 
 // 00CD01A0  cActionMessageParts::cActionMessageParts  size=185  [class]
 undefined4 * cActionMessageParts::cActionMessageParts(void)

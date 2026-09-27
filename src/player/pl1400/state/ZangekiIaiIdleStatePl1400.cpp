@@ -1,7 +1,8 @@
 // src/player/pl1400/state/ZangekiIaiIdleStatePl1400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085F860..008A03B0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiIaiIdleStatePl1400.h"
 
 // 0085F860  ZangekiIaiIdleStatePl1400::vf0C  size=5  [class]
 void __thiscall ZangekiIaiIdleStatePl1400::vf0C(int param_1,undefined4 param_2)

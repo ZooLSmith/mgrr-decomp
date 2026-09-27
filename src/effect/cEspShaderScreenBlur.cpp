@@ -1,7 +1,8 @@
 // src/effect/cEspShaderScreenBlur.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5CD50..00F8C940, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderScreenBlur.h"
 
 // 00F5CD50  cEspShaderScreenBlur::vf0C  size=1  [class]
 void cEspShaderScreenBlur::vf0C(void)

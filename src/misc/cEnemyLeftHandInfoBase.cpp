@@ -1,7 +1,8 @@
 // src/misc/cEnemyLeftHandInfoBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C5B0..00D23DA0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyLeftHandInfoBase.h"
 
 // 00D0C5B0  cEnemyLeftHandInfoBase::cEnemyLeftHandInfoBase  size=18  [class]
 undefined4 * __fastcall cEnemyLeftHandInfoBase::cEnemyLeftHandInfoBase(undefined4 *param_1)

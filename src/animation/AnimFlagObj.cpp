@@ -1,7 +1,8 @@
 // src/animation/AnimFlagObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00408FD0..00AB91A0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AnimFlagObj.h"
 
 // 00408FD0  AnimFlagObj::vf40  size=98  [class]
 undefined4 AnimFlagObj::vf40(void)

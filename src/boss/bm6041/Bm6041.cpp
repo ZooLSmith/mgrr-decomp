@@ -1,7 +1,8 @@
 // src/boss/bm6041/Bm6041.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00604370..00AC7250, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm6041.h"
 
 // 00604370  Bm6041::vf30  size=66  [class]
 void __fastcall Bm6041::vf30(int param_1)

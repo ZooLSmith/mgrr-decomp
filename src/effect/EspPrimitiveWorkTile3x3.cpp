@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkTile3x3.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F553B0..00F59560, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkTile3x3.h"
 
 // 00F553B0  FUN_00f553b0  size=408  [callgraph]
 void __thiscall

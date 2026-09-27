@@ -1,7 +1,8 @@
 // src/effect/cEspShaderPsMaskBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F82F50..00F8E050, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderPsMaskBase.h"
 
 // 00F82F50  cEspShaderPsMaskBase::cEspShaderPsMaskBase  size=273  [class]
 /* WARNING: Removing unreachable block (ram,0x00f82fa5) */

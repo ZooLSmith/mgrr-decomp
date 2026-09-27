@@ -1,7 +1,8 @@
 // src/enemy/emc060/Emc060.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00776EE0..00AB9E30, 310 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc060.h"
 
 // 00776EE0  Emc060::vf14C  size=43  [class]
 bool Emc060::vf14C(int param_1,int param_2)

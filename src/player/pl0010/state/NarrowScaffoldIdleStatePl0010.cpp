@@ -1,7 +1,8 @@
 // src/player/pl0010/state/NarrowScaffoldIdleStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81BE0..00BAE2B0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "NarrowScaffoldIdleStatePl0010.h"
 
 // 00B81BE0  FUN_00b81be0  size=195  [callgraph]
 void FUN_00b81be0(undefined4 *param_1,float *param_2,float *param_3,int param_4)

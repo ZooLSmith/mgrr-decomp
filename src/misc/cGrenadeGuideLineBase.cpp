@@ -1,7 +1,8 @@
 // src/misc/cGrenadeGuideLineBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E690..00D24570, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGrenadeGuideLineBase.h"
 
 // 00D0E690  cGrenadeGuideLineBase::cGrenadeGuideLineBase  size=18  [class]
 undefined4 * __fastcall cGrenadeGuideLineBase::cGrenadeGuideLineBase(undefined4 *param_1)

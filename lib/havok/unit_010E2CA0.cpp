@@ -1,7 +1,18 @@
 // lib/havok/unit_010E2CA0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010E2CA0..010E5790, 186 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkDataArrayImpl.h"
+#include "hkDataArrayNative.h"
+#include "hkDataClassImpl.h"
+#include "hkDataClassNative.h"
+#include "hkDataObjectImpl.h"
+#include "hkDataObjectNative.h"
+#include "hkDataRefCounted.h"
+#include "hkDataWorld.h"
+#include "hkDataWorldNative.h"
+#include "hkXmlPackfileWriter.h"
 
 // 010E2CA0  hkDataArrayNative::vf60  size=49  [run]
 void __thiscall hkDataArrayNative::vf60(int param_1,int param_2,int param_3)

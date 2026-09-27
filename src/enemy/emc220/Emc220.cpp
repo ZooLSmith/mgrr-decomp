@@ -1,7 +1,8 @@
 // src/enemy/emc220/Emc220.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0081FDC0..00AB9F60, 249 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc220.h"
 
 // 0081FDC0  FUN_0081fdc0  size=71  [callgraph]
 void __thiscall FUN_0081fdc0(int param_1,undefined4 param_2)

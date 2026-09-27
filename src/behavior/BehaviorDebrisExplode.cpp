@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisExplode.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8F00..005E2C30, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisExplode.h"
 
 // 005D8F00  BehaviorDebrisExplode::thunk_vf44  size=5  [class]
 void __fastcall BehaviorDebrisExplode::thunk_vf44(int param_1)

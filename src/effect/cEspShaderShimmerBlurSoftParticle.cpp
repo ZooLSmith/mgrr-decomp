@@ -1,7 +1,8 @@
 // src/effect/cEspShaderShimmerBlurSoftParticle.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F69B40..00F8EDF0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderShimmerBlurSoftParticle.h"
 
 // 00F69B40  cEspShaderShimmerBlurSoftParticle::vf08  size=428  [class]
 /* WARNING: Removing unreachable block (ram,0x00f69cbf) */

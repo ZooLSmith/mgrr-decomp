@@ -1,7 +1,8 @@
 // src/phase/app/p220.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48120..00D70240, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P220.h"
 
 // 00D48120  P220::vf1C  size=3  [class]
 void P220::vf1C(void)

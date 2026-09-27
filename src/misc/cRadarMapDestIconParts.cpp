@@ -1,7 +1,8 @@
 // src/misc/cRadarMapDestIconParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD65D0..00CF0F30, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRadarMapDestIconParts.h"
 
 // 00CD65D0  cRadarMapDestIconParts::cRadarMapDestIconParts  size=309  [class]
 void __fastcall cRadarMapDestIconParts::cRadarMapDestIconParts(undefined4 *param_1)

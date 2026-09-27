@@ -1,7 +1,8 @@
 // src/room/rb54.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A716D0..00A7B9B0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Rb54.h"
 
 // 00A716D0  Rb54::vf04  size=26  [class]
 void __fastcall Rb54::vf04(int param_1)

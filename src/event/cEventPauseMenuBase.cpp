@@ -1,7 +1,8 @@
 // src/event/cEventPauseMenuBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009A5770..00D11350, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEventPauseMenuBase.h"
 
 // 009A5770  cEventPauseMenuBase::vf14  size=91  [class]
 undefined4 __thiscall cEventPauseMenuBase::vf14(int param_1,undefined4 param_2)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_0040D330.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040D330..0040D390, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0040D330  FUN_0040d330  size=48  [run]
 void FUN_0040d330(undefined4 param_1,undefined4 param_2,undefined4 param_3)

@@ -1,7 +1,8 @@
 // src/effect/et3000/Et3000.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E3B50..00AB8300, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et3000.h"
 
 // 005E3B50  Et3000::FreeObjectiveSlot::vf10  size=1  [class]
 void Et3000::FreeObjectiveSlot::vf10(void)

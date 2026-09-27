@@ -1,7 +1,8 @@
 // src/boss/bm0235/Bm0235.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00411750..00AB8F70, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0235.h"
 
 // 00411750  Bm0235::vf44  size=30  [class]
 void Bm0235::vf44(void)

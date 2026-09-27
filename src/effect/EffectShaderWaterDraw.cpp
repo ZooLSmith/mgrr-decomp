@@ -1,7 +1,8 @@
 // src/effect/EffectShaderWaterDraw.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5D8E0..00F8E7A0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EffectShaderWaterDraw.h"
 
 // 00F5D8E0  EffectShaderWaterDraw::vf0C  size=1  [class]
 void EffectShaderWaterDraw::vf0C(void)

@@ -1,7 +1,7 @@
 // src/misc/cPlayerPosInfo.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009FE9C0..009FE9C0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009FE9C0  cPlayerPosInfo::setPlayerPos  size=310  [class]
 void __thiscall cPlayerPosInfo::setPlayerPos(uint *param_1,uint param_2)

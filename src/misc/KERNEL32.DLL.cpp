@@ -1,7 +1,7 @@
 // src/misc/KERNEL32.DLL.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 014371F0..014996FA, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 014371F0  KERNEL32.DLL::RtlUnwind  size=6  [class]
 void RtlUnwind(PVOID TargetFrame,PVOID TargetIp,PEXCEPTION_RECORD ExceptionRecord,PVOID ReturnValue)

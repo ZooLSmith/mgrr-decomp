@@ -1,7 +1,8 @@
 // src/boss/bm0429/Bm0429.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00413D70..00AB92A0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0429.h"
 
 // 00413D70  Bm0429::thunk_vf48  size=5  [class]
 void __fastcall Bm0429::thunk_vf48(int param_1)

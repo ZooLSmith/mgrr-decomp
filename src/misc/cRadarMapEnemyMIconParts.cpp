@@ -1,7 +1,8 @@
 // src/misc/cRadarMapEnemyMIconParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD6B70..00CF0FF0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRadarMapEnemyMIconParts.h"
 
 // 00CD6B70  cRadarMapEnemyMIconParts::cRadarMapEnemyMIconParts  size=190  [class]
 void __fastcall cRadarMapEnemyMIconParts::cRadarMapEnemyMIconParts(undefined4 *param_1)

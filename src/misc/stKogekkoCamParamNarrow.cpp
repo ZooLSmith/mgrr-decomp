@@ -1,7 +1,8 @@
 // src/misc/stKogekkoCamParamNarrow.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F56D0..00A90D50, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "stKogekkoCamParamNarrow.h"
 
 // 005F56D0  stKogekkoCamParamNarrow::vf04  size=100  [class]
 void __fastcall stKogekkoCamParamNarrow::vf04(int param_1)

@@ -1,7 +1,7 @@
 // src/hw/cHwLFFreeListTemp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00986400..015F44D0, 208 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00986400  FUN_00986400  size=114  [callgraph]
 void __fastcall FUN_00986400(int param_1)

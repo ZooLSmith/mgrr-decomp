@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FDB20B.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDB20B..00FDB5A5, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDB20B  FUN_00fdb20b  size=18  [run]
 void FUN_00fdb20b(undefined4 *param_1)

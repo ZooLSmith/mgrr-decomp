@@ -1,7 +1,8 @@
 // src/effect/cEspModel.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009DFAC0..00F2D190, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspModel.h"
 
 // 009DFAC0  cEspModel::vf00  size=36  [class]
 undefined4 * __thiscall cEspModel::vf00(undefined4 *param_1,byte param_2)

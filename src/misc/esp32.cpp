@@ -1,7 +1,8 @@
 // src/misc/esp32.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED1C00..00F35BC0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp32.h"
 
 // 00ED1C00  esp32::esp32  size=18  [class]
 undefined4 * __fastcall esp32::esp32(undefined4 *param_1)

@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Serialize/Util/hkSerializeUtil.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010DA400..010DA400, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 010DA400  FUN_010da400  size=292  [__FILE__]
 int FUN_010da400(undefined4 param_1,undefined4 param_2,int param_3,undefined8 *param_4,

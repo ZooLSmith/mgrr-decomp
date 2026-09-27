@@ -1,7 +1,8 @@
 // src/misc/DatsuSetTable.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093BCB0..0093BCB0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DatsuSetTable.h"
 
 // 0093BCB0  DatsuSetTable::vf20  size=31  [class]
 undefined4 * __thiscall DatsuSetTable::vf20(undefined4 *param_1,byte param_2)

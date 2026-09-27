@@ -1,7 +1,8 @@
 // src/misc/stKogekkoCamParamBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F43D0..005FA360, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "stKogekkoCamParamBase.h"
 
 // 005F43D0  stKogekkoCamParamBase::vf04  size=1  [class]
 void stKogekkoCamParamBase::vf04(void)

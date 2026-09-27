@@ -1,7 +1,8 @@
 // lib/havok/unit_00927840.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00927840..00927840, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpConvexTranslateShape.h"
 
 // 00927840  hkpConvexTranslateShape::hkpConvexTranslateShape_2  size=3096  [run]
 void hkpConvexTranslateShape::hkpConvexTranslateShape_2

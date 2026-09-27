@@ -1,7 +1,8 @@
 // lib/havok/unit_0092D810.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0092D810..0092D910, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkDataManagerImplement.h"
 
 // 0092D810  HkDataManagerImplement::vf04  size=242  [run]
 void __fastcall HkDataManagerImplement::vf04(int param_1)

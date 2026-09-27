@@ -1,7 +1,8 @@
 // src/managers/voicesubtitlemanager/VoiceSubtitleManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C13960..00C67570, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "VoiceSubtitleManager.h"
 
 // 00C13960  VoiceSubtitleManager::vf1C  size=31  [class]
 undefined4 * __thiscall VoiceSubtitleManager::vf1C(undefined4 *param_1,byte param_2)

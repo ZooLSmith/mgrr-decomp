@@ -1,7 +1,8 @@
 // src/phase/app/p468.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4A6D0..00D704D0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P468.h"
 
 // 00D4A6D0  P468::vf1C  size=50  [class]
 void __thiscall P468::vf1C(int param_1,undefined4 param_2,undefined4 param_3)

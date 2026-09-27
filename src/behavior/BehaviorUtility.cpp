@@ -1,7 +1,7 @@
 // src/behavior/BehaviorUtility.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A86290..00A86290, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A86290  BehaviorUtility::checkRay  size=349  [class]
 undefined4 BehaviorUtility::checkRay(int param_1,float *param_2)

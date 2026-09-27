@@ -1,7 +1,17 @@
 // lib/havok/unit_010DA530.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010DA530..010DDE10, 97 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkBinaryTagfileWriter.h"
+#include "hkDataWorldDict.h"
+#include "hkDefaultClassWrapper.h"
+#include "hkTagfileReader.h"
+#include "hkTagfileWriter.h"
+#include "hkTypeInfoRegistry.h"
+#include "hkVersionPatchManager.h"
+#include "hkXmlTagfileReader.h"
+#include "hkXmlTagfileWriter.h"
 
 // 010DA530  hkXmlTagfileWriter::hkXmlTagfileWriter  size=107  [run]
 undefined4 __fastcall

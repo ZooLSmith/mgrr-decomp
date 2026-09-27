@@ -1,7 +1,8 @@
 // src/misc/cHeadMark.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB97D0..00CD4700, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cHeadMark.h"
 
 // 00CB97D0  cHeadMark::cHeadMark  size=193  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

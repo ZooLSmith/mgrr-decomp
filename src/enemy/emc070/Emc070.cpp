@@ -1,7 +1,8 @@
 // src/enemy/emc070/Emc070.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00798AF0..00AB9E50, 255 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc070.h"
 
 // 00798AF0  FUN_00798af0  size=23  [callgraph]
 undefined4 __fastcall FUN_00798af0(int param_1)

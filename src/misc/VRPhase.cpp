@@ -1,7 +1,8 @@
 // src/misc/VRPhase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4AD50..00D70690, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "VRPhase.h"
 
 // 00D4AD50  FUN_00d4ad50  size=42  [callgraph]
 undefined4 * FUN_00d4ad50(int param_1)

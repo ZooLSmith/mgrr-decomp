@@ -1,7 +1,8 @@
 // src/misc/esp170.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D1450..00F2FF00, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp170.h"
 
 // 009D1450  esp170::vf04  size=61  [class]
 undefined4 __thiscall

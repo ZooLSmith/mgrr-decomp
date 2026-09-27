@@ -1,7 +1,8 @@
 // src/misc/MonDebris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0051B5D0..00AB8760, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "MonDebris.h"
 
 // 0051B5D0  MonDebris::vf300  size=274  [class]
 void __fastcall MonDebris::vf300(int param_1)

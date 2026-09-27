@@ -1,7 +1,7 @@
 // src/hw/cIndexBufferHeap.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9C7F0..00FAAA50, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9C7F0  Hw::cIndexBufferHeap::cIndexBufferHeap_2  size=29  [class]
 void __fastcall Hw::cIndexBufferHeap::cIndexBufferHeap_2(undefined4 *param_1)

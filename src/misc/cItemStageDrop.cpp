@@ -1,7 +1,8 @@
 // src/misc/cItemStageDrop.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094CDE0..00953290, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemStageDrop.h"
 
 // 0094CDE0  cItemStageDrop::vf00  size=6  [class]
 char * cItemStageDrop::vf00(void)

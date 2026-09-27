@@ -1,7 +1,8 @@
 // src/misc/ArmoredCarObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00414B30..00AB94A0, 21 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ArmoredCarObj.h"
 
 // 00414B30  ArmoredCarObj::vf30  size=45  [class]
 void __fastcall ArmoredCarObj::vf30(int param_1)

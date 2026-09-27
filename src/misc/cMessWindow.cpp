@@ -1,7 +1,8 @@
 // src/misc/cMessWindow.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00999A60..009AA670, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMessWindow.h"
 
 // 00999A60  cMessWindow::cMessWindow_2  size=79  [class]
 undefined4 * __fastcall cMessWindow::cMessWindow_2(undefined4 *param_1)

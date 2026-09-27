@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkMultiParticle_Esp64.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F3B5C0..00F4FE40, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkMultiParticle_Esp64.h"
 
 // 00F3B5C0  EspPrimitiveWorkMultiParticle_Esp64::vf04  size=18  [class]
 undefined4 EspPrimitiveWorkMultiParticle_Esp64::vf04(void)

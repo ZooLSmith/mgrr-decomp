@@ -1,7 +1,8 @@
 // src/player/pl0010/state/AnywayHighJumpStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80D70..00BDCC40, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AnywayHighJumpStatePl0010.h"
 
 // 00B80D70  AnywayHighJumpStatePl0010::vf08  size=55  [class]
 undefined4 __thiscall AnywayHighJumpStatePl0010::vf08(int param_1,undefined4 param_2)

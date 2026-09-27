@@ -1,7 +1,8 @@
 // src/misc/esp107.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CFEE0..009F5300, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp107.h"
 
 // 009CFEE0  esp107::thunk_vf14  size=5  [class]
 void __fastcall esp107::thunk_vf14(int param_1)

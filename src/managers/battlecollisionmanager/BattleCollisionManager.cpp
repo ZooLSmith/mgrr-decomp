@@ -1,7 +1,8 @@
 // src/managers/battlecollisionmanager/BattleCollisionManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D770A0..00D7B9C0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleCollisionManager.h"
 
 // 00D770A0  BattleCollisionManager::vf24  size=31  [class]
 undefined4 * __thiscall BattleCollisionManager::vf24(undefined4 *param_1,byte param_2)

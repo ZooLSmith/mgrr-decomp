@@ -1,7 +1,8 @@
 // src/scene/SceneBehaviorSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA54F0..00AC2160, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SceneBehaviorSystem.h"
 
 // 00AA54F0  SceneBehaviorSystem::vf04  size=47  [class]
 void __fastcall SceneBehaviorSystem::vf04(int param_1)

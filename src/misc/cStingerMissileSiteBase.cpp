@@ -1,7 +1,8 @@
 // src/misc/cStingerMissileSiteBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F6D0..00D26090, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStingerMissileSiteBase.h"
 
 // 00D0F6D0  cStingerMissileSiteBase::cStingerMissileSiteBase  size=18  [class]
 undefined4 * __fastcall cStingerMissileSiteBase::cStingerMissileSiteBase(undefined4 *param_1)

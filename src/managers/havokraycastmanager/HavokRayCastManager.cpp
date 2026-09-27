@@ -1,7 +1,7 @@
 // src/managers/havokraycastmanager/HavokRayCastManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0090F3B0..0090F3B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0090F3B0  HavokRayCastManager::set  size=182  [class]
 void HavokRayCastManager::set(int *param_1)

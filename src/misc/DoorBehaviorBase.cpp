@@ -1,7 +1,8 @@
 // src/misc/DoorBehaviorBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004090F0..00ABAB00, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DoorBehaviorBase.h"
 
 // 004090F0  DoorBehaviorBase::vf94  size=7  [class]
 undefined4 __fastcall DoorBehaviorBase::vf94(int param_1)

@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310Shield.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057E550..00AB6FE0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310Shield.h"
 
 // 0057E550  Em0310Shield::vf48  size=75  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

@@ -1,7 +1,8 @@
 // src/effect/EspModelShaderShellPolygon2.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E6470..009F3E80, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspModelShaderShellPolygon2.h"
 
 // 009E6470  EspModelShaderShellPolygon2::vf08  size=138  [class]
 undefined4 __thiscall EspModelShaderShellPolygon2::vf08(int param_1,undefined4 param_2)

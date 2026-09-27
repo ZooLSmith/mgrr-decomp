@@ -1,7 +1,8 @@
 // src/phase/app/p340.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D485E0..00D70340, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P340.h"
 
 // 00D485E0  P340::vf1C  size=3  [class]
 void P340::vf1C(void)

@@ -1,7 +1,11 @@
 // lib/havok/unit_010A8F50.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010A8F50..010BC750, 371 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "IConvexOverlapImpl.h"
+#include "hkBaseObject.h"
+#include "hkgpMesh.h"
+#include "hkgpTriangulatorBase.h"
 
 // 010A8F50  hkgpMesh::TriangleShape::TriangleShape  size=21  [run]
 void __thiscall hkgpMesh::TriangleShape::TriangleShape(undefined4 *param_1,undefined4 param_2)

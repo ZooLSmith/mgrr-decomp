@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CBB260.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB260..00CBB260, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CBB260  FUN_00cbb260  size=78  [run]
 void FUN_00cbb260(int param_1)

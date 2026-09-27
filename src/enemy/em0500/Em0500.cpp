@@ -1,7 +1,8 @@
 // src/enemy/em0500/Em0500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0059D140..00AB75B0, 18 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0500.h"
 
 // 0059D140  Em0500::vf50  size=16  [class]
 void Em0500::vf50(void)

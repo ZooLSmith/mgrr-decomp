@@ -1,7 +1,8 @@
 // src/misc/cVertexFormatPTTC2.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC48B0..00ECC1C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVertexFormatPTTC2.h"
 
 // 00EC48B0  cVertexFormatPTTC2::vf00  size=11  [class]
 void cVertexFormatPTTC2::vf00(void)

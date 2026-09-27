@@ -1,7 +1,8 @@
 // src/misc/cRayLeftHand.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAE3B0..00AEA450, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRayLeftHand.h"
 
 // 00AAE3B0  cRayLeftHand::vf04  size=6  [class]
 undefined * cRayLeftHand::vf04(void)

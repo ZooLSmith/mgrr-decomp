@@ -1,7 +1,9 @@
 // lib/havok/unit_005DC0F0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005DC0F0..005DC150, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpCdBodyPairCollector.h"
+#include "hkpPhantomOverlapListener.h"
 
 // 005DC0F0  hkpCdBodyPairCollector::vf00  size=47  [run]
 undefined4 * __thiscall hkpCdBodyPairCollector::vf00(undefined4 *param_1,byte param_2)

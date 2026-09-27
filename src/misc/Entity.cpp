@@ -1,7 +1,7 @@
 // src/misc/Entity.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A7C810..00A7C810, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A7C810  Entity::createAnimation  size=88  [class]
 bool __fastcall Entity::createAnimation(int param_1)

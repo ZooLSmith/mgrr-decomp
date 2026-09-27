@@ -1,7 +1,8 @@
 // src/misc/cHeadMarkAlertBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E7D0..00D246F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cHeadMarkAlertBase.h"
 
 // 00D0E7D0  cHeadMarkAlertBase::cHeadMarkAlertBase  size=18  [class]
 undefined4 * __fastcall cHeadMarkAlertBase::cHeadMarkAlertBase(undefined4 *param_1)

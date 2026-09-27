@@ -1,7 +1,8 @@
 // lib/havok/unit_00C61BC0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C61BC0..00C61BC0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpAllCdPointCollector.h"
 
 // 00C61BC0  hkpAllCdPointCollector::hkpAllCdPointCollector_33  size=329  [run]
 /* WARNING: Removing unreachable block (ram,0x00c61c8b) */

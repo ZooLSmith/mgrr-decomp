@@ -1,7 +1,7 @@
 // src/zangeki/ZANGEKI_QTE_STEALTH.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BB3F80..00BB4240, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00BB3F80  ZANGEKI_QTE_STEALTH::updateOnce  size=362  [class]
 void __thiscall ZANGEKI_QTE_STEALTH::updateOnce(int param_1,undefined4 *param_2)

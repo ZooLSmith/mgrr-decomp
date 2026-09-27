@@ -1,7 +1,8 @@
 // src/phase/app/pf04.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47340..00D6FD00, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPf04.h"
 
 // 00D47340  cPf04::vf08  size=1  [class]
 void cPf04::vf08(void)

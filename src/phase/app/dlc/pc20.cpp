@@ -1,7 +1,8 @@
 // src/phase/app/dlc/pc20.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B2D0..00D708A0, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPc20.h"
 
 // 00D4B2D0  cPc20::vf08  size=312  [class]
 void __fastcall cPc20::vf08(int param_1)

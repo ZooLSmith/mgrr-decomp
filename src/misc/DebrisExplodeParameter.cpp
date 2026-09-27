@@ -1,7 +1,8 @@
 // src/misc/DebrisExplodeParameter.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093D900..0093D900, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DebrisExplodeParameter.h"
 
 // 0093D900  DebrisExplodeParameter::vf2C  size=31  [class]
 undefined4 * __thiscall DebrisExplodeParameter::vf2C(undefined4 *param_1,byte param_2)

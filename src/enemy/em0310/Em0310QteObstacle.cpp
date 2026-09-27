@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310QteObstacle.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057E670..00AB7050, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310QteObstacle.h"
 
 // 0057E670  Em0310QteObstacle::thunk_vf48  size=5  [class]
 void __fastcall Em0310QteObstacle::thunk_vf48(int param_1)

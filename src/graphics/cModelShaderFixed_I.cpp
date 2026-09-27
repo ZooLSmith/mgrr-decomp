@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderFixed_I.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F93620..00F953D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderFixed_I.h"
 
 // 00F93620  cModelShaderFixed_I::cModelShaderFixed_I  size=282  [class]
 /* WARNING: Removing unreachable block (ram,0x00f9365d) */

@@ -1,7 +1,8 @@
 // src/effect/cEffectZanDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDE4F0..00D2DF10, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEffectZanDispParts.h"
 
 // 00CDE4F0  cEffectZanDispParts::vf00  size=63  [class]
 undefined4 * __thiscall cEffectZanDispParts::vf00(undefined4 *param_1,byte param_2)

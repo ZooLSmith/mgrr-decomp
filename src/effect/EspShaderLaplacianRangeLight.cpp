@@ -1,7 +1,8 @@
 // src/effect/EspShaderLaplacianRangeLight.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D24E0..009E67C0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderLaplacianRangeLight.h"
 
 // 009D24E0  EspShaderLaplacianRangeLight::vf10  size=8  [class]
 undefined4 EspShaderLaplacianRangeLight::vf10(void)

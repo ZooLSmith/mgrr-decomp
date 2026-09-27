@@ -1,7 +1,7 @@
 // src/misc/switchD_00b29046.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B28440..00B28E10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00B28440  FUN_00b28440  size=513  [callgraph]
 void __fastcall FUN_00b28440(int param_1)

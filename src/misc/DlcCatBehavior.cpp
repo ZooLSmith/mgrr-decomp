@@ -1,7 +1,8 @@
 // src/misc/DlcCatBehavior.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00603560..00AB9BE0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DlcCatBehavior.h"
 
 // 00603560  FUN_00603560  size=486  [callgraph]
 void __fastcall FUN_00603560(int *param_1)

@@ -1,7 +1,8 @@
 // src/havok/RigidBodyCollection.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008EC770..008F46D0, 81 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RigidBodyCollection.h"
 
 // 008EC770  RigidBodyCollection::RigidBodyCollection_3  size=29  [class]
 undefined4 * __fastcall RigidBodyCollection::RigidBodyCollection_3(undefined4 *param_1)

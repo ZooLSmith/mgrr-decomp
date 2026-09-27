@@ -1,7 +1,8 @@
 // src/effect/EspShaderToneCurveAlMaskSp_TexBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F62760..00F8BFE0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderToneCurveAlMaskSp_TexBlend.h"
 
 // 00F62760  EspShaderToneCurveAlMaskSp_TexBlend::vf08  size=402  [class]
 /* WARNING: Removing unreachable block (ram,0x00f628c5) */

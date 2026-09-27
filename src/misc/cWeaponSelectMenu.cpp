@@ -1,7 +1,8 @@
 // src/misc/cWeaponSelectMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00992390..009BC940, 29 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeaponSelectMenu.h"
 
 // 00992390  FUN_00992390  size=26  [callgraph]
 undefined4 __thiscall FUN_00992390(int param_1,int param_2)

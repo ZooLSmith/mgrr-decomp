@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisBullet.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8EC0..005E2C20, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisBullet.h"
 
 // 005D8EC0  BehaviorDebrisBullet::thunk_vf44  size=5  [class]
 void __fastcall BehaviorDebrisBullet::thunk_vf44(int param_1)

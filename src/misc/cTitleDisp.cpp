@@ -1,7 +1,8 @@
 // src/misc/cTitleDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC4900..00D42210, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTitleDisp.h"
 
 // 00CC4900  cTitleDisp::vf08  size=1053  [class]
 void __fastcall cTitleDisp::vf08(int param_1)

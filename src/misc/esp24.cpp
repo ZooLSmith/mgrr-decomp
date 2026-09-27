@@ -1,7 +1,8 @@
 // src/misc/esp24.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0530..00F34B70, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp24.h"
 
 // 00ED0530  esp24::esp24  size=18  [class]
 undefined4 * __fastcall esp24::esp24(undefined4 *param_1)

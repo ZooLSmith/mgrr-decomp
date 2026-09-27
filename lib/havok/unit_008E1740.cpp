@@ -1,7 +1,9 @@
 // lib/havok/unit_008E1740.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E1740..008E1970, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpCharacterProxyCinfo.h"
+#include "hkpCharacterProxyListener.h"
 
 // 008E1740  hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2  size=139  [run]
 void __fastcall hkpCharacterProxyCinfo::hkpCharacterProxyCinfo_2(undefined4 *param_1)

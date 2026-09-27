@@ -1,7 +1,7 @@
 // src/misc/WS2_32.DLL.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01436EA8..01436F20, 21 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01436EA8  WS2_32.DLL::closesocket  size=6  [class]
 int closesocket(SOCKET s)

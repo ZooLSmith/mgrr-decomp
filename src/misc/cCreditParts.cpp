@@ -1,7 +1,8 @@
 // src/misc/cCreditParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF39C0..00D37460, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCreditParts.h"
 
 // 00CF39C0  cCreditParts::vf00  size=30  [class]
 undefined4 __thiscall cCreditParts::vf00(undefined4 param_1,byte param_2)

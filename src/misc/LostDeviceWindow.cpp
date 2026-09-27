@@ -1,7 +1,8 @@
 // src/misc/LostDeviceWindow.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00999120..009992F0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "LostDeviceWindow.h"
 
 // 00999120  LostDeviceWindow::LostDeviceWindow  size=39  [class]
 void __fastcall LostDeviceWindow::LostDeviceWindow(undefined4 *param_1)

@@ -1,7 +1,7 @@
 // src/player/pl0010/Pl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B95720..00B95720, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00B95720  Pl0010::GroundTest  size=1028  [class]
 void __fastcall Pl0010::GroundTest(int param_1)

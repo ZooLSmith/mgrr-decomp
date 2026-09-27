@@ -1,7 +1,8 @@
 // src/effect/EspShaderMonoBrightnessAlmaskTexblend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F61000..00F8B670, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderMonoBrightnessAlmaskTexblend.h"
 
 // 00F61000  EspShaderMonoBrightnessAlmaskTexblend::vf08  size=237  [class]
 undefined4 __fastcall EspShaderMonoBrightnessAlmaskTexblend::vf08(int *param_1)

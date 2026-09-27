@@ -1,7 +1,7 @@
 // src/unsorted/unit_00E1D1DC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E1D1DC..00E1EBA0, 29 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E1D1DC  Catch@00e1d1dc  size=58  [run]
 undefined * Catch_00e1d1dc(void)

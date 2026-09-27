@@ -1,7 +1,8 @@
 // src/effect/cEsp103Strip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CF990..009D7D10, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEsp103Strip.h"
 
 // 009CF990  cEsp103Strip::vf1C  size=897  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

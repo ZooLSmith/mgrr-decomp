@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderZCopy.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC10D0..015F1C60, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderZCopy.h"
 
 // 00EC10D0  cFilterShaderZCopy::cFilterShaderZCopy  size=266  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec1125) */

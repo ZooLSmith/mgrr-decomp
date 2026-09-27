@@ -1,7 +1,8 @@
 // src/misc/esp45.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD520..00F37C90, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp45.h"
 
 // 00ECD520  esp45::esp45  size=18  [class]
 undefined4 * __fastcall esp45::esp45(undefined4 *param_1)

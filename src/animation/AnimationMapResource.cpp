@@ -1,7 +1,7 @@
 // src/animation/AnimationMapResource.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D7450..008DA6C0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 008D7450  AnimationMapResource::addReference  size=44  [class]
 int __fastcall AnimationMapResource::addReference(int *param_1)

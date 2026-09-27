@@ -1,7 +1,14 @@
 // lib/havok/unit_010DE930.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010DE930..010E2B80, 238 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkDataWorldNative.h"
+#include "hkDefaultClassWrapper.h"
+#include "hkSerializeDeprecated.h"
+#include "hkStaticClassNameRegistry.h"
+#include "hkTypeManager.h"
+#include "hkVersionPatchManager.h"
 
 // 010DE930  FUN_010de930  size=205  [run]
 int __thiscall FUN_010de930(int param_1,undefined4 param_2,undefined1 *param_3)

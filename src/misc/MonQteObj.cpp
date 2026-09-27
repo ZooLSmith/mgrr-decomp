@@ -1,7 +1,8 @@
 // src/misc/MonQteObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0051B550..00AB77E0, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "MonQteObj.h"
 
 // 0051B550  MonQteObj::vf4C  size=16  [class]
 void MonQteObj::vf4C(void)

@@ -1,7 +1,8 @@
 // src/misc/cGameOverHackingMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00990A20..009B32F0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameOverHackingMenu.h"
 
 // 00990A20  cGameOverHackingMenu::vf08  size=363  [class]
 void __fastcall cGameOverHackingMenu::vf08(int param_1)

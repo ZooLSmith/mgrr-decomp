@@ -1,7 +1,8 @@
 // src/misc/ShapeCylinder.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6ADB0..00A6CAC0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ShapeCylinder.h"
 
 // 00A6ADB0  ShapeCylinder::vf18  size=44  [class]
 void __thiscall ShapeCylinder::vf18(int param_1,undefined4 param_2)

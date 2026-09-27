@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkBox.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4F540..00F59420, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkBox.h"
 
 // 00F4F540  EspPrimitiveWorkBox::EspPrimitiveWorkBox  size=48  [class]
 undefined4 * __fastcall EspPrimitiveWorkBox::EspPrimitiveWorkBox(undefined4 *param_1)

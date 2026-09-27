@@ -1,7 +1,8 @@
 // src/object/ba5000/Ba5000.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00406260..00AB95A0, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba5000.h"
 
 // 00406260  Ba5000::vf4C  size=5  [class]
 void __fastcall Ba5000::vf4C(int param_1)

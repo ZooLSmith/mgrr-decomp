@@ -1,7 +1,7 @@
 // src/misc/cPrimHeap.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9B1F0..00F9B1F0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9B1F0  cPrimHeap::allocBuffer  size=177  [class]
 int __thiscall cPrimHeap::allocBuffer(int param_1,int param_2,int param_3)

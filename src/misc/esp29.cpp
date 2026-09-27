@@ -1,7 +1,8 @@
 // src/misc/esp29.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0580..00F35560, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp29.h"
 
 // 00ED0580  esp29::esp29  size=18  [class]
 undefined4 * __fastcall esp29::esp29(undefined4 *param_1)

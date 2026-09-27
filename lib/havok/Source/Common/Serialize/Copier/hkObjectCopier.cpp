@@ -1,7 +1,8 @@
 // lib/havok/Source/Common/Serialize/Copier/hkObjectCopier.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010F5600..010F6590, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkObjectCopier.h"
 
 // 010F5600  FUN_010f5600  size=148  [__FILE__]
 void __fastcall

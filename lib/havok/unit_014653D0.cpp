@@ -1,7 +1,21 @@
 // lib/havok/unit_014653D0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 014653D0..01499580, 534 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkCpuWorldGetClosestPointsCollector.h"
+#include "hkCpuWorldLinearCastCollector.h"
+#include "hkCpuWorldRayCastCollector.h"
+#include "hkpAction.h"
+#include "hkpBinaryAction.h"
+#include "hkpBroadPhaseListener.h"
+#include "hkpFixedBufferCdPointCollector.h"
+#include "hkpFixedBufferRayHitCollector.h"
+#include "hkpNullBroadPhaseListener.h"
+#include "hkpSimpleWorldRayCaster.h"
+#include "hkpWindAction.h"
+#include "hkpWorldLinearCaster.h"
+#include "hkpWorldRayCaster.h"
 
 // 014653D0  FUN_014653d0  size=703  [run]
 void __thiscall FUN_014653d0(int *param_1,float *param_2,uint *param_3)

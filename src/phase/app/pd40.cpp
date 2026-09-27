@@ -1,7 +1,8 @@
 // src/phase/app/pd40.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4BB20..00D70A70, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPd40.h"
 
 // 00D4BB20  cPd40::vf08  size=58  [class]
 void __fastcall cPd40::vf08(int param_1)

@@ -1,7 +1,7 @@
 // src/misc/cRoom.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6E940..00A77AD0, 175 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A6E940  cRoom<cRa43>::vf0C  size=1  [class]
 void cRoom<cRa43>::vf0C(void)

@@ -1,7 +1,7 @@
 // lib/cri/unit_01293274.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01293274..012981BA, 182 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01293274  FUN_01293274  size=100  [run]
 int __fastcall FUN_01293274(int param_1)

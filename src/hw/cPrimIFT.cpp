@@ -1,7 +1,7 @@
 // src/hw/cPrimIFT.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA54C0..00FAAC10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FA54C0  Hw::cPrimIFT::vf04  size=365  [class]
 void __fastcall Hw::cPrimIFT::vf04(int param_1)

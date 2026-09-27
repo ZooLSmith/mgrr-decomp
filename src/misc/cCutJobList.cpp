@@ -1,7 +1,7 @@
 // src/misc/cCutJobList.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D8CD30..00D8CD30, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D8CD30  cCutJobList::entryObject  size=103  [class]
 undefined4 __thiscall

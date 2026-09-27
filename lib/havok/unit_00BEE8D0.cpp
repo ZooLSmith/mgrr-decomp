@@ -1,7 +1,8 @@
 // lib/havok/unit_00BEE8D0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BEE8D0..00BEE8D0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpAllCdPointCollector.h"
 
 // 00BEE8D0  hkpAllCdPointCollector::hkpAllCdPointCollector_23  size=1567  [run]
 void __fastcall hkpAllCdPointCollector::hkpAllCdPointCollector_23(int *param_1)

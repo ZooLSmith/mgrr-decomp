@@ -1,7 +1,8 @@
 // src/phase/app/pa50.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47A40..00D70070, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPa50.h"
 
 // 00D47A40  cPa50::vf18  size=10  [class]
 void cPa50::vf18(void)

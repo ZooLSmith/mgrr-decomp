@@ -1,7 +1,8 @@
 // src/misc/esp104.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CFE70..009F6AA0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp104.h"
 
 // 009CFE70  esp104::vf10  size=1  [class]
 void esp104::vf10(void)

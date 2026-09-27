@@ -1,7 +1,8 @@
 // src/misc/cCollectionMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098C6D0..009AFF70, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionMenu.h"
 
 // 0098C6D0  cCollectionMenu::cCollectionMenu  size=38  [class]
 undefined4 * __fastcall cCollectionMenu::cCollectionMenu(undefined4 *param_1)

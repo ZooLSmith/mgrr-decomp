@@ -1,7 +1,16 @@
 // lib/havok/unit_009147D0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009147D0..00914E70, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkcdShape.h"
+#include "hkpConvexShape.h"
+#include "hkpConvexTranslateShape.h"
+#include "hkpShape.h"
+#include "hkpShapeBase.h"
+#include "hkpShapeContainer.h"
+#include "hkpSingleShapeContainer.h"
+#include "hkpSphereRepShape.h"
+#include "hkpTriangleShape.h"
 
 // 009147D0  hkcdShape::vf00  size=50  [run]
 undefined4 * __thiscall hkcdShape::vf00(undefined4 *param_1,byte param_2)

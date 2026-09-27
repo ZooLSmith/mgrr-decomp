@@ -1,7 +1,8 @@
 // src/boss/bm0201/Bm0201.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00411650..00AE25F0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0201.h"
 
 // 00411650  Bm0201::vf40  size=38  [class]
 undefined4 __fastcall Bm0201::vf40(int param_1)

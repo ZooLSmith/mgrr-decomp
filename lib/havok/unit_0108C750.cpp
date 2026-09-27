@@ -1,7 +1,9 @@
 // lib/havok/unit_0108C750.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0108C750..010A8EC0, 544 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkgpMesh.h"
 
 // 0108C750  FUN_0108c750  size=59  [run]
 void __thiscall FUN_0108c750(int *param_1,undefined1 *param_2,int *param_3)

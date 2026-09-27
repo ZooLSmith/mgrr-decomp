@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E18E00.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E18E00..00E18E00, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E18E00  std::ctype<char>::ctype<char>  size=152  [run]
 undefined4 std::ctype<char>::ctype<char>(int *param_1,int *param_2)

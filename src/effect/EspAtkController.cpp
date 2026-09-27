@@ -1,7 +1,8 @@
 // src/effect/EspAtkController.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CEF20..009D5ED0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspAtkController.h"
 
 // 009CEF20  EspAtkController::EspAtkController  size=18  [class]
 undefined4 * __fastcall EspAtkController::EspAtkController(undefined4 *param_1)

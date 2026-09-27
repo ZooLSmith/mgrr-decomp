@@ -1,7 +1,8 @@
 // src/boss/bm0600/Bm0600.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00413EC0..00AB90B0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0600.h"
 
 // 00413EC0  Bm0600::thunk_vf44  size=5  [class]
 void __fastcall Bm0600::thunk_vf44(int param_1)

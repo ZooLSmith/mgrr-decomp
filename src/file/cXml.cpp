@@ -1,7 +1,8 @@
 // src/file/cXml.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049CBF0..00EC7600, 21 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cXml.h"
 
 // 0049CBF0  cXml::vf00  size=31  [class]
 undefined4 * __thiscall cXml::vf00(undefined4 *param_1,byte param_2)

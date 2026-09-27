@@ -1,7 +1,8 @@
 // src/room/rfff.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A71730..00A7BA70, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRfff.h"
 
 // 00A71730  cRfff::vf04  size=26  [class]
 void __fastcall cRfff::vf04(int param_1)

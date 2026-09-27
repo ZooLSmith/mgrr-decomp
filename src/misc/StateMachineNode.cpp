@@ -1,7 +1,8 @@
 // src/misc/StateMachineNode.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085C5F0..00D82530, 22 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "StateMachineNode.h"
 
 // 0085C5F0  StateMachineNode::vf00  size=6  [class]
 undefined * StateMachineNode::vf00(void)

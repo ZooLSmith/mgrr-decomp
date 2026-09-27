@@ -1,7 +1,7 @@
 // src/hw/cHeapPhysicalBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A1D250..00DD4F70, 21 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A1D250  Hw::cHeapPhysicalBase::vf0C  size=9  [class]
 bool __fastcall Hw::cHeapPhysicalBase::vf0C(int param_1)

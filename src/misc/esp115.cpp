@@ -1,7 +1,8 @@
 // src/misc/esp115.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D4370..009EE740, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp115.h"
 
 // 009D4370  esp115::esp115  size=18  [class]
 undefined4 * __fastcall esp115::esp115(undefined4 *param_1)

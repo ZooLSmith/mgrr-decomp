@@ -1,7 +1,8 @@
 // src/misc/cItemPossessionWeaponGranade.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00949700..0094DA60, 22 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemPossessionWeaponGranade.h"
 
 // 00949700  cItemPossessionWeaponGranade::vf48  size=3  [class]
 undefined4 cItemPossessionWeaponGranade::vf48(void)

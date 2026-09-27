@@ -1,7 +1,8 @@
 // src/misc/PgIOHookDeferredCRI.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DEE430..00DF68F0, 35 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PgIOHookDeferredCRI.h"
 
 // 00DEE430  PgIOHookDeferredCRI::vf18  size=8  [class]
 undefined4 PgIOHookDeferredCRI::vf18(void)

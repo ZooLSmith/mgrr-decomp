@@ -1,7 +1,8 @@
 // src/misc/cMeshBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A11AE0..00A158B0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMeshBase.h"
 
 // 00A11AE0  cMeshBase::cMeshBase  size=78  [class]
 void __fastcall cMeshBase::cMeshBase(undefined4 *param_1)

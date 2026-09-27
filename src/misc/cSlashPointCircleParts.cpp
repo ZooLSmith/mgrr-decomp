@@ -1,7 +1,8 @@
 // src/misc/cSlashPointCircleParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBD800..00CF0AA0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSlashPointCircleParts.h"
 
 // 00CBD800  cSlashPointCircleParts::vf14  size=158  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

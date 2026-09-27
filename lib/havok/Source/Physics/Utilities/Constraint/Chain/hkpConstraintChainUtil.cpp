@@ -1,7 +1,7 @@
 // lib/havok/Source/Physics/Utilities/Constraint/Chain/hkpConstraintChainUtil.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01284880..01285050, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01284880  FUN_01284880  size=921  [__FILE__]
 int FUN_01284880(int *param_1,char param_2)

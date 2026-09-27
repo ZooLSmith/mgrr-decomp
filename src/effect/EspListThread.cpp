@@ -1,7 +1,8 @@
 // src/effect/EspListThread.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F42220..00F45680, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspListThread.h"
 
 // 00F42220  EspListThread::vf14  size=145  [class]
 void __fastcall EspListThread::vf14(int param_1)

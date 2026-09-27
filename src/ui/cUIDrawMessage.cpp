@@ -1,7 +1,8 @@
 // src/ui/cUIDrawMessage.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB3CA0..00D1FCF0, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDrawMessage.h"
 
 // 00CB3CA0  cUIDrawMessage::vf18  size=14  [class]
 void cUIDrawMessage::vf18(void)

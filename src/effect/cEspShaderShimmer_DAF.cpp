@@ -1,7 +1,8 @@
 // src/effect/cEspShaderShimmer_DAF.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D1490..015ECC00, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderShimmer_DAF.h"
 
 // 009D1490  cEspShaderShimmer_DAF::cEspShaderShimmer_DAF  size=18  [class]
 undefined4 * __fastcall cEspShaderShimmer_DAF::cEspShaderShimmer_DAF(undefined4 *param_1)

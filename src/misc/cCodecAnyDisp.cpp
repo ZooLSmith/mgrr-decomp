@@ -1,7 +1,8 @@
 // src/misc/cCodecAnyDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB5DE0..00CEB0B0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecAnyDisp.h"
 
 // 00CB5DE0  cCodecAnyDisp::cCodecAnyDisp  size=184  [class]
 void __fastcall cCodecAnyDisp::cCodecAnyDisp(undefined4 *param_1)

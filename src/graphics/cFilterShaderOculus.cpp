@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderOculus.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EBDB30..015F1AF0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderOculus.h"
 
 // 00EBDB30  cFilterShaderOculus::vf04  size=30  [class]
 void __fastcall cFilterShaderOculus::vf04(int param_1)

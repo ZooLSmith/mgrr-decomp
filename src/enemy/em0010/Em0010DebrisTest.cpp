@@ -1,7 +1,8 @@
 // src/enemy/em0010/Em0010DebrisTest.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E4160..00AA1660, 16 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0010DebrisTest.h"
 
 // 005E4160  Em0010DebrisTest::Em0010DebrisTest_2  size=50  [class]
 void __fastcall Em0010DebrisTest::Em0010DebrisTest_2(undefined4 *param_1)

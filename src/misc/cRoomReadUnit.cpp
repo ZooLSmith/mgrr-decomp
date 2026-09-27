@@ -1,7 +1,7 @@
 // src/misc/cRoomReadUnit.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A50090..00A50650, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A50090  cRoomReadUnit::setRoomCleanup  size=249  [class]
 void __thiscall cRoomReadUnit::setRoomCleanup(int *param_1,int param_2,int param_3)

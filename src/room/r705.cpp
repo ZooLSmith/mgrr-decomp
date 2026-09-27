@@ -1,7 +1,8 @@
 // src/room/r705.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A71680..00A7B930, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R705.h"
 
 // 00A71680  R705::vf04  size=33  [class]
 void __fastcall R705::vf04(int param_1)

@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FE2B70.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FE2B70..00FE2B99, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FE2B70  std::bad_exception::bad_exception_2  size=30  [run]
 exception * __fastcall std::bad_exception::bad_exception_2(exception *param_1)

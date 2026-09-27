@@ -1,7 +1,8 @@
 // src/ui/cUIPrimWorkFan.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCC0B0..00CCC120, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIPrimWorkFan.h"
 
 // 00CCC0B0  cUIPrimWorkFan::cUIPrimWorkFan  size=32  [class]
 undefined4 * __fastcall cUIPrimWorkFan::cUIPrimWorkFan(undefined4 *param_1)

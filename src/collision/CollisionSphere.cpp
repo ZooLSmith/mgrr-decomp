@@ -1,7 +1,8 @@
 // src/collision/CollisionSphere.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D77400..00D7DF90, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionSphere.h"
 
 // 00D77400  CollisionSphere::vf1C  size=7  [class]
 float10 __fastcall CollisionSphere::vf1C(int param_1)

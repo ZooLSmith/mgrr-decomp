@@ -1,7 +1,8 @@
 // src/misc/cWeaponSelectItemMessageParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00991FE0..00992120, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeaponSelectItemMessageParts.h"
 
 // 00991FE0  cWeaponSelectItemMessageParts::cWeaponSelectItemMessageParts  size=35  [class]
 undefined4 * __fastcall

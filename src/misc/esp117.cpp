@@ -1,7 +1,8 @@
 // src/misc/esp117.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0520..009E9370, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp117.h"
 
 // 009D0520  FUN_009d0520  size=101  [callgraph]
 void __thiscall FUN_009d0520(int *param_1,int param_2)

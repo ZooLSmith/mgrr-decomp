@@ -1,7 +1,8 @@
 // src/misc/NinjaRunEventPhantomListener.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00957D20..00957DC0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "NinjaRunEventPhantomListener.h"
 
 // 00957D20  NinjaRunEventPhantomListener::vf04  size=3  [class]
 void NinjaRunEventPhantomListener::vf04(void)

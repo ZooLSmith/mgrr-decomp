@@ -1,7 +1,8 @@
 // src/boss/bm018f/Bm018f.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00410E20..00AC3E60, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm018f.h"
 
 // 00410E20  Bm018f::cCallEfBm018fSlot::vf10  size=1  [class]
 void Bm018f::cCallEfBm018fSlot::vf10(void)

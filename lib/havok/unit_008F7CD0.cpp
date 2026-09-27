@@ -1,7 +1,9 @@
 // lib/havok/unit_008F7CD0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008F7CD0..008F7D60, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpEntityListener.h"
+#include "hkpPhantomListener.h"
 
 // 008F7CD0  hkpEntityListener::vf08  size=3  [run]
 void hkpEntityListener::vf08(void)

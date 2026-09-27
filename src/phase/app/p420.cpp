@@ -1,7 +1,8 @@
 // src/phase/app/p420.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48E40..00D704B0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P420.h"
 
 // 00D48E40  P420::vf14  size=145  [class]
 void P420::vf14(undefined4 param_1,byte *param_2)

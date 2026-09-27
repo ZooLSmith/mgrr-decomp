@@ -1,7 +1,8 @@
 // src/behavior/BehaviorBalkan.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAFE40..00AE0EA0, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorBalkan.h"
 
 // 00AAFE40  BehaviorBalkan::BehaviorBalkan  size=59  [class]
 undefined4 * __fastcall BehaviorBalkan::BehaviorBalkan(undefined4 *param_1)

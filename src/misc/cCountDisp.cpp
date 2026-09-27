@@ -1,7 +1,8 @@
 // src/misc/cCountDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB7090..00CD1530, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCountDisp.h"
 
 // 00CB7090  cCountDisp::cCountDisp_2  size=33  [class]
 void __fastcall cCountDisp::cCountDisp_2(undefined4 *param_1)

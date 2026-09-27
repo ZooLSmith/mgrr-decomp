@@ -1,7 +1,8 @@
 // src/misc/cNManiBoard.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00707E80..00AB9B50, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cNManiBoard.h"
 
 // 00707E80  cNManiBoard::vf40  size=105  [class]
 undefined4 __fastcall cNManiBoard::vf40(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/cItemBoxTargetCursorParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB170..00D30CF0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemBoxTargetCursorParts.h"
 
 // 00CBB170  cItemBoxTargetCursorParts::vf08  size=37  [class]
 void __fastcall cItemBoxTargetCursorParts::vf08(int param_1)

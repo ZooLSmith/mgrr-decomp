@@ -1,7 +1,8 @@
 // src/enemy/emc330/Emc330.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0083F6B0..00AB9970, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc330.h"
 
 // 0083F6B0  Emc330::vf40  size=262  [class]
 undefined4 __fastcall Emc330::vf40(int param_1)

@@ -1,7 +1,8 @@
 // src/phase/app/p458.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D493C0..00D71330, 30 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP458.h"
 
 // 00D493C0  cP458::vf1C  size=3  [class]
 void cP458::vf1C(void)

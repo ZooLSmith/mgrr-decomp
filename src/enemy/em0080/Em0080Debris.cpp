@@ -1,7 +1,8 @@
 // src/enemy/em0080/Em0080Debris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00486D50..00AB86F0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0080Debris.h"
 
 // 00486D50  Em0080Debris::vf40  size=63  [class]
 void __fastcall Em0080Debris::vf40(int param_1)

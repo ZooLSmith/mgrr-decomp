@@ -1,7 +1,8 @@
 // src/ui/cUICtrl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC75D0..00D20260, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUICtrl.h"
 
 // 00CC75D0  cUICtrl::cUICtrl  size=106  [class]
 undefined4 * __fastcall cUICtrl::cUICtrl(undefined4 *param_1)

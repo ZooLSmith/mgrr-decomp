@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPTToneCurveAlpha.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F60680..00F8B370, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPTToneCurveAlpha.h"
 
 // 00F60680  cEspShaderSoftPTToneCurveAlpha::vf08  size=315  [class]
 /* WARNING: Removing unreachable block (ram,0x00f6078e) */

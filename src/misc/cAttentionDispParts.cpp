@@ -1,7 +1,8 @@
 // src/misc/cAttentionDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBC230..00D31DF0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cAttentionDispParts.h"
 
 // 00CBC230  cAttentionDispParts::vf08  size=56  [class]
 void __fastcall cAttentionDispParts::vf08(int param_1)

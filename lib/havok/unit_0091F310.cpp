@@ -1,7 +1,8 @@
 // lib/havok/unit_0091F310.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0091F310..0091F310, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpEntityListener.h"
 
 // 0091F310  hkpEntityListener::hkpEntityListener_4  size=194  [run]
 undefined4 * __thiscall

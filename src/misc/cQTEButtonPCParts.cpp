@@ -1,7 +1,8 @@
 // src/misc/cQTEButtonPCParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBCA60..00D15390, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cQTEButtonPCParts.h"
 
 // 00CBCA60  cQTEButtonPCParts::vf08  size=1580  [class]
 void __fastcall cQTEButtonPCParts::vf08(int param_1)

@@ -1,7 +1,7 @@
 // src/effect/EffectAttrCallHitCategoryWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009DBB50..009DC010, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009DBB50  FUN_009dbb50  size=32  [callgraph]
 void __fastcall FUN_009dbb50(undefined4 *param_1)

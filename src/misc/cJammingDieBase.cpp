@@ -1,7 +1,8 @@
 // src/misc/cJammingDieBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0EC30..00D250F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cJammingDieBase.h"
 
 // 00D0EC30  cJammingDieBase::cJammingDieBase  size=18  [class]
 undefined4 * __fastcall cJammingDieBase::cJammingDieBase(undefined4 *param_1)

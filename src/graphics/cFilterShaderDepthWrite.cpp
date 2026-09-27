@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderDepthWrite.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EBDC10..015F1B40, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderDepthWrite.h"
 
 // 00EBDC10  cFilterShaderDepthWrite::vf04  size=21  [class]
 void __fastcall cFilterShaderDepthWrite::vf04(int param_1)

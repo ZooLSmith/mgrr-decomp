@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FA5C70.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA5C70..00FA5DF0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FA5C70  thunk_FUN_00fa45a0  size=5  [run]
 void __fastcall thunk_FUN_00fa45a0(int *param_1)

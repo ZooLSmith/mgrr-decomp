@@ -1,7 +1,8 @@
 // src/effect/EffectStencilMaskDrawWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CF690..009DE8E0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EffectStencilMaskDrawWork.h"
 
 // 009CF690  EffectStencilMaskDrawWork::vf04  size=211  [class]
 void __fastcall EffectStencilMaskDrawWork::vf04(int param_1)

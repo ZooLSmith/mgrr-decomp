@@ -1,7 +1,8 @@
 // src/boss/bm0304/Bm0304.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00412490..00AB9080, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0304.h"
 
 // 00412490  Bm0304::vf40  size=114  [class]
 undefined4 __fastcall Bm0304::vf40(int param_1)

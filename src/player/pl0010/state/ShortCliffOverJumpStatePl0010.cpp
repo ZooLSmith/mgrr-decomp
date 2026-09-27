@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ShortCliffOverJumpStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B824B0..00BE0C60, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ShortCliffOverJumpStatePl0010.h"
 
 // 00B824B0  FUN_00b824b0  size=127  [callgraph]
 undefined4 FUN_00b824b0(int param_1,int param_2)

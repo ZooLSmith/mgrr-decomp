@@ -1,7 +1,8 @@
 // src/misc/cHeadMarkAlertParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB9B30..00D30120, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cHeadMarkAlertParts.h"
 
 // 00CB9B30  cHeadMarkAlertParts::vf08  size=78  [class]
 void __fastcall cHeadMarkAlertParts::vf08(int param_1)

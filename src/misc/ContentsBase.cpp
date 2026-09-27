@@ -1,7 +1,8 @@
 // src/misc/ContentsBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DC280..008DCB10, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContentsBase.h"
 
 // 008DC280  ContentsBase::ContentsBase  size=34  [class]
 void __thiscall

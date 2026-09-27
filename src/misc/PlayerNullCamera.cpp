@@ -1,7 +1,8 @@
 // src/misc/PlayerNullCamera.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA60D0..00BA86D0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PlayerNullCamera.h"
 
 // 00AA60D0  PlayerNullCamera::PlayerNullCamera  size=18  [class]
 undefined4 * __fastcall PlayerNullCamera::PlayerNullCamera(undefined4 *param_1)

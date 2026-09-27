@@ -1,7 +1,7 @@
 // src/managers/phasemanager/PhaseManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D44F60..00D5ED60, 30 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D44F60  FUN_00d44f60  size=67  [callgraph]
 void __thiscall

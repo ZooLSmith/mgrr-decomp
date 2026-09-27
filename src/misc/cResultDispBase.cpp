@@ -1,7 +1,8 @@
 // src/misc/cResultDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F310..00D25BD0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cResultDispBase.h"
 
 // 00D0F310  cResultDispBase::cResultDispBase  size=18  [class]
 undefined4 * __fastcall cResultDispBase::cResultDispBase(undefined4 *param_1)

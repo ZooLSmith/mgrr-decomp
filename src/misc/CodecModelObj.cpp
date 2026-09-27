@@ -1,7 +1,8 @@
 // src/misc/CodecModelObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005FF2F0..00AB8CE0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CodecModelObj.h"
 
 // 005FF2F0  CodecModelObj::vf44  size=39  [class]
 void __fastcall CodecModelObj::vf44(int param_1)

@@ -1,7 +1,8 @@
 // src/room/ra43.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6F230..00A7B570, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRa43.h"
 
 // 00A6F230  cRa43::vf0C  size=5  [class]
 void __fastcall cRa43::vf0C(int param_1)

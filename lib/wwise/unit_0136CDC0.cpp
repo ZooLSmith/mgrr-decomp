@@ -1,7 +1,10 @@
 // lib/wwise/unit_0136CDC0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0136CDC0..01410AC0, 5236 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CAkRTPCMgr.h"
+#include "CAkRegisteredObj.h"
+#include "CAkRegistryMgr.h"
 
 // 0136CDC0  AK::MemoryMgr::IsInitialized  size=6  [run]
 /* bool __cdecl AK::MemoryMgr::IsInitialized(void) */

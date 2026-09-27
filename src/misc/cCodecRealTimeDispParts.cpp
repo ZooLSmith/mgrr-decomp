@@ -1,7 +1,8 @@
 // src/misc/cCodecRealTimeDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB6700..00D2B2D0, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecRealTimeDispParts.h"
 
 // 00CB6700  cCodecRealTimeDispParts::vf08  size=199  [class]
 void __fastcall cCodecRealTimeDispParts::vf08(int param_1)

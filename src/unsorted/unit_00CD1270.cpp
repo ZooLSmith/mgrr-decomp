@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CD1270.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD1270..00CD128C, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CD1270  FUN_00cd1270  size=28  [run]
 undefined4 FUN_00cd1270(uint param_1)

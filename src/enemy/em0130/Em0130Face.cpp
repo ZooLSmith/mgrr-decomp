@@ -1,7 +1,8 @@
 // src/enemy/em0130/Em0130Face.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006066D0..00ABA540, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0130Face.h"
 
 // 006066D0  Em0130Face::vf44  size=16  [class]
 void Em0130Face::vf44(void)

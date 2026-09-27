@@ -1,7 +1,8 @@
 // src/misc/cCollectionLockedItemBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0099D4D0..00D10940, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionLockedItemBase.h"
 
 // 0099D4D0  cCollectionLockedItemBase::vf14  size=61  [class]
 undefined4 __thiscall cCollectionLockedItemBase::vf14(int param_1,undefined4 param_2)

@@ -1,7 +1,9 @@
 // lib/havok/Source/Common/Compat/Deprecated/Packfile/Xml/hkXmlPackfileReader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0105B560..0105C930, 36 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkXmlPackfileReader.h"
+#include "hkXmlPackfileUpdateTracker.h"
 
 // 0105B560  hkXmlPackfileReader::vf38  size=3753  [__FILE__]
 undefined4 __thiscall hkXmlPackfileReader::vf38(int *param_1,uint param_2,int *param_3)

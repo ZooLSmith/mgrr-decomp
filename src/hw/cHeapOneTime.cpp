@@ -1,7 +1,7 @@
 // src/hw/cHeapOneTime.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD2D40..00DD5130, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD2D40  Hw::cHeapOneTime::vf04  size=21  [class]
 void __fastcall Hw::cHeapOneTime::vf04(int param_1)

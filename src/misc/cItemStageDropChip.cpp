@@ -1,7 +1,8 @@
 // src/misc/cItemStageDropChip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00949650..009546D0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemStageDropChip.h"
 
 // 00949650  cItemStageDropChip::vf20  size=3  [class]
 void cItemStageDropChip::vf20(void)

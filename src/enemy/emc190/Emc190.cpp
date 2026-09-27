@@ -1,7 +1,8 @@
 // src/enemy/emc190/Emc190.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007EEE50..00AB9F40, 191 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc190.h"
 
 // 007EEE50  FUN_007eee50  size=30  [callgraph]
 undefined4 __thiscall FUN_007eee50(int param_1,float param_2)

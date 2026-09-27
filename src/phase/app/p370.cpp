@@ -1,7 +1,8 @@
 // src/phase/app/p370.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48B50..00D703E0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP370.h"
 
 // 00D48B50  cP370::vf1C  size=3  [class]
 void cP370::vf1C(void)

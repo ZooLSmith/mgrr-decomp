@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FDA287.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDA287..00FDA557, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDA287  std::logic_error::logic_error  size=30  [run]
 exception * __fastcall std::logic_error::logic_error(exception *param_1)

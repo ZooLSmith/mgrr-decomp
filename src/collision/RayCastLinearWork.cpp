@@ -1,7 +1,9 @@
 // src/collision/RayCastLinearWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00905BF0..0090E590, 30 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RayCastLinearWork.h"
+#include "hkpCdPointCollector.h"
 
 // 00905BF0  RayCastLinearWork::vf1C  size=15  [class]
 void __fastcall RayCastLinearWork::vf1C(int param_1)

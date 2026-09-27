@@ -1,7 +1,8 @@
 // src/misc/esp121.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0700..009E2E50, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp121.h"
 
 // 009D0700  esp121::vf04  size=140  [class]
 void __thiscall esp121::vf04(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)

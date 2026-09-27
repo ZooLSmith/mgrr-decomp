@@ -1,7 +1,8 @@
 // src/object/bh0187/Bh0187.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040E950..0040FD40, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bh0187.h"
 
 // 0040E950  FUN_0040e950  size=44  [callgraph]
 void __fastcall FUN_0040e950(undefined4 *param_1)

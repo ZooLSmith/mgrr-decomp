@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Compat/Deprecated/Packfile/Binary/hkBinaryPackfileReader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01055A00..01055A00, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01055A00  FUN_01055a00  size=198  [__FILE__]
 void FUN_01055a00(int param_1)

@@ -1,7 +1,7 @@
 // src/havok/cHavok.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00930340..00930340, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00930340  cHavok::startupBaseSystem  size=137  [class]
 undefined4 __fastcall cHavok::startupBaseSystem(int param_1)

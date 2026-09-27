@@ -1,7 +1,8 @@
 // src/misc/cMessWindowCtrl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00999F40..009B9A40, 43 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMessWindowCtrl.h"
 
 // 00999F40  cMessWindowCtrl::cMessWindowCtrl_5  size=21  [class]
 void __fastcall cMessWindowCtrl::cMessWindowCtrl_5(undefined4 *param_1)

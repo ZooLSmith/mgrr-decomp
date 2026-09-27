@@ -1,7 +1,8 @@
 // src/collision/CollisionBox.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D774A0..00D7DF40, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionBox.h"
 
 // 00D774A0  CollisionBox::vf1C  size=90  [class]
 float10 __fastcall CollisionBox::vf1C(int param_1)

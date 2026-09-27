@@ -1,7 +1,8 @@
 // src/graphics/cModelVertexFormatN1.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F8F6A0..00F94120, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelVertexFormatN1.h"
 
 // 00F8F6A0  cModelVertexFormatN1::cModelVertexFormatN1  size=18  [class]
 undefined4 * __fastcall cModelVertexFormatN1::cModelVertexFormatN1(undefined4 *param_1)

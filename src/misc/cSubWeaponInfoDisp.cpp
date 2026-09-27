@@ -1,7 +1,8 @@
 // src/misc/cSubWeaponInfoDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBFBB0..00CD8DA0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSubWeaponInfoDisp.h"
 
 // 00CBFBB0  cSubWeaponInfoDisp::cSubWeaponInfoDisp_2  size=43  [class]
 void __fastcall cSubWeaponInfoDisp::cSubWeaponInfoDisp_2(undefined4 *param_1)

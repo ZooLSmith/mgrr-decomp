@@ -1,7 +1,8 @@
 // src/object/ba0041/Ba0041.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AB0CD0..00B78D40, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0041.h"
 
 // 00AB0CD0  Ba0041::vf04  size=6  [class]
 undefined * Ba0041::vf04(void)

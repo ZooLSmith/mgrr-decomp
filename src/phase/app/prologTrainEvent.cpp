@@ -1,7 +1,8 @@
 // src/phase/app/prologTrainEvent.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D557C0..00D70BD0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPrologTrainEvent.h"
 
 // 00D557C0  cPrologTrainEvent::vf30  size=593  [class]
 code * cPrologTrainEvent::vf30(byte *param_1)

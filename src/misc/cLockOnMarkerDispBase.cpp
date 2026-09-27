@@ -1,7 +1,8 @@
 // src/misc/cLockOnMarkerDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0ED70..00D252E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLockOnMarkerDispBase.h"
 
 // 00D0ED70  cLockOnMarkerDispBase::cLockOnMarkerDispBase  size=18  [class]
 undefined4 * __fastcall cLockOnMarkerDispBase::cLockOnMarkerDispBase(undefined4 *param_1)

@@ -1,7 +1,7 @@
 // src/hw/cShaderPreset.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9EFC0..00FAA430, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9EFC0  Hw::cShaderPreset::vf04  size=35  [class]
 void __fastcall Hw::cShaderPreset::vf04(int param_1)

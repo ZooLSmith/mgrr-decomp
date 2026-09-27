@@ -1,7 +1,7 @@
 // src/hw/cShaderPF.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA0370..00FAA510, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FA0370  Hw::cShaderPF::vf04  size=35  [class]
 void __fastcall Hw::cShaderPF::vf04(int param_1)

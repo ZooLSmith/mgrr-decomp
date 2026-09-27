@@ -1,7 +1,8 @@
 // src/player/pl1400/state/ZangekiForbidStatePl1400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085F5F0..00867C50, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiForbidStatePl1400.h"
 
 // 0085F5F0  ZangekiForbidStatePl1400::vf08  size=19  [class]
 bool ZangekiForbidStatePl1400::vf08(undefined4 param_1)

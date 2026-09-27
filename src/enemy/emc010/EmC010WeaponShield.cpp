@@ -1,7 +1,8 @@
 // src/enemy/emc010/EmC010WeaponShield.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0070D930..00ABA1E0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EmC010WeaponShield.h"
 
 // 0070D930  EmC010WeaponShield::vf4C  size=35  [class]
 void __fastcall EmC010WeaponShield::vf4C(int param_1)

@@ -1,7 +1,7 @@
 // src/hw/cOtManagerBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F979A0..00FA8BF0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F979A0  Hw::cOtManagerBase::cOtManagerBase  size=9  [class]
 void __fastcall Hw::cOtManagerBase::cOtManagerBase(undefined4 *param_1)

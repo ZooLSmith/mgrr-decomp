@@ -1,7 +1,8 @@
 // src/effect/et0060/Et0060.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D1F70..00AB81B0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et0060.h"
 
 // 005D1F70  Et0060::vf44  size=39  [class]
 void __fastcall Et0060::vf44(int param_1)

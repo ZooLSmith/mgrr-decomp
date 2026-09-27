@@ -1,7 +1,7 @@
 // src/misc/EnemySetReader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CA5670..00CA6A50, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CA5670  EnemySetReader::requestEnd  size=183  [class]
 void __thiscall EnemySetReader::requestEnd(int param_1,uint param_2)

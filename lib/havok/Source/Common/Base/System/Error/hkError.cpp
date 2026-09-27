@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Base/System/Error/hkError.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0100B210..0100B2F0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0100B210  FUN_0100b210  size=223  [__FILE__]
 void FUN_0100b210(int param_1,undefined4 param_2)

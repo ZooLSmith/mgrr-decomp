@@ -1,7 +1,8 @@
 // src/phase/app/p380.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48C40..00D70420, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP380.h"
 
 // 00D48C40  cP380::vf08  size=157  [class]
 void cP380::vf08(void)

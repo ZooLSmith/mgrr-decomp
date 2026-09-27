@@ -1,7 +1,8 @@
 // src/misc/cCollectionBackPanelBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0099D020..00D10760, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionBackPanelBase.h"
 
 // 0099D020  cCollectionBackPanelBase::vf14  size=61  [class]
 undefined4 __thiscall cCollectionBackPanelBase::vf14(int param_1,undefined4 param_2)

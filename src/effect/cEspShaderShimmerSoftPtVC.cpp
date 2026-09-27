@@ -1,7 +1,8 @@
 // src/effect/cEspShaderShimmerSoftPtVC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F69F80..00F8E410, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderShimmerSoftPtVC.h"
 
 // 00F69F80  cEspShaderShimmerSoftPtVC::vf08  size=442  [class]
 /* WARNING: Removing unreachable block (ram,0x00f6a113) */

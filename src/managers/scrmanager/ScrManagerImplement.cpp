@@ -1,7 +1,8 @@
 // src/managers/scrmanager/ScrManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C14320..00C24C30, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ScrManagerImplement.h"
 
 // 00C14320  ScrManagerImplement::vf24  size=122  [class]
 int __fastcall ScrManagerImplement::vf24(int param_1)

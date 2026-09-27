@@ -1,7 +1,8 @@
 // lib/havok/unit_00933140.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00933140..00933140, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpClosestRayHitCollector.h"
 
 // 00933140  hkpClosestRayHitCollector::hkpClosestRayHitCollector_2  size=228  [run]
 undefined4

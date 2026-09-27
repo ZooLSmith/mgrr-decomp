@@ -1,7 +1,8 @@
 // src/misc/cItemPossessionWeaponGun.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00949910..0094D950, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemPossessionWeaponGun.h"
 
 // 00949910  cItemPossessionWeaponGun::vf00  size=6  [class]
 char * cItemPossessionWeaponGun::vf00(void)

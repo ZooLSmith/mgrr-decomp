@@ -1,7 +1,8 @@
 // lib/havok/unit_00930E60.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00930E60..00930E60, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpWorldCinfo.h"
 
 // 00930E60  hkpWorldCinfo::hkpWorldCinfo_2  size=332  [run]
 undefined4 __fastcall hkpWorldCinfo::hkpWorldCinfo_2(int *param_1)

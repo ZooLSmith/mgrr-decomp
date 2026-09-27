@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E138B0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E138B0..00E138B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E138B0  std::ios_base::vf00  size=40  [run]
 ios_base * __thiscall std::ios_base::vf00(ios_base *param_1,byte param_2)

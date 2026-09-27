@@ -1,7 +1,8 @@
 // src/phase/app/pf31.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4BDF0..00D70AF0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pf31.h"
 
 // 00D4BDF0  Pf31::vf0C  size=1471  [class]
 void __fastcall Pf31::vf0C(int param_1)

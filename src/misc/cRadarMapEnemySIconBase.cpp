@@ -1,7 +1,8 @@
 // src/misc/cRadarMapEnemySIconBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C010..00D25B50, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRadarMapEnemySIconBase.h"
 
 // 00D0C010  cRadarMapEnemySIconBase::cRadarMapEnemySIconBase  size=18  [class]
 undefined4 * __fastcall cRadarMapEnemySIconBase::cRadarMapEnemySIconBase(undefined4 *param_1)

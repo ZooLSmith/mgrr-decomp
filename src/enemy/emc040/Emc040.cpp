@@ -1,7 +1,8 @@
 // src/enemy/emc040/Emc040.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00751190..00AB9E10, 374 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc040.h"
 
 // 00751190  Emc040::vf300  size=1  [class]
 void Emc040::vf300(void)

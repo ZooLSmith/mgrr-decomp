@@ -1,7 +1,8 @@
 // src/misc/esp48.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD560..00F381C0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp48.h"
 
 // 00ECD560  esp48::esp48  size=18  [class]
 undefined4 * __fastcall esp48::esp48(undefined4 *param_1)

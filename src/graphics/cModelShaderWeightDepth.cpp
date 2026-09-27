@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderWeightDepth.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F922F0..015F41D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderWeightDepth.h"
 
 // 00F922F0  cModelShaderWeightDepth::cModelShaderWeightDepth  size=30  [class]
 undefined4 * __fastcall cModelShaderWeightDepth::cModelShaderWeightDepth(undefined4 *param_1)

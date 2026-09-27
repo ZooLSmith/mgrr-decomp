@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057B880..00AB6FC0, 218 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310.h"
 
 // 0057B880  FUN_0057b880  size=71  [callgraph]
 void __thiscall FUN_0057b880(int param_1,undefined4 param_2)

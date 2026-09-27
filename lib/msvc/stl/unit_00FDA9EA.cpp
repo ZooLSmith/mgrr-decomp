@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FDA9EA.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDA9EA..00FDAA14, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDA9EA  std::locale::_Setgloballocale  size=42  [run]
 /* Library Function - Single Match

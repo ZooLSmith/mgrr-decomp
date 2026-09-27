@@ -1,7 +1,8 @@
 // src/misc/cChapterBg.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00989130..00CE4DC0, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cChapterBg.h"
 
 // 00989130  cChapterBg::cChapterBg  size=84  [class]
 undefined4 * __fastcall cChapterBg::cChapterBg(undefined4 *param_1)

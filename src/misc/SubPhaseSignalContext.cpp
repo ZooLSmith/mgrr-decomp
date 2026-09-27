@@ -1,7 +1,8 @@
 // src/misc/SubPhaseSignalContext.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D46A50..00D46A70, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SubPhaseSignalContext.h"
 
 // 00D46A50  SubPhaseSignalContext::vf00  size=6  [class]
 undefined * SubPhaseSignalContext::vf00(void)

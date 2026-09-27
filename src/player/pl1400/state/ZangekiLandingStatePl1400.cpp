@@ -1,7 +1,8 @@
 // src/player/pl1400/state/ZangekiLandingStatePl1400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085FFD0..00872EA0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiLandingStatePl1400.h"
 
 // 0085FFD0  ZangekiLandingStatePl1400::vf0C  size=5  [class]
 void __thiscall ZangekiLandingStatePl1400::vf0C(int param_1,undefined4 param_2)

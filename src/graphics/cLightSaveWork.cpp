@@ -1,7 +1,8 @@
 // src/graphics/cLightSaveWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A35070..00A35080, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLightSaveWork.h"
 
 // 00A35070  cLightSaveWork::vf00  size=6  [class]
 undefined ** cLightSaveWork::vf00(void)

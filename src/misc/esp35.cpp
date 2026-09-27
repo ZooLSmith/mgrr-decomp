@@ -1,7 +1,8 @@
 // src/misc/esp35.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD460..00F364E0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp35.h"
 
 // 00ECD460  esp35::esp35  size=29  [class]
 undefined4 * __fastcall esp35::esp35(undefined4 *param_1)

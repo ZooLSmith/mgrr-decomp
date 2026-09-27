@@ -1,7 +1,8 @@
 // src/enemy/em0221/Em0221.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0055C8D0..00AB6F10, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0221.h"
 
 // 0055C8D0  Em0221::vf44  size=117  [class]
 void __fastcall Em0221::vf44(int param_1)

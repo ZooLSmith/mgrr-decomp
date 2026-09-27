@@ -1,7 +1,8 @@
 // src/player/pl1400/state/ZangekiReadyStatePl1400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00860290..0089B100, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiReadyStatePl1400.h"
 
 // 00860290  ZangekiReadyStatePl1400::vf18  size=5  [class]
 undefined4 __thiscall ZangekiReadyStatePl1400::vf18(int param_1,undefined4 param_2)

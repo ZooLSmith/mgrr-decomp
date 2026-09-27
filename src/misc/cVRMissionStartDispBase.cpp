@@ -1,7 +1,8 @@
 // src/misc/cVRMissionStartDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0FA90..00D27360, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVRMissionStartDispBase.h"
 
 // 00D0FA90  cVRMissionStartDispBase::cVRMissionStartDispBase  size=18  [class]
 undefined4 * __fastcall cVRMissionStartDispBase::cVRMissionStartDispBase(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/graphics/cModelShader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F8FEA0..00F94610, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShader.h"
 
 // 00F8FEA0  cModelShader::cModelShader_2  size=11  [class]
 void __fastcall cModelShader::cModelShader_2(undefined4 *param_1)

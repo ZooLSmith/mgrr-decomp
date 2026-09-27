@@ -1,7 +1,8 @@
 // src/misc/BaContainer.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0047EFD0..00AB96D0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BaContainer.h"
 
 // 0047EFD0  BaContainer::vf4C  size=5  [class]
 void __fastcall BaContainer::vf4C(int param_1)

@@ -1,7 +1,7 @@
 // lib/wwise/unit_00DEFB30.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DEFB30..00DEFB30, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DEFB30  AK::SoundEngine::GetIDFromString  size=5  [run]
 ulong __cdecl AK::SoundEngine::GetIDFromString(char *param_1)

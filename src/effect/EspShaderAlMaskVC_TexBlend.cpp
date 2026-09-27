@@ -1,7 +1,8 @@
 // src/effect/EspShaderAlMaskVC_TexBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5F170..00F8AD90, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderAlMaskVC_TexBlend.h"
 
 // 00F5F170  EspShaderAlMaskVC_TexBlend::vf08  size=371  [class]
 bool __fastcall EspShaderAlMaskVC_TexBlend::vf08(int param_1)

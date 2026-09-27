@@ -1,7 +1,11 @@
 // lib/havok/Source/Common/Serialize/ResourceDatabase/hkResourceHandle.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 011108E0..01111200, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkMemoryResourceContainer.h"
+#include "hkMemoryResourceHandle.h"
+#include "hkResourceContainer.h"
+#include "hkResourceHandle.h"
 
 // 011108E0  hkMemoryResourceHandle::vf2C  size=521  [__FILE__]
 void __thiscall hkMemoryResourceHandle::vf2C(int param_1,int *param_2)

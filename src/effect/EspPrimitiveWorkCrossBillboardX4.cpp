@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkCrossBillboardX4.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4F410..00F593D0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkCrossBillboardX4.h"
 
 // 00F4F410  EspPrimitiveWorkCrossBillboardX4::EspPrimitiveWorkCrossBillboardX4  size=48  [class]
 undefined4 * __fastcall

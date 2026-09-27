@@ -1,7 +1,8 @@
 // src/misc/cLockonPartsList.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A87D90..00A88BE0, 24 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLockonPartsList.h"
 
 // 00A87D90  cLockonPartsList::cLockonPartsList  size=37  [class]
 void __fastcall cLockonPartsList::cLockonPartsList(undefined4 *param_1)

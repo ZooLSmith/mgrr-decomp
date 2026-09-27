@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSubFade.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F61450..00F8ED10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSubFade.h"
 
 // 00F61450  cEspShaderSubFade::vf08  size=210  [class]
 undefined4 __fastcall cEspShaderSubFade::vf08(int *param_1)

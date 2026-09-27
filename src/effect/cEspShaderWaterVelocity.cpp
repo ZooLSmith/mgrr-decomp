@@ -1,7 +1,8 @@
 // src/effect/cEspShaderWaterVelocity.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6B070..00F8E6E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderWaterVelocity.h"
 
 // 00F6B070  cEspShaderWaterVelocity::vf08  size=261  [class]
 /* WARNING: Removing unreachable block (ram,0x00f6b10b) */

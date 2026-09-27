@@ -1,7 +1,8 @@
 // src/misc/ShapeMesh.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6B8D0..00A6D060, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ShapeMesh.h"
 
 // 00A6B8D0  ShapeMesh::vf14  size=130  [class]
 undefined4 ShapeMesh::vf14(void)

@@ -1,7 +1,8 @@
 // src/misc/cNowLoadingDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0EE10..00D253E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cNowLoadingDispBase.h"
 
 // 00D0EE10  cNowLoadingDispBase::cNowLoadingDispBase  size=18  [class]
 undefined4 * __fastcall cNowLoadingDispBase::cNowLoadingDispBase(undefined4 *param_1)

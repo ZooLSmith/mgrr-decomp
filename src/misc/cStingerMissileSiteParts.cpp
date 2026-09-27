@@ -1,7 +1,8 @@
 // src/misc/cStingerMissileSiteParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD8760..00D17BE0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStingerMissileSiteParts.h"
 
 // 00CD8760  cStingerMissileSiteParts::cStingerMissileSiteParts  size=89  [class]
 void __fastcall cStingerMissileSiteParts::cStingerMissileSiteParts(undefined4 *param_1)

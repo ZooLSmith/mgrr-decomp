@@ -1,7 +1,16 @@
 // lib/havok/unit_010282B0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010282B0..0102BFE0, 164 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkArrayStreamWriter.h"
+#include "hkBaseObject.h"
+#include "hkBsdSocket.h"
+#include "hkBufferedStreamReader.h"
+#include "hkMemoryTrackStreamReader.h"
+#include "hkMemoryTrackStreamWriter.h"
+#include "hkSeekableStreamReader.h"
+#include "hkStdioStreamReader.h"
+#include "hkStdioStreamWriter.h"
 
 // 010282B0  FUN_010282b0  size=91  [run]
 undefined8

@@ -1,7 +1,8 @@
 // src/misc/SlashTestContents.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DB520..008DC110, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SlashTestContents.h"
 
 // 008DB520  SlashTestContents::SlashTestContents  size=61  [class]
 void __fastcall SlashTestContents::SlashTestContents(undefined4 *param_1)

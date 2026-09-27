@@ -1,7 +1,8 @@
 // src/enemy/em0220/Em0220_Debris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0055CBF0..00AB8610, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0220_Debris.h"
 
 // 0055CBF0  Em0220_Debris::vf48  size=1  [class]
 void Em0220_Debris::vf48(void)

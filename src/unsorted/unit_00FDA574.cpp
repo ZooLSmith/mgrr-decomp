@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FDA574.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDA574..00FDA77E, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDA574  __Tolower  size=269  [run]
 /* Library Function - Single Match

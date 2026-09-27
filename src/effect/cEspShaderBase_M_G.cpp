@@ -1,7 +1,8 @@
 // src/effect/cEspShaderBase_M_G.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F64670..00F8CB20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderBase_M_G.h"
 
 // 00F64670  cEspShaderBase_M_G::vf08  size=301  [class]
 undefined4 __fastcall cEspShaderBase_M_G::vf08(int *param_1)

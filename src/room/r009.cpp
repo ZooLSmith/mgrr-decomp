@@ -1,7 +1,8 @@
 // src/room/r009.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A70E00..00A7B420, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cR009.h"
 
 // 00A70E00  cR009::vf04  size=26  [class]
 void __fastcall cR009::vf04(int param_1)

@@ -1,7 +1,8 @@
 // src/phase/app/pd50.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4BCC0..00D70AB0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPd50.h"
 
 // 00D4BCC0  cPd50::vf0C  size=1  [class]
 void cPd50::vf0C(void)

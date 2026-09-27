@@ -1,7 +1,7 @@
 // src/misc/switchD_005c85d4.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005C7630..005C7630, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 005C7630  switchD_005c85d4::default  size=690  [class]
 void __fastcall switchD_005c85d4::default(int *param_1)

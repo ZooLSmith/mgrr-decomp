@@ -1,7 +1,7 @@
 // src/effect/cEffectData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4A4A0..00F4BED0, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F4A4A0  cEffectData::useCounterDown  size=91  [class]
 void __fastcall cEffectData::useCounterDown(int param_1)

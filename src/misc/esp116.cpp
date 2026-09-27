@@ -1,7 +1,8 @@
 // src/misc/esp116.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D04F0..009DF5B0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp116.h"
 
 // 009D04F0  esp116::vf10  size=1  [class]
 void esp116::vf10(void)

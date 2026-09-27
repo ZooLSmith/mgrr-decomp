@@ -1,7 +1,8 @@
 // src/enemy/em0110/Em0110Arm.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004B6DB0..00AB72C0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0110Arm.h"
 
 // 004B6DB0  Em0110Arm::vf54  size=42  [class]
 void __fastcall Em0110Arm::vf54(int param_1)

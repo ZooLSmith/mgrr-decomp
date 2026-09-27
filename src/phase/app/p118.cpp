@@ -1,7 +1,8 @@
 // src/phase/app/p118.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47C80..00D6CD40, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P118.h"
 
 // 00D47C80  P118::vf18  size=39  [class]
 void P118::vf18(void)

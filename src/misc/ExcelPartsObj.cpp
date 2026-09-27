@@ -1,7 +1,8 @@
 // src/misc/ExcelPartsObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B09E0..00AB76E0, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ExcelPartsObj.h"
 
 // 005B09E0  ExcelPartsObj::vf4C  size=83  [class]
 void __fastcall ExcelPartsObj::vf4C(int *param_1)

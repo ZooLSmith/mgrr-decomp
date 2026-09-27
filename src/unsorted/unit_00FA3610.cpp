@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FA3610.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA3610..00FA39A0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FA3610  FUN_00fa3610  size=228  [run]
 undefined4 FUN_00fa3610(int param_1)

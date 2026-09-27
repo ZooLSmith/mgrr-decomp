@@ -1,7 +1,8 @@
 // src/effect/cEspBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED4C70..00F40950, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspBase.h"
 
 // 00ED4C70  cEspBase::vf10  size=8  [class]
 void __fastcall cEspBase::vf10(int param_1)

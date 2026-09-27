@@ -1,7 +1,8 @@
 // lib/havok/Source/Physics/Collide/Shape/Convex/ConvexVertices/hkpConvexVerticesShapeConstructor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0113C420..0113C420, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpConvexVerticesShape.h"
 
 // 0113C420  hkpConvexVerticesShape::hkpConvexVerticesShape  size=1237  [__FILE__]
 undefined4 * __thiscall

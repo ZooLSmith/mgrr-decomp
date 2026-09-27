@@ -1,7 +1,7 @@
 // src/hw/cShareTargetTexture.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FAA2A0..00FAA2A0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FAA2A0  Hw::cShareTargetTexture::vf00  size=105  [class]
 undefined4 * __thiscall Hw::cShareTargetTexture::vf00(undefined4 *param_1,byte param_2)

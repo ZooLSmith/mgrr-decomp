@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkGridMeshBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4F670..00F59470, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkGridMeshBase.h"
 
 // 00F4F670  EspPrimitiveWorkGridMeshBase::EspPrimitiveWorkGridMeshBase  size=48  [class]
 undefined4 * __fastcall

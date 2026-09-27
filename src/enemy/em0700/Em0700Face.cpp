@@ -1,7 +1,8 @@
 // src/enemy/em0700/Em0700Face.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B0860..00AB75F0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0700Face.h"
 
 // 005B0860  Em0700Face::vf40  size=101  [class]
 bool __fastcall Em0700Face::vf40(int *param_1)

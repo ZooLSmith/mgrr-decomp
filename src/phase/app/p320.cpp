@@ -1,7 +1,8 @@
 // src/phase/app/p320.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D484E0..00D6CFA0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P320.h"
 
 // 00D484E0  P320::vf20  size=3  [class]
 void P320::vf20(void)

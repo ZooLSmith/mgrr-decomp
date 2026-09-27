@@ -1,7 +1,8 @@
 // src/misc/cGameResultRankDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CE4140..00CF5500, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameResultRankDisp.h"
 
 // 00CE4140  cGameResultRankDisp::vf00  size=63  [class]
 undefined4 * __thiscall cGameResultRankDisp::vf00(undefined4 *param_1,byte param_2)

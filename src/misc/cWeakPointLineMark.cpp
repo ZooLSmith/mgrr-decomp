@@ -1,7 +1,8 @@
 // src/misc/cWeakPointLineMark.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDA980..00D27670, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeakPointLineMark.h"
 
 // 00CDA980  cWeakPointLineMark::vf0C  size=5  [class]
 void __thiscall cWeakPointLineMark::vf0C(int param_1,undefined4 param_2)

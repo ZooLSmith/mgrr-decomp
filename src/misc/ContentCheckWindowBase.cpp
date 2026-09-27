@@ -1,7 +1,8 @@
 // src/misc/ContentCheckWindowBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009AA570..00D104E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContentCheckWindowBase.h"
 
 // 009AA570  ContentCheckWindowBase::vf14  size=61  [class]
 undefined4 __thiscall ContentCheckWindowBase::vf14(int param_1,undefined4 param_2)

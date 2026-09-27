@@ -1,7 +1,8 @@
 // src/player/pl0010/state/UnevenCliffOverJumpStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82900..00BE0E30, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "UnevenCliffOverJumpStatePl0010.h"
 
 // 00B82900  UnevenCliffOverJumpStatePl0010::vf08  size=43  [class]
 undefined4 __thiscall UnevenCliffOverJumpStatePl0010::vf08(int param_1,undefined4 param_2)

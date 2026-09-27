@@ -1,7 +1,7 @@
 // src/unsorted/unit_00EC2170.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC2170..00EC2170, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00EC2170  FUN_00ec2170  size=180  [run]
 void __thiscall FUN_00ec2170(int *param_1,int param_2,int param_3)

@@ -1,7 +1,10 @@
 // lib/havok/unit_010FF000.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010FF000..01100F70, 49 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkObjectReader.h"
+#include "hkXmlObjectReader.h"
 
 // 010FF000  hkXmlObjectReader::vf0C  size=212  [run]
 int hkXmlObjectReader::vf0C

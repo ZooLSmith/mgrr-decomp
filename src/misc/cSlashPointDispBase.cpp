@@ -1,7 +1,8 @@
 // src/misc/cSlashPointDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F130..00D25860, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSlashPointDispBase.h"
 
 // 00D0F130  cSlashPointDispBase::cSlashPointDispBase  size=18  [class]
 undefined4 * __fastcall cSlashPointDispBase::cSlashPointDispBase(undefined4 *param_1)

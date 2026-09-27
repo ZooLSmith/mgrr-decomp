@@ -1,7 +1,8 @@
 // src/misc/EmBodyDLC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A9BAC0..00AB9D10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EmBodyDLC.h"
 
 // 00A9BAC0  EmBodyDLC::vf40  size=182  [class]
 undefined4 __fastcall EmBodyDLC::vf40(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/cItemStageDropViscera.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094D420..00950420, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemStageDropViscera.h"
 
 // 0094D420  cItemStageDropViscera::vf00  size=6  [class]
 char * cItemStageDropViscera::vf00(void)

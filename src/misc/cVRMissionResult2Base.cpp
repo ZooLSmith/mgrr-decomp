@@ -1,7 +1,8 @@
 // src/misc/cVRMissionResult2Base.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0FB30..00D273F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVRMissionResult2Base.h"
 
 // 00D0FB30  cVRMissionResult2Base::cVRMissionResult2Base  size=18  [class]
 undefined4 * __fastcall cVRMissionResult2Base::cVRMissionResult2Base(undefined4 *param_1)

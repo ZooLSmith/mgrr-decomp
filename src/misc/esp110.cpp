@@ -1,7 +1,8 @@
 // src/misc/esp110.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D8A80..009E8480, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp110.h"
 
 // 009D8A80  esp110::vf04  size=105  [class]
 undefined4 __thiscall

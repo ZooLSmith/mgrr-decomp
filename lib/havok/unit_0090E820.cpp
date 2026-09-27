@@ -1,7 +1,8 @@
 // lib/havok/unit_0090E820.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0090E820..0090EC70, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpAllCdPointCollector.h"
 
 // 0090E820  hkpAllCdPointCollector::hkpAllCdPointCollector_24  size=274  [run]
 /* WARNING: Removing unreachable block (ram,0x0090e8d7) */

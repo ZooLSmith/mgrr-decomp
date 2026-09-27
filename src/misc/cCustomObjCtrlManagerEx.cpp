@@ -1,7 +1,8 @@
 // src/misc/cCustomObjCtrlManagerEx.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCE5E0..00CE5250, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCustomObjCtrlManagerEx.h"
 
 // 00CCE5E0  cCustomObjCtrlManagerEx::cCustomObjCtrlManagerEx  size=156  [class]
 void __fastcall cCustomObjCtrlManagerEx::cCustomObjCtrlManagerEx(undefined4 *param_1)

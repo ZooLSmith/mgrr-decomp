@@ -1,7 +1,8 @@
 // src/misc/cBodyLineMark.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD0370..00D20EE0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cBodyLineMark.h"
 
 // 00CD0370  cBodyLineMark::vf0C  size=5  [class]
 void __thiscall cBodyLineMark::vf0C(int param_1,undefined4 param_2)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_00A2ADA0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A2ADA0..00A2D740, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A2ADA0  FUN_00a2ada0  size=119  [run]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

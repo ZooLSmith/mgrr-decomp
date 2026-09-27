@@ -1,7 +1,8 @@
 // src/object/bh0244/Bh0244.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004100B0..00410490, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bh0244.h"
 
 // 004100B0  Bh0244::vf44  size=61  [class]
 void __fastcall Bh0244::vf44(int param_1)

@@ -1,7 +1,8 @@
 // src/enemy/em0048/Em0048.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F50C0..00AB6590, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0048.h"
 
 // 005F50C0  Em0048::vf4C  size=18  [class]
 void __fastcall Em0048::vf4C(int *param_1)

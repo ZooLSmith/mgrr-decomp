@@ -1,7 +1,8 @@
 // src/managers/targetmanager/TargetManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C12530..00C12530, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "TargetManager.h"
 
 // 00C12530  TargetManager::vf08  size=31  [class]
 undefined4 * __thiscall TargetManager::vf08(undefined4 *param_1,byte param_2)

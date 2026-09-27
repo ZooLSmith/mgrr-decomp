@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Serialize/Util/hkObjectInspector.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010FAB00..010FAB00, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 010FAB00  FUN_010fab00  size=495  [__FILE__]
 undefined4 FUN_010fab00(int param_1,undefined4 param_2,undefined4 param_3)

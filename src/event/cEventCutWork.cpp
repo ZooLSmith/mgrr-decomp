@@ -1,7 +1,8 @@
 // src/event/cEventCutWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D7EAE0..015F0760, 21 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEventCutWork.h"
 
 // 00D7EAE0  FUN_00d7eae0  size=59  [callgraph]
 void __fastcall FUN_00d7eae0(int param_1)

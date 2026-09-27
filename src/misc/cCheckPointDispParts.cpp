@@ -1,7 +1,8 @@
 // src/misc/cCheckPointDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEAEC0..00D2B180, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCheckPointDispParts.h"
 
 // 00CEAEC0  cCheckPointDispParts::vf00  size=63  [class]
 undefined4 * __thiscall cCheckPointDispParts::vf00(undefined4 *param_1,byte param_2)

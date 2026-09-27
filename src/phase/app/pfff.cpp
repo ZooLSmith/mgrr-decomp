@@ -1,7 +1,8 @@
 // src/phase/app/pfff.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D46A90..00D70B90, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPfff.h"
 
 // 00D46A90  cPfff::vf08  size=1  [class]
 void cPfff::vf08(void)

@@ -1,7 +1,7 @@
 // lib/havok/Source/Geometry/Internal/DataStructures/DynamicTree/hkcdDynamicTree.inl
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0123CAE0..0123CAE0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0123CAE0  FUN_0123cae0  size=357  [__FILE__]
 void __thiscall FUN_0123cae0(int param_1,int param_2,int param_3,int param_4)

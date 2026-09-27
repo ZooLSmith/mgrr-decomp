@@ -1,7 +1,8 @@
 // src/misc/cVRMissionResult2.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF2E90..00D43A90, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVRMissionResult2.h"
 
 // 00CF2E90  cVRMissionResult2::vf00  size=30  [class]
 undefined4 __thiscall cVRMissionResult2::vf00(undefined4 param_1,byte param_2)

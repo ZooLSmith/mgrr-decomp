@@ -1,7 +1,7 @@
 // src/effect/EspPrimitiveWorkMultiStrip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58E10..00F59D90, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F58E10  EspPrimitiveWorkMultiStrip<64>::vf00  size=53  [class]
 undefined4 * __thiscall EspPrimitiveWorkMultiStrip<64>::vf00(undefined4 *param_1,byte param_2)

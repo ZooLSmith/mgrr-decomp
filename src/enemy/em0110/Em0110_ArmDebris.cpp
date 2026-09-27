@@ -1,7 +1,8 @@
 // src/enemy/em0110/Em0110_ArmDebris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004B7440..00AB88B0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0110_ArmDebris.h"
 
 // 004B7440  Em0110_ArmDebris::vf40  size=66  [class]
 undefined4 __fastcall Em0110_ArmDebris::vf40(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/cDestinationDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB7650..00D2CDE0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDestinationDispParts.h"
 
 // 00CB7650  cDestinationDispParts::vf08  size=56  [class]
 void __fastcall cDestinationDispParts::vf08(int param_1)

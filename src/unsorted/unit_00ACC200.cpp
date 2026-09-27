@@ -1,7 +1,7 @@
 // src/unsorted/unit_00ACC200.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ACC200..00ACC2F0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00ACC200  FUN_00acc200  size=239  [run]
 void __fastcall FUN_00acc200(int param_1)

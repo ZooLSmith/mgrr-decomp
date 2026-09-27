@@ -1,7 +1,16 @@
 // lib/havok/unit_0123CC50.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0123CC50..0124BAC0, 186 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkpBvCompressedMeshShape.h"
+#include "hkpMoppAssembler.h"
+#include "hkpMoppCode.h"
+#include "hkpMoppCodeGenerator.h"
+#include "hkpMoppDefaultAssembler.h"
+#include "hkpMoppDefaultSplitter.h"
+#include "hkpMoppNodeMgr.h"
+#include "hkpMoppSplitter.h"
 
 // 0123CC50  FUN_0123cc50  size=472  [run]
 void __fastcall FUN_0123cc50(int param_1)

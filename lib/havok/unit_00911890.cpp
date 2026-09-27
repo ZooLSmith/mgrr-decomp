@@ -1,7 +1,9 @@
 // lib/havok/unit_00911890.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00911890..00911A00, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkRemoveEntity.h"
+#include "hkpContactListener.h"
 
 // 00911890  hkpContactListener::vf00  size=3  [run]
 void hkpContactListener::vf00(void)

@@ -1,7 +1,8 @@
 // src/effect/EspShaderDrawMirror.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D2550..015ECCB0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderDrawMirror.h"
 
 // 009D2550  EspShaderDrawMirror::EspShaderDrawMirror  size=18  [class]
 undefined4 * __fastcall EspShaderDrawMirror::EspShaderDrawMirror(undefined4 *param_1)

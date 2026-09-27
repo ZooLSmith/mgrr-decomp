@@ -1,7 +1,8 @@
 // src/misc/cItemPossessionCure.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094DAE0..0094DB00, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemPossessionCure.h"
 
 // 0094DAE0  cItemPossessionCure::vf00  size=6  [class]
 char * cItemPossessionCure::vf00(void)

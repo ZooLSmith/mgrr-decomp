@@ -1,7 +1,8 @@
 // src/phase/app/pa10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D477F0..00D6FFE0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pa10.h"
 
 // 00D477F0  Pa10::vf14  size=3  [class]
 void Pa10::vf14(void)

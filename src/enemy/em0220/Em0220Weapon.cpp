@@ -1,7 +1,8 @@
 // src/enemy/em0220/Em0220Weapon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0055CBA0..00AB6F50, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0220Weapon.h"
 
 // 0055CBA0  Em0220Weapon::thunk_vf54  size=5  [class]
 void __fastcall Em0220Weapon::thunk_vf54(int param_1)

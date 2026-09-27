@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_015FC079.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 015FC079..015FC08F, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 015FC079  std::error_category::error_category  size=11  [run]
 void std::error_category::error_category(void)

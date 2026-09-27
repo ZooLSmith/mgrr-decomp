@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E182B0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E182B0..00E182B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E182B0  std::bad_alloc::bad_alloc  size=82  [run]
 int std::bad_alloc::bad_alloc(char *param_1)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_00EB2490.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EB2490..00EB3850, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00EB2490  FUN_00eb2490  size=4557  [run]
 void FUN_00eb2490(int param_1)

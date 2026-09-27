@@ -1,7 +1,8 @@
 // src/misc/cLockOnMarkerDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB8E0..00D315B0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLockOnMarkerDispParts.h"
 
 // 00CBB8E0  cLockOnMarkerDispParts::vf08  size=1  [class]
 void cLockOnMarkerDispParts::vf08(void)

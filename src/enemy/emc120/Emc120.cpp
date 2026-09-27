@@ -1,7 +1,8 @@
 // src/enemy/emc120/Emc120.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007DD9F0..00AB9F20, 125 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc120.h"
 
 // 007DD9F0  Emc120::vf14C  size=5  [class]
 undefined4 Emc120::vf14C(void)

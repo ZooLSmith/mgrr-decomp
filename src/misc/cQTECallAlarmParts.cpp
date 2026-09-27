@@ -1,7 +1,8 @@
 // src/misc/cQTECallAlarmParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBD3D0..00D32030, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cQTECallAlarmParts.h"
 
 // 00CBD3D0  cQTECallAlarmParts::vf08  size=170  [class]
 void __fastcall cQTECallAlarmParts::vf08(int param_1)

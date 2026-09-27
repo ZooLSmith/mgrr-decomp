@@ -1,7 +1,8 @@
 // src/phase/app/pf32.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D57030..00D70B40, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pf32.h"
 
 // 00D57030  Pf32::vf10  size=176  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

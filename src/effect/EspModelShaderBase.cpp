@@ -1,7 +1,8 @@
 // src/effect/EspModelShaderBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D2040..009D2070, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspModelShaderBase.h"
 
 // 009D2040  EspModelShaderBase::EspModelShaderBase  size=18  [class]
 undefined4 * __fastcall EspModelShaderBase::EspModelShaderBase(undefined4 *param_1)

@@ -1,7 +1,10 @@
 // lib/havok/unit_010F5150.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010F5150..010F55F0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkDataWorldDict.h"
+#include "hkObjectCopier.h"
 
 // 010F5150  FUN_010f5150  size=515  [run]
 void __thiscall FUN_010f5150(int param_1,int *param_2)

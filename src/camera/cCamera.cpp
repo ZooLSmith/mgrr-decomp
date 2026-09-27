@@ -1,7 +1,8 @@
 // src/camera/cCamera.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C40720..00C56CE0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCamera.h"
 
 // 00C40720  cCamera::vf00  size=11  [class]
 void cCamera::vf00(void)

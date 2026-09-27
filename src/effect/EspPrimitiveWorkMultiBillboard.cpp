@@ -1,7 +1,7 @@
 // src/effect/EspPrimitiveWorkMultiBillboard.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58C80..00F598D0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F58C80  EspPrimitiveWorkMultiBillboard<1024>::vf00  size=80  [class]
 undefined4 * __thiscall EspPrimitiveWorkMultiBillboard<1024>::vf00(undefined4 *param_1,byte param_2)

@@ -1,7 +1,8 @@
 // src/managers/phantommanager/PhantomManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009002F0..009002F0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PhantomManager.h"
 
 // 009002F0  PhantomManager::vf20  size=31  [class]
 undefined4 * __thiscall PhantomManager::vf20(undefined4 *param_1,byte param_2)

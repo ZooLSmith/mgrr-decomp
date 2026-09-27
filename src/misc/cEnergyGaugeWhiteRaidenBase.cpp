@@ -1,7 +1,8 @@
 // src/misc/cEnergyGaugeWhiteRaidenBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0BB10..00D23FA0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnergyGaugeWhiteRaidenBase.h"
 
 // 00D0BB10  cEnergyGaugeWhiteRaidenBase::cEnergyGaugeWhiteRaidenBase  size=18  [class]
 undefined4 * __fastcall

@@ -1,7 +1,8 @@
 // src/player/pl1500/state/ZangekiNormalStatePl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A4940..008CFD90, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiNormalStatePl1500.h"
 
 // 008A4940  ZangekiNormalStatePl1500::vf0C  size=5  [class]
 void __thiscall ZangekiNormalStatePl1500::vf0C(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/effect/cEspShaderMultiMoveLine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5E440..00F8BC60, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderMultiMoveLine.h"
 
 // 00F5E440  cEspShaderMultiMoveLine::vf08  size=273  [class]
 undefined4 __fastcall cEspShaderMultiMoveLine::vf08(int *param_1)

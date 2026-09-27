@@ -1,7 +1,8 @@
 // src/misc/E3_EnemyBoardBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040AE60..00AB9470, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "E3_EnemyBoardBase.h"
 
 // 0040AE60  E3_EnemyBoardBase::vf44  size=20  [class]
 void __fastcall E3_EnemyBoardBase::vf44(int param_1)

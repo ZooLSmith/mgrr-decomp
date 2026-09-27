@@ -1,7 +1,8 @@
 // src/effect/cEspShaderProjectionTile.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5DAF0..00F8E890, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderProjectionTile.h"
 
 // 00F5DAF0  cEspShaderProjectionTile::vf0C  size=1  [class]
 void cEspShaderProjectionTile::vf0C(void)

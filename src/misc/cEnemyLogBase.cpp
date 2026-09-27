@@ -1,7 +1,8 @@
 // src/misc/cEnemyLogBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C650..00D23E20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyLogBase.h"
 
 // 00D0C650  cEnemyLogBase::cEnemyLogBase  size=18  [class]
 undefined4 * __fastcall cEnemyLogBase::cEnemyLogBase(undefined4 *param_1)

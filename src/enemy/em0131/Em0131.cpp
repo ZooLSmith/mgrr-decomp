@@ -1,7 +1,8 @@
 // src/enemy/em0131/Em0131.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00606970..00ABA510, 32 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0131.h"
 
 // 00606970  Em0131::vf48  size=18  [class]
 void Em0131::vf48(void)

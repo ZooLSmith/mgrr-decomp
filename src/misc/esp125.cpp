@@ -1,7 +1,8 @@
 // src/misc/esp125.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0830..009DA640, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp125.h"
 
 // 009D0830  esp125::esp125  size=29  [class]
 undefined4 * __fastcall esp125::esp125(undefined4 *param_1)

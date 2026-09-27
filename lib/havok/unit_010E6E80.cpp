@@ -1,7 +1,13 @@
 // lib/havok/unit_010E6E80.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010E6E80..010EC010, 243 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ArrayOfTuplesImplementation.h"
+#include "hkBaseObject.h"
+#include "hkDataRefCounted.h"
+#include "hkDataWorldDict.h"
+#include "hkDynamicClassNameRegistry.h"
+#include "hkTypeInfoRegistry.h"
 
 // 010E6E80  FUN_010e6e80  size=190  [run]
 int FUN_010e6e80(int param_1,undefined4 param_2,int param_3)

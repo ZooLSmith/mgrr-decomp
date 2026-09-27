@@ -1,7 +1,8 @@
 // src/enemy/em0600/Em0600Gun.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0059FD70..00AB6C50, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0600Gun.h"
 
 // 0059FD70  Em0600Gun::vf40  size=48  [class]
 undefined4 __fastcall Em0600Gun::vf40(int param_1)

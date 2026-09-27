@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E1B970.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E1B970..00E1B970, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E1B970  std::basic_stringstream<char,std::char_traits<char>,StlUtilAlloc<char>_>::vf00  size=33  [run]
 int __thiscall

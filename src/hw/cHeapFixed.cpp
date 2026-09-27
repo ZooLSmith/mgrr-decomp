@@ -1,7 +1,7 @@
 // src/hw/cHeapFixed.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD2C00..00DD50C0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD2C00  Hw::cHeapFixed::vf30  size=18  [class]
 undefined4 Hw::cHeapFixed::vf30(void)

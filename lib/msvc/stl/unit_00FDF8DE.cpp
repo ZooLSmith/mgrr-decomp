@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FDF8DE.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDF8DE..00FDFB42, 18 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDF8DE  std::exception::exception  size=29  [run]
 void __thiscall std::exception::exception(undefined4 *param_1,undefined4 *param_2)

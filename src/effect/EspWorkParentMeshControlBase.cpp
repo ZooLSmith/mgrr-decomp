@@ -1,7 +1,8 @@
 // src/effect/EspWorkParentMeshControlBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D14C0..009F6C70, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspWorkParentMeshControlBase.h"
 
 // 009D14C0  EspWorkParentMeshControlBase::vf08  size=25  [class]
 void __fastcall EspWorkParentMeshControlBase::vf08(int *param_1)

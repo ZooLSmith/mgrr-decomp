@@ -1,7 +1,8 @@
 // src/misc/cOptionMenuGraphicParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00996A20..00996A70, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cOptionMenuGraphicParts.h"
 
 // 00996A20  cOptionMenuGraphicParts::cOptionMenuGraphicParts  size=18  [class]
 undefined4 * __fastcall cOptionMenuGraphicParts::cOptionMenuGraphicParts(undefined4 *param_1)

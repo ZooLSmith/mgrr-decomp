@@ -1,7 +1,8 @@
 // src/ui/cUIDrawString.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB3D30..00CE6B40, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDrawString.h"
 
 // 00CB3D30  cUIDrawString::vf18  size=14  [class]
 void cUIDrawString::vf18(void)

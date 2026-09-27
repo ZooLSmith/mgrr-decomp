@@ -1,7 +1,8 @@
 // src/misc/cDamageDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB7530..00CD1AC0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDamageDisp.h"
 
 // 00CB7530  cDamageDisp::cDamageDisp  size=83  [class]
 void __fastcall cDamageDisp::cDamageDisp(undefined4 *param_1)

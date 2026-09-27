@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderEventWeight.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F901C0..015F4160, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderEventWeight.h"
 
 // 00F901C0  cModelShaderEventWeight::vf04  size=16  [class]
 void cModelShaderEventWeight::vf04(void)

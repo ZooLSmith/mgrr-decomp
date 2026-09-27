@@ -1,7 +1,7 @@
 // src/unsorted/unit_00410B60.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00410B60..00410CE0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00410B60  FUN_00410b60  size=29  [run]
 void __fastcall FUN_00410b60(undefined4 param_1)

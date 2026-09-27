@@ -1,7 +1,8 @@
 // src/phase/app/pf15.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D477B0..00D707A0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPf15.h"
 
 // 00D477B0  cPf15::vf08  size=1  [class]
 void cPf15::vf08(void)

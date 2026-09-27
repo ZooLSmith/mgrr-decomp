@@ -1,7 +1,8 @@
 // src/misc/cUnLockDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC34F0..00D42170, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUnLockDisp.h"
 
 // 00CC34F0  cUnLockDisp::vf08  size=138  [class]
 void __fastcall cUnLockDisp::vf08(int param_1)

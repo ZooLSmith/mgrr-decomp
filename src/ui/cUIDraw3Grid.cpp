@@ -1,7 +1,8 @@
 // src/ui/cUIDraw3Grid.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB3DD0..00CFB8E0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDraw3Grid.h"
 
 // 00CB3DD0  cUIDraw3Grid::cUIDraw3Grid  size=129  [class]
 void __fastcall cUIDraw3Grid::cUIDraw3Grid(undefined4 *param_1)

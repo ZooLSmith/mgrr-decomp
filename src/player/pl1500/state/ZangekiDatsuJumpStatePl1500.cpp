@@ -1,7 +1,8 @@
 // src/player/pl1500/state/ZangekiDatsuJumpStatePl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A4490..008D4910, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiDatsuJumpStatePl1500.h"
 
 // 008A4490  ZangekiDatsuJumpStatePl1500::vf14  size=5  [class]
 undefined4 __thiscall ZangekiDatsuJumpStatePl1500::vf14(int param_1,undefined4 param_2)

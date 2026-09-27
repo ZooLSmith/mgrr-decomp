@@ -1,7 +1,8 @@
 // src/managers/playermanager/PlayerManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C13520..00C4CF00, 48 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PlayerManagerImplement.h"
 
 // 00C13520  PlayerManagerImplement::vf10  size=47  [class]
 void PlayerManagerImplement::vf10(void)

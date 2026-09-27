@@ -1,7 +1,8 @@
 // src/misc/esp160.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0B70..009DF690, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp160.h"
 
 // 009D0B70  esp160::vf08  size=1  [class]
 void esp160::vf08(void)

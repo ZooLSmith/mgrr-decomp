@@ -1,7 +1,7 @@
 // src/hw/cDepthSurface.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F99FA0..00FAA650, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F99FA0  Hw::cDepthSurface::cDepthSurface_2  size=23  [class]
 void __fastcall Hw::cDepthSurface::cDepthSurface_2(undefined4 *param_1)

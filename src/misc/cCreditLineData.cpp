@@ -1,7 +1,7 @@
 // src/misc/cCreditLineData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC4400..00CC4400, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CC4400  cCreditLineData::readXml  size=370  [class]
 undefined4 __thiscall cCreditLineData::readXml(uint *param_1,int *param_2,uint param_3)

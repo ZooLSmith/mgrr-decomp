@@ -1,7 +1,7 @@
 // src/misc/UserData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008F77F0..008F9FB0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 008F77F0  UserData::EntityUserDataListener::vf08  size=3  [class]
 void UserData::EntityUserDataListener::vf08(void)

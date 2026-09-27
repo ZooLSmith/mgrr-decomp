@@ -1,7 +1,8 @@
 // src/misc/cJammingWallParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB7F0..00D314C0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cJammingWallParts.h"
 
 // 00CBB7F0  cJammingWallParts::vf08  size=15  [class]
 void __fastcall cJammingWallParts::vf08(int param_1)

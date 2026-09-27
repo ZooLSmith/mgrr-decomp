@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkMirrorX2.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4EF50..00F59290, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkMirrorX2.h"
 
 // 00F4EF50  EspPrimitiveWorkMirrorX2::EspPrimitiveWorkMirrorX2  size=48  [class]
 undefined4 * __fastcall EspPrimitiveWorkMirrorX2::EspPrimitiveWorkMirrorX2(undefined4 *param_1)

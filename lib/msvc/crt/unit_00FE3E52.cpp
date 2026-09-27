@@ -1,7 +1,15 @@
 // lib/msvc/crt/unit_00FE3E52.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FE3E52..010049E1, 621 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DName.h"
+#include "DNameStatusNode.h"
+#include "UnDecorator.h"
+#include "_HeapManager.h"
+#include "pDNameNode.h"
+#include "pairNode.h"
+#include "pcharNode.h"
+#include "type_info.h"
 
 // 00FE3E52  __itoa_s  size=42  [run]
 /* Library Function - Single Match

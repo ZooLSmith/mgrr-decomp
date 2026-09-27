@@ -1,7 +1,8 @@
 // src/misc/cDamageDispPrologueBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CEB7C0..00D22950, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDamageDispPrologueBase.h"
 
 // 00CEB7C0  cDamageDispPrologueBase::vf00  size=62  [class]
 undefined4 * __thiscall cDamageDispPrologueBase::vf00(undefined4 *param_1,byte param_2)

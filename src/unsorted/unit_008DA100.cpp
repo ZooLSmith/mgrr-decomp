@@ -1,7 +1,7 @@
 // src/unsorted/unit_008DA100.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DA100..008DA100, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 008DA100  FUN_008da100  size=679  [run]
 undefined4 __thiscall FUN_008da100(int param_1,int *param_2)

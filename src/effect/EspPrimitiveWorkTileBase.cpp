@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkTileBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4F910..00F59510, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkTileBase.h"
 
 // 00F4F910  EspPrimitiveWorkTileBase::vf08  size=36  [class]
 void EspPrimitiveWorkTileBase::vf08(void)

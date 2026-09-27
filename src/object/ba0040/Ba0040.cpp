@@ -1,7 +1,8 @@
 // src/object/ba0040/Ba0040.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AB0C50..00B786A0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0040.h"
 
 // 00AB0C50  Ba0040::Ba0040  size=18  [class]
 undefined4 * __fastcall Ba0040::Ba0040(undefined4 *param_1)

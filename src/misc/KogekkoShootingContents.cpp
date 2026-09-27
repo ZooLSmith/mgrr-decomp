@@ -1,7 +1,8 @@
 // src/misc/KogekkoShootingContents.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DC720..008DF5A0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "KogekkoShootingContents.h"
 
 // 008DC720  KogekkoShootingContents::vf00  size=6  [class]
 undefined * KogekkoShootingContents::vf00(void)

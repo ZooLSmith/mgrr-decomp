@@ -1,7 +1,8 @@
 // src/misc/esp27.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0560..00F34FF0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp27.h"
 
 // 00ED0560  esp27::esp27  size=18  [class]
 undefined4 * __fastcall esp27::esp27(undefined4 *param_1)

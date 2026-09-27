@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDatabase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A8B020..00AC1E10, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDatabase.h"
 
 // 00A8B020  BehaviorDatabase::vf14  size=31  [class]
 undefined4 * __thiscall BehaviorDatabase::vf14(undefined4 *param_1,byte param_2)

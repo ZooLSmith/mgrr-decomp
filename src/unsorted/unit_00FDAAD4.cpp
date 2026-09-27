@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FDAAD4.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDAAD4..00FDAAD4, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDAAD4  FUN_00fdaad4  size=78  [run]
 /* WARNING: Function: __EH_prolog3 replaced with injection: EH_prolog3 */

@@ -1,7 +1,8 @@
 // src/misc/DebrisLeaveSignalContext.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00808850..00B016A0, 74 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DebrisLeaveSignalContext.h"
 
 // 00808850  DebrisLeaveSignalContext::vf00  size=6  [class]
 undefined * DebrisLeaveSignalContext::vf00(void)

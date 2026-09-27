@@ -1,7 +1,7 @@
 // src/misc/DatsuJump.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0089D170..00BEF020, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0089D170  DatsuJump::SafeCheck  size=1182  [class]
 void __thiscall DatsuJump::SafeCheck(int param_1,undefined4 *param_2)

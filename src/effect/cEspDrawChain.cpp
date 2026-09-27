@@ -1,7 +1,8 @@
 // src/effect/cEspDrawChain.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED6220..00F3F7B0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspDrawChain.h"
 
 // 00ED6220  cEspDrawChain::vf04  size=105  [class]
 void __fastcall cEspDrawChain::vf04(int param_1)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CBF110.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF110..00CBF180, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CBF110  FUN_00cbf110  size=49  [run]
 void __fastcall FUN_00cbf110(int param_1)

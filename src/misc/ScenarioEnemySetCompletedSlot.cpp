@@ -1,7 +1,8 @@
 // src/misc/ScenarioEnemySetCompletedSlot.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6D490..00A6F210, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ScenarioEnemySetCompletedSlot.h"
 
 // 00A6D490  ScenarioEnemySetCompletedSlot::vf10  size=1  [class]
 void ScenarioEnemySetCompletedSlot::vf10(void)

@@ -1,7 +1,8 @@
 // src/misc/Slot.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004055E0..00D89890, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Slot.h"
 
 // 004055E0  Slot::vf00  size=31  [class]
 undefined4 * __thiscall Slot::vf00(undefined4 *param_1,byte param_2)

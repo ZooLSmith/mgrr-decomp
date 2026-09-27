@@ -1,7 +1,10 @@
 // lib/havok/unit_011B2DF0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 011B2DF0..011B6EC0, 117 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpBroadPhaseListener.h"
+#include "hkpContinuousSimulation.h"
+#include "hkpMultiThreadedSimulation.h"
 
 // 011B2DF0  hkpMultiThreadedSimulation::vf1C  size=1199  [run]
 undefined4 __thiscall hkpMultiThreadedSimulation::vf1C(int param_1,undefined4 param_2,float param_3)

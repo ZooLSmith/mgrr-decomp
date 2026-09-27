@@ -1,7 +1,8 @@
 // src/misc/cFreeMissionDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB8C60..00D2FB90, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFreeMissionDispParts.h"
 
 // 00CB8C60  cFreeMissionDispParts::vf08  size=56  [class]
 void __fastcall cFreeMissionDispParts::vf08(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/cWeakPointDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C790..00D27480, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeakPointDispBase.h"
 
 // 00D0C790  cWeakPointDispBase::cWeakPointDispBase  size=18  [class]
 undefined4 * __fastcall cWeakPointDispBase::cWeakPointDispBase(undefined4 *param_1)

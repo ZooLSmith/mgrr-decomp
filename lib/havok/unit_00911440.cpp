@@ -1,7 +1,11 @@
 // lib/havok/unit_00911440.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00911440..009116C0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkpConvexTranslateShape.h"
+#include "hkpShapeContainer.h"
+#include "hkpSingleShapeContainer.h"
 
 // 00911440  hkpShapeContainer::vf18  size=3  [run]
 undefined1 hkpShapeContainer::vf18(void)

@@ -1,7 +1,8 @@
 // src/managers/windmanager/WindManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DFDF0..008E0740, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "WindManager.h"
 
 // 008DFDF0  WindManager::vf00  size=31  [class]
 undefined4 * __thiscall WindManager::vf00(undefined4 *param_1,byte param_2)

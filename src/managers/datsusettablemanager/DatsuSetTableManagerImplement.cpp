@@ -1,7 +1,8 @@
 // src/managers/datsusettablemanager/DatsuSetTableManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093C3A0..0093D760, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DatsuSetTableManagerImplement.h"
 
 // 0093C3A0  DatsuSetTableManagerImplement::vf08  size=98  [class]
 void __thiscall DatsuSetTableManagerImplement::vf08(int param_1,int param_2)

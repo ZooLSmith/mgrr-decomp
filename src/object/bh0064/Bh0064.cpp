@@ -1,7 +1,8 @@
 // src/object/bh0064/Bh0064.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040D840..00AA36F0, 354 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bh0064.h"
 
 // 0040D840  Bh0064::vf80  size=1  [class]
 void Bh0064::vf80(void)

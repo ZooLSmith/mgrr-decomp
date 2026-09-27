@@ -1,7 +1,8 @@
 // src/effect/EspShaderTexBlend_G.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6CFF0..00F8ECC0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderTexBlend_G.h"
 
 // 00F6CFF0  EspShaderTexBlend_G::vf08  size=315  [class]
 undefined4 __fastcall EspShaderTexBlend_G::vf08(int *param_1)

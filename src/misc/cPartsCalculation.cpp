@@ -1,7 +1,7 @@
 // src/misc/cPartsCalculation.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A86470..00A86470, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A86470  cPartsCalculation::update  size=375  [class]
 void __fastcall cPartsCalculation::update(int *param_1)

@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E18FA0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E18FA0..00E19460, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E18FA0  std::basic_stringbuf<char,std::char_traits<char>,StlUtilAlloc<char>_>::basic_stringbuf<char,std::char_traits<char>,StlUtilAlloc<char>_>_2  size=22  [run]
 void __fastcall

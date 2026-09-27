@@ -1,7 +1,10 @@
 // lib/havok/Source/Geometry/Internal/DataStructures/StaticMeshTree/hkcdStaticMeshTree.inl
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0124BAD0..01262880, 179 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpBvCompressedMeshShape.h"
+#include "hkpBvCompressedMeshShapeGc.h"
+#include "hkpTriangleShape.h"
 
 // 0124BAD0  hkpBvCompressedMeshShape::vf14  size=3483  [__FILE__]
 /* WARNING: Removing unreachable block (ram,0x0124c70d) */

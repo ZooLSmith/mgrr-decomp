@@ -1,7 +1,7 @@
 // src/misc/Fw.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4B9A0..00F5E2C0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F4B9A0  Fw::StringCopy  size=142  [class]
 undefined4 __thiscall

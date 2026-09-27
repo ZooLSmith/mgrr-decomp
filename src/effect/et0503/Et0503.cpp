@@ -1,7 +1,8 @@
 // src/effect/et0503/Et0503.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D7330..00AB8BE0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et0503.h"
 
 // 005D7330  Et0503::vf50  size=468  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

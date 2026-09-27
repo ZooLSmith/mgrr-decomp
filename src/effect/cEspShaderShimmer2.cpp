@@ -1,7 +1,8 @@
 // src/effect/cEspShaderShimmer2.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F69740..00F8E300, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderShimmer2.h"
 
 // 00F69740  cEspShaderShimmer2::vf08  size=321  [class]
 undefined4 __fastcall cEspShaderShimmer2::vf08(int *param_1)

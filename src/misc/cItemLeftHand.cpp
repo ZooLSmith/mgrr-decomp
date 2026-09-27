@@ -1,7 +1,8 @@
 // src/misc/cItemLeftHand.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA9F0..00AB9860, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemLeftHand.h"
 
 // 005EA9F0  cItemLeftHand::vf40  size=365  [class]
 undefined4 __fastcall cItemLeftHand::vf40(int param_1)

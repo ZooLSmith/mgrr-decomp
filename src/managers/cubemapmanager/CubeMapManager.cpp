@@ -1,7 +1,7 @@
 // src/managers/cubemapmanager/CubeMapManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EAF820..00EB3F70, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00EAF820  FUN_00eaf820  size=107  [callgraph]
 void __thiscall FUN_00eaf820(undefined4 *param_1,undefined4 param_2,char *param_3)

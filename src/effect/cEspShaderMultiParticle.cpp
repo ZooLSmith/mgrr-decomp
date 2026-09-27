@@ -1,7 +1,8 @@
 // src/effect/cEspShaderMultiParticle.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F615B0..00F8B770, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderMultiParticle.h"
 
 // 00F615B0  cEspShaderMultiParticle::vf08  size=259  [class]
 undefined4 __fastcall cEspShaderMultiParticle::vf08(int *param_1)

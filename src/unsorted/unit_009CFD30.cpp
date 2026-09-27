@@ -1,7 +1,7 @@
 // src/unsorted/unit_009CFD30.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CFD30..009CFDD0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009CFD30  FUN_009cfd30  size=157  [run]
 void __thiscall FUN_009cfd30(int param_1,float *param_2)

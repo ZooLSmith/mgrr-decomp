@@ -1,7 +1,8 @@
 // src/misc/cCustomizeSelMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098F900..009C52D0, 62 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCustomizeSelMenu.h"
 
 // 0098F900  FUN_0098f900  size=47  [callgraph]
 void __thiscall FUN_0098f900(int param_1,int param_2)

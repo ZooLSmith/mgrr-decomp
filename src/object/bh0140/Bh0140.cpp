@@ -1,7 +1,8 @@
 // src/object/bh0140/Bh0140.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B0B70..00AC79B0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bh0140.h"
 
 // 005B0B70  Bh0140::vf2EC  size=1  [class]
 void Bh0140::vf2EC(void)

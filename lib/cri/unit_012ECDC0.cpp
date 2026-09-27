@@ -1,7 +1,12 @@
 // lib/cri/unit_012ECDC0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 012ECDC0..0134E5F0, 865 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CriManaFileReader.h"
+#include "CriManaSystemTimer.h"
+#include "CriMvEasyFileReaderMem.h"
+#include "CriMvFileReaderInterface.h"
+#include "CriMvSystemTimerInterface.h"
 
 // 012ECDC0  CriMvSystemTimerInterface::CriMvSystemTimerInterface  size=23  [run]
 undefined4 * __fastcall CriMvSystemTimerInterface::CriMvSystemTimerInterface(undefined4 *param_1)

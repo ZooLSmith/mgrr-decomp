@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPTMono.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F60BC0..00F8B590, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPTMono.h"
 
 // 00F60BC0  cEspShaderSoftPTMono::vf08  size=315  [class]
 /* WARNING: Removing unreachable block (ram,0x00f60cce) */

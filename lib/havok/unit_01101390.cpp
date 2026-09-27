@@ -1,7 +1,12 @@
 // lib/havok/unit_01101390.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01101390..0110F9E0, 467 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkBinaryPackfileWriter.h"
+#include "hkBinaryTagfileReader.h"
+#include "hkSubStreamWriter.h"
+#include "hkXmlTagfileReader.h"
 
 // 01101390  hkXmlTagfileReader::vf0C  size=144  [run]
 undefined4 * hkXmlTagfileReader::vf0C(undefined4 *param_1,undefined4 param_2,undefined4 *param_3)

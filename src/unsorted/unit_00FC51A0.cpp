@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FC51A0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FC51A0..00FCC320, 90 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FC51A0  FUN_00fc51a0  size=506  [run]
 /* WARNING: Removing unreachable block (ram,0x00fc52e5) */

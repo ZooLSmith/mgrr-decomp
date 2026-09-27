@@ -1,7 +1,8 @@
 // src/enemy/em8070/Em8070.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006A09F0..00ABA3D0, 262 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8070.h"
 
 // 006A09F0  FUN_006a09f0  size=23  [callgraph]
 undefined4 __fastcall FUN_006a09f0(int param_1)

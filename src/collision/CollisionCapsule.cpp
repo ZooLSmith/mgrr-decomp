@@ -1,7 +1,8 @@
 // src/collision/CollisionCapsule.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D773D0..00D7DEA0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionCapsule.h"
 
 // 00D773D0  CollisionCapsule::vf1C  size=34  [class]
 float10 __fastcall CollisionCapsule::vf1C(int param_1)

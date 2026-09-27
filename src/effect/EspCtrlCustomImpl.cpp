@@ -1,7 +1,8 @@
 // src/effect/EspCtrlCustomImpl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00932E50..00932EE0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspCtrlCustomImpl.h"
 
 // 00932E50  EspCtrlCustomImpl::EspCtrlCustomImpl  size=41  [class]
 undefined4 * __fastcall EspCtrlCustomImpl::EspCtrlCustomImpl(undefined4 *param_1)

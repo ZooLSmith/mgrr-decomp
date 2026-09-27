@@ -1,7 +1,8 @@
 // src/enemy/em00a0/Em00a0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049F740..00AB7EE0, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em00a0.h"
 
 // 0049F740  Em00a0::vf268  size=5  [class]
 undefined4 Em00a0::vf268(void)

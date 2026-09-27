@@ -1,7 +1,7 @@
 // src/misc/WINMM.DLL.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DF81C0..00DF8C00, 24 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DF81C0  WINMM.DLL::timeGetTime  size=6  [class]
 DWORD timeGetTime(void)

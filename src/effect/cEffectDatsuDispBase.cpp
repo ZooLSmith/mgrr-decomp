@@ -1,7 +1,8 @@
 // src/effect/cEffectDatsuDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0B890..00D23540, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEffectDatsuDispBase.h"
 
 // 00D0B890  cEffectDatsuDispBase::cEffectDatsuDispBase  size=18  [class]
 undefined4 * __fastcall cEffectDatsuDispBase::cEffectDatsuDispBase(undefined4 *param_1)

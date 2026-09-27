@@ -1,7 +1,8 @@
 // src/behavior/BehaviorBg.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6FC0..00AC3E20, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorBg.h"
 
 // 00AA6FC0  BehaviorBg::BehaviorBg  size=18  [class]
 undefined4 * __fastcall BehaviorBg::BehaviorBg(undefined4 *param_1)

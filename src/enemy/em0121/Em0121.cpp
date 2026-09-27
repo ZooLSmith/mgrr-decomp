@@ -1,7 +1,8 @@
 // src/enemy/em0121/Em0121.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004EC060..004F1010, 20 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0121.h"
 
 // 004EC060  FUN_004ec060  size=574  [callgraph]
 undefined4 __thiscall

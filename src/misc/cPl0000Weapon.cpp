@@ -1,7 +1,8 @@
 // src/misc/cPl0000Weapon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6880..00B80560, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPl0000Weapon.h"
 
 // 00AA6880  cPl0000Weapon::cPl0000Weapon_2  size=49  [class]
 undefined4 * __fastcall cPl0000Weapon::cPl0000Weapon_2(undefined4 *param_1)

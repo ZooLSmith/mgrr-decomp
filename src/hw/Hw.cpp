@@ -1,7 +1,7 @@
 // src/hw/Hw.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A1D670..00FA1BE0, 596 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A1D670  FUN_00a1d670  size=144  [callgraph]
 bool FUN_00a1d670(void)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_015ECAD0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 015ECAD0..015ECBF0, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 015ECAD0  FUN_015ecad0  size=10  [run]
 void FUN_015ecad0(void)

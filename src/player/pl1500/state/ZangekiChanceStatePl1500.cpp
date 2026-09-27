@@ -1,7 +1,8 @@
 // src/player/pl1500/state/ZangekiChanceStatePl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A4240..008CF460, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiChanceStatePl1500.h"
 
 // 008A4240  ZangekiChanceStatePl1500::vf14  size=5  [class]
 undefined4 __thiscall ZangekiChanceStatePl1500::vf14(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/behavior/BehaviorUniqueAllocatorImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A914F0..00A9C9B0, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorUniqueAllocatorImplement.h"
 
 // 00A914F0  FUN_00a914f0  size=244  [callgraph]
 void __fastcall FUN_00a914f0(int *param_1)

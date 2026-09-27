@@ -1,7 +1,8 @@
 // src/managers/scenarioregionmanager/ScenarioRegionManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6DFC0..00A76100, 38 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ScenarioRegionManagerImplement.h"
 
 // 00A6DFC0  ScenarioRegionManagerImplement::vf08  size=1  [class]
 void ScenarioRegionManagerImplement::vf08(void)

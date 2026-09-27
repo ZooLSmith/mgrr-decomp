@@ -1,7 +1,8 @@
 // src/misc/HoldEntitySlot.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00518EA0..00B1F470, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HoldEntitySlot.h"
 
 // 00518EA0  HoldEntitySlot::vf10  size=1  [class]
 void HoldEntitySlot::vf10(void)

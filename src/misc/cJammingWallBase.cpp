@@ -1,7 +1,8 @@
 // src/misc/cJammingWallBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0ECD0..00D25260, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cJammingWallBase.h"
 
 // 00D0ECD0  cJammingWallBase::cJammingWallBase  size=18  [class]
 undefined4 * __fastcall cJammingWallBase::cJammingWallBase(undefined4 *param_1)

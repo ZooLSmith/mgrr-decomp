@@ -1,7 +1,8 @@
 // lib/wwise/CAkFileLocationBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DF5A70..00DF5A70, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CAkFileLocationBase.h"
 
 // 00DF5A70  CAkFileLocationBase::vf00  size=31  [class]
 undefined4 * __thiscall CAkFileLocationBase::vf00(undefined4 *param_1,byte param_2)

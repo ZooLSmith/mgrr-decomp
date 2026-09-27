@@ -1,7 +1,8 @@
 // src/managers/debrismanager/DebrisManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1C600..00C64880, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DebrisManagerImplement.h"
 
 // 00C1C600  DebrisManagerImplement::vf04  size=18  [class]
 void __fastcall DebrisManagerImplement::vf04(int param_1)

@@ -1,7 +1,8 @@
 // src/collision/BoundingSphere.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A66730..00A6AB10, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BoundingSphere.h"
 
 // 00A66730  BoundingSphere::vf0C  size=34  [class]
 void __thiscall BoundingSphere::vf0C(int param_1,undefined4 param_2)

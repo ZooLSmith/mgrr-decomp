@@ -1,7 +1,9 @@
 // src/misc/ContactPointCollector.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008EA0B0..008EA110, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContactPointCollector.h"
+#include "hkpCdPointCollector.h"
 
 // 008EA0B0  ContactPointCollector::vf04  size=14  [class]
 void __fastcall ContactPointCollector::vf04(int param_1)

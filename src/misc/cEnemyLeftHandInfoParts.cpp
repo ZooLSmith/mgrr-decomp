@@ -1,7 +1,8 @@
 // src/misc/cEnemyLeftHandInfoParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB8330..00D2E9D0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyLeftHandInfoParts.h"
 
 // 00CB8330  cEnemyLeftHandInfoParts::vf08  size=142  [class]
 void __fastcall cEnemyLeftHandInfoParts::vf08(int param_1)

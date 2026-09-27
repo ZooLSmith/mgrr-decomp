@@ -1,7 +1,8 @@
 // src/phase/app/p350.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D487C0..00D70380, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P350.h"
 
 // 00D487C0  P350::vf1C  size=35  [class]
 void P350::vf1C(undefined4 param_1,undefined4 param_2)

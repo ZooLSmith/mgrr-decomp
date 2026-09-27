@@ -1,7 +1,8 @@
 // src/ui/cUIExtendFactory.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D28F50..00D29160, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIExtendFactory.h"
 
 // 00D28F50  cUIExtendFactory::cUIExtendFactory_2  size=28  [class]
 undefined4 * __fastcall cUIExtendFactory::cUIExtendFactory_2(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiNormalStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B836D0..00BF1190, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiNormalStatePl0010.h"
 
 // 00B836D0  ZangekiNormalStatePl0010::vf0C  size=5  [class]
 void __thiscall ZangekiNormalStatePl0010::vf0C(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/misc/cNinjyaRunNavi.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBBBE0..00CBBC50, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cNinjyaRunNavi.h"
 
 // 00CBBBE0  cNinjyaRunNavi::cNinjyaRunNavi  size=60  [class]
 void __fastcall cNinjyaRunNavi::cNinjyaRunNavi(undefined4 *param_1)

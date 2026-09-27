@@ -1,7 +1,8 @@
 // src/effect/EspShaderOutlineExtraction.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009DCCE0..015ECC60, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderOutlineExtraction.h"
 
 // 009DCCE0  EspShaderOutlineExtraction::vf00  size=36  [class]
 undefined4 * __thiscall EspShaderOutlineExtraction::vf00(undefined4 *param_1,byte param_2)

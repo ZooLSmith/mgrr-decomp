@@ -1,7 +1,8 @@
 // src/effect/cEspShaderBlockNoize.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F64380..00F8C9D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderBlockNoize.h"
 
 // 00F64380  cEspShaderBlockNoize::vf08  size=218  [class]
 undefined4 __fastcall cEspShaderBlockNoize::vf08(int *param_1)

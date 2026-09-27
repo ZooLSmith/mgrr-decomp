@@ -1,7 +1,7 @@
 // src/managers/cmodeldatamanager/cModelDataManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A198D0..00A19920, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A198D0  FUN_00a198d0  size=73  [callgraph]
 undefined4 __thiscall FUN_00a198d0(int param_1,uint param_2)

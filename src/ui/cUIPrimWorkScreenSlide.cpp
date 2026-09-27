@@ -1,7 +1,8 @@
 // src/ui/cUIPrimWorkScreenSlide.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB0340..00CCCAB0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIPrimWorkScreenSlide.h"
 
 // 00CB0340  cUIPrimWorkScreenSlide::cUIPrimWorkScreenSlide  size=87  [class]
 undefined4 * __fastcall cUIPrimWorkScreenSlide::cUIPrimWorkScreenSlide(undefined4 *param_1)

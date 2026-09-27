@@ -1,7 +1,7 @@
 // src/misc/cFixedList.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008F3B50..00FC21C0, 53 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 008F3B50  cFixedList::insert  size=146  [class]
 void __thiscall cFixedList::insert(int *param_1,int *param_2,int *param_3,undefined2 *param_4)

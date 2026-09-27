@@ -1,7 +1,8 @@
 // src/phase/app/dlc/pc10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B250..00D70860, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPc10.h"
 
 // 00D4B250  cPc10::vf08  size=44  [class]
 void cPc10::vf08(void)

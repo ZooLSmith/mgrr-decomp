@@ -1,7 +1,8 @@
 // src/misc/ContentCheckWindow.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009997C0..00999950, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ContentCheckWindow.h"
 
 // 009997C0  ContentCheckWindow::ContentCheckWindow  size=39  [class]
 void __fastcall ContentCheckWindow::ContentCheckWindow(undefined4 *param_1)

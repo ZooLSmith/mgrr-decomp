@@ -1,7 +1,8 @@
 // src/effect/EspShaderMonoBrightness.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F60F20..00F8B640, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderMonoBrightness.h"
 
 // 00F60F20  EspShaderMonoBrightness::vf08  size=218  [class]
 undefined4 __fastcall EspShaderMonoBrightness::vf08(int *param_1)

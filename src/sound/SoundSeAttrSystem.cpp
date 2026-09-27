@@ -1,7 +1,7 @@
 // src/sound/SoundSeAttrSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CB4F0..009CB4F0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009CB4F0  SoundSeAttrSystem::Se  size=165  [class]
 int SoundSeAttrSystem::Se(int *param_1)

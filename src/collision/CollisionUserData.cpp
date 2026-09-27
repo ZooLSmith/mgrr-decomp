@@ -1,7 +1,8 @@
 // src/collision/CollisionUserData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D72650..00D72670, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionUserData.h"
 
 // 00D72650  CollisionUserData::vf00  size=6  [class]
 undefined * CollisionUserData::vf00(void)

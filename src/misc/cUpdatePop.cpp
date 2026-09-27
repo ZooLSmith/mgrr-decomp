@@ -1,7 +1,8 @@
 // src/misc/cUpdatePop.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00990760..009A2050, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUpdatePop.h"
 
 // 00990760  cUpdatePop::cUpdatePop_2  size=18  [class]
 undefined4 * __fastcall cUpdatePop::cUpdatePop_2(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/player/pl0010/state/LowOverJumpStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B818E0..00BDF470, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "LowOverJumpStatePl0010.h"
 
 // 00B818E0  LowOverJumpStatePl0010::vf08  size=19  [class]
 bool LowOverJumpStatePl0010::vf08(undefined4 param_1)

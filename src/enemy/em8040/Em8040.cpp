@@ -1,7 +1,8 @@
 // src/enemy/em8040/Em8040.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0065C580..00ABA390, 342 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8040.h"
 
 // 0065C580  FUN_0065c580  size=22  [callgraph]
 bool FUN_0065c580(void)

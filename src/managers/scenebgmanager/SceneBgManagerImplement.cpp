@@ -1,7 +1,8 @@
 // src/managers/scenebgmanager/SceneBgManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C17C70..00C62910, 64 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SceneBgManagerImplement.h"
 
 // 00C17C70  SceneBgManagerImplement::PredicateRigidBodyBase::vf00  size=31  [class]
 undefined4 * __thiscall

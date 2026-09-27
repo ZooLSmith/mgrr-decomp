@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiHugeCutRightKesaStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B832D0..00BE3990, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiHugeCutRightKesaStatePl0010.h"
 
 // 00B832D0  ZangekiHugeCutRightKesaStatePl0010::vf0C  size=5  [class]
 void __thiscall ZangekiHugeCutRightKesaStatePl0010::vf0C(int param_1,undefined4 param_2)

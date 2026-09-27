@@ -1,7 +1,7 @@
 // src/unsorted/unit_00EF3F50.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EF3F50..00EF59C0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00EF3F50  FUN_00ef3f50  size=1971  [run]
 /* WARNING: Removing unreachable block (ram,0x00ef4248) */

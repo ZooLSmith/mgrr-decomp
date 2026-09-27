@@ -1,7 +1,8 @@
 // src/misc/ShapeCapsule.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6B450..00A6CB00, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ShapeCapsule.h"
 
 // 00A6B450  ShapeCapsule::vf10  size=363  [class]
 void __fastcall ShapeCapsule::vf10(int param_1)

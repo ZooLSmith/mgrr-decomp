@@ -1,7 +1,8 @@
 // src/misc/cItemBoxTargetCursor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBB1D0..00CD4F70, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemBoxTargetCursor.h"
 
 // 00CBB1D0  cItemBoxTargetCursor::cItemBoxTargetCursor  size=53  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

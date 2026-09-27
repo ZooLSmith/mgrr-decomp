@@ -1,7 +1,7 @@
 // src/lib/StaticArray.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00420A50..00E955B0, 443 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00420A50  lib::StaticArray<Collision*,256>::vf00  size=47  [class]
 undefined4 * __thiscall lib::StaticArray<Collision*,256>::vf00(undefined4 *param_1,byte param_2)

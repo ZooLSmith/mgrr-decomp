@@ -1,7 +1,7 @@
 // src/misc/switchD_00422a4f.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00422DB9..00422DB9, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00422DB9  switchD_00422a4f::caseD_6  size=156  [class]
 undefined4 switchD_00422a4f::caseD_6(void)

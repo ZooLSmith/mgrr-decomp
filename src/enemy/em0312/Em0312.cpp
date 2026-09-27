@@ -1,7 +1,8 @@
 // src/enemy/em0312/Em0312.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00597210..00AC1310, 22 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0312.h"
 
 // 00597210  Em0312::vf44  size=145  [class]
 void __fastcall Em0312::vf44(int param_1)

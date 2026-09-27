@@ -1,7 +1,8 @@
 // src/phase/app/pf12.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D476A0..00D706E0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pf12.h"
 
 // 00D476A0  Pf12::vf1C  size=3  [class]
 void Pf12::vf1C(void)

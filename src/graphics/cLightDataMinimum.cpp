@@ -1,7 +1,8 @@
 // src/graphics/cLightDataMinimum.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A40810..00A40820, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLightDataMinimum.h"
 
 // 00A40810  cLightDataMinimum::vf00  size=6  [class]
 undefined ** cLightDataMinimum::vf00(void)

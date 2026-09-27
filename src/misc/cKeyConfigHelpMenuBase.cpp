@@ -1,7 +1,8 @@
 // src/misc/cKeyConfigHelpMenuBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0099E7F0..00D10C60, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cKeyConfigHelpMenuBase.h"
 
 // 0099E7F0  cKeyConfigHelpMenuBase::vf14  size=114  [class]
 undefined4 __thiscall cKeyConfigHelpMenuBase::vf14(int param_1,undefined4 param_2)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_004BD970.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004BD970..004BDC40, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 004BD970  FUN_004bd970  size=246  [run]
 void __thiscall FUN_004bd970(int param_1,int param_2)

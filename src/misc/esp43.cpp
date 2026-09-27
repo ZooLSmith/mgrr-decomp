@@ -1,7 +1,8 @@
 // src/misc/esp43.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD4E0..00F376F0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp43.h"
 
 // 00ECD4E0  esp43::esp43  size=18  [class]
 undefined4 * __fastcall esp43::esp43(undefined4 *param_1)

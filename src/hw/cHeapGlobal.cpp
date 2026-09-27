@@ -1,7 +1,7 @@
 // src/hw/cHeapGlobal.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD31E0..00DD4F00, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD31E0  Hw::cHeapGlobal::vf04  size=18  [class]
 void __fastcall Hw::cHeapGlobal::vf04(int param_1)

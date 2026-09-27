@@ -1,7 +1,8 @@
 // src/misc/cFreeMissionDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E5F0..00D244F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFreeMissionDispBase.h"
 
 // 00D0E5F0  cFreeMissionDispBase::cFreeMissionDispBase  size=18  [class]
 undefined4 * __fastcall cFreeMissionDispBase::cFreeMissionDispBase(undefined4 *param_1)

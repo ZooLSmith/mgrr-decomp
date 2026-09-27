@@ -1,7 +1,9 @@
 // lib/havok/unit_0092EB50.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0092EB50..0092EBF0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkDataManager.h"
+#include "HkDataManagerImplement.h"
 
 // 0092EB50  HkDataManager::HkDataManager  size=153  [run]
 void __fastcall HkDataManager::HkDataManager(undefined4 *param_1)

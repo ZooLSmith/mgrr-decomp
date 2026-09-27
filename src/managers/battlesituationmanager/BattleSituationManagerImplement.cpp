@@ -1,7 +1,8 @@
 // src/managers/battlesituationmanager/BattleSituationManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D76A20..00D76D10, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleSituationManagerImplement.h"
 
 // 00D76A20  FUN_00d76a20  size=112  [callgraph]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

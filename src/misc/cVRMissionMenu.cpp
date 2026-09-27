@@ -1,7 +1,8 @@
 // src/misc/cVRMissionMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00996870..009A8A20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVRMissionMenu.h"
 
 // 00996870  cVRMissionMenu::cVRMissionMenu_2  size=33  [class]
 void __fastcall cVRMissionMenu::cVRMissionMenu_2(undefined4 *param_1)

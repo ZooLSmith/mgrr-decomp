@@ -1,7 +1,8 @@
 // src/misc/cHeadMarkAngryParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB9E20..00D301B0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cHeadMarkAngryParts.h"
 
 // 00CB9E20  cHeadMarkAngryParts::vf08  size=78  [class]
 void __fastcall cHeadMarkAngryParts::vf08(int param_1)

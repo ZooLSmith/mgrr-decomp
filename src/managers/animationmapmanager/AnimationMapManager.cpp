@@ -1,7 +1,8 @@
 // src/managers/animationmapmanager/AnimationMapManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D73D0..008D9E00, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AnimationMapManager.h"
 
 // 008D73D0  AnimationMapManager::vf0C  size=31  [class]
 undefined4 * __thiscall AnimationMapManager::vf0C(undefined4 *param_1,byte param_2)

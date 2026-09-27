@@ -1,7 +1,7 @@
 // src/lib/helper.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004013E0..00402270, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 004013E0  lib::helper::AllocatorProxy::Core::vf00  size=31  [class]
 undefined4 * __thiscall lib::helper::AllocatorProxy::Core::vf00(undefined4 *param_1,byte param_2)

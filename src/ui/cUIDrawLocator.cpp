@@ -1,7 +1,8 @@
 // src/ui/cUIDrawLocator.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB39A0..00CF9A80, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDrawLocator.h"
 
 // 00CB39A0  cUIDrawLocator::vf14  size=49  [class]
 void __thiscall cUIDrawLocator::vf14(int param_1,undefined4 param_2,int param_3)

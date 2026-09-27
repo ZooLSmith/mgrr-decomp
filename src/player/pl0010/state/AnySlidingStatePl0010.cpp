@@ -1,7 +1,8 @@
 // src/player/pl0010/state/AnySlidingStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80CE0..00BC95C0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AnySlidingStatePl0010.h"
 
 // 00B80CE0  AnySlidingStatePl0010::vf08  size=19  [class]
 bool AnySlidingStatePl0010::vf08(undefined4 param_1)

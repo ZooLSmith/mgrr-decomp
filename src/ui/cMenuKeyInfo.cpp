@@ -1,7 +1,8 @@
 // src/ui/cMenuKeyInfo.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00991140..009A29D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMenuKeyInfo.h"
 
 // 00991140  cMenuKeyInfo::cMenuKeyInfo  size=119  [class]
 undefined4 * __fastcall cMenuKeyInfo::cMenuKeyInfo(undefined4 *param_1)

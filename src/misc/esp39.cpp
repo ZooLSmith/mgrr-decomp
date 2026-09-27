@@ -1,7 +1,8 @@
 // src/misc/esp39.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CCA90..00F36E70, 25 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp39.h"
 
 // 009CCA90  FUN_009cca90  size=1  [callgraph]
 void FUN_009cca90(void)

@@ -1,7 +1,8 @@
 // src/phase/app/p720.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4AAC0..00D6E1C0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP720.h"
 
 // 00D4AAC0  cP720::vf1C  size=3  [class]
 void cP720::vf1C(void)

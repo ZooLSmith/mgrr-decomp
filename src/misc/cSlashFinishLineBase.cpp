@@ -1,7 +1,8 @@
 // src/misc/cSlashFinishLineBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C830..00D25EB0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSlashFinishLineBase.h"
 
 // 00D0C830  cSlashFinishLineBase::cSlashFinishLineBase  size=18  [class]
 undefined4 * __fastcall cSlashFinishLineBase::cSlashFinishLineBase(undefined4 *param_1)

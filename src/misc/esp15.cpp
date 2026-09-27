@@ -1,7 +1,8 @@
 // src/misc/esp15.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED1BC0..00F315B0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp15.h"
 
 // 00ED1BC0  esp15::esp15  size=28  [class]
 undefined4 * __fastcall esp15::esp15(undefined4 *param_1)

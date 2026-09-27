@@ -1,7 +1,7 @@
 // src/unsorted/unit_009ACA10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009ACA10..009ACA10, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009ACA10  FUN_009aca10  size=3458  [run]
 /* WARNING (jumptable): Unable to track spacebase fully for stack */

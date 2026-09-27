@@ -1,7 +1,7 @@
 // lib/havok/Source/Physics/Dynamics/World/Simulation/Continuous/hkpContinuousSimulation.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 011B71B0..011B71B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 011B71B0  FUN_011b71b0  size=327  [__FILE__]
 void __thiscall FUN_011b71b0(int param_1,int param_2,int param_3)

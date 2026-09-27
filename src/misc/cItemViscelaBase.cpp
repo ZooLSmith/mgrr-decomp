@@ -1,7 +1,8 @@
 // src/misc/cItemViscelaBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8FC0..00ABABA0, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemViscelaBase.h"
 
 // 005E8FC0  FUN_005e8fc0  size=328  [callgraph]
 void __fastcall FUN_005e8fc0(int *param_1)

@@ -1,7 +1,7 @@
 // src/effect/EffectAttrSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E6150..009EC820, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009E6150  EffectAttrSystem::Startup  size=131  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

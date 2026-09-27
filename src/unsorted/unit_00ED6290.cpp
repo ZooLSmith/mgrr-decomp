@@ -1,7 +1,7 @@
 // src/unsorted/unit_00ED6290.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED6290..00ED6290, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00ED6290  FUN_00ed6290  size=562  [run]
 /* WARNING: Removing unreachable block (ram,0x00ed6375) */

@@ -1,7 +1,8 @@
 // src/effect/cEspShaderPolyLine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F63E10..00F8C870, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderPolyLine.h"
 
 // 00F63E10  cEspShaderPolyLine::vf08  size=306  [class]
 undefined4 __fastcall cEspShaderPolyLine::vf08(int *param_1)

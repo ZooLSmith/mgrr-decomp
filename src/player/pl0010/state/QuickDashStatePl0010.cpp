@@ -1,7 +1,8 @@
 // src/player/pl0010/state/QuickDashStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B822F0..00BCC490, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "QuickDashStatePl0010.h"
 
 // 00B822F0  QuickDashStatePl0010::vf08  size=19  [class]
 bool QuickDashStatePl0010::vf08(undefined4 param_1)

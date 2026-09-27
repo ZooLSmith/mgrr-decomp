@@ -1,7 +1,8 @@
 // src/save/cSaveDataLoadMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009947A0..009BD760, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSaveDataLoadMenu.h"
 
 // 009947A0  FUN_009947a0  size=26  [callgraph]
 undefined4 __thiscall FUN_009947a0(int param_1,int param_2)

@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiEventQteStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82F10..00C05F10, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiEventQteStatePl0010.h"
 
 // 00B82F10  ZangekiEventQteStatePl0010::vf14  size=5  [class]
 undefined4 __thiscall ZangekiEventQteStatePl0010::vf14(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/misc/cRpgSiteParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CE3DA0..00D33940, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRpgSiteParts.h"
 
 // 00CE3DA0  cRpgSiteParts::vf00  size=63  [class]
 undefined4 * __thiscall cRpgSiteParts::vf00(undefined4 *param_1,byte param_2)

@@ -1,7 +1,8 @@
 // src/room/r40e.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A71570..00A7B830, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R40e.h"
 
 // 00A71570  R40e::vf04  size=26  [class]
 void __fastcall R40e::vf04(int param_1)

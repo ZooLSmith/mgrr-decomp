@@ -1,7 +1,7 @@
 // src/event/EventConfig.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00931A40..00931A40, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00931A40  EventConfig::getMoviePath  size=602  [class]
 bool EventConfig::getMoviePath(char *param_1,rsize_t param_2,int *param_3,char *param_4)

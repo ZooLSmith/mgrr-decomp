@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderWeight.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F937D0..00F95430, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderWeight.h"
 
 // 00F937D0  cModelShaderWeight::cModelShaderWeight  size=603  [class]
 /* WARNING: Removing unreachable block (ram,0x00f9386b) */

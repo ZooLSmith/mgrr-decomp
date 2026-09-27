@@ -1,7 +1,8 @@
 // src/ui/cUIExtendObject.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CA88E0..00CA8930, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIExtendObject.h"
 
 // 00CA88E0  cUIExtendObject::vf04  size=1  [class]
 void cUIExtendObject::vf04(void)

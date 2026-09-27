@@ -1,7 +1,7 @@
 // src/managers/ccutdatamanager/cCutDataManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D8D310..00D8D310, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D8D310  cCutDataManager::entryData  size=167  [class]
 uint __fastcall cCutDataManager::entryData(int param_1)

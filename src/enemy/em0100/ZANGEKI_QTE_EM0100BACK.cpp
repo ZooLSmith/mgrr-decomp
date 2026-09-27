@@ -1,7 +1,7 @@
 // src/enemy/em0100/ZANGEKI_QTE_EM0100BACK.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BB4850..00BB4850, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00BB4850  ZANGEKI_QTE_EM0100BACK::updateOnce  size=359  [class]
 void __thiscall ZANGEKI_QTE_EM0100BACK::updateOnce(int param_1,undefined4 *param_2)

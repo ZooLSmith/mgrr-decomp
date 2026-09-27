@@ -1,7 +1,8 @@
 // src/misc/HoldEntitySignalContext.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0043E8D0..00A1B750, 36 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HoldEntitySignalContext.h"
 
 // 0043E8D0  HoldEntitySignalContext::vf00  size=6  [class]
 undefined * HoldEntitySignalContext::vf00(void)

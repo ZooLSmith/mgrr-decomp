@@ -1,7 +1,8 @@
 // src/misc/cChainComboParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD0520..00D2B040, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cChainComboParts.h"
 
 // 00CD0520  cChainComboParts::cChainComboParts  size=239  [class]
 undefined4 * cChainComboParts::cChainComboParts(void)

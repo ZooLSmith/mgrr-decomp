@@ -1,7 +1,8 @@
 // src/misc/cEnemyEnergyGaugeBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E4B0..00D236C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyEnergyGaugeBase.h"
 
 // 00D0E4B0  cEnemyEnergyGaugeBase::cEnemyEnergyGaugeBase  size=18  [class]
 undefined4 * __fastcall cEnemyEnergyGaugeBase::cEnemyEnergyGaugeBase(undefined4 *param_1)

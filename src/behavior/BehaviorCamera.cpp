@@ -1,7 +1,8 @@
 // src/behavior/BehaviorCamera.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF390..00ACA050, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorCamera.h"
 
 // 00AAF390  BehaviorCamera::vf04  size=6  [class]
 undefined * BehaviorCamera::vf04(void)

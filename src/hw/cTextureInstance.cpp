@@ -1,7 +1,7 @@
 // src/hw/cTextureInstance.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9E5A0..00FA9E40, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9E5A0  Hw::cTextureInstance::cTextureInstance_3  size=116  [class]
 uint * Hw::cTextureInstance::cTextureInstance_3(uint param_1)

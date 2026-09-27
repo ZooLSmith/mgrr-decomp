@@ -1,7 +1,7 @@
 // lib/havok/Source/Geometry/Internal/Algorithms/Gsk/hkcdGskImpl.inl
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 014623F0..014623F0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 014623F0  FUN_014623f0  size=8641  [__FILE__]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

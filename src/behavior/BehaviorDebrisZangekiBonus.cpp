@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisZangekiBonus.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8E80..00AC13A0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisZangekiBonus.h"
 
 // 005D8E80  BehaviorDebrisZangekiBonus::vf1D0  size=16  [class]
 void __thiscall BehaviorDebrisZangekiBonus::vf1D0(undefined4 param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/misc/ShapeBox.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6AE40..00A6CB40, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ShapeBox.h"
 
 // 00A6AE40  ShapeBox::vf18  size=31  [class]
 void __thiscall ShapeBox::vf18(int param_1,undefined4 param_2)

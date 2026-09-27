@@ -1,7 +1,7 @@
 // src/managers/csceneespmanager/cSceneEspManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F41080..00F41080, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F41080  cSceneEspManager::getEventTimeRate  size=60  [class]
 float10 __thiscall cSceneEspManager::getEventTimeRate(int param_1,int param_2)

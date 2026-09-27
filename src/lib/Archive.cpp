@@ -1,7 +1,7 @@
 // src/lib/Archive.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C67850..00E913F0, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C67850  lib::Archive::vf6C  size=5  [class]
 undefined1 lib::Archive::vf6C(void)

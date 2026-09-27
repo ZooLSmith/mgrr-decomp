@@ -1,7 +1,8 @@
 // src/graphics/cTexRenderAddBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6B850..00F8E830, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTexRenderAddBlend.h"
 
 // 00F6B850  cTexRenderAddBlend::vf08  size=190  [class]
 undefined4 __fastcall cTexRenderAddBlend::vf08(int param_1)

@@ -1,7 +1,13 @@
 // lib/havok/unit_010F9450.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010F9450..010FAA90, 72 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkBinaryPackfileReader.h"
+#include "hkObjectWriter.h"
+#include "hkPackfileData.h"
+#include "hkResource.h"
+#include "hkXmlObjectWriter.h"
 
 // 010F9450  hkXmlObjectWriter::vf14  size=404  [run]
 bool __thiscall

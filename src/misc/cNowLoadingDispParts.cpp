@@ -1,7 +1,8 @@
 // src/misc/cNowLoadingDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD5910..00D31B90, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cNowLoadingDispParts.h"
 
 // 00CD5910  cNowLoadingDispParts::vf04  size=60  [class]
 void __fastcall cNowLoadingDispParts::vf04(int *param_1)

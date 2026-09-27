@@ -1,7 +1,8 @@
 // src/misc/cRadarMapFreeIconParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD67E0..00CF0F90, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRadarMapFreeIconParts.h"
 
 // 00CD67E0  cRadarMapFreeIconParts::cRadarMapFreeIconParts  size=309  [class]
 void __fastcall cRadarMapFreeIconParts::cRadarMapFreeIconParts(undefined4 *param_1)

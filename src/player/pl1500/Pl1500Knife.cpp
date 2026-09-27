@@ -1,7 +1,8 @@
 // src/player/pl1500/Pl1500Knife.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A9C90..00ACFB40, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl1500Knife.h"
 
 // 008A9C90  Pl1500Knife::vf304  size=54  [class]
 void __fastcall Pl1500Knife::vf304(int param_1)

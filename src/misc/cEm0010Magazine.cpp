@@ -1,7 +1,8 @@
 // src/misc/cEm0010Magazine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF150..00B31530, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEm0010Magazine.h"
 
 // 00AAF150  cEm0010Magazine::vf04  size=6  [class]
 undefined * cEm0010Magazine::vf04(void)

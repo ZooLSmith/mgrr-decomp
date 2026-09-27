@@ -1,7 +1,7 @@
 // src/enemy/em8060/Em8060Team.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00686E80..00686E80, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00686E80  Em8060Team::entry  size=195  [class]
 undefined4 __fastcall Em8060Team::entry(undefined4 *param_1)

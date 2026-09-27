@@ -1,7 +1,8 @@
 // src/camera/cCameraFrustum.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C12370..00C40760, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCameraFrustum.h"
 
 // 00C12370  cCameraFrustum::vf00  size=31  [class]
 undefined4 * __thiscall cCameraFrustum::vf00(undefined4 *param_1,byte param_2)

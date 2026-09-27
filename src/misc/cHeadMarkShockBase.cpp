@@ -1,7 +1,8 @@
 // src/misc/cHeadMarkShockBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E870..00D247F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cHeadMarkShockBase.h"
 
 // 00D0E870  cHeadMarkShockBase::cHeadMarkShockBase  size=18  [class]
 undefined4 * __fastcall cHeadMarkShockBase::cHeadMarkShockBase(undefined4 *param_1)

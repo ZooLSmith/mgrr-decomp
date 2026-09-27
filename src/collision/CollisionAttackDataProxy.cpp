@@ -1,7 +1,8 @@
 // src/collision/CollisionAttackDataProxy.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D730E0..00D73100, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionAttackDataProxy.h"
 
 // 00D730E0  CollisionAttackDataProxy::vf00  size=6  [class]
 undefined * CollisionAttackDataProxy::vf00(void)

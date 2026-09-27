@@ -1,7 +1,8 @@
 // src/enemy/em8010/Em8010Magazine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00619480..00ABA800, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8010Magazine.h"
 
 // 00619480  Em8010Magazine::vf44  size=5  [class]
 void __fastcall Em8010Magazine::vf44(int param_1)

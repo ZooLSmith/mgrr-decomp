@@ -1,7 +1,8 @@
 // src/misc/_AFX_RICHEDIT_STATE.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F3B5A0..00F3B5A0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "_AFX_RICHEDIT_STATE.h"
 
 // 00F3B5A0  _AFX_RICHEDIT_STATE::_AFX_RICHEDIT_STATE  size=18  [class]
 /* Library Function - Single Match

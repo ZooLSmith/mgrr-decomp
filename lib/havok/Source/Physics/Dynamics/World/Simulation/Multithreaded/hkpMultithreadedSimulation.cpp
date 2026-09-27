@@ -1,7 +1,7 @@
 // lib/havok/Source/Physics/Dynamics/World/Simulation/Multithreaded/hkpMultithreadedSimulation.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 011B2C20..011B2C20, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 011B2C20  FUN_011b2c20  size=455  [__FILE__]
 void __thiscall FUN_011b2c20(int param_1,int param_2,int param_3,LPCRITICAL_SECTION param_4)

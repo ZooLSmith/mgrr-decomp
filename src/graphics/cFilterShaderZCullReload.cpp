@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderZCullReload.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EB2440..015F1640, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderZCullReload.h"
 
 // 00EB2440  cFilterShaderZCullReload::cFilterShaderZCullReload  size=39  [class]
 undefined4 * __fastcall cFilterShaderZCullReload::cFilterShaderZCullReload(undefined4 *param_1)

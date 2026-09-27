@@ -1,7 +1,8 @@
 // src/misc/esp49.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED1C20..00F38360, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp49.h"
 
 // 00ED1C20  esp49::esp49  size=18  [class]
 undefined4 * __fastcall esp49::esp49(undefined4 *param_1)

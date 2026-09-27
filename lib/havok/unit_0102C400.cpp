@@ -1,7 +1,10 @@
 // lib/havok/unit_0102C400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0102C400..0102CC60, 37 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBsdSocket.h"
+#include "hkSolverAllocator.h"
+#include "hkStreamReader.h"
 
 // 0102C400  FUN_0102c400  size=38  [run]
 void FUN_0102c400(int param_1)

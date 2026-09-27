@@ -1,7 +1,8 @@
 // src/weapon/wpb004/Wpb004.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005FF8D0..00ACCB40, 25 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Wpb004.h"
 
 // 005FF8D0  FUN_005ff8d0  size=481  [callgraph]
 void __fastcall FUN_005ff8d0(int param_1)

@@ -1,7 +1,8 @@
 // src/effect/EspShaderOutlineExtractionMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E66B0..009F0F90, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderOutlineExtractionMask.h"
 
 // 009E66B0  EspShaderOutlineExtractionMask::vf08  size=257  [class]
 /* WARNING: Removing unreachable block (ram,0x009e678e) */

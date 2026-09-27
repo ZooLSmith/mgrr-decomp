@@ -1,7 +1,8 @@
 // src/misc/cSlashFinishLineParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF360..00D33D60, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSlashFinishLineParts.h"
 
 // 00CBF360  cSlashFinishLineParts::vf14  size=134  [class]
 int __fastcall cSlashFinishLineParts::vf14(int param_1)

@@ -1,7 +1,8 @@
 // src/behavior/BehaviorLockOnMarker.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6670..00AC64D0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorLockOnMarker.h"
 
 // 00AA6670  BehaviorLockOnMarker::BehaviorLockOnMarker  size=40  [class]
 undefined4 * __fastcall BehaviorLockOnMarker::BehaviorLockOnMarker(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/havok/HavokMallocAllocator.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00930D10..00930DC0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HavokMallocAllocator.h"
 
 // 00930D10  HavokMallocAllocator::vf04  size=97  [class]
 int __thiscall HavokMallocAllocator::vf04(int param_1,int param_2)

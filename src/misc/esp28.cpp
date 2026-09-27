@@ -1,7 +1,8 @@
 // src/misc/esp28.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009DF4E0..00F352F0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp28.h"
 
 // 009DF4E0  esp28::esp28  size=18  [class]
 undefined4 * __fastcall esp28::esp28(undefined4 *param_1)

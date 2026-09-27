@@ -1,7 +1,8 @@
 // src/misc/cCountDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E230..00D225C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCountDispBase.h"
 
 // 00D0E230  cCountDispBase::cCountDispBase  size=18  [class]
 undefined4 * __fastcall cCountDispBase::cCountDispBase(undefined4 *param_1)

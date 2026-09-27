@@ -1,7 +1,8 @@
 // src/misc/E3_EnemyBoardDebrisSokushi.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040AF90..00AB8A00, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "E3_EnemyBoardDebrisSokushi.h"
 
 // 0040AF90  E3_EnemyBoardDebrisSokushi::vf40  size=30  [class]
 undefined4 __fastcall E3_EnemyBoardDebrisSokushi::vf40(int *param_1)

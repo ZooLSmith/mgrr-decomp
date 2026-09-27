@@ -1,7 +1,8 @@
 // src/phase/app/p092.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B1C0..00D6FF60, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P092.h"
 
 // 00D4B1C0  P092::vf0C  size=1  [class]
 void P092::vf0C(void)

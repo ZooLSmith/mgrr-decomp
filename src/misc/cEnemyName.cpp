@@ -1,7 +1,8 @@
 // src/misc/cEnemyName.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB8850..00CD3BA0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyName.h"
 
 // 00CB8850  cEnemyName::cEnemyName  size=72  [class]
 undefined4 * cEnemyName::cEnemyName(void)

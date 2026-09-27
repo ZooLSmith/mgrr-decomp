@@ -1,7 +1,8 @@
 // src/misc/WindActionImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD22E0..00DD2710, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "WindActionImplement.h"
 
 // 00DD22E0  WindActionImplement::WindActionImplement  size=28  [class]
 undefined4 * __fastcall WindActionImplement::WindActionImplement(undefined4 *param_1)

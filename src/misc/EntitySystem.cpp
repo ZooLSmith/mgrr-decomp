@@ -1,7 +1,7 @@
 // src/misc/EntitySystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A7F3B0..00A7F3B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A7F3B0  EntitySystem::addDatsuEntity  size=118  [class]
 undefined4 __fastcall EntitySystem::addDatsuEntity(int param_1)

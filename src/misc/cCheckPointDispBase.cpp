@@ -1,7 +1,8 @@
 // src/misc/cCheckPointDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0DF10..00D211F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCheckPointDispBase.h"
 
 // 00D0DF10  cCheckPointDispBase::cCheckPointDispBase  size=18  [class]
 undefined4 * __fastcall cCheckPointDispBase::cCheckPointDispBase(undefined4 *param_1)

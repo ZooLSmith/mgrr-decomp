@@ -1,7 +1,8 @@
 // src/effect/EffectShaderWaterWave.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6B470..00F8E770, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EffectShaderWaterWave.h"
 
 // 00F6B470  EffectShaderWaterWave::vf08  size=279  [class]
 bool __fastcall EffectShaderWaterWave::vf08(int param_1)

@@ -1,7 +1,7 @@
 // src/managers/cobjcutmanager/cObjCutManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D8CF50..00D8CF50, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D8CF50  cObjCutManager::startup  size=186  [class]
 undefined4 __fastcall cObjCutManager::startup(int param_1)

@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FDA789.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDA789..00FDA789, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDA789  std::_Init_locks::_Init_locks  size=49  [run]
 /* Library Function - Single Match

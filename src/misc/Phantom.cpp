@@ -1,7 +1,7 @@
 // src/misc/Phantom.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00901900..009021A0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00901900  Phantom::setTransform  size=1187  [class]
 /* WARNING: Removing unreachable block (ram,0x00901cf9) */

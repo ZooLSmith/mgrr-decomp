@@ -1,7 +1,8 @@
 // src/misc/BulletBaseDLC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A9BBC0..00AC31B0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BulletBaseDLC.h"
 
 // 00A9BBC0  BulletBaseDLC::vf304  size=41  [class]
 void __fastcall BulletBaseDLC::vf304(int param_1)

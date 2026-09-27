@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CDA990.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDA990..00CDA990, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CDA990  FUN_00cda990  size=42  [run]
 void __thiscall FUN_00cda990(int param_1,void *param_2)

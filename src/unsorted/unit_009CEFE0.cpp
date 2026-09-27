@@ -1,7 +1,7 @@
 // src/unsorted/unit_009CEFE0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CEFE0..009CF290, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009CEFE0  thunk_FUN_00f4ba30  size=5  [run]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

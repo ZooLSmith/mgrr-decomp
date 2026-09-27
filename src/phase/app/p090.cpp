@@ -1,7 +1,8 @@
 // src/phase/app/p090.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D46B20..00D6FF20, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cP090.h"
 
 // 00D46B20  cP090::vf08  size=1  [class]
 void cP090::vf08(void)

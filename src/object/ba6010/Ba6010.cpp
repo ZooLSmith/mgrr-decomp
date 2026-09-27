@@ -1,7 +1,8 @@
 // src/object/ba6010/Ba6010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00602E20..00ABA950, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba6010.h"
 
 // 00602E20  Ba6010::vf1C  size=16  [class]
 void Ba6010::vf1C(void)

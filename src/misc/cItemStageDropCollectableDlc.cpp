@@ -1,7 +1,8 @@
 // src/misc/cItemStageDropCollectableDlc.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094F200..00952130, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemStageDropCollectableDlc.h"
 
 // 0094F200  cItemStageDropCollectableDlc::vf00  size=6  [class]
 char * cItemStageDropCollectableDlc::vf00(void)

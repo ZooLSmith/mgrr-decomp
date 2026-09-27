@@ -1,7 +1,7 @@
 // src/misc/FixedSplineLerp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECFA70..00ED1CF0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00ECFA70  FixedSplineLerp<Hw::cVec4>::vf00  size=85  [class]
 undefined4 * __thiscall FixedSplineLerp<Hw::cVec4>::vf00(undefined4 *param_1,byte param_2)

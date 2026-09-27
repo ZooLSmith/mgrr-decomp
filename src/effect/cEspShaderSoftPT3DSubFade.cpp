@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPT3DSubFade.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F61EF0..00F8BD10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPT3DSubFade.h"
 
 // 00F61EF0  cEspShaderSoftPT3DSubFade::vf08  size=339  [class]
 /* WARNING: Removing unreachable block (ram,0x00f61ffe) */

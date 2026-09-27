@@ -1,7 +1,8 @@
 // lib/havok/unit_00915010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00915010..00915010, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpCollisionListener.h"
 
 // 00915010  hkpCollisionListener::vf0C  size=47  [run]
 undefined4 * __thiscall hkpCollisionListener::vf0C(undefined4 *param_1,byte param_2)

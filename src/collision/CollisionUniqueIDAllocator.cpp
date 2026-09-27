@@ -1,7 +1,8 @@
 // src/collision/CollisionUniqueIDAllocator.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D76ED0..00D77AF0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionUniqueIDAllocator.h"
 
 // 00D76ED0  CollisionUniqueIDAllocator::vf04  size=31  [class]
 undefined4 * __thiscall CollisionUniqueIDAllocator::vf04(undefined4 *param_1,byte param_2)

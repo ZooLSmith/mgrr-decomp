@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FDA96D.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDA96D..00FDA9E4, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDA96D  Facet_Register  size=42  [run]
 /* Library Function - Multiple Matches With Same Base Name

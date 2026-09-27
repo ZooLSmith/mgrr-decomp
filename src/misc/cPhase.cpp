@@ -1,7 +1,7 @@
 // src/misc/cPhase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D575E0..00D6CAB0, 166 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D575E0  cPhase<cPa50>::vf2C  size=20  [class]
 void cPhase<cPa50>::vf2C(void)

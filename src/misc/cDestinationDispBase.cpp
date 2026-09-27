@@ -1,7 +1,8 @@
 // src/misc/cDestinationDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E370..00D22A70, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDestinationDispBase.h"
 
 // 00D0E370  cDestinationDispBase::cDestinationDispBase  size=18  [class]
 undefined4 * __fastcall cDestinationDispBase::cDestinationDispBase(undefined4 *param_1)

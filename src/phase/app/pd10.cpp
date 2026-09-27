@@ -1,7 +1,8 @@
 // src/phase/app/pd10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B900..00D709E0, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPd10.h"
 
 // 00D4B900  cPd10::vf08  size=35  [class]
 void __fastcall cPd10::vf08(int param_1)

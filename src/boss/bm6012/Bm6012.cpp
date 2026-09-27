@@ -1,7 +1,8 @@
 // src/boss/bm6012/Bm6012.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00603F30..00AB9A90, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm6012.h"
 
 // 00603F30  Bm6012::vf44  size=54  [class]
 void __fastcall Bm6012::vf44(int param_1)

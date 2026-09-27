@@ -1,7 +1,8 @@
 // src/managers/cckmsgmanager/cCkMsgManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF8220..00D0DDB0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCkMsgManager.h"
 
 // 00CF8220  cCkMsgManager::cCkMsgManager  size=185  [class]
 void __fastcall cCkMsgManager::cCkMsgManager(undefined4 *param_1)

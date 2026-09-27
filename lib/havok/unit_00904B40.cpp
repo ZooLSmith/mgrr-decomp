@@ -1,7 +1,8 @@
 // lib/havok/unit_00904B40.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00904B40..00904B40, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkPhysicsSystemContainer.h"
 
 // 00904B40  HkPhysicsSystemContainer::HkPhysicsSystemContainer  size=38  [run]
 void HkPhysicsSystemContainer::HkPhysicsSystemContainer(undefined4 param_1)

@@ -1,7 +1,8 @@
 // src/misc/cCredit.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDD0A0..00D421B0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCredit.h"
 
 // 00CDD0A0  cCredit::~cCredit  size=129  [class]
 void __fastcall cCredit::~cCredit(undefined4 *param_1)

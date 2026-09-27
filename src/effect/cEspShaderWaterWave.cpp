@@ -1,7 +1,8 @@
 // src/effect/cEspShaderWaterWave.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C800..00F8B700, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderWaterWave.h"
 
 // 00F5C800  cEspShaderWaterWave::vf0C  size=1  [class]
 void cEspShaderWaterWave::vf0C(void)

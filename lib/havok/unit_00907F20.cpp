@@ -1,7 +1,8 @@
 // lib/havok/unit_00907F20.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00907F20..00907F20, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpFirstCdBodyPairCollector.h"
 
 // 00907F20  hkpFirstCdBodyPairCollector::hkpFirstCdBodyPairCollector_2  size=86  [run]
 undefined4 * hkpFirstCdBodyPairCollector::hkpFirstCdBodyPairCollector_2(void)

@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPT3D_Fog.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F603D0..00F8B2D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPT3D_Fog.h"
 
 // 00F603D0  cEspShaderSoftPT3D_Fog::vf08  size=356  [class]
 /* WARNING: Removing unreachable block (ram,0x00f604de) */

@@ -1,7 +1,8 @@
 // src/phase/app/p138.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47E20..00D70140, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P138.h"
 
 // 00D47E20  P138::vf2C  size=26  [class]
 void __fastcall P138::vf2C(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/cCollectionSelectBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0099D690..00D10B20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionSelectBase.h"
 
 // 0099D690  cCollectionSelectBase::vf14  size=61  [class]
 undefined4 __thiscall cCollectionSelectBase::vf14(int param_1,undefined4 param_2)

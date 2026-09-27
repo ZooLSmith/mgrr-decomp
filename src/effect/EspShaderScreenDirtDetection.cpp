@@ -1,7 +1,8 @@
 // src/effect/EspShaderScreenDirtDetection.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6C6B0..00F8EAB0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderScreenDirtDetection.h"
 
 // 00F6C6B0  EspShaderScreenDirtDetection::vf08  size=248  [class]
 undefined4 __fastcall EspShaderScreenDirtDetection::vf08(int *param_1)

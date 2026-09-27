@@ -1,7 +1,8 @@
 // src/misc/CharacterRigidBody.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E1110..008E90C0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CharacterRigidBody.h"
 
 // 008E1110  CharacterRigidBody::vf00  size=8  [class]
 void CharacterRigidBody::vf00(void)

@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkMultiParticleBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F58B50..00F59650, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkMultiParticleBase.h"
 
 // 00F58B50  EspPrimitiveWorkMultiParticleBase::EspPrimitiveWorkMultiParticleBase  size=42  [class]
 undefined4 * __fastcall

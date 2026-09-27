@@ -1,7 +1,8 @@
 // src/effect/cEspShaderAlMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5EDA0..00F8ACC0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderAlMask.h"
 
 // 00F5EDA0  cEspShaderAlMask::vf08  size=291  [class]
 undefined4 __fastcall cEspShaderAlMask::vf08(int *param_1)

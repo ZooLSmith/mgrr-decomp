@@ -1,7 +1,7 @@
 // src/managers/effectresourcemanager/EffectResourceManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E004B0..00F4DD40, 116 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E004B0  EffectResourceManager::GetNameFromRoomNo  size=275  [class]
 void EffectResourceManager::GetNameFromRoomNo(uint param_1)

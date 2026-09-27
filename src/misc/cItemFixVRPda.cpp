@@ -1,7 +1,8 @@
 // src/misc/cItemFixVRPda.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EB060..00AC1200, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemFixVRPda.h"
 
 // 005EB060  cItemFixVRPda::vf40  size=280  [class]
 undefined4 __fastcall cItemFixVRPda::vf40(int param_1)

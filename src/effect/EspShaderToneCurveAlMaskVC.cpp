@@ -1,7 +1,8 @@
 // src/effect/EspShaderToneCurveAlMaskVC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F624D0..00F8BE40, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderToneCurveAlMaskVC.h"
 
 // 00F624D0  EspShaderToneCurveAlMaskVC::vf08  size=291  [class]
 undefined4 __fastcall EspShaderToneCurveAlMaskVC::vf08(int *param_1)

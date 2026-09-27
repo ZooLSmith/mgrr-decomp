@@ -1,7 +1,8 @@
 // src/misc/cGameResultParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CE40A0..00CF5320, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameResultParts.h"
 
 // 00CE40A0  cGameResultParts::vf00  size=63  [class]
 undefined4 * __thiscall cGameResultParts::vf00(undefined4 *param_1,byte param_2)

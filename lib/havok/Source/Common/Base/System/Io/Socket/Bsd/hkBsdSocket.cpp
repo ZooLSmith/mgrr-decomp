@@ -1,7 +1,9 @@
 // lib/havok/Source/Common/Base/System/Io/Socket/Bsd/hkBsdSocket.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0102C010..0102C290, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkBsdSocket.h"
 
 // 0102C010  FUN_0102c010  size=131  [__FILE__]
 void FUN_0102c010(void)

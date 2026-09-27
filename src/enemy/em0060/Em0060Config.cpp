@@ -1,7 +1,7 @@
 // src/enemy/em0060/Em0060Config.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0044D990..0044D990, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0044D990  Em0060Config::initializeBattleParameterConfig  size=1849  [class]
 void __fastcall Em0060Config::initializeBattleParameterConfig(int param_1)

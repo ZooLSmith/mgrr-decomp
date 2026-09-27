@@ -1,7 +1,8 @@
 // src/misc/esp18.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E1140..00F407C0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp18.h"
 
 // 009E1140  esp18::preTrans  size=309  [class]
 undefined4 __thiscall esp18::preTrans(undefined4 *param_1,undefined4 *param_2)

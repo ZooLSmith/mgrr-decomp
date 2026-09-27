@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310QteCeiling.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057E6E0..00AB7080, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310QteCeiling.h"
 
 // 0057E6E0  Em0310QteCeiling::vf4C  size=84  [class]
 void __fastcall Em0310QteCeiling::vf4C(int *param_1)

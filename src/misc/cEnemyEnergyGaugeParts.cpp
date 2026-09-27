@@ -1,7 +1,8 @@
 // src/misc/cEnemyEnergyGaugeParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD2B80..00D14160, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyEnergyGaugeParts.h"
 
 // 00CD2B80  cEnemyEnergyGaugeParts::cEnemyEnergyGaugeParts  size=207  [class]
 undefined4 * cEnemyEnergyGaugeParts::cEnemyEnergyGaugeParts(void)

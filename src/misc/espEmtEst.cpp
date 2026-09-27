@@ -1,7 +1,8 @@
 // src/misc/espEmtEst.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F0ACF0..00F44EB0, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "espEmtEst.h"
 
 // 00F0ACF0  espEmtEst::vf04  size=329  [class]
 undefined4 __thiscall

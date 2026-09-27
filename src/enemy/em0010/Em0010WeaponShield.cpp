@@ -1,7 +1,8 @@
 // src/enemy/em0010/Em0010WeaponShield.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAF200..00B5CA00, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0010WeaponShield.h"
 
 // 00AAF200  Em0010WeaponShield::vf04  size=6  [class]
 undefined * Em0010WeaponShield::vf04(void)

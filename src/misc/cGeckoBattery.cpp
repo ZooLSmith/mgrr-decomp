@@ -1,7 +1,8 @@
 // src/misc/cGeckoBattery.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAEF30..00B77D30, 18 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGeckoBattery.h"
 
 // 00AAEF30  cGeckoBattery::vf04  size=6  [class]
 undefined * cGeckoBattery::vf04(void)

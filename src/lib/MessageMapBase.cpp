@@ -1,7 +1,7 @@
 // src/lib/MessageMapBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E92900..00E96570, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E92900  lib::MessageMapBase::vf00  size=31  [class]
 undefined4 * __thiscall lib::MessageMapBase::vf00(undefined4 *param_1,byte param_2)

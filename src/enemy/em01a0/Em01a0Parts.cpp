@@ -1,7 +1,8 @@
 // src/enemy/em01a0/Em01a0Parts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005196F0..00AC1050, 18 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em01a0Parts.h"
 
 // 005196F0  Em01a0Parts::vf118  size=94  [class]
 undefined4 __thiscall Em01a0Parts::vf118(int param_1,int param_2)

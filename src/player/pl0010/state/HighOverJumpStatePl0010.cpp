@@ -1,7 +1,8 @@
 // src/player/pl0010/state/HighOverJumpStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81620..00BDEB40, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HighOverJumpStatePl0010.h"
 
 // 00B81620  HighOverJumpStatePl0010::vf08  size=55  [class]
 undefined4 __thiscall HighOverJumpStatePl0010::vf08(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/misc/esp122.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D07C0..009E2F40, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp122.h"
 
 // 009D07C0  esp122::vf14  size=80  [class]
 void __fastcall esp122::vf14(int param_1)

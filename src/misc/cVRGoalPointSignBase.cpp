@@ -1,7 +1,8 @@
 // src/misc/cVRGoalPointSignBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F950..00D27260, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVRGoalPointSignBase.h"
 
 // 00D0F950  cVRGoalPointSignBase::cVRGoalPointSignBase  size=18  [class]
 undefined4 * __fastcall cVRGoalPointSignBase::cVRGoalPointSignBase(undefined4 *param_1)

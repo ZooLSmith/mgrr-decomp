@@ -1,7 +1,8 @@
 // src/misc/cChapterResultBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0FBD0..00D27740, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cChapterResultBase.h"
 
 // 00D0FBD0  cChapterResultBase::cChapterResultBase  size=18  [class]
 undefined4 * __fastcall cChapterResultBase::cChapterResultBase(undefined4 *param_1)

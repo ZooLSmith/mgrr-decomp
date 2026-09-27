@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkTile6x6.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F56450..00F59600, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkTile6x6.h"
 
 // 00F56450  EspPrimitiveWorkTile6x6::vf04  size=2439  [class]
 /* WARNING: Function: __alloca_probe replaced with injection: alloca_probe */

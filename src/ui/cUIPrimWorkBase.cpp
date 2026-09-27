@@ -1,7 +1,8 @@
 // src/ui/cUIPrimWorkBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCAA70..00CCAB70, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIPrimWorkBase.h"
 
 // 00CCAA70  cUIPrimWorkBase::cUIPrimWorkBase  size=235  [class]
 undefined4 * __fastcall cUIPrimWorkBase::cUIPrimWorkBase(undefined4 *param_1)

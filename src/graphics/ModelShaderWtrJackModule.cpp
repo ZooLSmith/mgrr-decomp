@@ -1,7 +1,8 @@
 // src/graphics/ModelShaderWtrJackModule.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009F6920..00EF81C0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ModelShaderWtrJackModule.h"
 
 // 009F6920  ModelShaderWtrJackModule::ModelShaderWtrJackModule  size=186  [class]
 undefined4 * __fastcall ModelShaderWtrJackModule::ModelShaderWtrJackModule(undefined4 *param_1)

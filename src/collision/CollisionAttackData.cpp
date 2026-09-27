@@ -1,7 +1,8 @@
 // src/collision/CollisionAttackData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D73030..00D73BD0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionAttackData.h"
 
 // 00D73030  CollisionAttackData::CollisionAttackData_3  size=31  [class]
 undefined4 * __fastcall CollisionAttackData::CollisionAttackData_3(undefined4 *param_1)

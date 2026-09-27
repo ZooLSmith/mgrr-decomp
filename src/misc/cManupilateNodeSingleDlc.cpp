@@ -1,7 +1,8 @@
 // src/misc/cManupilateNodeSingleDlc.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00859FA0..00AB9C70, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cManupilateNodeSingleDlc.h"
 
 // 00859FA0  FUN_00859fa0  size=100  [callgraph]
 undefined4 FUN_00859fa0(int param_1)

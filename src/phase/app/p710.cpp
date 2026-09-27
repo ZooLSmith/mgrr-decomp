@@ -1,7 +1,8 @@
 // src/phase/app/p710.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4AA50..00D70550, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P710.h"
 
 // 00D4AA50  P710::vf1C  size=3  [class]
 void P710::vf1C(void)

@@ -1,7 +1,22 @@
 // lib/havok/unit_01065C00.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01065C00..010776A0, 547 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkIndexedTransformSet.h"
+#include "hkMemoryMeshBody.h"
+#include "hkMemoryMeshMaterial.h"
+#include "hkMemoryMeshShape.h"
+#include "hkMemoryMeshTexture.h"
+#include "hkMemoryMeshVertexBuffer.h"
+#include "hkMeshBody.h"
+#include "hkMeshMaterial.h"
+#include "hkMeshShape.h"
+#include "hkMeshVertexBuffer.h"
+#include "hkMultipleVertexBuffer.h"
+#include "hkSkinnedMeshShape.h"
+#include "hkSkinnedRefMeshShape.h"
+#include "hkStorageSkinnedMeshShape.h"
 
 // 01065C00  hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape  size=52  [run]
 undefined4 * __fastcall hkStorageSkinnedMeshShape::hkStorageSkinnedMeshShape(undefined4 *param_1)

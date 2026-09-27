@@ -1,7 +1,8 @@
 // src/graphics/cFilterShader2xAAResolveRot90.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC4120..00EC4170, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShader2xAAResolveRot90.h"
 
 // 00EC4120  cFilterShader2xAAResolveRot90::cFilterShader2xAAResolveRot90  size=18  [class]
 undefined4 * __fastcall

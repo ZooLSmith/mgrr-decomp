@@ -1,7 +1,8 @@
 // src/room/r207.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A71390..00A7B6B0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R207.h"
 
 // 00A71390  R207::vf04  size=175  [class]
 void __fastcall R207::vf04(int param_1)

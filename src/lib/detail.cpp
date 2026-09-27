@@ -1,7 +1,7 @@
 // src/lib/detail.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401370..004017D0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00401370  lib::detail::SharedCoreImplBase::vf00  size=31  [class]
 undefined4 * __thiscall lib::detail::SharedCoreImplBase::vf00(undefined4 *param_1,byte param_2)

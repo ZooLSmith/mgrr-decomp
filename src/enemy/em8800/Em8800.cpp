@@ -1,7 +1,8 @@
 // src/enemy/em8800/Em8800.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 007080A0..00AB9B80, 17 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8800.h"
 
 // 007080A0  Em8800::vf44  size=80  [class]
 void __fastcall Em8800::vf44(int param_1)

@@ -1,7 +1,8 @@
 // src/enemy/em0220/Em0220.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00559E30..00AB6EF0, 253 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0220.h"
 
 // 00559E30  FUN_00559e30  size=71  [callgraph]
 void __thiscall FUN_00559e30(int param_1,undefined4 param_2)

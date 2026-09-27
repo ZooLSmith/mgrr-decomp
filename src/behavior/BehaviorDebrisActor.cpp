@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisActor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D86E0..00A9D2F0, 25 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisActor.h"
 
 // 005D86E0  BehaviorDebrisActor::ExplosionSlot::vf10  size=1  [class]
 void BehaviorDebrisActor::ExplosionSlot::vf10(void)

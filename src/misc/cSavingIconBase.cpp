@@ -1,7 +1,8 @@
 // src/misc/cSavingIconBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F4F0..00D25DB0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSavingIconBase.h"
 
 // 00D0F4F0  cSavingIconBase::cSavingIconBase  size=18  [class]
 undefined4 * __fastcall cSavingIconBase::cSavingIconBase(undefined4 *param_1)

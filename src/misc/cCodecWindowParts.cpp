@@ -1,7 +1,8 @@
 // src/misc/cCodecWindowParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD13B0..00D220A0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecWindowParts.h"
 
 // 00CD13B0  cCodecWindowParts::cCodecWindowParts  size=214  [class]
 undefined4 * cCodecWindowParts::cCodecWindowParts(void)

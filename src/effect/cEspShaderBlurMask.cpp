@@ -1,7 +1,8 @@
 // src/effect/cEspShaderBlurMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F64150..00F8C970, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderBlurMask.h"
 
 // 00F64150  cEspShaderBlurMask::vf08  size=191  [class]
 bool __fastcall cEspShaderBlurMask::vf08(int param_1)

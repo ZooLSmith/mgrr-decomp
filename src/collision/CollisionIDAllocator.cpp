@@ -1,7 +1,8 @@
 // src/collision/CollisionIDAllocator.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D76E30..00D7AC30, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionIDAllocator.h"
 
 // 00D76E30  CollisionIDAllocator::vf10  size=31  [class]
 undefined4 * __thiscall CollisionIDAllocator::vf10(undefined4 *param_1,byte param_2)

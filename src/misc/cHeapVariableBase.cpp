@@ -1,7 +1,7 @@
 // src/misc/cHeapVariableBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD3C60..00DD3C60, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD3C60  cHeapVariableBase::createChildHeap  size=75  [class]
 undefined4 __thiscall

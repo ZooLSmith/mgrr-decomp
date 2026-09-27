@@ -1,7 +1,8 @@
 // src/misc/cScrObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009F8720..00AB7DC0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cScrObj.h"
 
 // 009F8720  cScrObj::vf50  size=171  [class]
 void __fastcall cScrObj::vf50(int param_1)

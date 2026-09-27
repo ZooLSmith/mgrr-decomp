@@ -1,7 +1,7 @@
 // src/misc/cHeapOneTime.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD3FF0..00DD3FF0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD3FF0  cHeapOneTime::allocImpl  size=208  [class]
 uint __thiscall cHeapOneTime::allocImpl(int param_1,int param_2,int param_3,int param_4)

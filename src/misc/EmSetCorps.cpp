@@ -1,7 +1,7 @@
 // src/misc/EmSetCorps.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C9F000..00C9F000, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C9F000  EmSetCorps::setAddedKillCount  size=81  [class]
 void __thiscall EmSetCorps::setAddedKillCount(int param_1,uint param_2,uint param_3,int param_4)

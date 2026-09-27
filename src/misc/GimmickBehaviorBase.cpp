@@ -1,7 +1,8 @@
 // src/misc/GimmickBehaviorBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E2CF0..00AA8AE0, 17 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GimmickBehaviorBase.h"
 
 // 005E2CF0  GimmickBehaviorBase::vf318  size=3  [class]
 void GimmickBehaviorBase::vf318(void)

@@ -1,7 +1,8 @@
 // src/misc/CardboardSlashSlot.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B2F240..00B4D9A0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CardboardSlashSlot.h"
 
 // 00B2F240  CardboardSlashSlot::vf10  size=1  [class]
 void CardboardSlashSlot::vf10(void)

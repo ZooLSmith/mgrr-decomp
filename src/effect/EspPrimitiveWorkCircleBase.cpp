@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkCircleBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4EBE0..00F591A0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkCircleBase.h"
 
 // 00F4EBE0  EspPrimitiveWorkCircleBase::EspPrimitiveWorkCircleBase_2  size=48  [class]
 undefined4 * __fastcall

@@ -1,7 +1,7 @@
 // src/sound/SoundSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E5D5B0..00E5DA30, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E5D5B0  SoundSystem::BankManager::addBankName  size=269  [class]
 void SoundSystem::BankManager::addBankName(undefined4 param_1,undefined4 param_2)

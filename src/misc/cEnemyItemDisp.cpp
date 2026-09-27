@@ -1,7 +1,8 @@
 // src/misc/cEnemyItemDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB82D0..00CD3590, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyItemDisp.h"
 
 // 00CB82D0  cEnemyItemDisp::cEnemyItemDisp  size=72  [class]
 undefined4 * cEnemyItemDisp::cEnemyItemDisp(void)

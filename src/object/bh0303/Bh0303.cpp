@@ -1,7 +1,8 @@
 // src/object/bh0303/Bh0303.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00603DF0..00AB9A20, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bh0303.h"
 
 // 00603DF0  Bh0303::vf40  size=31  [class]
 undefined4 __fastcall Bh0303::vf40(int param_1)

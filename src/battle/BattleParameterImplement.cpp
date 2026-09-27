@@ -1,7 +1,8 @@
 // src/battle/BattleParameterImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D727B0..00D767A0, 40 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleParameterImplement.h"
 
 // 00D727B0  BattleParameterImplement::vf94  size=3  [class]
 void BattleParameterImplement::vf94(void)

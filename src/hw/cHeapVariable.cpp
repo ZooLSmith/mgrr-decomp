@@ -1,7 +1,7 @@
 // src/hw/cHeapVariable.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD39D0..00DD4FD0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD39D0  Hw::cHeapVariable::vf40  size=137  [class]
 undefined4 __thiscall Hw::cHeapVariable::vf40(int *param_1,int param_2,int *param_3)

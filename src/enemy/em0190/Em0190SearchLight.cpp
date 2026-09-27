@@ -1,7 +1,8 @@
 // src/enemy/em0190/Em0190SearchLight.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004FBAB0..00AB8000, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0190SearchLight.h"
 
 // 004FBAB0  Em0190SearchLight::vf50  size=16  [class]
 void Em0190SearchLight::vf50(void)

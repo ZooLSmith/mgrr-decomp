@@ -1,7 +1,8 @@
 // src/effect/cEspShaderLine.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C430..00F8AE50, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderLine.h"
 
 // 00F5C430  cEspShaderLine::vf04  size=17  [class]
 void __fastcall cEspShaderLine::vf04(int param_1)

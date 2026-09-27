@@ -1,7 +1,8 @@
 // src/misc/cStealthKillTargetBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0C970..00D25FB0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStealthKillTargetBase.h"
 
 // 00D0C970  cStealthKillTargetBase::cStealthKillTargetBase  size=18  [class]
 undefined4 * __fastcall cStealthKillTargetBase::cStealthKillTargetBase(undefined4 *param_1)

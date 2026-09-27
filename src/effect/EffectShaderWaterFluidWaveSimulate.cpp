@@ -1,7 +1,8 @@
 // src/effect/EffectShaderWaterFluidWaveSimulate.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6A680..00F8E530, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EffectShaderWaterFluidWaveSimulate.h"
 
 // 00F6A680  EffectShaderWaterFluidWaveSimulate::vf08  size=287  [class]
 /* WARNING: Removing unreachable block (ram,0x00f6a71b) */

@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Serialize/Tagfile/Binary/hkBinaryTagfileReader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0110FA20..01110040, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0110FA20  FUN_0110fa20  size=1568  [__FILE__]
 int * __thiscall FUN_0110fa20(int param_1,int *param_2,int *param_3,int *param_4)

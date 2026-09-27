@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E18D20.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E18D20..00E18D20, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E18D20  std::runtime_error::runtime_error_2  size=112  [run]
 _Lockit * __thiscall std::runtime_error::runtime_error_2(_Lockit *param_1,char *param_2)

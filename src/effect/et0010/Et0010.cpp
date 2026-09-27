@@ -1,7 +1,8 @@
 // src/effect/et0010/Et0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005CFBA0..00AB7EC0, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et0010.h"
 
 // 005CFBA0  FUN_005cfba0  size=108  [callgraph]
 void __fastcall FUN_005cfba0(int param_1)

@@ -1,7 +1,8 @@
 // src/player/pl0010/state/LongCliffOverJumpStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81850..00BDF390, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "LongCliffOverJumpStatePl0010.h"
 
 // 00B81850  LongCliffOverJumpStatePl0010::vf08  size=19  [class]
 bool LongCliffOverJumpStatePl0010::vf08(undefined4 param_1)

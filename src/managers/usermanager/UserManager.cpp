@@ -1,7 +1,7 @@
 // src/managers/usermanager/UserManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009C8720..009C8720, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009C8720  UserManager::SetSigninPad  size=617  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

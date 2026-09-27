@@ -1,7 +1,8 @@
 // src/collision/CollisionMesh.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D776B0..00D7E080, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionMesh.h"
 
 // 00D776B0  CollisionMesh::vf1C  size=3  [class]
 float10 CollisionMesh::vf1C(void)

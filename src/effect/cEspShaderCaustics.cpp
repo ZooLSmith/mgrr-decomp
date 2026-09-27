@@ -1,7 +1,8 @@
 // src/effect/cEspShaderCaustics.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C480..00F8AE80, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderCaustics.h"
 
 // 00F5C480  cEspShaderCaustics::vf0C  size=1  [class]
 void cEspShaderCaustics::vf0C(void)

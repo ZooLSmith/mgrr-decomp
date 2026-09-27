@@ -1,7 +1,7 @@
 // src/hw/cVertexShader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9C190..015F47E0, 32 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9C190  Hw::cVertexShader::cVertexShader  size=48  [class]
 void __fastcall Hw::cVertexShader::cVertexShader(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/ui/cUIWorkBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CAE290..00CF8790, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIWorkBase.h"
 
 // 00CAE290  cUIWorkBase::vf04  size=1  [class]
 void cUIWorkBase::vf04(void)

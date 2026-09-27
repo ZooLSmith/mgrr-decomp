@@ -1,7 +1,7 @@
 // src/misc/Wind.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1E4F0..00C32920, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C1E4F0  Wind::Geometry::Module::vf00  size=31  [class]
 undefined4 * __thiscall Wind::Geometry::Module::vf00(undefined4 *param_1,byte param_2)

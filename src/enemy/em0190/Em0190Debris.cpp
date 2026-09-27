@@ -1,7 +1,8 @@
 // src/enemy/em0190/Em0190Debris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004FB9D0..00AB8530, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0190Debris.h"
 
 // 004FB9D0  Em0190Debris::vf114  size=35  [class]
 void __thiscall Em0190Debris::vf114(int *param_1,int param_2)

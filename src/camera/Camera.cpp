@@ -1,7 +1,7 @@
 // src/camera/Camera.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D9FF30..015F0BA0, 574 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D9FF30  FUN_00d9ff30  size=293  [callgraph]
 void __fastcall FUN_00d9ff30(int param_1)

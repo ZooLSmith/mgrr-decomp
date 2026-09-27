@@ -1,7 +1,8 @@
 // src/misc/DebrisLeaveSlot.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D89B0..005DA8D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DebrisLeaveSlot.h"
 
 // 005D89B0  DebrisLeaveSlot::vf10  size=1  [class]
 void DebrisLeaveSlot::vf10(void)

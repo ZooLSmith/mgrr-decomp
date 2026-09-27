@@ -1,7 +1,7 @@
 // src/managers/occlusionmanager/OcclusionManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C476E0..00C476E0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C476E0  OcclusionManager::loadVCD  size=322  [class]
 undefined4 __thiscall OcclusionManager::loadVCD(int param_1,undefined4 param_2)

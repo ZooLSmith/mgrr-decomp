@@ -1,7 +1,8 @@
 // src/misc/cMsgPrimWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCD350..00CCD390, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMsgPrimWork.h"
 
 // 00CCD350  cMsgPrimWork::vf08  size=6  [class]
 undefined4 cMsgPrimWork::vf08(void)

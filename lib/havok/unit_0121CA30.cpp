@@ -1,7 +1,14 @@
 // lib/havok/unit_0121CA30.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0121CA30..01237E30, 468 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkpAabbCastCollector.h"
+#include "hkpClosestRayHitCollector.h"
+#include "hkpDefaultToiResourceMgr.h"
+#include "hkpShapeContainer.h"
+#include "hkpStaticCompoundShape.h"
+#include "hkpToiResourceMgr.h"
 
 // 0121CA30  FUN_0121ca30  size=318  [run]
 void __thiscall FUN_0121ca30(int *param_1,undefined1 *param_2)

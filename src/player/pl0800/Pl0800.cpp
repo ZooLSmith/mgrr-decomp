@@ -1,7 +1,8 @@
 // src/player/pl0800/Pl0800.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F1200..00AC1220, 24 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl0800.h"
 
 // 005F1200  Pl0800::thunk_vf48  size=5  [class]
 void __fastcall Pl0800::thunk_vf48(int *param_1)

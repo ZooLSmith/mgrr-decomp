@@ -1,7 +1,9 @@
 // src/collision/sMapInfoRayCastWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00963940..0096B300, 103 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpFirstCdBodyPairCollector.h"
+#include "sMapInfoRayCastWork.h"
 
 // 00963940  FUN_00963940  size=170  [callgraph]
 undefined4 __fastcall FUN_00963940(int param_1)

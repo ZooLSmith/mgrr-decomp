@@ -1,7 +1,8 @@
 // src/behavior/BehaviorEs.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6720..00AC7B70, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorEs.h"
 
 // 00AA6720  BehaviorEs::BehaviorEs  size=18  [class]
 undefined4 * __fastcall BehaviorEs::BehaviorEs(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/misc/cCreditBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D118A0..00D28BA0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCreditBase.h"
 
 // 00D118A0  cCreditBase::cCreditBase  size=18  [class]
 undefined4 * __fastcall cCreditBase::cCreditBase(undefined4 *param_1)

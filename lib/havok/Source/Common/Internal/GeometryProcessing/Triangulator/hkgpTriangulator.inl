@@ -1,7 +1,9 @@
 // lib/havok/Source/Common/Internal/GeometryProcessing/Triangulator/hkgpTriangulator.inl
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010BC7F0..010C4180, 99 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkgpMesh.h"
 
 // 010BC7F0  FUN_010bc7f0  size=952  [__FILE__]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

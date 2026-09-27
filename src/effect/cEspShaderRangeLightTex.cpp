@@ -1,7 +1,8 @@
 // src/effect/cEspShaderRangeLightTex.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5D650..00F8E6B0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderRangeLightTex.h"
 
 // 00F5D650  cEspShaderRangeLightTex::vf0C  size=1  [class]
 void cEspShaderRangeLightTex::vf0C(void)

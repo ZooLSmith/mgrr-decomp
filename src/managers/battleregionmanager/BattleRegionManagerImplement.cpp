@@ -1,7 +1,8 @@
 // src/managers/battleregionmanager/BattleRegionManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401100..004024C0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleRegionManagerImplement.h"
 
 // 00401100  BattleRegionManagerImplement::vf10  size=1  [class]
 void BattleRegionManagerImplement::vf10(void)

@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisObjectFastDie.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D8D90..00AB8A70, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisObjectFastDie.h"
 
 // 005D8D90  BehaviorDebrisObjectFastDie::vf40  size=30  [class]
 undefined4 __fastcall BehaviorDebrisObjectFastDie::vf40(int *param_1)

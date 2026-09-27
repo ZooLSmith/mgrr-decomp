@@ -1,7 +1,8 @@
 // src/misc/cJammingDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF65D0..00D251F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cJammingDispBase.h"
 
 // 00CF65D0  cJammingDispBase::vf00  size=62  [class]
 undefined4 * __thiscall cJammingDispBase::vf00(undefined4 *param_1,byte param_2)

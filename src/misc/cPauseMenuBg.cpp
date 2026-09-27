@@ -1,7 +1,8 @@
 // src/misc/cPauseMenuBg.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00994310..00994430, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPauseMenuBg.h"
 
 // 00994310  cPauseMenuBg::cPauseMenuBg  size=18  [class]
 undefined4 * __fastcall cPauseMenuBg::cPauseMenuBg(undefined4 *param_1)

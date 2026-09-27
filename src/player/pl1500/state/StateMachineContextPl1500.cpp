@@ -1,7 +1,8 @@
 // src/player/pl1500/state/StateMachineContextPl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A4B70..008AA2F0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "StateMachineContextPl1500.h"
 
 // 008A4B70  StateMachineContextPl1500::StateMachineContextPl1500  size=169  [class]
 undefined4 * __thiscall

@@ -1,7 +1,8 @@
 // src/misc/cItemStageDropPassCordDlc.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0094C020..00952390, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemStageDropPassCordDlc.h"
 
 // 0094C020  cItemStageDropPassCordDlc::vf2C  size=3  [class]
 void cItemStageDropPassCordDlc::vf2C(void)

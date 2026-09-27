@@ -1,7 +1,8 @@
 // src/object/ba5002/Ba5002.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00408E10..00AB9640, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba5002.h"
 
 // 00408E10  Ba5002::vf40  size=58  [class]
 int __fastcall Ba5002::vf40(int param_1)

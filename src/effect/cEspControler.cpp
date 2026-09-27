@@ -1,7 +1,8 @@
 // src/effect/cEspControler.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A8C7B0..00EAA9B0, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspControler.h"
 
 // 00A8C7B0  cEspControler::vf00  size=100  [class]
 int __thiscall cEspControler::vf00(int param_1,byte param_2)

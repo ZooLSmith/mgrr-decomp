@@ -1,7 +1,8 @@
 // src/effect/cEsp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F20660..00F40680, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEsp.h"
 
 // 00F20660  cEsp::FixTexture  size=312  [class]
 undefined4

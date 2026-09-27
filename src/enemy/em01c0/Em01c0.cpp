@@ -1,7 +1,7 @@
 // src/enemy/em01c0/Em01c0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00542D50..005463E0, 41 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00542D50  Em01c0::getAttackInfo  size=384  [class]
 undefined4 __thiscall Em01c0::getAttackInfo(int param_1,ushort *param_2)

@@ -1,7 +1,8 @@
 // src/misc/cStageConnect.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF580..00CD8670, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStageConnect.h"
 
 // 00CBF580  cStageConnect::cStageConnect  size=33  [class]
 void __fastcall cStageConnect::cStageConnect(undefined4 *param_1)

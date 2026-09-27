@@ -1,7 +1,8 @@
 // lib/havok/unit_0092E170.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0092E170..0092E380, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkRemoveContainer.h"
 
 // 0092E170  HkRemoveContainer::HkRemoveContainer_2  size=140  [run]
 undefined4 __thiscall HkRemoveContainer::HkRemoveContainer_2(int param_1,int param_2)

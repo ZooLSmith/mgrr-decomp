@@ -1,7 +1,8 @@
 // src/misc/cPauseMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00993F60..009B4730, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPauseMenu.h"
 
 // 00993F60  cPauseMenu::vf0C  size=348  [class]
 void __fastcall cPauseMenu::vf0C(int param_1)

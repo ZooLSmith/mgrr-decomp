@@ -1,7 +1,7 @@
 // src/debug/DebugFileDev.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009C5960..009C5960, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009C5960  DebugFileDev::ReadAlloc  size=532  [class]
 /* WARNING: Function: __alloca_probe replaced with injection: alloca_probe */

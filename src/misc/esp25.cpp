@@ -1,7 +1,8 @@
 // src/misc/esp25.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED8820..00F408B0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp25.h"
 
 // 00ED8820  esp25::vf14  size=35  [class]
 void __fastcall esp25::vf14(int param_1)

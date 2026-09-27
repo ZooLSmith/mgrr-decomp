@@ -1,7 +1,8 @@
 // src/enemy/em0110/Em0110WeaponBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA92F0..00AA93B0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0110WeaponBase.h"
 
 // 00AA92F0  Em0110WeaponBase::Em0110WeaponBase  size=70  [class]
 undefined4 * __fastcall Em0110WeaponBase::Em0110WeaponBase(undefined4 *param_1)

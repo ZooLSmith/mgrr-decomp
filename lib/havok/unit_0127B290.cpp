@@ -1,7 +1,30 @@
 // lib/havok/unit_0127B290.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0127B290..01283270, 250 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkpAngularDashpotAction.h"
+#include "hkpBallGun.h"
+#include "hkpClosestCdPointCollector.h"
+#include "hkpClosestRayHitCollector.h"
+#include "hkpConstrainedSystemFilter.h"
+#include "hkpConstraintListener.h"
+#include "hkpContactListener.h"
+#include "hkpDashpotAction.h"
+#include "hkpDisableEntityCollisionFilter.h"
+#include "hkpEntityListener.h"
+#include "hkpFirstPersonGun.h"
+#include "hkpGravityGun.h"
+#include "hkpGroupCollisionFilter.h"
+#include "hkpGunProjectile.h"
+#include "hkpMotorAction.h"
+#include "hkpMountedBallGun.h"
+#include "hkpMouseSpringAction.h"
+#include "hkpPhysicsSystemWithContacts.h"
+#include "hkpProjectileGun.h"
+#include "hkpReorientAction.h"
+#include "hkpSerializedAgentNnEntry.h"
+#include "hkpSpringAction.h"
 
 // 0127B290  hkBaseObject::hkBaseObject_9  size=237  [run]
 void __fastcall hkBaseObject::hkBaseObject_9(undefined4 *param_1)

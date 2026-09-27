@@ -1,7 +1,8 @@
 // src/player/pl0010/state/OvercomeMissileStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82190..00BE03C0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "OvercomeMissileStatePl0010.h"
 
 // 00B82190  OvercomeMissileStatePl0010::vf08  size=49  [class]
 undefined4 __thiscall OvercomeMissileStatePl0010::vf08(int param_1,undefined4 param_2)

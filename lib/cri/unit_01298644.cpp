@@ -1,7 +1,14 @@
 // lib/cri/unit_01298644.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01298644..012EAFA0, 2364 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CMFCVisualManagerOfficeXP.h"
+#include "CMenu.h"
+#include "CriManaSoundAtomVoice.h"
+#include "CriManaSoundAtomVoice_Float32.h"
+#include "CriMvEasyPlayer.h"
+#include "CriNcvXAudio2EngineCallback.h"
+#include "CriNcvXAudio2VoiceCallback.h"
 
 // 01298644  FUN_01298644  size=445  [run]
 int FUN_01298644(undefined4 param_1,int param_2,int param_3,int param_4,int *param_5)

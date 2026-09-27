@@ -1,7 +1,8 @@
 // src/misc/E3_EnemyBoardGroundCircle.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0040B020..00AB93E0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "E3_EnemyBoardGroundCircle.h"
 
 // 0040B020  E3_EnemyBoardGroundCircle::vf40  size=31  [class]
 undefined4 __fastcall E3_EnemyBoardGroundCircle::vf40(int param_1)

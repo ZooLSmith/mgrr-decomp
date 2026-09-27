@@ -1,7 +1,8 @@
 // src/managers/phasereadmanager/PhaseReadManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D44550..00D4D560, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PhaseReadManager.h"
 
 // 00D44550  PhaseReadManager::vf28  size=31  [class]
 undefined4 * __thiscall PhaseReadManager::vf28(undefined4 *param_1,byte param_2)

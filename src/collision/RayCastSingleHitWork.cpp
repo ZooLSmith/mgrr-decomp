@@ -1,7 +1,8 @@
 // src/collision/RayCastSingleHitWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009066A0..00910800, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RayCastSingleHitWork.h"
 
 // 009066A0  RayCastSingleHitWork::vf00  size=6  [class]
 undefined * RayCastSingleHitWork::vf00(void)

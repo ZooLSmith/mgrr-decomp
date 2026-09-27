@@ -1,7 +1,8 @@
 // src/effect/EspPrimitiveWorkVolumeMeshBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F4F800..00F594C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspPrimitiveWorkVolumeMeshBase.h"
 
 // 00F4F800  EspPrimitiveWorkVolumeMeshBase::vf08  size=36  [class]
 void EspPrimitiveWorkVolumeMeshBase::vf08(void)

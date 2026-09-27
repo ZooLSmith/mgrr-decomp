@@ -1,7 +1,7 @@
 // lib/havok/Source/Physics/Internal/Collide/StaticCompound/hkpStaticCompoundShape_Internals.inl
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0121C660..0121C660, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0121C660  _anon_557D7FF8::hkpStaticCompoundShape_RayHitCollectorWrapper::vf00  size=975  [__FILE__]
 void __thiscall

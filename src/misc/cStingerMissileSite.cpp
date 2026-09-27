@@ -1,7 +1,8 @@
 // src/misc/cStingerMissileSite.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF740..00CD87C0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStingerMissileSite.h"
 
 // 00CBF740  cStingerMissileSite::cStingerMissileSite_2  size=112  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

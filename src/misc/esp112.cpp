@@ -1,7 +1,8 @@
 // src/misc/esp112.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D0050..009DF530, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp112.h"
 
 // 009D0050  esp112::vf04  size=29  [class]
 bool esp112::vf04(undefined4 param_1,undefined4 param_2,undefined4 param_3)

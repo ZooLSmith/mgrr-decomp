@@ -1,7 +1,8 @@
 // src/misc/cCodecCallAlarmBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0DFB0..00D21270, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecCallAlarmBase.h"
 
 // 00D0DFB0  cCodecCallAlarmBase::cCodecCallAlarmBase  size=18  [class]
 undefined4 * __fastcall cCodecCallAlarmBase::cCodecCallAlarmBase(undefined4 *param_1)

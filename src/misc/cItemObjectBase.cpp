@@ -1,7 +1,8 @@
 // src/misc/cItemObjectBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E86F0..00AC11A0, 24 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemObjectBase.h"
 
 // 005E86F0  cItemObjectBase::vf300  size=33  [class]
 undefined4 __fastcall cItemObjectBase::vf300(int param_1)

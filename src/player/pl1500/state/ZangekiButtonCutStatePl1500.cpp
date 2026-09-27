@@ -1,7 +1,8 @@
 // src/player/pl1500/state/ZangekiButtonCutStatePl1500.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008A4040..008C9BF0, 26 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiButtonCutStatePl1500.h"
 
 // 008A4040  ZangekiButtonCutStatePl1500::SlashFirstHitSlot::vf10  size=1  [class]
 void ZangekiButtonCutStatePl1500::SlashFirstHitSlot::vf10(void)

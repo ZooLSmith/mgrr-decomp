@@ -1,7 +1,8 @@
 // src/effect/cEspShaderShimmerBlur.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5D160..00F8E360, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderShimmerBlur.h"
 
 // 00F5D160  cEspShaderShimmerBlur::vf0C  size=1  [class]
 void cEspShaderShimmerBlur::vf0C(void)

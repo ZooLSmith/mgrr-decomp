@@ -1,7 +1,8 @@
 // src/misc/cTitleMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00994A00..009B50A0, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTitleMenu.h"
 
 // 00994A00  cTitleMenu::vf0C  size=361  [class]
 void __fastcall cTitleMenu::vf0C(int param_1)

@@ -1,7 +1,7 @@
 // src/vrmission/VRMission.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0095A1C0..00962600, 177 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0095A1C0  FUN_0095a1c0  size=166  [callgraph]
 void __fastcall FUN_0095a1c0(void *param_1)

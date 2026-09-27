@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E17640.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E17640..00E176C0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E17640  std::bad_alloc::vf00  size=36  [run]
 undefined4 * __thiscall std::bad_alloc::vf00(undefined4 *param_1,byte param_2)

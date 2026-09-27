@@ -1,7 +1,8 @@
 // src/effect/EspShaderShimmer_TexBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F69890..00F8E330, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderShimmer_TexBlend.h"
 
 // 00F69890  EspShaderShimmer_TexBlend::vf08  size=332  [class]
 undefined4 __fastcall EspShaderShimmer_TexBlend::vf08(int *param_1)

@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00FDA897.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDA897..00FDA8B8, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDA897  std::_Lockit::_Lockit_ctor  size=33  [run]
 /* Library Function - Single Match

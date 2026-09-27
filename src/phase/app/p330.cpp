@@ -1,7 +1,8 @@
 // src/phase/app/p330.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48570..00D70300, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P330.h"
 
 // 00D48570  P330::vf1C  size=3  [class]
 void P330::vf1C(void)

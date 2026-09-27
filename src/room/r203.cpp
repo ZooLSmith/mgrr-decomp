@@ -1,7 +1,8 @@
 // src/room/r203.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A711D0..00A7B630, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R203.h"
 
 // 00A711D0  R203::vf04  size=26  [class]
 void __fastcall R203::vf04(int param_1)

@@ -1,7 +1,8 @@
 // src/room/r115.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A711B0..00A7B5F0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R115.h"
 
 // 00A711B0  R115::vf04  size=26  [class]
 void __fastcall R115::vf04(int param_1)

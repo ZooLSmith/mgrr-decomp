@@ -1,7 +1,8 @@
 // src/effect/cEspShaderPixelNoClip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5E7C0..00F8AC00, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderPixelNoClip.h"
 
 // 00F5E7C0  cEspShaderPixelNoClip::vf08  size=199  [class]
 undefined4 __fastcall cEspShaderPixelNoClip::vf08(int *param_1)

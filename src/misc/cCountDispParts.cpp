@@ -1,7 +1,8 @@
 // src/misc/cCountDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB7020..00D2C520, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCountDispParts.h"
 
 // 00CB7020  cCountDispParts::vf08  size=56  [class]
 void __fastcall cCountDispParts::vf08(int param_1)

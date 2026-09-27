@@ -1,7 +1,7 @@
 // lib/msvc/crt/unit_00FDFB5F.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDFB5F..00FE2A00, 108 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FDFB5F  __isalpha_l  size=86  [run]
 /* Library Function - Single Match

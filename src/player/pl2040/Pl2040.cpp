@@ -1,7 +1,9 @@
 // src/player/pl2040/Pl2040.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F4400..00AB6570, 60 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl2040.h"
+#include "hkpAllCdPointCollector.h"
 
 // 005F4400  Pl2040::thunk_vf54  size=5  [class]
 void __fastcall Pl2040::thunk_vf54(int *param_1)

@@ -1,7 +1,8 @@
 // src/effect/cEffectSouDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CDE480..00D2DE20, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEffectSouDispParts.h"
 
 // 00CDE480  cEffectSouDispParts::vf00  size=63  [class]
 undefined4 * __thiscall cEffectSouDispParts::vf00(undefined4 *param_1,byte param_2)

@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Base/Types/Properties/hkRefCountedProperties.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01023050..01023050, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01023050  FUN_01023050  size=175  [__FILE__]
 void __thiscall FUN_01023050(int param_1,undefined4 param_2,int param_3)

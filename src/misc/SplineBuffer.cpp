@@ -1,7 +1,7 @@
 // src/misc/SplineBuffer.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009DE910..00ECEC70, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009DE910  SplineBuffer<float>::vf04  size=145  [class]
 void __thiscall SplineBuffer<float>::vf04(int param_1,void *param_2,uint param_3)

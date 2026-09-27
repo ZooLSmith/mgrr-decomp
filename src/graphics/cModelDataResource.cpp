@@ -1,7 +1,7 @@
 // src/graphics/cModelDataResource.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A16210..00A163B0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A16210  cModelDataResource::release  size=405  [class]
 void __fastcall cModelDataResource::release(int *param_1)

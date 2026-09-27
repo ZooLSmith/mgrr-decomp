@@ -1,7 +1,7 @@
 // src/hw/cVertexFormatP.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9F0B0..00FA9C20, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9F0B0  Hw::cVertexFormatP::vf00  size=87  [class]
 undefined4 __fastcall Hw::cVertexFormatP::vf00(int param_1)

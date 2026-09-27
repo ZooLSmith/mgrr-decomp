@@ -1,7 +1,8 @@
 // src/effect/cEspShaderMonoMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C7A0..00F8B6D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderMonoMask.h"
 
 // 00F5C7A0  cEspShaderMonoMask::vf0C  size=1  [class]
 void cEspShaderMonoMask::vf0C(void)

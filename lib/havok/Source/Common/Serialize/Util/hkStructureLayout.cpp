@@ -1,7 +1,7 @@
 // lib/havok/Source/Common/Serialize/Util/hkStructureLayout.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010E6CF0..010E6CF0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 010E6CF0  FUN_010e6cf0  size=321  [__FILE__]
 uint FUN_010e6cf0(int param_1,byte *param_2,undefined4 param_3)

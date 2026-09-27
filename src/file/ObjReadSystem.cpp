@@ -1,7 +1,7 @@
 // src/file/ObjReadSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E9C120..00E9FBD0, 41 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E9C120  FUN_00e9c120  size=77  [callgraph]
 void __thiscall FUN_00e9c120(int param_1,char *param_2)

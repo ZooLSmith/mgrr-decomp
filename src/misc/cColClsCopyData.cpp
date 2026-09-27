@@ -1,7 +1,7 @@
 // src/misc/cColClsCopyData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0096F0F0..00977C00, 162 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0096F0F0  FUN_0096f0f0  size=259  [callgraph]
 void __thiscall FUN_0096f0f0(int param_1,int *param_2,int param_3,int param_4)

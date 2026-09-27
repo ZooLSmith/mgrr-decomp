@@ -1,7 +1,7 @@
 // src/misc/cIndexBufferHeap.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F99B40..00F99B40, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F99B40  cIndexBufferHeap::allocateBuffer  size=208  [class]
 undefined4 __thiscall cIndexBufferHeap::allocateBuffer(int param_1,undefined4 *param_2,int param_3)

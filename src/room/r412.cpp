@@ -1,7 +1,8 @@
 // src/room/r412.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A71590..00A7B870, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "R412.h"
 
 // 00A71590  R412::vf04  size=175  [class]
 void __fastcall R412::vf04(int param_1)

@@ -1,7 +1,8 @@
 // src/effect/cEspShaderBump.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C2B0..00F8ADC0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderBump.h"
 
 // 00F5C2B0  cEspShaderBump::vf0C  size=1  [class]
 void cEspShaderBump::vf0C(void)

@@ -1,7 +1,8 @@
 // src/misc/cElectromagneticBarrier.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E2EA0..00ABA9E0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cElectromagneticBarrier.h"
 
 // 005E2EA0  cElectromagneticBarrier::vf44  size=53  [class]
 void __fastcall cElectromagneticBarrier::vf44(int param_1)

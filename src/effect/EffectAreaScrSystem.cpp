@@ -1,7 +1,7 @@
 // src/effect/EffectAreaScrSystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D806C0..00D81F30, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D806C0  FUN_00d806c0  size=120  [callgraph]
 undefined4 __thiscall FUN_00d806c0(int param_1,int param_2,int *param_3)

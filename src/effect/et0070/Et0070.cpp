@@ -1,7 +1,9 @@
 // src/effect/et0070/Et0070.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D22A0..00AB80C0, 62 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et0070.h"
+#include "hkpAllCdPointCollector.h"
 
 // 005D22A0  Et0070::vf268  size=5  [class]
 undefined4 Et0070::vf268(void)

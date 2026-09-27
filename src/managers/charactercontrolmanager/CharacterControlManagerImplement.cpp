@@ -1,7 +1,8 @@
 // src/managers/charactercontrolmanager/CharacterControlManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E3760..008EBB70, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CharacterControlManagerImplement.h"
 
 // 008E3760  CharacterControlManagerImplement::vf0C  size=53  [class]
 void __fastcall CharacterControlManagerImplement::vf0C(int param_1)

@@ -1,7 +1,8 @@
 // src/effect/cEspDrawWorkImmediate.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED8500..00F3F9C0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspDrawWorkImmediate.h"
 
 // 00ED8500  cEspDrawWorkImmediate::vf04  size=151  [class]
 void __fastcall cEspDrawWorkImmediate::vf04(int param_1)

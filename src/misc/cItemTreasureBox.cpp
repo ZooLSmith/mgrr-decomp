@@ -1,7 +1,8 @@
 // src/misc/cItemTreasureBox.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E8A90..00AB9810, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemTreasureBox.h"
 
 // 005E8A90  cItemTreasureBox::vf2C  size=66  [class]
 void __fastcall cItemTreasureBox::vf2C(int param_1)

@@ -1,7 +1,7 @@
 // src/collision/UICollision.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCFDA0..00D131E0, 52 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CCFDA0  FUN_00ccfda0  size=96  [callgraph]
 undefined4 __thiscall FUN_00ccfda0(int param_1,undefined4 param_2)

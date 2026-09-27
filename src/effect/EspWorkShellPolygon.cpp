@@ -1,7 +1,8 @@
 // src/effect/EspWorkShellPolygon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E5200..009F5DE0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspWorkShellPolygon.h"
 
 // 009E5200  FUN_009e5200  size=140  [callgraph]
 void __fastcall FUN_009e5200(undefined4 *param_1)

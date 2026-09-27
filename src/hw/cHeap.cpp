@@ -1,7 +1,7 @@
 // src/hw/cHeap.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD2970..00DD4EC0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD2970  Hw::cHeap::vf1C  size=5  [class]
 undefined4 Hw::cHeap::vf1C(void)

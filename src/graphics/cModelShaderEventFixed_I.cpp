@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderEventFixed_I.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F8FE20..015F4140, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderEventFixed_I.h"
 
 // 00F8FE20  cModelShaderEventFixed_I::cModelShaderEventFixed_I_2  size=18  [class]
 undefined4 * __fastcall cModelShaderEventFixed_I::cModelShaderEventFixed_I_2(undefined4 *param_1)

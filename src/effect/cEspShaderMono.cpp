@@ -1,7 +1,8 @@
 // src/effect/cEspShaderMono.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F60E40..00F8B610, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderMono.h"
 
 // 00F60E40  cEspShaderMono::vf08  size=218  [class]
 undefined4 __fastcall cEspShaderMono::vf08(int *param_1)

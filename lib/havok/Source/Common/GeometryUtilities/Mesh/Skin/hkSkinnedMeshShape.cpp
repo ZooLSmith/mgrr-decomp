@@ -1,7 +1,8 @@
 // lib/havok/Source/Common/GeometryUtilities/Mesh/Skin/hkSkinnedMeshShape.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010655A0..010655A0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkSkinnedMeshShape.h"
 
 // 010655A0  hkSkinnedMeshShape::vf1C  size=1622  [__FILE__]
 void __fastcall hkSkinnedMeshShape::vf1C(int *param_1)

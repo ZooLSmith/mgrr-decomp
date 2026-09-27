@@ -1,7 +1,8 @@
 // src/event/cEventCutData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D7E0E0..015F0700, 16 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEventCutData.h"
 
 // 00D7E0E0  cEventCutData::vf04  size=31  [class]
 undefined4 * __thiscall cEventCutData::vf04(undefined4 *param_1,byte param_2)

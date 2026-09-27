@@ -1,7 +1,8 @@
 // src/managers/clightmanager/cLightManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A40BC0..00A40BD0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLightManager.h"
 
 // 00A40BC0  cLightManager::vf00  size=6  [class]
 undefined ** cLightManager::vf00(void)

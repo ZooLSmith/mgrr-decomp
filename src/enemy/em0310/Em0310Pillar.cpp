@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310Pillar.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057E240..00AB7180, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310Pillar.h"
 
 // 0057E240  Em0310Pillar::vf40  size=253  [class]
 undefined4 __fastcall Em0310Pillar::vf40(int param_1)

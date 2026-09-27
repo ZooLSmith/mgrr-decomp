@@ -1,7 +1,8 @@
 // src/effect/cEspShaderToneCurveAlphaAlMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F62EF0..00F8C180, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderToneCurveAlphaAlMask.h"
 
 // 00F62EF0  cEspShaderToneCurveAlphaAlMask::vf08  size=310  [class]
 undefined4 __fastcall cEspShaderToneCurveAlphaAlMask::vf08(int *param_1)

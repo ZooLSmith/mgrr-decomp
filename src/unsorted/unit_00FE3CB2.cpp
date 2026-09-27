@@ -1,7 +1,7 @@
 // src/unsorted/unit_00FE3CB2.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FE3CB2..00FE3D98, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FE3CB2  ___InternalCxxFrameHandler  size=230  [run]
 /* Library Function - Single Match

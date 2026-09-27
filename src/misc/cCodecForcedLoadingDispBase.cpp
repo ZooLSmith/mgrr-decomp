@@ -1,7 +1,8 @@
 // src/misc/cCodecForcedLoadingDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E050..00D21350, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecForcedLoadingDispBase.h"
 
 // 00D0E050  cCodecForcedLoadingDispBase::cCodecForcedLoadingDispBase  size=18  [class]
 undefined4 * __fastcall

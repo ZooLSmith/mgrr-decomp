@@ -1,7 +1,7 @@
 // src/lib/InputTextArchive.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C67810..00EA72B0, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C67810  lib::InputTextArchive<char_const*,32>::vf08  size=3  [class]
 undefined1 lib::InputTextArchive<char_const*,32>::vf08(void)

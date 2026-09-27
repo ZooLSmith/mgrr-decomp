@@ -1,7 +1,8 @@
 // src/effect/EspShaderSoftPT3DAlMask_TexBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F60240..00F8B2A0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderSoftPT3DAlMask_TexBlend.h"
 
 // 00F60240  EspShaderSoftPT3DAlMask_TexBlend::vf08  size=399  [class]
 /* WARNING: Removing unreachable block (ram,0x00f6038a) */

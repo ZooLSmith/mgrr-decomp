@@ -1,7 +1,7 @@
 // src/managers/croomreadmanager/cRoomReadManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A4C9F0..00A4C9F0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A4C9F0  cRoomReadManager::setCommonRoom  size=262  [class]
 undefined4 __fastcall cRoomReadManager::setCommonRoom(int param_1)

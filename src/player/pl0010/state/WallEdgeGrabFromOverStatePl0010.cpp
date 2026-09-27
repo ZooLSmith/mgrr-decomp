@@ -1,7 +1,8 @@
 // src/player/pl0010/state/WallEdgeGrabFromOverStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82AD0..00BE1300, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "WallEdgeGrabFromOverStatePl0010.h"
 
 // 00B82AD0  WallEdgeGrabFromOverStatePl0010::vf08  size=41  [class]
 undefined4 __thiscall WallEdgeGrabFromOverStatePl0010::vf08(int param_1,undefined4 param_2)

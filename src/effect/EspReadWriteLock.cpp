@@ -1,7 +1,7 @@
 // src/effect/EspReadWriteLock.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EAABC0..00EAACE0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00EAABC0  EspReadWriteLock::enterWrite  size=131  [class]
 undefined4 __fastcall EspReadWriteLock::enterWrite(longlong *param_1)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CE4450.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CE4450..00CE4450, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CE4450  FUN_00ce4450  size=1704  [run]
 /* WARNING: Function: __alloca_probe replaced with injection: alloca_probe */

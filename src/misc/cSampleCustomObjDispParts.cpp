@@ -1,7 +1,8 @@
 // src/misc/cSampleCustomObjDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC5520..00CE4250, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSampleCustomObjDispParts.h"
 
 // 00CC5520  cSampleCustomObjDispParts::vf08  size=15  [class]
 void __fastcall cSampleCustomObjDispParts::vf08(int param_1)

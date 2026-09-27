@@ -1,7 +1,8 @@
 // src/misc/cGrenadeMarkParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB9330..00CEE8E0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGrenadeMarkParts.h"
 
 // 00CB9330  cGrenadeMarkParts::vf08  size=56  [class]
 void __fastcall cGrenadeMarkParts::vf08(int param_1)

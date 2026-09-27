@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E17D60.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E17D60..00E180D0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E17D60  std::basic_streambuf<char,std::char_traits<char>_>::~basic_streambuf<char,std::char_traits<char>_>  size=110  [run]
 void __fastcall

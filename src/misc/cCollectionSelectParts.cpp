@@ -1,7 +1,8 @@
 // src/misc/cCollectionSelectParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098C7D0..009BFDB0, 14 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCollectionSelectParts.h"
 
 // 0098C7D0  cCollectionSelectParts::vf0C  size=72  [class]
 void __fastcall cCollectionSelectParts::vf0C(int param_1)

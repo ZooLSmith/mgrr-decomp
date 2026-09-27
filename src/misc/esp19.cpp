@@ -1,7 +1,8 @@
 // src/misc/esp19.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED8600..00F40810, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp19.h"
 
 // 00ED8600  esp19::vf14  size=45  [class]
 void __fastcall esp19::vf14(int param_1)

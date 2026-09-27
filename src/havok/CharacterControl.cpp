@@ -1,7 +1,7 @@
 // src/havok/CharacterControl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E4780..008EC700, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 008E4780  CharacterControl::setRadius  size=607  [class]
 void __thiscall CharacterControl::setRadius(int param_1,float param_2)

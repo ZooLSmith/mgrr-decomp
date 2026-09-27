@@ -1,7 +1,8 @@
 // src/effect/EspShaderSoftPT3D_TexBlend.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5FAC0..00F8AF60, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderSoftPT3D_TexBlend.h"
 
 // 00F5FAC0  EspShaderSoftPT3D_TexBlend::vf08  size=369  [class]
 /* WARNING: Removing unreachable block (ram,0x00f5fc04) */

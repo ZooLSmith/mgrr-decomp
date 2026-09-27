@@ -1,7 +1,8 @@
 // src/object/ba0064/Ba0064.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00404E10..00AB8F30, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0064.h"
 
 // 00404E10  Ba0064::vf44  size=5  [class]
 void __fastcall Ba0064::vf44(int param_1)

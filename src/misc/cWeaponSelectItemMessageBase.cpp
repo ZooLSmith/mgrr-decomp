@@ -1,7 +1,8 @@
 // src/misc/cWeaponSelectItemMessageBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009A4680..00D110D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeaponSelectItemMessageBase.h"
 
 // 009A4680  cWeaponSelectItemMessageBase::vf14  size=64  [class]
 undefined4 __thiscall cWeaponSelectItemMessageBase::vf14(int param_1,undefined4 param_2)

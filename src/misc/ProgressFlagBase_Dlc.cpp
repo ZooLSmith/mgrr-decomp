@@ -1,7 +1,8 @@
 // src/misc/ProgressFlagBase_Dlc.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C88EB0..015F03D0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ProgressFlagBase_Dlc.h"
 
 // 00C88EB0  ProgressFlagBase_Dlc::vf00  size=39  [class]
 undefined4 * __thiscall ProgressFlagBase_Dlc::vf00(undefined4 *param_1,byte param_2)

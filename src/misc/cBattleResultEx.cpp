@@ -1,7 +1,8 @@
 // src/misc/cBattleResultEx.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D08AA0..00D36BD0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cBattleResultEx.h"
 
 // 00D08AA0  cBattleResultEx::vf00  size=102  [class]
 undefined4 * __thiscall cBattleResultEx::vf00(undefined4 *param_1,byte param_2)

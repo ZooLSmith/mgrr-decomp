@@ -1,7 +1,8 @@
 // src/misc/cRayDamageCutArmor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AC0ED0..00AFC720, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRayDamageCutArmor.h"
 
 // 00AC0ED0  cRayDamageCutArmor::vf04  size=6  [class]
 undefined * cRayDamageCutArmor::vf04(void)

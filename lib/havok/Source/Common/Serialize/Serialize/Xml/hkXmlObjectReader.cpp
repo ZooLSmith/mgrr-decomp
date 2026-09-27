@@ -1,7 +1,8 @@
 // lib/havok/Source/Common/Serialize/Serialize/Xml/hkXmlObjectReader.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010FD240..010FEE70, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkXmlObjectReader.h"
 
 // 010FD240  FUN_010fd240  size=937  [__FILE__]
 uint FUN_010fd240(undefined4 param_1)

@@ -1,7 +1,7 @@
 // src/managers/triggermanager/actions/TrgActResultSetDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C77530..00C9D540, 2765 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C77530  Trigger::cTriggerTask::vf04  size=5  [class]
 void __fastcall Trigger::cTriggerTask::vf04(int param_1)

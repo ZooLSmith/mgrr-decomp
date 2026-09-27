@@ -1,7 +1,10 @@
 // lib/havok/unit_00930730.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00930730..009307C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkMallocAllocator.h"
+#include "hkpWorldCinfo.h"
 
 // 00930730  hkMallocAllocator::vf00  size=14  [run]
 undefined4 __fastcall hkMallocAllocator::vf00(undefined4 param_1)

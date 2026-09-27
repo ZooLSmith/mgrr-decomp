@@ -1,7 +1,8 @@
 // src/collision/BattleCollisionFilter.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D76D70..00D7B730, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleCollisionFilter.h"
 
 // 00D76D70  BattleCollisionFilter::vf04  size=31  [class]
 undefined4 * __thiscall BattleCollisionFilter::vf04(undefined4 *param_1,byte param_2)

@@ -1,7 +1,8 @@
 // src/misc/GetMoneySlotPlBaseDLC.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A8FC70..00A9A140, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GetMoneySlotPlBaseDLC.h"
 
 // 00A8FC70  GetMoneySlotPlBaseDLC::vf10  size=1  [class]
 void GetMoneySlotPlBaseDLC::vf10(void)

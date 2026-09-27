@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiInterceptStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83520..00BFF980, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiInterceptStatePl0010.h"
 
 // 00B83520  ZangekiInterceptStatePl0010::vf14  size=5  [class]
 undefined4 __thiscall ZangekiInterceptStatePl0010::vf14(int param_1,undefined4 param_2)

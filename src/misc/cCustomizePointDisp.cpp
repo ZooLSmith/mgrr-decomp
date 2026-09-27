@@ -1,7 +1,8 @@
 // src/misc/cCustomizePointDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098F740..009A09E0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCustomizePointDisp.h"
 
 // 0098F740  cCustomizePointDisp::cCustomizePointDisp  size=18  [class]
 undefined4 * __fastcall cCustomizePointDisp::cCustomizePointDisp(undefined4 *param_1)

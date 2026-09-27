@@ -1,7 +1,12 @@
 // lib/havok/unit_01055AD0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01055AD0..0105B4C0, 176 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkBinaryPackfileReader.h"
+#include "hkObjectUpdateTracker.h"
+#include "hkXmlPackfileReader.h"
+#include "hkXmlPackfileUpdateTracker.h"
 
 // 01055AD0  FUN_01055ad0  size=606  [run]
 void FUN_01055ad0(int param_1,undefined4 param_2,undefined4 param_3,int param_4)

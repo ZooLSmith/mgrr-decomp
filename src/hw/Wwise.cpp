@@ -1,7 +1,7 @@
 // src/hw/Wwise.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DECDA0..00DF7F70, 202 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DECDA0  Hw::Wwise::BankWork::registData  size=125  [class]
 undefined4 __thiscall

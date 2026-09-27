@@ -1,7 +1,8 @@
 // src/enemy/em0010/Em0010DebrisActor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E3F70..00AB84C0, 24 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0010DebrisActor.h"
 
 // 005E3F70  Em0010DebrisActor::ExplosionSlot::vf10  size=1  [class]
 void Em0010DebrisActor::ExplosionSlot::vf10(void)

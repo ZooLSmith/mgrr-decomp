@@ -1,7 +1,8 @@
 // src/enemy/em01a0/Em01a0Sai.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0051ADE0..00AB7450, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em01a0Sai.h"
 
 // 0051ADE0  Em01a0Sai::vf40  size=44  [class]
 undefined4 __fastcall Em01a0Sai::vf40(int param_1)

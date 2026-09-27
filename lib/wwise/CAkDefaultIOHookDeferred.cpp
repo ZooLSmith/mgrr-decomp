@@ -1,7 +1,8 @@
 // lib/wwise/CAkDefaultIOHookDeferred.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DEF5D0..00DF5B10, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CAkDefaultIOHookDeferred.h"
 
 // 00DEF5D0  CAkDefaultIOHookDeferred::vf08  size=252  [class]
 void __thiscall

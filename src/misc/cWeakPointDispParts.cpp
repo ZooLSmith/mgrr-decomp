@@ -1,7 +1,8 @@
 // src/misc/cWeakPointDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CC1710..00D36380, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cWeakPointDispParts.h"
 
 // 00CC1710  cWeakPointDispParts::vf08  size=132  [class]
 void __fastcall cWeakPointDispParts::vf08(int param_1)

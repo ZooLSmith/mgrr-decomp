@@ -1,7 +1,8 @@
 // src/object/ba0017/Ba0017.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00404610..00AB8E00, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0017.h"
 
 // 00404610  Ba0017::vf44  size=23  [class]
 void Ba0017::vf44(void)

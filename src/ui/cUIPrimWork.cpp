@@ -1,7 +1,8 @@
 // src/ui/cUIPrimWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A4C6A0..00CFA750, 23 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIPrimWork.h"
 
 // 00A4C6A0  cUIPrimWork::cUIPrimWork_5  size=18  [class]
 undefined4 * __fastcall cUIPrimWork::cUIPrimWork_5(undefined4 *param_1)

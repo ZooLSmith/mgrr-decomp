@@ -1,7 +1,8 @@
 // src/effect/cEffectZanDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0B9D0..00D23640, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEffectZanDispBase.h"
 
 // 00D0B9D0  cEffectZanDispBase::cEffectZanDispBase  size=18  [class]
 undefined4 * __fastcall cEffectZanDispBase::cEffectZanDispBase(undefined4 *param_1)

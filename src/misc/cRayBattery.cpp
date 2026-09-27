@@ -1,7 +1,8 @@
 // src/misc/cRayBattery.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAEE10..00B76490, 22 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRayBattery.h"
 
 // 00AAEE10  cRayBattery::vf04  size=6  [class]
 undefined * cRayBattery::vf04(void)

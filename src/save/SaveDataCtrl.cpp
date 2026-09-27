@@ -1,7 +1,7 @@
 // src/save/SaveDataCtrl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009C5B80..009C85E0, 59 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009C5B80  SaveDataCtrl::readBinaryDataImpl  size=354  [class]
 undefined4 SaveDataCtrl::readBinaryDataImpl(DWORD *param_1)

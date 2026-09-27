@@ -1,7 +1,7 @@
 // src/sound/SoundSeHitCategoryWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009C9E30..009CB340, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009C9E30  FUN_009c9e30  size=88  [callgraph]
 void __fastcall FUN_009c9e30(undefined4 *param_1)

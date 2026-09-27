@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CBAC60.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBAC60..00CBAC80, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CBAC60  FUN_00cbac60  size=15  [run]
 void __fastcall FUN_00cbac60(int param_1)

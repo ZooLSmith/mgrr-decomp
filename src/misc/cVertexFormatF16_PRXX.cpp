@@ -1,7 +1,8 @@
 // src/misc/cVertexFormatF16_PRXX.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC48E0..00ECC2B0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVertexFormatF16_PRXX.h"
 
 // 00EC48E0  cVertexFormatF16_PRXX::vf00  size=11  [class]
 void cVertexFormatF16_PRXX::vf00(void)

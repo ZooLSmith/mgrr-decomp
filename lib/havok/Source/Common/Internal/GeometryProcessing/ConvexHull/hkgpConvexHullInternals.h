@@ -1,7 +1,9 @@
 // lib/havok/Source/Common/Internal/GeometryProcessing/ConvexHull/hkgpConvexHullInternals.h
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010776E0..0108C000, 353 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkgpConvexHull.h"
 
 // 010776E0  FUN_010776e0  size=155  [__FILE__]
 undefined4 __fastcall FUN_010776e0(int param_1)

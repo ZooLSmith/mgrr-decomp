@@ -1,7 +1,8 @@
 // src/misc/cEnemyTargetDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB89A0..00CD3DB0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyTargetDisp.h"
 
 // 00CB89A0  cEnemyTargetDisp::cEnemyTargetDisp  size=54  [class]
 void __fastcall cEnemyTargetDisp::cEnemyTargetDisp(undefined4 *param_1)

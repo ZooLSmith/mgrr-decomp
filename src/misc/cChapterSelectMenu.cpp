@@ -1,7 +1,8 @@
 // src/misc/cChapterSelectMenu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009AC9F0..009AC9F0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cChapterSelectMenu.h"
 
 // 009AC9F0  cChapterSelectMenu::vf00  size=30  [class]
 undefined4 __thiscall cChapterSelectMenu::vf00(undefined4 param_1,byte param_2)

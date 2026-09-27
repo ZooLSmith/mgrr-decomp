@@ -1,7 +1,9 @@
 // src/player/pl0000/Pl0000.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AC0A70..00C104B0, 684 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
 
 // 00AC0A70  Pl0000::vf04  size=6  [class]
 undefined * Pl0000::vf04(void)

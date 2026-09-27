@@ -1,7 +1,8 @@
 // src/object/ba0105/Ba0105.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004056B0..00AB97C0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0105.h"
 
 // 004056B0  Ba0105::vf2D8  size=120  [class]
 void __thiscall Ba0105::vf2D8(int param_1,undefined4 param_2,undefined4 param_3)

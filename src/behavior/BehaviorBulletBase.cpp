@@ -1,7 +1,8 @@
 // src/behavior/BehaviorBulletBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ACCE00..00AE8970, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorBulletBase.h"
 
 // 00ACCE00  BehaviorBulletBase::BehaviorBulletBase  size=235  [class]
 undefined4 * __fastcall BehaviorBulletBase::BehaviorBulletBase(undefined4 *param_1)

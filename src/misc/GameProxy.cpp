@@ -1,7 +1,7 @@
 // src/misc/GameProxy.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00932750..00932750, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00932750  GameProxy::getPhaseData  size=33  [class]
 undefined4 * GameProxy::getPhaseData(int param_1)

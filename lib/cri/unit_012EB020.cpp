@@ -1,7 +1,12 @@
 // lib/cri/unit_012EB020.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 012EB020..012ECD70, 53 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CriManaSound.h"
+#include "CriManaSoundAtomVoice.h"
+#include "CriManaSoundAtomVoice_Float32.h"
+#include "CriManaSystemTimer.h"
+#include "CriMvSoundInterface.h"
 
 // 012EB020  CriMvSoundInterface::~CriMvSoundInterface  size=20  [run]
 void __fastcall CriMvSoundInterface::~CriMvSoundInterface(undefined4 *param_1)

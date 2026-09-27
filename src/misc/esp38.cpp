@@ -1,7 +1,8 @@
 // src/misc/esp38.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0A60..00F39470, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp38.h"
 
 // 00ED0A60  esp38::vf00  size=54  [class]
 undefined4 __thiscall esp38::vf00(undefined4 param_1,byte param_2)

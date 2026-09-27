@@ -1,7 +1,8 @@
 // src/misc/cTitleDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D10030..00D28E20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTitleDispBase.h"
 
 // 00D10030  cTitleDispBase::cTitleDispBase  size=18  [class]
 undefined4 * __fastcall cTitleDispBase::cTitleDispBase(undefined4 *param_1)

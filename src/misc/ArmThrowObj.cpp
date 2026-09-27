@@ -1,7 +1,8 @@
 // src/misc/ArmThrowObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00843B50..00ABA070, 30 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ArmThrowObj.h"
 
 // 00843B50  ArmThrowObj::vf54  size=36  [class]
 void __fastcall ArmThrowObj::vf54(int param_1)

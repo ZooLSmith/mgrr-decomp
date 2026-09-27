@@ -1,7 +1,7 @@
 // lib/wwise/unit_009CB6E0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CB6E0..009CB6E0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009CB6E0  FUN_009cb6e0  size=486  [run]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

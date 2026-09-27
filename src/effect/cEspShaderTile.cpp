@@ -1,7 +1,8 @@
 // src/effect/cEspShaderTile.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5F4E0..00F8AE20, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderTile.h"
 
 // 00F5F4E0  cEspShaderTile::vf08  size=179  [class]
 undefined4 __fastcall cEspShaderTile::vf08(int *param_1)

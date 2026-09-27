@@ -1,7 +1,8 @@
 // src/misc/cPointGetParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBBF90..00D31CD0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPointGetParts.h"
 
 // 00CBBF90  cPointGetParts::vf08  size=56  [class]
 void __fastcall cPointGetParts::vf08(int param_1)

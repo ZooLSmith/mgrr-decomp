@@ -1,7 +1,7 @@
 // src/unsorted/unit_00F97A10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F97A10..00F98720, 17 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F97A10  FUN_00f97a10  size=244  [run]
 void __fastcall FUN_00f97a10(int param_1)

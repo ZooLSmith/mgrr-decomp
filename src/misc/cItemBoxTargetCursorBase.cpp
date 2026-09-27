@@ -1,7 +1,8 @@
 // src/misc/cItemBoxTargetCursorBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0EAF0..00D25010, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemBoxTargetCursorBase.h"
 
 // 00D0EAF0  cItemBoxTargetCursorBase::cItemBoxTargetCursorBase  size=18  [class]
 undefined4 * __fastcall cItemBoxTargetCursorBase::cItemBoxTargetCursorBase(undefined4 *param_1)

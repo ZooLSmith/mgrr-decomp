@@ -1,7 +1,8 @@
 // src/effect/cEspShaderMultiParticleWater.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C990..00F8B8E0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderMultiParticleWater.h"
 
 // 00F5C990  cEspShaderMultiParticleWater::vf0C  size=1  [class]
 void cEspShaderMultiParticleWater::vf0C(void)

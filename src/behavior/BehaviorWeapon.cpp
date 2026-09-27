@@ -1,7 +1,8 @@
 // src/behavior/BehaviorWeapon.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A8FB10..00AA9D00, 16 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorWeapon.h"
 
 // 00A8FB10  BehaviorWeapon::vfC8  size=133  [class]
 void __thiscall BehaviorWeapon::vfC8(int param_1,int param_2)

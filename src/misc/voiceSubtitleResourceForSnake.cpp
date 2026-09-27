@@ -1,7 +1,7 @@
 // src/misc/voiceSubtitleResourceForSnake.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C49CA0..00C49CA0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C49CA0  voiceSubtitleResourceForSnake::play  size=551  [class]
 void __thiscall voiceSubtitleResourceForSnake::play(int param_1,uint param_2)

@@ -1,7 +1,7 @@
 // src/unsorted/unit_00CECB20.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CECB20..00CECB20, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CECB20  FUN_00cecb20  size=634  [run]
 int __fastcall FUN_00cecb20(int param_1)

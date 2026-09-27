@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDatsu.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6130..00AE8B50, 34 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDatsu.h"
 
 // 00AA6130  BehaviorDatsu::BehaviorDatsu  size=61  [class]
 undefined4 * __fastcall BehaviorDatsu::BehaviorDatsu(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/player/pl0010/state/SlashStartSlotPl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B79DF0..00B84B70, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SlashStartSlotPl0010.h"
 
 // 00B79DF0  SlashStartSlotPl0010::vf10  size=1  [class]
 void SlashStartSlotPl0010::vf10(void)

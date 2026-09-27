@@ -1,7 +1,8 @@
 // src/misc/cDepressionScreenDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E410..00D22AF0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDepressionScreenDispBase.h"
 
 // 00D0E410  cDepressionScreenDispBase::cDepressionScreenDispBase  size=18  [class]
 undefined4 * __fastcall cDepressionScreenDispBase::cDepressionScreenDispBase(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/player/pl001c/Pl001c.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EDAC0..00AB6670, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl001c.h"
 
 // 005EDAC0  Pl001c::vf44  size=37  [class]
 void Pl001c::vf44(void)

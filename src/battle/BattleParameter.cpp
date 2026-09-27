@@ -1,7 +1,8 @@
 // src/battle/BattleParameter.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D726C0..00D752A0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleParameter.h"
 
 // 00D726C0  BattleParameter::vf98  size=31  [class]
 undefined4 * __thiscall BattleParameter::vf98(undefined4 *param_1,byte param_2)

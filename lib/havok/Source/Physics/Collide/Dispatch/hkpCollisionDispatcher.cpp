@@ -1,7 +1,7 @@
 // lib/havok/Source/Physics/Collide/Dispatch/hkpCollisionDispatcher.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01163CD0..01163CD0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01163CD0  FUN_01163cd0  size=836  [__FILE__]
 void __fastcall FUN_01163cd0(int param_1)

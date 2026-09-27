@@ -1,7 +1,8 @@
 // src/misc/cOptionMenuBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009A8A60..00D11670, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cOptionMenuBase.h"
 
 // 009A8A60  cOptionMenuBase::vf14  size=64  [class]
 undefined4 __thiscall cOptionMenuBase::vf14(int param_1,undefined4 param_2)

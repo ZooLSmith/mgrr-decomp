@@ -1,7 +1,7 @@
 // src/file/FileRead.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E9C7B0..00E9F380, 50 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E9C7B0  FileRead::Manager  size=248  [class]
 void __fastcall FileRead::Manager(int param_1)

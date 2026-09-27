@@ -1,7 +1,8 @@
 // lib/havok/unit_008E3690.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E3690..008E3690, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpCharacterRigidBodyListener.h"
 
 // 008E3690  hkpCharacterRigidBodyListener::vf00  size=50  [run]
 undefined4 * __thiscall hkpCharacterRigidBodyListener::vf00(undefined4 *param_1,byte param_2)

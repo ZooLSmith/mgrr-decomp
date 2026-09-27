@@ -1,7 +1,8 @@
 // lib/havok/unit_00900750.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00900750..00900770, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkRemovePhantom.h"
 
 // 00900750  HkRemovePhantom::vf18  size=3  [run]
 undefined4 __fastcall HkRemovePhantom::vf18(undefined4 param_1)

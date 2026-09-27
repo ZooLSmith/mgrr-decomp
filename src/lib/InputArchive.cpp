@@ -1,7 +1,7 @@
 // src/lib/InputArchive.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C67990..00C67990, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C67990  lib::InputArchive::vf78  size=31  [class]
 undefined4 * __thiscall lib::InputArchive::vf78(undefined4 *param_1,byte param_2)

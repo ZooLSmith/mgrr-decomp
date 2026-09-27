@@ -1,7 +1,8 @@
 // src/object/bh00a2/Bh00a2.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B77E20..00B77F60, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bh00a2.h"
 
 // 00B77E20  Bh00a2::vf44  size=40  [class]
 void __fastcall Bh00a2::vf44(int param_1)

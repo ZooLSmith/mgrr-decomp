@@ -1,7 +1,8 @@
 // src/misc/cEnergyGaugeWhiteRaiden.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD3F70..00D3C7D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnergyGaugeWhiteRaiden.h"
 
 // 00CD3F70  cEnergyGaugeWhiteRaiden::cEnergyGaugeWhiteRaiden  size=298  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

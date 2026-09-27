@@ -1,7 +1,8 @@
 // src/misc/cEnemyEnergyGaugePrologueParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD2C90..00D2E1B0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyEnergyGaugePrologueParts.h"
 
 // 00CD2C90  cEnemyEnergyGaugePrologueParts::cEnemyEnergyGaugePrologueParts  size=134  [class]
 void __fastcall cEnemyEnergyGaugePrologueParts::cEnemyEnergyGaugePrologueParts(undefined4 *param_1)

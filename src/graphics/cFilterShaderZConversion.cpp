@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderZConversion.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC1200..015F1CB0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderZConversion.h"
 
 // 00EC1200  cFilterShaderZConversion::cFilterShaderZConversion  size=266  [class]
 /* WARNING: Removing unreachable block (ram,0x00ec1255) */

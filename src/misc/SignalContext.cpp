@@ -1,7 +1,8 @@
 // src/misc/SignalContext.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0043E870..00A81B80, 23 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "SignalContext.h"
 
 // 0043E870  SignalContext::vf00  size=6  [class]
 undefined * SignalContext::vf00(void)

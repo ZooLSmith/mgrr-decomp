@@ -1,7 +1,8 @@
 // src/misc/CharacterProxyListener.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E0A30..008E3A90, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CharacterProxyListener.h"
 
 // 008E0A30  CharacterProxyListener::vf10  size=3  [class]
 void CharacterProxyListener::vf10(void)

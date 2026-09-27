@@ -1,7 +1,8 @@
 // src/misc/sAirScatterParam.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A284D0..00A2AD80, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "sAirScatterParam.h"
 
 // 00A284D0  sAirScatterParam::sAirScatterParam  size=411  [class]
 void __thiscall sAirScatterParam::sAirScatterParam(undefined4 *param_1,int param_2)

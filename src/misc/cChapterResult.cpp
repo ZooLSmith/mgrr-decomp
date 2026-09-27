@@ -1,7 +1,8 @@
 // src/misc/cChapterResult.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D07B70..00D41360, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cChapterResult.h"
 
 // 00D07B70  cChapterResult::vf00  size=30  [class]
 undefined4 __thiscall cChapterResult::vf00(undefined4 param_1,byte param_2)

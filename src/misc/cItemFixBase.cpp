@@ -1,7 +1,8 @@
 // src/misc/cItemFixBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA440..00AB1470, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemFixBase.h"
 
 // 005EA440  cItemFixBase::vf40  size=154  [class]
 undefined4 __fastcall cItemFixBase::vf40(int param_1)

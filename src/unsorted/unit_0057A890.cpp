@@ -1,7 +1,7 @@
 // src/unsorted/unit_0057A890.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057A890..0057AAE0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 0057A890  FUN_0057a890  size=414  [run]
 /* WARNING: Switch with 1 destination removed at 0x0057a963 : 14 cases all go to same destination */

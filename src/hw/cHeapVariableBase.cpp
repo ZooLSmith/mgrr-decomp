@@ -1,7 +1,7 @@
 // src/hw/cHeapVariableBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DD3280..00DD5040, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DD3280  Hw::cHeapVariableBase::vf24  size=6  [class]
 undefined4 Hw::cHeapVariableBase::vf24(void)

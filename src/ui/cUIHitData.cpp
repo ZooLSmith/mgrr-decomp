@@ -1,7 +1,7 @@
 // src/ui/cUIHitData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CFD4B0..00CFD4B0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CFD4B0  cUIHitData::HIT  size=243  [class]
 undefined4 __thiscall cUIHitData::HIT(int param_1,int param_2)

@@ -1,7 +1,8 @@
 // src/enemy/em1020/Em1020.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005C8EE0..00AB9390, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em1020.h"
 
 // 005C8EE0  Em1020::vf44  size=30  [class]
 void Em1020::vf44(void)

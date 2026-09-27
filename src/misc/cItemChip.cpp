@@ -1,7 +1,8 @@
 // src/misc/cItemChip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005EA640..00AB9880, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemChip.h"
 
 // 005EA640  cItemChip::vf40  size=479  [class]
 undefined4 __fastcall cItemChip::vf40(int param_1)

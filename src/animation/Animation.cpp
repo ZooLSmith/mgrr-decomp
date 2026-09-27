@@ -1,7 +1,7 @@
 // src/animation/Animation.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009312F0..00E81B00, 617 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009312F0  Animation::EspCtrlCustom::vf08  size=6  [class]
 undefined4 Animation::EspCtrlCustom::vf08(void)

@@ -1,7 +1,8 @@
 // src/managers/raycastmanager/RayCastManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00905E50..0090D8C0, 34 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RayCastManager.h"
 
 // 00905E50  RayCastManager::getWork  size=81  [class]
 void __thiscall RayCastManager::getWork(int param_1,int *param_2)

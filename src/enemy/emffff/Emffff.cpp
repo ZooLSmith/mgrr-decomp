@@ -1,7 +1,8 @@
 // src/enemy/emffff/Emffff.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005C93B0..00AB6790, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emffff.h"
 
 // 005C93B0  Emffff::vf40  size=139  [class]
 undefined4 __fastcall Emffff::vf40(int *param_1)

@@ -1,7 +1,8 @@
 // src/enemy/emc320/Emc320.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0083ECD0..00AB99A0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Emc320.h"
 
 // 0083ECD0  Emc320::vf44  size=70  [class]
 void __fastcall Emc320::vf44(int param_1)

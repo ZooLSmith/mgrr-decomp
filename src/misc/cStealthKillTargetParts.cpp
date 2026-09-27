@@ -1,7 +1,8 @@
 // src/misc/cStealthKillTargetParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF5F0..00D34290, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cStealthKillTargetParts.h"
 
 // 00CBF5F0  cStealthKillTargetParts::vf08  size=1  [class]
 void cStealthKillTargetParts::vf08(void)

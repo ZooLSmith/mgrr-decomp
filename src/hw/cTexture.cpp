@@ -1,7 +1,7 @@
 // src/hw/cTexture.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F972C0..00FA8B50, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F972C0  Hw::cTexture::cTexture_6  size=29  [class]
 void __fastcall Hw::cTexture::cTexture_6(undefined4 *param_1)

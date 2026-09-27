@@ -1,7 +1,8 @@
 // src/effect/cEspShaderBlurMaskSoftPt3D.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F64250..00F8C9A0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderBlurMaskSoftPt3D.h"
 
 // 00F64250  cEspShaderBlurMaskSoftPt3D::vf08  size=304  [class]
 /* WARNING: Removing unreachable block (ram,0x00f64359) */

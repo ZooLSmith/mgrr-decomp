@@ -1,7 +1,7 @@
 // src/misc/PathData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00962F30..00962F30, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00962F30  PathData::setParentInfo  size=413  [class]
 undefined4 __fastcall PathData::setParentInfo(undefined4 *param_1)

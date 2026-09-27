@@ -1,7 +1,8 @@
 // src/misc/cPointGet.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBBFF0..00CD5990, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPointGet.h"
 
 // 00CBBFF0  cPointGet::cPointGet  size=403  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

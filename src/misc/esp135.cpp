@@ -1,7 +1,8 @@
 // src/misc/esp135.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009D08A0..009DF670, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp135.h"
 
 // 009D08A0  esp135::vf04  size=54  [class]
 undefined4 __thiscall

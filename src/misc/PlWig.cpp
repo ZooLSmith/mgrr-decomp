@@ -1,7 +1,8 @@
 // src/misc/PlWig.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAB4B0..00B809F0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PlWig.h"
 
 // 00AAB4B0  PlWig::vf04  size=6  [class]
 undefined * PlWig::vf04(void)

@@ -1,7 +1,8 @@
 // src/misc/cCkMsgTeropDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0B600..00D29A90, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCkMsgTeropDisp.h"
 
 // 00D0B600  cCkMsgTeropDisp::cCkMsgTeropDisp  size=18  [class]
 undefined4 * __fastcall cCkMsgTeropDisp::cCkMsgTeropDisp(undefined4 *param_1)

@@ -1,7 +1,8 @@
 // src/graphics/cLightVolumeObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A002E0..00ABAA90, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cLightVolumeObj.h"
 
 // 00A002E0  cLightVolumeObj::vf08  size=547  [class]
 undefined4 __fastcall cLightVolumeObj::vf08(int param_1)

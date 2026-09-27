@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDatabaseImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A917E0..00AC1EC0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDatabaseImplement.h"
 
 // 00A917E0  BehaviorDatabaseImplement::vf00  size=171  [class]
 int __thiscall BehaviorDatabaseImplement::vf00(int *param_1,undefined4 param_2)

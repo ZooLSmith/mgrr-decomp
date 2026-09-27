@@ -1,7 +1,8 @@
 // src/misc/cCutPointDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0E2D0..00D22640, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCutPointDispBase.h"
 
 // 00D0E2D0  cCutPointDispBase::cCutPointDispBase  size=18  [class]
 undefined4 * __fastcall cCutPointDispBase::cCutPointDispBase(undefined4 *param_1)

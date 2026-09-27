@@ -1,7 +1,8 @@
 // src/phase/app/pf30.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4B1F0..00D70820, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPf30.h"
 
 // 00D4B1F0  cPf30::vf0C  size=85  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

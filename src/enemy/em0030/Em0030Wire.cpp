@@ -1,7 +1,8 @@
 // src/enemy/em0030/Em0030Wire.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AAEFD0..00B70D90, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0030Wire.h"
 
 // 00AAEFD0  Em0030Wire::vf04  size=6  [class]
 undefined * Em0030Wire::vf04(void)

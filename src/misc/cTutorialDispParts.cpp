@@ -1,7 +1,8 @@
 // src/misc/cTutorialDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBFD60..00D3F050, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cTutorialDispParts.h"
 
 // 00CBFD60  cTutorialDispParts::vf08  size=1810  [class]
 void __fastcall cTutorialDispParts::vf08(int param_1)

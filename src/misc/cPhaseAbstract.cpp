@@ -1,7 +1,8 @@
 // src/misc/cPhaseAbstract.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D66370..00D66450, 15 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPhaseAbstract.h"
 
 // 00D66370  cPhaseAbstract::vf04  size=1  [class]
 void cPhaseAbstract::vf04(void)

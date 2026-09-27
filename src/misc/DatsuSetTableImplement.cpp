@@ -1,7 +1,8 @@
 // src/misc/DatsuSetTableImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093BED0..0093D6E0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DatsuSetTableImplement.h"
 
 // 0093BED0  DatsuSetTableImplement::vf1C  size=3  [class]
 void DatsuSetTableImplement::vf1C(void)

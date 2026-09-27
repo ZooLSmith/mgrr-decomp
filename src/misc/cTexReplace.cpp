@@ -1,7 +1,7 @@
 // src/misc/cTexReplace.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FCDE30..00FCDE30, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FCDE30  cTexReplace::setRoomReplace  size=100  [class]
 void __thiscall cTexReplace::setRoomReplace(int param_1,uint param_2,undefined4 param_3)

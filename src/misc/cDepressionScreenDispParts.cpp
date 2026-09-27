@@ -1,7 +1,8 @@
 // src/misc/cDepressionScreenDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD1C60..00D2CF70, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cDepressionScreenDispParts.h"
 
 // 00CD1C60  cDepressionScreenDispParts::vf14  size=112  [class]
 void __fastcall cDepressionScreenDispParts::vf14(int param_1)

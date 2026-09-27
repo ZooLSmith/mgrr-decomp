@@ -1,7 +1,8 @@
 // src/collision/CollisionCylinder.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D77540..00D7DEF0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionCylinder.h"
 
 // 00D77540  CollisionCylinder::vf1C  size=34  [class]
 float10 __fastcall CollisionCylinder::vf1C(int param_1)

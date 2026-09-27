@@ -1,7 +1,8 @@
 // src/effect/cEspShaderWaterDraw.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6B2B0..00F8E740, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderWaterDraw.h"
 
 // 00F6B2B0  cEspShaderWaterDraw::vf08  size=217  [class]
 /* WARNING: Removing unreachable block (ram,0x00f6b34d) */

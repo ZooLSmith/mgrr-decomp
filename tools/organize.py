@@ -328,7 +328,13 @@ def main():
             lo, hi = funcs[idxs[0]]["ea"].upper(), funcs[idxs[-1]]["ea"].upper()
             out.write("// %s\n// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), %s..%s, %d functions\n\n"
                       % (path, lo, hi, len(idxs)))
-            out.write('#include "types.h"\n\n')
+            # mgrr.h is force-included by tools/cc.bat; include the classes this unit defines
+            classes = sorted({strip_templates(funcs[i]["ns"]).split("::")[0] for i in idxs if funcs[i]["ns"]})
+            classes = [c for c in classes if c and os.path.exists(os.path.join(ROOT, "include", "auto", "classes", c + ".h"))]
+            out.write('#include "mgrr.h"\n')
+            for c in classes:
+                out.write('#include "%s.h"\n' % c)
+            out.write("\n")
             for i in idxs:
                 out.write(render(funcs[i], reason[i]))
                 out.write("\n")

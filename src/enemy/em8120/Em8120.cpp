@@ -1,7 +1,9 @@
 // src/enemy/em8120/Em8120.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 006D6C00..00ABA480, 155 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8120.h"
+#include "hkpCdPointCollector.h"
 
 // 006D6C00  Em8120::vf184  size=6  [class]
 undefined4 Em8120::vf184(void)

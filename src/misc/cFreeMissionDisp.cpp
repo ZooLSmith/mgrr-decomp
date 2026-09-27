@@ -1,7 +1,8 @@
 // src/misc/cFreeMissionDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB8D30..00CD43C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFreeMissionDisp.h"
 
 // 00CB8D30  cFreeMissionDisp::cFreeMissionDisp  size=224  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

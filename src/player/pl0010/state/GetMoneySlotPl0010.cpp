@@ -1,7 +1,8 @@
 // src/player/pl0010/state/GetMoneySlotPl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B79D80..00B84A40, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GetMoneySlotPl0010.h"
 
 // 00B79D80  GetMoneySlotPl0010::vf10  size=1  [class]
 void GetMoneySlotPl0010::vf10(void)

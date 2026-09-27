@@ -1,7 +1,7 @@
 // src/lib/OutputArchive.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E93300..00E933C0, 12 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E93300  lib::OutputArchive::vf6C  size=7  [class]
 void __fastcall lib::OutputArchive::vf6C(int *param_1)

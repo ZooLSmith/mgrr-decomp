@@ -1,7 +1,8 @@
 // src/player/pl0010/state/ZangekiYokoStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83AC0..00BE6000, 66 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiYokoStatePl0010.h"
 
 // 00B83AC0  ZangekiYokoStatePl0010::SlashFirstHitSlot::vf10  size=1  [class]
 void ZangekiYokoStatePl0010::SlashFirstHitSlot::vf10(void)

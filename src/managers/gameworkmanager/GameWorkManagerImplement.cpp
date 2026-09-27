@@ -1,7 +1,8 @@
 // src/managers/gameworkmanager/GameWorkManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1B060..00C50500, 58 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "GameWorkManagerImplement.h"
 
 // 00C1B060  GameWorkManagerImplement::vf08  size=1  [class]
 void GameWorkManagerImplement::vf08(void)

@@ -1,7 +1,7 @@
 // src/misc/cFade.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC1AB0..00EC1AB0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00EC1AB0  cFade::set  size=180  [class]
 int __thiscall

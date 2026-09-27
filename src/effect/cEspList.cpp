@@ -1,7 +1,8 @@
 // src/effect/cEspList.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F40B30..00F45620, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspList.h"
 
 // 00F40B30  cEspList::vf0C  size=12  [class]
 void cEspList::vf0C(void)

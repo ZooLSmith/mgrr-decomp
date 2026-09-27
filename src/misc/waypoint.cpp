@@ -1,7 +1,7 @@
 // src/misc/waypoint.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C6CCA0..00C74490, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00C6CCA0  waypoint::WaypointLinkNodeArray::vf00  size=47  [class]
 undefined4 * __thiscall waypoint::WaypointLinkNodeArray::vf00(undefined4 *param_1,byte param_2)

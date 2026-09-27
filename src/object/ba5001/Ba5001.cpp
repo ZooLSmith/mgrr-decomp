@@ -1,7 +1,8 @@
 // src/object/ba5001/Ba5001.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00407AB0..00AB9610, 33 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba5001.h"
 
 // 00407AB0  FUN_00407ab0  size=40  [callgraph]
 void FUN_00407ab0(undefined4 param_1,undefined4 param_2)

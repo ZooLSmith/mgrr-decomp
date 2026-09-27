@@ -1,7 +1,8 @@
 // src/managers/scenariomanager/ScenarioManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6D440..00A7BBD0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ScenarioManager.h"
 
 // 00A6D440  ScenarioManager::vfA8  size=31  [class]
 undefined4 * __thiscall ScenarioManager::vfA8(undefined4 *param_1,byte param_2)

@@ -1,7 +1,8 @@
 // src/phase/app/p310.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48450..00D6CE70, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P310.h"
 
 // 00D48450  P310::vf20  size=3  [class]
 void P310::vf20(void)

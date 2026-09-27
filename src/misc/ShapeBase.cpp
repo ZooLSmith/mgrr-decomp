@@ -1,7 +1,8 @@
 // src/misc/ShapeBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A6ACF0..00A6CA40, 11 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ShapeBase.h"
 
 // 00A6ACF0  ShapeBase::vf10  size=1  [class]
 void ShapeBase::vf10(void)

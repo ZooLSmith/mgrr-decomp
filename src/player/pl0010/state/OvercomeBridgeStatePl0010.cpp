@@ -1,7 +1,8 @@
 // src/player/pl0010/state/OvercomeBridgeStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81F60..00BDFA10, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "OvercomeBridgeStatePl0010.h"
 
 // 00B81F60  OvercomeBridgeStatePl0010::vf08  size=52  [class]
 undefined4 __thiscall OvercomeBridgeStatePl0010::vf08(int param_1,undefined4 param_2)

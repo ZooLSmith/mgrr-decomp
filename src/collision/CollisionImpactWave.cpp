@@ -1,7 +1,8 @@
 // src/collision/CollisionImpactWave.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D77570..00D7DFE0, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionImpactWave.h"
 
 // 00D77570  CollisionImpactWave::vf1C  size=7  [class]
 float10 __fastcall CollisionImpactWave::vf1C(int param_1)

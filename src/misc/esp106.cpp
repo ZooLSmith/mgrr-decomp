@@ -1,7 +1,8 @@
 // src/misc/esp106.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CFEB0..009DF460, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp106.h"
 
 // 009CFEB0  esp106::vf04  size=5  [class]
 undefined4 esp106::vf04(void)

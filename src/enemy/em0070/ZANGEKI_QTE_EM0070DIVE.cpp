@@ -1,7 +1,7 @@
 // src/enemy/em0070/ZANGEKI_QTE_EM0070DIVE.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00BB3E30..00BB40F0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00BB3E30  ZANGEKI_QTE_EM0070DIVE::updateOnce  size=335  [class]
 void __thiscall ZANGEKI_QTE_EM0070DIVE::updateOnce(int param_1,undefined4 *param_2)

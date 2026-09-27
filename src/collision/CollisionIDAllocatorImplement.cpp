@@ -1,7 +1,8 @@
 // src/collision/CollisionIDAllocatorImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D77A40..00D7AC70, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CollisionIDAllocatorImplement.h"
 
 // 00D77A40  CollisionIDAllocatorImplement::vf00  size=45  [class]
 void __fastcall CollisionIDAllocatorImplement::vf00(int param_1)

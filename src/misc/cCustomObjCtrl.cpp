@@ -1,7 +1,8 @@
 // src/misc/cCustomObjCtrl.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCDA90..00D1F8F0, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCustomObjCtrl.h"
 
 // 00CCDA90  cCustomObjCtrl::vf0C  size=68  [class]
 void __fastcall cCustomObjCtrl::vf0C(int param_1)

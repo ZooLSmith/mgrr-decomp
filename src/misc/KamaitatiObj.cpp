@@ -1,7 +1,8 @@
 // src/misc/KamaitatiObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085EE70..00AB9CD0, 18 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "KamaitatiObj.h"
 
 // 0085EE70  KamaitatiObj::vf44  size=75  [class]
 void __fastcall KamaitatiObj::vf44(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/esp53.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED0C00..00F25110, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp53.h"
 
 // 00ED0C00  esp53::vf00  size=54  [class]
 undefined4 __thiscall esp53::vf00(undefined4 param_1,byte param_2)

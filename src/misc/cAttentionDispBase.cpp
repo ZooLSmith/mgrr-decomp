@@ -1,7 +1,8 @@
 // src/misc/cAttentionDispBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0EFF0..00D254F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cAttentionDispBase.h"
 
 // 00D0EFF0  cAttentionDispBase::cAttentionDispBase  size=18  [class]
 undefined4 * __fastcall cAttentionDispBase::cAttentionDispBase(undefined4 *param_1)

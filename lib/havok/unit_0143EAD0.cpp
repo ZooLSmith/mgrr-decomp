@@ -1,7 +1,18 @@
 // lib/havok/unit_0143EAD0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0143EAD0..014600D0, 743 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkDynamicClassNameRegistry.h"
+#include "hkIArchive.h"
+#include "hkIstream.h"
+#include "hkLineNumberStreamReader.h"
+#include "hkMemoryStreamReader.h"
+#include "hkOffsetOnlyStreamWriter.h"
+#include "hkRegisterCheckUtil.h"
+#include "hkTraceStream.h"
+#include "hkTypeInfoRegistry.h"
+#include "hkVtableClassRegistry.h"
 
 // 0143EAD0  hkVtableClassRegistry::vf0C  size=28  [run]
 void hkVtableClassRegistry::vf0C(undefined4 param_1,undefined4 param_2)

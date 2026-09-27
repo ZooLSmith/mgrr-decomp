@@ -1,7 +1,8 @@
 // src/misc/cItemBox.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005E89D0..00AB97F0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cItemBox.h"
 
 // 005E89D0  cItemBox::vf308  size=5  [class]
 undefined4 cItemBox::vf308(void)

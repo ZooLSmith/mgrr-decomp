@@ -1,7 +1,8 @@
 // src/phase/app/p448.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D49220..00D6D0B0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P448.h"
 
 // 00D49220  P448::vf14  size=145  [class]
 void P448::vf14(undefined4 param_1,byte *param_2)

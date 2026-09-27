@@ -1,7 +1,8 @@
 // src/managers/battleparametermanager/BattleParameterManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D731A0..00D76190, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleParameterManagerImplement.h"
 
 // 00D731A0  BattleParameterManagerImplement::vf08  size=98  [class]
 void __thiscall BattleParameterManagerImplement::vf08(int param_1,int param_2)

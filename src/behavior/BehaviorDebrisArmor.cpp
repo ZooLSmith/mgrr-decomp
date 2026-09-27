@@ -1,7 +1,8 @@
 // src/behavior/BehaviorDebrisArmor.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D89E0..00AB83E0, 16 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BehaviorDebrisArmor.h"
 
 // 005D89E0  BehaviorDebrisArmor::vf114  size=35  [class]
 void __thiscall BehaviorDebrisArmor::vf114(int *param_1,int param_2)

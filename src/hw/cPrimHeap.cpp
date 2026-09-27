@@ -1,7 +1,7 @@
 // src/hw/cPrimHeap.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F9D070..00FA9B80, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F9D070  Hw::cPrimHeap::cPrimHeap  size=49  [class]
 void __fastcall Hw::cPrimHeap::cPrimHeap(undefined4 *param_1)

@@ -1,7 +1,29 @@
 // lib/havok/unit_0113C900.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0113C900..01150560, 568 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkMoppBvTreeShapeBase.h"
+#include "hkp3AxisSweep.h"
+#include "hkpBvTreeShape.h"
+#include "hkpClosestRayHitCollector.h"
+#include "hkpCollidableCollidableFilter.h"
+#include "hkpCollisionFilterList.h"
+#include "hkpCompressedMeshShape.h"
+#include "hkpConvexListFilter.h"
+#include "hkpConvexTransformShape.h"
+#include "hkpConvexVerticesConnectivity.h"
+#include "hkpDefaultConvexListFilter.h"
+#include "hkpListShape.h"
+#include "hkpMoppBvTreeShape.h"
+#include "hkpMoppModifier.h"
+#include "hkpNullCollisionFilter.h"
+#include "hkpRemoveTerminalsMoppModifier.h"
+#include "hkpShapeCollection.h"
+#include "hkpShapeContainer.h"
+#include "hkpShapeInfo.h"
+#include "hkpSingleShapeContainer.h"
+#include "hkpSphereRepShape.h"
 
 // 0113C900  FUN_0113c900  size=44  [run]
 void __thiscall FUN_0113c900(undefined4 *param_1,undefined4 *param_2)

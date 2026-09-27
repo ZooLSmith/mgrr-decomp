@@ -1,7 +1,8 @@
 // src/player/pl0010/state/RunStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82410..00BE09A0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RunStatePl0010.h"
 
 // 00B82410  RunStatePl0010::vf08  size=45  [class]
 undefined4 __thiscall RunStatePl0010::vf08(int param_1,undefined4 param_2)

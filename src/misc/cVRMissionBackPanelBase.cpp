@@ -1,7 +1,8 @@
 // src/misc/cVRMissionBackPanelBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0F9F0..00D272E0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cVRMissionBackPanelBase.h"
 
 // 00D0F9F0  cVRMissionBackPanelBase::cVRMissionBackPanelBase  size=18  [class]
 undefined4 * __fastcall cVRMissionBackPanelBase::cVRMissionBackPanelBase(undefined4 *param_1)

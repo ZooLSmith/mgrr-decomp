@@ -1,7 +1,7 @@
 // src/misc/cRadarMapInfoData.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD7010..00CD7010, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00CD7010  cRadarMapInfoData::readXml  size=320  [class]
 undefined4 __thiscall cRadarMapInfoData::readXml(int *param_1,int *param_2,undefined4 param_3)

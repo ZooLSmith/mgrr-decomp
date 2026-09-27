@@ -1,7 +1,7 @@
 // src/managers/cgimanager/cGIManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F956A0..00F956A0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F956A0  cGIManager::setData  size=289  [class]
 void __thiscall cGIManager::setData(int param_1,uint param_2,float *param_3,float *param_4)

@@ -1,7 +1,8 @@
 // src/misc/cCodecMenuParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098A510..009AD850, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCodecMenuParts.h"
 
 // 0098A510  cCodecMenuParts::vf0C  size=100  [class]
 void __fastcall cCodecMenuParts::vf0C(int param_1)

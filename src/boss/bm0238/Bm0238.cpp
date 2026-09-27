@@ -1,7 +1,8 @@
 // src/boss/bm0238/Bm0238.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004119E0..00AB8FC0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0238.h"
 
 // 004119E0  Bm0238::vf40  size=36  [class]
 undefined4 __fastcall Bm0238::vf40(int param_1)

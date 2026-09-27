@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPT3DToneCurve.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F607C0..00F8B3C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPT3DToneCurve.h"
 
 // 00F607C0  cEspShaderSoftPT3DToneCurve::vf08  size=315  [class]
 /* WARNING: Removing unreachable block (ram,0x00f608ce) */

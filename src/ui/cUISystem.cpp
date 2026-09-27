@@ -1,7 +1,8 @@
 // src/ui/cUISystem.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D292A0..00D292A0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUISystem.h"
 
 // 00D292A0  cUISystem::vf00  size=30  [class]
 undefined4 __thiscall cUISystem::vf00(undefined4 param_1,byte param_2)

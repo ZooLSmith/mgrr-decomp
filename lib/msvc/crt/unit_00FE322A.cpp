@@ -1,7 +1,7 @@
 // lib/msvc/crt/unit_00FE322A.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FE322A..00FE322A, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FE322A  _is_exception_typeof  size=134  [run]
 /* Library Function - Single Match

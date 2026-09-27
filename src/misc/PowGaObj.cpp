@@ -1,7 +1,8 @@
 // src/misc/PowGaObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005B0900..00AB7660, 16 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "PowGaObj.h"
 
 // 005B0900  PowGaObj::vf44  size=58  [class]
 void __fastcall PowGaObj::vf44(int param_1)

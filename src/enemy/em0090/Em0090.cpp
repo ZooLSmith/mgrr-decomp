@@ -1,7 +1,8 @@
 // src/enemy/em0090/Em0090.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0049B520..00AB6ED0, 21 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0090.h"
 
 // 0049B520  Em0090::vf50  size=44  [class]
 void __fastcall Em0090::vf50(int param_1)

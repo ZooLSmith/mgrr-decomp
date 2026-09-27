@@ -1,7 +1,8 @@
 // src/phase/app/pa70.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47AF0..00D72560, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pa70.h"
 
 // 00D47AF0  Pa70::vf0C  size=321  [class]
 void Pa70::vf0C(void)

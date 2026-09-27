@@ -1,7 +1,8 @@
 // src/misc/cEnemyItemDispParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD31C0..00D2E5E0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyItemDispParts.h"
 
 // 00CD31C0  cEnemyItemDispParts::cEnemyItemDispParts  size=142  [class]
 void __fastcall cEnemyItemDispParts::cEnemyItemDispParts(undefined4 *param_1)

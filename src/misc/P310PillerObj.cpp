@@ -1,7 +1,8 @@
 // src/misc/P310PillerObj.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00415830..00AB9030, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P310PillerObj.h"
 
 // 00415830  P310PillerObj::vf40  size=30  [class]
 undefined4 __fastcall P310PillerObj::vf40(int param_1)

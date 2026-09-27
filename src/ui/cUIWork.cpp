@@ -1,7 +1,8 @@
 // src/ui/cUIWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CAE150..00D11960, 140 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIWork.h"
 
 // 00CAE150  cUIWork::vf10  size=1  [class]
 void cUIWork::vf10(void)

@@ -1,7 +1,8 @@
 // src/enemy/em1010/Em1010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005C6B70..00AB77B0, 31 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em1010.h"
 
 // 005C6B70  Em1010::vf50  size=43  [class]
 void __fastcall Em1010::vf50(int param_1)

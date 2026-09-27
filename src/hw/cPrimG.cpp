@@ -1,7 +1,7 @@
 // src/hw/cPrimG.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA09A0..00FAAFD0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00FA09A0  Hw::cPrimG::vf04  size=992  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

@@ -1,7 +1,8 @@
 // src/ui/cUIDrawMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB3DC0..00CFB4D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIDrawMask.h"
 
 // 00CB3DC0  cUIDrawMask::vf18  size=14  [class]
 void cUIDrawMask::vf18(void)

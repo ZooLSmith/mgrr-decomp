@@ -1,7 +1,8 @@
 // src/managers/cuitexturemanager/cUITextureManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0D2D0..015F04F0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUITextureManager.h"
 
 // 00D0D2D0  cUITextureManager::cUITextureManager  size=74  [class]
 void __fastcall cUITextureManager::cUITextureManager(undefined4 *param_1)

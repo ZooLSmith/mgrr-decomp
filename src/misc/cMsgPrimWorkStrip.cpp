@@ -1,7 +1,8 @@
 // src/misc/cMsgPrimWorkStrip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCD3C0..00D20740, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMsgPrimWorkStrip.h"
 
 // 00CCD3C0  cMsgPrimWorkStrip::cMsgPrimWorkStrip_3  size=18  [class]
 undefined4 * __fastcall cMsgPrimWorkStrip::cMsgPrimWorkStrip_3(undefined4 *param_1)

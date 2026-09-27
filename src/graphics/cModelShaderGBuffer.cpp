@@ -1,7 +1,8 @@
 // src/graphics/cModelShaderGBuffer.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F8FD60..015FAFD0, 418 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cModelShaderGBuffer.h"
 
 // 00F8FD60  cModelShaderGBuffer::cModelShaderGBuffer_3  size=22  [class]
 void __fastcall cModelShaderGBuffer::cModelShaderGBuffer_3(undefined4 *param_1)

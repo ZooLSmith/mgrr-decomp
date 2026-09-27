@@ -1,7 +1,8 @@
 // src/misc/cConfigMenuParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0098E6B0..0099E9F0, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cConfigMenuParts.h"
 
 // 0098E6B0  cConfigMenuParts::cConfigMenuParts_3  size=18  [class]
 undefined4 * __fastcall cConfigMenuParts::cConfigMenuParts_3(undefined4 *param_1)

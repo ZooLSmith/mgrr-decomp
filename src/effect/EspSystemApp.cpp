@@ -1,7 +1,7 @@
 // src/effect/EspSystemApp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CEFA0..009EE540, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009CEFA0  EspSystemApp::StartupGame  size=49  [class]
 undefined4 EspSystemApp::StartupGame(undefined4 param_1)

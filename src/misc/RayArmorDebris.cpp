@@ -1,7 +1,8 @@
 // src/misc/RayArmorDebris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AEAC00..00AEF860, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RayArmorDebris.h"
 
 // 00AEAC00  RayArmorDebris::vf40  size=163  [class]
 undefined4 __fastcall RayArmorDebris::vf40(int param_1)

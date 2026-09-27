@@ -1,7 +1,8 @@
 // src/object/ba0160/Ba0160.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00405890..00AB9170, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0160.h"
 
 // 00405890  Ba0160::vf44  size=16  [class]
 void Ba0160::vf44(void)

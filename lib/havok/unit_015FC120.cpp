@@ -1,7 +1,9 @@
 // lib/havok/unit_015FC120.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 015FC120..015FC440, 47 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkgpMesh.h"
 
 // 015FC120  hkBaseObject::hkBaseObject_248  size=11  [run]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

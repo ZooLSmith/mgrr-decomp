@@ -1,7 +1,8 @@
 // src/enemy/em8030/Em8030.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0064B420..00ABA300, 170 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em8030.h"
 
 // 0064B420  Em8030::vfFC  size=86  [class]
 void __fastcall Em8030::vfFC(int param_1)

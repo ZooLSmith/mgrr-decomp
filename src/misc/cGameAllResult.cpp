@@ -1,7 +1,8 @@
 // src/misc/cGameAllResult.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0AA70..00D37FA0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameAllResult.h"
 
 // 00D0AA70  FUN_00d0aa70  size=756  [callgraph]
 void __thiscall FUN_00d0aa70(int param_1,int param_2,int param_3,undefined4 param_4)

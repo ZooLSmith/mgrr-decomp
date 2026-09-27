@@ -1,7 +1,8 @@
 // src/phase/app/p168.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47ED0..00D701C0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P168.h"
 
 // 00D47ED0  P168::vf0C  size=94  [class]
 void P168::vf0C(void)

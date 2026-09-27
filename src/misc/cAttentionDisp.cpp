@@ -1,7 +1,8 @@
 // src/misc/cAttentionDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBC290..00CD5A90, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cAttentionDisp.h"
 
 // 00CBC290  cAttentionDisp::cAttentionDisp  size=268  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

@@ -1,7 +1,8 @@
 // src/player/pl0010/state/AvoidSlidingStatePl0010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80F50..00BC9860, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "AvoidSlidingStatePl0010.h"
 
 // 00B80F50  AvoidSlidingStatePl0010::vf08  size=19  [class]
 bool AvoidSlidingStatePl0010::vf08(undefined4 param_1)

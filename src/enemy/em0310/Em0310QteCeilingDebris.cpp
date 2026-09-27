@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310QteCeilingDebris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057E790..00AB87D0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310QteCeilingDebris.h"
 
 // 0057E790  Em0310QteCeilingDebris::vf40  size=191  [class]
 undefined4 __fastcall Em0310QteCeilingDebris::vf40(int *param_1)

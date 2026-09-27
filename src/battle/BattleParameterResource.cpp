@@ -1,7 +1,7 @@
 // src/battle/BattleParameterResource.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D72860..00D76860, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00D72860  BattleParameterResource::addReference  size=40  [class]
 int __fastcall BattleParameterResource::addReference(int *param_1)

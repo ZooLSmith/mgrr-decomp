@@ -1,7 +1,8 @@
 // src/enemy/em0060/Em0060.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0043FC90..00AB6E70, 293 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0060.h"
 
 // 0043FC90  FUN_0043fc90  size=91  [callgraph]
 void __thiscall FUN_0043fc90(int param_1,int param_2,undefined4 *param_3,undefined4 param_4)

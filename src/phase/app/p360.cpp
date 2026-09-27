@@ -1,7 +1,8 @@
 // src/phase/app/p360.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D48A80..00D703A0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "P360.h"
 
 // 00D48A80  P360::vf1C  size=3  [class]
 void P360::vf1C(void)

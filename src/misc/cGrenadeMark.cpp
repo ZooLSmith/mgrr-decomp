@@ -1,7 +1,8 @@
 // src/misc/cGrenadeMark.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB9410..00CD4510, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGrenadeMark.h"
 
 // 00CB9410  cGrenadeMark::cGrenadeMark  size=84  [class]
 undefined4 * __fastcall cGrenadeMark::cGrenadeMark(undefined4 *param_1)

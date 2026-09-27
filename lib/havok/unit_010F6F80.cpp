@@ -1,7 +1,9 @@
 // lib/havok/unit_010F6F80.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010F6F80..010F8D60, 58 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkObjectCopier.h"
+#include "hkXmlObjectWriter.h"
 
 // 010F6F80  _anon_B1A2C86F::PackfileObjectCopier::vf0C  size=152  [run]
 bool __thiscall

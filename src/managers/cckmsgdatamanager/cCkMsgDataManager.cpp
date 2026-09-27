@@ -1,7 +1,8 @@
 // src/managers/cckmsgdatamanager/cCkMsgDataManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCA390..00CF7E60, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCkMsgDataManager.h"
 
 // 00CCA390  cCkMsgDataManager::setupReadInfoDLC  size=87  [class]
 void cCkMsgDataManager::setupReadInfoDLC(int param_1)

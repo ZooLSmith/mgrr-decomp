@@ -1,7 +1,7 @@
 // src/misc/FixedSplineLoop.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009E78D0..00ECF950, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009E78D0  FixedSplineLoop<float>::vf04  size=177  [class]
 void __thiscall FixedSplineLoop<float>::vf04(int param_1,void *param_2,uint param_3)

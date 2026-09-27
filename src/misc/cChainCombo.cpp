@@ -1,7 +1,8 @@
 // src/misc/cChainCombo.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CB5D10..00CD09D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cChainCombo.h"
 
 // 00CB5D10  cChainCombo::cChainCombo_3  size=59  [class]
 void __fastcall cChainCombo::cChainCombo_3(undefined4 *param_1)

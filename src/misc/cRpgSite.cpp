@@ -1,7 +1,8 @@
 // src/misc/cRpgSite.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CBF060..00CD8370, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cRpgSite.h"
 
 // 00CBF060  cRpgSite::cRpgSite_2  size=45  [class]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

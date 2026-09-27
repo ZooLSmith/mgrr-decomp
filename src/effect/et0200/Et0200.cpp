@@ -1,7 +1,8 @@
 // src/effect/et0200/Et0200.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005D71B0..00AB8120, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Et0200.h"
 
 // 005D71B0  Et0200::vf44  size=16  [class]
 void Et0200::vf44(void)

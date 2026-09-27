@@ -1,7 +1,8 @@
 // lib/havok/Source/Physics/Utilities/Constraint/Chain/hkpPoweredChainMapper.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0127AAD0..0127AAD0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkpPoweredChainMapper.h"
 
 // 0127AAD0  hkpPoweredChainMapper::hkpPoweredChainMapper  size=1974  [__FILE__]
 undefined4 *

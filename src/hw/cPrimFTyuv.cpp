@@ -1,7 +1,7 @@
 // src/hw/cPrimFTyuv.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A2A6D0..00FA5180, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A2A6D0  Hw::cPrimFTyuv::cPrimFTyuv  size=57  [class]
 undefined4 * __fastcall Hw::cPrimFTyuv::cPrimFTyuv(undefined4 *param_1)

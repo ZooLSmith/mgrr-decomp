@@ -1,7 +1,7 @@
 // src/misc/D3DX9_43.DLL.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 01436F2C..01436FB0, 23 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 01436F2C  D3DX9_43.DLL::D3DXVec3TransformNormal  size=6  [class]
 void D3DXVec3TransformNormal(void)

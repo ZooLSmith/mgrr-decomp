@@ -1,7 +1,8 @@
 // src/managers/tutorialmanager/TutorialManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1C450..015EE900, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "TutorialManager.h"
 
 // 00C1C450  TutorialManager::TutorialManager  size=134  [class]
 undefined4 * __fastcall TutorialManager::TutorialManager(undefined4 *param_1)

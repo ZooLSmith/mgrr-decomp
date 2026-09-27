@@ -1,7 +1,8 @@
 // src/effect/EspShaderLuminanceShimmer.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F6C530..00F8EA80, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderLuminanceShimmer.h"
 
 // 00F6C530  EspShaderLuminanceShimmer::vf08  size=369  [class]
 undefined4 __fastcall EspShaderLuminanceShimmer::vf08(int *param_1)

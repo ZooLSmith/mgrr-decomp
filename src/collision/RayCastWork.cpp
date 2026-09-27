@@ -1,7 +1,8 @@
 // src/collision/RayCastWork.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00905560..00909AC0, 23 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "RayCastWork.h"
 
 // 00905560  FUN_00905560  size=86  [callgraph]
 void FUN_00905560(int param_1)

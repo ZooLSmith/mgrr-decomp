@@ -1,7 +1,8 @@
 // src/effect/cEspControlerEvent.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EAAA30..00EAAD30, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspControlerEvent.h"
 
 // 00EAAA30  cEspControlerEvent::cEspControlerEvent_2  size=45  [class]
 undefined4 * __fastcall cEspControlerEvent::cEspControlerEvent_2(undefined4 *param_1)

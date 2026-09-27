@@ -1,7 +1,8 @@
 // src/weapon/wp030a/Wp030a.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005FF630..00AB7900, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Wp030a.h"
 
 // 005FF630  Wp030a::vf50  size=16  [class]
 void Wp030a::vf50(void)

@@ -1,7 +1,8 @@
 // src/effect/cEspShaderPointLight.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5D440..00F8E590, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderPointLight.h"
 
 // 00F5D440  cEspShaderPointLight::vf0C  size=1  [class]
 void cEspShaderPointLight::vf0C(void)

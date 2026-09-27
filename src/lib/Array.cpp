@@ -1,7 +1,14 @@
 // src/lib/Array.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401180..015F1270, 2392 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "HkDataManagerImplement.h"
+#include "HkRemoveEntity.h"
+#include "HkRemoveEntityBatch.h"
+#include "HkRemoveManager.h"
+#include "HkRemovePhantom.h"
+#include "HkRemovePhysicsSystem.h"
+#include "HkRemoveRagdoll.h"
 
 // 00401180  lib::Array<BattleRegionManagerImplement::Unit>::vf04  size=4  [class]
 undefined4 __fastcall lib::Array<BattleRegionManagerImplement::Unit>::vf04(int param_1)

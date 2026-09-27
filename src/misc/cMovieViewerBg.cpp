@@ -1,7 +1,8 @@
 // src/misc/cMovieViewerBg.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00991F20..009A4650, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMovieViewerBg.h"
 
 // 00991F20  cMovieViewerBg::cMovieViewerBg  size=18  [class]
 undefined4 * __fastcall cMovieViewerBg::cMovieViewerBg(undefined4 *param_1)

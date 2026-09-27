@@ -1,7 +1,8 @@
 // src/player/pl0012/Pl0012.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00AA6040..00C12120, 13 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl0012.h"
 
 // 00AA6040  Pl0012::Pl0012  size=29  [class]
 undefined4 * __fastcall Pl0012::Pl0012(undefined4 *param_1)

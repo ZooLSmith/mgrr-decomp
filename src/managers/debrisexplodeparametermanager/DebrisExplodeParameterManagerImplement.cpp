@@ -1,7 +1,8 @@
 // src/managers/debrisexplodeparametermanager/DebrisExplodeParameterManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0093FDC0..00944640, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "DebrisExplodeParameterManagerImplement.h"
 
 // 0093FDC0  DebrisExplodeParameterManagerImplement::vf08  size=98  [class]
 void __thiscall DebrisExplodeParameterManagerImplement::vf08(int param_1,int param_2)

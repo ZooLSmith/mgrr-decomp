@@ -1,7 +1,8 @@
 // src/enemy/em0310/Em0310Debris.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0057F470..00AB8840, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0310Debris.h"
 
 // 0057F470  Em0310Debris::thunk_vf44  size=5  [class]
 void __fastcall Em0310Debris::thunk_vf44(int param_1)

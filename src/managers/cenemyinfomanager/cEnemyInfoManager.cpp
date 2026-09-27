@@ -1,7 +1,8 @@
 // src/managers/cenemyinfomanager/cEnemyInfoManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00988CD0..00988CD0, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEnemyInfoManager.h"
 
 // 00988CD0  cEnemyInfoManager::vf00  size=30  [class]
 undefined4 __thiscall cEnemyInfoManager::vf00(undefined4 param_1,byte param_2)

@@ -1,7 +1,8 @@
 // src/misc/cSentryGunSiteParts.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CD84D0..00D17910, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cSentryGunSiteParts.h"
 
 // 00CD84D0  cSentryGunSiteParts::cSentryGunSiteParts  size=101  [class]
 void __fastcall cSentryGunSiteParts::cSentryGunSiteParts(undefined4 *param_1)

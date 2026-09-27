@@ -1,7 +1,9 @@
 // lib/havok/unit_010E60C0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 010E60C0..010E6CE0, 41 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkPackfileWriter.h"
+#include "hkXmlPackfileWriter.h"
 
 // 010E60C0  hkPackfileWriter::hkPackfileWriter  size=370  [run]
 undefined4 * __thiscall hkPackfileWriter::hkPackfileWriter(undefined4 *param_1,undefined8 *param_2)

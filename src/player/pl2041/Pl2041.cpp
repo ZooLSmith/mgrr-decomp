@@ -1,7 +1,8 @@
 // src/player/pl2041/Pl2041.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 005F50A0..00AB9900, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Pl2041.h"
 
 // 005F50A0  Pl2041::vf40  size=28  [class]
 undefined4 __fastcall Pl2041::vf40(int param_1)

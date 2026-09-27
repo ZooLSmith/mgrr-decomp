@@ -1,7 +1,8 @@
 // src/misc/esp34.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED2D80..00F360D0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp34.h"
 
 // 00ED2D80  esp34::esp34  size=18  [class]
 undefined4 * __fastcall esp34::esp34(undefined4 *param_1)

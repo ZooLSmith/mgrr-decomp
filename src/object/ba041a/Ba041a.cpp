@@ -1,7 +1,8 @@
 // src/object/ba041a/Ba041a.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00405A00..00AB9330, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba041a.h"
 
 // 00405A00  Ba041a::vf40  size=32  [class]
 undefined4 __fastcall Ba041a::vf40(int param_1)

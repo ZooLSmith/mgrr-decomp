@@ -1,7 +1,8 @@
 // src/managers/voicesubtitlemanager/VoiceSubtitleManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C20860..00C67780, 17 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "VoiceSubtitleManagerImplement.h"
 
 // 00C20860  FUN_00c20860  size=76  [callgraph]
 void __thiscall FUN_00c20860(undefined4 *param_1,undefined4 param_2)

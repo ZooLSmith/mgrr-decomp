@@ -1,7 +1,8 @@
 // src/ui/cUIPrimWorkStrip.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CCC420..00CE97D0, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cUIPrimWorkStrip.h"
 
 // 00CCC420  cUIPrimWorkStrip::cUIPrimWorkStrip_5  size=32  [class]
 undefined4 * __fastcall cUIPrimWorkStrip::cUIPrimWorkStrip_5(undefined4 *param_1)

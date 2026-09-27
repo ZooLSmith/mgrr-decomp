@@ -1,7 +1,8 @@
 // src/collision/EffectCollisionMaterial.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008FE8B0..009001E0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EffectCollisionMaterial.h"
 
 // 008FE8B0  EffectCollisionMaterial::vf08  size=31  [class]
 undefined4 * __thiscall EffectCollisionMaterial::vf08(undefined4 *param_1,byte param_2)

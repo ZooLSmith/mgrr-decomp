@@ -1,7 +1,8 @@
 // lib/msvc/crt/unit_00FDB68B.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FDB68B..00FDF826, 156 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "_LocaleUpdate.h"
 
 // 00FDB68B  __purecall  size=42  [run]
 /* Library Function - Single Match

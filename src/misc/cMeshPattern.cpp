@@ -1,7 +1,7 @@
 // src/misc/cMeshPattern.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A09C60..00A0A360, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00A09C60  cMeshPattern::getPatternElem  size=121  [class]
 int __fastcall cMeshPattern::getPatternElem(int *param_1)

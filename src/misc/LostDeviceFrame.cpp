@@ -1,7 +1,8 @@
 // src/misc/LostDeviceFrame.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00989650..009990B0, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "LostDeviceFrame.h"
 
 // 00989650  LostDeviceFrame::LostDeviceFrame_2  size=25  [class]
 undefined4 * __fastcall LostDeviceFrame::LostDeviceFrame_2(undefined4 *param_1)

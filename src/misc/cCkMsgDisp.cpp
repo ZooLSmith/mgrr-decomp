@@ -1,7 +1,8 @@
 // src/misc/cCkMsgDisp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D0DCF0..00D29A10, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCkMsgDisp.h"
 
 // 00D0DCF0  cCkMsgDisp::vf00  size=62  [class]
 undefined4 * __thiscall cCkMsgDisp::vf00(undefined4 *param_1,byte param_2)

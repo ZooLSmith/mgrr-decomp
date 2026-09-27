@@ -1,7 +1,8 @@
 // src/object/ba0066/Ba0066.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00405140..00AB8F00, 10 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Ba0066.h"
 
 // 00405140  FUN_00405140  size=209  [callgraph]
 int __thiscall

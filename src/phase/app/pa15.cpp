@@ -1,7 +1,8 @@
 // src/phase/app/pa15.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D47830..00D70020, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPa15.h"
 
 // 00D47830  cPa15::vf0C  size=41  [class]
 void __fastcall cPa15::vf0C(int param_1)

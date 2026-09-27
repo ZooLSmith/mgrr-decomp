@@ -1,7 +1,7 @@
 // src/managers/effectlightmanager/EffectLightManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC6FA0..00EC70E0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00EC6FA0  FUN_00ec6fa0  size=80  [callgraph]
 void __fastcall FUN_00ec6fa0(undefined4 *param_1)

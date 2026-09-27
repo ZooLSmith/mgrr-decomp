@@ -1,7 +1,8 @@
 // src/camera/cCameraShakeOld.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DA3B10..00DB2270, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cCameraShakeOld.h"
 
 // 00DA3B10  cCameraShakeOld::vf04  size=22  [class]
 void __fastcall cCameraShakeOld::vf04(int param_1)

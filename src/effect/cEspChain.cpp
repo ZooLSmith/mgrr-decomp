@@ -1,7 +1,8 @@
 // src/effect/cEspChain.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ECD5E0..00F2E180, 26 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspChain.h"
 
 // 00ECD5E0  cEspChain::cEspChain  size=18  [class]
 undefined4 * __fastcall cEspChain::cEspChain(undefined4 *param_1)

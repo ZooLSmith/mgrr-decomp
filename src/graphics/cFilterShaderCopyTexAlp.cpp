@@ -1,7 +1,8 @@
 // src/graphics/cFilterShaderCopyTexAlp.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00EC1C50..00EC42A0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cFilterShaderCopyTexAlp.h"
 
 // 00EC1C50  cFilterShaderCopyTexAlp::cFilterShaderCopyTexAlp  size=18  [class]
 undefined4 * __fastcall cFilterShaderCopyTexAlp::cFilterShaderCopyTexAlp(undefined4 *param_1)

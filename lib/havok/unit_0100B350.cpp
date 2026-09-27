@@ -1,7 +1,34 @@
 // lib/havok/unit_0100B350.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0100B350..01022FF0, 960 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkArrayStreamWriter.h"
+#include "hkBaseObject.h"
+#include "hkBufferedStreamWriter.h"
+#include "hkCpuJobThreadPool.h"
+#include "hkCrc32StreamWriter.h"
+#include "hkDefaultError.h"
+#include "hkDummySingleton.h"
+#include "hkErrStream.h"
+#include "hkError.h"
+#include "hkFileSystem.h"
+#include "hkJobThreadPool.h"
+#include "hkLifoAllocator.h"
+#include "hkLocalFrame.h"
+#include "hkLocalFrameGroup.h"
+#include "hkMallocAllocator.h"
+#include "hkMemoryAllocator.h"
+#include "hkMemorySystem.h"
+#include "hkMemoryTrackStreamWriter.h"
+#include "hkMonitorStreamColorTable.h"
+#include "hkNativeFileSystem.h"
+#include "hkOArchive.h"
+#include "hkOstream.h"
+#include "hkReferencedObject.h"
+#include "hkSimpleLocalFrame.h"
+#include "hkSocket.h"
+#include "hkStreamReader.h"
+#include "hkStreamWriter.h"
 
 // 0100B350  FUN_0100b350  size=38  [run]
 void FUN_0100b350(int param_1)

@@ -1,7 +1,8 @@
 // src/misc/CRect.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00FA48F0..00FA4DE0, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CRect.h"
 
 // 00FA48F0  FUN_00fa48f0  size=273  [callgraph]
 undefined4 FUN_00fa48f0(int param_1,undefined4 param_2,undefined4 param_3,int param_4)

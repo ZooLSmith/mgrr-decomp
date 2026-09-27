@@ -1,7 +1,7 @@
 // src/misc/cVertexBufferHeap.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F99E10..00F99E10, 1 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00F99E10  cVertexBufferHeap::allocateBuffer  size=208  [class]
 undefined4 __thiscall

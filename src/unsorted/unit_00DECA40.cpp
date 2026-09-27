@@ -1,7 +1,7 @@
 // src/unsorted/unit_00DECA40.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00DECA40..00DECB90, 8 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00DECA40  FUN_00deca40  size=38  [run]
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */

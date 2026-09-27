@@ -1,7 +1,8 @@
 // src/misc/cObject.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A1F620..015F5EC0, 19 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cObject.h"
 
 // 00A1F620  cObject::vf00  size=6  [class]
 undefined ** cObject::vf00(void)

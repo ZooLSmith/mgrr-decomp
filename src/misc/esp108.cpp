@@ -1,7 +1,8 @@
 // src/misc/esp108.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009CFF00..00F2D650, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "esp108.h"
 
 // 009CFF00  esp108::vf04  size=54  [class]
 undefined4 __thiscall

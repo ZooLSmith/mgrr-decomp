@@ -1,7 +1,8 @@
 // src/boss/bm0013/Bm0013.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004104F0..00AB91D0, 16 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0013.h"
 
 // 004104F0  Bm0013::vf4C  size=5  [class]
 void __fastcall Bm0013::vf4C(int *param_1)

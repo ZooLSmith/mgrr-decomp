@@ -1,7 +1,8 @@
 // src/enemy/em0120/Em0120.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004DB240..00AB73A0, 112 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Em0120.h"
 
 // 004DB240  Em0120::vf14C  size=5  [class]
 undefined4 Em0120::vf14C(void)

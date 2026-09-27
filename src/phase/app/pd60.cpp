@@ -1,7 +1,8 @@
 // src/phase/app/pd60.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D4BD20..00D6E250, 7 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cPd60.h"
 
 // 00D4BD20  cPd60::vf14  size=18  [class]
 void __fastcall cPd60::vf14(int param_1)

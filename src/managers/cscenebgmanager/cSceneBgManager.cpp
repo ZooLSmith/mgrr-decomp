@@ -1,7 +1,7 @@
 // src/managers/cscenebgmanager/cSceneBgManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009351C0..00935420, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 009351C0  cSceneBgManager::moveReadLayoutRequest  size=606  [class]
 void __fastcall cSceneBgManager::moveReadLayoutRequest(undefined4 *param_1)

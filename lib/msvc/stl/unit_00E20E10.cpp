@@ -1,7 +1,7 @@
 // lib/msvc/stl/unit_00E20E10.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00E20E10..00E210A0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
 
 // 00E20E10  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>_>_>::vf20  size=525  [run]
 void __thiscall

@@ -1,7 +1,8 @@
 // src/effect/cEspStrip2p.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00ED1D50..00F2E1E0, 9 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspStrip2p.h"
 
 // 00ED1D50  cEspStrip2p::vf00  size=30  [class]
 undefined4 __thiscall cEspStrip2p::vf00(undefined4 param_1,byte param_2)

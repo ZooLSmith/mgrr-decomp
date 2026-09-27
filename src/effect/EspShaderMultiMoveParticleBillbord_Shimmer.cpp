@@ -1,7 +1,8 @@
 // src/effect/EspShaderMultiMoveParticleBillbord_Shimmer.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F63940..00F8C6C0, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EspShaderMultiMoveParticleBillbord_Shimmer.h"
 
 // 00F63940  EspShaderMultiMoveParticleBillbord_Shimmer::vf08  size=450  [class]
 undefined4 __fastcall EspShaderMultiMoveParticleBillbord_Shimmer::vf08(int *param_1)

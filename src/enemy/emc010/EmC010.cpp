@@ -1,7 +1,8 @@
 // src/enemy/emc010/EmC010.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00709080..00AB9CF0, 498 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "EmC010.h"
 
 // 00709080  EmC010::vfFC  size=30  [class]
 void __fastcall EmC010::vfFC(int param_1)

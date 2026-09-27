@@ -1,7 +1,8 @@
 // src/misc/cMovieViewerBase.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009A2E40..00D11710, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cMovieViewerBase.h"
 
 // 009A2E40  cMovieViewerBase::vf14  size=61  [class]
 undefined4 __thiscall cMovieViewerBase::vf14(int param_1,undefined4 param_2)

@@ -1,7 +1,8 @@
 // src/player/pl1400/state/ZangekiIaiAttackStatePl1400.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0085F770..00896A30, 17 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "ZangekiIaiAttackStatePl1400.h"
 
 // 0085F770  ZangekiIaiAttackStatePl1400::DatsuTargetCreateSlot::vf10  size=1  [class]
 void ZangekiIaiAttackStatePl1400::DatsuTargetCreateSlot::vf10(void)

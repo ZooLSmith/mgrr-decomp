@@ -1,7 +1,8 @@
 // src/havok/CharacterControlPointCollector.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008E1B90..008EBAF0, 2 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "CharacterControlPointCollector.h"
 
 // 008E1B90  CharacterControlPointCollector::vf04  size=68  [class]
 void CharacterControlPointCollector::vf04(int param_1)

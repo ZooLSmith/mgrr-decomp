@@ -1,7 +1,8 @@
 // src/managers/cgameuimanager/cGameUIManager.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00CF64C0..00CF6610, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cGameUIManager.h"
 
 // 00CF64C0  cGameUIManager::~cGameUIManager  size=117  [class]
 void __fastcall cGameUIManager::~cGameUIManager(undefined4 *param_1)

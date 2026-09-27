@@ -1,7 +1,8 @@
 // src/effect/cEspShaderMultiParticleBillbord.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F63B10..00F8C780, 3 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderMultiParticleBillbord.h"
 
 // 00F63B10  cEspShaderMultiParticleBillbord::vf08  size=384  [class]
 undefined4 __fastcall cEspShaderMultiParticleBillbord::vf08(int *param_1)

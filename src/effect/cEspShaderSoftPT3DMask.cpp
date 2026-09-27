@@ -1,7 +1,8 @@
 // src/effect/cEspShaderSoftPT3DMask.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F5C5D0..00F8B080, 5 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cEspShaderSoftPT3DMask.h"
 
 // 00F5C5D0  cEspShaderSoftPT3DMask::vf0C  size=1  [class]
 void cEspShaderSoftPT3DMask::vf0C(void)

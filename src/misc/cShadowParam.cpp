@@ -1,7 +1,8 @@
 // src/misc/cShadowParam.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00A28440..00A447A0, 4 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "cShadowParam.h"
 
 // 00A28440  cShadowParam::cShadowParam  size=117  [class]
 void __thiscall cShadowParam::cShadowParam(undefined4 *param_1,int param_2)

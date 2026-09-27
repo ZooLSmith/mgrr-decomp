@@ -1,7 +1,8 @@
 // src/managers/battlecollisionmanager/BattleCollisionManagerImplement.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D77300..00D7DC80, 42 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "BattleCollisionManagerImplement.h"
 
 // 00D77300  BattleCollisionManagerImplement::MainUpdateForPauseSlot::vf10  size=1  [class]
 void BattleCollisionManagerImplement::MainUpdateForPauseSlot::vf10(void)

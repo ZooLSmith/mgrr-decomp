@@ -1,7 +1,8 @@
 // src/boss/bm0270/Bm0270.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00411E80..00AB9360, 6 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "Bm0270.h"
 
 // 00411E80  Bm0270::vf44  size=5  [class]
 void __fastcall Bm0270::vf44(int param_1)

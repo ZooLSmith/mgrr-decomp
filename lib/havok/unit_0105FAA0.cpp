@@ -1,7 +1,13 @@
 // lib/havok/unit_0105FAA0.cpp
 // Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0105FAA0..01065520, 143 functions
 
-#include "types.h"
+#include "mgrr.h"
+#include "hkBaseObject.h"
+#include "hkMemoryMeshTexture.h"
+#include "hkMeshTexture.h"
+#include "hkPackfileReader.h"
+#include "hkSkinnedMeshShape.h"
+#include "hkStorageSkinnedMeshShape.h"
 
 // 0105FAA0  hkBaseObject::hkBaseObject_48  size=68  [run]
 void __fastcall hkBaseObject::hkBaseObject_48(undefined4 *param_1)
