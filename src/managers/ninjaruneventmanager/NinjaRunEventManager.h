@@ -1,0 +1,52 @@
+// REFINED
+// NinjaRunEventManager -- interface; the only implementation is NinjaRunEventManagerImplement
+// (see its header for the layout). The virtual list is kept as generated because the
+// implementation header overrides against it.
+#pragma once
+#include "../../../include/ghidra_types.h"
+#include "../../../include/auto/fwd.h"
+
+struct NinjaRunEventManager {
+    // virtual functions, in vftable order (slot = byte offset / 4)
+    virtual void vf00() = 0;  // 00FDB68B slot 0x0
+    virtual undefined vf04() = 0;  // 00FDB68B slot 0x4
+    virtual void vf08(int * param_2, undefined4 param_3) = 0;  // 00FDB68B slot 0x8
+    virtual void vf0C(undefined4 param_2) = 0;  // 00FDB68B slot 0xC
+    virtual void vf10() = 0;  // 00FDB68B slot 0x10
+    virtual void vf14() = 0;  // 00FDB68B slot 0x14
+    virtual void vf18() = 0;  // 00FDB68B slot 0x18
+    virtual undefined4 vf1C() = 0;  // 00FDB68B slot 0x1C
+    virtual undefined4 vf20() = 0;  // 00FDB68B slot 0x20
+    virtual undefined4 vf24(undefined4 param_2) = 0;  // 00FDB68B slot 0x24
+    virtual void vf28(int param_2) = 0;  // 00FDB68B slot 0x28
+    virtual void vf2C() = 0;  // 00FDB68B slot 0x2C
+    virtual undefined vf30() = 0;  // 00FDB68B slot 0x30
+    virtual undefined AllocatedArray_NinjaRunEventManagerImplement__RegionUnit__() = 0;  // 00FDB68B slot 0x34
+    virtual undefined vf38() = 0;  // 00FDB68B slot 0x38
+    virtual undefined vf3C() = 0;  // 00FDB68B slot 0x3C
+    virtual undefined vf40() = 0;  // 00FDB68B slot 0x40
+    virtual undefined vf44() = 0;  // 00FDB68B slot 0x44
+    virtual undefined vf48() = 0;  // 00FDB68B slot 0x48
+    virtual undefined vf4C() = 0;  // 00FDB68B slot 0x4C
+    virtual undefined vf50() = 0;  // 00FDB68B slot 0x50
+    virtual undefined vf54() = 0;  // 00FDB68B slot 0x54
+    virtual undefined vf58() = 0;  // 00FDB68B slot 0x58
+    virtual undefined vf5C() = 0;  // 00FDB68B slot 0x5C
+    virtual undefined vf60() = 0;  // 00FDB68B slot 0x60
+    virtual undefined vf64() = 0;  // 00FDB68B slot 0x64
+    virtual undefined vf68() = 0;  // 00FDB68B slot 0x68
+    virtual undefined vf6C() = 0;  // 00FDB68B slot 0x6C
+    virtual undefined vf70() = 0;  // 00FDB68B slot 0x70
+    virtual undefined vf74() = 0;  // 00FDB68B slot 0x74
+    virtual undefined vf78() = 0;  // 00FDB68B slot 0x78
+    virtual undefined vf7C() = 0;  // 00FDB68B slot 0x7C
+    virtual undefined vf80() = 0;  // 00FDB68B slot 0x80
+    virtual undefined vf84() = 0;  // 00FDB68B slot 0x84
+    virtual undefined vf88() = 0;  // 00FDB68B slot 0x88
+    virtual undefined vf8C() = 0;  // 00FDB68B slot 0x8C
+    virtual undefined vf90() = 0;  // 00FDB68B slot 0x90
+    virtual undefined4 * vf94(byte flags);  // 00C1BA20 slot 0x94  scalar deleting destructor
+    // non-virtual members
+    void destroyAsImplement();                     // 00C629F0 (was the "constructor"): = ~NinjaRunEventManagerImplement
+    undefined4 *deleteAsImplement(byte flags);     // 00C62A40 (was ctor_00C62A40): NinjaRunEventManagerImplement::vf94 body
+};

@@ -1,149 +1,170 @@
-// src/player/pl0010/Pl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B95720..00B95720, 1 functions
-
+// src/player/pl0010/Pl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "Pl0010.h"
 
-// 00B95720  Pl0010::GroundTest  size=1028  [class]
-void __fastcall Pl0010::GroundTest(int param_1)
-
-{
-  float *pfVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  code *pcVar8;
-  uint uVar9;
-  float *pfVar10;
-  int *piVar11;
-  int iVar12;
-  int iStack_4c;
-  int iStack_48;
-  int local_44;
-  float local_40;
-  float fStack_3c;
-  float fStack_38;
-  float fStack_34;
-  float fStack_30;
-  float fStack_2c;
-  float fStack_28;
-  float fStack_24;
-  undefined1 local_20 [28];
-  
-  iVar12 = *(int *)(param_1 + 0x764);
-  if (iVar12 != 0) {
-    uVar2 = *(undefined4 *)(iVar12 + 0xfc);
-    FUN_00a8bac0(&local_40,*(undefined4 *)(iVar12 + 0xfc));
-    FUN_00a8bac0(local_20,-0.5 - *(float *)(*(int *)(param_1 + 0x764) + 0xfc));
-    pcVar8 = *(code **)(*(int *)(param_1 + 0x50a0) + 8);
-    *(undefined4 *)(param_1 + 0x41ec) = 0;
-    (*pcVar8)();
-    piVar11 = (int *)FUN_009f8b60();
-    fStack_30 = *(float *)(param_1 + 0x40) + local_40;
-    fStack_2c = *(float *)(param_1 + 0x44) + fStack_3c;
-    pfVar1 = (float *)(param_1 + 0x41c0);
-    fStack_28 = *(float *)(param_1 + 0x48) + fStack_38;
-    fStack_24 = *(float *)(param_1 + 0x4c) + fStack_34;
-    iVar12 = FUN_0090eea0(param_1 + 0x50a0,pfVar1,&fStack_30,uVar2,local_20,*piVar11 << 0x10,
-                          "Pl0010::GroundTest");
-    if (iVar12 == 0) {
-      *(undefined4 *)(param_1 + 0x41e0) = 0;
-      *(undefined4 *)(param_1 + 0x41e4) = 0;
-      fVar5 = *(float *)(param_1 + 0x40) - *pfVar1;
-      fVar7 = *(float *)(param_1 + 0x44) - *(float *)(param_1 + 0x41c4);
-      fVar6 = *(float *)(param_1 + 0x48) - *(float *)(param_1 + 0x41c8);
-      *(float *)(param_1 + 0x41e8) = SQRT(fVar6 * fVar6 + fVar7 * fVar7 + fVar5 * fVar5);
-      fStack_30 = *(float *)(param_1 + 0x40) - *pfVar1;
-      fStack_2c = *(float *)(param_1 + 0x44) - *(float *)(param_1 + 0x41c4);
-      fStack_28 = *(float *)(param_1 + 0x48) - *(float *)(param_1 + 0x41c8);
-      fStack_24 = *(float *)(param_1 + 0x4c) - *(float *)(param_1 + 0x41cc);
-      if (((fStack_30 != 0.0) || (fStack_2c != 0.0)) ||
-         (fVar5 = fStack_2c, fVar6 = fStack_28, fVar7 = fStack_30, fStack_28 != 0.0)) {
-        fVar5 = fStack_28 * fStack_28 + fStack_30 * fStack_30 + fStack_2c * fStack_2c;
-        if (fVar5 < 0.0 == (fVar5 == 0.0)) {
-          FUN_00ddf460(&fStack_30,&fStack_30);
-          fVar5 = fStack_2c;
-          fVar6 = fStack_28;
-          fVar7 = fStack_30;
-        }
-        else {
-          FUN_00dd5650(&DAT_0163d0ac);
-          fVar7 = 0.0;
-          fVar5 = 1.0;
-          fVar6 = 0.0;
-        }
-      }
-      if (fVar6 * 0.0 + fVar7 * 0.0 + fVar5 < 0.0) {
-        *(float *)(param_1 + 0x41e8) = *(float *)(param_1 + 0x41e8) * -1.0;
-      }
-    }
-    else {
-      FUN_0112bcf0();
-      local_44 = 0;
-      if (0 < *(int *)(param_1 + 0x50b4)) {
-        iStack_4c = 0;
-        do {
-          iVar12 = *(int *)(iStack_4c + 0x28 + *(int *)(param_1 + 0x50b0));
-          iVar12 = *(char *)(iVar12 + 0x10) + iVar12;
-          if (iVar12 != 0) {
-            uVar9 = *(uint *)(iVar12 + 0xc);
-            if (uVar9 == 0) {
-              iStack_48 = 0;
-            }
-            else {
-              iStack_48 = *(int *)((-(uint)(uVar9 != 0) & uVar9) + 0x44);
-              if (iStack_48 == -1) goto LAB_00b95869;
-            }
-            piVar11 = (int *)FUN_00c13920();
-            (**(code **)(*piVar11 + 0x14))(iStack_48);
-          }
-LAB_00b95869:
-          iStack_4c = iStack_4c + 0x30;
-          local_44 = local_44 + 1;
-        } while (local_44 < *(int *)(param_1 + 0x50b4));
-      }
-      iVar12 = *(int *)(param_1 + 0x50b0);
-      uVar2 = *(undefined4 *)(iVar12 + 0x14);
-      uVar3 = *(undefined4 *)(iVar12 + 0x18);
-      uVar4 = *(undefined4 *)(iVar12 + 0x1c);
-      *(undefined4 *)(param_1 + 0x41d0) = *(undefined4 *)(iVar12 + 0x10);
-      *(undefined4 *)(param_1 + 0x41d4) = uVar2;
-      *(undefined4 *)(param_1 + 0x41d8) = uVar3;
-      *(undefined4 *)(param_1 + 0x41dc) = uVar4;
-      pfVar10 = *(float **)(param_1 + 0x50b0);
-      fVar5 = pfVar10[1];
-      fVar6 = pfVar10[2];
-      fVar7 = pfVar10[3];
-      *pfVar1 = *pfVar10;
-      *(float *)(param_1 + 0x41c4) = fVar5;
-      *(float *)(param_1 + 0x41c8) = fVar6;
-      *(float *)(param_1 + 0x41cc) = fVar7;
-      *pfVar1 = *pfVar1 - local_40;
-      *(float *)(param_1 + 0x41c4) = *(float *)(param_1 + 0x41c4) - fStack_3c;
-      *(float *)(param_1 + 0x41c8) = *(float *)(param_1 + 0x41c8) - fStack_38;
-      *(float *)(param_1 + 0x41cc) = *(float *)(param_1 + 0x41cc) - fStack_34;
-      *(undefined4 *)(param_1 + 0x41e0) = 1;
-      fVar5 = *(float *)(param_1 + 0x40) - *pfVar1;
-      fVar7 = *(float *)(param_1 + 0x44) - *(float *)(param_1 + 0x41c4);
-      fVar6 = *(float *)(param_1 + 0x48) - *(float *)(param_1 + 0x41c8);
-      *(float *)(param_1 + 0x41e4) = SQRT(fVar5 * fVar5 + fVar7 * fVar7 + fVar6 * fVar6);
-    }
-    *(undefined4 *)(param_1 + 0x600) = 0x3e19999a;
-    iVar12 = FUN_00d467a0();
-    if (iVar12 != 0) {
-      Behavior::updateGroundSupportForParts
-                (param_1 + 0x4160,param_1 + 0x5b0,param_1 + 0x594,param_1 + 0x5f0,0x19);
-      Behavior::updateGroundSupportForParts
-                (param_1 + 0x4164,param_1 + 0x5c0,param_1 + 0x598,param_1 + 0x5f4,0x14);
-      return;
-    }
-    Behavior::updateGroundSupportForParts
-              (param_1 + 0x4160,param_1 + 0x5b0,param_1 + 0x594,param_1 + 0x5f0,0x16);
-    Behavior::updateGroundSupportForParts
-              (param_1 + 0x4164,param_1 + 0x5c0,param_1 + 0x598,param_1 + 0x5f4,0x12);
-  }
-  return;
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+extern unsigned char DAT_01b35df8[];  // collision query manager (ECX of FUN_0090eea0)
+extern unsigned char DAT_018b9140[];  // ECX of FUN_00d467a0
+extern const char    DAT_0163d0ac[];  // "[Hw::VecNormalize] cannot normalise a zero vector."
+
+namespace Pl0010_p1 {
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
 }
 
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __fastcall call of a function with ECX = self
+template <class R, class F> inline R fastcall(F fn, const void *self)
+{
+    typedef R (__fastcall *Fn)(const void *);
+    return ((Fn)fn)(self);
+}
+
+}  // namespace Pl0010_p1
+
+// 00B95720  Pl0010::GroundTest  size=1028  [class]
+void Pl0010::GroundTest()
+{
+    using namespace Pl0010_p1;
+    __declspec(align(16)) float offset[4];      // cast offset: up * radius (FUN_00a8bac0)
+    __declspec(align(16)) float direction[4];   // cast vector: up * (-0.5 - radius)
+    __declspec(align(16)) float vec[4];
+
+    char *shape = *(char **)((char *)this + 0x764);  /* Behavior+0x764: ground shape (radius at +0xFC) */
+    if (shape == 0) {
+        return;
+    }
+    float radius = *(float *)(shape + 0xfc);
+    thiscall<float *>(FUN_00a8bac0, this, offset, *(float *)(shape + 0xfc));
+    thiscall<float *>(FUN_00a8bac0, this, direction, -0.5f - *(float *)(*(char **)((char *)this + 0x764) + 0xfc));
+    field41EC() = 0;
+    vcall<void>(groundCollector(), 0x8);  // reset the collector
+    int *filter = (int *)FUN_009f8b60((int)this);
+    float *position = matrix() + 12;  // +0x40
+    vec[0] = position[0] + offset[0];
+    vec[1] = position[1] + offset[1];
+    vec[2] = position[2] + offset[2];
+    vec[3] = position[3] + offset[3];
+    int hit = thiscall<int>(FUN_0090eea0, DAT_01b35df8, groundCollector(), groundPos(), vec, radius,
+                            direction, *filter << 0x10, "Pl0010::GroundTest");
+    if (hit == 0) {
+        groundHit() = 0;
+        groundHitDistance() = 0.0f;
+        float dx = position[0] - groundPos()[0];
+        float dy = position[1] - groundPos()[1];
+        float dz = position[2] - groundPos()[2];
+        groundMissDistance() = sqrtf((dx * dx + dy * dy) + dz * dz);
+        vec[0] = position[0] - groundPos()[0];
+        vec[1] = position[1] - groundPos()[1];
+        vec[2] = position[2] - groundPos()[2];
+        vec[3] = position[3] - groundPos()[3];
+        float x = vec[0];
+        float y = vec[1];
+        float z = vec[2];
+        if (vec[0] != 0.0f || vec[1] != 0.0f || vec[2] != 0.0f) {
+            // inlined Hw::VecNormalize
+            float lengthSq = (vec[1] * vec[1] + vec[0] * vec[0]) + vec[2] * vec[2];
+            // (the machine code also rejects NaN components: x != x checks omitted by Ghidra)
+            if ((lengthSq < 0.0f) == (lengthSq == 0.0f) && vec[0] == vec[0] && vec[1] == vec[1] &&
+                vec[2] == vec[2]) {
+                FUN_00ddf460(vec, vec);
+                y = vec[1];
+                z = vec[2];
+                x = vec[0];
+            }
+            else {
+                cdeclcall<void>(FUN_00dd5650, DAT_0163d0ac);  // debug print
+                x = 0.0f;
+                y = 1.0f;
+                z = 0.0f;
+            }
+        }
+        // below the ground position: negative distance
+        if ((y + x * 0.0f) + z * 0.0f < 0.0f) {
+            groundMissDistance() = groundMissDistance() * -1.0f;
+        }
+    }
+    else {
+        FUN_0112bcf0((uint)groundCollector());
+        int index = 0;
+        if (0 < groundHitCount()) {
+            int hitOffset = 0;
+            do {
+                char *collidable = *(char **)(groundHits() + hitOffset + 0x28);
+                char *owner = *(signed char *)(collidable + 0x10) + collidable;
+                if (owner != 0) {
+                    unsigned int object = *(unsigned int *)(owner + 0xc);
+                    int objectId;
+                    if (object == 0) {
+                        objectId = 0;
+                    }
+                    else {
+                        objectId = *(int *)(object + 0x44);
+                        if (objectId == -1) {
+                            goto next;
+                        }
+                    }
+                    {
+                        void *manager = (void *)FUN_00c13920();
+                        vcall<void>(manager, 0x14, objectId);
+                    }
+                }
+            next:
+                hitOffset = hitOffset + 0x30;
+                index = index + 1;
+            } while (index < groundHitCount());
+        }
+        float *firstHit = (float *)groundHits();
+        groundNormal()[0] = firstHit[4];
+        groundNormal()[1] = firstHit[5];
+        groundNormal()[2] = firstHit[6];
+        groundNormal()[3] = firstHit[7];
+        firstHit = (float *)groundHits();
+        groundPos()[0] = firstHit[0];
+        groundPos()[1] = firstHit[1];
+        groundPos()[2] = firstHit[2];
+        groundPos()[3] = firstHit[3];
+        groundPos()[0] = groundPos()[0] - offset[0];
+        groundPos()[1] = groundPos()[1] - offset[1];
+        groundPos()[2] = groundPos()[2] - offset[2];
+        groundPos()[3] = groundPos()[3] - offset[3];
+        groundHit() = 1;
+        float dx = position[0] - groundPos()[0];
+        float dy = position[1] - groundPos()[1];
+        float dz = position[2] - groundPos()[2];
+        groundHitDistance() = sqrtf(dx * dx + dy * dy + dz * dz);
+    }
+    groundSupportRange() = 0.15f;  // +0x600
+    if (FUN_00d467a0((int)DAT_018b9140)) {
+        updateGroundSupportForParts((int)groundQuery4160(), (float *)((char *)this + 0x5b0),
+                                    (int *)((char *)this + 0x594), (int *)((char *)this + 0x5f0), 0x19);
+        updateGroundSupportForParts((int)groundQuery4164(), (float *)((char *)this + 0x5c0),
+                                    (int *)((char *)this + 0x598), (int *)((char *)this + 0x5f4), 0x14);
+        return;
+    }
+    /* Behavior+0x5B0 / +0x5C0: ground hit positions, +0x594 / +0x598: ground states,
+       +0x5F0 / +0x5F4: hit collisions of the two parts */
+    updateGroundSupportForParts((int)groundQuery4160(), (float *)((char *)this + 0x5b0),
+                                (int *)((char *)this + 0x594), (int *)((char *)this + 0x5f0), 0x16);
+    updateGroundSupportForParts((int)groundQuery4164(), (float *)((char *)this + 0x5c0),
+                                (int *)((char *)this + 0x598), (int *)((char *)this + 0x5f4), 0x12);
+}

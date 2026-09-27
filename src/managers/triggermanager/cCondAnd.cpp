@@ -1,151 +1,113 @@
-// src/managers/triggermanager/cCondAnd.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C793F0..00C84D50, 7 functions
-
+// src/managers/triggermanager/cCondAnd.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondAnd.h"
+
+namespace cCondAnd_p1 {
+
+// layout-compatible view of any Trigger::cCondition (vftable layout of 0x016A8930)
+struct Condition {
+    virtual Condition *vf00(unsigned char flags);  // +0x00  scalar deleting destructor
+    virtual void vf04();                           // +0x04
+    virtual void vf08();                           // +0x08
+    virtual int vf0C();                            // +0x0C
+    virtual void vf10();                           // +0x10
+    virtual unsigned int vf14();                   // +0x14  evaluate
+    virtual int vf18();                            // +0x18
+    virtual void vf1C(int *record);                // +0x1C
+    virtual int vf20();                            // +0x20
+};
+
+inline Condition *asCondition(int *object) { return (Condition *)object; }
+
+// Trigger::cCondition+0x0C of a child: last evaluation result written by cCondAnd::vf14
+inline int &lastResult(int *condition) { return *(int *)((char *)condition + 0xC); }
+
+} // namespace cCondAnd_p1
 
 // 00C793F0  Trigger::cCondAnd::cCondAnd  size=31  [class]
-void __fastcall Trigger::cCondAnd::cCondAnd(undefined4 *param_1)
-
-{
-  param_1[3] = 0xffffffff;
-  param_1[1] = 0;
-  param_1[2] = 0xffffffff;
-  *param_1 = vftable;
-  param_1[0x22] = 0xffffffff;
-  return;
+Trigger::cCondAnd::cCondAnd()
+{
+    *(int *)((char *)this + 0xC) /* cCondition+0x0C: ? */ = -1;
+    *(int *)((char *)this + 0x4) /* cCondition+0x04: condition record */ = 0;
+    *(int *)((char *)this + 0x8) /* cCondition+0x08: ? */ = -1;
+    // vftable = Trigger::cCondAnd::vftable (0x016A8BD8)
+    childCount() = -1;
 }
 
 // 00C79420  Trigger::cCondAnd::vf04  size=48  [class]
-void __fastcall Trigger::cCondAnd::vf04(int param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  iVar2 = 0;
-  if (0 < *(int *)(param_1 + 0x88)) {
-    piVar1 = (int *)(param_1 + 0x10);
-    do {
-      if (*piVar1 != 0) {
-        (**(code **)(*(int *)*piVar1 + 4))();
-      }
-      iVar2 = iVar2 + 1;
-      piVar1 = piVar1 + 1;
-    } while (iVar2 < *(int *)(param_1 + 0x88));
-  }
-  return;
+void Trigger::cCondAnd::vf04()
+{
+    using namespace cCondAnd_p1;
+    for (int i = 0; i < childCount(); i++) {
+        if (children()[i] != 0) {
+            asCondition(children()[i])->vf04();
+        }
+    }
 }
 
 // 00C79450  Trigger::cCondAnd::vf08  size=62  [class]
-void __fastcall Trigger::cCondAnd::vf08(int param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  iVar2 = 0;
-  if (0 < *(int *)(param_1 + 0x88)) {
-    piVar1 = (int *)(param_1 + 0x10);
-    do {
-      if (*piVar1 != 0) {
-        (**(code **)(*(int *)*piVar1 + 8))();
-        if ((undefined4 *)*piVar1 != (undefined4 *)0x0) {
-          (*(code *)**(undefined4 **)*piVar1)(1);
-        }
-      }
-      iVar2 = iVar2 + 1;
-      piVar1 = piVar1 + 1;
-    } while (iVar2 < *(int *)(param_1 + 0x88));
-  }
-  return;
+void Trigger::cCondAnd::vf08()
+{
+    using namespace cCondAnd_p1;
+    for (int i = 0; i < childCount(); i++) {
+        if (children()[i] != 0) {
+            asCondition(children()[i])->vf08();
+            if (children()[i] != 0) {
+                asCondition(children()[i])->vf00(1);  // delete the child
+            }
+        }
+    }
 }
 
 // 00C79500  Trigger::cCondAnd::vf10  size=43  [class]
-void __fastcall Trigger::cCondAnd::vf10(int param_1)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  
-  iVar1 = 0;
-  if (0 < *(int *)(param_1 + 0x88)) {
-    puVar2 = (undefined4 *)(param_1 + 0x10);
-    do {
-      (**(code **)(*(int *)*puVar2 + 0x10))();
-      iVar1 = iVar1 + 1;
-      puVar2 = puVar2 + 1;
-    } while (iVar1 < *(int *)(param_1 + 0x88));
-  }
-  return;
+void Trigger::cCondAnd::vf10()
+{
+    using namespace cCondAnd_p1;
+    for (int i = 0; i < childCount(); i++) {
+        asCondition(children()[i])->vf10();
+    }
 }
 
 // 00C79530  Trigger::cCondAnd::vf14  size=93  [class]
-undefined4 __fastcall Trigger::cCondAnd::vf14(int param_1)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  int iVar4;
-  undefined4 local_4;
-  
-  iVar4 = 0;
-  local_4 = 1;
-  uVar2 = 1;
-  if (0 < *(int *)(param_1 + 0x88)) {
-    piVar3 = (int *)(param_1 + 0x10);
-    do {
-      uVar1 = (**(code **)(*(int *)*piVar3 + 0x14))();
-      if (piVar3[0xf] == 1) {
-        uVar1 = uVar1 ^ 1;
-      }
-      if (uVar1 == 0) {
-        *(undefined4 *)(*piVar3 + 0xc) = 0;
-        local_4 = 0;
-      }
-      else {
-        *(undefined4 *)(*piVar3 + 0xc) = 1;
-      }
-      iVar4 = iVar4 + 1;
-      piVar3 = piVar3 + 1;
-      uVar2 = local_4;
-    } while (iVar4 < *(int *)(param_1 + 0x88));
-  }
-  return uVar2;
+int Trigger::cCondAnd::vf14()
+{
+    using namespace cCondAnd_p1;
+    int allTrue = 1;
+    for (int i = 0; i < childCount(); i++) {
+        unsigned int result = asCondition(children()[i])->vf14();
+        if (inverted()[i] == 1) {
+            result = result ^ 1;
+        }
+        if (result == 0) {
+            lastResult(children()[i]) = 0;
+            allTrue = 0;
+        }
+        else {
+            lastResult(children()[i]) = 1;
+        }
+    }
+    return allTrue;
 }
 
 // 00C79590  Trigger::cCondAnd::vf20  size=63  [class]
-undefined4 __fastcall Trigger::cCondAnd::vf20(int param_1)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int *piVar4;
-  
-  iVar3 = 0;
-  uVar2 = 1;
-  if (0 < *(int *)(param_1 + 0x88)) {
-    piVar4 = (int *)(param_1 + 0x10);
-    do {
-      if ((*piVar4 != 0) && (iVar1 = (**(code **)(*(int *)*piVar4 + 0x20))(), iVar1 == 0)) {
-        uVar2 = 0;
-      }
-      iVar3 = iVar3 + 1;
-      piVar4 = piVar4 + 1;
-    } while (iVar3 < *(int *)(param_1 + 0x88));
-  }
-  return uVar2;
+int Trigger::cCondAnd::vf20()
+{
+    using namespace cCondAnd_p1;
+    int result = 1;
+    for (int i = 0; i < childCount(); i++) {
+        if (children()[i] != 0 && asCondition(children()[i])->vf20() == 0) {
+            result = 0;
+        }
+    }
+    return result;
 }
 
 // 00C84D50  Trigger::cCondAnd::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondAnd::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondAnd *Trigger::cCondAnd::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

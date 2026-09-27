@@ -1,328 +1,289 @@
-// src/player/pl0010/state/MiddleCatLeapStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81970..00BDF590, 9 functions
-
+// src/player/pl0010/state/MiddleCatLeapStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "MiddleCatLeapStatePl0010.h"
 
+// type records returned by vf00 / cObj::vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e30[];  // MiddleCatLeapStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+namespace MiddleCatLeapStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &at(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function with ECX = self (used where functions.h has the wrong prototype)
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (used where functions.h has the wrong prototype)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __fastcall call returning the full EAX (functions.h types these as bool)
+template <class F> inline int fastcallInt(F fn, const void *self)
+{
+    typedef int (__fastcall *Fn)(const void *);
+    return ((Fn)fn)(self);
+}
+
+// obj when its type record (from the vftable slot at `typeSlot`) derives from `type`, else 0
+inline char *downcast(const void *obj, unsigned int typeSlot, const void *type)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, typeSlot), type);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+inline char *asContext(const void *obj) { return downcast(obj, 0x0, DAT_01be9ef4); }  // StateMachineContextPl0010
+inline char *asPl0000(const void *obj)  { return downcast(obj, 0x4, DAT_01be9db8); }  // Pl0000
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline char *playerOf(const char *context)
+{
+    return asPl0000(at<void *>(context, 0xC));
+}
+
+// StateMachineContextPl0010+0xC0 -> +4: player parameter block
+inline char *paramsOf(const char *context)
+{
+    return at<char *>(at<char *>(context, 0xC0), 4);
+}
+
+// Pl0000+0x764: motion helper object (+0x104 mode, +0xD0 -> float at +4)
+inline char *motionHelper(const char *player)
+{
+    return at<char *>(player, 0x764);
+}
+
+inline void setMotionMode1(char *player)
+{
+    char *helper = motionHelper(player);
+    if (at<int>(helper, 0x104) != 1) {
+        at<int>(helper, 0x104) = 1;
+        at<float>(at<char *>(helper, 0xD0), 4) = 0.0f;
+    }
+}
+
+inline void clearMotionMode(char *player)
+{
+    if (at<int>(motionHelper(player), 0x104) != 0) {
+        at<int>(motionHelper(player), 0x104) = 0;
+    }
+}
+
+// Pl0000+0x4180/+0x417C/+0x4184 saved into +0x418C/+0x4188/+0x4190 on entry
+inline void saveSteering(char *player)
+{
+    at<float>(player, 0x418C) = at<float>(player, 0x4180);
+    at<float>(player, 0x4188) = at<float>(player, 0x417C);
+    at<float>(player, 0x4190) = at<float>(player, 0x4184);
+}
+
+inline void restoreSteering(char *player)
+{
+    at<float>(player, 0x4180) = at<float>(player, 0x418C);
+    at<float>(player, 0x417C) = at<float>(player, 0x4188);
+    at<float>(player, 0x4184) = at<float>(player, 0x4190);
+}
+
+// Steering reset from the parameters at Pl0000+0x40D4 (+0x170, +0x174 in degrees).
+inline void resetSteering(char *player)
+{
+    char *params = at<char *>(player, 0x40D4);
+    float degrees = at<float>(params, 0x174);
+    at<float>(player, 0x4180) = at<float>(params, 0x170);
+    at<float>(player, 0x417C) = degrees * 0.017453292f;  // degrees -> radians
+    at<float>(player, 0x4184) = 0.0f;
+}
+
+// True unless (Pl0000+0x41E0 is clear or +0x41E4 > 0.36) and the motion helper is idle
+// (FUN_008e2740); the raw nests these tests the same way.
+inline bool nearGroundOrBusy(char *player)
+{
+    return (at<int>(player, 0x41E0) != 0 && !(0.36f < at<float>(player, 0x41E4))) ||
+           fastcallInt(FUN_008e2740, motionHelper(player)) != 0;
+}
+
+}  // namespace MiddleCatLeapStatePl0010_p1
+
 // 00B81970  MiddleCatLeapStatePl0010::vf08  size=58  [class]
-undefined4 __thiscall MiddleCatLeapStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x48) = 0;
-  *(undefined4 *)(param_1 + 0x40) = 0;
-  *(undefined4 *)(param_1 + 0x44) = 0;
-  *(undefined4 *)(param_1 + 0x5c) = 0;
-  *(undefined4 *)(param_1 + 0x54) = 0;
-  *(undefined4 *)(param_1 + 0x58) = 0;
-  *(undefined4 *)(param_1 + 0x6c) = 0;
-  *(undefined4 *)(param_1 + 0x70) = 0;
-  return 1;
+// Enter.
+bool MiddleCatLeapStatePl0010::vf08(undefined4 contextArg)
+{
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return 0;
+    }
+    field48() = 0.0f;
+    field40() = 0;
+    field44() = 0;
+    field5C() = 0.0f;
+    field54() = 0;
+    field58() = 0;
+    leapStarted() = 0;
+    leapEnded() = 0;
+    return 1;
 }
 
 // 00B819B0  MiddleCatLeapStatePl0010::vf24  size=19  [class]
-bool MiddleCatLeapStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool MiddleCatLeapStatePl0010::vf24(undefined4 contextArg)
+{
+    return StateMachineNode::vf24(contextArg) != 0;
 }
 
 // 00B819F0  MiddleCatLeapStatePl0010::vf00  size=6  [class]
-undefined * MiddleCatLeapStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e30;
+undefined *MiddleCatLeapStatePl0010::vf00()
+{
+    return (undefined *)DAT_01be9e30;  // type record
 }
 
 // 00B91060  MiddleCatLeapStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall MiddleCatLeapStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *MiddleCatLeapStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00BAC720  MiddleCatLeapStatePl0010::SafeCheck  size=333  [class]
-void __thiscall MiddleCatLeapStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar3 = 0;
-    }
-    else {
-      puVar5 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar2 = FUN_00dd6d80(puVar5);
-      uVar3 = -(uint)(iVar2 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar3 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar4 = 0;
-    }
-    else {
-      puVar5 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar2 = FUN_00dd6d80(puVar5);
-      uVar4 = -(uint)(iVar2 != 0) & (uint)piVar1;
-    }
-    *(undefined4 *)(uVar4 + 0x4170) = 1;
-    *(undefined4 *)(uVar4 + 0x418c) = *(undefined4 *)(uVar4 + 0x4180);
-    *(undefined4 *)(uVar4 + 0x4188) = *(undefined4 *)(uVar4 + 0x417c);
-    *(undefined4 *)(uVar4 + 0x4190) = *(undefined4 *)(uVar4 + 0x4184);
-    iVar2 = *(int *)(*(int *)(uVar3 + 0xc0) + 4);
-    *(undefined4 *)(param_1 + 0x60) = *(undefined4 *)(iVar2 + 0x394);
-    *(undefined4 *)(param_1 + 100) = *(undefined4 *)(iVar2 + 0x38c);
-    *(undefined4 *)(param_1 + 0x68) = *(undefined4 *)(iVar2 + 0x388);
-    if (*(int *)(iVar2 + 0x3a8) == 0) {
-      FUN_00aa3f60(0xad);
-      *(undefined4 *)(param_1 + 0x50) = 0xaf;
-    }
-    else {
-      *(undefined4 *)(param_1 + 0x50) = 0xb1;
-      FUN_00aa3f60(0xb1);
-      local_20 = *(undefined4 *)(param_1 + 0x68);
-      local_1c = *(undefined4 *)(param_1 + 100);
-      local_18 = *(undefined4 *)(param_1 + 0x68);
-      *(undefined4 *)(param_1 + 0x6c) = 1;
-      FUN_00a95ff0(&local_20);
-    }
-    iVar2 = *(int *)(uVar4 + 0x764);
-    if (*(int *)(iVar2 + 0x104) != 1) {
-      *(undefined4 *)(iVar2 + 0x104) = 1;
-      *(undefined4 *)(*(int *)(iVar2 + 0xd0) + 4) = 0;
-    }
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// Entry: starts the approach (0xAD) or directly the leap (0xB1).
+void MiddleCatLeapStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    using namespace MiddleCatLeapStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        char *context = asContext(contextArg);
+        char *player = playerOf(context);
+        at<int>(player, 0x4170) = 1;  /* Pl0000+0x4170 */
+        saveSteering(player);
+        char *params = paramsOf(context);
+        param394() = at<float>(params, 0x394);
+        rateY() = at<float>(params, 0x38C);
+        rateXZ() = at<float>(params, 0x388);
+        if (at<int>(params, 0x3A8) == 0) {  /* parameter +0x3A8: skip the approach */
+            FUN_00aa3f60((int)player, 0xAD);
+            leapMotion() = 0xAF;
+        }
+        else {
+            leapMotion() = 0xB1;
+            FUN_00aa3f60((int)player, 0xB1);
+            float rate[3];
+            rate[0] = rateXZ();
+            rate[1] = rateY();
+            rate[2] = rateXZ();
+            leapStarted() = 1;
+            FUN_00a95ff0((int)player, (undefined4 *)rate);
+        }
+        setMotionMode1(player);
+    }
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00BAC870  MiddleCatLeapStatePl0010::vf20  size=171  [class]
-undefined4 MiddleCatLeapStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-  }
-  *(undefined4 *)(uVar3 + 0x4170) = 0;
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  return 1;
+// Leave: restores the player.
+undefined4 MiddleCatLeapStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace MiddleCatLeapStatePl0010_p1;
+    if (StateMachineNode::vf20(contextArg) == 0) {
+        return 0;
+    }
+    char *player = playerOf(asContext(contextArg));
+    clearMotionMode(player);
+    at<int>(player, 0x4170) = 0;  /* Pl0000+0x4170 */
+    restoreSteering(player);
+    return 1;
 }
 
 // 00BCAEE0  MiddleCatLeapStatePl0010::vf14  size=335  [class]
-void __thiscall MiddleCatLeapStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  undefined *puVar5;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  if (*(int *)(param_1 + 0x6c) == 0) goto LAB_00bcb021;
-  iVar4 = FUN_00a94db0(*(undefined4 *)(param_1 + 0x50));
-  if (iVar4 != 0) {
-    *(undefined4 *)(param_1 + 0x70) = 1;
-    if ((*(int *)(uVar3 + 0x41e0) == 0) || (0.36 < *(float *)(uVar3 + 0x41e4))) {
-      iVar4 = FUN_008e2740();
-      if (iVar4 == 0) {
-        iVar4 = FUN_00bb90c0(param_2,param_1);
-        if (iVar4 == 0) {
-          FUN_008e0c00(uVar3 + 0x560);
-        }
-        goto LAB_00bcafc0;
-      }
-    }
-    FUN_00bb8ae0(param_2,param_1,100);
-    FUN_00bb8d00(param_2,param_1,100,0,1);
-  }
-LAB_00bcafc0:
-  if (*(int *)(param_1 + 0x6c) != 0) {
-    iVar4 = FUN_00a9f7d0(*(undefined4 *)(param_1 + 0x50));
-    if (iVar4 != 0) {
-      fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x174);
-      *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(*(int *)(uVar3 + 0x40d4) + 0x170);
-      *(float *)(uVar3 + 0x417c) = fVar1 * 0.017453292;
-      *(undefined4 *)(uVar3 + 0x4184) = 0;
-      FUN_00b8af00();
-      FUN_00bb8ae0(param_2,param_1,100);
-      FUN_00bb8d00(param_2,param_1,100,1,1);
-    }
-  }
-LAB_00bcb021:
-  StateMachineNode::vf14(param_2);
-  return;
+// Per frame: once the leap motion ends (or is cancelled) hands over to the next state.
+void MiddleCatLeapStatePl0010::vf14(undefined4 *contextArg)
+{
+    using namespace MiddleCatLeapStatePl0010_p1;
+    char *player = playerOf(asContext(contextArg));
+    if (leapStarted() != 0) {
+        if (FUN_00a94db0((int)player, leapMotion()) != 0) {
+            leapEnded() = 1;
+            if (nearGroundOrBusy(player)) {
+                FUN_00bb8ae0(contextArg, (undefined4)this, 100);
+                FUN_00bb8d00(contextArg, (int)this, 100, 0, 1);
+            }
+            else if (cdeclcall<int>(FUN_00bb90c0, contextArg, (undefined4)this) == 0) {
+                FUN_008e0c00((int)motionHelper(player), (undefined4 *)(player + 0x560));  /* Pl0000+0x560 */
+            }
+        }
+        if (leapStarted() != 0 && FUN_00a9f7d0((int)player, leapMotion()) != 0) {
+            resetSteering(player);
+            FUN_00b8af00((int)player);
+            FUN_00bb8ae0(contextArg, (undefined4)this, 100);
+            FUN_00bb8d00(contextArg, (int)this, 100, 1, 1);
+        }
+    }
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00BCB030  MiddleCatLeapStatePl0010::vf18  size=181  [class]
-void __thiscall MiddleCatLeapStatePl0010::vf18(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if ((*(int *)(param_1 + 0x70) != 0) && (0x7fffffff < *(uint *)(param_1 + 0x24))) {
-    if ((*(int *)(uVar2 + 0x41e0) == 0) || (0.36 < *(float *)(uVar2 + 0x41e4))) {
-      iVar3 = FUN_008e2740();
-      if (iVar3 == 0) goto LAB_00bcb0d8;
-    }
-    FUN_00bb8ae0(param_2,param_1,100);
-    FUN_00bb8d00(param_2,param_1,100,0,1);
-  }
-LAB_00bcb0d8:
-  StateMachineNode::vf18(param_2);
-  return;
+undefined4 MiddleCatLeapStatePl0010::vf18(undefined4 contextArg)
+{
+    using namespace MiddleCatLeapStatePl0010_p1;
+    char *player = playerOf(asContext((void *)contextArg));
+    if (leapEnded() != 0 && at<int>(this, 0x24) < 0) {  /* StateMachineNode+0x24: requested state */
+        if (nearGroundOrBusy(player)) {
+            FUN_00bb8ae0((undefined4 *)contextArg, (undefined4)this, 100);
+            FUN_00bb8d00((undefined4 *)contextArg, (int)this, 100, 0, 1);
+        }
+    }
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00BDF590  MiddleCatLeapStatePl0010::qteSafeCheck  size=326  [class]
-void __thiscall MiddleCatLeapStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  iVar3 = FUN_00a94db0(0xad);
-  if (iVar3 != 0) {
-    FUN_00aa3f60(0xae);
-    local_20 = *(undefined4 *)(param_1 + 0x68);
-    local_1c = *(undefined4 *)(param_1 + 100);
-    local_18 = *(undefined4 *)(param_1 + 0x68);
-    FUN_00a95ff0(&local_20);
-  }
-  iVar3 = FUN_00a94db0(0xae);
-  if (iVar3 != 0) {
-    *(undefined4 *)(param_1 + 0x6c) = 1;
-    FUN_00aa3f60(*(undefined4 *)(param_1 + 0x50));
-  }
-  if (0x7fffffff < *(uint *)(param_1 + 0x24)) {
-    iVar3 = FUN_00a9f760(0xae);
-    if (iVar3 == 0) {
-      FUN_00bd3620(param_2,param_1,100);
-    }
-  }
-  if ((*(uint *)(uVar2 + 0xcf8) & *(uint *)(uVar2 + 0xe48)) != 0) {
-    FUN_00bd3730(param_2,param_1,0xd,0xc);
-    FUN_00bd37f0(param_2,param_1,0xd);
-    FUN_00bd3910(param_2,param_1,0xb,10);
-    FUN_00bd39d0(param_2,param_1,10);
-  }
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
+// Approach 0xAD -> 0xAE -> leap motion.
+void MiddleCatLeapStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace MiddleCatLeapStatePl0010_p1;
+    char *player = playerOf(asContext(contextArg));
+    FUN_008e0b70((int)motionHelper(player), 0);
+    FUN_008e0ba0((int)motionHelper(player), 0);
+    if (FUN_00a94db0((int)player, 0xAD) != 0) {
+        FUN_00aa3f60((int)player, 0xAE);
+        float rate[3];
+        rate[0] = rateXZ();
+        rate[1] = rateY();
+        rate[2] = rateXZ();
+        FUN_00a95ff0((int)player, (undefined4 *)rate);
+    }
+    if (FUN_00a94db0((int)player, 0xAE) != 0) {
+        leapStarted() = 1;
+        FUN_00aa3f60((int)player, leapMotion());
+    }
+    if (at<int>(this, 0x24) < 0) {  /* StateMachineNode+0x24: requested state */
+        if (FUN_00a9f760((int)player, 0xAE) == 0) {
+            FUN_00bd3620(contextArg, (int)this, 100);
+        }
+    }
+    if ((at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE48)) != 0) {  /* input flags */
+        FUN_00bd3730(contextArg, (undefined4)this, 0xD, 0xC);
+        FUN_00bd37f0(contextArg, (undefined4)this, 0xD);
+        FUN_00bd3910(contextArg, (undefined4)this, 0xB, 10);
+        FUN_00bd39d0(contextArg, (undefined4)this, 10);
+    }
+    StateMachineNode::qteSafeCheck(contextArg);
 }
-

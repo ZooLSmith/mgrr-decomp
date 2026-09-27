@@ -1,47 +1,47 @@
-// src/managers/triggermanager/cCondOutCamera.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7A3F0..00C853D0, 3 functions
-
+// src/managers/triggermanager/cCondOutCamera.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondOutCamera.h"
+
+namespace cCondOutCamera_p1 {
+
+// ECX of FUN_00d9fa80 (camera object at 0x01BEA1D0; the raw decompilation dropped it)
+const int kCamera = 0x01BEA1D0;
+
+}  // namespace cCondOutCamera_p1
 
 // 00C7A3F0  Trigger::cCondOutCamera::vf14  size=135  [class]
-undefined4 __fastcall Trigger::cCondOutCamera::vf14(int param_1)
-
-{
-  float *pfVar1;
-  int iVar2;
-  int iVar3;
-  
-  if (*(int *)(param_1 + 0x14) == 0) {
-    return 0;
-  }
-  iVar2 = FUN_00f98a90();
-  iVar3 = FUN_00f98aa0();
-  pfVar1 = (float *)(param_1 + 0x20);
-  FUN_00d9fa80(pfVar1,param_1 + 0x30);
-  if ((((0.0 < *(float *)(param_1 + 0x2c)) && (0.0 < *pfVar1)) && (*pfVar1 < (float)iVar2)) &&
-     ((0.0 < *(float *)(param_1 + 0x24) && (*(float *)(param_1 + 0x24) < (float)iVar3)))) {
-    return 0;
-  }
-  return 1;
+// Projects worldPos (+0x30) to screenPos (+0x20) and returns 0 while the point is in front of the
+// camera (w > 0) and inside the FUN_00f98a90 x FUN_00f98aa0 screen; 1 otherwise.
+int Trigger::cCondOutCamera::vf14()
+{
+    using namespace cCondOutCamera_p1;
+    if (enabled() == 0) {
+        return 0;
+    }
+    int screenWidth = FUN_00f98a90();
+    int screenHeight = FUN_00f98aa0();
+    float *pos = screenPos();
+    FUN_00d9fa80(kCamera, (undefined4)pos, (undefined4)worldPos());
+    if (0.0 < screenPos()[3] && 0.0 < pos[0] && pos[0] < (float)screenWidth &&
+        0.0 < screenPos()[1] && screenPos()[1] < (float)screenHeight) {
+        return 0;
+    }
+    return 1;
 }
 
 // 00C7A480  Trigger::cCondOutCamera::vf1C  size=16  [class]
-void __thiscall Trigger::cCondOutCamera::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_2 + 8);
-  return;
+void Trigger::cCondOutCamera::vf1C(int *record)
+{
+    *(int **)((char *)this + 0x04) = record;  // cCondition+0x04: condition record
+    target() = record[2];                     // record+0x08
 }
 
 // 00C853D0  Trigger::cCondOutCamera::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondOutCamera::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondOutCamera *Trigger::cCondOutCamera::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

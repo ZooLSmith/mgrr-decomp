@@ -1,68 +1,83 @@
-// src/managers/triggermanager/cActDoorCloseDelay.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C81800..00C94C10, 7 functions
-
+// src/managers/triggermanager/cActDoorCloseDelay.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActDoorCloseDelay.h"
+
+extern undefined DAT_01dbe2d4;           // cActDoorCloseDelay static descriptor returned by vf00
+extern char DAT_016aaa1c[];              // "Trigger::Act::DOOR_CLOSE: <data is NULL>" (Shift-JIS)
+extern undefined DAT_018aa480;           // ECX of FUN_00c317b0 (door manager?)
+
+namespace cActDoorCloseDelay_p1 {
+
+// __thiscall call of a function whose functions.h prototype lacks the ECX argument or has the
+// wrong convention; ECX (`self`) and the stack arguments are taken from the machine code.
+template <class R, class F, class... A> inline R callThis(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// FUN_00dd5650: debug printf (functions.h declares it void(void); empty in release).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    ((void (*)(const char *, ...))FUN_00dd5650)(format, args...);
+}
+
+// FUN_00e03ea0 (__cdecl): hash of a NUL-terminated name (functions.h declares it void).
+inline unsigned int hashName(char *name)
+{
+    return ((unsigned int (*)(char *))FUN_00e03ea0)(name);
+}
+
+} // namespace cActDoorCloseDelay_p1
 
 // 00C81800  Trigger::cActDoorCloseDelay::vf18  size=1  [class]
-undefined4 __fastcall Trigger::cActDoorCloseDelay::vf18(int param_1)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016aaa1c);
-    return 0;
-  }
-  uVar2 = FUN_00e03ea0(iVar1 + 8);
-  uVar2 = FUN_00c317b0(uVar2,*(undefined4 *)(iVar1 + 0x18));
-  return uVar2;
+int Trigger::cActDoorCloseDelay::vf18()
+{
+    using namespace cActDoorCloseDelay_p1;
+    // (machine code: `ret 4` -- one stack argument, unused; cAction.h declares vf18() without it)
+    char *rec = (char *)record();
+    if (rec == 0) {
+        debugPrint(DAT_016aaa1c);  // "Trigger::Act::DOOR_CLOSE: data is NULL."
+        return 0;
+    }
+    unsigned int doorNameHash = hashName(rec + 8);
+    // raw: FUN_00c317b0(hash, rec+0x18); machine code: ECX = &DAT_018aa480, second argument is the
+    // float at record+0x18 (fld/fstp)
+    return callThis<int>(FUN_00c317b0, &DAT_018aa480, doorNameHash, *(float *)(rec + 0x18));
 }
 
 // 00C8F9D0  Trigger::cActDoorCloseDelay::vf08  size=1  [class]
-void Trigger::cActDoorCloseDelay::vf08(void)
-
-{
-  return;
+void Trigger::cActDoorCloseDelay::vf08()
+{
 }
 
 // 00C8F9E0  Trigger::cActDoorCloseDelay::vf0C  size=1  [class]
-void Trigger::cActDoorCloseDelay::vf0C(void)
-
-{
-  return;
+void Trigger::cActDoorCloseDelay::vf0C()
+{
 }
 
 // 00C8F9F0  Trigger::cActDoorCloseDelay::vf10  size=1  [class]
-void Trigger::cActDoorCloseDelay::vf10(void)
-
-{
-  return;
+void Trigger::cActDoorCloseDelay::vf10()
+{
 }
 
 // 00C8FA00  Trigger::cActDoorCloseDelay::vf14  size=1  [class]
-void Trigger::cActDoorCloseDelay::vf14(void)
-
-{
-  return;
+void Trigger::cActDoorCloseDelay::vf14()
+{
 }
 
 // 00C94C00  Trigger::cActDoorCloseDelay::vf00  size=6  [class]
-undefined * Trigger::cActDoorCloseDelay::vf00(void)
-
-{
-  return &DAT_01dbe2d4;
+void *Trigger::cActDoorCloseDelay::vf00()
+{
+    return &DAT_01dbe2d4;
 }
 
 // 00C94C10  Trigger::cActDoorCloseDelay::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActDoorCloseDelay::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActDoorCloseDelay *Trigger::cActDoorCloseDelay::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

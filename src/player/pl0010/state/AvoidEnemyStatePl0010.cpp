@@ -1,303 +1,249 @@
-// src/player/pl0010/state/AvoidEnemyStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80E20..00BDCEA0, 9 functions
-
+// src/player/pl0010/state/AvoidEnemyStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "AvoidEnemyStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9dec[];  // AvoidEnemyStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+extern unsigned int DAT_01b7b914[];   // pad states, 4 pads * 0x30 bytes (button word first)
+
+namespace AvoidEnemyStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call (ECX = self) of a function whose functions.h prototype has the wrong
+// return / argument types
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// ctx when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline char *asContextPl0010(const void *ctx)
+{
+    if (ctx == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(ctx, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (char *)ctx : 0;
+}
+
+// obj when it is a Pl0000 (type record from vftable slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline Pl0000 *playerOf(const char *ctx)
+{
+    return asPl0000(fld<void *>(ctx, 0xC));
+}
+
+}  // namespace AvoidEnemyStatePl0010_p1
+
 // 00B80E20  AvoidEnemyStatePl0010::vf08  size=42  [class]
-undefined4 __thiscall AvoidEnemyStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x38) = 0;
-  *(undefined4 *)(param_1 + 0x34) = 0;
-  return 1;
+// Enter.
+bool AvoidEnemyStatePl0010::vf08(undefined4 contextArg)
+{
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    field38() = 0;
+    field34() = 0.0f;
+    return true;
 }
 
 // 00B80E50  AvoidEnemyStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall AvoidEnemyStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base's).
+undefined4 AvoidEnemyStatePl0010::vf18(undefined4 contextArg)
+{
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00B80E60  AvoidEnemyStatePl0010::vf24  size=19  [class]
-bool AvoidEnemyStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool AvoidEnemyStatePl0010::vf24(undefined4 contextArg)
+{
+    return StateMachineNode::vf24(contextArg) != 0;
 }
 
 // 00B80EA0  AvoidEnemyStatePl0010::vf00  size=6  [class]
-undefined * AvoidEnemyStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9dec;
+undefined *AvoidEnemyStatePl0010::vf00()
+{
+    return DAT_01be9dec;
 }
 
 // 00B90C40  AvoidEnemyStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall AvoidEnemyStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *AvoidEnemyStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BA8EF0  AvoidEnemyStatePl0010::SafeCheck  size=251  [class]
-void __thiscall AvoidEnemyStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar2 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-    }
-    *(undefined4 *)(uVar2 + 0x418c) = *(undefined4 *)(uVar2 + 0x4180);
-    *(undefined4 *)(uVar2 + 0x5088) = 1;
-    *(undefined4 *)(uVar2 + 0x508c) = 0;
-    *(undefined4 *)(uVar2 + 0x4188) = *(undefined4 *)(uVar2 + 0x417c);
-    *(undefined4 *)(uVar2 + 0x4170) = 1;
-    *(undefined4 *)(uVar2 + 0x4190) = *(undefined4 *)(uVar2 + 0x4184);
-    *(undefined4 *)(param_1 + 0x30) = 0x52;
-    FUN_00aa3f60(0x52);
-    *(undefined4 *)(param_1 + 0x3c) = 0;
-    *(undefined4 *)(param_1 + 0x40) = 0;
-    iVar3 = *(int *)(uVar2 + 0x764);
-    if (*(int *)(iVar3 + 0x104) != 1) {
-      *(undefined4 *)(iVar3 + 0x104) = 1;
-      *(undefined4 *)(*(int *)(iVar3 + 0xd0) + 4) = 0;
-      StateMachineNode::SafeCheck(param_2);
-      return;
-    }
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// First update: saves the camera angles, starts the vault motion 0x52 and switches the
+// controller into its motion-driven mode.
+void AvoidEnemyStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    using namespace AvoidEnemyStatePl0010_p1;
+
+    if (*(int *)((char *)this + 0x20) == 0) {  /* StateMachineNode+0x20: started */
+        char *ctx = asContextPl0010(contextArg);
+        Pl0000 *player = playerOf(ctx);
+        fld<float>(player, 0x418C) = fld<float>(player, 0x4180);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+        fld<int>(player, 0x5088) = 1;                             /* Pl0000+0x5088: ? */
+        fld<int>(player, 0x508C) = 0;                             /* Pl0000+0x508C: ? */
+        fld<float>(player, 0x4188) = fld<float>(player, 0x417C);
+        fld<int>(player, 0x4170) = 1;                             /* Pl0000+0x4170: camera angles overridden by the state */
+        fld<float>(player, 0x4190) = fld<float>(player, 0x4184);
+        motionId() = 0x52;
+        FUN_00aa3f60((int)player, 0x52);
+        nextFrame() = 0.0f;
+        chainRequest() = 0;
+        char *controller = fld<char *>(player, 0x764);  /* Pl0000+0x764: movement controller */
+        if (fld<int>(controller, 0x104) != 1) {
+            fld<int>(controller, 0x104) = 1;
+            fld<float>(fld<char *>(controller, 0xD0), 4) = 0.0f;
+            StateMachineNode::SafeCheck(contextArg);
+            return;
+        }
+    }
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00BA8FF0  AvoidEnemyStatePl0010::vf14  size=179  [class]
-void __thiscall AvoidEnemyStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  undefined4 uVar5;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  iVar3 = FUN_00a94db0(*(undefined4 *)(param_1 + 0x30));
-  if (iVar3 != 0) {
-    iVar3 = FUN_008e2740();
-    if ((iVar3 != 0) ||
-       ((*(int *)(uVar2 + 0x41e0) != 0 &&
-        (*(float *)(uVar2 + 0x41e4) < *(float *)(*(int *)(uVar2 + 0x40d4) + 0x160))))) {
-      uVar5 = 0x11;
-    }
-    else {
-      uVar5 = 0xe;
-    }
-    FUN_00d82510(uVar5,100);
-  }
-  StateMachineNode::vf14(param_2);
-  return;
+// When the current motion has ended, requests state 0x11 (airborne / off the ground) or 0xE.
+void AvoidEnemyStatePl0010::vf14(undefined4 *contextArg)
+{
+    using namespace AvoidEnemyStatePl0010_p1;
+
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (FUN_00a94db0((int)player, motionId()) != 0) {
+        int nextState;
+        if (FUN_008e2740(fld<int>(player, 0x764)) ||
+            (fld<int>(player, 0x41E0) != 0 &&  /* Pl0000+0x41E0 / +0x41E4: ground probe hit / distance */
+             fld<float>(player, 0x41E4) < fld<float>(fld<char *>(player, 0x40D4), 0x160))) {  /* Pl0000+0x40D4: parameter table */
+            nextState = 0x11;
+        }
+        else {
+            nextState = 0xE;
+        }
+        FUN_00d82510((int)this, nextState, 100);
+    }
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00BA90B0  AvoidEnemyStatePl0010::vf20  size=207  [class]
-undefined4 AvoidEnemyStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  puVar2 = param_1;
-  iVar3 = StateMachineNode::vf20(param_1);
-  if (iVar3 == 0) {
-    return 0;
-  }
-  if (puVar2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*puVar2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)puVar2;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar4 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar4 + 0x764) + 0x104) = 0;
-  }
-  *(undefined4 *)(uVar4 + 0x4180) = *(undefined4 *)(uVar4 + 0x418c);
-  *(undefined4 *)(uVar4 + 0x5088) = 0;
-  *(undefined4 *)(uVar4 + 0x508c) = 0;
-  *(undefined4 *)(uVar4 + 0x417c) = *(undefined4 *)(uVar4 + 0x4188);
-  *(undefined4 *)(uVar4 + 0x4170) = 0;
-  *(undefined4 *)(uVar4 + 0x4184) = *(undefined4 *)(uVar4 + 0x4190);
-  FUN_00a7c930();
-  FUN_00a7c960(&param_1);
-  return 1;
+// Leave: restores the controller and the camera angles and clears the context's handle +0x90.
+undefined4 AvoidEnemyStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace AvoidEnemyStatePl0010_p1;
+
+    if (StateMachineNode::vf20(contextArg) == 0) {
+        return 0;
+    }
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (fld<int>(fld<char *>(player, 0x764), 0x104) != 0) {  /* Pl0000+0x764: movement controller */
+        fld<int>(fld<char *>(player, 0x764), 0x104) = 0;
+    }
+    fld<float>(player, 0x4180) = fld<float>(player, 0x418C);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+    fld<int>(player, 0x5088) = 0;
+    fld<int>(player, 0x508C) = 0;
+    fld<float>(player, 0x417C) = fld<float>(player, 0x4188);
+    fld<int>(player, 0x4170) = 0;
+    fld<float>(player, 0x4184) = fld<float>(player, 0x4190);
+    // (the machine code uses the stack slot of the argument as the temporary handle)
+    undefined4 emptyHandle;
+    FUN_00a7c930(&emptyHandle);
+    FUN_00a7c960((undefined4 *)(ctx + 0x90), &emptyHandle);  /* StateMachineContextPl0010+0x90: object handle */
+    return 1;
 }
 
 // 00BDCEA0  AvoidEnemyStatePl0010::qteSafeCheck  size=635  [class]
-void __thiscall AvoidEnemyStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  int *piVar4;
-  float10 fVar5;
-  undefined *puVar6;
-  int *local_38;
-  int local_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
-  undefined1 auStack_20 [28];
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  local_38 = *(int **)(uVar3 + 0xc);
-  if (local_38 == (int *)0x0) {
-    piVar4 = (int *)0x0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*local_38 + 4))(&DAT_01be9db8);
-    iVar1 = FUN_00dd6d80(puVar6);
-    piVar4 = (int *)(-(uint)(iVar1 != 0) & (uint)local_38);
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  iVar1 = FUN_00a94db0(0x52);
-  if ((iVar1 != 0) && (*(int *)(param_1 + 0x30) == 0x53)) {
-    FUN_00aa3f60(0x53);
-  }
-  local_34 = uVar3 + 0x90;
-  iVar1 = FUN_00a81330();
-  if (((iVar1 == 0) || (iVar1 = FUN_00a7c7e0(), iVar1 == 0)) || (*(int *)(param_1 + 0x30) != 0x52))
-  {
-    FUN_00a7c930();
-    FUN_00a7c960(&local_38);
-  }
-  else if ((*(float *)(param_1 + 0x3c) <= 0.0) ||
-          ((0.0 < *(float *)(param_1 + 0x3c) &&
-           (iVar1 = FUN_00a95200(0x52,*(undefined4 *)(param_1 + 0x3c)), iVar1 == 0)))) {
-    puVar2 = (undefined4 *)(**(code **)(*piVar4 + 0x84))();
-    uStack_30 = *puVar2;
-    uStack_2c = puVar2[1];
-    uStack_28 = puVar2[2];
-    uStack_24 = puVar2[3];
-    iVar1 = FUN_00a7c8a0();
-    iVar1 = FUN_00a8eb50(auStack_20,iVar1 + 0x40);
-    uStack_2c = *(undefined4 *)(iVar1 + 4);
-    (**(code **)(*piVar4 + 0x88))(&uStack_30);
-  }
-  if (*(int *)(param_1 + 0x30) == 0x52) {
-    iVar1 = FUN_00a95630(0x52,0x14);
-    if (iVar1 != 0) {
-      fVar5 = (float10)FUN_00a95980(0x52);
-      fVar5 = (float10)30.0 - fVar5 * (float10)60.0;
-      piVar4[0x2ed] = (int)(float)fVar5;
-      if ((float)piVar4[0xd15] <= 0.0) {
-        piVar4[0xd0f] = (int)(float)fVar5;
-        piVar4[0xd10] = 0x3d4ccccd;
-      }
-      *(float *)(param_1 + 0x3c) = (float)(fVar5 + (float10)20.0);
-    }
-    iVar1 = FUN_00a95030(0x52,0x14,0x1e);
-    if ((iVar1 != 0) && (((byte)DAT_01b7b914 & 0x80) != 0)) {
-      *(undefined4 *)(param_1 + 0x40) = 1;
-    }
-    if ((*(int *)(param_1 + 0x40) != 0) && (iVar1 = FUN_00a95270(0x52,0x1e), iVar1 != 0)) {
-      *(undefined4 *)(param_1 + 0x30) = 0x53;
-      fVar5 = (float10)FUN_00a95980(0x52);
-      FUN_00aa42d0(*(undefined4 *)(param_1 + 0x30),(float)(fVar5 - (float10)0.5));
-    }
-  }
-  else if (((*(int *)(param_1 + 0x30) == 0x53) && (iVar1 = FUN_00a95270(0x53,0x1e), iVar1 != 0)) &&
-          (iVar1 = FUN_00b8b5d0(), iVar1 == 1)) {
-    FUN_00d82510(10,100);
-  }
-  FUN_00bd3910(param_2,param_1,0xb,10);
-  FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Per-frame update: aims the player at the object of the context handle +0x90, drives the
+// camera pitch from the motion frame and chains 0x52 -> 0x53 when the button was pressed.
+void AvoidEnemyStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace AvoidEnemyStatePl0010_p1;
 
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    FUN_008e0b70(fld<int>(player, 0x764), 0);
+    FUN_008e0ba0(fld<int>(player, 0x764), 0);
+    if (FUN_00a94db0((int)player, 0x52) != 0 && motionId() == 0x53) {
+        FUN_00aa3f60((int)player, 0x53);
+    }
+    unsigned int *handle = (unsigned int *)(ctx + 0x90);  /* StateMachineContextPl0010+0x90: object handle */
+    int target = FUN_00a81330(handle);
+    if (target == 0 || !FUN_00a7c7e0(target) || motionId() != 0x52) {
+        undefined4 emptyHandle;
+        FUN_00a7c930(&emptyHandle);
+        FUN_00a7c960((undefined4 *)handle, &emptyHandle);
+    }
+    else if (nextFrame() <= 0.0f ||
+             (0.0f < nextFrame() && thiscall<int>(FUN_00a95200, player, 0x52, nextFrame()) == 0)) {
+        float *current = vcall<float *>(player, 0x84);  // Pl0000 vftable slot 0x84 (returns a float[4])
+        float direction[4];
+        direction[0] = current[0];
+        direction[1] = current[1];
+        direction[2] = current[2];
+        direction[3] = current[3];
+        int model = FUN_00a7c8a0(target);
+        float aimed[4];
+        float *result = FUN_00a8eb50((int)player, aimed, (float *)(model + 0x40));
+        direction[1] = result[1];
+        vcall<void>(player, 0x88, direction);  // Pl0000 vftable slot 0x88 (takes a float[4])
+    }
+    if (motionId() == 0x52) {
+        if (thiscall<int>(FUN_00a95630, player, 0x52, 0x14) != 0) {
+            double pitch = (double)30.0f - (double)FUN_00a95980((int)player, 0x52) * (double)60.0f;
+            fld<float>(player, 0xBB4) = (float)pitch;  /* Pl0000+0xBB4: ? */
+            if (!(0.0f < fld<float>(player, 0x3454))) {  /* Pl0000+0x3454: timer3454 */
+                fld<float>(player, 0x343C) = (float)pitch;  /* Pl0000+0x343C: timer343C */
+                fld<float>(player, 0x3440) = 0.05f;          /* Pl0000+0x3440: field3440 */
+            }
+            nextFrame() = (float)(pitch + (double)20.0f);
+        }
+        if (FUN_00a95030((int)player, 0x52, 0x14, 0x1E) != 0 && (DAT_01b7b914[0] & 0x80) != 0) {
+            chainRequest() = 1;
+        }
+        if (chainRequest() != 0 && FUN_00a95270((int)player, 0x52, 0x1E) != 0) {
+            motionId() = 0x53;
+            float startFrame = (float)((double)FUN_00a95980((int)player, 0x52) - (double)0.5f);
+            thiscall<int>(FUN_00aa42d0, player, motionId(), startFrame);
+        }
+    }
+    else if (motionId() == 0x53 && FUN_00a95270((int)player, 0x53, 0x1E) != 0 &&
+             FUN_00b8b5d0((int)player) == 1) {
+        FUN_00d82510((int)this, 10, 100);
+    }
+    FUN_00bd3910(contextArg, (undefined4)this, 0xB, 10);
+    FUN_00bd39d0(contextArg, (undefined4)this, 10);
+    StateMachineNode::qteSafeCheck(contextArg);
+}

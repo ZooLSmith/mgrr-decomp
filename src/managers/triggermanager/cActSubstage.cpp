@@ -1,58 +1,48 @@
-// src/managers/triggermanager/cActSubstage.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7F140..00C92210, 7 functions
-
+// src/managers/triggermanager/cActSubstage.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActSubstage.h"
+
+extern undefined DAT_01dbe0d4;  // cActSubstage static descriptor returned by vf00
 
 // 00C7F140  Trigger::cActSubstage::vf18  size=5  [class]
-undefined4 Trigger::cActSubstage::vf18(void)
-
-{
-  return 0;
+int Trigger::cActSubstage::vf18()
+{
+    // machine code: `xor eax,eax; ret 4` (one unused stack argument)
+    return 0;
 }
 
 // 00C8A690  Trigger::cActSubstage::vf08  size=1  [class]
-void Trigger::cActSubstage::vf08(void)
-
-{
-  return;
+void Trigger::cActSubstage::vf08()
+{
 }
 
 // 00C8A6A0  Trigger::cActSubstage::vf0C  size=1  [class]
-void Trigger::cActSubstage::vf0C(void)
-
-{
-  return;
+void Trigger::cActSubstage::vf0C()
+{
 }
 
 // 00C8A6B0  Trigger::cActSubstage::vf10  size=1  [class]
-void Trigger::cActSubstage::vf10(void)
-
-{
-  return;
+void Trigger::cActSubstage::vf10()
+{
 }
 
 // 00C8A6C0  Trigger::cActSubstage::vf14  size=1  [class]
-void Trigger::cActSubstage::vf14(void)
-
-{
-  return;
+void Trigger::cActSubstage::vf14()
+{
 }
 
 // 00C92200  Trigger::cActSubstage::vf00  size=6  [class]
-undefined * Trigger::cActSubstage::vf00(void)
-
-{
-  return &DAT_01dbe0d4;
+void *Trigger::cActSubstage::vf00()
+{
+    return &DAT_01dbe0d4;
 }
 
 // 00C92210  Trigger::cActSubstage::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActSubstage::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActSubstage *Trigger::cActSubstage::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

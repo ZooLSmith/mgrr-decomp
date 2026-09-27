@@ -1,278 +1,231 @@
-// src/managers/cenemycautionstatemanager/cEnemyCautionStateManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 004EC010..00AB5410, 6 functions
-
+// src/managers/cenemycautionstatemanager/cEnemyCautionStateManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "cEnemyCautionStateManager.h"
 
+// ---------------------------------------------------------------------------------------------
+// Helpers.  The destructors below run on the embedding enemy objects, whose headers this file
+// does not include: their sub-objects are addressed by offset ("<owner>+0x...").  Destructors of
+// classes whose headers are not included are called by address.
+// ---------------------------------------------------------------------------------------------
+namespace cEnemyCautionStateManager_p1 {
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// address of a sub-object at an absolute byte offset
+inline char *at(void *base, int offset)
+{
+    return (char *)base + offset;
+}
+
+// FUN_00905ce0: destructor of the 4-byte handle objects (constructed by FUN_00904d60)
+inline void destroyHandle(char *handle)
+{
+    FUN_00905ce0((int *)handle);
+}
+
+// cEspControler::~cEspControler (0x00EAA9B0)
+inline void destroyEspControler(char *esp)
+{
+    thiscall<void>(0x00EAA9B0u, esp);
+}
+
+// Inlined cEnemyCautionStateManager destructor.
+inline void destroyManager(char *manager)
+{
+    // vftable = cEnemyCautionStateManager::vftable (0x0163F71C)
+    FUN_00a82d10((int)manager);
+    char *handle = manager + 0x164;
+    int index = 9;
+    do {
+        handle = handle - 4;  // handles13C()[index]
+        destroyHandle(handle);
+        index = index - 1;
+    } while (-1 < index);
+    destroyHandle(manager + 0x48);  // handle48()
+}
+
+// Inlined lib array destructor; `array` points at its data pointer (data, capacity, count, owns).
+inline void releaseArray(char *array)
+{
+    int *words = (int *)array;
+    if (words[0] != 0) {
+        words[2] = 0;
+        if (words[3] != 0) {
+            FUN_00dd48d0(words[0], 0);
+            words[3] = 0;
+        }
+        words[0] = 0;
+        words[1] = 0;
+    }
+}
+
+// Sub-object teardown shared by the three enemy destructors: `part` is the object at +0x20B0 /
+// +0x2180 (ECX of FUN_00485560 / FUN_007b7800 / FUN_006c1cb0), followed at +4 by an object
+// queried with FUN_00a81330 and at +0x64 by a RayCastManager work handle.
+inline void releaseRayCastPart(char *part)
+{
+    if (FUN_00a81330((uint *)(part + 0x4)) != 0) {
+        FUN_00a805f0(FUN_00a81330((uint *)(part + 0x4)));
+    }
+    thiscall<void>(0x00905E50u, (void *)0x01B35DF8, part + 0x64);  // RayCastManager::getWork (instance 0x01B35DF8)
+    destroyHandle(part + 0x64);
+}
+
+}  // namespace cEnemyCautionStateManager_p1
+
 // 004EC010  cEnemyCautionStateManager::vf00  size=74  [class]
-undefined4 * __thiscall cEnemyCautionStateManager::vf00(undefined4 *param_1,byte param_2)
-
-{
-  int iVar1;
-  
-  *param_1 = vftable;
-  FUN_00a82d10();
-  iVar1 = 9;
-  do {
-    FUN_00905ce0();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  FUN_00905ce0();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *cEnemyCautionStateManager::vf00(byte flags)
+{
+    using namespace cEnemyCautionStateManager_p1;
+    destroyManager((char *)this);
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 004EC410  cEnemyCautionStateManager::cEnemyCautionStateManager  size=420  [class]
-undefined4 * __fastcall cEnemyCautionStateManager::cEnemyCautionStateManager(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  *param_1 = vftable;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[9] = 0;
-  param_1[8] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  FUN_00a7c930();
-  FUN_00904d60();
-  param_1[0x13] = 0;
-  param_1[0x15] = 0;
-  param_1[0x14] = 0;
-  param_1[0x1e] = 0;
-  param_1[0x16] = 0;
-  param_1[0x27] = 0;
-  param_1[0x17] = 0;
-  param_1[0x30] = 0;
-  param_1[0x18] = 0;
-  param_1[0x39] = 0;
-  param_1[0x19] = 0;
-  param_1[0x1a] = 0;
-  param_1[0x1b] = 0;
-  param_1[0x1c] = 0;
-  param_1[0x1d] = 0;
-  param_1[0x1f] = 0;
-  param_1[0x20] = 0;
-  param_1[0x21] = 0;
-  param_1[0x22] = 0;
-  param_1[0x23] = 0;
-  param_1[0x24] = 0;
-  param_1[0x25] = 0;
-  param_1[0x26] = 0;
-  param_1[0x28] = 0;
-  param_1[0x29] = 0;
-  param_1[0x2a] = 0;
-  param_1[0x2b] = 0;
-  param_1[0x2c] = 0;
-  param_1[0x2d] = 0;
-  param_1[0x2e] = 0;
-  param_1[0x2f] = 0;
-  param_1[0x31] = 0;
-  param_1[0x32] = 0;
-  param_1[0x33] = 0;
-  param_1[0x34] = 0;
-  param_1[0x35] = 0;
-  param_1[0x36] = 0;
-  param_1[0x37] = 0;
-  param_1[0x38] = 0;
-  param_1[0x3a] = 0;
-  param_1[0x3b] = 0;
-  param_1[0x3c] = 0;
-  param_1[0x3d] = 0;
-  param_1[0x3e] = 0;
-  param_1[0x3f] = 0;
-  param_1[0x43] = 0;
-  param_1[0x42] = 0xbf800000;
-  param_1[0x45] = 0;
-  param_1[0x46] = 1;
-  FUN_00a7c930();
-  iVar1 = 9;
-  do {
-    FUN_00904d60();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  FUN_00a7c950();
-  param_1[0x4d] = 0;
-  iVar1 = FUN_00d466f0();
-  if (iVar1 != 0) {
-    param_1[0x48] = 0;
-    param_1[0x49] = 0;
-    param_1[0x4a] = 0;
-  }
-  return param_1;
+cEnemyCautionStateManager::cEnemyCautionStateManager()
+{
+    // vftable = cEnemyCautionStateManager::vftable (0x0163F71C)
+    field14() = 0;
+    field18() = 0.0f;
+    field1C() = 0.0f;
+    values24()[0] = 0.0f;
+    field20() = 0;
+    values24()[1] = 0.0f;
+    values24()[2] = 0.0f;
+    values24()[3] = 0.0f;
+    values24()[4] = 0.0f;
+    values24()[5] = 0.0f;
+    FUN_00a7c930((undefined4 *)object40());
+    FUN_00904d60((undefined4 *)handle48());
+    field4C() = 0.0f;
+    field50() = 0.0f;
+    // blocks 0..3 fully, block 4 up to values[5]
+    for (int block = 0; block < 5; block = block + 1) {
+        blocks()[block].flag = 0;
+    }
+    for (int block = 0; block < 4; block = block + 1) {
+        for (int i = 0; i < 8; i = i + 1) {
+            blocks()[block].values[i] = 0.0f;
+        }
+    }
+    for (int i = 0; i < 6; i = i + 1) {
+        blocks()[4].values[i] = 0.0f;
+    }
+    field10C() = 0;
+    field108() = -1.0f;
+    field114() = 0;
+    field118() = 1;
+    FUN_00a7c930((undefined4 *)object130());
+    int index = 9;
+    char *handle = handles13C();
+    do {
+        FUN_00904d60((undefined4 *)handle);
+        handle = handle + 4;
+        index = index - 1;
+    } while (-1 < index);
+    FUN_00a7c950((undefined4 *)object40());
+    field134() = 0;
+    if (FUN_00d466f0(0x018B9140) != 0) {  /* ECX: global object 0x018B9140 */
+        values120()[0] = 0.0f;
+        values120()[1] = 0.0f;
+        values120()[2] = 0.0f;
+    }
 }
 
 // 004ECE70  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=106  [class]
-void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
-
-{
-  int iVar1;
-  
-  *(undefined ***)(param_1 + 0xc10) = vftable;
-  FUN_00a82d10();
-  iVar1 = 9;
-  do {
-    FUN_00905ce0();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00dd7270();
-  Behavior::~Behavior();
-  return;
+// Destructor of the object embedding the manager at +0xC10 (`this` is that object).
+void cEnemyCautionStateManager::dtor_004ECE70()
+{
+    using namespace cEnemyCautionStateManager_p1;
+    destroyManager(at(this, 0xC10));           /* owner+0xC10: cEnemyCautionStateManager */
+    destroyHandle(at(this, 0xA60));            /* owner+0xA60 */
+    destroyHandle(at(this, 0xA5C));            /* owner+0xA5C */
+    FUN_00dd7270((undefined4)at(this, 0xA00));  /* owner+0xA00: critical section */
+    thiscall<void>(0x00AA3690u, this);         // Behavior::~Behavior (jmp)
 }
 
 // 00AACF30  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=334  [class]
-void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
-
-{
-  int iVar1;
-  
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  FUN_00485560();
-  iVar1 = FUN_00a81330();
-  if (iVar1 != 0) {
-    FUN_00a81330();
-    FUN_00a805f0();
-  }
-  RayCastManager::getWork(param_1 + 0x2114);
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  *(undefined ***)(param_1 + 0x1b90) = vftable;
-  FUN_00a82d10();
-  iVar1 = 9;
-  do {
-    FUN_00905ce0();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  FUN_00905ce0();
-  cXml::cXml_7();
-  if (*(int *)(param_1 + 0x11dc) != 0) {
-    *(undefined4 *)(param_1 + 0x11e4) = 0;
-    if (*(int *)(param_1 + 0x11e8) != 0) {
-      FUN_00dd48d0(*(int *)(param_1 + 0x11dc),0);
-      *(undefined4 *)(param_1 + 0x11e8) = 0;
-    }
-    *(undefined4 *)(param_1 + 0x11dc) = 0;
-    *(undefined4 *)(param_1 + 0x11e0) = 0;
-  }
-  cEspControler::~cEspControler();
-  Animation::PostControl::Work::~Work();
-  FUN_00905ce0();
-  ~cEnemyCautionStateManager();
-  return;
+// Enemy destructor (`this` is the enemy; manager embedded at +0x1B90).
+void cEnemyCautionStateManager::dtor_00AACF30()
+{
+    using namespace cEnemyCautionStateManager_p1;
+    destroyHandle(at(this, 0x2354));
+    destroyHandle(at(this, 0x234C));
+    destroyHandle(at(this, 0x2344));
+    destroyHandle(at(this, 0x233C));
+    destroyEspControler(at(this, 0x2140));
+    FUN_00485560((byte *)at(this, 0x20B0));
+    releaseRayCastPart(at(this, 0x20B0));
+    destroyEspControler(at(this, 0x1F10));
+    destroyEspControler(at(this, 0x1E60));
+    destroyEspControler(at(this, 0x1DB0));
+    destroyEspControler(at(this, 0x1D00));
+    destroyManager(at(this, 0x1B90));
+    thiscall<void>(0x00A60400u, at(this, 0x1B08));  // destructor (FILEMAP: cXml::cXml_7)
+    releaseArray(at(this, 0x11DC));                 /* owner+0x11DC..0x11E8: array */
+    destroyEspControler(at(this, 0x1040));
+    thiscall<void>(0x00E2C5D0u, at(this, 0xE50));   // Animation::PostControl::Work::~Work
+    destroyHandle(at(this, 0xDC4));
+    dtor_004ECE70();  // jmp 004ECE70
 }
 
 // 00AB2CD0  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=345  [class]
-void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
-
-{
-  int iVar1;
-  
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  FUN_007b7800();
-  iVar1 = FUN_00a81330();
-  if (iVar1 != 0) {
-    FUN_00a81330();
-    FUN_00a805f0();
-  }
-  RayCastManager::getWork(param_1 + 0x21e4);
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  *(undefined ***)(param_1 + 0x1c60) = vftable;
-  FUN_00a82d10();
-  iVar1 = 9;
-  do {
-    FUN_00905ce0();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  FUN_00905ce0();
-  cXml::cXml_7();
-  if (*(int *)(param_1 + 0x12ac) != 0) {
-    *(undefined4 *)(param_1 + 0x12b4) = 0;
-    if (*(int *)(param_1 + 0x12b8) != 0) {
-      FUN_00dd48d0(*(int *)(param_1 + 0x12ac),0);
-      *(undefined4 *)(param_1 + 0x12b8) = 0;
-    }
-    *(undefined4 *)(param_1 + 0x12ac) = 0;
-    *(undefined4 *)(param_1 + 0x12b0) = 0;
-  }
-  cEspControler::~cEspControler();
-  Animation::PostControl::Work::~Work();
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  ~cEnemyCautionStateManager();
-  return;
+// Enemy destructor (`this` is the enemy; manager embedded at +0x1C60).
+void cEnemyCautionStateManager::dtor_00AB2CD0()
+{
+    using namespace cEnemyCautionStateManager_p1;
+    destroyHandle(at(this, 0x2424));
+    destroyHandle(at(this, 0x241C));
+    destroyHandle(at(this, 0x2414));
+    destroyHandle(at(this, 0x240C));
+    destroyEspControler(at(this, 0x2210));
+    FUN_007b7800((byte *)at(this, 0x2180));
+    releaseRayCastPart(at(this, 0x2180));
+    destroyEspControler(at(this, 0x1FE0));
+    destroyEspControler(at(this, 0x1F30));
+    destroyEspControler(at(this, 0x1E80));
+    destroyEspControler(at(this, 0x1DD0));
+    destroyManager(at(this, 0x1C60));
+    thiscall<void>(0x00A60400u, at(this, 0x1BD8));  // destructor (FILEMAP: cXml::cXml_7)
+    releaseArray(at(this, 0x12AC));                 /* owner+0x12AC..0x12B8: array */
+    destroyEspControler(at(this, 0x1110));
+    thiscall<void>(0x00E2C5D0u, at(this, 0xF20));   // Animation::PostControl::Work::~Work
+    destroyHandle(at(this, 0xE94));
+    destroyEspControler(at(this, 0xDD0));
+    dtor_004ECE70();  // jmp 004ECE70
 }
 
 // 00AB5410  cEnemyCautionStateManager::~cEnemyCautionStateManager  size=345  [class]
-void __fastcall cEnemyCautionStateManager::~cEnemyCautionStateManager(int param_1)
-
-{
-  int iVar1;
-  
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00905ce0();
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  FUN_006c1cb0();
-  iVar1 = FUN_00a81330();
-  if (iVar1 != 0) {
-    FUN_00a81330();
-    FUN_00a805f0();
-  }
-  RayCastManager::getWork(param_1 + 0x21e4);
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  cEspControler::~cEspControler();
-  *(undefined ***)(param_1 + 0x1c60) = vftable;
-  FUN_00a82d10();
-  iVar1 = 9;
-  do {
-    FUN_00905ce0();
-    iVar1 = iVar1 + -1;
-  } while (-1 < iVar1);
-  FUN_00905ce0();
-  cXml::cXml_7();
-  if (*(int *)(param_1 + 0x12ac) != 0) {
-    *(undefined4 *)(param_1 + 0x12b4) = 0;
-    if (*(int *)(param_1 + 0x12b8) != 0) {
-      FUN_00dd48d0(*(int *)(param_1 + 0x12ac),0);
-      *(undefined4 *)(param_1 + 0x12b8) = 0;
-    }
-    *(undefined4 *)(param_1 + 0x12ac) = 0;
-    *(undefined4 *)(param_1 + 0x12b0) = 0;
-  }
-  cEspControler::~cEspControler();
-  Animation::PostControl::Work::~Work();
-  FUN_00905ce0();
-  cEspControler::~cEspControler();
-  ~cEnemyCautionStateManager();
-  return;
+// Enemy destructor (`this` is the enemy; manager embedded at +0x1C60).
+void cEnemyCautionStateManager::dtor_00AB5410()
+{
+    using namespace cEnemyCautionStateManager_p1;
+    destroyHandle(at(this, 0x2434));
+    destroyHandle(at(this, 0x242C));
+    destroyHandle(at(this, 0x2424));
+    destroyHandle(at(this, 0x241C));
+    destroyEspControler(at(this, 0x2210));
+    FUN_006c1cb0((byte *)at(this, 0x2180));
+    releaseRayCastPart(at(this, 0x2180));
+    destroyEspControler(at(this, 0x1FE0));
+    destroyEspControler(at(this, 0x1F30));
+    destroyEspControler(at(this, 0x1E80));
+    destroyEspControler(at(this, 0x1DD0));
+    destroyManager(at(this, 0x1C60));
+    thiscall<void>(0x00A60400u, at(this, 0x1BD8));  // destructor (FILEMAP: cXml::cXml_7)
+    releaseArray(at(this, 0x12AC));                 /* owner+0x12AC..0x12B8: array */
+    destroyEspControler(at(this, 0x1110));
+    thiscall<void>(0x00E2C5D0u, at(this, 0xF20));   // Animation::PostControl::Work::~Work
+    destroyHandle(at(this, 0xE94));
+    destroyEspControler(at(this, 0xDD0));
+    dtor_004ECE70();  // jmp 004ECE70
 }
-

@@ -1,199 +1,238 @@
-// src/managers/windmanager/WindManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DFE40..008E07A0, 7 functions
-
+// src/managers/windmanager/WindManagerImplement.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "WindManagerImplement.h"
 
+// Imports
+extern "C" __declspec(dllimport) void *__stdcall TlsGetValue(unsigned long tlsIndex);
+// TLS slot index of the module (0x01F8EF48); fs:[0x2C] is the thread's TLS array
+extern "C" unsigned int _tls_index;
+extern "C" unsigned long __readfsdword(unsigned long offset);
+#pragma intrinsic(__readfsdword)
+
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+extern int           DAT_01885d68;  // cHavok: 1 = world locking disabled
+extern int           DAT_01885db8;  // cHavok: non-zero = inside the unlock period
+extern int           DAT_01b35fac;  // cHavok: world exists
+extern unsigned char DAT_01885d70[];  // cHavok world lock object (ECX of FUN_00dd7320)
+extern int           DAT_01885d20;  // hkpWorld *
+extern unsigned long DAT_01f8fc4c;  // TLS index of the Havok memory router
+extern int           DAT_01b35d94;  // heap of the Wind entries (passed to FUN_00dd3500)
+
+// ---------------------------------------------------------------------------------------------
+// Helpers.  Callees whose functions.h prototype does not match the machine code are called
+// through a cast so that the argument list is the binary's.
+// ---------------------------------------------------------------------------------------------
+namespace WindManagerImplement_p1 {
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// Callees known only by address
+void *const HKP_WIND_ACTION_CTOR = (void *)0x01268970;  // hkpWindAction::hkpWindAction(body, wind, resistanceFactor, obbFactor)
+void *const HKP_WIND_CTOR        = (void *)0x01268DD0;  // FILEMAP: hkpWorldPostSimulationListener::hkpWorldPostSimulationListener_2 (wind from a vector)
+
+// Havok thread heap (hkMemoryRouter::heap(): router+0x2C); slot 0x4 = blockAlloc
+inline void *heapAlloc(int size)
+{
+    void *router = TlsGetValue(DAT_01f8fc4c);
+    return vcall<void *>(*(void **)((char *)router + 0x2C), 0x4, size);
+}
+
+// cHavok world lock.  FUN_004066f0 is the guard constructor (ECX = the guard object on the stack);
+// the guard destructor is inlined, reproduced by havokUnlock().
+inline void havokLock(void *guard)
+{
+    FUN_004066f0((undefined4)guard);
+}
+inline void havokUnlock()
+{
+    if (DAT_01885d68 != 1) {
+        char **tlsArray = (char **)__readfsdword(0x2C);
+        int *lockDepth = (int *)(tlsArray[_tls_index] + 4);
+        *lockDepth = *lockDepth - 1;
+        if (*lockDepth == 0 && DAT_01b35fac != 0 && DAT_01885db8 == 0) {
+            FUN_00dd7320((int)DAT_01885d70);
+        }
+    }
+}
+
+}  // namespace WindManagerImplement_p1
+
 // 008DFE40  WindManagerImplement::vf10  size=40  [class]
-void __thiscall WindManagerImplement::vf10(int *param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = (**(code **)(*param_1 + 8))(param_2);
-  if (iVar1 != 0) {
-    (**(code **)(*param_1 + 0xc))(iVar1,param_2);
-  }
-  return;
+// Adds a wind action of the wind registered under `id` to `*body` (ret 8: two stack arguments).
+void WindManagerImplement::vf10(int id, void **body)
+{
+    Wind *wind = vf08(id);
+    if (wind != 0) {
+        vf0C(wind, body);
+    }
 }
 
 // 008DFE90  WindManagerImplement::vf18  size=3  [class]
-void WindManagerImplement::vf18(void)
-
-{
-  return;
+void WindManagerImplement::vf18(int unused)
+{
 }
 
 // 008DFFD0  WindManagerImplement::vf08  size=51  [class]
-int * __thiscall WindManagerImplement::vf08(int param_1,int param_2)
-
-{
-  undefined4 *puVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  
-  iVar2 = *(int *)(param_1 + 4);
-  puVar3 = *(undefined4 **)(iVar2 + 4);
-  if (puVar3 != puVar3 + *(int *)(iVar2 + 8)) {
-    puVar1 = puVar3 + *(int *)(iVar2 + 8);
-    do {
-      if (*(int *)*puVar3 == param_2) {
-        return (int *)*puVar3;
-      }
-      puVar3 = puVar3 + 1;
-    } while (puVar3 != puVar1);
-  }
-  return (int *)0x0;
+// Finds the wind registered under `id`.
+WindManager::Wind *WindManagerImplement::vf08(int id)
+{
+    WindArray *array = winds();
+    Wind **it = array->data;
+    if (it != it + array->count) {
+        Wind **end = it + array->count;
+        do {
+            if ((*it)->id == id) {
+                return *it;
+            }
+            it = it + 1;
+        } while (it != end);
+    }
+    return 0;
 }
 
 // 008E0210  WindManagerImplement::vf0C  size=214  [class]
-void WindManagerImplement::vf0C(float param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  undefined4 uVar2;
-  LPVOID pvVar3;
-  int iVar4;
-  int unaff_retaddr;
-  
-  FUN_004066f0();
-  uVar2 = *param_2;
-  pvVar3 = TlsGetValue(DAT_01f8fc4c);
-  iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x28);
-  *(undefined2 *)(iVar4 + 4) = 0x28;
-  iVar4 = hkpWindAction::hkpWindAction
-                    (uVar2,*(undefined4 *)(unaff_retaddr + 4),
-                     *(float *)(unaff_retaddr + 8) * param_1,*(undefined4 *)(unaff_retaddr + 0xc));
-  if (iVar4 != 0) {
-    FUN_01195d90(iVar4);
-    FUN_010060a0();
-  }
-  if (DAT_01885d68 != 1) {
-    piVar1 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
-    *piVar1 = *piVar1 + -1;
-    if (((*piVar1 == 0) && (DAT_01b35fac != 0)) && (DAT_01885db8 == 0)) {
-      FUN_00dd7320();
-    }
-  }
-  return;
+// Rebuilt from the machine code (Ghidra lost `wind` as unaff_retaddr and the scale computation):
+// creates an hkpWindAction for `*body` with the wind's resistance factor scaled by the body's
+// value at (+0xC)->+0x84, adds it to the world and drops the local reference.  ECX is unused.
+void WindManagerImplement::vf0C(Wind *wind, void **body)
+{
+    using namespace WindManagerImplement_p1;
+    char guard;  // (the machine code keeps the guard in the `body` argument slot)
+    havokLock(&guard);
+    void *rigidBody = *body;
+    float scale;
+    if (rigidBody == 0) {
+        scale = 0.0f;
+    }
+    else {
+        char *owner = *(char **)((char *)rigidBody + 0xc);  /* hkpRigidBody+0xC: ? */
+        if (owner == 0) {
+            scale = 0.0f;
+        }
+        else {
+            scale = *(float *)(owner + 0x84);  // ?
+        }
+    }
+    void *memory = heapAlloc(0x28);
+    *(unsigned short *)((char *)memory + 4) = 0x28;  // hkReferencedObject::m_memSizeAndFlags
+    void *action = thiscall<void *>(HKP_WIND_ACTION_CTOR, memory, rigidBody, wind->wind,
+                                    wind->resistanceFactor * scale, wind->obbFactor);
+    if (action != 0) {
+        thiscall<int *>(FUN_01195d90, (void *)DAT_01885d20, action);  // world->addAction(action)
+        FUN_010060a0((undefined4 *)action);                           // action->removeReference()
+    }
+    havokUnlock();
 }
 
 // 008E02F0  WindManagerImplement::vf04  size=200  [class]
-undefined4 __thiscall
-WindManagerImplement::vf04
-          (int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param_4,undefined4 param_5)
-
-{
-  LPVOID pvVar1;
-  int iVar2;
-  undefined4 unaff_ESI;
-  undefined4 *puStack_28;
-  undefined4 uStack_24;
-  undefined4 uStack_20;
-  undefined4 uStack_1c;
-  undefined4 uStack_18;
-  
-  pvVar1 = TlsGetValue(DAT_01f8fc4c);
-  iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x40);
-  *(undefined2 *)(iVar2 + 4) = 0x40;
-  uStack_24 = *param_3;
-  uStack_20 = param_3[1];
-  uStack_1c = param_3[2];
-  uStack_18 = param_3[3];
-  iVar2 = hkpWorldPostSimulationListener::hkpWorldPostSimulationListener_2(&uStack_24);
-  puStack_28 = (undefined4 *)FUN_00dd3500(0x10,DAT_01b35d94);
-  if (puStack_28 == (undefined4 *)0x0) {
-    puStack_28 = (undefined4 *)0x0;
-  }
-  else {
-    puStack_28[2] = param_4;
-    *puStack_28 = param_2;
-    puStack_28[1] = iVar2;
-    puStack_28[3] = param_5;
-  }
-  (**(code **)(**(int **)(param_1 + 4) + 8))(&puStack_28);
-  if (iVar2 == 0) {
-    iVar2 = 0;
-  }
-  else {
-    iVar2 = iVar2 + 8;
-  }
-  FUN_011946c0(iVar2);
-  return unaff_ESI;
+// Creates a wind from the 4 floats at `vector`, registers it under `id` and adds its listener
+// (+0x8) to the world.  Returns the new entry (Ghidra: unaff_ESI).
+WindManager::Wind *WindManagerImplement::vf04(int id, float *vector, float resistanceFactor, float obbFactor)
+{
+    using namespace WindManagerImplement_p1;
+    __declspec(align(16)) float direction[4];
+
+    void *memory = heapAlloc(0x40);
+    *(unsigned short *)((char *)memory + 4) = 0x40;  // hkReferencedObject::m_memSizeAndFlags
+    direction[0] = vector[0];
+    direction[1] = vector[1];
+    direction[2] = vector[2];
+    direction[3] = vector[3];
+    char *windObject = thiscall<char *>(HKP_WIND_CTOR, memory, direction);
+    Wind *entry = (Wind *)cdeclcall<void *>(FUN_00dd3500, 0x10, DAT_01b35d94);
+    if (entry == 0) {
+        entry = 0;
+    }
+    else {
+        entry->resistanceFactor = resistanceFactor;
+        entry->id = id;
+        entry->wind = windObject;
+        entry->obbFactor = obbFactor;
+    }
+    vcall<void>(winds(), 0x8, &entry);  // push_back
+    char *listener;
+    if (windObject == 0) {
+        listener = 0;
+    }
+    else {
+        listener = windObject + 8;
+    }
+    thiscall<void>(FUN_011946c0, (void *)DAT_01885d20, listener);  // world->addWorldPostSimulationListener
+    return entry;
 }
 
 // 008E03C0  WindManagerImplement::vf14  size=262  [class]
-void __thiscall WindManagerImplement::vf14(int param_1,int param_2)
-
-{
-  int *piVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  
-  FUN_004066f0();
-  iVar5 = *(int *)(param_1 + 4);
-  piVar6 = *(int **)(iVar5 + 4);
-  if (piVar6 == piVar6 + *(int *)(iVar5 + 8)) {
-LAB_008e03f5:
-    if (DAT_01885d68 != 1) {
-      piVar6 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
-      *piVar6 = *piVar6 + -1;
-      iVar5 = *piVar6;
-LAB_008e0413:
-      if (((iVar5 == 0) && (DAT_01b35fac != 0)) && (DAT_01885db8 == 0)) {
-        FUN_00dd7320();
-      }
-    }
-    return;
-  }
-  piVar1 = piVar6 + *(int *)(iVar5 + 8);
-LAB_008e03e8:
-  piVar2 = (int *)*piVar6;
-  if (*piVar2 != param_2) goto code_r0x008e03ee;
-  if (piVar2[1] == 0) {
-    iVar5 = 0;
-  }
-  else {
-    iVar5 = piVar2[1] + 8;
-  }
-  FUN_01192e80(iVar5);
-  FUN_010060a0();
-  FUN_00dd4920(piVar2);
-  iVar5 = *(int *)(param_1 + 4);
-  uVar3 = *(uint *)(iVar5 + 8);
-  iVar4 = *(int *)(iVar5 + 4);
-  piVar1 = (int *)(iVar4 + uVar3 * 4);
-  if ((((piVar6 != piVar1) && (iVar4 != 0)) && (uVar3 != 0)) &&
-     ((uint)((int)piVar6 - iVar4 >> 2) < uVar3)) {
-    for (; piVar6 != piVar1 + -1; piVar6 = piVar6 + 1) {
-      *piVar6 = piVar6[1];
-    }
-    *(int *)(iVar5 + 8) = *(int *)(iVar5 + 8) + -1;
-  }
-  if (DAT_01885d68 == 1) {
-    return;
-  }
-  piVar6 = (int *)(*(int *)((int)ThreadLocalStoragePointer + _tls_index * 4) + 4);
-  *piVar6 = *piVar6 + -1;
-  iVar5 = *piVar6;
-  goto LAB_008e0413;
-code_r0x008e03ee:
-  piVar6 = piVar6 + 1;
-  if (piVar6 == piVar1) goto LAB_008e03f5;
-  goto LAB_008e03e8;
+// Removes the wind registered under `id`: detaches its listener from the world, releases it,
+// frees the entry and erases it from the array.
+void WindManagerImplement::vf14(int id)
+{
+    using namespace WindManagerImplement_p1;
+    char guard;  // (the machine code keeps the guard in the `id` argument slot)
+    havokLock(&guard);
+    WindArray *array = winds();
+    Wind **it = array->data;
+    if (it != it + array->count) {
+        Wind **end = it + array->count;
+        do {
+            Wind *wind = *it;
+            if (wind->id == id) {
+                char *listener;
+                if (wind->wind == 0) {
+                    listener = 0;
+                }
+                else {
+                    listener = (char *)wind->wind + 8;
+                }
+                thiscall<void>(FUN_01192e80, (void *)DAT_01885d20, listener);  // world->removeWorldPostSimulationListener
+                FUN_010060a0((undefined4 *)wind->wind);     // wind->removeReference()
+                FUN_00dd4920((int)wind);
+                array = winds();
+                unsigned int count = (unsigned int)array->count;
+                Wind **data = array->data;
+                end = data + count;
+                if (it != end && data != 0 && count != 0 && (unsigned int)(it - data) < count) {
+                    for (; it != end + -1; it = it + 1) {
+                        *it = it[1];
+                    }
+                    array->count = array->count + -1;
+                }
+                havokUnlock();
+                return;
+            }
+            it = it + 1;
+        } while (it != end);
+    }
+    havokUnlock();
 }
 
 // 008E07A0  WindManagerImplement::vf00  size=30  [class]
-undefined4 __thiscall WindManagerImplement::vf00(undefined4 param_1,byte param_2)
-
-{
-  WindManager::WindManager();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *WindManagerImplement::vf00(byte flags)
+{
+    implementDestructor();
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
-

@@ -1,1387 +1,1273 @@
-// src/managers/raycastmanager/RayCastManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00905E50..0090D8C0, 21 functions
-
+// src/managers/raycastmanager/RayCastManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "RayCastManager.h"
 
+// ---------------------------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------------------------
+// kernel32
+extern "C" __declspec(dllimport) void *__stdcall TlsGetValue(unsigned long tlsIndex);
+// d3dx9
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" float *__stdcall D3DXMatrixMultiply(float *out, const float *m1, const float *m2);
+extern "C" float *__stdcall D3DXMatrixRotationX(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationY(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationZ(float *out, float angle);
+// CRT (the compiler emitted fsqrt / fpatan inline)
+extern "C" double __cdecl sqrt(double x);
+extern "C" double __cdecl atan2(double y, double x);
+// CRT TLS index and the fs:[0x2C] read (TEB ThreadLocalStoragePointer)
+extern "C" unsigned long _tls_index;
+extern "C" unsigned long __readfsdword(unsigned long offset);
+#pragma intrinsic(__readfsdword)
+
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+extern unsigned char DAT_0164c08c[];  // debug message: handle does not match its work
+extern unsigned char DAT_0164c330[];  // debug message: work array full (argument: handle)
+extern unsigned char DAT_0164c364[];  // debug message: no work to register (argument: name)
+extern unsigned char DAT_0164c454[];  // debug message: stale handle (argument: name)
+extern unsigned long DAT_01f8fc4c;    // TLS slot of the Havok hkMemoryRouter
+extern float DAT_01b20754;            // convex radius passed to hkpBoxShape / hkpCylinderShape
+extern int DAT_01885d68;              // lock mode: 1 = locking disabled
+extern int DAT_01b35fac;              // non-zero once the global lock is usable
+extern int DAT_01885db8;              // non-zero: do not leave the critical section
+
+namespace RayCastManager_p1 {
+
+// Callees whose functions.h prototype does not match the argument list seen at the call site
+// are called through a cast so that exactly the raw arguments are passed. "ECX: ?" marks calls
+// of __thiscall / __fastcall functions whose register argument the decompiler did not show.
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class S, class... A> inline R thiscall(F fn, S self, A... args)
+{
+    typedef R (__thiscall *Fn)(S, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// Havok block allocation through the thread's hkMemoryRouter (+0x2C: heap allocator, vf04 =
+// alloc); the block size is then stored at +4 (hkReferencedObject::m_memSizeAndFlags).
+inline int havokNewBlock(int size)
+{
+    void *router = TlsGetValue(DAT_01f8fc4c);
+    int *allocator = *(int **)((char *)router + 0x2c);
+    int block = vcall<int>(allocator, 0x4, size);
+    *(unsigned short *)(block + 4) = (unsigned short)size;
+    return block;
+}
+
+// Havok shape constructors (__thiscall; ECX = the block just allocated, which the raw
+// decompilation does not show). They return the object, which the callers test for 0.
+inline int constructSphereShape(int block, float radius)  // 0112DD30
+{
+    return thiscall<int>(0x0112DD30u, block, radius);
+}
+inline int constructCapsuleShape(int block, float *vertexA, float *vertexB, float radius)  // 0112F240
+{
+    return thiscall<int>(0x0112F240u, block, vertexA, vertexB, radius);
+}
+inline int constructCylinderShape(int block, float *vertexA, float *vertexB, float radius,
+                                  float convexRadius)  // 0112D300
+{
+    return thiscall<int>(0x0112D300u, block, vertexA, vertexB, radius, convexRadius);
+}
+inline int constructBoxShape(int block, float *halfExtents, float convexRadius)  // 01138770
+{
+    return thiscall<int>(0x01138770u, block, halfExtents, convexRadius);
+}
+
+// SSE rsqrtss: the raw code uses rsqrtps on four copies of the value and reads lane 0.
+inline float rsqrtApprox(float value)
+{
+    float result;
+    __asm {
+        movss   xmm0, value
+        rsqrtss xmm0, xmm0
+        movss   result, xmm0
+    }
+    return result;
+}
+
+}  // namespace RayCastManager_p1
+
 // 00905E50  RayCastManager::getWork  size=81  [class]
-void __thiscall RayCastManager::getWork(int param_1,int *param_2)
-
-{
-  int iVar1;
-  
-  if (*(int *)(param_1 + 0x134) == 0) {
-    *param_2 = 0;
-    return;
-  }
-  iVar1 = *param_2;
-  if (iVar1 != 0) {
-    if (param_2 != *(int **)(iVar1 + 0x10)) {
-      FUN_00dd5650(&DAT_0164c08c);
-      *param_2 = 0;
-      return;
-    }
-    if (iVar1 != 0) {
-      *(undefined2 *)(iVar1 + 0x1a) = 1;
-    }
-  }
-  *param_2 = 0;
-  return;
+void RayCastManager::getWork(int *handle)
+{
+    using namespace RayCastManager_p1;
+    int work;
+
+    if (enabled() == 0) {
+        *handle = 0;
+        return;
+    }
+    work = *handle;
+    if (work != 0) {
+        if (handle != *(int **)(work + 0x10) /* RayCastWork+0x10: handle */) {
+            cdeclcall<void>(FUN_00dd5650, DAT_0164c08c);
+            *handle = 0;
+            return;
+        }
+        if (work != 0) {
+            *(unsigned short *)(work + 0x1a) = 1;  // RayCastWork+0x1A: release request
+        }
+    }
+    *handle = 0;
 }
 
 // 00905EE0  RayCastManager::getWork_2  size=45  [class]
-void RayCastManager::getWork_2(int *param_1,undefined1 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = *param_1;
-  if (iVar1 != 0) {
-    if (param_1 != *(int **)(iVar1 + 0x10)) {
-      FUN_00dd5650(&DAT_0164c08c);
-      return;
-    }
-    if (iVar1 != 0) {
-      *(undefined1 *)(iVar1 + 0x1d) = param_2;
-    }
-  }
-  return;
+void RayCastManager::getWork_2(int *handle, unsigned char value)
+{
+    using namespace RayCastManager_p1;
+    int work;
+
+    work = *handle;
+    if (work != 0) {
+        if (handle != *(int **)(work + 0x10) /* RayCastWork+0x10: handle */) {
+            cdeclcall<void>(FUN_00dd5650, DAT_0164c08c);
+            return;
+        }
+        if (work != 0) {
+            *(unsigned char *)(work + 0x1d) = value;  // RayCastWork+0x1D: ?
+        }
+    }
 }
 
 // 00907DC0  RayCastManager::set  size=163  [class]
-undefined4 __thiscall RayCastManager::set(int param_1,int *param_2,int *param_3,undefined4 param_4)
-
-{
-  undefined4 *puVar1;
-  int iVar2;
-  
-  if (param_2 == (int *)0x0) {
-    FUN_00dd5650(&DAT_0164c364,param_4);
-    return 0;
-  }
-  FUN_00dd72e0();
-  iVar2 = *(int *)(param_1 + 0x74);
-  if (*(int *)(param_1 + 0x70) <= iVar2) {
-    (**(code **)(*param_2 + 4))(1);
-    FUN_00dd5650(&DAT_0164c330,param_3);
-    FUN_00dd7320();
-    return 0;
-  }
-  if (iVar2 < *(int *)(param_1 + 0x70)) {
-    puVar1 = (undefined4 *)(*(int *)(param_1 + 0x6c) + iVar2 * 4);
-    if (puVar1 != (undefined4 *)0x0) {
-      *puVar1 = param_2;
-    }
-    *(int *)(param_1 + 0x74) = *(int *)(param_1 + 0x74) + 1;
-  }
-  FUN_00dd7320();
-  if (*param_3 == 0) {
-    *param_3 = (int)param_2;
-  }
-  param_2[4] = (int)param_3;
-  return 1;
+int RayCastManager::set(int *work, int *handle, const char *name)
+{
+    using namespace RayCastManager_p1;
+    int *slot;
+    int count;
+
+    if (work == 0) {
+        cdeclcall<void>(FUN_00dd5650, DAT_0164c364, name);
+        return 0;
+    }
+    cdeclcall<void>(FUN_00dd72e0); /* ECX: ? */
+    count = works().count;
+    if (works().capacity <= count) {
+        vcall<undefined4>(work, 0x4, 1);  // RayCastWork::vf04(1): scalar deleting destructor
+        cdeclcall<void>(FUN_00dd5650, DAT_0164c330, handle);
+        cdeclcall<void>(FUN_00dd7320); /* ECX: ? */
+        return 0;
+    }
+    if (count < works().capacity) {
+        slot = works().data + count;
+        if (slot != 0) {
+            *slot = (int)work;
+        }
+        works().count = works().count + 1;
+    }
+    cdeclcall<void>(FUN_00dd7320); /* ECX: ? */
+    if (*handle == 0) {
+        *handle = (int)work;
+    }
+    work[4] = (int)handle;  // RayCastWork+0x10: handle
+    return 1;
 }
 
 // 0090BAE0  RayCastManager::~RayCastManager  size=156  [class]
-void __fastcall RayCastManager::~RayCastManager(undefined4 *param_1)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  
-  *param_1 = vftable;
-  FUN_00dd7270();
-  FUN_00dd7270();
-  iVar1 = 4;
-  puVar2 = param_1 + 0x39;
-  do {
-    if (puVar2[-5] != 0) {
-      puVar2[-3] = 0;
-      if (puVar2[-2] != 0) {
-        FUN_00dd48d0(puVar2[-5],0);
-        puVar2[-2] = 0;
-      }
-      puVar2[-5] = 0;
-      puVar2[-4] = 0;
-    }
-    iVar1 = iVar1 + -1;
-    puVar2 = puVar2 + -5;
-  } while (-1 < iVar1);
-  if (param_1[0x1b] != 0) {
-    param_1[0x1d] = 0;
-    if (param_1[0x1e] != 0) {
-      FUN_00dd48d0(param_1[0x1b],0);
-      param_1[0x1e] = 0;
-    }
-    param_1[0x1b] = 0;
-    param_1[0x1c] = 0;
-  }
-  iVar1 = (**(code **)(param_1[4] + 0xc))();
-  if (iVar1 != 0) {
-    FUN_009078e0();
-  }
-  Hw::cHeap::cHeap_5();
-  return;
+RayCastManager::~RayCastManager()
+{
+    using namespace RayCastManager_p1;
+    WorkArray *array;
+    int index;
+    int heapResult;
+
+    // vftable = RayCastManager::vftable (0x0164c450)
+    cdeclcall<void>(FUN_00dd7270); /* ECX: ? */
+    cdeclcall<void>(FUN_00dd7270); /* ECX: ? */
+    index = 4;
+    array = &arrays()[4];
+    do {
+        if (array->data != 0) {
+            array->count = 0;
+            if (array->ownsMemory != 0) {
+                FUN_00dd48d0((int)array->data, 0);
+                array->ownsMemory = 0;
+            }
+            array->data = 0;
+            array->capacity = 0;
+        }
+        index = index + -1;
+        array = array - 1;
+    } while (-1 < index);
+    if (works().data != 0) {
+        works().count = 0;
+        if (works().ownsMemory != 0) {
+            FUN_00dd48d0((int)works().data, 0);
+            works().ownsMemory = 0;
+        }
+        works().data = 0;
+        works().capacity = 0;
+    }
+    heapResult = cdeclcall<int>(*(void **)(heapVftable() + 0xc)); /* heap vf0C, ECX: ? */
+    if (heapResult != 0) {
+        cdeclcall<void>(FUN_009078e0); /* ECX: ? */
+    }
+    cdeclcall<void>(0x00DD4530u); /* Hw::cHeap::cHeap_5 (heap destructor), ECX: ? */
 }
 
 // 0090BB80  RayCastManager::vf00  size=30  [class]
-undefined4 __thiscall RayCastManager::vf00(undefined4 param_1,byte param_2)
-
-{
-  ~RayCastManager();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 RayCastManager::vf00(byte flags)
+{
+    this->~RayCastManager();
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4)this;
 }
 
 // 0090BBA0  FUN_0090bba0  size=1102  [between]
-void FUN_0090bba0(undefined4 param_1,float *param_2,float *param_3,float *param_4,undefined4 param_5
-                 ,undefined4 param_6,undefined4 param_7,undefined4 param_8)
-
-{
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  LPVOID pvVar4;
-  int iVar5;
-  float unaff_EBX;
-  float unaff_ESI;
-  float10 fVar6;
-  float10 fVar7;
-  float10 fVar8;
-  float fStack_174;
-  float local_170;
-  float local_16c;
-  float local_168;
-  float fStack_164;
-  undefined4 uStack_160;
-  float fStack_15c;
-  float fStack_158;
-  float fStack_154;
-  undefined4 uStack_150;
-  float fStack_14c;
-  float fStack_148;
-  float fStack_144;
-  undefined4 uStack_140;
-  float fStack_13c;
-  float fStack_138;
-  float afStack_134 [4];
-  float fStack_124;
-  float local_120;
-  float fStack_11c;
-  undefined4 uStack_118;
-  float fStack_114;
-  float fStack_110;
-  float fStack_10c;
-  float fStack_108;
-  undefined4 uStack_104;
-  float fStack_100;
-  float fStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  undefined4 uStack_f0;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  float fStack_d4;
-  float fStack_c8;
-  float fStack_c4;
-  float fStack_bc;
-  undefined1 auStack_b0 [4];
-  float fStack_ac;
-  float fStack_a8;
-  float afStack_a4 [2];
-  undefined1 auStack_9c [60];
-  undefined1 auStack_60 [92];
-  
-  local_170 = 0.0;
-  local_16c = 0.0;
-  local_168 = param_4[2] * 0.5;
-  FUN_00ddc1d0(&local_120,param_3,5);
-  D3DXVec3TransformNormal(&local_170,&local_170,&local_120);
-  fVar1 = *param_2;
-  fVar2 = param_2[1];
-  fStack_174 = param_2[2] + fStack_174;
-  local_170 = param_2[3] + local_170;
-  afStack_134[0] = 0.0;
-  fStack_138 = 0.0;
-  fStack_13c = 0.0;
-  uStack_140 = 0;
-  fStack_148 = 0.0;
-  fStack_14c = 0.0;
-  uStack_150 = 0;
-  fStack_154 = 0.0;
-  fStack_15c = 0.0;
-  uStack_160 = 0;
-  fStack_164 = 0.0;
-  local_168 = 0.0;
-  afStack_134[1] = 1.0;
-  fStack_144 = 1.0;
-  fStack_158 = 1.0;
-  local_16c = 1.0;
-  if (param_3[2] != 0.0) {
-    D3DXMatrixRotationZ(afStack_134 + 2,param_3[2]);
-    D3DXMatrixMultiply(&fStack_174,afStack_134,&fStack_174);
-  }
-  if (param_3[1] != 0.0) {
-    D3DXMatrixRotationY(afStack_134 + 2,param_3[1]);
-    D3DXMatrixMultiply(&fStack_174,afStack_134,&fStack_174);
-  }
-  if (*param_3 != 0.0) {
-    D3DXMatrixRotationX(afStack_134 + 2,*param_3);
-    D3DXMatrixMultiply(&fStack_174,afStack_134,&fStack_174);
-  }
-  afStack_134[0] = fStack_174;
-  fStack_d4 = fStack_174;
-  fStack_c8 = SQRT(fStack_164 * fStack_164 + local_16c * local_16c + local_168 * local_168);
-  fStack_c4 = SQRT(fStack_154 * fStack_154 + fStack_15c * fStack_15c + fStack_158 * fStack_158);
-  fVar3 = SQRT(fStack_144 * fStack_144 + fStack_148 * fStack_148 + fStack_14c * fStack_14c);
-  fStack_e4 = fStack_154 / fVar3;
-  fStack_e0 = fStack_144 / fVar3;
-  fStack_13c = unaff_ESI + fVar1;
-  fStack_138 = fVar2 + unaff_EBX;
-  fStack_dc = unaff_ESI + fVar1;
-  fStack_d8 = fVar2 + unaff_EBX;
-  fVar6 = (float10)FUN_00ddbaa0(-(fStack_164 / fVar3));
-  fStack_e8 = (float)fVar6;
-  fVar7 = (float10)fpatan((float10)fStack_e4,(float10)fStack_e0);
-  fStack_bc = (float)fVar7;
-  fVar8 = (float10)fpatan((float10)local_168 / (float10)fStack_c4,
-                          (float10)local_16c / (float10)fStack_c8);
-  fVar7 = (float10)0;
-  fStack_f4 = (float)fVar7;
-  fStack_f8 = (float)fVar7;
-  fStack_fc = (float)fVar7;
-  fStack_100 = (float)fVar7;
-  fStack_108 = (float)fVar7;
-  fStack_10c = (float)fVar7;
-  fStack_110 = (float)fVar7;
-  fStack_114 = (float)fVar7;
-  fStack_11c = (float)fVar7;
-  local_120 = (float)fVar7;
-  fStack_124 = (float)fVar7;
-  afStack_134[3] = (float)fVar7;
-  uStack_f0 = 0x3f800000;
-  uStack_104 = 0x3f800000;
-  uStack_118 = 0x3f800000;
-  afStack_134[2] = 1.0;
-  if (fVar7 != fVar8) {
-    D3DXMatrixRotationZ(auStack_9c,(float)fVar8);
-    D3DXMatrixMultiply(afStack_134,afStack_a4,afStack_134);
-    fVar6 = (float10)fStack_e8;
-  }
-  if ((float10)0 != fVar6) {
-    D3DXMatrixRotationY(auStack_9c,(float)fVar6);
-    D3DXMatrixMultiply(afStack_134,afStack_a4,afStack_134);
-  }
-  if (fStack_bc != 0.0) {
-    D3DXMatrixRotationX(auStack_9c,fStack_bc);
-    D3DXMatrixMultiply(afStack_134,afStack_a4,afStack_134);
-  }
-  fStack_fc = fStack_dc;
-  fStack_f8 = fStack_d8;
-  fStack_f4 = fStack_d4;
-  FUN_01005190(afStack_134 + 2);
-  fStack_ac = *param_4 * 0.5;
-  fStack_a8 = param_4[1] * 0.5;
-  afStack_a4[0] = param_4[2] * 0.5;
-  afStack_a4[1] = 0.0;
-  pvVar4 = TlsGetValue(DAT_01f8fc4c);
-  iVar5 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x30);
-  *(undefined2 *)(iVar5 + 4) = 0x30;
-  iVar5 = hkpBoxShape::hkpBoxShape(auStack_b0,DAT_01b20754);
-  if (iVar5 != 0) {
-    FUN_009083c0(param_1,iVar5,0,auStack_60,param_5,param_6,param_7,param_8);
-    return;
-  }
-  return;
+// ? Box query for a RayCastWork: half extents = size / 2, pose from `position` and the Euler
+// angles `rotation`; the shape and its hkTransform go to FUN_009083c0 (RayCastWork
+// "setClosestPoints"; __thiscall, ECX = this function's own ECX, lost by the decompiler, and all 8 values on the stack). The last four arguments are forwarded.
+//
+// Ghidra lost track of this 16-byte-aligned frame: the same slot is reached through two bases
+// 8 bytes apart (matrices are written at one name and read at another) and two register values
+// are read uninitialized. Frame reproduces Ghidra's stack slots one to one (sNNN = the local at
+// -0xNNN) and every access below uses exactly the slot Ghidra printed.
+void FUN_0090bba0(int work, float *position, float *rotation, float *size, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s174, s170, s16c, s168, s164, s160, s15c, s158;
+        float s154, s150, s14c, s148, s144, s140, s13c, s138;
+        float s134, s130, s12c, s128, s124, s120, s11c, s118;
+        float s114, s110, s10c, s108, s104, s100, sfc, sf8;
+        float sf4, sf0, sec, se8, se4, se0, sdc, sd8;
+        float sd4, sd0, scc, sc8, sc4, sc0, sbc, sb8;
+        float sb4, sb0, sac, sa8, sa4, sa0;
+        float s9c[15];  // auStack_9c: rotation matrix scratch
+        float s60[23];  // auStack_60: hkTransform passed to the setter
+    } f;
+    float posX;       // fVar1
+    float posY;       // fVar2
+    float lengthZ;    // fVar3
+    float unaffEBX;   // ? register value on entry
+    float unaffESI;   // ? register value on entry
+    double angleY;    // fVar6
+    double angleX;    // fVar7 (then reused as the constant 0)
+    double angleZ;    // fVar8
+    int shape;
+
+    // offset (0, 0, size.z / 2) rotated by the Euler matrix (order 5)
+    f.s170 = 0.0f;
+    f.s16c = 0.0f;
+    f.s168 = size[2] * 0.5f;
+    FUN_00ddc1d0((undefined4 *)&f.s120, rotation, 5);
+    D3DXVec3TransformNormal(&f.s170, &f.s170, &f.s120);
+    posX = position[0];
+    posY = position[1];
+    f.s174 = position[2] + f.s174;
+    f.s170 = position[3] + f.s170;
+
+    // identity, then rotate by Z, Y, X
+    f.s134 = 0.0f;
+    f.s138 = 0.0f;
+    f.s13c = 0.0f;
+    f.s140 = 0.0f;
+    f.s148 = 0.0f;
+    f.s14c = 0.0f;
+    f.s150 = 0.0f;
+    f.s154 = 0.0f;
+    f.s15c = 0.0f;
+    f.s160 = 0.0f;
+    f.s164 = 0.0f;
+    f.s168 = 0.0f;
+    f.s130 = 1.0f;
+    f.s144 = 1.0f;
+    f.s158 = 1.0f;
+    f.s16c = 1.0f;
+    if (rotation[2] != 0.0f) {
+        D3DXMatrixRotationZ(&f.s12c, rotation[2]);
+        D3DXMatrixMultiply(&f.s174, &f.s134, &f.s174);
+    }
+    if (rotation[1] != 0.0f) {
+        D3DXMatrixRotationY(&f.s12c, rotation[1]);
+        D3DXMatrixMultiply(&f.s174, &f.s134, &f.s174);
+    }
+    if (rotation[0] != 0.0f) {
+        D3DXMatrixRotationX(&f.s12c, rotation[0]);
+        D3DXMatrixMultiply(&f.s174, &f.s134, &f.s174);
+    }
+
+    // decompose the matrix back into Euler angles (row lengths, clamped asin, atan2)
+    f.s134 = f.s174;
+    f.sd4 = f.s174;
+    f.sc8 = (float)sqrt(f.s164 * f.s164 + f.s16c * f.s16c + f.s168 * f.s168);
+    f.sc4 = (float)sqrt(f.s154 * f.s154 + f.s15c * f.s15c + f.s158 * f.s158);
+    lengthZ = (float)sqrt(f.s144 * f.s144 + f.s148 * f.s148 + f.s14c * f.s14c);
+    f.se4 = f.s154 / lengthZ;
+    f.se0 = f.s144 / lengthZ;
+    f.s13c = unaffESI + posX;
+    f.s138 = posY + unaffEBX;
+    f.sdc = unaffESI + posX;
+    f.sd8 = posY + unaffEBX;
+    angleY = (double)FUN_00ddbaa0(-(f.s164 / lengthZ));
+    f.se8 = (float)angleY;
+    angleX = atan2((double)f.se4, (double)f.se0);
+    f.sbc = (float)angleX;
+    angleZ = atan2((double)f.s168 / (double)f.sc4, (double)f.s16c / (double)f.sc8);
+
+    // identity, then rotate by the recovered Z, Y, X
+    angleX = 0.0;
+    f.sf4 = (float)angleX;
+    f.sf8 = (float)angleX;
+    f.sfc = (float)angleX;
+    f.s100 = (float)angleX;
+    f.s108 = (float)angleX;
+    f.s10c = (float)angleX;
+    f.s110 = (float)angleX;
+    f.s114 = (float)angleX;
+    f.s11c = (float)angleX;
+    f.s120 = (float)angleX;
+    f.s124 = (float)angleX;
+    f.s128 = (float)angleX;
+    f.sf0 = 1.0f;
+    f.s104 = 1.0f;
+    f.s118 = 1.0f;
+    f.s12c = 1.0f;
+    if (angleX != angleZ) {
+        D3DXMatrixRotationZ(f.s9c, (float)angleZ);
+        D3DXMatrixMultiply(&f.s134, &f.sa4, &f.s134);
+        angleY = (double)f.se8;
+    }
+    if (0.0 != angleY) {
+        D3DXMatrixRotationY(f.s9c, (float)angleY);
+        D3DXMatrixMultiply(&f.s134, &f.sa4, &f.s134);
+    }
+    if (f.sbc != 0.0f) {
+        D3DXMatrixRotationX(f.s9c, f.sbc);
+        D3DXMatrixMultiply(&f.s134, &f.sa4, &f.s134);
+    }
+    f.sfc = f.sdc;
+    f.sf8 = f.sd8;
+    f.sf4 = f.sd4;
+    // FUN_01005190: hkTransform::set4x4ColumnMajor (__thiscall)
+    cdeclcall<void>(FUN_01005190, &f.s12c); /* ECX: ? */
+
+    // box shape with half extents size / 2
+    f.sac = size[0] * 0.5f;
+    f.sa8 = size[1] * 0.5f;
+    f.sa4 = size[2] * 0.5f;
+    f.sa0 = 0.0f;
+    shape = havokNewBlock(0x30);
+    shape = constructBoxShape(shape, &f.sb0, DAT_01b20754);
+    if (shape != 0) {
+        cdeclcall<int>(FUN_009083c0, work, shape, 0, f.s60, forward1, forward2, forward3, forward4); /* ECX: ? (caller's ECX) */
+        return;
+    }
 }
 
 // 0090BFF0  FUN_0090bff0  size=509  [between]
-void FUN_0090bff0(undefined4 param_1,float *param_2,float *param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8)
-
-{
-  float fVar1;
-  float fVar2;
-  LPVOID pvVar3;
-  int iVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  undefined1 auVar9 [16];
-  undefined1 auStack_74 [4];
-  float local_70;
-  float fStack_6c;
-  float fStack_68;
-  undefined4 uStack_64;
-  float local_60;
-  float fStack_5c;
-  float fStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  float fStack_24;
-  float fStack_20;
-  float fStack_1c;
-  undefined4 uStack_18;
-  
-  fVar1 = (*param_3 + *param_2) * 0.5;
-  local_60 = *param_2 - fVar1;
-  fVar2 = (param_3[1] + param_2[1]) * 0.5;
-  fStack_5c = param_2[1] - fVar2;
-  fStack_6c = param_3[1] - fVar2;
-  fStack_68 = (param_3[2] + param_2[2]) * 0.5;
-  fStack_58 = param_2[2] - fStack_68;
-  fStack_68 = param_3[2] - fStack_68;
-  local_70 = *param_3 - fVar1;
-  uStack_54 = 0;
-  fVar5 = (local_60 - local_70) * (local_60 - local_70);
-  fVar6 = (fStack_5c - fStack_6c) * (fStack_5c - fStack_6c);
-  fVar7 = (fStack_58 - fStack_68) * (fStack_58 - fStack_68);
-  uStack_64 = 0;
-  fVar8 = fVar6 + fVar5 + fVar7;
-  auVar9._4_4_ = fVar6 + fVar5 + fVar7;
-  auVar9._0_4_ = fVar8;
-  auVar9._8_4_ = fVar6 + fVar5 + fVar7;
-  auVar9._12_4_ = fVar6 + fVar5 + fVar7;
-  auVar9 = rsqrtps(ZEXT416((uint)fStack_68),auVar9);
-  fVar5 = auVar9._0_4_;
-  fVar5 = (float)(~-(uint)(fVar8 <= 0.0) &
-                 (uint)((3.0 - fVar5 * fVar8 * fVar5) * fVar5 * 0.5 * fVar8));
-  if (fVar5 <= 0.0) {
-    pvVar3 = TlsGetValue(DAT_01f8fc4c);
-    iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x20);
-    *(undefined2 *)(iVar4 + 4) = 0x20;
-    iVar4 = hkpSphereShape::hkpSphereShape(param_4);
-  }
-  else {
-    pvVar3 = TlsGetValue(DAT_01f8fc4c);
-    iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x40);
-    *(undefined2 *)(iVar4 + 4) = 0x40;
-    iVar4 = hkpCapsuleShape::hkpCapsuleShape(&uStack_64,auStack_74,param_4);
-  }
-  if (iVar4 == 0) {
-    return;
-  }
-  uStack_54 = 0x3f800000;
-  uStack_50 = 0;
-  uStack_4c = 0;
-  uStack_48 = 0;
-  uStack_44 = 0;
-  uStack_40 = 0x3f800000;
-  uStack_3c = 0;
-  uStack_38 = 0;
-  uStack_34 = 0;
-  uStack_30 = 0;
-  uStack_2c = 0x3f800000;
-  uStack_28 = 0;
-  uStack_18 = 0x3f800000;
-  fStack_24 = fVar5;
-  fStack_20 = fVar1;
-  fStack_1c = fVar2;
-  FUN_009083c0(param_1,iVar4,0,&uStack_54,param_5,param_6,param_7,param_8);
-  return;
+// ? Capsule query for a RayCastWork between pointA and pointB (a sphere when they coincide),
+// centred between them; FUN_009083c0 ("setClosestPoints"; ECX passed through, not shown) does the query.
+// Frame mirrors Ghidra's stack slots (sNNN = local at -0xNNN); the capsule vertex pointers and
+// the translation stores are 4 bytes off the vectors they belong to, exactly as in the raw.
+void FUN_0090bff0(int work, float *pointA, float *pointB, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s74;                     // auStack_74 (second capsule vertex argument)
+        float s70, s6c, s68, s64;      // pointB - center (s68 first holds center.z)
+        float s60, s5c, s58;           // pointA - center
+        float s54, s50, s4c, s48;      // hkTransform (from s54)
+        float s44, s40, s3c, s38;
+        float s34, s30, s2c, s28;
+        float s24, s20, s1c, s18;
+    } f;
+    float centerX;   // fVar1
+    float centerY;   // fVar2
+    float dx2, dy2, dz2;
+    float lengthSq;  // fVar8
+    float estimate;
+    float length;    // fVar5
+    int shape;
+
+    centerX = (pointB[0] + pointA[0]) * 0.5f;
+    f.s60 = pointA[0] - centerX;
+    centerY = (pointB[1] + pointA[1]) * 0.5f;
+    f.s5c = pointA[1] - centerY;
+    f.s6c = pointB[1] - centerY;
+    f.s68 = (pointB[2] + pointA[2]) * 0.5f;
+    f.s58 = pointA[2] - f.s68;
+    f.s68 = pointB[2] - f.s68;
+    f.s70 = pointB[0] - centerX;
+    f.s54 = 0.0f;
+    dx2 = (f.s60 - f.s70) * (f.s60 - f.s70);
+    dy2 = (f.s5c - f.s6c) * (f.s5c - f.s6c);
+    dz2 = (f.s58 - f.s68) * (f.s58 - f.s68);
+    f.s64 = 0.0f;
+    // |pointA - pointB| with one Newton step on rsqrt, 0 when the squared length is <= 0
+    lengthSq = dy2 + dx2 + dz2;
+    estimate = rsqrtApprox(dy2 + dx2 + dz2);
+    if (lengthSq <= 0.0f) {
+        length = 0.0f;
+    }
+    else {
+        length = (3.0f - estimate * lengthSq * estimate) * estimate * 0.5f * lengthSq;
+    }
+    if (length <= 0.0f) {
+        shape = havokNewBlock(0x20);
+        shape = constructSphereShape(shape, radius);
+    }
+    else {
+        shape = havokNewBlock(0x40);
+        shape = constructCapsuleShape(shape, &f.s64, &f.s74, radius);
+    }
+    if (shape == 0) {
+        return;
+    }
+    f.s54 = 1.0f;
+    f.s50 = 0.0f;
+    f.s4c = 0.0f;
+    f.s48 = 0.0f;
+    f.s44 = 0.0f;
+    f.s40 = 1.0f;
+    f.s3c = 0.0f;
+    f.s38 = 0.0f;
+    f.s34 = 0.0f;
+    f.s30 = 0.0f;
+    f.s2c = 1.0f;
+    f.s28 = 0.0f;
+    f.s18 = 1.0f;
+    f.s24 = length;
+    f.s20 = centerX;
+    f.s1c = centerY;
+    cdeclcall<int>(FUN_009083c0, work, shape, 0, &f.s54, forward1, forward2, forward3, forward4); /* ECX: ? */
 }
 
 // 0090C1F0  FUN_0090c1f0  size=373  [between]
-void FUN_0090c1f0(undefined4 param_1,float *param_2,float *param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8)
-
-{
-  float fVar1;
-  float fVar2;
-  LPVOID pvVar3;
-  int iVar4;
-  undefined1 auStack_74 [4];
-  float local_70;
-  float fStack_6c;
-  float fStack_68;
-  undefined4 uStack_64;
-  float local_60;
-  float fStack_5c;
-  float fStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  float fStack_20;
-  float fStack_1c;
-  undefined4 uStack_18;
-  
-  fVar1 = (*param_3 + *param_2) * 0.5;
-  local_60 = *param_2 - fVar1;
-  fVar2 = (param_3[1] + param_2[1]) * 0.5;
-  fStack_5c = param_2[1] - fVar2;
-  fStack_6c = param_3[1] - fVar2;
-  fStack_68 = (param_3[2] + param_2[2]) * 0.5;
-  fStack_58 = param_2[2] - fStack_68;
-  fStack_68 = param_3[2] - fStack_68;
-  uStack_54 = 0;
-  local_70 = *param_3 - fVar1;
-  uStack_64 = 0;
-  pvVar3 = TlsGetValue(DAT_01f8fc4c);
-  iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x60);
-  *(undefined2 *)(iVar4 + 4) = 0x60;
-  iVar4 = hkpCylinderShape::hkpCylinderShape(&uStack_64,auStack_74,param_4,DAT_01b20754);
-  if (iVar4 == 0) {
-    return;
-  }
-  uStack_54 = 0x3f800000;
-  uStack_50 = 0;
-  uStack_4c = 0;
-  uStack_48 = 0;
-  uStack_44 = 0;
-  uStack_40 = 0x3f800000;
-  uStack_3c = 0;
-  uStack_38 = 0;
-  uStack_34 = 0;
-  uStack_30 = 0;
-  uStack_2c = 0x3f800000;
-  uStack_28 = 0;
-  uStack_18 = 0x3f800000;
-  fStack_20 = fVar1;
-  fStack_1c = fVar2;
-  FUN_009083c0(param_1,iVar4,0,&uStack_54,param_5,param_6,param_7,param_8);
-  return;
+// ? Cylinder query for a RayCastWork between pointA and pointB, centred between them;
+// FUN_009083c0 ("setClosestPoints"; ECX passed through, not shown) does the query. Frame as in FUN_0090bff0.
+void FUN_0090c1f0(int work, float *pointA, float *pointB, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s74;                     // auStack_74 (second cylinder vertex argument)
+        float s70, s6c, s68, s64;      // pointB - center (s68 first holds center.z)
+        float s60, s5c, s58;           // pointA - center
+        float s54, s50, s4c, s48;      // hkTransform (from s54)
+        float s44, s40, s3c, s38;
+        float s34, s30, s2c, s28;
+        float s24, s20, s1c, s18;
+    } f;
+    float centerX;  // fVar1
+    float centerY;  // fVar2
+    int shape;
+
+    centerX = (pointB[0] + pointA[0]) * 0.5f;
+    f.s60 = pointA[0] - centerX;
+    centerY = (pointB[1] + pointA[1]) * 0.5f;
+    f.s5c = pointA[1] - centerY;
+    f.s6c = pointB[1] - centerY;
+    f.s68 = (pointB[2] + pointA[2]) * 0.5f;
+    f.s58 = pointA[2] - f.s68;
+    f.s68 = pointB[2] - f.s68;
+    f.s54 = 0.0f;
+    f.s70 = pointB[0] - centerX;
+    f.s64 = 0.0f;
+    shape = havokNewBlock(0x60);
+    shape = constructCylinderShape(shape, &f.s64, &f.s74, radius, DAT_01b20754);
+    if (shape == 0) {
+        return;
+    }
+    f.s54 = 1.0f;
+    f.s50 = 0.0f;
+    f.s4c = 0.0f;
+    f.s48 = 0.0f;
+    f.s44 = 0.0f;
+    f.s40 = 1.0f;
+    f.s3c = 0.0f;
+    f.s38 = 0.0f;
+    f.s34 = 0.0f;
+    f.s30 = 0.0f;
+    f.s2c = 1.0f;
+    f.s28 = 0.0f;
+    f.s18 = 1.0f;
+    f.s20 = centerX;
+    f.s1c = centerY;
+    cdeclcall<int>(FUN_009083c0, work, shape, 0, &f.s54, forward1, forward2, forward3, forward4); /* ECX: ? */
 }
 
 // 0090C370  FUN_0090c370  size=191  [between]
-void FUN_0090c370(undefined4 param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7)
-
-{
-  LPVOID pvVar1;
-  int iVar2;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
-  undefined4 uStack_20;
-  undefined4 uStack_1c;
-  undefined4 uStack_18;
-  
-  pvVar1 = TlsGetValue(DAT_01f8fc4c);
-  iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x20);
-  *(undefined2 *)(iVar2 + 4) = 0x20;
-  iVar2 = hkpSphereShape::hkpSphereShape(param_3);
-  if (iVar2 == 0) {
-    return;
-  }
-  uStack_20 = param_2[1];
-  uStack_1c = param_2[2];
-  uStack_54 = 0x3f800000;
-  uStack_50 = 0;
-  uStack_4c = 0;
-  uStack_48 = 0;
-  uStack_44 = 0;
-  uStack_40 = 0x3f800000;
-  uStack_3c = 0;
-  uStack_38 = 0;
-  uStack_34 = 0;
-  uStack_30 = 0;
-  uStack_2c = 0x3f800000;
-  uStack_28 = 0;
-  uStack_24 = *param_2;
-  uStack_18 = 0x3f800000;
-  FUN_009083c0(param_1,iVar2,0,&uStack_54,param_4,param_5,param_6,param_7);
-  return;
+// Sphere query for a RayCastWork at `position`; FUN_009083c0 ("setClosestPoints"; ECX passed through, not shown).
+void FUN_0090c370(int work, float *position, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    float transform[16];  // hkTransform: identity rotation, translation = position
+    int shape;
+
+    shape = havokNewBlock(0x20);
+    shape = constructSphereShape(shape, radius);
+    if (shape == 0) {
+        return;
+    }
+    transform[13] = position[1];
+    transform[14] = position[2];
+    transform[0] = 1.0f;
+    transform[1] = 0.0f;
+    transform[2] = 0.0f;
+    transform[3] = 0.0f;
+    transform[4] = 0.0f;
+    transform[5] = 1.0f;
+    transform[6] = 0.0f;
+    transform[7] = 0.0f;
+    transform[8] = 0.0f;
+    transform[9] = 0.0f;
+    transform[10] = 1.0f;
+    transform[11] = 0.0f;
+    transform[12] = position[0];
+    transform[15] = 1.0f;
+    cdeclcall<int>(FUN_009083c0, work, shape, 0, transform, forward1, forward2, forward3, forward4); /* ECX: ? */
 }
 
 // 0090C430  FUN_0090c430  size=880  [between]
-undefined4
-FUN_0090c430(undefined4 param_1,undefined4 *param_2,float *param_3,int param_4,undefined4 param_5,
-            undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9)
-
-{
-  undefined4 uVar1;
-  float10 fVar2;
-  float10 fVar3;
-  float10 fVar4;
-  float fStack_118;
-  float fStack_114;
-  undefined4 local_110;
-  float fStack_10c;
-  float fStack_108;
-  float fStack_104;
-  float fStack_100;
-  undefined4 uStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  float fStack_f0;
-  float fStack_ec;
-  undefined4 uStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  undefined4 uStack_d4;
-  float fStack_c4;
-  undefined4 uStack_c0;
-  undefined4 uStack_bc;
-  undefined4 uStack_b8;
-  float fStack_ac;
-  float fStack_a8;
-  float fStack_a0;
-  undefined1 auStack_98 [8];
-  undefined1 auStack_90 [64];
-  undefined1 auStack_50 [76];
-  
-  if (param_4 != 0) {
-    FUN_01006000();
-    if (param_3[2] != 0.0) {
-      D3DXMatrixRotationZ(&local_110,param_3[2]);
-      D3DXMatrixMultiply(&stack0xfffffe98,&fStack_118,&stack0xfffffe98);
-    }
-    if (param_3[1] != 0.0) {
-      D3DXMatrixRotationY(&local_110,param_3[1]);
-      D3DXMatrixMultiply(&stack0xfffffe98,&fStack_118,&stack0xfffffe98);
-    }
-    if (*param_3 != 0.0) {
-      D3DXMatrixRotationX(&local_110,*param_3);
-      D3DXMatrixMultiply(&stack0xfffffe98,&fStack_118,&stack0xfffffe98);
-    }
-    uStack_c0 = *param_2;
-    uStack_bc = param_2[1];
-    uStack_b8 = param_2[2];
-    fStack_ac = 1.0;
-    fStack_a8 = 1.0;
-    fStack_114 = 0.0;
-    fStack_c4 = 1.0;
-    fVar2 = (float10)FUN_00ddbaa0(0x80000000);
-    fStack_118 = (float)fVar2;
-    fVar3 = (float10)fpatan((float10)fStack_114,(float10)fStack_c4);
-    fStack_a0 = (float)fVar3;
-    fVar4 = (float10)fpatan((float10)0.0 / (float10)fStack_a8,(float10)1.0 / (float10)fStack_ac);
-    fVar3 = (float10)0;
-    fStack_d8 = (float)fVar3;
-    fStack_dc = (float)fVar3;
-    fStack_e0 = (float)fVar3;
-    fStack_e4 = (float)fVar3;
-    fStack_ec = (float)fVar3;
-    fStack_f0 = (float)fVar3;
-    fStack_f4 = (float)fVar3;
-    fStack_f8 = (float)fVar3;
-    fStack_100 = (float)fVar3;
-    fStack_104 = (float)fVar3;
-    fStack_108 = (float)fVar3;
-    fStack_10c = (float)fVar3;
-    uStack_d4 = 0x3f800000;
-    uStack_e8 = 0x3f800000;
-    uStack_fc = 0x3f800000;
-    local_110 = 0x3f800000;
-    if (fVar3 != fVar4) {
-      D3DXMatrixRotationZ(auStack_90,(float)fVar4);
-      D3DXMatrixMultiply(&fStack_118,auStack_98,&fStack_118);
-      fVar2 = (float10)fStack_118;
-    }
-    if ((float10)0 != fVar2) {
-      D3DXMatrixRotationY(auStack_90,(float)fVar2);
-      D3DXMatrixMultiply(&fStack_118,auStack_98,&fStack_118);
-    }
-    if (fStack_a0 != 0.0) {
-      D3DXMatrixRotationX(auStack_90,fStack_a0);
-      D3DXMatrixMultiply(&fStack_118,auStack_98,&fStack_118);
-    }
-    fStack_e0 = (float)uStack_c0;
-    fStack_dc = (float)uStack_bc;
-    fStack_d8 = (float)uStack_b8;
-    FUN_01005190(&local_110);
-    uVar1 = FUN_009083c0(param_1,param_4,param_5,auStack_50,param_6,param_7,param_8,param_9);
-    return uVar1;
-  }
-  return 0;
+// ? Query of an existing `shape` for a RayCastWork, posed by `position` and the Euler angles
+// `rotation`; FUN_009083c0 ("setClosestPoints"; ECX passed through, not shown) does the query and its result is
+// returned (0 when shape is 0).
+// Frame mirrors Ghidra's stack slots (sNNN = local at -0xNNN); matrices are written and read
+// through bases 8 bytes apart and the first product goes to a frame address Ghidra did not map
+// to a local (stackFE98), exactly as in the raw decompilation.
+int FUN_0090c430(int work, float *position, float *rotation, int shape, unsigned int param,
+                 unsigned int forward1, unsigned int forward2, unsigned int forward3,
+                 unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s118, s114;
+        float s110, s10c, s108, s104, s100, sfc, sf8, sf4;
+        float sf0, sec, se8, se4, se0, sdc, sd8, sd4;
+        float sd0, scc, sc8;
+        float sc4, sc0, sbc, sb8;       // sc0..sb8: copy of position
+        float sb4, sb0, sac, sa8, sa4, sa0, s9c;
+        float s98[2];                   // auStack_98
+        float s90[16];                  // auStack_90: rotation matrix scratch
+        float s50[19];                  // auStack_50: hkTransform passed to the setter
+    } f;
+    float stackFE98[16];  // ? frame address 0xFFFFFE98 (not mapped to a local)
+    int result;
+    double angleY;  // fVar2
+    double angleX;  // fVar3 (then reused as the constant 0)
+    double angleZ;  // fVar4
+
+    if (shape != 0) {
+        cdeclcall<void>(FUN_01006000); /* ECX: ? */
+        if (rotation[2] != 0.0f) {
+            D3DXMatrixRotationZ(&f.s110, rotation[2]);
+            D3DXMatrixMultiply(stackFE98, &f.s118, stackFE98);
+        }
+        if (rotation[1] != 0.0f) {
+            D3DXMatrixRotationY(&f.s110, rotation[1]);
+            D3DXMatrixMultiply(stackFE98, &f.s118, stackFE98);
+        }
+        if (rotation[0] != 0.0f) {
+            D3DXMatrixRotationX(&f.s110, rotation[0]);
+            D3DXMatrixMultiply(stackFE98, &f.s118, stackFE98);
+        }
+        f.sc0 = position[0];
+        f.sbc = position[1];
+        f.sb8 = position[2];
+        f.sac = 1.0f;
+        f.sa8 = 1.0f;
+        f.s114 = 0.0f;
+        f.sc4 = 1.0f;
+        angleY = (double)FUN_00ddbaa0(-0.0f);  // raw argument 0x80000000
+        f.s118 = (float)angleY;
+        angleX = atan2((double)f.s114, (double)f.sc4);
+        f.sa0 = (float)angleX;
+        angleZ = atan2(0.0 / (double)f.sa8, 1.0 / (double)f.sac);
+        angleX = 0.0;
+        f.sd8 = (float)angleX;
+        f.sdc = (float)angleX;
+        f.se0 = (float)angleX;
+        f.se4 = (float)angleX;
+        f.sec = (float)angleX;
+        f.sf0 = (float)angleX;
+        f.sf4 = (float)angleX;
+        f.sf8 = (float)angleX;
+        f.s100 = (float)angleX;
+        f.s104 = (float)angleX;
+        f.s108 = (float)angleX;
+        f.s10c = (float)angleX;
+        f.sd4 = 1.0f;
+        f.se8 = 1.0f;
+        f.sfc = 1.0f;
+        f.s110 = 1.0f;
+        if (angleX != angleZ) {
+            D3DXMatrixRotationZ(f.s90, (float)angleZ);
+            D3DXMatrixMultiply(&f.s118, f.s98, &f.s118);
+            angleY = (double)f.s118;
+        }
+        if (0.0 != angleY) {
+            D3DXMatrixRotationY(f.s90, (float)angleY);
+            D3DXMatrixMultiply(&f.s118, f.s98, &f.s118);
+        }
+        if (f.sa0 != 0.0f) {
+            D3DXMatrixRotationX(f.s90, f.sa0);
+            D3DXMatrixMultiply(&f.s118, f.s98, &f.s118);
+        }
+        f.se0 = f.sc0;
+        f.sdc = f.sbc;
+        f.sd8 = f.sb8;
+        // FUN_01005190: hkTransform::set4x4ColumnMajor (__thiscall)
+        cdeclcall<void>(FUN_01005190, &f.s110); /* ECX: ? */
+        result = cdeclcall<int>(FUN_009083c0, work, shape, param, f.s50, /* ECX: ? */ forward1, forward2, forward3,
+                               forward4);
+        return result;
+    }
+    return 0;
 }
 
 // 0090C7A0  FUN_0090c7a0  size=165  [between]
-undefined4
-FUN_0090c7a0(undefined4 param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5
-            ,undefined4 param_6)
-
-{
-  int *piVar1;
-  int iVar2;
-  undefined4 uVar3;
-  
-  if (param_2 == 0) {
-    return 0;
-  }
-  FUN_00860de0();
-  uVar3 = *(undefined4 *)(param_2 + 0x10);
-  FUN_01006000();
-  uVar3 = FUN_009083c0(param_1,uVar3,param_3,param_2 + 0xf0,*(undefined4 *)(param_2 + 0x2c),param_4,
-                       param_5,param_6);
-  if ((DAT_01885d68 != 1) &&
-     (iVar2 = *(int *)((int)ThreadLocalStoragePointer + _tls_index * 4), *(int *)(iVar2 + 4) == 0))
-  {
-    piVar1 = (int *)(iVar2 + 8);
-    *piVar1 = *piVar1 + -1;
-    if ((*piVar1 == 0) && ((DAT_01b35fac != 0 && (DAT_01885db8 == 0)))) {
-      FUN_00dd7300();
-    }
-  }
-  return uVar3;
+// Query of the shape of an existing object for a RayCastWork: shape at source+0x10, hkTransform
+// at source+0xF0, filter at source+0x2C; FUN_009083c0 ("setClosestPoints"; ECX passed through, not shown). The
+// call is bracketed by a lock (FUN_00860de0) and the inlined unlock of the global lock.
+int FUN_0090c7a0(int work, int source, unsigned int param, unsigned int forward1,
+                 unsigned int forward2, unsigned int forward3)
+{
+    using namespace RayCastManager_p1;
+    int *lockDepth;
+    int threadData;
+    int result;
+
+    if (source == 0) {
+        return 0;
+    }
+    cdeclcall<void>(FUN_00860de0); /* ECX: ? */
+    result = *(int *)(source + 0x10);
+    cdeclcall<void>(FUN_01006000); /* ECX: ? */
+    result = cdeclcall<int>(FUN_009083c0, work, result, param, /* ECX: ? */ source + 0xf0, *(int *)(source + 0x2c),
+                           forward1, forward2, forward3);
+    if (DAT_01885d68 != 1) {
+        threadData = *(int *)(__readfsdword(0x2C) + _tls_index * 4);
+        if (*(int *)(threadData + 4) == 0) {
+            lockDepth = (int *)(threadData + 8);
+            *lockDepth = *lockDepth + -1;
+            if (*lockDepth == 0 && DAT_01b35fac != 0 && DAT_01885db8 == 0) {
+                cdeclcall<void>(FUN_00dd7300); /* ECX: ? */
+            }
+        }
+    }
+    return result;
 }
 
 // 0090C850  FUN_0090c850  size=461  [between]
-void FUN_0090c850(undefined4 param_1,undefined4 *param_2,float *param_3,float *param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-                 undefined4 param_9,undefined4 param_10,undefined4 param_11)
-
-{
-  LPVOID pvVar1;
-  int iVar2;
-  undefined1 auStack_e8 [8];
-  undefined4 local_e0;
-  undefined4 local_dc;
-  undefined4 local_d8;
-  undefined4 local_d4;
-  undefined4 local_d0;
-  undefined4 local_cc;
-  undefined4 local_c8;
-  undefined4 local_c4;
-  undefined4 local_c0;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float afStack_98 [2];
-  undefined1 local_90 [60];
-  undefined1 auStack_54 [80];
-  
-  local_a8 = 0;
-  local_ac = 0;
-  local_b0 = 0;
-  local_b4 = 0;
-  local_bc = 0;
-  local_c0 = 0;
-  local_c4 = 0;
-  local_c8 = 0;
-  local_d0 = 0;
-  local_d4 = 0;
-  local_d8 = 0;
-  local_dc = 0;
-  local_a4 = 0x3f800000;
-  local_b8 = 0x3f800000;
-  local_cc = 0x3f800000;
-  local_e0 = 0x3f800000;
-  if (param_3[2] != 0.0) {
-    D3DXMatrixRotationZ(local_90,param_3[2]);
-    D3DXMatrixMultiply(auStack_e8,afStack_98,auStack_e8);
-  }
-  if (param_3[1] != 0.0) {
-    D3DXMatrixRotationY(local_90,param_3[1]);
-    D3DXMatrixMultiply(auStack_e8,afStack_98,auStack_e8);
-  }
-  if (*param_3 != 0.0) {
-    D3DXMatrixRotationX(local_90,*param_3);
-    D3DXMatrixMultiply(auStack_e8,afStack_98,auStack_e8);
-  }
-  local_b0 = *param_2;
-  local_ac = param_2[1];
-  local_a8 = param_2[2];
-  FUN_01005190(&local_e0);
-  fStack_a0 = *param_4 * 0.5;
-  fStack_9c = param_4[1] * 0.5;
-  afStack_98[0] = param_4[2] * 0.5;
-  afStack_98[1] = 0.0;
-  pvVar1 = TlsGetValue(DAT_01f8fc4c);
-  iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x30);
-  *(undefined2 *)(iVar2 + 4) = 0x30;
-  iVar2 = hkpBoxShape::hkpBoxShape(&local_a4,DAT_01b20754);
-  if (iVar2 == 0) {
-    return;
-  }
-  FUN_00908ef0(param_1,iVar2,auStack_54,param_5,param_6,param_7,param_8,param_9,param_10,param_11);
-  return;
+// ? Box linear cast for a RayCastWork: half extents = size / 2, pose from `position` and the
+// Euler angles `rotation`; FUN_00908ef0 (RayCastWork "setLinearCast") does the query.
+// Frame mirrors Ghidra's stack slots (sNNN = local at -0xNNN); the matrix is read 8 bytes
+// before the slot it is written at, exactly as in the raw decompilation.
+void FUN_0090c850(int work, float *position, float *rotation, float *size, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4,
+                  unsigned int forward5, unsigned int forward6, unsigned int forward7)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float se8, se4;                  // auStack_e8
+        float se0, sdc, sd8, sd4;        // se0..sa4: 4x4 matrix (identity, then rotations)
+        float sd0, scc, sc8, sc4;
+        float sc0, sbc, sb8, sb4;
+        float sb0, sac, sa8, sa4;
+        float sa0, s9c, s98, s94;        // half extents (fStack_a0, fStack_9c, afStack_98)
+        float s90[15];                   // local_90: rotation matrix scratch
+        float s54[20];                   // auStack_54: hkTransform passed to the setter
+    } f;
+    int shape;
+
+    f.sa8 = 0.0f;
+    f.sac = 0.0f;
+    f.sb0 = 0.0f;
+    f.sb4 = 0.0f;
+    f.sbc = 0.0f;
+    f.sc0 = 0.0f;
+    f.sc4 = 0.0f;
+    f.sc8 = 0.0f;
+    f.sd0 = 0.0f;
+    f.sd4 = 0.0f;
+    f.sd8 = 0.0f;
+    f.sdc = 0.0f;
+    f.sa4 = 1.0f;
+    f.sb8 = 1.0f;
+    f.scc = 1.0f;
+    f.se0 = 1.0f;
+    if (rotation[2] != 0.0f) {
+        D3DXMatrixRotationZ(f.s90, rotation[2]);
+        D3DXMatrixMultiply(&f.se8, &f.s98, &f.se8);
+    }
+    if (rotation[1] != 0.0f) {
+        D3DXMatrixRotationY(f.s90, rotation[1]);
+        D3DXMatrixMultiply(&f.se8, &f.s98, &f.se8);
+    }
+    if (rotation[0] != 0.0f) {
+        D3DXMatrixRotationX(f.s90, rotation[0]);
+        D3DXMatrixMultiply(&f.se8, &f.s98, &f.se8);
+    }
+    f.sb0 = position[0];
+    f.sac = position[1];
+    f.sa8 = position[2];
+    // FUN_01005190: hkTransform::set4x4ColumnMajor (__thiscall)
+    cdeclcall<void>(FUN_01005190, &f.se0); /* ECX: ? */
+    f.sa0 = size[0] * 0.5f;
+    f.s9c = size[1] * 0.5f;
+    f.s98 = size[2] * 0.5f;
+    f.s94 = 0.0f;
+    shape = havokNewBlock(0x30);
+    shape = constructBoxShape(shape, &f.sa4, DAT_01b20754);
+    if (shape == 0) {
+        return;
+    }
+    cdeclcall<void>(FUN_00908ef0, work, shape, f.s54, forward1, forward2, forward3, forward4,
+                    forward5, forward6, forward7);
 }
 
 // 0090CA20  FUN_0090ca20  size=197  [between]
-void FUN_0090ca20(undefined4 param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-                 undefined4 param_9,undefined4 param_10)
-
-{
-  LPVOID pvVar1;
-  int iVar2;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
-  undefined4 uStack_20;
-  undefined4 uStack_1c;
-  undefined4 uStack_18;
-  
-  pvVar1 = TlsGetValue(DAT_01f8fc4c);
-  iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x20);
-  *(undefined2 *)(iVar2 + 4) = 0x20;
-  iVar2 = hkpSphereShape::hkpSphereShape(param_3);
-  if (iVar2 == 0) {
-    return;
-  }
-  uStack_20 = param_2[1];
-  uStack_1c = param_2[2];
-  uStack_54 = 0x3f800000;
-  uStack_50 = 0;
-  uStack_4c = 0;
-  uStack_48 = 0;
-  uStack_44 = 0;
-  uStack_40 = 0x3f800000;
-  uStack_3c = 0;
-  uStack_38 = 0;
-  uStack_34 = 0;
-  uStack_30 = 0;
-  uStack_2c = 0x3f800000;
-  uStack_28 = 0;
-  uStack_24 = *param_2;
-  uStack_18 = 0x3f800000;
-  FUN_00908ef0(param_1,iVar2,&uStack_54,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
-  return;
+// Sphere linear cast for a RayCastWork at `position`; FUN_00908ef0 ("setLinearCast").
+void FUN_0090ca20(int work, float *position, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4,
+                  unsigned int forward5, unsigned int forward6, unsigned int forward7)
+{
+    using namespace RayCastManager_p1;
+    float transform[16];  // hkTransform: identity rotation, translation = position
+    int shape;
+
+    shape = havokNewBlock(0x20);
+    shape = constructSphereShape(shape, radius);
+    if (shape == 0) {
+        return;
+    }
+    transform[13] = position[1];
+    transform[14] = position[2];
+    transform[0] = 1.0f;
+    transform[1] = 0.0f;
+    transform[2] = 0.0f;
+    transform[3] = 0.0f;
+    transform[4] = 0.0f;
+    transform[5] = 1.0f;
+    transform[6] = 0.0f;
+    transform[7] = 0.0f;
+    transform[8] = 0.0f;
+    transform[9] = 0.0f;
+    transform[10] = 1.0f;
+    transform[11] = 0.0f;
+    transform[12] = position[0];
+    transform[15] = 1.0f;
+    cdeclcall<void>(FUN_00908ef0, work, shape, transform, forward1, forward2, forward3, forward4,
+                    forward5, forward6, forward7);
 }
 
 // 0090CAF0  FUN_0090caf0  size=239  [between]
-void FUN_0090caf0(undefined4 param_1,undefined4 param_2,float param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-                 undefined4 param_9,undefined4 param_10,undefined4 param_11)
-
-{
-  LPVOID pvVar1;
-  int iVar2;
-  undefined1 auStack_74 [4];
-  undefined4 local_70;
-  float fStack_6c;
-  undefined4 uStack_68;
-  undefined4 uStack_64;
-  undefined4 local_60;
-  float fStack_5c;
-  undefined4 uStack_58;
-  undefined4 auStack_54 [20];
-  
-  FUN_01005190(param_2);
-  fStack_5c = param_3 * 0.5;
-  fStack_6c = param_3 * -0.5;
-  local_60 = 0;
-  uStack_58 = 0;
-  auStack_54[0] = 0;
-  local_70 = 0;
-  uStack_68 = 0;
-  uStack_64 = 0;
-  pvVar1 = TlsGetValue(DAT_01f8fc4c);
-  iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x60);
-  *(undefined2 *)(iVar2 + 4) = 0x60;
-  iVar2 = hkpCylinderShape::hkpCylinderShape(&uStack_64,auStack_74,param_4,DAT_01b20754);
-  if (iVar2 == 0) {
-    return;
-  }
-  FUN_00908ef0(param_1,iVar2,auStack_54,param_5,param_6,param_7,param_8,param_9,param_10,param_11);
-  return;
+// ? Cylinder linear cast for a RayCastWork: axis along Y from -height/2 to +height/2, pose from
+// `matrix` (converted by FUN_01005190); FUN_00908ef0 ("setLinearCast") does the query.
+// Frame mirrors Ghidra's stack slots (sNNN = local at -0xNNN).
+void FUN_0090caf0(int work, float *matrix, float height, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4,
+                  unsigned int forward5, unsigned int forward6, unsigned int forward7)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s74;                  // auStack_74 (second cylinder vertex argument)
+        float s70, s6c, s68, s64;   // (0, -height/2, 0, 0)
+        float s60, s5c, s58;        // (0, +height/2, 0)
+        float s54[20];              // auStack_54: hkTransform passed to the setter
+    } f;
+    int shape;
+
+    // FUN_01005190: hkTransform::set4x4ColumnMajor (__thiscall)
+    cdeclcall<void>(FUN_01005190, matrix); /* ECX: ? */
+    f.s5c = height * 0.5f;
+    f.s6c = height * -0.5f;
+    f.s60 = 0.0f;
+    f.s58 = 0.0f;
+    f.s54[0] = 0.0f;
+    f.s70 = 0.0f;
+    f.s68 = 0.0f;
+    f.s64 = 0.0f;
+    shape = havokNewBlock(0x60);
+    shape = constructCylinderShape(shape, &f.s64, &f.s74, radius, DAT_01b20754);
+    if (shape == 0) {
+        return;
+    }
+    cdeclcall<void>(FUN_00908ef0, work, shape, f.s54, forward1, forward2, forward3, forward4,
+                    forward5, forward6, forward7);
 }
 
 // 0090CBE0  FUN_0090cbe0  size=1102  [between]
-void FUN_0090cbe0(undefined4 param_1,float *param_2,float *param_3,float *param_4,undefined4 param_5
-                 ,undefined4 param_6,undefined4 param_7,undefined4 param_8)
-
-{
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  LPVOID pvVar4;
-  int iVar5;
-  float unaff_EBX;
-  float unaff_ESI;
-  float10 fVar6;
-  float10 fVar7;
-  float10 fVar8;
-  float fStack_174;
-  float local_170;
-  float local_16c;
-  float local_168;
-  float fStack_164;
-  undefined4 uStack_160;
-  float fStack_15c;
-  float fStack_158;
-  float fStack_154;
-  undefined4 uStack_150;
-  float fStack_14c;
-  float fStack_148;
-  float fStack_144;
-  undefined4 uStack_140;
-  float fStack_13c;
-  float fStack_138;
-  float afStack_134 [4];
-  float fStack_124;
-  float local_120;
-  float fStack_11c;
-  undefined4 uStack_118;
-  float fStack_114;
-  float fStack_110;
-  float fStack_10c;
-  float fStack_108;
-  undefined4 uStack_104;
-  float fStack_100;
-  float fStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  undefined4 uStack_f0;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  float fStack_d4;
-  float fStack_c8;
-  float fStack_c4;
-  float fStack_bc;
-  undefined1 auStack_b0 [4];
-  float fStack_ac;
-  float fStack_a8;
-  float afStack_a4 [2];
-  undefined1 auStack_9c [60];
-  undefined1 auStack_60 [92];
-  
-  local_170 = 0.0;
-  local_16c = 0.0;
-  local_168 = param_4[2] * 0.5;
-  FUN_00ddc1d0(&local_120,param_3,5);
-  D3DXVec3TransformNormal(&local_170,&local_170,&local_120);
-  fVar1 = *param_2;
-  fVar2 = param_2[1];
-  fStack_174 = param_2[2] + fStack_174;
-  local_170 = param_2[3] + local_170;
-  afStack_134[0] = 0.0;
-  fStack_138 = 0.0;
-  fStack_13c = 0.0;
-  uStack_140 = 0;
-  fStack_148 = 0.0;
-  fStack_14c = 0.0;
-  uStack_150 = 0;
-  fStack_154 = 0.0;
-  fStack_15c = 0.0;
-  uStack_160 = 0;
-  fStack_164 = 0.0;
-  local_168 = 0.0;
-  afStack_134[1] = 1.0;
-  fStack_144 = 1.0;
-  fStack_158 = 1.0;
-  local_16c = 1.0;
-  if (param_3[2] != 0.0) {
-    D3DXMatrixRotationZ(afStack_134 + 2,param_3[2]);
-    D3DXMatrixMultiply(&fStack_174,afStack_134,&fStack_174);
-  }
-  if (param_3[1] != 0.0) {
-    D3DXMatrixRotationY(afStack_134 + 2,param_3[1]);
-    D3DXMatrixMultiply(&fStack_174,afStack_134,&fStack_174);
-  }
-  if (*param_3 != 0.0) {
-    D3DXMatrixRotationX(afStack_134 + 2,*param_3);
-    D3DXMatrixMultiply(&fStack_174,afStack_134,&fStack_174);
-  }
-  afStack_134[0] = fStack_174;
-  fStack_d4 = fStack_174;
-  fStack_c8 = SQRT(fStack_164 * fStack_164 + local_16c * local_16c + local_168 * local_168);
-  fStack_c4 = SQRT(fStack_154 * fStack_154 + fStack_15c * fStack_15c + fStack_158 * fStack_158);
-  fVar3 = SQRT(fStack_144 * fStack_144 + fStack_148 * fStack_148 + fStack_14c * fStack_14c);
-  fStack_e4 = fStack_154 / fVar3;
-  fStack_e0 = fStack_144 / fVar3;
-  fStack_13c = unaff_ESI + fVar1;
-  fStack_138 = fVar2 + unaff_EBX;
-  fStack_dc = unaff_ESI + fVar1;
-  fStack_d8 = fVar2 + unaff_EBX;
-  fVar6 = (float10)FUN_00ddbaa0(-(fStack_164 / fVar3));
-  fStack_e8 = (float)fVar6;
-  fVar7 = (float10)fpatan((float10)fStack_e4,(float10)fStack_e0);
-  fStack_bc = (float)fVar7;
-  fVar8 = (float10)fpatan((float10)local_168 / (float10)fStack_c4,
-                          (float10)local_16c / (float10)fStack_c8);
-  fVar7 = (float10)0;
-  fStack_f4 = (float)fVar7;
-  fStack_f8 = (float)fVar7;
-  fStack_fc = (float)fVar7;
-  fStack_100 = (float)fVar7;
-  fStack_108 = (float)fVar7;
-  fStack_10c = (float)fVar7;
-  fStack_110 = (float)fVar7;
-  fStack_114 = (float)fVar7;
-  fStack_11c = (float)fVar7;
-  local_120 = (float)fVar7;
-  fStack_124 = (float)fVar7;
-  afStack_134[3] = (float)fVar7;
-  uStack_f0 = 0x3f800000;
-  uStack_104 = 0x3f800000;
-  uStack_118 = 0x3f800000;
-  afStack_134[2] = 1.0;
-  if (fVar7 != fVar8) {
-    D3DXMatrixRotationZ(auStack_9c,(float)fVar8);
-    D3DXMatrixMultiply(afStack_134,afStack_a4,afStack_134);
-    fVar6 = (float10)fStack_e8;
-  }
-  if ((float10)0 != fVar6) {
-    D3DXMatrixRotationY(auStack_9c,(float)fVar6);
-    D3DXMatrixMultiply(afStack_134,afStack_a4,afStack_134);
-  }
-  if (fStack_bc != 0.0) {
-    D3DXMatrixRotationX(auStack_9c,fStack_bc);
-    D3DXMatrixMultiply(afStack_134,afStack_a4,afStack_134);
-  }
-  fStack_fc = fStack_dc;
-  fStack_f8 = fStack_d8;
-  fStack_f4 = fStack_d4;
-  FUN_01005190(afStack_134 + 2);
-  fStack_ac = *param_4 * 0.5;
-  fStack_a8 = param_4[1] * 0.5;
-  afStack_a4[0] = param_4[2] * 0.5;
-  afStack_a4[1] = 0.0;
-  pvVar4 = TlsGetValue(DAT_01f8fc4c);
-  iVar5 = (**(code **)(**(int **)((int)pvVar4 + 0x2c) + 4))(0x30);
-  *(undefined2 *)(iVar5 + 4) = 0x30;
-  iVar5 = hkpBoxShape::hkpBoxShape(auStack_b0,DAT_01b20754);
-  if (iVar5 != 0) {
-    FUN_00909ac0(param_1,iVar5,0,auStack_60,param_5,param_6,param_7,param_8);
-    return;
-  }
-  return;
+// ? Same as FUN_0090bba0 (box posed by position / Euler rotation), but the query goes to
+// FUN_00909ac0 (RayCastWork "setPenetration"). Frame mirrors Ghidra's stack slots one to one
+// (see FUN_0090bba0).
+void FUN_0090cbe0(int work, float *position, float *rotation, float *size, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s174, s170, s16c, s168, s164, s160, s15c, s158;
+        float s154, s150, s14c, s148, s144, s140, s13c, s138;
+        float s134, s130, s12c, s128, s124, s120, s11c, s118;
+        float s114, s110, s10c, s108, s104, s100, sfc, sf8;
+        float sf4, sf0, sec, se8, se4, se0, sdc, sd8;
+        float sd4, sd0, scc, sc8, sc4, sc0, sbc, sb8;
+        float sb4, sb0, sac, sa8, sa4, sa0;
+        float s9c[15];  // auStack_9c: rotation matrix scratch
+        float s60[23];  // auStack_60: hkTransform passed to the setter
+    } f;
+    float posX;       // fVar1
+    float posY;       // fVar2
+    float lengthZ;    // fVar3
+    float unaffEBX;   // ? register value on entry
+    float unaffESI;   // ? register value on entry
+    double angleY;    // fVar6
+    double angleX;    // fVar7 (then reused as the constant 0)
+    double angleZ;    // fVar8
+    int shape;
+
+    // offset (0, 0, size.z / 2) rotated by the Euler matrix (order 5)
+    f.s170 = 0.0f;
+    f.s16c = 0.0f;
+    f.s168 = size[2] * 0.5f;
+    FUN_00ddc1d0((undefined4 *)&f.s120, rotation, 5);
+    D3DXVec3TransformNormal(&f.s170, &f.s170, &f.s120);
+    posX = position[0];
+    posY = position[1];
+    f.s174 = position[2] + f.s174;
+    f.s170 = position[3] + f.s170;
+
+    // identity, then rotate by Z, Y, X
+    f.s134 = 0.0f;
+    f.s138 = 0.0f;
+    f.s13c = 0.0f;
+    f.s140 = 0.0f;
+    f.s148 = 0.0f;
+    f.s14c = 0.0f;
+    f.s150 = 0.0f;
+    f.s154 = 0.0f;
+    f.s15c = 0.0f;
+    f.s160 = 0.0f;
+    f.s164 = 0.0f;
+    f.s168 = 0.0f;
+    f.s130 = 1.0f;
+    f.s144 = 1.0f;
+    f.s158 = 1.0f;
+    f.s16c = 1.0f;
+    if (rotation[2] != 0.0f) {
+        D3DXMatrixRotationZ(&f.s12c, rotation[2]);
+        D3DXMatrixMultiply(&f.s174, &f.s134, &f.s174);
+    }
+    if (rotation[1] != 0.0f) {
+        D3DXMatrixRotationY(&f.s12c, rotation[1]);
+        D3DXMatrixMultiply(&f.s174, &f.s134, &f.s174);
+    }
+    if (rotation[0] != 0.0f) {
+        D3DXMatrixRotationX(&f.s12c, rotation[0]);
+        D3DXMatrixMultiply(&f.s174, &f.s134, &f.s174);
+    }
+
+    // decompose the matrix back into Euler angles (row lengths, clamped asin, atan2)
+    f.s134 = f.s174;
+    f.sd4 = f.s174;
+    f.sc8 = (float)sqrt(f.s164 * f.s164 + f.s16c * f.s16c + f.s168 * f.s168);
+    f.sc4 = (float)sqrt(f.s154 * f.s154 + f.s15c * f.s15c + f.s158 * f.s158);
+    lengthZ = (float)sqrt(f.s144 * f.s144 + f.s148 * f.s148 + f.s14c * f.s14c);
+    f.se4 = f.s154 / lengthZ;
+    f.se0 = f.s144 / lengthZ;
+    f.s13c = unaffESI + posX;
+    f.s138 = posY + unaffEBX;
+    f.sdc = unaffESI + posX;
+    f.sd8 = posY + unaffEBX;
+    angleY = (double)FUN_00ddbaa0(-(f.s164 / lengthZ));
+    f.se8 = (float)angleY;
+    angleX = atan2((double)f.se4, (double)f.se0);
+    f.sbc = (float)angleX;
+    angleZ = atan2((double)f.s168 / (double)f.sc4, (double)f.s16c / (double)f.sc8);
+
+    // identity, then rotate by the recovered Z, Y, X
+    angleX = 0.0;
+    f.sf4 = (float)angleX;
+    f.sf8 = (float)angleX;
+    f.sfc = (float)angleX;
+    f.s100 = (float)angleX;
+    f.s108 = (float)angleX;
+    f.s10c = (float)angleX;
+    f.s110 = (float)angleX;
+    f.s114 = (float)angleX;
+    f.s11c = (float)angleX;
+    f.s120 = (float)angleX;
+    f.s124 = (float)angleX;
+    f.s128 = (float)angleX;
+    f.sf0 = 1.0f;
+    f.s104 = 1.0f;
+    f.s118 = 1.0f;
+    f.s12c = 1.0f;
+    if (angleX != angleZ) {
+        D3DXMatrixRotationZ(f.s9c, (float)angleZ);
+        D3DXMatrixMultiply(&f.s134, &f.sa4, &f.s134);
+        angleY = (double)f.se8;
+    }
+    if (0.0 != angleY) {
+        D3DXMatrixRotationY(f.s9c, (float)angleY);
+        D3DXMatrixMultiply(&f.s134, &f.sa4, &f.s134);
+    }
+    if (f.sbc != 0.0f) {
+        D3DXMatrixRotationX(f.s9c, f.sbc);
+        D3DXMatrixMultiply(&f.s134, &f.sa4, &f.s134);
+    }
+    f.sfc = f.sdc;
+    f.sf8 = f.sd8;
+    f.sf4 = f.sd4;
+    // FUN_01005190: hkTransform::set4x4ColumnMajor (__thiscall)
+    cdeclcall<void>(FUN_01005190, &f.s12c); /* ECX: ? */
+
+    // box shape with half extents size / 2
+    f.sac = size[0] * 0.5f;
+    f.sa8 = size[1] * 0.5f;
+    f.sa4 = size[2] * 0.5f;
+    f.sa0 = 0.0f;
+    shape = havokNewBlock(0x30);
+    shape = constructBoxShape(shape, &f.sb0, DAT_01b20754);
+    if (shape != 0) {
+        cdeclcall<int>(FUN_00909ac0, work, shape, 0, f.s60, forward1, forward2, forward3, forward4);
+        return;
+    }
 }
 
 // 0090D030  FUN_0090d030  size=509  [between]
-void FUN_0090d030(undefined4 param_1,float *param_2,float *param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8)
-
-{
-  float fVar1;
-  float fVar2;
-  LPVOID pvVar3;
-  int iVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  undefined1 auVar9 [16];
-  undefined1 auStack_74 [4];
-  float local_70;
-  float fStack_6c;
-  float fStack_68;
-  undefined4 uStack_64;
-  float local_60;
-  float fStack_5c;
-  float fStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  float fStack_24;
-  float fStack_20;
-  float fStack_1c;
-  undefined4 uStack_18;
-  
-  fVar1 = (*param_3 + *param_2) * 0.5;
-  local_60 = *param_2 - fVar1;
-  fVar2 = (param_3[1] + param_2[1]) * 0.5;
-  fStack_5c = param_2[1] - fVar2;
-  fStack_6c = param_3[1] - fVar2;
-  fStack_68 = (param_3[2] + param_2[2]) * 0.5;
-  fStack_58 = param_2[2] - fStack_68;
-  fStack_68 = param_3[2] - fStack_68;
-  local_70 = *param_3 - fVar1;
-  uStack_54 = 0;
-  fVar5 = (local_60 - local_70) * (local_60 - local_70);
-  fVar6 = (fStack_5c - fStack_6c) * (fStack_5c - fStack_6c);
-  fVar7 = (fStack_58 - fStack_68) * (fStack_58 - fStack_68);
-  uStack_64 = 0;
-  fVar8 = fVar6 + fVar5 + fVar7;
-  auVar9._4_4_ = fVar6 + fVar5 + fVar7;
-  auVar9._0_4_ = fVar8;
-  auVar9._8_4_ = fVar6 + fVar5 + fVar7;
-  auVar9._12_4_ = fVar6 + fVar5 + fVar7;
-  auVar9 = rsqrtps(ZEXT416((uint)fStack_68),auVar9);
-  fVar5 = auVar9._0_4_;
-  fVar5 = (float)(~-(uint)(fVar8 <= 0.0) &
-                 (uint)((3.0 - fVar5 * fVar8 * fVar5) * fVar5 * 0.5 * fVar8));
-  if (fVar5 <= 0.0) {
-    pvVar3 = TlsGetValue(DAT_01f8fc4c);
-    iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x20);
-    *(undefined2 *)(iVar4 + 4) = 0x20;
-    iVar4 = hkpSphereShape::hkpSphereShape(param_4);
-  }
-  else {
-    pvVar3 = TlsGetValue(DAT_01f8fc4c);
-    iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x40);
-    *(undefined2 *)(iVar4 + 4) = 0x40;
-    iVar4 = hkpCapsuleShape::hkpCapsuleShape(&uStack_64,auStack_74,param_4);
-  }
-  if (iVar4 == 0) {
-    return;
-  }
-  uStack_54 = 0x3f800000;
-  uStack_50 = 0;
-  uStack_4c = 0;
-  uStack_48 = 0;
-  uStack_44 = 0;
-  uStack_40 = 0x3f800000;
-  uStack_3c = 0;
-  uStack_38 = 0;
-  uStack_34 = 0;
-  uStack_30 = 0;
-  uStack_2c = 0x3f800000;
-  uStack_28 = 0;
-  uStack_18 = 0x3f800000;
-  fStack_24 = fVar5;
-  fStack_20 = fVar1;
-  fStack_1c = fVar2;
-  FUN_00909ac0(param_1,iVar4,0,&uStack_54,param_5,param_6,param_7,param_8);
-  return;
+// ? Same as FUN_0090bff0 (capsule / sphere between pointA and pointB), but the query goes to
+// FUN_00909ac0 ("setPenetration"). Frame as in FUN_0090bff0.
+void FUN_0090d030(int work, float *pointA, float *pointB, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s74;                     // auStack_74 (second capsule vertex argument)
+        float s70, s6c, s68, s64;      // pointB - center (s68 first holds center.z)
+        float s60, s5c, s58;           // pointA - center
+        float s54, s50, s4c, s48;      // hkTransform (from s54)
+        float s44, s40, s3c, s38;
+        float s34, s30, s2c, s28;
+        float s24, s20, s1c, s18;
+    } f;
+    float centerX;   // fVar1
+    float centerY;   // fVar2
+    float dx2, dy2, dz2;
+    float lengthSq;  // fVar8
+    float estimate;
+    float length;    // fVar5
+    int shape;
+
+    centerX = (pointB[0] + pointA[0]) * 0.5f;
+    f.s60 = pointA[0] - centerX;
+    centerY = (pointB[1] + pointA[1]) * 0.5f;
+    f.s5c = pointA[1] - centerY;
+    f.s6c = pointB[1] - centerY;
+    f.s68 = (pointB[2] + pointA[2]) * 0.5f;
+    f.s58 = pointA[2] - f.s68;
+    f.s68 = pointB[2] - f.s68;
+    f.s70 = pointB[0] - centerX;
+    f.s54 = 0.0f;
+    dx2 = (f.s60 - f.s70) * (f.s60 - f.s70);
+    dy2 = (f.s5c - f.s6c) * (f.s5c - f.s6c);
+    dz2 = (f.s58 - f.s68) * (f.s58 - f.s68);
+    f.s64 = 0.0f;
+    // |pointA - pointB| with one Newton step on rsqrt, 0 when the squared length is <= 0
+    lengthSq = dy2 + dx2 + dz2;
+    estimate = rsqrtApprox(dy2 + dx2 + dz2);
+    if (lengthSq <= 0.0f) {
+        length = 0.0f;
+    }
+    else {
+        length = (3.0f - estimate * lengthSq * estimate) * estimate * 0.5f * lengthSq;
+    }
+    if (length <= 0.0f) {
+        shape = havokNewBlock(0x20);
+        shape = constructSphereShape(shape, radius);
+    }
+    else {
+        shape = havokNewBlock(0x40);
+        shape = constructCapsuleShape(shape, &f.s64, &f.s74, radius);
+    }
+    if (shape == 0) {
+        return;
+    }
+    f.s54 = 1.0f;
+    f.s50 = 0.0f;
+    f.s4c = 0.0f;
+    f.s48 = 0.0f;
+    f.s44 = 0.0f;
+    f.s40 = 1.0f;
+    f.s3c = 0.0f;
+    f.s38 = 0.0f;
+    f.s34 = 0.0f;
+    f.s30 = 0.0f;
+    f.s2c = 1.0f;
+    f.s28 = 0.0f;
+    f.s18 = 1.0f;
+    f.s24 = length;
+    f.s20 = centerX;
+    f.s1c = centerY;
+    cdeclcall<int>(FUN_00909ac0, work, shape, 0, &f.s54, forward1, forward2, forward3, forward4);
 }
 
 // 0090D230  FUN_0090d230  size=373  [between]
-void FUN_0090d230(undefined4 param_1,float *param_2,float *param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8)
-
-{
-  float fVar1;
-  float fVar2;
-  LPVOID pvVar3;
-  int iVar4;
-  undefined1 auStack_74 [4];
-  float local_70;
-  float fStack_6c;
-  float fStack_68;
-  undefined4 uStack_64;
-  float local_60;
-  float fStack_5c;
-  float fStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  float fStack_20;
-  float fStack_1c;
-  undefined4 uStack_18;
-  
-  fVar1 = (*param_3 + *param_2) * 0.5;
-  local_60 = *param_2 - fVar1;
-  fVar2 = (param_3[1] + param_2[1]) * 0.5;
-  fStack_5c = param_2[1] - fVar2;
-  fStack_6c = param_3[1] - fVar2;
-  fStack_68 = (param_3[2] + param_2[2]) * 0.5;
-  fStack_58 = param_2[2] - fStack_68;
-  fStack_68 = param_3[2] - fStack_68;
-  uStack_54 = 0;
-  local_70 = *param_3 - fVar1;
-  uStack_64 = 0;
-  pvVar3 = TlsGetValue(DAT_01f8fc4c);
-  iVar4 = (**(code **)(**(int **)((int)pvVar3 + 0x2c) + 4))(0x60);
-  *(undefined2 *)(iVar4 + 4) = 0x60;
-  iVar4 = hkpCylinderShape::hkpCylinderShape(&uStack_64,auStack_74,param_4,DAT_01b20754);
-  if (iVar4 == 0) {
-    return;
-  }
-  uStack_54 = 0x3f800000;
-  uStack_50 = 0;
-  uStack_4c = 0;
-  uStack_48 = 0;
-  uStack_44 = 0;
-  uStack_40 = 0x3f800000;
-  uStack_3c = 0;
-  uStack_38 = 0;
-  uStack_34 = 0;
-  uStack_30 = 0;
-  uStack_2c = 0x3f800000;
-  uStack_28 = 0;
-  uStack_18 = 0x3f800000;
-  fStack_20 = fVar1;
-  fStack_1c = fVar2;
-  FUN_00909ac0(param_1,iVar4,0,&uStack_54,param_5,param_6,param_7,param_8);
-  return;
+// ? Same as FUN_0090c1f0 (cylinder between pointA and pointB), but the query goes to
+// FUN_00909ac0 ("setPenetration"). Frame as in FUN_0090bff0.
+void FUN_0090d230(int work, float *pointA, float *pointB, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s74;                     // auStack_74 (second cylinder vertex argument)
+        float s70, s6c, s68, s64;      // pointB - center (s68 first holds center.z)
+        float s60, s5c, s58;           // pointA - center
+        float s54, s50, s4c, s48;      // hkTransform (from s54)
+        float s44, s40, s3c, s38;
+        float s34, s30, s2c, s28;
+        float s24, s20, s1c, s18;
+    } f;
+    float centerX;  // fVar1
+    float centerY;  // fVar2
+    int shape;
+
+    centerX = (pointB[0] + pointA[0]) * 0.5f;
+    f.s60 = pointA[0] - centerX;
+    centerY = (pointB[1] + pointA[1]) * 0.5f;
+    f.s5c = pointA[1] - centerY;
+    f.s6c = pointB[1] - centerY;
+    f.s68 = (pointB[2] + pointA[2]) * 0.5f;
+    f.s58 = pointA[2] - f.s68;
+    f.s68 = pointB[2] - f.s68;
+    f.s54 = 0.0f;
+    f.s70 = pointB[0] - centerX;
+    f.s64 = 0.0f;
+    shape = havokNewBlock(0x60);
+    shape = constructCylinderShape(shape, &f.s64, &f.s74, radius, DAT_01b20754);
+    if (shape == 0) {
+        return;
+    }
+    f.s54 = 1.0f;
+    f.s50 = 0.0f;
+    f.s4c = 0.0f;
+    f.s48 = 0.0f;
+    f.s44 = 0.0f;
+    f.s40 = 1.0f;
+    f.s3c = 0.0f;
+    f.s38 = 0.0f;
+    f.s34 = 0.0f;
+    f.s30 = 0.0f;
+    f.s2c = 1.0f;
+    f.s28 = 0.0f;
+    f.s18 = 1.0f;
+    f.s20 = centerX;
+    f.s1c = centerY;
+    cdeclcall<int>(FUN_00909ac0, work, shape, 0, &f.s54, forward1, forward2, forward3, forward4);
 }
 
 // 0090D3B0  FUN_0090d3b0  size=191  [between]
-void FUN_0090d3b0(undefined4 param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7)
-
-{
-  LPVOID pvVar1;
-  int iVar2;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined4 uStack_44;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  undefined4 uStack_28;
-  undefined4 uStack_24;
-  undefined4 uStack_20;
-  undefined4 uStack_1c;
-  undefined4 uStack_18;
-  
-  pvVar1 = TlsGetValue(DAT_01f8fc4c);
-  iVar2 = (**(code **)(**(int **)((int)pvVar1 + 0x2c) + 4))(0x20);
-  *(undefined2 *)(iVar2 + 4) = 0x20;
-  iVar2 = hkpSphereShape::hkpSphereShape(param_3);
-  if (iVar2 == 0) {
-    return;
-  }
-  uStack_20 = param_2[1];
-  uStack_1c = param_2[2];
-  uStack_54 = 0x3f800000;
-  uStack_50 = 0;
-  uStack_4c = 0;
-  uStack_48 = 0;
-  uStack_44 = 0;
-  uStack_40 = 0x3f800000;
-  uStack_3c = 0;
-  uStack_38 = 0;
-  uStack_34 = 0;
-  uStack_30 = 0;
-  uStack_2c = 0x3f800000;
-  uStack_28 = 0;
-  uStack_24 = *param_2;
-  uStack_18 = 0x3f800000;
-  FUN_00909ac0(param_1,iVar2,0,&uStack_54,param_4,param_5,param_6,param_7);
-  return;
+// Sphere penetration query for a RayCastWork at `position`; FUN_00909ac0 ("setPenetration").
+void FUN_0090d3b0(int work, float *position, float radius, unsigned int forward1,
+                  unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    float transform[16];  // hkTransform: identity rotation, translation = position
+    int shape;
+
+    shape = havokNewBlock(0x20);
+    shape = constructSphereShape(shape, radius);
+    if (shape == 0) {
+        return;
+    }
+    transform[13] = position[1];
+    transform[14] = position[2];
+    transform[0] = 1.0f;
+    transform[1] = 0.0f;
+    transform[2] = 0.0f;
+    transform[3] = 0.0f;
+    transform[4] = 0.0f;
+    transform[5] = 1.0f;
+    transform[6] = 0.0f;
+    transform[7] = 0.0f;
+    transform[8] = 0.0f;
+    transform[9] = 0.0f;
+    transform[10] = 1.0f;
+    transform[11] = 0.0f;
+    transform[12] = position[0];
+    transform[15] = 1.0f;
+    cdeclcall<int>(FUN_00909ac0, work, shape, 0, transform, forward1, forward2, forward3, forward4);
 }
 
 // 0090D470  FUN_0090d470  size=879  [between]
-undefined4
-FUN_0090d470(undefined4 param_1,undefined4 *param_2,float *param_3,int param_4,undefined4 param_5,
-            undefined4 param_6,undefined4 param_7,undefined4 param_8)
-
-{
-  undefined4 uVar1;
-  float10 fVar2;
-  float10 fVar3;
-  float10 fVar4;
-  float fStack_118;
-  float fStack_114;
-  undefined4 local_110;
-  float fStack_10c;
-  float fStack_108;
-  float fStack_104;
-  float fStack_100;
-  undefined4 uStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  float fStack_f0;
-  float fStack_ec;
-  undefined4 uStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  undefined4 uStack_d4;
-  float fStack_c4;
-  undefined4 uStack_c0;
-  undefined4 uStack_bc;
-  undefined4 uStack_b8;
-  float fStack_ac;
-  float fStack_a8;
-  float fStack_a0;
-  undefined1 auStack_98 [8];
-  undefined1 auStack_90 [64];
-  undefined1 auStack_50 [76];
-  
-  if (param_4 != 0) {
-    FUN_01006000();
-    if (param_3[2] != 0.0) {
-      D3DXMatrixRotationZ(&local_110,param_3[2]);
-      D3DXMatrixMultiply(&stack0xfffffe98,&fStack_118,&stack0xfffffe98);
-    }
-    if (param_3[1] != 0.0) {
-      D3DXMatrixRotationY(&local_110,param_3[1]);
-      D3DXMatrixMultiply(&stack0xfffffe98,&fStack_118,&stack0xfffffe98);
-    }
-    if (*param_3 != 0.0) {
-      D3DXMatrixRotationX(&local_110,*param_3);
-      D3DXMatrixMultiply(&stack0xfffffe98,&fStack_118,&stack0xfffffe98);
-    }
-    uStack_c0 = *param_2;
-    uStack_bc = param_2[1];
-    uStack_b8 = param_2[2];
-    fStack_ac = 1.0;
-    fStack_a8 = 1.0;
-    fStack_114 = 0.0;
-    fStack_c4 = 1.0;
-    fVar2 = (float10)FUN_00ddbaa0(0x80000000);
-    fStack_118 = (float)fVar2;
-    fVar3 = (float10)fpatan((float10)fStack_114,(float10)fStack_c4);
-    fStack_a0 = (float)fVar3;
-    fVar4 = (float10)fpatan((float10)0.0 / (float10)fStack_a8,(float10)1.0 / (float10)fStack_ac);
-    fVar3 = (float10)0;
-    fStack_d8 = (float)fVar3;
-    fStack_dc = (float)fVar3;
-    fStack_e0 = (float)fVar3;
-    fStack_e4 = (float)fVar3;
-    fStack_ec = (float)fVar3;
-    fStack_f0 = (float)fVar3;
-    fStack_f4 = (float)fVar3;
-    fStack_f8 = (float)fVar3;
-    fStack_100 = (float)fVar3;
-    fStack_104 = (float)fVar3;
-    fStack_108 = (float)fVar3;
-    fStack_10c = (float)fVar3;
-    uStack_d4 = 0x3f800000;
-    uStack_e8 = 0x3f800000;
-    uStack_fc = 0x3f800000;
-    local_110 = 0x3f800000;
-    if (fVar3 != fVar4) {
-      D3DXMatrixRotationZ(auStack_90,(float)fVar4);
-      D3DXMatrixMultiply(&fStack_118,auStack_98,&fStack_118);
-      fVar2 = (float10)fStack_118;
-    }
-    if ((float10)0 != fVar2) {
-      D3DXMatrixRotationY(auStack_90,(float)fVar2);
-      D3DXMatrixMultiply(&fStack_118,auStack_98,&fStack_118);
-    }
-    if (fStack_a0 != 0.0) {
-      D3DXMatrixRotationX(auStack_90,fStack_a0);
-      D3DXMatrixMultiply(&fStack_118,auStack_98,&fStack_118);
-    }
-    fStack_e0 = (float)uStack_c0;
-    fStack_dc = (float)uStack_bc;
-    fStack_d8 = (float)uStack_b8;
-    FUN_01005190(&local_110);
-    uVar1 = FUN_00909ac0(param_1,param_4,0,auStack_50,param_5,param_6,param_7,param_8);
-    return uVar1;
-  }
-  return 0;
+// ? Same as FUN_0090c430 (existing shape posed by position / Euler rotation), but the query goes
+// to FUN_00909ac0 ("setPenetration") and its result is returned (0 when shape is 0). Frame as
+// in FUN_0090c430.
+int FUN_0090d470(int work, float *position, float *rotation, int shape, unsigned int forward1,
+                 unsigned int forward2, unsigned int forward3, unsigned int forward4)
+{
+    using namespace RayCastManager_p1;
+    struct Frame {
+        float s118, s114;
+        float s110, s10c, s108, s104, s100, sfc, sf8, sf4;
+        float sf0, sec, se8, se4, se0, sdc, sd8, sd4;
+        float sd0, scc, sc8;
+        float sc4, sc0, sbc, sb8;       // sc0..sb8: copy of position
+        float sb4, sb0, sac, sa8, sa4, sa0, s9c;
+        float s98[2];                   // auStack_98
+        float s90[16];                  // auStack_90: rotation matrix scratch
+        float s50[19];                  // auStack_50: hkTransform passed to the setter
+    } f;
+    float stackFE98[16];  // ? frame address 0xFFFFFE98 (not mapped to a local)
+    int result;
+    double angleY;  // fVar2
+    double angleX;  // fVar3 (then reused as the constant 0)
+    double angleZ;  // fVar4
+
+    if (shape != 0) {
+        cdeclcall<void>(FUN_01006000); /* ECX: ? */
+        if (rotation[2] != 0.0f) {
+            D3DXMatrixRotationZ(&f.s110, rotation[2]);
+            D3DXMatrixMultiply(stackFE98, &f.s118, stackFE98);
+        }
+        if (rotation[1] != 0.0f) {
+            D3DXMatrixRotationY(&f.s110, rotation[1]);
+            D3DXMatrixMultiply(stackFE98, &f.s118, stackFE98);
+        }
+        if (rotation[0] != 0.0f) {
+            D3DXMatrixRotationX(&f.s110, rotation[0]);
+            D3DXMatrixMultiply(stackFE98, &f.s118, stackFE98);
+        }
+        f.sc0 = position[0];
+        f.sbc = position[1];
+        f.sb8 = position[2];
+        f.sac = 1.0f;
+        f.sa8 = 1.0f;
+        f.s114 = 0.0f;
+        f.sc4 = 1.0f;
+        angleY = (double)FUN_00ddbaa0(-0.0f);  // raw argument 0x80000000
+        f.s118 = (float)angleY;
+        angleX = atan2((double)f.s114, (double)f.sc4);
+        f.sa0 = (float)angleX;
+        angleZ = atan2(0.0 / (double)f.sa8, 1.0 / (double)f.sac);
+        angleX = 0.0;
+        f.sd8 = (float)angleX;
+        f.sdc = (float)angleX;
+        f.se0 = (float)angleX;
+        f.se4 = (float)angleX;
+        f.sec = (float)angleX;
+        f.sf0 = (float)angleX;
+        f.sf4 = (float)angleX;
+        f.sf8 = (float)angleX;
+        f.s100 = (float)angleX;
+        f.s104 = (float)angleX;
+        f.s108 = (float)angleX;
+        f.s10c = (float)angleX;
+        f.sd4 = 1.0f;
+        f.se8 = 1.0f;
+        f.sfc = 1.0f;
+        f.s110 = 1.0f;
+        if (angleX != angleZ) {
+            D3DXMatrixRotationZ(f.s90, (float)angleZ);
+            D3DXMatrixMultiply(&f.s118, f.s98, &f.s118);
+            angleY = (double)f.s118;
+        }
+        if (0.0 != angleY) {
+            D3DXMatrixRotationY(f.s90, (float)angleY);
+            D3DXMatrixMultiply(&f.s118, f.s98, &f.s118);
+        }
+        if (f.sa0 != 0.0f) {
+            D3DXMatrixRotationX(f.s90, f.sa0);
+            D3DXMatrixMultiply(&f.s118, f.s98, &f.s118);
+        }
+        f.se0 = f.sc0;
+        f.sdc = f.sbc;
+        f.sd8 = f.sb8;
+        // FUN_01005190: hkTransform::set4x4ColumnMajor (__thiscall)
+        cdeclcall<void>(FUN_01005190, &f.s110); /* ECX: ? */
+        result = cdeclcall<int>(FUN_00909ac0, work, shape, 0, f.s50, forward1, forward2, forward3,
+                                forward4);
+        return result;
+    }
+    return 0;
 }
 
 // 0090D7E0  RayCastManager::RayCastManager  size=220  [class]
-undefined4 * __fastcall RayCastManager::RayCastManager(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  param_1[2] = 0;
-  Hw::cHeapVariable::cHeapVariable();
-  param_1[0x1a] = 0;
-  param_1[0x1b] = 0;
-  param_1[0x1c] = 0;
-  param_1[0x1d] = 0;
-  param_1[0x1e] = 0;
-  param_1[0x1f] = 0;
-  param_1[0x20] = 0;
-  param_1[0x21] = 0;
-  param_1[0x22] = 0;
-  param_1[0x23] = 0;
-  param_1[0x24] = 0;
-  param_1[0x25] = 0;
-  param_1[0x26] = 0;
-  param_1[0x27] = 0;
-  param_1[0x28] = 0;
-  param_1[0x29] = 0;
-  param_1[0x2a] = 0;
-  param_1[0x2b] = 0;
-  param_1[0x2c] = 0;
-  param_1[0x2d] = 0;
-  param_1[0x2e] = 0;
-  param_1[0x2f] = 0;
-  param_1[0x30] = 0;
-  param_1[0x31] = 0;
-  param_1[0x32] = 0;
-  param_1[0x33] = 0;
-  param_1[0x34] = 0;
-  param_1[0x35] = 0;
-  param_1[0x36] = 0;
-  param_1[0x37] = 0;
-  param_1[0x40] = 0;
-  param_1[0x48] = 0;
-  param_1[0x4b] = 0;
-  param_1[0x4c] = 0;
-  param_1[0x4d] = 0;
-  return param_1;
+RayCastManager::RayCastManager()
+{
+    using namespace RayCastManager_p1;
+    int index;
+
+    // vftable = RayCastManager::vftable (0x0164c450)
+    field08() = 0;
+    cdeclcall<void>(0x00DD44F0u); /* Hw::cHeapVariable::cHeapVariable, ECX: ? */
+    works().unk00 = 0;
+    works().data = 0;
+    works().capacity = 0;
+    works().count = 0;
+    works().ownsMemory = 0;
+    for (index = 0; index < 5; index = index + 1) {
+        arrays()[index].unk00 = 0;
+        arrays()[index].data = 0;
+        arrays()[index].capacity = 0;
+        arrays()[index].count = 0;
+        arrays()[index].ownsMemory = 0;
+    }
+    field100() = 0;
+    field120() = 0;
+    field12C() = 0;
+    field130() = 0;
+    enabled() = 0;
 }
 
 // 0090D8C0  FUN_0090d8c0  size=204  [callgraph]
-void FUN_0090d8c0(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 float *param_5,undefined4 param_6,undefined4 param_7)
-
-{
-  int iVar1;
-  int iVar2;
-  
-  if (((*param_5 != 0.0) && (param_5[1] != 0.0)) && (param_5[2] != 0.0)) {
-    iVar1 = *param_1;
-    if (iVar1 == 0) {
-      iVar1 = hkpFirstCdBodyPairCollector::hkpFirstCdBodyPairCollector_2();
-      iVar2 = RayCastManager::set(iVar1,param_1,param_7);
-      if (iVar2 == 0) {
-        return;
-      }
-    }
-    else if (param_1 != *(int **)(iVar1 + 0x10)) {
-      FUN_00dd5650(&DAT_0164c08c);
-      FUN_00dd5650(&DAT_0164c454,param_7);
-      return;
-    }
-    iVar2 = FUN_0090cbe0(param_2,param_3,param_4,param_5,param_6,param_7,5,0);
-    if (iVar2 == 0) {
-      *(undefined2 *)(iVar1 + 0x1a) = 1;
-    }
-    return;
-  }
-  return;
-}
+// Starts a box penetration query on the work held by `handle` (creating and registering a
+// RayCastPenetrationWork when the handle is empty); a zero size component does nothing.
+// The work is flagged for release (+0x1A) when FUN_0090cbe0 returns 0.
+void FUN_0090d8c0(int *handle, int target, float *position, float *rotation, float *size,
+                  unsigned int forward1, const char *name)
+{
+    using namespace RayCastManager_p1;
+    int work;
+    int ok;
 
+    if (size[0] != 0.0f && size[1] != 0.0f && size[2] != 0.0f) {
+        work = *handle;
+        if (work == 0) {
+            // 00907F20 hkpFirstCdBodyPairCollector::hkpFirstCdBodyPairCollector_2: new RayCastPenetrationWork
+            work = cdeclcall<int>(0x00907F20u);
+            // 00907DC0 RayCastManager::set (__thiscall)
+            ok = cdeclcall<int>(0x00907DC0u, work, handle, name); /* ECX: ? (the manager) */
+            if (ok == 0) {
+                return;
+            }
+        }
+        else if (handle != *(int **)(work + 0x10) /* RayCastWork+0x10: handle */) {
+            cdeclcall<void>(FUN_00dd5650, DAT_0164c08c);
+            cdeclcall<void>(FUN_00dd5650, DAT_0164c454, name);
+            return;
+        }
+        // ? FUN_0090cbe0 is decompiled as void; this caller reads its EAX
+        // machine code: ECX = work (mov ecx, esi), 8 stack arguments
+        ok = thiscall<int>(FUN_0090cbe0, work, target, position, rotation, size, forward1, name, 5, 0);
+        if (ok == 0) {
+            *(unsigned short *)(work + 0x1a) = 1;  // RayCastWork+0x1A: release request
+        }
+        return;
+    }
+}

@@ -1,361 +1,328 @@
-// src/player/pl0010/state/FreeFallStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81490..00BDE9A0, 9 functions
-
+// src/player/pl0010/state/FreeFallStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "FreeFallStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e10[];  // FreeFallStatePl0010 (returned by vf00)
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+// CRT (the compiler emitted fsqrt inline)
+extern "C" double __cdecl sqrt(double x);
+extern "C" double __cdecl fabs(double x);
+
+namespace FreeFallStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// obj when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline char *asContextPl0010(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, 0x0), DAT_01be9ef4);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+// obj when it is a Pl0000 (type record from cObj::vf04, slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, 0x4), DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline Pl0000 *playerOf(const char *ctx)
+{
+    return asPl0000(fld<void *>(ctx, 0xC));
+}
+
+// Pl0000+0x764: movement controller; Pl0000+0x40D4: parameter table
+inline char *controllerOf(Pl0000 *player)
+{
+    return fld<char *>(player, 0x764);
+}
+
+inline char *paramsOf(Pl0000 *player)
+{
+    return fld<char *>(player, 0x40D4);
+}
+
+// StateMachineNode fields (base class, header not owned here)
+inline int &nodeEntered(void *node)   { return fld<int>(node, 0x20); }  /* StateMachineNode+0x20: ? (skip when set) */
+inline int &nodeRequested(void *node) { return fld<int>(node, 0x24); }  /* StateMachineNode+0x24: requested state (-1: none) */
+
+// StateMachineNode::FUN_00d82510(state, priority): request a change to `state`
+inline void requestState(void *node, int state, int priority)
+{
+    thiscall<void>(FUN_00d82510, node, state, priority);
+}
+
+// The "near the ground" test shared by vf14 / vf18: the landing probe (Pl0000+0x41E0 / +0x41E4)
+// reports ground within 0.36, or the controller reports contact (FUN_008e2740).
+inline bool groundReached(Pl0000 *player)
+{
+    if (fld<int>(player, 0x41E0) != 0 && fld<float>(player, 0x41E4) <= 0.36f) {  /* Pl0000+0x41E0: ground probe hit, +0x41E4: its distance */
+        return true;
+    }
+    return FUN_008e2740((int)controllerOf(player));
+}
+
+// inlined strcmp(a, b) == 0
+inline bool sameName(const char *a, const char *b)
+{
+    for (;;) {
+        if (a[0] != b[0]) {
+            return false;
+        }
+        if (a[0] == 0) {
+            return true;
+        }
+        if (a[1] != b[1]) {
+            return false;
+        }
+        if (a[1] == 0) {
+            return true;
+        }
+        a += 2;
+        b += 2;
+    }
+}
+
+}  // namespace FreeFallStatePl0010_p1
+
 // 00B81490  FreeFallStatePl0010::vf08  size=42  [class]
-undefined4 __thiscall FreeFallStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x34) = 0;
-  *(undefined4 *)(param_1 + 0x50) = 0x3f800000;
-  return 1;
+// Enter.
+bool FreeFallStatePl0010::vf08(undefined4 contextArg)
+{
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    motionPending() = 0;
+    fallScale() = 1.0f;
+    return true;
 }
 
 // 00B814C0  FreeFallStatePl0010::vf24  size=19  [class]
-bool FreeFallStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool FreeFallStatePl0010::vf24(undefined4 arg)
+{
+    return StateMachineNode::vf24(arg) != 0;
 }
 
 // 00B81500  FreeFallStatePl0010::vf00  size=6  [class]
-undefined * FreeFallStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e10;
+undefined *FreeFallStatePl0010::vf00()
+{
+    return DAT_01be9e10;
 }
 
 // 00B90F60  FreeFallStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall FreeFallStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *FreeFallStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BAA6C0  FreeFallStatePl0010::SafeCheck  size=467  [class]
-void __thiscall FreeFallStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int *piVar6;
-  uint uVar7;
-  undefined *puVar8;
-  uint local_8;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      local_8 = 0;
-    }
-    else {
-      puVar8 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar8);
-      local_8 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    piVar6 = *(int **)(local_8 + 0xc);
-    if (piVar6 == (int *)0x0) {
-      uVar7 = 0;
-    }
-    else {
-      puVar8 = &DAT_01be9db8;
-      (**(code **)(*piVar6 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar8);
-      uVar7 = -(uint)(iVar3 != 0) & (uint)piVar6;
-    }
-    *(undefined4 *)(uVar7 + 0x418c) = *(undefined4 *)(uVar7 + 0x4180);
-    *(undefined4 *)(uVar7 + 0x4188) = *(undefined4 *)(uVar7 + 0x417c);
-    *(undefined4 *)(uVar7 + 0x4190) = *(undefined4 *)(uVar7 + 0x4184);
-    if (*(int *)(*(int *)(uVar7 + 0x764) + 0x104) != 0) {
-      *(undefined4 *)(*(int *)(uVar7 + 0x764) + 0x104) = 0;
-    }
-    *(undefined4 *)(uVar7 + 0x4170) = 1;
-    *(undefined4 *)(param_1 + 0x30) = 0x75;
-    fVar2 = *(float *)(*(int *)(uVar7 + 0x40d4) + 0x14c);
-    if ((fVar2 * fVar2 < *(float *)(uVar7 + 0xd28)) &&
-       ((*(uint *)(uVar7 + 0xcf8) & *(uint *)(uVar7 + 0xe48)) != 0)) {
-      *(undefined4 *)(param_1 + 0x30) = 0x73;
-    }
-    iVar3 = FUN_00a95ce0(0xc6);
-    if (iVar3 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 0x74;
-    }
-    if (*(int *)(uVar7 + 0x75c) != 0) {
-      iVar4 = FUN_00a95ca0(0);
-      iVar3 = *(int *)(**(int **)(uVar7 + 0x75c) + 8);
-      piVar6 = *(int **)(**(int **)(uVar7 + 0x75c) + 4);
-      if (piVar6 != piVar6 + iVar3 * 0xf) {
-        piVar1 = piVar6 + iVar3 * 0xf;
-        do {
-          if (*piVar6 == iVar4) {
-            uVar5 = FUN_00a95ca0(0);
-            iVar3 = FUN_008d7f50(uVar5);
-            if (iVar3 == 0) {
-              *(undefined4 *)(param_1 + 0x34) = 1;
-            }
-            else {
-              FUN_00aa41c0(*(undefined4 *)(param_1 + 0x30),0x3deeeeef);
-            }
-            goto LAB_00baa855;
-          }
-          piVar6 = piVar6 + 0xf;
-        } while (piVar6 != piVar1);
-      }
-      FUN_00aa41c0(*(undefined4 *)(param_1 + 0x30),0x3deeeeef);
-    }
-LAB_00baa855:
-    *(undefined4 *)(param_1 + 0x40) = *(undefined4 *)(uVar7 + 0x40);
-    *(undefined4 *)(param_1 + 0x44) = *(undefined4 *)(uVar7 + 0x44);
-    *(undefined4 *)(param_1 + 0x48) = *(undefined4 *)(uVar7 + 0x48);
-    *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(uVar7 + 0x4c);
-    *(undefined4 *)(local_8 + 0x30) = 0;
-    *(undefined4 *)(local_8 + 0x10) = 0;
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// First frame: saves the camera angles, chooses the fall motion and starts it (unless the
+// player's motion list says otherwise), and resets the context's fall bookkeeping.
+void FreeFallStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    using namespace FreeFallStatePl0010_p1;
+
+    if (nodeEntered(this) == 0) {
+        char *ctx = asContextPl0010(contextArg);
+        Pl0000 *player = playerOf(ctx);
+        fld<float>(player, 0x418C) = fld<float>(player, 0x4180);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+        fld<float>(player, 0x4188) = fld<float>(player, 0x417C);
+        fld<float>(player, 0x4190) = fld<float>(player, 0x4184);
+        char *controller = controllerOf(player);
+        if (fld<int>(controller, 0x104) != 0) {  /* controller+0x104: ? */
+            fld<int>(controller, 0x104) = 0;
+        }
+        fld<int>(player, 0x4170) = 1;  /* Pl0000+0x4170: camera angles overridden */
+        fallMotion() = 0x75;
+        float threshold = fld<float>(paramsOf(player), 0x14C);  /* params+0x14C: stick threshold */
+        if (!(threshold * threshold >= fld<float>(player, 0xD28)) &&  /* Pl0000+0xD28: stick magnitude squared; true when unordered */
+            (fld<unsigned int>(player, 0xCF8) & fld<unsigned int>(player, 0xE48)) != 0) {  /* Pl0000 inputHold & maskE48 */
+            fallMotion() = 0x73;
+        }
+        if (thiscall<int>(FUN_00a95ce0, player, 0xC6) != 0) {
+            fallMotion() = 0x74;
+        }
+        int **motionList = fld<int **>(player, 0x75C);  /* Pl0000+0x75C: motion list (holder of {?, entries, count}) */
+        if (motionList != 0) {
+            int key = thiscall<int>(FUN_00a95ca0, player, 0);
+            int count = fld<int>(*motionList, 8);
+            int *entry = fld<int *>(*motionList, 4);  // entries of 0x3C bytes, key first
+            int *end = entry + count * 0xF;
+            bool found = false;
+            if (entry != end) {
+                do {
+                    if (*entry == key) {
+                        found = true;
+                        break;
+                    }
+                    entry = entry + 0xF;
+                } while (entry != end);
+            }
+            if (found) {
+                int currentKey = thiscall<int>(FUN_00a95ca0, player, 0);
+                if (thiscall<int>(FUN_008d7f50, motionList, currentKey) == 0) {
+                    motionPending() = 1;
+                }
+                else {
+                    thiscall<int>(FUN_00aa41c0, player, fallMotion(), 0.11666667f);
+                }
+            }
+            else {
+                thiscall<int>(FUN_00aa41c0, player, fallMotion(), 0.11666667f);
+            }
+        }
+        prevPos()[0] = fld<float>(player, 0x40);  /* Pl0000+0x40: position */
+        prevPos()[1] = fld<float>(player, 0x44);
+        prevPos()[2] = fld<float>(player, 0x48);
+        prevPos()[3] = fld<float>(player, 0x4C);
+        fld<int>(ctx, 0x30) = 0;       /* StateMachineContextPl0010+0x30: ? */
+        fld<float>(ctx, 0x10) = 0.0f;  /* StateMachineContextPl0010+0x10: fall distance */
+    }
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00BAA8A0  FreeFallStatePl0010::vf14  size=250  [class]
-void __thiscall FreeFallStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  byte bVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  byte *pbVar5;
-  char *pcVar6;
-  bool bVar7;
-  undefined *puVar8;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar8 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar8);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar8 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar8);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  if ((*(int *)(uVar3 + 0x41e0) == 0) || (0.36 < *(float *)(uVar3 + 0x41e4))) {
-    iVar4 = FUN_008e2740();
-    if (iVar4 != 0) goto LAB_00baa924;
-  }
-  else {
-LAB_00baa924:
-    FUN_00d82510(0x13,100);
-  }
-  if (*(int *)(param_1 + 0x34) != 0) {
-    iVar4 = FUN_00a94ce0(0);
-    if (iVar4 == 0) {
-      pcVar6 = "GearMin";
-      pbVar5 = (byte *)FUN_00a95df0(0);
-      do {
-        bVar1 = *pbVar5;
-        bVar7 = bVar1 < (byte)*pcVar6;
-        if (bVar1 != *pcVar6) {
-LAB_00baa970:
-          iVar4 = (1 - (uint)bVar7) - (uint)(bVar7 != 0);
-          goto LAB_00baa975;
-        }
-        if (bVar1 == 0) break;
-        bVar1 = pbVar5[1];
-        bVar7 = bVar1 < (byte)pcVar6[1];
-        if (bVar1 != pcVar6[1]) goto LAB_00baa970;
-        pbVar5 = pbVar5 + 2;
-        pcVar6 = pcVar6 + 2;
-      } while (bVar1 != 0);
-      iVar4 = 0;
-LAB_00baa975:
-      if (iVar4 != 0) goto LAB_00baa98b;
-    }
-    FUN_00aa9280(*(undefined4 *)(param_1 + 0x30));
-    *(undefined4 *)(param_1 + 0x34) = 0;
-  }
-LAB_00baa98b:
-  StateMachineNode::vf14(param_2);
-  return;
+// Requests state 0x13 near the ground; starts the pending fall motion unless the current
+// motion is "GearMin".
+void FreeFallStatePl0010::vf14(undefined4 *contextArg)
+{
+    using namespace FreeFallStatePl0010_p1;
+
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (groundReached(player)) {
+        requestState(this, 0x13, 100);
+    }
+    if (motionPending() != 0) {
+        if (thiscall<int>(FUN_00a94ce0, player, 0) != 0 ||
+            sameName(thiscall<const char *>(FUN_00a95df0, player, 0), "GearMin")) {
+            thiscall<int>(FUN_00aa9280, player, fallMotion());
+            motionPending() = 0;
+        }
+    }
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00BAA9A0  FreeFallStatePl0010::vf18  size=155  [class]
-void FreeFallStatePl0010::vf18(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if ((*(int *)(uVar2 + 0x41e0) == 0) || (0.36 < *(float *)(uVar2 + 0x41e4))) {
-    iVar3 = FUN_008e2740();
-    if (iVar3 == 0) goto LAB_00baaa2e;
-  }
-  FUN_00d82510(0x13,100);
-LAB_00baaa2e:
-  StateMachineNode::vf18(param_1);
-  return;
+undefined4 FreeFallStatePl0010::vf18(undefined4 contextArg)
+{
+    using namespace FreeFallStatePl0010_p1;
+
+    char *ctx = asContextPl0010((void *)contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (groundReached(player)) {
+        requestState(this, 0x13, 100);
+    }
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00BAAA40  FreeFallStatePl0010::vf20  size=135  [class]
-undefined4 FreeFallStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(uVar4 + 0x14) = 0;
-  *(undefined4 *)(uVar4 + 0x20) = 0;
-  *(undefined4 *)(uVar4 + 0x24) = 0;
-  *(undefined4 *)(uVar4 + 0x28) = 0;
-  *(undefined4 *)(uVar4 + 0x2c) = 0;
-  *(undefined4 *)(uVar3 + 0x4170) = 0;
-  return 1;
+// Leave: clears the context's air-movement data and releases the camera angles.
+undefined4 FreeFallStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace FreeFallStatePl0010_p1;
+
+    if (StateMachineNode::vf20(contextArg) == 0) {
+        return 0;
+    }
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    fld<int>(ctx, 0x14) = 0;       /* StateMachineContextPl0010+0x14: air vector valid */
+    fld<float>(ctx, 0x20) = 0.0f;  /* StateMachineContextPl0010+0x20: float[4] air vector */
+    fld<float>(ctx, 0x24) = 0.0f;
+    fld<float>(ctx, 0x28) = 0.0f;
+    fld<float>(ctx, 0x2C) = 0.0f;
+    fld<int>(player, 0x4170) = 0;  /* Pl0000+0x4170: camera angles overridden */
+    return 1;
 }
 
 // 00BDE9A0  FreeFallStatePl0010::qteSafeCheck  size=411  [class]
-void __thiscall FreeFallStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  int *piVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined *puVar6;
-  float local_20;
-  float local_1c;
-  float local_18;
-  float local_14;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar4 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar6);
-    uVar5 = -(uint)(iVar3 != 0) & (uint)piVar2;
-  }
-  fVar1 = *(float *)(*(int *)(uVar5 + 0x40d4) + 0x16c);
-  *(undefined4 *)(uVar5 + 0x4180) = *(undefined4 *)(*(int *)(uVar5 + 0x40d4) + 0x168);
-  *(float *)(uVar5 + 0x417c) = fVar1 * 0.017453292;
-  *(undefined4 *)(uVar5 + 0x4184) = 0;
-  FUN_00b8af00();
-  *(undefined4 *)(uVar5 + 0x13f8) = 0;
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  if ((*(uint *)(uVar5 + 0xcf8) & *(uint *)(uVar5 + 0xe48)) != 0) {
-    if (*(uint *)(param_1 + 0x24) < 0x80000000) goto LAB_00bdeb01;
-    FUN_00bd3620(param_2,param_1,100);
-  }
-  if (0x7fffffff < *(uint *)(param_1 + 0x24)) {
-    if (*(int *)(uVar4 + 0x14) == 0) {
-      FUN_00b8ae90(&local_20);
-    }
-    else {
-      FUN_00b8ad30(&local_20,
-                   SQRT(*(float *)(uVar4 + 0x28) * *(float *)(uVar4 + 0x28) +
-                        *(float *)(uVar4 + 0x20) * *(float *)(uVar4 + 0x20)));
-      fVar1 = *(float *)(*(int *)(uVar5 + 0x40d4) + 0x164) * *(float *)(param_1 + 0x50);
-      *(float *)(param_1 + 0x50) = fVar1;
-      local_20 = local_20 * fVar1;
-      local_1c = local_1c * fVar1;
-      local_18 = local_18 * fVar1;
-      local_14 = fVar1 * local_14;
-    }
-    FUN_008e0c30(&local_20);
-  }
-LAB_00bdeb01:
-  *(float *)(uVar4 + 0x10) =
-       ABS(*(float *)(param_1 + 0x44) - *(float *)(uVar5 + 0x44)) + *(float *)(uVar4 + 0x10);
-  *(undefined4 *)(param_1 + 0x40) = *(undefined4 *)(uVar5 + 0x40);
-  *(undefined4 *)(param_1 + 0x44) = *(undefined4 *)(uVar5 + 0x44);
-  *(undefined4 *)(param_1 + 0x48) = *(undefined4 *)(uVar5 + 0x48);
-  *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(uVar5 + 0x4c);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Per-frame update: camera angles from the parameters, air movement (scaled by fallScale when
+// the context carries an air vector), fall distance accumulation.
+void FreeFallStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace FreeFallStatePl0010_p1;
 
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    char *params = paramsOf(player);
+    float yawDeg = fld<float>(params, 0x16C);
+    fld<float>(player, 0x4180) = fld<float>(params, 0x168);
+    fld<float>(player, 0x417C) = yawDeg * 0.017453292f;  // degrees -> radians
+    fld<float>(player, 0x4184) = 0.0f;
+    FUN_00b8af00((int)player);
+    fld<int>(player, 0x13F8) = 0;  /* Pl0000+0x13F8: ? */
+    thiscall<void>(FUN_008e0b70, controllerOf(player), 0);
+    thiscall<void>(FUN_008e0ba0, controllerOf(player), 0);
+    if ((fld<unsigned int>(player, 0xCF8) & fld<unsigned int>(player, 0xE48)) != 0 &&  /* Pl0000 inputHold & maskE48 */
+        nodeRequested(this) < 0) {
+        cdeclcall<undefined4>(FUN_00bd3620, contextArg, this, 100);
+    }
+    if (nodeRequested(this) < 0) {
+        float move[4];
+        if (fld<int>(ctx, 0x14) == 0) {  /* StateMachineContextPl0010+0x14: air vector valid */
+            thiscall<void>(FUN_00b8ae90, player, move);
+        }
+        else {
+            float airX = fld<float>(ctx, 0x20);  /* StateMachineContextPl0010+0x20: float[4] air vector */
+            float airZ = fld<float>(ctx, 0x28);
+            thiscall<void>(FUN_00b8ad30, player, move, (float)sqrt((double)airZ * airZ + (double)airX * airX));
+            float scale = fld<float>(params, 0x164) * fallScale();
+            fallScale() = scale;
+            move[0] = move[0] * scale;
+            move[1] = move[1] * scale;
+            move[2] = move[2] * scale;
+            move[3] = scale * move[3];
+        }
+        thiscall<void>(FUN_008e0c30, controllerOf(player), move);
+    }
+    fld<float>(ctx, 0x10) = (float)(fabs((double)prevPos()[1] - fld<float>(player, 0x44)) + fld<float>(ctx, 0x10));  /* StateMachineContextPl0010+0x10: fall distance */
+    prevPos()[0] = fld<float>(player, 0x40);
+    prevPos()[1] = fld<float>(player, 0x44);
+    prevPos()[2] = fld<float>(player, 0x48);
+    prevPos()[3] = fld<float>(player, 0x4C);
+    StateMachineNode::qteSafeCheck(contextArg);
+}

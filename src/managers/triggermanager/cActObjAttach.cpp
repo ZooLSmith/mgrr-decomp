@@ -1,51 +1,41 @@
-// src/managers/triggermanager/cActObjAttach.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C8C060..00C93080, 6 functions
-
+// src/managers/triggermanager/cActObjAttach.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActObjAttach.h"
+
+extern undefined DAT_01dbe168;                 // cActObjAttach static descriptor returned by vf00
 
 // 00C8C060  Trigger::cActObjAttach::vf08  size=1  [class]
-void Trigger::cActObjAttach::vf08(void)
-
-{
-  return;
+void Trigger::cActObjAttach::vf08()
+{
 }
 
 // 00C8C070  Trigger::cActObjAttach::vf0C  size=1  [class]
-void Trigger::cActObjAttach::vf0C(void)
-
-{
-  return;
+void Trigger::cActObjAttach::vf0C()
+{
 }
 
 // 00C8C080  Trigger::cActObjAttach::vf10  size=1  [class]
-void Trigger::cActObjAttach::vf10(void)
-
-{
-  return;
+void Trigger::cActObjAttach::vf10()
+{
 }
 
 // 00C8C090  Trigger::cActObjAttach::vf14  size=1  [class]
-void Trigger::cActObjAttach::vf14(void)
-
-{
-  return;
+void Trigger::cActObjAttach::vf14()
+{
 }
 
 // 00C93070  Trigger::cActObjAttach::vf00  size=6  [class]
-undefined * Trigger::cActObjAttach::vf00(void)
-
-{
-  return &DAT_01dbe168;
+void *Trigger::cActObjAttach::vf00()
+{
+    return &DAT_01dbe168;
 }
 
 // 00C93080  Trigger::cActObjAttach::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActObjAttach::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActObjAttach *Trigger::cActObjAttach::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

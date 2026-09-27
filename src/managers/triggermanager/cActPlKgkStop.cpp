@@ -1,79 +1,90 @@
-// src/managers/triggermanager/cActPlKgkStop.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C88950..00C94B50, 7 functions
-
+// src/managers/triggermanager/cActPlKgkStop.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActPlKgkStop.h"
+
+extern undefined DAT_01dbe2c8;  // cActPlKgkStop static descriptor returned by vf00
+extern unsigned int DAT_01bea094;   // global flags
+extern undefined DAT_01b35420;      // type descriptor tested with FUN_00dd6d80
+
+namespace cActPlKgkStop_p1 {
+
+// FUN_00c13920 returns a manager object; its vftable slot 0x28 returns an entity (0 = none).
+inline int getEntity(void *manager, int index)
+{
+    return (*(int (__thiscall **)(void *, int))(*(char **)manager + 0x28))(manager, index);
+}
+
+// owner vftable slot 0x04: the object's type descriptor.
+inline void *typeOf(int *object)
+{
+    return (*(void *(__thiscall **)(int *))(*(char **)object + 0x4))(object);
+}
+
+// FUN_00dd6d80 (__thiscall, type in ECX): nonzero when `type` is / derives from `base`.
+inline int isKindOf(void *type, void *base)
+{
+    return ((int (__thiscall *)(void *, void *))FUN_00dd6d80)(type, base);
+}
+
+} // namespace cActPlKgkStop_p1
 
 // 00C88950  Trigger::cActPlKgkStop::vf18  size=102  [class]
-undefined4 Trigger::cActPlKgkStop::vf18(void)
-
-{
-  int *piVar1;
-  int iVar2;
-  undefined *puVar3;
-  
-  if ((DAT_01bea094 & 0x20000) != 0) {
-    piVar1 = (int *)FUN_00c13920();
-    iVar2 = (**(code **)(*piVar1 + 0x28))(1);
-    if (iVar2 != 0) {
-      piVar1 = (int *)FUN_00a7c8a0();
-      if (piVar1 != (int *)0x0) {
-        puVar3 = &DAT_01b35420;
-        (**(code **)(*piVar1 + 4))(&DAT_01b35420);
-        iVar2 = FUN_00dd6d80(puVar3);
-        if (iVar2 != 0) {
-          FUN_005f5060();
-          return 1;
-        }
-      }
-      return 0;
-    }
-  }
-  return 0;
+int Trigger::cActPlKgkStop::vf18()  // machine code ends in `ret 4`: one stack argument, unused (cAction.h declares vf18() without it)
+{
+    using namespace cActPlKgkStop_p1;
+    if ((DAT_01bea094 & 0x20000) != 0) {
+        void *manager = (void *)FUN_00c13920();
+        int entity = getEntity(manager, 1);
+        if (entity != 0) {
+            // raw showed FUN_00a7c8a0() without argument; the disassembly passes the entity in ECX
+            int *owner = (int *)FUN_00a7c8a0(entity);
+            if (owner != 0) {
+                // raw: owner->vf04(&DAT_01b35420); FUN_00dd6d80(&DAT_01b35420). The disassembly calls
+                // vf04 with no stack argument and passes its result in ECX to FUN_00dd6d80, whose only
+                // stack argument is &DAT_01b35420.
+                if (isKindOf(typeOf(owner), &DAT_01b35420) != 0) {
+                    FUN_005f5060((int)owner);  // ECX = owner
+                    return 1;
+                }
+            }
+            return 0;
+        }
+    }
+    return 0;
 }
 
 // 00C8F930  Trigger::cActPlKgkStop::vf08  size=1  [class]
-void Trigger::cActPlKgkStop::vf08(void)
-
-{
-  return;
+void Trigger::cActPlKgkStop::vf08()
+{
 }
 
 // 00C8F940  Trigger::cActPlKgkStop::vf0C  size=1  [class]
-void Trigger::cActPlKgkStop::vf0C(void)
-
-{
-  return;
+void Trigger::cActPlKgkStop::vf0C()
+{
 }
 
 // 00C8F950  Trigger::cActPlKgkStop::vf10  size=1  [class]
-void Trigger::cActPlKgkStop::vf10(void)
-
-{
-  return;
+void Trigger::cActPlKgkStop::vf10()
+{
 }
 
 // 00C8F960  Trigger::cActPlKgkStop::vf14  size=1  [class]
-void Trigger::cActPlKgkStop::vf14(void)
-
-{
-  return;
+void Trigger::cActPlKgkStop::vf14()
+{
 }
 
 // 00C94B40  Trigger::cActPlKgkStop::vf00  size=6  [class]
-undefined * Trigger::cActPlKgkStop::vf00(void)
-
-{
-  return &DAT_01dbe2c8;
+void *Trigger::cActPlKgkStop::vf00()
+{
+    return &DAT_01dbe2c8;
 }
 
 // 00C94B50  Trigger::cActPlKgkStop::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActPlKgkStop::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActPlKgkStop *Trigger::cActPlKgkStop::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

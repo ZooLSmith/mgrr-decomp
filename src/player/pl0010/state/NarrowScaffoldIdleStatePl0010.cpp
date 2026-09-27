@@ -1,574 +1,359 @@
-// src/player/pl0010/state/NarrowScaffoldIdleStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81BE0..00BAE2B0, 10 functions
-
+// src/player/pl0010/state/NarrowScaffoldIdleStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "NarrowScaffoldIdleStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------------------------
+// d3dx9_43.dll import
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+// CRT (the compiler emitted fpatan inline)
+extern "C" double __cdecl atan2(double y, double x);
+
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 / vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e40[];  // NarrowScaffoldIdleStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+// global objects passed in ECX
+extern char DAT_01bea1d0[];           // camera / view (ECX of FUN_00da0640)
+// debug-print strings (Shift-JIS)
+extern const char DAT_0163d0ac[];     // "[Hw::VecNormalize] a zero vector cannot be normalized."
+// plain globals
+extern unsigned int DAT_01b7b910;     // ? pad buttons (0x4000 selects the wider probe / motion 0xD5)
+extern float        DAT_01b7b920;     // ? left stick X
+extern float        DAT_01b7b924;     // ? left stick Y (used as Z)
+
+namespace NarrowScaffoldIdleStatePl0010_p1 {
+
+// Field at byte offset `offset` of an object whose class header is not owned by this file.
+template <class T> inline T &at(const void *base, int offset) { return *(T *)((char *)base + offset); }
+
+// Type-record virtual (no arguments besides `this`) at byte offset `slot` of obj's vftable.
+typedef undefined *(__thiscall *TypeRecordFn)(const void *self);
+inline undefined *typeRecord(const void *obj, int slot) { return (*(TypeRecordFn **)obj)[slot / 4](obj); }
+
+// Checked downcasts (0 when the object is null or of another type).
+inline void *asContext(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)typeRecord(obj, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (void *)obj : 0;
+}
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)typeRecord(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player that owns the state machine: context (StateMachineContextPl0010) +0xC, checked
+// against Pl0000.  The context is not null-checked before the load (as in the original).
+inline Pl0000 *ownerPlayer(const void *context)
+{
+    return asPl0000(at<void *>(asContext(context), 0xC));  /* StateMachineContext+0xC: owner */
+}
+
+// Callees whose generated prototype does not match the machine-code call site.
+typedef void (*VecNormalizeWarningFn)(const char *message);                         // FUN_00dd5650 (cdecl)
+typedef void (*DebugLineFn)(float *from, float *to, unsigned int color, int flags); // FUN_00f95fa0 (cdecl, debug draw)
+// 0090B490 RayCastSingleHitWork::RayCastSingleHitWork_4: __stdcall, ret 0x20 (the caller loads
+// ECX = 0x01B35DF8, which the callee never reads).  Writes the hit position to hitPos[0..2].
+typedef int (__stdcall *RayCastSingleHitFn)(float *hitPos, int a, int *hitFlag, int c, float *from,
+                                            float *to, unsigned int mask, const char *name);
+inline RayCastSingleHitFn rayCastSingleHit() { return (RayCastSingleHitFn)0x0090B490; }
+
+// One downward probe: from = (pos + up) + offset, to = from + down * 2, then a "narrow" ray cast.
+inline int castProbe(Pl0000 *player, const float *up, const float *offset, const float *down,
+                     float *from, float *to, unsigned int color, unsigned int mask, int *hitFlag,
+                     float *hitPos)
+{
+    float *pos = &at<float>(player, 0x40);  /* +0x40: position */
+    from[0] = (pos[0] + up[0]) + offset[0];
+    from[1] = (pos[1] + up[1]) + offset[1];
+    from[2] = (pos[2] + up[2]) + offset[2];
+    from[3] = (pos[3] + up[3]) + offset[3];
+    to[0] = from[0] + down[0] * 2.0f;
+    to[1] = from[1] + down[1] * 2.0f;
+    to[2] = from[2] + down[2] * 2.0f;
+    to[3] = from[3] + down[3] * 2.0f;
+    ((DebugLineFn)FUN_00f95fa0)(from, to, color, 0);
+    return rayCastSingleHit()(hitPos, 0, hitFlag, 0, from, to, mask, "narrow");
+}
+
+// After a probe hit: face along `offset` (yaw into +0x94), push +0x50 by offset * scale and take
+// the hit height as +0x54.
+inline void snapToHit(Pl0000 *player, float *offset, float scale, const float *hitPos)
+{
+    float angles[4];
+    FUN_00b81be0((undefined4 *)angles, &at<float>(player, 0x40), offset,
+                 (int)&at<float>(player, 0xF0));  /* +0x40 position, +0xF0 matrix */
+    at<float>(player, 0x94) = angles[1];          /* +0x94: yaw */
+    float *vec50 = &at<float>(player, 0x50);      /* +0x50: float[4] */
+    vec50[0] = vec50[0] + offset[0] * scale;
+    vec50[1] = offset[1] * scale + vec50[1];
+    vec50[2] = offset[2] * scale + vec50[2];
+    vec50[3] = offset[3] * scale + vec50[3];
+    vec50[1] = hitPos[1];
+}
+
+}  // namespace NarrowScaffoldIdleStatePl0010_p1
+
 // 00B81BE0  FUN_00b81be0  size=195  [callgraph]
-void FUN_00b81be0(undefined4 *param_1,float *param_2,float *param_3,int param_4)
-
-{
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float unaff_ESI;
-  float10 fVar4;
-  float *pfVar5;
-  float fStack_38;
-  float local_30;
-  float local_2c;
-  float local_28;
-  float local_24;
-  float local_20;
-  float local_1c;
-  float local_18;
-  float local_14;
-  
-  local_30 = *param_2 + *param_3;
-  local_2c = param_3[1] + param_2[1];
-  local_28 = param_3[2] + param_2[2];
-  local_24 = param_3[3] + param_2[3];
-  local_20 = *param_2;
-  local_1c = param_2[1];
-  local_18 = param_2[2];
-  local_14 = param_2[3];
-  pfVar5 = &local_30;
-  D3DXVec3TransformNormal(pfVar5,pfVar5,param_4);
-  fVar1 = *(float *)(param_4 + 0x34);
-  D3DXVec3TransformNormal(&local_2c,&local_2c,param_4);
-  fVar2 = *(float *)(param_4 + 0x30);
-  fVar3 = *(float *)(param_4 + 0x38);
-  *param_1 = 0;
-  fVar4 = (float10)fpatan((float10)(float)pfVar5 - ((float10)fVar2 + (float10)(fVar1 + fStack_38)),
-                          (float10)unaff_ESI - ((float10)local_30 + (float10)fVar3));
-  param_1[1] = (float)fVar4;
-  param_1[2] = 0;
-  return;
+// Yaw of `dir` placed at `pos` in the space of `matrix`: out = (0, atan2(dx, dz), 0) where d is
+// the difference of the two transformed points (pos + dir) and pos.  Returns out in EAX and pops
+// its four arguments (ret 0x10).
+void FUN_00b81be0(undefined4 *out, float *pos, float *dir, int matrix)
+{
+    float *m = (float *)matrix;
+    float *angles = (float *)out;
+    float tip[4];
+    float base[4];
+
+    tip[0] = pos[0] + dir[0];
+    tip[1] = dir[1] + pos[1];
+    tip[2] = dir[2] + pos[2];
+    tip[3] = dir[3] + pos[3];
+    base[0] = pos[0];
+    base[1] = pos[1];
+    base[2] = pos[2];
+    base[3] = pos[3];
+    D3DXVec3TransformNormal(tip, tip, m);
+    tip[0] = m[12] + tip[0];
+    tip[1] = m[13] + tip[1];
+    tip[2] = tip[2] + m[14];
+    D3DXVec3TransformNormal(base, base, m);
+    angles[0] = 0.0f;
+    angles[1] = (float)atan2((double)tip[0] - ((double)m[12] + (double)base[0]),
+                             (double)tip[2] - ((double)base[2] + (double)m[14]));
+    angles[2] = 0.0f;
 }
 
 // 00B81CB0  NarrowScaffoldIdleStatePl0010::vf08  size=19  [class]
-bool NarrowScaffoldIdleStatePl0010::vf08(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_1);
-  return iVar1 != 0;
+bool NarrowScaffoldIdleStatePl0010::vf08(undefined4 context)
+{
+    return StateMachineNode::vf08(context) != 0;
 }
 
 // 00B81CD0  NarrowScaffoldIdleStatePl0010::vf14  size=5  [class]
-undefined4 __thiscall NarrowScaffoldIdleStatePl0010::vf14(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x14))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x14))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 4;
-  return 1;
+void NarrowScaffoldIdleStatePl0010::vf14(undefined4 *context)
+{
+    StateMachineNode::vf14(context);  // jmp 0x00D822A0
 }
 
 // 00B81CE0  NarrowScaffoldIdleStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall NarrowScaffoldIdleStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+undefined4 NarrowScaffoldIdleStatePl0010::vf18(undefined4 context)
+{
+    return StateMachineNode::vf18(context);  // jmp 0x00D822E0
 }
 
 // 00B81CF0  NarrowScaffoldIdleStatePl0010::vf24  size=19  [class]
-bool NarrowScaffoldIdleStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool NarrowScaffoldIdleStatePl0010::vf24(undefined4 context)
+{
+    return StateMachineNode::vf24(context) != 0;
 }
 
 // 00B81D30  NarrowScaffoldIdleStatePl0010::vf00  size=6  [class]
-undefined * NarrowScaffoldIdleStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e40;
+undefined *NarrowScaffoldIdleStatePl0010::vf00()
+{
+    return DAT_01be9e40;
 }
 
 // 00B910E0  NarrowScaffoldIdleStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall NarrowScaffoldIdleStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *NarrowScaffoldIdleStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BAD050  NarrowScaffoldIdleStatePl0010::SafeCheck  size=170  [class]
-void __thiscall NarrowScaffoldIdleStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar2 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-    }
-    FUN_00aa3f60(0xd6);
-    FUN_00a95fb0(0);
-    iVar3 = *(int *)(uVar2 + 0x764);
-    if (*(int *)(iVar3 + 0x104) != 1) {
-      *(undefined4 *)(iVar3 + 0x104) = 1;
-      *(undefined4 *)(*(int *)(iVar3 + 0xd0) + 4) = 0;
-    }
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+void NarrowScaffoldIdleStatePl0010::SafeCheck(undefined4 *context)
+{
+    using namespace NarrowScaffoldIdleStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        Pl0000 *player = ownerPlayer(context);
+        FUN_00aa3f60((int)player, 0xD6);
+        FUN_00a95fb0((int)player, 0);  // 0.0f
+        char *controller = at<char *>(player, 0x764);  /* Pl0000+0x764: motion controller ? */
+        if (at<int>(controller, 0x104) != 1) {
+            at<int>(controller, 0x104) = 1;
+            at<float>(at<char *>(controller, 0xD0), 4) = 0.0f;
+        }
+    }
+    StateMachineNode::SafeCheck(context);
 }
 
 // 00BAD100  NarrowScaffoldIdleStatePl0010::qteSafeCheck  size=4521  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void NarrowScaffoldIdleStatePl0010::qteSafeCheck(undefined4 *param_1)
-
-{
-  float fVar1;
-  bool bVar2;
-  uint uVar3;
-  int *piVar4;
-  float *pfVar5;
-  int iVar6;
-  uint uVar7;
-  undefined4 uVar8;
-  undefined *puVar9;
-  float fStack_18c;
-  float fStack_188;
-  float local_184;
-  float local_180;
-  float local_17c;
-  float local_178;
-  float fStack_174;
-  undefined1 local_170 [4];
-  float fStack_16c;
-  float fStack_168;
-  float fStack_164;
-  float fStack_160;
-  float fStack_15c;
-  float fStack_158;
-  float fStack_154;
-  float fStack_150;
-  undefined1 auStack_14c [8];
-  float fStack_144;
-  int iStack_130;
-  float fStack_12c;
-  float fStack_128;
-  float fStack_124;
-  float fStack_120;
-  float fStack_11c;
-  float fStack_118;
-  float fStack_114;
-  float fStack_110;
-  float fStack_10c;
-  float fStack_108;
-  float fStack_104;
-  float fStack_100;
-  float fStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  float fStack_f0;
-  float fStack_ec;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  float fStack_d4;
-  float fStack_d0;
-  float fStack_cc;
-  float fStack_c8;
-  float fStack_c4;
-  float fStack_c0;
-  float fStack_bc;
-  float fStack_b8;
-  float fStack_b4;
-  float fStack_b0;
-  float fStack_ac;
-  float fStack_a8;
-  float fStack_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float fStack_98;
-  float fStack_94;
-  float fStack_90;
-  float fStack_8c;
-  float fStack_88;
-  float fStack_84;
-  float fStack_80;
-  float fStack_7c;
-  float fStack_78;
-  float fStack_74;
-  float fStack_70;
-  undefined1 auStack_6c [4];
-  undefined4 uStack_68;
-  undefined1 local_50 [76];
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar6 = FUN_00dd6d80(puVar9);
-    uVar3 = -(uint)(iVar6 != 0) & (uint)param_1;
-  }
-  piVar4 = *(int **)(uVar3 + 0xc);
-  if (piVar4 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9db8;
-    (**(code **)(*piVar4 + 4))(&DAT_01be9db8);
-    iVar6 = FUN_00dd6d80(puVar9);
-    uVar3 = -(uint)(iVar6 != 0) & (uint)piVar4;
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c);
-  if (*(float *)(uVar3 + 0xd28) <= fVar1 * fVar1) {
-    FUN_00aa9280(0xd6);
-    StateMachineNode::qteSafeCheck(param_1);
-    return;
-  }
-  FUN_00b8ae90(local_170);
-  FUN_00da0640(local_50);
-  local_180 = _DAT_01b7b920;
-  local_17c = 0.0;
-  local_178 = _DAT_01b7b924;
-  D3DXVec3TransformNormal(local_170,&local_180,local_50);
-  if (((local_17c != 0.0) || (local_178 != 0.0)) || (fStack_174 != 0.0)) {
-    fVar1 = fStack_174 * fStack_174 + local_178 * local_178 + local_17c * local_17c;
-    if (fVar1 < 0.0 == (fVar1 == 0.0)) {
-      FUN_00ddf460(&local_17c,&local_17c);
-    }
-    else {
-      FUN_00dd5650(&DAT_0163d0ac);
-      local_17c = 0.0;
-      local_178 = 1.0;
-      fStack_174 = 0.0;
-    }
-  }
-  if ((_DAT_01b7b910 & 0x4000) == 0) {
-    fVar1 = 0.15;
-  }
-  else {
-    fVar1 = 0.25;
-  }
-  FUN_00a8b8a0(&fStack_cc,fVar1);
-  FUN_00a8b8a0(&fStack_ac,-fVar1);
-  FUN_00a8b9b0(&fStack_dc,fVar1);
-  FUN_00a8b9b0(&fStack_bc,-fVar1);
-  FUN_00a8bac0(&fStack_10c,0x3e4ccccd);
-  FUN_00a8bac0(&fStack_11c,0xbe4ccccd);
-  piVar4 = (int *)FUN_009f8b60();
-  uVar7 = *piVar4 << 0x10 | 0x1a;
-  bVar2 = false;
-  iStack_130 = 0;
-  pfVar5 = (float *)FUN_00a925a0(auStack_14c);
-  if (0.5 < pfVar5[2] * fStack_174 + *pfVar5 * local_17c + pfVar5[1] * local_178) {
-    fStack_16c = fStack_cc + *(float *)(uVar3 + 0x40) + fStack_10c;
-    fStack_168 = fStack_c8 + *(float *)(uVar3 + 0x44) + fStack_108;
-    fStack_164 = fStack_c4 + *(float *)(uVar3 + 0x48) + fStack_104;
-    fStack_160 = fStack_c0 + *(float *)(uVar3 + 0x4c) + fStack_100;
-    local_184 = fStack_114 * 2.0;
-    fStack_15c = fStack_11c * 2.0 + fStack_16c;
-    fStack_158 = fStack_118 * 2.0 + fStack_168;
-    fStack_154 = local_184 + fStack_164;
-    fStack_150 = fStack_160 + fStack_110 * 2.0;
-    FUN_00f95fa0(&fStack_16c,&fStack_15c,0xffffffff,0);
-    iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                      (auStack_6c,0,&iStack_130,0,&fStack_16c,&fStack_15c,uVar7,"narrow");
-    if (iVar6 != 0) {
-      bVar2 = true;
-      iVar6 = FUN_00b81be0(auStack_14c,uVar3 + 0x40,&fStack_cc,uVar3 + 0xf0);
-      *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-      *(float *)(uVar3 + 0x50) = *(float *)(uVar3 + 0x50) + fStack_cc * fVar1;
-      *(float *)(uVar3 + 0x54) = fStack_c8 * fVar1 + *(float *)(uVar3 + 0x54);
-      *(float *)(uVar3 + 0x58) = fStack_c4 * fVar1 + *(float *)(uVar3 + 0x58);
-      *(float *)(uVar3 + 0x5c) = fStack_c0 * fVar1 + *(float *)(uVar3 + 0x5c);
-      *(undefined4 *)(uVar3 + 0x54) = uStack_68;
-    }
-  }
-  pfVar5 = (float *)FUN_00a925a0(auStack_14c);
-  if (0.5 < pfVar5[2] * -1.0 * fStack_174 +
-            pfVar5[1] * -1.0 * local_178 + *pfVar5 * -1.0 * local_17c) {
-    fStack_16c = fStack_ac + fStack_10c + *(float *)(uVar3 + 0x40);
-    fStack_168 = fStack_a8 + *(float *)(uVar3 + 0x44) + fStack_108;
-    fStack_164 = fStack_a4 + *(float *)(uVar3 + 0x48) + fStack_104;
-    fStack_160 = fStack_a0 + *(float *)(uVar3 + 0x4c) + fStack_100;
-    local_184 = fStack_114 * 2.0;
-    fStack_15c = fStack_11c * 2.0 + fStack_16c;
-    fStack_158 = fStack_118 * 2.0 + fStack_168;
-    fStack_154 = local_184 + fStack_164;
-    fStack_150 = fStack_110 * 2.0 + fStack_160;
-    FUN_00f95fa0(&fStack_16c,&fStack_15c,0xffff0000,0);
-    iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                      (auStack_6c,0,&iStack_130,0,&fStack_16c,&fStack_15c,uVar7,"narrow");
-    if (iVar6 != 0) {
-      bVar2 = true;
-      iVar6 = FUN_00b81be0(auStack_14c,(float *)(uVar3 + 0x40),&fStack_ac,uVar3 + 0xf0);
-      *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-      *(float *)(uVar3 + 0x50) = fStack_ac * fVar1 + *(float *)(uVar3 + 0x50);
-      *(float *)(uVar3 + 0x54) = fStack_a8 * fVar1 + *(float *)(uVar3 + 0x54);
-      *(float *)(uVar3 + 0x58) = fStack_a4 * fVar1 + *(float *)(uVar3 + 0x58);
-      *(float *)(uVar3 + 0x5c) = fStack_a0 * fVar1 + *(float *)(uVar3 + 0x5c);
-      *(undefined4 *)(uVar3 + 0x54) = uStack_68;
-    }
-  }
-  pfVar5 = (float *)FUN_00a92640(auStack_14c);
-  if (0.5 < pfVar5[2] * fStack_174 + local_17c * *pfVar5 + pfVar5[1] * local_178) {
-    fStack_16c = fStack_dc + fStack_10c + *(float *)(uVar3 + 0x40);
-    fStack_168 = fStack_d8 + *(float *)(uVar3 + 0x44) + fStack_108;
-    fStack_164 = fStack_d4 + *(float *)(uVar3 + 0x48) + fStack_104;
-    fStack_160 = fStack_d0 + *(float *)(uVar3 + 0x4c) + fStack_100;
-    local_184 = fStack_114 * 2.0;
-    fStack_15c = fStack_11c * 2.0 + fStack_16c;
-    fStack_158 = fStack_118 * 2.0 + fStack_168;
-    fStack_154 = local_184 + fStack_164;
-    fStack_150 = fStack_110 * 2.0 + fStack_160;
-    FUN_00f95fa0(&fStack_16c,&fStack_15c,0xff00ff00,0);
-    iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                      (auStack_6c,0,&iStack_130,0,&fStack_16c,&fStack_15c,uVar7,"narrow");
-    if (iVar6 != 0) {
-      bVar2 = true;
-      iVar6 = FUN_00b81be0(auStack_14c,(float *)(uVar3 + 0x40),&fStack_dc,uVar3 + 0xf0);
-      *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-      *(float *)(uVar3 + 0x50) = fStack_dc * fVar1 + *(float *)(uVar3 + 0x50);
-      *(float *)(uVar3 + 0x54) = fStack_d8 * fVar1 + *(float *)(uVar3 + 0x54);
-      *(float *)(uVar3 + 0x58) = fStack_d4 * fVar1 + *(float *)(uVar3 + 0x58);
-      *(float *)(uVar3 + 0x5c) = fStack_d0 * fVar1 + *(float *)(uVar3 + 0x5c);
-      *(undefined4 *)(uVar3 + 0x54) = uStack_68;
-    }
-  }
-  pfVar5 = (float *)FUN_00a92640(auStack_14c);
-  if (0.5 < pfVar5[2] * -1.0 * fStack_174 +
-            *pfVar5 * -1.0 * local_17c + pfVar5[1] * -1.0 * local_178) {
-    fStack_16c = fStack_bc + fStack_10c + *(float *)(uVar3 + 0x40);
-    fStack_168 = fStack_b8 + *(float *)(uVar3 + 0x44) + fStack_108;
-    fStack_164 = fStack_b4 + *(float *)(uVar3 + 0x48) + fStack_104;
-    fStack_160 = fStack_b0 + *(float *)(uVar3 + 0x4c) + fStack_100;
-    local_184 = fStack_114 * 2.0;
-    fStack_15c = fStack_11c * 2.0 + fStack_16c;
-    fStack_158 = fStack_118 * 2.0 + fStack_168;
-    fStack_154 = local_184 + fStack_164;
-    fStack_150 = fStack_110 * 2.0 + fStack_160;
-    FUN_00f95fa0(&fStack_16c,&fStack_15c,0xff0000ff,0);
-    iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                      (auStack_6c,0,&iStack_130,0,&fStack_16c,&fStack_15c,uVar7,"narrow");
-    if (iVar6 != 0) {
-      iVar6 = FUN_00b81be0(auStack_14c,(float *)(uVar3 + 0x40),&fStack_bc,uVar3 + 0xf0);
-      *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-      *(float *)(uVar3 + 0x50) = *(float *)(uVar3 + 0x50) + fStack_bc * fVar1;
-      *(float *)(uVar3 + 0x54) = fStack_b8 * fVar1 + *(float *)(uVar3 + 0x54);
-      *(float *)(uVar3 + 0x58) = fStack_b4 * fVar1 + *(float *)(uVar3 + 0x58);
-      *(float *)(uVar3 + 0x5c) = fStack_b0 * fVar1 + *(float *)(uVar3 + 0x5c);
-      *(undefined4 *)(uVar3 + 0x54) = uStack_68;
-      goto LAB_00bae21f;
-    }
-  }
-  if (!bVar2) {
-    FUN_00a8b8a0(&fStack_9c,0x3d4ccccd);
-    FUN_00a8b8a0(&fStack_7c,0xbd4ccccd);
-    FUN_00a8b9b0(&fStack_8c,0x3d4ccccd);
-    FUN_00a8b9b0(&fStack_16c,0xbd4ccccd);
-    FUN_00a8bac0(&fStack_ec,0x3e4ccccd);
-    FUN_00a8bac0(&fStack_fc,0xbe4ccccd);
-    piVar4 = (int *)FUN_009f8b60();
-    uVar7 = *piVar4 << 0x10 | 0x1a;
-    pfVar5 = (float *)FUN_00a925a0(auStack_14c);
-    if (0.5 < pfVar5[2] * fStack_174 + *pfVar5 * local_17c + pfVar5[1] * local_178) {
-      fStack_18c = fStack_9c + fStack_ec + *(float *)(uVar3 + 0x40);
-      fStack_188 = fStack_98 + *(float *)(uVar3 + 0x44) + fStack_e8;
-      local_184 = fStack_94 + *(float *)(uVar3 + 0x48) + fStack_e4;
-      local_180 = fStack_90 + *(float *)(uVar3 + 0x4c) + fStack_e0;
-      fStack_144 = fStack_f4 * 2.0;
-      fStack_12c = fStack_fc * 2.0 + fStack_18c;
-      fStack_128 = fStack_f8 * 2.0 + fStack_188;
-      fStack_124 = fStack_144 + local_184;
-      fStack_120 = fStack_f0 * 2.0 + local_180;
-      FUN_00f95fa0(&fStack_18c,&fStack_12c,0xffffffff,0);
-      iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                        (&fStack_15c,0,&stack0xfffffe68,0,&fStack_18c,&fStack_12c,uVar7,"narrow");
-      if (iVar6 != 0) {
-        bVar2 = true;
-        iVar6 = FUN_00b81be0(auStack_14c,(float *)(uVar3 + 0x40),&fStack_9c,uVar3 + 0xf0);
-        *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-        *(float *)(uVar3 + 0x50) = *(float *)(uVar3 + 0x50) + fStack_9c * 0.05;
-        *(float *)(uVar3 + 0x54) = fStack_98 * 0.05 + *(float *)(uVar3 + 0x54);
-        *(float *)(uVar3 + 0x58) = *(float *)(uVar3 + 0x58) + fStack_94 * 0.05;
-        *(float *)(uVar3 + 0x5c) = fStack_90 * 0.05 + *(float *)(uVar3 + 0x5c);
-        *(float *)(uVar3 + 0x54) = fStack_158;
-      }
-    }
-    pfVar5 = (float *)FUN_00a925a0(auStack_14c);
-    if (0.5 < pfVar5[2] * -1.0 * fStack_174 +
-              pfVar5[1] * -1.0 * local_178 + local_17c * *pfVar5 * -1.0) {
-      fStack_12c = fStack_7c + *(float *)(uVar3 + 0x40) + fStack_ec;
-      fStack_128 = fStack_78 + *(float *)(uVar3 + 0x44) + fStack_e8;
-      fStack_124 = fStack_74 + *(float *)(uVar3 + 0x48) + fStack_e4;
-      fStack_120 = fStack_70 + *(float *)(uVar3 + 0x4c) + fStack_e0;
-      fStack_144 = fStack_f4 * 2.0;
-      fStack_18c = fStack_fc * 2.0 + fStack_12c;
-      fStack_188 = fStack_f8 * 2.0 + fStack_128;
-      local_184 = fStack_144 + fStack_124;
-      local_180 = fStack_f0 * 2.0 + fStack_120;
-      FUN_00f95fa0(&fStack_12c,&fStack_18c,0xffff0000,0);
-      iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                        (&fStack_15c,0,&stack0xfffffe68,0,&fStack_12c,&fStack_18c,uVar7,"narrow");
-      if (iVar6 != 0) {
-        bVar2 = true;
-        iVar6 = FUN_00b81be0(auStack_14c,uVar3 + 0x40,&fStack_7c,uVar3 + 0xf0);
-        *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-        *(float *)(uVar3 + 0x50) = fStack_7c * 0.05 + *(float *)(uVar3 + 0x50);
-        *(float *)(uVar3 + 0x54) = fStack_78 * 0.05 + *(float *)(uVar3 + 0x54);
-        *(float *)(uVar3 + 0x58) = fStack_74 * 0.05 + *(float *)(uVar3 + 0x58);
-        *(float *)(uVar3 + 0x5c) = fStack_70 * 0.05 + *(float *)(uVar3 + 0x5c);
-        *(float *)(uVar3 + 0x54) = fStack_158;
-      }
-    }
-    pfVar5 = (float *)FUN_00a92640(auStack_14c);
-    if (0.5 < pfVar5[2] * fStack_174 + local_17c * *pfVar5 + pfVar5[1] * local_178) {
-      fStack_12c = fStack_8c + *(float *)(uVar3 + 0x40) + fStack_ec;
-      fStack_128 = fStack_88 + *(float *)(uVar3 + 0x44) + fStack_e8;
-      fStack_124 = fStack_84 + *(float *)(uVar3 + 0x48) + fStack_e4;
-      fStack_120 = fStack_80 + *(float *)(uVar3 + 0x4c) + fStack_e0;
-      fStack_144 = fStack_f4 * 2.0;
-      fStack_18c = fStack_fc * 2.0 + fStack_12c;
-      fStack_188 = fStack_f8 * 2.0 + fStack_128;
-      local_184 = fStack_144 + fStack_124;
-      local_180 = fStack_f0 * 2.0 + fStack_120;
-      FUN_00f95fa0(&fStack_12c,&fStack_18c,0xff00ff00,0);
-      iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                        (&fStack_15c,0,&stack0xfffffe68,0,&fStack_12c,&fStack_18c,uVar7,"narrow");
-      if (iVar6 != 0) {
-        bVar2 = true;
-        iVar6 = FUN_00b81be0(auStack_14c,uVar3 + 0x40,&fStack_8c,uVar3 + 0xf0);
-        *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-        *(float *)(uVar3 + 0x50) = fStack_8c * 0.05 + *(float *)(uVar3 + 0x50);
-        *(float *)(uVar3 + 0x54) = fStack_88 * 0.05 + *(float *)(uVar3 + 0x54);
-        *(float *)(uVar3 + 0x58) = fStack_84 * 0.05 + *(float *)(uVar3 + 0x58);
-        *(float *)(uVar3 + 0x5c) = fStack_80 * 0.05 + *(float *)(uVar3 + 0x5c);
-        *(float *)(uVar3 + 0x54) = fStack_158;
-      }
-    }
-    pfVar5 = (float *)FUN_00a92640(auStack_14c);
-    if (0.5 < pfVar5[2] * -1.0 * fStack_174 +
-              *pfVar5 * -1.0 * local_17c + pfVar5[1] * -1.0 * local_178) {
-      fStack_12c = fStack_16c + fStack_ec + *(float *)(uVar3 + 0x40);
-      fStack_128 = fStack_168 + *(float *)(uVar3 + 0x44) + fStack_e8;
-      fStack_124 = fStack_164 + *(float *)(uVar3 + 0x48) + fStack_e4;
-      fStack_120 = fStack_160 + *(float *)(uVar3 + 0x4c) + fStack_e0;
-      fStack_144 = fStack_f4 * 2.0;
-      fStack_18c = fStack_fc * 2.0 + fStack_12c;
-      fStack_188 = fStack_f8 * 2.0 + fStack_128;
-      local_184 = fStack_144 + fStack_124;
-      local_180 = fStack_f0 * 2.0 + fStack_120;
-      FUN_00f95fa0(&fStack_12c,&fStack_18c,0xff0000ff,0);
-      iVar6 = RayCastSingleHitWork::RayCastSingleHitWork_4
-                        (&fStack_15c,0,&stack0xfffffe68,0,&fStack_12c,&fStack_18c,uVar7,"narrow");
-      if (iVar6 != 0) {
-        iVar6 = FUN_00b81be0(auStack_14c,(float *)(uVar3 + 0x40),&fStack_16c,uVar3 + 0xf0);
-        *(undefined4 *)(uVar3 + 0x94) = *(undefined4 *)(iVar6 + 4);
-        *(float *)(uVar3 + 0x50) = *(float *)(uVar3 + 0x50) + fStack_16c * 0.05;
-        *(float *)(uVar3 + 0x54) = fStack_168 * 0.05 + *(float *)(uVar3 + 0x54);
-        *(float *)(uVar3 + 0x58) = fStack_164 * 0.05 + *(float *)(uVar3 + 0x58);
-        *(float *)(uVar3 + 0x5c) = fStack_160 * 0.05 + *(float *)(uVar3 + 0x5c);
-        *(float *)(uVar3 + 0x54) = fStack_158;
-        goto LAB_00bae21f;
-      }
-    }
-    if (!bVar2) {
-      FUN_00aa9280(0xd6);
-      StateMachineNode::qteSafeCheck(param_1);
-      return;
-    }
-  }
-LAB_00bae21f:
-  if (iStack_130 != 0) {
-    if ((_DAT_01b7b910 & 0x4000) == 0) {
-      uVar8 = 0xd4;
-    }
-    else {
-      uVar8 = 0xd5;
-    }
-    FUN_00aa9280(uVar8);
-  }
-  FUN_00a95fb0(0);
-  StateMachineNode::qteSafeCheck(param_1);
-  return;
+// Keeps the player on the scaffold: casts downward "narrow" rays at the four sides that face the
+// stick direction (first at the wide offset, then at 0.05) and snaps onto the first surface hit.
+void NarrowScaffoldIdleStatePl0010::qteSafeCheck(undefined4 *context)
+{
+    using namespace NarrowScaffoldIdleStatePl0010_p1;
+    float stick[4];
+    float dir[4];
+    float camRot[16];
+    float axis[4];
+    float from[4];
+    float to[4];
+    float hitPos[4];
+    float sideP[4], sideN[4], frontP[4], frontN[4], upP[4], upN[4];
+    int hitFlag;
+    int hitFlag2;
+    bool hitAny;
+    float width;
+    unsigned int mask;
+
+    Pl0000 *player = ownerPlayer(context);
+    FUN_008e0b70(at<int>(player, 0x764), 0);  /* Pl0000+0x764: motion controller ? */
+    FUN_008e0ba0(at<int>(player, 0x764), 0);
+    float speed = at<float>(at<char *>(player, 0x40D4), 0x14C);  /* Pl0000+0x40D4: ? (+0x14C) */
+    if (!(speed * speed < at<float>(player, 0xD28))) {           /* Pl0000+0xD28: ? */
+        FUN_00aa9280((int)player, 0xD6);
+        StateMachineNode::qteSafeCheck(context);
+        return;
+    }
+
+    // Stick direction in world space (camera rotation), normalised.
+    FUN_00b8ae90((int)player, (undefined4)dir);
+    FUN_00da0640((int)DAT_01bea1d0, (int)camRot);
+    stick[0] = DAT_01b7b920;
+    stick[1] = 0.0f;
+    stick[2] = DAT_01b7b924;
+    D3DXVec3TransformNormal(dir, stick, camRot);
+    if (dir[0] != 0.0f || dir[1] != 0.0f || dir[2] != 0.0f) {
+        float lengthSq = dir[0] * dir[0] + dir[1] * dir[1] + dir[2] * dir[2];
+        // (the self-comparisons reject NaN components)
+        if (0.0f < lengthSq && dir[0] == dir[0] && dir[1] == dir[1] && dir[2] == dir[2]) {
+            FUN_00ddf460(dir, dir);
+        }
+        else {
+            ((VecNormalizeWarningFn)FUN_00dd5650)(DAT_0163d0ac);
+            dir[0] = 0.0f;
+            dir[1] = 1.0f;
+            dir[2] = 0.0f;
+        }
+    }
+
+    // First pass: probes at +-width sideways / forwards.
+    if ((DAT_01b7b910 & 0x4000) == 0) {
+        width = 0.15f;
+    }
+    else {
+        width = 0.25f;
+    }
+    FUN_00a8b8a0((int)player, sideP, width);
+    FUN_00a8b8a0((int)player, sideN, -width);
+    FUN_00a8b9b0((int)player, frontP, width);
+    FUN_00a8b9b0((int)player, frontN, -width);
+    FUN_00a8bac0((int)player, upP, 0.2f);
+    FUN_00a8bac0((int)player, upN, -0.2f);
+    mask = (unsigned int)*(int *)FUN_009f8b60((int)player) << 0x10 | 0x1A;
+    hitAny = false;
+    hitFlag = 0;
+
+    float *a = FUN_00a925a0((int)player, axis);
+    if (0.5f < a[1] * dir[1] + a[0] * dir[0] + a[2] * dir[2]) {
+        if (castProbe(player, upP, sideP, upN, from, to, 0xFFFFFFFF, mask, &hitFlag, hitPos) != 0) {
+            hitAny = true;
+            snapToHit(player, sideP, width, hitPos);
+        }
+    }
+    a = FUN_00a925a0((int)player, axis);
+    if (0.5f < a[0] * -1.0f * dir[0] + a[1] * -1.0f * dir[1] + a[2] * -1.0f * dir[2]) {
+        if (castProbe(player, upP, sideN, upN, from, to, 0xFFFF0000, mask, &hitFlag, hitPos) != 0) {
+            hitAny = true;
+            snapToHit(player, sideN, width, hitPos);
+        }
+    }
+    a = FUN_00a92640((int)player, axis);
+    if (0.5f < a[1] * dir[1] + dir[0] * a[0] + a[2] * dir[2]) {
+        if (castProbe(player, upP, frontP, upN, from, to, 0xFF00FF00, mask, &hitFlag, hitPos) != 0) {
+            hitAny = true;
+            snapToHit(player, frontP, width, hitPos);
+        }
+    }
+    a = FUN_00a92640((int)player, axis);
+    if (0.5f < a[0] * -1.0f * dir[0] + a[1] * -1.0f * dir[1] + a[2] * -1.0f * dir[2]) {
+        if (castProbe(player, upP, frontN, upN, from, to, 0xFF0000FF, mask, &hitFlag, hitPos) != 0) {
+            snapToHit(player, frontN, width, hitPos);
+            goto finish;
+        }
+    }
+
+    if (!hitAny) {
+        // Second pass: probes at +-0.05 (their hit flag is not consulted afterwards).
+        FUN_00a8b8a0((int)player, sideP, 0.05f);
+        FUN_00a8b8a0((int)player, sideN, -0.05f);
+        FUN_00a8b9b0((int)player, frontP, 0.05f);
+        FUN_00a8b9b0((int)player, frontN, -0.05f);
+        FUN_00a8bac0((int)player, upP, 0.2f);
+        FUN_00a8bac0((int)player, upN, -0.2f);
+        mask = (unsigned int)*(int *)FUN_009f8b60((int)player) << 0x10 | 0x1A;
+        hitFlag2 = 0;
+
+        a = FUN_00a925a0((int)player, axis);
+        if (0.5f < a[1] * dir[1] + a[0] * dir[0] + a[2] * dir[2]) {
+            if (castProbe(player, upP, sideP, upN, from, to, 0xFFFFFFFF, mask, &hitFlag2, hitPos) != 0) {
+                hitAny = true;
+                snapToHit(player, sideP, 0.05f, hitPos);
+            }
+        }
+        a = FUN_00a925a0((int)player, axis);
+        if (0.5f < a[0] * -1.0f * dir[0] + a[1] * -1.0f * dir[1] + a[2] * -1.0f * dir[2]) {
+            if (castProbe(player, upP, sideN, upN, from, to, 0xFFFF0000, mask, &hitFlag2, hitPos) != 0) {
+                hitAny = true;
+                snapToHit(player, sideN, 0.05f, hitPos);
+            }
+        }
+        a = FUN_00a92640((int)player, axis);
+        if (0.5f < a[1] * dir[1] + dir[0] * a[0] + a[2] * dir[2]) {
+            if (castProbe(player, upP, frontP, upN, from, to, 0xFF00FF00, mask, &hitFlag2, hitPos) != 0) {
+                hitAny = true;
+                snapToHit(player, frontP, 0.05f, hitPos);
+            }
+        }
+        a = FUN_00a92640((int)player, axis);
+        if (0.5f < a[0] * -1.0f * dir[0] + a[1] * -1.0f * dir[1] + a[2] * -1.0f * dir[2]) {
+            if (castProbe(player, upP, frontN, upN, from, to, 0xFF0000FF, mask, &hitFlag2, hitPos) != 0) {
+                snapToHit(player, frontN, 0.05f, hitPos);
+                goto finish;
+            }
+        }
+        if (!hitAny) {
+            FUN_00aa9280((int)player, 0xD6);
+            StateMachineNode::qteSafeCheck(context);
+            return;
+        }
+    }
+
+finish:
+    if (hitFlag != 0) {
+        FUN_00aa9280((int)player, (DAT_01b7b910 & 0x4000) == 0 ? 0xD4 : 0xD5);
+    }
+    FUN_00a95fb0((int)player, 0);  // 0.0f
+    StateMachineNode::qteSafeCheck(context);
 }
 
 // 00BAE2B0  NarrowScaffoldIdleStatePl0010::vf20  size=125  [class]
-undefined4 NarrowScaffoldIdleStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-  }
-  return 1;
+undefined4 NarrowScaffoldIdleStatePl0010::vf20(undefined4 *context)
+{
+    using namespace NarrowScaffoldIdleStatePl0010_p1;
+    if (StateMachineNode::vf20(context) == 0) {
+        return 0;
+    }
+    Pl0000 *player = ownerPlayer(context);
+    if (at<int>(at<char *>(player, 0x764), 0x104) != 0) {  /* Pl0000+0x764: motion controller ? */
+        at<int>(at<char *>(player, 0x764), 0x104) = 0;
+    }
+    return 1;
 }
-

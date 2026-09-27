@@ -1,45 +1,57 @@
-// src/managers/situationmanager/SituationManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1A600..00C60B10, 2 functions
-
+// src/managers/situationmanager/SituationManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "SituationManager.h"
 
+namespace SituationManager_p1 {
+
+// SituationManagerImplement fields (this file only sees SituationManager.h)
+inline void *Lock(void *self)    { return (char *)self + 0x8; }            // +0x08 CRITICAL_SECTION
+inline int *&Units(void *self)   { return *(int **)((char *)self + 0x28); } // +0x28 lib::AllocatedArray<Unit *> *
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+}  // namespace SituationManager_p1
+
 // 00C1A600  SituationManager::vf0C  size=31  [class]
-undefined4 * __thiscall SituationManager::vf0C(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor: bit 0 of `flags` frees the object.
+undefined4 *SituationManager::vf0C(byte flags)
+{
+    // vftable = SituationManager::vftable (0x016A3780)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00C60B10  SituationManager::SituationManager  size=118  [class]
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __fastcall SituationManager::SituationManager(undefined4 *param_1)
-
-{
-  int *piVar1;
-  
-  *param_1 = SituationManagerImplement::vftable;
-  if ((param_1[10] == 0) && (piVar1 = _DAT_00000004, _DAT_00000004 != _DAT_00000004 + _DAT_00000008)
-     ) {
-    do {
-      if (*piVar1 != 0) {
-        FUN_00dd4920(*piVar1);
-      }
-      piVar1 = piVar1 + 1;
-    } while (piVar1 != (int *)(*(int *)(param_1[10] + 4) + *(int *)(param_1[10] + 8) * 4));
-  }
-  if ((undefined4 *)param_1[10] != (undefined4 *)0x0) {
-    (*(code *)**(undefined4 **)param_1[10])(1);
-    param_1[10] = 0;
-  }
-  FUN_00dd7270();
-  FUN_00dd7270();
-  *param_1 = vftable;
-  return;
+// ~SituationManagerImplement with ~SituationManager inlined (see SituationManager.h).
+void SituationManager::implementDestructor()
+{
+    using namespace SituationManager_p1;
+    // vftable = SituationManagerImplement::vftable (0x016A70C0)
+    if (Units(this) == 0) {
+        // ? the binary frees the entries only when the array pointer is null, reading the data
+        // pointer and count of the null array (absolute addresses 4 and 8)
+        int *entry = *(int **)4;
+        if (entry != entry + *(int *)8) {
+            do {
+                if (*entry != 0) {
+                    FUN_00dd4920(*entry);
+                }
+                entry++;
+            } while (entry != *(int **)((char *)Units(this) + 0x4) + *(int *)((char *)Units(this) + 0x8));
+        }
+    }
+    if (Units(this) != 0) {
+        vcall<void>(Units(this), 0x0, 1);  // scalar deleting destructor, delete
+        Units(this) = 0;
+    }
+    FUN_00dd7270((undefined4)Lock(this));
+    FUN_00dd7270((undefined4)Lock(this));
+    // vftable = SituationManager::vftable (0x016A3780)
 }
-

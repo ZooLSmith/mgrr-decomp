@@ -1,251 +1,194 @@
-// src/player/pl0010/state/WalkStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B829A0..00BCCC40, 9 functions
-
+// src/player/pl0010/state/WalkStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "WalkStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 / vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e88[];  // WalkStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+namespace WalkStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function whose functions.h prototype does not fit the call site
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function whose functions.h prototype lost arguments
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// ctx when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline char *asContextPl0010(const void *ctx)
+{
+    if (ctx == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(ctx, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (char *)ctx : 0;
+}
+
+// obj when it is a Pl0000 (type record from vftable slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player of a state-machine context (StateMachineContext+0xC: owner; ctx is not null-checked).
+inline Pl0000 *playerOf(const char *ctx)
+{
+    return asPl0000(fld<void *>(ctx, 0xC));
+}
+
+// State ids of the Pl0010 state machine (see StateMachineFactoryPl0010::vf00)
+const int kStateDash     = 10;    // DashStatePl0010
+const int kStateFreeFall = 0xE;   // FreeFallStatePl0010
+const int kStateIdle     = 0x11;  // IdleStatePl0010
+
+}  // namespace WalkStatePl0010_p1
+
 // 00B829A0  WalkStatePl0010::vf08  size=19  [class]
-bool WalkStatePl0010::vf08(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_1);
-  return iVar1 != 0;
+bool WalkStatePl0010::vf08(undefined4 context)
+{
+    return StateMachineNode::vf08(context) != 0;
 }
 
 // 00B829C0  WalkStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall WalkStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base one).
+undefined4 WalkStatePl0010::vf18(undefined4 context)
+{
+    return StateMachineNode::vf18(context);
 }
 
 // 00B829D0  WalkStatePl0010::vf24  size=19  [class]
-bool WalkStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool WalkStatePl0010::vf24(undefined4 context)
+{
+    return StateMachineNode::vf24(context) != 0;
 }
 
 // 00B82A10  WalkStatePl0010::vf00  size=6  [class]
-undefined * WalkStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e88;
+undefined *WalkStatePl0010::vf00()
+{
+    return DAT_01be9e88;
 }
 
 // 00B91330  WalkStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall WalkStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *WalkStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB2550  WalkStatePl0010::SafeCheck  size=169  [class]
-void __thiscall WalkStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar4 = 0;
-    }
-    else {
-      puVar5 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar5);
-      uVar4 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar4 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar5 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar5);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-    }
-    *(undefined4 *)(uVar4 + 0x70) = 0;
-    *(undefined4 *)(uVar2 + 0x5074) = 0;
-    *(undefined4 *)(uVar2 + 0x418c) = *(undefined4 *)(uVar2 + 0x4180);
-    *(undefined4 *)(uVar2 + 0x4188) = *(undefined4 *)(uVar2 + 0x417c);
-    *(undefined4 *)(uVar2 + 0x4190) = *(undefined4 *)(uVar2 + 0x4184);
-    FUN_00aa9280(0x1c);
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// First update: saves the camera angles and starts action 0x1C.
+void WalkStatePl0010::SafeCheck(undefined4 *context)
+{
+    using namespace WalkStatePl0010_p1;
+
+    if (*(int *)((char *)this + 0x20) == 0) {  /* StateMachineNode+0x20: started */
+        char *ctx = asContextPl0010(context);
+        Pl0000 *player = playerOf(ctx);
+        fld<float>(ctx, 0x70) = 0.0f;                              /* StateMachineContextPl0010+0x70: ? */
+        fld<int>(player, 0x5074) = 0;                              /* Pl0000+0x5074: ? */
+        fld<float>(player, 0x418C) = fld<float>(player, 0x4180);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+        fld<float>(player, 0x4188) = fld<float>(player, 0x417C);
+        fld<float>(player, 0x4190) = fld<float>(player, 0x4184);
+        FUN_00aa9280((int)player, 0x1C);
+    }
+    StateMachineNode::SafeCheck(context);
 }
 
 // 00BB2600  WalkStatePl0010::vf14  size=134  [class]
-void WalkStatePl0010::vf14(undefined4 *param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined *puVar3;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar3 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar3);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  if (*(int **)(uVar1 + 0xc) != (int *)0x0) {
-    puVar3 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar1 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar3);
-  }
-  iVar2 = FUN_00a94db0(0x1c);
-  if ((iVar2 != 0) || (iVar2 = FUN_00a94db0(0x1d), iVar2 != 0)) {
-    FUN_00aa9280(0x1e);
-  }
-  StateMachineNode::vf14(param_1);
-  return;
+// Update: after 0x1C or 0x1D, action 0x1E.
+void WalkStatePl0010::vf14(undefined4 *context)
+{
+    using namespace WalkStatePl0010_p1;
+
+    Pl0000 *player = playerOf(asContextPl0010(context));
+    if (FUN_00a94db0((int)player, 0x1C) != 0 || FUN_00a94db0((int)player, 0x1D) != 0) {
+        FUN_00aa9280((int)player, 0x1E);
+    }
+    StateMachineNode::vf14(context);
 }
 
 // 00BB2690  WalkStatePl0010::vf20  size=136  [class]
-undefined4 WalkStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  return 1;
+// Leave: restores the camera angles.
+undefined4 WalkStatePl0010::vf20(undefined4 *context)
+{
+    using namespace WalkStatePl0010_p1;
+
+    if (StateMachineNode::vf20(context) == 0) {
+        return 0;
+    }
+    Pl0000 *player = playerOf(asContextPl0010(context));
+    fld<float>(player, 0x4180) = fld<float>(player, 0x418C);
+    fld<float>(player, 0x417C) = fld<float>(player, 0x4188);
+    fld<float>(player, 0x4184) = fld<float>(player, 0x4190);
+    return 1;
 }
 
 // 00BCCC40  WalkStatePl0010::qteSafeCheck  size=382  [class]
-void __thiscall WalkStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  bool bVar5;
-  undefined *puVar6;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  *(undefined4 *)(uVar3 + 0x4180) = 0x3e99999a;
-  *(undefined4 *)(uVar3 + 0x417c) = 0x3f060a92;
-  *(undefined4 *)(uVar3 + 0x4184) = 0;
-  FUN_00b8af00();
-  iVar4 = FUN_008e2740();
-  if ((iVar4 == 0) &&
-     ((*(int *)(uVar3 + 0x41e0) == 0 ||
-      (*(float *)(*(int *)(uVar3 + 0x40d4) + 0x160) <= *(float *)(uVar3 + 0x41e4))))) {
-    FUN_00d82510(0xe,100);
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c);
-  if (fVar1 * fVar1 < *(float *)(uVar3 + 0xd28)) {
-    bVar5 = (*(uint *)(uVar3 + 0xe48) & *(uint *)(uVar3 + 0xcf8)) != 0;
-  }
-  else {
-    bVar5 = false;
-  }
-  iVar4 = -1;
-  if (bVar5) {
-    if (bVar5) {
-      iVar4 = 10;
-    }
-  }
-  else {
-    iVar4 = 0x11;
-  }
-  if (iVar4 != *(int *)(param_1 + 4)) {
-    FUN_00d82510(iVar4,0x19);
-  }
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Sets the walking camera angles, falls when the ground is lost, and switches to the dash state
+// (slow stick with the walk input bits) or the idle state.
+void WalkStatePl0010::qteSafeCheck(undefined4 *context)
+{
+    using namespace WalkStatePl0010_p1;
 
+    Pl0000 *player = playerOf(asContextPl0010(context));
+    FUN_008e0b70(fld<int>(player, 0x764), 0);  /* Pl0000+0x764: motion controller ? */
+    FUN_008e0ba0(fld<int>(player, 0x764), 0);
+    fld<float>(player, 0x4180) = 0.3f;         /* Pl0000+0x417C..0x4184: camera angles */
+    fld<float>(player, 0x417C) = 0.5235988f;   // 30 degrees in radians (0x3F060A92)
+    fld<float>(player, 0x4184) = 0.0f;
+    FUN_00b8af00((int)player);
+    if (!FUN_008e2740(fld<int>(player, 0x764)) &&
+        (fld<int>(player, 0x41E0) == 0 ||  /* Pl0000+0x41E0 / +0x41E4: ground ? */
+         !(fld<float>(fld<char *>(player, 0x40D4), 0x160) > fld<float>(player, 0x41E4)))) {  /* Pl0000+0x40D4: parameters ? */
+        FUN_00d82510((int)this, kStateFreeFall, 100);
+    }
+
+    player = playerOf(asContextPl0010(context));
+    double speed = fld<float>(fld<char *>(player, 0x40D4), 0x14C);
+    bool walkInput;
+    // (unordered counts as "slower")
+    if (!(speed * speed >= fld<float>(player, 0xD28))) {  /* Pl0000+0xD28: ? squared speed threshold */
+        walkInput = (fld<unsigned int>(player, 0xE48) & fld<unsigned int>(player, 0xCF8)) != 0;  /* Pl0000+0xE48 / +0xCF8: input bits ? */
+    }
+    else {
+        walkInput = false;
+    }
+    int next = walkInput ? kStateDash : kStateIdle;
+    if (next != *(int *)((char *)this + 4)) {  /* StateMachineNode+4: state id */
+        FUN_00d82510((int)this, next, 0x19);
+    }
+    StateMachineNode::qteSafeCheck(context);
+}

@@ -1,51 +1,41 @@
-// src/managers/triggermanager/cActFlagOff.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C8A900..00C922F0, 6 functions
-
+// src/managers/triggermanager/cActFlagOff.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActFlagOff.h"
+
+extern undefined DAT_01dbe538;                 // cActFlagOff static descriptor returned by vf00
 
 // 00C8A900  Trigger::cActFlagOff::vf00  size=6  [class]
-undefined * Trigger::cActFlagOff::vf00(void)
-
-{
-  return &DAT_01dbe538;
+void *Trigger::cActFlagOff::vf00()
+{
+    return &DAT_01dbe538;
 }
 
 // 00C8A910  Trigger::cActFlagOff::vf08  size=1  [class]
-void Trigger::cActFlagOff::vf08(void)
-
-{
-  return;
+void Trigger::cActFlagOff::vf08()
+{
 }
 
 // 00C8A920  Trigger::cActFlagOff::vf0C  size=1  [class]
-void Trigger::cActFlagOff::vf0C(void)
-
-{
-  return;
+void Trigger::cActFlagOff::vf0C()
+{
 }
 
 // 00C8A930  Trigger::cActFlagOff::vf10  size=1  [class]
-void Trigger::cActFlagOff::vf10(void)
-
-{
-  return;
+void Trigger::cActFlagOff::vf10()
+{
 }
 
 // 00C8A940  Trigger::cActFlagOff::vf14  size=1  [class]
-void Trigger::cActFlagOff::vf14(void)
-
-{
-  return;
+void Trigger::cActFlagOff::vf14()
+{
 }
 
 // 00C922F0  Trigger::cActFlagOff::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActFlagOff::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActFlagOff *Trigger::cActFlagOff::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

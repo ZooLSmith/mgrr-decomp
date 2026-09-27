@@ -1,397 +1,314 @@
-// src/player/pl0010/state/OvercomeMissileStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82190..00BE03C0, 10 functions
-
+// src/player/pl0010/state/OvercomeMissileStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "OvercomeMissileStatePl0010.h"
 
+// type records returned by vf00 / vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e58[];  // OvercomeMissileStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+// debug-print string (Shift-JIS)
+extern const char DAT_0163d0ac[];  // "[Hw::VecNormalize] ..." zero-vector warning
+
+// CRT (the compiler emitted fabs inline)
+extern "C" double __cdecl fabs(double x);
+
+namespace OvercomeMissileStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &at(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// FUN_00b8b610 (declared bool) returns an int that is compared against 0x16 here
+typedef int (__fastcall *IntFastcallFn)(int self);
+
+// obj when its type record (from the vftable slot at `typeSlot`) derives from `type`, else 0
+inline char *downcast(const void *obj, unsigned int typeSlot, const void *type)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, typeSlot), type);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+inline char *asContext(const void *obj) { return downcast(obj, 0x0, DAT_01be9ef4); }  // StateMachineContextPl0010
+inline char *asPl0000(const void *obj)  { return downcast(obj, 0x4, DAT_01be9db8); }  // Pl0000
+
+// The player of a state-machine context (StateMachineContext+0xC: owner; no null check on ctx).
+inline char *playerOf(const char *ctx)
+{
+    return asPl0000(at<void *>(ctx, 0xC));
+}
+
+// The entity referenced by an entity handle (FUN_00a81330 -> entry, FUN_00a7c8a0 -> object).
+inline char *handleTarget(void *handle)
+{
+    return (char *)FUN_00a7c8a0(FUN_00a81330((uint *)handle));
+}
+
+// Player motion helper object at Pl0000+0x764: +0x104 mode, +0xD0 -> float at +4
+inline void setMotionMode1(char *player)
+{
+    char *motion = at<char *>(player, 0x764);  /* Pl0000+0x764: motion helper */
+    if (at<int>(motion, 0x104) != 1) {
+        at<int>(motion, 0x104) = 1;
+        at<float>(at<char *>(motion, 0xD0), 4) = 0.0f;
+    }
+}
+
+}  // namespace OvercomeMissileStatePl0010_p1
+
 // 00B82190  OvercomeMissileStatePl0010::vf08  size=49  [class]
-undefined4 __thiscall OvercomeMissileStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x40) = 0;
-  *(undefined4 *)(param_1 + 0x48) = 0;
-  *(undefined4 *)(param_1 + 0x50) = 0;
-  *(undefined4 *)(param_1 + 0x54) = 0;
-  *(undefined4 *)(param_1 + 0x74) = 0;
-  return 1;
+bool OvercomeMissileStatePl0010::vf08(undefined4 param_1)
+{
+    if (StateMachineNode::vf08(param_1) == 0) {
+        return 0;
+    }
+    finished() = 0;
+    field48() = 0.0f;
+    field50() = 0;
+    field54() = 0;
+    landed() = 0;
+    return 1;
 }
 
 // 00B821D0  OvercomeMissileStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall OvercomeMissileStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+undefined4 OvercomeMissileStatePl0010::vf18(undefined4 param_2)
+{
+    return StateMachineNode::vf18(param_2);  // jmp 0x00D822E0
 }
 
 // 00B821E0  OvercomeMissileStatePl0010::vf24  size=19  [class]
-bool OvercomeMissileStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool OvercomeMissileStatePl0010::vf24(undefined4 param_1)
+{
+    return StateMachineNode::vf24(param_1) != 0;
 }
 
 // 00B82200  OvercomeMissileStatePl0010::OvercomeMissileStatePl0010  size=33  [class]
-undefined4 * __thiscall
-OvercomeMissileStatePl0010::OvercomeMissileStatePl0010(undefined4 *param_1,undefined4 param_2)
-
-{
-  StateMachineNode::StateMachineNode(param_2);
-  *param_1 = vftable;
-  FUN_00a7c930();
-  return param_1;
+OvercomeMissileStatePl0010::OvercomeMissileStatePl0010(undefined4 param_2)
+    : StateMachineNode(param_2)
+{
+    // vftable = OvercomeMissileStatePl0010::vftable (0x016A19A4)
+    FUN_00a7c930((undefined4 *)missileHandle());
 }
 
 // 00B82230  OvercomeMissileStatePl0010::vf00  size=6  [class]
-undefined * OvercomeMissileStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e58;
+undefined *OvercomeMissileStatePl0010::vf00()
+{
+    return (undefined *)DAT_01be9e58;  // type record
 }
 
 // 00B911B0  OvercomeMissileStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall OvercomeMissileStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *OvercomeMissileStatePl0010::vf04(byte param_2)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((param_2 & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB0460  OvercomeMissileStatePl0010::SafeCheck  size=708  [class]
-void __thiscall OvercomeMissileStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  float *pfVar4;
-  uint uVar5;
-  uint uVar6;
-  undefined *puVar7;
-  undefined4 uVar8;
-  undefined1 local_48 [4];
-  int *local_44;
-  float local_40;
-  float local_3c;
-  float local_38;
-  float local_34;
-  float local_30;
-  float local_2c;
-  float local_28;
-  float local_24;
-  undefined1 local_20 [28];
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar5 = 0;
-    }
-    else {
-      puVar7 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar7);
-      uVar5 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    local_44 = *(int **)(uVar5 + 0xc);
-    if (local_44 == (int *)0x0) {
-      uVar6 = 0;
-    }
-    else {
-      puVar7 = &DAT_01be9db8;
-      (**(code **)(*local_44 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar7);
-      uVar6 = -(uint)(iVar3 != 0) & (uint)local_44;
-    }
-    iVar3 = *(int *)(uVar6 + 0x764);
-    if (*(int *)(iVar3 + 0x104) != 1) {
-      *(undefined4 *)(iVar3 + 0x104) = 1;
-      *(undefined4 *)(*(int *)(iVar3 + 0xd0) + 4) = 0;
-    }
-    *(undefined4 *)(uVar6 + 0x418c) = *(undefined4 *)(uVar6 + 0x4180);
-    *(undefined4 *)(uVar6 + 0x4188) = *(undefined4 *)(uVar6 + 0x417c);
-    *(undefined4 *)(uVar6 + 0x4190) = *(undefined4 *)(uVar6 + 0x4184);
-    FUN_00a7c940(*(int *)(*(int *)(uVar5 + 0xc0) + 4) + 0xb50);
-    local_44 = (int *)(*(float *)(*(int *)(uVar6 + 0x764) + 0xfc) + 3.0);
-    FUN_00a81330();
-    iVar3 = FUN_00a7c8a0();
-    fVar1 = *(float *)(iVar3 + 0x44);
-    uVar8 = *(undefined4 *)(iVar3 + 0x48);
-    fVar2 = *(float *)(iVar3 + 0x4c);
-    *(undefined4 *)(param_1 + 0x60) = *(undefined4 *)(iVar3 + 0x40);
-    *(float *)(param_1 + 100) = fVar1 + 0.5;
-    *(undefined4 *)(param_1 + 0x68) = uVar8;
-    *(float *)(param_1 + 0x6c) = fVar2 + local_24;
-    local_40 = *(float *)(param_1 + 0x60) - *(float *)(uVar6 + 0x40);
-    local_3c = *(float *)(param_1 + 100) - *(float *)(uVar6 + 0x44);
-    local_38 = *(float *)(param_1 + 0x68) - *(float *)(uVar6 + 0x48);
-    local_34 = *(float *)(param_1 + 0x6c) - *(float *)(uVar6 + 0x4c);
-    pfVar4 = (float *)FUN_00a92640(local_20);
-    if (pfVar4[2] * local_38 + *pfVar4 * local_40 + pfVar4[1] * local_3c <= 0.0) {
-      uVar8 = 0xb7;
-    }
-    else {
-      uVar8 = 0xb8;
-    }
-    FUN_00aa3f60(uVar8);
-    local_30 = local_40;
-    local_2c = local_3c;
-    local_28 = local_38;
-    local_24 = local_34;
-    if (((local_40 != 0.0) || (local_3c != 0.0)) || (local_38 != 0.0)) {
-      fVar1 = local_38 * local_38 + local_40 * local_40 + local_3c * local_3c;
-      if (fVar1 < 0.0 == (fVar1 == 0.0)) {
-        FUN_00ddf460(&local_30,&local_30);
-      }
-      else {
-        FUN_00dd5650(&DAT_0163d0ac);
-        local_30 = 0.0;
-        local_2c = 1.0;
-        local_28 = 0.0;
-      }
-    }
-    FUN_00a95fb0(0);
-    FUN_00d83250(param_1 + 0x30,param_1 + 0x34,0x40c00000,local_44,
-                 ABS(*(float *)(*(int *)(uVar6 + 0x764) + 0xf4)));
-    FUN_00a7c960(local_48);
-    FUN_00a937e0();
-    *(undefined4 *)(param_1 + 0x38) = 0;
-    *(undefined4 *)(param_1 + 0x3c) = 0;
-    *(undefined4 *)(param_1 + 0x44) = *(undefined4 *)(uVar6 + 0x44);
-    *(undefined4 *)(param_1 + 0x4c) = 0;
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// Entry: picks up the missile, plays motion 0xB7 / 0xB8 depending on its side and prepares the jump.
+void OvercomeMissileStatePl0010::SafeCheck(undefined4 *param_2)
+{
+    using namespace OvercomeMissileStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        char *context = asContext(param_2);
+        char *player = playerOf(context);
+        setMotionMode1(player);
+        at<float>(player, 0x418C) = at<float>(player, 0x4180);  /* Pl0000+0x418C = +0x4180 (saved) */
+        at<float>(player, 0x4188) = at<float>(player, 0x417C);  /* Pl0000+0x4188 = +0x417C */
+        at<float>(player, 0x4190) = at<float>(player, 0x4184);  /* Pl0000+0x4190 = +0x4184 */
+
+        int handle;  // temporary entity handle
+        // StateMachineContextPl0010+0xC0 -> +4: the missile (+0xB50 inside it)
+        thiscall<void>(FUN_00a7c940, &handle, at<int>(at<char *>(context, 0xC0), 4) + 0xB50);
+        float jumpHeight = at<float>(at<char *>(player, 0x764), 0xFC) + 3.0f;  /* Pl0000+0x764: motion helper */
+        char *missile = handleTarget(&handle);
+
+        float direction[4];
+        targetPos()[0] = at<float>(missile, 0x40);
+        targetPos()[1] = at<float>(missile, 0x44) + 0.5f;
+        targetPos()[2] = at<float>(missile, 0x48);
+        targetPos()[3] = at<float>(missile, 0x4C) + direction[3];  // ? reads the not yet written stack slot
+
+        float delta[4];
+        delta[0] = targetPos()[0] - at<float>(player, 0x40);  /* Pl0000+0x40: position */
+        delta[1] = targetPos()[1] - at<float>(player, 0x44);
+        delta[2] = targetPos()[2] - at<float>(player, 0x48);
+        delta[3] = targetPos()[3] - at<float>(player, 0x4C);
+        float axisBuffer[4];
+        float *axis = thiscall<float *>(FUN_00a92640, player, axisBuffer);
+        float side = axis[1] * delta[1] + axis[0] * delta[0] + axis[2] * delta[2];
+        thiscall<int>(FUN_00aa3f60, player, (0.0f < side) ? 0xB8 : 0xB7);
+
+        direction[0] = delta[0];
+        direction[1] = delta[1];
+        direction[2] = delta[2];
+        direction[3] = delta[3];
+        if (direction[0] != 0.0f || direction[1] != 0.0f || direction[2] != 0.0f) {
+            float lengthSq = direction[1] * direction[1] + direction[0] * direction[0] + direction[2] * direction[2];
+            // inlined Hw::VecNormalize (the NaN self-comparisons are in the machine code)
+            if (!(lengthSq <= 0.0f) && direction[0] == direction[0] && direction[1] == direction[1] &&
+                direction[2] == direction[2]) {
+                FUN_00ddf460(direction, direction);
+            }
+            else {
+                cdeclcall<void>(FUN_00dd5650, DAT_0163d0ac);
+                direction[0] = 0.0f;
+                direction[1] = 1.0f;
+                direction[2] = 0.0f;
+            }
+        }
+        thiscall<void>(FUN_00a95fb0, player, 0.0f);
+        FUN_00d83250(&curve30(), &curve34(), 6.0f, jumpHeight,
+                     (float)fabs(at<float>(at<char *>(player, 0x764), 0xF4)));
+        thiscall<void>(FUN_00a7c960, missileHandle(), &handle);
+        FUN_00a937e0((int)player);
+        field38() = 0.0f;
+        field3C() = 0.0f;
+        startY() = at<float>(player, 0x44);
+        field4C() = 0.0f;
+    }
+    StateMachineNode::SafeCheck(param_2);
 }
 
 // 00BB0730  OvercomeMissileStatePl0010::vf20  size=179  [class]
-undefined4 __thiscall OvercomeMissileStatePl0010::vf20(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_2);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-  }
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  if (*(int *)(param_1 + 0x24) != 0x20) {
-    FUN_00a93820();
-  }
-  return 1;
+undefined4 OvercomeMissileStatePl0010::vf20(undefined4 *param_1)
+{
+    using namespace OvercomeMissileStatePl0010_p1;
+    if (StateMachineNode::vf20(param_1) == 0) {
+        return 0;
+    }
+    char *player = playerOf(asContext(param_1));
+    if (at<int>(at<char *>(player, 0x764), 0x104) != 0) {  /* Pl0000+0x764: motion helper */
+        at<int>(at<char *>(player, 0x764), 0x104) = 0;
+    }
+    at<float>(player, 0x4180) = at<float>(player, 0x418C);  /* restore values saved by SafeCheck */
+    at<float>(player, 0x417C) = at<float>(player, 0x4188);
+    at<float>(player, 0x4184) = at<float>(player, 0x4190);
+    if (at<int>(this, 0x24) != 0x20) {  /* StateMachineNode+0x24: next state id? */
+        FUN_00a93820((int)player);
+    }
+    return 1;
 }
 
 // 00BCC260  OvercomeMissileStatePl0010::vf14  size=309  [class]
-void __thiscall OvercomeMissileStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  iVar2 = FUN_00a94db0(0xb7);
-  if (iVar2 == 0) {
-    iVar2 = FUN_00a94db0(0xb8);
-    if (iVar2 != 0) goto LAB_00bcc2dd;
-  }
-  else {
-LAB_00bcc2dd:
-    *(undefined4 *)(param_1 + 0x74) = 1;
-  }
-  if (*(int *)(param_1 + 0x40) != 0) {
-    *(undefined4 *)(uVar4 + 0x30) = 1;
-    if ((*(int *)(uVar3 + 0x41e0) == 0) || (0.36 < *(float *)(uVar3 + 0x41e4))) {
-      iVar2 = FUN_008e2740();
-      if (iVar2 == 0) goto LAB_00bcc33d;
-    }
-    FUN_00d82510(0x13,100);
-    iVar2 = FUN_00b8b610();
-    if (iVar2 == 0x16) {
-      FUN_00d82510(0x20,0x96);
-    }
-  }
-LAB_00bcc33d:
-  if (*(int *)(param_1 + 0x74) != 0) {
-    iVar2 = FUN_00bb90c0(param_2,param_1);
-    if (iVar2 != 0) {
-      FUN_008e0c00(uVar3 + 0x560);
-      iVar2 = FUN_00b8b610();
-      if (iVar2 == 0x16) {
-        FUN_00d82510(0x20,0x96);
-      }
-    }
-  }
-  StateMachineNode::vf14(param_2);
-  return;
+void OvercomeMissileStatePl0010::vf14(undefined4 *param_2)
+{
+    using namespace OvercomeMissileStatePl0010_p1;
+    char *context = asContext(param_2);
+    char *player = playerOf(context);
+    if (thiscall<int>(FUN_00a94db0, player, 0xB7) != 0 || thiscall<int>(FUN_00a94db0, player, 0xB8) != 0) {
+        landed() = 1;
+    }
+    if (finished() != 0) {
+        at<int>(context, 0x30) = 1;  /* StateMachineContextPl0010+0x30: ? */
+        if ((at<int>(player, 0x41E0) != 0 && at<float>(player, 0x41E4) <= 0.36f) ||  /* Pl0000+0x41E0 / +0x41E4 */
+            FUN_008e2740(at<int>(player, 0x764)) != 0) {
+            thiscall<void>(FUN_00d82510, this, 0x13, 100);
+            if (((IntFastcallFn)FUN_00b8b610)((int)player) == 0x16) {
+                thiscall<void>(FUN_00d82510, this, 0x20, 0x96);
+            }
+        }
+    }
+    if (landed() != 0) {
+        if (cdeclcall<int>(FUN_00bb90c0, param_2, this) != 0) {
+            thiscall<void>(FUN_008e0c00, at<void *>(player, 0x764), player + 0x560);  /* Pl0000+0x560 */
+            if (((IntFastcallFn)FUN_00b8b610)((int)player) == 0x16) {
+                thiscall<void>(FUN_00d82510, this, 0x20, 0x96);
+            }
+        }
+    }
+    StateMachineNode::vf14(param_2);
 }
 
 // 00BE03C0  OvercomeMissileStatePl0010::qteSafeCheck  size=673  [class]
-void __thiscall OvercomeMissileStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
-  float10 fVar5;
-  float10 fVar6;
-  undefined *puVar7;
-  float local_40;
-  float local_3c;
-  float local_38;
-  float local_34;
-  float local_30;
-  float local_2c;
-  float local_28;
-  float local_24;
-  float local_20;
-  float local_1c;
-  float local_18;
-  float local_14;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar7);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar4 = *(int **)(uVar2 + 0xc);
-  if (piVar4 == (int *)0x0) {
-    piVar4 = (int *)0x0;
-  }
-  else {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*piVar4 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar7);
-    piVar4 = (int *)(-(uint)(iVar3 != 0) & (uint)piVar4);
-  }
-  fVar5 = (float10)FUN_00a8ed10(param_1 + 0x60,piVar4 + 0x10);
-  FUN_00a8e960((float)fVar5);
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  iVar3 = FUN_00a81330();
-  if (iVar3 != 0) {
-    FUN_00a81330();
-    FUN_00a7c8a0();
-    iVar3 = FUN_00a8cab0();
-    if (iVar3 < 3) goto LAB_00be047d;
-  }
-  *(undefined4 *)(param_1 + 0x40) = 1;
-LAB_00be047d:
-  iVar3 = FUN_00a81330();
-  if (iVar3 == 0) {
-    *(undefined4 *)(param_1 + 0x74) = 1;
-  }
-  else {
-    FUN_00a81330();
-    iVar3 = FUN_00a7c8a0();
-    local_40 = *(float *)(iVar3 + 0x40) - (float)piVar4[0x10];
-    local_3c = (*(float *)(iVar3 + 0x44) + 0.5) - (float)piVar4[0x11];
-    local_38 = *(float *)(iVar3 + 0x48) - (float)piVar4[0x12];
-    local_34 = (*(float *)(iVar3 + 0x4c) + local_14) - (float)piVar4[0x13];
-    local_30 = local_40;
-    local_2c = local_3c;
-    local_28 = local_38;
-    local_24 = local_34;
-    if (((local_40 != 0.0) || (local_3c != 0.0)) || (local_38 != 0.0)) {
-      fVar1 = local_38 * local_38 + local_40 * local_40 + local_3c * local_3c;
-      if (fVar1 < 0.0 == (fVar1 == 0.0)) {
-        FUN_00ddf460(&local_40,&local_40);
-      }
-      else {
-        FUN_00dd5650(&DAT_0163d0ac);
-        local_40 = 0.0;
-        local_3c = 1.0;
-        local_38 = 0.0;
-      }
-    }
-    fVar5 = (float10)FUN_00a95680(0);
-    fVar6 = (float10)FUN_00a958c0(0);
-    if ((float10)0 < (float10)(float)fVar5 - fVar6) {
-      fVar5 = ((float10)(float)fVar5 - fVar6) * (float10)60.0;
-      local_20 = (float)((float10)local_30 / fVar5);
-      local_1c = (float)((float10)local_2c / fVar5);
-      local_18 = (float)((float10)local_28 / fVar5);
-      local_14 = (float)((float10)local_24 / fVar5);
-      (**(code **)(*piVar4 + 0x70))(&local_20);
-    }
-    iVar3 = FUN_008e0ce0(&local_20);
-    if (*(float *)(iVar3 + 4) < 0.0) {
-      *(undefined4 *)(param_1 + 0x40) = 1;
-    }
-  }
-  FUN_00bd3730(param_2,param_1,0xd,0xc);
-  FUN_00bd37f0(param_2,param_1,0xd);
-  FUN_00bd3910(param_2,param_1,0xb,10);
-  FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
+// Steers the player towards the missile until the motion ends.
+void OvercomeMissileStatePl0010::qteSafeCheck(undefined4 *param_2)
+{
+    using namespace OvercomeMissileStatePl0010_p1;
+    char *player = playerOf(asContext(param_2));
+    float yaw = (float)thiscall<float10>(FUN_00a8ed10, player, targetPos(), (float *)(player + 0x40));  /* Pl0000+0x40: position */
+    thiscall<void>(FUN_00a8e960, player, yaw);
+    thiscall<void>(FUN_008e0b70, at<void *>(player, 0x764), 0);  /* Pl0000+0x764: motion helper */
+    thiscall<void>(FUN_008e0ba0, at<void *>(player, 0x764), 0);
+    if (FUN_00a81330((uint *)missileHandle()) == 0 ||
+        (int)FUN_00a8cab0((int)handleTarget(missileHandle())) >= 3) {
+        finished() = 1;
+    }
+    if (FUN_00a81330((uint *)missileHandle()) == 0) {
+        landed() = 1;
+    }
+    else {
+        char *missile = handleTarget(missileHandle());
+        float move[4];
+        float delta[4];      // missile (+0.5 on y) - player position
+        float direction[4];  // normalised copy (the result is not used afterwards)
+        delta[0] = at<float>(missile, 0x40) - at<float>(player, 0x40);
+        delta[1] = (at<float>(missile, 0x44) + 0.5f) - at<float>(player, 0x44);
+        delta[2] = at<float>(missile, 0x48) - at<float>(player, 0x48);
+        delta[3] = (at<float>(missile, 0x4C) + move[3]) - at<float>(player, 0x4C);  // ? reads the not yet written stack slot
+        direction[0] = delta[0];
+        direction[1] = delta[1];
+        direction[2] = delta[2];
+        direction[3] = delta[3];
+        if (direction[0] != 0.0f || direction[1] != 0.0f || direction[2] != 0.0f) {
+            float lengthSq = direction[1] * direction[1] + direction[0] * direction[0] + direction[2] * direction[2];
+            // inlined Hw::VecNormalize (the NaN self-comparisons are in the machine code)
+            if (!(lengthSq <= 0.0f) && direction[0] == direction[0] && direction[1] == direction[1] &&
+                direction[2] == direction[2]) {
+                FUN_00ddf460(direction, direction);
+            }
+            else {
+                cdeclcall<void>(FUN_00dd5650, DAT_0163d0ac);
+                direction[0] = 0.0f;
+                direction[1] = 1.0f;
+                direction[2] = 0.0f;
+            }
+        }
+        float endFrame = (float)thiscall<float10>(FUN_00a95680, player, 0);
+        double remaining = (double)endFrame - (double)thiscall<float10>(FUN_00a958c0, player, 0);
+        if (0.0 < remaining) {
+            double frames = remaining * 60.0f;
+            move[0] = (float)(delta[0] / frames);
+            move[1] = (float)(delta[1] / frames);
+            move[2] = (float)(delta[2] / frames);
+            move[3] = (float)(delta[3] / frames);
+            vcall<void>(player, 0x70, move);
+        }
+        float *result = thiscall<float *>(FUN_008e0ce0, at<void *>(player, 0x764), move);
+        if (result[1] < 0.0f) {
+            finished() = 1;
+        }
+    }
+    FUN_00bd3730(param_2, (undefined4)this, 0xD, 0xC);
+    FUN_00bd37f0(param_2, (undefined4)this, 0xD);
+    FUN_00bd3910(param_2, (undefined4)this, 0xB, 10);
+    FUN_00bd39d0(param_2, (undefined4)this, 10);
+    StateMachineNode::qteSafeCheck(param_2);
 }
-

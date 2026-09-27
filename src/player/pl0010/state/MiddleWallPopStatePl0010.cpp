@@ -1,255 +1,218 @@
-// src/player/pl0010/state/MiddleWallPopStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81AB0..00BDF960, 9 functions
-
+// src/player/pl0010/state/MiddleWallPopStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "MiddleWallPopStatePl0010.h"
 
+// type records returned by vf00 / cObj::vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e38[];  // MiddleWallPopStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+namespace MiddleWallPopStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &at(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function with ECX = self (used where functions.h has the wrong prototype)
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __fastcall call returning the full EAX (functions.h types these as bool)
+template <class F> inline int fastcallInt(F fn, const void *self)
+{
+    typedef int (__fastcall *Fn)(const void *);
+    return ((Fn)fn)(self);
+}
+
+// obj when its type record (from the vftable slot at `typeSlot`) derives from `type`, else 0
+inline char *downcast(const void *obj, unsigned int typeSlot, const void *type)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, typeSlot), type);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+inline char *asContext(const void *obj) { return downcast(obj, 0x0, DAT_01be9ef4); }  // StateMachineContextPl0010
+inline char *asPl0000(const void *obj)  { return downcast(obj, 0x4, DAT_01be9db8); }  // Pl0000
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline char *playerOf(const char *context)
+{
+    return asPl0000(at<void *>(context, 0xC));
+}
+
+// StateMachineContextPl0010+0xC0 -> +4: player parameter block
+inline char *paramsOf(const char *context)
+{
+    return at<char *>(at<char *>(context, 0xC0), 4);
+}
+
+// Pl0000+0x764: motion helper object (+0x104 mode, +0xD0 -> float at +4)
+inline char *motionHelper(const char *player)
+{
+    return at<char *>(player, 0x764);
+}
+
+inline void setMotionMode1(char *player)
+{
+    char *helper = motionHelper(player);
+    if (at<int>(helper, 0x104) != 1) {
+        at<int>(helper, 0x104) = 1;
+        at<float>(at<char *>(helper, 0xD0), 4) = 0.0f;
+    }
+}
+
+inline void clearMotionMode(char *player)
+{
+    if (at<int>(motionHelper(player), 0x104) != 0) {
+        at<int>(motionHelper(player), 0x104) = 0;
+    }
+}
+
+// True unless (Pl0000+0x41E0 is clear or +0x41E4 > 0.36) and the motion helper is idle
+// (FUN_008e2740); the raw nests these tests the same way.
+inline bool nearGroundOrBusy(char *player)
+{
+    return (at<int>(player, 0x41E0) != 0 && !(0.36f < at<float>(player, 0x41E4))) ||
+           fastcallInt(FUN_008e2740, motionHelper(player)) != 0;
+}
+
+// Animation unit of the player (FUN_00a92f90): sets its speed vector (+0xE4/+0xE8/+0xEC).
+inline void setAnimSpeed(char *player, float speedY)
+{
+    int unit = FUN_00a92f90((int)player);
+    FUN_00e26e90(unit);
+    at<float>((void *)unit, 0xE4) = 1.0f;
+    at<float>((void *)unit, 0xE8) = speedY;
+    at<float>((void *)unit, 0xEC) = 1.0f;
+}
+
+}  // namespace MiddleWallPopStatePl0010_p1
+
 // 00B81AB0  MiddleWallPopStatePl0010::vf08  size=19  [class]
-bool MiddleWallPopStatePl0010::vf08(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_1);
-  return iVar1 != 0;
+bool MiddleWallPopStatePl0010::vf08(undefined4 contextArg)
+{
+    return StateMachineNode::vf08(contextArg) != 0;
 }
 
 // 00B81AD0  MiddleWallPopStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall MiddleWallPopStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base's).
+undefined4 MiddleWallPopStatePl0010::vf18(undefined4 contextArg)
+{
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00B81AE0  MiddleWallPopStatePl0010::vf24  size=19  [class]
-bool MiddleWallPopStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool MiddleWallPopStatePl0010::vf24(undefined4 contextArg)
+{
+    return StateMachineNode::vf24(contextArg) != 0;
 }
 
 // 00B81B20  MiddleWallPopStatePl0010::vf00  size=6  [class]
-undefined * MiddleWallPopStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e38;
+undefined *MiddleWallPopStatePl0010::vf00()
+{
+    return (undefined *)DAT_01be9e38;  // type record
 }
 
 // 00B910A0  MiddleWallPopStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall MiddleWallPopStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *MiddleWallPopStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00BACBB0  MiddleWallPopStatePl0010::SafeCheck  size=269  [class]
-void __thiscall MiddleWallPopStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  int *piVar2;
-  float fVar3;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
-  undefined *puVar7;
-  undefined4 local_20;
-  float local_1c;
-  float local_18;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar6 = 0;
-    }
-    else {
-      puVar7 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar4 = FUN_00dd6d80(puVar7);
-      uVar6 = -(uint)(iVar4 != 0) & (uint)param_2;
-    }
-    piVar2 = *(int **)(uVar6 + 0xc);
-    if (piVar2 == (int *)0x0) {
-      uVar5 = 0;
-    }
-    else {
-      puVar7 = &DAT_01be9db8;
-      (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-      iVar4 = FUN_00dd6d80(puVar7);
-      uVar5 = -(uint)(iVar4 != 0) & (uint)piVar2;
-    }
-    iVar4 = *(int *)(*(int *)(uVar6 + 0xc0) + 4);
-    fVar3 = *(float *)(iVar4 + 0x31c) / *(float *)(*(int *)(uVar5 + 0x40d4) + 0xd4);
-    fVar1 = *(float *)(iVar4 + 0x318);
-    *(float *)(param_1 + 0x30) = fVar3;
-    FUN_00aa3f60(0xa9);
-    local_20 = 0x3f800000;
-    local_1c = fVar3;
-    local_18 = 1.0 - (fVar1 + fVar1);
-    FUN_00a95ff0(&local_20);
-    iVar4 = *(int *)(uVar5 + 0x764);
-    if (*(int *)(iVar4 + 0x104) != 1) {
-      *(undefined4 *)(iVar4 + 0x104) = 1;
-      *(undefined4 *)(*(int *)(iVar4 + 0xd0) + 4) = 0;
-    }
-    *(undefined4 *)(uVar5 + 0x4170) = 1;
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// Entry: starts the wall-pop motion 0xA9 with its speed from the player parameters.
+void MiddleWallPopStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    using namespace MiddleWallPopStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        char *context = asContext(contextArg);
+        char *player = playerOf(context);
+        char *params = paramsOf(context);
+        float rate = at<float>(params, 0x31C) / at<float>(at<char *>(player, 0x40D4), 0xD4);  /* Pl0000+0x40D4 -> +0xD4 */
+        float lift = at<float>(params, 0x318);
+        climbRate() = rate;
+        FUN_00aa3f60((int)player, 0xA9);
+        float scale[3];
+        scale[0] = 1.0f;
+        scale[1] = rate;
+        scale[2] = 1.0f - (lift + lift);
+        FUN_00a95ff0((int)player, (undefined4 *)scale);
+        setMotionMode1(player);
+        at<int>(player, 0x4170) = 1;  /* Pl0000+0x4170 */
+    }
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00BACCC0  MiddleWallPopStatePl0010::vf14  size=343  [class]
-void __thiscall MiddleWallPopStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  undefined4 uVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  undefined *puVar5;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  iVar4 = FUN_00a94ce0(0);
-  if (iVar4 != 0) {
-    if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-      *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-    }
-    iVar4 = FUN_008e2740();
-    if ((iVar4 == 0) &&
-       ((*(int *)(uVar3 + 0x41e0) == 0 ||
-        (*(float *)(*(int *)(uVar3 + 0x40d4) + 0x160) <= *(float *)(uVar3 + 0x41e4))))) {
-      FUN_00d82510(0xe,0x32);
-    }
-    if ((*(int *)(uVar3 + 0x41e0) == 0) || (0.36 < *(float *)(uVar3 + 0x41e4))) {
-      iVar4 = FUN_008e2740();
-      if (iVar4 == 0) goto LAB_00bacdba;
-    }
-    FUN_00d82510(0x13,0x32);
-  }
-LAB_00bacdba:
-  iVar4 = FUN_00a95540(0,5);
-  if (iVar4 != 0) {
-    iVar4 = FUN_00a92f90();
-    if (iVar4 != 0) {
-      uVar1 = *(undefined4 *)(param_1 + 0x30);
-      iVar4 = FUN_00a92f90();
-      FUN_00e26e90();
-      *(undefined4 *)(iVar4 + 0xe4) = 0x3f800000;
-      *(undefined4 *)(iVar4 + 0xe8) = uVar1;
-      *(undefined4 *)(iVar4 + 0xec) = 0x3f800000;
-    }
-  }
-  StateMachineNode::vf14(param_2);
-  return;
+void MiddleWallPopStatePl0010::vf14(undefined4 *contextArg)
+{
+    using namespace MiddleWallPopStatePl0010_p1;
+    char *player = playerOf(asContext(contextArg));
+    if (thiscall<int>(FUN_00a94ce0, player, 0) != 0) {  // tests the full EAX (functions.h types it as bool)
+        clearMotionMode(player);
+        if (fastcallInt(FUN_008e2740, motionHelper(player)) == 0 &&
+            (at<int>(player, 0x41E0) == 0 ||  /* Pl0000+0x41E0 / +0x41E4: ground distance? */
+             at<float>(at<char *>(player, 0x40D4), 0x160) <= at<float>(player, 0x41E4))) {
+            FUN_00d82510((int)this, 0xE, 0x32);
+        }
+        if (nearGroundOrBusy(player)) {
+            FUN_00d82510((int)this, 0x13, 0x32);
+        }
+    }
+    if (thiscall<int>(FUN_00a95540, player, 0, 5) != 0) {
+        if (FUN_00a92f90((int)player) != 0) {
+            setAnimSpeed(player, climbRate());
+        }
+    }
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00BACE20  MiddleWallPopStatePl0010::vf20  size=186  [class]
-undefined4 MiddleWallPopStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-  }
-  *(undefined4 *)(uVar3 + 0x4170) = 0;
-  iVar2 = FUN_00a92f90();
-  if (iVar2 != 0) {
-    iVar2 = FUN_00a92f90();
-    FUN_00e26e90();
-    *(undefined4 *)(iVar2 + 0xe4) = 0x3f800000;
-    *(undefined4 *)(iVar2 + 0xe8) = 0x3f800000;
-    *(undefined4 *)(iVar2 + 0xec) = 0x3f800000;
-  }
-  return 1;
+// Leave: restores the player and the animation speed.
+undefined4 MiddleWallPopStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace MiddleWallPopStatePl0010_p1;
+    if (StateMachineNode::vf20(contextArg) == 0) {
+        return 0;
+    }
+    char *player = playerOf(asContext(contextArg));
+    clearMotionMode(player);
+    at<int>(player, 0x4170) = 0;  /* Pl0000+0x4170 */
+    if (FUN_00a92f90((int)player) != 0) {
+        setAnimSpeed(player, 1.0f);
+    }
+    return 1;
 }
 
 // 00BDF960  MiddleWallPopStatePl0010::qteSafeCheck  size=169  [class]
-void __thiscall MiddleWallPopStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined *puVar3;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar1 = 0;
-  }
-  else {
-    puVar3 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar3);
-    uVar1 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  if (*(int **)(uVar1 + 0xc) != (int *)0x0) {
-    puVar3 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar1 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar3);
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  FUN_00bd3730(param_2,param_1,0xd,0xc);
-  FUN_00bd37f0(param_2,param_1,0xd);
-  FUN_00bd3910(param_2,param_1,0xb,10);
-  FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
+void MiddleWallPopStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace MiddleWallPopStatePl0010_p1;
+    char *player = playerOf(asContext(contextArg));
+    FUN_008e0b70((int)motionHelper(player), 0);
+    FUN_008e0ba0((int)motionHelper(player), 0);
+    FUN_00bd3730(contextArg, (undefined4)this, 0xD, 0xC);
+    FUN_00bd37f0(contextArg, (undefined4)this, 0xD);
+    FUN_00bd3910(contextArg, (undefined4)this, 0xB, 10);
+    FUN_00bd39d0(contextArg, (undefined4)this, 10);
+    StateMachineNode::qteSafeCheck(contextArg);
 }
-

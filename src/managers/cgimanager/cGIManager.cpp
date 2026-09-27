@@ -1,79 +1,84 @@
-// src/managers/cgimanager/cGIManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00F956A0..00F956A0, 1 functions
-
+// src/managers/cgimanager/cGIManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+// The raw file includes no class header (none was generated for cGIManager); the refined
+// header written for this file declares the class.
+#include "cGIManager.h"
 
-// 00F956A0  cGIManager::setData  size=289  [class]
-void __thiscall cGIManager::setData(int param_1,uint param_2,float *param_3,float *param_4)
-
-{
-  int iVar1;
-  float *pfVar2;
-  int iVar3;
-  float *pfVar4;
-  uint *puVar5;
-  float *pfVar6;
-  float *pfVar7;
-  float *local_c;
-  uint local_8;
-  uint local_4;
-  
-  iVar1 = (int)param_3;
-  *(int *)(param_1 + 0x23000) = *(int *)(param_1 + 0x23000) + 1;
-  pfVar4 = (float *)((int)param_3 + 0x10);
-  local_8 = 0;
-  local_4 = 0;
-  puVar5 = (uint *)(param_1 + 0x21000);
-  pfVar2 = (float *)(param_1 + 0xc);
-  param_3 = pfVar4;
-  local_c = pfVar4;
-  do {
-    if ((*puVar5 & 0x80000000) == 0) {
-      *puVar5 = *puVar5 | 0x80000000;
-      puVar5[1] = param_2;
-      if (1 < *(uint *)(iVar1 + 4)) {
-        pfVar4 = param_3;
-      }
-      pfVar2[-3] = *pfVar4;
-      pfVar2[-2] = pfVar4[1];
-      pfVar2[-1] = pfVar4[2];
-      *pfVar2 = pfVar4[3];
-      pfVar6 = pfVar4 + 4;
-      pfVar7 = pfVar2;
-      for (iVar3 = 0x1b; pfVar7 = pfVar7 + 1, iVar3 != 0; iVar3 = iVar3 + -1) {
-        *pfVar7 = *pfVar6;
-        pfVar6 = pfVar6 + 1;
-      }
-      pfVar2[0x1c] = pfVar4[0x1f];
-      pfVar2[0x1d] = pfVar4[0x20];
-      if (param_4 != (float *)0x0) {
-        pfVar2[-2] = pfVar2[-2] + *param_4;
-        pfVar2[-1] = param_4[1] + pfVar2[-1];
-        *pfVar2 = param_4[2] + *pfVar2;
-      }
-      if (*(uint *)(iVar1 + 4) < 2) {
-        *puVar5 = *puVar5 & 0xbfffffff;
-        pfVar2[0x1c] = 0.0;
-        pfVar2[0x1d] = 0.0;
-      }
-      else {
-        *puVar5 = *puVar5 | 0x40000000;
-      }
-      param_3 = param_3 + 0x21;
-      pfVar4 = local_c + 0x1f;
-      local_8 = local_8 + 1;
-      local_c = pfVar4;
-      if (*(uint *)(iVar1 + 0xc) <= local_8) {
-        return;
-      }
-    }
-    local_4 = local_4 + 1;
-    puVar5 = puVar5 + 2;
-    pfVar2 = pfVar2 + 0x21;
-    if (0x3ff < local_4) {
-      FUN_00dd5650(&DAT_016eb200);
-      return;
-    }
-  } while( true );
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+extern const char DAT_016eb200[];  // debug message printed when every slot is in use
+
+namespace cGIManager_p1 {
+
+// __cdecl call of a function (FUN_00dd5650 is a debug printf; functions.h declares it (void))
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
 }
 
+}  // namespace cGIManager_p1
+
+// 00F956A0  cGIManager::setData  size=289  [class]
+void cGIManager::setData(uint id, float *source, float *offset)
+{
+    using namespace cGIManager_p1;
+    SetDataSource *desc = (SetDataSource *)source;
+    updateCount() = updateCount() + 1;
+    float *entry = desc->entries;
+    uint written = 0;
+    uint slotIndex = 0;
+    uint *state = (uint *)slotStates();         // flags, id pairs
+    float *slot = slotData() + 3;               // points at float 3 of the current slot
+    float *entryWide = entry;                   // entries of 0x21 floats (type > 1)
+    float *entryNarrow = entry;                 // entries of 0x1F floats (type <= 1)
+    do {
+        if ((state[0] & SLOT_USED) == 0) {
+            state[0] = state[0] | SLOT_USED;
+            state[1] = id;
+            if (1 < desc->type) {
+                entry = entryWide;
+            }
+            slot[-3] = entry[0];
+            slot[-2] = entry[1];
+            slot[-1] = entry[2];
+            slot[0] = entry[3];
+            float *src = entry + 4;
+            float *dst = slot;
+            for (int n = 0x1b; dst = dst + 1, n != 0; n = n - 1) {
+                *dst = *src;
+                src = src + 1;
+            }
+            slot[0x1c] = entry[0x1f];
+            slot[0x1d] = entry[0x20];
+            if (offset != 0) {
+                slot[-2] = slot[-2] + offset[0];
+                slot[-1] = offset[1] + slot[-1];
+                slot[0] = offset[2] + slot[0];
+            }
+            if (desc->type < 2) {
+                state[0] = state[0] & 0xbfffffff;  // ~SLOT_EXTENDED
+                slot[0x1c] = 0.0f;
+                slot[0x1d] = 0.0f;
+            }
+            else {
+                state[0] = state[0] | SLOT_EXTENDED;
+            }
+            entryWide = entryWide + 0x21;
+            entry = entryNarrow + 0x1f;
+            written = written + 1;
+            entryNarrow = entry;
+            if (desc->count <= written) {
+                return;
+            }
+        }
+        slotIndex = slotIndex + 1;
+        state = state + 2;
+        slot = slot + 0x21;
+        if (0x3ff < slotIndex) {
+            cdeclcall<void>(FUN_00dd5650, DAT_016eb200);
+            return;
+        }
+    } while (true);
+}

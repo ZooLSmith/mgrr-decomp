@@ -1,1306 +1,976 @@
-// src/managers/scenebgmanager/SceneBgManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C17C70..00C62910, 64 functions
-
+// src/managers/scenebgmanager/SceneBgManagerImplement.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "SceneBgManagerImplement.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+extern SceneBgManagerImplement *DAT_01bea180;  // the SceneBgManagerImplement instance
+extern unsigned char DAT_01dc53d8[];           // type record tested by EntityDeletedSlot::vf18
+
+// ---------------------------------------------------------------------------------------------
+// Helpers.  The raw decompilation dropped the ECX argument of most callees (the SceneBgWork slot
+// the loop is visiting); the disassembly shows it, so it is passed here.  Callees whose
+// functions.h prototype does not match the machine code are called through a cast.
+// ---------------------------------------------------------------------------------------------
+namespace SceneBgManagerImplement_p1 {
+
+typedef SceneBgManagerImplement::SceneBgWork SceneBgWork;
+
+// number of SceneBgWork slots
+const int kWorkCount = 8;
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// FUN_00dd3500: allocate `size` bytes from `heap`
+inline void *MemAlloc(unsigned int size, void *heap)
+{
+    return cdeclcall<void *>(FUN_00dd3500, size, heap);
+}
+
+// FUN_00d89ec0: register `slot` for signal `id` (functions.h lists only one parameter)
+inline void RegisterSlot(int id, void *slot)
+{
+    cdeclcall<void>(FUN_00d89ec0, id, slot);
+}
+
+// FUN_00933750 (SceneBgWork, ECX = work): functions.h says bool, the callers use all of EAX
+inline int WorkState(SceneBgWork *work)
+{
+    return ((int (__fastcall *)(int))FUN_00933750)((int)work);
+}
+
+// Function at 0x00C5EB00 (FILEMAP: SceneBgManager::SceneBgManager): the destructor body of
+// SceneBgManagerImplement (it writes this class's vftable and unregisters the 0x3A slot)
+inline void DestroyBody(SceneBgManagerImplement *self)
+{
+    ((void (__thiscall *)(void *))0x00C5EB00)(self);
+}
+
+// x87 fabs
+inline double AbsD(double value)
+{
+    return value < 0.0 ? -value : value;
+}
+
+}  // namespace SceneBgManagerImplement_p1
+
 // 00C17C70  SceneBgManagerImplement::PredicateRigidBodyBase::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::PredicateRigidBodyBase::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *SceneBgManagerImplement::PredicateRigidBodyBase::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C17D20  SceneBgManagerImplement::vf94  size=53  [class]
-void __thiscall
-SceneBgManagerImplement::vf94(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 == param_2) {
-      FUN_00934890(param_3,param_4);
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+// Forwards (arg1, arg2) to FUN_00934890 of every slot whose id is `id`.  ret 0xC.
+void SceneBgManagerImplement::vf94(int id, undefined4 arg1, undefined4 arg2)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            thiscall<void>(FUN_00934890, work, arg1, arg2);
+        }
+    }
 }
 
 // 00C17D60  SceneBgManagerImplement::vf5C  size=42  [class]
-void __thiscall SceneBgManagerImplement::vf5C(int param_1,int param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 == param_2) {
-      FUN_00934810();
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf5C(int id)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            FUN_00934810((int)work);
+        }
+    }
 }
 
 // 00C17D90  SceneBgManagerImplement::vf60  size=42  [class]
-void __thiscall SceneBgManagerImplement::vf60(int param_1,int param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 == param_2) {
-      FUN_00934850();
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf60(int id)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            FUN_00934850((int)work);
+        }
+    }
 }
 
 // 00C17DC0  SceneBgManagerImplement::vf68  size=70  [class]
-undefined4 __thiscall SceneBgManagerImplement::vf68(int param_1,int param_2)
-
-{
-  int iVar1;
-  int *piVar2;
-  undefined4 uVar3;
-  int iVar4;
-  uint uVar5;
-  
-  if (param_1 == -8) {
-    return 0;
-  }
-  uVar5 = 0;
-  piVar2 = (int *)(param_1 + 0x1c);
-  iVar4 = 0;
-  do {
-    iVar1 = *piVar2;
-    if (param_2 < iVar1 + iVar4) {
-      uVar3 = FUN_00933d60(param_2 - iVar4);
-      return uVar3;
-    }
-    uVar5 = uVar5 + 1;
-    piVar2 = piVar2 + 0x8ae;
-    iVar4 = iVar1 + iVar4;
-  } while (uVar5 < 8);
-  return 0;
+// Object `index` counted over all slots (free slots included): FUN_00933d60 of the slot that
+// holds it, with the slot-local index; 0 when out of range.
+undefined4 SceneBgManagerImplement::vf68(int index)
+{
+    using namespace SceneBgManagerImplement_p1;
+    if ((int)this == -8) {  // the binary tests works() == 0
+        return 0;
+    }
+    SceneBgWork *work = works();
+    int base = 0;
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        int count = work->objectCount();
+        if (index < count + base) {
+            return thiscall<undefined4>(FUN_00933d60, work, index - base);
+        }
+        base = count + base;
+    }
+    return 0;
 }
 
 // 00C17E10  SceneBgManagerImplement::vf64  size=42  [class]
-void __thiscall SceneBgManagerImplement::vf64(int param_1,int param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 == param_2) {
-      FUN_00933db0();
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf64(int id)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            FUN_00933db0((int)work);
+        }
+    }
 }
 
 // 00C17E40  SceneBgManagerImplement::vf40  size=53  [class]
-int __thiscall SceneBgManagerImplement::vf40(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  int *piVar2;
-  uint uVar3;
-  
-  uVar3 = 0;
-  piVar2 = (int *)(param_1 + 8);
-  while ((*piVar2 == -1 || (iVar1 = FUN_009340d0(param_2), iVar1 == 0))) {
-    uVar3 = uVar3 + 1;
-    piVar2 = piVar2 + 0x8ae;
-    if (7 < uVar3) {
-      return 0;
-    }
-  }
-  return iVar1;
+// First non-zero FUN_009340d0(arg) of the used slots, else 0.
+int SceneBgManagerImplement::vf40(undefined4 arg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            int result = thiscall<int>(FUN_009340d0, work, (int)arg);
+            if (result != 0) {
+                return result;
+            }
+        }
+    }
+    return 0;
 }
 
 // 00C17E80  SceneBgManagerImplement::vf44  size=44  [class]
-void __thiscall SceneBgManagerImplement::vf44(int param_1,undefined4 param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 != -1) {
-      FUN_00934130(param_2);
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf44(undefined4 arg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            thiscall<void>(FUN_00934130, work, (float *)arg);
+        }
+    }
 }
 
 // 00C17EB0  SceneBgManagerImplement::vf48  size=44  [class]
-void __thiscall SceneBgManagerImplement::vf48(int param_1,undefined4 param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 != -1) {
-      FUN_009341d0(param_2);
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf48(undefined4 arg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            thiscall<void>(FUN_009341d0, work, (float *)arg);
+        }
+    }
 }
 
 // 00C17EE0  SceneBgManagerImplement::vf4C  size=44  [class]
-void __thiscall SceneBgManagerImplement::vf4C(int param_1,undefined4 param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 != -1) {
-      FUN_00934270(param_2);
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf4C(undefined4 arg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            thiscall<void>(FUN_00934270, work, (int)arg);
+        }
+    }
 }
 
 // 00C17F10  SceneBgManagerImplement::vf50  size=44  [class]
-void __thiscall SceneBgManagerImplement::vf50(int param_1,undefined4 param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 != -1) {
-      FUN_00934320(param_2);
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf50(undefined4 arg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            thiscall<void>(FUN_00934320, work, (int)arg);
+        }
+    }
 }
 
 // 00C17F40  SceneBgManagerImplement::vf54  size=44  [class]
-void __thiscall SceneBgManagerImplement::vf54(int param_1,undefined4 param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 != -1) {
-      FUN_009343d0(param_2);
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf54(undefined4 arg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            thiscall<void>(FUN_009343d0, work, (float *)arg);
+        }
+    }
 }
 
 // 00C17F70  SceneBgManagerImplement::vf58  size=44  [class]
-void __thiscall SceneBgManagerImplement::vf58(int param_1,undefined4 param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 != -1) {
-      FUN_00934470(param_2);
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+void SceneBgManagerImplement::vf58(undefined4 arg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            thiscall<void>(FUN_00934470, work, (float *)arg);
+        }
+    }
 }
 
 // 00C17FD0  SceneBgManagerImplement::vf34  size=35  [class]
-void SceneBgManagerImplement::vf34(void)
-
-{
-  int iVar1;
-  
-  iVar1 = 8;
-  do {
-    FUN_00934ab0();
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
-  return;
+void SceneBgManagerImplement::vf34()
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        FUN_00934ab0((int)work);
+    }
 }
 
 // 00C18000  SceneBgManagerImplement::vf24  size=37  [class]
-void SceneBgManagerImplement::vf24(void)
-
-{
-  int iVar1;
-  
-  iVar1 = 8;
-  do {
-    FUN_009338b0();
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
-  return;
+// The binary pops 2 unused stack arguments (ret 8).
+void SceneBgManagerImplement::vf24()
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        ((void (__fastcall *)(int))FUN_009338b0)((int)work);
+    }
 }
 
 // 00C18030  SceneBgManagerImplement::vf28  size=37  [class]
-void SceneBgManagerImplement::vf28(void)
-
-{
-  int iVar1;
-  
-  iVar1 = 8;
-  do {
-    FUN_00933f00();
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
-  return;
+// The binary pops 2 unused stack arguments (ret 8).
+void SceneBgManagerImplement::vf28()
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        FUN_00933f00((int)work);
+    }
 }
 
 // 00C18060  SceneBgManagerImplement::vf2C  size=37  [class]
-void SceneBgManagerImplement::vf2C(void)
-
-{
-  int iVar1;
-  
-  iVar1 = 8;
-  do {
-    FUN_009338c0();
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
-  return;
+// The binary pops 2 unused stack arguments (ret 8).
+void SceneBgManagerImplement::vf2C()
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        ((void (__fastcall *)(int))FUN_009338c0)((int)work);
+    }
 }
 
 // 00C18090  SceneBgManagerImplement::vf30  size=37  [class]
-void SceneBgManagerImplement::vf30(void)
-
-{
-  int iVar1;
-  
-  iVar1 = 8;
-  do {
-    FUN_009338d0();
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
-  return;
+// The binary pops 2 unused stack arguments (ret 8).
+void SceneBgManagerImplement::vf30()
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        ((void (__fastcall *)(int))FUN_009338d0)((int)work);
+    }
 }
 
 // 00C180C0  SceneBgManagerImplement::vf1C  size=31  [class]
-undefined4 __fastcall SceneBgManagerImplement::vf1C(int param_1)
-
-{
-  uint uVar1;
-  int *piVar2;
-  
-  uVar1 = 0;
-  piVar2 = (int *)(param_1 + 0x50);
-  do {
-    if (*piVar2 != 0) {
-      return 0;
-    }
-    uVar1 = uVar1 + 1;
-    piVar2 = piVar2 + 0x8ae;
-  } while (uVar1 < 8);
-  return 1;
+// 1 when no slot has flag48 set.
+undefined4 SceneBgManagerImplement::vf1C()
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->flag48() != 0) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 // 00C180E0  SceneBgManagerImplement::vf20  size=36  [class]
-undefined4 __fastcall SceneBgManagerImplement::vf20(int param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  
-  uVar2 = 0;
-  piVar1 = (int *)(param_1 + 8);
-  while ((piVar1[0x12] == 0 || (*piVar1 == -1))) {
-    uVar2 = uVar2 + 1;
-    piVar1 = piVar1 + 0x8ae;
-    if (7 < uVar2) {
-      return 1;
-    }
-  }
-  return 0;
+// 1 when no used slot has flag48 set.
+undefined4 SceneBgManagerImplement::vf20()
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->flag48() != 0 && work->id() != -1) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 // 00C18110  SceneBgManagerImplement::vf6C  size=112  [class]
-int __fastcall SceneBgManagerImplement::vf6C(int param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = 0;
-  if (*(int *)(param_1 + 8) != -1) {
-    iVar1 = *(int *)(param_1 + 0x1c);
-  }
-  if (*(int *)(param_1 + 0x22c0) != -1) {
-    iVar1 = iVar1 + *(int *)(param_1 + 0x22d4);
-  }
-  if (*(int *)(param_1 + 0x4578) != -1) {
-    iVar1 = iVar1 + *(int *)(param_1 + 0x458c);
-  }
-  if (*(int *)(param_1 + 0x6830) != -1) {
-    iVar1 = iVar1 + *(int *)(param_1 + 0x6844);
-  }
-  if (*(int *)(param_1 + 0x8ae8) != -1) {
-    iVar1 = iVar1 + *(int *)(param_1 + 0x8afc);
-  }
-  if (*(int *)(param_1 + 0xada0) != -1) {
-    iVar1 = iVar1 + *(int *)(param_1 + 0xadb4);
-  }
-  if (*(int *)(param_1 + 0xd058) != -1) {
-    iVar1 = iVar1 + *(int *)(param_1 + 0xd06c);
-  }
-  if (*(int *)(param_1 + 0xf310) != -1) {
-    iVar1 = iVar1 + *(int *)(param_1 + 0xf324);
-  }
-  return iVar1;
+// Total object count of the used slots (the binary unrolls this loop).
+int SceneBgManagerImplement::vf6C()
+{
+    using namespace SceneBgManagerImplement_p1;
+    int total = 0;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            total = total + work->objectCount();
+        }
+    }
+    return total;
 }
 
 // 00C18180  SceneBgManagerImplement::vf70  size=64  [class]
-undefined4 __thiscall SceneBgManagerImplement::vf70(int param_1,int param_2)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  uint uVar4;
-  int iVar5;
-  
-  uVar4 = 0;
-  piVar3 = (int *)(param_1 + 8);
-  iVar5 = 0;
-  while ((iVar1 = iVar5, *piVar3 == -1 || (iVar1 = piVar3[5] + iVar5, iVar1 <= param_2))) {
-    uVar4 = uVar4 + 1;
-    piVar3 = piVar3 + 0x8ae;
-    iVar5 = iVar1;
-    if (7 < uVar4) {
-      return 0;
-    }
-  }
-  uVar2 = FUN_00933e80(param_2 - iVar5);
-  return uVar2;
+// Object `index` counted over the used slots: FUN_00933e80 of the slot that holds it, with the
+// slot-local index; 0 when out of range.
+undefined4 SceneBgManagerImplement::vf70(int index)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    int base = 0;
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            int end = work->objectCount() + base;
+            if (index < end) {
+                return thiscall<undefined4>(FUN_00933e80, work, index - base);
+            }
+            base = end;
+        }
+    }
+    return 0;
 }
 
 // 00C181C0  SceneBgManagerImplement::vf98  size=3  [class]
-void SceneBgManagerImplement::vf98(void)
-
-{
-  return;
+// Empty; the binary pops 1 unused stack argument (ret 4).
+void SceneBgManagerImplement::vf98()
+{
 }
 
 // 00C181D0  SceneBgManagerImplement::vf04  size=56  [class]
-void __fastcall SceneBgManagerImplement::vf04(int param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  *(undefined4 *)(param_1 + 0x115d0) = 0x3f000000;
-  *(undefined4 *)(param_1 + 0x115c8) = 1;
-  piVar1 = (int *)(param_1 + 8);
-  iVar2 = 8;
-  do {
-    if (*piVar1 != -1) {
-      FUN_00933ff0();
-    }
-    piVar1 = piVar1 + 0x8ae;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return;
+// Starts the 0.5 s wait that vf00 counts down, then FUN_00933ff0 on every used slot.
+void SceneBgManagerImplement::vf04()
+{
+    using namespace SceneBgManagerImplement_p1;
+    waitTimer() = 0.5f;
+    waitActive() = 1;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            FUN_00933ff0((int)work);
+        }
+    }
 }
 
 // 00C18240  FUN_00c18240  size=104  [between]
-void __fastcall FUN_00c18240(int param_1)
-
-{
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  
-  piVar4 = (int *)(param_1 + 8);
-  iVar3 = 8;
-  do {
-    if (*piVar4 != -1) {
-      iVar1 = FUN_00933750();
-      if (piVar4[0x14] != 0) {
-        FUN_00935420();
-        iVar2 = FUN_00933750();
-        if (iVar1 != iVar2) {
-          FUN_00933900();
-        }
-        if (piVar4[0x13] == 0) {
-          FUN_00935420();
-          if (piVar4[0x15] != 0) {
-            FUN_00934940();
-            FUN_00933910();
-          }
-        }
-      }
-    }
-    piVar4 = piVar4 + 0x8ae;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
-  return;
+// Per-frame update of the used slots (called first by SceneBgManagerImplement::vf00).
+void __fastcall FUN_00c18240(int self)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgManagerImplement *manager = (SceneBgManagerImplement *)self;
+    SceneBgWork *work = manager->works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            int before = WorkState(work);
+            if (work->flag50() != 0) {
+                FUN_00935420((int)work);
+                int after = WorkState(work);
+                if (before != after) {
+                    FUN_00933900((int)work);
+                }
+                if (work->flag4C() == 0) {
+                    FUN_00935420((int)work);
+                    if (work->flag54() != 0) {
+                        FUN_00934940((int)work);
+                        FUN_00933910((int)work);
+                    }
+                }
+            }
+        }
+    }
 }
 
 // 00C18320  SceneBgManagerImplement::EntityDeletedSlot::vf10  size=1  [class]
-void SceneBgManagerImplement::EntityDeletedSlot::vf10(void)
-
-{
-  return;
+void SceneBgManagerImplement::EntityDeletedSlot::vf10()
+{
 }
 
 // 00C18330  SceneBgManagerImplement::EntityDeletedSlot::vf14  size=13  [class]
-void __fastcall SceneBgManagerImplement::EntityDeletedSlot::vf14(undefined4 *param_1)
-
-{
-  if (param_1 != (undefined4 *)0x0) {
-    (**(code **)*param_1)(1);
-  }
-  return;
+// Deletes the slot through its scalar deleting destructor (slot 0x0, flags 1).
+void SceneBgManagerImplement::EntityDeletedSlot::vf14()
+{
+    using namespace SceneBgManagerImplement_p1;
+    EntityDeletedSlot *self = this;
+    if (self != 0) {
+        vcall<void>(self, 0x0, 1);
+    }
 }
 
 // 00C29AD0  SceneBgManagerImplement::DisableHitByRange::vf04  size=129  [class]
-void __fastcall SceneBgManagerImplement::DisableHitByRange::vf04(int param_1)
-
-{
-  float *pfVar1;
-  float *pfVar2;
-  float local_20;
-  float local_1c;
-  float local_18;
-  
-  FUN_00911d10(&local_20);
-  pfVar1 = *(float **)(param_1 + 4);
-  if ((((*pfVar1 <= local_20) &&
-       (pfVar2 = *(float **)(param_1 + 8), local_20 < *pfVar2 != (local_20 == *pfVar2))) &&
-      (pfVar1[1] <= local_1c)) &&
-     (((local_1c < pfVar2[1] != (local_1c == pfVar2[1]) && (pfVar1[2] <= local_18)) &&
-      (local_18 < pfVar2[2] != (local_18 == pfVar2[2]))))) {
-    FUN_00916360();
-    return;
-  }
-  return;
+// Disables the hit of the rigid body when its position lies in [minPoint, maxPoint].
+void SceneBgManagerImplement::DisableHitByRange::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    float *low = minPoint();
+    if (low[0] <= position[0]) {
+        float *high = maxPoint();
+        if (position[0] <= high[0] && low[1] <= position[1] && position[1] <= high[1] &&
+            low[2] <= position[2] && position[2] <= high[2]) {
+            FUN_00916360((undefined4 *)rigidBodyRef);
+            return;
+        }
+    }
 }
 
 // 00C29B80  SceneBgManagerImplement::EnableHitByRange::vf04  size=129  [class]
-void __fastcall SceneBgManagerImplement::EnableHitByRange::vf04(int param_1)
-
-{
-  float *pfVar1;
-  float *pfVar2;
-  float local_20;
-  float local_1c;
-  float local_18;
-  
-  FUN_00911d10(&local_20);
-  pfVar1 = *(float **)(param_1 + 4);
-  if ((((*pfVar1 <= local_20) &&
-       (pfVar2 = *(float **)(param_1 + 8), local_20 < *pfVar2 != (local_20 == *pfVar2))) &&
-      (pfVar1[1] <= local_1c)) &&
-     (((local_1c < pfVar2[1] != (local_1c == pfVar2[1]) && (pfVar1[2] <= local_18)) &&
-      (local_18 < pfVar2[2] != (local_18 == pfVar2[2]))))) {
-    FUN_0091a8a0();
-    return;
-  }
-  return;
+// Enables the hit of the rigid body when its position lies in [minPoint, maxPoint].
+void SceneBgManagerImplement::EnableHitByRange::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    float *low = minPoint();
+    if (low[0] <= position[0]) {
+        float *high = maxPoint();
+        if (position[0] <= high[0] && low[1] <= position[1] && position[1] <= high[1] &&
+            low[2] <= position[2] && position[2] <= high[2]) {
+            FUN_0091a8a0((undefined4 *)rigidBodyRef);
+            return;
+        }
+    }
 }
 
 // 00C29C30  SceneBgManagerImplement::DisableHitByRangeX::vf04  size=77  [class]
-void __fastcall SceneBgManagerImplement::DisableHitByRangeX::vf04(int param_1)
-
-{
-  float local_20 [7];
-  
-  FUN_00911d10(local_20);
-  if ((*(float *)(param_1 + 4) <= local_20[0]) &&
-     (local_20[0] < *(float *)(param_1 + 8) != (local_20[0] == *(float *)(param_1 + 8)))) {
-    FUN_00916360();
-    return;
-  }
-  return;
+void SceneBgManagerImplement::DisableHitByRangeX::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    if (minValue() <= position[0] && position[0] <= maxValue()) {
+        FUN_00916360((undefined4 *)rigidBodyRef);
+        return;
+    }
 }
 
 // 00C29CA0  SceneBgManagerImplement::EnableHitByRangeX::vf04  size=77  [class]
-void __fastcall SceneBgManagerImplement::EnableHitByRangeX::vf04(int param_1)
-
-{
-  float local_20 [7];
-  
-  FUN_00911d10(local_20);
-  if ((*(float *)(param_1 + 4) <= local_20[0]) &&
-     (local_20[0] < *(float *)(param_1 + 8) != (local_20[0] == *(float *)(param_1 + 8)))) {
-    FUN_0091a8a0();
-    return;
-  }
-  return;
+void SceneBgManagerImplement::EnableHitByRangeX::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    if (minValue() <= position[0] && position[0] <= maxValue()) {
+        FUN_0091a8a0((undefined4 *)rigidBodyRef);
+        return;
+    }
 }
 
 // 00C29D10  SceneBgManagerImplement::DisableHitByRangeY::vf04  size=77  [class]
-void __fastcall SceneBgManagerImplement::DisableHitByRangeY::vf04(int param_1)
-
-{
-  undefined1 local_20 [4];
-  float local_1c;
-  
-  FUN_00911d10(local_20);
-  if ((*(float *)(param_1 + 4) <= local_1c) &&
-     (local_1c < *(float *)(param_1 + 8) != (local_1c == *(float *)(param_1 + 8)))) {
-    FUN_00916360();
-    return;
-  }
-  return;
+void SceneBgManagerImplement::DisableHitByRangeY::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    if (minValue() <= position[1] && position[1] <= maxValue()) {
+        FUN_00916360((undefined4 *)rigidBodyRef);
+        return;
+    }
 }
 
 // 00C29D80  SceneBgManagerImplement::EnableHitByRangeY::vf04  size=77  [class]
-void __fastcall SceneBgManagerImplement::EnableHitByRangeY::vf04(int param_1)
-
-{
-  undefined1 local_20 [4];
-  float local_1c;
-  
-  FUN_00911d10(local_20);
-  if ((*(float *)(param_1 + 4) <= local_1c) &&
-     (local_1c < *(float *)(param_1 + 8) != (local_1c == *(float *)(param_1 + 8)))) {
-    FUN_0091a8a0();
-    return;
-  }
-  return;
+void SceneBgManagerImplement::EnableHitByRangeY::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    if (minValue() <= position[1] && position[1] <= maxValue()) {
+        FUN_0091a8a0((undefined4 *)rigidBodyRef);
+        return;
+    }
 }
 
 // 00C29DF0  SceneBgManagerImplement::DisableHitByRangeZ::vf04  size=77  [class]
-void __fastcall SceneBgManagerImplement::DisableHitByRangeZ::vf04(int param_1)
-
-{
-  undefined1 local_20 [8];
-  float local_18;
-  
-  FUN_00911d10(local_20);
-  if ((*(float *)(param_1 + 8) <= local_18) &&
-     (local_18 < *(float *)(param_1 + 8) != (local_18 == *(float *)(param_1 + 8)))) {
-    FUN_00916360();
-    return;
-  }
-  return;
+// ? The binary compares both bounds against +0x8 (maxValue); kept as is.
+void SceneBgManagerImplement::DisableHitByRangeZ::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    if (maxValue() <= position[2] && position[2] <= maxValue()) {
+        FUN_00916360((undefined4 *)rigidBodyRef);
+        return;
+    }
 }
 
 // 00C29E60  SceneBgManagerImplement::EnableHitByRangeZ::vf04  size=77  [class]
-void __fastcall SceneBgManagerImplement::EnableHitByRangeZ::vf04(int param_1)
-
-{
-  undefined1 local_20 [8];
-  float local_18;
-  
-  FUN_00911d10(local_20);
-  if ((*(float *)(param_1 + 8) <= local_18) &&
-     (local_18 < *(float *)(param_1 + 8) != (local_18 == *(float *)(param_1 + 8)))) {
-    FUN_0091a8a0();
-    return;
-  }
-  return;
+// ? The binary compares both bounds against +0x8 (maxValue); kept as is.
+void SceneBgManagerImplement::EnableHitByRangeZ::vf04(int *rigidBodyRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    float position[4];
+
+    thiscall<undefined4 *>(FUN_00911d10, rigidBodyRef, (undefined4 *)position);
+    if (maxValue() <= position[2] && position[2] <= maxValue()) {
+        FUN_0091a8a0((undefined4 *)rigidBodyRef);
+        return;
+    }
 }
 
 // 00C29EB0  SceneBgManagerImplement::EntityDeletedSlot::vf18  size=75  [class]
-void SceneBgManagerImplement::EntityDeletedSlot::vf18(undefined4 param_1,undefined4 *param_2)
-
-{
-  undefined4 uVar1;
-  int iVar2;
-  undefined *puVar3;
-  
-  if (param_2 != (undefined4 *)0x0) {
-    puVar3 = &DAT_01dc53d8;
-    (**(code **)*param_2)(&DAT_01dc53d8);
-    iVar2 = FUN_00dd6d80(puVar3);
-    if (iVar2 != 0) {
-      uVar1 = param_2[2];
-      iVar2 = 8;
-      do {
-        FUN_00933e10(uVar1);
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
-    }
-  }
-  return;
+// An entity was deleted: when it is of the type DAT_01dc53d8, FUN_00933e10(entity+0x8) on every
+// slot of the manager instance.  ret 8 (`sender` is not read).
+void SceneBgManagerImplement::EntityDeletedSlot::vf18(undefined4 sender, int *entity)
+{
+    using namespace SceneBgManagerImplement_p1;
+    if (entity != 0) {
+        // entity->vf00() returns its type record; FUN_00dd6d80 = is-kind-of
+        undefined4 *type = vcall<undefined4 *>(entity, 0x0);
+        if (thiscall<undefined4>(FUN_00dd6d80, type, (undefined4 *)DAT_01dc53d8) != 0) {
+            int key = entity[2];
+            SceneBgWork *work = DAT_01bea180->works();
+            for (int i = 0; i < kWorkCount; i++, work++) {
+                thiscall<void>(FUN_00933e10, work, key);
+            }
+        }
+    }
 }
 
 // 00C29F00  SceneBgManagerImplement::DisableHitByRange::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::DisableHitByRange::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *SceneBgManagerImplement::DisableHitByRange::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C29F20  SceneBgManagerImplement::EnableHitByRange::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::EnableHitByRange::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *SceneBgManagerImplement::EnableHitByRange::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C29F40  SceneBgManagerImplement::DisableHitByRangeX::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::DisableHitByRangeX::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *SceneBgManagerImplement::DisableHitByRangeX::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C29F60  SceneBgManagerImplement::EnableHitByRangeX::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::EnableHitByRangeX::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *SceneBgManagerImplement::EnableHitByRangeX::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C29F80  SceneBgManagerImplement::DisableHitByRangeY::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::DisableHitByRangeY::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *SceneBgManagerImplement::DisableHitByRangeY::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C29FA0  SceneBgManagerImplement::EnableHitByRangeY::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::EnableHitByRangeY::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *SceneBgManagerImplement::EnableHitByRangeY::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C29FC0  SceneBgManagerImplement::DisableHitByRangeZ::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::DisableHitByRangeZ::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *SceneBgManagerImplement::DisableHitByRangeZ::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C29FE0  SceneBgManagerImplement::EnableHitByRangeZ::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::EnableHitByRangeZ::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = PredicateRigidBodyBase::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *SceneBgManagerImplement::EnableHitByRangeZ::vf00(byte flags)
+{
+    // vftable = SceneBgManagerImplement::PredicateRigidBodyBase::vftable (0x016A3754)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C2A000  FUN_00c2a000  size=151  [between]
-void __thiscall FUN_00c2a000(int *param_1,int *param_2)
-
-{
-  short sVar1;
-  int iVar2;
-  int iVar3;
-  int iStack_c;
-  int iStack_8;
-  int iStack_4;
-  
-  iStack_4 = (**(code **)(*param_1 + 0x6c))();
-  iStack_8 = 0;
-  if (0 < iStack_4) {
-    do {
-      iVar2 = (**(code **)(*param_1 + 0x70))(iStack_8);
-      if (iVar2 != 0) {
-        iVar3 = FUN_00a7c8a0();
-        iVar2 = *(int *)(iVar3 + 0x360);
-        if (*(int *)(iVar3 + 0x360) == 0) {
-          iVar2 = iVar3;
-        }
-        sVar1 = *(short *)(iVar2 + 0x358);
-        iVar2 = -1;
-        if (-1 < sVar1) {
-          do {
-            FUN_00a8c570(&iStack_c,iVar2);
-            if (iStack_c != 0) {
-              (**(code **)(*param_2 + 4))(&iStack_c);
-            }
-            iVar2 = iVar2 + 1;
-          } while ((short)iVar2 < sVar1);
-        }
-      }
-      iStack_8 = iStack_8 + 1;
-    } while (iStack_8 < iStack_4);
-  }
-  return;
+// ECX = the manager, stack = a PredicateRigidBodyBase: applies predicate->vf04 to every rigid body
+// (indices -1 .. count-1 of FUN_00a8c570) of the model of every layout object (vf6C / vf70).
+void FUN_00c2a000(int *manager, int *predicate)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgManagerImplement *self = (SceneBgManagerImplement *)manager;
+    int rigidBody;
+
+    int objectCount = self->vf6C();
+    int objectIndex = 0;
+    if (0 < objectCount) {
+        do {
+            int object = (int)self->vf70(objectIndex);
+            if (object != 0) {
+                int model = (int)FUN_00a7c8a0(object);
+                int source = *(int *)(model + 0x360);  // model+0x360: ? parent model, used when set
+                if (*(int *)(model + 0x360) == 0) {
+                    source = model;
+                }
+                short bodyCount = *(short *)(source + 0x358);  // model+0x358: rigid body count
+                int bodyIndex = -1;
+                if (-1 < bodyCount) {
+                    do {
+                        thiscall<undefined4>(FUN_00a8c570, (void *)model, (undefined4)&rigidBody,
+                                             (undefined4)bodyIndex);
+                        if (rigidBody != 0) {
+                            vcall<void>(predicate, 0x4, &rigidBody);
+                        }
+                        bodyIndex = bodyIndex + 1;
+                    } while ((short)bodyIndex < bodyCount);
+                }
+            }
+            objectIndex = objectIndex + 1;
+        } while (objectIndex < objectCount);
+    }
 }
 
 // 00C2A0A0  SceneBgManagerImplement::vf08  size=46  [class]
-void __thiscall SceneBgManagerImplement::vf08(int param_1,int *param_2)
-
-{
-  uint uVar1;
-  int *piVar2;
-  
-  uVar1 = 0;
-  piVar2 = (int *)(param_1 + 8);
-  do {
-    if (*piVar2 == *param_2) {
-      if (piVar2[0x14] == 0) {
-        FUN_00934940();
-      }
-      return;
-    }
-    uVar1 = uVar1 + 1;
-    piVar2 = piVar2 + 0x8ae;
-  } while (uVar1 < 8);
-  return;
+void SceneBgManagerImplement::vf08(int *idRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    int id = *idRef;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            if (work->flag50() == 0) {
+                FUN_00934940((int)work);
+            }
+            return;
+        }
+    }
 }
 
 // 00C2A0E0  SceneBgManagerImplement::vf0C  size=40  [class]
-void __thiscall SceneBgManagerImplement::vf0C(int param_1,int *param_2)
-
-{
-  uint uVar1;
-  int *piVar2;
-  
-  uVar1 = 0;
-  piVar2 = (int *)(param_1 + 8);
-  do {
-    if (*piVar2 == *param_2) {
-      FUN_00934a70();
-      return;
-    }
-    uVar1 = uVar1 + 1;
-    piVar2 = piVar2 + 0x8ae;
-  } while (uVar1 < 8);
-  return;
+void SceneBgManagerImplement::vf0C(int *idRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    int id = *idRef;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            FUN_00934a70((int)work);
+            return;
+        }
+    }
 }
 
 // 00C2A110  SceneBgManagerImplement::vf10  size=43  [class]
-void __thiscall SceneBgManagerImplement::vf10(int param_1,int param_2)
-
-{
-  uint uVar1;
-  int *piVar2;
-  
-  uVar1 = 0;
-  piVar2 = (int *)(param_1 + 8);
-  do {
-    if (*piVar2 == param_2) {
-      FUN_00934f10();
-      return;
-    }
-    uVar1 = uVar1 + 1;
-    piVar2 = piVar2 + 0x8ae;
-  } while (uVar1 < 8);
-  return;
+void SceneBgManagerImplement::vf10(int id)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            FUN_00934f10((undefined4 *)work);
+            return;
+        }
+    }
 }
 
 // 00C2A140  SceneBgManagerImplement::vf18  size=108  [class]
-void __thiscall SceneBgManagerImplement::vf18(int param_1,int *param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  char local_10 [16];
-  
-  uVar1 = 0;
-  piVar3 = (int *)(param_1 + 8);
-  do {
-    if (*piVar3 == -1) {
-      *piVar3 = *param_2;
-      _sprintf_s(local_10,0x10,"r%03x.ly2",*param_2);
-      uVar2 = FUN_00de4500(local_10);
-      FUN_00933890(uVar2);
-      FUN_00933720();
-      return;
-    }
-    uVar1 = uVar1 + 1;
-    piVar3 = piVar3 + 0x8ae;
-  } while (uVar1 < 8);
-  return;
+// Loads the layout "r<id>.ly2" of room *roomRef into the first free slot.
+void SceneBgManagerImplement::vf18(int *roomRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    char fileName[16];
+
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() == -1) {
+            work->id() = *roomRef;
+            _sprintf_s(fileName, 0x10, (char *)"r%03x.ly2", *roomRef);
+            int file = thiscall<int>(FUN_00de4500, roomRef + 2, fileName);  // ECX = roomRef+0x8
+            thiscall<void>(FUN_00933890, work, file);
+            FUN_00933720((int)work);
+            return;
+        }
+    }
 }
 
 // 00C2A1B0  SceneBgManagerImplement::vf14  size=112  [class]
-undefined4 __thiscall SceneBgManagerImplement::vf14(int param_1,int *param_2)
-
-{
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  
-  piVar4 = (int *)(param_1 + 8);
-  iVar3 = 8;
-  piVar5 = piVar4;
-  do {
-    if (*piVar5 != -1) {
-      FUN_00935420();
-    }
-    piVar5 = piVar5 + 0x8ae;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
-  uVar1 = 0;
-  do {
-    if (*piVar4 == *param_2) {
-      if (piVar4[0x14] != 0) {
-        iVar3 = FUN_00933750();
-        if (iVar3 != 0) {
-          FUN_00933900();
-        }
-      }
-      uVar2 = FUN_00933750();
-      return uVar2;
-    }
-    uVar1 = uVar1 + 1;
-    piVar4 = piVar4 + 0x8ae;
-  } while (uVar1 < 8);
-  return 1;
+undefined4 SceneBgManagerImplement::vf14(int *idRef)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *first = works();
+
+    SceneBgWork *work = first;
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        if (work->id() != -1) {
+            FUN_00935420((int)work);
+        }
+    }
+    work = first;
+    int id = *idRef;
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            if (work->flag50() != 0) {
+                if (WorkState(work) != 0) {
+                    FUN_00933900((int)work);
+                }
+            }
+            return (undefined4)WorkState(work);
+        }
+    }
+    return 1;
 }
 
 // 00C2A220  SceneBgManagerImplement::vf38  size=43  [class]
-void __thiscall SceneBgManagerImplement::vf38(int param_1,int param_2)
-
-{
-  uint uVar1;
-  int *piVar2;
-  
-  uVar1 = 0;
-  piVar2 = (int *)(param_1 + 8);
-  do {
-    if (*piVar2 == param_2) {
-      FUN_009338e0();
-      return;
-    }
-    uVar1 = uVar1 + 1;
-    piVar2 = piVar2 + 0x8ae;
-  } while (uVar1 < 8);
-  return;
+void SceneBgManagerImplement::vf38(int id)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            FUN_009338e0((int)work);
+            return;
+        }
+    }
 }
 
 // 00C2A250  SceneBgManagerImplement::vf3C  size=43  [class]
-void __thiscall SceneBgManagerImplement::vf3C(int param_1,int param_2)
-
-{
-  uint uVar1;
-  int *piVar2;
-  
-  uVar1 = 0;
-  piVar2 = (int *)(param_1 + 8);
-  do {
-    if (*piVar2 == param_2) {
-      FUN_009338f0();
-      return;
-    }
-    uVar1 = uVar1 + 1;
-    piVar2 = piVar2 + 0x8ae;
-  } while (uVar1 < 8);
-  return;
+void SceneBgManagerImplement::vf3C(int id)
+{
+    using namespace SceneBgManagerImplement_p1;
+    SceneBgWork *work = works();
+    for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+        if (work->id() == id) {
+            FUN_009338f0((int)work);
+            return;
+        }
+    }
 }
 
 // 00C2A280  SceneBgManagerImplement::vf00  size=193  [class]
-void __fastcall SceneBgManagerImplement::vf00(int param_1)
-
-{
-  float fVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
-  bool bVar5;
-  
-  FUN_00c18240();
-  if (*(int *)(param_1 + 0x115c8) == 0) {
-    piVar4 = (int *)(param_1 + 8);
-    iVar3 = 8;
-    do {
-      if (*piVar4 != -1) {
-        FUN_00934db0();
-      }
-      piVar4 = piVar4 + 0x8ae;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
-    return;
-  }
-  fVar1 = *(float *)(param_1 + 0x115d0) - 0.016666668;
-  *(float *)(param_1 + 0x115d0) = fVar1;
-  if (fVar1 <= 0.0) {
-    FUN_00fde300((double)(ABS(fVar1) * 60.0));
-    uVar2 = FUN_00fdbc60();
-    uVar2 = uVar2 & 0x80000001;
-    bVar5 = uVar2 == 0;
-    if ((int)uVar2 < 0) {
-      bVar5 = (uVar2 - 1 | 0xfffffffe) == 0xffffffff;
-    }
-    if (bVar5) {
-      uVar2 = 0;
-      piVar4 = (int *)(param_1 + 8);
-      while ((*piVar4 == -1 || (iVar3 = FUN_00934040(), iVar3 == 0))) {
-        uVar2 = uVar2 + 1;
-        piVar4 = piVar4 + 0x8ae;
-        if (7 < uVar2) {
-          *(undefined4 *)(param_1 + 0x115c8) = 0;
-          *(undefined4 *)(param_1 + 0x115cc) = 1;
-          return;
-        }
-      }
-    }
-  }
-  return;
+// Per-frame update.  While the wait started by vf04 runs, count it down by 1/60 s; once it has
+// expired, on every other frame (floor(|remaining| * 60) even) check the used slots with
+// FUN_00934040 and end the wait (waitDone = 1) when none of them reports non-zero.
+void SceneBgManagerImplement::vf00()
+{
+    using namespace SceneBgManagerImplement_p1;
+    FUN_00c18240((int)this);
+    if (waitActive() == 0) {
+        SceneBgWork *work = works();
+        for (int i = 0; i < kWorkCount; i++, work++) {
+            if (work->id() != -1) {
+                FUN_00934db0((int)work);
+            }
+        }
+        return;
+    }
+    // x87: the difference stays unrounded on the FPU stack after the float store
+    double remaining = (double)waitTimer() - (double)0.016666668f;
+    waitTimer() = (float)remaining;
+    if (!(0.0 < remaining)) {  // fcomp + test ah,5: also taken when unordered
+        // FUN_00fde300 (? floor), then FUN_00fdbc60 (_ftol2) for the int conversion
+        int frames = (int)FUN_00fde300(AbsD(remaining) * (double)60.0f);
+        if (frames % 2 == 0) {
+            SceneBgWork *work = works();
+            for (unsigned int i = 0; i < (unsigned int)kWorkCount; i++, work++) {
+                if (work->id() != -1 && FUN_00934040((int)work) != 0) {
+                    return;
+                }
+            }
+            waitActive() = 0;
+            waitDone() = 1;
+            return;
+        }
+    }
 }
 
 // 00C2A350  SceneBgManagerImplement::EntityDeletedSlot::vf00  size=31  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::EntityDeletedSlot::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = Slot::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *SceneBgManagerImplement::EntityDeletedSlot::vf00(byte flags)
+{
+    // vftable = Slot::vftable (0x0163B780)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C420F0  SceneBgManagerImplement::vf74  size=42  [class]
-void SceneBgManagerImplement::vf74(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = DisableHitByRange::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+// Disables the hit of every layout rigid body inside the box [minPoint, maxPoint].
+void SceneBgManagerImplement::vf74(undefined4 minPoint, undefined4 maxPoint)
+{
+    DisableHitByRange predicate;  // vftable = DisableHitByRange::vftable (0x016A3E2C)
+    predicate.minPoint() = (float *)minPoint;
+    predicate.maxPoint() = (float *)maxPoint;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C42120  SceneBgManagerImplement::vf78  size=42  [class]
-void SceneBgManagerImplement::vf78(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = DisableHitByRangeX::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+// The two arguments are floats (copied through the FPU); stored bit for bit.
+void SceneBgManagerImplement::vf78(undefined4 minValue, undefined4 maxValue)
+{
+    DisableHitByRangeX predicate;  // vftable = DisableHitByRangeX::vftable (0x016A3E44)
+    *(undefined4 *)&predicate.minValue() = minValue;
+    *(undefined4 *)&predicate.maxValue() = maxValue;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C42150  SceneBgManagerImplement::vf7C  size=42  [class]
-void SceneBgManagerImplement::vf7C(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = DisableHitByRangeY::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+void SceneBgManagerImplement::vf7C(undefined4 minValue, undefined4 maxValue)
+{
+    DisableHitByRangeY predicate;  // vftable = DisableHitByRangeY::vftable (0x016A3E5C)
+    *(undefined4 *)&predicate.minValue() = minValue;
+    *(undefined4 *)&predicate.maxValue() = maxValue;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C42180  SceneBgManagerImplement::vf80  size=42  [class]
-void SceneBgManagerImplement::vf80(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = DisableHitByRangeZ::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+void SceneBgManagerImplement::vf80(undefined4 minValue, undefined4 maxValue)
+{
+    DisableHitByRangeZ predicate;  // vftable = DisableHitByRangeZ::vftable (0x016A3E74)
+    *(undefined4 *)&predicate.minValue() = minValue;
+    *(undefined4 *)&predicate.maxValue() = maxValue;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C421B0  SceneBgManagerImplement::vf84  size=42  [class]
-void SceneBgManagerImplement::vf84(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = EnableHitByRange::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+// Enables the hit of every layout rigid body inside the box [minPoint, maxPoint].
+void SceneBgManagerImplement::vf84(undefined4 minPoint, undefined4 maxPoint)
+{
+    EnableHitByRange predicate;  // vftable = EnableHitByRange::vftable (0x016A3E38)
+    predicate.minPoint() = (float *)minPoint;
+    predicate.maxPoint() = (float *)maxPoint;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C421E0  SceneBgManagerImplement::vf88  size=42  [class]
-void SceneBgManagerImplement::vf88(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = EnableHitByRangeX::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+void SceneBgManagerImplement::vf88(undefined4 minValue, undefined4 maxValue)
+{
+    EnableHitByRangeX predicate;  // vftable = EnableHitByRangeX::vftable (0x016A3E50)
+    *(undefined4 *)&predicate.minValue() = minValue;
+    *(undefined4 *)&predicate.maxValue() = maxValue;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C42210  SceneBgManagerImplement::vf8C  size=42  [class]
-void SceneBgManagerImplement::vf8C(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = EnableHitByRangeY::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+void SceneBgManagerImplement::vf8C(undefined4 minValue, undefined4 maxValue)
+{
+    EnableHitByRangeY predicate;  // vftable = EnableHitByRangeY::vftable (0x016A3E68)
+    *(undefined4 *)&predicate.minValue() = minValue;
+    *(undefined4 *)&predicate.maxValue() = maxValue;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C42240  SceneBgManagerImplement::vf90  size=42  [class]
-void SceneBgManagerImplement::vf90(undefined4 param_1,undefined4 param_2)
-
-{
-  undefined **local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  local_8 = param_1;
-  local_c = EnableHitByRangeZ::vftable;
-  local_4 = param_2;
-  FUN_00c2a000(&local_c);
-  return;
+void SceneBgManagerImplement::vf90(undefined4 minValue, undefined4 maxValue)
+{
+    EnableHitByRangeZ predicate;  // vftable = EnableHitByRangeZ::vftable (0x016A3E80)
+    *(undefined4 *)&predicate.minValue() = minValue;
+    *(undefined4 *)&predicate.maxValue() = maxValue;
+    FUN_00c2a000((int *)this, (int *)&predicate);
 }
 
 // 00C625E0  SceneBgManagerImplement::EntityDeletedSlot::EntityDeletedSlot  size=807  [class]
-undefined4 * __thiscall
-SceneBgManagerImplement::EntityDeletedSlot::EntityDeletedSlot
-          (undefined4 *param_1,undefined4 param_2)
-
-{
-  undefined4 *puVar1;
-  int iVar2;
-  
-  *param_1 = SceneBgManagerImplement::vftable;
-  param_1[1] = param_2;
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  param_1[0x1e] = 0;
-  param_1[0x1d] = param_1 + 0x20;
-  param_1[0x1f] = 0x80;
-  param_1[0x1c] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x8b6] = 0;
-  param_1[0x8b7] = 0;
-  param_1[0x8ba] = 0;
-  param_1[0x8bb] = 0;
-  param_1[0x8bc] = 0;
-  param_1[0x8bd] = 0;
-  param_1[0x8be] = 0;
-  param_1[0x8bf] = 0;
-  param_1[0x8c0] = 0;
-  param_1[0x8c1] = 0;
-  param_1[0x8cb] = param_1 + 0x8ce;
-  param_1[0x8cc] = 0;
-  param_1[0x8cd] = 0x80;
-  param_1[0x8ca] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x1164] = 0;
-  param_1[0x1165] = 0;
-  param_1[0x1168] = 0;
-  param_1[0x1169] = 0;
-  param_1[0x116a] = 0;
-  param_1[0x116b] = 0;
-  param_1[0x116c] = 0;
-  param_1[0x116d] = 0;
-  param_1[0x116e] = 0;
-  param_1[0x116f] = 0;
-  param_1[0x1179] = param_1 + 0x117c;
-  param_1[0x117a] = 0;
-  param_1[0x117b] = 0x80;
-  param_1[0x1178] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x1a12] = 0;
-  param_1[0x1a13] = 0;
-  param_1[0x1a16] = 0;
-  param_1[0x1a17] = 0;
-  param_1[0x1a18] = 0;
-  param_1[0x1a19] = 0;
-  param_1[0x1a1a] = 0;
-  param_1[0x1a1b] = 0;
-  param_1[0x1a1c] = 0;
-  param_1[0x1a1d] = 0;
-  param_1[0x1a27] = param_1 + 0x1a2a;
-  param_1[0x1a28] = 0;
-  param_1[0x1a29] = 0x80;
-  param_1[0x1a26] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x22c0] = 0;
-  param_1[0x22c1] = 0;
-  param_1[0x22c4] = 0;
-  param_1[0x22c5] = 0;
-  param_1[0x22c6] = 0;
-  param_1[0x22c7] = 0;
-  param_1[0x22c8] = 0;
-  param_1[0x22c9] = 0;
-  param_1[0x22ca] = 0;
-  param_1[0x22cb] = 0;
-  param_1[0x22d5] = param_1 + 0x22d8;
-  param_1[0x22d6] = 0;
-  param_1[0x22d7] = 0x80;
-  param_1[0x22d4] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x2b6e] = 0;
-  param_1[0x2b6f] = 0;
-  param_1[0x2b72] = 0;
-  param_1[0x2b73] = 0;
-  param_1[0x2b74] = 0;
-  param_1[0x2b75] = 0;
-  param_1[0x2b76] = 0;
-  param_1[0x2b77] = 0;
-  param_1[0x2b78] = 0;
-  param_1[0x2b79] = 0;
-  param_1[0x2b83] = param_1 + 0x2b86;
-  param_1[0x2b84] = 0;
-  param_1[0x2b85] = 0x80;
-  param_1[0x2b82] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x341c] = 0;
-  param_1[0x341d] = 0;
-  param_1[0x3420] = 0;
-  param_1[0x3421] = 0;
-  param_1[0x3422] = 0;
-  param_1[0x3423] = 0;
-  param_1[0x3424] = 0;
-  param_1[0x3425] = 0;
-  param_1[0x3426] = 0;
-  param_1[0x3427] = 0;
-  param_1[0x3431] = param_1 + 0x3434;
-  param_1[0x3432] = 0;
-  param_1[0x3433] = 0x80;
-  param_1[0x3430] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x3cca] = 0;
-  param_1[0x3ccb] = 0;
-  param_1[0x3cce] = 0;
-  param_1[0x3ccf] = 0;
-  param_1[0x3cd0] = 0;
-  param_1[0x3cd1] = 0;
-  param_1[0x3cd2] = 0;
-  param_1[0x3cd3] = 0;
-  param_1[0x3cd4] = 0;
-  param_1[0x3cd5] = 0;
-  param_1[0x3cdf] = param_1 + 0x3ce2;
-  param_1[0x3ce0] = 0;
-  param_1[0x3ce1] = 0x80;
-  param_1[0x3cde] = lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable;
-  param_1[0x4574] = 0;
-  param_1[0x4572] = 0;
-  iVar2 = 8;
-  do {
-    FUN_00935030();
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  puVar1 = (undefined4 *)FUN_00dd3500(4,param_2);
-  if (puVar1 == (undefined4 *)0x0) {
-    puVar1 = (undefined4 *)0x0;
-  }
-  else {
-    *puVar1 = vftable;
-  }
-  param_1[0x4575] = puVar1;
-  FUN_00d89ec0(0x3a,puVar1);
-  return param_1;
+// Really the SceneBgManagerImplement constructor (writes its vftable 0x016A6F7C).  The binary
+// unrolls the per-slot initialisation.
+SceneBgManagerImplement::SceneBgManagerImplement(void *heapArg)
+{
+    using namespace SceneBgManagerImplement_p1;
+    // vftable = SceneBgManagerImplement::vftable (0x016A6F7C)
+    heap() = heapArg;
+    SceneBgWork *work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        work->field18() = 0;
+        work->field1C() = 0;
+        work->field28() = 0;
+        work->field2C() = 0;
+        work->field30() = 0;
+        work->field34() = 0;
+        work->field38() = 0;
+        work->field3C() = 0;
+        work->field40() = 0;
+        work->field44() = 0;
+        work->layoutsCount() = 0;
+        work->layoutsData() = work->layoutsStorage();
+        work->layoutsCapacity() = 0x80;
+        work->layoutsVftable() = (void *)0x016A6DB4;  // lib::StaticArray<SceneBgWork::LayoutUnit,128>::vftable
+    }
+    waitTimer() = 0.0f;
+    waitActive() = 0;
+    work = works();
+    for (int i = 0; i < kWorkCount; i++, work++) {
+        FUN_00935030((int)work);  // ? SceneBgWork init
+    }
+    void *slot = MemAlloc(4, heapArg);
+    if (slot == 0) {
+        slot = 0;
+    }
+    else {
+        *(void **)slot = (void *)0x016A3760;  // vftable = SceneBgManagerImplement::EntityDeletedSlot::vftable
+    }
+    entityDeletedSlot() = (EntityDeletedSlot *)slot;
+    RegisterSlot(0x3a, slot);
 }
 
 // 00C62910  SceneBgManagerImplement::vf9C  size=30  [class]
-undefined4 __thiscall SceneBgManagerImplement::vf9C(undefined4 param_1,byte param_2)
-
-{
-  SceneBgManager::SceneBgManager();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *SceneBgManagerImplement::vf9C(byte flags)
+{
+    using namespace SceneBgManagerImplement_p1;
+    DestroyBody(this);
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
-

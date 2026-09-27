@@ -1,17 +1,29 @@
-// src/managers/triggermanager/actions/TrgActUnloadroom.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7F1F0..00C7F1F0, 1 functions
-
+// src/managers/triggermanager/actions/TrgActUnloadroom.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C7F1F0  Trigger::Act::UnloadRoom  size=47  [class]
-undefined4 __fastcall Trigger::Act::UnloadRoom(int param_1)
-
-{
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_00dd5650(&DAT_016aaaa0);
-    return 0;
-  }
-  FUN_00a4ea90(*(undefined4 *)(*(int *)(param_1 + 4) + 8));
-  return 1;
-}
+extern char DAT_016aaaa0[];  // debug message: action has no record
 
+// Trigger::Act::UnloadRoom is the vf18 ("execute") body of the matching Trigger::cAct* action:
+// ECX = the action object; action[1] = its record (record[1] = action type, parameters from +0x08).
+namespace Trigger { namespace Act {
+int __fastcall UnloadRoom(int *action);
+} }
+
+namespace TrgActUnloadroom_p1 {
+
+typedef void (*DebugPrintFn)(const void *format, ...);
+const DebugPrintFn debugPrint = (DebugPrintFn)FUN_00dd5650;  // debug printf (empty in release)
+
+} // namespace TrgActUnloadroom_p1
+
+// 00C7F1F0  Trigger::Act::UnloadRoom  size=47  [class]
+int __fastcall Trigger::Act::UnloadRoom(int *action)
+{
+    using namespace TrgActUnloadroom_p1;
+    if (action[1] == 0) {
+        debugPrint(DAT_016aaaa0);
+        return 0;
+    }
+    ((void (*)(int))FUN_00a4ea90)(((int *)action[1])[2]);  // room id
+    return 1;
+}

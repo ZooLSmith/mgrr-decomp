@@ -1,38 +1,61 @@
-// src/managers/ccutdatamanager/cCutDataManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D8D310..00D8D310, 1 functions
-
+// src/managers/ccutdatamanager/cCutDataManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+// The raw file includes no class header (none was generated for cCutDataManager); the refined
+// header written for this file declares the class.
+#include "cCutDataManager.h"
 
-// 00D8D310  cCutDataManager::entryData  size=167  [class]
-uint __fastcall cCutDataManager::entryData(int param_1)
-
-{
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  
-  if (*(int *)(param_1 + 0x18) != 0) {
-    puVar2 = (undefined4 *)FUN_00d8b200();
-    if (puVar2 != (undefined4 *)0x0) {
-      *puVar2 = 0;
-      FUN_00a15130();
-      FUN_00a16570();
-      puVar1 = *(undefined4 **)(param_1 + 0x18);
-      if ((puVar2 < puVar1) || (puVar1 + *(int *)(param_1 + 0x1c) * 0x84 <= puVar2)) {
-        uVar3 = 0xffffffff;
-      }
-      else {
-        uVar3 = (uint)((int)puVar2 - (int)puVar1) / 0x210;
-      }
-      puVar2[0x7e] = 0;
-      puVar2[0x7f] = 0;
-      puVar2[0x7c] = 0;
-      puVar2[0x7d] = 1;
-      FUN_00d8ae30(puVar2);
-      return uVar3;
-    }
-  }
-  FUN_00dd5650(&DAT_016c2858);
-  return 0xffffffff;
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// "cCutDataManager::entryData(): could not allocate a data area after cutting." (Shift-JIS, translated)
+extern const char DAT_016c2858[];
+
+namespace cCutDataManager_p1 {
+
+typedef cCutDataManager::CutDataWork CutDataWork;
+
+// __thiscall call of a function with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
 }
 
+// __cdecl call of a function
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+}  // namespace cCutDataManager_p1
+
+// 00D8D310  cCutDataManager::entryData  size=167  [class]
+uint cCutDataManager::entryData()
+{
+    using namespace cCutDataManager_p1;
+    if (works() != 0) {
+        CutDataWork *work = thiscall<CutDataWork *>(FUN_00d8b200, freeList());  // pop
+        if (work != 0) {
+            work->field000 = 0;
+            FUN_00a15130((int)work->sub010);
+            FUN_00a16570((int)work->sub110);
+            CutDataWork *pool = works();
+            uint index;
+            if (work < pool || pool + workCount() <= work) {
+                index = 0xFFFFFFFF;
+            }
+            else {
+                index = (uint)((char *)work - (char *)pool) / 0x210;
+            }
+            work->field1F8 = 0;
+            work->field1FC = 0;
+            work->field1F0 = 0;
+            work->field1F4 = 1;
+            thiscall<void>(FUN_00d8ae30, activeList(), work);  // push
+            return index;
+        }
+    }
+    cdeclcall<void>(FUN_00dd5650, DAT_016c2858);
+    return 0xFFFFFFFF;
+}

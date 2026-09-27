@@ -1,224 +1,253 @@
-// src/managers/cmapinfomanager/cMapInfoManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 0096D700..0096D8E0, 2 functions
-
+// src/managers/cmapinfomanager/cMapInfoManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cMapInfoManager.h"
+
+// Data referenced by this part
+extern undefined *PTR_vftable_018e9b94;  // global allocator object (first dword = vftable; slot 0x10 = free)
+extern unsigned char DAT_01651954[];     // debug message: path table allocation failed
+extern unsigned char DAT_016514a4[];     // attribute name read into path entry +0xE0
+
+namespace cMapInfoManager_p1 {
+
+// __cdecl call of a function (symbol or address); used for callees whose register argument the
+// decompiler did not show ("ECX: ?") and for mismatching prototypes.
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class S, class... A> inline R thiscall(F fn, S self, A... args)
+{
+    typedef R (__thiscall *Fn)(S, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// Size of one path entry.
+const int kPathEntrySize = 0x130;
+
+// Inlined initialisation of the 16 attachment slots of a path entry (entry + 0x38, 12 bytes each:
+// short -1, short 0, float 1.5, int 0). `p` points at the int of the first slot (entry + 0x40).
+inline void initAttachSlots(undefined4 *p)
+{
+    int remaining = 0xf;
+    do {
+        p[-1] = 0x3fc00000;  // 1.5f
+        *(unsigned short *)(p + -2) = 0xffff;
+        *(unsigned short *)((int)p + -6) = 0;
+        *p = 0;
+        p = p + 3;
+        remaining = remaining + -1;
+    } while (-1 < remaining);
+}
+
+// Slot of FUN_0096d8e0's stack frame, addressed by its offset from the frame top (-0x180 .. -0x10).
+// The decompiler split this frame into overlapping locals, so it is kept as one block.
+template <class T> inline T &frameAt(unsigned char *frame, int offset)
+{
+    return *(T *)(frame + 0x180 + offset);
+}
+
+} // namespace cMapInfoManager_p1
 
 // 0096D700  cMapInfoManager::sortPathData  size=466  [class]
-void __thiscall cMapInfoManager::sortPathData(int param_1,int param_2,int *param_3)
-
-{
-  int *piVar1;
-  longlong lVar2;
-  int *piVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  int extraout_ECX;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  int local_14c;
-  undefined4 local_100 [46];
-  int local_48;
-  uint local_38;
-  
-  iVar8 = *param_3;
-  iVar6 = 0;
-  local_14c = 0;
-  if (iVar8 != param_3[1] * 0x130 + iVar8) {
-    piVar3 = (int *)(iVar8 + 0xf8);
-    do {
-      iVar4 = *piVar3;
-      if (iVar6 <= iVar4) {
-        iVar6 = iVar4;
-        local_14c = iVar4;
-      }
-      piVar1 = piVar3 + 0xe;
-      piVar3 = piVar3 + 0x4c;
-    } while (piVar1 != (int *)(param_3[1] * 0x130 + iVar8));
-  }
-  uVar7 = iVar6 + 1;
-  lVar2 = (ulonglong)uVar7 * 0x130;
-  iVar4 = FUN_00dd3580(-(uint)((int)((ulonglong)lVar2 >> 0x20) != 0) | (uint)lVar2,
-                       *(undefined4 *)(param_1 + 0x324));
-  iVar8 = iVar4;
-  if (iVar4 == 0) {
-    iVar4 = 0;
-  }
-  else {
-    for (; -1 < iVar6; iVar6 = iVar6 + -1) {
-      FUN_00401040(iVar8 + 0x38,0xc,0x10,&LAB_00964f00);
-      FUN_00962e70();
-      iVar8 = iVar8 + 0x130;
-    }
-  }
-  param_1 = param_2 * 0x20 + param_1;
-  *(int *)(param_1 + 0x28) = iVar4;
-  *(uint *)(param_1 + 0x2c) = uVar7;
-  if (iVar4 == 0) {
-    FUN_00dd5650(&DAT_01651954);
-    return;
-  }
-  iVar8 = 0;
-  if (-1 < local_14c) {
-    do {
-      iVar6 = *param_3;
-      if (iVar6 != param_3[1] * 0x130 + iVar6) {
-        do {
-          if (*(int *)(iVar6 + 0xf8) == iVar8) goto LAB_0096d86c;
-          iVar6 = iVar6 + 0x130;
-        } while (iVar6 != param_3[1] * 0x130 + *param_3);
-      }
-      iVar6 = 0xf;
-      puVar5 = local_100;
-      do {
-        puVar5[-1] = 0x3fc00000;
-        *(undefined2 *)(puVar5 + -2) = 0xffff;
-        *(undefined2 *)((int)puVar5 + -6) = 0;
-        *puVar5 = 0;
-        puVar5 = puVar5 + 3;
-        iVar6 = iVar6 + -1;
-      } while (-1 < iVar6);
-      FUN_00962e70();
-      local_38 = local_38 | 0x40000000;
-      iVar6 = extraout_ECX;
-      local_48 = iVar8;
-LAB_0096d86c:
-      FUN_00963a80(iVar6);
-      iVar8 = iVar8 + 1;
-    } while (iVar8 <= local_14c);
-  }
-  param_3[1] = 0;
-  if (-1 < param_3[2]) {
-    (**(code **)(PTR_vftable_018e9b94 + 0x10))(*param_3,(param_3[2] & 0x3fffffffU) * 0x130);
-  }
-  *param_3 = 0;
-  param_3[2] = -0x80000000;
-  return;
+void cMapInfoManager::sortPathData(int index, int *pathArray)
+{
+    using namespace cMapInfoManager_p1;
+    int data;
+    int entry;
+    int maxId;
+    int maxIdCopy;
+    int id;
+    unsigned int tableCount;
+    unsigned __int64 bytes;
+    int table;
+    int block;
+    int newEntry;
+    int searchId;
+    int source;
+    int ecxAfterInit;             // ? extraout_ECX: ECX left by FUN_00962e70 (probably &tempEntry)
+    unsigned char tempEntry[0x130];  // local_140: default entry for an id without data
+    int slotBase;
+
+    data = pathArray[0];
+    entry = data;
+    maxId = 0;
+    maxIdCopy = 0;
+    if (data != pathArray[1] * kPathEntrySize + data) {
+        do {
+            id = *(int *)(entry + 0xf8);
+            if (maxId <= id) {
+                maxId = id;
+                maxIdCopy = id;
+            }
+            entry = entry + kPathEntrySize;
+        } while (entry != pathArray[1] * kPathEntrySize + data);
+    }
+    tableCount = maxId + 1;
+    bytes = (unsigned __int64)tableCount * kPathEntrySize;
+    table = cdeclcall<int>(FUN_00dd3580,
+                           -(unsigned int)((int)(bytes >> 0x20) != 0) | (unsigned int)bytes, heap());
+    block = table;
+    if (table == 0) {
+        table = 0;
+    }
+    else {
+        newEntry = block;
+        for (; -1 < maxId; maxId = maxId + -1) {
+            FUN_00401040(newEntry + 0x38, 0xc, 0x10, (code *)0x00964F00 /* LAB_00964f00: slot ctor */);
+            cdeclcall<void>(FUN_00962e70); /* ECX: ? (likely newEntry) */
+            newEntry = newEntry + kPathEntrySize;
+        }
+    }
+    slotBase = index * 0x20 + (int)this;
+    *(int *)(slotBase + 0x28) = table;           // pathTableData(index)
+    *(unsigned int *)(slotBase + 0x2c) = tableCount;  // pathTableCount(index)
+    if (table == 0) {
+        cdeclcall<void>(FUN_00dd5650, DAT_01651954);
+        return;
+    }
+    searchId = 0;
+    if (-1 < maxIdCopy) {
+        do {
+            source = pathArray[0];
+            if (source != pathArray[1] * kPathEntrySize + source) {
+                do {
+                    if (*(int *)(source + 0xf8) == searchId) goto found;
+                    source = source + kPathEntrySize;
+                } while (source != pathArray[1] * kPathEntrySize + pathArray[0]);
+            }
+            initAttachSlots((undefined4 *)(tempEntry + 0x40));
+            cdeclcall<void>(FUN_00962e70); /* ECX: ? (likely &tempEntry) */
+            *(unsigned int *)(tempEntry + 0x108) = *(unsigned int *)(tempEntry + 0x108) | 0x40000000;
+            source = ecxAfterInit;
+            *(int *)(tempEntry + 0xf8) = searchId;
+found:
+            cdeclcall<void>(FUN_00963a80, source); /* ECX: ? */
+            searchId = searchId + 1;
+        } while (searchId <= maxIdCopy);
+    }
+    pathArray[1] = 0;
+    if (-1 < pathArray[2]) {
+        vcall<void>(&PTR_vftable_018e9b94, 0x10, pathArray[0],
+                    (pathArray[2] & 0x3fffffffU) * kPathEntrySize);  // free
+    }
+    pathArray[0] = 0;
+    pathArray[2] = -0x80000000;
 }
 
 // 0096D8E0  FUN_0096d8e0  size=768  [callgraph]
-undefined4 FUN_0096d8e0(undefined4 param_1,int *param_2,undefined4 param_3)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
-  uint unaff_EBX;
-  uint unaff_ESI;
-  int unaff_EDI;
-  int iVar4;
-  undefined4 local_174;
-  uint local_170;
-  undefined4 local_16c;
-  undefined4 local_168;
-  undefined4 local_164;
-  undefined4 uStack_154;
-  uint uStack_150;
-  undefined4 uStack_14c;
-  undefined4 uStack_148;
-  undefined4 uStack_134;
-  uint uStack_130;
-  undefined4 uStack_12c;
-  undefined4 uStack_128;
-  undefined4 auStack_10c [40];
-  undefined1 auStack_6c [4];
-  undefined1 auStack_68 [4];
-  undefined1 auStack_64 [12];
-  undefined1 auStack_58 [4];
-  undefined1 auStack_54 [24];
-  undefined1 auStack_3c [56];
-  
-  iVar4 = 0;
-  local_174 = 0;
-  local_170 = 0;
-  local_16c = 0x80000000;
-  local_164 = 0;
-  iVar1 = (**(code **)(*param_2 + 0x10))(param_3);
-  if (0 < iVar1) {
-    do {
-      iVar1 = (**(code **)(*param_2 + 0x14))(param_3,iVar4);
-      if (iVar1 != -1) {
-        iVar4 = 0xf;
-        puVar2 = auStack_10c;
-        do {
-          puVar2[-1] = 0x3fc00000;
-          *(undefined2 *)(puVar2 + -2) = 0xffff;
-          *(undefined2 *)((int)puVar2 + -6) = 0;
-          *puVar2 = 0;
-          puVar2 = puVar2 + 3;
-          iVar4 = iVar4 + -1;
-        } while (-1 < iVar4);
-        FUN_00962e70();
-        FUN_00962e70();
-        iVar4 = (**(code **)(*param_2 + 0x18))(iVar1,"Position");
-        if (iVar4 != -1) {
-          local_174 = 0;
-          local_170 = 0;
-          local_16c = 0;
-          (**(code **)(*param_2 + 0x44))(iVar4,&local_174);
-          uStack_134 = local_174;
-          uStack_130 = local_170;
-          uStack_12c = local_16c;
-          uStack_128 = local_168;
-        }
-        iVar4 = (**(code **)(*param_2 + 0x18))(iVar1,"EditNo");
-        if (iVar4 != -1) {
-          (**(code **)(*param_2 + 0x58))(iVar4,auStack_64);
-        }
-        iVar4 = (**(code **)(*param_2 + 0x18))(iVar1,"BranchNum");
-        if (iVar4 != -1) {
-          (**(code **)(*param_2 + 0x58))(iVar4,auStack_68);
-        }
-        uVar3 = (**(code **)(*param_2 + 0x18))(iVar1,"Branch");
-        FUN_00963f20(&local_16c,param_2,uVar3);
-        iVar4 = (**(code **)(*param_2 + 0x18))(iVar1,&DAT_016514a4);
-        if (iVar4 != -1) {
-          (**(code **)(*param_2 + 0x68))(iVar4,auStack_6c);
-        }
-        iVar1 = (**(code **)(*param_2 + 0x18))(iVar1,"PartsInfo");
-        if (iVar1 != -1) {
-          iVar4 = (**(code **)(*param_2 + 0x18))(iVar1,"ObjId");
-          if (iVar4 != -1) {
-            (**(code **)(*param_2 + 0x58))(iVar4,auStack_54);
-          }
-          iVar4 = (**(code **)(*param_2 + 0x18))(iVar1,"PartsNo");
-          if (iVar4 != -1) {
-            (**(code **)(*param_2 + 0x58))(iVar4,auStack_58);
-          }
-          iVar4 = (**(code **)(*param_2 + 0x18))(iVar1,"OffSetPos");
-          if (iVar4 != -1) {
-            local_174 = 0;
-            local_170 = 0;
-            local_16c = 0;
-            (**(code **)(*param_2 + 0x44))(iVar4,&local_174);
-            uStack_154 = local_174;
-            uStack_150 = local_170;
-            uStack_14c = local_16c;
-            uStack_148 = local_168;
-          }
-          iVar1 = (**(code **)(*param_2 + 0x18))(iVar1,"ParentHash");
-          if (iVar1 != -1) {
-            (**(code **)(*param_2 + 0x68))(iVar1,auStack_3c);
-          }
-        }
-        if (unaff_ESI == (unaff_EBX & 0x3fffffff)) {
-          FUN_0100a290(&PTR_vftable_018e9b94,&stack0xfffffe80,0x130);
-        }
-        if (unaff_ESI * 0x130 + unaff_EDI != 0) {
-          FUN_00964be0(&uStack_14c);
-        }
-        unaff_ESI = unaff_ESI + 1;
-      }
-      local_170 = local_170 + 1;
-      iVar4 = (int)(short)local_170;
-      iVar1 = (**(code **)(*param_2 + 0x10))(param_3);
-    } while (iVar4 < iVar1);
-  }
-  cMapInfoManager::sortPathData(param_1,&stack0xfffffe88);
-  local_174 = 0;
-  if (-1 < (int)local_170) {
-    (**(code **)(PTR_vftable_018e9b94 + 0x10))(unaff_EBX,(local_170 & 0x3fffffff) * 0x130);
-  }
-  return 1;
-}
+// Reads the path nodes under `node` ("Position", "EditNo", "BranchNum", "Branch", "PartsInfo" ...)
+// through `reader` into a temporary array and hands it to cMapInfoManager::sortPathData.
+undefined4 FUN_0096d8e0(undefined4 manager, int *reader, undefined4 node)
+{
+    using namespace cMapInfoManager_p1;
+    int child;
+    int count;
+    int attr;
+    int childIndex;
+    undefined4 branchAttr;
+    unsigned int arrayCapacity;   // ? unaff_EBX: register value on entry
+    unsigned int arrayCount;      // ? unaff_ESI: register value on entry
+    int arrayData;                // ? unaff_EDI: register value on entry
+    unsigned char frame[0x170];   // stack frame -0x180 .. -0x10
 
+    // frame slots: -0x174..-0x168 vector temp (also the array header / loop counter at -0x170),
+    // -0x154 offset position, -0x14C path entry being built (0x130 bytes; +0x18 position,
+    // +0x40 attachment slots, +0xE0.. attributes, +0x110 parent hash)
+    childIndex = 0;
+    frameAt<undefined4>(frame, -0x174) = 0;
+    frameAt<unsigned int>(frame, -0x170) = 0;
+    frameAt<undefined4>(frame, -0x16c) = 0x80000000;
+    frameAt<undefined4>(frame, -0x164) = 0;
+    count = vcall<int>(reader, 0x10, node);
+    if (0 < count) {
+        do {
+            child = vcall<int>(reader, 0x14, node, childIndex);
+            if (child != -1) {
+                initAttachSlots(&frameAt<undefined4>(frame, -0x10c));
+                cdeclcall<void>(FUN_00962e70); /* ECX: ? */
+                cdeclcall<void>(FUN_00962e70); /* ECX: ? */
+                attr = vcall<int>(reader, 0x18, child, "Position");
+                if (attr != -1) {
+                    frameAt<undefined4>(frame, -0x174) = 0;
+                    frameAt<unsigned int>(frame, -0x170) = 0;
+                    frameAt<undefined4>(frame, -0x16c) = 0;
+                    vcall<void>(reader, 0x44, attr, &frameAt<undefined4>(frame, -0x174));
+                    frameAt<undefined4>(frame, -0x134) = frameAt<undefined4>(frame, -0x174);
+                    frameAt<unsigned int>(frame, -0x130) = frameAt<unsigned int>(frame, -0x170);
+                    frameAt<undefined4>(frame, -0x12c) = frameAt<undefined4>(frame, -0x16c);
+                    frameAt<undefined4>(frame, -0x128) = frameAt<undefined4>(frame, -0x168);
+                }
+                attr = vcall<int>(reader, 0x18, child, "EditNo");
+                if (attr != -1) {
+                    vcall<void>(reader, 0x58, attr, &frameAt<undefined1>(frame, -0x64));
+                }
+                attr = vcall<int>(reader, 0x18, child, "BranchNum");
+                if (attr != -1) {
+                    vcall<void>(reader, 0x58, attr, &frameAt<undefined1>(frame, -0x68));
+                }
+                branchAttr = vcall<undefined4>(reader, 0x18, child, "Branch");
+                FUN_00963f20((int)&frameAt<undefined4>(frame, -0x16c), reader, branchAttr);
+                attr = vcall<int>(reader, 0x18, child, DAT_016514a4);
+                if (attr != -1) {
+                    vcall<void>(reader, 0x68, attr, &frameAt<undefined1>(frame, -0x6c));
+                }
+                child = vcall<int>(reader, 0x18, child, "PartsInfo");
+                if (child != -1) {
+                    attr = vcall<int>(reader, 0x18, child, "ObjId");
+                    if (attr != -1) {
+                        vcall<void>(reader, 0x58, attr, &frameAt<undefined1>(frame, -0x54));
+                    }
+                    attr = vcall<int>(reader, 0x18, child, "PartsNo");
+                    if (attr != -1) {
+                        vcall<void>(reader, 0x58, attr, &frameAt<undefined1>(frame, -0x58));
+                    }
+                    attr = vcall<int>(reader, 0x18, child, "OffSetPos");
+                    if (attr != -1) {
+                        frameAt<undefined4>(frame, -0x174) = 0;
+                        frameAt<unsigned int>(frame, -0x170) = 0;
+                        frameAt<undefined4>(frame, -0x16c) = 0;
+                        vcall<void>(reader, 0x44, attr, &frameAt<undefined4>(frame, -0x174));
+                        frameAt<undefined4>(frame, -0x154) = frameAt<undefined4>(frame, -0x174);
+                        frameAt<unsigned int>(frame, -0x150) = frameAt<unsigned int>(frame, -0x170);
+                        frameAt<undefined4>(frame, -0x14c) = frameAt<undefined4>(frame, -0x16c);
+                        frameAt<undefined4>(frame, -0x148) = frameAt<undefined4>(frame, -0x168);
+                    }
+                    child = vcall<int>(reader, 0x18, child, "ParentHash");
+                    if (child != -1) {
+                        vcall<void>(reader, 0x68, child, &frameAt<undefined1>(frame, -0x3c));
+                    }
+                }
+                // append the entry (grow when full)
+                if (arrayCount == (arrayCapacity & 0x3fffffff)) {
+                    FUN_0100a290((int *)&PTR_vftable_018e9b94, &frameAt<undefined4>(frame, -0x180),
+                                 kPathEntrySize);
+                }
+                if (arrayCount * kPathEntrySize + arrayData != 0) {
+                    cdeclcall<void>(FUN_00964be0, &frameAt<undefined4>(frame, -0x14c)); /* ECX: ? */
+                }
+                arrayCount = arrayCount + 1;
+            }
+            frameAt<unsigned int>(frame, -0x170) = frameAt<unsigned int>(frame, -0x170) + 1;
+            childIndex = (int)(short)frameAt<unsigned int>(frame, -0x170);
+            count = vcall<int>(reader, 0x10, node);
+        } while (childIndex < count);
+    }
+    thiscall<void>(0x0096D700u /* cMapInfoManager::sortPathData */, manager,
+                   &frameAt<undefined4>(frame, -0x178)); /* ? only one stack argument recovered */
+    frameAt<undefined4>(frame, -0x174) = 0;
+    if (-1 < (int)frameAt<unsigned int>(frame, -0x170)) {
+        vcall<void>(&PTR_vftable_018e9b94, 0x10, arrayCapacity,
+                    (frameAt<unsigned int>(frame, -0x170) & 0x3fffffff) * kPathEntrySize);  // free
+    }
+    return 1;
+}

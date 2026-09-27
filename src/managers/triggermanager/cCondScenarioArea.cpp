@@ -1,51 +1,58 @@
-// src/managers/triggermanager/cCondScenarioArea.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7E050..00C86CB0, 4 functions
-
+// src/managers/triggermanager/cCondScenarioArea.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondScenarioArea.h"
+
+extern int DAT_01dbd1d0;
+extern unsigned int DAT_01bea060;  // game state flags
+extern int DAT_01be8e58;           // player object
+
+namespace cCondScenarioArea_p1 {
+
+// address stored in the vftable slot at byte offset `offset` of `object`
+inline int vslot(int *object, int offset) { return *(int *)(*object + offset); }
+
+// area manager virtual +0x24 (__thiscall, ECX = the manager): is the player inside area `areaId`
+inline int areaContains24(int *manager, unsigned short areaId, int a, int b)
+{
+    return ((int (__thiscall *)(int *, unsigned int, int, int))vslot(manager, 0x24))(manager, areaId, a, b);
+}
+
+}  // namespace cCondScenarioArea_p1
 
 // 00C7E050  Trigger::cCondScenarioArea::vf10  size=8  [class]
-void __fastcall Trigger::cCondScenarioArea::vf10(int param_1)
-
-{
-  *(undefined4 *)(param_1 + 0x14) = 0;
-  return;
+void Trigger::cCondScenarioArea::vf10()
+{
+    hitObject() = 0;
 }
 
 // 00C7E060  Trigger::cCondScenarioArea::vf14  size=74  [class]
-undefined4 __fastcall Trigger::cCondScenarioArea::vf14(int param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  if (((DAT_01dbd1d0 == 0) || ((DAT_01bea060 & 8) != 0)) || ((DAT_01bea060 & 0x2000400) == 0)) {
-    piVar1 = (int *)FUN_00a6e640();
-    iVar2 = (**(code **)(*piVar1 + 0x24))(*(undefined2 *)(param_1 + 0x10),1,2);
-    if (iVar2 != 0) {
-      *(undefined4 *)(param_1 + 0x14) = DAT_01be8e58;
-      return 1;
-    }
-  }
-  return 0;
+int Trigger::cCondScenarioArea::vf14()
+{
+    using namespace cCondScenarioArea_p1;
+    if (DAT_01dbd1d0 == 0 || (DAT_01bea060 & 8) != 0 || (DAT_01bea060 & 0x2000400) == 0) {
+        int *areaManager = (int *)FUN_00a6e640();
+        int inside = areaContains24(areaManager, areaId(), 1, 2);  // movzx: areaId zero-extended
+        if (inside != 0) {
+            hitObject() = DAT_01be8e58;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 // 00C86C90  Trigger::cCondScenarioArea::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondScenarioArea::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondScenarioArea *Trigger::cCondScenarioArea::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return this;
 }
 
 // 00C86CB0  Trigger::cCondScenarioArea::vf1C  size=18  [class]
-void __thiscall Trigger::cCondScenarioArea::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(undefined2 *)(param_1 + 0x10) = *(undefined2 *)(param_2 + 8);
-  return;
+void Trigger::cCondScenarioArea::vf1C(int *record)
+{
+    this->record() = record;
+    areaId() = *(unsigned short *)&record[2];  // record+0x08
 }
-

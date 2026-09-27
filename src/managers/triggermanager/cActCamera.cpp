@@ -1,1608 +1,1425 @@
-// src/managers/triggermanager/cActCamera.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C89010..00C99A70, 7 functions
-
+// src/managers/triggermanager/cActCamera.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActCamera.h"
+
+extern undefined DAT_01dbd218;          // cActCamera static descriptor returned by vf00
+extern void *PTR_DAT_018ab998;          // heap used for trigger action objects
+extern unsigned char DAT_00c9ba90[];    // action type -> switch case index (0x201 entries)
+extern char DAT_016b1764[];             // debug message: unknown action type
+extern int DAT_018b9254;                // argument of that debug message
+
+namespace cActCamera_p1 {
+
+// FUN_00dd3500: allocate `size` bytes from a heap (functions.h declares it void).
+inline int *allocAction(unsigned int size)
+{
+    return ((int *(*)(unsigned int, void *))FUN_00dd3500)(size, PTR_DAT_018ab998);
+}
+
+// 00C93CC0 Trigger::cActArray::cActArray (__fastcall, object in ECX); returns the object.
+inline int *constructActArray(int *memory)
+{
+    return ((int *(__fastcall *)(int *))0x00C93CC0)(memory);
+}
+
+// action vftable slot 0x1C: store the action record.
+inline void setActionRecord(int *action, int *record)
+{
+    (*(void (__thiscall **)(int *, int *))((char *)action[0] + 0x1C))(action, record);
+}
+
+// FUN_00dd5650: debug printf (empty in release).
+inline void reportBadActionType(unsigned int type)
+{
+    ((void (*)(const char *, ...))FUN_00dd5650)(DAT_016b1764, DAT_018b9254, type);
+}
+
+} // namespace cActCamera_p1
 
 // 00C89010  Trigger::cActCamera::vf08  size=1  [class]
-void Trigger::cActCamera::vf08(void)
-
-{
-  return;
+void Trigger::cActCamera::vf08()
+{
 }
 
 // 00C89020  Trigger::cActCamera::vf0C  size=1  [class]
-void Trigger::cActCamera::vf0C(void)
-
-{
-  return;
+void Trigger::cActCamera::vf0C()
+{
 }
 
 // 00C89030  Trigger::cActCamera::vf10  size=1  [class]
-void Trigger::cActCamera::vf10(void)
-
-{
-  return;
+void Trigger::cActCamera::vf10()
+{
 }
 
 // 00C89040  Trigger::cActCamera::vf14  size=1  [class]
-void Trigger::cActCamera::vf14(void)
-
-{
-  return;
+void Trigger::cActCamera::vf14()
+{
 }
 
 // 00C91630  Trigger::cActCamera::vf00  size=6  [class]
-undefined * Trigger::cActCamera::vf00(void)
-
-{
-  return &DAT_01dbd218;
+void *Trigger::cActCamera::vf00()
+{
+    return &DAT_01dbd218;
 }
 
 // 00C91640  Trigger::cActCamera::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActCamera::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActCamera *Trigger::cActCamera::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
 
 // 00C99A70  Trigger::cActCamera::cActCamera  size=7444  [class]
-int * Trigger::cActCamera::cActCamera(int param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  int *piVar3;
-  
-  uVar1 = *(uint *)(param_1 + 4);
-  if (0x200 < uVar1) {
-switchD_00c99a90_caseD_c2:
-    FUN_00dd5650(&DAT_016b1764,DAT_018b9254,uVar1);
-    return (int *)0x0;
-  }
-                    /* WARNING (jumptable): Sanity check requires truncation of jumptable */
-                    /* WARNING: Could not find normalized switch variable to match jumptable */
-  switch((&DAT_00c9ba90)[uVar1]) {
-  case 0:
-    goto LAB_00c99a9e;
-  case 1:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      piVar3[2] = 0;
-      *piVar3 = (int)vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 2:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTeleportExplicit::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 3:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActStaFlagOn::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 4:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTerminate::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 5:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDoorOpen::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 6:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCamOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 7:
-LAB_00c99a9e:
-    piVar3 = (int *)FUN_00dd3500(0x10,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActAnimation::vftable;
-      piVar3[2] = 0;
-      piVar3[3] = 0;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 8:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActScrCollisionOn::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 9:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActScrCollisionOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 10:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSoftEvent::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSubphase::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xc:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPhase::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xd:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActBoss::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xe:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xf:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyByName::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x10:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRetreatByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x11:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRetreatByName::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x12:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyClearByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x13:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEffect::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x14:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActResult::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x15:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyByNumberForce::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x16:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyByNameForce::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x17:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTeleportIndex::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x18:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyClearByName::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x19:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTurnOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x1a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSE::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x1b:
-    piVar3 = (int *)FUN_00dd3500(0x10,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFuncall::vftable;
-      piVar3[2] = 0;
-      piVar3[3] = 1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x1c:
-    goto LAB_00c99eda;
-  case 0x1d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFollowPath::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x1e:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      piVar3[2] = 0;
-      *piVar3 = (int)cActAnimationOrigin::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x1f:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCameraDistance::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x20:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCameraDistanceOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x21:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCameraFocusOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x22:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCameraFocus::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x23:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCameraAngle::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x24:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCameraAngleOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x25:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPhaseSubphase::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x26:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDoorClose::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x27:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDebugMessage::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x28:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActStage::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x29:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSubstage::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x2a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActText::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x2b:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFlagOn::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x2c:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFlagOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x2d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActLoadRoom::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x2e:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActUnloadRoom::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x2f:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTextOut::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x30:
-    goto LAB_00c9a1e5;
-  case 0x31:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPosIndex::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x32:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEmMsg::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x33:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActScene::vftable;
-      piVar3[2] = 0;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x34:
-    piVar3 = (int *)FUN_00dd3500(0x14,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEmMsgDirect::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x35:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCollision::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x36:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActBgm::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x37:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActBgmSimple::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x38:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSESimple::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x39:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSound::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x3a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCollisionOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x3b:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSeEntity::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x3c:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActRoomEvent::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x3d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEffectRoom::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x3e:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlayerDie::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x3f:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyMove::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x40:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActReqBehaviorInstruction::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x41:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActRaderMap::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x42:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActRadioInfoStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x43:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActRadioInfoEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x44:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActConversationStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x45:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActConversationEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x46:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPathWayStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x47:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPathWayEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x48:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTutorialStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x49:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTutorialEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x4a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActAreaBarrierOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x4b:
-    goto LAB_00c9a5fc;
-  case 0x4c:
-    piVar3 = (int *)FUN_00dd3500(0x10,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActResultSetDisp::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x4d:
-    goto LAB_00c9a651;
-  case 0x4e:
-LAB_00c9a651:
-    piVar3 = (int *)FUN_00dd3500(0x10,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEmAnimation::vftable;
-      piVar3[2] = 0;
-      piVar3[3] = 0;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x4f:
-LAB_00c9a5fc:
-    piVar3 = (int *)FUN_00dd3500(0x10,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlAnimation::vftable;
-      piVar3[2] = 0;
-      piVar3[3] = 0;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x50:
-LAB_00c99eda:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActTask::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x51:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActResultSetEndDisp::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x52:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlayerDeadDemo::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x53:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActHackEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x54:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCamFlag::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x55:
-    goto LAB_00c9a73a;
-  case 0x56:
-LAB_00c9a73a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActObjAttach::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x57:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActQTEButtonDisp::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x58:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRequestEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x59:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRequestEndByName::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x5a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRequestEndBySubPhase::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x5b:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRequestEndAll::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x5c:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRequest::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x5d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRequestByName::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x5e:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyRequestBySubPhase::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x5f:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActMoviePlay::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x60:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActForceBattleFlag::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x61:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActGimmickEnable::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x62:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFileRead::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 99:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFileRelease::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 100:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyFirstRequestEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x65:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSceneMovie::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x66:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActStopObjectType::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x67:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActMvObjectType::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x68:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActGameFlagOn::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x69:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActGameFlagOff::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x6a:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSendSignal::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x6b:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSendSignalContext::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x6c:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCodecStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x6d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActObjMeshTrans::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x6e:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlayerEffectOn::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x6f:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlayerEffectOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x70:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActQTEButtonDispOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x71:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActObjectivePosSet::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x72:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyGroupByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x73:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActJammingDispStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x74:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActJammingDispEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x75:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActReqGpBehaviorInstruction::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x76:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActStaFlagOff::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x77:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActUIAnimStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x78:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSetNextCodec::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x79:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActStpFlagOff::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x7a:
-    piVar3 = (int *)FUN_00dd3500(0xc,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActStpFlagOn::vftable;
-      piVar3[2] = -1;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x7b:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSetUIAnimStartNone::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x7c:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSetGameoverNormalFlag::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x7d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActScrMeshOn::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x7e:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActScrMeshOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x7f:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVmPlay::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x80:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActItemGet::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x81:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActActionMessageStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x82:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActActionMessageFlagClear::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x83:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActResultRecStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x84:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActResultRecEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x85:
-    iVar2 = FUN_00dd3500(0x84,PTR_DAT_018ab998);
-    if (iVar2 != 0) {
-      piVar3 = (int *)cActArray::cActArray();
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x86:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEffectRoomLoop::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x87:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEffectRoomLoopOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x88:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActMesDispOffSkip::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x89:
-    piVar3 = (int *)FUN_00dd3500(0x10,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEmMsgDirectByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x8a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCodecEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x8b:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActAntiqScrMove::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x8c:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActAntiqScrReqEnd::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x8d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActBattleAreaOn::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x8e:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActBattleAreaOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x8f:
-    goto LAB_00c9a1e5;
-  case 0x90:
-LAB_00c9a1e5:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEmAnimationByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x91:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActObjectDisp::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x92:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDoorLock::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x93:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActObjectCollision::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x94:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVrComplete::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x95:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVrMistake::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x96:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActGimmickFinish::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x97:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActGimmickRevert::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x98:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyHide::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x99:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyAppear::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x9a:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActGimmickRevivalCancel::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x9b:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEffectOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x9c:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCodecEndAll::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x9d:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVrGoalPoint::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x9e:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFade::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0x9f:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActScrMeshOnAll::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa0:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActScrMeshOffAll::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa1:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDoorDispOn::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa2:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDoorDispOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa3:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActAddExp::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa4:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCodecStartForSkip::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa5:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActItemDelInstallation::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa6:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActItemDelDropAll::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa7:
-    goto LAB_00c9b3a1;
-  case 0xa8:
-LAB_00c9b3a1:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActGenericFlag::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xa9:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyAppearResetPosByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xaa:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyGroupAppearResetPosByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xab:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActEnemyDestroyByNumber::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xac:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActReqVrStart::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xad:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlayerMaxHp::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xae:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlayerMaxDryCell::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xaf:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActSeObject::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb0:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActItemOnOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb1:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActNoCodecMenu::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb2:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVrTimerStop::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb3:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCamFocusLock::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb4:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActCamFocusLockOff::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb5:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlKgkPos::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb6:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVrBm6000On::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb7:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVrBm6000Off::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb8:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFlagOnDlc2::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xb9:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFlagOffDlc2::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xba:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFlagOnDlc3::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xbb:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActFlagOffDlc3::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xbc:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActPlKgkStop::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xbd:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActVrReturn::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xbe:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDoorOpenDelay::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xbf:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActDoorCloseDelay::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xc0:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActResultRecStartClear::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xc1:
-    piVar3 = (int *)FUN_00dd3500(8,PTR_DAT_018ab998);
-    if (piVar3 != (int *)0x0) {
-      piVar3[1] = 0;
-      *piVar3 = (int)cActReqShotMissile::vftable;
-      goto LAB_00c99ac1;
-    }
-    break;
-  case 0xc2:
-    goto switchD_00c99a90_caseD_c2;
-  }
-  piVar3 = (int *)0x0;
-LAB_00c99ac1:
-  if (piVar3 != (int *)0x0) {
-    (**(code **)(*piVar3 + 0x1c))(param_1);
-  }
-  return piVar3;
-}
+Trigger::cActionAbstract *Trigger::cActCamera::createAction(int *record)
+{
+    using namespace cActCamera_p1;
+    int *action = 0;
+    int *memory;
+    unsigned int type = (unsigned int)record[1];
 
+    if (0x200 < type) {
+        reportBadActionType(type);
+        return 0;
+    }
+    // Each case is an inlined `new (heap) Trigger::cActXxx()`: word 1 = record (0), word 0 = vftable.
+    switch (DAT_00c9ba90[type]) {
+    case 0x01:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[2] = 0;
+            action[0] = 0x016AEA78;  // Trigger::cActCamera::vftable
+        }
+        break;
+    case 0x02:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEAC8;  // Trigger::cActTeleportExplicit::vftable
+        }
+        break;
+    case 0x03:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEB40;  // Trigger::cActStaFlagOn::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x04:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEF94;  // Trigger::cActTerminate::vftable
+        }
+        break;
+    case 0x05:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEB18;  // Trigger::cActDoorOpen::vftable
+        }
+        break;
+    case 0x06:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEB68;  // Trigger::cActCamOff::vftable
+        }
+        break;
+    case 0x00:  // same object as case 0x07
+    case 0x07:
+        action = allocAction(0x10);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEF44;  // Trigger::cActAnimation::vftable
+            action[2] = 0;
+            action[3] = 0;
+        }
+        break;
+    case 0x08:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0170;  // Trigger::cActScrCollisionOn::vftable
+        }
+        break;
+    case 0x09:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0198;  // Trigger::cActScrCollisionOff::vftable
+        }
+        break;
+    case 0x0A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEBE0;  // Trigger::cActSoftEvent::vftable
+        }
+        break;
+    case 0x0B:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEAA0;  // Trigger::cActSubphase::vftable
+        }
+        break;
+    case 0x0C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEC08;  // Trigger::cActPhase::vftable
+        }
+        break;
+    case 0x0D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0E2C;  // Trigger::cActBoss::vftable
+        }
+        break;
+    case 0x0E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEC88;  // Trigger::cActEnemyByNumber::vftable
+        }
+        break;
+    case 0x0F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEC5C;  // Trigger::cActEnemyByName::vftable
+        }
+        break;
+    case 0x10:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AED34;  // Trigger::cActEnemyRetreatByNumber::vftable
+        }
+        break;
+    case 0x11:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AED0C;  // Trigger::cActEnemyRetreatByName::vftable
+        }
+        break;
+    case 0x12:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AED84;  // Trigger::cActEnemyClearByNumber::vftable
+        }
+        break;
+    case 0x13:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEDAC;  // Trigger::cActEffect::vftable
+        }
+        break;
+    case 0x14:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEDD4;  // Trigger::cActResult::vftable
+        }
+        break;
+    case 0x15:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AECE0;  // Trigger::cActEnemyByNumberForce::vftable
+        }
+        break;
+    case 0x16:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AECB4;  // Trigger::cActEnemyByNameForce::vftable
+        }
+        break;
+    case 0x17:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEAF0;  // Trigger::cActTeleportIndex::vftable
+        }
+        break;
+    case 0x18:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AED5C;  // Trigger::cActEnemyClearByName::vftable
+        }
+        break;
+    case 0x19:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEDFC;  // Trigger::cActTurnOff::vftable
+        }
+        break;
+    case 0x1A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEE24;  // Trigger::cActSE::vftable
+        }
+        break;
+    case 0x1B:
+        action = allocAction(0x10);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEEF4;  // Trigger::cActFuncall::vftable
+            action[2] = 0;
+            action[3] = 1;
+        }
+        break;
+    case 0x1D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEFBC;  // Trigger::cActFollowPath::vftable
+        }
+        break;
+    case 0x1E:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[2] = 0;
+            action[0] = 0x016AEF6C;  // Trigger::cActAnimationOrigin::vftable
+        }
+        break;
+    case 0x1F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEFE4;  // Trigger::cActCameraDistance::vftable
+        }
+        break;
+    case 0x20:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF00C;  // Trigger::cActCameraDistanceOff::vftable
+        }
+        break;
+    case 0x21:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF05C;  // Trigger::cActCameraFocusOff::vftable
+        }
+        break;
+    case 0x22:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF034;  // Trigger::cActCameraFocus::vftable
+        }
+        break;
+    case 0x23:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF084;  // Trigger::cActCameraAngle::vftable
+        }
+        break;
+    case 0x24:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF0AC;  // Trigger::cActCameraAngleOff::vftable
+        }
+        break;
+    case 0x25:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF0D4;  // Trigger::cActPhaseSubphase::vftable
+        }
+        break;
+    case 0x26:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF0FC;  // Trigger::cActDoorClose::vftable
+        }
+        break;
+    case 0x27:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF124;  // Trigger::cActDebugMessage::vftable
+        }
+        break;
+    case 0x28:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF14C;  // Trigger::cActStage::vftable
+        }
+        break;
+    case 0x29:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF174;  // Trigger::cActSubstage::vftable
+        }
+        break;
+    case 0x2A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF19C;  // Trigger::cActText::vftable
+        }
+        break;
+    case 0x2B:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF1EC;  // Trigger::cActFlagOn::vftable
+        }
+        break;
+    case 0x2C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF214;  // Trigger::cActFlagOff::vftable
+        }
+        break;
+    case 0x2D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF23C;  // Trigger::cActLoadRoom::vftable
+        }
+        break;
+    case 0x2E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF264;  // Trigger::cActUnloadRoom::vftable
+        }
+        break;
+    case 0x2F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF1C4;  // Trigger::cActTextOut::vftable
+        }
+        break;
+    case 0x31:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF2B4;  // Trigger::cActPosIndex::vftable
+        }
+        break;
+    case 0x32:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF2DC;  // Trigger::cActEmMsg::vftable
+        }
+        break;
+    case 0x33:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF304;  // Trigger::cActScene::vftable
+            action[2] = 0;
+        }
+        break;
+    case 0x34:
+        action = allocAction(0x14);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF32C;  // Trigger::cActEmMsgDirect::vftable
+        }
+        break;
+    case 0x35:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF354;  // Trigger::cActCollision::vftable
+        }
+        break;
+    case 0x36:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF37C;  // Trigger::cActBgm::vftable
+        }
+        break;
+    case 0x37:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF424;  // Trigger::cActBgmSimple::vftable
+        }
+        break;
+    case 0x38:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF4F4;  // Trigger::cActSESimple::vftable
+        }
+        break;
+    case 0x39:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF5E0;  // Trigger::cActSound::vftable
+        }
+        break;
+    case 0x3A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF608;  // Trigger::cActCollisionOff::vftable
+        }
+        break;
+    case 0x3B:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF630;  // Trigger::cActSeEntity::vftable
+        }
+        break;
+    case 0x3C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF658;  // Trigger::cActRoomEvent::vftable
+        }
+        break;
+    case 0x3D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF680;  // Trigger::cActEffectRoom::vftable
+        }
+        break;
+    case 0x3E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF6A8;  // Trigger::cActPlayerDie::vftable
+        }
+        break;
+    case 0x3F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF6D0;  // Trigger::cActEnemyMove::vftable
+        }
+        break;
+    case 0x40:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF6F8;  // Trigger::cActReqBehaviorInstruction::vftable
+        }
+        break;
+    case 0x41:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF720;  // Trigger::cActRaderMap::vftable
+        }
+        break;
+    case 0x42:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF748;  // Trigger::cActRadioInfoStart::vftable
+        }
+        break;
+    case 0x43:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF770;  // Trigger::cActRadioInfoEnd::vftable
+        }
+        break;
+    case 0x44:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF798;  // Trigger::cActConversationStart::vftable
+        }
+        break;
+    case 0x45:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF7C0;  // Trigger::cActConversationEnd::vftable
+        }
+        break;
+    case 0x46:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF7E8;  // Trigger::cActPathWayStart::vftable
+        }
+        break;
+    case 0x47:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF810;  // Trigger::cActPathWayEnd::vftable
+        }
+        break;
+    case 0x48:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF838;  // Trigger::cActTutorialStart::vftable
+        }
+        break;
+    case 0x49:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF860;  // Trigger::cActTutorialEnd::vftable
+        }
+        break;
+    case 0x4A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF888;  // Trigger::cActAreaBarrierOff::vftable
+        }
+        break;
+    case 0x4C:
+        action = allocAction(0x10);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF8B0;  // Trigger::cActResultSetDisp::vftable
+        }
+        break;
+    case 0x4D:  // same object as case 0x4E
+    case 0x4E:
+        action = allocAction(0x10);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF8D8;  // Trigger::cActEmAnimation::vftable
+            action[2] = 0;
+            action[3] = 0;
+        }
+        break;
+    case 0x4B:  // same object as case 0x4F
+    case 0x4F:
+        action = allocAction(0x10);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF900;  // Trigger::cActPlAnimation::vftable
+            action[2] = 0;
+            action[3] = 0;
+        }
+        break;
+    case 0x1C:  // same object as case 0x50
+    case 0x50:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AEF1C;  // Trigger::cActTask::vftable
+        }
+        break;
+    case 0x51:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF928;  // Trigger::cActResultSetEndDisp::vftable
+        }
+        break;
+    case 0x52:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF950;  // Trigger::cActPlayerDeadDemo::vftable
+        }
+        break;
+    case 0x53:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF978;  // Trigger::cActHackEnd::vftable
+        }
+        break;
+    case 0x54:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF9A0;  // Trigger::cActCamFlag::vftable
+        }
+        break;
+    case 0x55:  // same object as case 0x56
+    case 0x56:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF9C8;  // Trigger::cActObjAttach::vftable
+        }
+        break;
+    case 0x57:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AF9F0;  // Trigger::cActQTEButtonDisp::vftable
+        }
+        break;
+    case 0x58:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFA18;  // Trigger::cActEnemyRequestEnd::vftable
+        }
+        break;
+    case 0x59:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFA44;  // Trigger::cActEnemyRequestEndByName::vftable
+        }
+        break;
+    case 0x5A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFA70;  // Trigger::cActEnemyRequestEndBySubPhase::vftable
+        }
+        break;
+    case 0x5B:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFA9C;  // Trigger::cActEnemyRequestEndAll::vftable
+        }
+        break;
+    case 0x5C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFAC8;  // Trigger::cActEnemyRequest::vftable
+        }
+        break;
+    case 0x5D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFAF4;  // Trigger::cActEnemyRequestByName::vftable
+        }
+        break;
+    case 0x5E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFB20;  // Trigger::cActEnemyRequestBySubPhase::vftable
+        }
+        break;
+    case 0x5F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFB4C;  // Trigger::cActMoviePlay::vftable
+        }
+        break;
+    case 0x60:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFB74;  // Trigger::cActForceBattleFlag::vftable
+        }
+        break;
+    case 0x61:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFB9C;  // Trigger::cActGimmickEnable::vftable
+        }
+        break;
+    case 0x62:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFBC4;  // Trigger::cActFileRead::vftable
+        }
+        break;
+    case 0x63:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFBEC;  // Trigger::cActFileRelease::vftable
+        }
+        break;
+    case 0x64:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFC14;  // Trigger::cActEnemyFirstRequestEnd::vftable
+        }
+        break;
+    case 0x65:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFC40;  // Trigger::cActSceneMovie::vftable
+        }
+        break;
+    case 0x66:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFC68;  // Trigger::cActStopObjectType::vftable
+        }
+        break;
+    case 0x67:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFC90;  // Trigger::cActMvObjectType::vftable
+        }
+        break;
+    case 0x68:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFCB8;  // Trigger::cActGameFlagOn::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x69:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFCE0;  // Trigger::cActGameFlagOff::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x6A:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFD08;  // Trigger::cActSendSignal::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x6B:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFD30;  // Trigger::cActSendSignalContext::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x6C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFD58;  // Trigger::cActCodecStart::vftable
+        }
+        break;
+    case 0x6D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFD80;  // Trigger::cActObjMeshTrans::vftable
+        }
+        break;
+    case 0x6E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFDA8;  // Trigger::cActPlayerEffectOn::vftable
+        }
+        break;
+    case 0x6F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFDD0;  // Trigger::cActPlayerEffectOff::vftable
+        }
+        break;
+    case 0x70:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFDF8;  // Trigger::cActQTEButtonDispOff::vftable
+        }
+        break;
+    case 0x71:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFE20;  // Trigger::cActObjectivePosSet::vftable
+        }
+        break;
+    case 0x72:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFE48;  // Trigger::cActEnemyGroupByNumber::vftable
+        }
+        break;
+    case 0x73:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFEA0;  // Trigger::cActJammingDispStart::vftable
+        }
+        break;
+    case 0x74:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFEC8;  // Trigger::cActJammingDispEnd::vftable
+        }
+        break;
+    case 0x75:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFEF0;  // Trigger::cActReqGpBehaviorInstruction::vftable
+        }
+        break;
+    case 0x76:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFF18;  // Trigger::cActStaFlagOff::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x77:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFF40;  // Trigger::cActUIAnimStart::vftable
+        }
+        break;
+    case 0x78:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFF68;  // Trigger::cActSetNextCodec::vftable
+        }
+        break;
+    case 0x79:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFF90;  // Trigger::cActStpFlagOff::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x7A:
+        action = allocAction(0xC);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFFB8;  // Trigger::cActStpFlagOn::vftable
+            action[2] = -1;
+        }
+        break;
+    case 0x7B:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016AFFE0;  // Trigger::cActSetUIAnimStartNone::vftable
+        }
+        break;
+    case 0x7C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0008;  // Trigger::cActSetGameoverNormalFlag::vftable
+        }
+        break;
+    case 0x7D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0030;  // Trigger::cActScrMeshOn::vftable
+        }
+        break;
+    case 0x7E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0058;  // Trigger::cActScrMeshOff::vftable
+        }
+        break;
+    case 0x7F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0080;  // Trigger::cActVmPlay::vftable
+        }
+        break;
+    case 0x80:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B00A8;  // Trigger::cActItemGet::vftable
+        }
+        break;
+    case 0x81:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B00D0;  // Trigger::cActActionMessageStart::vftable
+        }
+        break;
+    case 0x82:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B00F8;  // Trigger::cActActionMessageFlagClear::vftable
+        }
+        break;
+    case 0x83:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0120;  // Trigger::cActResultRecStart::vftable
+        }
+        break;
+    case 0x84:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0148;  // Trigger::cActResultRecEnd::vftable
+        }
+        break;
+    case 0x85:
+        memory = allocAction(0x84);
+        if (memory != 0) {
+            action = constructActArray(memory);  // Trigger::cActArray::cActArray
+        }
+        break;
+    case 0x86:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B01E8;  // Trigger::cActEffectRoomLoop::vftable
+        }
+        break;
+    case 0x87:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0210;  // Trigger::cActEffectRoomLoopOff::vftable
+        }
+        break;
+    case 0x88:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0238;  // Trigger::cActMesDispOffSkip::vftable
+        }
+        break;
+    case 0x89:
+        action = allocAction(0x10);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0260;  // Trigger::cActEmMsgDirectByNumber::vftable
+        }
+        break;
+    case 0x8A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0288;  // Trigger::cActCodecEnd::vftable
+        }
+        break;
+    case 0x8B:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B02B0;  // Trigger::cActAntiqScrMove::vftable
+        }
+        break;
+    case 0x8C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B02D8;  // Trigger::cActAntiqScrReqEnd::vftable
+        }
+        break;
+    case 0x8D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0300;  // Trigger::cActBattleAreaOn::vftable
+        }
+        break;
+    case 0x8E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0328;  // Trigger::cActBattleAreaOff::vftable
+        }
+        break;
+    case 0x30:  // same object as case 0x90
+    case 0x8F:  // same object as case 0x90
+    case 0x90:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B03AC;  // Trigger::cActEmAnimationByNumber::vftable
+        }
+        break;
+    case 0x91:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B03D4;  // Trigger::cActObjectDisp::vftable
+        }
+        break;
+    case 0x92:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B03FC;  // Trigger::cActDoorLock::vftable
+        }
+        break;
+    case 0x93:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0424;  // Trigger::cActObjectCollision::vftable
+        }
+        break;
+    case 0x94:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B044C;  // Trigger::cActVrComplete::vftable
+        }
+        break;
+    case 0x95:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0474;  // Trigger::cActVrMistake::vftable
+        }
+        break;
+    case 0x96:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B049C;  // Trigger::cActGimmickFinish::vftable
+        }
+        break;
+    case 0x97:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B04C4;  // Trigger::cActGimmickRevert::vftable
+        }
+        break;
+    case 0x98:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B04EC;  // Trigger::cActEnemyHide::vftable
+        }
+        break;
+    case 0x99:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0514;  // Trigger::cActEnemyAppear::vftable
+        }
+        break;
+    case 0x9A:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B053C;  // Trigger::cActGimmickRevivalCancel::vftable
+        }
+        break;
+    case 0x9B:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0564;  // Trigger::cActEffectOff::vftable
+        }
+        break;
+    case 0x9C:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B058C;  // Trigger::cActCodecEndAll::vftable
+        }
+        break;
+    case 0x9D:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B05B4;  // Trigger::cActVrGoalPoint::vftable
+        }
+        break;
+    case 0x9E:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B05DC;  // Trigger::cActFade::vftable
+        }
+        break;
+    case 0x9F:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0604;  // Trigger::cActScrMeshOnAll::vftable
+        }
+        break;
+    case 0xA0:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B062C;  // Trigger::cActScrMeshOffAll::vftable
+        }
+        break;
+    case 0xA1:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0654;  // Trigger::cActDoorDispOn::vftable
+        }
+        break;
+    case 0xA2:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B067C;  // Trigger::cActDoorDispOff::vftable
+        }
+        break;
+    case 0xA3:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B06A4;  // Trigger::cActAddExp::vftable
+        }
+        break;
+    case 0xA4:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B06CC;  // Trigger::cActCodecStartForSkip::vftable
+        }
+        break;
+    case 0xA5:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B06F4;  // Trigger::cActItemDelInstallation::vftable
+        }
+        break;
+    case 0xA6:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B071C;  // Trigger::cActItemDelDropAll::vftable
+        }
+        break;
+    case 0xA7:  // same object as case 0xA8
+    case 0xA8:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0744;  // Trigger::cActGenericFlag::vftable
+        }
+        break;
+    case 0xA9:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B076C;  // Trigger::cActEnemyAppearResetPosByNumber::vftable
+        }
+        break;
+    case 0xAA:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0794;  // Trigger::cActEnemyGroupAppearResetPosByNumber::vftable
+        }
+        break;
+    case 0xAB:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B07BC;  // Trigger::cActEnemyDestroyByNumber::vftable
+        }
+        break;
+    case 0xAC:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B07E4;  // Trigger::cActReqVrStart::vftable
+        }
+        break;
+    case 0xAD:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B080C;  // Trigger::cActPlayerMaxHp::vftable
+        }
+        break;
+    case 0xAE:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0834;  // Trigger::cActPlayerMaxDryCell::vftable
+        }
+        break;
+    case 0xAF:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B085C;  // Trigger::cActSeObject::vftable
+        }
+        break;
+    case 0xB0:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0884;  // Trigger::cActItemOnOff::vftable
+        }
+        break;
+    case 0xB1:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B08AC;  // Trigger::cActNoCodecMenu::vftable
+        }
+        break;
+    case 0xB2:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B08D4;  // Trigger::cActVrTimerStop::vftable
+        }
+        break;
+    case 0xB3:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B08FC;  // Trigger::cActCamFocusLock::vftable
+        }
+        break;
+    case 0xB4:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0924;  // Trigger::cActCamFocusLockOff::vftable
+        }
+        break;
+    case 0xB5:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0974;  // Trigger::cActPlKgkPos::vftable
+        }
+        break;
+    case 0xB6:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B09C4;  // Trigger::cActVrBm6000On::vftable
+        }
+        break;
+    case 0xB7:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B09EC;  // Trigger::cActVrBm6000Off::vftable
+        }
+        break;
+    case 0xB8:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0A64;  // Trigger::cActFlagOnDlc2::vftable
+        }
+        break;
+    case 0xB9:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0A8C;  // Trigger::cActFlagOffDlc2::vftable
+        }
+        break;
+    case 0xBA:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0AB4;  // Trigger::cActFlagOnDlc3::vftable
+        }
+        break;
+    case 0xBB:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0ADC;  // Trigger::cActFlagOffDlc3::vftable
+        }
+        break;
+    case 0xBC:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B099C;  // Trigger::cActPlKgkStop::vftable
+        }
+        break;
+    case 0xBD:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B094C;  // Trigger::cActVrReturn::vftable
+        }
+        break;
+    case 0xBE:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0A3C;  // Trigger::cActDoorOpenDelay::vftable
+        }
+        break;
+    case 0xBF:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0A14;  // Trigger::cActDoorCloseDelay::vftable
+        }
+        break;
+    case 0xC0:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0B04;  // Trigger::cActResultRecStartClear::vftable
+        }
+        break;
+    case 0xC1:
+        action = allocAction(0x8);
+        if (action != 0) {
+            action[1] = 0;
+            action[0] = 0x016B0350;  // Trigger::cActReqShotMissile::vftable
+        }
+        break;
+    case 0xC2:
+        reportBadActionType(type);
+        return 0;
+    }
+    if (action != 0) {
+        setActionRecord(action, record);
+    }
+    return (cActionAbstract *)action;
+}

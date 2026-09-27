@@ -1,91 +1,103 @@
-// src/managers/triggermanager/cCondAreaEm.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C799A0..00C84DD0, 5 functions
-
+// src/managers/triggermanager/cCondAreaEm.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondAreaEm.h"
+
+extern undefined DAT_01c78cb0;  // ? enemy manager object (ECX of FUN_00c18c10 / FUN_00c19c00)
+
+namespace cCondAreaEm_p1 {
+
+// FUN_00c18c10 (__thiscall, ECX = DAT_01c78cb0): nonzero when the enemy group/sub-group exists
+inline int subGroupExists(int group, int subGroup)
+{
+    return ((int (__thiscall *)(void *, int, int))FUN_00c18c10)(&DAT_01c78cb0, group, subGroup);
+}
+
+// FUN_00c19c00 (__thiscall, ECX = DAT_01c78cb0): the enemy for (group, subGroup, entry), or 0
+inline int findEnemy(int group, int subGroup, int entry)
+{
+    return ((int (__thiscall *)(void *, int, int, int))FUN_00c19c00)(&DAT_01c78cb0, group, subGroup, entry);
+}
+
+// FUN_00a6e640: returns the area manager object (has a vftable)
+inline int *areaManager()
+{
+    return (int *)FUN_00a6e640();
+}
+
+// FUN_00a7c8b0 (__fastcall, ECX = enemy): the enemy's position
+inline float *enemyPosition(int enemy)
+{
+    return (float *)FUN_00a7c8b0(enemy);
+}
+
+// area manager virtual +0x2C (__thiscall): is `position` inside area areaId on `layer`
+inline int areaContains2C(int *manager, float *position, unsigned int areaId, int layer)
+{
+    typedef int (__thiscall *Fn)(int *, float *, unsigned int, int);
+    return ((Fn)(*(int **)manager)[0x2C / 4])(manager, position, areaId, layer);
+}
+
+} // namespace cCondAreaEm_p1
 
 // 00C799A0  Trigger::cCondAreaEm::vf10  size=8  [class]
-void __fastcall Trigger::cCondAreaEm::vf10(int param_1)
-
-{
-  *(undefined4 *)(param_1 + 0x14) = 0;
-  return;
+void Trigger::cCondAreaEm::vf10()
+{
+    foundEnemy() = 0;
 }
 
 // 00C799B0  Trigger::cCondAreaEm::vf14  size=217  [class]
-undefined4 __fastcall Trigger::cCondAreaEm::vf14(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  undefined4 uVar3;
-  int iVar4;
-  undefined4 *local_c;
-  int local_8;
-  int iStack_4;
-  
-  iVar1 = FUN_00c18c10(*(undefined4 *)(param_1 + 0x18),*(undefined4 *)(param_1 + 0x1c));
-  if (iVar1 == 0) {
-    return 0;
-  }
-  local_8 = 0;
-  if (0 < *(int *)(param_1 + 0x20)) {
-    local_c = (undefined4 *)(param_1 + 0x24);
-    do {
-      iVar1 = FUN_00c19c00(*(undefined4 *)(param_1 + 0x18),*(undefined4 *)(param_1 + 0x1c),*local_c)
-      ;
-      if (iVar1 != 0) {
-        piVar2 = (int *)FUN_00a6e640();
-        iVar4 = *piVar2;
-        uVar3 = FUN_00a7c8b0(*(undefined2 *)(param_1 + 0x10),1);
-        (**(code **)(iVar4 + 0x2c))(uVar3);
-        piVar2 = (int *)FUN_00a6e640();
-        iVar4 = *piVar2;
-        uVar3 = FUN_00a7c8b0(*(undefined2 *)(param_1 + 0x10),2);
-        iVar4 = (**(code **)(iVar4 + 0x2c))(uVar3);
-        if ((iStack_4 != 0) || (iVar4 != 0)) {
-          *(int *)(param_1 + 0x14) = iVar1;
-          return 1;
-        }
-      }
-      local_c = local_c + 1;
-      local_8 = local_8 + 1;
-    } while (local_8 < *(int *)(param_1 + 0x20));
-  }
-  return 0;
+int Trigger::cCondAreaEm::vf14()
+{
+    using namespace cCondAreaEm_p1;
+    if (subGroupExists(group(), subGroup()) == 0) {
+        return 0;
+    }
+    // Ghidra mis-read this loop: FUN_00a7c8b0 is __fastcall (ECX = enemy) and the areaId / layer
+    // pushed before it are arguments of the vftable+0x2C call; the first test's result is kept
+    // on the stack (Ghidra's iStack_4). The test is (hit1 != 0 || hit2 != 0).
+    for (int i = 0; i < entryCount(); i++) {
+        int enemy = findEnemy(group(), subGroup(), entries()[i]);
+        if (enemy != 0) {
+            int *manager = areaManager();
+            int hit1 = areaContains2C(manager, enemyPosition(enemy), areaId(), 1);
+            manager = areaManager();
+            int hit2 = areaContains2C(manager, enemyPosition(enemy), areaId(), 2);
+            if (hit1 != 0 || hit2 != 0) {
+                foundEnemy() = enemy;
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
 
 // 00C79A90  Trigger::cCondAreaEm::vf1C  size=66  [class]
-void __thiscall Trigger::cCondAreaEm::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(undefined2 *)(param_1 + 0x10) = *(undefined2 *)(param_2 + 8);
-  *(undefined4 *)(param_1 + 0x18) = *(undefined4 *)(param_2 + 0xc);
-  *(undefined4 *)(param_1 + 0x1c) = *(undefined4 *)(param_2 + 0x10);
-  *(undefined4 *)(param_1 + 0x20) = *(undefined4 *)(param_2 + 0x14);
-  *(undefined4 *)(param_1 + 0x24) = *(undefined4 *)(param_2 + 0x18);
-  *(undefined4 *)(param_1 + 0x28) = *(undefined4 *)(param_2 + 0x1c);
-  *(undefined4 *)(param_1 + 0x2c) = *(undefined4 *)(param_2 + 0x20);
-  *(undefined4 *)(param_1 + 0x30) = *(undefined4 *)(param_2 + 0x24);
-  *(undefined4 *)(param_1 + 0x34) = *(undefined4 *)(param_2 + 0x28);
-  return;
+void Trigger::cCondAreaEm::vf1C(int *record)
+{
+    *(int **)((char *)this + 0x4) /* cCondition+0x04: condition record */ = record;
+    areaId() = *(unsigned short *)((char *)record + 8);
+    group() = record[3];
+    subGroup() = record[4];
+    entryCount() = record[5];
+    entries()[0] = record[6];
+    entries()[1] = record[7];
+    entries()[2] = record[8];
+    entries()[3] = record[9];
+    entries()[4] = record[10];
 }
 
 // 00C79AE0  Trigger::cCondAreaEm::vf18  size=4  [class]
-undefined4 __fastcall Trigger::cCondAreaEm::vf18(int param_1)
-
-{
-  return *(undefined4 *)(param_1 + 0x14);
+int Trigger::cCondAreaEm::vf18()
+{
+    return foundEnemy();
 }
 
 // 00C84DD0  Trigger::cCondAreaEm::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondAreaEm::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondAreaEm *Trigger::cCondAreaEm::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

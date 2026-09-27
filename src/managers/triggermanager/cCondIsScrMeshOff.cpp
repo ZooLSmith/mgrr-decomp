@@ -1,54 +1,45 @@
-// src/managers/triggermanager/cCondIsScrMeshOff.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7C830..00C86500, 4 functions
-
+// src/managers/triggermanager/cCondIsScrMeshOff.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondIsScrMeshOff.h"
 
 // 00C7C830  Trigger::cCondIsScrMeshOff::cCondIsScrMeshOff  size=41  [class]
-void __fastcall Trigger::cCondIsScrMeshOff::cCondIsScrMeshOff(undefined4 *param_1)
-
-{
-  param_1[3] = 0xffffffff;
-  param_1[1] = 0;
-  param_1[2] = 0xffffffff;
-  *param_1 = vftable;
-  param_1[4] = 0;
-  param_1[9] = 0xffffffff;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  return;
+Trigger::cCondIsScrMeshOff::cCondIsScrMeshOff()
+{
+    *(int *)((char *)this + 0x0C) = -1;  // cCondition+0x0C: last result
+    *(int **)((char *)this + 0x04) = 0;  // cCondition+0x04: condition record
+    *(int *)((char *)this + 0x08) = -1;  // cCondition+0x08: ?
+    // vftable = Trigger::cCondIsScrMeshOff::vftable (0x016A9D38)
+    searchKey() = 0;
+    partNo() = -1;
+    meshName()[0] = 0;
+    meshName()[1] = 0;
+    meshName()[2] = 0;
+    meshName()[3] = 0;
 }
 
 // 00C7C870  Trigger::cCondIsScrMeshOff::vf10  size=1  [class]
-void Trigger::cCondIsScrMeshOff::vf10(void)
-
-{
-  return;
+void Trigger::cCondIsScrMeshOff::vf10()
+{
 }
 
 // 00C7C880  Trigger::cCondIsScrMeshOff::vf1C  size=46  [class]
-void __thiscall Trigger::cCondIsScrMeshOff::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_2 + 8);
-  *(undefined4 *)(param_1 + 0x14) = *(undefined4 *)(param_2 + 0xc);
-  *(undefined4 *)(param_1 + 0x18) = *(undefined4 *)(param_2 + 0x10);
-  *(undefined4 *)(param_1 + 0x1c) = *(undefined4 *)(param_2 + 0x14);
-  *(undefined4 *)(param_1 + 0x20) = *(undefined4 *)(param_2 + 0x18);
-  *(undefined4 *)(param_1 + 0x24) = *(undefined4 *)(param_2 + 0x1c);
-  return;
+void Trigger::cCondIsScrMeshOff::vf1C(int *record)
+{
+    *(int **)((char *)this + 0x04) = record;  // cCondition+0x04: condition record
+    searchKey() = record[2];                  // record+0x08
+    meshName()[0] = record[3];                // record+0x0C
+    meshName()[1] = record[4];                // record+0x10
+    meshName()[2] = record[5];                // record+0x14
+    meshName()[3] = record[6];                // record+0x18
+    partNo() = record[7];                     // record+0x1C
 }
 
 // 00C86500  Trigger::cCondIsScrMeshOff::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondIsScrMeshOff::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondIsScrMeshOff *Trigger::cCondIsScrMeshOff::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

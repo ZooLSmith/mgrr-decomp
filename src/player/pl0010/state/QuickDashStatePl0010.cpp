@@ -1,232 +1,157 @@
-// src/player/pl0010/state/QuickDashStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B822F0..00BCC490, 9 functions
-
+// src/player/pl0010/state/QuickDashStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "QuickDashStatePl0010.h"
 
+// type records returned by vf00 / vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e60[];  // QuickDashStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+namespace QuickDashStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &at(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// obj when its type record (from the vftable slot at `typeSlot`) derives from `type`, else 0
+inline char *downcast(const void *obj, unsigned int typeSlot, const void *type)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, typeSlot), type);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+inline char *asContext(const void *obj) { return downcast(obj, 0x0, DAT_01be9ef4); }  // StateMachineContextPl0010
+inline char *asPl0000(const void *obj)  { return downcast(obj, 0x4, DAT_01be9db8); }  // Pl0000
+
+// The player of a state-machine context (StateMachineContext+0xC: owner; no null check on ctx).
+inline char *playerOf(const char *ctx)
+{
+    return asPl0000(at<void *>(ctx, 0xC));
+}
+
+}  // namespace QuickDashStatePl0010_p1
+
 // 00B822F0  QuickDashStatePl0010::vf08  size=19  [class]
-bool QuickDashStatePl0010::vf08(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_1);
-  return iVar1 != 0;
+bool QuickDashStatePl0010::vf08(undefined4 param_1)
+{
+    return StateMachineNode::vf08(param_1) != 0;
 }
 
 // 00B82310  QuickDashStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall QuickDashStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+undefined4 QuickDashStatePl0010::vf18(undefined4 param_2)
+{
+    return StateMachineNode::vf18(param_2);  // jmp 0x00D822E0
 }
 
 // 00B82320  QuickDashStatePl0010::vf24  size=19  [class]
-bool QuickDashStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool QuickDashStatePl0010::vf24(undefined4 param_1)
+{
+    return StateMachineNode::vf24(param_1) != 0;
 }
 
 // 00B82360  QuickDashStatePl0010::vf00  size=6  [class]
-undefined * QuickDashStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e60;
+undefined *QuickDashStatePl0010::vf00()
+{
+    return (undefined *)DAT_01be9e60;  // type record
 }
 
 // 00B911F0  QuickDashStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall QuickDashStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *QuickDashStatePl0010::vf04(byte param_2)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((param_2 & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB0AD0  QuickDashStatePl0010::SafeCheck  size=169  [class]
-void __thiscall QuickDashStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar4 = 0;
-    }
-    else {
-      puVar5 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar5);
-      uVar4 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar4 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar5 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar5);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-    }
-    *(undefined4 *)(uVar4 + 0x70) = 0;
-    *(undefined4 *)(uVar2 + 0x5074) = 0;
-    *(undefined4 *)(uVar2 + 0x418c) = *(undefined4 *)(uVar2 + 0x4180);
-    *(undefined4 *)(uVar2 + 0x4188) = *(undefined4 *)(uVar2 + 0x417c);
-    *(undefined4 *)(uVar2 + 0x4190) = *(undefined4 *)(uVar2 + 0x4184);
-    FUN_00aa9280(0x39);
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// Entry: saves the player's turn parameters and starts motion 0x39.
+void QuickDashStatePl0010::SafeCheck(undefined4 *param_2)
+{
+    using namespace QuickDashStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        char *context = asContext(param_2);
+        char *player = playerOf(context);
+        at<float>(context, 0x70) = 0.0f;                        /* StateMachineContextPl0010+0x70: ? */
+        at<int>(player, 0x5074) = 0;                            /* Pl0000+0x5074 */
+        at<float>(player, 0x418C) = at<float>(player, 0x4180);  /* Pl0000+0x418C = +0x4180 (saved) */
+        at<float>(player, 0x4188) = at<float>(player, 0x417C);  /* Pl0000+0x4188 = +0x417C */
+        at<float>(player, 0x4190) = at<float>(player, 0x4184);  /* Pl0000+0x4190 = +0x4184 */
+        thiscall<int>(FUN_00aa9280, player, 0x39);
+    }
+    StateMachineNode::SafeCheck(param_2);
 }
 
 // 00BB0B80  QuickDashStatePl0010::vf20  size=136  [class]
-undefined4 QuickDashStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  return 1;
+undefined4 QuickDashStatePl0010::vf20(undefined4 *param_1)
+{
+    using namespace QuickDashStatePl0010_p1;
+    if (StateMachineNode::vf20(param_1) == 0) {
+        return 0;
+    }
+    char *player = playerOf(asContext(param_1));
+    at<float>(player, 0x4180) = at<float>(player, 0x418C);  /* restore values saved by SafeCheck */
+    at<float>(player, 0x417C) = at<float>(player, 0x4188);
+    at<float>(player, 0x4184) = at<float>(player, 0x4190);
+    return 1;
 }
 
 // 00BCC3A0  QuickDashStatePl0010::qteSafeCheck  size=235  [class]
-void __thiscall QuickDashStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  *(undefined4 *)(uVar2 + 0x4180) = 0x3e99999a;
-  *(undefined4 *)(uVar2 + 0x417c) = 0x3f060a92;
-  *(undefined4 *)(uVar2 + 0x4184) = 0;
-  FUN_00b8af00();
-  iVar3 = FUN_008e2740();
-  if ((iVar3 == 0) &&
-     ((*(int *)(uVar2 + 0x41e0) == 0 ||
-      (*(float *)(*(int *)(uVar2 + 0x40d4) + 0x160) <= *(float *)(uVar2 + 0x41e4))))) {
-    FUN_00d82510(0xe,100);
-  }
-  FUN_00bb8ae0(param_2,param_1,100);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
+void QuickDashStatePl0010::qteSafeCheck(undefined4 *param_2)
+{
+    using namespace QuickDashStatePl0010_p1;
+    char *player = playerOf(asContext(param_2));
+    thiscall<void>(FUN_008e0b70, at<void *>(player, 0x764), 0);  /* Pl0000+0x764: motion helper */
+    thiscall<void>(FUN_008e0ba0, at<void *>(player, 0x764), 0);
+    at<float>(player, 0x4180) = 0.3f;                /* Pl0000+0x4180 */
+    at<float>(player, 0x417C) = 0.5235988f;          /* Pl0000+0x417C: pi/6 */
+    at<float>(player, 0x4184) = 0.0f;                /* Pl0000+0x4184 */
+    FUN_00b8af00((int)player);
+    if (FUN_008e2740(at<int>(player, 0x764)) == 0 &&
+        (at<int>(player, 0x41E0) == 0 ||  /* Pl0000+0x41E0 / +0x41E4, Pl0000+0x40D4: parameters */
+         !(at<float>(player, 0x41E4) < at<float>(at<char *>(player, 0x40D4), 0x160)))) {
+        thiscall<void>(FUN_00d82510, this, 0xE, 100);
+    }
+    FUN_00bb8ae0(param_2, (undefined4)this, 100);
+    StateMachineNode::qteSafeCheck(param_2);
 }
 
 // 00BCC490  QuickDashStatePl0010::vf14  size=221  [class]
-void __thiscall QuickDashStatePl0010::vf14(undefined4 param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  undefined *puVar5;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c);
-  if ((fVar1 * fVar1 < *(float *)(uVar3 + 0xd28)) &&
-     ((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe48)) != 0)) {
-    iVar4 = FUN_00a95630(0x39,0x14);
-    if (iVar4 == 0) {
-      iVar4 = FUN_00a94db0(0x39);
-      if (iVar4 == 0) goto LAB_00bcc55f;
-    }
-    FUN_00bb8d00(param_2,param_1,100,0,1);
-    StateMachineNode::vf14(param_2);
-    return;
-  }
-  iVar4 = FUN_00a94db0(0x39);
-  if (iVar4 != 0) {
-    *(undefined4 *)(uVar3 + 0x5080) = 1;
-  }
-LAB_00bcc55f:
-  StateMachineNode::vf14(param_2);
-  return;
+void QuickDashStatePl0010::vf14(undefined4 *param_2)
+{
+    using namespace QuickDashStatePl0010_p1;
+    char *player = playerOf(asContext(param_2));
+    float threshold = at<float>(at<char *>(player, 0x40D4), 0x14C);  /* Pl0000+0x40D4: parameters */
+    if (threshold * threshold < at<float>(player, 0xD28) &&           /* Pl0000+0xD28 */
+        (at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE48)) != 0) {  /* Pl0000+0xCF8 / +0xE48 */
+        if (thiscall<int>(FUN_00a95630, player, 0x39, 0x14) != 0 || thiscall<int>(FUN_00a94db0, player, 0x39) != 0) {
+            FUN_00bb8d00(param_2, (int)this, 100, 0, 1);
+            StateMachineNode::vf14(param_2);
+            return;
+        }
+    }
+    else if (thiscall<int>(FUN_00a94db0, player, 0x39) != 0) {
+        at<int>(player, 0x5080) = 1;  /* Pl0000+0x5080 */
+    }
+    StateMachineNode::vf14(param_2);
 }
-

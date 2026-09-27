@@ -1,269 +1,261 @@
-// src/managers/debrismanager/DebrisManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C1C600..00C64880, 13 functions
-
+// src/managers/debrismanager/DebrisManagerImplement.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "DebrisManagerImplement.h"
 
+// kernel32 (the lock at +0x20 is a CRITICAL_SECTION)
+extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void *criticalSection);
+extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void *criticalSection);
+
+extern undefined4 *DAT_01bea18c;  // the DebrisManager instance
+
+namespace DebrisManagerImplement_p1 {
+
+typedef DebrisManagerImplement::EntityList EntityList;
+typedef DebrisManagerImplement::SortEntry  SortEntry;
+
+const unsigned int kVftable = 0x016A71A8;  // DebrisManagerImplement::vftable
+
+// Virtual function at byte offset `offset` of the vftable of `obj`.
+template <class Sig> inline Sig vfunc(void *obj, int offset) { return *(Sig *)(*(char **)obj + offset); }
+
+// Local entity handle with a float (8 bytes, same layout as SortEntry).
+struct HandleWithValue {
+    undefined4 handle;
+    float      value;
+};
+
+// 00C1C630 (not a named function): qsort comparator of two SortEntry.
+void *const kCompareSortEntries = (void *)0x00C1C630;
+
+// FUN_00dd3500(size, heap): heap allocation (the generated prototype returns void).
+inline void *allocate(unsigned int size, undefined4 heap)
+{
+    return ((void *(*)(unsigned int, undefined4))FUN_00dd3500)(size, heap);
+}
+// 00C5F220 (named lib::AllocatedArray<Entity*>::AllocatedArray<Entity*>), ECX = the new manager.
+inline void initEntityList(void *manager)
+{
+    ((void (__thiscall *)(void *))0x00C5F220)(manager);
+}
+
+}  // namespace DebrisManagerImplement_p1
+
 // 00C1C600  DebrisManagerImplement::vf04  size=18  [class]
-void __fastcall DebrisManagerImplement::vf04(int param_1)
-
-{
-  (**(code **)(**(int **)(param_1 + 8) + 8))(&stack0x00000004);
-  return;
+// Appends `entity` to the list (passes the address of the argument).
+void DebrisManagerImplement::vf04(undefined4 entity)
+{
+    using namespace DebrisManagerImplement_p1;
+    EntityList *list = entities();
+    vfunc<void (__thiscall *)(void *, undefined4 *)>(list, 0x8)(list, &entity);
 }
 
 // 00C2DC20  DebrisManagerImplement::vf14  size=57  [class]
-void __fastcall DebrisManagerImplement::vf14(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  
-  iVar1 = *(int *)(param_1 + 8);
-  if (((iVar1 != 0) && (*(int *)(iVar1 + 8) != 0)) && (**(int **)(iVar1 + 4) != 0)) {
-    piVar2 = (int *)FUN_00a7c8a0();
-    if (piVar2 == (int *)0x0) {
-      FUN_00a805f0();
-      return;
-    }
-                    /* WARNING: Could not recover jumptable at 0x00c2dc4d. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(code **)(*piVar2 + 0x80))();
-    return;
-  }
-  return;
+// For the first entity of the list: its object's vf80(), or FUN_00a805f0 when it has none.
+void DebrisManagerImplement::vf14()
+{
+    using namespace DebrisManagerImplement_p1;
+    EntityList *list = entities();
+    if (list != 0 && list->count != 0) {
+        int first = list->data[0];
+        if (first != 0) {
+            void *object = (void *)FUN_00a7c8a0(first);
+            if (object == 0) {
+                FUN_00a805f0(first);  // tail call
+                return;
+            }
+            vfunc<void (__thiscall *)(void *)>(object, 0x80)(object);  // tail call
+            return;
+        }
+    }
 }
 
 // 00C2DC60  DebrisManagerImplement::vf20  size=4  [class]
-undefined4 __fastcall DebrisManagerImplement::vf20(int param_1)
-
-{
-  return *(undefined4 *)(param_1 + 0x18);
+undefined4 DebrisManagerImplement::vf20()
+{
+    return (undefined4)sortedCount();
 }
 
 // 00C448C0  DebrisManagerImplement::vf18  size=43  [class]
-void __fastcall DebrisManagerImplement::vf18(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  
-  iVar1 = *(int *)(param_1 + 8);
-  if (((iVar1 != 0) && (*(int *)(iVar1 + 8) != 0)) && (piVar2 = *(int **)(iVar1 + 4), *piVar2 != 0))
-  {
-    FUN_00a805f0();
-    FUN_0040c150(piVar2);
-  }
-  return;
+// FUN_00a805f0 on the first entity, then FUN_0040c150(list, &data[0]).
+void DebrisManagerImplement::vf18()
+{
+    using namespace DebrisManagerImplement_p1;
+    EntityList *list = entities();
+    if (list != 0 && list->count != 0) {
+        int *first = list->data;
+        if (*first != 0) {
+            FUN_00a805f0(*first);
+            FUN_0040c150((int)entities(), (undefined4 *)first);
+        }
+    }
 }
 
 // 00C448F0  DebrisManagerImplement::vf1C  size=69  [class]
-void __fastcall DebrisManagerImplement::vf1C(int param_1)
-
-{
-  int iVar1;
-  int iVar2;
-  
-  iVar1 = *(int *)(param_1 + 8);
-  if (iVar1 != 0) {
-    iVar2 = *(int *)(iVar1 + 4);
-    if (iVar2 != iVar2 + *(int *)(iVar1 + 8) * 4) {
-      do {
-        FUN_00a805f0();
-        iVar2 = iVar2 + 4;
-      } while (iVar2 != *(int *)(*(int *)(param_1 + 8) + 4) +
-                        *(int *)(*(int *)(param_1 + 8) + 8) * 4);
-    }
-    if (*(int *)(*(int *)(param_1 + 8) + 4) != 0) {
-      *(undefined4 *)(*(int *)(param_1 + 8) + 8) = 0;
-    }
-  }
-  return;
+// FUN_00a805f0 on every entity, then empties the list.
+void DebrisManagerImplement::vf1C()
+{
+    using namespace DebrisManagerImplement_p1;
+    EntityList *list = entities();
+    if (list != 0) {
+        int *it = list->data;
+        if (it != it + list->count) {
+            do {
+                FUN_00a805f0(*it);
+                it++;
+            } while (it != entities()->data + entities()->count);
+        }
+        if (entities()->data != 0) {
+            entities()->count = 0;
+        }
+    }
 }
 
 // 00C50F40  DebrisManagerImplement::vf08  size=104  [class]
-void __thiscall DebrisManagerImplement::vf08(int param_1,int param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  int *piVar5;
-  
-  iVar2 = *(int *)(param_1 + 8);
-  piVar5 = *(int **)(iVar2 + 4);
-  piVar1 = piVar5 + *(int *)(iVar2 + 8);
-  for (; (piVar5 != piVar1 && (*piVar5 != param_2)); piVar5 = piVar5 + 1) {
-  }
-  iVar3 = *(int *)(iVar2 + 4);
-  if (piVar5 != (int *)(iVar3 + *(int *)(iVar2 + 8) * 4)) {
-    uVar4 = *(uint *)(iVar2 + 8);
-    piVar1 = (int *)(iVar3 + uVar4 * 4);
-    if ((((piVar5 != piVar1) && (iVar3 != 0)) && (uVar4 != 0)) &&
-       ((uint)((int)piVar5 - iVar3 >> 2) < uVar4)) {
-      for (; piVar5 != piVar1 + -1; piVar5 = piVar5 + 1) {
-        *piVar5 = piVar5[1];
-      }
-      *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + -1;
-    }
-  }
-  return;
+// Removes `entity` from the list (erase, preserving order).
+void DebrisManagerImplement::vf08(int entity)
+{
+    using namespace DebrisManagerImplement_p1;
+    EntityList *list = entities();
+    int *it = list->data;
+    int *end = it + list->count;
+    for (; it != end && *it != entity; it++) {
+    }
+    int data = (int)list->data;
+    if (it != (int *)(data + list->count * 4)) {
+        unsigned int count = list->count;
+        end = (int *)(data + count * 4);
+        if (it != end && data != 0 && count != 0 &&
+            (unsigned int)(((int)it - data) >> 2) < count) {
+            for (; it != end - 1; it++) {
+                *it = it[1];
+            }
+            list->count = list->count - 1;
+        }
+    }
 }
 
 // 00C50FB0  DebrisManagerImplement::vf24  size=241  [class]
-void __fastcall DebrisManagerImplement::vf24(int param_1)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  undefined1 local_10 [4];
-  float local_c;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    FUN_00c3f310();
-    piVar3 = *(int **)(*(int *)(param_1 + 8) + 4);
-    if (piVar3 != piVar3 + *(int *)(*(int *)(param_1 + 8) + 8)) {
-      do {
-        FUN_00a7c930();
-        FUN_00a7c950();
-        local_c = 0.0;
-        if (*piVar3 == 0) {
-LAB_00c51023:
-          uVar2 = FUN_00a7c7f0();
-          FUN_00a7c960(uVar2);
-          if (*(int *)(param_1 + 0x18) < *(int *)(param_1 + 0x14)) {
-            iVar1 = *(int *)(param_1 + 0x10) + *(int *)(param_1 + 0x18) * 8;
-            if (iVar1 != 0) {
-              FUN_00a7c940(local_10);
-              *(float *)(iVar1 + 4) = local_c;
-            }
-            *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) + 1;
-          }
-        }
-        else {
-          iVar1 = FUN_00a7c800();
-          if (iVar1 != 0) {
-            local_c = *(float *)(iVar1 + 0x524);
-          }
-          if (0.0 <= local_c) goto LAB_00c51023;
-        }
-        FUN_00a7c950();
-        local_c = 0.0;
-        piVar3 = piVar3 + 1;
-      } while (piVar3 != (int *)(*(int *)(*(int *)(param_1 + 8) + 4) +
-                                *(int *)(*(int *)(param_1 + 8) + 8) * 4));
-    }
-    _qsort(*(void **)(param_1 + 0x10),*(size_t *)(param_1 + 0x18),8,(_PtFuncCompare *)&LAB_00c1c630)
-    ;
-  }
-  return;
+// Rebuilds the {handle, value} array from the entities (value = +0x524 of the entity object,
+// entities with a negative value are skipped) and sorts it with the comparator at 0x00C1C630.
+void DebrisManagerImplement::vf24()
+{
+    using namespace DebrisManagerImplement_p1;
+
+    if (entities() != 0) {
+        FUN_00c3f310((int)sortedArray());
+        int *it = entities()->data;
+        if (it != it + entities()->count) {
+            do {
+                HandleWithValue local;
+                FUN_00a7c930(&local.handle);
+                FUN_00a7c950(&local.handle);
+                local.value = 0.0f;
+                bool add = true;
+                if (*it != 0) {
+                    int object = (int)FUN_00a7c800(*it);
+                    if (object != 0) {
+                        local.value = *(float *)(object + 0x524);
+                    }
+                    // x87: fldz / fcomp value / test ah,0x41 -> skipped only when value < 0
+                    add = !(local.value < 0.0f);
+                }
+                if (add) {
+                    FUN_00a7c960(&local.handle, (undefined4 *)FUN_00a7c7f0(*it));
+                    if (sortedCount() < sortedCapacity()) {
+                        SortEntry *slot = sortedData() + sortedCount();
+                        if (slot != 0) {
+                            FUN_00a7c940(&slot->handle, &local.handle);
+                            slot->value = local.value;
+                        }
+                        sortedCount()++;
+                    }
+                }
+                FUN_00a7c950(&local.handle);
+                local.value = 0.0f;
+                it++;
+            } while (it != entities()->data + entities()->count);
+        }
+        _qsort(sortedData(), sortedCount(), 8, kCompareSortEntries);
+    }
 }
 
 // 00C510B0  DebrisManagerImplement::vf28  size=119  [class]
-void __fastcall DebrisManagerImplement::vf28(int param_1)
-
-{
-  int iVar1;
-  undefined4 local_8;
-  undefined1 local_4 [4];
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    if (*(int *)(param_1 + 0x38) != 0) {
-      EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 0x20));
-    }
-    if (*(int *)(param_1 + 0x18) != 0) {
-      local_8 = *(undefined4 *)(param_1 + 0x10);
-      iVar1 = FUN_00a81330();
-      if (((iVar1 != 0) && (iVar1 = FUN_00a7c8a0(), iVar1 != 0)) &&
-         (iVar1 = FUN_00606e40(iVar1), iVar1 != 0)) {
-        FUN_005d9560();
-      }
-      FUN_00c4ba60(local_4,&local_8);
-    }
-    if (*(int *)(param_1 + 0x38) != 0) {
-      LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 0x20));
-    }
-  }
-  return;
+// Takes the first sorted entry: its entity object's FUN_005d9560 (when it has one), then erases it.
+void DebrisManagerImplement::vf28()
+{
+    using namespace DebrisManagerImplement_p1;
+
+    if (entities() != 0) {
+        if (lockEnabled() != 0) {
+            EnterCriticalSection(lock());
+        }
+        if (sortedCount() != 0) {
+            int first = (int)sortedData();
+            int entity = (int)FUN_00a81330((uint *)sortedData());
+            if (entity != 0 && (entity = (int)FUN_00a7c8a0(entity)) != 0 &&
+                (entity = (int)FUN_00606e40((int *)entity)) != 0) {
+                FUN_005d9560(entity);
+            }
+            int erased;  // returned iterator (unused)
+            FUN_00c4ba60((int)sortedArray(), &erased, &first);
+        }
+        if (lockEnabled() != 0) {
+            LeaveCriticalSection(lock());
+        }
+    }
 }
 
 // 00C62AD0  DebrisManagerImplement::vf0C  size=20  [class]
-int __fastcall DebrisManagerImplement::vf0C(int *param_1)
-
-{
-  int iVar1;
-  int iVar2;
-  
-  iVar1 = *(int *)(param_1[2] + 0xc);
-  iVar2 = (**(code **)(*param_1 + 0x10))();
-  return iVar1 - iVar2;
+// Free room in the entity list.
+int DebrisManagerImplement::vf0C()
+{
+    int capacity = entities()->capacity;
+    return capacity - (int)vf10();  // virtual call (slot 0x10)
 }
 
 // 00C62AF0  DebrisManagerImplement::vf10  size=7  [class]
-undefined4 __fastcall DebrisManagerImplement::vf10(int param_1)
-
-{
-  return *(undefined4 *)(*(int *)(param_1 + 8) + 8);
+undefined4 DebrisManagerImplement::vf10()
+{
+    return entities()->count;
 }
 
 // 00C62B90  DebrisManagerImplement::vf00  size=30  [class]
-undefined4 __thiscall DebrisManagerImplement::vf00(undefined4 param_1,byte param_2)
-
-{
-  DebrisManager::DebrisManager();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *DebrisManagerImplement::vf00(byte flags)
+{
+    destroyAsImplement();
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00C64820  DebrisManagerImplement::DebrisManagerImplement  size=96  [class]
-bool DebrisManagerImplement::DebrisManagerImplement(undefined4 param_1)
-
-{
-  undefined4 *puVar1;
-  
-  puVar1 = (undefined4 *)FUN_00dd3500(0x40,param_1);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = vftable;
-    puVar1[1] = param_1;
-    puVar1[3] = 0;
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    puVar1[6] = 0;
-    puVar1[7] = 0;
-    puVar1[0xe] = 0;
-    lib::AllocatedArray<Entity*>::AllocatedArray<Entity*>();
-    DAT_01bea18c = puVar1;
-    return puVar1 != (undefined4 *)0x0;
-  }
-  DAT_01bea18c = (undefined4 *)0x0;
-  return false;
+// Allocates and initialises the instance (DAT_01bea18c); true on success.
+bool DebrisManagerImplement::create(undefined4 heap)
+{
+    using namespace DebrisManagerImplement_p1;
+
+    DebrisManagerImplement *manager = (DebrisManagerImplement *)allocate(0x40, heap);
+    if (manager != 0) {
+        *(unsigned int *)manager = kVftable;  // vftable = DebrisManagerImplement::vftable
+        manager->heap() = heap;
+        *(int *)manager->sortedArray() = 0;
+        manager->sortedData() = 0;
+        manager->sortedCapacity() = 0;
+        manager->sortedCount() = 0;
+        manager->sortedOwnsData() = 0;
+        manager->lockEnabled() = 0;
+        initEntityList(manager);
+        DAT_01bea18c = (undefined4 *)manager;
+        return manager != 0;
+    }
+    DAT_01bea18c = 0;
+    return false;
 }
 
 // 00C64880  DebrisManagerImplement::DebrisManagerImplement  size=5  [class]
-bool DebrisManagerImplement::DebrisManagerImplement(undefined4 param_1)
-
-{
-  undefined4 *puVar1;
-  
-  puVar1 = (undefined4 *)FUN_00dd3500(0x40,param_1);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = vftable;
-    puVar1[1] = param_1;
-    puVar1[3] = 0;
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    puVar1[6] = 0;
-    puVar1[7] = 0;
-    puVar1[0xe] = 0;
-    lib::AllocatedArray<Entity*>::AllocatedArray<Entity*>();
-    DAT_01bea18c = puVar1;
-    return puVar1 != (undefined4 *)0x0;
-  }
-  DAT_01bea18c = (undefined4 *)0x0;
-  return false;
+bool DebrisManagerImplement::createThunk(undefined4 heap)
+{
+    return create(heap);  // jmp 00C64820
 }
-

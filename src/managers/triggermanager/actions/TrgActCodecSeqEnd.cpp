@@ -1,17 +1,37 @@
-// src/managers/triggermanager/actions/TrgActCodecSeqEnd.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C80BB0..00C80BB0, 1 functions
-
+// src/managers/triggermanager/actions/TrgActCodecSeqEnd.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C80BB0  Trigger::Act::CODEC_SEQ_END  size=47  [class]
-undefined4 __fastcall Trigger::Act::CODEC_SEQ_END(int param_1)
-
-{
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_00dd5650(&DAT_016ab90c);
-    return 0;
-  }
-  FUN_0093a210(*(int *)(param_1 + 4) + 8);
-  return 1;
-}
+extern undefined DAT_016ab90c;  // error message format string
 
+// the trigger action/condition handlers are free functions in these namespaces
+namespace Trigger { namespace Act {
+    int __fastcall CODEC_SEQ_END(int action);
+} }
+
+namespace TrgActCodecSeqEnd_p1 {
+
+// field at a byte offset of a record whose layout is not modelled
+template <class T> inline T &at(int base, int offset) { return *(T *)(base + offset); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (*)(const void *, ...))FUN_00dd5650)(format); }
+template <class A> inline void reportError(const void *format, A a)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a); }
+template <class A, class B> inline void reportError(const void *format, A a, B b)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b); }
+template <class A, class B, class C> inline void reportError(const void *format, A a, B b, C c)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b, c); }
+
+}  // namespace TrgActCodecSeqEnd_p1
+
+// 00C80BB0  Trigger::Act::CODEC_SEQ_END  size=47  [class]
+int __fastcall Trigger::Act::CODEC_SEQ_END(int action)
+{
+    using namespace TrgActCodecSeqEnd_p1;
+    if (at<int>(action, 4) == 0) {
+        reportError(&DAT_016ab90c);
+        return 0;
+    }
+    FUN_0093a210(at<int>(action, 4) + 8);  // sequence name
+    return 1;
+}

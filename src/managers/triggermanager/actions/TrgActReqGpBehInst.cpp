@@ -1,54 +1,77 @@
-// src/managers/triggermanager/actions/TrgActReqGpBehInst.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C9D540..00C9D540, 1 functions
-
+// src/managers/triggermanager/actions/TrgActReqGpBehInst.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C9D540  Trigger::Act::REQ_GP_BEH_INST  size=206  [class]
-undefined4 __fastcall Trigger::Act::REQ_GP_BEH_INST(int param_1)
-
-{
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  undefined4 local_48;
-  undefined4 *local_44;
-  undefined4 local_40 [15];
-  
-  iVar1 = *(int *)(param_1 + 4);
-  local_48 = 0;
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016b1b1c);
-    return 0;
-  }
-  puVar2 = (undefined4 *)FUN_00dd3500(0x18,&DAT_01b7bd48);
-  puVar4 = (undefined4 *)0x0;
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = 0;
-    puVar2[2] = 0;
-    puVar2[3] = 0;
-    *puVar2 = lib::AllocatedArray<Entity*>::vftable;
-    puVar2[4] = 0;
-    puVar2[5] = 0;
-    puVar4 = puVar2;
-  }
-  local_44 = &DAT_01b7bd48;
-  FUN_00a81e00(0x20,&local_44);
-  iVar3 = FUN_00c19d00(*(undefined4 *)(iVar1 + 8),*(undefined4 *)(iVar1 + 0xc),puVar4);
-  if (0 < iVar3) {
-    iVar5 = puVar4[1];
-    iVar3 = iVar5 + puVar4[2] * 4;
-    if (iVar5 != iVar3) {
-      local_48 = 1;
-      do {
-        FUN_00a7c8a0();
-        local_40[0] = *(undefined4 *)(iVar1 + 0x10);
-        FUN_00a9d720(local_40);
-        iVar5 = iVar5 + 4;
-      } while (iVar5 != iVar3);
-    }
-  }
-  return local_48;
+extern char DAT_016b1b1c[];           // debug message: action has no parameter block
+extern unsigned char DAT_01b7bd48[];  // default heap (second argument of FUN_00dd3500)
+
+namespace Trigger { namespace Act {
+int __fastcall REQ_GP_BEH_INST(int *action);
+} }
+
+namespace TrgActReqGpBehInst_p1 {
+
+// FUN_00dd5650 is a variadic debug print (empty in the release build).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    typedef void (__cdecl *Fn)(const char *, ...);
+    ((Fn)FUN_00dd5650)(format, args...);
 }
 
+// Callees whose generated prototype does not match the raw call site are invoked through
+// call<Sig>(fn)(args...) with exactly the raw arguments. "ECX: ?" marks an unrecovered register.
+template <class Sig, class Fn> inline Sig call(Fn *fn) { return (Sig)(void *)fn; }
+
+// lib::AllocatedArray<Entity*> (0x18 bytes, constructed inline here)
+struct EntityArray {
+    void *vftable;   // +0x00
+    int **data;      // +0x04
+    int count;       // +0x08
+    int unknown0C;   // +0x0C
+    int unknown10;   // +0x10
+    int unknown14;   // +0x14
+};
+
+}  // namespace TrgActReqGpBehInst_p1
+
+// 00C9D540  Trigger::Act::REQ_GP_BEH_INST  size=206  [class]
+// Collects the entities of group (params+0x8, params+0xC) into a new array and sends each a
+// behaviour request whose first word is params+0x10. Returns 1 when the array is not empty.
+int __fastcall Trigger::Act::REQ_GP_BEH_INST(int *action)
+{
+    using namespace TrgActReqGpBehInst_p1;
+    undefined4 request[15];
+    int *params = (int *)action[1];  // +0x4 parameter block
+    int result = 0;
+    if (params == 0) {
+        debugPrint(DAT_016b1b1c);
+        return 0;
+    }
+    EntityArray *block = call<EntityArray *(*)(int, unsigned char *)>(FUN_00dd3500)(0x18, DAT_01b7bd48);
+    EntityArray *array = 0;
+    if (block != 0) {
+        block->data = 0;
+        block->count = 0;
+        block->unknown0C = 0;
+        block->vftable = (void *)0x01663FE8;  // lib::AllocatedArray<Entity*>::vftable
+        block->unknown10 = 0;
+        block->unknown14 = 0;
+        array = block;
+    }
+    unsigned char *heap = DAT_01b7bd48;
+    call<void (*)(int, unsigned char **)>(FUN_00a81e00)(0x20, &heap); /* ECX: ? (the array) */
+    int found = call<int (*)(int, int, EntityArray *)>(FUN_00c19d00)(params[2], params[3], array); /* ECX: ? */
+    if (0 < found) {
+        int **entry = array->data;
+        int **end = entry + array->count;
+        if (entry != end) {
+            result = 1;
+            do {
+                FUN_00a7c8a0((int)*entry);  // machine code: ECX = *entry
+                request[0] = params[4];  // +0x10
+                call<void (*)(undefined4 *)>(FUN_00a9d720)(request); /* ECX: ? (object returned above) */
+                entry = entry + 1;
+            } while (entry != end);
+        }
+    }
+    return result;
+}

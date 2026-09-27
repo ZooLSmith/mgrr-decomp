@@ -1,158 +1,153 @@
-// src/managers/ctouchmanager/cTouchManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 009835F0..00983780, 5 functions
-
+// src/managers/ctouchmanager/cTouchManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "cTouchManager.h"
 
+namespace cTouchManager_p1 {
+
+// __cdecl call of a function (symbol or address); used for __fastcall callees whose ECX the
+// decompiler did not show ("ECX: ?").
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// Inlined in FUN_00983650 / FUN_009836d0: unlinks `node` from the active list of the manager at
+// `self`, resets it (virtual slot 0, argument 0) and pushes it onto the free list. Returns the
+// node that followed it.
+inline undefined4 *recycleNode(int self, undefined4 *node)
+{
+    int prev;
+    int freeHead;
+    int freePrev;
+    undefined4 *next;
+
+    prev = node[0xf];
+    next = (undefined4 *)node[0x10];
+    if (prev != 0) {
+        *(undefined4 **)(prev + 0x40) = next;
+    }
+    if (next != (undefined4 *)0x0) {
+        next[0xf] = prev;
+    }
+    if (*(undefined4 **)(self + 0x18) == node) {
+        *(undefined4 **)(self + 0x18) = next;
+    }
+    vcall<void>(node, 0x0, 0);
+    *(int *)(self + 0x10) = *(int *)(self + 0x10) + -1;
+    freeHead = *(int *)(self + 0x14);
+    if (freeHead == 0) {
+        freePrev = 0;
+    }
+    else {
+        freePrev = *(int *)(freeHead + 0x3c);
+    }
+    node[0xf] = freePrev;
+    node[0x10] = freeHead;
+    if (freePrev != 0) {
+        *(undefined4 **)(freePrev + 0x40) = node;
+    }
+    if (freeHead != 0) {
+        *(undefined4 **)(freeHead + 0x3c) = node;
+    }
+    *(undefined4 **)(self + 0x14) = node;
+    return next;
+}
+
+} // namespace cTouchManager_p1
+
 // 009835F0  cTouchManager::cTouchManager  size=74  [class]
-void __fastcall cTouchManager::cTouchManager(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[0x14] = 1;
-  param_1[10] = 0;
-  param_1[0x17] = 0;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  return;
+cTouchManager::cTouchManager()
+{
+    // vftable = cTouchManager::vftable
+    field04() = 0;
+    field08() = 0;
+    freeList() = 0;
+    activeList() = 0;
+    activeEnd() = 0;
+    field20() = 0;
+    field24() = 0;
+    field50() = 1;
+    field28() = 0;
+    field5C() = 0;
+    field2C() = 0;
+    field30() = 0;
+    field34() = 0;
+    field38() = 0;
+    field3C() = 0;
+    field40() = 0;
+    field44() = 0;
+    field48() = 0;
+    field4C() = 0;
 }
 
 // 00983640  cTouchManager::~cTouchManager  size=14  [class]
-void __fastcall cTouchManager::~cTouchManager(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  FUN_009830a0();
-  return;
+cTouchManager::~cTouchManager()
+{
+    using namespace cTouchManager_p1;
+    // vftable = cTouchManager::vftable
+    cdeclcall<void>(FUN_009830a0); /* ECX: ? (likely this) */
 }
 
 // 00983650  FUN_00983650  size=122  [between]
-void __thiscall FUN_00983650(int param_1,uint param_2)
-
-{
-  int iVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  
-  puVar3 = *(undefined4 **)(param_1 + 0x18);
-  if (puVar3 != *(undefined4 **)(param_1 + 0x1c)) {
-    do {
-      if (*(ushort *)((int)puVar3 + 6) == param_2) {
-        iVar1 = puVar3[0xf];
-        puVar4 = (undefined4 *)puVar3[0x10];
-        if (iVar1 != 0) {
-          *(undefined4 **)(iVar1 + 0x40) = puVar4;
-        }
-        if (puVar4 != (undefined4 *)0x0) {
-          puVar4[0xf] = iVar1;
-        }
-        if (*(undefined4 **)(param_1 + 0x18) == puVar3) {
-          *(undefined4 **)(param_1 + 0x18) = puVar4;
-        }
-        (**(code **)*puVar3)(0);
-        *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + -1;
-        iVar1 = *(int *)(param_1 + 0x14);
-        if (iVar1 == 0) {
-          iVar2 = 0;
-        }
-        else {
-          iVar2 = *(int *)(iVar1 + 0x3c);
-        }
-        puVar3[0xf] = iVar2;
-        puVar3[0x10] = iVar1;
-        if (iVar2 != 0) {
-          *(undefined4 **)(iVar2 + 0x40) = puVar3;
-        }
-        if (iVar1 != 0) {
-          *(undefined4 **)(iVar1 + 0x3c) = puVar3;
-        }
-        *(undefined4 **)(param_1 + 0x14) = puVar3;
-      }
-      else {
-        puVar4 = (undefined4 *)puVar3[0x10];
-      }
-      puVar3 = puVar4;
-    } while (puVar4 != *(undefined4 **)(param_1 + 0x1c));
-  }
-  return;
+// __thiscall on a cTouchManager: recycles every active node whose id (word at +0x6) is `id`.
+void FUN_00983650(int self, uint id)
+{
+    using namespace cTouchManager_p1;
+    undefined4 *node;
+    undefined4 *next;
+
+    node = *(undefined4 **)(self + 0x18);
+    if (node != *(undefined4 **)(self + 0x1c)) {
+        do {
+            if (*(unsigned short *)((int)node + 6) == id) {
+                next = recycleNode(self, node);
+            }
+            else {
+                next = (undefined4 *)node[0x10];
+            }
+            node = next;
+        } while (next != *(undefined4 **)(self + 0x1c));
+    }
 }
 
 // 009836D0  FUN_009836d0  size=141  [between]
-void __thiscall FUN_009836d0(int param_1,int param_2,uint param_3)
-
-{
-  int iVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  
-  if (*(undefined4 **)(param_1 + 0x18) != *(undefined4 **)(param_1 + 0x1c)) {
-    puVar3 = *(undefined4 **)(param_1 + 0x18);
-    do {
-      if (puVar3[1] == (param_2 << 0x10 | param_3 & 0xffff)) {
-        iVar1 = puVar3[0xf];
-        puVar4 = (undefined4 *)puVar3[0x10];
-        if (iVar1 != 0) {
-          *(undefined4 **)(iVar1 + 0x40) = puVar4;
-        }
-        if (puVar4 != (undefined4 *)0x0) {
-          puVar4[0xf] = iVar1;
-        }
-        if (*(undefined4 **)(param_1 + 0x18) == puVar3) {
-          *(undefined4 **)(param_1 + 0x18) = puVar4;
-        }
-        (**(code **)*puVar3)(0);
-        *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + -1;
-        iVar1 = *(int *)(param_1 + 0x14);
-        if (iVar1 == 0) {
-          iVar2 = 0;
-        }
-        else {
-          iVar2 = *(int *)(iVar1 + 0x3c);
-        }
-        puVar3[0xf] = iVar2;
-        puVar3[0x10] = iVar1;
-        if (iVar2 != 0) {
-          *(undefined4 **)(iVar2 + 0x40) = puVar3;
-        }
-        if (iVar1 != 0) {
-          *(undefined4 **)(iVar1 + 0x3c) = puVar3;
-        }
-        *(undefined4 **)(param_1 + 0x14) = puVar3;
-      }
-      else {
-        puVar4 = (undefined4 *)puVar3[0x10];
-      }
-      puVar3 = puVar4;
-    } while (puVar4 != *(undefined4 **)(param_1 + 0x1c));
-  }
-  return;
+// __thiscall on a cTouchManager: recycles every active node whose key is (group << 16 | id).
+void FUN_009836d0(int self, int group, uint id)
+{
+    using namespace cTouchManager_p1;
+    undefined4 *node;
+    undefined4 *next;
+
+    if (*(undefined4 **)(self + 0x18) != *(undefined4 **)(self + 0x1c)) {
+        node = *(undefined4 **)(self + 0x18);
+        do {
+            if (node[1] == (group << 0x10 | id & 0xffff)) {
+                next = recycleNode(self, node);
+            }
+            else {
+                next = (undefined4 *)node[0x10];
+            }
+            node = next;
+        } while (next != *(undefined4 **)(self + 0x1c));
+    }
 }
 
 // 00983780  cTouchManager::vf00  size=39  [class]
-undefined4 * __thiscall cTouchManager::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  FUN_009830a0();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *cTouchManager::vf00(byte flags)
+{
+    using namespace cTouchManager_p1;
+    // vftable = cTouchManager::vftable
+    cdeclcall<void>(FUN_009830a0); /* ECX: ? (likely this) */
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
-

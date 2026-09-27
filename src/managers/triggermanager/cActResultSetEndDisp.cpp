@@ -1,59 +1,49 @@
-// src/managers/triggermanager/cActResultSetEndDisp.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7F9C0..00C92F80, 7 functions
-
+// src/managers/triggermanager/cActResultSetEndDisp.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActResultSetEndDisp.h"
+
+extern undefined DAT_01dbe158;  // cActResultSetEndDisp static descriptor returned by vf00
+extern int DAT_01dc130c;   // result display flag
 
 // 00C7F9C0  Trigger::cActResultSetEndDisp::vf18  size=18  [class]
-undefined4 Trigger::cActResultSetEndDisp::vf18(void)
-
-{
-  DAT_01dc130c = 0;
-  return 1;
+int Trigger::cActResultSetEndDisp::vf18()  // machine code ends in `ret 4`: one stack argument, unused (cAction.h declares vf18() without it)
+{
+    DAT_01dc130c = 0;
+    return 1;
 }
 
 // 00C8BDE0  Trigger::cActResultSetEndDisp::vf08  size=1  [class]
-void Trigger::cActResultSetEndDisp::vf08(void)
-
-{
-  return;
+void Trigger::cActResultSetEndDisp::vf08()
+{
 }
 
 // 00C8BDF0  Trigger::cActResultSetEndDisp::vf0C  size=1  [class]
-void Trigger::cActResultSetEndDisp::vf0C(void)
-
-{
-  return;
+void Trigger::cActResultSetEndDisp::vf0C()
+{
 }
 
 // 00C8BE00  Trigger::cActResultSetEndDisp::vf10  size=1  [class]
-void Trigger::cActResultSetEndDisp::vf10(void)
-
-{
-  return;
+void Trigger::cActResultSetEndDisp::vf10()
+{
 }
 
 // 00C8BE10  Trigger::cActResultSetEndDisp::vf14  size=1  [class]
-void Trigger::cActResultSetEndDisp::vf14(void)
-
-{
-  return;
+void Trigger::cActResultSetEndDisp::vf14()
+{
 }
 
 // 00C92F70  Trigger::cActResultSetEndDisp::vf00  size=6  [class]
-undefined * Trigger::cActResultSetEndDisp::vf00(void)
-
-{
-  return &DAT_01dbe158;
+void *Trigger::cActResultSetEndDisp::vf00()
+{
+    return &DAT_01dbe158;
 }
 
 // 00C92F80  Trigger::cActResultSetEndDisp::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActResultSetEndDisp::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActResultSetEndDisp *Trigger::cActResultSetEndDisp::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

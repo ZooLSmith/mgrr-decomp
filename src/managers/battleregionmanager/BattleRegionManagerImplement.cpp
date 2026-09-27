@@ -1,206 +1,216 @@
-// src/managers/battleregionmanager/BattleRegionManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00401100..004024C0, 8 functions
-
+// src/managers/battleregionmanager/BattleRegionManagerImplement.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "BattleRegionManagerImplement.h"
 
+// ---------------------------------------------------------------------------------------------
+// Helpers.  Callees whose functions.h prototype does not match the machine code are called
+// through a cast so that the argument list is the binary's.
+// ---------------------------------------------------------------------------------------------
+namespace BattleRegionManagerImplement_p1 {
+
+typedef BattleRegionManagerImplement::Unit      Unit;
+typedef BattleRegionManagerImplement::UnitArray UnitArray;
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// FUN_004011c0: formats at most 10 characters into `buffer` (_vsnprintf).
+inline void formatName(char *buffer, const char *format, int value)
+{
+    cdeclcall<void>(FUN_004011c0, buffer, format, value);
+}
+
+// Region object (FUN_00c14bb0 returns the instance at 0x01BEA104; type unknown).
+inline void *regions()
+{
+    return (void *)FUN_00c14bb0();
+}
+// regions()->vf44(enable, name): enables / disables a named region.
+inline void setRegionEnabled(int enable, char *name)
+{
+    vcall<void>(regions(), 0x44, enable, name);
+}
+// regions()->vf50(name): non-zero when the named region is enabled.
+inline int isRegionEnabled(char *name)
+{
+    return vcall<int>(regions(), 0x50, name);
+}
+
+// Plays effect `effectId` with the parameters of `esp`: FUN_00e01d00 builds the call parameters
+// on the stack, FUN_00dffb30 attaches the controller, FUN_00e01f10(source, effectId, params).
+inline void playEffect(int effectId, cEspControler *esp)
+{
+    __declspec(align(16)) unsigned char effectParam[0x110];
+    thiscall<void>(FUN_00e01d00, effectParam, effectId);
+    thiscall<void>(FUN_00dffb30, effectParam, esp);
+    int room = thiscall<int>(FUN_00a4c980, (void *)0x01BE8F30);  /* ECX: global object 0x01BE8F30 */
+    void *manager = (void *)FUN_00a6dd90();
+    int source = vcall<int>(manager, 0x9C, room);
+    cdeclcall<void>(FUN_00e01f10, source, effectId, effectParam);
+}
+
+const float kDisableDelay = 1.2f;  // 0x0163B568
+
+}  // namespace BattleRegionManagerImplement_p1
+
 // 00401100  BattleRegionManagerImplement::vf10  size=1  [class]
-void BattleRegionManagerImplement::vf10(void)
-
-{
-  return;
+void BattleRegionManagerImplement::vf10()
+{
 }
 
 // 00401470  BattleRegionManagerImplement::vf0C  size=113  [class]
-bool BattleRegionManagerImplement::vf0C(undefined4 param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  undefined1 local_c [12];
-  
-  FUN_004011c0(local_c,"_BA%03d",param_1);
-  piVar1 = (int *)FUN_00c14bb0();
-  iVar2 = (**(code **)(*piVar1 + 0x50))(local_c);
-  if (iVar2 != 0) {
-    return true;
-  }
-  FUN_004011c0(&stack0xfffffff0,"_ba%03d",param_1);
-  piVar1 = (int *)FUN_00c14bb0();
-  iVar2 = (**(code **)(*piVar1 + 0x50))(&stack0xfffffff0);
-  return iVar2 != 0;
+// True when "_BA<n>" or "_ba<n>" is enabled.
+bool BattleRegionManagerImplement::vf0C(undefined4 regionNo)
+{
+    using namespace BattleRegionManagerImplement_p1;
+    char name[12];
+    formatName(name, "_BA%03d", (int)regionNo);
+    if (isRegionEnabled(name) != 0) {
+        return true;
+    }
+    formatName(name, "_ba%03d", (int)regionNo);
+    return isRegionEnabled(name) != 0;
 }
 
 // 00401980  BattleRegionManagerImplement::vf00  size=268  [class]
-void __thiscall BattleRegionManagerImplement::vf00(int param_1,float param_2)
-
-{
-  float fVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
-  undefined4 *puVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
-  undefined1 local_c [12];
-  
-  iVar4 = FUN_00c14bb0();
-  if ((iVar4 != 0) &&
-     (puVar7 = *(undefined4 **)(*(int *)(param_1 + 4) + 4),
-     puVar7 != puVar7 + *(int *)(*(int *)(param_1 + 4) + 8) * 2)) {
-    do {
-      fVar1 = (float)puVar7[1];
-      puVar7[1] = fVar1 - param_2;
-      if (0.0 < fVar1 - param_2) {
-        puVar8 = puVar7 + 2;
-      }
-      else {
-        FUN_004011c0(local_c,"_BA%03d",*puVar7);
-        piVar5 = (int *)FUN_00c14bb0();
-        (**(code **)(*piVar5 + 0x44))(0,local_c);
-        FUN_004011c0(&stack0xffffffec,"_ba%03d",*puVar7);
-        piVar5 = (int *)FUN_00c14bb0();
-        (**(code **)(*piVar5 + 0x44))(0,&stack0xffffffec);
-        iVar4 = *(int *)(param_1 + 4);
-        uVar2 = *(uint *)(iVar4 + 8);
-        iVar3 = *(int *)(iVar4 + 4);
-        puVar8 = (undefined4 *)(iVar3 + uVar2 * 8);
-        if ((((puVar7 != puVar8) && (iVar3 != 0)) && (uVar2 != 0)) &&
-           ((uint)((int)puVar7 - iVar3 >> 3) < uVar2)) {
-          for (puVar6 = puVar7; puVar6 != puVar8 + -2; puVar6 = puVar6 + 2) {
-            *puVar6 = puVar6[2];
-            puVar6[1] = puVar6[3];
-          }
-          *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + -1;
-          puVar8 = puVar7;
-        }
-      }
-      puVar7 = puVar8;
-    } while (puVar8 != (undefined4 *)
-                       (*(int *)(*(int *)(param_1 + 4) + 4) +
-                       *(int *)(*(int *)(param_1 + 4) + 8) * 8));
-  }
-  return;
+// Counts down the regions being disabled; an expired one is disabled and removed from the list.
+void BattleRegionManagerImplement::vf00(float elapsed)
+{
+    using namespace BattleRegionManagerImplement_p1;
+    char name[12];
+    if (FUN_00c14bb0() != 0) {
+        Unit *it = units()->data;
+        if (it != it + units()->count) {
+            Unit *next;
+            do {
+                float remaining = it->timer - elapsed;
+                it->timer = remaining;
+                if (0.0f < remaining) {
+                    next = it + 1;
+                }
+                else {
+                    formatName(name, "_BA%03d", it->regionNo);
+                    setRegionEnabled(0, name);
+                    formatName(name, "_ba%03d", it->regionNo);
+                    setRegionEnabled(0, name);
+                    UnitArray *list = units();
+                    unsigned int count = list->count;
+                    Unit *data = list->data;
+                    next = data + count;
+                    if (it != next && data != 0 && count != 0 && (unsigned int)(it - data) < count) {
+                        // erase: shift the following units down by one
+                        for (Unit *p = it; p != next - 1; p = p + 1) {
+                            p[0].regionNo = p[1].regionNo;
+                            p[0].timer = p[1].timer;
+                        }
+                        list->count = list->count - 1;
+                        next = it;
+                    }
+                }
+                it = next;
+            } while (next != units()->data + units()->count);
+        }
+    }
 }
 
 // 00401A90  FUN_00401a90  size=179  [callgraph]
-void __fastcall FUN_00401a90(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  undefined4 *puVar3;
-  undefined1 local_c [12];
-  
-  iVar1 = FUN_00c14bb0();
-  if ((iVar1 != 0) &&
-     (puVar3 = *(undefined4 **)(*(int *)(param_1 + 4) + 4),
-     puVar3 != puVar3 + *(int *)(*(int *)(param_1 + 4) + 8) * 2)) {
-    do {
-      FUN_004011c0(local_c,"_BA%03d",*puVar3);
-      piVar2 = (int *)FUN_00c14bb0();
-      (**(code **)(*piVar2 + 0x44))(0,local_c);
-      FUN_004011c0(&stack0xffffffec,"_ba%03d",*puVar3);
-      piVar2 = (int *)FUN_00c14bb0();
-      (**(code **)(*piVar2 + 0x44))(0,&stack0xffffffec);
-      puVar3 = puVar3 + 2;
-    } while (puVar3 != (undefined4 *)
-                       (*(int *)(*(int *)(param_1 + 4) + 4) +
-                       *(int *)(*(int *)(param_1 + 4) + 8) * 8));
-  }
-  if (*(int *)(*(int *)(param_1 + 4) + 4) != 0) {
-    *(undefined4 *)(*(int *)(param_1 + 4) + 8) = 0;
-  }
-  if (*(undefined4 **)(param_1 + 4) != (undefined4 *)0x0) {
-    (**(code **)**(undefined4 **)(param_1 + 4))();
-    *(undefined4 *)(param_1 + 4) = 0;
-  }
-  return;
+// BattleRegionManagerImplement teardown: disables every pending region, then deletes the list.
+void __fastcall FUN_00401a90(int self)
+{
+    using namespace BattleRegionManagerImplement_p1;
+    BattleRegionManagerImplement *manager = (BattleRegionManagerImplement *)self;
+    char name[12];
+    if (FUN_00c14bb0() != 0) {
+        Unit *it = manager->units()->data;
+        if (it != it + manager->units()->count) {
+            do {
+                formatName(name, "_BA%03d", it->regionNo);
+                setRegionEnabled(0, name);
+                formatName(name, "_ba%03d", it->regionNo);
+                setRegionEnabled(0, name);
+                it = it + 1;
+            } while (it != manager->units()->data + manager->units()->count);
+        }
+    }
+    if (manager->units()->data != 0) {
+        manager->units()->count = 0;
+    }
+    if (manager->units() != 0) {
+        vcall<void>(manager->units(), 0x0, 1);  // scalar deleting destructor
+        manager->units() = 0;
+    }
 }
 
 // 00401DE0  BattleRegionManagerImplement::vf04  size=195  [class]
-void __thiscall BattleRegionManagerImplement::vf04(int *param_1,int param_2)
-
-{
-  int iVar1;
-  int *piVar2;
-  undefined4 uVar3;
-  undefined1 auStack_138 [4];
-  undefined1 auStack_134 [4];
-  undefined1 auStack_130 [300];
-  
-  iVar1 = (**(code **)(*param_1 + 0xc))(param_2);
-  if (iVar1 == 0) {
-    FUN_004011c0(auStack_130,"_BA%03d",param_2);
-    piVar2 = (int *)FUN_00c14bb0();
-    (**(code **)(*piVar2 + 0x44))(1,auStack_130);
-    FUN_004011c0(auStack_138,"_ba%03d",param_2);
-    piVar2 = (int *)FUN_00c14bb0();
-    (**(code **)(*piVar2 + 0x44))(1,auStack_138);
-    iVar1 = param_2 * 5 + 0x5f;
-    FUN_00e01d00(iVar1);
-    FUN_00dffb30(param_1 + 4);
-    uVar3 = FUN_00a4c980();
-    piVar2 = (int *)FUN_00a6dd90();
-    uVar3 = (**(code **)(*piVar2 + 0x9c))(uVar3,iVar1,auStack_134);
-    FUN_00e01f10(uVar3);
-  }
-  return;
+// Enables both named regions of `regionNo` and plays its effect (regionNo*5+0x5F).
+void BattleRegionManagerImplement::vf04(int regionNo)
+{
+    using namespace BattleRegionManagerImplement_p1;
+    if (vf0C(regionNo) == false) {
+        char name[12];
+        formatName(name, "_BA%03d", regionNo);
+        setRegionEnabled(1, name);
+        formatName(name, "_ba%03d", regionNo);
+        setRegionEnabled(1, name);
+        int effectId = regionNo * 5 + 0x5F;
+        playEffect(effectId, espControler());
+    }
 }
 
 // 00401EB0  BattleRegionManagerImplement::vf08  size=178  [class]
-void __thiscall BattleRegionManagerImplement::vf08(int *param_1,int param_2)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  int iStack_134;
-  int iStack_130;
-  int *local_12c;
-  undefined1 auStack_124 [288];
-  
-  local_12c = param_1;
-  iVar1 = (**(code **)(*param_1 + 0xc))(param_2);
-  if (iVar1 != 0) {
-    FUN_00eaa5b0(param_2 * 5 + 0x5f,0,0);
-    iVar1 = param_2 * 5 + 0x60;
-    FUN_00e01d00(iVar1);
-    FUN_00dffb30(param_1 + 4);
-    uVar2 = FUN_00a4c980();
-    piVar3 = (int *)FUN_00a6dd90();
-    uVar2 = (**(code **)(*piVar3 + 0x9c))(uVar2,iVar1,auStack_124);
-    FUN_00e01f10(uVar2);
-    local_12c = (int *)0x3f99999a;
-    iStack_130 = param_2;
-    (**(code **)(**(int **)(iStack_134 + 4) + 8))(&iStack_130);
-  }
-  return;
+// Stops the "enabled" effect, plays the disabling effect (regionNo*5+0x60) and queues the
+// region to be disabled after 1.2 s.
+void BattleRegionManagerImplement::vf08(int regionNo)
+{
+    using namespace BattleRegionManagerImplement_p1;
+    if (vf0C(regionNo)) {
+        thiscall<void>(FUN_00eaa5b0, espControler(), regionNo * 5 + 0x5F, 0.0f, 0.0f);
+        int effectId = regionNo * 5 + 0x60;
+        playEffect(effectId, espControler());
+        Unit unit;
+        unit.timer = kDisableDelay;
+        unit.regionNo = regionNo;
+        vcall<void>(units(), 0x8, &unit);  // push_back
+    }
 }
 
 // 004024A0  BattleRegionManagerImplement::~BattleRegionManagerImplement  size=30  [class]
-void __fastcall BattleRegionManagerImplement::~BattleRegionManagerImplement(undefined4 *param_1)
-
-{
-  *param_1 = vftable;
-  FUN_00401a90();
-  cEspControler::~cEspControler();
-  *param_1 = BattleRegionManager::vftable;
-  return;
+BattleRegionManagerImplement::~BattleRegionManagerImplement()
+{
+    // vftable = BattleRegionManagerImplement::vftable (0x0163B58C)
+    FUN_00401a90((int)this);
+    espControler()->~cEspControler();
+    // vftable = BattleRegionManager::vftable (0x0163B4E0)
 }
 
 // 004024C0  BattleRegionManagerImplement::vf14  size=50  [class]
-undefined4 * __thiscall BattleRegionManagerImplement::vf14(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  FUN_00401a90();
-  cEspControler::~cEspControler();
-  *param_1 = BattleRegionManager::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *BattleRegionManagerImplement::vf14(byte flags)
+{
+    // vftable = BattleRegionManagerImplement::vftable (0x0163B58C)
+    FUN_00401a90((int)this);
+    espControler()->~cEspControler();
+    // vftable = BattleRegionManager::vftable (0x0163B4E0)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
-

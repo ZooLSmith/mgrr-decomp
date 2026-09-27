@@ -1,51 +1,67 @@
-// src/managers/triggermanager/actions/TrgActScrColiOff.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C80940..00C80940, 1 functions
-
+// src/managers/triggermanager/actions/TrgActScrColiOff.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C80940  Trigger::Act::SCR_COLI_OFF  size=195  [class]
-int __fastcall Trigger::Act::SCR_COLI_OFF(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int unaff_ESI;
-  int iVar6;
-  int local_4;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  iVar6 = 0;
-  if (iVar1 == 0) {
-    local_4 = param_1;
-    FUN_00dd5650(&DAT_016ab86c);
-    return 0;
-  }
-  iVar5 = 0;
-  local_4 = 0;
-  piVar2 = (int *)FUN_00c14bb0();
-  iVar3 = (**(code **)(*piVar2 + 0x28))(&local_4,*(undefined4 *)(iVar1 + 8));
-  if (iVar3 != 0) {
-    if (0 < unaff_ESI) {
-      do {
-        piVar2 = *(int **)(iVar3 + iVar6 * 4);
-        if (((piVar2 != (int *)0x0) && (iVar4 = (**(code **)(*piVar2 + 8))(), iVar4 != 0)) &&
-           (iVar4 = (**(code **)(**(int **)(iVar3 + iVar6 * 4) + 0xe0))(0,iVar1 + 0xc,0,0),
-           iVar4 != 0)) {
-          iVar5 = 1;
-        }
-        iVar6 = iVar6 + 1;
-      } while (iVar6 < unaff_ESI);
-      if (iVar5 != 0) {
-        return iVar5;
-      }
-    }
-    FUN_00dd5650(&DAT_016ab828,iVar1 + 0xc);
-    return 0;
-  }
-  FUN_00dd5650(&DAT_016ab7e8,*(undefined4 *)(iVar1 + 8));
-  return 0;
+extern char DAT_016ab86c[];  // debug message: action has no parameter block
+extern char DAT_016ab828[];  // debug message: collision %s not switched
+extern char DAT_016ab7e8[];  // debug message: no objects for id %d
+
+namespace Trigger { namespace Act {
+int __fastcall SCR_COLI_OFF(int *action);
+} }
+
+namespace TrgActScrColiOff_p1 {
+
+// FUN_00dd5650 is a variadic debug print (empty in the release build).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    typedef void (__cdecl *Fn)(const char *, ...);
+    ((Fn)FUN_00dd5650)(format, args...);
 }
 
+// object manager (FUN_00c14bb0) vf28: objects with id -> array of object pointers
+typedef int **(__thiscall *FindObjectsFn)(int *manager, int *outValue, int id);
+// object vf08: nonzero when the object is usable
+typedef int (__thiscall *IsValidFn)(int *object);
+// object vfE0: switch the named script collision (on, name, 0, 0)
+typedef int (__thiscall *SetCollisionFn)(int *object, int on, char *name, int unknown3, int unknown4);
+
+}  // namespace TrgActScrColiOff_p1
+
+// 00C80940  Trigger::Act::SCR_COLI_OFF  size=195  [class]
+// Turns off the script collision named at params+0xC on every object with id params+0x8.
+int __fastcall Trigger::Act::SCR_COLI_OFF(int *action)
+{
+    using namespace TrgActScrColiOff_p1;
+    int outValue;  // vf28 writes the object count here (raw showed unaff_ESI; machine code compares [esp+0x10])
+    int *params = (int *)action[1];  // +0x4 parameter block
+    int i = 0;
+    if (params == 0) {
+        outValue = (int)action;
+        debugPrint(DAT_016ab86c);
+        return 0;
+    }
+    int result = 0;
+    outValue = 0;
+    int *manager = (int *)FUN_00c14bb0();
+    int **objects = (*(FindObjectsFn *)(*manager + 0x28))(manager, &outValue, params[2]);
+    char *name = (char *)(params + 3);  // +0xC
+    if (objects != 0) {
+        if (0 < outValue) {
+            do {
+                int *object = objects[i];
+                if (object != 0 && (*(IsValidFn *)(*object + 8))(object) != 0 &&
+                    (*(SetCollisionFn *)(*objects[i] + 0xe0))(objects[i], 0, name, 0, 0) != 0) {
+                    result = 1;
+                }
+                i = i + 1;
+            } while (i < outValue);
+            if (result != 0) {
+                return result;
+            }
+        }
+        debugPrint(DAT_016ab828, name);
+        return 0;
+    }
+    debugPrint(DAT_016ab7e8, params[2]);
+    return 0;
+}

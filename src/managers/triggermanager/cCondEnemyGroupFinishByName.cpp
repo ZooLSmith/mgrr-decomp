@@ -1,89 +1,107 @@
-// src/managers/triggermanager/cCondEnemyGroupFinishByName.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7B7D0..00C85FB0, 5 functions
-
+// src/managers/triggermanager/cCondEnemyGroupFinishByName.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondEnemyGroupFinishByName.h"
+
+extern unsigned char DAT_01c78cb0[];  // enemy set manager (ECX of the FUN_00c18xxx / FUN_00c19xxx calls)
+
+extern unsigned int DAT_01bea060;  // global flags (0x400: enemy finish checks suspended)
+extern undefined DAT_016ac5f8;  // debug error message
+
+namespace cCondEnemyGroupFinishByName_p1 {
+
+// Trigger::cCondition+0x04: the trigger record this condition was built from
+inline int *&conditionRecord(void *self) { return *(int **)((char *)self + 0x4); }
+
+// Trigger::cCondition+0x08 / +0x0C: ? both set to -1 by the (inlined) base constructor
+inline int &conditionField08(void *self) { return *(int *)((char *)self + 0x8); }
+inline int &conditionField0C(void *self) { return *(int *)((char *)self + 0xC); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (__cdecl *)(const void *, ...))FUN_00dd5650)(format); }
+
+// FUN_00c18cc0: nonzero while the numbered enemy set is placed (? see cCondEnemyNotSetByNumber)
+inline int enemySetByNumber(int number) { return ((int (__thiscall *)(void *, int))(void *)FUN_00c18cc0)(DAT_01c78cb0, number); }
+
+// FUN_00c18cf0: finish state of the whole group ("all")
+inline int enemyGroupFinishAll(int groupNo) { return ((int (__thiscall *)(void *, int))(void *)FUN_00c18cf0)(DAT_01c78cb0, groupNo); }
+
+// FUN_00c18c70: nonzero while the named enemy set is placed (? see cCondEnemyNotSetByName)
+inline int enemySetByName(char *name) { return ((int (__thiscall *)(void *, char *))(void *)FUN_00c18c70)(DAT_01c78cb0, name); }
+
+// FUN_00c18d50: finish state of the named enemy set of the group
+inline int enemyGroupFinishByName(int groupNo, char *name) { return ((int (__thiscall *)(void *, int, char *))(void *)FUN_00c18d50)(DAT_01c78cb0, groupNo, name); }
+
+} // namespace cCondEnemyGroupFinishByName_p1
 
 // 00C7B7D0  Trigger::cCondEnemyGroupFinishByName::cCondEnemyGroupFinishByName  size=35  [class]
-void __fastcall
-Trigger::cCondEnemyGroupFinishByName::cCondEnemyGroupFinishByName(undefined4 *param_1)
-
-{
-  param_1[3] = 0xffffffff;
-  param_1[1] = 0;
-  param_1[2] = 0xffffffff;
-  *param_1 = vftable;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  return;
+Trigger::cCondEnemyGroupFinishByName::cCondEnemyGroupFinishByName()
+{
+    using namespace cCondEnemyGroupFinishByName_p1;
+
+    conditionField0C(this) = -1;
+    conditionRecord(this) = 0;
+    conditionField08(this) = -1;
+    // vftable = Trigger::cCondEnemyGroupFinishByName::vftable (0x016A9664)
+    enemyName() = 0;
+    groupNo() = 0;
+    finishState() = 0;
+    allSetState() = 0;
 }
 
 // 00C7B810  Trigger::cCondEnemyGroupFinishByName::vf1C  size=22  [class]
-void __thiscall Trigger::cCondEnemyGroupFinishByName::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(int *)(param_1 + 0x10) = param_2 + 0xc;
-  *(undefined4 *)(param_1 + 0x14) = *(undefined4 *)(param_2 + 8);
-  return;
+void Trigger::cCondEnemyGroupFinishByName::vf1C(int *record)
+{
+    using namespace cCondEnemyGroupFinishByName_p1;
+
+    conditionRecord(this) = record;
+    enemyName() = (char *)(record + 3);   // name string at record+0x0C
+    groupNo() = record[2];
 }
 
 // 00C7B830  Trigger::cCondEnemyGroupFinishByName::vf20  size=13  [class]
-undefined4 __fastcall Trigger::cCondEnemyGroupFinishByName::vf20(int param_1)
-
-{
-  *(undefined4 *)(param_1 + 0x18) = 0;
-  return 1;
+int Trigger::cCondEnemyGroupFinishByName::vf20()
+{
+    finishState() = 0;
+    return 1;
 }
 
 // 00C85F90  Trigger::cCondEnemyGroupFinishByName::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondEnemyGroupFinishByName::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondEnemyGroupFinishByName *Trigger::cCondEnemyGroupFinishByName::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return this;
 }
 
 // 00C85FB0  Trigger::cCondEnemyGroupFinishByName::vf14  size=173  [class]
-bool __fastcall Trigger::cCondEnemyGroupFinishByName::vf14(int param_1)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  bool bVar3;
-  
-  if (*(char **)(param_1 + 0x10) == (char *)0x0) {
-    FUN_00dd5650(&DAT_016ac5f8);
-  }
-  else if ((DAT_01bea060 & 0x400) == 0) {
-    if (*(int *)(param_1 + 0x18) == 0) {
-      iVar1 = __stricmp("all",*(char **)(param_1 + 0x10));
-      if (iVar1 == 0) {
-        if (*(int *)(param_1 + 0x1c) == 0) {
-          uVar2 = FUN_00c18cc0(*(undefined4 *)(param_1 + 0x14));
-          *(undefined4 *)(param_1 + 0x1c) = uVar2;
-        }
-        if (*(int *)(param_1 + 0x1c) != 1) goto LAB_00c86046;
-        uVar2 = FUN_00c18cf0(*(undefined4 *)(param_1 + 0x14));
-      }
-      else {
-        iVar1 = FUN_00c18c70(*(undefined4 *)(param_1 + 0x10));
-        if (iVar1 != 1) goto LAB_00c86046;
-        uVar2 = FUN_00c18d50(*(undefined4 *)(param_1 + 0x14),*(undefined4 *)(param_1 + 0x10));
-      }
-      *(undefined4 *)(param_1 + 0x18) = uVar2;
-    }
-LAB_00c86046:
-    bVar3 = *(int *)(param_1 + 0x18) == 1;
-    if (bVar3) {
-      *(undefined4 *)(param_1 + 0x18) = 0;
-    }
-    return bVar3;
-  }
-  return false;
-}
+bool Trigger::cCondEnemyGroupFinishByName::vf14()
+{
+    using namespace cCondEnemyGroupFinishByName_p1;
 
+    if (enemyName() == 0) {
+        reportError(&DAT_016ac5f8);   // enemy set name not set
+    }
+    else if ((DAT_01bea060 & 0x400) == 0) {
+        if (finishState() == 0) {
+            if (__stricmp((char *)"all", enemyName()) == 0) {
+                if (allSetState() == 0) {
+                    allSetState() = enemySetByNumber(groupNo());
+                }
+                if (allSetState() == 1) {
+                    finishState() = enemyGroupFinishAll(groupNo());
+                }
+            }
+            else if (enemySetByName(enemyName()) == 1) {
+                finishState() = enemyGroupFinishByName(groupNo(), enemyName());
+            }
+        }
+        bool finished = finishState() == 1;
+        if (finished) {
+            finishState() = 0;
+        }
+        return finished;
+    }
+    return false;
+}

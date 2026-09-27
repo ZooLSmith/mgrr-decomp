@@ -1,138 +1,120 @@
-// src/managers/triggermanager/actions/TrgActEnmMsg.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C874C0..00C88350, 3 functions
-
+// src/managers/triggermanager/actions/TrgActEnmMsg.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
+extern undefined DAT_016ac6f4;  // error message format string
+
+// the trigger action/condition handlers are free functions in these namespaces
+namespace Trigger { namespace Act {
+    int __fastcall ENM_MSG(int action);
+    int __fastcall ENM_MSG_2(int action);
+    int __fastcall ENM_MSG_3(int action);
+} }
+
+namespace TrgActEnmMsg_p1 {
+
+// field at a byte offset of a record whose layout is not modelled
+template <class T> inline T &at(int base, int offset) { return *(T *)(base + offset); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (*)(const void *, ...))FUN_00dd5650)(format); }
+template <class A> inline void reportError(const void *format, A a)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a); }
+template <class A, class B> inline void reportError(const void *format, A a, B b)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b); }
+template <class A, class B, class C> inline void reportError(const void *format, A a, B b, C c)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b, c); }
+
+// the two blocks handed to FUN_00c5e350, adjacent on the stack (header at -0x54, body at -0x30);
+// words never written here are left uninitialised as in the original
+struct EnemyMessage {
+    undefined4 header[9];   // -0x54 .. -0x34
+    undefined4 body[12];    // -0x30 .. -0x04
+};
+
+}  // namespace TrgActEnmMsg_p1
+
 // 00C874C0  Trigger::Act::ENM_MSG  size=169  [class]
-undefined4 __fastcall Trigger::Act::ENM_MSG(int param_1)
-
-{
-  int iVar1;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_10;
-  undefined4 local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016ac6f4);
-    return 0;
-  }
-  local_30 = *(undefined4 *)(param_1 + 8);
-  local_10 = 0;
-  local_c = 0;
-  local_8 = 0;
-  local_54 = 0;
-  local_50 = 0;
-  local_4c = 0xffffffff;
-  local_4 = 0xffffffff;
-  local_40 = 0xfffffffe;
-  local_3c = 0;
-  local_2c = 0;
-  local_34 = 0x1010000;
-  local_48 = *(undefined4 *)(iVar1 + 0x28);
-  local_44 = *(undefined4 *)(iVar1 + 0x2c);
-  local_38 = *(undefined4 *)(iVar1 + 0x30);
-  FUN_00c5e350(0,&local_54,&local_30);
-  return 1;
+int __fastcall Trigger::Act::ENM_MSG(int action)
+{
+    using namespace TrgActEnmMsg_p1;
+    EnemyMessage msg;
+    int params = at<int>(action, 4);
+    if (params == 0) {
+        reportError(&DAT_016ac6f4);
+        return 0;
+    }
+    msg.body[0] = at<undefined4>(action, 8);
+    msg.body[8] = 0;
+    msg.body[9] = 0;
+    msg.body[10] = 0;
+    msg.header[0] = 0;
+    msg.header[1] = 0;
+    msg.header[2] = 0xFFFFFFFF;
+    msg.body[11] = 0xFFFFFFFF;
+    msg.header[5] = 0xFFFFFFFE;
+    msg.header[6] = 0;
+    msg.body[1] = 0;
+    msg.header[8] = 0x1010000;
+    msg.header[3] = at<undefined4>(params, 0x28);
+    msg.header[4] = at<undefined4>(params, 0x2C);
+    msg.header[7] = at<undefined4>(params, 0x30);
+    ((void (*)(int, undefined4 *, undefined4 *))FUN_00c5e350)(0, msg.header, msg.body);
+    return 1;
 }
 
 // 00C87590  Trigger::Act::ENM_MSG_2  size=144  [class]
-undefined4 __fastcall Trigger::Act::ENM_MSG_2(int param_1)
-
-{
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_10;
-  undefined4 local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_00dd5650(&DAT_016ac6f4);
-    return 0;
-  }
-  local_4c = 0xffffffff;
-  local_10 = 0;
-  local_48 = 0xffffffff;
-  local_c = 0;
-  local_44 = 0xffffffff;
-  local_8 = 0;
-  local_38 = 0xffffffff;
-  local_54 = 0;
-  local_3c = *(undefined4 *)(param_1 + 0xc);
-  local_50 = 0;
-  local_30 = *(undefined4 *)(param_1 + 8);
-  local_4 = *(undefined4 *)(param_1 + 0x10);
-  local_40 = 0xfffffffe;
-  local_2c = 0;
-  local_34 = 0x1010000;
-  FUN_00c5e350(0,&local_54,&local_30);
-  return 1;
+int __fastcall Trigger::Act::ENM_MSG_2(int action)
+{
+    using namespace TrgActEnmMsg_p1;
+    EnemyMessage msg;
+    if (at<int>(action, 4) == 0) {
+        reportError(&DAT_016ac6f4);
+        return 0;
+    }
+    msg.header[2] = 0xFFFFFFFF;
+    msg.body[8] = 0;
+    msg.header[3] = 0xFFFFFFFF;
+    msg.body[9] = 0;
+    msg.header[4] = 0xFFFFFFFF;
+    msg.body[10] = 0;
+    msg.header[7] = 0xFFFFFFFF;
+    msg.header[0] = 0;
+    msg.header[6] = at<undefined4>(action, 0xC);
+    msg.header[1] = 0;
+    msg.body[0] = at<undefined4>(action, 8);
+    msg.body[11] = at<undefined4>(action, 0x10);
+    msg.header[5] = 0xFFFFFFFE;
+    msg.body[1] = 0;
+    msg.header[8] = 0x1010000;
+    ((void (*)(int, undefined4 *, undefined4 *))FUN_00c5e350)(0, msg.header, msg.body);
+    return 1;
 }
 
 // 00C88350  Trigger::Act::ENM_MSG_3  size=189  [class]
-undefined4 __fastcall Trigger::Act::ENM_MSG_3(int param_1)
-
-{
-  int iVar1;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_10;
-  undefined4 local_c;
-  undefined4 local_8;
-  undefined4 local_4;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016ac6f4);
-    return 0;
-  }
-  local_10 = 0;
-  local_c = 0;
-  local_8 = 0;
-  local_4c = 0xffffffff;
-  local_38 = 0xffffffff;
-  local_3c = 0;
-  local_2c = 0;
-  local_48 = *(undefined4 *)(iVar1 + 0x28);
-  local_44 = *(undefined4 *)(iVar1 + 0x2c);
-  local_40 = *(undefined4 *)(iVar1 + 0x30);
-  local_54 = 0;
-  local_30 = *(undefined4 *)(param_1 + 8);
-  local_50 = 0;
-  local_4 = *(undefined4 *)(param_1 + 0xc);
-  local_34 = 0x1010000;
-  FUN_00c5e350(0,&local_54,&local_30);
-  return 1;
+int __fastcall Trigger::Act::ENM_MSG_3(int action)
+{
+    using namespace TrgActEnmMsg_p1;
+    EnemyMessage msg;
+    int params = at<int>(action, 4);
+    if (params == 0) {
+        reportError(&DAT_016ac6f4);
+        return 0;
+    }
+    msg.body[8] = 0;
+    msg.body[9] = 0;
+    msg.body[10] = 0;
+    msg.header[2] = 0xFFFFFFFF;
+    msg.header[7] = 0xFFFFFFFF;
+    msg.header[6] = 0;
+    msg.body[1] = 0;
+    msg.header[3] = at<undefined4>(params, 0x28);
+    msg.header[4] = at<undefined4>(params, 0x2C);
+    msg.header[5] = at<undefined4>(params, 0x30);
+    msg.header[0] = 0;
+    msg.body[0] = at<undefined4>(action, 8);
+    msg.header[1] = 0;
+    msg.body[11] = at<undefined4>(action, 0xC);
+    msg.header[8] = 0x1010000;
+    ((void (*)(int, undefined4 *, undefined4 *))FUN_00c5e350)(0, msg.header, msg.body);
+    return 1;
 }
-

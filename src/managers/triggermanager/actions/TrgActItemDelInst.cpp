@@ -1,17 +1,33 @@
-// src/managers/triggermanager/actions/TrgActItemDelInst.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C814A0..00C814A0, 1 functions
-
+// src/managers/triggermanager/actions/TrgActItemDelInst.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C814A0  Trigger::Act::ITEM_DEL_INST  size=45  [class]
-undefined4 __fastcall Trigger::Act::ITEM_DEL_INST(int param_1)
-
-{
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_00dd5650(&DAT_016abe88);
-    return 0;
-  }
-  FUN_0094e9e0(*(undefined4 *)(*(int *)(param_1 + 4) + 8));
-  return 1;
+extern char DAT_016abe88[];  // debug message: action has no parameter block
+
+namespace Trigger { namespace Act {
+int __fastcall ITEM_DEL_INST(int *action);
+} }
+
+namespace TrgActItemDelInst_p1 {
+
+// FUN_00dd5650 is a variadic debug print (empty in the release build).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    typedef void (__cdecl *Fn)(const char *, ...);
+    ((Fn)FUN_00dd5650)(format, args...);
 }
 
+}  // namespace TrgActItemDelInst_p1
+
+// 00C814A0  Trigger::Act::ITEM_DEL_INST  size=45  [class]
+// Deletes item instance params+0x8 (FUN_0094e9e0).
+int __fastcall Trigger::Act::ITEM_DEL_INST(int *action)
+{
+    using namespace TrgActItemDelInst_p1;
+    if (action[1] == 0) {  // +0x4 parameter block
+        debugPrint(DAT_016abe88);
+        return 0;
+    }
+    int *params = (int *)action[1];
+    FUN_0094e9e0(params[2]);
+    return 1;
+}

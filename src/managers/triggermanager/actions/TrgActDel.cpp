@@ -1,60 +1,84 @@
-// src/managers/triggermanager/actions/TrgActDel.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C96CB0..00C96CB0, 1 functions
-
+// src/managers/triggermanager/actions/TrgActDel.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C96CB0  Trigger::Act::DEL  size=255  [class]
-undefined4 __fastcall Trigger::Act::DEL(int param_1)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 local_54;
-  undefined1 *local_50;
-  undefined4 local_4c;
-  int local_48;
-  int local_44;
-  undefined1 local_40 [64];
-  
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_00dd5650(&DAT_016b11c4);
-    return 0;
-  }
-  iVar1 = *(int *)(param_1 + 4) + 8;
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016b1198);
-    return 0;
-  }
-  local_50 = local_40;
-  local_54 = 0;
-  local_4c = 0x10;
-  local_48 = 0;
-  local_44 = 0;
-  iVar1 = FUN_00c77fc0(iVar1,&local_54);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016b1168);
-    if ((local_50 != (undefined1 *)0x0) && (local_48 = 0, local_44 != 0)) {
-      FUN_00dd48d0(local_50,0);
-    }
-    return 0;
-  }
-  iVar1 = 0;
-  uVar2 = 1;
-  if (0 < local_48) {
-    do {
-      if (*(int *)(local_50 + iVar1 * 4) == 0) {
-        FUN_00dd5650(&DAT_016b1168);
-        uVar2 = 0;
-      }
-      else {
-        FUN_00a805f0();
-      }
-      iVar1 = iVar1 + 1;
-    } while (iVar1 < local_48);
-  }
-  if ((local_50 != (undefined1 *)0x0) && (local_48 = 0, local_44 != 0)) {
-    FUN_00dd48d0(local_50,0);
-  }
-  return uVar2;
+extern undefined DAT_016b1168;  // error message format string
+extern undefined DAT_016b1198;  // error message format string
+extern undefined DAT_016b11c4;  // error message format string
+
+// the trigger action/condition handlers are free functions in these namespaces
+namespace Trigger { namespace Act {
+    int __fastcall DEL(int action);
+} }
+
+namespace TrgActDel_p1 {
+
+// field at a byte offset of a record whose layout is not modelled
+template <class T> inline T &at(int base, int offset) { return *(T *)(base + offset); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (*)(const void *, ...))FUN_00dd5650)(format); }
+template <class A> inline void reportError(const void *format, A a)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a); }
+template <class A, class B> inline void reportError(const void *format, A a, B b)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b); }
+template <class A, class B, class C> inline void reportError(const void *format, A a, B b, C c)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b, c); }
+
+// small pointer list on the stack with 16 inline entries (filled by FUN_00c77fc0)
+struct PointerList {
+    undefined4 unk0;         // +0x00
+    char      *data;         // +0x04  -> storage or heap block
+    undefined4 capacity;     // +0x08
+    int        count;        // +0x0C
+    int        ownsBuffer;   // +0x10
+    undefined1 storage[64];  // +0x14
+};
+
+// frees the list's heap block (inlined twice)
+inline void releaseList(PointerList *list)
+{
+    if (list->data != 0 && (list->count = 0, list->ownsBuffer != 0)) {
+        FUN_00dd48d0((int)list->data, 0);
+    }
 }
 
+}  // namespace TrgActDel_p1
+
+// 00C96CB0  Trigger::Act::DEL  size=255  [class]
+// Deletes every object matched by the name in the action parameters.
+int __fastcall Trigger::Act::DEL(int action)
+{
+    using namespace TrgActDel_p1;
+    PointerList list;
+    if (at<int>(action, 4) == 0) {
+        reportError(&DAT_016b11c4);
+        return 0;
+    }
+    int name = at<int>(action, 4) + 8;
+    if (name == 0) {
+        reportError(&DAT_016b1198);
+        return 0;
+    }
+    list.data = (char *)list.storage;
+    list.unk0 = 0;
+    list.capacity = 0x10;
+    list.count = 0;
+    list.ownsBuffer = 0;
+    if (((int (*)(int, PointerList *))FUN_00c77fc0)(name, &list) == 0) {
+        reportError(&DAT_016b1168);
+        releaseList(&list);
+        return 0;
+    }
+    int result = 1;
+    for (int i = 0; i < list.count; i = i + 1) {
+        if (*(int *)(list.data + i * 4) == 0) {
+            reportError(&DAT_016b1168);
+            result = 0;
+        }
+        else {
+            ((void (*)(void))FUN_00a805f0)();
+        }
+    }
+    releaseList(&list);
+    return result;
+}

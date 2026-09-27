@@ -1,249 +1,254 @@
-// src/managers/triggermanager/actions/TrgActObjectDisp.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C96460..00C974B0, 2 functions
-
+// src/managers/triggermanager/actions/TrgActObjectDisp.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
+extern char DAT_016a9fec[];  // debug message format: object %s: %s
+extern char DAT_016b0e0c[];  // message format for FUN_00959930 (object not found)
+extern char DAT_016b15a0[];  // debug message: action has no parameter block
+extern char DAT_016b1568[];  // message text: object not found
+extern char DAT_016b1584[];  // message format for FUN_00959930: %s (parts name)
+
+namespace Trigger { namespace Act {
+unsigned int __fastcall OBJECT_DISP(int *action);
+int __fastcall OBJECT_DISP_2(int *action);
+} }
+
+namespace TrgActObjectDisp_p1 {
+
+// FUN_00dd5650 is a variadic debug print (empty in the release build).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    typedef void (__cdecl *Fn)(const char *, ...);
+    ((Fn)FUN_00dd5650)(format, args...);
+}
+
+// Callees whose generated prototype does not match the raw call site are invoked through
+// call<Sig>(fn)(args...) with exactly the raw arguments. "ECX: ?" marks an unrecovered register.
+template <class Sig, class Fn> inline Sig call(Fn *fn) { return (Sig)(void *)fn; }
+
+// __thiscall call of the virtual function at byte offset `slot` of obj's vftable
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// Growable entity list filled by the object lookups (header of a lib array with an inline
+// buffer of 16 entries on the caller's stack).
+struct EntityList {
+    undefined4 unk00;      // +0x00
+    int       *items;      // +0x04
+    int        capacity;   // +0x08
+    int        count;      // +0x0C
+    int        heapOwned;  // +0x10 nonzero: items was allocated and must be freed
+};
+
+// Inlined list destructor.
+inline void releaseList(EntityList &list)
+{
+    if (list.items != 0) {
+        list.count = 0;
+        if (list.heapOwned != 0) {
+            FUN_00dd48d0((int)list.items, 0);
+        }
+    }
+}
+
+// Inlined strcmp: -1 / 0 / 1.
+inline int compareNames(const unsigned char *a, const unsigned char *b)
+{
+    for (;;) {
+        if (*a != *b) {
+            return *a < *b ? -1 : 1;
+        }
+        if (*a == 0) {
+            return 0;
+        }
+        a++;
+        b++;
+    }
+}
+
+// OBJECT_DISP keeps its parameter block at action+0x10 and re-reads it after every call.
+inline int *checkParams(int *action) { return (int *)action[4]; }
+
+}  // namespace TrgActObjectDisp_p1
+
 // 00C96460  Trigger::Act::OBJECT_DISP  size=450  [class]
-uint __fastcall Trigger::Act::OBJECT_DISP(int param_1)
-
-{
-  char cVar1;
-  char *pcVar2;
-  int iVar3;
-  undefined4 uVar4;
-  char *pcVar5;
-  uint uVar6;
-  undefined4 local_460;
-  undefined1 *local_45c;
-  undefined4 local_458;
-  int local_454;
-  int local_450;
-  int local_44c;
-  char *local_448;
-  int local_444;
-  undefined1 local_440 [64];
-  undefined1 local_400 [1024];
-  
-  local_45c = local_440;
-  iVar3 = *(int *)(param_1 + 0x10);
-  local_460 = 0;
-  local_458 = 0x10;
-  local_454 = 0;
-  local_450 = 0;
-  pcVar2 = (char *)(iVar3 + 0xc);
-  if (*(int *)(iVar3 + 8) == -1) {
-    FUN_00c77fc0(pcVar2,&local_460);
-  }
-  else {
-    do {
-      cVar1 = *pcVar2;
-      pcVar2 = pcVar2 + 1;
-    } while (cVar1 != '\0');
-    if (pcVar2 == (char *)(iVar3 + 0xd)) {
-      FUN_00a814d0(&local_460,*(int *)(iVar3 + 8));
-    }
-    else {
-      FUN_00c959c0(*(int *)(param_1 + 0x10) + 0xc,*(undefined4 *)(*(int *)(param_1 + 0x10) + 8),
-                   &local_460);
-    }
-  }
-  if (local_454 == 0) {
-    if ((local_45c != (undefined1 *)0x0) && (local_454 = 0, local_450 != 0)) {
-      FUN_00dd48d0(local_45c,0);
-    }
-    return 0;
-  }
-  uVar6 = 1;
-  local_444 = 0;
-  if (0 < local_454) {
-    do {
-      if ((*(int *)(local_45c + local_444 * 4) == 0) || (local_44c = FUN_00a7c8a0(), local_44c == 0)
-         ) {
-        uVar6 = 0;
-        uVar4 = FUN_00959930(local_400,&DAT_016b0e0c,*(int *)(param_1 + 0x10) + 0xc);
-        if (*(int *)(*(int *)(param_1 + 0x10) + 8) == -1) {
-          FUN_00dd5650(&DAT_016a9fec,*(int *)(param_1 + 0x10) + 0xc,uVar4);
-        }
-      }
-      else {
-        iVar3 = FUN_00a92f90();
-        if ((iVar3 == 0) || ((*(uint *)(iVar3 + 0x94) & 1) == 0)) {
-LAB_00c965b0:
-          uVar6 = 0;
-        }
-        else {
-          pcVar5 = (char *)(*(int *)(param_1 + 0x10) + 0x1c);
-          local_448 = (char *)(*(int *)(param_1 + 0x10) + 0x1d);
-          pcVar2 = pcVar5;
-          do {
-            cVar1 = *pcVar2;
-            pcVar2 = pcVar2 + 1;
-          } while (cVar1 != '\0');
-          if (pcVar2 == local_448) {
-            uVar6 = uVar6 & *(uint *)(iVar3 + 0x94) >> 1 & 1;
-          }
-          else {
-            iVar3 = FUN_00e33270(pcVar5);
-            if (iVar3 == -1) goto LAB_00c965b0;
-            iVar3 = FUN_00a92f90();
-            uVar6 = uVar6 & *(uint *)(iVar3 + 0x94) >> 1 & 1;
-          }
-        }
-      }
-      local_444 = local_444 + 1;
-    } while (local_444 < local_454);
-  }
-  if ((local_45c != (undefined1 *)0x0) && (local_454 = 0, local_450 != 0)) {
-    FUN_00dd48d0(local_45c,0);
-  }
-  return uVar6;
+// Check variant (parameter block at action+0x10): 1 when every matching object is displayed.
+// Parameter block: +0x8 object id (-1 = by name), +0xC object name, +0x1C parts name.
+// The object's +0x94 flags: bit 0 = active, bit 1 = displayed.
+unsigned int __fastcall Trigger::Act::OBJECT_DISP(int *action)
+{
+    using namespace TrgActObjectDisp_p1;
+    int inlineItems[16];
+    char message[1024];
+    EntityList list;
+    list.items = inlineItems;
+    int *params = checkParams(action);
+    list.unk00 = 0;
+    list.capacity = 0x10;
+    list.count = 0;
+    list.heapOwned = 0;
+    char *objectName = (char *)(params + 3);  // +0xC
+    if (params[2] == -1) {                     // +0x8 object id
+        call<undefined4 (*)(char *, EntityList *)>(FUN_00c77fc0)(objectName, &list);
+    }
+    else if (objectName[0] == '\0') {  // inlined strlen == 0
+        call<void (*)(EntityList *, int)>(FUN_00a814d0)(&list, params[2]); /* ECX: ? */
+    }
+    else {
+        call<int (*)(char *, int, EntityList *)>(FUN_00c959c0)((char *)(checkParams(action) + 3),
+                                                              checkParams(action)[2], &list);
+    }
+    if (list.count == 0) {
+        releaseList(list);
+        return 0;
+    }
+    unsigned int result = 1;
+    int behavior;
+    int object;
+    char *text;
+    char *partsName;
+    int i = 0;
+    if (0 < list.count) {
+        do {
+            if ((list.items[i] == 0) || (behavior = FUN_00a7c8a0(list.items[i]), behavior == 0)) {  // machine code: ECX = list entry
+                result = 0;
+                text = call<char *(*)(char *, char *, char *)>(FUN_00959930)(message, DAT_016b0e0c,
+                                                                          (char *)(checkParams(action) + 3));
+                if (checkParams(action)[2] == -1) {
+                    debugPrint(DAT_016a9fec, (char *)(checkParams(action) + 3), text);
+                }
+            }
+            else {
+                object = FUN_00a92f90(behavior);  // machine code: ECX = behavior
+                if ((object == 0) || ((*(unsigned int *)(object + 0x94) & 1) == 0)) {
+fail:
+                    result = 0;
+                }
+                else {
+                    partsName = (char *)(checkParams(action) + 7);  // +0x1C
+                    if (partsName[0] == '\0') {  // inlined strlen == 0
+                        result = result & *(unsigned int *)(object + 0x94) >> 1 & 1;
+                    }
+                    else {
+                        object = call<int (*)(char *)>(FUN_00e33270)(partsName); /* ECX: ? */
+                        if (object == -1) goto fail;
+                        object = FUN_00a92f90(behavior);  // machine code: ECX = behavior
+                        result = result & *(unsigned int *)(object + 0x94) >> 1 & 1;
+                    }
+                }
+            }
+            i = i + 1;
+        } while (i < list.count);
+    }
+    releaseList(list);
+    return result;
 }
 
 // 00C974B0  Trigger::Act::OBJECT_DISP_2  size=603  [class]
-int __fastcall Trigger::Act::OBJECT_DISP_2(int param_1)
-
-{
-  byte *pbVar1;
-  char cVar2;
-  byte bVar3;
-  int iVar4;
-  char *pcVar5;
-  int *piVar6;
-  byte *pbVar7;
-  int iVar8;
-  undefined4 uVar9;
-  byte *pbVar10;
-  int iVar11;
-  int *piVar12;
-  bool bVar13;
-  int local_464;
-  undefined4 local_45c;
-  undefined1 *local_458;
-  undefined4 local_454;
-  int local_450;
-  int local_44c;
-  int local_448;
-  int local_444;
-  undefined1 local_440 [64];
-  undefined1 local_400 [1024];
-  
-  iVar4 = *(int *)(param_1 + 4);
-  if (iVar4 == 0) {
-    FUN_00dd5650(&DAT_016b15a0);
-    return 0;
-  }
-  local_458 = local_440;
-  local_45c = 0;
-  local_454 = 0x10;
-  local_450 = 0;
-  local_44c = 0;
-  iVar11 = *(int *)(iVar4 + 8);
-  pcVar5 = (char *)(iVar4 + 0xc);
-  if (iVar11 == -1) {
-    FUN_00c77fc0(pcVar5,&local_45c);
-  }
-  else {
-    do {
-      cVar2 = *pcVar5;
-      pcVar5 = pcVar5 + 1;
-    } while (cVar2 != '\0');
-    if (pcVar5 == (char *)(iVar4 + 0xd)) {
-      FUN_00a814d0(&local_45c,iVar11);
-    }
-    else {
-      FUN_00c959c0(iVar4 + 0xc,iVar11,&local_45c);
-    }
-  }
-  if (local_450 == 0) {
-    if ((local_458 != (undefined1 *)0x0) && (local_450 = 0, local_44c != 0)) {
-      FUN_00dd48d0(local_458,0);
-    }
-    return 0;
-  }
-  local_464 = 1;
-  local_444 = 0;
-  if (0 < local_450) {
-    do {
-      if ((*(int *)(local_458 + local_444 * 4) == 0) ||
-         (piVar6 = (int *)FUN_00a7c800(), piVar6 == (int *)0x0)) {
-        if (*(int *)(iVar4 + 8) == -1) {
-          FUN_00dd5650(&DAT_016a9fec,iVar4 + 0xc,&DAT_016b1568);
-        }
-LAB_00c976cd:
-        local_464 = 0;
-      }
-      else {
-        pbVar1 = (byte *)(iVar4 + 0x1c);
-        pbVar10 = pbVar1;
-        do {
-          bVar3 = *pbVar10;
-          pbVar10 = pbVar10 + 1;
-        } while (bVar3 != 0);
-        if (pbVar10 != (byte *)(iVar4 + 0x1d)) {
-          iVar11 = 0;
-          if (0 < (short)piVar6[0xc9]) {
-            local_448 = piVar6[200];
-            piVar12 = (int *)(local_448 + 0x60);
-            do {
-              pbVar10 = *(byte **)(*piVar12 + 0x40);
-              pbVar7 = pbVar1;
-              if (pbVar10 != (byte *)0x0) {
-                do {
-                  bVar3 = *pbVar7;
-                  bVar13 = bVar3 < *pbVar10;
-                  if (bVar3 != *pbVar10) {
-LAB_00c97632:
-                    iVar8 = (1 - (uint)bVar13) - (uint)(bVar13 != 0);
-                    goto LAB_00c97637;
-                  }
-                  if (bVar3 == 0) break;
-                  bVar3 = pbVar7[1];
-                  bVar13 = bVar3 < pbVar10[1];
-                  if (bVar3 != pbVar10[1]) goto LAB_00c97632;
-                  pbVar10 = pbVar10 + 2;
-                  pbVar7 = pbVar7 + 2;
-                } while (bVar3 != 0);
-                iVar8 = 0;
-LAB_00c97637:
-                if (iVar8 == 0) {
-                  if ((iVar11 != -1) && (iVar11 = iVar11 * 0x70 + local_448, iVar11 != 0)) {
-                    if (*(int *)(iVar4 + 0x2c) == 1) {
-                      *(uint *)(iVar11 + 0x38) = *(uint *)(iVar11 + 0x38) | 1;
-                    }
-                    else {
-                      *(uint *)(iVar11 + 0x38) = *(uint *)(iVar11 + 0x38) & 0xfffffffe;
-                    }
-                    goto LAB_00c9769b;
-                  }
-                  break;
-                }
-              }
-              iVar11 = iVar11 + 1;
-              piVar12 = piVar12 + 0x1c;
-            } while (iVar11 < (short)piVar6[0xc9]);
-          }
-          uVar9 = FUN_00959930(local_400,&DAT_016b1584,pbVar1);
-          if (*(int *)(iVar4 + 8) == -1) {
-            FUN_00dd5650(&DAT_016a9fec,iVar4 + 0xc,uVar9);
-          }
-          goto LAB_00c976cd;
-        }
-        if (*(int *)(iVar4 + 0x2c) == 1) {
-          (**(code **)(*piVar6 + 0x1c))();
-        }
-        else {
-          (**(code **)(*piVar6 + 0x20))();
-        }
-LAB_00c9769b:
-        if (local_464 == 0) goto LAB_00c976cd;
-        local_464 = 1;
-      }
-      local_444 = local_444 + 1;
-    } while (local_444 < local_450);
-  }
-  if ((local_458 != (undefined1 *)0x0) && (local_450 = 0, local_44c != 0)) {
-    FUN_00dd48d0(local_458,0);
-  }
-  return local_464;
+// Parameter block: +0x8 object id (-1 = by name), +0xC object name, +0x1C parts name
+// (empty = whole object), +0x2C 1 = show. Whole objects use cObj::vf1C (show) / vf20 (hide);
+// a named parts toggles bit 0 of its +0x38 flags.
+int __fastcall Trigger::Act::OBJECT_DISP_2(int *action)
+{
+    using namespace TrgActObjectDisp_p1;
+    int *params = (int *)action[1];  // +0x4 parameter block
+    if (params == 0) {
+        debugPrint(DAT_016b15a0);
+        return 0;
+    }
+    int inlineItems[16];
+    char message[1024];
+    EntityList list;
+    list.items = inlineItems;
+    list.unk00 = 0;
+    list.capacity = 0x10;
+    list.count = 0;
+    list.heapOwned = 0;
+    int objectId = params[2];                // +0x8
+    char *objectName = (char *)(params + 3);  // +0xC
+    if (objectId == -1) {
+        call<undefined4 (*)(char *, EntityList *)>(FUN_00c77fc0)(objectName, &list);
+    }
+    else if (objectName[0] == '\0') {  // inlined strlen == 0
+        call<void (*)(EntityList *, int)>(FUN_00a814d0)(&list, objectId); /* ECX: ? */
+    }
+    else {
+        call<int (*)(char *, int, EntityList *)>(FUN_00c959c0)((char *)(params + 3), objectId, &list);
+    }
+    if (list.count == 0) {
+        releaseList(list);
+        return 0;
+    }
+    int result = 1;
+    int i = 0;
+    int *model;
+    int parts;
+    int partsIndex;
+    int *partsEntry;
+    int cmp;
+    int part;
+    unsigned char *partsName;
+    unsigned char *entryName;
+    char *text;
+    if (0 < list.count) {
+        do {
+            if ((list.items[i] == 0) || (model = (int *)FUN_00a7c800(list.items[i]), model == 0)) {  // machine code: ECX = list entry
+                if (params[2] == -1) {
+                    debugPrint(DAT_016a9fec, (char *)(params + 3), DAT_016b1568);
+                }
+fail:
+                result = 0;
+            }
+            else {
+                partsName = (unsigned char *)(params + 7);  // +0x1C
+                if (partsName[0] != 0) {  // inlined strlen != 0
+                    partsIndex = 0;
+                    if (0 < (short)model[0xc9]) {  // +0x324 parts count
+                        // parts array at model+0x320, 0x70 bytes each; entry+0x60 -> info, info+0x40 = name
+                        parts = model[200];
+                        partsEntry = (int *)(parts + 0x60);
+                        do {
+                            entryName = *(unsigned char **)(*partsEntry + 0x40);
+                            if (entryName != 0) {
+                                cmp = compareNames(partsName, entryName);
+                                if (cmp == 0) {
+                                    if ((partsIndex != -1) && (part = partsIndex * 0x70 + parts, part != 0)) {
+                                        if (params[11] == 1) {  // +0x2C
+                                            *(unsigned int *)(part + 0x38) = *(unsigned int *)(part + 0x38) | 1;
+                                        }
+                                        else {
+                                            *(unsigned int *)(part + 0x38) = *(unsigned int *)(part + 0x38) & 0xfffffffe;
+                                        }
+                                        goto next;
+                                    }
+                                    break;
+                                }
+                            }
+                            partsIndex = partsIndex + 1;
+                            partsEntry = partsEntry + 0x1c;
+                        } while (partsIndex < (short)model[0xc9]);
+                    }
+                    text = call<char *(*)(char *, char *, unsigned char *)>(FUN_00959930)(message, DAT_016b1584, partsName);
+                    if (params[2] == -1) {
+                        debugPrint(DAT_016a9fec, (char *)(params + 3), text);
+                    }
+                    goto fail;
+                }
+                if (params[11] == 1) {  // +0x2C
+                    vcall<void>(model, 0x1c);  // cObj::vf1C: sets objFlags bit 0
+                }
+                else {
+                    vcall<void>(model, 0x20);  // cObj::vf20: clears objFlags bit 0
+                }
+next:
+                if (result == 0) goto fail;
+                result = 1;
+            }
+            i = i + 1;
+        } while (i < list.count);
+    }
+    releaseList(list);
+    return result;
 }
-

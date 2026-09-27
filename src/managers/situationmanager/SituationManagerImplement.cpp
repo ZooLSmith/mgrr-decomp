@@ -1,408 +1,480 @@
-// src/managers/situationmanager/SituationManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C3D390..00C60BC0, 5 functions
-
+// src/managers/situationmanager/SituationManagerImplement.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "SituationManagerImplement.h"
 
+// ---------------------------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------------------------
+extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void *criticalSection);
+extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void *criticalSection);
+// CRT (the compiler emitted fsqrt inline)
+extern "C" double __cdecl sqrt(double x);
+
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+extern unsigned int DAT_01bea070;     // game flags; bit 0x1000 disables the situation manager
+extern unsigned int DAT_01bea094;     // game flags; bit 0x20000 disables the enemy senses
+extern void *DAT_01bea100;            // manager whose vf28(0) returns the player entity
+extern unsigned char DAT_01be9db8[];  // class descriptor the player must derive from
+extern int *DAT_01bebdbc;             // entity list: first node (+0x0 handle, +0x8 next)
+extern int *DAT_01bebdc0;             // entity list: end node
+extern unsigned char DAT_01bebe78[];  // object that receives the sense notifications (FUN_00c5e350)
+extern unsigned char DAT_01b35df8[];  // ray cast manager (ECX of RayCastSingleHitWork_2)
+
+namespace SituationManagerImplement_p1 {
+
+typedef SituationManagerImplement::Unit Unit;
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// raw field access
+template <class T> inline T &at(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// FUN_00dd3500: allocate `size` bytes from `heap` (functions.h declares it void)
+inline void *MemAlloc(unsigned int size, void *heap)
+{
+    return ((void *(__cdecl *)(unsigned int, void *))FUN_00dd3500)(size, heap);
+}
+
+// entity handles (FUN_00a7c9xx family, all __thiscall on the handle)
+inline void HandleClear(int *handle)                 { FUN_00a7c930((undefined4 *)handle); }            // *handle = 0
+inline void HandleSet(int *handle, const int *src)   // FUN_00a7c960: *handle = *src
+{
+    ((void (__thiscall *)(int *, const int *))FUN_00a7c960)(handle, src);
+}
+inline void HandleAssign(int *handle, const int *src)  // FUN_00a7c940: *handle = *src
+{
+    ((void (__thiscall *)(int *, const int *))FUN_00a7c940)(handle, src);
+}
+inline int HandleResolve(int *handle)  // FUN_00a81330: the entity of a handle, or 0
+{
+    return (int)FUN_00a81330((uint *)handle);
+}
+inline int EntityHandleOf(int entity) { return FUN_00a7c7f0(entity); }    // entity + 0x2C
+inline int EntityOwner(int entity)    { return (int)FUN_00a7c8a0(entity); } // [entity + 0x48]
+inline int EntityIsActive(int entity) { return FUN_00a7c7e0(entity); }    // ([entity + 0x28] & 3) == 0
+
+// FUN_00416910: game flag test (functions.h says bool; the callers test all of EAX)
+inline int FlagTest(unsigned int flag)
+{
+    return ((int (__cdecl *)(unsigned int))FUN_00416910)(flag);
+}
+
+// FUN_00dd6d80 (__thiscall, ECX = class descriptor): non-zero when it is, or derives from, `base`
+inline int IsKindOf(void *classInfo, const void *base)
+{
+    return ((int (__thiscall *)(void *, const void *))FUN_00dd6d80)(classInfo, base);
+}
+
+// FUN_00c5e350 (__thiscall, ECX = &DAT_01bebe78): notify a sense event
+inline void NotifySense(int source, void *infoA, void *infoB)
+{
+    ((void (__thiscall *)(void *, int, void *, void *))FUN_00c5e350)(DAT_01bebe78, source, infoA, infoB);
+}
+
+// FUN_00445d40 (__thiscall, ECX = the query, ret 0x20): set up a ray cast query
+inline void SetupRayQuery(void *query, float *from, float *to, int a3, int a4, int a5, int a6,
+                          const char *name, int a8)
+{
+    ((void (__thiscall *)(void *, float *, float *, int, int, int, int, const char *, int))FUN_00445d40)(
+        query, from, to, a3, a4, a5, a6, name, a8);
+}
+
+// 0090B130 RayCastSingleHitWork::RayCastSingleHitWork_2 (__thiscall, ECX = &DAT_01b35df8,
+// ret 0x14): non-zero when the ray hits something.
+inline int RayCastSingleHit(float *hit, int a2, int a3, int a4, void *query)
+{
+    return ((int (__thiscall *)(void *, float *, int, int, int, void *))0x0090B130)(
+        DAT_01b35df8, hit, a2, a3, a4, query);
+}
+
+// 008E28A0 hkBaseObject::hkBaseObject_209 (__thiscall, returns on the x87 stack)
+inline float BodyExtent(void *body)
+{
+    return ((float (__thiscall *)(void *))0x008E28A0)(body);
+}
+
+// the sense parameter table (FUN_00d72b30 returns DAT_01dc5264); vf00 fills the four outputs
+// for (id, kind) and returns non-zero when the entry exists
+inline void *SenseTable()
+{
+    return (void *)FUN_00d72b30();
+}
+inline int QuerySense(void *table, float *range, float *paramA, float *threshold, int *paramB, int id,
+                      int kind)
+{
+    return vcall<int>(table, 0x0, range, paramA, threshold, paramB, id, kind);
+}
+
+}  // namespace SituationManagerImplement_p1
+
 // 00C3D390  FUN_00c3d390  size=101  [callgraph]
-undefined4 * __thiscall
-FUN_00c3d390(undefined4 *param_1,undefined4 param_2,int param_3,undefined4 *param_4)
-
-{
-  undefined4 uVar1;
-  int iVar2;
-  
-  *param_1 = param_2;
-  FUN_00a7c930();
-  param_1[2] = 0xffffffff;
-  param_1[4] = *param_4;
-  param_1[5] = param_4[1];
-  param_1[6] = param_4[2];
-  param_1[7] = param_4[3];
-  if (param_3 != 0) {
-    uVar1 = FUN_00a7c7f0();
-    FUN_00a7c960(uVar1);
-    iVar2 = FUN_00a7c8a0();
-    param_1[2] = *(undefined4 *)(iVar2 + 0x4b4);
-  }
-  return param_1;
+SituationManagerImplement::Unit *SituationManagerImplement::Unit::init(int kind, int source,
+                                                                       const float *vector)
+{
+    using namespace SituationManagerImplement_p1;
+    this->kind() = kind;
+    HandleClear(&entityHandle());
+    id() = -1;
+    this->vector()[0] = vector[0];
+    this->vector()[1] = vector[1];
+    this->vector()[2] = vector[2];
+    this->vector()[3] = vector[3];
+    if (source != 0) {
+        HandleSet(&entityHandle(), (const int *)EntityHandleOf(source));
+        id() = at<int>((void *)EntityOwner(source), 0x4b4);  // owner+0x4B4
+    }
+    return this;
 }
 
 // 00C3D400  SituationManagerImplement::vf08  size=192  [class]
-undefined4 __thiscall
-SituationManagerImplement::vf08
-          (int param_1,undefined4 *param_2,undefined4 param_3,undefined4 *param_4)
-
-{
-  LPCRITICAL_SECTION lpCriticalSection;
-  undefined4 *puVar1;
-  
-  if ((DAT_01bea070 & 0x1000) != 0) {
-    return 1;
-  }
-  if (*(int *)(param_1 + 0x28) == 0) {
-    return 0;
-  }
-  lpCriticalSection = (LPCRITICAL_SECTION)(param_1 + 8);
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection(lpCriticalSection);
-  }
-  puVar1 = (undefined4 *)FUN_00dd3500(0x20,*(undefined4 *)(param_1 + 4));
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = param_2;
-    FUN_00a7c930();
-    puVar1[2] = param_3;
-    puVar1[4] = *param_4;
-    puVar1[5] = param_4[1];
-    puVar1[6] = param_4[2];
-    puVar1[7] = param_4[3];
-    param_2 = puVar1;
-    if (*(int *)(param_1 + 0x28) != 0) {
-      (**(code **)(**(int **)(param_1 + 0x28) + 8))(&param_2);
-    }
-    if (*(int *)(param_1 + 0x20) != 0) {
-      LeaveCriticalSection(lpCriticalSection);
-    }
-    return 1;
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection(lpCriticalSection);
-  }
-  return 0;
+// Queue a Unit of `kind` with the given id.  Returns 1 when queued (or when the manager is
+// disabled), 0 when there is no unit array or the allocation failed.
+int SituationManagerImplement::vf08(int kind, int id, const float *vector)
+{
+    using namespace SituationManagerImplement_p1;
+    if ((DAT_01bea070 & 0x1000) != 0) {
+        return 1;
+    }
+    if (units() == 0) {
+        return 0;
+    }
+    void *criticalSection = lock();
+    if (lockEnabled() != 0) {
+        EnterCriticalSection(criticalSection);
+    }
+    Unit *unit = (Unit *)MemAlloc(0x20, heap());
+    if (unit != 0) {
+        unit->kind() = kind;
+        HandleClear(&unit->entityHandle());
+        unit->id() = id;
+        unit->vector()[0] = vector[0];
+        unit->vector()[1] = vector[1];
+        unit->vector()[2] = vector[2];
+        unit->vector()[3] = vector[3];
+        Unit *pushed = unit;
+        if (units() != 0) {
+            vcall<void>(units(), 0x8, &pushed);  // lib::AllocatedArray<Unit *>::vf08: append
+        }
+        if (lockEnabled() != 0) {
+            LeaveCriticalSection(criticalSection);
+        }
+        return 1;
+    }
+    if (lockEnabled() != 0) {
+        LeaveCriticalSection(criticalSection);
+    }
+    return 0;
 }
 
 // 00C3D4C0  SituationManagerImplement::vf04  size=165  [class]
-undefined4 __thiscall
-SituationManagerImplement::vf04(int param_1,undefined4 param_2,undefined4 param_3,int param_4)
-
-{
-  LPCRITICAL_SECTION lpCriticalSection;
-  int iVar1;
-  
-  if ((DAT_01bea070 & 0x1000) != 0) {
-    return 1;
-  }
-  if (*(int *)(param_1 + 0x28) == 0) {
-    return 0;
-  }
-  lpCriticalSection = (LPCRITICAL_SECTION)(param_1 + 8);
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection(lpCriticalSection);
-  }
-  iVar1 = FUN_00dd3500(0x20,*(undefined4 *)(param_1 + 4));
-  if (iVar1 != 0) {
-    iVar1 = FUN_00c3d390(param_2,param_3,param_4);
-    if (iVar1 != 0) {
-      param_4 = iVar1;
-      if (*(int *)(param_1 + 0x28) != 0) {
-        (**(code **)(**(int **)(param_1 + 0x28) + 8))(&param_4);
-      }
-      if (*(int *)(param_1 + 0x20) != 0) {
-        LeaveCriticalSection(lpCriticalSection);
-      }
-      return 1;
-    }
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection(lpCriticalSection);
-  }
-  return 0;
+// Queue a Unit of `kind` for the entity `source` (see Unit::init).
+int SituationManagerImplement::vf04(int kind, int source, const float *vector)
+{
+    using namespace SituationManagerImplement_p1;
+    if ((DAT_01bea070 & 0x1000) != 0) {
+        return 1;
+    }
+    if (units() == 0) {
+        return 0;
+    }
+    void *criticalSection = lock();
+    if (lockEnabled() != 0) {
+        EnterCriticalSection(criticalSection);
+    }
+    Unit *memory = (Unit *)MemAlloc(0x20, heap());
+    if (memory != 0) {
+        Unit *unit = memory->init(kind, source, vector);
+        if (unit != 0) {
+            Unit *pushed = unit;
+            if (units() != 0) {
+                vcall<void>(units(), 0x8, &pushed);  // lib::AllocatedArray<Unit *>::vf08: append
+            }
+            if (lockEnabled() != 0) {
+                LeaveCriticalSection(criticalSection);
+            }
+            return 1;
+        }
+    }
+    if (lockEnabled() != 0) {
+        LeaveCriticalSection(criticalSection);
+    }
+    return 0;
 }
 
 // 00C60B90  SituationManagerImplement::vf0C  size=30  [class]
-undefined4 __thiscall SituationManagerImplement::vf0C(undefined4 param_1,byte param_2)
-
-{
-  SituationManager::SituationManager();
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *SituationManagerImplement::vf0C(byte flags)
+{
+    implementDestructor();
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00C60BC0  SituationManagerImplement::vf00  size=2055  [class]
-void __fastcall SituationManagerImplement::vf00(float param_1)
-
-{
-  float fVar1;
-  uint uVar2;
-  float fVar3;
-  float fVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int *piVar8;
-  int *piVar9;
-  undefined4 *puVar10;
-  int iVar11;
-  int *piVar12;
-  float10 fVar13;
-  undefined *puVar14;
-  float fStack_114;
-  float local_110;
-  float local_10c;
-  float local_108;
-  undefined4 local_104;
-  float fStack_100;
-  undefined4 uStack_fc;
-  undefined4 uStack_f8;
-  undefined4 uStack_f4;
-  undefined4 uStack_f0;
-  undefined4 uStack_ec;
-  undefined4 uStack_e8;
-  undefined4 uStack_e4;
-  undefined4 uStack_e0;
-  uint uStack_dc;
-  undefined4 uStack_d8;
-  float local_d4;
-  float fStack_d0;
-  float fStack_cc;
-  int iStack_c8;
-  float fStack_c4;
-  float fStack_c0;
-  float fStack_bc;
-  float fStack_b4;
-  int iStack_b0;
-  float fStack_ac;
-  undefined4 uStack_a8;
-  int iStack_a4;
-  float fStack_a0;
-  int iStack_9c;
-  float fStack_98;
-  int iStack_94;
-  float fStack_90;
-  int iStack_8c;
-  float fStack_88;
-  float afStack_84 [2];
-  float fStack_7c;
-  float fStack_78;
-  float fStack_70;
-  float fStack_6c;
-  LPCRITICAL_SECTION p_Stack_68;
-  LPCRITICAL_SECTION local_64 [4];
-  undefined1 auStack_54 [80];
-  
-  if ((DAT_01bea070 & 0x1000) == 0) {
-    local_64[0] = (LPCRITICAL_SECTION)((int)param_1 + 8);
-    local_10c = param_1;
-    if (*(int *)((int)param_1 + 0x20) != 0) {
-      EnterCriticalSection(local_64[0]);
-    }
-    piVar9 = *(int **)(*(int *)((int)param_1 + 0x28) + 4);
-    if (piVar9 != piVar9 + *(int *)(*(int *)((int)param_1 + 0x28) + 8)) {
-      do {
-        puVar10 = (undefined4 *)*piVar9;
-        puVar5 = (undefined4 *)FUN_00d72b30();
-        iVar6 = (**(code **)*puVar5)(&local_110,&local_104,&local_d4,&local_108,puVar10[2],*puVar10)
-        ;
-        if (iVar6 != 0) {
-          uStack_f4 = 0;
-          iStack_b0 = puVar10[4];
-          fStack_d0 = local_108;
-          fStack_ac = (float)puVar10[5];
-          uStack_ec = 0xffffffff;
-          uStack_e8 = 0xffffffff;
-          uStack_a8 = puVar10[6];
-          uStack_e4 = 0xfffffffe;
-          uStack_e0 = 0;
-          iStack_c8 = puVar10[4];
-          uStack_dc = 0xffffffff;
-          fStack_c4 = (float)puVar10[5];
-          iStack_a4 = -1;
-          fStack_c0 = (float)puVar10[6];
-          uStack_d8 = 0x1010000;
-          uStack_f0 = 0xffffffff;
-          fStack_cc = 2.8026e-45;
-          fStack_bc = local_110;
-          uStack_f8 = local_104;
-          iVar6 = FUN_00a81330();
-          if (iVar6 == 0) {
-            uVar7 = 0;
-          }
-          else {
-            uVar7 = FUN_00a7c8a0();
-          }
-          FUN_00c5e350(uVar7,&uStack_f8,&fStack_d0);
-        }
-        FUN_00dd4920(puVar10);
-        iVar6 = *(int *)((int)local_10c + 0x28);
-        uVar2 = *(uint *)(iVar6 + 8);
-        iVar11 = *(int *)(iVar6 + 4);
-        piVar12 = (int *)(iVar11 + uVar2 * 4);
-        if ((((piVar9 != piVar12) && (iVar11 != 0)) && (uVar2 != 0)) &&
-           ((uint)((int)piVar9 - iVar11 >> 2) < uVar2)) {
-          for (piVar8 = piVar9; piVar8 != piVar12 + -1; piVar8 = piVar8 + 1) {
-            *piVar8 = piVar8[1];
-          }
-          *(int *)(iVar6 + 8) = *(int *)(iVar6 + 8) + -1;
-          piVar12 = piVar9;
-        }
-        piVar9 = piVar12;
-      } while (piVar12 !=
-               (int *)(*(int *)(*(int *)((int)local_10c + 0x28) + 4) +
-                      *(int *)(*(int *)((int)local_10c + 0x28) + 8) * 4));
-    }
-    iVar6 = (**(code **)(*DAT_01bea100 + 0x28))(0);
-    if ((iVar6 == 0) || (piVar9 = (int *)FUN_00a7c8a0(), piVar9 == (int *)0x0)) {
-      piVar9 = (int *)0x0;
-    }
-    else {
-      puVar14 = &DAT_01be9db8;
-      (**(code **)(*piVar9 + 4))(&DAT_01be9db8);
-      iVar6 = FUN_00dd6d80(puVar14);
-      piVar9 = (int *)(-(uint)(iVar6 != 0) & (uint)piVar9);
-    }
-    fStack_114 = DAT_01bebdbc;
-    if (DAT_01bebdbc != DAT_01bebdc0) {
-      do {
-        FUN_00a7c940(fStack_114);
-        iVar6 = FUN_00a81330();
-        if (((iVar6 != 0) && (iVar6 = FUN_00a7c7e0(), iVar6 != 0)) &&
-           ((piVar9 != (int *)0x0 && ((DAT_01bea094 & 0x20000) == 0)))) {
-          puVar10 = (undefined4 *)FUN_00d72b30();
-          iVar6 = FUN_00a7c8a0();
-          iVar6 = (**(code **)*puVar10)
-                            (&local_10c,&local_104,&local_110,&fStack_100,
-                             *(undefined4 *)(iVar6 + 0x4b0),7);
-          if (((iVar6 != 0) && (0.0 < local_110)) && (iVar6 = FUN_00416910(0x19), iVar6 == 0)) {
-            uVar7 = FUN_00a7c8a0();
-            iVar6 = FUN_00445b60(uVar7);
-            if (iVar6 != 0) {
-              fVar1 = *(float *)(iVar6 + 0x40) - (float)piVar9[0x10];
-              fVar4 = *(float *)(iVar6 + 0x44) - (float)piVar9[0x11];
-              fVar3 = *(float *)(iVar6 + 0x48) - (float)piVar9[0x12];
-              if (((SQRT(fVar1 * fVar1 + fVar4 * fVar4 + fVar3 * fVar3) <= local_10c) &&
-                  (iVar11 = (**(code **)(*piVar9 + 0x3ec))(), iVar11 != 0)) &&
-                 ((iVar11 = FUN_00416910(6), iVar11 == 0 &&
-                  (iVar11 = (**(code **)(*piVar9 + 0x368))(), iVar11 == 0)))) {
-                iStack_a4 = piVar9[0x10];
-                fStack_a0 = (float)piVar9[0x11] + 1.8;
-                iStack_9c = piVar9[0x12];
-                fStack_98 = (float)piVar9[0x13] + fStack_78;
-                iStack_94 = *(int *)(iVar6 + 0x40);
-                fStack_90 = *(float *)(iVar6 + 0x44) + 1.8;
-                iStack_8c = *(int *)(iVar6 + 0x48);
-                fStack_88 = fStack_78 + *(float *)(iVar6 + 0x4c);
-                FUN_00445d40(&iStack_94,&iStack_a4,3,0,0x1c,0,"dashSense",0);
-                iVar11 = RayCastSingleHitWork::RayCastSingleHitWork_2(afStack_84,0,0,0,auStack_54);
-                if (iVar11 == 0) {
-                  FUN_00c14dc0();
-                  if (local_110 <= *(float *)(iVar6 + 0xd8c)) {
-                    *(undefined4 *)(iVar6 + 0xd8c) = 0;
-                    FUN_0040e950();
-                    uStack_f8 = 0;
-                    fStack_b4 = (float)piVar9[0x10];
-                    iStack_b0 = piVar9[0x11];
-                    uStack_a8 = 0xffffffff;
-                    uStack_f4 = 0xffffffff;
-                    fStack_ac = (float)piVar9[0x12];
-                    uStack_ec = 0xffffffff;
-                    fStack_cc = (float)piVar9[0x10];
-                    iStack_c8 = piVar9[0x11];
-                    fStack_c4 = (float)piVar9[0x12];
-                    local_d4 = fStack_100;
-                    uStack_dc = uStack_dc & 0xffff0000;
-                    fStack_d0 = 2.8026e-45;
-                    fStack_c0 = local_10c;
-                    uStack_fc = local_104;
-                    FUN_00c5e350(piVar9,&uStack_fc,&local_d4);
-                  }
-                  goto LAB_00c61046;
-                }
-              }
-              FUN_00c14de0();
-            }
-          }
-        }
-LAB_00c61046:
-        fStack_114 = *(float *)((int)fStack_114 + 8);
-      } while (fStack_114 != DAT_01bebdc0);
-    }
-    local_110 = DAT_01bebdbc;
-    if (DAT_01bebdbc != DAT_01bebdc0) {
-      do {
-        FUN_00a7c940(local_110);
-        iVar6 = FUN_00a81330();
-        if (((iVar6 != 0) && (iVar6 = FUN_00a7c7e0(), iVar6 != 0)) &&
-           ((piVar9 != (int *)0x0 && ((DAT_01bea094 & 0x20000) == 0)))) {
-          puVar10 = (undefined4 *)FUN_00d72b30();
-          iVar6 = FUN_00a7c8a0();
-          iVar6 = (**(code **)*puVar10)
-                            (&fStack_100,&uStack_d8,&local_10c,&fStack_70,
-                             *(undefined4 *)(iVar6 + 0x4b0),8);
-          if ((iVar6 != 0) && (0.0 < local_10c)) {
-            uVar7 = FUN_00a7c8a0();
-            iVar6 = FUN_00445b60(uVar7);
-            if (iVar6 != 0) {
-              fStack_114 = fStack_100;
-              if (*(int *)(iVar6 + 0x764) != 0) {
-                fStack_6c = *(float *)(*(int *)(iVar6 + 0x764) + 0xfc);
-                fVar1 = *(float *)(piVar9[0x1d9] + 0xfc);
-                fVar13 = (float10)::hkBaseObject::hkBaseObject_209();
-                local_108 = (float)fVar13;
-                fVar13 = (float10)::hkBaseObject::hkBaseObject_209();
-                fStack_114 = (float)(((float10)fVar1 + (float10)fStack_6c +
-                                     fVar13 + (float10)local_108) * (float10)1.1);
-                iVar11 = (**(code **)(*piVar9 + 0x368))();
-                if (iVar11 != 0) {
-                  fStack_114 = fStack_114 + 0.6;
-                }
-              }
-              FUN_004fc8e0(afStack_84,piVar9,5);
-              fVar4 = *(float *)(iVar6 + 0x40) - afStack_84[0];
-              fVar1 = *(float *)(iVar6 + 0x44) - (float)piVar9[0x11];
-              fVar3 = *(float *)(iVar6 + 0x48) - fStack_7c;
-              if (((SQRT(fVar1 * fVar1 + fVar4 * fVar4 + fVar3 * fVar3) <= fStack_114) &&
-                  (iVar11 = (**(code **)(*piVar9 + 0x330))(), iVar11 == 0)) &&
-                 (iVar11 = FUN_00416910(6), iVar11 == 0)) {
-                iStack_94 = piVar9[0x10];
-                fStack_90 = (float)piVar9[0x11] + 1.8;
-                iStack_8c = piVar9[0x12];
-                fStack_88 = (float)piVar9[0x13] + fStack_78;
-                iStack_a4 = *(int *)(iVar6 + 0x40);
-                fStack_a0 = *(float *)(iVar6 + 0x44) + 1.8;
-                iStack_9c = *(int *)(iVar6 + 0x48);
-                fStack_98 = fStack_78 + *(float *)(iVar6 + 0x4c);
-                FUN_00445d40(&iStack_a4,&iStack_94,3,0,0x1c,0,"touchSense",0);
-                iVar11 = RayCastSingleHitWork::RayCastSingleHitWork_2(local_64,0,0,0,auStack_54);
-                if (iVar11 == 0) {
-                  FUN_00c14e30();
-                  if ((local_10c <= *(float *)(iVar6 + 0xd90)) ||
-                     (local_10c <= *(float *)(iVar6 + 0xd8c))) {
-                    *(undefined4 *)(iVar6 + 0xd90) = 0;
-                    FUN_0040e950();
-                    uStack_f8 = 0;
-                    fStack_b4 = afStack_84[0];
-                    uStack_a8 = 0xffffffff;
-                    uStack_f4 = 0xffffffff;
-                    fStack_ac = fStack_7c;
-                    uStack_ec = 0xffffffff;
-                    iStack_b0 = *(int *)(iVar6 + 0x44);
-                    iStack_c8 = *(int *)(iVar6 + 0x44);
-                    fStack_cc = afStack_84[0];
-                    uStack_dc = uStack_dc & 0xffff0000;
-                    local_d4 = fStack_70;
-                    fStack_d0 = 2.8026e-45;
-                    fStack_c4 = fStack_7c;
-                    fStack_c0 = fStack_114;
-                    uStack_fc = uStack_d8;
-                    FUN_00c5e350(piVar9,&uStack_fc,&local_d4);
-                  }
-                  goto LAB_00c61395;
-                }
-              }
-              FUN_00c14e50();
-            }
-          }
-        }
-LAB_00c61395:
-        local_110 = *(float *)((int)local_110 + 8);
-      } while (local_110 != DAT_01bebdc0);
-    }
-    if (p_Stack_68[1].DebugInfo != (PRTL_CRITICAL_SECTION_DEBUG)0x0) {
-      LeaveCriticalSection(p_Stack_68);
-    }
-  }
-  return;
-}
+// Per-frame update (rewritten from the disassembly: Ghidra lost track of the 16-byte aligned
+// frame).  Under the lock:
+//  1. every queued Unit is looked up in the sense table (id, kind); when found, a sense event
+//     is sent to DAT_01bebe78 for the Unit's entity owner; the Unit is freed and removed.
+//  2. for every entity of the list DAT_01bebdbc whose enemy has a "dashSense" entry (kind 7):
+//     when the player is within range and visible, and the enemy's dash timer (+0xD8C) has
+//     reached the threshold, the timer is reset and a sense event is sent for the player.
+//  3. the same with "touchSense" (kind 8), a range grown by both bodies' extents, and the
+//     touch timer (+0xD90).
+// The two event records (infoA at esp+0x28, infoB at esp+0x50 in the binary) and the 4-float
+// work vector (esp+0xA0) are shared by all three passes, as in the binary: fields a pass does
+// not write keep whatever an earlier pass stored.
+void SituationManagerImplement::vf00()
+{
+    using namespace SituationManagerImplement_p1;
+    int infoA[9];         // sense event record A (+0x0 float param, +0x4 float, +0x8.. ids, +0x20 flags)
+    int infoB[12];        // sense event record B (+0x0 param, +0x4 type, +0x8 position, +0x14 range, +0x20 position, +0x2C id)
+    float work[4];        // pass 2: ray hit output; pass 3: body position of the player (FUN_004fc8e0)
+    float rayTo[4];       // esp+0x80
+    float rayFrom[4];     // esp+0x90
+    float touchHit[4];    // esp+0xC0 (pass 3 ray hit output)
+    char rayQuery[0x40];  // esp+0xD0
 
+    if ((DAT_01bea070 & 0x1000) != 0) {
+        return;
+    }
+    void *criticalSection = lock();
+    if (lockEnabled() != 0) {
+        EnterCriticalSection(criticalSection);
+    }
+
+    // 1. queued units
+    Unit **entry = at<Unit **>(units(), 0x4);
+    if (entry != entry + at<int>(units(), 0x8)) {
+        do {
+            Unit *unit = *entry;
+            float range;
+            float paramA;
+            float threshold;
+            int paramB;
+            void *table = SenseTable();
+            if (QuerySense(table, &range, &paramA, &threshold, &paramB, unit->id(), unit->kind()) != 0) {
+                at<float>(infoA, 0x4) = 0.0f;
+                infoB[0] = paramB;
+                at<float>(infoB, 0x20) = unit->vector()[0];
+                infoA[3] = -1;
+                at<float>(infoB, 0x24) = unit->vector()[1];
+                infoA[4] = -1;
+                at<float>(infoB, 0x28) = unit->vector()[2];
+                infoA[5] = -2;
+                infoA[6] = 0;
+                infoA[7] = -1;
+                infoB[11] = -1;
+                infoA[8] = 0x1010000;
+                infoA[2] = -1;
+                at<float>(infoB, 0x8) = unit->vector()[0];
+                infoB[1] = 2;
+                at<float>(infoB, 0xC) = unit->vector()[1];
+                at<float>(infoB, 0x10) = unit->vector()[2];
+                at<float>(infoB, 0x14) = range;
+                at<float>(infoA, 0x0) = paramA;
+                int entity = HandleResolve(&unit->entityHandle());
+                int owner;
+                if (entity == 0) {
+                    owner = 0;
+                }
+                else {
+                    owner = EntityOwner(entity);
+                }
+                NotifySense(owner, infoA, infoB);
+            }
+            FUN_00dd4920((int)unit);
+            // remove the entry (lib::Array erase)
+            int *array = units();
+            unsigned int count = (unsigned int)at<int>(array, 0x8);
+            Unit **data = at<Unit **>(array, 0x4);
+            Unit **end = data + count;
+            if (entry != end && data != 0 && count != 0 && (unsigned int)(entry - data) < count) {
+                for (Unit **p = entry; p != end - 1; p++) {
+                    *p = p[1];
+                }
+                at<int>(array, 0x8) = at<int>(array, 0x8) - 1;
+            }
+            else {
+                entry = end;
+            }
+        } while (entry != at<Unit **>(units(), 0x4) + at<int>(units(), 0x8));
+    }
+
+    // the player: DAT_01bea100->vf28(0)'s owner, if it derives from DAT_01be9db8
+    char *player;
+    int playerEntity = vcall<int>(DAT_01bea100, 0x28, 0);
+    char *candidate;
+    if (playerEntity == 0 || (candidate = (char *)EntityOwner(playerEntity)) == 0) {
+        player = 0;
+    }
+    else {
+        void *classInfo = vcall<void *>(candidate, 0x4);
+        player = IsKindOf(classInfo, DAT_01be9db8) != 0 ? candidate : 0;
+    }
+
+    // 2. dashSense
+    for (int *node = DAT_01bebdbc; node != DAT_01bebdc0; node = (int *)node[2]) {
+        int handle;
+        HandleAssign(&handle, node);
+        int entity = HandleResolve(&handle);
+        if (entity == 0 || EntityIsActive(entity) == 0 || player == 0 ||
+            (DAT_01bea094 & 0x20000) != 0) {
+            continue;
+        }
+        float range;
+        float paramA;
+        float threshold;
+        int paramB;
+        void *table = SenseTable();
+        int owner = EntityOwner(entity);
+        if (QuerySense(table, &range, &paramA, &threshold, &paramB, at<int>((void *)owner, 0x4b0) /* owner+0x4B0 */,
+                       7) == 0) {
+            continue;
+        }
+        if (0.0f >= threshold || FlagTest(0x19) != 0) {  // a NaN threshold passes (fcomp)
+            continue;
+        }
+        char *enemy = (char *)FUN_00445b60((int *)EntityOwner(entity));
+        if (enemy == 0) {
+            continue;
+        }
+        double dx = (double)at<float>(enemy, 0x40) - at<float>(player, 0x40);
+        double dy = (double)at<float>(enemy, 0x44) - at<float>(player, 0x44);
+        double dz = (double)at<float>(enemy, 0x48) - at<float>(player, 0x48);
+        if (!(sqrt(dx * dx + dy * dy + dz * dz) > range) &&  // fcomp: NaN counts as "in range"
+            vcall<int>(player, 0x3ec) != 0 && FlagTest(6) == 0 && vcall<int>(player, 0x368) == 0) {
+            rayTo[0] = at<float>(player, 0x40);
+            rayTo[1] = at<float>(player, 0x44) + 1.8f;
+            rayTo[2] = at<float>(player, 0x48);
+            rayTo[3] = at<float>(player, 0x4c) + work[3];  // ? work[3] is not written before (as in the binary)
+            rayFrom[0] = at<float>(enemy, 0x40);
+            rayFrom[1] = at<float>(enemy, 0x44) + 1.8f;
+            rayFrom[2] = at<float>(enemy, 0x48);
+            rayFrom[3] = work[3] + at<float>(enemy, 0x4c);
+            SetupRayQuery(rayQuery, rayFrom, rayTo, 3, 0, 0x1c, 0, "dashSense", 0);
+            if (RayCastSingleHit(work, 0, 0, 0, rayQuery) == 0) {
+                FUN_00c14dc0((int)enemy);
+                if (!(threshold > at<float>(enemy, 0xd8c))) {  // dash timer reached (NaN included)
+                    at<float>(enemy, 0xd8c) = 0.0f;
+                    FUN_0040e950((undefined4 *)infoA);
+                    at<float>(infoA, 0x4) = 0.0f;
+                    at<float>(infoB, 0x20) = at<float>(player, 0x40);
+                    infoB[11] = -1;
+                    at<float>(infoB, 0x24) = at<float>(player, 0x44);
+                    infoA[2] = -1;
+                    at<float>(infoB, 0x28) = at<float>(player, 0x48);
+                    infoA[4] = -1;
+                    infoB[0] = paramB;
+                    at<float>(infoB, 0x8) = at<float>(player, 0x40);
+                    at<unsigned short>(infoA, 0x20) = 0;
+                    infoB[1] = 2;
+                    at<float>(infoB, 0xC) = at<float>(player, 0x44);
+                    at<float>(infoB, 0x10) = at<float>(player, 0x48);
+                    at<float>(infoB, 0x14) = range;
+                    at<float>(infoA, 0x0) = paramA;
+                    NotifySense((int)player, infoA, infoB);
+                }
+                continue;
+            }
+        }
+        FUN_00c14de0((int)enemy);
+    }
+
+    // 3. touchSense
+    for (int *node = DAT_01bebdbc; node != DAT_01bebdc0; node = (int *)node[2]) {
+        int handle;
+        HandleAssign(&handle, node);
+        int entity = HandleResolve(&handle);
+        if (entity == 0 || EntityIsActive(entity) == 0 || player == 0 ||
+            (DAT_01bea094 & 0x20000) != 0) {
+            continue;
+        }
+        float baseRange;
+        float paramA;
+        float threshold;
+        int paramB;
+        void *table = SenseTable();
+        int owner = EntityOwner(entity);
+        if (QuerySense(table, &baseRange, &paramA, &threshold, &paramB, at<int>((void *)owner, 0x4b0) /* owner+0x4B0 */,
+                       8) == 0) {
+            continue;
+        }
+        if (0.0f >= threshold) {  // a NaN threshold passes (fcomp)
+            continue;
+        }
+        char *enemy = (char *)FUN_00445b60((int *)EntityOwner(entity));
+        if (enemy == 0) {
+            continue;
+        }
+        char *enemyBody = at<char *>(enemy, 0x764);
+        float range = baseRange;
+        if (enemyBody != 0) {
+            float enemyRadius = at<float>(enemyBody, 0xfc);
+            char *playerBody = at<char *>(player, 0x764);
+            range = at<float>(playerBody, 0xfc);
+            float enemyExtent = BodyExtent(enemyBody);
+            range = (float)(((double)BodyExtent(playerBody) + enemyExtent +
+                             ((double)range + enemyRadius)) * 1.1f);
+            if (vcall<int>(player, 0x368) != 0) {
+                range = range + 0.6f;
+            }
+        }
+        FUN_004fc8e0((undefined4 *)work, (int)player, 5);
+        double dx = (double)at<float>(enemy, 0x40) - work[0];
+        double dy = (double)at<float>(enemy, 0x44) - at<float>(player, 0x44);
+        double dz = (double)at<float>(enemy, 0x48) - work[2];
+        if (!(sqrt(dy * dy + dx * dx + dz * dz) > range) &&  // fcomp: NaN counts as "in range"
+            vcall<int>(player, 0x330) == 0 && FlagTest(6) == 0) {
+            rayFrom[0] = at<float>(player, 0x40);
+            rayFrom[1] = at<float>(player, 0x44) + 1.8f;
+            rayFrom[2] = at<float>(player, 0x48);
+            rayFrom[3] = at<float>(player, 0x4c) + work[3];
+            rayTo[0] = at<float>(enemy, 0x40);
+            rayTo[1] = at<float>(enemy, 0x44) + 1.8f;
+            rayTo[2] = at<float>(enemy, 0x48);
+            rayTo[3] = work[3] + at<float>(enemy, 0x4c);
+            SetupRayQuery(rayQuery, rayTo, rayFrom, 3, 0, 0x1c, 0, "touchSense", 0);
+            if (RayCastSingleHit(touchHit, 0, 0, 0, rayQuery) == 0) {
+                FUN_00c14e30((int)enemy);
+                if (!(threshold > at<float>(enemy, 0xd90)) || !(threshold > at<float>(enemy, 0xd8c))) {
+                    at<float>(enemy, 0xd90) = 0.0f;
+                    FUN_0040e950((undefined4 *)infoA);
+                    at<float>(infoA, 0x4) = 0.0f;
+                    at<float>(infoB, 0x20) = work[0];
+                    infoB[11] = -1;
+                    infoA[2] = -1;
+                    at<float>(infoB, 0x28) = work[2];
+                    infoA[4] = -1;
+                    at<float>(infoB, 0x24) = at<float>(enemy, 0x44);
+                    at<float>(infoB, 0x8) = work[0];
+                    at<float>(infoB, 0xC) = at<float>(enemy, 0x44);
+                    at<unsigned short>(infoA, 0x20) = 0;
+                    infoB[0] = paramB;
+                    infoB[1] = 2;
+                    at<float>(infoB, 0x10) = work[2];
+                    at<float>(infoB, 0x14) = range;
+                    at<float>(infoA, 0x0) = paramA;
+                    NotifySense((int)player, infoA, infoB);
+                }
+                continue;
+            }
+        }
+        FUN_00c14e50((int)enemy);
+    }
+
+    if (lockEnabled() != 0) {  // the binary reads it as criticalSection + 0x18
+        LeaveCriticalSection(criticalSection);
+    }
+}

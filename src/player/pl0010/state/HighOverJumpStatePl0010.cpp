@@ -1,343 +1,327 @@
-// src/player/pl0010/state/HighOverJumpStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B81620..00BDEB40, 9 functions
-
+// src/player/pl0010/state/HighOverJumpStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "HighOverJumpStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e18[];  // HighOverJumpStatePl0010 (returned by vf00)
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+// D3DX import
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+// CRT (the compiler emitted fabs / fcos / fsin inline)
+extern "C" double __cdecl fabs(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sin(double x);
+
+namespace HighOverJumpStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// obj when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline char *asContextPl0010(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, 0x0), DAT_01be9ef4);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+// obj when it is a Pl0000 (type record from cObj::vf04, slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, 0x4), DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline Pl0000 *playerOf(const char *ctx)
+{
+    return asPl0000(fld<void *>(ctx, 0xC));
+}
+
+// Pl0000+0x764: movement controller; Pl0000+0x40D4: parameter table
+inline char *controllerOf(Pl0000 *player)
+{
+    return fld<char *>(player, 0x764);
+}
+
+inline char *paramsOf(Pl0000 *player)
+{
+    return fld<char *>(player, 0x40D4);
+}
+
+// StateMachineContextPl0010+0xC0 -> +0x4: obstacle / environment info
+inline char *envInfoOf(const char *ctx)
+{
+    return fld<char *>(fld<char *>(ctx, 0xC0), 4);  /* StateMachineContextPl0010+0xC0: ? (+0x4: environment info) */
+}
+
+// StateMachineNode fields (base class, header not owned here)
+inline int &nodeEntered(void *node)   { return fld<int>(node, 0x20); }  /* StateMachineNode+0x20: ? (skip when set) */
+inline int &nodeRequested(void *node) { return fld<int>(node, 0x24); }  /* StateMachineNode+0x24: requested state (-1: none) */
+
+// StateMachineNode::FUN_00d82510(state, priority): request a change to `state`
+inline void requestState(void *node, int state, int priority)
+{
+    thiscall<void>(FUN_00d82510, node, state, priority);
+}
+
+// motions of this state
+const int kMotionTakeOff = 0xB3;
+const int kMotionTakeOff2 = 0xB4;
+const int kMotionAir = 0xB5;
+
+}  // namespace HighOverJumpStatePl0010_p1
+
 // 00B81620  HighOverJumpStatePl0010::vf08  size=55  [class]
-undefined4 __thiscall HighOverJumpStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x48) = 0;
-  *(undefined4 *)(param_1 + 0x40) = 0;
-  *(undefined4 *)(param_1 + 0x50) = 0;
-  *(undefined4 *)(param_1 + 0x54) = 0;
-  *(undefined4 *)(param_1 + 0x58) = 0x3f4ccccd;
-  return 1;
+// Enter.
+bool HighOverJumpStatePl0010::vf08(undefined4 contextArg)
+{
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    airTime() = 0.0f;
+    pastApex() = 0;
+    mayFall() = 0;
+    wallHit() = 0;
+    speedScale() = 0.8f;
+    return true;
 }
 
 // 00B81660  HighOverJumpStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall HighOverJumpStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base's).
+undefined4 HighOverJumpStatePl0010::vf18(undefined4 contextArg)
+{
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00B81670  HighOverJumpStatePl0010::vf24  size=19  [class]
-bool HighOverJumpStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool HighOverJumpStatePl0010::vf24(undefined4 arg)
+{
+    return StateMachineNode::vf24(arg) != 0;
 }
 
 // 00B816B0  HighOverJumpStatePl0010::vf00  size=6  [class]
-undefined * HighOverJumpStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e18;
+undefined *HighOverJumpStatePl0010::vf00()
+{
+    return DAT_01be9e18;
 }
 
 // 00B90FA0  HighOverJumpStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall HighOverJumpStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *HighOverJumpStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BAB090  HighOverJumpStatePl0010::SafeCheck  size=404  [class]
-void __thiscall HighOverJumpStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  undefined4 uVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
-  undefined *puVar8;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar6 = 0;
-    }
-    else {
-      puVar8 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar5 = FUN_00dd6d80(puVar8);
-      uVar6 = -(uint)(iVar5 != 0) & (uint)param_2;
-    }
-    piVar4 = *(int **)(uVar6 + 0xc);
-    if (piVar4 == (int *)0x0) {
-      uVar7 = 0;
-    }
-    else {
-      puVar8 = &DAT_01be9db8;
-      (**(code **)(*piVar4 + 4))(&DAT_01be9db8);
-      iVar5 = FUN_00dd6d80(puVar8);
-      uVar7 = -(uint)(iVar5 != 0) & (uint)piVar4;
-    }
-    FUN_00aa3f60(0xb3);
-    iVar5 = *(int *)(uVar7 + 0x764);
-    if (*(int *)(iVar5 + 0x104) != 1) {
-      *(undefined4 *)(iVar5 + 0x104) = 1;
-      *(undefined4 *)(*(int *)(iVar5 + 0xd0) + 4) = 0;
-    }
-    *(undefined4 *)(uVar7 + 0x4170) = 1;
-    *(undefined4 *)(uVar7 + 0x418c) = *(undefined4 *)(uVar7 + 0x4180);
-    *(undefined4 *)(uVar7 + 0x4188) = *(undefined4 *)(uVar7 + 0x417c);
-    *(undefined4 *)(uVar7 + 0x4190) = *(undefined4 *)(uVar7 + 0x4184);
-    *(undefined4 *)(param_1 + 0x5c) = *(undefined4 *)(*(int *)(uVar7 + 0x764) + 0x1c0);
-    *(undefined4 *)(param_1 + 0x60) = *(undefined4 *)(*(int *)(uVar7 + 0x764) + 0x1cc);
-    FUN_008e0b70(0);
-    FUN_008e0ba0(0);
-    iVar5 = *(int *)(*(int *)(uVar6 + 0xc0) + 4);
-    uVar1 = *(undefined4 *)(iVar5 + 0x3f8);
-    fVar2 = *(float *)(iVar5 + 0x3fc);
-    if (!NAN(fVar2) && 3.0 < fVar2 != (fVar2 == 3.0)) {
-      fVar2 = 3.0;
-    }
-    fVar3 = *(float *)(*(int *)(uVar7 + 0x764) + 0xfc);
-    if (*(float *)(*(int *)(*(int *)(uVar6 + 0xc0) + 4) + 0x548) < 1.0) {
-      *(undefined4 *)(param_1 + 0x58) = 0x3f000000;
-    }
-    FUN_00d83250(param_1 + 0x30,param_1 + 0x34,uVar1,fVar2 + fVar3,
-                 ABS(*(float *)(*(int *)(uVar7 + 0x764) + 0xf4)));
-    *(undefined4 *)(param_1 + 0x38) = 0;
-    *(undefined4 *)(param_1 + 0x3c) = 0;
-    *(undefined4 *)(param_1 + 0x44) = *(undefined4 *)(uVar7 + 0x44);
-    *(undefined4 *)(param_1 + 0x4c) = 0;
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// First frame: starts the take-off motion, locks the camera angles, saves two controller values
+// and solves the launch (angle, speed) for the obstacle height (clamped to 3.0).
+void HighOverJumpStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    using namespace HighOverJumpStatePl0010_p1;
+
+    if (nodeEntered(this) == 0) {
+        char *ctx = asContextPl0010(contextArg);
+        Pl0000 *player = playerOf(ctx);
+        thiscall<int>(FUN_00aa3f60, player, kMotionTakeOff);
+        char *controller = controllerOf(player);
+        if (fld<int>(controller, 0x104) != 1) {  /* controller+0x104: ? */
+            fld<int>(controller, 0x104) = 1;
+            fld<float>(fld<char *>(controller, 0xD0), 4) = 0.0f;  /* controller+0xD0: ? (+0x4 float) */
+        }
+        fld<int>(player, 0x4170) = 1;  /* Pl0000+0x4170: camera angles overridden */
+        fld<float>(player, 0x418C) = fld<float>(player, 0x4180);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+        fld<float>(player, 0x4188) = fld<float>(player, 0x417C);
+        fld<float>(player, 0x4190) = fld<float>(player, 0x4184);
+        savedCtrl1C0() = fld<int>(controllerOf(player), 0x1C0);  /* controller+0x1C0: ? */
+        savedCtrl1CC() = fld<int>(controllerOf(player), 0x1CC);  /* controller+0x1CC: ? */
+        thiscall<void>(FUN_008e0b70, controllerOf(player), 0);
+        thiscall<void>(FUN_008e0ba0, controllerOf(player), 0);
+        char *env = envInfoOf(ctx);
+        float distance = fld<float>(env, 0x3F8);  /* env+0x3F8: ? (distance to the obstacle) */
+        float height = fld<float>(env, 0x3FC);    /* env+0x3FC: obstacle height */
+        if (height >= 3.0f) {
+            height = 3.0f;
+        }
+        float controllerFC = fld<float>(controllerOf(player), 0xFC);  /* controller+0xFC: ? */
+        if (fld<float>(envInfoOf(ctx), 0x548) < 1.0f) {  /* env+0x548: ? */
+            speedScale() = 0.5f;
+        }
+        cdeclcall<undefined4>(FUN_00d83250, &launchAngle(), &launchSpeed(), distance, height + controllerFC,
+                              (float)fabs(fld<float>(controllerOf(player), 0xF4)));  /* controller+0xF4: gravity */
+        prevForward() = 0.0f;
+        prevUp() = 0.0f;
+        startY() = fld<float>(player, 0x44);  /* Pl0000+0x44: position y */
+        gravityDrop() = 0.0f;
+    }
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00BAB230  HighOverJumpStatePl0010::vf20  size=210  [class]
-undefined4 __thiscall HighOverJumpStatePl0010::vf20(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_2);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-  }
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x4170) = 0;
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  FUN_008e0b70(*(undefined4 *)(param_1 + 0x5c));
-  FUN_008e0ba0(*(undefined4 *)(param_1 + 0x60));
-  return 1;
+// Leave: releases the camera angles and restores the two controller values.
+undefined4 HighOverJumpStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace HighOverJumpStatePl0010_p1;
+
+    if (StateMachineNode::vf20(contextArg) == 0) {
+        return 0;
+    }
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (fld<int>(controllerOf(player), 0x104) != 0) {  /* controller+0x104: ? */
+        fld<int>(controllerOf(player), 0x104) = 0;
+    }
+    fld<float>(player, 0x4180) = fld<float>(player, 0x418C);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+    fld<int>(player, 0x4170) = 0;                             /* Pl0000+0x4170: camera angles overridden */
+    fld<float>(player, 0x417C) = fld<float>(player, 0x4188);
+    fld<float>(player, 0x4184) = fld<float>(player, 0x4190);
+    thiscall<void>(FUN_008e0b70, controllerOf(player), savedCtrl1C0());
+    thiscall<void>(FUN_008e0ba0, controllerOf(player), savedCtrl1CC());
+    return 1;
 }
 
 // 00BCA620  HighOverJumpStatePl0010::vf14  size=294  [class]
-void __thiscall HighOverJumpStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined *puVar6;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar5 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar6);
-    uVar5 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  iVar2 = FUN_00a94db0(0xb3);
-  if ((iVar2 != 0) || (iVar2 = FUN_00a94db0(0xb4), iVar2 != 0)) {
-    uVar3 = FUN_00aa3f60(0xb5);
-    FUN_00a96070(uVar3,0x80,1);
-  }
-  if ((*(int *)(param_1 + 0x40) != 0) &&
-     (((*(undefined4 *)(uVar4 + 0x30) = 1, *(int *)(uVar5 + 0x41e0) != 0 &&
-       (*(float *)(uVar5 + 0x41e4) <= 0.36)) || (iVar2 = FUN_008e2740(), iVar2 != 0)))) {
-    FUN_00d82510(0x13,100);
-  }
-  iVar2 = FUN_00a94db0(0xb5);
-  if (((iVar2 != 0) && (0x7fffffff < *(uint *)(param_1 + 0x24))) &&
-     (iVar2 = FUN_00bb90c0(param_2,param_1), iVar2 != 0)) {
-    FUN_008e0c00(uVar5 + 0x560);
-  }
-  StateMachineNode::vf14(param_2);
-  return;
+// Chains take-off -> air motion, requests landing (0x13) near the ground after the apex and
+// lets FUN_00bb90c0 cancel the jump.
+void HighOverJumpStatePl0010::vf14(undefined4 *contextArg)
+{
+    using namespace HighOverJumpStatePl0010_p1;
+
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (thiscall<int>(FUN_00a94db0, player, kMotionTakeOff) != 0 ||
+        thiscall<int>(FUN_00a94db0, player, kMotionTakeOff2) != 0) {
+        int motion = thiscall<int>(FUN_00aa3f60, player, kMotionAir);
+        thiscall<void>(FUN_00a96070, player, motion, 0x80, 1);
+    }
+    if (pastApex() != 0) {
+        fld<int>(ctx, 0x30) = 1;  /* StateMachineContextPl0010+0x30: ? */
+        if ((fld<int>(player, 0x41E0) != 0 && fld<float>(player, 0x41E4) <= 0.36f) ||  /* Pl0000+0x41E0: ground probe hit, +0x41E4: its distance */
+            FUN_008e2740((int)controllerOf(player))) {
+            requestState(this, 0x13, 100);
+        }
+    }
+    if (thiscall<int>(FUN_00a94db0, player, kMotionAir) != 0 && nodeRequested(this) < 0 &&
+        cdeclcall<int>(FUN_00bb90c0, contextArg, this) != 0) {
+        thiscall<void>(FUN_008e0c00, controllerOf(player), (char *)player + 0x560);  /* Pl0000+0x560: ? (vector) */
+    }
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00BDEB40  HighOverJumpStatePl0010::qteSafeCheck  size=747  [class]
-void __thiscall HighOverJumpStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  int *piVar4;
-  float10 fVar5;
-  float10 fVar6;
-  float10 fVar7;
-  undefined *puVar8;
-  undefined1 auStack_6c [4];
-  undefined4 *local_68;
-  float local_64;
-  undefined4 local_60;
-  float local_5c;
-  float local_58;
-  undefined1 local_50 [76];
-  
-  if (param_2 == (undefined4 *)0x0) {
-    local_68 = param_2;
-  }
-  else {
-    puVar8 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar8);
-    local_68 = (undefined4 *)(-(uint)(iVar3 != 0) & (uint)param_2);
-  }
-  piVar4 = (int *)local_68[3];
-  if (piVar4 == (int *)0x0) {
-    piVar4 = (int *)0x0;
-  }
-  else {
-    puVar8 = &DAT_01be9db8;
-    (**(code **)(*piVar4 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar8);
-    piVar4 = (int *)(-(uint)(iVar3 != 0) & (uint)piVar4);
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  iVar3 = FUN_00a9f760(0xb5);
-  if (iVar3 != 0) {
-    fVar1 = *(float *)(piVar4[0x1035] + 0x174);
-    piVar4[0x1060] = *(int *)(piVar4[0x1035] + 0x170);
-    piVar4[0x105f] = (int)(fVar1 * 0.017453292);
-    piVar4[0x1061] = 0;
-    FUN_00b8af00();
-  }
-  local_64 = *(float *)(piVar4[0x1035] + 0xf8) * *(float *)(param_1 + 0x58);
-  iVar3 = FUN_00a9f760(0xb5);
-  if (iVar3 != 0) {
-    *(float *)(param_1 + 0x48) = (float)local_68[2] + *(float *)(param_1 + 0x48);
-  }
-  fVar1 = *(float *)(param_1 + 0x48);
-  if (!NAN(fVar1) && 0.1 < fVar1 != (fVar1 == 0.1)) {
-    if (*(int *)(piVar4[0x109a] + 0x94) != 0) {
-      *(undefined4 *)(param_1 + 0x54) = 1;
-    }
-    if (*(int *)(piVar4[0x109a] + 0x24) != 0) {
-      *(undefined4 *)(param_1 + 0x54) = 1;
-    }
-  }
-  iVar3 = FUN_00a9f760(0xb5);
-  if ((iVar3 != 0) && (iVar3 = FUN_00a95270(0xb5,8), iVar3 != 0)) {
-    FUN_00bd3620(param_2,param_1,100);
-  }
-  iVar3 = FUN_00a9f760(0xb3);
-  if ((iVar3 != 0) || (*(float *)(param_1 + 0x48) <= 1.0)) {
-    if (((float)piVar4[0x34a] <=
-         *(float *)(piVar4[0x1035] + 0x14c) * *(float *)(piVar4[0x1035] + 0x14c)) ||
-       (*(int *)(param_1 + 0x54) != 0)) {
-      *(undefined4 *)(param_1 + 0x50) = 1;
-    }
-    else {
-      *(undefined4 *)(param_1 + 0x50) = 0;
-    }
-  }
-  if ((*(int *)(param_1 + 0x50) != 0) &&
-     (iVar3 = FUN_008e0ce0(&local_60), *(float *)(iVar3 + 4) < 0.0)) {
-    local_68[0xc] = 1;
-    FUN_00bb91f0(param_2,param_1);
-  }
-  if ((0x7fffffff < *(uint *)(param_1 + 0x24)) && (iVar3 = FUN_00a9f760(0xb5), iVar3 != 0)) {
-    fVar5 = (float10)fcos((float10)*(float *)(param_1 + 0x30));
-    fVar6 = (float10)local_64;
-    fVar7 = fVar5 * (float10)*(float *)(param_1 + 0x34) * (float10)*(float *)(param_1 + 0x48) *
-            fVar6;
-    fVar5 = (float10)fsin((float10)*(float *)(param_1 + 0x30));
-    fVar5 = fVar5 * (float10)*(float *)(param_1 + 0x34) * (float10)*(float *)(param_1 + 0x48) *
-            fVar6;
-    fVar1 = *(float *)(param_1 + 0x38);
-    fVar2 = *(float *)(param_1 + 0x3c);
-    if (1.0 < *(float *)(param_1 + 0x48)) {
-      *(undefined4 *)(param_1 + 0x40) = 1;
-    }
-    *(float *)(param_1 + 0x4c) =
-         (float)((float10)*(float *)(piVar4[0x1d9] + 0xf4) * (float10)(float)local_68[2] *
-                 (float10)(float)local_68[2] * fVar6 * fVar6 + (float10)*(float *)(param_1 + 0x4c));
-    *(float *)(param_1 + 0x38) = (float)fVar7;
-    *(float *)(param_1 + 0x3c) = (float)fVar5;
-    local_60 = 0;
-    local_5c = (float)((fVar5 - (float10)fVar2) + (float10)*(float *)(param_1 + 0x4c));
-    local_58 = (float)(fVar7 - (float10)fVar1);
-    FUN_00ddc1d0(local_50,piVar4 + 0x24,5);
-    D3DXVec3TransformNormal(&local_60,&local_60,local_50);
-    (**(code **)(*piVar4 + 0x70))(auStack_6c);
-  }
-  FUN_00bd3730(param_2,param_1,0xd,0xc);
-  FUN_00bd37f0(param_2,param_1,0xd);
-  FUN_00bd3910(param_2,param_1,0xb,10);
-  FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Per-frame arc: while in motion 0xB5 the offset along the launch direction is
+// (cos, sin)(launchAngle) * launchSpeed * airTime * speed, minus the accumulated gravity; the
+// frame's delta is rotated by the player matrix and applied through vf70.
+void HighOverJumpStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace HighOverJumpStatePl0010_p1;
 
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    thiscall<void>(FUN_008e0b70, controllerOf(player), 0);
+    thiscall<void>(FUN_008e0ba0, controllerOf(player), 0);
+    if (thiscall<int>(FUN_00a9f760, player, kMotionAir) != 0) {
+        char *params = paramsOf(player);
+        float yawDeg = fld<float>(params, 0x174);
+        fld<float>(player, 0x4180) = fld<float>(params, 0x170);  /* Pl0000+0x417C..0x4184: camera angles */
+        fld<float>(player, 0x417C) = yawDeg * 0.017453292f;      // degrees -> radians
+        fld<float>(player, 0x4184) = 0.0f;
+        FUN_00b8af00((int)player);
+    }
+    float speed = fld<float>(paramsOf(player), 0xF8) * speedScale();  /* params+0xF8: jump speed */
+    if (thiscall<int>(FUN_00a9f760, player, kMotionAir) != 0) {
+        airTime() = fld<float>(ctx, 0x8) + airTime();  /* StateMachineContextPl0010+0x8: frame time */
+    }
+    if (airTime() >= 0.1f) {
+        if (fld<int>(fld<char *>(player, 0x4268), 0x94) != 0) {  /* Pl0000+0x4268: contact info (+0x94, +0x24: ?) */
+            wallHit() = 1;
+        }
+        if (fld<int>(fld<char *>(player, 0x4268), 0x24) != 0) {
+            wallHit() = 1;
+        }
+    }
+    if (thiscall<int>(FUN_00a9f760, player, kMotionAir) != 0 &&
+        thiscall<int>(FUN_00a95270, player, kMotionAir, 8) != 0) {
+        cdeclcall<undefined4>(FUN_00bd3620, contextArg, this, 100);
+    }
+    if (thiscall<int>(FUN_00a9f760, player, kMotionTakeOff) != 0 || airTime() <= 1.0f) {
+        float threshold = fld<float>(paramsOf(player), 0x14C);  /* params+0x14C: stick threshold */
+        if (!(threshold * threshold < fld<float>(player, 0xD28)) || wallHit() != 0) {  /* Pl0000+0xD28: stick magnitude squared */
+            mayFall() = 1;
+        }
+        else {
+            mayFall() = 0;
+        }
+    }
+    float vec[4];  // FUN_008e0ce0 output, then the frame's movement vector
+    if (mayFall() != 0) {
+        float *velocity = (float *)thiscall<int>(FUN_008e0ce0, controllerOf(player), vec);
+        if (velocity[1] < 0.0f) {
+            fld<int>(ctx, 0x30) = 1;  /* StateMachineContextPl0010+0x30: ? */
+            cdeclcall<undefined4>(FUN_00bb91f0, contextArg, this);
+        }
+    }
+    if (nodeRequested(this) < 0 && thiscall<int>(FUN_00a9f760, player, kMotionAir) != 0) {
+        double forward = cos((double)launchAngle()) * launchSpeed() * airTime() * speed;
+        double up = sin((double)launchAngle()) * launchSpeed() * airTime() * speed;
+        float oldForward = prevForward();
+        float oldUp = prevUp();
+        if (1.0f < airTime()) {
+            pastApex() = 1;
+        }
+        float dt = fld<float>(ctx, 0x8);  /* StateMachineContextPl0010+0x8: frame time */
+        gravityDrop() = (float)((double)fld<float>(controllerOf(player), 0xF4) * dt * dt * speed * speed + gravityDrop());  /* controller+0xF4: gravity */
+        prevForward() = (float)forward;
+        prevUp() = (float)up;
+        vec[0] = 0.0f;
+        vec[1] = (float)((up - oldUp) + gravityDrop());
+        vec[2] = (float)(forward - oldForward);
+        float matrix[19];  // 76-byte buffer filled by FUN_00ddc1d0
+        FUN_00ddc1d0((undefined4 *)matrix, (float *)((char *)player + 0x90), 5);  /* Pl0000+0x90: transform */
+        D3DXVec3TransformNormal(vec, vec, matrix);
+        vcall<void>(player, 0x70, vec);  // Behavior::vf70 (slot 0x70): move by a vector
+    }
+    FUN_00bd3730(contextArg, (undefined4)this, 0xD, 0xC);
+    FUN_00bd37f0(contextArg, (undefined4)this, 0xD);
+    FUN_00bd3910(contextArg, (undefined4)this, 0xB, 10);
+    FUN_00bd39d0(contextArg, (undefined4)this, 10);
+    StateMachineNode::qteSafeCheck(contextArg);
+}

@@ -1,225 +1,287 @@
-// src/managers/triggermanager/cActAnimation.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C89DD0..00C968D0, 7 functions
-
+// src/managers/triggermanager/cActAnimation.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActAnimation.h"
+
+extern undefined DAT_01dbe09c;  // cActAnimation static descriptor returned by vf00
+extern char DAT_01b7bd48[];  // default heap (second argument of FUN_00dd3500)
+extern char DAT_016b0f9c[];  // debug message: unknown animation action type
+extern char DAT_016b1124[];  // debug message: %s has no record
+extern char DAT_016b10fc[];  // debug message: %s has no target
+extern char DAT_016b108c[];  // debug message: %s: no object named %s
+extern char DAT_016b10c4[];  // debug message: %s: no object with number %d
+extern char DAT_016b102c[];  // debug message: %s: null handle (by name)
+extern char DAT_016b105c[];  // debug message: %s: null handle (by number)
+extern char DAT_016b0fc4[];  // debug message: %s: animation failed (by name)
+extern char DAT_016b0ff8[];  // debug message: %s: animation failed (by number)
+
+namespace cActAnimation_p1 {
+
+// object-handle list filled by the lookup functions (inline storage for 16 handles)
+struct HandleList {
+    unsigned int unknown00;
+    int *data;          // points at the inline storage unless grown
+    int capacity;
+    int count;
+    int heapAllocated;  // nonzero: data must be freed with FUN_00dd48d0
+};
+
+typedef void (*DebugPrintFn)(const void *format, ...);
+const DebugPrintFn debugPrint = (DebugPrintFn)FUN_00dd5650;  // debug printf (empty in release)
+
+// FUN_00c77fc0: collect the objects whose name matches.
+inline int findObjectsByName(char *name, HandleList *list)
+{
+    return ((int (*)(char *, HandleList *))FUN_00c77fc0)(name, list);
+}
+// FUN_00a814d0: collect the objects with the given number (?).
+inline void findObjectsByNumber(HandleList *list, int number)
+{
+    ((void (*)(HandleList *, int))FUN_00a814d0)(list, number);
+}
+// FUN_00c959c0: collect the objects matching name and number.
+inline void findObjectsByNameAndNumber(char *name, int number, HandleList *list)
+{
+    ((void (*)(char *, int, HandleList *))FUN_00c959c0)(name, number, list);
+}
+// FUN_00a7c8a0: handle -> object (ECX argument not recovered by the decompiler).
+inline int handleToObject()
+{
+    return ((int (*)())FUN_00a7c8a0)();
+}
+inline int isPlayerCharacter(int characterId)  // FUN_009f9350 ?
+{
+    return ((int (*)(int))FUN_009f9350)(characterId);
+}
+inline int *allocTask(unsigned int size)  // FUN_00dd3500: heap allocation
+{
+    return ((int *(*)(unsigned int, char *))FUN_00dd3500)(size, DAT_01b7bd48);
+}
+inline void taskSetTarget(int handle)  // FUN_00c83e90 (cTriggerTask_PlAnim; ECX not recovered)
+{
+    ((void (*)(int))FUN_00c83e90)(handle);
+}
+inline char registerTask(int *task)  // FUN_00c84760
+{
+    return ((char (*)(int *))FUN_00c84760)(task);
+}
+inline void prepareMotion()  // FUN_00a92f90 (ECX not recovered)
+{
+    ((void (*)())FUN_00a92f90)();
+}
+inline int findMotion(char *motionName)  // FUN_00e33270
+{
+    return ((int (*)(char *))FUN_00e33270)(motionName);
+}
+inline int currentMotionFrame(char *motionName)  // FUN_00a957d0 ? (int result converted to float below)
+{
+    return ((int (*)(char *))FUN_00a957d0)(motionName);
+}
+inline int motionFrameCount(int motionIndex)  // FUN_00a957b0 ? (int result converted to float below)
+{
+    return ((int (*)(int))FUN_00a957b0)(motionIndex);
+}
+// 00AA4940: start a motion; returns the motion index or -1.
+// Word arguments are the raw bit patterns (0x3e4ccccd = 0.2f, 0x3f800000 = 1.0f).
+inline int playMotion(char *motionName, int motionIndex, unsigned int blend, unsigned int speed,
+                      int unknown, float frame, unsigned int rate)
+{
+    return ((int (*)(char *, int, unsigned int, unsigned int, int, float, unsigned int))0x00AA4940)(
+        motionName, motionIndex, blend, speed, unknown, frame, rate);
+}
+// FUN_00a9f2b0 (Behavior.cpp), called with the 7 arguments the decompiler shows.
+inline int playMotionAt(char *motionName, int motionIndex, int unknown2, unsigned int speed,
+                        int unknown4, float frame, int unknown6)
+{
+    return ((int (*)(char *, int, int, unsigned int, int, float, int))FUN_00a9f2b0)(
+        motionName, motionIndex, unknown2, speed, unknown4, frame, unknown6);
+}
+inline void reportFailure()  // FUN_00948120 (ECX not recovered)
+{
+    ((void (*)())FUN_00948120)();
+}
+
+} // namespace cActAnimation_p1
 
 // 00C89DD0  Trigger::cActAnimation::vf08  size=1  [class]
-void Trigger::cActAnimation::vf08(void)
-
-{
-  return;
+void Trigger::cActAnimation::vf08()
+{
 }
 
 // 00C89DE0  Trigger::cActAnimation::vf0C  size=1  [class]
-void Trigger::cActAnimation::vf0C(void)
-
-{
-  return;
+void Trigger::cActAnimation::vf0C()
+{
 }
 
 // 00C89DF0  Trigger::cActAnimation::vf10  size=1  [class]
-void Trigger::cActAnimation::vf10(void)
-
-{
-  return;
+void Trigger::cActAnimation::vf10()
+{
 }
 
 // 00C89E00  Trigger::cActAnimation::vf14  size=1  [class]
-void Trigger::cActAnimation::vf14(void)
-
-{
-  return;
+void Trigger::cActAnimation::vf14()
+{
 }
 
 // 00C91E30  Trigger::cActAnimation::vf00  size=6  [class]
-undefined * Trigger::cActAnimation::vf00(void)
-
-{
-  return &DAT_01dbe09c;
+void *Trigger::cActAnimation::vf00()
+{
+    return &DAT_01dbe09c;
 }
 
 // 00C91E40  Trigger::cActAnimation::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActAnimation::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActAnimation *Trigger::cActAnimation::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
 
 // 00C968D0  Trigger::cActAnimation::vf18  size=990  [class]
-bool __fastcall Trigger::cActAnimation::vf18(int param_1)
-
-{
-  int iVar1;
-  char cVar2;
-  char *pcVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
-  int iVar7;
-  int *piVar8;
-  bool bVar9;
-  undefined *puVar10;
-  int iVar11;
-  char *local_70;
-  int local_64;
-  int local_60;
-  undefined4 local_54;
-  undefined1 *local_50;
-  undefined4 local_4c;
-  int local_48;
-  int local_44;
-  undefined1 local_40 [64];
-  
-  iVar1 = *(int *)(param_1 + 4);
-  iVar7 = *(int *)(iVar1 + 4);
-  if (iVar7 == 0) {
-    local_70 = "ANIM";
-  }
-  else if (iVar7 == 7) {
-    local_70 = "ANIM_LAST";
-  }
-  else {
-    if (iVar7 != 0x4d) {
-      FUN_00dd5650(&DAT_016b0f9c);
-      return false;
-    }
-    local_70 = "PL_ANIM";
-  }
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016b1124,local_70);
-    return false;
-  }
-  if (*(int *)(iVar1 + 8) == -1) {
-    pcVar3 = (char *)(iVar1 + 0xc);
-    do {
-      cVar2 = *pcVar3;
-      pcVar3 = pcVar3 + 1;
-    } while (cVar2 != '\0');
-    if (pcVar3 == (char *)(iVar1 + 0xd)) {
-      FUN_00dd5650(&DAT_016b10fc,local_70);
-      return false;
-    }
-  }
-  local_50 = local_40;
-  local_54 = 0;
-  local_4c = 0x10;
-  local_48 = 0;
-  local_44 = 0;
-  iVar7 = *(int *)(iVar1 + 8);
-  if (iVar7 == -1) {
-    iVar7 = iVar1 + 0xc;
-    FUN_00c77fc0(iVar7,&local_54);
-    if (local_48 != 0) goto LAB_00c96a20;
-    puVar10 = &DAT_016b108c;
-  }
-  else {
-    pcVar3 = (char *)(iVar1 + 0xc);
-    do {
-      cVar2 = *pcVar3;
-      pcVar3 = pcVar3 + 1;
-    } while (cVar2 != '\0');
-    if (pcVar3 == (char *)(iVar1 + 0xd)) {
-      FUN_00a814d0(&local_54,iVar7);
-    }
-    else {
-      FUN_00c959c0((char *)(iVar1 + 0xc),iVar7,&local_54);
-    }
-    if (local_48 != 0) {
-LAB_00c96a20:
-      local_64 = iVar1 + 0xc;
-      bVar9 = true;
-      local_60 = 0;
-      if (0 < local_48) {
-        do {
-          iVar7 = *(int *)(local_50 + local_60 * 4);
-          iVar11 = local_64;
-          if (iVar7 == 0) {
-            if (*(int *)(iVar1 + 8) == -1) {
-              puVar10 = &DAT_016b102c;
-            }
-            else {
-              puVar10 = &DAT_016b105c;
-              iVar11 = *(int *)(iVar1 + 8);
-            }
-LAB_00c96c4d:
-            FUN_00dd5650(puVar10,local_70,iVar11);
-            bVar9 = false;
-          }
-          else {
-            iVar4 = FUN_00a7c8a0();
-            if (iVar4 == 0) {
-LAB_00c96c29:
-              if (*(int *)(iVar1 + 8) == -1) {
-                puVar10 = &DAT_016b0fc4;
-              }
-              else {
-                puVar10 = &DAT_016b0ff8;
-                iVar11 = *(int *)(iVar1 + 8);
-              }
-              goto LAB_00c96c4d;
-            }
-            if (*(int *)(*(int *)(param_1 + 4) + 4) == 0x4d) {
-              bVar9 = false;
-              iVar4 = FUN_009f9350(*(undefined4 *)(iVar4 + 0x4b0));
-              if (iVar4 == 1) {
-                piVar5 = (int *)FUN_00dd3500(0x10,&DAT_01b7bd48);
-                piVar8 = (int *)0x0;
-                if (piVar5 != (int *)0x0) {
-                  piVar5[1] = 0;
-                  piVar5[2] = 0;
-                  piVar5[3] = 0;
-                  *piVar5 = (int)cTriggerTask_PlAnim::vftable;
-                  piVar8 = piVar5;
-                }
-                (**(code **)(*piVar8 + 4))();
-                FUN_00c83e90(iVar7);
-                piVar8[1] = *(int *)(*(int *)(param_1 + 4) + 4);
-                cVar2 = FUN_00c84760(piVar8);
-                if (cVar2 == '\0') {
-                  (**(code **)*piVar8)(1);
-                }
-                bVar9 = cVar2 != '\0';
-              }
-            }
-            if (*(int *)(param_1 + 0xc) != 0) {
-              FUN_00a92f90();
-              iVar7 = iVar1 + 0x1c;
-              iVar4 = FUN_00e33270(iVar7);
-              if (iVar4 != -1) {
-                iVar6 = FUN_00a957d0(iVar7);
-                if ((float)iVar6 != 0.0) {
-                  FUN_00aa4940(iVar7,iVar4,0x3e4ccccd,0x3f800000,0,(float)iVar6,0x3f800000);
-                }
-              }
-            }
-            if (*(int *)(*(int *)(param_1 + 4) + 4) == 7) {
-              iVar7 = FUN_00aa4940(iVar1 + 0x1c,0,0x3e4ccccd,0x3f800000,0,0xbf800000,0x3f800000);
-              if (iVar7 == -1) goto LAB_00c96c29;
-              iVar4 = FUN_00a957b0(iVar7);
-              iVar7 = FUN_00a9f2b0(iVar1 + 0x1c,iVar7,0,0x3f800000,0,(float)iVar4,0);
-            }
-            else {
-              iVar7 = FUN_00aa4940(iVar1 + 0x1c,0,0x3e4ccccd,0x3f800000,0,0xbf800000,0x3f800000);
-            }
-            if (iVar7 == -1) goto LAB_00c96c29;
-          }
-          local_60 = local_60 + 1;
-        } while (local_60 < local_48);
-      }
-      if ((local_50 != (undefined1 *)0x0) && (local_48 = 0, local_44 != 0)) {
-        FUN_00dd48d0(local_50,0);
-      }
-      return bVar9;
-    }
-    iVar7 = *(int *)(iVar1 + 8);
-    puVar10 = &DAT_016b10c4;
-  }
-  FUN_00dd5650(puVar10,local_70,iVar7);
-  FUN_00948120();
-  return false;
-}
+int Trigger::cActAnimation::vf18()
+{
+    using namespace cActAnimation_p1;
+    int *rec = record();
+    int actionType = rec[1];
+    const char *commandName;
+    HandleList list;
+    int storage[16];
 
+    if (actionType == 0) {
+        commandName = "ANIM";
+    }
+    else if (actionType == 7) {
+        commandName = "ANIM_LAST";
+    }
+    else {
+        if (actionType != 0x4d) {
+            debugPrint(DAT_016b0f9c);
+            return false;
+        }
+        commandName = "PL_ANIM";
+    }
+    if (rec == 0) {
+        debugPrint(DAT_016b1124, commandName);
+        return false;
+    }
+    char *targetName = (char *)rec + 0xc;
+    if (rec[2] == -1 && targetName[0] == '\0') {  // inlined strlen == 0
+        debugPrint(DAT_016b10fc, commandName);
+        return false;
+    }
+    list.data = storage;
+    list.unknown00 = 0;
+    list.capacity = 0x10;
+    list.count = 0;
+    list.heapAllocated = 0;
+    int targetNumber = rec[2];
+    if (targetNumber == -1) {
+        findObjectsByName(targetName, &list);
+    }
+    else if (targetName[0] == '\0') {  // inlined strlen == 0
+        findObjectsByNumber(&list, targetNumber);
+    }
+    else {
+        findObjectsByNameAndNumber(targetName, targetNumber, &list);
+    }
+    if (list.count == 0) {
+        if (targetNumber == -1) {
+            debugPrint(DAT_016b108c, commandName, targetName);
+        }
+        else {
+            debugPrint(DAT_016b10c4, commandName, rec[2]);
+        }
+        reportFailure();
+        return false;
+    }
+
+    char *motionName = (char *)rec + 0x1c;
+    bool ok = true;
+    for (int i = 0; i < list.count; i++) {
+        int handle = list.data[i];
+        int messageArg = (int)targetName;
+        const char *message;
+        int object;
+        int motionIndex;
+
+        if (handle == 0) {
+            if (rec[2] == -1) {
+                message = DAT_016b102c;
+            }
+            else {
+                message = DAT_016b105c;
+                messageArg = rec[2];
+            }
+            goto report;
+        }
+        object = handleToObject();  // ? ECX = handle
+        if (object == 0) {
+            goto failed;
+        }
+        if (record()[1] == 0x4d) {  // PL_ANIM: hand the animation to a cTriggerTask_PlAnim
+            ok = false;
+            if (isPlayerCharacter(*(int *)(object + 0x4b0) /* object+0x4B0: ? */) == 1) {
+                int *memory = allocTask(0x10);
+                int *task = 0;
+                if (memory != 0) {
+                    memory[1] = 0;
+                    memory[2] = 0;
+                    memory[3] = 0;
+                    memory[0] = 0x016A891C;  // Trigger::cTriggerTask_PlAnim::vftable
+                    task = memory;
+                }
+                (*(void (__thiscall **)(int *))((char *)task[0] + 4))(task);
+                taskSetTarget(handle);
+                task[1] = record()[1];
+                char registered = registerTask(task);
+                if (registered == '\0') {
+                    (*(void (__thiscall **)(int *, int))task[0])(task, 1);  // scalar deleting destructor
+                }
+                ok = registered != '\0';
+            }
+        }
+        if (blendFromCurrent() != 0) {
+            prepareMotion();  // ? ECX = object
+            int currentIndex = findMotion(motionName);
+            if (currentIndex != -1) {
+                int frame = currentMotionFrame(motionName);
+                if ((float)frame != 0.0) {
+                    playMotion(motionName, currentIndex, 0x3e4ccccd, 0x3f800000, 0, (float)frame, 0x3f800000);
+                }
+            }
+        }
+        if (record()[1] == 7) {  // ANIM_LAST: jump to the last frame
+            motionIndex = playMotion(motionName, 0, 0x3e4ccccd, 0x3f800000, 0, -1.0f /* 0xbf800000 */, 0x3f800000);
+            if (motionIndex == -1) {
+                goto failed;
+            }
+            int frameCount = motionFrameCount(motionIndex);
+            motionIndex = playMotionAt(motionName, motionIndex, 0, 0x3f800000, 0, (float)frameCount, 0);
+        }
+        else {
+            motionIndex = playMotion(motionName, 0, 0x3e4ccccd, 0x3f800000, 0, -1.0f /* 0xbf800000 */, 0x3f800000);
+        }
+        if (motionIndex != -1) {
+            continue;
+        }
+failed:
+        if (rec[2] == -1) {
+            message = DAT_016b0fc4;
+        }
+        else {
+            message = DAT_016b0ff8;
+            messageArg = rec[2];
+        }
+report:
+        debugPrint(message, commandName, messageArg);
+        ok = false;
+    }
+    if (list.data != 0) {
+        list.count = 0;
+        if (list.heapAllocated != 0) {
+            FUN_00dd48d0((int)list.data, 0);
+        }
+    }
+    return ok;
+}

@@ -1,676 +1,611 @@
-// src/player/pl0010/state/ZangekiHoldStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B83090..00BE2560, 10 functions
-
+// src/player/pl0010/state/ZangekiHoldStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "ZangekiHoldStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------------------------
+// d3dx9_43.dll imports (thunks 0x01436F2C..0x01436F44)
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" float *__stdcall D3DXMatrixMultiply(float *out, const float *m1, const float *m2);
+extern "C" float *__stdcall D3DXMatrixRotationX(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationY(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationZ(float *out, float angle);
+// CRT (the compiler emitted fsqrt / fpatan / fabs inline)
+extern "C" double __cdecl sqrt(double x);
+extern "C" double __cdecl atan2(double y, double x);
+extern "C" double __cdecl fabs(double x);
+
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 / cObj::vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9eb0[];  // ZangekiHoldStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+// global camera matrix written by qteSafeCheck (float[16]) followed by a float
+extern unsigned char DAT_01d618e0[];
+extern float DAT_01d61920;
+extern float DAT_01d61ab0;  // divisor of the player's slow timer (player mode 0xC)
+
+namespace ZangekiHoldStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address) whose generated prototype is wrong
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __fastcall call with ECX = arg (for prototypes that lost their return value)
+template <class R, class F> inline R fastcall(F fn, int arg)
+{
+    typedef R (__fastcall *Fn)(int);
+    return ((Fn)fn)(arg);
+}
+
+// Functions without a generated prototype (both in src/lib/StaticArray.cpp, __cdecl).
+// FUN_00bd6680(context, motionA, motionB, layerMotion0, layerMotion1)
+static void *const kFUN_00bd6680 = (void *)0x00BD6680;
+// FUN_00bd6860(context, layerMotion0, layerMotion1, layerMotion2, blend, yawDegrees)
+static void *const kFUN_00bd6860 = (void *)0x00BD6860;
+
+// Animation::blend-out style call FUN_00e35de0 (ECX = animation + 0xF4)
+typedef void (__thiscall *BlendOutFn)(int self, int motionSet, unsigned int motionId, float blendTime);
+
+static const float kDegToRad = 0.017453292f;
+static const float kRadToDeg = 57.29578f;
+
+// obj when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline StateMachineContextPl0010 *asContext(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    // FUN_00dd6d80 is __thiscall (ECX = type record)
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (StateMachineContextPl0010 *)obj : 0;
+}
+
+// obj when it is a Pl0000 (type record from cObj::vf04, slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// |180 - atan2(x, z - 1) in degrees|, kept in x87 precision (not rounded to float)
+inline double yawDegrees(float x, float z)
+{
+    return fabs(180.0f - atan2((double)x, (double)z - 1.0) * kRadToDeg);
+}
+
+}  // namespace ZangekiHoldStatePl0010_p1
+
 // 00B83090  ZangekiHoldStatePl0010::SafeCheck  size=5  [class]
-void __thiscall ZangekiHoldStatePl0010::SafeCheck(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0xc))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0xc))(param_2);
-  }
-  if (*(int *)(param_1 + 0x20) == 0) {
-    *(undefined4 *)(param_1 + 0x14) = 2;
-    *(undefined4 *)(param_1 + 0x20) = 1;
-  }
-  return;
+// A tail jump to StateMachineNode::SafeCheck (the raw body shown by Ghidra is the base's).
+void ZangekiHoldStatePl0010::SafeCheck(undefined4 *context)
+{
+    StateMachineNode::SafeCheck(context);
 }
 
 // 00B830A0  ZangekiHoldStatePl0010::vf14  size=5  [class]
-undefined4 __thiscall ZangekiHoldStatePl0010::vf14(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x14))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x14))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 4;
-  return 1;
+// A tail jump to StateMachineNode::vf14.
+void ZangekiHoldStatePl0010::vf14(undefined4 *context)
+{
+    StateMachineNode::vf14(context);
 }
 
 // 00B830B0  ZangekiHoldStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall ZangekiHoldStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18.
+undefined4 ZangekiHoldStatePl0010::vf18(undefined4 arg)
+{
+    return StateMachineNode::vf18(arg);
 }
 
 // 00B830C0  ZangekiHoldStatePl0010::vf24  size=19  [class]
-bool ZangekiHoldStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool ZangekiHoldStatePl0010::vf24(undefined4 arg)
+{
+    return StateMachineNode::vf24(arg) != 0;
 }
 
 // 00B83100  ZangekiHoldStatePl0010::vf00  size=6  [class]
-undefined * ZangekiHoldStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9eb0;
+undefined *ZangekiHoldStatePl0010::vf00()
+{
+    return DAT_01be9eb0;
 }
 
 // 00B916A0  ZangekiHoldStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall ZangekiHoldStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *ZangekiHoldStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB5E40  ZangekiHoldStatePl0010::vf20  size=329  [class]
-undefined4 __thiscall ZangekiHoldStatePl0010::vf20(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined4 uVar5;
-  undefined *puVar6;
-  undefined4 uVar7;
-  
-  iVar2 = StateMachineNode::vf20(param_2);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar4 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  iVar2 = FUN_00a92f90();
-  if (iVar2 != 0) {
-    if (*(int *)(uVar3 + 0x40c8) == 8) {
-      if (*(int *)(uVar4 + 0x330) == 0xc) {
-        uVar5 = *(undefined4 *)(param_1 + 0x3c);
-        uVar7 = 0x41200000;
-        FUN_00a92f90(uVar5,0x41200000);
-        FUN_00808650(uVar5,uVar7);
-      }
-    }
-    else {
-      uVar5 = *(undefined4 *)(param_1 + 0x3c);
-      iVar2 = FUN_00a92f90();
-      FUN_00e26e90();
-      FUN_00e35de0(iVar2 + 0x98,uVar5,0x41200000);
-    }
-    uVar5 = *(undefined4 *)(param_1 + 0x40);
-    iVar2 = FUN_00a92f90();
-    FUN_00e26e90();
-    FUN_00e35de0(iVar2 + 0x98,uVar5,0);
-    uVar5 = *(undefined4 *)(param_1 + 0x44);
-    iVar2 = FUN_00a92f90();
-    FUN_00e26e90();
-    FUN_00e35de0(iVar2 + 0x98,uVar5,0x41200000);
-  }
-  *(undefined4 *)(param_1 + 0x3c) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x40) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x44) = 0xffffffff;
-  return 1;
+// Leave: blends the three layer motions out (10 frames, 0 for layerMotion1) and clears them.
+undefined4 ZangekiHoldStatePl0010::vf20(undefined4 *context)
+{
+    using namespace ZangekiHoldStatePl0010_p1;
+
+    if (StateMachineNode::vf20(context) == 0) {
+        return 0;
+    }
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+    if (FUN_00a92f90((int)player) != 0) {
+        if (fld<int>(player, 0x40C8) == 8) {  /* Pl0000+0x40C8: mode */
+            if (fld<int>(ctx, 0x330) == 0xC) {  /* StateMachineContextPl0010+0x330: ? */
+                unsigned int motion = layerMotion0();
+                int animation = FUN_00a92f90((int)player);
+                thiscall<void>(FUN_00808650, (void *)animation, motion, 10.0f);
+            }
+        }
+        else {
+            unsigned int motion = layerMotion0();
+            int animation = FUN_00a92f90((int)player);
+            FUN_00e26e90(animation);
+            ((BlendOutFn)FUN_00e35de0)(animation + 0xF4, animation + 0x98, motion, 10.0f);
+        }
+        unsigned int motion = layerMotion1();
+        int animation = FUN_00a92f90((int)player);
+        FUN_00e26e90(animation);
+        ((BlendOutFn)FUN_00e35de0)(animation + 0xF4, animation + 0x98, motion, 0.0f);
+        motion = layerMotion2();
+        animation = FUN_00a92f90((int)player);
+        FUN_00e26e90(animation);
+        ((BlendOutFn)FUN_00e35de0)(animation + 0xF4, animation + 0x98, motion, 10.0f);
+    }
+    layerMotion0() = 0xFFFFFFFF;
+    layerMotion1() = 0xFFFFFFFF;
+    layerMotion2() = 0xFFFFFFFF;
+    return 1;
 }
 
 // 00BB5FA0  FUN_00bb5fa0  size=264  [callgraph]
-void __thiscall FUN_00bb5fa0(int param_1,undefined4 *param_2,float param_3,float param_4)
-
-{
-  int *piVar1;
-  float fVar2;
-  uint uVar3;
-  int iVar4;
-  undefined *puVar5;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar1;
-  }
-  fVar2 = SQRT(param_4 * 0.001 * param_4 * 0.001 + param_3 * 0.001 * param_3 * 0.001);
-  if (0.1 <= fVar2) {
-    fVar2 = (fVar2 + 1.0) * 0.5;
-    *(float *)(param_1 + 0x7c) = fVar2;
-    if (1.0 < fVar2) {
-      *(undefined4 *)(param_1 + 0x7c) = 0x3f800000;
-    }
-    if (*(float *)(param_1 + 0x7c) < 0.5) {
-      *(undefined4 *)(param_1 + 0x7c) = 0x3f000000;
-    }
-  }
-  else {
-    *(undefined4 *)(param_1 + 0x7c) = 0;
-  }
-  fVar2 = *(float *)(param_1 + 0x7c) * *(float *)(param_1 + 0x7c);
-  *(float *)(param_1 + 0x80) = fVar2;
-  if (fVar2 == 0.0) {
-    *(undefined4 *)(param_1 + 0x80) = 0x3ecccccd;
-  }
-  if (*(int *)(uVar3 + 0x40c8) == 0x13) {
-    *(undefined4 *)(param_1 + 0x80) = 0x3e4ccccd;
-  }
-  *(float *)(param_1 + 0x78) =
-       (*(float *)(param_1 + 0x7c) - *(float *)(param_1 + 0x78)) *
-       *(float *)(param_1 + 0x80) * *(float *)(param_1 + 0x80) + *(float *)(param_1 + 0x78);
-  return;
+// __thiscall on the state (self): updates blendTarget / blendRate from the stick input
+// (stickX, stickY in -1000..1000) and moves blend toward blendTarget.
+void FUN_00bb5fa0(int self, undefined4 *context, float stickX, float stickY)
+{
+    using namespace ZangekiHoldStatePl0010_p1;
+
+    ZangekiHoldStatePl0010 *state = (ZangekiHoldStatePl0010 *)self;
+    Pl0000 *player = asPl0000(fld<void *>(asContext(context), 0xC));  /* StateMachineContextPl0010+0xC: owner */
+
+    // kept in x87 precision (not rounded to float)
+    double x = stickX * (double)0.001f;
+    double y = (double)0.001f * stickY;
+    double magnitude = sqrt(x * x + y * y);
+    if (0.1f <= magnitude) {
+        double target = (magnitude + 1.0) * 0.5f;
+        state->blendTarget() = (float)target;
+        if (1.0 < target) {
+            state->blendTarget() = 1.0f;
+        }
+        if (state->blendTarget() < 0.5f) {
+            state->blendTarget() = 0.5f;
+        }
+    }
+    else {
+        state->blendTarget() = 0.0f;
+    }
+    float rate = state->blendTarget() * state->blendTarget();
+    state->blendRate() = rate;
+    if (rate == 0.0f) {
+        state->blendRate() = 0.4f;
+    }
+    if (fld<int>(player, 0x40C8) == 0x13) {  /* Pl0000+0x40C8: mode */
+        state->blendRate() = 0.2f;
+    }
+    state->blend() = (state->blendTarget() - state->blend()) * (state->blendRate() * state->blendRate()) +
+                     state->blend();
 }
 
 // 00BE2410  ZangekiHoldStatePl0010::vf08  size=326  [class]
-undefined4 __thiscall ZangekiHoldStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  float10 fVar3;
-  float local_20;
-  float local_1c;
-  undefined4 local_14;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x30) = 0xeb;
-  *(undefined4 *)(param_1 + 0x34) = 0x143;
-  *(undefined4 *)(param_1 + 0x38) = 0xef;
-  uVar2 = FUN_00bbc680(param_2);
-  *(undefined4 *)(param_1 + 0x3c) = uVar2;
-  *(undefined4 *)(param_1 + 0x40) = 3;
-  *(undefined4 *)(param_1 + 0x44) = 1;
-  *(undefined4 *)(param_1 + 0x60) = 0;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(undefined4 *)(param_1 + 0x68) = 0;
-  *(undefined4 *)(param_1 + 0x6c) = 0x3f800000;
-  *(undefined4 *)(param_1 + 0x4c) = 0;
-  *(undefined4 *)(param_1 + 0x50) = 0;
-  *(undefined4 *)(param_1 + 0x48) = 0;
-  FUN_00bbc9f0(&local_20,param_2);
-  fVar3 = (float10)fpatan(-(float10)local_20,(float10)1 - (float10)local_1c);
-  *(float *)(param_1 + 0x48) = (float)fVar3;
-  *(undefined4 *)(param_1 + 0x60) = 0;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(undefined4 *)(param_1 + 0x68) = 0;
-  *(float *)(param_1 + 0x6c) = (float)(float10)1;
-  *(float *)(param_1 + 0x60) = local_20;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(float *)(param_1 + 0x68) = local_1c;
-  *(undefined4 *)(param_1 + 0x6c) = local_14;
-  FUN_00bd6680(param_2,*(undefined4 *)(param_1 + 0x30),*(undefined4 *)(param_1 + 0x34),
-               *(undefined4 *)(param_1 + 0x3c),*(undefined4 *)(param_1 + 0x40));
-  iVar1 = *(int *)(param_1 + 0x2c);
-  *(undefined4 *)(param_1 + 0x70) = 0x3f000000;
-  *(undefined4 *)(param_1 + 0x74) = 0x3f4ccccd;
-  *(undefined4 *)(param_1 + 0x78) = 0;
-  *(undefined4 *)(param_1 + 0x7c) = 0;
-  *(undefined4 *)(param_1 + 0x80) = 0;
-  *(undefined4 *)(param_1 + 0x8c) = 0x41a00000;
-  *(undefined4 *)(param_1 + 0x90) = 0x40a00000;
-  *(undefined4 *)(param_1 + 0x88) = 0;
-  *(undefined4 *)(param_1 + 0x84) = 0;
-  if (((iVar1 != 0x31) && (iVar1 != 0x45)) && (iVar1 != 0x46)) {
-    return 1;
-  }
-  *(undefined4 *)(param_1 + 0x84) = 0x40a00000;
-  return 1;
+// Enter: sets the motions, seeds stickDir / yaw48 from the current stick and resets the blend.
+bool ZangekiHoldStatePl0010::vf08(undefined4 contextArg)
+{
+    using namespace ZangekiHoldStatePl0010_p1;
+
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    undefined4 *context = (undefined4 *)contextArg;
+    motionA() = 0xEB;
+    motionB() = 0x143;
+    motionC() = 0xEF;
+    layerMotion0() = FUN_00bbc680(context);
+    layerMotion1() = 3;
+    layerMotion2() = 1;
+    stickDir()[0] = 0.0f;
+    stickDir()[1] = 0.0f;
+    stickDir()[2] = 0.0f;
+    stickDir()[3] = 1.0f;
+    holdFrames() = 0;
+    holdFramesMax() = 0;
+    yaw48() = 0.0f;
+
+    float stick[4];
+    FUN_00bbc9f0(stick, context);
+    yaw48() = (float)atan2(-(double)stick[0], 1.0 - stick[1]);
+    stickDir()[0] = 0.0f;
+    stickDir()[1] = 0.0f;
+    stickDir()[2] = 0.0f;
+    stickDir()[3] = 1.0f;
+    stickDir()[0] = stick[0];
+    stickDir()[1] = 0.0f;
+    stickDir()[2] = stick[1];
+    stickDir()[3] = stick[3];
+    cdeclcall<void>(kFUN_00bd6680, context, motionA(), motionB(), layerMotion0(), layerMotion1());
+
+    int kind = *(int *)((char *)this + 0x2C);  /* StateMachineNode+0x2C: ? */
+    param70() = 0.5f;
+    param74() = 0.8f;
+    blend() = 0.0f;
+    blendTarget() = 0.0f;
+    blendRate() = 0.0f;
+    rate8C() = 20.0f;
+    param90() = 5.0f;
+    timerFired88() = 0.0f;
+    timer84() = 0.0f;
+    if (kind != 0x31 && kind != 0x45 && kind != 0x46) {
+        return true;
+    }
+    timer84() = 5.0f;
+    return true;
 }
 
 // 00BE2560  ZangekiHoldStatePl0010::qteSafeCheck  size=3378  [class]
-/* WARNING: Type propagation algorithm not settling */
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void __thiscall ZangekiHoldStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  float fVar2;
-  undefined4 uVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  bool bVar9;
-  uint uVar10;
-  int iVar11;
-  uint uVar12;
-  float unaff_EDI;
-  float10 fVar13;
-  float10 fVar14;
-  float10 fVar15;
-  float10 fVar16;
-  float *pfVar17;
-  float *pfVar18;
-  undefined *puVar19;
-  undefined4 *puVar20;
-  float local_140;
-  undefined1 auStack_130 [8];
-  undefined4 uStack_128;
-  float local_124;
-  float local_120;
-  int *local_11c;
-  float local_118;
-  float local_114;
-  undefined4 local_110;
-  undefined4 uStack_10c;
-  undefined4 uStack_108;
-  undefined4 uStack_104;
-  undefined4 uStack_100;
-  undefined4 uStack_fc;
-  undefined4 uStack_f8;
-  undefined4 uStack_f4;
-  undefined4 uStack_f0;
-  undefined4 uStack_ec;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  undefined1 auStack_dc [12];
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float fStack_c4;
-  float local_c0 [15];
-  float fStack_84;
-  float afStack_80 [2];
-  undefined1 auStack_78 [88];
-  undefined1 local_20 [28];
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar12 = 0;
-  }
-  else {
-    puVar19 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar11 = FUN_00dd6d80(puVar19);
-    uVar12 = -(uint)(iVar11 != 0) & (uint)param_2;
-  }
-  local_11c = *(int **)(uVar12 + 0xc);
-  if (local_11c == (int *)0x0) {
-    local_11c = (int *)0x0;
-  }
-  else {
-    puVar19 = &DAT_01be9db8;
-    (**(code **)(*local_11c + 4))(&DAT_01be9db8);
-    iVar11 = FUN_00dd6d80(puVar19);
-    local_11c = (int *)(-(uint)(iVar11 != 0) & (uint)local_11c);
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar10 = 0;
-  }
-  else {
-    puVar19 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar11 = FUN_00dd6d80(puVar19);
-    uVar10 = -(uint)(iVar11 != 0) & (uint)param_2;
-  }
-  if (*(int *)(uVar10 + 0x56c) != 0) {
-    FUN_00d82510(0x35,100);
-  }
-  local_118 = (float)FUN_00a92f90();
-  iVar11 = FUN_00e26e90();
-  if (iVar11 == 0) {
-    fVar13 = (float10)1;
-  }
-  else {
-    fVar13 = (float10)FUN_00e36840(3);
-  }
-  fVar13 = (float10)*(float *)(param_1 + 0x84) - fVar13;
-  *(float *)(param_1 + 0x84) = (float)fVar13;
-  if (((float10)0 == (float10)*(float *)(param_1 + 0x88)) && (fVar13 < (float10)0)) {
-    FUN_00e25450(*(float *)(param_1 + 0x8c) * 0.016666668);
-    *(undefined4 *)(param_1 + 0x88) = 0x3f800000;
-    *(undefined4 *)(param_1 + 0x84) = 0;
-  }
-  FUN_00bbc9f0(&local_118,param_2);
-  local_120 = local_118;
-  local_124 = local_114;
-  if (*(int *)(uVar12 + 0x330) == 0xf) {
-    local_120 = local_118 * -1.0;
-    local_124 = local_114 * -1.0;
-  }
-  FUN_00bd61b0(param_2);
-  FUN_00bd6ca0(param_2,param_1,0x32);
-  FUN_00bd6eb0(param_2,param_1,0x32,0);
-  FUN_00bbad20(param_2,param_1,0x32);
-  if (*(int *)(uVar12 + 0xf0) == 0) {
-    FUN_00bb5fa0(param_2,local_120,local_124);
-    if ((*(float *)(param_1 + 0x7c) != 0.0) || (0.01 <= *(float *)(param_1 + 0x78))) {
-      fVar13 = (float10)fpatan((float10)*(float *)(param_1 + 0x60),
-                               (float10)*(float *)(param_1 + 0x68) - (float10)1.0);
-      fVar13 = ABS((float10)180.0 - fVar13 * (float10)57.29578);
-      local_118 = (float)fVar13;
-      if (*(float *)(param_1 + 0x7c) == 0.0) {
-        local_118 = *(float *)(uVar12 + 0x3f8);
-        fVar13 = (float10)local_118;
-      }
-      FUN_00bd6860(param_2,*(undefined4 *)(param_1 + 0x3c),*(undefined4 *)(param_1 + 0x40),
-                   *(undefined4 *)(param_1 + 0x44),*(undefined4 *)(param_1 + 0x78),(float)fVar13);
-      *(float *)(param_1 + 0x60) = local_120;
-      *(undefined4 *)(param_1 + 100) = 0;
-      *(float *)(param_1 + 0x68) = local_124;
-      *(float *)(param_1 + 0x6c) = local_c0[7];
-      if (*(int *)(uVar12 + 0x3f4) != 0) {
-        iVar11 = FUN_00a81330();
-        if (((iVar11 != 0) && (iVar11 = FUN_00a7c8a0(), iVar11 != 0)) &&
-           (iVar11 = FUN_00860b50(iVar11), iVar11 != 0)) {
-          FUN_005ca1a0(*(int *)(uVar12 + 0x528) == 0);
-        }
-        fVar1 = local_118 - *(float *)(uVar12 + 0x3f8);
-        if (180.0 < fVar1) {
-          fVar1 = local_118 - (*(float *)(uVar12 + 0x3f8) + 360.0);
-        }
-        if (fVar1 < -180.0) {
-          fVar1 = local_118 - (*(float *)(uVar12 + 0x3f8) - 360.0);
-        }
-        if ((float)local_11c[0x102d] < ABS(fVar1)) {
-          fVar1 = fVar1 + *(float *)(uVar12 + 0x3f8);
-          *(float *)(uVar12 + 0x3f8) = fVar1;
-          if (360.0 < fVar1) {
-            do {
-              fVar1 = fVar1 - 360.0;
-            } while (360.0 < fVar1);
-            *(float *)(uVar12 + 0x3f8) = fVar1;
-          }
-          fVar1 = *(float *)(uVar12 + 0x3f8);
-          if (fVar1 < 0.0) {
-            do {
-              fVar1 = fVar1 + 360.0;
-            } while (fVar1 < 0.0);
-            *(float *)(uVar12 + 0x3f8) = fVar1;
-          }
-        }
-      }
-    }
-    else {
-      FUN_00d82510(0x3d,0x19);
-    }
-    goto LAB_00be2dc1;
-  }
-  bVar9 = false;
-  local_140 = local_120;
-  if (SQRT(local_124 * 0.001 * local_124 * 0.001 + local_120 * 0.001 * local_120 * 0.001) < 0.1) {
-    if (local_11c[0x1032] == 0xf) {
-      local_140 = 1000.0;
-      local_120 = 1000.0;
-    }
-    else {
-      if (local_11c[0x1032] == 0xc) {
-        if (0.0 < _DAT_01d61ab0) {
-          fVar1 = ((float)local_11c[0xd07] / _DAT_01d61ab0) * 145.0 * 0.017453292;
-          goto LAB_00be2acf;
-        }
-      }
-      else {
-        iVar11 = *(int *)(uVar12 + 0x330);
-        if (iVar11 == 3) {
-LAB_00be2878:
-          D3DXMatrixRotationZ(&local_110,0x3fc90fdb);
-        }
-        else if (iVar11 == 4) {
-          if (*(float *)(uVar12 + 0x328) <= 0.0) goto LAB_00be2aef;
-          fVar1 = *(float *)(uVar12 + 0x324) * 0.006666667;
-          D3DXMatrixRotationZ(&local_110,((1.0 - fVar1) * 45.0 - fVar1 * 45.0) * 0.017453292);
-        }
-        else {
-          if (iVar11 == 0xb) {
-LAB_00be2909:
-            fVar1 = -1.5707964;
-            goto LAB_00be2acf;
-          }
-          if (iVar11 == 0xd) {
-            D3DXMatrixRotationZ(&local_110,0xbfc90fdb);
-          }
-          else if (iVar11 == 0xe) {
-            D3DXMatrixRotationZ(&local_110,0x3f490fdb);
-          }
-          else {
-            if (iVar11 == 0x10) goto LAB_00be2909;
-            if (iVar11 == 0x11) {
-              D3DXMatrixRotationZ(&local_110,0x3f490fdb);
-            }
-            else if (iVar11 == 10) {
-              D3DXMatrixRotationZ(&local_110,0xbf490fdb);
-            }
-            else if (iVar11 == 0x14) {
-              fVar1 = 0.7853982;
-LAB_00be2acf:
-              D3DXMatrixRotationZ(&local_110,fVar1);
-            }
-            else if (iVar11 == 0x15) {
-              D3DXMatrixRotationZ(&local_110,0xbf490fdb);
-            }
-            else {
-              if (iVar11 != 0x16) {
-                if (iVar11 == 0x12) {
-                  fVar1 = 0.0;
-                }
-                else {
-                  if (iVar11 == 0x1c) goto LAB_00be2878;
-                  if (iVar11 == 0x1b) {
-                    D3DXMatrixRotationZ(&local_110,0xbfc90fdb);
-                    goto LAB_00be2aea;
-                  }
-                  local_118 = (float)FUN_00a959f0(0);
-                  fVar1 = (float)(int)local_118 * 0.017453292;
-                }
-                goto LAB_00be2acf;
-              }
-              D3DXMatrixRotationZ(&local_110,0xbf060a92);
-            }
-          }
-        }
-LAB_00be2aea:
-        D3DXVec3TransformNormal(&stack0xfffffeb8,&stack0xfffffeb8,&local_118);
-      }
-LAB_00be2aef:
-      local_140 = 0.0;
-      bVar9 = true;
-      local_120 = 0.0;
-    }
-    local_124 = -1000.0;
-  }
-  FUN_00bb5fa0(param_2,local_140,local_124);
-  fVar2 = local_124;
-  fVar1 = local_120;
-  if (!bVar9) {
-    fVar1 = *(float *)(param_1 + 0x60);
-    fVar2 = *(float *)(param_1 + 0x68);
-  }
-  fVar13 = (float10)fpatan((float10)fVar1,(float10)fVar2 - (float10)1.0);
-  fVar14 = ABS((float10)180.0 - fVar13 * (float10)57.29578);
-  fVar13 = (float10)0;
-  if (fVar13 == (float10)*(float *)(param_1 + 0x7c)) {
-    fVar14 = (float10)*(float *)(uVar12 + 0x3f8);
-  }
-  uVar3 = *(undefined4 *)(param_1 + 0x78);
-  if ((fVar13 != (float10)*(float *)(param_1 + 0x7c)) || (0.01 <= *(float *)(param_1 + 0x78))) {
-    fVar15 = fVar14 - (float10)*(float *)(uVar12 + 0x3f8);
-    fVar16 = (float10)360.0;
-    if ((float10)180.0 < fVar15) {
-      fVar15 = fVar14 - ((float10)*(float *)(uVar12 + 0x3f8) + fVar16);
-    }
-    if (fVar15 < (float10)-180.0) {
-      fVar15 = fVar14 - ((float10)*(float *)(uVar12 + 0x3f8) - fVar16);
-    }
-    fVar15 = (float10)*(float *)(param_1 + 0x80) * fVar15 * (float10)*(float *)(param_1 + 0x80) +
-             (float10)*(float *)(uVar12 + 0x3f8);
-    *(float *)(uVar12 + 0x3f8) = (float)fVar15;
-    if (fVar16 < fVar15) {
-      do {
-        fVar15 = fVar15 - fVar16;
-      } while (fVar16 < fVar15);
-      *(float *)(uVar12 + 0x3f8) = (float)fVar15;
-    }
-    fVar15 = (float10)*(float *)(uVar12 + 0x3f8);
-    if (fVar15 < fVar13) {
-      do {
-        fVar15 = fVar15 + fVar16;
-      } while (fVar15 < fVar13);
-      *(float *)(uVar12 + 0x3f8) = (float)fVar15;
-    }
-  }
-  else {
-    fVar14 = (float10)*(float *)(uVar12 + 0x3f8);
-  }
-  FUN_00bd6860(param_2,*(undefined4 *)(param_1 + 0x3c),*(undefined4 *)(param_1 + 0x40),
-               *(undefined4 *)(param_1 + 0x44),uVar3,(float)fVar14);
-  *(float *)(param_1 + 0x60) = local_120;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(float *)(param_1 + 0x68) = local_124;
-  *(float *)(param_1 + 0x6c) = local_c0[7];
-LAB_00be2dc1:
-  FUN_00bbb430(param_2,param_1,100);
-  fVar13 = (float10)fpatan((float10)local_120,(float10)local_124 - (float10)1.0);
-  local_118 = (float)ABS((float10)180.0 - fVar13 * (float10)57.29578);
-  if (*(float *)(param_1 + 0x7c) == 0.0) {
-    local_118 = *(float *)(uVar12 + 0x3f8);
-  }
-  iVar11 = FUN_00a12210(0xffffffff);
-  fVar1 = *(float *)(iVar11 + 0x10);
-  fVar2 = *(float *)(iVar11 + 0x14);
-  fVar4 = *(float *)(iVar11 + 0x18);
-  fVar5 = *(float *)(iVar11 + 0x20);
-  fVar6 = *(float *)(iVar11 + 0x24);
-  fVar7 = *(float *)(iVar11 + 0x28);
-  fVar8 = SQRT(*(float *)(iVar11 + 0x38) * *(float *)(iVar11 + 0x38) +
-               *(float *)(iVar11 + 0x34) * *(float *)(iVar11 + 0x34) +
-               *(float *)(iVar11 + 0x30) * *(float *)(iVar11 + 0x30));
-  local_124 = *(float *)(iVar11 + 0x28) / fVar8;
-  local_120 = *(float *)(iVar11 + 0x38) / fVar8;
-  fVar13 = (float10)FUN_00ddbaa0(-(*(float *)(iVar11 + 0x18) / fVar8));
-  fVar14 = (float10)fpatan((float10)local_124,(float10)local_120);
-  local_d0 = (float)fVar14;
-  local_cc = (float)fVar13;
-  fVar13 = (float10)fpatan((float10)*(float *)(iVar11 + 0x14) /
-                           (float10)SQRT(fVar5 * fVar5 + fVar6 * fVar6 + fVar7 * fVar7),
-                           (float10)*(float *)(iVar11 + 0x10) /
-                           (float10)SQRT(fVar2 * fVar2 + fVar1 * fVar1 + fVar4 * fVar4));
-  local_c8 = (float)fVar13;
-  local_c0[0] = 0.0;
-  local_c0[1] = 0.0;
-  local_c0[2] = 1.0;
-  FUN_00ddc1d0(&local_110,&local_d0,5);
-  puVar20 = &local_110;
-  pfVar18 = local_c0;
-  D3DXVec3TransformNormal(local_20,pfVar18,puVar20);
-  local_cc = 0.0;
-  local_c8 = 1.0;
-  fStack_c4 = 0.0;
-  FUN_00ddc1d0(&local_11c,auStack_dc,5);
-  pfVar17 = &local_cc;
-  D3DXVec3TransformNormal(local_c0 + 1,pfVar17,&local_11c);
-  local_c0[0xe] = local_c8 * 1.35 + (float)pfVar18;
-  fStack_84 = fStack_c4 * 1.35 + (float)puVar20;
-  afStack_80[0] = local_c0[0] * 1.35 + unaff_EDI;
-  local_c0[0xd] = 0.0;
-  local_c0[0xb] = 0.0;
-  local_c0[10] = 0.0;
-  local_c0[9] = 0.0;
-  local_c0[8] = 0.0;
-  local_c0[6] = 0.0;
-  local_c0[5] = 0.0;
-  local_c0[4] = 0.0;
-  local_c0[3] = 0.0;
-  afStack_80[1] = 1.0;
-  local_c0[0xc] = 1.0;
-  local_c0[7] = 1.0;
-  local_c0[2] = 1.0;
-  uStack_ec = 0x3f800000;
-  uStack_100 = 0x3f800000;
-  local_114 = 1.0;
-  uStack_128 = 0x3f800000;
-  uStack_f0 = 0;
-  uStack_f4 = 0;
-  uStack_f8 = 0;
-  uStack_fc = 0;
-  uStack_104 = 0;
-  uStack_108 = 0;
-  uStack_10c = 0;
-  local_110 = 0;
-  local_118 = 0.0;
-  local_11c = (int *)0x0;
-  local_120 = 0.0;
-  local_124 = 0.0;
-  if (fStack_e0 != 0.0) {
-    D3DXMatrixRotationZ(auStack_78,fStack_e0);
-    D3DXMatrixMultiply(auStack_130,afStack_80,auStack_130);
-  }
-  if (fStack_e4 != 0.0) {
-    D3DXMatrixRotationY(auStack_78,fStack_e4);
-    D3DXMatrixMultiply(auStack_130,afStack_80,auStack_130);
-  }
-  if (fStack_e8 != 0.0) {
-    D3DXMatrixRotationX(auStack_78,fStack_e8);
-    D3DXMatrixMultiply(auStack_130,afStack_80,auStack_130);
-  }
-  D3DXMatrixMultiply(local_c0 + 2,&uStack_128,local_c0 + 2);
-  D3DXMatrixRotationX(&fStack_84,*(undefined4 *)(uVar12 + 0x374));
-  D3DXMatrixMultiply(&local_cc,local_c0 + 0xd,&local_cc);
-  fVar13 = (float10)FUN_00ddba30((*(float *)(uVar12 + 0x3f8) + 90.0) * 0.017453292);
-  D3DXMatrixRotationZ(local_c0 + 10,(float)fVar13);
-  D3DXMatrixMultiply(&fStack_e0,local_c0 + 8,&fStack_e0);
-  FID_conflict__memcpy(&DAT_01d618e0,&uStack_ec,0x40);
-  _DAT_01d61920 = 0x41200000;
-  if (0.1 < *(float *)(param_1 + 0x78)) {
-    *(int *)(param_1 + 0x4c) = *(int *)(param_1 + 0x4c) + 1;
-    if (*(uint *)(param_1 + 0x50) < *(uint *)(param_1 + 0x4c)) {
-      *(uint *)(param_1 + 0x4c) = *(uint *)(param_1 + 0x50);
-      *(undefined4 *)(uVar12 + 0x3f4) = 1;
-      *(undefined4 *)(uVar12 + 0x564) = 0;
-      *(undefined4 *)(uVar12 + 0x570) = 0;
-    }
-  }
-  *(float **)(param_1 + 0x48) = pfVar17;
-  *(undefined4 *)(uVar12 + 0x400) = *(undefined4 *)(uVar12 + 0x3f8);
-  iVar11 = *(int *)(param_1 + 0x24);
-  if (((iVar11 == 0x31) || (iVar11 == 0x45)) || (iVar11 == 0x46)) {
-    FUN_00b8c400();
-  }
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Per-frame update: steers the heading (context +0x3F8) with the stick, then builds the
+// camera matrix DAT_01d618e0 from the player's root parts matrix.
+// Rebuilt from the machine code: the Ghidra output lost the rotated direction of the
+// "no stick input" case (D3DXVec3TransformNormal on a local vector) and the value stored to +0x48.
+void ZangekiHoldStatePl0010::qteSafeCheck(undefined4 *context)
+{
+    using namespace ZangekiHoldStatePl0010_p1;
 
+    // Local vectors/matrices. yAxis[3] is never written (D3DXVec3TransformNormal only writes
+    // x, y, z), yet it is read into stickDir()[3] -- uninitialised in the original too.
+    float yAxis[4];
+    float zAxis[4];
+    float axis[4];
+    float angles[4];  // angles[3] is never written
+    float rotation[16];
+    float basis[16];
+    float camera[16];
+    float temp[16];
+
+    StateMachineContextPl0010 *ctx = asContext(context);
+    Pl0000 *player = asPl0000(fld<void *>(ctx, 0xC));  /* StateMachineContextPl0010+0xC: owner */
+    if (fld<int>(asContext(context), 0x56C) != 0) {  /* StateMachineContextPl0010+0x56C: ? */
+        thiscall<void>(FUN_00d82510, this, 0x35, 100);  // request state 0x35, priority 100
+    }
+
+    // count timer84 down by the animation frame step; fire FUN_00e25450 once when it expires
+    int animation = FUN_00a92f90((int)player);
+    double step;
+    if (fastcall<int>(FUN_00e26e90, animation) == 0) {
+        step = 1.0;
+    }
+    else {
+        step = thiscall<double>(FUN_00e36840, (void *)(animation + 0xF4), 3);
+    }
+    double remaining = timer84() - step;
+    timer84() = (float)remaining;
+    if (timerFired88() == 0.0f && remaining < 0.0) {
+        thiscall<void>(FUN_00e25450, (void *)(animation + 0x3BF0), rate8C() * 0.016666668f);
+        timerFired88() = 1.0f;
+        timer84() = 0.0f;
+    }
+
+    float stick[4];
+    FUN_00bbc9f0(stick, context);
+    float stickX = stick[0];
+    float stickY = stick[1];
+    if (fld<int>(ctx, 0x330) == 0xF) {  /* StateMachineContextPl0010+0x330: ? */
+        stickX = stick[0] * -1.0f;
+        stickY = stick[1] * -1.0f;
+    }
+    FUN_00bd61b0(context);
+    FUN_00bd6ca0(context, (undefined4)this, 0x32);
+    cdeclcall<void>(FUN_00bd6eb0, context, this, 0x32, 0);
+    cdeclcall<void>(FUN_00bbad20, context, this, 0x32);
+
+    float &heading = fld<float>(ctx, 0x3F8);  /* StateMachineContextPl0010+0x3F8: heading (degrees) */
+
+    if (fld<int>(ctx, 0xF0) == 0) {  /* StateMachineContextPl0010+0xF0: ? */
+        FUN_00bb5fa0((int)this, context, stickX, stickY);
+        if (blendTarget() != 0.0f || 0.01f <= blend()) {
+            float yaw = (float)yawDegrees(stickDir()[0], stickDir()[2]);
+            if (blendTarget() == 0.0f) {
+                yaw = heading;
+            }
+            cdeclcall<void>(kFUN_00bd6860, context, layerMotion0(), layerMotion1(), layerMotion2(), blend(), yaw);
+            stickDir()[0] = stickX;
+            stickDir()[1] = 0.0f;
+            stickDir()[2] = stickY;
+            stickDir()[3] = yAxis[3];
+            if (fld<int>(ctx, 0x3F4) != 0) {  /* StateMachineContextPl0010+0x3F4: ? */
+                int target = FUN_00a81330((uint *)((char *)ctx + 0x4BC));  /* StateMachineContextPl0010+0x4BC: handle */
+                if (target != 0 && (target = FUN_00a7c8a0(target)) != 0 &&
+                    (target = (int)FUN_00860b50((int *)target)) != 0) {
+                    thiscall<void>(FUN_005ca1a0, (void *)target,
+                                   (int)(fld<int>(ctx, 0x528) == 0));  /* StateMachineContextPl0010+0x528: ? */
+                }
+                double diff = yaw - heading;
+                if (180.0f < diff) {
+                    diff = yaw - (heading + 360.0);
+                }
+                if (diff < -180.0f) {
+                    diff = yaw - (heading - 360.0);
+                }
+                if (fld<float>(player, 0x40B4) < fabs(diff)) {  /* Pl0000+0x40B4: turn threshold */
+                    double turned = diff + heading;
+                    heading = (float)turned;
+                    if (360.0 < turned) {
+                        do {
+                            turned = turned - 360.0;
+                        } while (360.0 < turned);
+                        heading = (float)turned;
+                    }
+                    double wrapped = heading;
+                    if (wrapped < 0.0) {
+                        do {
+                            wrapped = wrapped + 360.0;
+                        } while (wrapped < 0.0);
+                        heading = (float)wrapped;
+                    }
+                }
+            }
+        }
+        else {
+            thiscall<void>(FUN_00d82510, this, 0x3D, 0x19);  // request state 0x3D, priority 0x19
+        }
+    }
+    else {
+        bool snapped = false;
+        double x = stickX * (double)0.001f;  // x87 precision, not rounded to float
+        double y = stickY * (double)0.001f;
+        if (sqrt(x * x + y * y) < 0.1f) {
+            // no stick input: use a fixed direction for the current mode
+            if (fld<int>(player, 0x40C8) == 0xF) {  /* Pl0000+0x40C8: mode */
+                stickY = -1000.0f;
+                stickX = 1000.0f;
+            }
+            else {
+                float dir[4];
+                bool rotate = true;
+                float angle = 0.0f;
+                if (fld<int>(player, 0x40C8) == 0xC) {
+                    dir[0] = 0.0f;
+                    dir[1] = -1000.0f;
+                    dir[2] = 0.0f;
+                    if (0.0f < DAT_01d61ab0) {
+                        angle = fld<float>(player, 0x341C) / DAT_01d61ab0 * 145.0f * kDegToRad;  /* Pl0000+0x341C: slowTimer341C */
+                    }
+                    else {
+                        rotate = false;
+                    }
+                }
+                else {
+                    int mode = fld<int>(ctx, 0x330);  /* StateMachineContextPl0010+0x330: ? */
+                    dir[0] = 0.0f;
+                    dir[1] = -1000.0f;
+                    dir[2] = 0.0f;
+                    switch (mode) {
+                    case 3:
+                    case 0x1C:
+                        angle = 1.5707964f;
+                        break;
+                    case 4:
+                        if (0.0f < fld<float>(ctx, 0x328)) {  /* StateMachineContextPl0010+0x328: ? */
+                            float f = fld<float>(ctx, 0x324) * 0.006666667f;  /* StateMachineContextPl0010+0x324: ? */
+                            angle = ((1.0f - f) * 45.0f - f * 45.0f) * kDegToRad;
+                        }
+                        else {
+                            rotate = false;
+                        }
+                        break;
+                    case 0xB:
+                    case 0xD:
+                    case 0x10:
+                    case 0x1B:
+                        angle = -1.5707964f;
+                        break;
+                    case 0xE:
+                    case 0x11:
+                    case 0x14:
+                        angle = 0.7853982f;
+                        break;
+                    case 0xA:
+                    case 0x15:
+                        angle = -0.7853982f;
+                        break;
+                    case 0x16:
+                        angle = -0.5235988f;
+                        break;
+                    case 0x12:
+                        angle = 0.0f;
+                        break;
+                    default:
+                        angle = (float)thiscall<int>(FUN_00a959f0, player, 0) * kDegToRad;
+                        break;
+                    }
+                }
+                if (rotate) {
+                    D3DXMatrixRotationZ(rotation, angle);
+                    D3DXVec3TransformNormal(dir, dir, rotation);
+                }
+                stickY = dir[1];
+                stickX = dir[0];
+                snapped = true;
+            }
+        }
+        FUN_00bb5fa0((int)this, context, stickX, stickY);
+
+        float dirX;
+        float dirZ;
+        if (snapped) {
+            dirX = stickX;
+            dirZ = stickY;
+        }
+        else {
+            dirX = stickDir()[0];
+            dirZ = stickDir()[2];
+        }
+        double yaw = yawDegrees(dirX, dirZ);
+        if (blendTarget() == 0.0f) {
+            yaw = heading;
+        }
+        float blendNow = blend();
+        if (blendTarget() != 0.0f || 0.01f <= blend()) {
+            double diff = yaw - heading;
+            if (180.0f < diff) {
+                diff = yaw - (heading + 360.0);
+            }
+            if (diff < -180.0f) {
+                diff = yaw - (heading - 360.0);
+            }
+            double turned = diff * blendRate() * blendRate() + heading;
+            heading = (float)turned;
+            if (360.0 < turned) {
+                do {
+                    turned = turned - 360.0;
+                } while (360.0 < turned);
+                heading = (float)turned;
+            }
+            double wrapped = heading;
+            if (wrapped < 0.0) {
+                do {
+                    wrapped = wrapped + 360.0;
+                } while (wrapped < 0.0);
+                heading = (float)wrapped;
+            }
+        }
+        else {
+            yaw = heading;
+        }
+        cdeclcall<void>(kFUN_00bd6860, context, layerMotion0(), layerMotion1(), layerMotion2(), blendNow,
+                        (float)yaw);
+        stickDir()[0] = stickX;
+        stickDir()[1] = 0.0f;
+        stickDir()[2] = stickY;
+        stickDir()[3] = yAxis[3];
+    }
+
+    FUN_00bbb430(context, (undefined4)this, 100);
+    float yawOut = (float)yawDegrees(stickX, stickY);
+    if (blendTarget() == 0.0f) {
+        yawOut = heading;
+    }
+
+    // Euler angles and position of the player's root parts matrix (float[16] at +0x10)
+    int parts = thiscall<int>(FUN_00a12210, player, -1);  // __thiscall, ECX = player
+    const float *m = (const float *)(parts + 0x10);
+    float len0 = (float)sqrt(m[0] * m[0] + m[1] * m[1] + m[2] * m[2]);
+    float len1 = (float)sqrt(m[4] * m[4] + m[5] * m[5] + m[6] * m[6]);
+    double len2 = sqrt(m[8] * m[8] + m[9] * m[9] + m[10] * m[10]);
+    float sinA = (float)(m[6] / len2);
+    float cosA = (float)(m[10] / len2);
+    double angle1 = FUN_00ddbaa0((float)-(m[2] / len2));
+    angles[0] = (float)atan2(sinA, cosA);
+    angles[1] = (float)angle1;
+    angles[2] = (float)atan2(m[1] / len1, m[0] / len0);
+    float origin[3];
+    origin[0] = m[12];
+    origin[1] = m[13];
+    origin[2] = m[14];
+
+    // rotated Z axis (the result is not used) and Y axis
+    axis[0] = 0.0f;
+    axis[1] = 0.0f;
+    axis[2] = 1.0f;
+    FUN_00ddc1d0((undefined4 *)rotation, angles, 5);
+    D3DXVec3TransformNormal(zAxis, axis, rotation);
+    axis[0] = 0.0f;
+    axis[1] = 1.0f;
+    axis[2] = 0.0f;
+    FUN_00ddc1d0((undefined4 *)rotation, angles, 5);
+    D3DXVec3TransformNormal(yAxis, axis, rotation);
+
+    // camera = identity with the eye 1.35 above the root along its Y axis
+    for (int i = 0; i < 16; i++) {
+        basis[i] = 0.0f;
+        camera[i] = 0.0f;
+    }
+    basis[0] = 1.0f;
+    basis[5] = 1.0f;
+    basis[10] = 1.0f;
+    basis[15] = 1.0f;
+    camera[0] = 1.0f;
+    camera[5] = 1.0f;
+    camera[10] = 1.0f;
+    camera[15] = 1.0f;
+    camera[12] = yAxis[0] * 1.35f + origin[0];
+    camera[13] = yAxis[1] * 1.35f + origin[1];
+    camera[14] = yAxis[2] * 1.35f + origin[2];
+
+    if (angles[2] != 0.0f) {
+        D3DXMatrixRotationZ(temp, angles[2]);
+        D3DXMatrixMultiply(basis, temp, basis);
+    }
+    if (angles[1] != 0.0f) {
+        D3DXMatrixRotationY(temp, angles[1]);
+        D3DXMatrixMultiply(basis, temp, basis);
+    }
+    if (angles[0] != 0.0f) {
+        D3DXMatrixRotationX(temp, angles[0]);
+        D3DXMatrixMultiply(basis, temp, basis);
+    }
+    D3DXMatrixMultiply(camera, basis, camera);
+    D3DXMatrixRotationX(temp, fld<float>(ctx, 0x374));  /* StateMachineContextPl0010+0x374: pitch */
+    D3DXMatrixMultiply(camera, temp, camera);
+    D3DXMatrixRotationZ(temp, cdeclcall<float>(FUN_00ddba30, (heading + 90.0f) * kDegToRad));
+    D3DXMatrixMultiply(camera, temp, camera);
+    FID_conflict__memcpy(DAT_01d618e0, camera, 0x40);
+    DAT_01d61920 = 10.0f;
+
+    if (0.1f < blend()) {
+        holdFrames() = holdFrames() + 1;
+        if (holdFramesMax() < holdFrames()) {
+            holdFrames() = holdFramesMax();
+            fld<int>(ctx, 0x3F4) = 1;  /* StateMachineContextPl0010+0x3F4: ? */
+            fld<int>(ctx, 0x564) = 0;  /* StateMachineContextPl0010+0x564: ? */
+            fld<int>(ctx, 0x570) = 0;  /* StateMachineContextPl0010+0x570: ? */
+        }
+    }
+    yaw48() = yawOut;
+    fld<float>(ctx, 0x400) = heading;  /* StateMachineContextPl0010+0x400: previous heading */
+    int kind = *(int *)((char *)this + 0x24);  /* StateMachineNode+0x24: ? */
+    if (kind == 0x31 || kind == 0x45 || kind == 0x46) {
+        FUN_00b8c400((int)player);
+    }
+    StateMachineNode::qteSafeCheck(context);
+}

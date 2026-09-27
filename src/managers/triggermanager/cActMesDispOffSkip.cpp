@@ -1,51 +1,41 @@
-// src/managers/triggermanager/cActMesDispOffSkip.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C8DB30..00C93DC0, 6 functions
-
+// src/managers/triggermanager/cActMesDispOffSkip.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActMesDispOffSkip.h"
+
+extern undefined DAT_01dbe214;                 // cActMesDispOffSkip static descriptor returned by vf00
 
 // 00C8DB30  Trigger::cActMesDispOffSkip::vf08  size=1  [class]
-void Trigger::cActMesDispOffSkip::vf08(void)
-
-{
-  return;
+void Trigger::cActMesDispOffSkip::vf08()
+{
 }
 
 // 00C8DB40  Trigger::cActMesDispOffSkip::vf0C  size=1  [class]
-void Trigger::cActMesDispOffSkip::vf0C(void)
-
-{
-  return;
+void Trigger::cActMesDispOffSkip::vf0C()
+{
 }
 
 // 00C8DB50  Trigger::cActMesDispOffSkip::vf10  size=1  [class]
-void Trigger::cActMesDispOffSkip::vf10(void)
-
-{
-  return;
+void Trigger::cActMesDispOffSkip::vf10()
+{
 }
 
 // 00C8DB60  Trigger::cActMesDispOffSkip::vf14  size=1  [class]
-void Trigger::cActMesDispOffSkip::vf14(void)
-
-{
-  return;
+void Trigger::cActMesDispOffSkip::vf14()
+{
 }
 
 // 00C93DB0  Trigger::cActMesDispOffSkip::vf00  size=6  [class]
-undefined * Trigger::cActMesDispOffSkip::vf00(void)
-
-{
-  return &DAT_01dbe214;
+void *Trigger::cActMesDispOffSkip::vf00()
+{
+    return &DAT_01dbe214;
 }
 
 // 00C93DC0  Trigger::cActMesDispOffSkip::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActMesDispOffSkip::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActMesDispOffSkip *Trigger::cActMesDispOffSkip::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

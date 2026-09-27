@@ -1,22 +1,42 @@
-// src/managers/triggermanager/actions/TrgActBattleAreaOff.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C80C80..00C80C80, 1 functions
-
+// src/managers/triggermanager/actions/TrgActBattleAreaOff.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C80C80  Trigger::Act::BATTLE_AREA_OFF  size=54  [class]
-undefined4 __fastcall Trigger::Act::BATTLE_AREA_OFF(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016ab9d8);
-    return 0;
-  }
-  piVar2 = (int *)FUN_00401110();
-  (**(code **)(*piVar2 + 8))(*(undefined4 *)(iVar1 + 8));
-  return 1;
-}
+extern undefined DAT_016ab9d8;  // error message format string
 
+// the trigger action/condition handlers are free functions in these namespaces
+namespace Trigger { namespace Act {
+    int __fastcall BATTLE_AREA_OFF(int action);
+} }
+
+namespace TrgActBattleAreaOff_p1 {
+
+// field at a byte offset of a record whose layout is not modelled
+template <class T> inline T &at(int base, int offset) { return *(T *)(base + offset); }
+
+// address stored in the vftable slot at byte offset `offset` of `object`
+inline int vslot(int *object, int offset) { return *(int *)(*object + offset); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (*)(const void *, ...))FUN_00dd5650)(format); }
+template <class A> inline void reportError(const void *format, A a)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a); }
+template <class A, class B> inline void reportError(const void *format, A a, B b)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b); }
+template <class A, class B, class C> inline void reportError(const void *format, A a, B b, C c)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b, c); }
+
+}  // namespace TrgActBattleAreaOff_p1
+
+// 00C80C80  Trigger::Act::BATTLE_AREA_OFF  size=54  [class]
+int __fastcall Trigger::Act::BATTLE_AREA_OFF(int action)
+{
+    using namespace TrgActBattleAreaOff_p1;
+    int params = at<int>(action, 4);
+    if (params == 0) {
+        reportError(&DAT_016ab9d8);
+        return 0;
+    }
+    int *battleRegions = (int *)FUN_00401110();
+    ((void (*)(undefined4))vslot(battleRegions, 8))(at<undefined4>(params, 8));
+    return 1;
+}

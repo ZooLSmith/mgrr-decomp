@@ -1,51 +1,41 @@
-// src/managers/triggermanager/cActReqShotMissile.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C8DF90..00C93F80, 6 functions
-
+// src/managers/triggermanager/cActReqShotMissile.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActReqShotMissile.h"
+
+extern undefined DAT_01dbe230;  // cActReqShotMissile static descriptor returned by vf00
 
 // 00C8DF90  Trigger::cActReqShotMissile::vf08  size=1  [class]
-void Trigger::cActReqShotMissile::vf08(void)
-
-{
-  return;
+void Trigger::cActReqShotMissile::vf08()
+{
 }
 
 // 00C8DFA0  Trigger::cActReqShotMissile::vf0C  size=1  [class]
-void Trigger::cActReqShotMissile::vf0C(void)
-
-{
-  return;
+void Trigger::cActReqShotMissile::vf0C()
+{
 }
 
 // 00C8DFB0  Trigger::cActReqShotMissile::vf10  size=1  [class]
-void Trigger::cActReqShotMissile::vf10(void)
-
-{
-  return;
+void Trigger::cActReqShotMissile::vf10()
+{
 }
 
 // 00C8DFC0  Trigger::cActReqShotMissile::vf14  size=1  [class]
-void Trigger::cActReqShotMissile::vf14(void)
-
-{
-  return;
+void Trigger::cActReqShotMissile::vf14()
+{
 }
 
 // 00C93F70  Trigger::cActReqShotMissile::vf00  size=6  [class]
-undefined * Trigger::cActReqShotMissile::vf00(void)
-
-{
-  return &DAT_01dbe230;
+void *Trigger::cActReqShotMissile::vf00()
+{
+    return &DAT_01dbe230;
 }
 
 // 00C93F80  Trigger::cActReqShotMissile::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActReqShotMissile::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActReqShotMissile *Trigger::cActReqShotMissile::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

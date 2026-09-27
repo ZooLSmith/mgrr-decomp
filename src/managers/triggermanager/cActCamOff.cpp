@@ -1,61 +1,52 @@
-// src/managers/triggermanager/cActCamOff.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7EB10..00C917C0, 7 functions
-
+// src/managers/triggermanager/cActCamOff.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActCamOff.h"
+
+extern undefined DAT_01dbe04c;           // cActCamOff static descriptor returned by vf00
+extern undefined4 DAT_01dbd8a8;          // camera object (ECX of FUN_00ac9fe0; also tested by Trigger::Act::CAM)
 
 // 00C7EB10  Trigger::cActCamOff::vf18  size=23  [class]
-undefined4 Trigger::cActCamOff::vf18(void)
-
-{
-  if (DAT_01dbd8a8 != 0) {
-    FUN_00ac9fe0();
-  }
-  return 1;
+int Trigger::cActCamOff::vf18()
+{
+    // (machine code: `ret 4` -- one stack argument, unused; cAction.h declares vf18() without it)
+    if (DAT_01dbd8a8 != 0) {
+        FUN_00ac9fe0((int)DAT_01dbd8a8);  // __fastcall, ECX = DAT_01dbd8a8 (from the machine code)
+    }
+    return 1;
 }
 
 // 00C893D0  Trigger::cActCamOff::vf08  size=1  [class]
-void Trigger::cActCamOff::vf08(void)
-
-{
-  return;
+void Trigger::cActCamOff::vf08()
+{
 }
 
 // 00C893E0  Trigger::cActCamOff::vf0C  size=1  [class]
-void Trigger::cActCamOff::vf0C(void)
-
-{
-  return;
+void Trigger::cActCamOff::vf0C()
+{
 }
 
 // 00C893F0  Trigger::cActCamOff::vf10  size=1  [class]
-void Trigger::cActCamOff::vf10(void)
-
-{
-  return;
+void Trigger::cActCamOff::vf10()
+{
 }
 
 // 00C89400  Trigger::cActCamOff::vf14  size=1  [class]
-void Trigger::cActCamOff::vf14(void)
-
-{
-  return;
+void Trigger::cActCamOff::vf14()
+{
 }
 
 // 00C917B0  Trigger::cActCamOff::vf00  size=6  [class]
-undefined * Trigger::cActCamOff::vf00(void)
-
-{
-  return &DAT_01dbe04c;
+void *Trigger::cActCamOff::vf00()
+{
+    return &DAT_01dbe04c;
 }
 
 // 00C917C0  Trigger::cActCamOff::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActCamOff::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActCamOff *Trigger::cActCamOff::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

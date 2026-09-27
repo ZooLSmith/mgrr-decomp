@@ -1,20 +1,33 @@
-// src/managers/triggermanager/actions/TrgActItemOnOff.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C81680..00C81680, 1 functions
-
+// src/managers/triggermanager/actions/TrgActItemOnOff.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C81680  Trigger::Act::ITEM_ON_OFF  size=49  [class]
-undefined4 __fastcall Trigger::Act::ITEM_ON_OFF(int param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016abfe0);
-    return 0;
-  }
-  FUN_00956870(*(undefined4 *)(iVar1 + 8),*(undefined4 *)(iVar1 + 0xc));
-  return 1;
+extern char DAT_016abfe0[];  // debug message: action has no parameter block
+
+namespace Trigger { namespace Act {
+int __fastcall ITEM_ON_OFF(int *action);
+} }
+
+namespace TrgActItemOnOff_p1 {
+
+// FUN_00dd5650 is a variadic debug print (empty in the release build).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    typedef void (__cdecl *Fn)(const char *, ...);
+    ((Fn)FUN_00dd5650)(format, args...);
 }
 
+}  // namespace TrgActItemOnOff_p1
+
+// 00C81680  Trigger::Act::ITEM_ON_OFF  size=49  [class]
+// FUN_00956870(params+0x8, params+0xC).
+int __fastcall Trigger::Act::ITEM_ON_OFF(int *action)
+{
+    using namespace TrgActItemOnOff_p1;
+    int *params = (int *)action[1];  // +0x4 parameter block
+    if (params == 0) {
+        debugPrint(DAT_016abfe0);
+        return 0;
+    }
+    FUN_00956870(params[2], params[3]);
+    return 1;
+}

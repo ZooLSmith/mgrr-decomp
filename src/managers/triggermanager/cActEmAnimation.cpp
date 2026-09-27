@@ -1,51 +1,41 @@
-// src/managers/triggermanager/cActEmAnimation.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C8BCA0..00C92EB0, 6 functions
-
+// src/managers/triggermanager/cActEmAnimation.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActEmAnimation.h"
+
+extern undefined DAT_01dbe150;           // cActEmAnimation static descriptor returned by vf00
 
 // 00C8BCA0  Trigger::cActEmAnimation::vf08  size=1  [class]
-void Trigger::cActEmAnimation::vf08(void)
-
-{
-  return;
+void Trigger::cActEmAnimation::vf08()
+{
 }
 
 // 00C8BCB0  Trigger::cActEmAnimation::vf0C  size=1  [class]
-void Trigger::cActEmAnimation::vf0C(void)
-
-{
-  return;
+void Trigger::cActEmAnimation::vf0C()
+{
 }
 
 // 00C8BCC0  Trigger::cActEmAnimation::vf10  size=1  [class]
-void Trigger::cActEmAnimation::vf10(void)
-
-{
-  return;
+void Trigger::cActEmAnimation::vf10()
+{
 }
 
 // 00C8BCD0  Trigger::cActEmAnimation::vf14  size=1  [class]
-void Trigger::cActEmAnimation::vf14(void)
-
-{
-  return;
+void Trigger::cActEmAnimation::vf14()
+{
 }
 
 // 00C92EA0  Trigger::cActEmAnimation::vf00  size=6  [class]
-undefined * Trigger::cActEmAnimation::vf00(void)
-
-{
-  return &DAT_01dbe150;
+void *Trigger::cActEmAnimation::vf00()
+{
+    return &DAT_01dbe150;
 }
 
 // 00C92EB0  Trigger::cActEmAnimation::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActEmAnimation::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActEmAnimation *Trigger::cActEmAnimation::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

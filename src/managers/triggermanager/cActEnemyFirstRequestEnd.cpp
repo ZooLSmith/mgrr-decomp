@@ -1,42 +1,54 @@
-// src/managers/triggermanager/cActEnemyFirstRequestEnd.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7FFB0..00C93400, 4 functions
-
+// src/managers/triggermanager/cActEnemyFirstRequestEnd.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActEnemyFirstRequestEnd.h"
+
+extern undefined DAT_01dbe1a0;           // cActEnemyFirstRequestEnd static descriptor returned by vf00
+extern char DAT_016aa78c[];              // "Trigger::Act::ENM: <data is NULL>" (Shift-JIS)
+extern undefined DAT_01dbe5d8;           // EnemySetReader instance (ECX of requestEnd_3)
+
+namespace cActEnemyFirstRequestEnd_p1 {
+
+// FUN_00dd5650: debug printf (functions.h declares it void(void); empty in release).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    ((void (*)(const char *, ...))FUN_00dd5650)(format, args...);
+}
+
+} // namespace cActEnemyFirstRequestEnd_p1
 
 // 00C7FFB0  Trigger::cActEnemyFirstRequestEnd::vf18  size=42  [class]
-undefined4 __fastcall Trigger::cActEnemyFirstRequestEnd::vf18(int param_1)
-
-{
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_00dd5650(&DAT_016aa78c);
-    return 0;
-  }
-  EnemySetReader::requestEnd_3();
-  return 1;
+int Trigger::cActEnemyFirstRequestEnd::vf18()
+{
+    using namespace cActEnemyFirstRequestEnd_p1;
+    // (machine code: `ret 4` -- one stack argument, unused; cAction.h declares vf18() without it)
+    if (record() == 0) {
+        debugPrint(DAT_016aa78c);
+        return 0;
+    }
+    // 00CA5BD0 EnemySetReader::requestEnd_3 (__fastcall; class not declared in the headers);
+    // raw: no argument shown; machine code: ECX = &DAT_01dbe5d8
+    ((void (__fastcall *)(void *))0x00CA5BD0)(&DAT_01dbe5d8);
+    return 1;
 }
 
 // 00C7FFE0  Trigger::cActEnemyFirstRequestEnd::vf24  size=4  [class]
-undefined4 Trigger::cActEnemyFirstRequestEnd::vf24(void)
-
-{
-  return 0xffffffff;
+int Trigger::cActEnemyFirstRequestEnd::vf24()
+{
+    return -1;
 }
 
 // 00C933F0  Trigger::cActEnemyFirstRequestEnd::vf00  size=6  [class]
-undefined * Trigger::cActEnemyFirstRequestEnd::vf00(void)
-
-{
-  return &DAT_01dbe1a0;
+void *Trigger::cActEnemyFirstRequestEnd::vf00()
+{
+    return &DAT_01dbe1a0;
 }
 
 // 00C93400  Trigger::cActEnemyFirstRequestEnd::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActEnemyFirstRequestEnd::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActEnemyFirstRequestEnd *Trigger::cActEnemyFirstRequestEnd::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

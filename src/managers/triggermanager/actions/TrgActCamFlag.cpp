@@ -1,79 +1,67 @@
-// src/managers/triggermanager/actions/TrgActCamFlag.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7FA10..00C7FA10, 1 functions
-
+// src/managers/triggermanager/actions/TrgActCamFlag.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C7FA10  Trigger::Act::CAM_FLAG  size=241  [class]
-undefined4 __fastcall Trigger::Act::CAM_FLAG(int param_1)
-
-{
-  byte bVar1;
-  byte *pbVar2;
-  int iVar3;
-  int iVar4;
-  char *pcVar5;
-  bool bVar6;
-  
-  iVar4 = *(int *)(param_1 + 4);
-  if (iVar4 == 0) {
-    FUN_00dd5650(&DAT_016ab06c);
-    return 0;
-  }
-  pcVar5 = "HANDSHAKE";
-  pbVar2 = (byte *)(iVar4 + 8);
-  do {
-    bVar1 = *pbVar2;
-    bVar6 = bVar1 < (byte)*pcVar5;
-    if (bVar1 != *pcVar5) {
-LAB_00c7fa54:
-      iVar3 = (1 - (uint)bVar6) - (uint)(bVar6 != 0);
-      goto LAB_00c7fa59;
-    }
-    if (bVar1 == 0) break;
-    bVar1 = pbVar2[1];
-    bVar6 = bVar1 < (byte)pcVar5[1];
-    if (bVar1 != pcVar5[1]) goto LAB_00c7fa54;
-    pbVar2 = pbVar2 + 2;
-    pcVar5 = pcVar5 + 2;
-  } while (bVar1 != 0);
-  iVar3 = 0;
-LAB_00c7fa59:
-  if (iVar3 == 0) {
-    if (*(int *)(iVar4 + 0x18) == 0) {
-      FUN_00da57a0();
-      FUN_00da5790();
-      return 1;
-    }
-    iVar4 = FUN_00da5770();
-    if (iVar4 == 0) {
-      FUN_00da5780(0,0x3db2b8c2);
-      return 1;
-    }
-  }
-  else {
-    pcVar5 = "ANIMOFF";
-    pbVar2 = (byte *)(iVar4 + 8);
-    do {
-      bVar1 = *pbVar2;
-      bVar6 = bVar1 < (byte)*pcVar5;
-      if (bVar1 != *pcVar5) {
-LAB_00c7fae0:
-        iVar3 = (1 - (uint)bVar6) - (uint)(bVar6 != 0);
-        goto LAB_00c7fae5;
-      }
-      if (bVar1 == 0) break;
-      bVar1 = pbVar2[1];
-      bVar6 = bVar1 < (byte)pcVar5[1];
-      if (bVar1 != pcVar5[1]) goto LAB_00c7fae0;
-      pbVar2 = pbVar2 + 2;
-      pcVar5 = pcVar5 + 2;
-    } while (bVar1 != 0);
-    iVar3 = 0;
-LAB_00c7fae5:
-    if (iVar3 == 0) {
-      FUN_00da5000(*(int *)(iVar4 + 0x18) == 0);
-    }
-  }
-  return 1;
+extern undefined DAT_016ab06c;  // error message format string
+
+// the trigger action/condition handlers are free functions in these namespaces
+namespace Trigger { namespace Act {
+    int __fastcall CAM_FLAG(int action);
+} }
+
+namespace TrgActCamFlag_p1 {
+
+// field at a byte offset of a record whose layout is not modelled
+template <class T> inline T &at(int base, int offset) { return *(T *)(base + offset); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (*)(const void *, ...))FUN_00dd5650)(format); }
+template <class A> inline void reportError(const void *format, A a)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a); }
+template <class A, class B> inline void reportError(const void *format, A a, B b)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b); }
+template <class A, class B, class C> inline void reportError(const void *format, A a, B b, C c)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b, c); }
+
+// the inlined strcmp: -1 / 0 / 1 by the first differing byte (unsigned)
+inline int compareString(const char *a, const char *b)
+{
+    for (;;) {
+        unsigned char ca = (unsigned char)*a, cb = (unsigned char)*b;
+        if (ca != cb) {
+            return ca < cb ? -1 : 1;
+        }
+        if (ca == 0) {
+            return 0;
+        }
+        ++a;
+        ++b;
+    }
 }
 
+}  // namespace TrgActCamFlag_p1
+
+// 00C7FA10  Trigger::Act::CAM_FLAG  size=241  [class]
+int __fastcall Trigger::Act::CAM_FLAG(int action)
+{
+    using namespace TrgActCamFlag_p1;
+    int params = at<int>(action, 4);
+    if (params == 0) {
+        reportError(&DAT_016ab06c);
+        return 0;
+    }
+    if (compareString((const char *)(params + 8), "HANDSHAKE") == 0) {
+        if (at<int>(params, 0x18) == 0) {
+            FUN_00da57a0();
+            ((void (*)(void))FUN_00da5790)();
+            return 1;
+        }
+        if (((int (*)(void))FUN_00da5770)() == 0) {
+            ((void (*)(int, undefined4))FUN_00da5780)(0, 0x3DB2B8C2);  // 0x3DB2B8C2 = 0.0872665f (5 degrees)
+            return 1;
+        }
+    }
+    else if (compareString((const char *)(params + 8), "ANIMOFF") == 0) {
+        ((void (*)(int))FUN_00da5000)(at<int>(params, 0x18) == 0);
+    }
+    return 1;
+}

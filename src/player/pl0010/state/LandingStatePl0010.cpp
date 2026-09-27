@@ -1,561 +1,437 @@
-// src/player/pl0010/state/LandingStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B817C0..00BDF1A0, 9 functions
-
+// src/player/pl0010/state/LandingStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "LandingStatePl0010.h"
 
+// type records returned by vf00 / cObj::vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e24[];  // LandingStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+// animation name tested with FUN_00a9f710
+extern const char DAT_016a27b0[];     // "6022"
+
+namespace LandingStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &at(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function with ECX = self (used where functions.h has the wrong prototype)
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __fastcall call returning the full EAX (functions.h types these as bool)
+template <class F> inline int fastcallInt(F fn, const void *self)
+{
+    typedef int (__fastcall *Fn)(const void *);
+    return ((Fn)fn)(self);
+}
+
+// obj when its type record (from the vftable slot at `typeSlot`) derives from `type`, else 0
+inline char *downcast(const void *obj, unsigned int typeSlot, const void *type)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, vcall<void *>(obj, typeSlot), type);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+inline char *asContext(const void *obj) { return downcast(obj, 0x0, DAT_01be9ef4); }  // StateMachineContextPl0010
+inline char *asPl0000(const void *obj)  { return downcast(obj, 0x4, DAT_01be9db8); }  // Pl0000
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline char *playerOf(const char *context)
+{
+    return asPl0000(at<void *>(context, 0xC));
+}
+
+// Pl0000+0x764: motion helper object (FUN_008e2740 / FUN_008e0b70 / FUN_008e0ba0 run on it)
+inline char *motionHelper(const char *player)
+{
+    return at<char *>(player, 0x764);
+}
+
+// Pl0000+0x40D4 -> +0x14C: stick threshold parameter (compared squared with Pl0000+0xD28)
+inline float stickThreshold(const char *player)
+{
+    return at<float>(at<char *>(player, 0x40D4), 0x14C);
+}
+
+// Pl0000+0xCF8 & Pl0000+0xE48: input flags
+inline unsigned int inputFlags(const char *player)
+{
+    return at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE48);
+}
+
+// Stick past the threshold and a move input held (the raw "threshold^2 < +0xD28 ? flags : 0").
+inline bool moveInputHeld(const char *player)
+{
+    float threshold = stickThreshold(player);
+    if (threshold * threshold < at<float>(player, 0xD28)) {
+        return (at<unsigned int>(player, 0xE48) & at<unsigned int>(player, 0xCF8)) != 0;
+    }
+    return false;
+}
+
+// Pl0000+0x4254 set and the motion time (helper +0xFC) has reached Pl0000+0x4250.
+inline bool cancelTimeReached(const char *player)
+{
+    return at<int>(player, 0x4254) != 0 &&
+           at<float>(player, 0x4250) <= at<float>(motionHelper(player), 0xFC);
+}
+
+// Searches the action list at Pl0000+0x75C (entries of 0x3C bytes, id first) for `action`.
+inline bool actionListed(const char *player, int action)
+{
+    int *header = *at<int **>(player, 0x75C);
+    int count = header[2];
+    int *entry = (int *)header[1];
+    int *end = entry + count * 0xF;
+    for (; entry != end; entry = entry + 0xF) {
+        if (*entry == action) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Pl0000+0x4180/+0x417C/+0x4184 saved into +0x418C/+0x4188/+0x4190 on entry
+inline void saveSteering(char *player)
+{
+    at<float>(player, 0x418C) = at<float>(player, 0x4180);
+    at<float>(player, 0x4188) = at<float>(player, 0x417C);
+    at<float>(player, 0x4190) = at<float>(player, 0x4184);
+}
+
+inline void restoreSteering(char *player)
+{
+    at<float>(player, 0x4180) = at<float>(player, 0x418C);
+    at<float>(player, 0x417C) = at<float>(player, 0x4188);
+    at<float>(player, 0x4184) = at<float>(player, 0x4190);
+}
+
+// Action (FUN_00a95ce0) -> landing motion overrides in SafeCheck, tested in this order.
+struct ActionMotion {
+    int action;
+    int motion;
+};
+static const ActionMotion kActionMotions[] = {
+    {0xA6, 100}, {0x33, 100}, {0x34, 100}, {199, 0x70}, {0x74, 0x70}, {0xB0, 0x6A},
+    {0xA2, 0x6C}, {0xA0, 100}, {0xA1, 100}, {0xAB, 100}, {0xAC, 100},
+};
+
+}  // namespace LandingStatePl0010_p1
+
 // 00B817C0  LandingStatePl0010::vf08  size=44  [class]
-undefined4 __thiscall LandingStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x34) = 0;
-  *(undefined4 *)(param_1 + 0x30) = 0xffffffff;
-  return 1;
+// Enter.
+bool LandingStatePl0010::vf08(undefined4 contextArg)
+{
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return 0;
+    }
+    field34() = 0;
+    motionId() = -1;
+    return 1;
 }
 
 // 00B817F0  LandingStatePl0010::vf24  size=19  [class]
-bool LandingStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool LandingStatePl0010::vf24(undefined4 contextArg)
+{
+    return StateMachineNode::vf24(contextArg) != 0;
 }
 
 // 00B81830  LandingStatePl0010::vf00  size=6  [class]
-undefined * LandingStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e24;
+undefined *LandingStatePl0010::vf00()
+{
+    return (undefined *)DAT_01be9e24;  // type record
 }
 
 // 00B91000  LandingStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall LandingStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+undefined4 *LandingStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00BABD30  LandingStatePl0010::SafeCheck  size=1204  [class]
-void __thiscall LandingStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  float fVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  uint uVar7;
-  bool bVar8;
-  undefined *puVar9;
-  undefined4 uVar10;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar3 = 0;
-    }
-    else {
-      puVar9 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar4 = FUN_00dd6d80(puVar9);
-      uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-    }
-    piVar6 = *(int **)(uVar3 + 0xc);
-    if (piVar6 == (int *)0x0) {
-      uVar7 = 0;
-    }
-    else {
-      puVar9 = &DAT_01be9db8;
-      (**(code **)(*piVar6 + 4))(&DAT_01be9db8);
-      iVar4 = FUN_00dd6d80(puVar9);
-      uVar7 = -(uint)(iVar4 != 0) & (uint)piVar6;
-    }
-    *(undefined4 *)(uVar7 + 0x507c) = 0;
-    *(undefined4 *)(uVar7 + 0x418c) = *(undefined4 *)(uVar7 + 0x4180);
-    *(undefined4 *)(uVar7 + 0x4188) = *(undefined4 *)(uVar7 + 0x417c);
-    *(undefined4 *)(uVar7 + 0x4190) = *(undefined4 *)(uVar7 + 0x4184);
-    *(undefined4 *)(uVar7 + 0x894) = 0;
-    *(undefined4 *)(param_1 + 0x30) = 0x67;
-    fVar2 = *(float *)(*(int *)(uVar7 + 0x40d4) + 0x14c);
-    if (fVar2 * fVar2 < *(float *)(uVar7 + 0xd28)) {
-      bVar8 = (*(uint *)(uVar7 + 0xe48) & *(uint *)(uVar7 + 0xcf8)) != 0;
-    }
-    else {
-      bVar8 = false;
-    }
-    if (bVar8) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    else {
-      iVar4 = FUN_00a95ce0(0x73);
-      if (iVar4 != 0) {
-        *(undefined4 *)(param_1 + 0x30) = 0x65;
-      }
-      iVar4 = FUN_00a95ce0(0x5e);
-      if (iVar4 != 0) {
-        *(undefined4 *)(param_1 + 0x30) = 0x65;
-      }
-    }
-    iVar4 = *(int *)(param_1 + 0x2c);
-    if (iVar4 == 0x14) {
-      *(undefined4 *)(param_1 + 0x30) = 0x69;
-    }
-    if (iVar4 == 0x2f) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    if (iVar4 == 0x10) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    if (*(float *)(uVar7 + 0x41e8) < -1.5) {
-      *(undefined4 *)(param_1 + 0x30) = 0x6e;
-    }
-    if (iVar4 == 0xd) {
-      *(undefined4 *)(param_1 + 0x30) = 0x6e;
-    }
-    iVar4 = FUN_00a95ce0(0xa6);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    iVar4 = FUN_00a95ce0(0x33);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    iVar4 = FUN_00a95ce0(0x34);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    iVar4 = FUN_00a95ce0(199);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 0x70;
-    }
-    iVar4 = FUN_00a95ce0(0x74);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 0x70;
-    }
-    iVar4 = FUN_00a95ce0(0xb0);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 0x6a;
-    }
-    iVar4 = FUN_00a95ce0(0xa2);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 0x6c;
-    }
-    iVar4 = FUN_00a95ce0(0xa0);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    iVar4 = FUN_00a95ce0(0xa1);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    iVar4 = FUN_00a95ce0(0xab);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    iVar4 = FUN_00a95ce0(0xac);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 100;
-    }
-    if (*(int *)(uVar3 + 0x30) != 0) {
-      *(undefined4 *)(param_1 + 0x30) = 0x6b;
-    }
-    if (*(int *)(param_1 + 0x30) == 0x6e) {
-      if ((*(int *)(*(int *)(uVar7 + 17000) + 0x544) != 0) &&
-         (*(float *)(*(int *)(uVar7 + 17000) + 0x548) <= 3.5)) {
-        *(undefined4 *)(param_1 + 0x30) = 0x6f;
-      }
-      if ((*(int *)(uVar7 + 0x4254) != 0) && (*(float *)(uVar7 + 0x4250) <= 3.5)) {
-        *(undefined4 *)(param_1 + 0x30) = 0x6f;
-      }
-      fVar2 = *(float *)(*(int *)(uVar7 + 0x40d4) + 0x14c);
-      if (*(float *)(uVar7 + 0xd28) <= fVar2 * fVar2) {
-        *(undefined4 *)(param_1 + 0x30) = 0x65;
-      }
-    }
-    if (*(int *)(uVar7 + 0x75c) != 0) {
-      iVar5 = FUN_00a95ca0(0);
-      iVar4 = *(int *)(**(int **)(uVar7 + 0x75c) + 8);
-      piVar6 = *(int **)(**(int **)(uVar7 + 0x75c) + 4);
-      if (piVar6 != piVar6 + iVar4 * 0xf) {
-        piVar1 = piVar6 + iVar4 * 0xf;
-        do {
-          if (*piVar6 == iVar5) {
-            iVar4 = FUN_008d7f90(iVar5);
-            if (iVar4 == 0) {
-              *(int *)(param_1 + 0x30) = iVar5;
-            }
-            else {
-              if (*(int *)(param_1 + 0x30) == 100) {
-                iVar4 = FUN_00b8b5d0();
-                if (iVar4 != 1) {
-                  *(undefined4 *)(param_1 + 0x30) = 0x6d;
-                }
-                if ((*(int *)(uVar7 + 0x4254) != 0) &&
-                   (*(float *)(uVar7 + 0x4250) <= *(float *)(*(int *)(uVar7 + 0x764) + 0xfc))) {
-                  *(undefined4 *)(param_1 + 0x30) = 0x6d;
-                }
-              }
-              FUN_00aa9280(*(undefined4 *)(param_1 + 0x30));
-            }
-            goto LAB_00bac01c;
-          }
-          piVar6 = piVar6 + 0xf;
-        } while (piVar6 != piVar1);
-      }
-      *(undefined4 *)(param_1 + 0x30) = 0x6d;
-LAB_00bac01c:
-      if (*(int *)(param_1 + 0x30) == 0x6a) {
-        FUN_00aa92c0(7);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x6c) {
-        FUN_00aa92c0(7);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x6f) {
-        FUN_00aa92c0(5);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x66) {
-        FUN_00aa92c0(7);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x70) {
-        FUN_00aa92c0(7);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x67) {
-        FUN_00aa92c0(0xf);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x6d) {
-        FUN_00aa92c0(6);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x6b) {
-        FUN_00aa92c0(6);
-      }
-      if (*(int *)(param_1 + 0x30) == 100) {
-        FUN_00aa92c0(7);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x65) {
-        FUN_00aa92c0(7);
-      }
-      if (*(int *)(param_1 + 0x30) == 0x6e) {
-        if (((*(uint *)(uVar7 + 0xcf8) & *(uint *)(uVar7 + 0xe48)) == 0) ||
-           (iVar4 = FUN_00b95e30(), iVar4 == 0)) {
-          uVar10 = 8;
-        }
-        else {
-          uVar10 = 9;
-        }
-        FUN_00aa92c0(uVar10);
-      }
-    }
-    if (*(int *)(*(int *)(uVar7 + 0x764) + 0x104) != 0) {
-      *(undefined4 *)(*(int *)(uVar7 + 0x764) + 0x104) = 0;
-    }
-    if ((*(int *)(uVar7 + 0x4254) != 0) &&
-       (*(float *)(uVar7 + 0x4250) <= *(float *)(*(int *)(uVar7 + 0x764) + 0xfc))) {
-      uVar10 = FUN_00a95ca0(0);
-      iVar4 = FUN_008d7d10(uVar10);
-      if ((iVar4 != 0) && (iVar4 = FUN_008d7f90(uVar10), iVar4 != 0)) {
-        FUN_00a96070(0,0x80,1);
-      }
-    }
-    *(undefined4 *)(uVar3 + 0x10) = 0;
-    *(undefined4 *)(uVar3 + 0x30) = 0;
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// Entry: chooses the landing motion and the landing effect.
+void LandingStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    using namespace LandingStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        char *context = asContext(contextArg);
+        char *player = playerOf(context);
+        at<int>(player, 0x507C) = 0;  /* Pl0000+0x507C */
+        saveSteering(player);
+        at<float>(player, 0x894) = 0.0f;  /* Pl0000+0x894 */
+
+        motionId() = 0x67;
+        if (moveInputHeld(player)) {
+            motionId() = 100;
+        }
+        else {
+            if (FUN_00a95ce0((int)player, 0x73) != 0) {
+                motionId() = 0x65;
+            }
+            if (FUN_00a95ce0((int)player, 0x5E) != 0) {
+                motionId() = 0x65;
+            }
+        }
+        int prevState = at<int>(this, 0x2C);  /* StateMachineNode+0x2C: previous state */
+        if (prevState == 0x14) {
+            motionId() = 0x69;
+        }
+        if (prevState == 0x2F) {
+            motionId() = 100;
+        }
+        if (prevState == 0x10) {
+            motionId() = 100;
+        }
+        if (at<float>(player, 0x41E8) < -1.5f) {  /* Pl0000+0x41E8: vertical speed? */
+            motionId() = 0x6E;
+        }
+        if (prevState == 0xD) {
+            motionId() = 0x6E;
+        }
+        for (int i = 0; i < (int)(sizeof(kActionMotions) / sizeof(kActionMotions[0])); i++) {
+            if (FUN_00a95ce0((int)player, kActionMotions[i].action) != 0) {
+                motionId() = kActionMotions[i].motion;
+            }
+        }
+        if (at<int>(context, 0x30) != 0) {  /* StateMachineContextPl0010+0x30 */
+            motionId() = 0x6B;
+        }
+        if (motionId() == 0x6E) {
+            char *ground = at<char *>(player, 0x4268);  /* Pl0000+0x4268 */
+            if (at<int>(ground, 0x544) != 0 && at<float>(ground, 0x548) <= 3.5f) {
+                motionId() = 0x6F;
+            }
+            if (at<int>(player, 0x4254) != 0 && at<float>(player, 0x4250) <= 3.5f) {
+                motionId() = 0x6F;
+            }
+            float threshold = stickThreshold(player);
+            if (at<float>(player, 0xD28) <= threshold * threshold) {
+                motionId() = 0x65;
+            }
+        }
+
+        if (at<int *>(player, 0x75C) != 0) {  /* Pl0000+0x75C: action list */
+            int action = FUN_00a95ca0((int)player, 0);
+            if (actionListed(player, action)) {
+                if (FUN_008d7f90(at<int *>(player, 0x75C), action) == 0) {
+                    motionId() = action;
+                }
+                else {
+                    if (motionId() == 100) {
+                        if (fastcallInt(FUN_00b8b5d0, player) != 1) {
+                            motionId() = 0x6D;
+                        }
+                        if (cancelTimeReached(player)) {
+                            motionId() = 0x6D;
+                        }
+                    }
+                    FUN_00aa9280((int)player, motionId());
+                }
+            }
+            else {
+                motionId() = 0x6D;
+            }
+
+            // landing effect
+            if (motionId() == 0x6A) {
+                FUN_00aa92c0((undefined4)player, 7);
+            }
+            if (motionId() == 0x6C) {
+                FUN_00aa92c0((undefined4)player, 7);
+            }
+            if (motionId() == 0x6F) {
+                FUN_00aa92c0((undefined4)player, 5);
+            }
+            if (motionId() == 0x66) {
+                FUN_00aa92c0((undefined4)player, 7);
+            }
+            if (motionId() == 0x70) {
+                FUN_00aa92c0((undefined4)player, 7);
+            }
+            if (motionId() == 0x67) {
+                FUN_00aa92c0((undefined4)player, 0xF);
+            }
+            if (motionId() == 0x6D) {
+                FUN_00aa92c0((undefined4)player, 6);
+            }
+            if (motionId() == 0x6B) {
+                FUN_00aa92c0((undefined4)player, 6);
+            }
+            if (motionId() == 100) {
+                FUN_00aa92c0((undefined4)player, 7);
+            }
+            if (motionId() == 0x65) {
+                FUN_00aa92c0((undefined4)player, 7);
+            }
+            if (motionId() == 0x6E) {
+                int effect;
+                if ((at<unsigned int>(player, 0xCF8) & at<unsigned int>(player, 0xE48)) == 0 ||
+                    FUN_00b95e30((int)player) == 0) {
+                    effect = 8;
+                }
+                else {
+                    effect = 9;
+                }
+                FUN_00aa92c0((undefined4)player, effect);
+            }
+        }
+
+        if (at<int>(motionHelper(player), 0x104) != 0) {
+            at<int>(motionHelper(player), 0x104) = 0;
+        }
+        if (cancelTimeReached(player)) {
+            int action = FUN_00a95ca0((int)player, 0);
+            int *actionList = at<int *>(player, 0x75C);
+            if (FUN_008d7d10(actionList, action) != 0 && FUN_008d7f90(actionList, action) != 0) {
+                thiscall<void>(FUN_00a96070, player, 0, 0x80, 1);
+            }
+        }
+        at<float>(context, 0x10) = 0.0f;  /* StateMachineContextPl0010+0x10 */
+        at<int>(context, 0x30) = 0;       /* StateMachineContextPl0010+0x30 */
+    }
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00BAC1F0  LandingStatePl0010::vf18  size=158  [class]
-void LandingStatePl0010::vf18(undefined4 *param_1)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  iVar3 = FUN_008e2740();
-  if ((iVar3 == 0) &&
-     ((*(int *)(uVar2 + 0x41e0) == 0 ||
-      (*(float *)(*(int *)(uVar2 + 0x40d4) + 0x160) <= *(float *)(uVar2 + 0x41e4))))) {
-    FUN_00d82510(0xe,0x4b);
-  }
-  StateMachineNode::vf18(param_1);
-  return;
+undefined4 LandingStatePl0010::vf18(undefined4 contextArg)
+{
+    using namespace LandingStatePl0010_p1;
+    char *player = playerOf(asContext((void *)contextArg));
+    if (fastcallInt(FUN_008e2740, motionHelper(player)) == 0 &&
+        (at<int>(player, 0x41E0) == 0 ||  /* Pl0000+0x41E0 / +0x41E4: ground distance? */
+         at<float>(at<char *>(player, 0x40D4), 0x160) <= at<float>(player, 0x41E4))) {
+        FUN_00d82510((int)this, 0xE, 0x4B);
+    }
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00BAC290  LandingStatePl0010::vf20  size=136  [class]
-undefined4 LandingStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  return 1;
+// Leave: restores the steering values saved by SafeCheck.
+undefined4 LandingStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace LandingStatePl0010_p1;
+    if (StateMachineNode::vf20(contextArg) == 0) {
+        return 0;
+    }
+    char *player = playerOf(asContext(contextArg));
+    restoreSteering(player);
+    return 1;
 }
 
 // 00BCAA10  LandingStatePl0010::vf14  size=595  [class]
-void __thiscall LandingStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  int *piVar2;
-  bool bVar3;
-  bool bVar4;
-  bool bVar5;
-  uint uVar6;
-  int iVar7;
-  bool bVar8;
-  undefined *puVar9;
-  undefined4 uVar10;
-  
-  bVar8 = false;
-  if (param_2 == (undefined4 *)0x0) {
-    uVar6 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar7 = FUN_00dd6d80(puVar9);
-    uVar6 = -(uint)(iVar7 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar6 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar6 = 0;
-  }
-  else {
-    puVar9 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar7 = FUN_00dd6d80(puVar9);
-    uVar6 = -(uint)(iVar7 != 0) & (uint)piVar2;
-  }
-  if ((*(int *)(uVar6 + 0x4254) == 0) ||
-     (bVar4 = true, *(float *)(*(int *)(uVar6 + 0x764) + 0xfc) < *(float *)(uVar6 + 0x4250))) {
-    bVar4 = false;
-  }
-  bVar3 = false;
-  bVar5 = false;
-  iVar7 = FUN_00a94db0(*(undefined4 *)(param_1 + 0x30));
-  if ((iVar7 != 0) || (*(int *)(param_1 + 0x30) == -1)) {
-    bVar3 = true;
-    bVar8 = true;
-    bVar5 = true;
-  }
-  iVar7 = *(int *)(param_1 + 0x30);
-  if ((iVar7 == 0x66) || (iVar7 == 100)) {
-    if (bVar4) {
-      bVar8 = true;
-      bVar3 = true;
-    }
-    if (iVar7 != 100) goto LAB_00bcaadc;
-  }
-  else {
-LAB_00bcaadc:
-    if ((((iVar7 != 0x66) && (iVar7 != 0x68)) && (iVar7 != 0x69)) && (iVar7 != 0x6e)) {
-      bVar8 = true;
-      bVar3 = true;
-    }
-  }
-  iVar7 = FUN_00a9f7d0(100);
-  if (iVar7 == 0) {
-    iVar7 = FUN_00a9f7d0(0x6b);
-    if (iVar7 != 0) goto LAB_00bcab5f;
-    iVar7 = FUN_00a9f7d0(0x6a);
-    if (iVar7 != 0) goto LAB_00bcab5f;
-    iVar7 = FUN_00a9f7d0(0x6c);
-    if (iVar7 != 0) goto LAB_00bcab5f;
-    iVar7 = FUN_00a9f7d0(0x6f);
-    if (iVar7 != 0) goto LAB_00bcab5f;
-    iVar7 = FUN_00a9f7d0(0x68);
-    if (iVar7 != 0) goto LAB_00bcab5f;
-    iVar7 = FUN_00a9f7d0(0x69);
-    if (iVar7 != 0) goto LAB_00bcab5f;
-    iVar7 = FUN_00a9f7d0(0x6e);
-    if (iVar7 != 0) goto LAB_00bcab5f;
-  }
-  else {
-LAB_00bcab5f:
-    bVar3 = true;
-  }
-  iVar7 = *(int *)(param_1 + 0x30);
-  if (((iVar7 == 0x6f) || (iVar7 == 0x6b)) ||
-     ((iVar7 == 0x6a || ((iVar7 == 0x6c || (iVar7 == 0x70)))))) {
-    iVar7 = FUN_00a9f7d0(iVar7);
-    if (iVar7 != 0) {
-      bVar8 = true;
-      bVar3 = true;
-    }
-  }
-  iVar7 = FUN_00a9f710(&DAT_016a27b0);
-  if (iVar7 != 0) {
-    if ((*(int *)(uVar6 + 0x41e0) == 0) || (0.36 < *(float *)(uVar6 + 0x41e4))) {
-      iVar7 = FUN_008e2740();
-      if (iVar7 == 0) goto LAB_00bcabdd;
-    }
-    FUN_00aa9280(*(undefined4 *)(param_1 + 0x30));
-  }
-LAB_00bcabdd:
-  if (bVar3) {
-    FUN_00bb8ae0(param_2,param_1,100);
-  }
-  if (bVar8) {
-    fVar1 = *(float *)(*(int *)(uVar6 + 0x40d4) + 0x14c);
-    if (fVar1 * fVar1 < *(float *)(uVar6 + 0xd28)) {
-      bVar8 = (*(uint *)(uVar6 + 0xe48) & *(uint *)(uVar6 + 0xcf8)) != 0;
-    }
-    else {
-      bVar8 = false;
-    }
-    if (bVar8) {
-      if (!bVar8) goto LAB_00bcac4e;
-      uVar10 = 10;
-    }
-    else {
-      if ((!bVar5) && (!bVar4)) goto LAB_00bcac4e;
-      uVar10 = 0x11;
-    }
-    FUN_00d82510(uVar10,0x32);
-  }
-LAB_00bcac4e:
-  StateMachineNode::vf14(param_2);
-  return;
+// Per frame: leaves the landing once the motion ended, was cancelled or another motion runs.
+void LandingStatePl0010::vf14(undefined4 *contextArg)
+{
+    using namespace LandingStatePl0010_p1;
+    bool changeState = false;
+    char *player = playerOf(asContext(contextArg));
+    bool pastCancel = cancelTimeReached(player);
+    bool requestIdle = false;
+    bool motionEnded = false;
+    if (FUN_00a94db0((int)player, motionId()) != 0 || motionId() == -1) {
+        requestIdle = true;
+        changeState = true;
+        motionEnded = true;
+    }
+    int motion = motionId();
+    if ((motion == 0x66 || motion == 100) && pastCancel) {
+        changeState = true;
+        requestIdle = true;
+    }
+    if (motion != 100 && motion != 0x66 && motion != 0x68 && motion != 0x69 && motion != 0x6E) {
+        changeState = true;
+        requestIdle = true;
+    }
+    if (FUN_00a9f7d0((int)player, 100) != 0 || FUN_00a9f7d0((int)player, 0x6B) != 0 ||
+        FUN_00a9f7d0((int)player, 0x6A) != 0 || FUN_00a9f7d0((int)player, 0x6C) != 0 ||
+        FUN_00a9f7d0((int)player, 0x6F) != 0 || FUN_00a9f7d0((int)player, 0x68) != 0 ||
+        FUN_00a9f7d0((int)player, 0x69) != 0 || FUN_00a9f7d0((int)player, 0x6E) != 0) {
+        requestIdle = true;
+    }
+    motion = motionId();
+    if (motion == 0x6F || motion == 0x6B || motion == 0x6A || motion == 0x6C || motion == 0x70) {
+        if (FUN_00a9f7d0((int)player, motion) != 0) {
+            changeState = true;
+            requestIdle = true;
+        }
+    }
+    if (FUN_00a9f710((int)player, (undefined4)DAT_016a27b0) != 0) {
+        if ((at<int>(player, 0x41E0) != 0 && !(0.36f < at<float>(player, 0x41E4))) ||
+            fastcallInt(FUN_008e2740, motionHelper(player)) != 0) {
+            FUN_00aa9280((int)player, motionId());
+        }
+    }
+    if (requestIdle) {
+        FUN_00bb8ae0(contextArg, (undefined4)this, 100);
+    }
+    if (changeState) {
+        if (moveInputHeld(player)) {
+            FUN_00d82510((int)this, 10, 0x32);
+        }
+        else if (motionEnded || pastCancel) {
+            FUN_00d82510((int)this, 0x11, 0x32);
+        }
+    }
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00BDF1A0  LandingStatePl0010::qteSafeCheck  size=491  [class]
-void __thiscall LandingStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  float fVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  undefined *puVar7;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar5 = FUN_00dd6d80(puVar7);
-    uVar3 = -(uint)(iVar5 != 0) & (uint)param_2;
-  }
-  piVar6 = *(int **)(uVar3 + 0xc);
-  if (piVar6 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*piVar6 + 4))(&DAT_01be9db8);
-    iVar5 = FUN_00dd6d80(puVar7);
-    uVar3 = -(uint)(iVar5 != 0) & (uint)piVar6;
-  }
-  FUN_00b8af00();
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  if ((*(int *)(param_1 + 0x30) == 100) &&
-     ((fVar2 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c),
-      *(float *)(uVar3 + 0xd28) <= fVar2 * fVar2 ||
-      ((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe48)) == 0)))) {
-    FUN_00d82510(0x11,0x32);
-  }
-  if (*(int *)(param_1 + 0x30) == 0x66) {
-    fVar2 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c);
-    if ((*(float *)(uVar3 + 0xd28) <= fVar2 * fVar2) ||
-       ((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe48)) == 0)) {
-      FUN_00d82510(0x11,0x32);
-    }
-    fVar2 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x14c);
-    if ((fVar2 * fVar2 < *(float *)(uVar3 + 0xd28)) &&
-       ((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe48)) != 0)) {
-      FUN_00d82510(10,0x32);
-    }
-  }
-  if ((*(int *)(uVar3 + 0x4254) != 0) &&
-     (*(float *)(uVar3 + 0x4250) <= *(float *)(*(int *)(uVar3 + 0x764) + 0xfc))) {
-    iVar4 = FUN_00a95ca0(0);
-    iVar5 = *(int *)(**(int **)(uVar3 + 0x75c) + 8);
-    piVar6 = *(int **)(**(int **)(uVar3 + 0x75c) + 4);
-    if (piVar6 != piVar6 + iVar5 * 0xf) {
-      piVar1 = piVar6 + iVar5 * 0xf;
-      do {
-        if (*piVar6 == iVar4) {
-          iVar5 = FUN_008d7f90(iVar4);
-          if (iVar5 != 0) {
-            FUN_00a96070(0,0x80,1);
-          }
-          break;
-        }
-        piVar6 = piVar6 + 0xf;
-      } while (piVar6 != piVar1);
-    }
-  }
-  if ((*(uint *)(uVar3 + 0xcf8) & *(uint *)(uVar3 + 0xe48)) != 0) {
-    FUN_00bd3730(param_2,param_1,0xd,0xc);
-    FUN_00bd37f0(param_2,param_1,0xd);
-    FUN_00bd3910(param_2,param_1,0xb,10);
-    FUN_00bd39d0(param_2,param_1,10);
-  }
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
+void LandingStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace LandingStatePl0010_p1;
+    char *player = playerOf(asContext(contextArg));
+    FUN_00b8af00((int)player);
+    FUN_008e0b70((int)motionHelper(player), 0);
+    FUN_008e0ba0((int)motionHelper(player), 0);
+    if (motionId() == 100) {
+        float threshold = stickThreshold(player);
+        if (at<float>(player, 0xD28) <= threshold * threshold || inputFlags(player) == 0) {
+            FUN_00d82510((int)this, 0x11, 0x32);
+        }
+    }
+    if (motionId() == 0x66) {
+        float threshold = stickThreshold(player);
+        if (at<float>(player, 0xD28) <= threshold * threshold || inputFlags(player) == 0) {
+            FUN_00d82510((int)this, 0x11, 0x32);
+        }
+        threshold = stickThreshold(player);
+        if (threshold * threshold < at<float>(player, 0xD28) && inputFlags(player) != 0) {
+            FUN_00d82510((int)this, 10, 0x32);
+        }
+    }
+    if (cancelTimeReached(player)) {
+        int action = FUN_00a95ca0((int)player, 0);
+        if (actionListed(player, action)) {
+            if (FUN_008d7f90(at<int *>(player, 0x75C), action) != 0) {
+                thiscall<void>(FUN_00a96070, player, 0, 0x80, 1);
+            }
+        }
+    }
+    if (inputFlags(player) != 0) {
+        FUN_00bd3730(contextArg, (undefined4)this, 0xD, 0xC);
+        FUN_00bd37f0(contextArg, (undefined4)this, 0xD);
+        FUN_00bd3910(contextArg, (undefined4)this, 0xB, 10);
+        FUN_00bd39d0(contextArg, (undefined4)this, 10);
+    }
+    StateMachineNode::qteSafeCheck(contextArg);
 }
-

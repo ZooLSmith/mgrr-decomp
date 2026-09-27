@@ -1,17 +1,20 @@
-// src/managers/gamestagemanager/GameStageManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008DFB70..008DFB70, 1 functions
-
+// src/managers/gamestagemanager/GameStageManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "GameStageManager.h"
 
-// 008DFB70  GameStageManager::vf14  size=31  [class]
-undefined4 * __thiscall GameStageManager::vf14(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
-}
+namespace GameStageManager_p1 {
 
+const unsigned int kVftable = 0x0164AD68;  // GameStageManager::vftable
+
+}  // namespace GameStageManager_p1
+
+// 008DFB70  GameStageManager::vf14  size=31  [class]
+// Scalar deleting destructor.
+undefined4 *GameStageManager::vf14(byte flags)
+{
+    *(unsigned int *)this = GameStageManager_p1::kVftable;  // vftable = GameStageManager::vftable
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
+}

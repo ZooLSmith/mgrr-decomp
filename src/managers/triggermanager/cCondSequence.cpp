@@ -1,174 +1,146 @@
-// src/managers/triggermanager/cCondSequence.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C78EC0..00C84D10, 7 functions
-
+// src/managers/triggermanager/cCondSequence.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondSequence.h"
 
 // 00C78EC0  Trigger::cCondSequence::cCondSequence  size=41  [class]
-void __fastcall Trigger::cCondSequence::cCondSequence(undefined4 *param_1)
-
-{
-  param_1[3] = 0xffffffff;
-  param_1[1] = 0;
-  param_1[2] = 0xffffffff;
-  *param_1 = vftable;
-  param_1[0x22] = 0;
-  param_1[0x23] = 0;
-  param_1[0x24] = 0;
-  return;
+Trigger::cCondSequence::cCondSequence()
+{
+    satisfied() = -1;
+    record() = 0;
+    field08() = -1;
+    // vftable = Trigger::cCondSequence::vftable (0x016A8AD0)
+    current() = 0;
+    childCount() = 0;
+    completed() = 0;
 }
 
 // 00C78F30  Trigger::cCondSequence::vf04  size=48  [class]
-void __fastcall Trigger::cCondSequence::vf04(int param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  iVar2 = 0;
-  if (0 < *(int *)(param_1 + 0x8c)) {
-    piVar1 = (int *)(param_1 + 0x10);
-    do {
-      if (*piVar1 != 0) {
-        (**(code **)(*(int *)*piVar1 + 4))();
-      }
-      iVar2 = iVar2 + 1;
-      piVar1 = piVar1 + 1;
-    } while (iVar2 < *(int *)(param_1 + 0x8c));
-  }
-  return;
+void Trigger::cCondSequence::vf04()
+{
+    int i = 0;
+    if (0 < childCount()) {
+        cCondition **child = children();
+        do {
+            if (*child != 0) {
+                (*child)->vf04();
+            }
+            i = i + 1;
+            child = child + 1;
+        } while (i < childCount());
+    }
 }
 
 // 00C78F60  Trigger::cCondSequence::vf08  size=62  [class]
-void __fastcall Trigger::cCondSequence::vf08(int param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  
-  iVar2 = 0;
-  if (0 < *(int *)(param_1 + 0x8c)) {
-    piVar1 = (int *)(param_1 + 0x10);
-    do {
-      if (*piVar1 != 0) {
-        (**(code **)(*(int *)*piVar1 + 8))();
-        if ((undefined4 *)*piVar1 != (undefined4 *)0x0) {
-          (*(code *)**(undefined4 **)*piVar1)(1);
-        }
-      }
-      iVar2 = iVar2 + 1;
-      piVar1 = piVar1 + 1;
-    } while (iVar2 < *(int *)(param_1 + 0x8c));
-  }
-  return;
+void Trigger::cCondSequence::vf08()
+{
+    int i = 0;
+    if (0 < childCount()) {
+        cCondition **child = children();
+        do {
+            if (*child != 0) {
+                (*child)->vf08();
+                if (*child != 0) {
+                    (*child)->vf00(1);  // delete
+                }
+            }
+            i = i + 1;
+            child = child + 1;
+        } while (i < childCount());
+    }
 }
 
 // 00C79000  Trigger::cCondSequence::vf10  size=319  [class]
-void __fastcall Trigger::cCondSequence::vf10(int param_1)
-
-{
-  uint uVar1;
-  int iVar2;
-  int *piVar3;
-  
-  if (*(int *)(param_1 + 8) == 2) {
-    iVar2 = 0;
-    *(undefined4 *)(param_1 + 0x88) = 0;
-    if (0 < *(int *)(param_1 + 0x8c)) {
-      piVar3 = (int *)(param_1 + 0x10);
-      do {
-        if (*piVar3 != 0) {
-          (**(code **)(*(int *)*piVar3 + 0x10))();
-        }
-        iVar2 = iVar2 + 1;
-        piVar3 = piVar3 + 1;
-      } while (iVar2 < *(int *)(param_1 + 0x8c));
-    }
-  }
-  else {
-    iVar2 = *(int *)(param_1 + 0x88);
-    if (iVar2 < 0) {
-      return;
-    }
-    if ((iVar2 < *(int *)(param_1 + 0x8c)) && (*(int *)(param_1 + 0x10 + iVar2 * 4) != 0)) {
-      (**(code **)(**(int **)(param_1 + 0x10 + iVar2 * 4) + 0x10))();
-    }
-  }
-  if (*(int *)(param_1 + 0x88) < *(int *)(param_1 + 0x8c)) {
-    do {
-      if (*(int *)(param_1 + 0x10 + *(int *)(param_1 + 0x88) * 4) == 0) break;
-      uVar1 = (**(code **)(**(int **)(param_1 + 0x10 + *(int *)(param_1 + 0x88) * 4) + 0x14))();
-      if (*(int *)(param_1 + 0x4c + *(int *)(param_1 + 0x88) * 4) == 1) {
-        uVar1 = uVar1 ^ 1;
-      }
-      iVar2 = *(int *)(param_1 + 0x10 + *(int *)(param_1 + 0x88) * 4);
-      if (uVar1 != 1) {
-        *(undefined4 *)(iVar2 + 0xc) = 0;
-        break;
-      }
-      *(undefined4 *)(iVar2 + 0xc) = 1;
-      *(int *)(param_1 + 0x88) = *(int *)(param_1 + 0x88) + 1;
-      iVar2 = *(int *)(param_1 + 0x88);
-      if ((iVar2 < *(int *)(param_1 + 0x8c)) && (*(int *)(param_1 + 0x10 + iVar2 * 4) != 0)) {
-        (**(code **)(**(int **)(param_1 + 0x10 + iVar2 * 4) + 0xc))();
-        (**(code **)(**(int **)(param_1 + 0x10 + *(int *)(param_1 + 0x88) * 4) + 0x10))();
-      }
-    } while (*(int *)(param_1 + 0x88) < *(int *)(param_1 + 0x8c));
-  }
-  if (*(int *)(param_1 + 0x88) < *(int *)(param_1 + 0x8c)) {
-    *(undefined4 *)(param_1 + 0x90) = 0;
-    return;
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0xc))();
-  }
-  *(undefined4 *)(param_1 + 0x90) = 1;
-  *(undefined4 *)(param_1 + 0x88) = 0xffffffff;
-  return;
+void Trigger::cCondSequence::vf10()
+{
+    if (field08() == 2) {
+        int i = 0;
+        current() = 0;
+        if (0 < childCount()) {
+            cCondition **child = children();
+            do {
+                if (*child != 0) {
+                    (*child)->vf10();
+                }
+                i = i + 1;
+                child = child + 1;
+            } while (i < childCount());
+        }
+    }
+    else {
+        int index = current();
+        if (index < 0) {
+            return;
+        }
+        if (index < childCount() && children()[index] != 0) {
+            children()[index]->vf10();
+        }
+    }
+    if (current() < childCount()) {
+        do {
+            if (children()[current()] == 0) break;
+            unsigned int met = children()[current()]->vf14();
+            if (negate()[current()] == 1) {
+                met = met ^ 1;
+            }
+            cCondition *child = children()[current()];
+            if (met != 1) {
+                child->satisfied() = 0;
+                break;
+            }
+            child->satisfied() = 1;
+            current() = current() + 1;
+            int next = current();
+            if (next < childCount() && children()[next] != 0) {
+                children()[next]->vf0C();
+                children()[current()]->vf10();
+            }
+        } while (current() < childCount());
+    }
+    if (current() < childCount()) {
+        completed() = 0;
+        return;
+    }
+    if (children()[0] != 0) {
+        children()[0]->vf0C();
+    }
+    completed() = 1;
+    current() = -1;
 }
 
 // 00C79140  Trigger::cCondSequence::vf14  size=7  [class]
-undefined4 __fastcall Trigger::cCondSequence::vf14(int param_1)
-
-{
-  return *(undefined4 *)(param_1 + 0x90);
+int Trigger::cCondSequence::vf14()
+{
+    return completed();
 }
 
 // 00C79150  Trigger::cCondSequence::vf20  size=78  [class]
-int __fastcall Trigger::cCondSequence::vf20(int param_1)
-
-{
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  
-  iVar3 = 0;
-  iVar2 = 1;
-  if (0 < *(int *)(param_1 + 0x8c)) {
-    piVar4 = (int *)(param_1 + 0x10);
-    do {
-      if ((*piVar4 != 0) && (iVar1 = (**(code **)(*(int *)*piVar4 + 0x20))(), iVar1 == 0)) {
-        iVar2 = 0;
-      }
-      iVar3 = iVar3 + 1;
-      piVar4 = piVar4 + 1;
-    } while (iVar3 < *(int *)(param_1 + 0x8c));
-    if (iVar2 != 1) {
-      return iVar2;
-    }
-  }
-  *(undefined4 *)(param_1 + 0x88) = 0;
-  return 1;
+int Trigger::cCondSequence::vf20()
+{
+    int i = 0;
+    int allRestarted = 1;
+    if (0 < childCount()) {
+        cCondition **child = children();
+        do {
+            if (*child != 0 && (*child)->vf20() == 0) {
+                allRestarted = 0;
+            }
+            i = i + 1;
+            child = child + 1;
+        } while (i < childCount());
+        if (allRestarted != 1) {
+            return allRestarted;
+        }
+    }
+    current() = 0;
+    return 1;
 }
 
 // 00C84D10  Trigger::cCondSequence::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondSequence::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondSequence *Trigger::cCondSequence::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return this;
 }
-

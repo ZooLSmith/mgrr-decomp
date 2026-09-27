@@ -1,35 +1,41 @@
-// src/managers/triggermanager/cCondChainBreak.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7AB40..00C85990, 3 functions
-
+// src/managers/triggermanager/cCondChainBreak.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondChainBreak.h"
+
+extern undefined4 DAT_01d5bae0;
+
+namespace cCondChainBreak_p1 {
+
+// __thiscall call of a function with an explicit ECX (`self`)
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+} // namespace cCondChainBreak_p1
 
 // 00C7AB40  Trigger::cCondChainBreak::vf14  size=24  [class]
-bool __fastcall Trigger::cCondChainBreak::vf14(int param_1)
-
-{
-  char cVar1;
-  
-  cVar1 = FUN_00c1ace0(*(undefined4 *)(param_1 + 0x10));
-  return cVar1 != '\0';
+bool Trigger::cCondChainBreak::vf14()
+{
+    using namespace cCondChainBreak_p1;
+    char broken = thiscall<char>(FUN_00c1ace0, &DAT_01d5bae0, chainId());  // ECX = &DAT_01d5bae0
+    return broken != '\0';
 }
 
 // 00C7AB60  Trigger::cCondChainBreak::vf1C  size=16  [class]
-void __thiscall Trigger::cCondChainBreak::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_2 + 8);
-  return;
+void Trigger::cCondChainBreak::vf1C(int *record)
+{
+    *(int **)((char *)this + 0x04) /* cCondition+0x04: record */ = record;
+    chainId() = record[2];  // record+0x08
 }
 
 // 00C85990  Trigger::cCondChainBreak::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondChainBreak::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondChainBreak *Trigger::cCondChainBreak::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

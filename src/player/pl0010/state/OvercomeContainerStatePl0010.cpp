@@ -1,385 +1,283 @@
-// src/player/pl0010/state/OvercomeContainerStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B82030..00BDFB70, 10 functions
-
+// src/player/pl0010/state/OvercomeContainerStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "OvercomeContainerStatePl0010.h"
 
+// CRT (the compiler emitted fcos inline)
+extern "C" double __cdecl cos(double x);
+
+// type records returned by vf00 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e50[];  // OvercomeContainerStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+// debug-print strings (Shift-JIS)
+extern const char DAT_0163d0ac[];     // "[Hw::VecNormalize] a zero vector cannot be normalized."
+
+namespace OvercomeContainerStatePl0010_p1 {
+
+// Field at byte offset `offset` of an object whose class header is not owned by this file.
+template <class T> inline T &at(const void *base, int offset) { return *(T *)((char *)base + offset); }
+
+// Virtual call through the vftable slot at byte offset `slot`.
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self.
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// Checked downcasts (0 when the object is null or of another type).
+inline char *asContext(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<undefined *>(obj, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (char *)obj : 0;
+}
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<undefined *>(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player that owns the state machine (context +0xC, checked against Pl0000).  The context
+// is not null-checked before the load (as in the original).
+inline Pl0000 *ownerOf(const char *ctx)
+{
+    return asPl0000(at<void *>(ctx, 0xC));  /* StateMachineContext+0xC: owner */
+}
+
+// Callees whose generated prototype does not match the machine-code call site.
+typedef void (*VecNormalizeWarningFn)(const char *message);  // FUN_00dd5650 (cdecl)
+// FUN_00bb91f0 (ZangekiYokoStatePl0010.cpp) takes the state node as a second cdecl argument.
+typedef undefined4 (__cdecl *LeaveToIdleFn)(undefined4 *context, undefined4 node);
+
+// Hw::VecNormalize, inlined in the original: normalises v[0..2] in place, or warns and sets
+// (0, 1, 0) when the length is zero (the self-comparisons reject NaN components).
+inline void normalizeInPlace(float *v)
+{
+    if (v[0] != 0.0f || v[1] != 0.0f || v[2] != 0.0f) {
+        float lengthSq = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];  // machine order
+        if (0.0f < lengthSq && v[0] == v[0] && v[1] == v[1] && v[2] == v[2]) {
+            FUN_00ddf460(v, v);
+        }
+        else {
+            ((VecNormalizeWarningFn)FUN_00dd5650)(DAT_0163d0ac);
+            v[0] = 0.0f;
+            v[1] = 1.0f;
+            v[2] = 0.0f;
+        }
+    }
+}
+
+}  // namespace OvercomeContainerStatePl0010_p1
+
 // 00B82030  OvercomeContainerStatePl0010::vf08  size=37  [class]
-undefined4 __thiscall OvercomeContainerStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x34) = 0;
-  return 1;
+bool OvercomeContainerStatePl0010::vf08(undefined4 context)
+{
+    if (!StateMachineNode::vf08(context)) {
+        return false;
+    }
+    climbPending() = 0;
+    return true;
 }
 
 // 00B82060  OvercomeContainerStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall OvercomeContainerStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+undefined4 OvercomeContainerStatePl0010::vf18(undefined4 context)
+{
+    return StateMachineNode::vf18(context);  // jmp 0x00D822E0
 }
 
 // 00B82070  OvercomeContainerStatePl0010::vf24  size=19  [class]
-bool OvercomeContainerStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool OvercomeContainerStatePl0010::vf24(undefined4 context)
+{
+    return StateMachineNode::vf24(context) != 0;
 }
 
 // 00B820B0  OvercomeContainerStatePl0010::vf00  size=6  [class]
-undefined * OvercomeContainerStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e50;
+undefined *OvercomeContainerStatePl0010::vf00()
+{
+    return DAT_01be9e50;
 }
 
 // 00B91170  OvercomeContainerStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall OvercomeContainerStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *OvercomeContainerStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BAF9C0  FUN_00baf9c0  size=561  [callgraph]
-void __thiscall FUN_00baf9c0(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  int iVar6;
-  float *pfVar7;
-  uint uVar8;
-  uint uVar9;
-  undefined *puVar10;
-  undefined4 uVar11;
-  float local_40;
-  float local_3c;
-  float local_38;
-  float local_34;
-  float local_2c;
-  undefined1 local_20 [28];
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar9 = 0;
-  }
-  else {
-    puVar10 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar6 = FUN_00dd6d80(puVar10);
-    uVar9 = -(uint)(iVar6 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar9 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar8 = 0;
-  }
-  else {
-    puVar10 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar6 = FUN_00dd6d80(puVar10);
-    uVar8 = -(uint)(iVar6 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(param_1 + 0x34) = 0;
-  iVar6 = *(int *)(uVar9 + 0xc4);
-  local_2c = *(float *)(iVar6 + 0x54);
-  fVar2 = *(float *)(iVar6 + 0x50) - *(float *)(uVar8 + 0x40);
-  fVar3 = local_2c - *(float *)(uVar8 + 0x44);
-  fVar4 = *(float *)(iVar6 + 0x58) - *(float *)(uVar8 + 0x48);
-  fVar5 = *(float *)(iVar6 + 0x5c) - *(float *)(uVar8 + 0x4c);
-  pfVar7 = (float *)FUN_00a92640(local_20);
-  if (pfVar7[2] * fVar4 + fVar2 * *pfVar7 + pfVar7[1] * fVar3 <= 0.0) {
-    uVar11 = 0xb7;
-  }
-  else {
-    uVar11 = 0xb8;
-  }
-  FUN_00aa3f60(uVar11);
-  local_40 = fVar2;
-  local_3c = fVar3;
-  local_38 = fVar4;
-  local_34 = fVar5;
-  if (((fVar2 != 0.0) || (fVar3 != 0.0)) || (fVar4 != 0.0)) {
-    fVar2 = fVar4 * fVar4 + fVar3 * fVar3 + fVar2 * fVar2;
-    if (fVar2 < 0.0 == (fVar2 == 0.0)) {
-      FUN_00ddf460(&local_40,&local_40);
-    }
-    else {
-      FUN_00dd5650(&DAT_0163d0ac);
-      local_40 = 0.0;
-      local_3c = 1.0;
-      local_38 = 0.0;
-    }
-  }
-  FUN_00a96030(0,0x3f000000);
-  FUN_00a95fb0(0);
-  if (*(float *)(uVar8 + 0x44) < local_2c) {
-    fVar2 = local_2c - *(float *)(uVar8 + 0x44);
-    *(float *)(param_1 + 0x30) = fVar2 + fVar2;
-  }
-  if (*(float *)(param_1 + 0x30) <= 4.0) {
-    *(undefined4 *)(param_1 + 0x30) = 0x40800000;
-    FUN_00a937e0();
-    return;
-  }
-  FUN_00a937e0();
-  return;
+// __thiscall on the OvercomeContainerStatePl0010 node.  Starts the climb towards the target
+// stored in the context (+0xC4): motion 0xB8 when the target lies on the positive side of the
+// player's FUN_00a92640 axis, else 0xB7, and climbHeight = 2 * (target y - player y), at least 4.
+void FUN_00baf9c0(int self, undefined4 *context)
+{
+    using namespace OvercomeContainerStatePl0010_p1;
+    OvercomeContainerStatePl0010 *node = (OvercomeContainerStatePl0010 *)self;
+    float axisBuf[4];
+    float dir[4];
+
+    char *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    node->climbPending() = 0;
+    char *target = at<char *>(ctx, 0xC4);  /* StateMachineContext+0xC4: climb target object */
+    float targetY = at<float>(target, 0x54);
+    float *pos = &at<float>(player, 0x40);  /* Pl0000+0x40: position */
+    float dx = at<float>(target, 0x50) - pos[0];  /* target +0x50: position */
+    float dy = targetY - pos[1];
+    float dz = at<float>(target, 0x58) - pos[2];
+    float dw = at<float>(target, 0x5C) - pos[3];
+    float *axis = FUN_00a92640((int)player, axisBuf);
+    FUN_00aa3f60((int)player, 0.0f < (axis[1] * dy + dx * axis[0]) + axis[2] * dz ? 0xB8 : 0xB7);
+    dir[0] = dx;
+    dir[1] = dy;
+    dir[2] = dz;
+    dir[3] = dw;
+    normalizeInPlace(dir);  // (the result is not used)
+    thiscall<void>(FUN_00a96030, player, 0, 0.5f);
+    thiscall<void>(FUN_00a95fb0, player, 0.0f);
+    if (pos[1] < targetY) {
+        float rise = targetY - pos[1];
+        node->climbHeight() = rise + rise;
+    }
+    if (node->climbHeight() <= 4.0f) {
+        node->climbHeight() = 4.0f;
+        FUN_00a937e0((int)player);
+        return;
+    }
+    FUN_00a937e0((int)player);
 }
 
 // 00BAFC00  OvercomeContainerStatePl0010::SafeCheck  size=198  [class]
-void __thiscall OvercomeContainerStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar2 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-    }
-    iVar3 = *(int *)(uVar2 + 0x764);
-    if (*(int *)(iVar3 + 0x104) != 1) {
-      *(undefined4 *)(iVar3 + 0x104) = 1;
-      *(undefined4 *)(*(int *)(iVar3 + 0xd0) + 4) = 0;
-    }
-    *(undefined4 *)(uVar2 + 0x418c) = *(undefined4 *)(uVar2 + 0x4180);
-    *(undefined4 *)(uVar2 + 0x4188) = *(undefined4 *)(uVar2 + 0x417c);
-    *(undefined4 *)(uVar2 + 0x4190) = *(undefined4 *)(uVar2 + 0x4184);
-    FUN_008e6c60(0);
-    FUN_00baf9c0(param_2);
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+void OvercomeContainerStatePl0010::SafeCheck(undefined4 *context)
+{
+    using namespace OvercomeContainerStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        Pl0000 *player = ownerOf(asContext(context));
+        char *controller = at<char *>(player, 0x764);  /* Pl0000+0x764: motion controller ? */
+        if (at<int>(controller, 0x104) != 1) {
+            at<int>(controller, 0x104) = 1;
+            at<float>(at<char *>(controller, 0xD0), 4) = 0.0f;
+        }
+        // save +0x417C..0x4184 into +0x4188..0x4190 (restored by vf20)
+        at<float>(player, 0x418C) = at<float>(player, 0x4180);  /* Pl0000+0x417C..0x4190: ? */
+        at<float>(player, 0x4188) = at<float>(player, 0x417C);
+        at<float>(player, 0x4190) = at<float>(player, 0x4184);
+        FUN_008e6c60(at<int>(player, 0x764), 0);
+        FUN_00baf9c0((int)this, context);
+    }
+    StateMachineNode::SafeCheck(context);
 }
 
 // 00BAFCD0  OvercomeContainerStatePl0010::vf20  size=196  [class]
-undefined4 __thiscall OvercomeContainerStatePl0010::vf20(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_2);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(*(int *)(uVar3 + 0x764) + 0x104) != 0) {
-    *(undefined4 *)(*(int *)(uVar3 + 0x764) + 0x104) = 0;
-  }
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  FUN_008e6c60(1);
-  if (*(int *)(param_1 + 0x24) != 0x1e) {
-    FUN_00a93820();
-  }
-  return 1;
+undefined4 OvercomeContainerStatePl0010::vf20(undefined4 *context)
+{
+    using namespace OvercomeContainerStatePl0010_p1;
+    if (StateMachineNode::vf20(context) == 0) {
+        return 0;
+    }
+    Pl0000 *player = ownerOf(asContext(context));
+    if (at<int>(at<char *>(player, 0x764), 0x104) != 0) {  /* Pl0000+0x764: motion controller ? */
+        at<int>(at<char *>(player, 0x764), 0x104) = 0;
+    }
+    at<float>(player, 0x4180) = at<float>(player, 0x418C);  /* Pl0000+0x417C..0x4190: ? */
+    at<float>(player, 0x417C) = at<float>(player, 0x4188);
+    at<float>(player, 0x4184) = at<float>(player, 0x4190);
+    FUN_008e6c60(at<int>(player, 0x764), 1);
+    if (at<int>(this, 0x24) != 0x1E) {  /* StateMachineNode+0x24: ? (next state id) */
+        FUN_00a93820((int)player);
+    }
+    return 1;
 }
 
 // 00BCC000  OvercomeContainerStatePl0010::vf14  size=321  [class]
-void __thiscall OvercomeContainerStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  int *piVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  undefined1 local_c [12];
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar1 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar1 != 0) & (uint)piVar2;
-  }
-  iVar1 = FUN_00a94db0(0xb7);
-  if (((iVar1 != 0) || (iVar1 = FUN_00a94db0(0xb8), iVar1 != 0)) ||
-     (iVar1 = FUN_00a94db0(0xb5), iVar1 != 0)) {
-    *(undefined4 *)(param_1 + 0x34) = 1;
-  }
-  if (*(int *)(param_1 + 0x34) != 0) {
-    piVar2 = (int *)FUN_00c1bd10();
-    piVar2 = (int *)(**(code **)(*piVar2 + 4))(local_c,uVar4,0,0x41f00000,0);
-    *(int *)(uVar3 + 0xc4) = *piVar2;
-    *(int *)(uVar3 + 200) = piVar2[1];
-    *(int *)(uVar3 + 0xcc) = piVar2[2];
-    if ((piVar2[1] != 0) && ((*piVar2 != 0 || (piVar2[2] != 0)))) {
-      FUN_00baf9c0(param_2);
-    }
-    if ((*(int *)(uVar3 + 200) == 0) ||
-       ((*(int *)(uVar3 + 0xc4) == 0 && (*(int *)(uVar3 + 0xcc) == 0)))) {
-      FUN_00bb91f0(param_2,param_1);
-    }
-  }
-  StateMachineNode::vf14(param_2);
-  return;
+void OvercomeContainerStatePl0010::vf14(undefined4 *context)
+{
+    using namespace OvercomeContainerStatePl0010_p1;
+    int found[3];
+
+    char *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    if (FUN_00a94db0((int)player, 0xB7) != 0 || FUN_00a94db0((int)player, 0xB8) != 0 ||
+        FUN_00a94db0((int)player, 0xB5) != 0) {
+        climbPending() = 1;
+    }
+    if (climbPending() != 0) {
+        void *finder = (void *)FUN_00c1bd10();
+        int *hit = vcall<int *>(finder, 0x4, found, player, 0.0f, 30.0f, 0.0f);
+        at<int>(ctx, 0xC4) = hit[0];  /* StateMachineContext+0xC4..0xCC: climb target */
+        at<int>(ctx, 0xC8) = hit[1];
+        at<int>(ctx, 0xCC) = hit[2];
+        if (hit[1] != 0 && (hit[0] != 0 || hit[2] != 0)) {
+            FUN_00baf9c0((int)this, context);
+        }
+        if (at<int>(ctx, 0xC8) == 0 || (at<int>(ctx, 0xC4) == 0 && at<int>(ctx, 0xCC) == 0)) {
+            ((LeaveToIdleFn)FUN_00bb91f0)(context, (undefined4)this);
+        }
+    }
+    StateMachineNode::vf14(context);
 }
 
 // 00BDFB70  OvercomeContainerStatePl0010::qteSafeCheck  size=636  [class]
-void __thiscall OvercomeContainerStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  float fVar2;
-  int iVar3;
-  int *piVar4;
-  float10 fVar5;
-  float10 fVar6;
-  undefined *puVar7;
-  float local_58;
-  float fStack_50;
-  float fStack_4c;
-  float fStack_48;
-  float fStack_44;
-  float fStack_40;
-  float fStack_3c;
-  float fStack_38;
-  float fStack_34;
-  float fStack_30;
-  float fStack_2c;
-  float fStack_28;
-  float fStack_24;
-  float fStack_20;
-  float fStack_1c;
-  float fStack_18;
-  
-  piVar4 = (int *)0x0;
-  if (param_2 == (undefined4 *)0x0) {
-    local_58 = 0.0;
-  }
-  else {
-    puVar7 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar7);
-    local_58 = (float)(-(uint)(iVar3 != 0) & (uint)param_2);
-  }
-  piVar1 = *(int **)((int)local_58 + 0xc);
-  if (piVar1 != (int *)0x0) {
-    puVar7 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar7);
-    piVar4 = (int *)(-(uint)(iVar3 != 0) & (uint)piVar1);
-  }
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  iVar3 = *(int *)((int)local_58 + 0xc4);
-  fStack_40 = *(float *)(iVar3 + 0x50);
-  fStack_4c = *(float *)((int)local_58 + 200);
-  fStack_48 = *(float *)((int)local_58 + 0xcc);
-  fStack_3c = *(float *)(iVar3 + 0x54);
-  fStack_38 = *(float *)(iVar3 + 0x58);
-  fStack_34 = *(float *)(iVar3 + 0x5c);
-  fVar5 = (float10)FUN_00a8ed10(&fStack_40,piVar4 + 0x10);
-  FUN_00a8e960((float)fVar5);
-  fStack_50 = fStack_40 - (float)piVar4[0x10];
-  fStack_4c = fStack_3c - (float)piVar4[0x11];
-  fStack_48 = fStack_38 - (float)piVar4[0x12];
-  fStack_44 = fStack_34 - (float)piVar4[0x13];
-  fStack_30 = fStack_50;
-  fStack_2c = fStack_4c;
-  fStack_28 = fStack_48;
-  fStack_24 = fStack_44;
-  if (((fStack_50 != 0.0) || (fStack_4c != 0.0)) || (fStack_48 != 0.0)) {
-    fVar2 = fStack_48 * fStack_48 + fStack_50 * fStack_50 + fStack_4c * fStack_4c;
-    if (fVar2 < 0.0 == (fVar2 == 0.0)) {
-      FUN_00ddf460(&fStack_50,&fStack_50);
-    }
-    else {
-      FUN_00dd5650(&DAT_0163d0ac);
-      fStack_50 = 0.0;
-      fStack_4c = 1.0;
-      fStack_48 = 0.0;
-    }
-  }
-  fVar5 = (float10)FUN_00a958c0(0);
-  fVar6 = (float10)FUN_00a95680(0);
-  fVar5 = (float10)fcos((float10)(float)fVar5 / fVar6);
-  (**(code **)(*piVar4 + 0x74))((float)(fVar5 * (float10)*(float *)(param_1 + 0x30) * (float10)0.1))
-  ;
-  fStack_24 = fStack_34 * local_58;
-  fStack_20 = fStack_30 * local_58;
-  fStack_1c = fStack_2c * local_58;
-  fStack_18 = local_58 * fStack_28;
-  (**(code **)(*piVar4 + 0x70))(&fStack_24);
-  FUN_00bd3730(param_2,param_1,0xd,0xc);
-  FUN_00bd37f0(param_2,param_1,0xd);
-  FUN_00bd3910(param_2,param_1,0xb,10);
-  FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Turns the player towards the climb target and moves him along (target - position) scaled by
+// the motion progress, lifting him by cos(progress) * climbHeight * 0.1.
+void OvercomeContainerStatePl0010::qteSafeCheck(undefined4 *context)
+{
+    using namespace OvercomeContainerStatePl0010_p1;
+    float targetPos[4];
+    float delta[4];
+    float dir[4];
+    float step[4];
 
+    char *ctx = asContext(context);
+    Pl0000 *player = ownerOf(ctx);
+    FUN_008e0b70(at<int>(player, 0x764), 0);  /* Pl0000+0x764: motion controller ? */
+    FUN_008e0ba0(at<int>(player, 0x764), 0);
+    char *target = at<char *>(ctx, 0xC4);  /* StateMachineContext+0xC4: climb target object */
+    targetPos[0] = at<float>(target, 0x50);  /* target +0x50: position */
+    targetPos[1] = at<float>(target, 0x54);
+    targetPos[2] = at<float>(target, 0x58);
+    targetPos[3] = at<float>(target, 0x5C);
+    float *pos = &at<float>(player, 0x40);  /* Pl0000+0x40: position */
+    float yaw = (float)FUN_00a8ed10((int)player, targetPos, (undefined4 *)pos);
+    thiscall<void>(FUN_00a8e960, player, yaw);
+    delta[0] = targetPos[0] - pos[0];
+    delta[1] = targetPos[1] - pos[1];
+    delta[2] = targetPos[2] - pos[2];
+    delta[3] = targetPos[3] - pos[3];
+    dir[0] = delta[0];
+    dir[1] = delta[1];
+    dir[2] = delta[2];
+    dir[3] = delta[3];
+    normalizeInPlace(dir);  // (the result is not used)
+    float frame = (float)FUN_00a958c0((int)player, 0);
+    double progress = (double)frame / (double)FUN_00a95680((int)player, 0);
+    float ratio = (float)progress;
+    // Behavior vf74 (slot 0x74): vertical move
+    vcall<void>(player, 0x74, (float)(cos(progress) * climbHeight() * 0.1f));
+    step[0] = delta[0] * ratio;
+    step[1] = delta[1] * ratio;
+    step[2] = delta[2] * ratio;
+    step[3] = delta[3] * ratio;
+    // Behavior vf70 (slot 0x70): move by vector
+    vcall<void>(player, 0x70, step);
+    FUN_00bd3730(context, (undefined4)this, 0xD, 0xC);
+    FUN_00bd37f0(context, (undefined4)this, 0xD);
+    FUN_00bd3910(context, (undefined4)this, 0xB, 10);
+    FUN_00bd39d0(context, (undefined4)this, 10);
+    StateMachineNode::qteSafeCheck(context);
+}

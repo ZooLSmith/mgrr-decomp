@@ -1,188 +1,146 @@
-// src/managers/battleparametermanager/BattleParameterManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D731A0..00D76190, 5 functions
-
+// src/managers/battleparametermanager/BattleParameterManagerImplement.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "BattleParameterManagerImplement.h"
 
+// ---------------------------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------------------------
+extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void *criticalSection);
+extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void *criticalSection);
+
+namespace BattleParameterManagerImplement_p1 {
+
+typedef BattleParameterManagerImplement::Entry      Entry;
+typedef BattleParameterManagerImplement::EntryArray EntryArray;
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// Frees one entry and the parameter object it owns.
+inline void deleteEntry(Entry *entry)
+{
+    if (entry->parameter != 0) {
+        vcall<void>(entry->parameter, 0x98, 1);
+        entry->parameter = 0;
+    }
+    FUN_00dd4920((int)entry);
+}
+
+}  // namespace BattleParameterManagerImplement_p1
+
 // 00D731A0  BattleParameterManagerImplement::vf08  size=98  [class]
-void __thiscall BattleParameterManagerImplement::vf08(int param_1,int param_2)
-
-{
-  undefined4 *puVar1;
-  int iVar2;
-  int *piVar3;
-  undefined4 *puVar4;
-  
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  iVar2 = *(int *)(param_1 + 0x28);
-  puVar4 = *(undefined4 **)(iVar2 + 4);
-  if (puVar4 != puVar4 + *(int *)(iVar2 + 8)) {
-    puVar1 = puVar4 + *(int *)(iVar2 + 8);
-    do {
-      piVar3 = (int *)*puVar4;
-      if (piVar3[2] == param_2) {
-        *piVar3 = *piVar3 + -1;
-        if (*piVar3 < 1) {
-          piVar3[1] = 1;
-        }
-        break;
-      }
-      puVar4 = puVar4 + 1;
-    } while (puVar4 != puVar1);
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  return;
+// Drops one reference of the entry `id`; an entry whose count falls below 1 is marked released.
+void BattleParameterManagerImplement::vf08(int id)
+{
+    using namespace BattleParameterManagerImplement_p1;
+    if (lockInitialized() != 0) {
+        EnterCriticalSection(lock());
+    }
+    EntryArray *list = entries();
+    Entry **it = list->data;
+    if (it != it + list->count) {
+        Entry **end = it + list->count;
+        do {
+            Entry *entry = *it;
+            if (entry->id == id) {
+                entry->refCount = entry->refCount - 1;
+                if (entry->refCount < 1) {
+                    entry->released = 1;
+                }
+                break;
+            }
+            it = it + 1;
+        } while (it != end);
+    }
+    if (lockInitialized() != 0) {
+        LeaveCriticalSection(lock());
+    }
 }
 
 // 00D73210  FUN_00d73210  size=118  [callgraph]
-void __fastcall FUN_00d73210(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  
-  FUN_00dd7270();
-  piVar2 = *(int **)(*(int *)(param_1 + 0x28) + 4);
-  if (piVar2 != piVar2 + *(int *)(*(int *)(param_1 + 0x28) + 8)) {
-    do {
-      iVar1 = *piVar2;
-      if (iVar1 != 0) {
-        if (*(int **)(iVar1 + 0xc) != (int *)0x0) {
-          (**(code **)(**(int **)(iVar1 + 0xc) + 0x98))(1);
-          *(undefined4 *)(iVar1 + 0xc) = 0;
-        }
-        FUN_00dd4920(iVar1);
-      }
-      piVar2 = piVar2 + 1;
-    } while (piVar2 != (int *)(*(int *)(*(int *)(param_1 + 0x28) + 4) +
-                              *(int *)(*(int *)(param_1 + 0x28) + 8) * 4));
-  }
-  if (*(undefined4 **)(param_1 + 0x28) != (undefined4 *)0x0) {
-    (**(code **)**(undefined4 **)(param_1 + 0x28))(1);
-    *(undefined4 *)(param_1 + 0x28) = 0;
-  }
-  return;
+// BattleParameterManagerImplement teardown: destroys the lock, frees every entry, then the entry array.
+void __fastcall FUN_00d73210(int self)
+{
+    using namespace BattleParameterManagerImplement_p1;
+    BattleParameterManagerImplement *manager = (BattleParameterManagerImplement *)self;
+    FUN_00dd7270((undefined4)manager->lock());
+    Entry **it = manager->entries()->data;
+    if (it != it + manager->entries()->count) {
+        do {
+            Entry *entry = *it;
+            if (entry != 0) {
+                deleteEntry(entry);
+            }
+            it = it + 1;
+        } while (it != manager->entries()->data + manager->entries()->count);
+    }
+    if (manager->entries() != 0) {
+        vcall<void>(manager->entries(), 0x0, 1);  // scalar deleting destructor
+        manager->entries() = 0;
+    }
 }
 
 // 00D73C20  BattleParameterManagerImplement::vf00  size=208  [class]
-void __fastcall BattleParameterManagerImplement::vf00(int param_1)
-
-{
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  piVar5 = *(int **)(*(int *)(param_1 + 0x28) + 4);
-  if (piVar5 != piVar5 + *(int *)(*(int *)(param_1 + 0x28) + 8)) {
-    do {
-      iVar1 = *piVar5;
-      if (*(int *)(iVar1 + 4) == 0) {
-        piVar6 = piVar5 + 1;
-      }
-      else {
-        if (iVar1 != 0) {
-          if (*(int **)(iVar1 + 0xc) != (int *)0x0) {
-            (**(code **)(**(int **)(iVar1 + 0xc) + 0x98))(1);
-            *(undefined4 *)(iVar1 + 0xc) = 0;
-          }
-          FUN_00dd4920(iVar1);
-        }
-        iVar1 = *(int *)(param_1 + 0x28);
-        uVar2 = *(uint *)(iVar1 + 8);
-        iVar3 = *(int *)(iVar1 + 4);
-        piVar6 = (int *)(iVar3 + uVar2 * 4);
-        if ((((piVar5 != piVar6) && (iVar3 != 0)) && (uVar2 != 0)) &&
-           ((uint)((int)piVar5 - iVar3 >> 2) < uVar2)) {
-          for (piVar4 = piVar5; piVar4 != piVar6 + -1; piVar4 = piVar4 + 1) {
-            *piVar4 = piVar4[1];
-          }
-          *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + -1;
-          piVar6 = piVar5;
-        }
-      }
-      piVar5 = piVar6;
-    } while (piVar6 != (int *)(*(int *)(*(int *)(param_1 + 0x28) + 4) +
-                              *(int *)(*(int *)(param_1 + 0x28) + 8) * 4));
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  return;
+// Frees the released entries and removes them from the table.
+void BattleParameterManagerImplement::purgeReleased()
+{
+    using namespace BattleParameterManagerImplement_p1;
+    if (lockInitialized() != 0) {
+        EnterCriticalSection(lock());
+    }
+    Entry **it = entries()->data;
+    if (it != it + entries()->count) {
+        Entry **next;
+        do {
+            Entry *entry = *it;
+            if (entry->released == 0) {
+                next = it + 1;
+            }
+            else {
+                if (entry != 0) {
+                    deleteEntry(entry);
+                }
+                EntryArray *list = entries();
+                unsigned int count = list->count;
+                Entry **data = list->data;
+                next = data + count;
+                if (it != next && data != 0 && count != 0 && (unsigned int)(it - data) < count) {
+                    // erase: shift the following entries down by one
+                    for (Entry **p = it; p != next - 1; p = p + 1) {
+                        *p = p[1];
+                    }
+                    list->count = list->count - 1;
+                    next = it;
+                }
+            }
+            it = next;
+        } while (next != entries()->data + entries()->count);
+    }
+    if (lockInitialized() != 0) {
+        LeaveCriticalSection(lock());
+    }
 }
 
 // 00D73D00  BattleParameterManagerImplement::thunk_vf00  size=5  [class]
-void __fastcall BattleParameterManagerImplement::thunk_vf00(int param_1)
-
-{
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  piVar5 = *(int **)(*(int *)(param_1 + 0x28) + 4);
-  if (piVar5 != piVar5 + *(int *)(*(int *)(param_1 + 0x28) + 8)) {
-    do {
-      iVar1 = *piVar5;
-      if (*(int *)(iVar1 + 4) == 0) {
-        piVar6 = piVar5 + 1;
-      }
-      else {
-        if (iVar1 != 0) {
-          if (*(int **)(iVar1 + 0xc) != (int *)0x0) {
-            (**(code **)(**(int **)(iVar1 + 0xc) + 0x98))(1);
-            *(undefined4 *)(iVar1 + 0xc) = 0;
-          }
-          FUN_00dd4920(iVar1);
-        }
-        iVar1 = *(int *)(param_1 + 0x28);
-        uVar2 = *(uint *)(iVar1 + 8);
-        iVar3 = *(int *)(iVar1 + 4);
-        piVar6 = (int *)(iVar3 + uVar2 * 4);
-        if ((((piVar5 != piVar6) && (iVar3 != 0)) && (uVar2 != 0)) &&
-           ((uint)((int)piVar5 - iVar3 >> 2) < uVar2)) {
-          for (piVar4 = piVar5; piVar4 != piVar6 + -1; piVar4 = piVar4 + 1) {
-            *piVar4 = piVar4[1];
-          }
-          *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + -1;
-          piVar6 = piVar5;
-        }
-      }
-      piVar5 = piVar6;
-    } while (piVar6 != (int *)(*(int *)(*(int *)(param_1 + 0x28) + 4) +
-                              *(int *)(*(int *)(param_1 + 0x28) + 8) * 4));
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  return;
+void BattleParameterManagerImplement::vf00()
+{
+    purgeReleased();  // jmp 00D73C20
 }
 
 // 00D76190  BattleParameterManagerImplement::vf0C  size=50  [class]
-undefined4 * __thiscall BattleParameterManagerImplement::vf0C(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  FUN_00d73210();
-  FUN_00dd7270();
-  *param_1 = BattleParameterManager::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *BattleParameterManagerImplement::vf0C(byte flags)
+{
+    // vftable = BattleParameterManagerImplement::vftable (0x016C0EEC)
+    FUN_00d73210((int)this);
+    FUN_00dd7270((undefined4)lock());
+    // vftable = BattleParameterManager::vftable (0x016C0C24)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
-

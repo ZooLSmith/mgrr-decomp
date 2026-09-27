@@ -1,281 +1,249 @@
-// src/player/pl0010/state/ZangekiHugeCutRightKesaStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B832D0..00BE3990, 10 functions
-
+// src/player/pl0010/state/ZangekiHugeCutRightKesaStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "ZangekiHugeCutRightKesaStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9ec0[];  // ZangekiHugeCutRightKesaStatePl0010 (returned by vf00)
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+extern unsigned char DAT_01b351a0[];  // Em0600 (returned by Em0600::vf04)
+// global objects passed in ECX
+extern unsigned char DAT_01be9a98[];  // object table: FUN_00a7f600 (find by id)
+
+namespace ZangekiHugeCutRightKesaStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function (symbol or address)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// ctx when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline char *asContextPl0010(const void *ctx)
+{
+    if (ctx == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(ctx, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (char *)ctx : 0;
+}
+
+// obj when it is a Pl0000 (type record from vftable slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline Pl0000 *playerOf(const char *ctx)
+{
+    return asPl0000(fld<void *>(ctx, 0xC));
+}
+
+const int kCutAction = 0xF3;  // action started on enter
+const float kCutAngle = 45.0f;  // stored in StateMachineContextPl0010+0x3F8 (degrees)
+
+// Body of vf08 after the base call (also entered directly at 0x00BB65F3).
+// Starts the cut motion; the play rate comes from the Em0600 registered as object 0x20600
+// (1.0 when there is none).
+inline void startHugeCut(undefined4 *context)
+{
+    char *ctx = asContextPl0010(context);
+    Pl0000 *player = playerOf(ctx);
+    int found = thiscall<int>(FUN_00a7f600, DAT_01be9a98, 0x20600);
+    if (found != 0) {
+        float rate = 1.0f;
+        void *enemy = (void *)FUN_00a7c8a0(found);
+        if (enemy != 0 &&
+            FUN_00dd6d80((undefined4 *)vcall<void *>(enemy, 0x4), (undefined4 *)DAT_01b351a0) != 0) {
+            rate = thiscall<float>(FUN_0059fa90, enemy);
+        }
+        // FUN_00aa4520: start a motion (8 stack arguments)
+        thiscall<void>(FUN_00aa4520, player, kCutAction, found, 0, 0.016666668f, 1.0f, 0x8000000, -1.0f, rate);
+    }
+    fld<float>(ctx, 0x3F8) = kCutAngle;  /* StateMachineContextPl0010+0x3F8: cut angle (degrees) */
+    fld<int>(ctx, 0x2F8) = 1;            /* StateMachineContextPl0010+0x2F8: ? */
+}
+
+}  // namespace ZangekiHugeCutRightKesaStatePl0010_p1
+
 // 00B832D0  ZangekiHugeCutRightKesaStatePl0010::SafeCheck  size=5  [class]
-void __thiscall ZangekiHugeCutRightKesaStatePl0010::SafeCheck(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0xc))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0xc))(param_2);
-  }
-  if (*(int *)(param_1 + 0x20) == 0) {
-    *(undefined4 *)(param_1 + 0x14) = 2;
-    *(undefined4 *)(param_1 + 0x20) = 1;
-  }
-  return;
+// A tail jump to StateMachineNode::SafeCheck (the raw body shown by Ghidra is the base's).
+void ZangekiHugeCutRightKesaStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00B832E0  ZangekiHugeCutRightKesaStatePl0010::vf14  size=5  [class]
-undefined4 __thiscall ZangekiHugeCutRightKesaStatePl0010::vf14(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x14))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x14))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 4;
-  return 1;
+// A tail jump to StateMachineNode::vf14 (the raw body shown by Ghidra is the base's).
+void ZangekiHugeCutRightKesaStatePl0010::vf14(undefined4 *contextArg)
+{
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00B832F0  ZangekiHugeCutRightKesaStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall ZangekiHugeCutRightKesaStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base's).
+undefined4 ZangekiHugeCutRightKesaStatePl0010::vf18(undefined4 contextArg)
+{
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00B83300  ZangekiHugeCutRightKesaStatePl0010::vf24  size=19  [class]
-bool ZangekiHugeCutRightKesaStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool ZangekiHugeCutRightKesaStatePl0010::vf24(undefined4 contextArg)
+{
+    return StateMachineNode::vf24(contextArg) != 0;
 }
 
 // 00B83340  ZangekiHugeCutRightKesaStatePl0010::vf00  size=6  [class]
-undefined * ZangekiHugeCutRightKesaStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9ec0;
+undefined *ZangekiHugeCutRightKesaStatePl0010::vf00()
+{
+    return DAT_01be9ec0;
 }
 
 // 00B91720  ZangekiHugeCutRightKesaStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall ZangekiHugeCutRightKesaStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *ZangekiHugeCutRightKesaStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BB65E0  ZangekiHugeCutRightKesaStatePl0010::vf08  size=19  [class]
-void ZangekiHugeCutRightKesaStatePl0010::vf08(undefined4 *param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  uint uVar4;
-  float10 fVar5;
-  undefined *puVar6;
-  
-  iVar1 = StateMachineNode::vf08(param_1);
-  if (iVar1 == 0) {
-    return;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar1 != 0) & (uint)param_1;
-  }
-  if (*(int **)(uVar4 + 0xc) != (int *)0x0) {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar4 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar6);
-  }
-  iVar1 = FUN_00a7f600(0x20600);
-  if (iVar1 == 0) goto LAB_00bb66c6;
-  piVar2 = (int *)FUN_00a7c8a0();
-  if (piVar2 == (int *)0x0) {
-LAB_00bb668c:
-    fVar5 = (float10)1.0;
-  }
-  else {
-    puVar6 = &DAT_01b351a0;
-    (**(code **)(*piVar2 + 4))(&DAT_01b351a0);
-    iVar3 = FUN_00dd6d80(puVar6);
-    if (iVar3 == 0) goto LAB_00bb668c;
-    fVar5 = (float10)FUN_0059fa90();
-  }
-  FUN_00aa4520(0xf3,iVar1,0,0x3c888889,0x3f800000,0x8000000,0xbf800000,(float)fVar5);
-LAB_00bb66c6:
-  *(undefined4 *)(uVar4 + 0x3f8) = 0x42340000;
-  *(undefined4 *)(uVar4 + 0x2f8) = 1;
-  return;
+// Enter: starts the cut motion.  (Ghidra's size covers only up to 0x00BB65F3; the rest of
+// the body is listed separately as FUN_00bb65f3 below.)
+bool ZangekiHugeCutRightKesaStatePl0010::vf08(undefined4 contextArg)
+{
+    using namespace ZangekiHugeCutRightKesaStatePl0010_p1;
+
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    startHugeCut((undefined4 *)contextArg);
+    return true;
 }
 
 // 00BB65F3  FUN_00bb65f3  size=241  [between]
-void FUN_00bb65f3(void)
-
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  uint uVar4;
-  undefined4 *unaff_EDI;
-  float10 fVar5;
-  undefined *puVar6;
-  
-  if (unaff_EDI == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*unaff_EDI)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar1 != 0) & (uint)unaff_EDI;
-  }
-  if (*(int **)(uVar4 + 0xc) != (int *)0x0) {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar4 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar6);
-  }
-  iVar1 = FUN_00a7f600(0x20600);
-  if (iVar1 == 0) goto LAB_00bb66c6;
-  piVar2 = (int *)FUN_00a7c8a0();
-  if (piVar2 == (int *)0x0) {
-LAB_00bb668c:
-    fVar5 = (float10)1.0;
-  }
-  else {
-    puVar6 = &DAT_01b351a0;
-    (**(code **)(*piVar2 + 4))(&DAT_01b351a0);
-    iVar3 = FUN_00dd6d80(puVar6);
-    if (iVar3 == 0) goto LAB_00bb668c;
-    fVar5 = (float10)FUN_0059fa90();
-  }
-  FUN_00aa4520(0xf3,iVar1,0,0x3c888889,0x3f800000,0x8000000,0xbf800000,(float)fVar5);
-LAB_00bb66c6:
-  *(undefined4 *)(uVar4 + 0x3f8) = 0x42340000;
-  *(undefined4 *)(uVar4 + 0x2f8) = 1;
-  return;
+// Not a real function: the rest of vf08 after the base call, split off by the analysis.
+// EDI holds the context on entry.
+void FUN_00bb65f3(void)
+{
+    using namespace ZangekiHugeCutRightKesaStatePl0010_p1;
+
+    undefined4 *context;  // ? unaff_EDI: register value on entry (the context of vf08)
+    startHugeCut(context);
 }
 
 // 00BB66F0  ZangekiHugeCutRightKesaStatePl0010::vf20  size=171  [class]
-undefined4 ZangekiHugeCutRightKesaStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int iVar1;
-  uint uVar2;
-  undefined *puVar3;
-  
-  iVar1 = StateMachineNode::vf20(param_1);
-  if (iVar1 != 0) {
-    if (param_1 == (undefined4 *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar3 = &DAT_01be9ef4;
-      (**(code **)*param_1)(&DAT_01be9ef4);
-      iVar1 = FUN_00dd6d80(puVar3);
-      uVar2 = -(uint)(iVar1 != 0) & (uint)param_1;
-    }
-    if (*(int **)(uVar2 + 0xc) != (int *)0x0) {
-      puVar3 = &DAT_01be9db8;
-      (**(code **)(**(int **)(uVar2 + 0xc) + 4))(&DAT_01be9db8);
-      FUN_00dd6d80(puVar3);
-    }
-    *(undefined4 *)(uVar2 + 0x2f8) = 0;
-    iVar1 = FUN_00a92f90();
-    if (iVar1 != 0) {
-      iVar1 = FUN_00a92f90();
-      FUN_00e26e90();
-      FUN_00e35de0(iVar1 + 0x98,0,0);
-    }
-    return 1;
-  }
-  return 0;
+// Leave: clears the context flag and resets the blend of the player's animation unit.
+undefined4 ZangekiHugeCutRightKesaStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace ZangekiHugeCutRightKesaStatePl0010_p1;
+
+    if (StateMachineNode::vf20(contextArg) != 0) {
+        char *ctx = asContextPl0010(contextArg);
+        Pl0000 *player = playerOf(ctx);
+        fld<int>(ctx, 0x2F8) = 0;  /* StateMachineContextPl0010+0x2F8: ? */
+        if (FUN_00a92f90((int)player) != 0) {
+            int animation = FUN_00a92f90((int)player);  // animation unit of the player
+            FUN_00e26e90(animation);
+            thiscall<void>(FUN_00e35de0, (char *)animation + 0xF4, animation + 0x98, 0, 0.0f);
+        }
+        return 1;
+    }
+    return 0;
 }
 
 // 00BE3990  ZangekiHugeCutRightKesaStatePl0010::qteSafeCheck  size=395  [class]
-void __thiscall
-ZangekiHugeCutRightKesaStatePl0010::qteSafeCheck(undefined4 param_1,undefined4 *param_2)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined *puVar5;
-  undefined1 local_20 [28];
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar1 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar1 != 0) & (uint)param_2;
-  }
-  if (*(int **)(uVar4 + 0xc) != (int *)0x0) {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(**(int **)(uVar4 + 0xc) + 4))(&DAT_01be9db8);
-    FUN_00dd6d80(puVar5);
-  }
-  *(undefined4 *)(uVar4 + 0x3f8) = 0x42340000;
-  iVar1 = FUN_00a94ce0(0);
-  if (iVar1 != 0) {
-    FUN_00d82510(0x3c,100);
-  }
-  iVar1 = FUN_00a8c760(2);
-  if (iVar1 != 0) {
-    FUN_00bd61b0(param_2);
-  }
-  iVar1 = FUN_00a8c760(1);
-  if (iVar1 != 0) {
-    FUN_00bd6f70(param_2,param_1,100);
-  }
-  uVar2 = FUN_00a8c760(2);
-  *(undefined4 *)(uVar4 + 0x3f4) = uVar2;
-  iVar1 = FUN_00a8c760(1);
-  *(uint *)(uVar4 + 0x2f8) = (uint)(iVar1 == 0);
-  iVar1 = FUN_00a8c760(0xb);
-  if (iVar1 == 0) {
-    StateMachineNode::qteSafeCheck(param_2);
-    return;
-  }
-  FUN_00b92a30(local_20,param_2,*(float *)(uVar4 + 0x3f8) + 180.0);
-  FUN_00bb9f50(param_2,local_20);
-  iVar1 = 2;
-  if (param_2 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar5);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  if (*(int *)(uVar4 + 0x330) == 0x20) {
-    iVar1 = 5;
-  }
-                    /* WARNING: Could not recover jumptable at 0x00be3b01. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(&UNK_00be3bc4 + iVar1 * 4))();
-  return;
-}
+// Per-frame update: blade inputs, then aims the cut and plays the blade motion of the selected
+// side (an inlined switch; Ghidra could not recover its jump table at 0x00BE3BC4).
+void ZangekiHugeCutRightKesaStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace ZangekiHugeCutRightKesaStatePl0010_p1;
 
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    fld<float>(ctx, 0x3F8) = kCutAngle;  /* StateMachineContextPl0010+0x3F8: cut angle (degrees) */
+    if (thiscall<int>(FUN_00a94ce0, player, 0) != 0) {
+        thiscall<void>(FUN_00d82510, this, 0x3C, 100);
+    }
+    if (thiscall<int>(FUN_00a8c760, player, 2) != 0) {
+        FUN_00bd61b0(contextArg);
+    }
+    if (thiscall<int>(FUN_00a8c760, player, 1) != 0) {
+        cdeclcall<void>(FUN_00bd6f70, contextArg, this, 100);
+    }
+    /* StateMachineContextPl0010+0x3F4 / +0x2F8: ? */
+    fld<int>(ctx, 0x3F4) = thiscall<int>(FUN_00a8c760, player, 2);
+    fld<int>(ctx, 0x2F8) = thiscall<int>(FUN_00a8c760, player, 1) == 0;
+    if (thiscall<int>(FUN_00a8c760, player, 0xB) == 0) {
+        StateMachineNode::qteSafeCheck(contextArg);
+        return;
+    }
+    float cutTarget[4];  // 16-byte aligned stack vector filled by FUN_00b92a30
+    FUN_00b92a30((int *)cutTarget, contextArg, fld<float>(ctx, 0x3F8) + 180.0f);
+    FUN_00bb9f50(contextArg, cutTarget);
+
+    char *current = asContextPl0010(contextArg);
+    /* StateMachineContextPl0010+0x38C / +0x390: the two blade objects (+0x984: ?), +0x330: ? */
+    int side = 0;
+    if (fld<int>(fld<char *>(current, 0x38C), 0x984) == 0 && fld<int>(fld<char *>(current, 0x390), 0x984) != 0) {
+        side = 1;
+    }
+    int kind = 2;
+    if (fld<int>(current, 0x330) == 0x20) {
+        kind = 5;
+    }
+    int blade = fld<int>(current, 0x38C + side * 4);
+    switch (kind) {  // jump table at 0x00BE3BC4 (only 2 and 5 are reachable here)
+    case 0:
+        FUN_005ee210(blade);
+        break;
+    case 1:
+        FUN_005ee240(blade);
+        break;
+    case 2:
+        FUN_005ee270(blade);
+        break;
+    case 3:
+        FUN_005ee2a0(blade);
+        break;
+    case 4:
+        FUN_005ee2d0(blade);
+        break;
+    case 5:
+        FUN_005ee300(blade);
+        break;
+    }
+    StateMachineNode::qteSafeCheck(contextArg);
+}

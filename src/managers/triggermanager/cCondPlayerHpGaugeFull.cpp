@@ -1,61 +1,78 @@
-// src/managers/triggermanager/cCondPlayerHpGaugeFull.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7A8E0..00C85750, 4 functions
-
+// src/managers/triggermanager/cCondPlayerHpGaugeFull.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondPlayerHpGaugeFull.h"
+
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+namespace cCondPlayerHpGaugeFull_p1 {
+
+// address stored in the vftable slot at byte offset `offset` of `object`
+inline void *vslot(const void *object, int offset)
+{
+    return *(void **)(*(char **)object + offset);
+}
+
+// FUN_00c13920 returns the entity manager; its vftable slot 0x28 returns an entity (0 = none).
+inline int *entityFromManager(int which)
+{
+    int *manager = (int *)FUN_00c13920();
+    return ((int *(__thiscall *)(int *, int))vslot(manager, 0x28))(manager, which);
+}
+
+// obj->vf04() returns the object's type record; FUN_00dd6d80(record, type) walks its parent chain.
+// (The raw decompilation shows the pushed type as an argument of the virtual call.)
+inline undefined4 isKindOf(int *object, unsigned char *type)
+{
+    undefined4 *record = ((undefined4 *(__thiscall *)(int *))vslot(object, 0x4))(object);
+    return FUN_00dd6d80(record, (undefined4 *)type);
+}
+// FUN_00b7c980 is __thiscall(player, 1); functions.h declares it __fastcall with one parameter
+inline int playerHpValue(int *player, int which)
+{
+    return ((int (__thiscall *)(int *, int))FUN_00b7c980)(player, which);
+}
+
+}  // namespace cCondPlayerHpGaugeFull_p1
 
 // 00C7A8E0  Trigger::cCondPlayerHpGaugeFull::vf10  size=1  [class]
-void Trigger::cCondPlayerHpGaugeFull::vf10(void)
-
-{
-  return;
+void Trigger::cCondPlayerHpGaugeFull::vf10()
+{
 }
 
 // 00C7A8F0  Trigger::cCondPlayerHpGaugeFull::vf1C  size=10  [class]
-void __thiscall Trigger::cCondPlayerHpGaugeFull::vf1C(int param_1,undefined4 param_2)
-
-{
-  *(undefined4 *)(param_1 + 4) = param_2;
-  return;
+void Trigger::cCondPlayerHpGaugeFull::vf1C(int *record)
+{
+    *(int **)((char *)this + 0x04) = record;  // cCondition+0x04: condition record
 }
 
 // 00C85730  Trigger::cCondPlayerHpGaugeFull::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondPlayerHpGaugeFull::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondPlayerHpGaugeFull *Trigger::cCondPlayerHpGaugeFull::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
 
 // 00C85750  Trigger::cCondPlayerHpGaugeFull::vf14  size=101  [class]
-undefined4 Trigger::cCondPlayerHpGaugeFull::vf14(void)
-
-{
-  int *piVar1;
-  int iVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  piVar1 = (int *)FUN_00c13920();
-  iVar2 = (**(code **)(*piVar1 + 0x28))(0xffffffff);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  piVar1 = (int *)FUN_00a7c8a0();
-  if (piVar1 != (int *)0x0) {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    if (iVar2 != 0) {
-      iVar2 = FUN_00b7c980(1);
-      iVar3 = FUN_00b7c970();
-      if (iVar2 == iVar3) {
-        return 1;
-      }
-    }
-  }
-  return 0;
+// 1 when the player's FUN_00b7c980(1) equals FUN_00b7c970 (ECX = player).
+int Trigger::cCondPlayerHpGaugeFull::vf14()
+{
+    using namespace cCondPlayerHpGaugeFull_p1;
+    int *entity = entityFromManager(-1);
+    if (entity == 0) {
+        return 0;
+    }
+    int *player = (int *)FUN_00a7c8a0((int)entity);  // entity -> behavior
+    if (player != 0) {
+        if (isKindOf(player, DAT_01be9db8) != 0) {
+            int maxHp = playerHpValue(player, 1);  // ? maximum
+            int hp = FUN_00b7c970((int)player);    // ? current
+            if (maxHp == hp) {
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
-

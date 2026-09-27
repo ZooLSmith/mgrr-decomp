@@ -1,152 +1,139 @@
-// src/player/pl0010/state/BodyStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80FE0..00BA95E0, 9 functions
-
+// src/player/pl0010/state/BodyStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "BodyStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9df8[];  // BodyStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+namespace BodyStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// ctx when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline char *asContextPl0010(const void *ctx)
+{
+    if (ctx == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(ctx, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (char *)ctx : 0;
+}
+
+// obj when it is a Pl0000 (type record from vftable slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline Pl0000 *playerOf(const char *ctx)
+{
+    return asPl0000(fld<void *>(ctx, 0xC));
+}
+
+}  // namespace BodyStatePl0010_p1
+
 // 00B80FE0  BodyStatePl0010::SafeCheck  size=5  [class]
-void __thiscall BodyStatePl0010::SafeCheck(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0xc))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0xc))(param_2);
-  }
-  if (*(int *)(param_1 + 0x20) == 0) {
-    *(undefined4 *)(param_1 + 0x14) = 2;
-    *(undefined4 *)(param_1 + 0x20) = 1;
-  }
-  return;
+// A tail jump to StateMachineNode::SafeCheck (the raw body shown by Ghidra is the base's).
+void BodyStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00B80FF0  BodyStatePl0010::qteSafeCheck  size=5  [class]
-undefined4 __thiscall BodyStatePl0010::qteSafeCheck(int param_1,int param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x10))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x10))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 3;
-  *(float *)(param_1 + 8) = *(float *)(param_2 + 8) + *(float *)(param_1 + 8);
-  return 1;
+// A tail jump to StateMachineNode::qteSafeCheck (the raw body shown by Ghidra is the base's).
+void BodyStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    StateMachineNode::qteSafeCheck(contextArg);
 }
 
 // 00B81000  BodyStatePl0010::vf14  size=5  [class]
-undefined4 __thiscall BodyStatePl0010::vf14(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x14))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x14))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 4;
-  return 1;
+// A tail jump to StateMachineNode::vf14 (the raw body shown by Ghidra is the base's).
+void BodyStatePl0010::vf14(undefined4 *contextArg)
+{
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00B81010  BodyStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall BodyStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// A tail jump to StateMachineNode::vf18 (the raw body shown by Ghidra is the base's).
+undefined4 BodyStatePl0010::vf18(undefined4 contextArg)
+{
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00B81020  BodyStatePl0010::vf20  size=19  [class]
-bool BodyStatePl0010::vf20(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf20(param_1);
-  return iVar1 != 0;
+undefined4 BodyStatePl0010::vf20(undefined4 *contextArg)
+{
+    return StateMachineNode::vf20(contextArg) != 0;
 }
 
 // 00B81040  BodyStatePl0010::vf24  size=19  [class]
-bool BodyStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool BodyStatePl0010::vf24(undefined4 contextArg)
+{
+    return StateMachineNode::vf24(contextArg) != 0;
 }
 
 // 00B81080  BodyStatePl0010::vf00  size=6  [class]
-undefined * BodyStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9df8;
+undefined *BodyStatePl0010::vf00()
+{
+    return DAT_01be9df8;
 }
 
 // 00B90CA0  BodyStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall BodyStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *BodyStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BA95E0  BodyStatePl0010::vf08  size=175  [class]
-undefined4 BodyStatePl0010::vf08(undefined4 *param_1)
-
-{
-  float fVar1;
-  int *piVar2;
-  int iVar3;
-  uint uVar4;
-  undefined4 uVar5;
-  undefined *puVar6;
-  undefined4 uVar7;
-  
-  iVar3 = StateMachineNode::vf08(param_1);
-  if (iVar3 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(uVar4 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar4 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar6);
-    uVar4 = -(uint)(iVar3 != 0) & (uint)piVar2;
-  }
-  fVar1 = *(float *)(*(int *)(uVar4 + 0x40d4) + 0x14c);
-  if ((*(float *)(uVar4 + 0xd28) <= fVar1 * fVar1) ||
-     ((*(uint *)(uVar4 + 0xcf8) & *(uint *)(uVar4 + 0xe48)) == 0)) {
-    uVar7 = 0x11;
-  }
-  else {
-    uVar7 = 10;
-  }
-  uVar5 = (*(code *)**(undefined4 **)param_1[1])(uVar7,param_1);
-  FUN_00d82bf0(uVar5,uVar7);
-  return 1;
-}
+// Enter: creates the first child state (10 or 0x11) with the context's factory and attaches it.
+bool BodyStatePl0010::vf08(undefined4 contextArg)
+{
+    using namespace BodyStatePl0010_p1;
 
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    char *ctx = asContextPl0010((void *)contextArg);
+    Pl0000 *player = playerOf(ctx);
+    float threshold = fld<float>(fld<char *>(player, 0x40D4), 0x14C);  /* Pl0000+0x40D4: parameter table */
+    int firstState;
+    if (!(threshold * threshold >= fld<float>(player, 0xD28)) &&  // NaN passes, as in the machine code  /* Pl0000+0xD28: ? (compared with the squared parameter) */
+        (fld<unsigned int>(player, 0xCF8) & fld<unsigned int>(player, 0xE48)) != 0) {  /* Pl0000+0xCF8 inputHold & +0xE48 maskE48 */
+        firstState = 10;
+    }
+    else {
+        firstState = 0x11;
+    }
+    // StateMachineContext+0x4: state factory; vftable slot 0 creates the node of a state id
+    // (it pops only the id: the context pushed before it is the last argument of FUN_00d82bf0)
+    void *factory = fld<void *>((void *)contextArg, 4);
+    int *node = vcall<int *>(factory, 0x0, firstState);
+    FUN_00d82bf0((int)this, node, contextArg);
+    return true;
+}

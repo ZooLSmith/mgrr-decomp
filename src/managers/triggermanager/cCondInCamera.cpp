@@ -1,47 +1,54 @@
-// src/managers/triggermanager/cCondInCamera.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7A320..00C85330, 3 functions
-
+// src/managers/triggermanager/cCondInCamera.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondInCamera.h"
+
+extern unsigned char DAT_01bea1d0[];  // camera/view object (ECX of FUN_00d9fa80)
+
+namespace cCondInCamera_p1 {
+
+// Trigger::cCondition+0x04: the trigger record this condition was built from
+inline int *&conditionRecord(void *self) { return *(int **)((char *)self + 0x4); }
+
+// FUN_00d9fa80: projects the world position `world` to screen coordinates (x, y, z, w) at `screen`
+// (__thiscall, ECX = DAT_01bea1d0)
+inline void projectToScreen(float *screen, float *world) { ((void (__thiscall *)(void *, float *, float *))(void *)FUN_00d9fa80)(DAT_01bea1d0, screen, world); }
+
+} // namespace cCondInCamera_p1
 
 // 00C7A320  Trigger::cCondInCamera::vf14  size=135  [class]
-undefined4 __fastcall Trigger::cCondInCamera::vf14(int param_1)
-
-{
-  float *pfVar1;
-  int iVar2;
-  int iVar3;
-  
-  if (*(int *)(param_1 + 0x14) == 0) {
-    return 0;
-  }
-  iVar2 = FUN_00f98a90();
-  iVar3 = FUN_00f98aa0();
-  pfVar1 = (float *)(param_1 + 0x20);
-  FUN_00d9fa80(pfVar1,param_1 + 0x30);
-  if ((((0.0 < *(float *)(param_1 + 0x2c)) && (0.0 < *pfVar1)) && (*pfVar1 < (float)iVar2)) &&
-     ((0.0 < *(float *)(param_1 + 0x24) && (*(float *)(param_1 + 0x24) < (float)iVar3)))) {
-    return 1;
-  }
-  return 0;
+int Trigger::cCondInCamera::vf14()
+{
+    using namespace cCondInCamera_p1;
+
+    if (active() == 0) {
+        return 0;
+    }
+    int screenWidth = (int)FUN_00f98a90();
+    int screenHeight = (int)FUN_00f98aa0();
+    float *screen = &screenX();
+    projectToScreen(screen, &worldX());
+    if (0.0f < screenW() && 0.0f < *screen && *screen < (float)screenWidth &&
+        0.0f < screenY() && screenY() < (float)screenHeight) {
+        return 1;
+    }
+    return 0;
 }
 
 // 00C7A3B0  Trigger::cCondInCamera::vf1C  size=16  [class]
-void __thiscall Trigger::cCondInCamera::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_2 + 8);
-  return;
+void Trigger::cCondInCamera::vf1C(int *record)
+{
+    using namespace cCondInCamera_p1;
+
+    conditionRecord(this) = record;
+    field10() = record[2];
 }
 
 // 00C85330  Trigger::cCondInCamera::vf00  size=31  [class]
-undefined4 * __thiscall Trigger::cCondInCamera::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondInCamera *Trigger::cCondInCamera::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return this;
 }
-

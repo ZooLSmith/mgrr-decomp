@@ -1,368 +1,302 @@
-// src/player/pl0010/state/DownwardCliffOverJumpStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B813F0..00BDE790, 9 functions
-
+// src/player/pl0010/state/DownwardCliffOverJumpStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "DownwardCliffOverJumpStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9e0c[];  // DownwardCliffOverJumpStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+// CRT (the compiler emitted fabs / fcos / fsin inline) and D3DX
+extern "C" double __cdecl fabs(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sin(double x);
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+
+namespace DownwardCliffOverJumpStatePl0010_p1 {
+
+// field at an absolute byte offset
+template <class T> inline T &fld(const void *base, int offset)
+{
+    return *(T *)((char *)base + offset);
+}
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// __thiscall call (ECX = self) of a function whose functions.h prototype lost arguments
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// __cdecl call of a function whose functions.h prototype lost arguments
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// ctx when it is a StateMachineContextPl0010 (type record from vftable slot 0), else 0
+inline char *asContextPl0010(const void *ctx)
+{
+    if (ctx == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(ctx, 0x0), (undefined4 *)DAT_01be9ef4);
+    return isKind != 0 ? (char *)ctx : 0;
+}
+
+// obj when it is a Pl0000 (type record from vftable slot 4), else 0
+inline Pl0000 *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = FUN_00dd6d80((undefined4 *)vcall<void *>(obj, 0x4), (undefined4 *)DAT_01be9db8);
+    return isKind != 0 ? (Pl0000 *)obj : 0;
+}
+
+// The player of a state-machine context (StateMachineContext+0xC: owner).
+inline Pl0000 *playerOf(const char *ctx)
+{
+    return asPl0000(fld<void *>(ctx, 0xC));
+}
+
+// Close enough to land: ground probe hit within 0.36, or the controller reports the fall ended.
+inline bool readyToLand(Pl0000 *player)
+{
+    bool nearGround = fld<int>(player, 0x41E0) != 0 &&  /* Pl0000+0x41E0 / +0x41E4: ground probe hit / distance */
+                      0.36f >= fld<float>(player, 0x41E4);  // NaN -> falls through to FUN_008e2740
+    return nearGround || FUN_008e2740(fld<int>(player, 0x764));  /* Pl0000+0x764: movement controller */
+}
+
+// Camera angles from the parameter table (+0x168 yaw, +0x16C pitch in degrees), then FUN_00b8af00.
+inline void aimCamera(Pl0000 *player)
+{
+    char *params = fld<char *>(player, 0x40D4);  /* Pl0000+0x40D4: parameter table */
+    float pitchDegrees = fld<float>(params, 0x16C);
+    fld<float>(player, 0x4180) = fld<float>(params, 0x168);  /* Pl0000+0x417C..0x4184: camera angles */
+    fld<float>(player, 0x417C) = pitchDegrees * 0.017453292f;
+    fld<float>(player, 0x4184) = 0.0f;
+    FUN_00b8af00((int)player);
+}
+
+}  // namespace DownwardCliffOverJumpStatePl0010_p1
+
 // 00B813F0  DownwardCliffOverJumpStatePl0010::vf08  size=52  [class]
-undefined4 __thiscall DownwardCliffOverJumpStatePl0010::vf08(int param_1,undefined4 param_2)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_2);
-  if (iVar1 == 0) {
-    return 0;
-  }
-  *(undefined4 *)(param_1 + 0x48) = 0;
-  *(undefined4 *)(param_1 + 0x40) = 0;
-  *(undefined4 *)(param_1 + 0x38) = 0;
-  *(undefined4 *)(param_1 + 0x44) = 0;
-  *(undefined4 *)(param_1 + 0x54) = 0;
-  *(undefined4 *)(param_1 + 0x3c) = 0;
-  return 1;
+// Enter.
+bool DownwardCliffOverJumpStatePl0010::vf08(undefined4 contextArg)
+{
+    if (StateMachineNode::vf08(contextArg) == 0) {
+        return false;
+    }
+    airTime() = 0.0f;
+    landing() = 0;
+    prevForward() = 0.0f;
+    airborne() = 0;
+    shortDrop() = 0;
+    prevUp() = 0.0f;
+    return true;
 }
 
 // 00B81430  DownwardCliffOverJumpStatePl0010::vf24  size=19  [class]
-bool DownwardCliffOverJumpStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool DownwardCliffOverJumpStatePl0010::vf24(undefined4 contextArg)
+{
+    return StateMachineNode::vf24(contextArg) != 0;
 }
 
 // 00B81470  DownwardCliffOverJumpStatePl0010::vf00  size=6  [class]
-undefined * DownwardCliffOverJumpStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9e0c;
+undefined *DownwardCliffOverJumpStatePl0010::vf00()
+{
+    return DAT_01be9e0c;
 }
 
 // 00B90F40  DownwardCliffOverJumpStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall DownwardCliffOverJumpStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *DownwardCliffOverJumpStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BAA570  DownwardCliffOverJumpStatePl0010::vf18  size=161  [class]
-void __thiscall DownwardCliffOverJumpStatePl0010::vf18(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  if (*(int *)(param_1 + 0x40) != 0) {
-    if ((*(int *)(uVar2 + 0x41e0) == 0) || (0.36 < *(float *)(uVar2 + 0x41e4))) {
-      iVar3 = FUN_008e2740();
-      if (iVar3 == 0) goto LAB_00baa604;
-    }
-    FUN_00d82510(0x13,0x4b);
-  }
-LAB_00baa604:
-  StateMachineNode::vf18(param_2);
-  return;
+undefined4 DownwardCliffOverJumpStatePl0010::vf18(undefined4 contextArg)
+{
+    using namespace DownwardCliffOverJumpStatePl0010_p1;
+
+    char *ctx = asContextPl0010((void *)contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (landing() != 0 && readyToLand(player)) {
+        FUN_00d82510((int)this, 0x13, 0x4B);
+    }
+    return StateMachineNode::vf18(contextArg);
 }
 
 // 00BAA620  DownwardCliffOverJumpStatePl0010::vf20  size=146  [class]
-undefined4 DownwardCliffOverJumpStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(uVar3 + 0x4170) = 0;
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  return 1;
+// Leave: restores the camera angles.
+undefined4 DownwardCliffOverJumpStatePl0010::vf20(undefined4 *contextArg)
+{
+    using namespace DownwardCliffOverJumpStatePl0010_p1;
+
+    if (StateMachineNode::vf20(contextArg) == 0) {
+        return 0;
+    }
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    fld<int>(player, 0x4170) = 0;  /* Pl0000+0x4170: camera angles overridden by the state */
+    fld<float>(player, 0x4180) = fld<float>(player, 0x418C);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+    fld<float>(player, 0x417C) = fld<float>(player, 0x4188);
+    fld<float>(player, 0x4184) = fld<float>(player, 0x4190);
+    return 1;
 }
 
 // 00BCA480  DownwardCliffOverJumpStatePl0010::vf14  size=405  [class]
-void __thiscall DownwardCliffOverJumpStatePl0010::vf14(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  undefined4 uVar5;
-  undefined *puVar6;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_2;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar6 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar6);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  if (*(int *)(param_1 + 0x54) == 0) {
-    iVar4 = FUN_00a94db0(0xcf);
-    if (iVar4 != 0) {
-      *(undefined4 *)(param_1 + 0x50) = 0xd0;
-      uVar5 = FUN_00aa3f60(0xd0);
-      FUN_00a96070(uVar5,0x80,1);
-    }
-    iVar4 = FUN_00a94db0(0xd0);
-    if ((iVar4 != 0) && (*(int *)(param_1 + 0x44) == 0)) {
-      *(undefined4 *)(param_1 + 0x44) = 1;
-      uVar5 = FUN_00aa3f60(0xd1);
-      FUN_00a96070(uVar5,0x80,1);
-    }
-    if (*(int *)(param_1 + 0x40) != 0) {
-      fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x16c);
-      *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(*(int *)(uVar3 + 0x40d4) + 0x168);
-      *(float *)(uVar3 + 0x417c) = fVar1 * 0.017453292;
-      *(undefined4 *)(uVar3 + 0x4184) = 0;
-      FUN_00b8af00();
-      if ((*(int *)(uVar3 + 0x41e0) == 0) || (0.36 < *(float *)(uVar3 + 0x41e4))) {
-        iVar4 = FUN_008e2740();
-        if (iVar4 == 0) goto LAB_00bca607;
-      }
-      FUN_00d82510(0x13,0x4b);
-    }
-  }
-  else {
-    iVar4 = FUN_00a94db0(0x33);
-    if (iVar4 == 0) {
-      iVar4 = FUN_00a94db0(0x34);
-      if (iVar4 == 0) goto LAB_00bca607;
-    }
-    iVar4 = FUN_00bb90c0(param_2,param_1);
-    if (iVar4 == 0) {
-      FUN_008e0c00(uVar3 + 0x560);
-      StateMachineNode::vf14(param_2);
-      return;
-    }
-  }
-LAB_00bca607:
-  StateMachineNode::vf14(param_2);
-  return;
+void DownwardCliffOverJumpStatePl0010::vf14(undefined4 *contextArg)
+{
+    using namespace DownwardCliffOverJumpStatePl0010_p1;
+
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    if (shortDrop() == 0) {
+        if (FUN_00a94db0((int)player, 0xCF) != 0) {
+            action() = 0xD0;
+            int motion = FUN_00aa3f60((int)player, 0xD0);
+            thiscall<void>(FUN_00a96070, player, motion, 0x80, 1);
+        }
+        if (FUN_00a94db0((int)player, 0xD0) != 0 && airborne() == 0) {
+            airborne() = 1;
+            int motion = FUN_00aa3f60((int)player, 0xD1);
+            thiscall<void>(FUN_00a96070, player, motion, 0x80, 1);
+        }
+        if (landing() != 0) {
+            aimCamera(player);
+            if (readyToLand(player)) {
+                FUN_00d82510((int)this, 0x13, 0x4B);
+            }
+        }
+    }
+    else if (FUN_00a94db0((int)player, 0x33) != 0 || FUN_00a94db0((int)player, 0x34) != 0) {
+        if (cdeclcall<int>(FUN_00bb90c0, contextArg, (int)this) == 0) {
+            FUN_008e0c00(fld<int>(player, 0x764), (undefined4 *)((char *)player + 0x560));  /* Pl0000+0x560: float[4] */
+            StateMachineNode::vf14(contextArg);
+            return;
+        }
+    }
+    StateMachineNode::vf14(contextArg);
 }
 
 // 00BDE5D0  DownwardCliffOverJumpStatePl0010::SafeCheck  size=442  [class]
-void __thiscall DownwardCliffOverJumpStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  undefined4 uVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
-  undefined *puVar8;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar6 = 0;
-    }
-    else {
-      puVar8 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar5 = FUN_00dd6d80(puVar8);
-      uVar6 = -(uint)(iVar5 != 0) & (uint)param_2;
-    }
-    piVar4 = *(int **)(uVar6 + 0xc);
-    if (piVar4 == (int *)0x0) {
-      uVar7 = 0;
-    }
-    else {
-      puVar8 = &DAT_01be9db8;
-      (**(code **)(*piVar4 + 4))(&DAT_01be9db8);
-      iVar5 = FUN_00dd6d80(puVar8);
-      uVar7 = -(uint)(iVar5 != 0) & (uint)piVar4;
-    }
-    *(undefined4 *)(uVar7 + 0x4170) = 1;
-    *(undefined4 *)(uVar7 + 0x418c) = *(undefined4 *)(uVar7 + 0x4180);
-    *(undefined4 *)(uVar7 + 0x4188) = *(undefined4 *)(uVar7 + 0x417c);
-    *(undefined4 *)(uVar7 + 0x4190) = *(undefined4 *)(uVar7 + 0x4184);
-    fVar1 = *(float *)(*(int *)(*(int *)(uVar6 + 0xc0) + 4) + 0x158);
-    if ((3.1 < *(float *)(uVar7 + 0x4258)) || (fVar1 <= 6.0)) {
-      *(undefined4 *)(param_1 + 0x50) = 0xcf;
-      FUN_00aa3f60(0xcf);
-      uVar2 = *(undefined4 *)(*(int *)(*(int *)(uVar6 + 0xc0) + 4) + 0x160);
-      fVar3 = *(float *)(*(int *)(uVar7 + 0x764) + 0xf4);
-      *(undefined4 *)(param_1 + 0x34) = 0x41600000;
-      FUN_00d83290(param_1 + 0x30,fVar1,uVar2,ABS(fVar3),0x41600000);
-    }
-    else {
-      if (*(float *)(uVar7 + 0x4258) <= 1.5) {
-        *(undefined4 *)(param_1 + 0x50) = 0x33;
-      }
-      else {
-        *(undefined4 *)(param_1 + 0x50) = 0x34;
-      }
-      FUN_00aa3f60(*(undefined4 *)(param_1 + 0x50));
-      iVar5 = *(int *)(uVar7 + 0x764);
-      if (*(int *)(iVar5 + 0x104) != 1) {
-        *(undefined4 *)(iVar5 + 0x104) = 1;
-        *(undefined4 *)(*(int *)(iVar5 + 0xd0) + 4) = 0;
-      }
-      *(undefined4 *)(param_1 + 0x54) = 1;
-    }
-    *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(uVar7 + 0x44);
-  }
-  FUN_00bd3730(param_2,param_1,0xd,0xc);
-  FUN_00bd37f0(param_2,param_1,0xd);
-  FUN_00bd3910(param_2,param_1,0xb,10);
-  FUN_00bd39d0(param_2,param_1,10);
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// First update: picks the long drop (0xCF, arc from FUN_00d83290) or the short one (0x33 / 0x34)
+// from the drop height and the distance to the context's target.
+void DownwardCliffOverJumpStatePl0010::SafeCheck(undefined4 *contextArg)
+{
+    using namespace DownwardCliffOverJumpStatePl0010_p1;
+
+    if (*(int *)((char *)this + 0x20) == 0) {  /* StateMachineNode+0x20: started */
+        char *ctx = asContextPl0010(contextArg);
+        Pl0000 *player = playerOf(ctx);
+        fld<int>(player, 0x4170) = 1;  /* Pl0000+0x4170: camera angles overridden by the state */
+        fld<float>(player, 0x418C) = fld<float>(player, 0x4180);  /* Pl0000+0x417C..0x4190: camera angles and their saved copy */
+        fld<float>(player, 0x4188) = fld<float>(player, 0x417C);
+        fld<float>(player, 0x4190) = fld<float>(player, 0x4184);
+        /* StateMachineContextPl0010+0xC0: object whose +4 has floats at +0x158 / +0x160 */
+        float distance = fld<float>(fld<char *>(fld<char *>(ctx, 0xC0), 4), 0x158);
+        // (written so that a NaN height or distance takes the long drop, as in the machine code)
+        if (!(3.1f >= fld<float>(player, 0x4258)) || !(distance > 6.0f)) {  /* Pl0000+0x4258: drop height */
+            action() = 0xCF;
+            FUN_00aa3f60((int)player, 0xCF);
+            float targetValue = fld<float>(fld<char *>(fld<char *>(ctx, 0xC0), 4), 0x160);
+            float verticalSpeed = fld<float>(fld<char *>(player, 0x764), 0xF4);  /* Pl0000+0x764: movement controller */
+            jumpSpeed() = 14.0f;
+            FUN_00d83290(&jumpAngle(), distance, targetValue, (float)fabs(verticalSpeed), 14.0f);
+        }
+        else {
+            if (1.5f < fld<float>(player, 0x4258)) {
+                action() = 0x34;
+            }
+            else {
+                action() = 0x33;
+            }
+            FUN_00aa3f60((int)player, action());
+            char *controller = fld<char *>(player, 0x764);
+            if (fld<int>(controller, 0x104) != 1) {
+                fld<int>(controller, 0x104) = 1;
+                fld<float>(fld<char *>(controller, 0xD0), 4) = 0.0f;
+            }
+            shortDrop() = 1;
+        }
+        startHeight() = fld<float>(player, 0x44);  /* Pl0000+0x44: position y */
+    }
+    FUN_00bd3730(contextArg, (undefined4)this, 0xD, 0xC);
+    FUN_00bd37f0(contextArg, (undefined4)this, 0xD);
+    FUN_00bd3910(contextArg, (undefined4)this, 0xB, 10);
+    FUN_00bd39d0(contextArg, (undefined4)this, 10);
+    StateMachineNode::SafeCheck(contextArg);
 }
 
 // 00BDE790  DownwardCliffOverJumpStatePl0010::qteSafeCheck  size=517  [class]
-void __thiscall DownwardCliffOverJumpStatePl0010::qteSafeCheck(int param_1,undefined4 *param_2)
-
-{
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int *piVar5;
-  float10 fVar6;
-  float10 fVar7;
-  undefined *puVar8;
-  undefined4 *local_74;
-  undefined4 local_70;
-  float local_6c;
-  float local_68;
-  undefined1 local_50 [76];
-  
-  if (param_2 == (undefined4 *)0x0) {
-    local_74 = param_2;
-  }
-  else {
-    puVar8 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar8);
-    local_74 = (undefined4 *)(-(uint)(iVar3 != 0) & (uint)param_2);
-  }
-  piVar5 = (int *)local_74[3];
-  if (piVar5 == (int *)0x0) {
-    piVar5 = (int *)0x0;
-  }
-  else {
-    puVar8 = &DAT_01be9db8;
-    (**(code **)(*piVar5 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar8);
-    piVar5 = (int *)(-(uint)(iVar3 != 0) & (uint)piVar5);
-  }
-  FUN_00bd3620(param_2,param_1,100);
-  FUN_008e0b70(0);
-  FUN_008e0ba0(0);
-  if (0x7fffffff < *(uint *)(param_1 + 0x24)) {
-    if (*(int *)(param_1 + 0x50) == 0x33) {
-LAB_00bde847:
-      fVar1 = *(float *)(piVar5[0x1035] + 0x16c);
-      piVar5[0x1060] = *(int *)(piVar5[0x1035] + 0x168);
-      piVar5[0x105f] = (int)(fVar1 * 0.017453292);
-      piVar5[0x1061] = 0;
-      FUN_00b8af00();
-      StateMachineNode::qteSafeCheck(param_2);
-      return;
-    }
-    if (*(int *)(param_1 + 0x50) == 0x34) {
-      iVar3 = FUN_00a95270(0x34,0x11);
-      if (iVar3 != 0) goto LAB_00bde847;
-    }
-    else if (*(int *)(param_1 + 0x44) != 0) {
-      FUN_00b8af00();
-      fVar6 = (float10)fcos((float10)*(float *)(param_1 + 0x30));
-      fVar6 = fVar6 * (float10)*(float *)(param_1 + 0x34) * (float10)*(float *)(param_1 + 0x48);
-      fVar7 = (float10)fsin((float10)*(float *)(param_1 + 0x30));
-      fVar7 = fVar7 * (float10)*(float *)(param_1 + 0x34) * (float10)*(float *)(param_1 + 0x48);
-      fVar1 = *(float *)(param_1 + 0x38);
-      fVar2 = *(float *)(param_1 + 0x3c);
-      *(float *)(param_1 + 0x38) = (float)fVar6;
-      *(float *)(param_1 + 0x3c) = (float)fVar7;
-      local_70 = 0;
-      local_6c = (float)(fVar7 - (float10)fVar2);
-      local_68 = (float)(fVar6 - (float10)fVar1);
-      FUN_00ddc1d0(local_50,piVar5 + 0x24,5);
-      D3DXVec3TransformNormal(&local_70,&local_70,local_50);
-      if ((float)piVar5[0x11] < *(float *)(param_1 + 0x4c)) {
-        iVar3 = FUN_00a94db0(0xd1);
-        if (iVar3 != 0) {
-          uVar4 = FUN_00aa9280(0xd2);
-          FUN_00a96070(uVar4,0x80,1);
-        }
-      }
-      if (0.033333335 < *(float *)(param_1 + 0x48)) {
-        iVar3 = FUN_008e0ce0(&local_6c);
-        if (*(float *)(iVar3 + 4) < 0.0) {
-          *(undefined4 *)(param_1 + 0x40) = 1;
-        }
-      }
-      (**(code **)(*piVar5 + 0x70))(&stack0xffffff84);
-      *(float *)(param_1 + 0x48) = (float)local_74[2] + *(float *)(param_1 + 0x48);
-    }
-  }
-  StateMachineNode::qteSafeCheck(param_2);
-  return;
-}
+// Per-frame update (while no other state is requested): the short drop only aims the camera;
+// the long drop moves the player along the arc, rotated into the player's frame.
+void DownwardCliffOverJumpStatePl0010::qteSafeCheck(undefined4 *contextArg)
+{
+    using namespace DownwardCliffOverJumpStatePl0010_p1;
 
+    char *ctx = asContextPl0010(contextArg);
+    Pl0000 *player = playerOf(ctx);
+    FUN_00bd3620(contextArg, (int)this, 100);
+    FUN_008e0b70(fld<int>(player, 0x764), 0);
+    FUN_008e0ba0(fld<int>(player, 0x764), 0);
+    if (*(int *)((char *)this + 0x24) < 0) {  /* StateMachineNode+0x24: requested state */
+        if (action() == 0x33 || (action() == 0x34 && FUN_00a95270((int)player, 0x34, 0x11) != 0)) {
+            aimCamera(player);
+            StateMachineNode::qteSafeCheck(contextArg);
+            return;
+        }
+        if (action() != 0x34 && airborne() != 0) {
+            FUN_00b8af00((int)player);
+            double forward = cos((double)jumpAngle()) * jumpSpeed() * airTime();
+            double up = sin((double)jumpAngle()) * jumpSpeed() * airTime();
+            float oldForward = prevForward();
+            float oldUp = prevUp();
+            prevForward() = (float)forward;
+            prevUp() = (float)up;
+            float step[4];  // step[3] is never written
+            step[0] = 0.0f;
+            step[1] = (float)(up - oldUp);
+            step[2] = (float)(forward - oldForward);
+            float rotation[16];
+            FUN_00ddc1d0((undefined4 *)rotation, (float *)((char *)player + 0x90), 5);  /* Pl0000+0x90: rotation */
+            D3DXVec3TransformNormal(step, step, rotation);
+            if (fld<float>(player, 0x44) < startHeight()) {  /* Pl0000+0x44: position y */
+                if (FUN_00a94db0((int)player, 0xD1) != 0) {
+                    int motion = FUN_00aa9280((int)player, 0xD2);
+                    thiscall<void>(FUN_00a96070, player, motion, 0x80, 1);
+                }
+            }
+            if (0.033333335f < airTime()) {
+                float delta[4];
+                FUN_008e0ce0(fld<int>(player, 0x764), delta);  // controller +0x1B0 - +0x1A0 (returns delta)
+                if (delta[1] < 0.0f) {
+                    landing() = 1;
+                }
+            }
+            // Pl0000 vftable slot 0x70 (moves by a float[4]); Ghidra showed a wrong stack slot here,
+            // the machine code passes step
+            vcall<void>(player, 0x70, step);
+            airTime() = fld<float>(ctx, 8) + airTime();  /* StateMachineContext+0x8: frame time */
+        }
+    }
+    StateMachineNode::qteSafeCheck(contextArg);
+}

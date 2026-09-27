@@ -1,37 +1,43 @@
-// src/managers/battlesituationmanager/BattleSituationManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D72AD0..00D76C30, 2 functions
-
+// src/managers/battlesituationmanager/BattleSituationManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "BattleSituationManager.h"
 
+namespace BattleSituationManager_p1 {
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+}  // namespace BattleSituationManager_p1
+
 // 00D72AD0  BattleSituationManager::vf0C  size=31  [class]
-undefined4 * __thiscall BattleSituationManager::vf0C(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *BattleSituationManager::vf0C(byte flags)
+{
+    // vftable = BattleSituationManager::vftable (0x016C0C98)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00D76C30  BattleSituationManager::BattleSituationManager  size=64  [class]
-void __fastcall BattleSituationManager::BattleSituationManager(undefined4 *param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = param_1[2];
-  *param_1 = BattleSituationManagerImplement::vftable;
-  if (iVar1 != 0) {
-    if (*(undefined4 **)(iVar1 + 4) != (undefined4 *)0x0) {
-      (**(code **)**(undefined4 **)(iVar1 + 4))(1);
-      *(undefined4 *)(iVar1 + 4) = 0;
-    }
-    FUN_00dd4920(iVar1);
-    param_1[2] = 0;
-  }
-  *param_1 = vftable;
-  return;
+// Destructor body of BattleSituationManagerImplement: deletes the situation resource.
+void BattleSituationManager::implementDestructor()
+{
+    using namespace BattleSituationManager_p1;
+    int **resource = *(int ***)((char *)this + 0x8);  /* BattleSituationManagerImplement+0x8: resource */
+    // vftable = BattleSituationManagerImplement::vftable (0x016C0F54)
+    if (resource != 0) {
+        if (resource[1] != 0) {  /* Resource+0x4: units */
+            vcall<void>(resource[1], 0x0, 1);  // scalar deleting destructor
+            resource[1] = 0;
+        }
+        FUN_00dd4920((int)resource);
+        *(int ***)((char *)this + 0x8) = 0;  /* BattleSituationManagerImplement+0x8: resource */
+    }
+    // vftable = BattleSituationManager::vftable (0x016C0C98)
 }
-

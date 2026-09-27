@@ -1,51 +1,41 @@
-// src/managers/triggermanager/cActTutorialEnd.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C8BA90..00C92CD0, 6 functions
-
+// src/managers/triggermanager/cActTutorialEnd.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActTutorialEnd.h"
+
+extern undefined DAT_01dbe144;  // cActTutorialEnd static descriptor returned by vf00
 
 // 00C8BA90  Trigger::cActTutorialEnd::vf08  size=1  [class]
-void Trigger::cActTutorialEnd::vf08(void)
-
-{
-  return;
+void Trigger::cActTutorialEnd::vf08()
+{
 }
 
 // 00C8BAA0  Trigger::cActTutorialEnd::vf0C  size=1  [class]
-void Trigger::cActTutorialEnd::vf0C(void)
-
-{
-  return;
+void Trigger::cActTutorialEnd::vf0C()
+{
 }
 
 // 00C8BAB0  Trigger::cActTutorialEnd::vf10  size=1  [class]
-void Trigger::cActTutorialEnd::vf10(void)
-
-{
-  return;
+void Trigger::cActTutorialEnd::vf10()
+{
 }
 
 // 00C8BAC0  Trigger::cActTutorialEnd::vf14  size=1  [class]
-void Trigger::cActTutorialEnd::vf14(void)
-
-{
-  return;
+void Trigger::cActTutorialEnd::vf14()
+{
 }
 
 // 00C92CC0  Trigger::cActTutorialEnd::vf00  size=6  [class]
-undefined * Trigger::cActTutorialEnd::vf00(void)
-
-{
-  return &DAT_01dbe144;
+void *Trigger::cActTutorialEnd::vf00()
+{
+    return &DAT_01dbe144;
 }
 
 // 00C92CD0  Trigger::cActTutorialEnd::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActTutorialEnd::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActTutorialEnd *Trigger::cActTutorialEnd::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-

@@ -1,204 +1,152 @@
-// src/managers/animationmapmanager/AnimationMapManagerImplement.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 008D8110..008D9E20, 5 functions
-
+// src/managers/animationmapmanager/AnimationMapManagerImplement.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "AnimationMapManagerImplement.h"
 
+// ---------------------------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------------------------
+extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void *criticalSection);
+extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void *criticalSection);
+
+namespace AnimationMapManagerImplement_p1 {
+
+typedef AnimationMapManagerImplement::Entry      Entry;
+typedef AnimationMapManagerImplement::EntryArray EntryArray;
+typedef AnimationMapManagerImplement::Resource   Resource;
+
+// virtual call through the vftable slot at byte offset `slot`
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+// Frees one entry and the resource it owns.
+inline void deleteEntry(Entry *entry)
+{
+    Resource *resource = entry->resource;
+    if (resource != 0) {
+        if (resource->object != 0) {
+            vcall<void>(resource->object, 0x0, 1);  // scalar deleting destructor
+            resource->object = 0;
+        }
+        FUN_00dd4920((int)resource);
+        entry->resource = 0;
+    }
+    FUN_00dd4920((int)entry);
+}
+
+}  // namespace AnimationMapManagerImplement_p1
+
 // 008D8110  AnimationMapManagerImplement::vf08  size=98  [class]
-void __thiscall AnimationMapManagerImplement::vf08(int param_1,int param_2)
-
-{
-  undefined4 *puVar1;
-  int iVar2;
-  int *piVar3;
-  undefined4 *puVar4;
-  
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  iVar2 = *(int *)(param_1 + 0x28);
-  puVar4 = *(undefined4 **)(iVar2 + 4);
-  if (puVar4 != puVar4 + *(int *)(iVar2 + 8)) {
-    puVar1 = puVar4 + *(int *)(iVar2 + 8);
-    do {
-      piVar3 = (int *)*puVar4;
-      if (piVar3[2] == param_2) {
-        *piVar3 = *piVar3 + -1;
-        if (*piVar3 < 1) {
-          piVar3[1] = 1;
-        }
-        break;
-      }
-      puVar4 = puVar4 + 1;
-    } while (puVar4 != puVar1);
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  return;
+// Drops one reference of the entry `id`; an entry whose count falls below 1 is marked released.
+void AnimationMapManagerImplement::vf08(int id)
+{
+    using namespace AnimationMapManagerImplement_p1;
+    if (lockInitialized() != 0) {
+        EnterCriticalSection(lock());
+    }
+    EntryArray *list = entries();
+    Entry **it = list->data;
+    if (it != it + list->count) {
+        Entry **end = it + list->count;
+        do {
+            Entry *entry = *it;
+            if (entry->id == id) {
+                entry->refCount = entry->refCount - 1;
+                if (entry->refCount < 1) {
+                    entry->released = 1;
+                }
+                break;
+            }
+            it = it + 1;
+        } while (it != end);
+    }
+    if (lockInitialized() != 0) {
+        LeaveCriticalSection(lock());
+    }
 }
 
 // 008D8180  FUN_008d8180  size=136  [callgraph]
-void __fastcall FUN_008d8180(int param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  int *piVar3;
-  
-  FUN_00dd7270();
-  piVar3 = *(int **)(*(int *)(param_1 + 0x28) + 4);
-  if (piVar3 != piVar3 + *(int *)(*(int *)(param_1 + 0x28) + 8)) {
-    do {
-      iVar1 = *piVar3;
-      if (iVar1 != 0) {
-        piVar2 = *(int **)(iVar1 + 0xc);
-        if (piVar2 != (int *)0x0) {
-          if ((undefined4 *)*piVar2 != (undefined4 *)0x0) {
-            (*(code *)**(undefined4 **)*piVar2)(1);
-            *piVar2 = 0;
-          }
-          FUN_00dd4920(piVar2);
-          *(undefined4 *)(iVar1 + 0xc) = 0;
-        }
-        FUN_00dd4920(iVar1);
-      }
-      piVar3 = piVar3 + 1;
-    } while (piVar3 != (int *)(*(int *)(*(int *)(param_1 + 0x28) + 4) +
-                              *(int *)(*(int *)(param_1 + 0x28) + 8) * 4));
-  }
-  if (*(undefined4 **)(param_1 + 0x28) != (undefined4 *)0x0) {
-    (**(code **)**(undefined4 **)(param_1 + 0x28))(1);
-    *(undefined4 *)(param_1 + 0x28) = 0;
-  }
-  return;
+// AnimationMapManagerImplement teardown: destroys the lock, frees every entry, then the entry array.
+void __fastcall FUN_008d8180(int self)
+{
+    using namespace AnimationMapManagerImplement_p1;
+    AnimationMapManagerImplement *manager = (AnimationMapManagerImplement *)self;
+    FUN_00dd7270((undefined4)manager->lock());
+    Entry **it = manager->entries()->data;
+    if (it != it + manager->entries()->count) {
+        do {
+            Entry *entry = *it;
+            if (entry != 0) {
+                deleteEntry(entry);
+            }
+            it = it + 1;
+        } while (it != manager->entries()->data + manager->entries()->count);
+    }
+    if (manager->entries() != 0) {
+        vcall<void>(manager->entries(), 0x0, 1);  // scalar deleting destructor
+        manager->entries() = 0;
+    }
 }
 
 // 008D8DE0  AnimationMapManagerImplement::vf00  size=227  [class]
-void __fastcall AnimationMapManagerImplement::vf00(int param_1)
-
-{
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  piVar5 = *(int **)(*(int *)(param_1 + 0x28) + 4);
-  if (piVar5 != piVar5 + *(int *)(*(int *)(param_1 + 0x28) + 8)) {
-    do {
-      iVar1 = *piVar5;
-      if (*(int *)(iVar1 + 4) == 0) {
-        piVar6 = piVar5 + 1;
-      }
-      else {
-        if (iVar1 != 0) {
-          piVar6 = *(int **)(iVar1 + 0xc);
-          if (piVar6 != (int *)0x0) {
-            if ((undefined4 *)*piVar6 != (undefined4 *)0x0) {
-              (*(code *)**(undefined4 **)*piVar6)(1);
-              *piVar6 = 0;
-            }
-            FUN_00dd4920(piVar6);
-            *(undefined4 *)(iVar1 + 0xc) = 0;
-          }
-          FUN_00dd4920(iVar1);
-        }
-        iVar1 = *(int *)(param_1 + 0x28);
-        uVar2 = *(uint *)(iVar1 + 8);
-        iVar3 = *(int *)(iVar1 + 4);
-        piVar6 = (int *)(iVar3 + uVar2 * 4);
-        if ((((piVar5 != piVar6) && (iVar3 != 0)) && (uVar2 != 0)) &&
-           ((uint)((int)piVar5 - iVar3 >> 2) < uVar2)) {
-          for (piVar4 = piVar5; piVar4 != piVar6 + -1; piVar4 = piVar4 + 1) {
-            *piVar4 = piVar4[1];
-          }
-          *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + -1;
-          piVar6 = piVar5;
-        }
-      }
-      piVar5 = piVar6;
-    } while (piVar6 != (int *)(*(int *)(*(int *)(param_1 + 0x28) + 4) +
-                              *(int *)(*(int *)(param_1 + 0x28) + 8) * 4));
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  return;
+// Frees the released entries and removes them from the table.
+void AnimationMapManagerImplement::purgeReleased()
+{
+    using namespace AnimationMapManagerImplement_p1;
+    if (lockInitialized() != 0) {
+        EnterCriticalSection(lock());
+    }
+    Entry **it = entries()->data;
+    if (it != it + entries()->count) {
+        Entry **next;
+        do {
+            Entry *entry = *it;
+            if (entry->released == 0) {
+                next = it + 1;
+            }
+            else {
+                if (entry != 0) {
+                    deleteEntry(entry);
+                }
+                EntryArray *list = entries();
+                unsigned int count = list->count;
+                Entry **data = list->data;
+                next = data + count;
+                if (it != next && data != 0 && count != 0 && (unsigned int)(it - data) < count) {
+                    // erase: shift the following entries down by one
+                    for (Entry **p = it; p != next - 1; p = p + 1) {
+                        *p = p[1];
+                    }
+                    list->count = list->count - 1;
+                    next = it;
+                }
+            }
+            it = next;
+        } while (next != entries()->data + entries()->count);
+    }
+    if (lockInitialized() != 0) {
+        LeaveCriticalSection(lock());
+    }
 }
 
 // 008D8ED0  AnimationMapManagerImplement::thunk_vf00  size=5  [class]
-void __fastcall AnimationMapManagerImplement::thunk_vf00(int param_1)
-
-{
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  
-  if (*(int *)(param_1 + 0x20) != 0) {
-    EnterCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  piVar5 = *(int **)(*(int *)(param_1 + 0x28) + 4);
-  if (piVar5 != piVar5 + *(int *)(*(int *)(param_1 + 0x28) + 8)) {
-    do {
-      iVar1 = *piVar5;
-      if (*(int *)(iVar1 + 4) == 0) {
-        piVar6 = piVar5 + 1;
-      }
-      else {
-        if (iVar1 != 0) {
-          piVar6 = *(int **)(iVar1 + 0xc);
-          if (piVar6 != (int *)0x0) {
-            if ((undefined4 *)*piVar6 != (undefined4 *)0x0) {
-              (*(code *)**(undefined4 **)*piVar6)(1);
-              *piVar6 = 0;
-            }
-            FUN_00dd4920(piVar6);
-            *(undefined4 *)(iVar1 + 0xc) = 0;
-          }
-          FUN_00dd4920(iVar1);
-        }
-        iVar1 = *(int *)(param_1 + 0x28);
-        uVar2 = *(uint *)(iVar1 + 8);
-        iVar3 = *(int *)(iVar1 + 4);
-        piVar6 = (int *)(iVar3 + uVar2 * 4);
-        if ((((piVar5 != piVar6) && (iVar3 != 0)) && (uVar2 != 0)) &&
-           ((uint)((int)piVar5 - iVar3 >> 2) < uVar2)) {
-          for (piVar4 = piVar5; piVar4 != piVar6 + -1; piVar4 = piVar4 + 1) {
-            *piVar4 = piVar4[1];
-          }
-          *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + -1;
-          piVar6 = piVar5;
-        }
-      }
-      piVar5 = piVar6;
-    } while (piVar6 != (int *)(*(int *)(*(int *)(param_1 + 0x28) + 4) +
-                              *(int *)(*(int *)(param_1 + 0x28) + 8) * 4));
-  }
-  if (*(int *)(param_1 + 0x20) != 0) {
-    LeaveCriticalSection((LPCRITICAL_SECTION)(param_1 + 8));
-  }
-  return;
+void AnimationMapManagerImplement::vf00()
+{
+    purgeReleased();  // jmp 008D8DE0
 }
 
 // 008D9E20  AnimationMapManagerImplement::vf0C  size=50  [class]
-undefined4 * __thiscall AnimationMapManagerImplement::vf0C(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  FUN_008d8180();
-  FUN_00dd7270();
-  *param_1 = AnimationMapManager::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *AnimationMapManagerImplement::vf0C(byte flags)
+{
+    // vftable = AnimationMapManagerImplement::vftable (0x0164A368)
+    FUN_008d8180((int)this);
+    FUN_00dd7270((undefined4)lock());
+    // vftable = AnimationMapManager::vftable (0x0164A254)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
-

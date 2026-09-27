@@ -1,97 +1,100 @@
-// src/managers/triggermanager/cCondEnemyFinishHPCompByName.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7D470..00C86830, 5 functions
-
+// src/managers/triggermanager/cCondEnemyFinishHPCompByName.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cCondEnemyFinishHPCompByName.h"
+
+extern undefined DAT_016ac518;  // debug message
+extern unsigned int DAT_01bea060;  // global flag word (0x400 blocks enemy-finish conditions)
+extern undefined4 DAT_01d5bad4;  // argument of FUN_00c18cc0 for "all"
+
+namespace cCondEnemyFinishHPCompByName_p1 {
+
+// call a function as __cdecl with exactly the arguments the raw call shows
+// (used for the __cdecl callees; __thiscall callees go through thiscall() below)
+template <class R, class F, class... A> inline R cdeclcall(F fn, A... args)
+{
+    typedef R (__cdecl *Fn)(A...);
+    return ((Fn)fn)(args...);
+}
+
+// __thiscall call of a function with an explicit ECX (`self`), recovered from the machine code
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+} // namespace cCondEnemyFinishHPCompByName_p1
 
 // 00C7D470  Trigger::cCondEnemyFinishHPCompByName::cCondEnemyFinishHPCompByName  size=37  [class]
-void __fastcall
-Trigger::cCondEnemyFinishHPCompByName::cCondEnemyFinishHPCompByName(undefined4 *param_1)
-
-{
-  param_1[5] = 0;
-  param_1[3] = 0xffffffff;
-  param_1[1] = 0;
-  param_1[2] = 0xffffffff;
-  *param_1 = vftable;
-  param_1[4] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  return;
+Trigger::cCondEnemyFinishHPCompByName::cCondEnemyFinishHPCompByName()
+{
+    elapsed() = 0.0f;
+    // inlined Trigger::cCondition constructor
+    *(int *)((char *)this + 0x0C) /* cCondition+0x0C: ? */ = -1;
+    *(int **)((char *)this + 0x04) /* cCondition+0x04: record */ = 0;
+    *(int *)((char *)this + 0x08) /* cCondition+0x08: ? */ = -1;
+    // vftable = Trigger::cCondEnemyFinishHPCompByName::vftable (0x016AA118)
+    enemyName() = 0;
+    finished() = 0;
+    allRegistered() = 0;
 }
 
 // 00C7D4B0  Trigger::cCondEnemyFinishHPCompByName::vf1C  size=28  [class]
-void __thiscall Trigger::cCondEnemyFinishHPCompByName::vf1C(int param_1,int param_2)
-
-{
-  *(int *)(param_1 + 4) = param_2;
-  *(int *)(param_1 + 0x10) = param_2 + 8;
-  *(float *)(param_1 + 0x18) = *(float *)(param_2 + 0x18) * 60.0;
-  return;
+void Trigger::cCondEnemyFinishHPCompByName::vf1C(int *record)
+{
+    *(int **)((char *)this + 0x04) /* cCondition+0x04: record */ = record;
+    enemyName() = (char *)record + 8;                           // name string stored in the record
+    delay() = *(float *)((char *)record + 0x18) * 60.0f;        // seconds -> frames
 }
 
 // 00C7D4D0  Trigger::cCondEnemyFinishHPCompByName::vf20  size=18  [class]
-undefined4 __fastcall Trigger::cCondEnemyFinishHPCompByName::vf20(int param_1)
-
-{
-  *(undefined4 *)(param_1 + 0x1c) = 0;
-  *(undefined4 *)(param_1 + 0x14) = 0;
-  return 1;
+int Trigger::cCondEnemyFinishHPCompByName::vf20()
+{
+    finished() = 0;
+    elapsed() = 0.0f;
+    return 1;
 }
 
 // 00C86810  Trigger::cCondEnemyFinishHPCompByName::vf00  size=31  [class]
-undefined4 * __thiscall
-Trigger::cCondEnemyFinishHPCompByName::vf00(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cCondition::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cCondEnemyFinishHPCompByName *Trigger::cCondEnemyFinishHPCompByName::vf00(unsigned char flags)
+{
+    // vftable = Trigger::cCondition::vftable (0x016A8930)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
 
 // 00C86830  Trigger::cCondEnemyFinishHPCompByName::vf14  size=196  [class]
-undefined4 __fastcall Trigger::cCondEnemyFinishHPCompByName::vf14(int param_1)
-
-{
-  int iVar1;
-  undefined4 uVar2;
-  float10 fVar3;
-  
-  if (*(char **)(param_1 + 0x10) == (char *)0x0) {
-    FUN_00dd5650(&DAT_016ac518);
-  }
-  else if ((DAT_01bea060 & 0x400) == 0) {
-    if (*(int *)(param_1 + 0x1c) == 0) {
-      iVar1 = __stricmp("all",*(char **)(param_1 + 0x10));
-      if (iVar1 == 0) {
-        if (*(int *)(param_1 + 0x20) == 0) {
-          uVar2 = FUN_00c18cc0(DAT_01d5bad4);
-          *(undefined4 *)(param_1 + 0x20) = uVar2;
-        }
-        if (*(int *)(param_1 + 0x20) == 1) {
-          *(undefined4 *)(param_1 + 0x1c) = 0;
-        }
-      }
-      else {
-        iVar1 = FUN_00c18c70(*(undefined4 *)(param_1 + 0x10));
-        if (iVar1 == 1) {
-          uVar2 = FUN_00c19140(*(undefined4 *)(param_1 + 0x10));
-          *(undefined4 *)(param_1 + 0x1c) = uVar2;
-        }
-      }
-    }
-    if (*(int *)(param_1 + 0x1c) == 1) {
-      if (*(float *)(param_1 + 0x18) < *(float *)(param_1 + 0x14) !=
-          (*(float *)(param_1 + 0x18) == *(float *)(param_1 + 0x14))) {
-        *(undefined4 *)(param_1 + 0x1c) = 0;
-        return 1;
-      }
-      fVar3 = (float10)FUN_00e03a90(0);
-      *(float *)(param_1 + 0x14) = (float)(fVar3 + (float10)*(float *)(param_1 + 0x14));
-    }
-    return 0;
-  }
-  return 0;
+int Trigger::cCondEnemyFinishHPCompByName::vf14()
+{
+    using namespace cCondEnemyFinishHPCompByName_p1;
+    if (enemyName() == 0) {
+        cdeclcall<void>(FUN_00dd5650, &DAT_016ac518);  // debug message
+    }
+    else if ((DAT_01bea060 & 0x400) == 0) {
+        if (finished() == 0) {
+            if (__stricmp((char *)"all", enemyName()) == 0) {
+                if (allRegistered() == 0) {
+                    allRegistered() = thiscall<int>(FUN_00c18cc0, (void *)0x01C78CB0, DAT_01d5bad4);  // ECX = 0x01C78CB0 (enemy manager)
+                }
+                if (allRegistered() == 1) {
+                    finished() = 0;
+                }
+            }
+            else if (thiscall<int>(FUN_00c18c70, (void *)0x01C78CB0, enemyName()) == 1) {  // ECX = 0x01C78CB0 (enemy manager)
+                finished() = thiscall<int>(FUN_00c19140, (void *)0x01C78CB0, enemyName());  // ECX = 0x01C78CB0 (enemy manager)
+            }
+        }
+        if (finished() == 1) {
+            if (delay() <= elapsed()) {  // raw: delay < elapsed != (delay == elapsed), i.e. x87 "<="
+                finished() = 0;
+                return 1;
+            }
+            double frameTime = thiscall<double>(FUN_00e03a90, (void *)0x01BE93B0, 0);  // ECX = 0x01BE93B0
+            elapsed() = (float)(frameTime + elapsed());
+        }
+        return 0;
+    }
+    return 0;
 }
-

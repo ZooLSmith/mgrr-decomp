@@ -1,58 +1,72 @@
-// src/managers/triggermanager/actions/TrgActPosPl.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C7E920..00C7E990, 2 functions
-
+// src/managers/triggermanager/actions/TrgActPosPl.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
+extern char DAT_016aa628[];  // debug message: action has no parameter block
+extern char DAT_016aa654[];  // debug message: position %d not registered
+
+namespace Trigger { namespace Act {
+int __fastcall POS_PL(int *action);
+int __fastcall POS_PL_2(int *action);
+} }
+
+namespace TrgActPosPl_p1 {
+
+// FUN_00dd5650 is a variadic debug print (empty in the release build).
+template <class... A> inline void debugPrint(const char *format, A... args)
+{
+    typedef void (__cdecl *Fn)(const char *, ...);
+    ((Fn)FUN_00dd5650)(format, args...);
+}
+
+// Callees whose generated prototype does not match the raw call site are invoked through
+// call<Sig>(fn)(args...) with exactly the raw arguments. "ECX: ?" marks an unrecovered register.
+template <class Sig, class Fn> inline Sig call(Fn *fn) { return (Sig)(void *)fn; }
+
+const float DEG_TO_RAD = 0.017453292f;
+
+}  // namespace TrgActPosPl_p1
+
 // 00C7E920  Trigger::Act::POS_PL  size=103  [class]
-undefined4 __fastcall Trigger::Act::POS_PL(int param_1)
-
-{
-  int iVar1;
-  undefined4 local_20;
-  undefined4 local_1c;
-  undefined4 local_18;
-  undefined4 local_14;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016aa628);
-    return 0;
-  }
-  local_20 = *(undefined4 *)(iVar1 + 8);
-  local_1c = *(undefined4 *)(iVar1 + 0xc);
-  local_18 = *(undefined4 *)(iVar1 + 0x10);
-  local_14 = 0x3f800000;
-  FUN_00a4ae90(&local_20,*(float *)(iVar1 + 0x14) * 0.017453292);
-  return 1;
+// Moves the player to params+0x8..+0x10 (x, y, z) with yaw params+0x14 (degrees).
+int __fastcall Trigger::Act::POS_PL(int *action)
+{
+    using namespace TrgActPosPl_p1;
+    float position[4];
+    int *params = (int *)action[1];  // +0x4 parameter block
+    if (params == 0) {
+        debugPrint(DAT_016aa628);
+        return 0;
+    }
+    float *coords = (float *)params;
+    position[0] = coords[2];  // +0x8
+    position[1] = coords[3];  // +0xC
+    position[2] = coords[4];  // +0x10
+    position[3] = 1.0f;
+    call<void (*)(float *, float)>(FUN_00a4ae90)(position, coords[5] * DEG_TO_RAD); /* ECX: ? */
+    return 1;
 }
 
 // 00C7E990  Trigger::Act::POS_PL_2  size=146  [class]
-undefined4 __fastcall Trigger::Act::POS_PL_2(int param_1)
-
-{
-  int iVar1;
-  int iVar2;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined1 local_20 [12];
-  undefined4 local_14;
-  
-  iVar1 = *(int *)(param_1 + 4);
-  if (iVar1 == 0) {
-    FUN_00dd5650(&DAT_016aa628);
-    return 0;
-  }
-  iVar2 = FUN_00c78580(*(undefined4 *)(iVar1 + 8),local_20);
-  if (iVar2 == 0) {
-    FUN_00dd5650(&DAT_016aa654,*(undefined4 *)(iVar1 + 8));
-    return 0;
-  }
-  local_30 = 0;
-  local_2c = local_14;
-  local_28 = 0;
-  local_14 = 0x3f800000;
-  FUN_00a4d790(local_20,&local_30,0);
-  return 1;
+// Moves the player to registered position params+0x8; the entry's 4th component is the yaw.
+int __fastcall Trigger::Act::POS_PL_2(int *action)
+{
+    using namespace TrgActPosPl_p1;
+    float rotation[4];
+    float position[4];
+    int *params = (int *)action[1];  // +0x4 parameter block
+    if (params == 0) {
+        debugPrint(DAT_016aa628);
+        return 0;
+    }
+    int ok = call<int (*)(int, float *)>(FUN_00c78580)(params[2], position); /* ECX: ? */
+    if (ok == 0) {
+        debugPrint(DAT_016aa654, params[2]);
+        return 0;
+    }
+    rotation[0] = 0.0f;
+    rotation[1] = position[3];
+    rotation[2] = 0.0f;
+    position[3] = 1.0f;
+    call<void (*)(float *, float *, int)>(FUN_00a4d790)(position, rotation, 0); /* ECX: ? */
+    return 1;
 }
-

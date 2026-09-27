@@ -1,28 +1,50 @@
-// src/managers/triggermanager/actions/TrgActFlagOnDlc3.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C88CD0..00C88CD0, 1 functions
-
+// src/managers/triggermanager/actions/TrgActFlagOnDlc3.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C88CD0  Trigger::Act::FLAG_ON_DLC3  size=106  [class]
-undefined4 __fastcall Trigger::Act::FLAG_ON_DLC3(int param_1)
-
-{
-  uint *puVar1;
-  uint uVar2;
-  
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_00dd5650(&DAT_016accc4);
-    return 0;
-  }
-  uVar2 = *(uint *)(*(int *)(param_1 + 4) + 8);
-  if (DAT_018abfb8 != 0) {
-    EnterCriticalSection((LPCRITICAL_SECTION)&DAT_018abfa0);
-    puVar1 = (uint *)(DAT_018abf98 + (uVar2 >> 5) * 4);
-    *puVar1 = *puVar1 | 0x80000000U >> ((byte)uVar2 & 0x1f);
-    if (DAT_018abfb8 != 0) {
-      LeaveCriticalSection((LPCRITICAL_SECTION)&DAT_018abfa0);
-    }
-  }
-  return 1;
-}
+extern undefined DAT_016accc4;  // error message format string
+extern int DAT_018abf98;  // DLC3 flag bit array (pointer to words)
+extern undefined DAT_018abfa0;  // DLC3 flag CRITICAL_SECTION
+extern int DAT_018abfb8;  // DLC3 flag lock enabled
+extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void *criticalSection);
+extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void *criticalSection);
 
+// the trigger action/condition handlers are free functions in these namespaces
+namespace Trigger { namespace Act {
+    int __fastcall FLAG_ON_DLC3(int action);
+} }
+
+namespace TrgActFlagOnDlc3_p1 {
+
+// field at a byte offset of a record whose layout is not modelled
+template <class T> inline T &at(int base, int offset) { return *(T *)(base + offset); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (*)(const void *, ...))FUN_00dd5650)(format); }
+template <class A> inline void reportError(const void *format, A a)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a); }
+template <class A, class B> inline void reportError(const void *format, A a, B b)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b); }
+template <class A, class B, class C> inline void reportError(const void *format, A a, B b, C c)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b, c); }
+
+}  // namespace TrgActFlagOnDlc3_p1
+
+// 00C88CD0  Trigger::Act::FLAG_ON_DLC3  size=106  [class]
+int __fastcall Trigger::Act::FLAG_ON_DLC3(int action)
+{
+    using namespace TrgActFlagOnDlc3_p1;
+    if (at<int>(action, 4) == 0) {
+        reportError(&DAT_016accc4);
+        return 0;
+    }
+    unsigned int flagNo = at<unsigned int>(at<int>(action, 4), 8);
+    if (DAT_018abfb8 != 0) {
+        EnterCriticalSection(&DAT_018abfa0);
+        unsigned int *word = (unsigned int *)(DAT_018abf98 + (flagNo >> 5) * 4);
+        *word = *word | 0x80000000U >> ((unsigned char)flagNo & 0x1F);
+        if (DAT_018abfb8 != 0) {
+            LeaveCriticalSection(&DAT_018abfa0);
+        }
+    }
+    return 1;
+}

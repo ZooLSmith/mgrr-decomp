@@ -1,55 +1,67 @@
-// src/managers/signalmanager/SignalManager.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00D897D0..00D8A650, 2 functions
-
+// src/managers/signalmanager/SignalManager.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "SignalManager.h"
 
+namespace SignalManager_p1 {
+
+// SignalManagerImplement fields (this file only sees SignalManager.h)
+typedef SignalManager::Signal Signal;
+inline void *&ArrayVftable(void *self) { return *(void **)((char *)self + 0x4); }    // +0x04 lib::Array<Signal *>
+inline Signal **&Signals(void *self)   { return *(Signal ***)((char *)self + 0x8); } // +0x08 data
+inline int &SignalCount(void *self)    { return *(int *)((char *)self + 0xC); }      // +0x0C count
+inline int &SignalCapacity(void *self) { return *(int *)((char *)self + 0x10); }     // +0x10 capacity
+
+// virtual call through the vftable slot at byte offset `slot` (ECX = obj)
+template <class R, class... A> inline R vcall(const void *obj, unsigned int slot, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return (*(Fn *)(*(char *const *)obj + slot))(obj, args...);
+}
+
+}  // namespace SignalManager_p1
+
 // 00D897D0  SignalManager::vf08  size=31  [class]
-undefined4 * __thiscall SignalManager::vf08(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor: bit 0 of `flags` frees the object.
+undefined4 *SignalManager::vf08(byte flags)
+{
+    // vftable = SignalManager::vftable (0x016C25B8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return (undefined4 *)this;
 }
 
 // 00D8A650  SignalManager::SignalManager  size=152  [class]
-void __fastcall SignalManager::SignalManager(undefined4 *param_1)
-
-{
-  int iVar1;
-  int *piVar2;
-  
-  piVar2 = (int *)param_1[2];
-  *param_1 = SignalManagerImplement::vftable;
-  if (piVar2 != piVar2 + param_1[3]) {
-    do {
-      iVar1 = *piVar2;
-      if (iVar1 != 0) {
-        FUN_00d89f20();
-        if (*(undefined4 **)(iVar1 + 0x28) != (undefined4 *)0x0) {
-          (**(code **)**(undefined4 **)(iVar1 + 0x28))(1);
-          *(undefined4 *)(iVar1 + 0x28) = 0;
-        }
-        FUN_00dd7270();
-        FUN_00dd7270();
-        FUN_00dd4920(iVar1);
-      }
-      piVar2 = piVar2 + 1;
-    } while (piVar2 != (int *)(param_1[2] + param_1[3] * 4));
-  }
-  if (param_1[2] != 0) {
-    param_1[3] = 0;
-  }
-  param_1[1] = lib::Array<Signal*>::vftable;
-  if (param_1[2] != 0) {
-    param_1[3] = 0;
-  }
-  param_1[2] = 0;
-  param_1[4] = 0;
-  *param_1 = vftable;
-  return;
+// ~SignalManagerImplement with ~SignalManager inlined (see SignalManager.h).
+void SignalManager::implementDestructor()
+{
+    using namespace SignalManager_p1;
+    Signal **entry = Signals(this);
+    // vftable = SignalManagerImplement::vftable (0x016C2638)
+    if (entry != entry + SignalCount(this)) {
+        do {
+            Signal *signal = *entry;
+            if (signal != 0) {
+                FUN_00d89f20((int)signal);
+                if (signal->slots() != 0) {
+                    vcall<void>(signal->slots(), 0x0, 1);  // scalar deleting destructor, delete
+                    signal->slots() = 0;
+                }
+                FUN_00dd7270((undefined4)signal->lock());
+                FUN_00dd7270((undefined4)signal->lock());
+                FUN_00dd4920((int)signal);
+            }
+            entry++;
+        } while (entry != Signals(this) + SignalCount(this));
+    }
+    if (Signals(this) != 0) {
+        SignalCount(this) = 0;
+    }
+    ArrayVftable(this) = (void *)0x016C25E4;  // lib::Array<Signal *>::vftable
+    if (Signals(this) != 0) {
+        SignalCount(this) = 0;
+    }
+    Signals(this) = 0;
+    SignalCapacity(this) = 0;
+    // vftable = SignalManager::vftable (0x016C25B8)
 }
-

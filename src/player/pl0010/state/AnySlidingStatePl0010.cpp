@@ -1,216 +1,157 @@
-// src/player/pl0010/state/AnySlidingStatePl0010.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00B80CE0..00BC95C0, 9 functions
-
+// src/player/pl0010/state/AnySlidingStatePl0010.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 #include "AnySlidingStatePl0010.h"
 
+// ---------------------------------------------------------------------------------------------
+// Data referenced by this part
+// ---------------------------------------------------------------------------------------------
+// type records returned by vf00 / vf04 (FUN_00dd6d80(record, target) walks the parent chain)
+extern unsigned char DAT_01be9de4[];  // AnySlidingStatePl0010
+extern unsigned char DAT_01be9ef4[];  // StateMachineContextPl0010
+extern unsigned char DAT_01be9db8[];  // Pl0000
+
+namespace AnySlidingStatePl0010_p1 {
+
+// Field at byte offset `offset` of an object whose class header is not owned by this file.
+template <class T> inline T &at(const void *base, int offset) { return *(T *)((char *)base + offset); }
+
+// __thiscall call of a function (symbol or address) with ECX = self
+template <class R, class F, class... A> inline R thiscall(F fn, const void *self, A... args)
+{
+    typedef R (__thiscall *Fn)(const void *, A...);
+    return ((Fn)fn)(self, args...);
+}
+
+// Type-record virtual (no arguments besides `this`) at byte offset `slot` of obj's vftable.
+typedef undefined *(__thiscall *TypeRecordFn)(const void *self);
+inline undefined *typeRecord(const void *obj, int slot) { return (*(TypeRecordFn **)obj)[slot / 4](obj); }
+
+// Checked downcasts (0 when the object is null or of another type).
+inline void *asContext(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, typeRecord(obj, 0x0), DAT_01be9ef4);
+    return isKind != 0 ? (void *)obj : 0;
+}
+inline char *asPl0000(const void *obj)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    int isKind = thiscall<int>(FUN_00dd6d80, typeRecord(obj, 0x4), DAT_01be9db8);
+    return isKind != 0 ? (char *)obj : 0;
+}
+
+// The player that owns the state machine: context (StateMachineContextPl0010) +0xC, checked
+// against Pl0000.  The context is not null-checked before the load (as in the original).
+inline char *ownerPlayer(const void *context)
+{
+    return asPl0000(at<void *>(asContext(context), 0xC));  /* StateMachineContext+0xC: owner */
+}
+
+}  // namespace AnySlidingStatePl0010_p1
+
 // 00B80CE0  AnySlidingStatePl0010::vf08  size=19  [class]
-bool AnySlidingStatePl0010::vf08(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf08(param_1);
-  return iVar1 != 0;
+bool AnySlidingStatePl0010::vf08(undefined4 context)
+{
+    return StateMachineNode::vf08(context) != 0;
 }
 
 // 00B80D00  AnySlidingStatePl0010::vf18  size=5  [class]
-undefined4 __thiscall AnySlidingStatePl0010::vf18(int param_1,undefined4 param_2)
-
-{
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0xc) + 0x18))(param_2);
-  }
-  if (*(int **)(param_1 + 0x10) != (int *)0x0) {
-    (**(code **)(**(int **)(param_1 + 0x10) + 0x18))(param_2);
-  }
-  *(undefined4 *)(param_1 + 0x14) = 5;
-  return 1;
+// (jmp 0x00D822E0; Ghidra showed the inlined body of StateMachineNode::vf18)
+undefined4 AnySlidingStatePl0010::vf18(undefined4 context)
+{
+    return StateMachineNode::vf18(context);
 }
 
 // 00B80D10  AnySlidingStatePl0010::vf24  size=19  [class]
-bool AnySlidingStatePl0010::vf24(undefined4 param_1)
-
-{
-  int iVar1;
-  
-  iVar1 = StateMachineNode::vf24(param_1);
-  return iVar1 != 0;
+bool AnySlidingStatePl0010::vf24(undefined4 context)
+{
+    return StateMachineNode::vf24(context) != 0;
 }
 
 // 00B80D50  AnySlidingStatePl0010::vf00  size=6  [class]
-undefined * AnySlidingStatePl0010::vf00(void)
-
-{
-  return &DAT_01be9de4;
+undefined *AnySlidingStatePl0010::vf00()
+{
+    return DAT_01be9de4;
 }
 
 // 00B90C00  AnySlidingStatePl0010::vf04  size=31  [class]
-undefined4 * __thiscall AnySlidingStatePl0010::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = StateMachineNode::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+// Scalar deleting destructor.
+undefined4 *AnySlidingStatePl0010::vf04(byte flags)
+{
+    // vftable = StateMachineNode::vftable (0x01648DC8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);
+    }
+    return (undefined4 *)this;
 }
 
 // 00BA8B00  AnySlidingStatePl0010::SafeCheck  size=163  [class]
-void __thiscall AnySlidingStatePl0010::SafeCheck(int param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (*(int *)(param_1 + 0x20) == 0) {
-    if (param_2 == (undefined4 *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9ef4;
-      (**(code **)*param_2)(&DAT_01be9ef4);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-    }
-    piVar1 = *(int **)(uVar2 + 0xc);
-    if (piVar1 == (int *)0x0) {
-      uVar2 = 0;
-    }
-    else {
-      puVar4 = &DAT_01be9db8;
-      (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-      iVar3 = FUN_00dd6d80(puVar4);
-      uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-    }
-    FUN_00aa3f60(0x2c);
-    *(undefined4 *)(uVar2 + 0x418c) = *(undefined4 *)(uVar2 + 0x4180);
-    *(undefined4 *)(uVar2 + 0x4188) = *(undefined4 *)(uVar2 + 0x417c);
-    *(undefined4 *)(uVar2 + 0x4190) = *(undefined4 *)(uVar2 + 0x4184);
-    FUN_00aa92c0(4);
-  }
-  StateMachineNode::SafeCheck(param_2);
-  return;
+// Enter: motion 0x2C and saves +0x417C..+0x4184 into +0x4188..+0x4190.
+void AnySlidingStatePl0010::SafeCheck(undefined4 *context)
+{
+    using namespace AnySlidingStatePl0010_p1;
+    if (at<int>(this, 0x20) == 0) {  /* StateMachineNode+0x20: ? */
+        char *player = ownerPlayer(context);
+        thiscall<int>(FUN_00aa3f60, player, 0x2c);
+        /* Pl0000+0x417C..+0x4184: ?, saved into +0x4188..+0x4190 */
+        at<float>(player, 0x418C) = at<float>(player, 0x4180);
+        at<float>(player, 0x4188) = at<float>(player, 0x417C);
+        at<float>(player, 0x4190) = at<float>(player, 0x4184);
+        thiscall<void>(FUN_00aa92c0, player, 4);
+    }
+    StateMachineNode::SafeCheck(context);
 }
 
 // 00BA8BB0  AnySlidingStatePl0010::qteSafeCheck  size=144  [class]
-void AnySlidingStatePl0010::qteSafeCheck(undefined4 *param_1)
-
-{
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  undefined *puVar5;
-  
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)param_1;
-  }
-  piVar2 = *(int **)(uVar3 + 0xc);
-  if (piVar2 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar5 = &DAT_01be9db8;
-    (**(code **)(*piVar2 + 4))(&DAT_01be9db8);
-    iVar4 = FUN_00dd6d80(puVar5);
-    uVar3 = -(uint)(iVar4 != 0) & (uint)piVar2;
-  }
-  FUN_00b8af00();
-  fVar1 = *(float *)(*(int *)(uVar3 + 0x40d4) + 0x20);
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(*(int *)(uVar3 + 0x40d4) + 0x24);
-  *(float *)(uVar3 + 0x417c) = fVar1 * 0.017453292;
-  *(undefined4 *)(uVar3 + 0x4184) = 0;
-  StateMachineNode::qteSafeCheck(param_1);
-  return;
+void AnySlidingStatePl0010::qteSafeCheck(undefined4 *context)
+{
+    using namespace AnySlidingStatePl0010_p1;
+    char *player = ownerPlayer(context);
+    FUN_00b8af00((int)player);
+    char *params = at<char *>(player, 0x40D4);  /* Pl0000+0x40D4: parameter block */
+    float degrees = at<float>(params, 0x20);
+    at<float>(player, 0x4180) = at<float>(params, 0x24);
+    at<float>(player, 0x417C) = degrees * 0.017453292f;  // degrees -> radians
+    at<float>(player, 0x4184) = 0.0f;
+    StateMachineNode::qteSafeCheck(context);
 }
 
 // 00BA8C40  AnySlidingStatePl0010::vf20  size=136  [class]
-undefined4 AnySlidingStatePl0010::vf20(undefined4 *param_1)
-
-{
-  int *piVar1;
-  int iVar2;
-  uint uVar3;
-  undefined *puVar4;
-  
-  iVar2 = StateMachineNode::vf20(param_1);
-  if (iVar2 == 0) {
-    return 0;
-  }
-  if (param_1 == (undefined4 *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_1)(&DAT_01be9ef4);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)param_1;
-  }
-  piVar1 = *(int **)(uVar3 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar3 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar2 = FUN_00dd6d80(puVar4);
-    uVar3 = -(uint)(iVar2 != 0) & (uint)piVar1;
-  }
-  *(undefined4 *)(uVar3 + 0x4180) = *(undefined4 *)(uVar3 + 0x418c);
-  *(undefined4 *)(uVar3 + 0x417c) = *(undefined4 *)(uVar3 + 0x4188);
-  *(undefined4 *)(uVar3 + 0x4184) = *(undefined4 *)(uVar3 + 0x4190);
-  return 1;
+// Leave: restores +0x417C..+0x4184.
+undefined4 AnySlidingStatePl0010::vf20(undefined4 *context)
+{
+    using namespace AnySlidingStatePl0010_p1;
+    if (StateMachineNode::vf20(context) == 0) {
+        return 0;
+    }
+    char *player = ownerPlayer(context);
+    at<float>(player, 0x4180) = at<float>(player, 0x418C);
+    at<float>(player, 0x417C) = at<float>(player, 0x4188);
+    at<float>(player, 0x4184) = at<float>(player, 0x4190);
+    return 1;
 }
 
 // 00BC95C0  AnySlidingStatePl0010::vf14  size=196  [class]
-void __thiscall AnySlidingStatePl0010::vf14(undefined4 param_1,undefined4 *param_2)
-
-{
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  undefined *puVar4;
-  
-  if (param_2 == (undefined4 *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9ef4;
-    (**(code **)*param_2)(&DAT_01be9ef4);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)param_2;
-  }
-  piVar1 = *(int **)(uVar2 + 0xc);
-  if (piVar1 == (int *)0x0) {
-    uVar2 = 0;
-  }
-  else {
-    puVar4 = &DAT_01be9db8;
-    (**(code **)(*piVar1 + 4))(&DAT_01be9db8);
-    iVar3 = FUN_00dd6d80(puVar4);
-    uVar2 = -(uint)(iVar3 != 0) & (uint)piVar1;
-  }
-  iVar3 = FUN_00a94ce0(0);
-  if (iVar3 != 0) {
-    FUN_00bb8d00(param_2,param_1,0x19,0,1);
-  }
-  iVar3 = FUN_008e2740();
-  if ((iVar3 == 0) &&
-     (((*(int *)(uVar2 + 0x41e0) == 0 ||
-       (*(float *)(*(int *)(uVar2 + 0x40d4) + 0x160) <= *(float *)(uVar2 + 0x41e4))) &&
-      (*(int *)(uVar2 + 0x4260) != 0)))) {
-    FUN_00d82510(0xe,100);
-  }
-  StateMachineNode::vf14(param_2);
-  return;
+void AnySlidingStatePl0010::vf14(undefined4 *context)
+{
+    using namespace AnySlidingStatePl0010_p1;
+    char *player = ownerPlayer(context);
+    if (thiscall<bool>(FUN_00a94ce0, player, 0)) {
+        FUN_00bb8d00(context, (int)this, 0x19, 0, 1);
+    }
+    if (!FUN_008e2740(at<int>(player, 0x764))) {
+        /* Pl0000+0x41E0: ground hit, +0x41E4: distance to it (Pl0010::GroundTest);
+           Pl0000+0x40D4: parameter block (+0x160); Pl0000+0x4260: ? */
+        // (fcomp + test ah,0x41: also taken when unordered, hence !(a > b))
+        if ((at<int>(player, 0x41E0) == 0 ||
+             !(at<float>(at<char *>(player, 0x40D4), 0x160) > at<float>(player, 0x41E4))) &&
+            at<int>(player, 0x4260) != 0) {
+            thiscall<void>(FUN_00d82510, this, 0xe, 100);
+        }
+    }
+    StateMachineNode::vf14(context);
 }
-

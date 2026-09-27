@@ -1,85 +1,103 @@
-// src/managers/triggermanager/actions/TrgActEffect.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C96670..00C96670, 1 functions
-
+// src/managers/triggermanager/actions/TrgActEffect.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
 
-// 00C96670  Trigger::Act::EFFECT  size=319  [class]
-int __fastcall Trigger::Act::EFFECT(int param_1)
-
-{
-  char *pcVar1;
-  char cVar2;
-  int iVar3;
-  char *pcVar4;
-  int iVar5;
-  int iVar6;
-  undefined4 uVar7;
-  undefined4 local_54;
-  undefined1 *local_50;
-  undefined4 local_4c;
-  int local_48;
-  int local_44;
-  undefined1 local_40 [64];
-  
-  iVar3 = *(int *)(param_1 + 4);
-  iVar6 = 0;
-  if (iVar3 == 0) {
-    FUN_00dd5650(&DAT_016b0e90);
-    return 0;
-  }
-  local_50 = local_40;
-  local_54 = 0;
-  local_4c = 0x10;
-  local_48 = 0;
-  local_44 = 0;
-  iVar5 = *(int *)(iVar3 + 8);
-  pcVar1 = (char *)(iVar3 + 0xc);
-  if (iVar5 == -1) {
-    FUN_00c77fc0(pcVar1,&local_54);
-  }
-  else {
-    pcVar4 = pcVar1;
-    do {
-      cVar2 = *pcVar4;
-      pcVar4 = pcVar4 + 1;
-    } while (cVar2 != '\0');
-    if (pcVar4 == (char *)(iVar3 + 0xd)) {
-      FUN_00a814d0(&local_54,iVar5);
-    }
-    else {
-      FUN_00c959c0(pcVar1,iVar5,&local_54);
-    }
-  }
-  if (local_48 == 0) {
-    if ((local_50 != (undefined1 *)0x0) && (local_48 = 0, local_44 != 0)) {
-      FUN_00dd48d0(local_50,0);
-    }
-    return 0;
-  }
-  iVar5 = 1;
-  if (0 < local_48) {
-    do {
-      if (*(int *)(local_50 + iVar6 * 4) == 0) {
-        if (*(int *)(iVar3 + 8) == -1) {
-          FUN_00dd5650(&DAT_016b0e54,pcVar1);
-        }
-LAB_00c9675f:
-        iVar5 = 0;
-      }
-      else {
-        if (iVar5 == 0) goto LAB_00c9675f;
-        uVar7 = *(undefined4 *)(iVar3 + 0x1c);
-        FUN_00a7c8a0(uVar7);
-        iVar5 = FUN_00aa92c0(uVar7);
-        if (iVar5 == 0) goto LAB_00c9675f;
-        iVar5 = 1;
-      }
-      iVar6 = iVar6 + 1;
-    } while (iVar6 < local_48);
-  }
-  if ((local_50 != (undefined1 *)0x0) && (local_48 = 0, local_44 != 0)) {
-    FUN_00dd48d0(local_50,0);
-  }
-  return iVar5;
+extern undefined DAT_016b0e54;  // error message format string
+extern undefined DAT_016b0e90;  // error message format string
+
+// the trigger action/condition handlers are free functions in these namespaces
+namespace Trigger { namespace Act {
+    int __fastcall EFFECT(int action);
+} }
+
+namespace TrgActEffect_p1 {
+
+// field at a byte offset of a record whose layout is not modelled
+template <class T> inline T &at(int base, int offset) { return *(T *)(base + offset); }
+
+// FUN_00dd5650: printf-style debug error report (functions.h declares it without parameters)
+inline void reportError(const void *format) { ((void (*)(const void *, ...))FUN_00dd5650)(format); }
+template <class A> inline void reportError(const void *format, A a)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a); }
+template <class A, class B> inline void reportError(const void *format, A a, B b)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b); }
+template <class A, class B, class C> inline void reportError(const void *format, A a, B b, C c)
+{ ((void (*)(const void *, ...))FUN_00dd5650)(format, a, b, c); }
+
+// small pointer list on the stack with 16 inline entries
+struct PointerList {
+    undefined4 unk0;         // +0x00
+    char      *data;         // +0x04  -> storage or heap block
+    undefined4 capacity;     // +0x08
+    int        count;        // +0x0C
+    int        ownsBuffer;   // +0x10
+    undefined1 storage[64];  // +0x14
+};
+
+// frees the list's heap block (inlined twice)
+inline void releaseList(PointerList *list)
+{
+    if (list->data != 0 && (list->count = 0, list->ownsBuffer != 0)) {
+        FUN_00dd48d0((int)list->data, 0);
+    }
 }
 
+}  // namespace TrgActEffect_p1
+
+// 00C96670  Trigger::Act::EFFECT  size=319  [class]
+// Collects the target objects (by name, by id, or by name + id) and starts effect +0x1C on each.
+int __fastcall Trigger::Act::EFFECT(int action)
+{
+    using namespace TrgActEffect_p1;
+    PointerList list;
+    int params = at<int>(action, 4);
+    int i = 0;
+    if (params == 0) {
+        reportError(&DAT_016b0e90);
+        return 0;
+    }
+    list.data = (char *)list.storage;
+    list.unk0 = 0;
+    list.capacity = 0x10;
+    list.count = 0;
+    list.ownsBuffer = 0;
+    int objectId = at<int>(params, 8);
+    char *name = (char *)(params + 0xC);
+    if (objectId == -1) {
+        ((int (*)(char *, PointerList *))FUN_00c77fc0)(name, &list);
+    }
+    else if (name[0] == '\0') {  // inlined strlen(name) == 0
+        ((void (*)(PointerList *, int))FUN_00a814d0)(&list, objectId);
+    }
+    else {
+        ((int (*)(char *, int, PointerList *))FUN_00c959c0)(name, objectId, &list);
+    }
+    if (list.count == 0) {
+        releaseList(&list);
+        return 0;
+    }
+    int result = 1;
+    for (; i < list.count; i = i + 1) {
+        if (*(int *)(list.data + i * 4) == 0) {
+            if (at<int>(params, 8) == -1) {
+                reportError(&DAT_016b0e54, name);
+            }
+            result = 0;
+        }
+        else if (result == 0) {
+            result = 0;
+        }
+        else {
+            undefined4 effectId = at<undefined4>(params, 0x1C);
+            FUN_00a7c8a0(effectId);
+            result = ((int (*)(undefined4))FUN_00aa92c0)(effectId);
+            if (result == 0) {
+                result = 0;
+            }
+            else {
+                result = 1;
+            }
+        }
+    }
+    releaseList(&list);
+    return result;
+}

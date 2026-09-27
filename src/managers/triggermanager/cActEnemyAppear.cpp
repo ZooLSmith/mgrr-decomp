@@ -1,51 +1,41 @@
-// src/managers/triggermanager/cActEnemyAppear.cpp
-// Reconstructed from METAL GEAR RISING REVENGEANCE.exe (0x52E76F3A), 00C8E5D0..00C94420, 6 functions
-
+// src/managers/triggermanager/cActEnemyAppear.cpp -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
 #include "mgrr.h"
+#include "cActEnemyAppear.h"
+
+extern undefined DAT_01dbe258;           // cActEnemyAppear static descriptor returned by vf00
 
 // 00C8E5D0  Trigger::cActEnemyAppear::vf08  size=1  [class]
-void Trigger::cActEnemyAppear::vf08(void)
-
-{
-  return;
+void Trigger::cActEnemyAppear::vf08()
+{
 }
 
 // 00C8E5E0  Trigger::cActEnemyAppear::vf0C  size=1  [class]
-void Trigger::cActEnemyAppear::vf0C(void)
-
-{
-  return;
+void Trigger::cActEnemyAppear::vf0C()
+{
 }
 
 // 00C8E5F0  Trigger::cActEnemyAppear::vf10  size=1  [class]
-void Trigger::cActEnemyAppear::vf10(void)
-
-{
-  return;
+void Trigger::cActEnemyAppear::vf10()
+{
 }
 
 // 00C8E600  Trigger::cActEnemyAppear::vf14  size=1  [class]
-void Trigger::cActEnemyAppear::vf14(void)
-
-{
-  return;
+void Trigger::cActEnemyAppear::vf14()
+{
 }
 
 // 00C94410  Trigger::cActEnemyAppear::vf00  size=6  [class]
-undefined * Trigger::cActEnemyAppear::vf00(void)
-
-{
-  return &DAT_01dbe258;
+void *Trigger::cActEnemyAppear::vf00()
+{
+    return &DAT_01dbe258;
 }
 
 // 00C94420  Trigger::cActEnemyAppear::vf04  size=31  [class]
-undefined4 * __thiscall Trigger::cActEnemyAppear::vf04(undefined4 *param_1,byte param_2)
-
-{
-  *param_1 = cActionAbstract::vftable;
-  if ((param_2 & 1) != 0) {
-    FUN_00dd4920(param_1);
-  }
-  return param_1;
+Trigger::cActEnemyAppear *Trigger::cActEnemyAppear::vf04(unsigned char flags)
+{
+    // vftable = Trigger::cActionAbstract::vftable (0x016A89A8)
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // ? operator delete
+    }
+    return this;
 }
-
