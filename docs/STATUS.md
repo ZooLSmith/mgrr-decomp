@@ -15,24 +15,21 @@ _Last updated 2026-09-27._
 
 Game data: extracted to `data/` (gitignored, `tools/cpk_extract.py`).
 
-## In progress: rest of wave 2 (mainly Pl0000.cpp, 22 chunks)
+## Paused: Pl0000.cpp (last file of wave 2)
 
-Find what is left: `python tools/verified_files.py logs/wave2.json <journal>` lists finished files;
-`find src -name "*.part*"` shows parts still unassembled. Compile many: `python tools/cc_many.py -j 8 list.txt`.
+Paused by the user on 2026-09-28 with `src/player/pl0000/Pl0000.cpp.part0` .. `part16` written
+(chunks 1-17 of 22; each part compiles against the current, uncommitted `Pl0000.h`). Not yet
+done: chunks 18-22 (`part17` .. `part21`) and the adversarial verification of all 22 parts.
 
-- Plan: `logs/wave2.json` (59 items, 691 units, 4.3 MB raw). Show a unit:
-  `python tools/plan_cleanup.py --show logs/wave2.json <item> [<unit>]`
-- Workflow script: `~/.claude/projects/E--Projects-cpp-mgrr-decomp/<session>/workflows/scripts/mgrr-cleanup-v2-wf_d412116e-592.js`,
-  run id `wf_d412116e-592`. Resume in the same session with
-  `Workflow({scriptPath, resumeFromRunId: "wf_d412116e-592"})`; in a new session re-run the
-  script with the same args (`--summary` below) — part files already written can be kept by
-  skipping items whose parts all exist and compile.
-- Args: `{"plan": "logs/wave2.json", "items": <output of python tools/plan_cleanup.py --summary logs/wave2.json>}`
-- Agents write `src/**/<file>.cpp.partN`. Afterwards:
-  1. `python tools/assemble_parts.py --all`  (checks every raw function is present in order; parts are moved to logs/parts_backup)
-  2. compile each assembled file: `tools\cc.bat src\...\File.cpp`; fix leftovers
-  3. `python tools/gen_headers.py` (also refreshes include/auto/cleaned.h)
-  4. commit wave 2
+To resume:
+1. For each missing chunk k in 17..21 run one rewrite agent with the wave-2 prompt
+   (workflow script `mgrr-cleanup-v2-*.js`, `rewriteUnitPrompt(item 0, k)`); its unit:
+   `python tools/plan_cleanup.py --show logs/wave2.json 0 <k>`. Chunks run in sequence (they extend Pl0000.h).
+2. Run the 22 verifiers (`verifyPrompt(item 0, k)` for k = 0..21, parallel).
+3. `python tools/assemble_parts.py src/player/pl0000/Pl0000.cpp`, then `tools\cc.bat` on it, then
+   `python tools/gen_headers.py`, then commit Pl0000.cpp + Pl0000.h + include/auto/classes/Pl0000.h.
+
+Everything else in wave 2 (661 of 662 files) is committed (`a0ba14b`, `c4c509a`).
 
 ## Cost reference
 
