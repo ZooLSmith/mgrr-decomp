@@ -1,0 +1,1417 @@
+// src/player/pl0000/Pl0000.cpp (part 1/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// D3DX9_43.DLL imports
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" float *__stdcall D3DXMatrixMultiply(float *out, const float *m1, const float *m2);
+extern "C" float *__stdcall D3DXMatrixRotationX(float *out, float angle);
+
+// globals
+extern int DAT_01b77e30;           // pad layout id: 2 / 3 swap the action button masks (FUN_00b79e20)
+extern unsigned int DAT_01bea090;  // game flags (bit 0x20 / 0x8000 tested here)
+extern int DAT_01bea024;           // 0xE: the damage-mesh variants are switched (FUN_00b7b440)
+extern int DAT_01b75898;
+extern int DAT_01dc08d4;           // slow/zan state flag (FUN_00b7aa00 .. FUN_00b7aa80)
+extern int DAT_01dc08d8;
+extern int DAT_01be8e54;
+extern int DAT_01be8e58;
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern char DAT_01be93b0[];        // object: ECX of FUN_00e03a70
+extern char DAT_01beb908[];        // object: ECX of FUN_00c4e710
+
+namespace Pl0000_p1 {
+
+// address of the sub-object / field at byte offset `off` of `obj`
+template <class T> inline T *at(void *obj, unsigned int off) { return (T *)((char *)obj + off); }
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &state618(void *p)      { return *(int *)((char *)p + 0x618); }    // Behavior+0x618: ? current action / state id
+inline int   &subState61C(void *p)   { return *(int *)((char *)p + 0x61C); }    // Behavior+0x61C: ? sub-state of state618
+inline int   &controller764(void *p) { return *(int *)((char *)p + 0x764); }    // Behavior+0x764: ? character controller (0 = none)
+inline float &gravity8A8(void *p)    { return *(float *)((char *)p + 0x8A8); }  // BehaviorAppBase+0x8A8: ? gravity (per second)
+inline float &dt910(void *p)         { return *(float *)((char *)p + 0x910); }  // BehaviorAppBase+0x910: ? frame delta time
+inline float &field974(void *p)      { return *(float *)((char *)p + 0x974); }  // BehaviorAppBase+0x974: ?
+
+// FUN_00a81330 resolves an object handle; FUN_00a7c8a0 returns that object's owner (object+0x48).
+// Inlined in the original as: handle ok ? FUN_00a7c8a0(FUN_00a81330(h)) : 0.
+inline int handleOwner(unsigned int *handle)
+{
+    if (FUN_00a81330(handle) == 0) {
+        return 0;
+    }
+    return FUN_00a7c8a0((int)FUN_00a81330(handle));
+}
+
+// Sets (set = true) or clears bit 0 of the flags word (+0x38) of every mesh of `model` (0x70-byte
+// entries, name at entry+0x60 -> +0x40) whose name contains `tag` (FUN_00fdbbd0 = strstr).
+inline void setMeshFlag(cModelBase *model, const char *tag, bool set)
+{
+    for (int i = 0; i < model->meshCount(); i++) {
+        char *mesh = (char *)model->meshArray() + i * 0x70;
+        int name = *(int *)(*(int *)(mesh + 0x60) + 0x40);
+        if (name != 0 && FUN_00fdbbd0((uint *)name, (char *)tag) != 0) {
+            if (set) {
+                *(unsigned int *)(mesh + 0x38) |= 1;
+            } else {
+                *(unsigned int *)(mesh + 0x38) &= 0xFFFFFFFE;
+            }
+        }
+    }
+}
+
+// callees whose generated prototype lacks the ECX receiver or passes floats as integers
+inline int ownerFE8(Pl0000 *self)  // FUN_0085c1b0: handleOwner(&handleFE8())
+{
+    return ((int (__thiscall *)(Pl0000 *))0x0085C1B0)(self);
+}
+inline int ownerB98(Pl0000 *self)  // FUN_004b5380: handleOwner(&handleB98())
+{
+    return ((int (__thiscall *)(Pl0000 *))0x004B5380)(self);
+}
+inline void call_00DB8150(void *obj, int arg)
+{
+    ((void (__thiscall *)(void *, int))0x00DB8150)(obj, arg);
+}
+inline void call_00EAA6E0(void *esp, float a, float b)  // cEspControler method
+{
+    ((void (__thiscall *)(void *, float, float))0x00EAA6E0)(esp, a, b);
+}
+inline void call_00E03A70(void *obj, int index, float value)  // obj+0x3C+index*0x10 = value (index < 4)
+{
+    ((void (__thiscall *)(void *, int, float))0x00E03A70)(obj, index, value);
+}
+inline int call_008EB310(int controller, float *vec, float time)  // ? ground probe along vec
+{
+    return ((int (__thiscall *)(int, float *, float))0x008EB310)(controller, vec, time);
+}
+inline void ctorFootIk2(void *obj)       // Animation::FootIk2::FootIk2 (0x00E30E60)
+{
+    ((void (__thiscall *)(void *))0x00E30E60)(obj);
+}
+inline void ctorHandIk(void *obj)        // Animation::HandIk::HandIk (0x00E2CD70)
+{
+    ((void (__thiscall *)(void *))0x00E2CD70)(obj);
+}
+inline void ctorFreeRunInfoArray(void *obj)  // lib::StaticArray<FreeRunActivity::Info,30>::StaticArray (0x00D85160)
+{
+    ((void (__thiscall *)(void *))0x00D85160)(obj);
+}
+// virtual slot 0x158 of an owner object, called with two arguments (Behavior declares it without)
+inline int vcall158(int obj, int a, int b)
+{
+    return (*(int (__thiscall **)(int, int, int))(*(char **)obj + 0x158))(obj, a, b);
+}
+
+}  // namespace Pl0000_p1
+
+// 00AC0310  Pl0000::Pl0000  size=1867  [class]
+Pl0000::Pl0000()
+{
+    using namespace Pl0000_p1;
+    // BehaviorAppBase::BehaviorAppBase() -- implicit base constructor, inlined in the original:
+    //   Behavior::Behavior() (0x00AA3540); vftable = BehaviorAppBase::vftable (0x0163F724);
+    //   FUN_00a7c930(&handle91C())
+    // vftable = Pl0000::vftable (0x0169C8EC)
+    at<cEspControler>(this, 0xA00)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0xAC0)->cEspControler::cEspControler();
+    FUN_00a7c930(&handleB98());
+    *at<int>(this, 0xBD8) = 0;
+    FUN_00a7c930(at<undefined4>(this, 0xC30));
+    at<cEspControler>(this, 0xC40)->cEspControler::cEspControler();
+    FUN_00a7c930(at<undefined4>(this, 0xCF4));
+    at<cEspControler>(this, 0xE90)->cEspControler::cEspControler();
+    *at<int>(this, 0xF64) = 0;
+    *at<int>(this, 0xF68) = 0;
+    *at<int>(this, 0xF6C) = 0;
+    *at<int>(this, 0xF70) = 0;
+    *at<int>(this, 0xF74) = 0;
+    FUN_00a603a0(at<undefined2>(this, 0xF78));
+    FUN_00a7c930(at<undefined4>(this, 0xFE0));
+    FUN_00a7c930(&handleFE4());
+    FUN_00a7c930(&handleFE8());
+    FUN_00a7c930(at<undefined4>(this, 0xFEC));
+    FUN_00a7c930(at<undefined4>(this, 0xFF0));
+    FUN_00a7c930(at<undefined4>(this, 0xFF4));
+    FUN_00a7c930(at<undefined4>(this, 0xFF8));
+    FUN_00a7c930(at<undefined4>(this, 0xFFC));
+    FUN_00a7c930(at<undefined4>(this, 0x1004));
+    FUN_00a7c930(at<undefined4>(this, 0x1008));
+    FUN_00a7c930(at<undefined4>(this, 0x100C));
+    FUN_00a7c930(at<undefined4>(this, 0x1010));
+    *at<int>(this, 0x1040) = 0;
+    *at<int>(this, 0x1044) = 0;
+    *at<int>(this, 0x1048) = 0;
+    *at<int>(this, 0x104C) = 0;
+    *at<int>(this, 0x1050) = 0;
+    *at<int>(this, 0x1054) = 0;
+    *at<int>(this, 0x1058) = 0;
+    *at<int>(this, 0x1064) = 0;
+    *at<int>(this, 0x1068) = 0;
+    *at<int>(this, 0x106C) = 0;
+    *at<short>(this, 0x1078) = 0;
+    *at<short>(this, 0x1084) = 0;
+    *at<short>(this, 0x1090) = 0;
+    FUN_009003e0(at<undefined4>(this, 0x10E4));
+    FUN_009003e0(at<undefined4>(this, 0x10F8));
+    FUN_00a7c930(at<undefined4>(this, 0x1108));
+    FUN_00a7c930(&handle1198());
+    FUN_00a7c930(&handle119C());
+    FUN_00a7c930(&handle11A8());
+    FUN_00a7c930(at<undefined4>(this, 0x11AC));
+    FUN_00405230((int)at<char>(this, 0x11B0));
+    FUN_00405230((int)at<char>(this, 0x1220));
+    *at<float>(this, 0x1294) = 0.0f;
+    *at<int>(this, 0x1298) = 0;
+    field1290() = 0;
+    *at<float>(this, 0x12A0) = 0.0f;
+    *at<int>(this, 0x12A4) = 0;
+    obj129C() = 0;
+    timer12AC() = 0.0f;
+    *at<int>(this, 0x12B0) = 0;
+    obj12A8() = 0;
+    *at<float>(this, 0x12B8) = 0.0f;
+    *at<int>(this, 0x12BC) = 0;
+    *at<int>(this, 0x12B4) = 0;
+    at<cEspControler>(this, 0x12C0)->cEspControler::cEspControler();
+    FUN_00405230((int)&handle1370());
+    // 1.0f tables (the original unrolls each loop 5 floats per iteration)
+    float *ones = at<float>(this, 0x142C);
+    for (int i = 0; i < 0x48 * 5; i++) {
+        ones[i] = 1.0f;
+    }
+    ones = at<float>(this, 0x19CC);
+    for (int i = 0; i < 0x24 * 5; i++) {
+        ones[i] = 1.0f;
+    }
+    ones = at<float>(this, 0x1C9C);
+    for (int i = 0; i < 0x11 * 5; i++) {
+        ones[i] = 1.0f;
+    }
+    ones = at<float>(this, 0x1DF0);
+    for (int i = 0; i < 20; i++) {  // +0x1DF0 .. +0x1E3C, stored one by one in the original
+        ones[i] = 1.0f;
+    }
+    at<cEspControler>(this, 0x1E50)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x1F00)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x1FB0)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x2060)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x2110)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x21C0)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x2270)->cEspControler::cEspControler();
+    *at<int>(this, 0x2398) = 0;
+    *at<int>(this, 0x239C) = 0;
+    *at<int>(this, 0x23A0) = 0;
+    ctorFootIk2(at<char>(this, 0x23B0));
+    FUN_00a7c930(at<undefined4>(this, 0x2684));
+    FUN_00904d60(at<undefined4>(this, 0x26A8));
+    FUN_00405230((int)at<char>(this, 0x26F0));
+    FUN_00a7c930(at<undefined4>(this, 0x2770));
+    FUN_00a7c930(at<undefined4>(this, 0x27AC));
+    FUN_00a7c930(at<undefined4>(this, 0x27DC));
+    *at<int>(this, 0x284C) = 0;
+    *at<int>(this, 0x2850) = 0;
+    *at<int>(this, 0x2854) = 0;
+    *at<int>(this, 0x2858) = 0;
+    *at<int>(this, 0x285C) = 0;
+    FUN_004105d0(at<undefined4>(this, 0x2870));
+    *at<int>(this, 0x2978) = 0;
+    *at<int>(this, 0x297C) = 0;
+    *at<int>(this, 0x2980) = 0;
+    *at<int>(this, 0x2984) = 0;
+    *at<int>(this, 0x2988) = 0;
+    at<cEspControler>(this, 0x2990)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x2A40)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x2AF0)->cEspControler::cEspControler();
+    *at<int>(this, 0x2BDC) = 0;
+    *at<int>(this, 0x2BE0) = 0;
+    *at<int>(this, 0x2BE4) = 0;
+    *at<int>(this, 0x2BE8) = 0;
+    *at<int>(this, 0x2BEC) = 0;
+    FUN_00a7c930(at<undefined4>(this, 0x2C1C));
+    FUN_00a7c930(at<undefined4>(this, 0x2C34));
+    *at<int>(this, 0x2C48) = 0;
+    *at<int>(this, 0x2C4C) = 0;
+    *at<int>(this, 0x2C50) = 0;
+    *at<int>(this, 0x2C54) = 0;
+    *at<int>(this, 0x2C58) = 0;
+    for (int i = 0; i < 2; i++) {  // 0xD0-byte elements
+        FUN_00a826e0((int)at<char>(this, 0x2C70 + i * 0xD0));
+    }
+    FUN_00a826e0((int)at<char>(this, 0x2E10));
+    for (int i = 0; i < 3; i++) {  // 0xE0-byte elements
+        FUN_00a831e0((int)at<char>(this, 0x2EE0 + i * 0xE0));
+    }
+    *at<unsigned short>(this, 0x31B2) = 0xFFFF;
+    *at<unsigned short>(this, 0x31B0) = 0;
+    *at<unsigned int>(this, 0x31B5) = 0xFFFFFFFF;  // unaligned 4-byte store
+    *at<unsigned char>(this, 0x31B4) = 0;
+    FUN_00a7c930(at<undefined4>(this, 0x31C0));
+    *at<unsigned short>(this, 0x31B0) = 0;
+    *at<unsigned int>(this, 0x31B5) = 0xFFFFFFFF;
+    *at<unsigned short>(this, 0x31B2) = 0xFFFF;
+    *at<unsigned char>(this, 0x31B4) = 0;
+    *at<int>(this, 0x31BC) = 0;
+    FUN_00a7c950(at<undefined4>(this, 0x31C0));
+    *at<int>(this, 0x31C4) = 1;
+    FUN_00a8b210((int)at<char>(this, 0x31D0));
+    FUN_00a8b210((int)at<char>(this, 0x3230));
+    FUN_00a7c930(at<undefined4>(this, 0x3298));
+    at<cEspControler>(this, 0x32A0)->cEspControler::cEspControler();
+    for (int i = 0; i < 8; i++) {
+        FUN_00a7c930(at<undefined4>(this, 0x3354 + i * 4));
+    }
+    at<cEspControler>(this, 0x3470)->cEspControler::cEspControler();
+    ((cEspControler *)esp3520())->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x35D0)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x3680)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x3730)->cEspControler::cEspControler();
+    FUN_00a7c930(at<undefined4>(this, 0x3810));
+    FUN_00a7c930(at<undefined4>(this, 0x3818));
+    *at<int>(this, 0x381C) = 0;
+    *at<int>(this, 0x3820) = 0;
+    *at<int>(this, 0x3824) = 0;
+    *at<int>(this, 0x3828) = 0;
+    *at<int>(this, 0x382C) = 0;
+    at<cEspControler>(this, 0x3870)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x3930)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x39F0)->cEspControler::cEspControler();
+    at<cEspControler>(this, 0x3AB0)->cEspControler::cEspControler();
+    FUN_00904d60(at<undefined4>(this, 0x3B90));
+    ctorHandIk(at<char>(this, 0x3BF0));
+    ctorHandIk(at<char>(this, 0x3CF0));
+    FUN_00a7c930(at<undefined4>(this, 0x3DFC));
+    FUN_00b89bf0(at<undefined4>(this, 0x3E80));
+    FUN_00a7c930(at<undefined4>(this, 0x3EA0));
+    FUN_00a7c930(at<undefined4>(this, 0x3EE8));
+    FUN_00a7c930(at<undefined4>(this, 0x3EEC));
+    FUN_00a7c930(at<undefined4>(this, 0x3EF0));
+    FUN_00a7c930(at<undefined4>(this, 0x3EF4));
+    FUN_00a603a0(at<undefined2>(this, 0x3F20));
+    FUN_00a7c930(at<undefined4>(this, 0x3F84));
+    FUN_00a7c930(at<undefined4>(this, 0x3F88));
+    FUN_00a7c930(at<undefined4>(this, 0x3F8C));
+    at<cEspControler>(this, 0x3FA0)->cEspControler::cEspControler();
+    FUN_00904d60(at<undefined4>(this, 0x4160));
+    FUN_00904d60(at<undefined4>(this, 0x4164));
+    FUN_00904d60(at<undefined4>(this, 0x4168));
+    FUN_00a7c930(at<undefined4>(this, 0x4178));
+    ctorFreeRunInfoArray(at<char>(this, 0x4250));
+    // two embedded hkpAllCdPointCollector objects, constructor inlined
+    // (early-out distance 3.40282e+38f = 0x7F7FFFEE, inline point storage of capacity 8)
+    *at<unsigned int>(this, 0x50A4) = 0x7F7FFFEE;
+    *at<void *>(this, 0x50A0) = (void *)0x0163D3AC;  // hkpAllCdPointCollector::vftable
+    *at<char *>(this, 0x50B0) = at<char>(this, 0x50C0);
+    *at<unsigned int>(this, 0x50B8) = 0x80000008;
+    *at<int>(this, 0x50B4) = 0;
+    *at<unsigned int>(this, 0x50A4) = 0x7F7FFFEE;
+    *at<void *>(this, 0x5240) = (void *)0x0163D3AC;  // hkpAllCdPointCollector::vftable
+    *at<unsigned int>(this, 0x5244) = 0x7F7FFFEE;
+    *at<char *>(this, 0x5250) = at<char>(this, 0x5260);
+    *at<unsigned int>(this, 0x5258) = 0x80000008;
+    *at<int>(this, 0x5254) = 0;
+    *at<unsigned int>(this, 0x5244) = 0x7F7FFFEE;
+}
+
+// 00AC0A70  Pl0000::vf04  size=6  [class]
+undefined *Pl0000::vf04()
+{
+    return (undefined *)0x01BE9DB8;  // DAT_01be9db8
+}
+
+// 00AC0A80  Pl0000::vf338  size=24  [class]
+undefined4 Pl0000::vf338()
+{
+    using namespace Pl0000_p1;
+    int state = state618(this);
+    if (state != 0 && state != 1) {
+        return 0;
+    }
+    return 1;
+}
+
+// 00AC0AA0  Pl0000::vf1FC  size=7  [class]
+undefined4 Pl0000::vf1FC()
+{
+    return field2668();
+}
+
+// 00AC0AB0  Pl0000::vf350  size=27  [class]
+undefined4 Pl0000::vf350()
+{
+    using namespace Pl0000_p1;
+    if (state618(this) == 0x5E && subState61C(this) < 4) {
+        return 1;
+    }
+    return 0;
+}
+
+// 00AC0AD0  Pl0000::vf354  size=16  [class]
+bool Pl0000::vf354()
+{
+    using namespace Pl0000_p1;
+    return state618(this) == 0xD0;
+}
+
+// 00AC0AE0  Pl0000::vf358  size=29  [class]
+undefined4 Pl0000::vf358()
+{
+    using namespace Pl0000_p1;
+    int state = state618(this);
+    if (state != 0xB7 && state != 0xBD) {
+        return 0;
+    }
+    return 1;
+}
+
+// 00AC0B00  Pl0000::vf35C  size=36  [class]
+undefined4 Pl0000::vf35C()
+{
+    using namespace Pl0000_p1;
+    int state = state618(this);
+    if (state != 0xC9 && state != 0xCB && state != 0xD1) {
+        return 0;
+    }
+    return 1;
+}
+
+// 00AC0B30  Pl0000::vf360  size=71  [class]
+undefined4 Pl0000::vf360()
+{
+    using namespace Pl0000_p1;
+    int state = state618(this);
+    if (state != 0xB7 && state != 0xB8 && state != 0xB9 && state != 0xBA &&
+        state != 0xBD && state != 0xBE && state != 0xBF) {
+        return 0;
+    }
+    if (1 < subState61C(this)) {
+        return 0;
+    }
+    return 1;
+}
+
+// 00AC0B80  Pl0000::vf364  size=3  [class]
+undefined4 Pl0000::vf364()
+{
+    return 0;
+}
+
+// 00AC0B90  Pl0000::vf36C  size=27  [class]
+undefined4 Pl0000::vf36C()
+{
+    using namespace Pl0000_p1;
+    int state = state618(this);
+    if (0x7B < state && state < 0x89) {
+        return 1;
+    }
+    return 0;
+}
+
+// 00AC0BB0  Pl0000::vf370  size=45  [class]
+undefined4 Pl0000::vf370()
+{
+    using namespace Pl0000_p1;
+    int controller = controller764(this);
+    if (controller != 0 && move890()[1] < 0.0f) {  // +0x894: vertical speed
+        if (FUN_008e2740(controller)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// 00AC0BE0  Pl0000::vf374  size=38  [class]
+undefined4 Pl0000::vf374()
+{
+    using namespace Pl0000_p1;
+    if (field1410() == 0) {
+        int state = state618(this);
+        if (0x81 < state && state < 0x89) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// 00AC0C10  Pl0000::vf378  size=36  [class]
+undefined4 Pl0000::vf378()
+{
+    using namespace Pl0000_p1;
+    if (field1410() == 0) {
+        int state = state618(this);
+        if (0x7B < state && state < 0x82) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// 00AC0C40  Pl0000::vf37C  size=13  [class]
+bool Pl0000::vf37C()
+{
+    using namespace Pl0000_p1;
+    return state618(this) == 0x60;
+}
+
+// 00AC0C50  Pl0000::vf17C  size=6  [class]
+undefined4 Pl0000::vf17C()
+{
+    return 1;
+}
+
+// 00AC0C60  Pl0000::vf27C  size=42  [class]
+void Pl0000::vf27C(undefined4 *out)
+{
+    float *dst = (float *)out;
+    float *pos = matrix() + 12;  // +0x40: translation row of the cParts matrix
+    dst[0] = pos[0];
+    dst[1] = pos[1];
+    dst[2] = pos[2];
+    dst[3] = pos[3];
+    dst[1] = dst[1] + 1.4f;
+}
+
+// 00AC0C90  Pl0000::vf314  size=33  [class]
+void Pl0000::vf314()
+{
+    using namespace Pl0000_p1;
+    int controller = controller764(this);
+    flag884() = 0;
+    if (controller != 0 && *(int *)(controller + 0x104) != 0) {
+        *(int *)(controller + 0x104) = 0;
+    }
+}
+
+// 00AC0CC0  Pl0000::vf318  size=47  [class]
+void Pl0000::vf318()
+{
+    using namespace Pl0000_p1;
+    int controller = controller764(this);
+    flag884() = 1;
+    if (controller != 0 && *(int *)(controller + 0x104) != 1) {
+        *(int *)(controller + 0x104) = 1;
+        *(float *)(*(int *)(controller + 0xD0) + 4) = 0.0f;
+    }
+}
+
+// 00AC0D00  Pl0000::vf3E4  size=22  [class]
+void Pl0000::vf3E4()
+{
+    if (groundAttribute() == 8) {
+        field2BAC() = -1.0f;
+    }
+}
+
+// 00AC0D20  Pl0000::vf224  size=33  [class]
+void Pl0000::vf224(float a, float b)
+{
+    flag3444() = 1;
+    param3448() = a;
+    param344C() = b;
+}
+
+// 00AC0D60  Pl0000::vf270  size=7  [class]
+undefined4 Pl0000::vf270()
+{
+    return field392C();
+}
+
+// 00AC0D70  Pl0000::vf3E8  size=3  [class]
+undefined4 Pl0000::vf3E8()
+{
+    return 0;
+}
+
+// 00AC0D80  Pl0000::vf3F0  size=11  [class]
+void Pl0000::vf3F0()
+{
+    flag53EC() = 1;
+}
+
+// 00AC35D0  Pl0000::destruct  size=30  [class]
+undefined4 Pl0000::destruct(byte flags)
+{
+    // 0x00AC13C0 (FILEMAP: hkpAllCdPointCollector::~hkpAllCdPointCollector) -- the destructor body
+    // called on this object
+    ((hkpAllCdPointCollector *)this)->hkpAllCdPointCollector::~hkpAllCdPointCollector();
+    if ((flags & 1) != 0) {
+        FUN_00dd4920((int)this);  // operator delete
+    }
+    return (undefined4)this;
+}
+
+// 00B79E20  FUN_00b79e20  size=268  [callgraph]
+// Initialises the action -> pad button mask table (+0xE08 .. +0xE68).
+void __fastcall FUN_00b79e20(Pl0000 *self)
+{
+    self->maskE18() = 0x10;
+    self->maskE24() = 0x80;
+    self->maskE30() = 0x20;
+    self->maskE44() = 0x20;
+    self->maskE34() = 0x20;
+    self->maskE38() = 0x20;
+    self->maskE5C() = 0x20;
+    self->maskE60() = 0x80;
+    self->maskE64() = 0x10;
+    self->maskE20() = 0x40;
+    self->maskE28() = 0x40;
+    self->maskE68() = 0x40;
+    self->maskE58() = 4;
+    int layout = DAT_01b77e30;
+    self->maskE3C() = 0x400;
+    self->maskE40() = 0x4000;
+    self->maskE14() = 0x4000;
+    self->maskE2C() = 0x4000;
+    self->maskE48() = 0x4000;
+    self->maskE4C() = 0x4000;
+    self->maskE08() = 0x2000;
+    self->maskE50() = 0x800;
+    self->maskE54() = 0x800;
+    if (layout == 2 || layout == 3) {
+        self->maskE3C() = 0x800;
+        self->maskE40() = 0x2000;
+        self->maskE14() = 0x2000;
+        self->maskE2C() = 0x2000;
+        self->maskE48() = 0x2000;
+        self->maskE4C() = 0x2000;
+        self->maskE08() = 0x4000;
+        self->maskE50() = 0x400;
+        self->maskE54() = 0x400;
+    }
+    self->maskE1C() = 0;
+}
+
+// 00B79F30  FUN_00b79f30  size=171  [callgraph]
+// Pad button mask of an action id.
+undefined4 FUN_00b79f30(Pl0000 *self, undefined4 action)  // __thiscall
+{
+    undefined4 mask = 0;
+    switch (action) {
+    case 5:
+        return self->maskE18();
+    case 6:
+        return self->maskE20();
+    case 7:
+        return self->maskE24();
+    case 8:
+        return self->maskE50();
+    case 9:
+        if (self->fieldB94() == 0) {
+            return self->maskE48();
+        }
+        break;
+    case 10:
+        return self->maskE38();
+    case 0xC:
+        return self->maskE08();
+    case 0xD:
+        return self->maskE3C();
+    case 0xE:
+        return self->maskE58();
+    case 0xF:
+        return 8;
+    case 0x10:
+        return 1;
+    case 0x11:
+        return 0x200;
+    case 0x12:
+        return 0x100;
+    case 0x13:
+        return 0x8000;
+    case 0x16:
+        if (self->fieldB94() != 0) {
+            mask = self->maskE40();
+        }
+    }
+    return mask;
+}
+
+// 00B7A030  FUN_00b7a030  size=24  [callgraph]
+void FUN_00b7a030(void)
+{
+    using namespace Pl0000_p1;
+    DAT_01be8e54 = 0;
+    DAT_01be8e58 = 0;
+    call_00DB8150(DAT_01bea1d0, 0);
+}
+
+// 00B7A050  FUN_00b7a050  size=33  [callgraph]
+void __fastcall FUN_00b7a050(Pl0000 *self)
+{
+    int obj = (int)FUN_00a81330(&self->handleFE4());
+    if (obj != 0) {
+        FUN_00a805f0(obj);
+    }
+    FUN_00a931b0((int)self);  // tail call
+}
+
+// 00B7A080  Pl0000::vf5C  size=1  [class]
+void Pl0000::vf5C()
+{
+}
+
+// 00B7A090  FUN_00b7a090  size=344  [between]
+// Latches the requested bits 0..2 of +0x13E0 into +0x13E4; once a request is dropped the bit's
+// timer is set to -1.0f and the bit (in both words) is cleared when the timer runs out.
+void __fastcall FUN_00b7a090(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    unsigned int req = self->flagsReq13E0();
+    if ((req & 1) != 0 && (self->flagsOn13E4() & 1) == 0) {
+        self->flagsOn13E4() = self->flagsOn13E4() | 1;
+    }
+    if ((req & 2) != 0 && (self->flagsOn13E4() & 2) == 0) {
+        self->flagsOn13E4() = self->flagsOn13E4() | 2;
+    }
+    if ((req & 4) != 0 && (self->flagsOn13E4() & 4) == 0) {
+        self->flagsOn13E4() = self->flagsOn13E4() | 4;
+    }
+    float *timers = self->flagTimers13E8();
+    if ((req & 1) == 0 && (*(unsigned char *)&self->flagsOn13E4() & 1) != 0) {
+        timers[0] = -1.0f;
+    }
+    if ((self->flagsOn13E4() & 1) != 0) {
+        float t = timers[0] - dt910(self);
+        timers[0] = t;
+        if (t < 0.0f) {
+            self->flagsReq13E0() = req & 0xFFFFFFFE;
+            self->flagsOn13E4() = self->flagsOn13E4() & 0xFFFFFFFE;
+        }
+    }
+    if ((self->flagsReq13E0() & 2) == 0 && (*(unsigned char *)&self->flagsOn13E4() & 2) != 0) {
+        timers[1] = -1.0f;
+    }
+    if ((self->flagsOn13E4() & 2) != 0) {
+        float t = timers[1] - dt910(self);
+        timers[1] = t;
+        if (t < 0.0f) {
+            self->flagsReq13E0() = self->flagsReq13E0() & 0xFFFFFFFD;
+            self->flagsOn13E4() = self->flagsOn13E4() & 0xFFFFFFFD;
+        }
+    }
+    if ((self->flagsReq13E0() & 4) == 0 && (*(unsigned char *)&self->flagsOn13E4() & 4) != 0) {
+        timers[2] = -1.0f;
+    }
+    if ((self->flagsOn13E4() & 4) != 0) {
+        float t = timers[2] - dt910(self);
+        timers[2] = t;
+        if (t < 0.0f) {
+            self->flagsReq13E0() = self->flagsReq13E0() & 0xFFFFFFFB;
+            self->flagsOn13E4() = self->flagsOn13E4() & 0xFFFFFFFB;
+        }
+    }
+}
+
+// 00B7A1F0  Pl0000::vf7C  size=105  [class]
+void Pl0000::vf7C(undefined4 param_2, undefined4 param_3)
+{
+    Behavior::vf7C(param_2, param_3);  // 0x00A92820
+    int other = FUN_00a12210((int)this, 0);  // __thiscall
+    vec3B70()[0] = *(float *)(other + 0x40);
+    vec3B70()[1] = *(float *)(other + 0x44);
+    vec3B70()[2] = *(float *)(other + 0x48);
+    vec3B70()[3] = *(float *)(other + 0x4C);
+    float *pos = matrix() + 12;  // +0x40
+    vec3B80()[0] = pos[0];
+    vec3B80()[1] = pos[1];
+    vec3B80()[2] = pos[2];
+    vec3B80()[3] = pos[3];
+}
+
+// 00B7A260  FUN_00b7a260  size=458  [between]
+// Builds `mtx` from the matrices at bone2320()+0x1B0 / +0x1C0 / +0x1D0 (FUN_00db6410), then turns
+// it by +90 degrees about X when its up vector (in model space) points up (> 0.4), otherwise by
+// 180 degrees when its Z axis points up (> 0.7).  The raw decompilation lost the vector locals;
+// this follows the machine code.
+void FUN_00b7a260(Pl0000 *self, float *mtx)  // __thiscall
+{
+    mtx[14] = 0.0f;
+    mtx[13] = 0.0f;
+    mtx[12] = 0.0f;
+    int bone = self->bone2320();
+    mtx[11] = 0.0f;
+    mtx[9] = 0.0f;
+    mtx[8] = 0.0f;
+    mtx[7] = 0.0f;
+    mtx[6] = 0.0f;
+    mtx[4] = 0.0f;
+    mtx[3] = 0.0f;
+    mtx[2] = 0.0f;
+    mtx[1] = 0.0f;
+    mtx[15] = 1.0f;
+    mtx[10] = 1.0f;
+    mtx[5] = 1.0f;
+    mtx[0] = 1.0f;
+    float a[4];
+    float b[4];
+    float c[4];
+    float d[4];
+    float rot[16];
+    a[0] = *(float *)(bone + 0x1C0);
+    a[1] = *(float *)(bone + 0x1C4);
+    a[2] = *(float *)(bone + 0x1C8);
+    a[3] = *(float *)(bone + 0x1CC);
+    b[0] = *(float *)(bone + 0x1B0);
+    b[1] = *(float *)(bone + 0x1B4);
+    b[2] = *(float *)(bone + 0x1B8);
+    b[3] = *(float *)(bone + 0x1BC);
+    c[0] = *(float *)(bone + 0x1D0);
+    c[1] = *(float *)(bone + 0x1D4);
+    c[2] = *(float *)(bone + 0x1D8);
+    c[3] = *(float *)(bone + 0x1DC);
+    FUN_00db6410((undefined4 *)mtx, b, a, (undefined4)c);
+    c[0] = 0.0f;
+    c[1] = 1.0f;
+    c[2] = 0.0f;
+    c[3] = b[3];
+    D3DXVec3TransformNormal(c, c, mtx);
+    D3DXVec3TransformNormal(c, c, self->invMatrixF0());
+    if (c[0] * 0.0f + c[1] + c[2] * 0.0f > 0.4f) {
+        D3DXMatrixRotationX(rot, 1.5707964f);
+        D3DXMatrixMultiply(mtx, rot, mtx);
+        return;
+    }
+    d[0] = 0.0f;
+    d[1] = 0.0f;
+    d[2] = 1.0f;
+    D3DXVec3TransformNormal(d, d, mtx);
+    if (d[0] * 0.0f + d[1] + d[2] * 0.0f > 0.7f) {
+        D3DXMatrixRotationX(rot, 3.1415927f);
+        D3DXMatrixMultiply(mtx, rot, mtx);
+    }
+}
+
+// 00B7A430  FUN_00b7a430  size=90  [between]
+// Horizontal angle (atan2 of the x / z differences, fpatan) between the points bone2320()+0x1C0
+// and bone2320()+0x1B0 in model space.  Returned unrounded in ST0.
+double __fastcall FUN_00b7a430(Pl0000 *self)
+{
+    float p0[4];
+    float p1[4];
+    D3DXVec3TransformNormal(p0, (float *)(self->bone2320() + 0x1C0), self->invMatrixF0());
+    D3DXVec3TransformNormal(p1, (float *)(self->bone2320() + 0x1B0), self->invMatrixF0());
+    return atan2((double)(p0[0] - p1[0]), (double)(p0[2] - p1[2]));
+}
+
+// 00B7A490  FUN_00b7a490  size=104  [between]
+// maskE50 button: pressed (no repeat mode) or held for exactly 15 frames (repeat mode).
+bool __fastcall FUN_00b7a490(Pl0000 *self)
+{
+    if (self->field3860() != 0) {
+        return false;
+    }
+    if (self->fieldF4C() == 0 && self->fieldF58() == 0) {
+        self->holdFramesF5C() = 0;
+        return (self->maskE50() & self->inputTrigger()) != 0;
+    }
+    if ((self->inputHold() & self->maskE50()) != 0) {
+        self->holdFramesF5C() = self->holdFramesF5C() + 1;
+        return self->holdFramesF5C() == 0xF;
+    }
+    self->holdFramesF5C() = 0;
+    return self->holdFramesF5C() == 0xF;
+}
+
+// 00B7A500  FUN_00b7a500  size=104  [between]
+// maskE50 button: held (no repeat mode) or held for at least 15 frames (repeat mode).
+bool __fastcall FUN_00b7a500(Pl0000 *self)
+{
+    if (self->field3860() != 0) {
+        return false;
+    }
+    if (self->fieldF4C() == 0 && self->fieldF58() == 0) {
+        self->holdFramesF5C() = 0;
+        return (self->maskE50() & self->inputHold()) != 0;
+    }
+    if ((self->inputHold() & self->maskE50()) != 0) {
+        self->holdFramesF5C() = self->holdFramesF5C() + 1;
+        return 0xE < self->holdFramesF5C();
+    }
+    self->holdFramesF5C() = 0;
+    return 0xE < self->holdFramesF5C();
+}
+
+// 00B7A570  FUN_00b7a570  size=130  [between]
+// maskE4C button, like FUN_00b7a490 (also false while vf32C()).
+bool __fastcall FUN_00b7a570(Pl0000 *self)
+{
+    if (self->field3860() == 0) {
+        if (!self->vf32C()) {
+            if (self->fieldF4C() == 0 && self->fieldF58() == 0) {
+                self->holdFramesF60() = 0;
+                return (self->maskE4C() & self->inputTrigger()) != 0;
+            }
+            if ((self->inputHold() & self->maskE4C()) != 0) {
+                self->holdFramesF60() = self->holdFramesF60() + 1;
+                return self->holdFramesF60() == 0xF;
+            }
+            self->holdFramesF60() = 0;
+            return self->holdFramesF60() == 0xF;
+        }
+    }
+    return false;
+}
+
+// 00B7A600  FUN_00b7a600  size=130  [between]
+// maskE4C button, like FUN_00b7a500 (also false while vf32C()).
+bool __fastcall FUN_00b7a600(Pl0000 *self)
+{
+    if (self->field3860() == 0) {
+        if (!self->vf32C()) {
+            if (self->fieldF4C() == 0 && self->fieldF58() == 0) {
+                self->holdFramesF60() = 0;
+                return (self->maskE4C() & self->inputHold()) != 0;
+            }
+            if ((self->inputHold() & self->maskE4C()) != 0) {
+                self->holdFramesF60() = self->holdFramesF60() + 1;
+                return 0xE < self->holdFramesF60();
+            }
+            self->holdFramesF60() = 0;
+            return 0xE < self->holdFramesF60();
+        }
+    }
+    return false;
+}
+
+// 00B7A690  FUN_00b7a690  size=57  [between]
+// True when one of (up to 16) entries listed by FUN_00a96130 has type byte (+2) 3.
+// The incoming ECX is passed through unchanged to FUN_00a96130.
+undefined4 __fastcall FUN_00b7a690(int obj)
+{
+    int list[16];
+    int count = FUN_00a96130(obj, (undefined4)list, 0x10);  // __thiscall
+    for (int i = 0; i < count; i++) {
+        if (*(char *)(list[i] + 2) == 3) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// 00B7A6D0  FUN_00b7a6d0  size=59  [between]
+bool FUN_00b7a6d0(void)
+{
+    if ((DAT_01bea090 & 0x20) == 0) {
+        int kind = (int)FUN_00932720() >> 8;
+        if (kind == 10 || kind == 0xE) {
+            return false;
+        }
+        if (DAT_01b75898 == 0) {
+            return (unsigned int)(kind - 4) < 4;
+        }
+    }
+    return true;
+}
+
+// 00B7A710  FUN_00b7a710  size=57  [between]
+// Assignment operator of a 0x18-byte record whose +0x10 member is copied with FUN_00a7c960.
+undefined4 *FUN_00b7a710(undefined4 *dst, undefined4 *src)  // __thiscall
+{
+    dst[0] = src[0];
+    dst[1] = src[1];
+    *(undefined2 *)(dst + 2) = *(undefined2 *)(src + 2);
+    dst[3] = src[3];
+    FUN_00a7c960(dst + 4, src + 4);  // __thiscall
+    dst[5] = src[5];
+    return dst;
+}
+
+// 00B7A760  FUN_00b7a760  size=61  [between]
+void __fastcall FUN_00b7a760(Pl0000 *self)
+{
+    self->vf3F0();
+    self->field2644() = 0;
+    self->vf1D4(1);
+    self->vf220(10.0f);
+}
+
+// 00B7A7C0  FUN_00b7a7c0  size=26  [between]
+char __fastcall FUN_00b7a7c0(Pl0000 *self)
+{
+    char count = self->inputTrigger() != 0;
+    if (self->field2600() != 0) {
+        count = count + 1;
+    }
+    return count;
+}
+
+// 00B7A7E0  FUN_00b7a7e0  size=23  [between]
+void FUN_00b7a7e0(Pl0000 *self, int amount)  // __thiscall
+{
+    self->counter2844() = self->counter2844() + amount;
+    self->timer2848() = 300;
+}
+
+// 00B7A800  FUN_00b7a800  size=15  [between]
+void __fastcall FUN_00b7a800(Pl0000 *self)
+{
+    self->counter2844() = 0;
+    self->timer2848() = 0;
+}
+
+// 00B7A810  FUN_00b7a810  size=40  [between]
+void __fastcall FUN_00b7a810(Pl0000 *self)
+{
+    int frames = self->timer2848();
+    self->timer2848() = frames - 1;
+    if (frames < 1) {
+        self->timer2848() = 300;
+        self->counter2844() = 0;
+    }
+}
+
+// 00B7A840  FUN_00b7a840  size=33  [between]
+bool __fastcall FUN_00b7a840(Pl0000 *self)
+{
+    int threshold = 8;
+    if (self->field3860() != 0) {
+        threshold = 4;
+    }
+    return threshold <= self->counter2844();
+}
+
+// 00B7A8A0  FUN_00b7a8a0  size=111  [between]
+void __fastcall FUN_00b7a8a0(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    int obj = (int)FUN_00a81330(&self->handle91C());
+    if (obj == 0) {
+        self->vf388(0);
+        self->vf388(0);
+        return;
+    }
+    int owner = (int)FUN_00a7c8a0(obj);
+    if (owner == 0) {
+        self->vf388(0);
+        return;
+    }
+    if (vcall158(owner, -1, 0) != 0) {
+        self->vf388(0);
+    }
+}
+
+// 00B7A920  FUN_00b7a920  size=111  [between]
+void __fastcall FUN_00b7a920(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    int obj = (int)FUN_00a81330(&self->handle91C());
+    if (obj == 0) {
+        self->vf388(0);
+        self->vf388(0);
+        return;
+    }
+    int owner = (int)FUN_00a7c8a0(obj);
+    if (owner == 0) {
+        self->vf388(0);
+        return;
+    }
+    if (vcall158(owner, -1, 0) != 0) {
+        self->vf388(0);
+    }
+}
+
+// 00B7A9C0  FUN_00b7a9c0  size=13  [between]
+bool __fastcall FUN_00b7a9c0(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    return subState61C(self) == 2;
+}
+
+// 00B7A9E0  Pl0000::vf328  size=18  [class]
+void Pl0000::vf328(float dt)
+{
+    using namespace Pl0000_p1;
+    BehaviorAppBase::vf328(dt910(this));  // 0x00A8EEE0; the argument is ignored
+}
+
+// 00B7AA00  FUN_00b7aa00  size=73  [between]
+void __fastcall FUN_00b7aa00(Pl0000 *self)
+{
+    if ((DAT_01bea090 & 0x8000) == 0) {
+        self->zanMode3458() = 1;
+        DAT_01dc08d4 = 1;
+        DAT_01dc08d8 = 0;
+        FUN_00e5e0c0((undefined4)"core_se_btl_char_zan", (undefined4)self, 0xFFFFFFFF, 0);
+        FUN_00da9230((int)DAT_01bea1d0, 1);  // __thiscall
+    }
+}
+
+// 00B7AA50  FUN_00b7aa50  size=14  [between]
+void __fastcall FUN_00b7aa50(Pl0000 *self)
+{
+    DAT_01dc08d4 = 0;
+    self->zanMode3458() = 0;
+}
+
+// 00B7AA60  FUN_00b7aa60  size=23  [between]
+void FUN_00b7aa60(void)
+{
+    DAT_01dc08d8 = 1;
+    FUN_00da9230((int)DAT_01bea1d0, 1);  // __thiscall
+}
+
+// 00B7AA80  FUN_00b7aa80  size=161  [between]
+void __fastcall FUN_00b7aa80(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    if (self->slowSePlaying() != 0) {
+        FUN_00e5e050((undefined4)"core_se_btl_slow_out", 0);
+    }
+    self->slowTimer341C() = -1.0f;
+    self->timer343C() = -1.0f;
+    self->timer3454() = -1.0f;
+    DAT_01dc08d4 = 0;
+    self->zanMode3458() = 0;
+    call_00EAA6E0(self->esp3520(), 10.0f, 0.0f);
+    self->slowSePlaying() = 0;
+    call_00E03A70(DAT_01be93b0, 0, 1.0f);
+    call_00E03A70(DAT_01be93b0, 1, 1.0f);
+    call_00E03A70(DAT_01be93b0, 2, 1.0f);
+    self->field3434() = 0;
+}
+
+// 00B7AB30  FUN_00b7ab30  size=28  [between]
+void FUN_00b7ab30(Pl0000 *self, float value)  // __thiscall
+{
+    if (0.0f < self->slowTimer341C()) {
+        self->slowTimer341C() = value;
+    }
+}
+
+// 00B7AB80  FUN_00b7ab80  size=38  [between]
+void FUN_00b7ab80(Pl0000 *self, float time, float value)  // __thiscall
+{
+    if (self->timer3454() <= 0.0f) {
+        self->timer343C() = time;
+        self->field3440() = value;
+    }
+}
+
+// 00B7ABC0  FUN_00b7abc0  size=91  [between]
+// Enables the line constraint (see FUN_00b7ac20) through `origin` along `dir`.
+void FUN_00b7abc0(Pl0000 *self, float *origin, float *dir)  // __thiscall
+{
+    self->lineLockOn() = 1;
+    self->lineOrigin()[0] = origin[0];
+    self->lineOrigin()[1] = origin[1];
+    self->lineOrigin()[2] = origin[2];
+    self->lineOrigin()[3] = origin[3];
+    self->lineDir()[0] = dir[0];
+    self->lineDir()[1] = dir[1];
+    self->lineDir()[2] = dir[2];
+    self->lineDir()[3] = dir[3];
+}
+
+// 00B7AC20  FUN_00b7ac20  size=145  [between]
+// Projects the position (+0x50) onto the constraint line; only x and z are written back.
+void __fastcall FUN_00b7ac20(Pl0000 *self)
+{
+    if (self->lineLockOn() != 0) {
+        float *pos = self->quat();  // +0x50 (cParts; used as the position here)
+        float *origin = self->lineOrigin();
+        float *dir = self->lineDir();
+        float t = (dir[1] * (pos[1] - origin[1]) + dir[0] * (pos[0] - origin[0]) +
+                   dir[2] * (pos[2] - origin[2])) /
+                  (dir[1] * dir[1] + dir[0] * dir[0] + dir[2] * dir[2]);
+        pos[0] = dir[0] * t + origin[0];
+        pos[2] = origin[2] + dir[2] * t;
+    }
+}
+
+// 00B7AD00  FUN_00b7ad00  size=31  [between]
+void __fastcall FUN_00b7ad00(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    self->saved3B60() = 0.0f;
+    if (controller764(self) != 0) {
+        self->saved3B60() = *(float *)(controller764(self) + 0xF4);
+    }
+}
+
+// 00B7AD20  FUN_00b7ad20  size=23  [between]
+void __fastcall FUN_00b7ad20(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    if (controller764(self) != 0) {
+        *(float *)(controller764(self) + 0xF4) = self->saved3B60();
+    }
+}
+
+// 00B7AD80  Pl0000::vf324  size=7  [class]
+undefined4 Pl0000::vf324()
+{
+    return field8A0();
+}
+
+// 00B7AD90  Pl0000::vf33C  size=67  [class]
+bool Pl0000::vf33C()
+{
+    if (vf330()) {
+        return false;
+    }
+    if (FUN_00a8cab0((int)this) == 0xE8 && FUN_00a8cac0((int)this) != 0) {
+        return false;
+    }
+    return FUN_00a8cab0((int)this) != 0xE9;
+}
+
+// 00B7ADE0  Pl0000::vf31C  size=856  [class]
+// Gravity / fall step (move890()[1] = vertical speed).  Rebuilt from the machine code: the raw
+// decompilation lost the pow() arguments and the second probe vector.
+void Pl0000::vf31C()
+{
+    using namespace Pl0000_p1;
+    bool active = vf33C();
+    int controller = controller764(this);
+    if (!active) {
+        if (controller != 0) {
+            *(float *)(controller + 0xF4) = saved3B60();
+        }
+        return;
+    }
+    if (controller != 0) {
+        *(float *)(controller + 0xF4) = saved3B60();
+    }
+    controller = controller764(this);
+    if (controller != 0 && FUN_008e2740(controller) && move890()[1] <= 0.0f && vf32C()) {
+        FUN_00b7ad20(this);
+    }
+    if (flag884() != 0) {
+        return;
+    }
+    if (0.0f < move890()[1]) {
+        // rising
+        int started = fallStarted3808();
+        float speed = move890()[1] - gravity8A8(this) * dt910(this);
+        move890()[1] = speed;
+        field974(this) = 0.0f;
+        if (started != 0 && speed < 0.0f) {
+            move890()[1] = (float)(pow(0.5, (double)dt910(this)) * speed);  // _CIpow (0x00FDC1F0)
+        }
+        if (move890()[1] < 0.0f) {
+            move890()[1] = 0.0f;
+            if (flag3BBC() != 0) {
+                flag3BBC() = 0;
+                timer3BC8() = timer3BC4();
+            }
+        }
+    } else {
+        // falling
+        if (timer3BC8() >= 0.0f) {
+            timer3BC8() = timer3BC8() - dt910(this);
+        }
+        if (timer3BC8() < 0.0f) {
+            move890()[1] = (float)(pow((double)0.999f, (double)dt910(this)) *
+                                   (move890()[1] - gravity8A8(this) * dt910(this)));
+        } else {
+            move890()[1] = (float)(pow((double)0.99f, (double)dt910(this)) *
+                                   (move890()[1] - gravity8A8(this) * dt910(this) * 0.05f));
+        }
+    }
+    fallStarted3808() = 1;
+    float velocity[4];
+    velocity[0] = move890()[0];
+    velocity[1] = move890()[1];
+    velocity[2] = move890()[2];
+    velocity[3] = move890()[3];
+    D3DXVec3TransformNormal(velocity, velocity, matrixB0());
+    controller = controller764(this);
+    if (controller == 0) {
+        return;
+    }
+    field8A0() = 0;
+    if (move890()[1] < 0.0f) {
+        if (FUN_008e2740(controller) || call_008EB310(controller764(this), velocity, 0.033333335f)) {
+            // landed
+            field8A0() = 1;
+            move890()[1] = 0.0f;
+            velocity[0] = move890()[0];
+            velocity[1] = move890()[1];
+            velocity[2] = move890()[2];
+            velocity[3] = move890()[3];
+            D3DXVec3TransformNormal(velocity, velocity, matrixB0());
+            groundY2324() = quat()[1];  // +0x54
+        }
+    }
+    float dt = dt910(this);
+    float step[4];
+    step[0] = dt * move890()[0];
+    step[1] = move890()[1] * dt;
+    step[2] = dt * move890()[2];
+    step[3] = dt * move890()[3];
+    FUN_008e0c00(controller764(this), (undefined4 *)step);  // __thiscall
+    if (FUN_008e2740(controller764(this)) ||
+        call_008EB310(controller764(this), velocity, 0.033333335f)) {
+        move890()[0] = move890()[0] * 0.7f;
+        move890()[2] = move890()[2] * 0.7f;
+    }
+}
+
+// 00B7B150  FUN_00b7b150  size=37  [between]
+void __fastcall FUN_00b7b150(Pl0000 *self)
+{
+    FUN_00a7c950(&self->handle1198());
+    FUN_00a7c950(&self->handle119C());
+    FUN_00a7c950(&self->handle11A8());  // tail call
+}
+
+// 00B7B180  FUN_00b7b180  size=122  [between]
+int __fastcall FUN_00b7b180(Pl0000 *self)
+{
+    if (self->obj129C() != 0 && FUN_00a81330((uint *)self->obj129C()) != 0 &&
+        *(int *)(self->obj129C() + 0x34) != 0) {
+        FUN_00a81330((uint *)self->obj129C());
+    }
+    if (FUN_00a81330(&self->handle1370()) != 0) {
+        return (int)&self->handle1370();
+    }
+    if (self->obj12A8() != 0 && FUN_00a81330((uint *)self->obj12A8()) != 0 &&
+        *(int *)(self->obj12A8() + 0x34) != 0 && FUN_00a81330((uint *)self->obj12A8()) != 0) {
+        return self->obj12A8();
+    }
+    return self->field1290();
+}
+
+// 00B7B200  FUN_00b7b200  size=42  [between]
+undefined4 __fastcall FUN_00b7b200(Pl0000 *self)
+{
+    using namespace Pl0000_p1;
+    return handleOwner(&self->handle1370());  // tail call of FUN_00a7c8a0
+}
+
+// 00B7B230  FUN_00b7b230  size=34  [between]
+void FUN_00b7b230(Pl0000 *self, float *out)  // __thiscall
+{
+    if (FUN_00a81330(&self->handle1370()) != 0) {
+        FUN_00c15010((int)&self->handle1370(), out);  // __thiscall
+    }
+}
+
+// 00B7B260  FUN_00b7b260  size=7  [between]
+int __fastcall FUN_00b7b260(Pl0000 *self)
+{
+    return (int)&self->handle1370();
+}
+
+// 00B7B270  FUN_00b7b270  size=159  [between]
+void FUN_00b7b270(Pl0000 *self, float rate, float deadZone, float maxStep, float yawOffset)  // __thiscall
+{
+    using namespace Pl0000_p1;
+    Behavior *owner = (Behavior *)handleOwner(&self->handle1370());
+    if (owner != 0) {
+        if (owner->vf228() != 0) {
+            float target[4];
+            if (FUN_00a81330(&self->handle1370()) != 0) {
+                FUN_00c15010((int)&self->handle1370(), target);  // __thiscall
+            }
+            FUN_00a8e880((int)self, target);  // __thiscall
+            self->vf308(rate, deadZone, maxStep, yawOffset);
+        }
+    }
+}
+
+// 00B7B310  FUN_00b7b310  size=107  [between]
+undefined4 __fastcall FUN_00b7b310(Pl0000 *self)
+{
+    if (self->obj129C() != 0 && FUN_00a81330((uint *)self->obj129C()) != 0 &&
+        *(int *)(self->obj129C() + 0x34) != 0 && FUN_00a81330((uint *)self->obj129C()) != 0) {
+        return self->obj129C();
+    }
+    if (self->obj12A8() != 0 && FUN_00a81330((uint *)self->obj12A8()) != 0 &&
+        *(int *)(self->obj12A8() + 0x34) != 0 && FUN_00a81330((uint *)self->obj12A8()) != 0) {
+        return self->obj12A8();
+    }
+    return 0;
+}
+
+// 00B7B380  FUN_00b7b380  size=174  [between]
+// Looks up `key` for `obj` (FUN_00c4e710 on DAT_01beb908) and stores the hit in obj12A8 (with a
+// 480.0f timer); otherwise asks FUN_008a07c0 with the owner's vf210() value.  The result is then
+// passed to FUN_008a4f80 on handle1370.
+void FUN_00b7b380(Pl0000 *self, int obj, undefined4 key, int flag)  // __thiscall
+{
+    if (obj == 0) {
+        return;
+    }
+    int target = FUN_00c4e710((int)DAT_01beb908, obj, (float *)key);  // __thiscall
+    if (target == 0 || (*(int *)(target + 0x30) < 1 && flag != 0) ||
+        (*(unsigned char *)(target + 8) & 1) == 0 || *(int *)(target + 0x34) == 0) {
+        if (((Behavior *)FUN_00a7c8a0(obj))->vf210() == 0) {
+            return;
+        }
+        undefined4 value = ((Behavior *)FUN_00a7c8a0(obj))->vf210();
+        if (FUN_008a07c0(&self->obj12A8(), (int)value, key, flag) == 0) {  // __thiscall
+            return;
+        }
+        target = self->obj12A8();
+    } else {
+        self->obj12A8() = target;
+        self->timer12AC() = 480.0f;
+    }
+    if (target != 0) {
+        FUN_008a4f80((int)&self->handle1370(), target);  // __thiscall
+    }
+}
+
+// 00B7B440  FUN_00b7b440  size=3023  [between]
+// Switches the "_dam0" / "_dam1" / "_dam2" mesh variants (and hides "face" / "eye_blow") of the
+// player and of the objects owned through handleFE8 / handleB98, when DAT_01bea024 == 0xE.
+void FUN_00b7b440(Pl0000 *self, int damaged)  // __thiscall
+{
+    using namespace Pl0000_p1;
+    int variant = FUN_00a4a2d0();  // always 0 (xor eax, eax)
+    if (damaged == 0) {
+        if (DAT_01bea024 == 0xE) {
+            setMeshFlag(self, "_dam0", true);
+            setMeshFlag(self, "_dam1", false);
+            setMeshFlag(self, "_dam2", false);
+            if (handleOwner(&self->handleFE8()) != 0) {
+                setMeshFlag((cModelBase *)handleOwner(&self->handleFE8()), "_dam0", true);
+                setMeshFlag((cModelBase *)handleOwner(&self->handleFE8()), "_dam1", false);
+                setMeshFlag((cModelBase *)handleOwner(&self->handleFE8()), "_dam2", false);
+            }
+            if (handleOwner(&self->handleB98()) != 0) {
+                ((cObj *)handleOwner(&self->handleB98()))->vf1C();
+                setMeshFlag((cModelBase *)handleOwner(&self->handleB98()), "_dam0", true);
+                setMeshFlag((cModelBase *)handleOwner(&self->handleB98()), "_dam1", false);
+                setMeshFlag((cModelBase *)handleOwner(&self->handleB98()), "_dam2", false);
+            }
+            setMeshFlag(self, "face", false);  // DAT_0163ef94
+            setMeshFlag(self, "eye_blow", false);
+        }
+    } else if (DAT_01bea024 == 0xE) {
+        if (variant == 0) {
+            setMeshFlag(self, "_dam0", false);
+            setMeshFlag(self, "_dam2", false);
+            setMeshFlag(self, "_dam1", true);
+            if (handleOwner(&self->handleFE8()) != 0) {
+                setMeshFlag((cModelBase *)ownerFE8(self), "_dam0", false);
+                setMeshFlag((cModelBase *)ownerFE8(self), "_dam2", false);
+                setMeshFlag((cModelBase *)ownerFE8(self), "_dam1", true);
+            }
+            if (handleOwner(&self->handleB98()) == 0) {
+                return;
+            }
+            setMeshFlag((cModelBase *)ownerB98(self), "_dam0", false);
+            setMeshFlag((cModelBase *)ownerB98(self), "_dam2", false);
+            setMeshFlag((cModelBase *)ownerB98(self), "_dam1", true);
+        } else {
+            setMeshFlag(self, "_dam0", false);
+            setMeshFlag(self, "_dam1", false);
+            setMeshFlag(self, "_dam2", true);
+            if (handleOwner(&self->handleFE8()) != 0) {
+                setMeshFlag((cModelBase *)ownerFE8(self), "_dam0", false);
+                setMeshFlag((cModelBase *)ownerFE8(self), "_dam1", false);
+                setMeshFlag((cModelBase *)ownerFE8(self), "_dam2", true);
+            }
+            if (handleOwner(&self->handleB98()) == 0) {
+                return;
+            }
+            setMeshFlag((cModelBase *)ownerB98(self), "_dam0", false);
+            setMeshFlag((cModelBase *)ownerB98(self), "_dam1", false);
+            setMeshFlag((cModelBase *)ownerB98(self), "_dam2", true);
+        }
+        ((cObj *)ownerB98(self))->vf20();
+    }
+}

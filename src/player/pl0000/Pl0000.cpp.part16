@@ -1,0 +1,1390 @@
+// src/player/pl0000/Pl0000.cpp (part 17/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// imports
+extern "C" unsigned int _tls_index;
+extern "C" unsigned long __readfsdword(unsigned long offset);
+#pragma intrinsic(__readfsdword)
+
+// globals
+extern unsigned int DAT_01bea060;  // global flags
+extern unsigned int DAT_01bea090;  // game flags (bit 0x20 / 0x8000 tested here)
+extern unsigned int DAT_01bea094;  // global flags
+extern int DAT_01bea024;           // 0xE: the damage-mesh variants are switched (FUN_00b7b440)
+extern int DAT_01bea028;           // compared with DAT_01bea024: equipment table DAT_01bea01c valid
+extern int DAT_01bea02c;           // non-zero: equipment table DAT_01bea01c not valid
+extern int *DAT_01bea01c;          // equipment ids: [0] body, [1] hair, [2] helmet, [3] sheath, [4] face
+extern int DAT_01b7bd48;           // argument of FUN_00b84230 / FUN_00b842f0
+extern unsigned char DAT_01b7b364[];  // cObjReadManager instance (getDataAtSet)
+extern int DAT_01be8e54;
+extern int DAT_01be8e58;
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern unsigned char DAT_01d616d0[];  // object: ECX of FUN_00c5bbb0
+extern unsigned char DAT_01be9a98[];  // object table searched by FUN_00a82090 (find by name / id)
+extern unsigned char DAT_01d64250[];  // object: ECX of FUN_00c3ca80
+extern unsigned char DAT_01b5d1e0[];  // save data object (0x8EE0 bytes; ECX of the save-data calls)
+extern unsigned char DAT_01dd0814[];  // random generator (ECX of FUN_00dde2d0)
+extern int DAT_01885d68;           // cHavok: 1 = world locking disabled
+extern int DAT_01885db8;           // cHavok: non-zero = inside the unlock period
+extern int DAT_01b35fac;           // cHavok: world exists
+extern unsigned char DAT_01885d70[];  // cHavok world lock object (ECX of FUN_00dd7300)
+
+// defined earlier in this file (parts 1 .. 16)
+float10 FUN_00b7edd0(Pl0000 *self, undefined4 arg);  // __thiscall
+void __fastcall FUN_00b7ef20(Pl0000 *self);
+void __fastcall FUN_00b84b90(Pl0000 *self);
+void __fastcall FUN_00b88c50(Pl0000 *self);
+void __fastcall FUN_00b88d30(Pl0000 *self);
+void __fastcall FUN_00b7ad00(Pl0000 *self);
+void FUN_00b94790(Pl0000 *self, float unused1, float unused2);  // __thiscall
+void __fastcall FUN_00bbd320(Pl0000 *self);
+void __fastcall FUN_00b79e20(Pl0000 *self);
+void FUN_00b7b440(Pl0000 *self, int damaged);  // __thiscall
+void FUN_00b7c060(Pl0000 *self, int mode);  // __thiscall
+void __fastcall FUN_00b7e820(Pl0000 *self);
+void __fastcall FUN_00be8060(Pl0000 *self);
+void *__fastcall FUN_00b932b0(void *obj);
+void *FUN_00bf88f0(void *self, undefined4 source);  // __thiscall, ret 4
+undefined4 __fastcall FUN_00be9590(Pl0000 *self);
+undefined4 __fastcall FUN_00bbdc50(Pl0000 *self);
+void __fastcall FUN_00bd9e50(Pl0000 *self);
+void __fastcall FUN_00bc34f0(Pl0000 *self);
+bool __fastcall FUN_00b7a840(Pl0000 *self);
+undefined4 __fastcall FUN_00b7cc20(Pl0000 *self);
+void FUN_00b7ab80(Pl0000 *self, float time, float value);  // __thiscall
+void FUN_00b8a040(Pl0000 *self, int keepAction, undefined4 unused, int setFlag2F0);  // __thiscall
+void FUN_00b877b0(Pl0000 *self, int amount, int unused);  // __thiscall
+
+// Pl0000::startup (the Behavior startup of the player: collisions, character controller, parameter table,
+// state machine, phantoms) and Pl0000::vf3CC (the hit reaction of the frame).
+
+namespace Pl0000_p17 {
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &field594(void *p)      { return *(int *)((char *)p + 0x594); }    // Behavior+0x594: 0 at startup
+inline int   &field598(void *p)      { return *(int *)((char *)p + 0x598); }    // Behavior+0x598: 0 at startup
+inline int   &field59C(void *p)      { return *(int *)((char *)p + 0x59C); }    // Behavior+0x59C: 0 at startup
+inline int   &field5A0(void *p)      { return *(int *)((char *)p + 0x5A0); }    // Behavior+0x5A0: 0 at startup
+inline int   &controller764(void *p) { return *(int *)((char *)p + 0x764); }    // Behavior+0x764: ? character controller (0 = none)
+inline float &field8A8(void *p)      { return *(float *)((char *)p + 0x8A8); }  // BehaviorAppBase+0x8A8: 0.01f at startup
+inline float &dir914(void *p)        { return *(float *)((char *)p + 0x914); }  // BehaviorAppBase+0x914: ? direction of the hit (radians)
+
+// virtual call through slot `off` (byte offset) of an object whose class is not known here
+template <class R> inline R vcall(void *obj, unsigned int off)
+{
+    return (*(R (__thiscall **)(void *))(*(char **)obj + off))(obj);
+}
+template <class R, class A> inline R vcall(void *obj, unsigned int off, A a)
+{
+    return (*(R (__thiscall **)(void *, A))(*(char **)obj + off))(obj, a);
+}
+template <class R, class A, class B> inline R vcall(void *obj, unsigned int off, A a, B b)
+{
+    return (*(R (__thiscall **)(void *, A, B))(*(char **)obj + off))(obj, a, b);
+}
+template <class R, class A, class B, class C> inline R vcall(void *obj, unsigned int off, A a, B b, C c)
+{
+    return (*(R (__thiscall **)(void *, A, B, C))(*(char **)obj + off))(obj, a, b, c);
+}
+template <class R, class A, class B, class C, class D>
+inline R vcall(void *obj, unsigned int off, A a, B b, C c, D d)
+{
+    return (*(R (__thiscall **)(void *, A, B, C, D))(*(char **)obj + off))(obj, a, b, c, d);
+}
+template <class R, class A, class B, class C, class D, class E, class F>
+inline R vcall(void *obj, unsigned int off, A a, B b, C c, D d, E e, F f)
+{
+    return (*(R (__thiscall **)(void *, A, B, C, D, E, F))(*(char **)obj + off))(obj, a, b, c, d, e, f);
+}
+template <class R, class A, class B, class C, class D, class E, class F, class G>
+inline R vcall(void *obj, unsigned int off, A a, B b, C c, D d, E e, F f, G g)
+{
+    return (*(R (__thiscall **)(void *, A, B, C, D, E, F, G))(*(char **)obj + off))(obj, a, b, c, d, e, f, g);
+}
+
+// Havok world write lock: FUN_004066f0 constructs the guard; its destructor is inlined.
+inline void havokWriteUnlock()
+{
+    if (DAT_01885d68 != 1) {
+        char *tls = ((char **)__readfsdword(0x2C))[_tls_index];
+        int *writeDepth = (int *)(tls + 4);
+        *writeDepth = *writeDepth - 1;
+        if (*writeDepth == 0 && DAT_01b35fac != 0 && DAT_01885db8 == 0) {
+            FUN_00dd7320((int)DAT_01885d70);
+        }
+    }
+}
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void setAction(void *obj, int action, int a, int b, int c)  // FUN_00a8caf0 (Behavior)
+{
+    ((void (__thiscall *)(void *, int, int, int, int))0x00A8CAF0)(obj, action, a, b, c);
+}
+inline void call_00AA4080(void *self, int id, int layer, float a, float b, int flags, float c, float d)
+{
+    ((void (__thiscall *)(void *, int, int, float, float, int, float, float))0x00AA4080)(
+        self, id, layer, a, b, flags, c, d);
+}
+inline float10 call_00DDBA30(float value)  // angle wrapped to [-pi, pi]
+{
+    return ((float10 (__cdecl *)(float))0x00DDBA30)(value);
+}
+inline void call_00DDA360(int a, float b, float c, int d)
+{
+    ((void (__cdecl *)(int, float, float, int))0x00DDA360)(a, b, c, d);
+}
+inline int call_009C4BF0(void *save)
+{
+    return ((int (__thiscall *)(void *))0x009C4BF0)(save);
+}
+inline void call_00DA0F50(void *camera, int a, float b, int c)
+{
+    ((void (__thiscall *)(void *, int, float, int))0x00DA0F50)(camera, a, b, c);
+}
+// FUN_00dd3500: allocates `size` bytes from `heap` (cdecl)
+inline void *call_00DD3500(unsigned int size, void *heap)
+{
+    return ((void *(__cdecl *)(unsigned int, void *))0x00DD3500)(size, heap);
+}
+inline int call_00E26E90(int model)
+{
+    return ((int (__thiscall *)(int))0x00E26E90)(model);
+}
+inline void call_00A17A40(void *obj)  // FILEMAP: switchD_0080dbae::default
+{
+    ((void (__thiscall *)(void *))0x00A17A40)(obj);
+}
+inline void call_00E25500(void *obj, float value)  // ret 4
+{
+    ((void (__thiscall *)(void *, float))0x00E25500)(obj, value);
+}
+// FUN_009f8930: sets the file pair of the object (+0x494 / +0x498) (tail call of FUN_00de3540, ret 8)
+inline void setFilePair(void *obj, undefined4 first, undefined4 second)
+{
+    ((void (__thiscall *)(void *, undefined4, undefined4))0x009F8930)(obj, first, second);
+}
+// cObjReadManager::getDataAtSet (0x00A01170, ret 0xC) on the instance DAT_01b7b364
+inline undefined4 getDataAtSet(void *manager, unsigned int *out, unsigned int id, unsigned int param)
+{
+    return ((undefined4 (__thiscall *)(void *, unsigned int *, unsigned int, unsigned int))0x00A01170)(
+        manager, out, id, param);
+}
+inline void call_00E2C500(void *obj, int data, undefined4 size)  // ret 8
+{
+    ((void (__thiscall *)(void *, int, undefined4))0x00E2C500)(obj, data, size);
+}
+// FILEMAP names of the next ones come from Ghidra's type guesses (lib::StaticArray<...> / AllocatedArray<...>)
+inline void call_00AA91C0(void *self)  // FILEMAP: lib::StaticArray<Behavior::AnimationSlot,16>::StaticArray
+{
+    ((void (__thiscall *)(void *))0x00AA91C0)(self);
+}
+inline int call_00AA3EB0(void *self)  // FILEMAP: lib::StaticArray<Constraints,32>::StaticArray
+{
+    return ((int (__thiscall *)(void *))0x00AA3EB0)(self);
+}
+inline void call_00AA9080(void *self, int a, int b)  // FILEMAP: lib::StaticArray<Collision*,64>::StaticArray (ret 8)
+{
+    ((void (__thiscall *)(void *, int, int))0x00AA9080)(self, a, b);
+}
+inline void call_00AC2010(void *self)  // FILEMAP: lib::AllocatedArray<Collision*>::AllocatedArray
+{
+    ((void (__thiscall *)(void *))0x00AC2010)(self);
+}
+inline int call_00AA4980(void *self, int *counts)  // FILEMAP: lib::StaticArray<Behavior::EffectIntegrationContainer,32> (ret 4)
+{
+    return ((int (__thiscall *)(void *, int *))0x00AA4980)(self, counts);
+}
+inline int call_00BD9460(void *memory, int count, void *info)  // FILEMAP: lib::StaticArray<FreeRunActivity::Info,64> (ret 8)
+{
+    return ((int (__thiscall *)(void *, int, void *))0x00BD9460)(memory, count, info);
+}
+inline void call_00903ED0(void *phantom, int shape)  // FILEMAP: lib::AllocatedArray<hkpPhantomListener*> (ret 4)
+{
+    ((void (__thiscall *)(void *, int))0x00903ED0)(phantom, shape);
+}
+// FUN_00a8d2a0: `this` is not used; returns FUN_00a4af30(5) of the object at 0x01BE8E40
+inline int call_00A8D2A0(void *self)
+{
+    return ((int (__thiscall *)(void *))0x00A8D2A0)(self);
+}
+// Collision "constructor": cdecl factory returning the new CollisionCapsule (see Behavior.cpp)
+inline int CollisionCapsule_create(int collisionType, int objInfo, int attackInfo)
+{
+    return ((int (__cdecl *)(int, int, int))0x00D7DEA0)(collisionType, objInfo, attackInfo);
+}
+// FUN_008ec660 (cdecl): creates the character controller of `owner`
+inline int createController(void *owner, float height, float radius, float a, float b, int c, int d, int e)
+{
+    return ((int (__cdecl *)(void *, float, float, float, float, int, int, int))0x008EC660)(
+        owner, height, radius, a, b, c, d, e);
+}
+inline undefined4 call_00A80CF0(void *array, int capacity, void *heap)  // ret 8
+{
+    return ((undefined4 (__thiscall *)(void *, int, void *))0x00A80CF0)(array, capacity, heap);
+}
+// FUN_00a82840 / FUN_00a82870 (ret 0x14): the two angle ranges of a limits object (flag bits 4 / 8)
+inline void call_00A82840(void *limits, float max, float min, float a, float b, float c)
+{
+    ((void (__thiscall *)(void *, float, float, float, float, float))0x00A82840)(limits, max, min, a, b, c);
+}
+inline void call_00A82870(void *limits, float max, float min, float a, float b, float c)
+{
+    ((void (__thiscall *)(void *, float, float, float, float, float))0x00A82870)(limits, max, min, a, b, c);
+}
+inline void call_00DB8150(void *obj, int model)
+{
+    ((void (__thiscall *)(void *, int))0x00DB8150)(obj, model);
+}
+inline int constructContext(void *memory, int factory, void *owner)  // StateMachineContextPl0010::StateMachineContextPl0010
+{
+    return ((int (__thiscall *)(void *, int, void *))0x00BF1BA0)(memory, factory, owner);
+}
+inline void call_00D89EC0(int kind, void *slot)  // cdecl
+{
+    ((void (__cdecl *)(int, void *))0x00D89EC0)(kind, slot);
+}
+inline void call_008F7F00(int phantom, int model)  // cdecl
+{
+    ((void (__cdecl *)(int, int))0x008F7F00)(phantom, model);
+}
+inline void call_00406760(void *guard)  // Havok world write lock guard: destructor
+{
+    ((void (__thiscall *)(void *))0x00406760)(guard);
+}
+inline int call_00A82090(void *table, const char *name, int flags, int a)  // ret 0xC
+{
+    return ((int (__thiscall *)(void *, const char *, int, int))0x00A82090)(table, name, flags, a);
+}
+inline void call_00C1CEE0(void *obj, float value)  // ret 4
+{
+    ((void (__thiscall *)(void *, float))0x00C1CEE0)(obj, value);
+}
+
+// bits of the phantom object (+0xC) set after the phantom is created, under the Havok write lock
+inline void setPhantomBits(int phantom, unsigned int bits0, int index, unsigned int bits)
+{
+    int guard;
+    FUN_004066f0((undefined4)&guard);
+    if (phantom != 0 && *(unsigned int *)(phantom + 0xC) != 0) {
+        unsigned int *data = *(unsigned int **)(phantom + 0xC);
+        data[0] = data[0] | bits0;
+        data[index] = data[index] | bits;
+    }
+    havokWriteUnlock();
+}
+
+// 0x150-byte collision hit record (FUN_00445db0 constructs it, FUN_00448f50 copies one)
+struct HitRecord {
+    int kind;                    // +0x00 attack kind (0x147 is skipped)
+    int priority;                // +0x04 the hit with the highest priority is taken; damage given to vf30C
+    int pad08[2];                // +0x08
+    unsigned char reaction;      // +0x10 non-zero: vf21C(owner, reaction, 0.01f, 0)
+    unsigned char strength;      // +0x11 0 .. 3: light, 4 / 5, 6 / 7, 8 .. 10
+    unsigned char pad12[6];      // +0x12
+    unsigned int handle;         // +0x18 attacker object handle
+    int pad1C;                   // +0x1C
+    float vec[4];                // +0x20 copied to vec2800
+    float yaw;                   // +0x30 direction of the hit
+    unsigned char pad34[0x58];   // +0x34
+    unsigned int flags;          // +0x8C
+    unsigned int flags2;         // +0x90
+    unsigned char pad94[0xBC];   // +0x94
+};
+
+}  // namespace Pl0000_p17
+
+// 00C02660  Pl0000::startup  size=7632  [class]
+// Behavior startup of the player: loads the equipment file pair, hides the "hide_armor" meshes for the
+// body 0x11060, runs BehaviorAppBase::startup, creates the three body capsules ("SignsAndBullet",
+// "MISSILE_ONLY", "Body"), the character controller, the default motions, resets the player state,
+// reads the parameter table (field754) when present, creates the state machine (factory + context),
+// the free-run flags, the constant table, the qte slots and the "headHitCheck" / "qteCheck" phantoms.
+// Returns 1, or 0 when a base step fails.
+undefined4 Pl0000::startup()
+{
+    using namespace Pl0000_p17;
+    // offset[3] is never written in the original: its value is stored as the w of three vectors
+    float offset[4];
+
+    // the animation slots are set up with the file pair of the manager, then the own pair is restored
+    unsigned int files[2];
+    files[0] = filePair0();
+    files[1] = filePair1();
+    unsigned int *managerFiles = vcall<unsigned int *>((void *)FUN_00c13920(), 0x2C);
+    unsigned int pair[2];
+    pair[0] = managerFiles[0];
+    pair[1] = managerFiles[1];
+    undefined4 second = FUN_00de3550((int)pair);
+    undefined4 first = FUN_00de3560((undefined4 *)pair);
+    setFilePair(this, first, second);
+    call_00AA91C0(this);
+    second = FUN_00de3550((int)files);
+    first = FUN_00de3560((undefined4 *)files);
+    setFilePair(this, first, second);
+
+    if (DAT_01bea02c == 0 && DAT_01bea028 == DAT_01bea024 && *DAT_01bea01c == 0x11060) {
+        FUN_00de3530((undefined4)files);
+        getDataAtSet(DAT_01b7b364, files, 0x11060, 0);
+        int expData = FUN_00de4550((int *)files, (char *)".exp", 0);  // __thiscall
+        if (expData != 0) {
+            undefined4 expSize = FUN_00de46d0((int *)files, (char *)".exp", 0);  // __thiscall
+            int animation = (int)FUN_00a92f90((int)this);
+            call_00E2C500((void *)(animation + 0x288), expData, expSize);
+        }
+        for (int i = 0; i < meshCount(); i++) {
+            char *mesh = (char *)meshArray() + i * 0x70;
+            char *name = *(char **)(*(int *)(mesh + 0x60) + 0x40);
+            if (name != 0 && FUN_00fdbbd0((uint *)name, (char *)"hide_armor") != 0) {
+                *(unsigned int *)(mesh + 0x38) = *(unsigned int *)(mesh + 0x38) & 0xFFFFFFFE;
+            }
+        }
+    }
+
+    if (BehaviorAppBase::startup() == 0) {
+        return 0;
+    }
+    int model = field4F0();
+    if (model == 0) {
+        return 0;
+    }
+    FUN_00dd7240((undefined4)lockBC0());
+    objFlags() = objFlags() | 0x10;
+    field18C() = 0.0f;
+    flags364() = flags364() | 0x100000;
+    field460() = 0.1f;
+    field6C4() = 5;
+    vec6D0()[0] = 0.0f;
+    vec6D0()[1] = 0.0f;
+    vec6D0()[2] = 0.0f;
+    vec6D0()[3] = offset[3];
+    field6EC() = 1;
+    field6E4() = 5;
+    field6E8() = 1.5f;
+    field6E0() = 5;
+    field640() = 1;
+    if (call_00AA3EB0(this) == 0) {
+        return 0;
+    }
+    call_00AA9080(this, 0x10, 3);
+    call_00AC2010(this);
+    int effectCounts[3];
+    effectCounts[0] = 1;
+    effectCounts[1] = 1;
+    effectCounts[2] = 1;
+    if (call_00AA4980(this, effectCounts) == 0) {
+        return 0;
+    }
+    FUN_00a8d280((int)this);
+    int ownerParam = call_00A8D2A0(this);
+
+    // body capsules
+    int collision = CollisionCapsule_create(0x10, *(int *)FUN_009f8b60((int)this), 0);
+    if (collision != 0) {
+        *(int *)(collision + 0x380) = 1;
+        FUN_00d77c50(collision, field4F0(), 0);  // __thiscall
+        *(float *)(collision + 0x594) = 1.1f;
+        *(float *)(collision + 0x590) = 0.7f;
+        FUN_0041cd00(collision, (char *)"SignsAndBullet");  // __thiscall
+        FUN_00a93a00((int)this, collision, ownerParam);
+        FUN_00d7b0f0(collision);
+        FUN_00d7b890(collision);
+        *(unsigned int *)(collision + 0x384) = *(unsigned int *)(collision + 0x384) | 3;
+        flag2C0C() = 0;
+        FUN_00a938c0((int)this, 1);
+    }
+    collision = CollisionCapsule_create(3, *(int *)FUN_009f8b60((int)this), 0);
+    if (collision != 0) {
+        *(int *)(collision + 0x380) = 3;
+        FUN_00d77c50(collision, field4F0(), 0);  // __thiscall
+        *(float *)(collision + 0x594) = 1.9f;
+        *(float *)(collision + 0x590) = 0.9f;
+        FUN_0041cd00(collision, (char *)"MISSILE_ONLY");  // __thiscall
+        FUN_00a93a00((int)this, collision, ownerParam);
+        FUN_00d7b0f0(collision);
+        FUN_00d7b890(collision);
+        *(unsigned int *)(collision + 0x384) = *(unsigned int *)(collision + 0x384) | 3;
+        flag2C08() = 0;
+        FUN_00a938c0((int)this, 3);
+    }
+    collision = CollisionCapsule_create(1, *(int *)FUN_009f8b60((int)this), 0);
+    if (collision != 0) {
+        *(int *)(collision + 0x380) = 0;
+        FUN_00d77c50(collision, field4F0(), 0);  // __thiscall
+        *(float *)(collision + 0x594) = 1.3f;
+        *(float *)(collision + 0x590) = 0.3f;
+        FUN_0041cd00(collision, (char *)"Body");  // __thiscall
+        FUN_00a93a00((int)this, collision, ownerParam);
+        FUN_00d7b0f0(collision);
+        FUN_00d7b890(collision);
+    }
+
+    FUN_00410540((int)&field678(), 0x40, &DAT_01b7bd48);  // __thiscall
+    FUN_00410540((int)hits2BDC(), 0x20, &DAT_01b7bd48);  // __thiscall
+    FUN_00410540((int)list2C48(), 0x40, &DAT_01b7bd48);  // __thiscall
+    FUN_00b88c50(this);
+    FUN_00b88d30(this);
+    FUN_008609b0((int)list1040(), 0x40, &DAT_01b7bd48);  // __thiscall
+    int modelAnimation = (int)FUN_00a7c890(model);
+    if (modelAnimation != 0) {
+        FUN_00e26e50(modelAnimation, 1);  // __thiscall
+    }
+    FUN_00e08640((int *)FUN_00a92fb0((int)this), 1);  // __thiscall
+    padIndex2564() = setFlags();
+    FUN_00b84b90(this);
+
+    // character controller
+    height3BB0() = 1.8f;
+    height3BAC() = 1.8f;
+    flag3BA4() = 0;
+    flag3BA8() = 1;
+    field3BA0() = 0;
+    controller764(this) = createController(this, 1.8f, 0.35f, 15.0f, 20.0f, 0xC8, 6, 0);
+    FUN_008e6fe0(controller764(this), 4);  // __thiscall
+    FUN_008e7400(controller764(this), 4);  // __thiscall
+    if (controller764(this) != 0) {
+        FUN_008e0b70(controller764(this), 1);  // __thiscall
+        FUN_008e0b80(controller764(this), 0xFFFFFFFF, 0x900);  // __thiscall
+        FUN_008e0ba0(controller764(this), 0);  // __thiscall
+        FUN_008e0bb0(controller764(this), 0x900);  // __thiscall
+        *(float *)(controller764(this) + 0xF4) = *(float *)(controller764(this) + 0xF4) * 0.75f;
+        FUN_00b7ad00(this);
+        FUN_008e6d00(controller764(this));
+        FUN_008e1cc0(controller764(this));
+    }
+    fieldB74() = 1;
+
+    // default motion
+    short motion = 4;
+    if ((DAT_01bea090 & 0x10) != 0) {
+        motion = 0x460;
+    }
+    if (-1 < (int)DAT_01bea090 && FUN_00416d50(0x1B)) {
+        motion = 0x46D;
+    }
+    call_00AA4080(this, motion, 0, 0.0f, 1.0f, 0, -1.0f, 1.0f);
+    FUN_00a9f3c0((int)this, (int)&filePair0(), 0, 0, 0.0f, 1.0f, 0, -1.0f, 1.0f);
+    FUN_00a929d0((int)this);
+    int parts = FUN_00a12210((int)this, 0xF00);  // __thiscall
+    if (parts != 0) {
+        *(unsigned short *)(parts + 0xA2) = *(unsigned short *)(parts + 0xA2) | 0x1000;
+    }
+    parts = FUN_00a12210((int)this, 0x710);  // __thiscall
+    if (parts != 0) {
+        *(unsigned short *)(parts + 0xA2) = *(unsigned short *)(parts + 0xA2) | 0x1000;
+    }
+    FUN_00b94790(this, 1.0f, 1.0f);
+    FUN_00e3f050((int)FUN_00a92f90((int)this));
+    call_00A17A40(this);
+    setAction(this, 0, 0, 0, 0);
+    FUN_00bbd320(this);
+    FUN_00b79e20(this);
+    vf314();
+    FUN_00a8edf0((int)this, 500);  // __thiscall: hp() = maxHp() = 500
+
+    // player state
+    field37E0() = 0.0f;
+    field2690() = 0;
+    timer25B4() = 0;
+    field37E4() = 300.0f;
+    field25B8() = 0;
+    request2568() = 0;
+    request256C() = 0;
+    field10D4() = 0.0f;
+    timer2574() = 0;
+    holdTimeE80() = 0.0f;
+    timer2580() = 0;
+    timer2584() = 0;
+    timer2588() = 0;
+    timer25AC() = 0;
+    field25A4() = 0;
+    timer25B0() = 0;
+    field25A8() = 0;
+    counter261C() = 0;
+    field2328() = 500;
+    reload25C0() = 0xF;
+    field25C4() = 0xF;
+    field878() = 1;
+    field8A0() = 1;
+    move890()[0] = 0.0f;
+    move890()[1] = -0.01f;
+    move890()[2] = 0.0f;
+    move890()[3] = offset[3];
+    field2BD0() = 0.0f;
+    timer2BF8() = 0.0f;
+    field2BFC() = 0.0f;
+    for (int i = 0; i < 0x10; i++) {
+        ((unsigned int *)matD80())[i] = ((unsigned int *)matrixB0())[i];
+    }
+    for (int i = 0; i < 0x10; i++) {
+        ((unsigned int *)matDC0())[i] = ((unsigned int *)invMatrixF0())[i];
+    }
+    fieldE00() = 1.0f;
+    fieldE04() = 1.0f;
+    field2C20() = 0.0f;
+    field2C24() = 0.0f;
+    field2810() = 0;
+    timer10CC() = 0.0f;
+    hitCount2814() = 0;
+    timer2384() = 0.0f;
+    hitCount2818() = 0;
+    timer238C() = 0.0f;
+    field281C() = 0;
+    obj10C4() = 0;
+    field8A8(this) = 0.01f;
+    field10C8() = 0;
+    field2380() = 0;
+    field31A0() = 0.0f;
+    field2388() = 0;
+    field31A4() = 0.0f;
+    field2390() = 0;
+    timer2BF0() = 0.0f;
+    field2394() = 0;
+    flags27D0() = 0;
+    timer2C10() = -1.0f;
+    field27D8() = 0;
+    fieldF54() = 0;
+    field3418() = 0.0f;
+    flagsReq13E0() = 0;
+    timer2C3C() = 0.0f;
+    flagsOn13E4() = 0;
+    field3350() = 0;
+    field2674() = -1.0f;
+    field2C44() = 0;
+    field267C() = -1.0f;
+    field2C40() = 0;
+    field2C38() = 0;
+    slowTimer341C() = 0.0f;
+    field2670() = 0;
+    timer343C() = 0.0f;
+    field2678() = 0;
+    slowSePlaying() = 0;
+    field3424() = 1.0f;
+    field3434() = 0;
+    field3420() = 1.0f;
+    field3450() = 0;
+    zanMode3458() = 0;
+    byte3460() = 0;
+    field3184() = 0;
+    field3194() = 0;
+    field3188() = 0.0f;
+    field318C() = 0.0f;
+    field3190() = 180.0f;
+    fieldF44() = 500.0f;
+    field37EC() = 0;
+    field3DEC() = 0;
+    boneFlag2370() = 0;
+    boneFlag2374() = 0;
+    boneFlag2378() = 0;
+    boneFlag237C() = 0;
+    field39E0() = 0;
+    field3928() = 0.0f;
+    field392C() = 0;
+    timer39E4() = -1.0f;
+    fieldE0C() = 0;
+    field3B9C() = 0;
+    timer3838() = 0.0f;
+    field383C() = 0.0f;
+    timer3840() = 0.0f;
+    field3854() = 0.0f;
+    field3844() = -1;
+    field3858() = 0;
+    field13FC() = 0;
+    byte2C30() = 0;
+    field2C2C() = 0.0f;
+    field3860() = 0;
+    timer2C04() = -1.0f;
+    lineLockOn() = 0;
+    flag3BBC() = 0;
+    timer3BC4() = 0.0f;
+    timer3BC8() = -1.0f;
+    fieldB88() = 0;
+    field27E0() = 0;
+    field27E4() = -1.0f;
+    field2680() = 0;
+    field3B98() = 1;
+    field2620() = 0;
+    field2624() = 0;
+    field2628() = 0;
+    field262C() = 0;
+    obj2640() = 0;
+    field2644() = 0;
+    field3BCC() = 0;
+    field27E8() = 0;
+    timer1294() = 0.0f;
+    field1298() = 0;
+    field1290() = 0;
+    timer12A0() = 0.0f;
+    field12A4() = 0;
+    obj129C() = 0;
+    timer12AC() = 0.0f;
+    flags12B0() = 0;
+    obj12A8() = 0;
+    timer12B8() = 0.0f;
+    flags12BC() = 0;
+    obj12B4() = 0;
+    FUN_00a7c950((undefined4 *)&handle1010());
+    field2778() = -1;
+    field277A() = -1;
+    field277C() = -1;
+    field10A4() = 1;
+    fieldCF0() = 0;
+    timer3B94() = -1.0f;
+    FUN_00b7b440(this, 0);
+    FUN_00b7c060(this, 0);
+    FUN_00b7e820(this);
+
+    // parameter defaults
+    param3374() = 90.0f;
+    param3378() = 20.0f;
+    param337C() = 0.25f;
+    param3380() = 1.0f;
+    param3384() = 3.0f;
+    field3388() = 0.16f;
+    param338C() = 0.24f;
+    param3390() = 0.25f;
+    param3394() = 100.0f;
+    field3398() = 360.0f;
+    field339C() = 2.0f;
+    field33A0() = 0.01f;
+    field33A4() = 45.0f;
+    field33B0() = 1.0f;
+    field33B4() = 0.01f;
+    field33B8() = 45.0f;
+    param33BC() = 0.01f;
+    param33C0() = 120.0f;
+    field33C4() = 0.05f;
+    field33C8() = 35.0f;
+    field33D4() = 100.0f;
+    field33D8() = 300.0f;
+    field33DC() = 100.0f;
+    field33E0() = 500.0f;
+    field33E4() = 500.0f;
+    field33E8() = 0.5f;
+    field33EC() = 10.0f;
+    field33F0() = 0.6f;
+    param33F4() = 0.006981317f;
+    param33F8() = 0.006981317f;
+    field33FC() = 12.0f;
+    param3400() = 0.05f;
+    param3404() = 0.017453292f;
+    field3408() = 0.02f;
+    field340C() = 0.5f;
+    field40C0() = 60.0f;
+    field40C4() = 60.0f;
+    field40B8() = 0;
+    timer27A4() = 0.0f;
+    wingState27A8() = 0;
+    hpBonus1E40() = 10;
+    field3410() = 1.0f;
+    field3414() = 1.0f;
+    field3198() = 2.0f;
+    field319C() = 1.0f;
+    field27B8() = 49.0f;
+    range27BC() = 49.0f;
+    field279C() = 600.0f;
+    field27A0() = 0.3f;
+    push26C4() = 1.0f;
+    push26C8() = 1.0f;
+    push26D0() = 1.5f;
+    push26CC() = -2.0f;
+    field3BB4() = 1.0f;
+
+    // parameters from the parameter table (field754): FUN_00b7edd0(id) and its virtual getters
+    if (field754() != 0) {
+        param3374() = (float)FUN_00b7edd0(this, 0xD6);
+        param3378() = (float)FUN_00b7edd0(this, 0xD7);
+        param337C() = (float)FUN_00b7edd0(this, 0xD8);
+        param3380() = (float)FUN_00b7edd0(this, 0xD9);
+        param3384() = (float)FUN_00b7edd0(this, 0xDA);
+        field3388() = (float)FUN_00b7edd0(this, 0xDB);
+        param338C() = (float)FUN_00b7edd0(this, 0xDC);
+        param3390() = (float)FUN_00b7edd0(this, 0xDD);
+        param3394() = (float)FUN_00b7edd0(this, 0xDF);
+        field3398() = (float)FUN_00b7edd0(this, 0xE0);
+        field339C() = (float)FUN_00b7edd0(this, 0xE1);
+        field33A0() = (float)FUN_00b7edd0(this, 0xE2);
+        field33A4() = (float)FUN_00b7edd0(this, 0xE3);
+        param33A8() = (float)FUN_00b7edd0(this, 0xE4);
+        param33AC() = (float)FUN_00b7edd0(this, 0xE5);
+        field33B0() = (float)FUN_00b7edd0(this, 0xE6);
+        field33B4() = (float)FUN_00b7edd0(this, 0xE7);
+        field33B8() = (float)FUN_00b7edd0(this, 0xE8);
+        param33BC() = (float)FUN_00b7edd0(this, 0xEB);
+        param33C0() = (float)FUN_00b7edd0(this, 0xEC);
+        field33C4() = (float)FUN_00b7edd0(this, 0xE9);
+        field33C8() = (float)FUN_00b7edd0(this, 0xEA);
+        param33CC() = (float)FUN_00b7edd0(this, 0xED);
+        param33D0() = (float)FUN_00b7edd0(this, 0xEE);
+        field33D4() = (float)FUN_00b7edd0(this, 0xEF);
+        field33D8() = (float)FUN_00b7edd0(this, 0xF0);
+        field33DC() = (float)FUN_00b7edd0(this, 0xF1);
+        field33E0() = (float)FUN_00b7edd0(this, 0xF2);
+        field33E4() = (float)FUN_00b7edd0(this, 0xF3);
+        field33E8() = (float)FUN_00b7edd0(this, 0xF4);
+        field33F0() = (float)FUN_00b7edd0(this, 0xF5);
+        field33EC() = (float)FUN_00b7edd0(this, 0xF6);
+        field3408() = (float)FUN_00b7edd0(this, 0xF8);
+        field340C() = (float)FUN_00b7edd0(this, 0xF9);
+        float10 value = FUN_00b7edd0(this, 0x192);
+        field27B8() = (float)(value * value);
+        value = FUN_00b7edd0(this, 0x193);
+        range27BC() = (float)(value * value);
+        void *table = (void *)field754();
+        param33F4() = vcall<float, int>(table, 0x34, 0xCF) * 0.017453292f;
+        table = (void *)field754();
+        param33F8() = vcall<float, int>(table, 0x3C, 0xCF) * 0.017453292f;
+        table = (void *)field754();
+        field33FC() = vcall<float, int>(table, 0x44, 0xCF) * 20.0f;
+        table = (void *)field754();
+        param3400() = vcall<float, int>(table, 0x34, 0xF7);
+        table = (void *)field754();
+        param3404() = vcall<float, int>(table, 0x3C, 0xF7) * 0.017453292f;
+        param4060() = vcall<float, int>((void *)field754(), 0x34, 0xFB);
+        param4064() = vcall<float, int>((void *)field754(), 0x34, 0xFC);
+        param4068() = vcall<float, int>((void *)field754(), 0x3C, 0xFB);
+        param406C() = vcall<float, int>((void *)field754(), 0x3C, 0xFC);
+        param4070() = vcall<float, int>((void *)field754(), 0x44, 0xFB);
+        param4074() = vcall<float, int>((void *)field754(), 0x44, 0xFC);
+        param4078() = vcall<float, int>((void *)field754(), 0x34, 0xFD);
+        param407C() = vcall<float, int>((void *)field754(), 0x34, 0xFE);
+        param4080() = vcall<float, int>((void *)field754(), 0x3C, 0xFE);
+        param4084() = vcall<float, int>((void *)field754(), 0x34, 0xFF);
+        param4088() = vcall<float, int>((void *)field754(), 0x3C, 0xFF);
+        param408C() = vcall<int, int>((void *)field754(), 0x24, 0x100);
+        param4090() = vcall<int, int>((void *)field754(), 0x2C, 0x100);
+        param4094() = vcall<float, int>((void *)field754(), 0x34, 0x100);
+        param4098() = vcall<float, int>((void *)field754(), 0x3C, 0x100);
+        param409C() = vcall<float, int>((void *)field754(), 0x44, 0x100);
+        call_00C1CEE0(DAT_01d616d0, vcall<float, int>((void *)field754(), 0x34, 0x103));
+        field40A0() = vcall<float, int>((void *)field754(), 0x34, 0x104);
+        param40A8() = vcall<float, int>((void *)field754(), 0x3C, 0x104);
+        param40AC() = vcall<float, int>((void *)field754(), 0x44, 0x104);
+        param40B0() = vcall<float, int>((void *)field754(), 0x4C, 0x104);
+        param40B4() = vcall<float, int>((void *)field754(), 0x34, 0x101);
+        hpBonus1E40() = (int)FUN_00b7edd0(this, 0x18C);  // _ftol2 (FUN_00fdbc60)
+        field3410() = (float)FUN_00b7edd0(this, 0x18D);
+        field3414() = (float)FUN_00b7edd0(this, 0x18E);
+        field3198() = (float)FUN_00b7edd0(this, 0x18F);
+        field319C() = (float)FUN_00b7edd0(this, 0x190);
+        field279C() = (float)(FUN_00b7edd0(this, 0x195) * 60.0f);
+        field27A0() = (float)FUN_00b7edd0(this, 0x196);
+        push26C4() = (float)FUN_00b7edd0(this, 0x198);
+        push26C8() = (float)FUN_00b7edd0(this, 0x199);
+        push26D0() = (float)FUN_00b7edd0(this, 0x19A);
+        push26CC() = (float)FUN_00b7edd0(this, 0x19B);
+        field3BB4() = (float)FUN_00b7edd0(this, 0x19D);
+        FUN_00b7ef20(this);
+    }
+    FUN_00be8060(this);
+    field3EE0() = 0;
+    field3F9C() = 0;
+    flag53E8() = 0;
+    flag53EC() = 0;
+    field10A8() = -1;
+    flagBF0() = 0;
+    FUN_00a13340((int)this, 0);  // __thiscall
+    call_00A80CF0(&field1054(), 0x40, &DAT_01b7bd48);
+
+    // angle limits
+    FUN_00a82790((undefined4 *)limits2C70(), field4F0(), 7, 0);  // __thiscall
+    flags2C70() = flags2C70() | 2;
+    call_00A82840(limits2C70(), 1.5707964f, -1.5707964f, 0.6f, 0.0017453292f, 1.0471976f);
+    call_00A82870(limits2C70(), 3.1415927f, -3.1415927f, 0.6f, 0.0017453292f, 1.0471976f);
+    FUN_00a84d60((int *)sub2398(), (undefined4)&DAT_01b7bd48, (int)this, 7);  // __thiscall
+    FUN_00a8c2e0((int)this);
+
+    // state machine
+    void *factory = call_00DD3500(4, &DAT_01b7bd48);
+    if (factory == 0) {
+        factory = 0;
+    } else {
+        *(unsigned int *)factory = 0x016A21AC;  // vftable = StateMachineFactoryPl0010::vftable
+    }
+    field7D4() = (int)factory;
+    void *memory = call_00DD3500(0x5E0, &DAT_01b7bd48);
+    int context;
+    if (memory == 0) {
+        context = 0;
+    } else {
+        context = constructContext(memory, field7D4(), this);
+    }
+    field7D0() = context;
+
+    // animation targets of sub3BF0 / sub3CF0
+    int animParams[0x11];
+    FUN_00e250e0((int)animParams);
+    ids3CE0()[0] = 0xB;
+    ids3CE0()[1] = 0xC;
+    animParams[0] = 9;
+    animParams[1] = 0x10;
+    animParams[2] = 0x11;
+    animParams[3] = 0x12;
+    animParams[4] = 0x13;
+    animParams[5] = 0x14;
+    animParams[6] = 0x15;
+    animParams[7] = 0x16;
+    animParams[8] = 0;
+    ids3CE0()[2] = 0xD;
+    FUN_00e35ab0((undefined4)sub3BF0(), (int)FUN_00a92f90((int)this), (undefined4)ids3CE0());  // __thiscall
+    FUN_00e25400((int)sub3BF0(), (undefined4)FUN_00a12210((int)this, 0x730));  // __thiscall
+    call_00E25500(sub3BF0(), 0.0f);
+    ids3DE0()[0] = 7;
+    ids3DE0()[1] = 8;
+    ids3DE0()[2] = 9;
+    FUN_00e35ab0((undefined4)sub3CF0(), (int)FUN_00a92f90((int)this), (undefined4)ids3DE0());  // __thiscall
+    FUN_00e25400((int)sub3CF0(), 0);  // __thiscall
+    call_00E25500(sub3CF0(), 0.0f);
+    FUN_00a82790((undefined4 *)limits2E10(), field4F0(), 5, 0);  // __thiscall
+    flags2E10() = flags2E10() | 0x20;
+    call_00A82840(limits2E10(), 0.34906584f, -0.34906584f, 0.3f, 0.0017453292f, 0.17453292f);
+    call_00A82870(limits2E10(), 1.0471976f, -1.0471976f, 0.3f, 0.0017453292f, 0.17453292f);
+    call_00DB8150(DAT_01bea1d0, field4F0());
+    DAT_01be8e54 = (int)this;
+    DAT_01be8e58 = field4F0();
+    flags364() = flags364() & 0xFFFFFFFD;
+    FUN_00a13340((int)this, 1);  // __thiscall
+
+    // free-run flags and constant tables
+    buffer5070() = 0;
+    memory = call_00DD3500(0xC, &DAT_01b7bd48);
+    int freeRunFlags;
+    if (memory == 0) {
+        freeRunFlags = 0;
+    } else {
+        int file = FUN_00de4550((int *)&filePair0(), (char *)"_freeRunFlag.bxm", 0);  // __thiscall
+        freeRunFlags = (int)FUN_00d850d0((undefined4 *)memory, (undefined4)&DAT_01b7bd48, file);  // __thiscall
+    }
+    buffer5070() = freeRunFlags;
+    memory = call_00DD3500(0x178, &DAT_01b7bd48);
+    int constants;
+    if (memory == 0) {
+        constants = 0;
+    } else {
+        int file = FUN_00de4550((int *)&filePair0(), (char *)"_constant.bxm", 0);  // __thiscall
+        constants = (int)FUN_00bf88f0(memory, (undefined4)file);
+    }
+    obj40D4() = constants;
+    field4170() = 0;
+    field416C() = 0;
+    field4174() = 0.0f;
+    field417C() = *(float *)(obj40D4() + 0x16C);
+    field4180() = *(float *)(obj40D4() + 0x168);
+    field4184() = *(float *)(obj40D4() + 0x154);
+    field4188() = field417C();
+    field418C() = field4180();
+    field4190() = field4184();
+    field4194() = 0.0f;
+    field4198() = 0.0f;
+    field41EC() = 0;
+    field4248() = -1.0f;
+    field41E0() = 0;
+    field41E4() = 0.0f;
+    vec41C0()[0] = 0.0f;
+    vec41C0()[1] = 0.0f;
+    vec41C0()[2] = 0.0f;
+    vec41C0()[3] = 0.0f;
+    vec41D0()[0] = 0.0f;
+    vec41D0()[1] = 1.0f;
+    vec41D0()[2] = 0.0f;
+    field41E8() = 0.0f;
+    field5080() = 1;
+    field5088() = 0;
+    field508C() = 0;
+    field594(this) = 0;
+    field598(this) = 0;
+    field59C(this) = 0;
+    field5A0(this) = 0;
+    vec4210()[0] = 0.0f;
+    vec4210()[1] = 0.0f;
+    vec4210()[2] = 1.0f;
+    vec4230()[0] = 0.0f;
+    vec4230()[1] = 0.0f;
+    vec4230()[2] = 1.0f;
+    field5074() = 0;
+    field5078() = 0;
+    field5084() = 0;
+    field3F94() = 0;
+    memory = call_00DD3500(0x1C10, &DAT_01b7bd48);
+    int activities;
+    if (memory == 0) {
+        activities = 0;
+    } else {
+        __declspec(align(16)) unsigned char activityInfo[0x70];
+        activities = call_00BD9460(memory, 0x1E, FUN_00b932b0(activityInfo));
+    }
+    obj5090() = activities;
+
+    // qte slots
+    void *slot = call_00DD3500(8, &DAT_01b7bd48);
+    if (slot == 0) {
+        slot = 0;
+    } else {
+        *(unsigned int *)slot = 0x016A1344;  // vftable = SlashStartSlotPl0010::vftable
+    }
+    ((Pl0000 **)slot)[1] = this;  // stored even when the allocation failed
+    obj41A0() = (int)slot;
+    call_00D89EC0(0x11, slot);
+    call_00D89EC0(0xE, (void *)obj41A0());
+    field405C() = 0.0f;
+    field41A8() = 0.0f;
+    qteTarget3E70()[0] = 0.0f;
+    qteTarget3E70()[1] = 0.0f;
+    qteTarget3E70()[2] = 0.0f;
+    qteTarget3E70()[3] = 1.0f;
+    qteTarget3E60()[3] = 1.0f;
+    qteTarget3E60()[0] = 0.0f;
+    qteTarget3E60()[1] = 0.0f;
+    qteTarget3E60()[2] = 0.0f;
+    slot = call_00DD3500(8, &DAT_01b7bd48);
+    if (slot == 0) {
+        slot = 0;
+    } else {
+        *(unsigned int *)slot = 0x016A1324;  // vftable = GetMoneySlotPl0010::vftable
+        ((Pl0000 **)slot)[1] = this;
+    }
+    field41A4() = (int)slot;
+    call_00D89EC0(0xE, slot);
+
+    float direction[4];
+    direction[0] = 1.0f;
+    direction[1] = 1.0f;
+    direction[2] = 0.0f;
+    FUN_00ddf460(direction, direction);
+    vf3E0(0xC8, 0);
+    int animation = (int)FUN_00a92f90((int)this);
+    if (call_00E26E90(animation) != 0) {
+        *(unsigned int *)(animation + 0x280) = *(unsigned int *)(animation + 0x280) & 0xFFFFFFFB;
+    }
+    FUN_00abad90((int)this);
+    FUN_00a7c960((undefined4 *)field644(), (undefined4 *)FUN_00a7c7f0(field4F0()));  // __thiscall
+    *(unsigned char *)(field644() + 6) = 1;
+    *(unsigned short *)(field644() + 4) = 0;
+    *(float *)(field644() + 0x30) = 0.3f;
+    *(float *)(field644() + 0x2C) = 0.65f;
+    rate53E0() = 0.9f;
+    rate53E4() = 0.8f;
+
+    // "headHitCheck" phantom
+    float position[4];
+    position[0] = quat()[0];  // +0x50 position
+    position[1] = quat()[1];
+    position[2] = quat()[2];
+    position[3] = quat()[3];
+    offset[0] = 0.0f;
+    offset[1] = 0.0f;
+    offset[2] = 0.0f;
+    float halfExtents[4];
+    halfExtents[0] = 0.6f;
+    halfExtents[1] = 0.3f;
+    halfExtents[2] = 0.7f;
+    void *world = (void *)FUN_00900480();
+    int filter = (int)FUN_009f8b40((int)this);
+    int phantom = vcall<int, float *, float *, float *, int, int, int>(world, 0x8, position, offset, halfExtents, 6,
+                                                                       filter, 0);
+    call_008F7F00(phantom, field4F0());
+    setPhantomBits(phantom, 1, 2, 0x40);
+    setPhantomBits(phantom, 4, 4, 4);
+    setPhantomBits(phantom, 8, 5, 4);
+    call_00903ED0(sub10E4(), phantom);
+    FUN_009009c0((int *)sub10E4(), (undefined4)"headHitCheck");  // __thiscall
+    FUN_00900bd0((int *)sub10E4());
+    field10F4() = 1;
+
+    // "qteCheck" phantom, created under the Havok write lock
+    int guard;
+    FUN_004066f0((undefined4)&guard);
+    position[0] = quat()[0];
+    position[1] = quat()[1];
+    position[2] = quat()[2];
+    position[3] = quat()[3];
+    float extent[4];
+    extent[0] = 0.0f;
+    extent[1] = 2.5f;
+    extent[2] = 0.0f;
+    offset[0] = 0.0f;
+    offset[1] = 0.3f;
+    offset[2] = 0.0f;
+    world = (void *)FUN_00900480();
+    filter = (int)FUN_009f8b40((int)this);
+    phantom = vcall<int, float *, float *, float *, float, int, int, int>(world, 0xC, position, extent, offset, 5.0f,
+                                                                          5, filter, 0);
+    call_008F7F00(phantom, field4F0());
+    setPhantomBits(phantom, 1, 2, 0x40);
+    setPhantomBits(phantom, 4, 4, 4);
+    setPhantomBits(phantom, 8, 5, 4);
+    call_00903ED0(sub10F8(), phantom);
+    FUN_009009c0((int *)sub10F8(), (undefined4)"qteCheck");  // __thiscall
+    FUN_00900bd0((int *)sub10F8());
+    FUN_0112c440(*(int *)(*(int *)sub10F8() + 0x10), 1.0f);  // __thiscall
+    FUN_00901540((int *)sub10F8(), 0x1F);  // __thiscall
+    call_00406760(&guard);
+
+    obj26A4() = call_00A82090(DAT_01be9a98, "vrWallCheck", 0x44000, 0);
+    vec26B0()[0] = 0.0f;
+    vec26B0()[1] = 0.0f;
+    vec26B0()[2] = 1.0f;
+    vec26B0()[3] = offset[3];
+    dist26C0() = 0.0f;
+    FUN_00c20180((int)DAT_01d64250, (int *)field754());  // __thiscall
+    return 1;
+}
+
+// 00C04430  Pl0000::vf3CC  size=3014  [class]
+// Hit reaction of the frame: takes the collision hit with the highest priority (buffer67C / field684),
+// lets the attacker veto it (vf1A0 / vf1B0), applies the damage (vf30C), picks the reaction level
+// 0 .. 0xC from the hit strength and flags, plays the reaction action and camera shake (FUN_00dda360),
+// and handles the kill (actions 0x3B / 0x3C / 0xDA / 0xEA).  Returns 1 when a hit was taken.
+undefined4 Pl0000::vf3CC()
+{
+    using namespace Pl0000_p17;
+    field385C() = 0;
+    fieldB8C() = 0;
+    if (field4E4() != 0) {
+        return 0;
+    }
+    int timer = timer2848();
+    timer2848() = timer - 1;
+    if (timer < 1) {
+        timer2848() = 300;
+        counter2844() = 0;
+    }
+    field684() = 0;
+    FUN_00ac2080((int)this, 0);  // __thiscall
+    if (FUN_00be9590(this) != 0) {
+        return 1;
+    }
+    if ((DAT_01bea094 & 0x20) == 0 && (FUN_00a8ef10((int)this) != 0 || FUN_00a8c760((int)this, 6))) {
+        FUN_00bbdc50(this);
+        return 0;
+    }
+    if ((DAT_01bea060 & 0x2000000) != 0) {
+        return 0;
+    }
+    int keepLink = 0;
+    if (vf32C()) {
+        keepLink = 1;
+    }
+    char *hit = (char *)buffer67C();
+    char *end = hit + field684() * 0x150;
+    int currentAction = FUN_00a8cab0((int)this);
+    int reaction = -1;
+    HitRecord record;
+    FUN_00445db0((int)&record);
+    int bestPriority = -1;
+    int found = 0;
+    if (hit == end) {
+        return 0;
+    }
+    do {
+        int priority = *(int *)(hit + 4);
+        if (*(int *)hit != 0x147 && bestPriority <= priority) {
+            FUN_00448f50((int)&record, (int)hit);  // __thiscall: copies the hit
+            bestPriority = priority;
+            found = 1;
+        }
+        hit = hit + 0x150;
+    } while (hit != end);
+    if (found == 0) {
+        return 0;
+    }
+    if (FUN_00a8f040((int)this, (int)&record) != 0) {  // __thiscall
+        return 0;
+    }
+    int guarded = 0.0f < timer2C10();
+    int dead = 0;
+    if (FUN_004025b0((int *)&record) == 0) {
+        return 0;
+    }
+    vec2800()[0] = record.vec[0];
+    vec2800()[1] = record.vec[1];
+    vec2800()[2] = record.vec[2];
+    vec2800()[3] = record.vec[3];
+    FUN_00bd9e50(this);
+    int attacker = 0;
+    int obj = (int)FUN_00a81330(&record.handle);
+    if (obj != 0) {
+        attacker = (int)FUN_00a7c8a0(obj);
+        if (attacker != 0 && vcall<int, HitRecord *, int>((void *)attacker, 0x1A0, &record, field4F0()) != 0) {
+            return 0;
+        }
+    }
+    if (record.reaction != 0) {
+        vcall<void, int, int, float, int>(this, 0x21C, attacker, (int)record.reaction, 0.01f, 0);
+    }
+    if ((flagsOn13E4() & 2) != 0) {
+        return 0;
+    }
+    vf198((undefined4)attacker, (undefined4)(int)&record, 1);
+    if ((record.flags & 0x400000) != 0) {
+        return 0;
+    }
+    if ((record.flags & 0x10000000) == 0) {
+        FUN_00bc34f0(this);
+    }
+    int damage = record.priority;
+    if (guarded != 0 && (record.flags & 0x10000000) != 0 && record.strength <= 5) {
+        damage = 0;
+    }
+    vf30C(damage, 0);
+    if (guarded == 0 && (record.flags & 0x10000000) != 0 && record.strength <= 5) {
+        timer2C10() = 10.0f;
+    }
+    obj = (int)FUN_00a81330(&handle91C());
+    if (obj != 0 && FUN_00a7c8a0(obj) != 0) {
+        void *owner = (void *)FUN_00a7c8a0(obj);
+        if (vcall<int, int>(owner, 0x1B0, field4F0()) != 0) {
+            return 0;
+        }
+    }
+    dir914(this) = (float)call_00DDBA30(record.yaw - vec90()[1]);
+    field2810() = field2810() + record.strength;
+    angle27EC() = record.yaw;
+
+    // reaction level from the strength (0 .. 3 light; 4 / 5 medium unless the hit has flag 0x10000000)
+    unsigned char strength = record.strength;
+    if (strength <= 5) {
+        if ((record.flags & 0x10000000) == 0 && 3 < strength) {
+            reaction = 1;
+        } else {
+            reaction = 0;
+        }
+    } else if (strength <= 7) {
+        if (reaction < 2) {
+            reaction = 2;
+        }
+    } else if (strength <= 10) {
+        if (reaction < 4) {
+            reaction = 4;
+        }
+    }
+    if ((record.flags2 & 0x2000000) != 0 && reaction < 4) {
+        reaction = 4;
+    }
+    if (9 < hitCount2814()) {
+        guarded = 0;
+        hitCount2814() = 0;
+        if (reaction < 1) {
+            reaction = 1;
+        }
+    }
+    if (5 < hitCount2818()) {
+        guarded = 0;
+        hitCount2818() = 0;
+        if (reaction < 2) {
+            reaction = 2;
+        }
+    }
+    if ((record.flags & 0x200000) != 0) {
+        reaction = 10;
+        FUN_0085c300((int *)this);
+    }
+    if ((record.flags & 0x20) != 0) {
+        reaction = 0xB;
+    }
+    if (guarded != 0 && !vf32C()) {
+        reaction = 0;
+    }
+    if ((record.flags & 0x800) != 0) {
+        reaction = 6;
+        if (currentAction == 0xD0) {
+            reaction = 5;
+        }
+    }
+    if ((record.flags & 0x20000) != 0 && !FUN_00416d50(0) && field3860() == 0) {
+        field385C() = 1;
+    }
+    if (FUN_00a8c760((int)this, 0x1A)) {  // __thiscall
+        reaction = 8;
+    }
+    if (FUN_00a8c760((int)this, 0x1B)) {  // __thiscall
+        reaction = 9;
+    }
+    if ((record.flags2 & 0x800000) != 0) {
+        reaction = 7;
+        flag3BC0() = 0;
+    }
+    if ((record.flags2 & 0x200000) != 0) {
+        reaction = 7;
+        flag3BC0() = 1;
+    }
+    if (FUN_00a8c760((int)this, 8) || (field3184() != 0 && record.strength <= 5)) {  // __thiscall
+        reaction = 0;
+        keepLink = 0;
+    }
+    if ((record.flags & 0x10000000) != 0 && record.strength <= 5 && (keepLink != 0 || vf1FC() != 0) &&
+        reaction < 2) {
+        reaction = 0;
+        keepLink = 0;
+    }
+    if (vf368() != 0 && (reaction == 0 || reaction == 1)) {
+        reaction = 2;
+    }
+    if (record.kind == 0xE2) {
+        reaction = 3;
+    }
+    if ((record.flags2 & 0x20000000) != 0) {
+        reaction = 5;
+    }
+    if (record.kind == 0xD9) {
+        reaction = 6;
+    }
+    if (FUN_00a8c760((int)this, 0x3B)) {  // __thiscall
+        reaction = 0;
+        keepLink = 0;
+        hitCount2814() = 0;
+    }
+    if ((record.flags & 0x40) != 0 && vf3EC()) {
+        reaction = 0xC;
+        hitCount2814() = 0;
+    } else if (reaction == 0) {
+        if (!FUN_00a8c760((int)this, 8)) {  // __thiscall
+            hitCount2814() = hitCount2814() + 1;
+        }
+        vf394();
+        call_00DDA360(0, 0.3f, 0.0f, 3);
+    }
+
+    if (field3EE0() == 0) {
+        if (field3F9C() == 0) {
+            int points = 0;
+            if (vf1D8() == 0) {
+                if (reaction == 1) {
+                    points = reaction;
+                    int linked = vf1D8();
+                    hitCount2818() = hitCount2818() + 1;
+                    if (linked == 0) {
+                        setAction(this, 0xC5, 0, 0, 0);
+                        call_00DDA360(0, 0.4f, 0.3f, 4);
+                    } else {
+                        vf394();
+                        call_00DDA360(0, 0.3f, 0.0f, 3);
+                    }
+                } else if (reaction == 2) {
+                    points = reaction;
+                    setAction(this, 0xC6, 0, 0, 0);
+                    call_00DDA360(0, 0.6f, 0.4f, 6);
+                } else if (reaction == 3) {
+                    points = reaction - 1;
+                    setAction(this, 0xCA, 0, 0, 0);
+                    call_00DDA360(0, 0.7f, 0.5f, 7);
+                } else if (reaction == 4) {
+                    points = reaction - 1;
+                    setAction(this, 0xC9, 0, 0, 0);
+                    if ((short)FUN_00dde2d0((uint *)DAT_01dd0814, 0, 2) == 2) {  // __thiscall
+                        setAction(this, 0xCB, 0, 0, 0);
+                    }
+                    call_00DDA360(0, 0.8f, 0.6f, 8);
+                } else if (reaction == 5) {
+                    points = reaction - 2;
+                    setAction(this, 0xCB, 0, 0, 0);
+                    call_00DDA360(0, 0.8f, 0.6f, 8);
+                } else if (reaction == 10) {
+                    points = 0;
+                    if (currentAction != 199) {
+                        setAction(this, 199, 0, 0, 0);
+                    }
+                    call_00DDA360(0, 0.8f, 0.6f, 8);
+                } else if (reaction == 0xB) {
+                    points = 0;
+                    if (currentAction != 200) {
+                        setAction(this, 200, 0, 0, 0);
+                    }
+                    call_00DDA360(0, 0.8f, 0.6f, 8);
+                }
+                if ((record.flags & 0x80) == 0) {
+                    counter2844() = counter2844() + points;
+                    timer2848() = 300;
+                    if (FUN_00b7a840(this) || reaction == 6) {
+                        setAction(this, 0xD0, 0, 0, 0);
+                        call_00DDA360(0, 0.8f, 0.6f, 8);
+                    }
+                }
+                if (reaction == 8 || reaction == 9) {
+                    setAction(this, 0xD4, 0, 0, 0);
+                    call_00DDA360(0, 0.8f, 0.6f, 8);
+                }
+            }
+            if (vf1D8() != 0) {
+                field281C() = field281C() + 1;
+                call_00AA4080(this, (record.flags & 0x10000000) != 0 ? 0x452 : 0x451, 3, 0.0f, 1.0f, 0x8000010,
+                              0.0f, 1.0f);
+                if (4 < field281C() && field2820() == 0) {
+                    setAction(this, 0xD5, 0, 0, 0);
+                    field2820() = 1;
+                }
+                if (reaction == 2 || reaction == 5 || reaction == 3) {
+                    setAction(this, 0xD5, 0, 0, 0);
+                    field2820() = 1;
+                    call_00DDA360(0, 0.7f, 0.6f, 8);
+                } else if (reaction == 4 || reaction == 6) {
+                    setAction(this, 0xD5, 0, 0, 0);
+                    field2820() = 1;
+                    call_00DDA360(0, 0.8f, 0.8f, 8);
+                }
+                if ((record.flags2 & 0x1000000) != 0) {
+                    call_00DDA360(0, 0.8f, 0.8f, 8);
+                    setAction(this, 0xD3, 0, 0, 0);
+                    field2820() = 1;
+                }
+                if (vf32C() && field2820() == 0) {
+                    keepLink = 0;
+                }
+            }
+            if (reaction == 7) {
+                call_00DDA360(0, 0.8f, 0.8f, 8);
+                setAction(this, 0xD1, 0, 0, 0);
+            }
+        } else {
+            setAction(this, 0xEA, 0, 0, 0);
+            dead = 1;
+        }
+    } else if (field3F9C() == 0) {
+        setAction(this, 0x3B, 0, 0, 0);
+        if ((record.flags & 0x8000000) != 0 && 0 < call_009C4BF0(DAT_01b5d1e0)) {
+            hp() = -1;
+        }
+        if ((record.flags & 4) != 0) {
+            hp() = -1;
+        }
+        if (hp() < 1) {
+            setAction(this, 0x3C, 0, 0, 0);
+            dead = 1;
+        }
+    } else {
+        setAction(this, 0xEA, 0, 0, 0);
+        dead = 1;
+    }
+
+    if ((record.flags & 4) != 0) {
+        hp() = -1;
+    }
+    if (0 < hp() && fieldB8C() == 0) {
+        if (FUN_00b7cc20(this) == 0) {
+            field3924() = 0;
+        } else if (field3924() == 0) {
+            FUN_00b7ab80(this, 45.0f, 0.1f);
+            field3924() = 1;
+            call_00DA0F50(DAT_01bea1d0, 1, 45.0f, 0);
+            field10A4() = 0;
+        }
+        if (keepLink != 0) {
+            FUN_00b8a040(this, 1, 0, 0);  // the middle argument is the float 0.0f
+        }
+        field31A8() = 180.0f;
+        return 1;
+    }
+    FUN_00b7ab80(this, 45.0f, 0.1f);
+    if (dead == 0) {
+        setAction(this, 0xDA, 0, 0, 0);
+        hp() = 0;
+        if (FUN_00416d50(0x3C) && fieldB8C() != 0) {
+            FUN_00b877b0(this, 1, 0);
+            setAction(this, 0xCB, 0, 0, 0);
+            fieldB88() = 1;
+            return 1;
+        }
+    }
+    return 1;
+}

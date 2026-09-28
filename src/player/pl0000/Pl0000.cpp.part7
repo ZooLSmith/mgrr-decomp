@@ -1,0 +1,1661 @@
+// src/player/pl0000/Pl0000.cpp (part 8/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// D3DX9_43.DLL imports
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" float *__stdcall D3DXMatrixMultiply(float *out, const float *m1, const float *m2);
+extern "C" float *__stdcall D3DXMatrixRotationX(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationY(float *out, float angle);
+extern "C" float *__stdcall D3DXMatrixRotationZ(float *out, float angle);
+extern "C" float *__stdcall D3DXVec3Normalize(float *out, const float *v);
+
+// globals
+extern unsigned int DAT_01bea090;  // game flags (bit 0x20 / 0x8000 tested here)
+extern int DAT_01be8e54;
+extern int DAT_01be8e58;
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern char DAT_01be93b0[];        // object: ECX of FUN_00e03a70
+extern char DAT_0163d0ac[];        // "[Hw::VecNormalize]..." (message of FUN_00dd5650)
+extern char DAT_016a25dc[];        // "Pl0000::setSeqAtk ..." (Shift-JIS: could not allocate the attack)
+extern unsigned char DAT_01b35df8[];  // collision world: ECX of RayCastSingleHitWork::RayCastSingleHitWork_2
+extern unsigned char DAT_01be9a98[];  // object table searched by FUN_00a82090 (find by name / id)
+extern unsigned char DAT_01be9ef4[];  // type descriptor tested with FUN_00dd6d80 (FUN_00b85420)
+extern int DAT_01bea024;           // 0xE: the damage-mesh variants are switched (FUN_00b7b440)
+extern int DAT_01bea028;           // compared with DAT_01bea024: equipment table DAT_01bea01c valid
+extern int DAT_01bea02c;           // non-zero: equipment table DAT_01bea01c not valid
+extern int *DAT_01bea01c;          // equipment ids: [0] body, [1] hair, [2] helmet, [3] sheath, [4] face
+extern int DAT_01bea004;
+extern int DAT_01bea000;
+extern int DAT_01be9ffc;
+extern int *DAT_01be9ff4;          // *DAT_01be9ff4: object id given to FUN_00a82090 (FUN_00b88590)
+
+// defined earlier in this file (parts 1 .. 7)
+undefined4 __fastcall FUN_00b7d0c0(Pl0000 *self);
+void FUN_00b7e090(Pl0000 *self, int kind);  // __thiscall
+undefined4 __fastcall FUN_00b7f9e0(Pl0000 *self);
+void __fastcall FUN_00b84bf0(Pl0000 *self);
+undefined4 FUN_00b86b00(Pl0000 *self, int allowE20, int clearOnE20, int allowE24, int unused);  // __thiscall
+void FUN_00b87c60(Pl0000 *self, int obj, int force);  // __thiscall
+void __fastcall FUN_00b88d70(Pl0000 *self);
+bool __fastcall FUN_00b89e20(Pl0000 *self);
+void FUN_00b8a040(Pl0000 *self, int keepAction, undefined4 unused, int setFlag2F0);  // __thiscall
+void __fastcall FUN_00b8a510(Pl0000 *self);
+void __fastcall FUN_00b8aae0(Pl0000 *self);
+undefined4 FUN_00b8afd0(Pl0000 *self, float *out);  // __thiscall
+undefined4 __fastcall FUN_00b8cd60(Pl0000 *self);
+undefined4 FUN_00b94500(Pl0000 *self, int allowE18, int allowE48, int unused);  // __thiscall
+void FUN_00b94790(Pl0000 *self, float unused1, float unused2);  // __thiscall
+void __fastcall FUN_00b949b0(Pl0000 *self);
+void __fastcall FUN_00b94ed0(Pl0000 *self);
+
+namespace Pl0000_p8 {
+
+// address of the sub-object / field at byte offset `off` of `obj`
+template <class T> inline T *at(int obj, unsigned int off) { return (T *)((char *)obj + off); }
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &state618(void *p)      { return *(int *)((char *)p + 0x618); }    // Behavior+0x618: ? current action / state id
+inline int   &subState61C(void *p)   { return *(int *)((char *)p + 0x61C); }    // Behavior+0x61C: ? sub-state of state618
+inline float *prevPos540(void *p)    { return (float *)((char *)p + 0x540); }   // Behavior+0x540: ? float[4] position of the last frame (vec560 = delta)
+inline int   &controller764(void *p) { return *(int *)((char *)p + 0x764); }    // Behavior+0x764: ? character controller (0 = none)
+inline float *pos900(void *p)        { return (float *)((char *)p + 0x900); }   // BehaviorAppBase+0x900: ? float[4] position before the move
+inline float &dt910(void *p)         { return *(float *)((char *)p + 0x910); }  // BehaviorAppBase+0x910: ? frame delta time
+inline float &field920(void *p)      { return *(float *)((char *)p + 0x920); }  // BehaviorAppBase+0x920: ? gravity per frame of the jump
+inline float &field924(void *p)      { return *(float *)((char *)p + 0x924); }  // BehaviorAppBase+0x924: ? count-down of the jump rise
+inline float &field928(void *p)      { return *(float *)((char *)p + 0x928); }  // BehaviorAppBase+0x928: ? time in the current action
+inline int   &field940(void *p)      { return *(int *)((char *)p + 0x940); }    // BehaviorAppBase+0x940: ? rising (no gravity) flag
+
+// virtual call through slot `off` (byte offset) of an object whose class is not known here
+template <class R> inline R vcall(void *obj, unsigned int off)
+{
+    return (*(R (__thiscall **)(void *))(*(char **)obj + off))(obj);
+}
+template <class R, class A> inline R vcall(void *obj, unsigned int off, A a)
+{
+    return (*(R (__thiscall **)(void *, A))(*(char **)obj + off))(obj, a);
+}
+
+// virtual slot `off` of the manager returned by FUN_00c13920 (slots 0x58 / 0x68: game modes)
+inline int mgrCall(unsigned int off)
+{
+    return vcall<int>((void *)FUN_00c13920(), off);
+}
+
+// true when the type returned by virtual slot `slot` of `obj` is-a `desc` (FUN_00dd6d80)
+inline bool isKindOf(void *obj, unsigned int slot, void *desc)
+{
+    undefined4 *type = vcall<undefined4 *>(obj, slot);
+    return FUN_00dd6d80(type, (undefined4 *)desc) != 0;
+}
+
+// FUN_00a81330 resolves an object handle; FUN_00a7c8a0 returns that object's owner (object+0x48).
+// Inlined in the original as: handle ok ? FUN_00a7c8a0(FUN_00a81330(h)) : 0.
+inline int handleOwner(unsigned int *handle)
+{
+    if (FUN_00a81330(handle) == 0) {
+        return 0;
+    }
+    return FUN_00a7c8a0((int)FUN_00a81330(handle));
+}
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void setAction(void *obj, int action, int a, int b, int c)  // FUN_00a8caf0 (Behavior)
+{
+    ((void (__thiscall *)(void *, int, int, int, int))0x00A8CAF0)(obj, action, a, b, c);
+}
+inline int ownerB98(Pl0000 *self)  // FUN_004b5380: owner of handleB98()
+{
+    return ((int (__thiscall *)(Pl0000 *))0x004B5380)(self);
+}
+inline void getWork(int *handle)  // RayCastManager::getWork (0x00905E50) on the instance DAT_01b35df8
+{
+    ((void (__thiscall *)(void *, int *))0x00905E50)(DAT_01b35df8, handle);
+}
+inline void call_00D8A1D0(int kind, int obj)
+{
+    ((void (__cdecl *)(int, int))0x00D8A1D0)(kind, obj);
+}
+inline void call_00DB8150(void *obj, int arg)
+{
+    ((void (__thiscall *)(void *, int))0x00DB8150)(obj, arg);
+}
+inline void call_00E03A70(void *obj, int index, float value)  // obj+0x3C+index*0x10 = value (index < 4)
+{
+    ((void (__thiscall *)(void *, int, float))0x00E03A70)(obj, index, value);
+}
+inline void call_00DD5650(const char *message)  // ? debug message
+{
+    ((void (__cdecl *)(const char *))0x00DD5650)(message);
+}
+inline int call_00A82090(void *table, const char *name, int id, int c)  // find object by name / id
+{
+    return ((int (__thiscall *)(void *, const char *, int, int))0x00A82090)(table, name, id, c);
+}
+inline void call_00A8C5F0(void *obj, int a, int b, int c, int d, int e)
+{
+    ((void (__thiscall *)(void *, int, int, int, int, int))0x00A8C5F0)(obj, a, b, c, d, e);
+}
+inline void call_00A0B9D0(int obj, float value)
+{
+    ((void (__thiscall *)(int, float))0x00A0B9D0)(obj, value);
+}
+// 0x008EAF70 (named hkpCdPointCollector::hkpCdPointCollector): ? ground probe of the character
+// controller along `delta` from `pos` (pos receives the hit); non-zero on a hit
+inline int call_008EAF70(int controller, float *delta, float *pos, int a, int b, float radius)
+{
+    return ((int (__thiscall *)(int, float *, float *, int, int, float))0x008EAF70)(controller, delta, pos, a, b,
+                                                                                   radius);
+}
+inline void call_00A8CE90(int obj, float *out, float *out2)
+{
+    ((void (__thiscall *)(int, float *, float *))0x00A8CE90)(obj, out, out2);
+}
+inline int call_00F96440(int id)
+{
+    return ((int (__cdecl *)(int))0x00F96440)(id);
+}
+inline void call_00AA4080(void *self, int id, int layer, float a, float b, int flags, float c, float d)
+{
+    ((void (__thiscall *)(void *, int, int, float, float, int, float, float))0x00AA4080)(
+        self, id, layer, a, b, flags, c, d);
+}
+inline void call_00A94BC0(void *self, int layer, float time)
+{
+    ((void (__thiscall *)(void *, int, float))0x00A94BC0)(self, layer, time);
+}
+inline int call_00A959F0(Pl0000 *self, int layer)  // result of FUN_00a958c0 scaled and truncated to int
+{
+    return ((int (__thiscall *)(Pl0000 *, int))0x00A959F0)(self, layer);
+}
+inline float10 call_00A95C80(Pl0000 *self, int layer)
+{
+    return ((float10 (__thiscall *)(Pl0000 *, int))0x00A95C80)(self, layer);
+}
+inline int call_00B95E80(Pl0000 *self)  // declared bool, compared with 5 by the callers
+{
+    return ((int (__fastcall *)(Pl0000 *))0x00B95E80)(self);
+}
+
+// Growable array {data, capacity, count, owned} released inline: data is freed with FUN_00dd48d0
+// when owned.
+inline void releaseArray(int *array)
+{
+    if (array[0] != 0) {
+        array[2] = 0;
+        if (array[3] != 0) {
+            FUN_00dd48d0(array[0], 0);
+            array[3] = 0;
+        }
+        array[0] = 0;
+        array[1] = 0;
+    }
+}
+
+// Mesh entry i of a model (0x70 bytes each): name at (+0x60)->+0x40, bit 0 of +0x38 = shown.
+inline char *meshEntry(void *model, int i)
+{
+    return (char *)((cModelBase *)model)->meshArray() + i * 0x70;
+}
+inline char *meshName(char *entry)
+{
+    return *(char **)(*(char **)(entry + 0x60) + 0x40);
+}
+// Hides the meshes whose name contains `part` (FUN_00fdbbd0: strstr).
+inline void hideMeshesContaining(void *model, const char *part)
+{
+    for (int i = 0; i < ((cModelBase *)model)->meshCount(); i++) {
+        char *entry = meshEntry(model, i);
+        char *name = meshName(entry);
+        if (name != 0 && FUN_00fdbbd0((uint *)name, (char *)part) != 0) {
+            *(unsigned int *)(entry + 0x38) = *(unsigned int *)(entry + 0x38) & 0xFFFFFFFE;
+        }
+    }
+}
+// Hides the meshes named exactly `wanted` (strcmp inlined in the original).
+inline void hideMeshesNamed(void *model, const char *wanted)
+{
+    for (int i = 0; i < ((cModelBase *)model)->meshCount(); i++) {
+        char *entry = meshEntry(model, i);
+        const unsigned char *name = (const unsigned char *)meshName(entry);
+        if (name != 0) {
+            const unsigned char *other = (const unsigned char *)wanted;
+            while (*name == *other && *name != 0) {
+                name++;
+                other++;
+            }
+            if (*name == *other) {
+                *(unsigned int *)(entry + 0x38) = *(unsigned int *)(entry + 0x38) & 0xFFFFFFFE;
+            }
+        }
+    }
+}
+
+// lib::StaticArray<Collision*,256> built on the stack by setSeqAtk (filled by FUN_00a9d9a0)
+struct CollisionArray {
+    void *vftable;   // +0x00 lib::StaticArray<Collision*,256>::vftable (0x0163D22C)
+    int *data;       // +0x04 items
+    int count;       // +0x08
+    int capacity;    // +0x0C 0x100
+    int items[256];  // +0x10
+};
+
+// Record of an attack sequence (see Behavior::setSeqAtk; 16 are fetched with FUN_00a96130).
+struct SeqAtkRecord {
+    unsigned short attackType;  // +0x00 < 4: attackId82 is also stored at AttackInfo+0x34
+    unsigned char  shape;       // +0x02 3: the attack collisions are refreshed
+    unsigned char  direction;   // +0x03 0..12
+    unsigned short attackId82;  // +0x04 matched with AttackInfo+0x82
+    unsigned short partsNo;     // +0x06 0xFFFF = whole model
+    unsigned short attackId80;  // +0x08 matched with AttackInfo+0x80
+    unsigned short pad0A;
+    float          pos[3];      // +0x0C
+    float          rot[3];      // +0x18
+    float          size[3];     // +0x24
+};
+
+// Growable array of float[3] points built on the stack by FUN_00bbfd70 (0x14 bytes).
+struct PointArray {
+    int unk00;     // +0x00
+    float *data;   // +0x04
+    int capacity;  // +0x08
+    int count;     // +0x0C
+    int owned;     // +0x10 non-zero: data is freed with FUN_00dd48d0
+};
+inline void pushPoint(PointArray &points, float x, float y, float z)
+{
+    if (points.count < points.capacity) {
+        float *p = points.data + points.count * 3;
+        if (p != 0) {
+            p[0] = x;
+            p[1] = y;
+            p[2] = z;
+        }
+        points.count = points.count + 1;
+    }
+}
+// Hw::VecNormalize check: a zero-length vector is reported and replaced by (0, 1, 0).
+// (The original also tests every component for NaN, which gives the same result as the > 0 test.)
+inline void checkLength(float *v)
+{
+    if (!(0.0f < v[1] * v[1] + v[0] * v[0] + v[2] * v[2])) {
+        call_00DD5650(DAT_0163d0ac);
+        v[0] = 0.0f;
+        v[1] = 1.0f;
+        v[2] = 0.0f;
+    }
+}
+
+// sum of the frame counters (+0xB8 / +0xC4 / +0xD0) of the animation object FUN_00a92f90()
+inline int motionFrames(int motion)
+{
+    return *(int *)(motion + 0xD0) + *(int *)(motion + 0xC4) + *(int *)(motion + 0xB8);
+}
+
+}  // namespace Pl0000_p8
+
+// 00BBCEE0  Pl0000::vf44  size=1082  [class]
+// Releases the player's objects: ends the item link, the ray-cast works, the owned objects and
+// arrays, resets the three FUN_00e03a70 values to 1.0, then Behavior::vf44 (clears DAT_01bea090
+// bit 6).
+void Pl0000::vf44()
+{
+    using namespace Pl0000_p8;
+    if (field7CC() != 0) {
+        int item = field7D0();
+        if (item != 0 && isKindOf((void *)item, 0, DAT_01be9ef4)) {
+            *at<int>(item, 0x5DC) = 1;
+        }
+        FUN_00b8a040(this, 1, 0, 0);  // __thiscall (third argument 0.0f)
+    }
+    getWork(&cast26A8());
+    if (obj26A4() != 0) {
+        FUN_00a805f0(obj26A4());
+    }
+    obj26A4() = 0;
+    FUN_00dd7270((undefined4)lockBC0());
+    call_00D8A1D0(0xE, field41A4());
+    call_00D8A1D0(0x11, obj41A0());
+    call_00D8A1D0(0xE, obj41A0());
+    if (obj41A0() != 0) {
+        vcall<void>((void *)obj41A0(), 0, 1);  // scalar deleting destructor
+        obj41A0() = 0;
+    }
+    if (obj5090() != 0) {
+        vcall<void>((void *)obj5090(), 0, 1);  // scalar deleting destructor
+        obj5090() = 0;
+    }
+    if (obj40D4() != 0) {
+        FUN_00dd4920(obj40D4());
+        obj40D4() = 0;
+    }
+    FUN_00a92a00((int)this);
+    FUN_00a931b0((int)this);
+    FUN_00a944d0((int)this);
+    FUN_00a9d8a0((int)this);
+    FUN_00900ca0((int *)sub10E4());
+    FUN_00900ca0((int *)sub10F8());
+    DAT_01be8e54 = 0;
+    DAT_01be8e58 = 0;
+    call_00DB8150(DAT_01bea1d0, 0);
+    getWork(&ray4160());
+    getWork(&ray4164());
+    getWork(&ray4168());
+    getWork(&ray3B90());
+    FUN_00a8c820((int)this);
+    int linked = (int)FUN_00a81330(&handleFE4());
+    if (linked != 0) {
+        FUN_00a805f0(linked);
+    }
+    FUN_00a931b0((int)this);
+    if (controller764(this) != 0) {
+        FUN_008e3c10(controller764(this));
+        FUN_008e1c60(controller764(this));
+    }
+    if (buffer1058() != 0) {
+        if (buffer1058() != 0) {
+            FUN_00dd48d0(buffer1058(), 0);
+            buffer1058() = 0;
+        }
+        field105C() = 0;
+        field1060() = 0;
+        field1064() = field1054();
+        field1068() = field1054();
+        field106C() = field1054();
+    }
+    releaseArray(&buffer67C());
+    releaseArray(&data2BE0());
+    releaseArray(&data2C4C());
+    releaseArray(&data1044());
+    releaseArray(&entries3820());
+    releaseArray(&data2850());
+    releaseArray(&data297C());
+    if (field7B0() != 0) {
+        vcall<void>((void *)field7B0(), 4, 1);
+        field7B0() = 0;
+    }
+    if (buffer5070() != 0) {
+        FUN_00dd4920(buffer5070());
+        buffer5070() = 0;
+    }
+    call_00E03A70(DAT_01be93b0, 0, 1.0f);
+    call_00E03A70(DAT_01be93b0, 1, 1.0f);
+    call_00E03A70(DAT_01be93b0, 2, 1.0f);
+    releaseArray(&dataF68());
+    FUN_00a5dc60((int)objF78());
+    FUN_00ac1f70((int)this);
+    Behavior::vf44();  // 0x00A9D130
+    DAT_01bea090 = DAT_01bea090 & 0xFFFFFFBF;
+}
+
+// 00BBD320  FUN_00bbd320  size=2340  [between]
+// Attaches the equipment objects chosen by the equipment table DAT_01bea01c (when it is valid):
+// hair (handleFE8), helmet (handleFEC), sheath (sheath1194 / handleFF4), blade (blade1190 /
+// handleFF0) and face (handleB98); hides the damage / sheath / face meshes they replace.
+void __fastcall FUN_00bbd320(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    if (self->field4F0() == 0) {
+        return;
+    }
+    unsigned int local30[0x1D];  // ? object constructed by FUN_0040b190, not used afterwards
+    FUN_0040b190((undefined4 *)local30);
+    bool tableValid = DAT_01bea02c == 0 && DAT_01bea028 == DAT_01bea024;
+    int hairId = tableValid ? DAT_01bea01c[1] : -1;
+    int sheathId = tableValid ? DAT_01bea01c[3] : -1;
+    int helmetId = tableValid ? DAT_01bea01c[2] : -1;
+    int bladeId = (DAT_01bea004 == 0 && DAT_01bea000 == DAT_01be9ffc) ? *DAT_01be9ff4 : -1;
+    int faceId = tableValid ? DAT_01bea01c[4] : -1;
+    if (tableValid && DAT_01bea01c[0] == 0x10100) {
+        hideMeshesContaining(self, "_dam1");
+        hideMeshesContaining(self, "_dam2");
+    }
+
+    // hair
+    if (hairId != -1) {
+        int hair = call_00A82090(DAT_01be9a98, "Pl0010_Hair", hairId, 0);
+        if (hair != 0) {
+            call_00A8C5F0(self, 0, self->field4F0(), hair, 4, 0);
+            call_00A8C5F0(self, 1, self->field4F0(), hair, 5, 1);
+            FUN_00a7c960((undefined4 *)&self->handleFE8(), (undefined4 *)FUN_00a7c7f0(hair));  // __thiscall
+        }
+    }
+    if (FUN_00a81330(&self->handleFE8()) != 0 && FUN_00a7c8a0((int)FUN_00a81330(&self->handleFE8())) != 0) {
+        if (DAT_01bea02c == 0 && DAT_01bea028 == DAT_01bea024 && DAT_01bea01c[1] == 0x10101) {
+            hideMeshesContaining((void *)handleOwner(&self->handleFE8()), "_dam1");
+            hideMeshesContaining((void *)handleOwner(&self->handleFE8()), "_dam2");
+        }
+        ((cObj *)handleOwner(&self->handleFE8()))->linkedObj() = self;
+    }
+
+    // helmet
+    if (helmetId != -1) {
+        int helmet = call_00A82090(DAT_01be9a98, "Pl0010_Helmet", helmetId, 0);
+        if (helmet != 0) {
+            int owner = FUN_00a7c8a0(helmet);
+            FUN_00a7c960((undefined4 *)&self->handleFEC(), (undefined4 *)FUN_00a7c7f0(helmet));  // __thiscall
+            if (helmetId == 0x10104) {
+                call_00A8C5F0(self, 2, self->field4F0(), helmet, 5, 5);
+            } else if (helmetId == 0x110A4) {
+                call_00A8C5F0(self, 2, self->field4F0(), helmet, 5, 1);
+                call_00A8C5F0(self, 2, self->field4F0(), helmet, 4, 0);
+                if (owner != 0) {
+                    call_00A0B9D0(owner, -0.1f);
+                }
+            } else {
+                call_00A8C5F0(self, 2, self->field4F0(), helmet, 5, 0);
+            }
+            if (owner != 0) {
+                vcall<void>((void *)owner, 0x64);
+                ((cObj *)owner)->linkedObj() = self;
+            }
+        }
+    }
+
+    // sheath
+    int sheath = call_00A82090(DAT_01be9a98, "Pl0010_Sheath", sheathId, 0);
+    if (sheath != 0) {
+        call_00A8C5F0(self, 3, self->field4F0(), sheath, (short)((DAT_01bea024 == 0xE) + 0x710), 0);
+        hideMeshesNamed((void *)FUN_00a7c800(sheath), "connect");
+        ((cModelBase *)FUN_00a7c8a0(sheath))->setRootPartsNo(0);
+        ((cObj *)FUN_00a7c8a0(sheath))->linkedObj() = self;
+    }
+    self->sheath1194() = sheath;
+    if (sheath != 0) {
+        FUN_00a7c960((undefined4 *)&self->handleFF4(), (undefined4 *)FUN_00a7c7f0(sheath));  // __thiscall
+    }
+    self->field3920() = -1;
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        hideMeshesNamed(self, "saya_arm");
+    }
+
+    // blade
+    int blade = call_00A82090(DAT_01be9a98, "Pl0010_Blade", bladeId, 0);
+    if (blade != 0 && sheath != 0) {
+        call_00A8C5F0((void *)FUN_00a7c8a0(sheath), 4, sheath, blade, 0x700, 0);
+    }
+    self->blade1190() = blade;
+    ((cModelBase *)FUN_00a7c8a0(blade))->setRootPartsNo(0);  // (no null check on the blade)
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        FUN_00a9e140((int)self, 4, 1);
+    }
+    if (blade != 0) {
+        FUN_00a7c960((undefined4 *)&self->handleFF0(), (undefined4 *)FUN_00a7c7f0(blade));  // __thiscall
+    }
+    if (self->blade1190() != 0) {
+        FUN_00e08640((int *)FUN_00a92fb0(FUN_00a7c8a0(self->blade1190())), 1);  // __thiscall
+        ((cObj *)FUN_00a7c8a0(self->blade1190()))->linkedObj() = self;
+    }
+    self->field13F4() = 0;
+    self->vf3D8();
+    FUN_00b949b0(self);
+
+    // face
+    if (faceId == -1) {
+        return;
+    }
+    FUN_00a7c970((undefined4 *)&self->handleB98(), call_00A82090(DAT_01be9a98, "Pl0100_FACE", faceId, 0));  // __thiscall
+    if (FUN_00a81330(&self->handleB98()) == 0) {
+        return;
+    }
+    int face = (int)FUN_00a81330(&self->handleB98());
+    call_00A8C5F0(self, 8, self->field4F0(), face, 3, 3);
+    call_00A8C5F0(self, 9, self->field4F0(), face, 4, 4);
+    call_00A8C5F0(self, 10, self->field4F0(), face, 5, 5);
+    if (faceId == 0x10106) {
+        call_00A8C5F0(self, 0xB, self->field4F0(), face, 6, 6);
+        call_00A8C5F0(self, 0xC, self->field4F0(), face, 10, 10);
+        call_00A8C5F0(self, 0xD, self->field4F0(), face, 0x500, 0x500);
+    }
+    if (face != 0 && FUN_00a7c8a0(face) != 0) {
+        ((cModelBase *)FUN_00a7c8a0(face))->flags364() = ((cModelBase *)FUN_00a7c8a0(face))->flags364() & 0xFFFFFFFD;
+        vcall<void>((void *)FUN_00a7c8a0(face), 0x1C);
+        ((cModelBase *)FUN_00a7c8a0(face))->setRootPartsNo(3);
+        FUN_00e08640((int *)FUN_00a92fb0(FUN_00a7c8a0(face)), 1);  // __thiscall
+        int fileOwner = ownerB98(self);
+        FUN_00a9f3c0(ownerB98(self), fileOwner + 0x494, 1, 0, 0.033333335f, 1.0f, 0, 0.0f, 1.0f);
+        ((cObj *)ownerB98(self))->linkedObj() = self;
+    }
+    hideMeshesContaining(self, "face");  // DAT_0163ef94
+    hideMeshesContaining(self, "eye_blow");
+    self->fieldB9C() = 0;
+    self->fieldBAC() = 0;
+}
+
+// 00BBDC50  FUN_00bbdc50  size=168  [between]
+// When an entry of the array buffer67C (0x150-byte entries) has bit 2 of +0x8C set and cObj+0x4E4
+// is clear, starts action 0x3C (with hp() = -1 during the call, when field3EE0 is set) or 0xDA,
+// resets hp() to 0 and returns 1; otherwise 0.
+undefined4 __fastcall FUN_00bbdc50(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    char *entry = (char *)self->buffer67C();
+    char *end = entry + self->field684() * 0x150;
+    unsigned char local10[0x140];  // ? object constructed by FUN_00445db0, not used afterwards
+    FUN_00445db0((int)local10);
+    for (; entry != end; entry += 0x150) {
+        if (self->field3EE0() == 0) {
+            if ((*(unsigned char *)(entry + 0x8C) & 4) != 0 && self->field4E4() == 0) {
+                setAction(self, 0xDA, 0, 0, 0);
+                self->hp() = 0;
+                return 1;
+            }
+        } else if ((*(unsigned char *)(entry + 0x8C) & 4) != 0 && self->field4E4() == 0) {
+            self->hp() = -1;
+            setAction(self, 0x3C, 0, 0, 0);
+            self->hp() = 0;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// 00BBDEC0  Pl0000::vf54  size=969  [class]
+// Per frame: when field3BB8 is set, probes the ground (controller +0x764) and snaps down onto it;
+// the wall check FUN_00b84bf0; the link to the object of handle91C (pulled towards FUN_00a8ce90 of
+// it, or given vec3E30 / vec3E50); Behavior::vf54; the frame delta of the position (vec560).
+void Pl0000::vf54()
+{
+    using namespace Pl0000_p8;
+    if (field3BB8() != 0 && vf1D8() == 0 && state618(this) != 0x47) {
+        float *pos = quat();  // +0x50
+        float from[4];
+        from[0] = pos[0];
+        from[1] = pos[1];
+        from[2] = pos[2];
+        from[3] = pos[3];
+        float delta[4];
+        delta[0] = pos[0] - pos900(this)[0];
+        delta[1] = pos[1] - pos900(this)[1];
+        delta[2] = pos[2] - pos900(this)[2];
+        delta[3] = pos[3] - pos900(this)[3];
+        if (call_008EAF70(controller764(this), delta, from, 1, 0, 0.01f) == 0) {
+            float savedY = move890()[1];
+            move890()[1] = -0.3f;
+            FUN_008e4580(controller764(this), (undefined4 *)pos, 1);  // __thiscall
+            float down[4];
+            down[0] = 0.0f;
+            down[1] = -2.0f;
+            down[2] = 0.0f;
+            float probe[4];
+            probe[0] = pos[0];
+            probe[1] = pos[1];
+            probe[2] = pos[2];
+            probe[3] = pos[3];
+            if (call_008EAF70(controller764(this), down, probe, 1, 0, 0.01f) != 0) {
+                pos[1] = probe[1];
+                *(int *)(controller764(this) + 0x124) = 0;
+            } else {
+                move890()[1] = savedY;
+            }
+        }
+    }
+    FUN_00b84bf0(this);
+    int item = field7D0();
+    if (item == 0 || !isKindOf((void *)item, 0, DAT_01be9ef4) || *at<int>(item, 0x2F4) == 0) {
+        if (FUN_00a8c760((int)this, 0x2F) && !vf32C()) {  // __thiscall
+            int obj = (int)FUN_00a81330(&handle91C());
+            if (obj != 0) {
+                int owner = FUN_00a7c8a0(obj);
+                if (owner != 0) {
+                    float point[4];
+                    float extra[4];
+                    call_00A8CE90(owner, point, extra);
+                    D3DXVec3TransformNormal(point, point, (float *)(owner + 0x10));
+                    point[0] = point[0] + *at<float>(owner, 0x40);
+                    point[1] = *at<float>(owner, 0x44) + point[1];
+                    point[2] = *at<float>(owner, 0x48) + point[2];
+                    float move[4];
+                    move[0] = point[0] - matrix()[12];  // +0x40
+                    move[1] = point[1] - matrix()[13];
+                    move[2] = point[2] - matrix()[14];
+                    move[3] = point[3] - matrix()[15];
+                    FUN_00a12310((undefined4)this, (undefined4)move);  // __thiscall
+                }
+            }
+        } else {
+            int obj = (int)FUN_00a81330(&handle91C());
+            if (obj != 0) {
+                int owner = FUN_00a7c8a0(obj);
+                if (owner != 0 && FUN_00a8c760(owner, 0x25)) {  // __thiscall
+                    if (flag3E24() == 0 && flag3E40() == 0) {
+                        FUN_00a8c760((int)this, 0x1C);  // result not used
+                    } else {
+                        FUN_00a12210((int)this, -1);  // __thiscall, result not used
+                        *at<float>(owner, 0x860) = vec3E30()[0];
+                        *at<float>(owner, 0x864) = vec3E30()[1];
+                        *at<float>(owner, 0x868) = vec3E30()[2];
+                        *at<float>(owner, 0x86C) = vec3E30()[3];
+                        *at<float>(owner, 0x850) = vec3E50()[0];
+                        *at<float>(owner, 0x854) = vec3E50()[1];
+                        *at<float>(owner, 0x858) = vec3E50()[2];
+                        *at<float>(owner, 0x85C) = vec3E50()[3];
+                    }
+                }
+            }
+        }
+    }
+    Behavior::vf54();  // 0x00A9D3E0
+    float *position = matrix() + 12;  // +0x40
+    vec560()[0] = position[0] - prevPos540(this)[0];
+    vec560()[1] = position[1] - prevPos540(this)[1];
+    vec560()[2] = position[2] - prevPos540(this)[2];
+    vec560()[3] = position[3] - prevPos540(this)[3];
+    prevPos540(this)[0] = position[0];
+    prevPos540(this)[1] = position[1];
+    prevPos540(this)[2] = position[2];
+    prevPos540(this)[3] = position[3];
+    if (field7CC() != 0 && field7D0() != 0) {
+        FUN_00d82a20((undefined4 *)field7CC(), field7D0());  // __thiscall
+    }
+    if (!vf32C()) {
+        FUN_00b95b30((int)this);
+    }
+    if (call_00F96440(0x25) == 0 && call_00F96440(0x1A) == 0) {
+        return;
+    }
+    vf5C();
+}
+
+// 00BBE290  Pl0000::setSeqAtk  size=2247  [class]
+// Behavior::setSeqAtk, then for every attack sequence record: builds the attack matrix and the
+// direction (as Behavior::setSeqAtk), fetches an attack info with getAttackInfo and fills it;
+// records of shape 3 refresh the attack data of the player's collisions (FUN_00a9d9a0).  The info
+// is released again (slot 4) in every case.
+void Pl0000::setSeqAtk()
+{
+    using namespace Pl0000_p8;
+    Behavior::setSeqAtk();  // 0x00A9F960
+    int records[16];
+    int count = FUN_00a96130((int)this, (undefined4)records, 0x10);  // __thiscall
+    CollisionArray collisions;
+    collisions.data = collisions.items;
+    collisions.count = 0;
+    collisions.capacity = 0x100;
+    collisions.vftable = (void *)0x0163D22C;  // vftable = lib::StaticArray<Collision*,256>::vftable
+    FUN_00a9d9a0((int)this, (int *)&collisions);
+    float unusedW;  // ? never written in this function; copied into direction[3]
+    for (int i = 0; i < count; i++) {
+        SeqAtkRecord *record = (SeqAtkRecord *)records[i];
+        float partsMatrix[16];
+        float directionMatrix[16];
+        FID_conflict__memcpy(partsMatrix, matrix(), 0x40);
+        FID_conflict__memcpy(directionMatrix, matrix(), 0x40);
+        int mirrored = 0;
+        if (FUN_00e3a1e0(FUN_00a92f90((int)this), 0, 0x40) != 0) {  // __thiscall
+            mirrored = 1;
+        }
+        unsigned short partsNo = record->partsNo;
+        if (mirrored != 0) {
+            partsNo = (unsigned short)FUN_00a96170((int)this, (short)partsNo);  // __thiscall
+        }
+        int parts;
+        if (partsNo == 0xFFFF) {
+            parts = (int)this;
+        } else {
+            parts = FUN_00a12210((int)this, (short)partsNo);  // __thiscall
+        }
+        if (parts != 0) {
+            for (int k = 0; k < 16; k++) {
+                ((int *)partsMatrix)[k] = ((int *)(parts + 0x10))[k];
+            }
+        }
+
+        // attackMatrix = Rz * Ry * Rx (each only when non-zero), translated to pos, times partsMatrix.
+        float posX = record->pos[0];
+        float posY = record->pos[1];
+        float posZ = record->pos[2];
+        float rotX = record->rot[0];
+        float rotY = record->rot[1];
+        float rotZ = record->rot[2];
+        if (mirrored != 0) {
+            rotY = rotY * -1.0f;
+            posX = posX * -1.0f;
+        }
+        float attackMatrix[16];
+        float tempMatrix[16];
+        attackMatrix[0] = 1.0f;  attackMatrix[1] = 0.0f;  attackMatrix[2] = 0.0f;  attackMatrix[3] = 0.0f;
+        attackMatrix[4] = 0.0f;  attackMatrix[5] = 1.0f;  attackMatrix[6] = 0.0f;  attackMatrix[7] = 0.0f;
+        attackMatrix[8] = 0.0f;  attackMatrix[9] = 0.0f;  attackMatrix[10] = 1.0f; attackMatrix[11] = 0.0f;
+        attackMatrix[12] = 0.0f; attackMatrix[13] = 0.0f; attackMatrix[14] = 0.0f; attackMatrix[15] = 1.0f;
+        if (rotZ != 0.0f) {
+            D3DXMatrixRotationZ(tempMatrix, rotZ);
+            D3DXMatrixMultiply(attackMatrix, tempMatrix, attackMatrix);
+        }
+        if (rotY != 0.0f) {
+            D3DXMatrixRotationY(tempMatrix, rotY);
+            D3DXMatrixMultiply(attackMatrix, tempMatrix, attackMatrix);
+        }
+        if (rotX != 0.0f) {
+            D3DXMatrixRotationX(tempMatrix, rotX);
+            D3DXMatrixMultiply(attackMatrix, tempMatrix, attackMatrix);
+        }
+        attackMatrix[12] = posX;
+        attackMatrix[13] = posY;
+        attackMatrix[14] = posZ;
+        D3DXMatrixMultiply(attackMatrix, attackMatrix, partsMatrix);
+
+        float tipA[4];  // computed but not used afterwards
+        float tipB[4];  // computed but not used afterwards
+        tipA[0] = 0.0f;
+        tipA[2] = 0.0f;
+        tipA[1] = record->size[1];
+        tipB[0] = 0.0f;
+        tipB[2] = 0.0f;
+        tipB[1] = -record->size[1];
+        D3DXVec3TransformNormal(tipA, tipA, attackMatrix);
+        tipA[0] = tipA[0] + attackMatrix[12];
+        tipA[1] = tipA[1] + attackMatrix[13];
+        tipA[2] = tipA[2] + attackMatrix[14];
+        D3DXVec3TransformNormal(tipB, tipB, attackMatrix);
+        tipB[0] = tipB[0] + attackMatrix[12];
+        tipB[1] = tipB[1] + attackMatrix[13];
+        tipB[2] = tipB[2] + attackMatrix[14];
+
+        // attack direction; modes 7..12 give it in the attack's own frame
+        float direction[4];
+        direction[0] = 0.0f;
+        direction[1] = 0.0f;
+        direction[2] = 1.0f;
+        switch (record->direction) {
+        case 0:
+            direction[0] = 0.0f;  direction[1] = 0.0f;  direction[2] = 1.0f;
+            direction[3] = unusedW;
+            break;
+        case 1:
+            direction[0] = 0.0f;  direction[1] = 0.0f;  direction[2] = -1.0f;
+            direction[3] = unusedW;
+            break;
+        case 2:
+            if (mirrored == 0) {
+                direction[0] = 1.0f;
+            } else {
+                direction[0] = -1.0f;
+            }
+            direction[1] = 0.0f;  direction[2] = 0.0f;
+            direction[3] = unusedW;
+            break;
+        case 3:
+            if (mirrored == 0) {
+                direction[0] = -1.0f;
+            } else {
+                direction[0] = 1.0f;
+            }
+            direction[1] = 0.0f;  direction[2] = 0.0f;
+            direction[3] = unusedW;
+            break;
+        case 4:
+            direction[0] = 0.0f;  direction[2] = 0.0f;  direction[1] = 1.0f;
+            direction[3] = unusedW;
+            break;
+        case 5:
+            direction[0] = 0.0f;  direction[1] = -1.0f; direction[2] = 0.0f;
+            direction[3] = unusedW;
+            break;
+        case 6:
+            direction[0] = 0.0f;  direction[1] = 0.0f;  direction[2] = 0.0f;
+            direction[3] = unusedW;
+            break;
+        case 7:
+            direction[0] = 1.0f;  direction[1] = 0.0f;  direction[2] = 0.0f;
+            direction[3] = unusedW;
+            for (int k = 0; k < 16; k++) {
+                ((int *)directionMatrix)[k] = ((int *)attackMatrix)[k];
+            }
+            break;
+        case 8:
+            direction[0] = 0.0f;  direction[2] = 0.0f;  direction[1] = 1.0f;
+            direction[3] = unusedW;
+            for (int k = 0; k < 16; k++) {
+                ((int *)directionMatrix)[k] = ((int *)attackMatrix)[k];
+            }
+            break;
+        case 9:
+            direction[0] = 0.0f;  direction[1] = 0.0f;  direction[2] = 1.0f;
+            direction[3] = unusedW;
+            for (int k = 0; k < 16; k++) {
+                ((int *)directionMatrix)[k] = ((int *)attackMatrix)[k];
+            }
+            break;
+        case 10:
+            direction[0] = -1.0f; direction[1] = 0.0f;  direction[2] = 0.0f;
+            direction[3] = unusedW;
+            for (int k = 0; k < 16; k++) {
+                ((int *)directionMatrix)[k] = ((int *)attackMatrix)[k];
+            }
+            break;
+        case 11:
+            direction[0] = 0.0f;  direction[1] = -1.0f;
+            for (int k = 0; k < 16; k++) {
+                ((int *)directionMatrix)[k] = ((int *)attackMatrix)[k];
+            }
+            direction[2] = 0.0f;
+            direction[3] = unusedW;
+            break;
+        case 12:
+            direction[0] = 0.0f;  direction[1] = 0.0f;
+            for (int k = 0; k < 16; k++) {
+                ((int *)directionMatrix)[k] = ((int *)attackMatrix)[k];
+            }
+            direction[2] = -1.0f;
+            direction[3] = unusedW;
+            break;
+        default:
+            break;
+        }
+        D3DXVec3TransformNormal(direction, direction, directionMatrix);
+        float directionX = direction[0];
+        float directionZ = direction[2];
+
+        int info = getAttackInfo((ushort *)record);
+        if (info == 0) {
+            call_00DD5650(DAT_016a25dc);
+            continue;
+        }
+        int attack = *(int *)(info + 8);  // AttackInfo data
+        *(unsigned short *)(attack + 0x80) = record->attackId80;
+        *(unsigned short *)(attack + 0x82) = record->attackId82;
+        *(float *)(attack + 0x20) = direction[0];
+        *(float *)(attack + 0x24) = direction[1];
+        *(float *)(attack + 0x28) = direction[2];
+        *(float *)(attack + 0x2C) = direction[3];
+        *(float *)(attack + 0x30) = (float)atan2((double)directionX, (double)directionZ);  // fpatan
+        int rootParts = FUN_00a12210((int)this, 0xFFE);  // __thiscall
+        if (rootParts != 0) {
+            for (int k = 0; k < 16; k++) {
+                ((int *)(attack + 0x40))[k] = ((int *)(rootParts + 0x10))[k];
+            }
+        } else {
+            float rotationMatrix[16];
+            tempMatrix[0] = 1.0f;  tempMatrix[1] = 0.0f;  tempMatrix[2] = 0.0f;  tempMatrix[3] = 0.0f;
+            tempMatrix[4] = 0.0f;  tempMatrix[5] = 1.0f;  tempMatrix[6] = 0.0f;  tempMatrix[7] = 0.0f;
+            tempMatrix[8] = 0.0f;  tempMatrix[9] = 0.0f;  tempMatrix[10] = 1.0f; tempMatrix[11] = 0.0f;
+            tempMatrix[12] = 0.0f; tempMatrix[13] = 0.0f; tempMatrix[14] = 0.0f; tempMatrix[15] = 1.0f;
+            D3DXMatrixRotationZ(rotationMatrix, 1.5707964f);  // pi / 2
+            D3DXMatrixMultiply(tempMatrix, rotationMatrix, tempMatrix);
+            D3DXMatrixRotationX(rotationMatrix, 3.1415927f);  // pi
+            D3DXMatrixMultiply(tempMatrix, rotationMatrix, tempMatrix);
+            D3DXMatrixMultiply((float *)(attack + 0x40), tempMatrix, attackMatrix);
+        }
+        if (record->attackType < 4) {
+            *(unsigned int *)(attack + 0x34) = record->attackId82;
+        }
+        unsigned int attackKind = record->attackType;
+        if (attackKind >= 4) {
+            attackKind = 4;
+        }
+
+        if (record->shape == 3) {
+            // refresh the attack data of the collisions (not in the game modes 4 / 8 unless the
+            // attack info's first word is 1 or field3B9C is set)
+            for (int *it = collisions.data; it != collisions.data + collisions.count; it++) {
+                int proxy = *(int *)(*it + 0x378);  // Collision+0x378
+                if (proxy == 0 || vf32C()) {
+                    continue;
+                }
+                if (mgrCall(0x58) == 4 || mgrCall(0x58) == 8) {
+                    if (*(int *)attack != 1 && field3B9C() == 0) {
+                        continue;
+                    }
+                }
+                float sizeX = record->size[0];
+                float sizeY = record->size[1];
+                int data = *(int *)(proxy + 8);
+                int power = vf270();
+                int attackId = attackIdBase760() + attackKind;
+                *(int *)(data + 0x94) = 1;
+                for (int k = 0; k < 16; k++) {
+                    ((float *)(data + 0xA0))[k] = attackMatrix[k];
+                }
+                *(float *)(data + 0xE0) = sizeX;
+                *(float *)(data + 0xE4) = sizeY;
+                *(int *)(data + 0xE8) = power;
+                *(int *)(data + 0xEC) = 0;
+                *(int *)(data + 0xF0) = attackId;
+            }
+            vcall<void>((void *)info, 4, 1);
+        } else {
+            // looks up the collision of this attack (the result is not used)
+            if (collisions.count != 0) {
+                int *end = collisions.data + collisions.count;
+                for (int *it = collisions.data; it != end; it++) {
+                    int proxy = *(int *)(*it + 0x378);
+                    if (proxy != 0) {
+                        int data = *(int *)(proxy + 8);
+                        if (*(unsigned short *)(data + 0x80) == record->attackId80 &&
+                            *(unsigned short *)(data + 0x82) == record->attackId82) {
+                            break;
+                        }
+                    }
+                }
+            }
+            vcall<void>((void *)info, 4, 1);
+        }
+    }
+}
+
+// 00BBEB90  FUN_00bbeb90  size=464  [between]
+// Action step function (game mode 5 with field1400: FUN_00ba68c0): motion 0x1B / 4 / 5 / 0x460 /
+// 0x46D, then FUN_00b94790 until the motion ends (vf388(0)); steps 2 / 3: motion 0xE, back to step 0
+// when it ends.
+void __fastcall FUN_00bbeb90(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    if (mgrCall(0x68) == 5 && self->field1400() != 0) {
+        FUN_00ba68c0((int *)self);  // tail call
+        return;
+    }
+    self->field2658() = 1;
+    self->vf314();
+    switch (subState61C(self)) {
+    case 0:
+        if (FUN_00b80980((int)self) != 0) {
+            self->fieldB74() = 1;
+        }
+        if (FUN_00b7f9e0(self) != 0) {
+            int fileOwner = FUN_00b7d0c0(self);
+            FUN_00a9f3c0((int)self, fileOwner + 0x494, 0x1B, 0, 0.13333334f, 1.0f, 0, 0.0f, 1.0f);
+            FUN_00b8aae0(self);
+        } else {
+            short motion = 5;
+            if (self->fieldB74() != 0) {
+                motion = 4;
+            }
+            bool alternate = FUN_00416d50(0x1B);
+            if (alternate) {
+                motion = 0x460;
+            }
+            if (!FUN_00416d50(0) && alternate) {
+                motion = 0x46D;
+            }
+            call_00AA4080(self, motion, 0, 0.13333334f, 1.0f, 0, -1.0f, 1.0f);
+        }
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b94ed0(self);
+        // fall through
+    case 1:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (FUN_00a8d9d0((int)self) != 0) {
+            self->vf388(0);
+            return;
+        }
+        break;
+    case 2:
+        call_00AA4080(self, 0xE, 0, 0.13333334f, 1.0f, 0, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->field2620() = 0;
+        // fall through
+    case 3:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (FUN_00a8d9d0((int)self) == 0) {
+            subState61C(self) = 0;
+            return;
+        }
+        break;
+    }
+}
+
+// 00BBED70  FUN_00bbed70  size=243  [between]
+// Idle step: action 0x21 (vf34C), FUN_00b7e090 (FUN_00b89e20), 0x78 (maskE20 pressed or
+// request2568 pending), else the move actions 2 / 3 by the stick length.
+void __fastcall FUN_00bbed70(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->field2644() = 0;
+    self->vf320(0.016666668f);
+    if (self->vf34C() != 0) {
+        setAction(self, 0x21, 0, 0, 0);
+        return;
+    }
+    if (FUN_00b89e20(self)) {
+        FUN_00b7e090(self, 0);
+        return;
+    }
+    if ((self->inputTrigger() & self->maskE20()) == 0 && self->request2568() == 0) {
+        if (FUN_00b94500(self, 1, 1, 1) == 0 && 90000.0f < self->inputSqD28()) {
+            if (!FUN_00416d50(7) && !FUN_00416d50(0x1B) && 810000.0f < self->inputSqD28()) {
+                setAction(self, 3, 0, 0, 0);
+                return;
+            }
+            setAction(self, 2, 0, 0, 0);
+            return;
+        }
+    } else {
+        setAction(self, 0x78, 0, 0, 0);
+    }
+}
+
+// 00BBEE70  FUN_00bbee70  size=147  [between]
+// Action step: motion 0xE, then FUN_00b94790 until the motion ends (vf388(0)).
+void __fastcall FUN_00bbee70(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->field2658() = 1;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0xE, 0, 0.13333334f, 1.0f, 0, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b94ed0(self);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (FUN_00a8d9d0((int)self) == 0) {
+        self->vf388(0);
+    }
+}
+
+// 00BBEF10  FUN_00bbef10  size=1153  [between]
+// Three-part action (game mode 5 with field1400: FUN_00ba6960): start (0x1C / 0x1D / 0x462 /
+// 0x46F), loop (0x1D / 0x1E / 0x1F / 0x463 / 0x470), end (0x1E..0x23 / 0x464 / 0x465 / 0x471 /
+// 0x472 by the side FUN_00b8afd0 picks), then vf388(0); turns towards inputYawD30 every frame.
+void __fastcall FUN_00bbef10(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->field3B68() = 1;
+    if (mgrCall(0x68) == 5 && self->field1400() != 0) {
+        FUN_00ba6960((int *)self);
+        return;
+    }
+    self->field265C() = 1;
+    self->vf314();
+    switch (subState61C(self)) {
+    case 0:
+        if (FUN_00b7f9e0(self) != 0) {
+            int fileOwner = FUN_00b7d0c0(self);
+            FUN_00a9f3c0((int)self, fileOwner + 0x494, 0x1C, 0, 0.13333334f, 1.0f, 0x8000000, 0.0f, 1.0f);
+            FUN_00b8aae0(self);
+        } else {
+            short motion = 0x1C;
+            if (self->fieldB74() != 0) {
+                motion = 0x1D;
+            }
+            bool alternate = FUN_00416d50(0x1B);
+            if (alternate) {
+                motion = 0x462;
+            }
+            if (!FUN_00416d50(0) && alternate) {
+                motion = 0x46F;
+            }
+            call_00AA4080(self, motion, 0, 0.16666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        }
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b94ed0(self);
+        // fall through
+    case 1:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (call_00A95C80(self, 0) < 2.0f) {
+            subState61C(self) = subState61C(self) + 1;
+        }
+        break;
+    case 2:
+        if (FUN_00b7f9e0(self) != 0) {
+            int fileOwner = FUN_00b7d0c0(self);
+            FUN_00a9f3c0((int)self, fileOwner + 0x494, 0x1D, 0, 0.13333334f, 1.0f, 0, 0.0f, 1.0f);
+        } else {
+            short motion = 0x1E;
+            if (self->fieldB74() != 0) {
+                motion = 0x1F;
+            }
+            bool alternate = FUN_00416d50(0x1B);
+            if (alternate) {
+                motion = 0x463;
+            }
+            if (!FUN_00416d50(0) && alternate) {
+                motion = 0x470;
+            }
+            call_00AA4080(self, motion, 0, 0.033333335f, 1.0f, 0x3C000, -1.0f, 1.0f);
+        }
+        subState61C(self) = subState61C(self) + 1;
+        // fall through
+    case 3:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        break;
+    case 4: {
+        float sidePoint[4];
+        if (FUN_00b7f9e0(self) != 0) {
+            short motion = 0x1F;
+            if (FUN_00b8afd0(self, sidePoint) == 2) {
+                motion = 0x1E;
+            }
+            int fileOwner = FUN_00b7d0c0(self);
+            FUN_00a9f3c0((int)self, fileOwner + 0x494, motion, 0, 0.13333334f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        } else if (FUN_00416d50(0x1B)) {
+            short motion = 0x465;
+            if (!FUN_00416d50(0)) {
+                motion = 0x472;
+            }
+            if (FUN_00b8afd0(self, sidePoint) == 2) {
+                motion = 0x464;
+                if (!FUN_00416d50(0) && FUN_00416d50(0x1B)) {
+                    motion = 0x471;
+                }
+            }
+            call_00AA4080(self, motion, 0, 0.16666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        } else if (self->fieldB74() != 0) {
+            if (FUN_00b8afd0(self, sidePoint) == 2) {
+                call_00AA4080(self, 0x22, 0, 0.16666667f, 1.0f, 0x8000000, -1.0f, 1.0f);
+            } else {
+                call_00AA4080(self, 0x23, 0, 0.16666667f, 1.0f, 0x8000000, -1.0f, 1.0f);
+            }
+        } else {
+            if (FUN_00b8afd0(self, sidePoint) == 2) {
+                call_00AA4080(self, 0x20, 0, 0.16666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+            } else {
+                call_00AA4080(self, 0x21, 0, 0.16666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+            }
+        }
+        subState61C(self) = subState61C(self) + 1;
+    }
+        // fall through
+    case 5:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (FUN_00a94ce0((int)self, 0)) {  // __thiscall
+            self->vf388(0);
+        }
+        break;
+    default:
+        break;
+    }
+    self->targetYaw() = self->inputYawD30();
+    if ((DAT_01bea090 & 0x10) != 0) {
+        self->vf308(0.05f, 0.0017453292f, 0.08726646f, 0.0f);
+        return;
+    }
+    self->vf308(0.3f, 0.0017453292f, 0.5235988f, 0.0f);
+}
+
+// 00BBF3B0  FUN_00bbf3b0  size=698  [between]
+// Landing step: action 0x63 (early in step 1 with timerE70 and FUN_00b7c530), FUN_00b7e090
+// (FUN_00b89e20), FUN_00b8cd60; from step 2 on also action 0xB (vf34C: movement cleared), the
+// attacks (FUN_00b86b00), the move actions 0xC / 0xE and FUN_00b8a510.
+void __fastcall FUN_00bbf3b0(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->vf3F0();
+    int step = subState61C(self);
+    if (step == 0) {
+        return;
+    }
+    if (step <= 1) {
+        if (step == 1 && (float)call_00A959F0(self, 0) < 5.0f && self->timerE70() != 0 && FUN_00b7c530()) {
+            goto startAction63;
+        }
+        self->field2644() = 0;
+        if (FUN_00b89e20(self)) {
+            FUN_00b7e090(self, 0);
+            return;
+        }
+        if (FUN_00b90920((int)self) == 0) {
+            FUN_00b8cd60(self);  // tail call
+            return;
+        }
+        return;
+    }
+    self->field2644() = 0;
+    self->vf1D4(1);
+    if (self->vf34C() != 0) {
+        self->vf314();
+        self->move890()[0] = self->move890()[0] * 0.0f;
+        self->move890()[1] = self->move890()[1] * 0.0f;
+        self->move890()[2] = self->move890()[2] * 0.0f;
+        self->move890()[3] = self->move890()[3] * 0.0f;
+        self->push1020()[0] = self->push1020()[0] * 0.0f;
+        self->push1020()[1] = self->push1020()[1] * 0.0f;
+        self->push1020()[2] = self->push1020()[2] * 0.0f;
+        self->push1020()[3] = self->push1020()[3] * 0.0f;
+        self->vec90()[0] = 0.0f;
+        setAction(self, 0xB, 0, 0, 0);
+        return;
+    }
+    if ((self->inputHold() & self->maskE18()) == 0) {
+        self->vf220(0.0f);
+    }
+    if (subState61C(self) == 1 && (float)call_00A959F0(self, 0) < 5.0f && self->timerE70() != 0 &&
+        FUN_00b7c530()) {
+        goto startAction63;
+    }
+    if (FUN_00b89e20(self)) {
+        FUN_00b7e090(self, 0);
+        return;
+    }
+    if (FUN_00b90920((int)self) != 0 || FUN_00b8cd60(self) != 0) {
+        return;
+    }
+    if (!FUN_00416d50(8) && field940(self) == 0 && 7.0f < field928(self) && FUN_00b86b00(self, 1, 1, 1, 1) != 0) {
+        return;
+    }
+    if (subState61C(self) >= 3 && field940(self) == 0 && self->vf320(0.016666668f) != 0) {
+        if (state618(self) != 5) {
+            setAction(self, 0xC, 0, 0, 0);
+            return;
+        }
+        setAction(self, 0xE, 0, 0, 0);
+        return;
+    }
+    if (subState61C(self) != 0 && call_00B95E80(self) == 5 && self->field4194() <= 0.0f) {
+        FUN_00b8a510(self);  // tail call
+        return;
+    }
+    return;
+startAction63:
+    self->timerE70() = 0;
+    setAction(self, 0x63, 0, 0, 0);
+    self->field2644() = 0;
+}
+
+// 00BBF670  FUN_00bbf670  size=1752  [between]
+// Jump: motion 0x5C / 0xCF, then the take-off (motion 0x5F / 0x7D, upward move 0.03 * dt, rise
+// time 7.0, forward push 0.12 along the stick) and the air steps until the motion ends (actions
+// 0xB / 0xD); applies the gravity field920 once the rise ended, turns towards the handle11A8
+// object or the stick and blends the horizontal move towards the stick direction.
+void __fastcall FUN_00bbf670(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->field2664() = 1;
+    self->field3BB8() = 0;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    switch (subState61C(self)) {
+    case 0: {
+        int action = state618(self);
+        if (action == 5) {
+            self->field26D4() = 0;
+            self->fieldB74() = 1;
+            self->field13F8() = 1;
+        }
+        short motion = 0x5C;
+        if (action == 5) {
+            motion = 0xCF;
+        }
+        call_00AA4080(self, motion, 0, 0.033333335f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        int keep40 = 0;
+        if ((self->flags2654() & 0x40) != 0) {
+            keep40 = 1;
+        }
+        field940(self) = 1;
+        self->field2620() = 0;
+        self->field2644() = 0;
+        FUN_00b94ed0(self);
+        FUN_00b88d70(self);
+        if (keep40 != 0) {
+            self->flags2654() = self->flags2654() | 0x40;
+        }
+        self->field281C() = 0;
+        field928(self) = 0.0f;
+        self->field2820() = 0;
+        self->fieldB74() = 1;
+        if ((DAT_01bea090 & 0x80000000) != 0) {
+            FUN_00a9e120((int)self, 3, 0x711, 0);
+        }
+        for (int layer = 2; layer <= 8; layer++) {
+            call_00A94BC0(self, layer, 0.016666668f);
+        }
+    }
+        // fall through
+    case 1: {
+        FUN_00b94790(self, 1.0f, 1.0f);
+        int animation = FUN_00a92f90((int)self);
+        if (motionFrames(animation) == 0 || FUN_00e36060(animation + 0xF4, 0)) {  // __thiscall
+            subState61C(self) = subState61C(self) + 1;
+        }
+        goto turn;
+    }
+    case 2: {
+        short motion = 0x5F;
+        if (state618(self) == 5) {
+            motion = 0x7D;
+        }
+        call_00AA4080(self, motion, 0, 0.033333335f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        float unusedW;  // ? never written in this function
+        float *move = self->move890();
+        move[0] = 0.0f;
+        move[1] = 0.2f;
+        move[2] = 0.0f;
+        move[3] = unusedW;
+        field920(self) = 0.03f;
+        move[0] = 0.0f;
+        move[1] = 0.03f * dt910(self);
+        move[2] = 0.0f;
+        self->targetYaw() = self->vec90()[1];  // +0x94
+        if (90000.0f < self->inputSqD28()) {
+            float yaw = self->inputYawD30();
+            self->targetYaw() = yaw;
+            float rotation[16];
+            D3DXMatrixRotationY(rotation, yaw);
+            float push[4];
+            push[0] = 0.0f;
+            push[1] = 0.0f;
+            push[2] = 0.12f;
+            D3DXVec3TransformNormal(push, push, rotation);
+            move[0] = push[0];
+            move[2] = push[2];
+        }
+        field924(self) = 7.0f;
+        field928(self) = 0.0f;
+        field940(self) = 1;
+        self->vf220(5.0f);
+        subState61C(self) = subState61C(self) + 1;
+        int keep40 = 0;
+        if ((self->flags2654() & 0x40) != 0) {
+            keep40 = 1;
+        }
+        self->field2620() = 0;
+        self->counter261C() = 1;
+        self->field2688() = 0;
+        self->field268C() = 0;
+        self->flags2654() = 0;
+        if (keep40 != 0) {
+            self->flags2654() = 0x40;
+        }
+        self->fieldB74() = 1;
+        if ((DAT_01bea090 & 0x80000000) != 0) {
+            FUN_00a9e120((int)self, 3, 0x711, 0);
+        }
+        for (int layer = 2; layer <= 8; layer++) {
+            call_00A94BC0(self, layer, 0.016666668f);
+        }
+    }
+        // fall through
+    case 3: {
+        field928(self) = dt910(self) + field928(self);
+        FUN_00b94790(self, 1.0f, 1.0f);
+        int animation = FUN_00a92f90((int)self);
+        if (motionFrames(animation) == 0 || FUN_00e36060(animation + 0xF4, 0)) {  // __thiscall
+            if (state618(self) == 5) {
+                setAction(self, 0xD, 0, 0, 0);
+            } else {
+                setAction(self, 0xB, 0, 0, 0);
+            }
+        }
+        break;
+    }
+    default:
+        break;
+    }
+
+    // rise / gravity
+    if (!(self->field2C5C() < 0.0f)) {
+        field940(self) = 0;
+        self->move890()[1] = field920(self) * dt910(self) + self->move890()[1];
+    } else {
+        if ((self->inputHold() & self->maskE18()) == 0 && field924(self) < 3.0f) {
+            field940(self) = 0;
+        }
+        if (0.0f < field924(self)) {
+            float rise = field924(self) - dt910(self);
+            field924(self) = rise;
+            if (field940(self) != 0 && rise <= 0.0f) {
+                field940(self) = 0;
+                self->move890()[1] = (rise + dt910(self)) * field920(self) + self->move890()[1];
+            }
+        } else {
+            field940(self) = 0;
+        }
+        if (field940(self) != 0) {
+            self->move890()[1] = field920(self) * dt910(self) + self->move890()[1];
+        }
+    }
+
+turn:
+    int target = (int)FUN_00a81330(&self->handle11A8());
+    if (target != 0) {
+        FUN_00b87c60(self, target, 0);
+        self->vf308(0.3f, 0.0052359877f, 0.5235988f, 0.0f);
+    } else if (90000.0f < self->inputSqD28()) {
+        self->targetYaw() = self->inputYawD30();
+        self->vf308(0.3f, 0.0017453292f, 0.5235988f, 0.0f);
+    }
+    float push[4];
+    float keep;
+    if ((self->inputHold() & self->maskE48()) != 0 && state618(self) == 5) {
+        push[0] = 0.0f;
+        push[1] = 0.0f;
+        push[2] = 0.0f;
+        keep = 0.93f;
+        if (90000.0f < self->inputSqD28()) {
+            float rotation[16];
+            D3DXMatrixRotationY(rotation, self->inputYawD30());
+            push[2] = 0.24f;
+            D3DXVec3TransformNormal(push, push, rotation);
+            keep = 0.9f;
+        }
+    } else {
+        push[0] = 0.0f;
+        push[1] = 0.0f;
+        push[2] = 0.0f;
+        keep = 0.93f;
+        if (90000.0f < self->inputSqD28()) {
+            float rotation[16];
+            D3DXMatrixRotationY(rotation, self->inputYawD30());
+            push[2] = 0.12f;
+            D3DXVec3TransformNormal(push, push, rotation);
+            keep = 0.9f;
+        }
+    }
+    self->move890()[0] = self->move890()[0] * keep + push[0] * (1.0f - keep);
+    self->move890()[2] = keep * self->move890()[2] + (1.0f - keep) * push[2];
+}
+
+// 00BBFD70  FUN_00bbfd70  size=1036  [between]
+// Builds the 7 control points of a curve through start, middle and end (tangent (end - start) / 6
+// at middle; unit steps from start towards middle - tangent and from end towards middle +
+// tangent) and assigns them to the point array `out` (FUN_00a5e090).  ret 0x10.
+void FUN_00bbfd70(undefined4 out, float *start, float *middle, float *end)
+{
+    using namespace Pl0000_p8;
+    PointArray points;
+    points.unk00 = 0;
+    points.data = 0;
+    points.capacity = 0;
+    points.count = 0;
+    points.owned = 0;
+    FUN_0041c8e0((int)&points, 8, (int *)FUN_00a1d5c0());  // __thiscall: reserve 8 points
+    float a[3];
+    a[0] = start[0];
+    a[1] = start[1];
+    a[2] = start[2];
+    pushPoint(points, a[0], a[1], a[2]);
+    float c[3];
+    c[0] = end[0];
+    c[1] = end[1];
+    c[2] = end[2];
+    float b[3];
+    b[0] = middle[0];
+    b[1] = middle[1];
+    b[2] = middle[2];
+    float tangent[3];
+    tangent[0] = (c[0] - a[0]) * 0.16666667f;
+    tangent[1] = (c[1] - a[1]) * 0.16666667f;
+    tangent[2] = (c[2] - a[2]) * 0.16666667f;
+    float before[3];  // middle - tangent
+    before[0] = b[0] - tangent[0];
+    before[1] = b[1] - tangent[1];
+    before[2] = b[2] - tangent[2];
+    float step[3];
+    step[0] = before[0] - a[0];
+    step[1] = before[1] - a[1];
+    step[2] = before[2] - a[2];
+    checkLength(step);
+    D3DXVec3Normalize(step, step);
+    pushPoint(points, step[0] + a[0], step[1] + a[1], step[2] + a[2]);
+    pushPoint(points, before[0], before[1], before[2]);
+    pushPoint(points, b[0], b[1], b[2]);
+    float after[3];  // middle + tangent
+    after[0] = tangent[0] + b[0];
+    after[1] = tangent[1] + b[1];
+    after[2] = tangent[2] + b[2];
+    step[0] = c[0] - after[0];
+    step[1] = c[1] - after[1];
+    step[2] = c[2] - after[2];
+    checkLength(step);
+    D3DXVec3Normalize(step, step);
+    pushPoint(points, after[0], after[1], after[2]);
+    pushPoint(points, c[0] - step[0], c[1] - step[1], c[2] - step[2]);
+    pushPoint(points, c[0], c[1], c[2]);
+    FUN_00a5e090((undefined2 *)out, (int)&points);  // __thiscall on out
+    if (points.data != 0) {
+        points.count = 0;
+        if (points.owned != 0) {
+            FUN_00dd48d0((int)points.data, 0);
+        }
+    }
+}
+
+// 00BC0180  FUN_00bc0180  size=98  [between]
+void __fastcall FUN_00bc0180(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->vf3F0();
+    if (FUN_00b89e20(self)) {
+        FUN_00b7e090(self, 0);
+        return;
+    }
+    if (FUN_00b8cd60(self) == 0 && FUN_00b86b00(self, 1, 1, 1, 1) == 0 && call_00B95E80(self) == 5 &&
+        self->field4194() <= 0.0f) {
+        FUN_00b8a510(self);  // tail call
+        return;
+    }
+}
+
+// 00BC01F0  FUN_00bc01f0  size=210  [between]
+// Action step: motion 0x3C0, then FUN_00b94790 until the motion ends (action 0xB).
+void __fastcall FUN_00bc01f0(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->field2664() = 1;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x3C0, 0, 0.16666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        field928(self) = 0.0f;
+        FUN_00b88d70(self);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    int animation = FUN_00a92f90((int)self);
+    if (motionFrames(animation) != 0 && !FUN_00e36060(animation + 0xF4, 0)) {  // __thiscall
+        return;
+    }
+    setAction(self, 0xB, 0, 0, 0);
+}
+
+// 00BC02D0  FUN_00bc02d0  size=254  [between]
+// Air step: move actions 0xC / 0xE once vf320 reports the landing (from step 1 on), else
+// FUN_00b7e090 / FUN_00b90920 / FUN_00b8cd60 / the attacks (FUN_00b86b00) / FUN_00b8a510.
+void __fastcall FUN_00bc02d0(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->vf3F0();
+    if (self->vf34C() != 0) {
+        if (0 < subState61C(self) && self->vf320(0.016666668f) != 0) {
+            setAction(self, 0xC, 0, 0, 0);
+        }
+        return;
+    }
+    if (FUN_00b89e20(self)) {
+        FUN_00b7e090(self, 0);
+        return;
+    }
+    if (FUN_00b90920((int)self) != 0 || FUN_00b8cd60(self) != 0 || FUN_00b86b00(self, 1, 1, 1, 1) != 0) {
+        return;
+    }
+    if (0 < subState61C(self) && self->vf320(0.016666668f) != 0) {
+        if (state618(self) == 0xD) {
+            setAction(self, 0xE, 0, 0, 0);
+            return;
+        }
+        setAction(self, 0xC, 0, 0, 0);
+        return;
+    }
+    if (call_00B95E80(self) == 5 && self->field4194() <= 0.0f) {
+        FUN_00b8a510(self);  // tail call
+        return;
+    }
+}
+
+// 00BC03D0  FUN_00bc03d0  size=605  [between]
+// Fall: motion 0x75 / 0x7E, action 4 once the controller has fallen for more than 0x78 frames
+// (field2C5C = 7.0); turns towards the handle11A8 object or the stick, blends the horizontal move
+// towards the stick direction (cleared with vf34C) and caps the fall speed at -1.0 (field928 = 1.0
+// once its count-down ends while falling faster than 0.5).
+void __fastcall FUN_00bc03d0(Pl0000 *self)
+{
+    using namespace Pl0000_p8;
+    self->field2664() = 1;
+    self->field3BB8() = 0;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    switch (subState61C(self)) {
+    case 0: {
+        short motion = 0x75;
+        if (state618(self) == 0xD) {
+            motion = 0x7E;
+        }
+        call_00AA4080(self, motion, 0, 0.2f, 1.0f, 0, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        field928(self) = 0.0f;
+        FUN_00b88d70(self);
+    }
+        // fall through
+    case 1:
+        if (0x78 < *(int *)(controller764(self) + 0x120)) {
+            setAction(self, 4, 0, 0, 0);
+            self->field2C5C() = 7.0f;
+        }
+        FUN_00b94790(self, 1.0f, 1.0f);
+        break;
+    default:
+        break;
+    }
+    int target = (int)FUN_00a81330(&self->handle11A8());
+    if (target != 0) {
+        FUN_00b87c60(self, target, 0);
+        self->vf308(0.3f, 0.0017453292f, 0.5235988f, 0.0f);
+    } else if (90000.0f < self->inputSqD28()) {
+        self->targetYaw() = self->inputYawD30();
+        self->vf308(0.3f, 0.0017453292f, 0.5235988f, 0.0f);
+    }
+    if (self->vf34C() == 0) {
+        float push[4];
+        push[0] = 0.0f;
+        push[1] = 0.0f;
+        push[2] = 0.0f;
+        float keep = 0.93f;
+        if (90000.0f < self->inputSqD28()) {
+            float rotation[16];
+            D3DXMatrixRotationY(rotation, self->inputYawD30());
+            push[2] = 0.12f;
+            D3DXVec3TransformNormal(push, push, rotation);
+            keep = 0.9f;
+        }
+        self->move890()[0] = push[0] * (1.0f - keep) + self->move890()[0] * keep;
+        self->move890()[2] = (1.0f - keep) * push[2] + self->move890()[2] * keep;
+    } else {
+        self->move890()[0] = 0.0f;
+        self->move890()[2] = 0.0f;
+    }
+    if (self->move890()[1] <= -0.5f) {
+        if (self->move890()[1] <= -1.0f) {
+            self->move890()[1] = -1.0f;
+        }
+        float timer = field928(self) - dt910(self);
+        field928(self) = timer;
+        if (!(timer <= 0.0f)) {
+            return;
+        }
+        field928(self) = 1.0f;
+        return;
+    }
+    field928(self) = 0.0f;
+}

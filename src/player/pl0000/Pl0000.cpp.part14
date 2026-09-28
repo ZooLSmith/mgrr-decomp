@@ -1,0 +1,1160 @@
+// src/player/pl0000/Pl0000.cpp (part 15/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// imports
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+
+// globals
+extern unsigned int DAT_01bea060;  // global flags
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern unsigned char DAT_01bea750[];  // object: ECX of FUN_00db3e80 (FUN_00b8d3b0)
+extern unsigned char DAT_01be9ef4[];  // type descriptor tested with FUN_00dd6d80 (FUN_00b85420)
+extern unsigned char DAT_01be9db8[];  // type descriptor of Pl0000 (tested with FUN_00dd6d80 on cObj::vf04)
+extern int DAT_01bea9a0;           // set to 1 by the kind 3 / 4 qte handlers (FUN_00bf8bd0 / FUN_00bf8e60)
+extern unsigned char DAT_01d616d0[];  // object: ECX of FUN_00c5bbb0
+extern unsigned char DAT_01b35df8[];  // collision world: ECX of RayCastSingleHitWork::RayCastSingleHitWork_2
+extern unsigned char DAT_01b35260[];  // Et0006
+extern float DAT_018a9758;         // ? height factor of the kind 8 hit-object offset (1.5 in the image)
+
+// The functions of this part are the ZangekiEventQteStatePl0010 qte-kind handlers 5 .. 0x11 (dispatched by
+// ZangekiEventQteStatePl0010::qteSafeCheck): __thiscall with ECX = the state and one stack argument (its
+// StateMachineContextPl0010), ret 4.  "linked" below means: the context handle +0x534 resolves and the
+// state has a qte target (+0x30).
+
+namespace Pl0000_p15 {
+
+// virtual call through slot `off` (byte offset) of an object whose class does not declare it
+template <class R, class... A> inline R vcall(void *obj, unsigned int off, A... args)
+{
+    return (*(R (__thiscall **)(void *, A...))(*(char **)obj + off))(obj, args...);
+}
+
+// obj when the type record returned by its virtual slot `slot` is-a `desc` (FUN_00dd6d80), else 0
+inline void *asKind(void *obj, unsigned int slot, void *desc)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    undefined4 *type = vcall<undefined4 *>(obj, slot);
+    return FUN_00dd6d80(type, (undefined4 *)desc) != 0 ? obj : 0;
+}
+// the StateMachineContextPl0010 `obj` (type record DAT_01be9ef4 from slot 0), or 0
+inline char *asContext(void *obj)
+{
+    return (char *)asKind(obj, 0x0, DAT_01be9ef4);
+}
+
+// ZangekiEventQteStatePl0010 fields (not owned here; see its refined header)
+inline int   &qteTarget(void *s)   { return *(int *)((char *)s + 0x30); }     // +0x30 qte target object (cObj)
+inline uint  *handle38(void *s)    { return (uint *)((char *)s + 0x38); }     // +0x38 embedded object handle
+inline int   &field3C(void *s)     { return *(int *)((char *)s + 0x3C); }     // +0x3C
+inline int   &step40(void *s)      { return *(int *)((char *)s + 0x40); }     // +0x40 (here: step 0 / 1)
+inline float &fieldCC(void *s)     { return *(float *)((char *)s + 0xCC); }   // +0xCC
+inline float &savedY1B4(void *s)   { return *(float *)((char *)s + 0x1B4); }  // +0x1B4 player vf84()[1] (kind 0xF)
+inline float *vec1C0(void *s)      { return (float *)((char *)s + 0x1C0); }   // +0x1C0 float[4] rotation snapshot
+inline int   &field1DC(void *s)    { return *(int *)((char *)s + 0x1DC); }    // +0x1DC ? id (ray flags = id << 16 | 5)
+inline float *vec1F0(void *s)      { return (float *)((char *)s + 0x1F0); }   // +0x1F0 float[4] position given to vf7C
+inline int   &restored200(void *s) { return *(int *)((char *)s + 0x200); }    // +0x200 1: nothing to restore on leave
+
+// StateMachineContextPl0010 fields (not owned here)
+inline void *ctxOwner(char *c)       { return *(void **)(c + 0xC); }     // StateMachineContext+0xC: owner (the player)
+inline int   &ctxField2F4(char *c)   { return *(int *)(c + 0x2F4); }     // +0x2F4 (0: FUN_00bbb050 is called)
+inline int   &ctxField2F8(char *c)   { return *(int *)(c + 0x2F8); }     // +0x2F8
+inline int   &ctxField2FC(char *c)   { return *(int *)(c + 0x2FC); }     // +0x2FC
+inline int   &ctxField300(char *c)   { return *(int *)(c + 0x300); }     // +0x300
+inline int   &ctxField304(char *c)   { return *(int *)(c + 0x304); }     // +0x304
+inline uint  *ctxHandle320(char *c)  { return (uint *)(c + 0x320); }     // +0x320 object handle
+inline int   &ctxField32C(char *c)   { return *(int *)(c + 0x32C); }     // +0x32C
+inline float *ctxVec360(char *c)     { return (float *)(c + 0x360); }    // +0x360 float[4]
+inline int   &ctxObj38C(char *c)     { return *(int *)(c + 0x38C); }     // +0x38C object (FUN_005edc60(5.0f))
+inline int   &ctxObj390(char *c)     { return *(int *)(c + 0x390); }     // +0x390 object (FUN_005edc60(5.0f))
+inline uint  *ctxHandle4BC(char *c)  { return (uint *)(c + 0x4BC); }     // +0x4BC object handle
+inline int   &ctxField500(char *c)   { return *(int *)(c + 0x500); }     // +0x500
+inline uint  *ctxHandle534(char *c)  { return (uint *)(c + 0x534); }     // +0x534 object handle
+inline int   &ctxField5D4(char *c)   { return *(int *)(c + 0x5D4); }     // +0x5D4
+inline float &ctxField5D8(char *c)   { return *(float *)(c + 0x5D8); }   // +0x5D8
+
+// base-class field of the player
+inline int &controller764(void *p) { return *(int *)((char *)p + 0x764); }  // Behavior+0x764: ? character controller
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void call_00DB3E80(void *obj, float time, int a, void *b)  // ret 0xC
+{
+    ((void (__thiscall *)(void *, float, int, void *))0x00DB3E80)(obj, time, a, b);
+}
+inline void call_00DA8810(void *obj, float value)  // ret 4
+{
+    ((void (__thiscall *)(void *, float))0x00DA8810)(obj, value);
+}
+inline int call_00E26E90(int model)
+{
+    return ((int (__thiscall *)(int))0x00E26E90)(model);
+}
+inline void call_00E36AC0(int obj, int a, float b)  // ret 8
+{
+    ((void (__thiscall *)(int, int, float))0x00E36AC0)(obj, a, b);
+}
+inline void call_00BCF3E0(void *state, void *context, int a, int b, float c, float d)  // ret 0x14
+{
+    ((void (__thiscall *)(void *, void *, int, int, float, float))0x00BCF3E0)(state, context, a, b, c, d);
+}
+inline int call_00BE6620(void *context, void *state, int a, int b, int c)
+{
+    return ((int (__cdecl *)(void *, void *, int, int, int))0x00BE6620)(context, state, a, b, c);
+}
+inline void call_00BF24F0(void *context, float value)
+{
+    ((void (__cdecl *)(void *, float))0x00BF24F0)(context, value);
+}
+inline void call_00BBC310(void *context)
+{
+    ((void (__cdecl *)(void *))0x00BBC310)(context);
+}
+inline void call_00BBB050(void *context)
+{
+    ((void (__cdecl *)(void *))0x00BBB050)(context);
+}
+inline void call_00BBC0E0(void *context, float a, float b, float c, float d)
+{
+    ((void (__cdecl *)(void *, float, float, float, float))0x00BBC0E0)(context, a, b, c, d);
+}
+inline void call_00BD7600(void *context, void *state)
+{
+    ((void (__cdecl *)(void *, void *))0x00BD7600)(context, state);
+}
+inline void call_00BB5830(void *state, void *context)  // ret 4
+{
+    ((void (__thiscall *)(void *, void *))0x00BB5830)(state, context);
+}
+inline void call_00C5BBB0(void *obj, int value)  // ret 4
+{
+    ((void (__thiscall *)(void *, int))0x00C5BBB0)(obj, value);
+}
+inline void call_00A17A40(void *obj)  // FILEMAP: switchD_0080dbae::default
+{
+    ((void (__thiscall *)(void *))0x00A17A40)(obj);
+}
+inline void call_00A94BC0(void *self, int layer, float time)  // ret 8
+{
+    ((void (__thiscall *)(void *, int, float))0x00A94BC0)(self, layer, time);
+}
+inline void call_005CA330(int obj, float value)  // ret 4
+{
+    ((void (__thiscall *)(int, float))0x005CA330)(obj, value);
+}
+inline void call_00B83EA0(void *obj, float value)  // ret 4
+{
+    ((void (__thiscall *)(void *, float))0x00B83EA0)(obj, value);
+}
+inline void call_00E25500(void *obj, float value)  // ret 4
+{
+    ((void (__thiscall *)(void *, float))0x00E25500)(obj, value);
+}
+inline void call_00A8CA50(void *self, int id, float a, float b)  // ret 0xC
+{
+    ((void (__thiscall *)(void *, int, float, float))0x00A8CA50)(self, id, a, b);
+}
+inline void setControllerHeight(int controller, float height)  // CharacterControl::setHeight (0x008E49E0)
+{
+    ((void (__thiscall *)(int, float))0x008E49E0)(controller, height);
+}
+// FUN_00d9fa80 (ret 8): screen position `out` of the world point `pos`
+inline void projectToScreen(void *camera, float *out, float *pos)
+{
+    ((void (__thiscall *)(void *, float *, float *))0x00D9FA80)(camera, out, pos);
+}
+// FUN_00b85350 (defined in part 4): slow-motion request, ret 0x18
+inline void slowRequest(Pl0000 *self, float level, float factorA, float factorB, undefined4 value3450,
+                        undefined4 startZan, float value3430)
+{
+    ((void (__thiscall *)(Pl0000 *, float, float, float, undefined4, undefined4, float))0x00B85350)(
+        self, level, factorA, factorB, value3450, startZan, value3430);
+}
+// FUN_00445d40 (ret 0x20): builds the ray request `request` from `from` to `to`
+inline void buildRayRequest(void *request, float *from, float *to, unsigned int flags, int a, int mask, int b,
+                            const char *name, int c)
+{
+    ((void (__thiscall *)(void *, float *, float *, unsigned int, int, int, int, const char *, int))0x00445D40)(
+        request, from, to, flags, a, mask, b, name, c);
+}
+// RayCastSingleHitWork::RayCastSingleHitWork_2 (0x0090B130) on the collision world
+inline int rayCast(void *world, void *out1, void *out2, int a, int b, void *request)
+{
+    return ((int (__thiscall *)(void *, void *, void *, int, int, void *))0x0090B130)(
+        world, out1, out2, a, b, request);
+}
+
+// the player (owner of the context, is-a Pl0000) or 0
+inline Pl0000 *qtePlayer(char *ctx)
+{
+    return (Pl0000 *)asKind(ctxOwner(ctx), 0x4, DAT_01be9db8);
+}
+// the context is cast again; true when its handle +0x534 resolves and the state has a target
+inline bool qteLinked(void *state, undefined4 *context)
+{
+    if (FUN_00a81330(ctxHandle534(asContext(context))) == 0 || qteTarget(state) == 0) {
+        return false;
+    }
+    return true;
+}
+// resets the target's animation: FUN_00e26e90 and FUN_00e22f10(0) on its animation unit +0x338
+inline void resetTargetAnimation(void *state)
+{
+    if (FUN_00a92f90(qteTarget(state)) != 0) {
+        int animation = (int)FUN_00a92f90(qteTarget(state));
+        call_00E26E90(animation);
+        FUN_00e22f10(animation + 0x338, 0);
+    }
+}
+// FUN_00e36ac0(0, 0.0f) on the player's animation unit +0xF4 when FUN_00e26e90 reports one
+inline void resetPlayerAnimation(Pl0000 *player)
+{
+    int animation = (int)FUN_00a92f90((int)player);
+    if (call_00E26E90(animation) != 0) {
+        call_00E36AC0(animation + 0xF4, 0, 0.0f);
+    }
+}
+// the carried item (field7D0, is-a DAT_01be9ef4) gets +0x378 = 0
+inline void clearItem378(Pl0000 *player)
+{
+    void *item = (void *)player->field7D0();
+    if (item != 0 && asKind(item, 0x0, DAT_01be9ef4) != 0) {
+        *(float *)((char *)item + 0x378) = 0.0f;  // carried item +0x378: ?
+    }
+}
+// FUN_00bbb050 unless the (again cast) context +0x2F4 is set
+inline void finishUnlessHeld(undefined4 *context)
+{
+    if (ctxField2F4(asContext(context)) == 0) {
+        call_00BBB050(context);
+    }
+}
+// the player keeps only its yaw `yaw`: vf88((0, yaw, 0)); [3] is not set
+inline void setYawOnly(Pl0000 *player, float yaw)
+{
+    float yawOnly[4];
+    yawOnly[0] = 0.0f;
+    yawOnly[1] = yaw;
+    yawOnly[2] = 0.0f;
+    vcall<void>(player, 0x88, yawOnly);
+}
+// the player faces the direction FUN_00a925a0 returns: yaw = atan2(dx, dz) of (position + dir) - position,
+// where the position is read before (x0, z0) and after the call
+inline void faceA925A0(Pl0000 *player)
+{
+    float before[4];  // [1] / [3] are not set
+    float dirOut[4];
+    float *pos = player->matrix() + 12;  // +0x40
+    before[0] = pos[0];
+    before[2] = pos[2];
+    float *dir = FUN_00a925a0((int)player, dirOut);
+    float x = pos[0] + dir[0];
+    float z = dir[2] + pos[2];
+    float yawOnly[4];  // [3] is not set
+    yawOnly[0] = 0.0f;
+    yawOnly[1] = (float)atan2((double)(x - before[0]), (double)(z - before[2]));
+    yawOnly[2] = 0.0f;
+    vcall<void>(player, 0x88, yawOnly);
+}
+// step 0 of the kinds 0xB .. 0x10: FUN_00bbc0e0(0.3, 180, 1, 0.1), FUN_00bbc2a0, then the node for `id` from
+// the context's factory (context[1], slot 0) is given to FUN_00d82bf0(node, context)
+inline void startQteNode(void *state, undefined4 *context, int id)
+{
+    call_00BBC0E0(context, 0.3f, 180.0f, 1.0f, 0.1f);
+    FUN_00bbc2a0(context);
+    int node = vcall<int>((void *)context[1], 0x0, id);
+    FUN_00d82bf0((int)state, (int *)node, (undefined4)context);
+}
+// FUN_005ca330(1.0f) on the owner of the context handle +0x4BC when it is an Et0006 (DAT_01b35260)
+inline void releaseEt0006(char *ctx)
+{
+    int obj = (int)FUN_00a81330(ctxHandle4BC(ctx));
+    if (obj != 0) {
+        int owner = (int)FUN_00a7c8a0(obj);
+        if (owner != 0 && asKind((void *)owner, 0x4, DAT_01b35260) != 0) {
+            call_005CA330(owner, 1.0f);
+        }
+    }
+}
+
+// Euler angles (x, y, z) of the rotation part of `m` (float[16]; rows +0x00 / +0x10 / +0x20 normalised)
+inline void matrixAngles(float *m, float *angles)
+{
+    float lenX = (float)sqrt((double)(m[0] * m[0] + m[1] * m[1] + m[2] * m[2]));
+    float lenY = (float)sqrt((double)(m[4] * m[4] + m[5] * m[5] + m[6] * m[6]));
+    float lenZ = (float)sqrt((double)(m[8] * m[8] + m[9] * m[9] + m[10] * m[10]));
+    float zy = m[6] / lenZ;   // +0x28 / |row 2|
+    float zz = m[10] / lenZ;  // +0x38 / |row 2|
+    float ay = (float)FUN_00ddbaa0(-(m[2] / lenZ));  // ? asin
+    angles[0] = (float)atan2((double)zy, (double)zz);
+    angles[1] = ay;
+    angles[2] = (float)atan2((double)(m[1] / lenY), (double)(m[0] / lenX));
+}
+
+}  // namespace Pl0000_p15
+
+// 00BF90C0  FUN_00bf90c0  size=928  [callgraph]
+// Qte kind 5: starts the finisher unless the context is idle (no flags +0x2F4 .. +0x300, +0x304 <= 0,
+// +0x5D8 <= 0) and the target is missing or its +0x87C is set; the target is first placed on the object
+// FUN_00a12210(field3C) of the handle38 owner (its position and matrix angles through vf7C).
+void FUN_00bf90c0(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    int anchor = 0;
+    bool linked = qteLinked(state, context);
+    DAT_01bea9a0 = 1;
+    int obj = (int)FUN_00a81330(handle38(state));
+    if (obj != 0) {
+        int owner = (int)FUN_00a7c8a0(obj);
+        if (owner != 0) {
+            anchor = FUN_00a12210(owner, field3C(state));
+        }
+    }
+    FUN_00e3a1a0((int)FUN_00a92f90((int)player), 0, 0x1000, 1);
+    if (ctxField2F4(ctx) == 0 && ctxField2F8(ctx) == 0 && ctxField2FC(ctx) == 0 && ctxField300(ctx) == 0 &&
+        ctxField304(ctx) <= 0 && !(0.0f < ctxField5D8(ctx)) &&
+        (!linked || *(int *)(qteTarget(state) + 0x87C) /* target+0x87C: ? */ != 0)) {
+        DAT_01bea9a0 = 0;
+        call_00DB3E80(DAT_01bea750, 0.0f, 0, DAT_01bea1d0);
+        FUN_00b7aa80((int)player);
+        FUN_00d82510((int)state, 0xB, 100);
+        return;
+    }
+    if (anchor != 0 && FUN_00a81330(ctxHandle534(ctx)) != 0) {
+        float pos[4];
+        float angles[3];
+        float *m = (float *)(anchor + 0x10);  // anchor matrix (+0x10), position row +0x40
+        pos[0] = m[12];
+        pos[1] = m[13];
+        pos[2] = m[14];
+        pos[3] = m[15];
+        matrixAngles(m, angles);
+        vcall<void>((void *)qteTarget(state), 0x7C, pos, angles);
+    }
+    resetPlayerAnimation(player);
+    call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+    call_00C5BBB0(DAT_01d616d0, 0x10);
+    FUN_00b8bb40((int)player, 0.0f);
+    clearItem378(player);
+    call_00BF24F0(context, 1.0f);
+    finishUnlessHeld(context);
+    if (ctxObj38C(ctx) != 0) {
+        FUN_005edc60(ctxObj38C(ctx), 5.0f);
+    }
+    if (ctxObj390(ctx) != 0) {
+        FUN_005edc60(ctxObj390(ctx), 5.0f);
+    }
+}
+
+// 00BF9460  FUN_00bf9460  size=712  [callgraph]
+// Qte kind 6: with a linked target whose +0x87C is 0 the finisher starts (FUN_00bcf3e0(1, 0), FUN_00bb5830,
+// timer vf220(2), FUN_00bd5f40(35, -40), FUN_00c5bbb0(0x2000)); otherwise the qte is cancelled (the player
+// keeps only the saved yaw savedY1B4, FUN_00d82510(0xB, 100)).
+void FUN_00bf9460(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    DAT_01bea9a0 = 1;
+    if (linked) {
+        resetTargetAnimation(state);
+    }
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 0, 30.0f, 30.0f);
+        call_00BB5830(state, context);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        call_00BF24F0(context, 1.0f);
+        FUN_00bd5f40(context, 35.0f, -40.0f, 0, 0);
+        clearItem378(player);
+        finishUnlessHeld(context);
+        call_00C5BBB0(DAT_01d616d0, 0x2000);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    setYawOnly(player, savedY1B4(state));
+    FUN_00b7aa80((int)player);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+}
+
+// 00BF9730  Pl0000::em0080Qte2SafeCheck  size=1290  [class]
+// Qte kind 7 (em0080): like kind 6 with FUN_00bcf3e0(1, 1), and the owner of handle91C put into action 4 when
+// FUN_00be6620 succeeds.  On cancel the camera is reset, the Et0006 of the context is released and, when
+// the handle91C owner exists and flag1180 is set, the player's quat() slot (+0x50) receives the point
+// (0.4339, 0, -4.52384) of mtx1140 -- or (0.4339, 0, -1.5) when the ray to the first one from the anchor
+// FUN_00a12210(0) (1.5 higher) hits.  The context's +0x360 is reset to (0, 0, 0, 1).
+void Pl0000::em0080Qte2SafeCheck(void *state, undefined4 *context)  // __thiscall (ECX = state), ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    DAT_01bea9a0 = 1;
+    if (linked) {
+        resetTargetAnimation(state);
+    }
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        if (call_00BE6620(context, state, 100, 0, 0) != 0) {
+            int obj = (int)FUN_00a81330(&player->handle91C());
+            if (obj != 0) {
+                int owner = (int)FUN_00a7c8a0(obj);
+                if (owner != 0) {
+                    FUN_00a8cb60(owner, 4);
+                }
+            }
+        }
+        call_00BF24F0(context, 1.0f);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        finishUnlessHeld(context);
+        call_00C5BBB0(DAT_01d616d0, 0x2000);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    setYawOnly(player, savedY1B4(state));
+    call_00DA8810(DAT_01bea1d0, 0.0f);
+    call_00DB3E80(DAT_01bea750, 0.0f, 0, DAT_01bea1d0);
+    FUN_00b7aa80((int)player);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+    releaseEt0006(ctx);
+    int obj = (int)FUN_00a81330(&player->handle91C());
+    if (obj != 0 && FUN_00a7c8a0(obj) != 0 && player->flag1180() != 0) {
+        float *m = player->mtx1140();
+        float point[4];  // [3] is not written by D3DXVec3TransformNormal (stack garbage in the original)
+        point[0] = 0.4339f;
+        point[1] = 0.0f;
+        point[2] = -4.52384f;
+        D3DXVec3TransformNormal(point, point, m);
+        point[0] = point[0] + m[12];  // +0x1170: translation row
+        point[1] = m[13] + point[1];
+        point[2] = m[14] + point[2];
+        int anchor = FUN_00a12210((int)player, 0);
+        float from[4];
+        from[0] = *(float *)(anchor + 0x40);
+        from[1] = *(float *)(anchor + 0x44) + 1.5f;
+        from[2] = *(float *)(anchor + 0x48);
+        from[3] = *(float *)(anchor + 0x4C);
+        float to[4];
+        to[0] = point[0];
+        to[1] = point[1];
+        to[2] = point[2];
+        to[3] = point[3];
+        unsigned char request[0x40];  // ray request (FUN_00445d40)
+        unsigned char hit1[0x10];
+        unsigned char hit2[0x10];
+        buildRayRequest(request, from, to, (unsigned int)(field1DC(state) << 0x10) | 5, 0, 0x60, 0,
+                        "Pl0000::em0080Qte2SafeCheck", 0);
+        float *q = player->quat();  // +0x50
+        if (rayCast(DAT_01b35df8, hit1, hit2, 0, 0, request) != 0) {
+            float near4[4];  // written into the `to` slot of the original; [3] keeps to[3]
+            near4[0] = 0.4339f;
+            near4[1] = 0.0f;
+            near4[2] = -1.5f;
+            near4[3] = to[3];
+            D3DXVec3TransformNormal(near4, near4, m);
+            q[0] = near4[0] + m[12];
+            q[1] = m[13] + near4[1];
+            q[2] = m[14] + near4[2];
+            q[3] = near4[3];
+        } else {
+            q[0] = point[0];
+            q[1] = point[1];
+            q[2] = point[2];
+            q[3] = point[3];
+        }
+    }
+    float *v = ctxVec360(ctx);
+    v[0] = 0.0f;
+    v[1] = 0.0f;
+    v[2] = 0.0f;
+    v[3] = 1.0f;
+}
+
+// 00BF9C40  FUN_00bf9c40  size=2218  [callgraph]
+// Qte kind 8: with a linked target whose +0x87C is 0 the player controller is placed on the position;
+// when the vf1A4 hit object (handle3EA0) is on screen its vf70 receives the offset from it to the target
+// anchor FUN_00a12210(-1) raised along its up axis (DAT_018a9758) and moved along its forward axis
+// (1.5 - fieldCC * 0.005), * 0.01.  Then timer vf220(10); when FUN_00be6620 succeeds the player is placed at
+// the anchor FUN_00a12210(5) (keeping its height) and the rotation vec1C0 restored, else the finisher
+// starts (FUN_00b8bb40(pi / 6), FUN_00bd7600) and vec1F0 takes the target position (returns without the
+// common end).  Unlinked: the player is restored from vec1C0 / vec1F0 and dropped 0.1 higher.  Common end:
+// restored200 = 1, DAT_01bea060 bit 3 cleared.
+void FUN_00bf9c40(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    float right[4];  // right[3] (never written) is the stack slot read by the unlinked branch below
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        FUN_008e4580(controller764(player), (undefined4 *)(player->matrix() + 12), 1);  // +0x40: position
+        int obj = (int)FUN_00a81330(&player->handle3EA0());
+        if (obj != 0) {
+            int hitObj = (int)FUN_00a7c8a0(obj);
+            if (hitObj != 0 && *(int *)(hitObj + 0x330) != 0 &&        // hit object +0x330: ?
+                *(int *)(*(int *)(hitObj + 0x330) + 0xCC) == 0 &&
+                *(int *)(hitObj + 0x4B0) != 0x20110) {                 // hit object +0x4B0: ? object id
+                float halfW1 = (float)(int)FUN_00f98a90() * 0.5f;      // ? screen width / 2
+                float halfH1 = (float)(int)FUN_00f98aa0() * 0.5f;      // ? screen height / 2
+                float halfW2 = (float)(int)FUN_00f98a90() * 0.5f;
+                float halfH2 = (float)(int)FUN_00f98aa0() * 0.5f;
+                float screen[4];
+                projectToScreen(DAT_01bea1d0, screen, (float *)(hitObj + 0x40));
+                if (1.0f < screen[3] && halfW1 - halfW2 < screen[0] && screen[0] < halfW1 + halfW2 &&
+                    halfH1 - halfH2 < screen[1] && screen[1] < halfH1 + halfH2) {
+                    int anchor = FUN_00a12210(qteTarget(state), -1);
+                    float pos[4];
+                    float angles[3];
+                    float *m = (float *)(anchor + 0x10);
+                    pos[0] = m[12];
+                    pos[1] = m[13];
+                    pos[2] = m[14];
+                    pos[3] = m[15];
+                    matrixAngles(m, angles);
+                    float rotation[16];
+                    float axis[4];
+                    float up[4];   // [3] of up / fwd are not written by D3DXVec3TransformNormal (stack garbage)
+                    float fwd[4];
+                    axis[0] = 0.0f;
+                    axis[1] = 1.0f;
+                    axis[2] = 0.0f;
+                    FUN_00ddc1d0((undefined4 *)rotation, angles, 5);
+                    D3DXVec3TransformNormal(up, axis, rotation);
+                    axis[0] = 0.0f;
+                    axis[1] = 0.0f;
+                    axis[2] = 1.0f;
+                    FUN_00ddc1d0((undefined4 *)rotation, angles, 5);
+                    D3DXVec3TransformNormal(fwd, axis, rotation);
+                    axis[0] = 1.0f;
+                    axis[1] = 0.0f;
+                    axis[2] = 0.0f;
+                    FUN_00ddc1d0((undefined4 *)rotation, angles, 5);
+                    D3DXVec3TransformNormal(right, axis, rotation);
+                    float upScale = DAT_018a9758;
+                    float fwdScale = 1.5f - fieldCC(state) * 0.005f;
+                    float *hitPos = (float *)(hitObj + 0x40);
+                    float offset[4];
+                    offset[0] = (pos[0] + up[0] * upScale + fwd[0] * fwdScale - hitPos[0]) * 0.01f;
+                    offset[1] = (pos[1] + up[1] * upScale + fwd[1] * fwdScale - hitPos[1]) * 0.01f;
+                    offset[2] = (pos[2] + up[2] * upScale + fwd[2] * fwdScale - hitPos[2]) * 0.01f;
+                    offset[3] = (pos[3] + up[3] * upScale + fwd[3] * fwdScale - hitPos[3]) * 0.01f;
+                    vcall<void>((void *)hitObj, 0x70, offset);
+                }
+            }
+        }
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(10.0f);
+        if (call_00BE6620(context, state, 100, 0, 0) == 0) {
+            FUN_00b8bb40((int)player, 0.5235988f);  // pi / 6
+            clearItem378(player);
+            call_00BF24F0(context, 1.0f);
+            call_00BD7600(context, state);
+            call_00C5BBB0(DAT_01d616d0, 0x2000);
+            if (ctxObj38C(ctx) != 0) {
+                FUN_005edc60(ctxObj38C(ctx), 5.0f);
+            }
+            if (ctxObj390(ctx) != 0) {
+                FUN_005edc60(ctxObj390(ctx), 5.0f);
+            }
+            float *targetPos = (float *)(qteTarget(state) + 0x40);
+            vec1F0(state)[0] = targetPos[0];
+            vec1F0(state)[1] = targetPos[1];
+            vec1F0(state)[2] = targetPos[2];
+            vec1F0(state)[3] = targetPos[3];
+            return;
+        }
+        int anchor = FUN_00a12210((int)player, 5);
+        float place[4];
+        place[0] = *(float *)(anchor + 0x40);
+        place[1] = *(float *)(anchor + 0x44);
+        place[2] = *(float *)(anchor + 0x48);
+        place[3] = *(float *)(anchor + 0x4C);
+        place[1] = player->matrix()[13];  // keeps the player height (+0x44)
+        vcall<void>(player, 0x6C, place);
+        vcall<void>(player, 0x88, vec1C0(state));
+        FUN_00b7aa80((int)player);
+        FUN_008e6d00(controller764(player));
+        FUN_008e5c50(controller764(player), 6);
+        setControllerHeight(controller764(player), 1.9f);
+        FUN_008e4580(controller764(player), (undefined4 *)place, 1);
+        call_00A17A40(player);
+        call_00A94BC0(player, 6, 0.0f);
+        player->vf314();
+        int controller = controller764(player);
+        if (*(int *)(controller + 0x104) != 0) {  // controller+0x104: ?
+            *(int *)(controller + 0x104) = 0;
+        }
+        vec1C0(state)[0] = 0.0f;
+        vec1C0(state)[1] = 0.0f;
+        vec1C0(state)[2] = 0.0f;
+        vec1C0(state)[3] = 1.0f;
+        vec1F0(state)[3] = 1.0f;
+        vec1F0(state)[0] = 0.0f;
+        vec1F0(state)[1] = 0.0f;
+        vec1F0(state)[2] = 0.0f;
+    } else {
+        ctxField500(asContext(context)) = 0;
+        DAT_01bea9a0 = 0;
+        vcall<void>(player, 0x88, vec1C0(state));
+        float *restore = vec1F0(state);
+        player->vf7C((undefined4)restore, (undefined4)vec1C0(state));
+        FUN_00b7aa80((int)player);
+        FUN_008e6d00(controller764(player));
+        FUN_008e5c50(controller764(player), 6);
+        setControllerHeight(controller764(player), 1.9f);
+        float drop[4];
+        drop[0] = restore[0];
+        drop[1] = restore[1] + 0.1f;
+        drop[2] = restore[2];
+        drop[3] = right[3] + restore[3];  // ? uninitialised stack slot + vec1F0[3] (as in the original)
+        FUN_008e4580(controller764(player), (undefined4 *)drop, 1);
+        FUN_008e5ac0(controller764(player), 0x20);
+        FUN_00d82510((int)state, 0xB, 100);
+        ctxField32C(ctx) = 1;
+        call_00A17A40(player);
+        call_00A94BC0(player, 6, 0.0f);
+        player->vf314();
+        if (*(int *)(controller764(player) + 0x104) != 0) {  // controller+0x104: ?
+            *(int *)(controller764(player) + 0x104) = 0;
+        }
+        releaseEt0006(ctx);
+        call_00A8CA50(player, 0xE, 1.0f, 0.0f);
+        FUN_00da0d70((int)DAT_01bea1d0);
+        vec1C0(state)[0] = 0.0f;
+        vec1C0(state)[1] = 0.0f;
+        vec1C0(state)[2] = 0.0f;
+        vec1C0(state)[3] = 1.0f;
+        restore[3] = 1.0f;
+        restore[0] = 0.0f;
+        restore[1] = 0.0f;
+        restore[2] = 0.0f;
+    }
+    restored200(state) = 1;
+    DAT_01bea060 = DAT_01bea060 & 0xFFFFFFF7;
+}
+
+// 00BFA4F0  FUN_00bfa4f0  size=720  [callgraph]
+// Qte kind 9: like kind 3 (FUN_00bf8bd0) without FUN_00be6620 (timer vf220(2), fieldCC + 1, FUN_00c5bbb0(2));
+// the cancel keeps the player's own yaw and ends with FUN_00da0d70 on the camera.
+void FUN_00bfa4f0(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    DAT_01bea9a0 = 1;
+    if (linked) {
+        resetTargetAnimation(state);
+    }
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        call_00BF24F0(context, 1.0f);
+        finishUnlessHeld(context);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    setYawOnly(player, ((float *)player->vf84())[1]);
+    FUN_00b7aa80((int)player);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+    FUN_00da0d70((int)DAT_01bea1d0);
+}
+
+// 00BFA7C0  FUN_00bfa7c0  size=761  [callgraph]
+// Qte kind 10: like kind 9 with FUN_00be6620 after FUN_00bf24f0; the cancel resets the camera
+// (FUN_00da8810(0) / FUN_00db3e80) instead of FUN_00da0d70.
+void FUN_00bfa7c0(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    DAT_01bea9a0 = 1;
+    if (linked) {
+        resetTargetAnimation(state);
+    }
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BF24F0(context, 1.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        finishUnlessHeld(context);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    setYawOnly(player, ((float *)player->vf84())[1]);
+    FUN_00b7aa80((int)player);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+    call_00DA8810(DAT_01bea1d0, 0.0f);
+    call_00DB3E80(DAT_01bea750, 0.0f, 0, DAT_01bea1d0);
+}
+
+// 00BFAAC0  FUN_00bfaac0  size=886  [callgraph]
+// Qte kind 0xB, two steps (step40): step 0 waits for FUN_00a94ce0(0), then starts the qte node 0x36; step 1
+// (and the rest of step 0) runs the finisher (FUN_00bf24f0 before FUN_00be6620, FUN_00bd7600) or cancels:
+// the player faces the FUN_00a925a0 direction and gets the slow request (0, 1, 1, 0, 0, 0.1).
+void FUN_00bfaac0(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    switch (step40(state)) {
+    case 0:
+        if (linked) {
+            resetTargetAnimation(state);
+        }
+        if (!FUN_00a94ce0((int)player, 0)) {
+            return;
+        }
+        step40(state) = step40(state) + 1;
+        startQteNode(state, context, 0x36);
+        ctxField5D4(ctx) = 0;
+        break;
+    case 1:
+        break;
+    default:
+        return;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BF24F0(context, 1.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        call_00BD7600(context, state);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    faceA925A0(player);
+    FUN_00b7aa80((int)player);
+    slowRequest(player, 0.0f, 1.0f, 1.0f, 0, 0, 0.1f);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+}
+
+// 00BFAE40  FUN_00bfae40  size=990  [callgraph]
+// Qte kind 0xC: like kind 0xB with the qte node 0x3D; the finisher uses FUN_00bcf3e0(1, 0), FUN_00bb5830,
+// FUN_00bd5f40(35, -40) (no FUN_00b8bb40) and, when the owner of the context handle +0x320 has id 0x20170
+// (+0x4B4), calls FUN_00b83ea0(4.0f) on the context.
+void FUN_00bfae40(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    switch (step40(state)) {
+    case 0:
+        if (linked) {
+            resetTargetAnimation(state);
+        }
+        if (!FUN_00a94ce0((int)player, 0)) {
+            return;
+        }
+        step40(state) = step40(state) + 1;
+        startQteNode(state, context, 0x3D);
+        ctxField5D4(ctx) = 0;
+        break;
+    case 1:
+        break;
+    default:
+        return;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 0, 30.0f, 30.0f);
+        call_00BB5830(state, context);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        call_00BF24F0(context, 1.0f);
+        FUN_00bd5f40(context, 35.0f, -40.0f, 0, 0);
+        clearItem378(player);
+        call_00BD7600(context, state);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        int obj = (int)FUN_00a81330(ctxHandle320(ctx));
+        if (obj != 0) {
+            int owner = (int)FUN_00a7c8a0(obj);
+            if (owner != 0 && *(int *)(owner + 0x4B4) == 0x20170) {  // owner+0x4B4: ? object id
+                call_00B83EA0(ctx, 4.0f);
+                return;
+            }
+        }
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    faceA925A0(player);
+    FUN_00b7aa80((int)player);
+    slowRequest(player, 0.0f, 1.0f, 1.0f, 0, 0, 0.1f);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+}
+
+// 00BFB220  FUN_00bfb220  size=888  [callgraph]
+// Qte kind 0xD: kind 0xB with FUN_00be6620 before FUN_00bf24f0 in the finisher.
+void FUN_00bfb220(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    switch (step40(state)) {
+    case 0:
+        if (linked) {
+            resetTargetAnimation(state);
+        }
+        if (!FUN_00a94ce0((int)player, 0)) {
+            return;
+        }
+        step40(state) = step40(state) + 1;
+        startQteNode(state, context, 0x36);
+        ctxField5D4(ctx) = 0;
+        break;
+    case 1:
+        break;
+    default:
+        return;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        call_00BF24F0(context, 1.0f);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        call_00BD7600(context, state);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    faceA925A0(player);
+    FUN_00b7aa80((int)player);
+    slowRequest(player, 0.0f, 1.0f, 1.0f, 0, 0, 0.1f);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+}
+
+// 00BFB5A0  FUN_00bfb5a0  size=888  [callgraph]
+// Qte kind 0xE: same code as kind 0xD (FUN_00bfb220).
+void FUN_00bfb5a0(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    switch (step40(state)) {
+    case 0:
+        if (linked) {
+            resetTargetAnimation(state);
+        }
+        if (!FUN_00a94ce0((int)player, 0)) {
+            return;
+        }
+        step40(state) = step40(state) + 1;
+        startQteNode(state, context, 0x36);
+        ctxField5D4(ctx) = 0;
+        break;
+    case 1:
+        break;
+    default:
+        return;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        call_00BF24F0(context, 1.0f);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        call_00BD7600(context, state);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    faceA925A0(player);
+    FUN_00b7aa80((int)player);
+    slowRequest(player, 0.0f, 1.0f, 1.0f, 0, 0, 0.1f);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+}
+
+// 00BFB920  FUN_00bfb920  size=1088  [callgraph]
+// Qte kind 0xF: the finisher (context +0x2F4 = 1 and the player moved 1.5 along its up axis when
+// FUN_00be6620 succeeds); the cancel puts the player next to the target (target + FUN_00a925a0 * 0.5, target
+// rotation) when linked, else restores vec1C0, then the slow request, camera reset (FUN_00db3e80(.., 1, ..)),
+// FUN_00b92cc0 and field10F4 = 1.
+void FUN_00bfb920(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    DAT_01bea9a0 = 1;
+    if (linked) {
+        resetTargetAnimation(state);
+    }
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        if (call_00BE6620(context, state, 100, 0, 0) != 0) {
+            ctxField2F4(ctx) = 1;
+            float yaw = ((float *)player->vf84())[1];
+            float up[4];  // [3] is not written by D3DXVec3TransformNormal (stack garbage in the original)
+            up[0] = 0.0f;
+            up[1] = 1.0f;
+            up[2] = 0.0f;
+            D3DXVec3TransformNormal(up, up, player->matrix());
+            float rot[4];  // [3] is not set
+            rot[0] = 0.0f;
+            rot[1] = yaw;
+            rot[2] = 0.0f;
+            float *p = player->matrix() + 12;  // +0x40
+            float pos[4];
+            pos[0] = p[0] + up[0] * 1.5f;
+            pos[1] = up[1] * 1.5f + p[1];
+            pos[2] = p[2] + up[2] * 1.5f;
+            pos[3] = up[3] * 1.5f + p[3];
+            player->vf7C((undefined4)pos, (undefined4)rot);
+        }
+        call_00BF24F0(context, 1.0f);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        finishUnlessHeld(context);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    if (linked) {
+        int target = qteTarget(state);
+        float dirOut[4];
+        float *dir = FUN_00a925a0(target, dirOut);
+        float *t = (float *)(qteTarget(state) + 0x40);
+        float pos[4];
+        pos[0] = t[0] + dir[0] * 0.5f;
+        pos[1] = dir[1] * 0.5f + t[1];
+        pos[2] = t[2] + dir[2] * 0.5f;
+        pos[3] = dir[3] * 0.5f + t[3];
+        float *targetRot = vcall<float *>((void *)qteTarget(state), 0x84);
+        player->vf7C((undefined4)pos, (undefined4)targetRot);
+    } else {
+        vcall<void>(player, 0x88, vec1C0(state));
+    }
+    FUN_00b7aa80((int)player);
+    slowRequest(player, 0.0f, 1.0f, 1.0f, 0, 0, 0.1f);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+    call_00DA8810(DAT_01bea1d0, 0.0f);
+    call_00DB3E80(DAT_01bea750, 0.0f, 1, DAT_01bea1d0);
+    FUN_00b92cc0(context);
+    player->field10F4() = 1;
+}
+
+// 00BFBD60  FUN_00bfbd60  size=859  [callgraph]
+// Qte kind 0x10: kind 0xD without the slow request on cancel, ending with FUN_00da0d70 on the camera.
+void FUN_00bfbd60(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    switch (step40(state)) {
+    case 0:
+        if (linked) {
+            resetTargetAnimation(state);
+        }
+        if (!FUN_00a94ce0((int)player, 0)) {
+            return;
+        }
+        step40(state) = step40(state) + 1;
+        startQteNode(state, context, 0x36);
+        ctxField5D4(ctx) = 0;
+        break;
+    case 1:
+        break;
+    default:
+        return;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        call_00BF24F0(context, 1.0f);
+        FUN_00b8bb40((int)player, 0.0f);
+        clearItem378(player);
+        call_00BD7600(context, state);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    faceA925A0(player);
+    FUN_00b7aa80((int)player);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+    FUN_00da0d70((int)DAT_01bea1d0);
+}
+
+// 00BFC0C0  FUN_00bfc0c0  size=956  [callgraph]
+// Qte kind 0x11: step 0 starts the qte node 0x36 (and FUN_00e25500(0) on sub3BF0) when FUN_00a8c760(0xB),
+// then waits for FUN_00a94ce0(0) -- meanwhile a linked target is kept on the player (vf7C(position, player
+// vf84())).  Finisher / cancel as kind 0xC without the +0x320 check and the slow request.
+void FUN_00bfc0c0(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p15;
+    char *ctx = asContext(context);
+    Pl0000 *player = qtePlayer(ctx);
+    bool linked = qteLinked(state, context);
+    switch (step40(state)) {
+    case 0:
+        if (linked) {
+            resetTargetAnimation(state);
+        }
+        if (FUN_00a8c760((int)player, 0xB)) {
+            startQteNode(state, context, 0x36);
+            call_00E25500(player->sub3BF0(), 0.0f);
+        }
+        if (!FUN_00a94ce0((int)player, 0)) {
+            if (linked) {
+                void *target = (void *)qteTarget(state);
+                undefined *rot = player->vf84();
+                vcall<void>(target, 0x7C, player->matrix() + 12 /* +0x40 */, rot);
+            }
+            return;
+        }
+        step40(state) = step40(state) + 1;
+        ctxField5D4(ctx) = 0;
+        break;
+    case 1:
+        break;
+    default:
+        return;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(qteTarget(state) + 0x87C) == 0) {  // target+0x87C: ?
+        resetPlayerAnimation(player);
+        call_00BCF3E0(state, context, 1, 0, 30.0f, 30.0f);
+        call_00BB5830(state, context);
+        fieldCC(state) = fieldCC(state) + 1.0f;
+        player->vf220(2.0f);
+        call_00BE6620(context, state, 100, 0, 0);
+        call_00BF24F0(context, 1.0f);
+        FUN_00bd5f40(context, 35.0f, -40.0f, 0, 0);
+        clearItem378(player);
+        call_00BD7600(context, state);
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    ctxField500(asContext(context)) = 0;
+    DAT_01bea9a0 = 0;
+    faceA925A0(player);
+    FUN_00b7aa80((int)player);
+    FUN_008e6d00(controller764(player));
+    FUN_008e5c50(controller764(player), 6);
+    FUN_008e0b70(controller764(player), 1);
+    FUN_00d82510((int)state, 0xB, 100);
+    ctxField32C(ctx) = 1;
+    call_00A17A40(player);
+}

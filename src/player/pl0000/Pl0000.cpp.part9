@@ -1,0 +1,1731 @@
+// src/player/pl0000/Pl0000.cpp (part 10/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// D3DX9_43.DLL imports
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" float *__stdcall D3DXMatrixInverse(float *out, float *determinant, const float *m);
+extern "C" float *__stdcall D3DXVec3Normalize(float *out, const float *v);
+
+// globals
+extern unsigned int DAT_01bea060;  // global flags
+extern unsigned int DAT_01bea064;  // global flags; 0x1000 suppresses vf3E0(0xC9) in FUN_00b7c8a0
+extern unsigned int DAT_01bea090;  // game flags (bit 0x20 / 0x8000 tested here)
+extern unsigned int DAT_01bea094;  // global flags
+extern int DAT_01bea010;           // mode word; (DAT_01bea010 % 4) selects a parameter row (vf3B4)
+extern int DAT_01bea024;           // 0xE: the damage-mesh variants are switched (FUN_00b7b440)
+extern float DAT_01be942c;         // time step subtracted from timer2860 (FUN_00b94b00)
+extern float DAT_01bea380[4];      // vectors given to FUN_00db6410 (FUN_00b8a370)
+extern float DAT_01bea390[4];
+extern char DAT_0163d0ac[];        // "[Hw::VecNormalize]..." (message of FUN_00dd5650)
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern char DAT_01beb908[];        // object: ECX of FUN_00c4e710
+extern unsigned char DAT_01886ea0[];  // object: ECX of FUN_0094e5e0
+extern unsigned char DAT_01b35df8[];  // collision world: ECX of RayCastSingleHitWork::RayCastSingleHitWork_2
+extern unsigned char DAT_01be9ef4[];  // type descriptor tested with FUN_00dd6d80 (FUN_00b85420)
+extern unsigned char DAT_01be939c[];  // object: ECX of FUN_00e049b0 (FUN_00bc3dc0)
+extern float DAT_01bea530;         // aim angle loaded into angle278C when the gun stance times out (FUN_00bc4f40)
+extern int DAT_01dc1340;           // set to 1 by FUN_00bc54c0
+extern float DAT_01dc4ed0[4];      // copy of the "Sito" ray end rayEnd2760 (FUN_00bc54c0)
+
+// defined earlier in this file (parts 1 .. 9)
+undefined4 __fastcall FUN_00b7b200(Pl0000 *self);
+void FUN_00b7b270(Pl0000 *self, float rate, float deadZone, float maxStep, float yawOffset);  // __thiscall
+int FUN_00b7f840(void);
+void FUN_00b85350(Pl0000 *self, float level, float factorA, float factorB, undefined4 value3450,
+                  int startZan, float value3430);  // __thiscall
+void FUN_00b86010(Pl0000 *self, int useLockOn);  // __thiscall
+undefined4 __fastcall FUN_00b86410(Pl0000 *self);
+void __fastcall FUN_00b895d0(Pl0000 *self);
+void __fastcall FUN_00b8a510(Pl0000 *self);
+void __fastcall FUN_00b8aae0(Pl0000 *self);
+undefined4 FUN_00b8afd0(Pl0000 *self, float *out);  // __thiscall
+void FUN_00b94790(Pl0000 *self, float unused1, float unused2);  // __thiscall
+void __fastcall FUN_00b94ed0(Pl0000 *self);
+void __fastcall FUN_00b94fc0(Pl0000 *self);
+void __fastcall FUN_00b95140(Pl0000 *self);
+undefined4 FUN_00bc3230(Pl0000 *self, int includeLocked);  // __thiscall
+
+namespace Pl0000_p10 {
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &subState61C(void *p)   { return *(int *)((char *)p + 0x61C); }    // Behavior+0x61C: ? sub-state of the current action
+inline int   &field594(void *p)      { return *(int *)((char *)p + 0x594); }    // Behavior+0x594: 1: message 0xC with vec5B0 (FUN_00bc9010)
+inline int   &field598(void *p)      { return *(int *)((char *)p + 0x598); }    // Behavior+0x598: 1: message 0xC with vec5C0 (FUN_00bc9010)
+inline float *vec5B0(void *p)        { return (float *)((char *)p + 0x5B0); }   // Behavior+0x5B0: ? float[4]
+inline float *vec5C0(void *p)        { return (float *)((char *)p + 0x5C0); }   // Behavior+0x5C0: ? float[4]
+inline float &field8A8(void *p)      { return *(float *)((char *)p + 0x8A8); }  // BehaviorAppBase+0x8A8: ? gravity scale of the fall
+inline float &dt910(void *p)         { return *(float *)((char *)p + 0x910); }  // BehaviorAppBase+0x910: ? frame delta time
+inline float &field920(void *p)      { return *(float *)((char *)p + 0x920); }  // BehaviorAppBase+0x920: ? (here: count-down)
+inline float &field924(void *p)      { return *(float *)((char *)p + 0x924); }  // BehaviorAppBase+0x924: ? (here: yaw)
+inline float &field928(void *p)      { return *(float *)((char *)p + 0x928); }  // BehaviorAppBase+0x928: ? (here: yaw)
+inline int   &field940(void *p)      { return *(int *)((char *)p + 0x940); }    // BehaviorAppBase+0x940: ? (here: flag / variant)
+inline int   &field944(void *p)      { return *(int *)((char *)p + 0x944); }    // BehaviorAppBase+0x944: ? flag
+inline int   &field948(void *p)      { return *(int *)((char *)p + 0x948); }    // BehaviorAppBase+0x948: ? flag (no move damping)
+
+// raw field of an embedded cEspControler (not owned here)
+inline float &espFloat(void *esp, int offset) { return *(float *)((char *)esp + offset); }
+inline unsigned int &espBits(void *esp, int offset) { return *(unsigned int *)((char *)esp + offset); }
+
+// virtual call through slot `off` (byte offset) of an object whose class is not known here
+template <class R> inline R vcall(void *obj, unsigned int off)
+{
+    return (*(R (__thiscall **)(void *))(*(char **)obj + off))(obj);
+}
+template <class R, class A> inline R vcall(void *obj, unsigned int off, A a)
+{
+    return (*(R (__thiscall **)(void *, A))(*(char **)obj + off))(obj, a);
+}
+
+// virtual slot `off` of the manager returned by FUN_00c13920 (slot 0x6C: game mode)
+inline int mgrCall(unsigned int off)
+{
+    return vcall<int>((void *)FUN_00c13920(), off);
+}
+
+// true when the type returned by virtual slot `slot` of `obj` is-a `desc` (FUN_00dd6d80)
+inline bool isKindOf(void *obj, unsigned int slot, void *desc)
+{
+    undefined4 *type = vcall<undefined4 *>(obj, slot);
+    return FUN_00dd6d80(type, (undefined4 *)desc) != 0;
+}
+
+// owner (FUN_00a7c8a0) of the object resolved from `handle` (FUN_00a81330, called once), or 0
+inline int ownerOf(unsigned int *handle)
+{
+    int obj = (int)FUN_00a81330(handle);
+    int owner = 0;
+    if (obj != 0) {
+        owner = FUN_00a7c8a0(obj);
+    }
+    return owner;
+}
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void setAction(void *obj, int action, int a, int b, int c)  // FUN_00a8caf0 (Behavior)
+{
+    ((void (__thiscall *)(void *, int, int, int, int))0x00A8CAF0)(obj, action, a, b, c);
+}
+inline void call_00AA4080(void *self, int id, int layer, float a, float b, int flags, float c, float d)
+{
+    ((void (__thiscall *)(void *, int, int, float, float, int, float, float))0x00AA4080)(
+        self, id, layer, a, b, flags, c, d);
+}
+// 0x00A94A40: motion `motion` of the file set on a layer (ret 0x24)
+inline void call_00A94A40(void *self, int fileSet, int a, int b, int c, int d, int e, int motion, float blend,
+                          unsigned int flags)
+{
+    ((void (__thiscall *)(void *, int, int, int, int, int, int, int, float, unsigned int))0x00A94A40)(
+        self, fileSet, a, b, c, d, e, motion, blend, flags);
+}
+// 0x00A947E0: sets the frame of motion layer `layer` (ret 0x10)
+inline void call_00A947E0(void *self, int layer, float frame, float a, float b)
+{
+    ((void (__thiscall *)(void *, int, float, float, float))0x00A947E0)(self, layer, frame, a, b);
+}
+inline void call_00A17A40(void *obj)  // switchD_0080dbae::default
+{
+    ((void (__thiscall *)(void *))0x00A17A40)(obj);
+}
+inline int call_00A959F0(Pl0000 *self, int layer)  // result of FUN_00a958c0 scaled and truncated to int
+{
+    return ((int (__thiscall *)(Pl0000 *, int))0x00A959F0)(self, layer);
+}
+inline float10 call_00A95C80(Pl0000 *self, int layer)
+{
+    return ((float10 (__thiscall *)(Pl0000 *, int))0x00A95C80)(self, layer);
+}
+inline float call_00DDBA30(float value)  // angle wrapped to [-pi, pi]
+{
+    return ((float (__cdecl *)(float))0x00DDBA30)(value);
+}
+inline void call_00DD5650(const char *message)  // ? debug message (zero-length vector)
+{
+    ((void (__cdecl *)(const char *))0x00DD5650)(message);
+}
+// thunk_FUN_00dde510 at 0x00DDE5D0: pitch / yaw of the direction from `from` to `to`
+inline void call_00DDE5D0(float *pitch, float *yaw, float *to, float *from)
+{
+    ((void (__cdecl *)(float *, float *, float *, float *))0x00DDE5D0)(pitch, yaw, to, from);
+}
+inline void call_00EAA6E0(void *esp, float a, float b)  // cEspControler method
+{
+    ((void (__thiscall *)(void *, float, float))0x00EAA6E0)(esp, a, b);
+}
+inline void call_00E03080(void *message, int obj, int index)  // ret 8
+{
+    ((void (__thiscall *)(void *, int, int))0x00E03080)(message, obj, index);
+}
+// 0x00BA4410 (cPl0000SaiWeapon file): two float arguments, ECX = the player
+inline void call_00BA4410(Pl0000 *self, float a, float b)
+{
+    ((void (__thiscall *)(Pl0000 *, float, float))0x00BA4410)(self, a, b);
+}
+// 0x00BA62F0: called on the weapon (owner of handleFF8), ret 0x18
+inline void call_00BA62F0(int weapon, float *offset, float a, float b, unsigned int *target, float c, int d)
+{
+    ((void (__thiscall *)(int, float *, float, float, unsigned int *, float, int))0x00BA62F0)(
+        weapon, offset, a, b, target, c, d);
+}
+// 0x00A8DB10: turns *value from `current` towards `target` (ret 0x18)
+inline void call_00A8DB10(Pl0000 *self, float *value, float current, float target, float rate, float deadZone,
+                          float maxStep)
+{
+    ((void (__thiscall *)(Pl0000 *, float *, float, float, float, float, float))0x00A8DB10)(
+        self, value, current, target, rate, deadZone, maxStep);
+}
+inline int call_0085BF90(int obj)  // ECX = obj
+{
+    return ((int (__thiscall *)(int))0x0085BF90)(obj);
+}
+// 0x00ABAEC0 (named lib::StaticArray<Collision*,256>::StaticArray): collects the collision hits of
+// group `group` of `self` into the hit array `out` (ret 8)
+inline void collectHits(void *self, void *out, int group)
+{
+    ((void (__thiscall *)(void *, void *, int))0x00ABAEC0)(self, out, group);
+}
+
+// RayCastSingleHitWork::RayCastSingleHitWork_2 (0x0090B130) on the collision world
+inline int rayCast(void *world, void *a, void *b, void *c, void *d, void *request)
+{
+    return ((int (__thiscall *)(void *, void *, void *, void *, void *, void *))0x0090B130)(
+        world, a, b, c, d, request);
+}
+
+// ray request built on the stack (0x38 bytes)
+struct RayRequest {
+    float from[4];
+    float to[4];
+    unsigned int flags;  // group << 16 | 0x1E
+    int field24;
+    int mask28;
+    int field2C;
+    const char *name;
+    int field34;
+};
+
+// entry of the collision hit array hits2BDC (0x150 bytes)
+struct CollisionHit {
+    int kind;             // +0x00 0 / 1 / 2 / 0x147 / 0x1B0 are ignored
+    char pad04[0x14];
+    unsigned int handle;  // +0x18 object handle of the hit object
+    char pad1C[0x14];
+    float yaw30;          // +0x30 ? yaw of the hit
+    char pad34[0x58];
+    unsigned int flags8C; // +0x8C bit 26: ignored by vf3D0
+    char pad90[0x70];
+    float pos[4];         // +0x100 hit position
+    char pad110[0x40];
+};
+
+// growable point / object array built on the stack (released with FUN_00dd48d0 when owned)
+struct PointArray {
+    int unk00;     // +0x00
+    float *data;   // +0x04
+    int capacity;  // +0x08
+    int count;     // +0x0C
+    int owned;     // +0x10 non-zero: data is freed with FUN_00dd48d0
+};
+inline void pushPoint(PointArray &points, float x, float y, float z)
+{
+    if (points.count < points.capacity) {
+        float *p = points.data + points.count * 3;
+        if (p != 0) {
+            p[0] = x;
+            p[1] = y;
+            p[2] = z;
+        }
+        points.count = points.count + 1;
+    }
+}
+// Hw::VecNormalize check: a zero-length vector is reported and replaced by (0, 1, 0).
+inline void checkLength(float *v)
+{
+    if (!(0.0f < v[1] * v[1] + v[0] * v[0] + v[2] * v[2])) {
+        call_00DD5650(DAT_0163d0ac);
+        v[0] = 0.0f;
+        v[1] = 1.0f;
+        v[2] = 0.0f;
+    }
+}
+// same check, then normalized with FUN_00ddf460
+inline void normalizeHw(float *v)
+{
+    if (0.0f < v[1] * v[1] + v[0] * v[0] + v[2] * v[2]) {
+        FUN_00ddf460(v, v);
+    } else {
+        call_00DD5650(DAT_0163d0ac);
+        v[0] = 0.0f;
+        v[1] = 1.0f;
+        v[2] = 0.0f;
+    }
+}
+
+// Entry `index` of the float parameter table at +0x142C (0x14-byte entries, 5 floats).
+inline float *paramEntry(Pl0000 *self, int index)
+{
+    return self->paramTable142C() + index * 5;
+}
+
+// entry of the array at entries3820 / count3828 (0x18 bytes)
+struct Cell {
+    int value00;     // +0x00
+    float amount;    // +0x04
+    int value08;     // +0x08
+    float capacity;  // +0x0C
+    float field10;   // +0x10
+    int locked;      // +0x14
+};
+
+// message block built on the stack by FUN_004039a0 (kind, sender, 0), completed with
+// FUN_00dffb20 / FUN_00e03080 and sent with FUN_00a8c930
+struct Message {
+    unsigned char head[0x120];
+    float vec120[4];  // +0x120 (message 0xC of FUN_00bc9010)
+    float vec130[4];  // +0x130
+    unsigned char tail[0x10];
+};
+
+// the mode selected by the low bits of DAT_01bea010 (signed remainder)
+inline int modeRow()
+{
+    return DAT_01bea010 % 4;
+}
+
+// sum of the frame counters (+0xB8 / +0xC4 / +0xD0) of the animation object FUN_00a92f90()
+inline int motionFrames(int motion)
+{
+    return *(int *)(motion + 0xD0) + *(int *)(motion + 0xC4) + *(int *)(motion + 0xB8);
+}
+// FUN_00a92f90 then: no frames left, or FUN_00e36060(animation + 0xF4, 0) (the motion has ended)
+inline bool motionDone(Pl0000 *self)
+{
+    int animation = FUN_00a92f90((int)self);
+    return motionFrames(animation) == 0 || FUN_00e36060(animation + 0xF4, 0);  // __thiscall
+}
+
+// ignored collision kinds of vf3D0 / vf3D4
+inline bool ignoredHit(int kind)
+{
+    return kind == 0 || kind == 1 || kind == 2 || kind == 0x1B0 || kind == 0x147;
+}
+
+}  // namespace Pl0000_p10
+
+// 00BC3DC0  FUN_00bc3dc0  size=443  [between]
+// Effect sequence of esp39F0, step byte39E8: 0 restarts it (slot 0xC); 2 / 6 send message 7 with the
+// effect and grow radius39EC by 3.2 per time step (to 300 / 100, then step 4; step 7 also mirrors the
+// radius into the effect while vf32C); 4 / 5 shrink it by FUN_00e049b0(DAT_01be939c).
+void __fastcall FUN_00bc3dc0(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    unsigned char step = self->byte39E8();
+    Message message;
+    float radius;
+    switch (step) {
+    case 0:
+        vcall<void>(self->esp39F0(), 0xC);
+        self->byte39E8() = self->byte39E8() + 1;
+        return;
+    case 2:
+        self->radius39EC() = 1.0f;
+        self->byte39E8() = (unsigned char)(step + 1);
+        FUN_004039a0((int)&message, 7, (int)self, 0);                  // __thiscall
+        FUN_00dffb20((int)&message, (undefined4)self->esp39F0());      // __thiscall
+        call_00E03080(&message, self->field4F0(), 0);
+        FUN_00a8c930((int)self, 0, (int)&message);                     // __thiscall
+        // fall through
+    case 3:
+        radius = DAT_01be942c * 3.2f + self->radius39EC();
+        self->radius39EC() = radius;
+        if (300.0f < radius) {
+            self->byte39E8() = 4;
+            return;
+        }
+        break;
+    case 4:
+        self->radius39EC() = 30.0f;
+        self->byte39E8() = (unsigned char)(step + 1);
+        // fall through
+    case 5:
+        radius = self->radius39EC();
+        self->radius39EC() = (float)((float10)radius - FUN_00e049b0((int *)DAT_01be939c));
+        return;
+    case 6:
+        self->radius39EC() = 1.0f;
+        self->byte39E8() = (unsigned char)(step + 1);
+        FUN_004039a0((int)&message, 7, (int)self, 0);                  // __thiscall
+        FUN_00dffb20((int)&message, (undefined4)self->esp39F0());      // __thiscall
+        call_00E03080(&message, self->field4F0(), 0);
+        FUN_00a8c930((int)self, 0, (int)&message);                     // __thiscall
+        // fall through
+    case 7:
+        radius = DAT_01be942c * 3.2f + self->radius39EC();
+        self->radius39EC() = radius;
+        if (100.0f < radius) {
+            self->byte39E8() = 4;
+        }
+        if (!self->vf32C()) {
+            self->byte39E8() = 4;
+        }
+        espFloat(self->esp39F0(), 0x5C) = self->radius39EC();  // cEspControler+0x5C: ? (Pl0000+0x3A4C)
+        espFloat(self->esp39F0(), 0x60) = self->radius39EC();  // cEspControler+0x60: ? (Pl0000+0x3A50)
+        espFloat(self->esp39F0(), 0x64) = 0.0f;                // cEspControler+0x64: ? (Pl0000+0x3A54)
+        espBits(self->esp39F0(), 0x68) = espBits(self->esp39F0(), 0x68) | 0x10;  // cEspControler+0x68: ? flags
+        break;
+    }
+}
+
+// 00BC3FA0  FUN_00bc3fa0  size=78  [between]
+// With a sub-state: when the field7D0 object is-a DAT_01be9ef4 and its +0x32C flag is set, clears
+// the flag and calls FUN_00b95140 (tail call).
+void __fastcall FUN_00bc3fa0(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    if (subState61C(self) == 0) {
+        return;
+    }
+    void *obj = (void *)self->field7D0();
+    if (obj == 0) {
+        return;
+    }
+    if (isKindOf(obj, 0, DAT_01be9ef4) && *(int *)((char *)obj + 0x32C) != 0) {
+        *(int *)((char *)obj + 0x32C) = 0;
+        FUN_00b95140(self);
+    }
+}
+
+// 00BC4200  Pl0000::vf3D0  size=713  [class]
+// Collision group 1 (enabled while vf330): collects the hits into hits2BDC; each valid hit while
+// field2BD0 > 0 is reported with vf198(owner, hit, 2), and its position (in local coordinates) and
+// relative yaw are kept in field2BC0.. / field2BD4.  Returns 1 when a hit was reported.
+undefined4 Pl0000::vf3D0()
+{
+    using namespace Pl0000_p10;
+    count2BE8() = 0;
+    collectHits(this, hits2BDC(), 1);
+    field2BBC() = 0;
+    field2BB4() = 0;
+    if ((DAT_01bea060 & 0x2000000) != 0) {
+        field2BD0() = -1.0f;
+        field2BD8() = -1.0f;
+        timer2BF8() = -1.0f;
+        return 0;
+    }
+    if (0.0f <= field2BD0()) {
+        field2BD0() = field2BD0() - dt910(this);
+    }
+    if (0.0f <= field2BD8()) {
+        field2BD8() = field2BD8() - dt910(this);
+    }
+    if (vf330()) {
+        field2BD0() = 3.0f;
+    }
+    if (0.0f <= timer2BF8()) {
+        timer2BF8() = timer2BF8() - dt910(this);
+    }
+    if (0.0f <= field2BFC()) {
+        field2BFC() = field2BFC() - dt910(this);
+    }
+    if (vf330()) {
+        if (flag2C0C() == 0) {
+            FUN_00a93910((int)this, 1);
+        }
+        flag2C0C() = 1;
+    } else {
+        if (flag2C0C() != 0) {
+            FUN_00a938c0((int)this, 1);
+        }
+        flag2C0C() = 0;
+    }
+    if (flag2C0C() == 0) {
+        return 0;
+    }
+    undefined4 reported = 0;
+    CollisionHit *hit = (CollisionHit *)data2BE0();
+    CollisionHit *end = hit + count2BE8();
+    for (; hit != end; hit++) {
+        if (ignoredHit(hit->kind) || !(0.0f < field2BD0()) || (hit->flags8C & 0x4000000) != 0) {
+            continue;
+        }
+        int owner = ownerOf(&hit->handle);
+        if (timer2BF8() <= 0.0f) {
+            timer2BF8() = 5.0f;
+        }
+        vf198((undefined4)owner, (undefined4)hit, 2);
+        field2BFC() = 30.0f;
+        field2BB4() = 1;
+        float *local = &field2BC0();  // float[4] at +0x2BC0: hit position
+        local[0] = hit->pos[0];
+        local[1] = hit->pos[1];
+        local[2] = hit->pos[2];
+        local[3] = hit->pos[3];
+        field2BD4() = call_00DDBA30(hit->yaw30 - vec90()[1]);
+        float inverse[16];
+        D3DXMatrixInverse(inverse, 0, matrix());
+        D3DXVec3TransformNormal(local, local, inverse);
+        local[0] = local[0] + inverse[12];
+        local[1] = local[1] + inverse[13];
+        local[2] = local[2] + inverse[14];
+        reported = 1;
+    }
+    return reported;
+}
+
+// 00BC44D0  Pl0000::vf3D4  size=305  [class]
+// Collision group 3 (enabled while timer2C04 >= 0, counted down): every valid hit is reported with
+// vf198(owner, hit, 0x2000).  Returns 1 when a hit was reported.
+undefined4 Pl0000::vf3D4()
+{
+    using namespace Pl0000_p10;
+    count2BE8() = 0;
+    collectHits(this, hits2BDC(), 3);
+    if ((DAT_01bea060 & 0x2000000) != 0) {
+        return 0;
+    }
+    float timer = timer2C04();
+    if (flag2C08() == 0) {
+        if (0.0f <= timer) {
+            flag2C08() = 1;
+            FUN_00a93910((int)this, 3);
+        }
+    } else if (timer < 0.0f) {
+        flag2C08() = 0;
+        FUN_00a938c0((int)this, 3);
+    }
+    if (flag2C08() == 0) {
+        return 0;
+    }
+    if (0.0f < timer2C04()) {
+        timer2C04() = timer2C04() - dt910(this);
+    }
+    undefined4 reported = 0;
+    CollisionHit *hit = (CollisionHit *)data2BE0();
+    CollisionHit *end = hit + count2BE8();
+    for (; hit != end; hit++) {
+        if (ignoredHit(hit->kind)) {
+            continue;
+        }
+        int owner = ownerOf(&hit->handle);
+        vf198((undefined4)owner, (undefined4)hit, 0x2000);
+        float inverse[16];
+        D3DXMatrixInverse(inverse, 0, matrix());  // result not used
+        reported = 1;
+    }
+    return reported;
+}
+
+// 00BC4610  FUN_00bc4610  size=77  [between]
+// 1 when `obj` is one of the objects of the handle list data1044 / field104C.  ret 4.
+undefined4 FUN_00bc4610(Pl0000 *self, int obj)  // __thiscall
+{
+    if (obj == 0) {
+        return 0;
+    }
+    unsigned int *handle = (unsigned int *)self->data1044();
+    unsigned int *end = handle + self->field104C();
+    for (; handle != end; handle++) {
+        int found = (int)FUN_00a81330(handle);
+        if (found != 0 && found == obj) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// 00BC4660  FUN_00bc4660  size=1309  [between]
+// Builds the 7 control points of an arc from start to end (middle 0.7 of the way, raised to
+// max(|d| / 3, 1.5) above the higher end -- half that when the end is more than 5 below the start;
+// tangent d / 6; the second / sixth points are |d| / 6 from the ends towards the tangent points)
+// and assigns them to the point array `out` (FUN_00a5e090).  The raw decompilation lost the stack
+// values; this follows the machine code.  ret 0xC.
+void FUN_00bc4660(undefined4 out, float *start, float *end)
+{
+    using namespace Pl0000_p10;
+    PointArray points;
+    points.unk00 = 0;
+    points.data = 0;
+    points.capacity = 0;
+    points.count = 0;
+    points.owned = 0;
+    FUN_0041c8e0((int)&points, 8, (int *)FUN_00a1d5c0());  // __thiscall: reserve 8 points
+    float a[3];
+    a[0] = start[0];
+    a[1] = start[1];
+    a[2] = start[2];
+    pushPoint(points, a[0], a[1], a[2]);
+    float c[3];
+    c[0] = end[0];
+    c[1] = end[1];
+    c[2] = end[2];
+    float d[3];
+    d[0] = c[0] - a[0];
+    d[1] = c[1] - a[1];
+    d[2] = c[2] - a[2];
+    double length = sqrt((double)(d[1] * d[1] + d[0] * d[0] + d[2] * d[2]));
+    float lift = (float)(length * 0.33333334f);
+    if (lift < 1.5f) {
+        lift = 1.5f;
+    }
+    float stepLength = (float)(length * 0.16666667f);
+    float m[3];  // middle point
+    m[0] = d[0] * 0.7f + a[0];
+    m[1] = d[1] * 0.7f + a[1];
+    m[2] = d[2] * 0.7f + a[2];
+    if (c[1] <= a[1]) {
+        m[1] = a[1] + lift;
+    } else if (a[1] < c[1]) {
+        if (c[1] + 5.0f < a[1]) {
+            m[1] = c[1] + lift * 0.5f;
+        } else {
+            m[1] = c[1] + lift;
+        }
+    }
+    float t[3];  // tangent at the middle
+    t[0] = d[0] * 0.16666667f;
+    t[1] = d[1] * 0.16666667f;
+    t[2] = d[2] * 0.16666667f;
+    float before[3];  // middle - tangent
+    before[0] = m[0] - t[0];
+    before[1] = m[1] - t[1];
+    before[2] = m[2] - t[2];
+    float step[3];
+    step[0] = before[0] - a[0];
+    step[1] = before[1] - a[1];
+    step[2] = before[2] - a[2];
+    checkLength(step);
+    D3DXVec3Normalize(step, step);
+    pushPoint(points, step[0] * stepLength + a[0], step[1] * stepLength + a[1], step[2] * stepLength + a[2]);
+    pushPoint(points, before[0], before[1], before[2]);
+    pushPoint(points, m[0], m[1], m[2]);
+    float after[3];  // middle + tangent
+    after[0] = t[0] + m[0];
+    after[1] = t[1] + m[1];
+    after[2] = t[2] + m[2];
+    step[0] = c[0] - after[0];
+    step[1] = c[1] - after[1];
+    step[2] = c[2] - after[2];
+    checkLength(step);
+    D3DXVec3Normalize(step, step);
+    step[0] = step[0] * stepLength;
+    step[1] = step[1] * stepLength;
+    step[2] = step[2] * stepLength;
+    pushPoint(points, after[0], after[1], after[2]);
+    pushPoint(points, c[0] - step[0], c[1] - step[1], c[2] - step[2]);
+    pushPoint(points, c[0], c[1], c[2]);
+    FUN_00a5e090((undefined2 *)out, (int)&points);  // __thiscall on out
+    if (points.data != 0) {
+        points.count = 0;
+        if (points.owned != 0) {
+            FUN_00dd48d0((int)points.data, 0);
+        }
+    }
+}
+
+// 00BC4B80  FUN_00bc4b80  size=155  [between]
+// Moves the last point of the curve `curve` (point array at +0x38: data +0x3C, count +0x44) the
+// fraction `rate` towards `target` and rebuilds the arc from its first point (FUN_00bc4660).
+void FUN_00bc4b80(int curve, float *target, float rate)
+{
+    float *data = *(float **)(curve + 0x3C);
+    float *last = data + *(int *)(curve + 0x44) * 3 - 3;
+    float step[3];
+    step[0] = (target[0] - last[0]) * rate;
+    step[1] = (target[1] - last[1]) * rate;
+    step[2] = rate * (target[2] - last[2]);
+    float endPoint[4];
+    endPoint[0] = last[0] + step[0];
+    last[0] = endPoint[0];
+    endPoint[1] = last[1] + step[1];
+    last[1] = endPoint[1];
+    endPoint[2] = last[2] + step[2];
+    last[2] = endPoint[2];
+    float startPoint[4];
+    startPoint[0] = data[0];
+    startPoint[1] = data[1];
+    startPoint[2] = data[2];
+    startPoint[3] = 1.0f;
+    endPoint[3] = 1.0f;
+    FUN_00bc4660((undefined4)curve, startPoint, endPoint);
+}
+
+// 00BC4C20  Pl0000::vf3B0  size=169  [class]
+// Parameter of the current game mode (entry 48 in mode 8, else the entry selected by the mode info
+// byte +2; 1 without info), times field3410 unless the first cell is full, times the rows of
+// DAT_01bea024 and of the DAT_01bea010 mode.
+float10 Pl0000::vf3B0()
+{
+    using namespace Pl0000_p10;
+    void *manager = (void *)FUN_00c13920();
+    int info = 0;
+    int mode = vcall<int>((void *)FUN_00c13920(), 0x58);
+    if (manager != 0) {
+        info = vcall<int, int>(manager, 0x5C, mode);
+    }
+    float10 value;
+    if (mode == 8) {
+        value = paramEntry(this, 48)[3];
+    } else if (info == 0) {
+        value = 1;
+    } else {
+        value = paramEntry(this, (int)*(unsigned char *)(info + 2) + mode * 6)[3];
+    }
+    Cell *cell = (Cell *)entries3820();
+    if (count3828() == 0 || !(cell->capacity <= cell->amount)) {
+        value = value * field3410();
+    }
+    int row = modeRow();  // signed remainder (and 0x80000003 / fix-up in the original)
+    return value * paramEntry(this, 108 + DAT_01bea024)[3] * paramEntry(this, 125 + row)[3];
+}
+
+// 00BC4CD0  FUN_00bc4cd0  size=615  [callgraph]
+// "GREKAMAE" (grenade stance): step 0 starts the animation and the three layer motions 0x10..0x12
+// of the handleFFC owner's file set; each frame sets the layer frame from angle278C, on motion key
+// 0xB throws (FUN_00ba4410); when the motion ends: action 0x7D, then 0x81 unless mode row 1 or the
+// equipped item refuses (slot 0x44).
+void __fastcall FUN_00bc4cd0(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    self->vf314();
+    if (subState61C(self) == 0) {
+        FUN_00a9f560((int)self, (char *)"GREKAMAE", 0.033333335f, 0, 0);  // DAT_016496a4
+        call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 1, 0, 0, 0x10, 0.033333335f, 0x8000000);
+        call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 0, 0, 0x11, 0.033333335f, 0x8000000);
+        call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, -1, 0, 0, 0x12, 0.033333335f, 0x8000000);
+        call_00A947E0(self, 0, self->angle278C() * 0.95492965f, 0.0f, 0.0f);
+        subState61C(self) = subState61C(self) + 1;
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    call_00A947E0(self, 0, self->angle278C() * 0.95492965f, 0.0f, 0.0f);
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (FUN_00a8c760((int)self, 0xB)) {  // __thiscall
+        call_00A17A40(self);
+        if (self->field1418() == 0) {
+            float angle = call_00DDBA30(self->angle278C() - 0.34906584f);
+            call_00BA4410(self, angle, self->field33FC());
+        } else {
+            call_00BA4410(self, self->angle278C() * 0.8f, self->field33FC() * 0.6f);
+        }
+    }
+    if (!motionDone(self)) {
+        return;
+    }
+    setAction(self, 0x7D, 0, 0, 0);
+    if (modeRow() != 1) {
+        void *item = (void *)FUN_0094e5e0((int)DAT_01886ea0, FUN_00b7f840());  // __thiscall
+        if (item != 0 && vcall<int>(item, 0x44) == 0) {
+            return;
+        }
+        setAction(self, 0x81, 0, 0, 0);
+    }
+}
+
+// 00BC4F40  FUN_00bc4f40  size=693  [callgraph]
+// Gun stance: motion 0x13 (0x14 with fieldB74) of the handleFFC owner's file set; holding the
+// maskE3C button for 15 time units gives action 0x7C (angle278C = DAT_01bea530).  Motion key 5
+// turns to the handle1370 target (or the stick), key 0xB fires (FUN_00ba4410, item slot 0x40);
+// vf388(0) when the motion ends.
+void __fastcall FUN_00bc4f40(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    self->vf314();
+    if (subState61C(self) == 0) {
+        int motion = 0x13;
+        if (self->fieldB74() != 0) {
+            motion = 0x14;
+        }
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFFC()) + 0x494, motion, 0, 0.16666667f, 1.0f, 0x8000000, -1.0f,
+                     1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->timer1414() = 0.0f;
+        field928(self) = self->yawD34();
+        self->field1410() = 1;
+        self->field1418() = 0;
+        self->angle278C() = 0.0f;
+        self->field1408() = 0x701;
+        FUN_00b86010(self, 1);
+        field940(self) = 0;
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    if ((self->inputHold() & self->maskE3C()) == 0 || field940(self) != 0) {
+        self->timer1414() = 0.0f;
+    } else {
+        float held = dt910(self) + self->timer1414();
+        self->timer1414() = held;
+        if (15.0f <= held) {
+            self->field1410() = 0;
+            setAction(self, 0x7C, 0, 0, 0);
+            self->angle278C() = DAT_01bea530;
+        }
+    }
+    if (FUN_00a8c760((int)self, 5)) {  // __thiscall
+        int target = 0;
+        if (FUN_00a81330(&self->handle1370()) != 0) {
+            target = FUN_00a7c8a0((int)FUN_00a81330(&self->handle1370()));
+        }
+        if (target != 0 && vcall<int>((void *)target, 0x228) != 0) {
+            FUN_00b7b270(self, 0.3f, 0.00017453292f, 0.27925268f, 0.0f);
+        } else if (90000.0f < self->inputSqD28()) {
+            self->targetYaw() = self->inputYawD30();
+            self->vf308(0.1f, 0.0017453292f, 0.27925268f, 0.0f);
+        }
+    }
+    self->field26DC() = 3.0f;
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (FUN_00a8c760((int)self, 0xB)) {  // __thiscall
+        call_00A17A40(self);
+        call_00BA4410(self, self->angle278C(), self->field33FC());
+        void *item = (void *)FUN_0094e5e0((int)DAT_01886ea0, FUN_00b7f840());  // __thiscall
+        if (item != 0) {
+            vcall<void>(item, 0x40);
+        }
+        field940(self) = 1;
+    }
+    if (!motionDone(self)) {
+        return;
+    }
+    self->vf388(0);
+}
+
+// 00BC5200  FUN_00bc5200  size=704  [callgraph]
+// Second gun stance: motion 0xC (0xB with fieldB74); action 0x82 at once with DAT_01bea090 bit 3,
+// or after holding maskE3C for 15 time units.  Turns like FUN_00bc4f40; motion key 0xB fires with
+// FUN_00ba3ef0; vf388(0) when the motion ends.
+void __fastcall FUN_00bc5200(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        int motion = 0xC;
+        if (self->fieldB74() != 0) {
+            motion = 0xB;
+        }
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFFC()) + 0x494, motion, 0, 0.16666667f, 1.0f, 0x8000000, -1.0f,
+                     1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->timer1414() = 0.0f;
+        self->field1410() = 1;
+        field924(self) = self->yawD34();
+        mgrCall(0x6C);  // result not used
+        self->field1408() = 0x701;
+        if ((DAT_01bea090 & 8) != 0) {
+            self->field1410() = 0;
+            setAction(self, 0x82, 0, 0, 0);
+        }
+        FUN_00b86010(self, 1);
+        field940(self) = 0;
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    if ((self->inputHold() & self->maskE3C()) == 0 || field940(self) != 0) {
+        self->timer1414() = 0.0f;
+    } else {
+        float held = dt910(self) + self->timer1414();
+        self->timer1414() = held;
+        if (15.0f <= held) {
+            self->field1410() = 0;
+            setAction(self, 0x82, 0, 0, 0);
+            self->angle278C() = DAT_01bea530;
+        }
+    }
+    if (FUN_00a8c760((int)self, 5)) {  // __thiscall
+        int target = 0;
+        if (FUN_00a81330(&self->handle1370()) != 0) {
+            target = FUN_00a7c8a0((int)FUN_00a81330(&self->handle1370()));
+        }
+        if (target != 0 && vcall<int>((void *)target, 0x228) != 0) {
+            FUN_00b7b270(self, 0.3f, 0.00017453292f, 0.27925268f, 0.0f);
+        } else if (90000.0f < self->inputSqD28()) {
+            self->targetYaw() = self->inputYawD30();
+            self->vf308(0.1f, 0.0017453292f, 0.27925268f, 0.0f);
+        }
+    }
+    self->field26DC() = 3.0f;
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (FUN_00a8c760((int)self, 0xB)) {  // __thiscall
+        FUN_00ba3ef0((int)self);
+        void *item = (void *)FUN_0094e5e0((int)DAT_01886ea0, FUN_00b7f840());  // __thiscall
+        if (item != 0) {
+            vcall<void>(item, 0x40);
+        }
+        field940(self) = 1;
+    }
+    if (!motionDone(self)) {
+        return;
+    }
+    self->vf388(0);
+}
+
+// 00BC54C0  FUN_00bc54c0  size=951  [callgraph]
+// Resets target26F0; unless field1410: casts the "Sito" ray 200 units from DAT_01bea380 towards
+// DAT_01bea390 (end in rayEnd2760, copied to DAT_01dc4ed0), then collects the objects around
+// field4F0 (FUN_00c58180, 300 / 200) and reports every flagged one with a position; in game mode 6
+// the first entry is copied into target26F0.  Finally the target26F0 object is reported too.
+void __fastcall FUN_00bc54c0(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    FUN_00c14f90((int)self->target26F0());
+    if (self->field1410() != 0) {
+        return;
+    }
+    DAT_01dc1340 = 1;
+    FUN_00f98a90();
+    FUN_00f98aa0();
+    float start[4];
+    start[0] = DAT_01bea380[0];
+    start[1] = DAT_01bea380[1];
+    start[2] = DAT_01bea380[2];
+    start[3] = DAT_01bea380[3];
+    float dir[4];
+    dir[0] = DAT_01bea390[0] - DAT_01bea380[0];
+    dir[1] = DAT_01bea390[1] - DAT_01bea380[1];
+    dir[2] = DAT_01bea390[2] - DAT_01bea380[2];
+    dir[3] = DAT_01bea390[3] - DAT_01bea380[3];
+    normalizeHw(dir);
+    float *end = self->rayEnd2760();
+    dir[0] = dir[0] * 200.0f;
+    int hitFlag = 0;
+    dir[1] = dir[1] * 200.0f;
+    dir[2] = dir[2] * 200.0f;
+    dir[3] = dir[3] * 200.0f;
+    float target[4];
+    target[0] = dir[0] + start[0];
+    target[1] = dir[1] + start[1];
+    target[2] = dir[2] + start[2];
+    target[3] = dir[3] + start[3];
+    end[0] = target[0];
+    end[1] = target[1];
+    end[2] = target[2];
+    end[3] = target[3];
+    int group = FUN_009f8b40((int)self);
+    RayRequest request;
+    request.from[0] = start[0];
+    request.flags = group << 16 | 0x1E;
+    request.from[1] = start[1];
+    request.from[2] = start[2];
+    request.from[3] = start[3];
+    request.to[0] = target[0];
+    request.to[1] = target[1];
+    request.field24 = 0;
+    request.to[2] = target[2];
+    request.mask28 = 0;
+    request.field2C = 0;
+    request.to[3] = target[3];
+    request.name = "Sito";  // DAT_0163e7c8
+    request.field34 = 0;
+    unsigned char work[28];
+    rayCast(DAT_01b35df8, end, work, &hitFlag, 0, &request);
+    DAT_01dc4ed0[0] = end[0];
+    DAT_01dc4ed0[1] = end[1];
+    DAT_01dc4ed0[2] = end[2];
+    DAT_01dc4ed0[3] = end[3];
+    PointArray list;  // 0x70-byte target entries
+    list.unk00 = 0;
+    list.data = 0;
+    list.capacity = 0;
+    list.count = 0;
+    list.owned = 0;
+    FUN_004b7c50((int)&list, 0x20, (int *)FUN_00a1d5c0());  // __thiscall: reserve 0x20 entries
+    FUN_00c58180((int *)DAT_01beb908, self->field4F0(), (int)&list, 300.0f, 200.0f);  // __thiscall
+    float pos[4];
+    short index = 0;
+    for (char *entry = (char *)list.data; entry != (char *)list.data + list.count * 0x70; entry += 0x70) {
+        if ((*(unsigned char *)(entry + 8) & 1) != 0 && FUN_00c15010((int)entry, pos) != 0) {  // __thiscall
+            FUN_00d9fa80((int)DAT_01bea1d0, (undefined4)start, (undefined4)pos);  // __thiscall
+            FUN_00cbf800(FUN_00a81330((unsigned int *)entry), (undefined4 *)pos);
+            if (index == 0 && mgrCall(0x6C) == 6) {
+                FUN_008a4f80((int)self->target26F0(), (int)entry);  // __thiscall: copy the entry
+            }
+        }
+        index++;
+    }
+    unsigned int *slot = (unsigned int *)self->target26F0();
+    if (FUN_00a81330(slot) != 0 && (*((unsigned char *)self->target26F0() + 8) & 1) != 0 &&
+        FUN_00c15010((int)slot, pos) != 0) {  // __thiscall
+        FUN_00cbf8a0(FUN_00a81330(slot));
+        FUN_00d9fa80((int)DAT_01bea1d0, (undefined4)start, (undefined4)pos);  // __thiscall
+    }
+    if (list.data != 0) {
+        list.count = 0;
+        if (list.owned != 0) {
+            FUN_00dd48d0((int)list.data, 0);
+        }
+    }
+}
+
+// 00BC5880  FUN_00bc5880  size=1006  [callgraph]
+// Sword swing: step 0 cycles field2628 (0..3, then reset), motion 0 of the handleFF8 owner's file
+// set, faces the target (60 degrees max); motion key 0xB triggers the weapon (FUN_00ba62f0 /
+// FUN_00b807a0), key 5 or frame <= 16 turns to handle1370; step 2 / 4: motions 2 / 1 (7 / 6 when
+// field940 == 1); after step 5 FUN_00b8a510 (vf3EC) or vf388(0).
+void __fastcall FUN_00bc5880(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    int motion;
+    self->vf314();
+    switch (subState61C(self)) {
+    case 0: {
+        field940(self) = self->field2628();
+        int next = self->field2628() + 1;
+        field920(self) = 0.0f;
+        self->field2628() = next;
+        if (3 < next) {
+            self->field2628() = 0;
+        }
+        self->fieldB74() = 0;
+        field940(self) = 0;
+        self->field2628() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 0, 0, 0.06666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b86010(self, 1);
+        FUN_00b7b270(self, 1.0f, 0.00017453292f, 1.0471976f, 0.0f);
+        FUN_00b94fc0(self);
+        FUN_00b8aae0(self);
+        self->field27CC() = 0;
+        break;
+    }
+    case 1:
+        break;
+    case 2:
+        self->fieldB74() = 0;
+        motion = 2;
+        if (field940(self) == 1) {
+            motion = 7;
+        }
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, motion, 0, 0.06666667f, 1.0f, 0, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        // fall through
+    case 3:
+        self->field11A4() = 1;
+        FUN_00b94790(self, 1.0f, 1.0f);
+        return;
+    case 4:
+        motion = 1;
+        self->fieldB74() = 0;
+        if (field940(self) == 1) {
+            motion = 6;
+        }
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, motion, 0, 0.06666667f, 1.0f, 0x8000000, 0.0f,
+                     1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        // fall through
+    case 5:
+        self->field11A4() = 1;
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (motionDone(self)) {
+            if (!self->vf3EC()) {
+                self->vf388(0);
+                return;
+            }
+            FUN_00b8a510(self);
+            return;
+        }
+        return;
+    default:
+        return;
+    }
+    self->field11A4() = 1;
+    if (FUN_00a8c760((int)self, 0xB)) {  // __thiscall
+        float offset[3];
+        offset[0] = 0.0f;
+        offset[1] = 0.0f;
+        offset[2] = self->field33E8();
+        D3DXVec3TransformNormal(offset, offset, self->matrix());
+        int obj = (int)FUN_00a81330(&self->handleFF8());
+        if (obj != 0) {
+            int weapon = FUN_00a7c8a0(obj);
+            if (weapon != 0) {
+                call_00BA62F0(weapon, offset, self->field33E8(), self->field33F0(), &self->handle1370(),
+                              self->field33EC(), self->field4F0());
+                FUN_00b807a0(weapon, self->field4F0(), 0x701);  // __thiscall
+            }
+        }
+    }
+    if ((FUN_00a8c760((int)self, 5) || (float)call_00A959F0(self, 0) <= 16.0f) &&
+        FUN_00a81330(&self->handle1370()) != 0) {
+        if (FUN_00a7c8a0((int)FUN_00a81330(&self->handle1370())) != 0) {
+            FUN_00b7b270(self, 0.3f, 0.00017453292f, 0.27925268f, 0.0f);
+        }
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (motionDone(self)) {
+        subState61C(self) = subState61C(self) + 1;
+        return;
+    }
+}
+
+// 00BC5C90  FUN_00bc5c90  size=1156  [callgraph]
+// Same as FUN_00bc4660 with the middle point halfway between start and end (not raised).  The raw
+// decompilation lost the stack values; this follows the machine code.  ret 0xC.
+void FUN_00bc5c90(undefined4 out, float *start, float *end)
+{
+    using namespace Pl0000_p10;
+    PointArray points;
+    points.unk00 = 0;
+    points.data = 0;
+    points.capacity = 0;
+    points.count = 0;
+    points.owned = 0;
+    FUN_0041c8e0((int)&points, 8, (int *)FUN_00a1d5c0());  // __thiscall: reserve 8 points
+    float a[3];
+    a[0] = start[0];
+    a[1] = start[1];
+    a[2] = start[2];
+    pushPoint(points, a[0], a[1], a[2]);
+    float c[3];
+    c[0] = end[0];
+    c[1] = end[1];
+    c[2] = end[2];
+    float d[3];
+    d[0] = c[0] - a[0];
+    d[1] = c[1] - a[1];
+    d[2] = c[2] - a[2];
+    double length = sqrt((double)(d[1] * d[1] + d[0] * d[0] + d[2] * d[2]));
+    float stepLength = (float)(length * 0.16666667f);
+    float m[3];  // middle point
+    m[0] = d[0] * 0.5f + a[0];
+    m[1] = d[1] * 0.5f + a[1];
+    m[2] = d[2] * 0.5f + a[2];
+    float t[3];  // tangent at the middle
+    t[0] = d[0] * 0.16666667f;
+    t[1] = d[1] * 0.16666667f;
+    t[2] = d[2] * 0.16666667f;
+    float before[3];  // middle - tangent
+    before[0] = m[0] - t[0];
+    before[1] = m[1] - t[1];
+    before[2] = m[2] - t[2];
+    float step[3];
+    step[0] = before[0] - a[0];
+    step[1] = before[1] - a[1];
+    step[2] = before[2] - a[2];
+    checkLength(step);
+    D3DXVec3Normalize(step, step);
+    pushPoint(points, step[0] * stepLength + a[0], step[1] * stepLength + a[1], step[2] * stepLength + a[2]);
+    pushPoint(points, before[0], before[1], before[2]);
+    pushPoint(points, m[0], m[1], m[2]);
+    float after[3];  // middle + tangent
+    after[0] = t[0] + m[0];
+    after[1] = t[1] + m[1];
+    after[2] = t[2] + m[2];
+    step[0] = c[0] - after[0];
+    step[1] = c[1] - after[1];
+    step[2] = c[2] - after[2];
+    checkLength(step);
+    D3DXVec3Normalize(step, step);
+    step[0] = step[0] * stepLength;
+    step[1] = step[1] * stepLength;
+    step[2] = step[2] * stepLength;
+    pushPoint(points, after[0], after[1], after[2]);
+    pushPoint(points, c[0] - step[0], c[1] - step[1], c[2] - step[2]);
+    pushPoint(points, c[0], c[1], c[2]);
+    FUN_00a5e090((undefined2 *)out, (int)&points);  // __thiscall on out
+    if (points.data != 0) {
+        points.count = 0;
+        if (points.owned != 0) {
+            FUN_00dd48d0((int)points.data, 0);
+        }
+    }
+}
+
+// 00BC6120  FUN_00bc6120  size=155  [callgraph]
+// Same as FUN_00bc4b80 with the straight curve FUN_00bc5c90.
+void FUN_00bc6120(int curve, float *target, float rate)
+{
+    float *data = *(float **)(curve + 0x3C);
+    float *last = data + *(int *)(curve + 0x44) * 3 - 3;
+    float step[3];
+    step[0] = (target[0] - last[0]) * rate;
+    step[1] = (target[1] - last[1]) * rate;
+    step[2] = rate * (target[2] - last[2]);
+    float endPoint[4];
+    endPoint[0] = last[0] + step[0];
+    last[0] = endPoint[0];
+    endPoint[1] = last[1] + step[1];
+    last[1] = endPoint[1];
+    endPoint[2] = last[2] + step[2];
+    last[2] = endPoint[2];
+    float startPoint[4];
+    startPoint[0] = data[0];
+    startPoint[1] = data[1];
+    startPoint[2] = data[2];
+    startPoint[3] = 1.0f;
+    endPoint[3] = 1.0f;
+    FUN_00bc5c90((undefined4)curve, startPoint, endPoint);
+}
+
+// 00BC61C0  FUN_00bc61c0  size=1403  [callgraph]
+// Aerial swing: motion 0xE (0x10 / 0xF in steps 2 / 4) of the handleFF8 owner's file set; the move
+// is damped (x / z by 0.94, y by 0.97 minus gravity) and applied to the position unless field948
+// (set when flags2654 bit 4 was already set) or flags2654 bit 6; motion key 0xB triggers the weapon,
+// key 5 turns; after step 5 action 0xB.
+void __fastcall FUN_00bc61c0(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    float fall;
+    self->vf314();
+    if (FUN_00a8c760((int)self, 0x12) && field948(self) == 0 && (self->flags2654() & 0x40) == 0) {  // __thiscall
+        self->vf318();
+    }
+    switch (subState61C(self)) {
+    case 0:
+        self->flags2654() = self->flags2654() | 4;
+        field920(self) = 0.0f;
+        field940(self) = self->field2628();
+        field944(self) = 0;
+        self->field2628() = 0;
+        self->fieldB74() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 0xE, 0, 0.06666667f, 1.0f, 0x8000000, 0.0f,
+                     1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b86010(self, 1);
+        if (FUN_00b86410(self) != 0) {
+            FUN_00b7b270(self, 1.0f, 0.00017453292f, 3.1415927f, 0.0f);
+        }
+        FUN_00b94fc0(self);
+        FUN_00b8aae0(self);
+        self->field27CC() = 0;
+        field948(self) = 0;
+        if ((self->flags2654() & 0x10) != 0) {
+            field948(self) = 1;
+        }
+        self->flags2654() = self->flags2654() | 0x10;
+        break;
+    case 1:
+        break;
+    case 2:
+        self->fieldB74() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 0x10, 0, 0.06666667f, 1.0f, 0, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        // fall through
+    case 3:
+        self->move890()[0] = self->move890()[0] * 0.94f;
+        self->move890()[2] = self->move890()[2] * 0.94f;
+        if (field948(self) == 0) {
+            fall = self->move890()[1] * 0.97f;
+            self->move890()[1] = fall;
+            if (0.0f < fall) {
+                self->move890()[1] = fall - dt910(self) * field8A8(self) * 0.1f;
+            }
+            self->quat()[0] = self->move890()[0] + self->quat()[0];
+            self->quat()[1] = self->move890()[1] + self->quat()[1];
+            self->quat()[2] = self->move890()[2] + self->quat()[2];
+            self->quat()[3] = self->move890()[3] + self->quat()[3];
+        }
+        self->field11A4() = 1;
+        FUN_00b94790(self, 1.0f, 1.0f);
+        return;
+    case 4:
+        self->fieldB74() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 0xF, 0, 0.06666667f, 1.0f, 0x8000000, 0.0f,
+                     1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->flags2654() = self->flags2654() & 0xFFFFFFFB;
+        // fall through
+    case 5:
+        self->field11A4() = 1;
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (motionDone(self)) {
+            setAction(self, 0xB, 0, 0, 0);
+            return;
+        }
+        return;
+    default:
+        return;
+    }
+    self->move890()[0] = self->move890()[0] * 0.94f;
+    self->move890()[2] = self->move890()[2] * 0.94f;
+    if (field948(self) == 0 && (self->flags2654() & 0x40) == 0) {
+        fall = self->move890()[1] * 0.97f;
+        self->move890()[1] = fall;
+        if (0.0f < fall) {
+            self->move890()[1] = fall - dt910(self) * field8A8(self) * 0.1f;
+        }
+        self->quat()[0] = self->move890()[0] + self->quat()[0];
+        self->quat()[1] = self->move890()[1] + self->quat()[1];
+        self->quat()[2] = self->move890()[2] + self->quat()[2];
+        self->quat()[3] = self->move890()[3] + self->quat()[3];
+    }
+    self->field11A4() = 1;
+    FUN_00a8d280((int)self);
+    if (FUN_00a8c760((int)self, 0xB)) {  // __thiscall
+        float offset[3];
+        offset[0] = 0.0f;
+        offset[1] = -0.8f;
+        offset[2] = 1.0f;
+        field944(self) = 1;
+        D3DXVec3TransformNormal(offset, offset, self->matrix());
+        int obj = (int)FUN_00a81330(&self->handleFF8());
+        if (obj != 0) {
+            int weapon = FUN_00a7c8a0(obj);
+            if (weapon != 0) {
+                call_00BA62F0(weapon, offset, self->field33E8(), self->field33F0(), &self->handle1370(),
+                              self->field33EC(), self->field4F0());
+                FUN_00b807a0(weapon, self->field4F0(), 0x701);  // __thiscall
+            }
+        }
+    }
+    if (FUN_00a8c760((int)self, 5)) {  // __thiscall
+        void *target = (void *)FUN_00b7b200(self);
+        if (target == 0 || vcall<int>(target, 0x228) == 0) {
+            if (90000.0f < self->inputSqD28()) {
+                self->targetYaw() = self->inputYawD30();
+                self->vf308(0.3f, 0.0017453292f, 0.27925268f, 0.0f);
+            }
+        } else {
+            FUN_00b7b270(self, 0.3f, 0.00017453292f, 0.27925268f, 0.0f);
+        }
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (motionDone(self)) {
+        subState61C(self) = subState61C(self) + 1;
+        return;
+    }
+}
+
+// 00BC6760  FUN_00bc6760  size=1659  [callgraph]
+// Dash attack towards the handle11A8 target: step 0 faces it, motion 10 of the handleFF8 owner's
+// file set; step 1 aims at handle1370 (pitch / yaw), motion key 0xB triggers the weapon; step 2:
+// motion 0xC, then step 3 moves by vecBE0 (field27B4 forward) for 20 time units, turning towards
+// handle1370 while it is at least 2 ahead; steps 4 / 6: motions 0xB / 0xD, then action 0x9F when the
+// animation reports it, or 0xA0 on motion key 0xB with vf320.  The raw decompilation lost the
+// stack values; this follows the machine code.
+void __fastcall FUN_00bc6760(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    FUN_00a12210(ownerOf(&self->handleFF8()), 0);  // __thiscall, result not used
+    self->vf314();
+    if (FUN_00a8c760((int)self, 0x12)) {  // __thiscall
+        self->vf318();
+    }
+    float target[4];
+    float pitch;
+    float yaw;
+    switch (subState61C(self)) {
+    case 0: {
+        self->flags2654() = self->flags2654() | 0x20;
+        field940(self) = 0;
+        int obj = (int)FUN_00a81330(&self->handleFF8());
+        if (obj != 0) {
+            int weapon = FUN_00a7c8a0(obj);
+            if (weapon != 0) {
+                FUN_00b80720(weapon);
+            }
+        }
+        obj = (int)FUN_00a81330(&self->handle11A8());
+        if (obj != 0) {
+            float *other = (float *)FUN_00a7c8a0(obj);  // no null check on the owner
+            float *pos = self->matrix() + 12;         // position row (+0x40)
+            self->targetYaw() = (float)atan2((double)other[0x10] - (double)pos[0], (double)other[0x12] - (double)pos[2]);
+            self->vf308(1.0f, 0.00017453292f, 3.1415927f, 0.0f);
+        }
+        field920(self) = 0.0f;
+        self->fieldB74() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 10, 0, 0.06666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b86010(self, 1);
+        FUN_00b94fc0(self);
+        FUN_00b8aae0(self);
+        self->push1020()[1] = 0.0f;
+        self->field27C4() = 0;
+        self->field27C8() = 0;
+        goto aim;
+    }
+    case 1:
+        goto aim;
+    case 2:
+        self->fieldB74() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 0xC, 0, 0.033333335f, 1.0f, 0x8000000, 0.0f,
+                     1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        field920(self) = 20.0f;
+        self->field27C4() = 0;
+        self->field27B4() = self->field340C();
+        self->push1020()[1] = 0.0f;
+        // fall through
+    case 3: {
+        self->field11A4() = 1;
+        self->vf318();
+        self->move890()[0] = self->move890()[0] * 0.0f;
+        self->move890()[2] = self->move890()[2] * 0.0f;
+        self->move890()[1] = 0.0f * self->move890()[1];
+        FUN_00b94790(self, 1.0f, 1.0f);
+        float *step = self->vecBE0();
+        step[0] = 0.0f;
+        step[1] = 0.0f;
+        step[2] = self->field27B4();
+        D3DXVec3TransformNormal(step, step, self->matrix());
+        float remaining = field920(self) - dt910(self);
+        field920(self) = remaining;
+        if (remaining < 0.0f) {
+            subState61C(self) = 6;
+        }
+        if (FUN_0085be10(FUN_00a92f90((int)self), 0)) {  // __thiscall
+            subState61C(self) = 6;
+        }
+        if (FUN_00a81330(&self->handle1370()) != 0 && FUN_00a7c8a0((int)FUN_00a81330(&self->handle1370())) != 0) {
+            if (FUN_00a81330(&self->handle1370()) != 0) {
+                FUN_00c15010((int)&self->handle1370(), target);  // __thiscall
+            }
+            float inverse[16];
+            D3DXMatrixInverse(inverse, 0, self->matrix());
+            float local[3];
+            D3DXVec3TransformNormal(local, target, inverse);
+            local[0] = inverse[12] + local[0];
+            local[1] = inverse[13] + local[1];
+            local[2] = inverse[14] + local[2];
+            if (2.0f <= local[2]) {
+                call_00DDE5D0(&pitch, &yaw, target, self->matrix() + 12);
+                call_00A8DB10(self, &self->vec90()[1], self->vec90()[1], yaw, 0.1f, 0.0017453292f, 0.05235988f);
+            }
+        }
+        self->vec90()[0] = 0.0f;
+        return;
+    }
+    case 4:
+        self->fieldB74() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 0xB, 0, 0.0f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        self->vec90()[0] = 0.0f;
+        self->move890()[1] = 0.0f;
+        goto started;
+    case 6:
+        self->fieldB74() = 0;
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, 0xD, 0, 0.033333335f, 1.0f, 0x8000000, 0.0f,
+                     1.0f);
+        self->vec90()[0] = 0.0f;
+        self->move890()[1] = -0.05f;
+    started: {
+        subState61C(self) = subState61C(self) + 1;
+        self->push1020()[1] = 0.0f;
+        int obj = (int)FUN_00a81330(&self->handleFF8());
+        if (obj != 0) {
+            int weapon = FUN_00a7c8a0(obj);
+            if (weapon != 0) {
+                FUN_00b80720(weapon);
+            }
+        }
+    }
+        // fall through
+    case 5:
+    case 7:
+        self->field11A4() = 1;
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (FUN_0085be10(FUN_00a92f90((int)self), 0)) {  // __thiscall
+            setAction(self, 0x9F, 0, 0, 0);
+        }
+        if (FUN_00a8c760((int)self, 0xB) && self->vf320(0.016666668f) != 0) {  // __thiscall
+            setAction(self, 0xA0, 0, 0, 0);
+        }
+        return;
+    default:
+        return;
+    }
+aim:
+    self->field11A4() = 1;
+    self->vf318();
+    if (FUN_00a81330(&self->handle1370()) != 0 && FUN_00a7c8a0((int)FUN_00a81330(&self->handle1370())) != 0) {
+        if (FUN_00a81330(&self->handle1370()) != 0) {
+            FUN_00c15010((int)&self->handle1370(), target);  // __thiscall
+        }
+        call_00DDE5D0(&pitch, &yaw, target, self->matrix() + 12);
+        self->vec90()[1] = yaw;
+        self->vec90()[0] = pitch * -1.0f;
+    } else {
+        self->vec90()[0] = 0.0f;
+    }
+    self->vec90()[0] = 0.0f;
+    if (FUN_00a8c760((int)self, 0xB)) {  // __thiscall
+        float offset[3];
+        offset[0] = 0.0f;
+        offset[1] = 0.0f;
+        offset[2] = self->field33E8();
+        D3DXVec3TransformNormal(offset, offset, self->matrix());
+        int obj = (int)FUN_00a81330(&self->handleFF8());
+        if (obj != 0) {
+            int weapon = FUN_00a7c8a0(obj);
+            if (weapon != 0) {
+                call_00BA62F0(weapon, offset, self->field33E8(), self->field33F0(), &self->handle1370(),
+                              self->field33EC(), self->field4F0());
+                FUN_00b807a0(weapon, self->field4F0(), 0x701);  // __thiscall
+            }
+        }
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (FUN_0085be10(FUN_00a92f90((int)self), 0)) {  // __thiscall
+        subState61C(self) = subState61C(self) + 1;
+        return;
+    }
+}
+
+// 00BC8C50  FUN_00bc8c50  size=360  [callgraph]
+// Reaction to the target slot `target` by its kind (+0x5C): FUN_00cbc8f0 with the kind's flags,
+// or the slow motion (FUN_00b85350) for kinds 4 / 5 with fieldF54.  Kind 8 needs full cells
+// (FUN_00bc3230) unless DAT_01bea090 bit 31.  ret 4.
+void FUN_00bc8c50(Pl0000 *self, int target)  // __thiscall
+{
+    bool allowed = true;
+    if (*(int *)(target + 0x5C) == 8 && (DAT_01bea090 & 0x80000000) == 0 && FUN_00bc3230(self, 0) == 0) {
+        allowed = false;
+    }
+    if (FUN_00b80840((int *)self) == 0 || !allowed || !FUN_00c15520(target)) {
+        return;
+    }
+    switch (*(int *)(target + 0x5C)) {
+    case 1:
+        FUN_00cbc8f0(0x4000000, 1);
+        return;
+    case 2:
+    case 6:
+    case 7:
+        FUN_00cbc8f0(2, 1);
+        return;
+    case 3:
+        FUN_00cbc8f0(0x102, 1);
+        return;
+    case 4:
+        if (self->fieldF54() != 0) {
+            FUN_00b85350(self, self->field33B8(), self->field33B0(), self->field33B4(), 1, 1, 0.1f);
+            return;
+        }
+        break;
+    case 5:
+        if (self->fieldF54() != 0) {
+            FUN_00b85350(self, 90.0f, self->field33B0(), self->field33B4(), 1, 1, 0.1f);
+            return;
+        }
+        break;
+    case 8:
+        if (FUN_00416d50(0x20)) {
+            break;
+        }
+        // fall through
+    case 9:
+        FUN_00cbc8f0(10, 1);
+        return;
+    default:
+        FUN_00cbc8f0(0x2800000, 1);
+    }
+}
+
+// 00BC8DE0  Pl0000::vf390  size=554  [class]
+// Lock marker: unless blocked (DAT_01bea094 bit 29, vf32C, DAT_01bea060 bits 10 / 25 / 27 / 30,
+// vf368, vf36C), keeps obj12B4 on the object FUN_00c4e230 finds around field4F0 (10 units) while it
+// stays the same; a new valid object (+0x814 below 4) gets the marker message 0xF2 with esp12C0.
+// fieldBB4 = 3.0f while the marked object is valid.
+void Pl0000::vf390()
+{
+    using namespace Pl0000_p10;
+    int blocked = 0;
+    if ((DAT_01bea094 & 0x20000000) != 0) {
+        blocked = 1;
+    }
+    if (vf32C()) {
+        blocked = 1;
+    }
+    if ((DAT_01bea060 & 0x2000000) != 0) {
+        blocked = 1;
+    }
+    if ((DAT_01bea060 & 0x40000000) != 0) {
+        blocked = 1;
+    }
+    if ((DAT_01bea060 & 0x8000000) != 0) {
+        blocked = 1;
+    }
+    if ((DAT_01bea060 & 0x400) != 0) {
+        blocked = 1;
+    }
+    if (vf368() != 0) {
+        blocked = 1;
+    }
+    if (vf36C() != 0 || blocked != 0) {
+        timer12B8() = 0.0f;
+        flags12BC() = 0;
+        obj12B4() = 0;
+        call_00EAA6E0(esp12C0(), 10.0f, 0.0f);
+        return;
+    }
+    int found = FUN_00c4e230((int)DAT_01beb908, field4F0(), 10.0f);  // __thiscall
+    if (obj12B4() == 0 || FUN_00a81330((unsigned int *)obj12B4()) == 0 || *(int *)(obj12B4() + 0x34) == 0) {
+        call_00EAA6E0(esp12C0(), 10.0f, 0.0f);
+        if (found != 0 && *(int *)(found + 0x34) != 0 && FUN_00a81330((unsigned int *)found) != 0 &&
+            FUN_00a7c8a0((int)FUN_00a81330((unsigned int *)found)) != 0 && *(int *)(call_0085BF90(found) + 0x814) < 4) {
+            timer12B8() = 30.0f;
+            obj12B4() = found;
+            if (FUN_00a81330((unsigned int *)found) != 0) {
+                int owner = FUN_00a7c8a0((int)FUN_00a81330((unsigned int *)found));
+                Message message;
+                FUN_004039a0((int)&message, 0xF2, owner, 0);           // __thiscall
+                FUN_00dffb20((int)&message, (undefined4)esp12C0());   // __thiscall
+                FUN_00a8c930((int)this, 0, (int)&message);             // __thiscall
+            }
+        }
+    } else if (found == 0 || obj12B4() != found) {
+        flags12BC() = 0;
+        timer12B8() = 0.0f;
+        obj12B4() = 0;
+    } else {
+        obj12B4() = found;
+        timer12B8() = 30.0f;
+    }
+    if (obj12B4() != 0 && FUN_00a81330((unsigned int *)obj12B4()) != 0 && *(int *)(obj12B4() + 0x34) != 0 &&
+        FUN_00a81330((unsigned int *)obj12B4()) != 0) {
+        fieldBB4() = 3.0f;
+    }
+}
+
+// 00BC9010  FUN_00bc9010  size=938  [callgraph]
+// Guard: motion 0x11 (0x12 with fieldB74; blend 0 when field2690) until frame 2, then motion 0x13 /
+// 0x14; step 4: motion 0x20 (0x1F when FUN_00b8afd0 reports 2), vf388(0) when it ends.  Always
+// turns to the stick; unless FUN_00a8cac0() == 5, sends message 0xC for the vec5B0 / vec5C0 blocks
+// flagged by field594 / field598.
+void __fastcall FUN_00bc9010(Pl0000 *self)
+{
+    using namespace Pl0000_p10;
+    float blend;
+    self->field2644() = 0;
+    self->field2660() = 1;
+    self->vf314();
+    switch (subState61C(self)) {
+    case 0:
+        blend = 0.16666667f;
+        if (self->field2690() != 0) {
+            blend = 0.0f;
+        }
+        self->field2690() = 0;
+        if (self->fieldB74() == 0) {
+            call_00AA4080(self, 0x11, 0, blend, 1.0f, 0x8000000, 0.0f, 1.0f);
+        } else {
+            call_00AA4080(self, 0x12, 0, blend, 1.0f, 0x8000000, -1.0f, 1.0f);
+        }
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b94ed0(self);
+        break;
+    case 1:
+        break;
+    case 2:
+        blend = 0.033333335f;
+        if (self->field2690() != 0) {
+            blend = 0.0f;
+        }
+        self->field2690() = 0;
+        if (self->fieldB74() == 0) {
+            call_00AA4080(self, 0x13, 0, blend, 1.0f, 0x3C000, 0.0f, 1.0f);
+        } else {
+            call_00AA4080(self, 0x14, 0, blend, 1.0f, 0x3C000, -1.0f, 1.0f);
+        }
+        FUN_00b94ed0(self);
+        FUN_00b895d0(self);
+        subState61C(self) = subState61C(self) + 1;
+        // fall through
+    case 3:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        goto turn;
+    case 4: {
+        short motion = 0x20;
+        float point[4];
+        if (FUN_00b8afd0(self, point) == 2) {
+            motion = 0x1F;
+        }
+        FUN_00a9f3c0((int)self, ownerOf(&self->handleFF8()) + 0x494, (int)motion, 0, 0.16666667f, 1.0f, 0x8000000,
+                     0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+    }
+        // fall through
+    case 5:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (FUN_00a94ce0((int)self, 0)) {  // __thiscall
+            self->vf388(0);
+        }
+        goto turn;
+    default:
+        goto turn;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (call_00A95C80(self, 0) < 2.0) {
+        subState61C(self) = subState61C(self) + 1;
+    }
+turn:
+    self->targetYaw() = self->inputYawD30();
+    self->vf308(0.3f, 0.0017453292f, 0.5235988f, 0.0f);
+    if (FUN_00a8cac0((int)self) == 5) {
+        return;
+    }
+    if (field594(self) == 1) {
+        Message message;
+        FUN_004039a0((int)&message, 0xC, (int)self, 0);  // __thiscall
+        message.vec120[0] = vec5B0(self)[0];
+        message.vec120[1] = vec5B0(self)[1];
+        message.vec120[2] = vec5B0(self)[2];
+        message.vec120[3] = vec5B0(self)[3];
+        message.vec130[0] = 0.0f;
+        message.vec130[1] = 0.0f;
+        message.vec130[2] = 0.0f;
+        message.vec130[3] = 0.0f;
+        FUN_00a8c930((int)self, 0, (int)&message);  // __thiscall
+    }
+    if (field598(self) == 1) {
+        Message message;
+        FUN_004039a0((int)&message, 0xC, (int)self, 0);  // __thiscall
+        message.vec120[0] = vec5C0(self)[0];
+        message.vec120[1] = vec5C0(self)[1];
+        message.vec120[2] = vec5C0(self)[2];
+        message.vec120[3] = vec5C0(self)[3];
+        message.vec130[0] = 0.0f;
+        message.vec130[1] = 0.0f;
+        message.vec130[2] = 0.0f;
+        message.vec130[3] = 0.0f;
+        FUN_00a8c930((int)self, 0, (int)&message);  // __thiscall
+    }
+}
+
+// 00BD9510  FUN_00bd9510  size=99  [callgraph]
+// Copy-assignment of a 0x120-byte record (head via FUN_004ab4b0, handle +0x100 via FUN_00a7c940,
+// then +0x104 and the floats +0x110 .. +0x11C).  Returns the record.  ret 4.
+int FUN_00bd9510(int record, int source)  // __thiscall
+{
+    FUN_004ab4b0((undefined4 *)record, (undefined4 *)source);                    // __thiscall
+    FUN_00a7c940((undefined4 *)(record + 0x100), (undefined4 *)(source + 0x100));  // __thiscall
+    *(int *)(record + 0x104) = *(int *)(source + 0x104);
+    *(float *)(record + 0x110) = *(float *)(source + 0x110);
+    *(float *)(record + 0x114) = *(float *)(source + 0x114);
+    *(float *)(record + 0x118) = *(float *)(source + 0x118);
+    *(float *)(record + 0x11C) = *(float *)(source + 0x11C);
+    return record;
+}
+
+// 00BD9590  FUN_00bd9590  size=197  [callgraph]
+// Ends Ripper mode (field3184): Ripper exit music (Exit1 as well unless the cells are full), fades
+// esp3470 out (30 with `withReaction`, which also sends vf3E0(0x66, 0); else 0.1) and plays
+// "core_se_btl_ripper_out" unless DAT_01bea064 bit 12.  ret 4.
+void FUN_00bd9590(Pl0000 *self, int withReaction)  // __thiscall
+{
+    using namespace Pl0000_p10;
+    if (self->field3184() == 0) {
+        return;
+    }
+    self->field31A4() = 0.0f;
+    self->field31A0() = 20.0f;
+    FUN_00e5e1b0((undefined4)"bgm_Ripper_Exit2");  // DAT_016a2858
+    if (FUN_00bc3230(self, 0) == 0) {
+        FUN_00e5e1b0((undefined4)"bgm_Ripper_Exit1");  // DAT_016a2844
+    }
+    if (withReaction == 0) {
+        call_00EAA6E0(self->esp3470(), 0.1f, 0.0f);
+    } else {
+        call_00EAA6E0(self->esp3470(), 30.0f, 0.0f);
+        self->vf3E0(0x66, 0);
+    }
+    self->field3184() = 0;
+    self->field3194() = 0;
+    if ((DAT_01bea064 & 0x1000) == 0) {
+        FUN_00e5e0c0((undefined4)"core_se_btl_ripper_out", (undefined4)self, 0xFFFFFFFF, 0);  // DAT_016a282c
+    }
+}

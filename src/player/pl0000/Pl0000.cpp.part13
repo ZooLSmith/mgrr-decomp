@@ -1,0 +1,1449 @@
+// src/player/pl0000/Pl0000.cpp (part 14/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// imports
+extern "C" float *__stdcall D3DXMatrixInverse(float *out, float *determinant, const float *m);
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+
+// globals
+extern unsigned int DAT_01bea060;  // global flags
+extern unsigned int DAT_01bea090;  // game flags (bit 0x20 / 0x8000 tested here)
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern unsigned char DAT_01bea750[];  // object: ECX of FUN_00db3e80 (FUN_00b8d3b0)
+extern char DAT_01beb908[];        // object: ECX of FUN_00c4e710
+extern float DAT_018a80e4;         // ? speed scale 0.7 .. 1.1 from the distance to the target (FUN_00bdba00)
+extern int DAT_018b9174;           // current phase id
+extern unsigned char DAT_01be9ef4[];  // type descriptor tested with FUN_00dd6d80 (FUN_00b85420)
+extern unsigned char DAT_01be9db8[];  // type descriptor of Pl0000 (tested with FUN_00dd6d80 on cObj::vf04)
+extern int DAT_01bea9a0;           // set to 1 by the kind 3 / 4 qte handlers (FUN_00bf8bd0 / FUN_00bf8e60)
+extern unsigned char DAT_01d616d0[];  // object: ECX of FUN_00c5bbb0
+
+// defined earlier in this file (parts 1 .. 13)
+void __fastcall FUN_00b7aa80(Pl0000 *self);
+void FUN_00b7ab80(Pl0000 *self, float time, float value);  // __thiscall
+void FUN_00b7b270(Pl0000 *self, float rate, float deadZone, float maxStep, float yawOffset);  // __thiscall
+void FUN_00b7b380(Pl0000 *self, int obj, undefined4 key, int flag);  // __thiscall
+void FUN_00b7e090(Pl0000 *self, int kind);  // __thiscall
+void FUN_00b7e7d0(Pl0000 *self, int obj, int value);  // __thiscall
+void FUN_00b893e0(Pl0000 *self, float *up, int copy);  // __thiscall
+void FUN_00b8a040(Pl0000 *self, int keepAction, undefined4 unused, int setFlag2F0);  // __thiscall
+void FUN_00b8bb40(Pl0000 *self, float angle);  // __thiscall
+undefined4 FUN_00b8fc60(Pl0000 *self);  // __thiscall
+void FUN_00b94790(Pl0000 *self, float unused1, float unused2);  // __thiscall
+undefined4 FUN_00bc3230(Pl0000 *self, int includeLocked);  // __thiscall
+void __fastcall FUN_00be8aa0(Pl0000 *self);
+void FUN_00be8f50(Pl0000 *self, int obj, int key, float *vec);  // __thiscall
+
+// defined below
+void FUN_00bf5600(Pl0000 *self, int obj, int key, float *extra1, float *extra2, float *extra3, int extra4,
+                  float *extra5, float *extra6, float *extra7, int extra8, float extra9, float extra10,
+                  float extra11, int extra12);  // __thiscall
+
+namespace Pl0000_p14 {
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &state618(void *p)      { return *(int *)((char *)p + 0x618); }    // Behavior+0x618: ? current action / state id
+inline int   &subState61C(void *p)   { return *(int *)((char *)p + 0x61C); }    // Behavior+0x61C: ? sub-state of the current action
+inline int   &controller764(void *p) { return *(int *)((char *)p + 0x764); }    // Behavior+0x764: ? character controller (0 = none)
+inline float &dt910(void *p)         { return *(float *)((char *)p + 0x910); }  // BehaviorAppBase+0x910: ? frame delta time
+inline float &field920(void *p)      { return *(float *)((char *)p + 0x920); }  // BehaviorAppBase+0x920: ? (here: action time)
+inline float &field924(void *p)      { return *(float *)((char *)p + 0x924); }  // BehaviorAppBase+0x924: ? (here: curve position 0 .. 2)
+inline float &field928(void *p)      { return *(float *)((char *)p + 0x928); }  // BehaviorAppBase+0x928: ? (here: eased curve rate)
+inline int   &field940(void *p)      { return *(int *)((char *)p + 0x940); }    // BehaviorAppBase+0x940: ? (here: motion variant)
+inline int   &field948(void *p)      { return *(int *)((char *)p + 0x948); }    // BehaviorAppBase+0x948: ?
+inline int   &field94C(void *p)      { return *(int *)((char *)p + 0x94C); }    // BehaviorAppBase+0x94C: ? (here: slow-down started)
+
+// virtual call through slot `off` (byte offset) of an object whose class does not declare it
+template <class R, class... A> inline R vcall(void *obj, unsigned int off, A... args)
+{
+    return (*(R (__thiscall **)(void *, A...))(*(char **)obj + off))(obj, args...);
+}
+
+// obj when the type record returned by its virtual slot `slot` is-a `desc` (FUN_00dd6d80), else 0
+inline void *asKind(void *obj, unsigned int slot, void *desc)
+{
+    if (obj == 0) {
+        return 0;
+    }
+    undefined4 *type = vcall<undefined4 *>(obj, slot);
+    return FUN_00dd6d80(type, (undefined4 *)desc) != 0 ? obj : 0;
+}
+// the StateMachineContextPl0010 `obj` (type record DAT_01be9ef4 from slot 0), or 0
+inline char *asContext(void *obj)
+{
+    return (char *)asKind(obj, 0x0, DAT_01be9ef4);
+}
+
+// target slot object found by FUN_00c4e710: usable when count (+0x30) > 0, flag (+8) bit 0 and +0x34 are set
+inline bool isLockTarget(int target)
+{
+    return target != 0 && *(int *)(target + 0x30) > 0 && (*(unsigned char *)(target + 8) & 1) != 0 &&
+           *(int *)(target + 0x34) != 0;
+}
+
+// the owner of handle3EE8 exists and its cObj+0x4E4 is 0
+inline bool handle3EE8Active(Pl0000 *self)
+{
+    if (FUN_00a81330(&self->handle3EE8()) == 0) {
+        return false;
+    }
+    int obj = (int)FUN_00a81330(&self->handle3EE8());
+    if (obj == 0) {
+        return false;
+    }
+    int owner = (int)FUN_00a7c8a0(obj);
+    return owner != 0 && ((cObj *)owner)->field4E4() == 0;
+}
+
+// the kind fields of the link record handled by FUN_00bf75d0 (object handle at +0)
+inline int &linkKind58(void *link) { return *(int *)((char *)link + 0x58); }  // +0x58 link kind
+inline int &linkKind5C(void *link) { return *(int *)((char *)link + 0x5C); }  // +0x5C second kind (8: needs the cells)
+
+// sets the model tint (+0xE4 / +0xE8 / +0xEC) of the animation model after FUN_00e26e90
+inline void setModelTint(int model, float value)
+{
+    FUN_00e26e90(model);
+    *(float *)(model + 0xE4) = value;
+    *(float *)(model + 0xE8) = value;
+    *(float *)(model + 0xEC) = value;
+}
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void setAction(void *obj, int action, int a, int b, int c)  // FUN_00a8caf0 (Behavior)
+{
+    ((void (__thiscall *)(void *, int, int, int, int))0x00A8CAF0)(obj, action, a, b, c);
+}
+inline void call_00AA4080(void *self, int id, int layer, float a, float b, int flags, float c, float d)
+{
+    ((void (__thiscall *)(void *, int, int, float, float, int, float, float))0x00AA4080)(
+        self, id, layer, a, b, flags, c, d);
+}
+inline void call_00A94BC0(void *self, int layer, float time)
+{
+    ((void (__thiscall *)(void *, int, float))0x00A94BC0)(self, layer, time);
+}
+inline float10 call_00DDBA30(float value)  // angle wrapped to [-pi, pi]
+{
+    return ((float10 (__cdecl *)(float))0x00DDBA30)(value);
+}
+// FUN_00bc6e00 (stdcall, ret 0xC): builds the movement curve `curve` from `from` to `to`
+inline void call_00BC6E00(void *curve, float *from, float *to)
+{
+    ((void (__stdcall *)(void *, float *, float *))0x00BC6E00)(curve, from, to);
+}
+inline void setControllerRadius(int controller, float radius)  // CharacterControl::setRadius (0x008E4780)
+{
+    ((void (__thiscall *)(int, float))0x008E4780)(controller, radius);
+}
+inline void call_00D82DE0(void *obj, int item)  // FUN_00d82de0: ret 4
+{
+    ((void (__thiscall *)(void *, int))0x00D82DE0)(obj, item);
+}
+inline void call_00DB85A0(void *camera, float value)  // ? camera parameter (40 / 60 here)
+{
+    ((void (__thiscall *)(void *, float))0x00DB85A0)(camera, value);
+}
+// FUN_00db84e0 / FUN_00db8520 (ret 0xC): ? camera offsets (x, y, z) for the object id
+inline void call_00DB84E0(void *camera, int objectId, int index, float *offset)
+{
+    ((void (__thiscall *)(void *, int, int, float *))0x00DB84E0)(camera, objectId, index, offset);
+}
+inline void call_00DB8520(void *camera, int objectId, int index, float *offset)
+{
+    ((void (__thiscall *)(void *, int, int, float *))0x00DB8520)(camera, objectId, index, offset);
+}
+inline void call_00DB3E80(void *obj, float time, int a, void *b)  // ret 0xC
+{
+    ((void (__thiscall *)(void *, float, int, void *))0x00DB3E80)(obj, time, a, b);
+}
+inline void call_00DA8810(void *obj, float value)  // ret 4
+{
+    ((void (__thiscall *)(void *, float))0x00DA8810)(obj, value);
+}
+// 0x00BEC070 (FILEMAP: hkpAllCdPointCollector::hkpAllCdPointCollector_32; ECX = the player), ret 4
+inline void call_00BEC070(void *self, int flag)
+{
+    ((void (__thiscall *)(void *, int))0x00BEC070)(self, flag);
+}
+inline void call_00B808D0(void *self, void *link)  // ret 4
+{
+    ((void (__thiscall *)(void *, void *))0x00B808D0)(self, link);
+}
+inline int call_005F4370(void *handle)  // ? owner of the object of `handle`
+{
+    return ((int (__thiscall *)(void *))0x005F4370)(handle);
+}
+inline int call_00E26E90(int model)
+{
+    return ((int (__thiscall *)(int))0x00E26E90)(model);
+}
+inline void call_00E36AC0(int obj, int a, float b)  // ret 8
+{
+    ((void (__thiscall *)(int, int, float))0x00E36AC0)(obj, a, b);
+}
+inline void call_00BCF3E0(void *state, void *context, int a, int b, float c, float d)  // ret 0x14
+{
+    ((void (__thiscall *)(void *, void *, int, int, float, float))0x00BCF3E0)(state, context, a, b, c, d);
+}
+inline void call_00BE6620(void *context, void *state, int a, int b, int c)
+{
+    ((void (__cdecl *)(void *, void *, int, int, int))0x00BE6620)(context, state, a, b, c);
+}
+inline void call_00BF24F0(void *context, float value)
+{
+    ((void (__cdecl *)(void *, float))0x00BF24F0)(context, value);
+}
+inline void call_00BBC310(void *context)
+{
+    ((void (__cdecl *)(void *))0x00BBC310)(context);
+}
+inline void call_00BBB050(void *context)
+{
+    ((void (__cdecl *)(void *))0x00BBB050)(context);
+}
+inline void call_00C5BBB0(void *obj, int value)  // ret 4
+{
+    ((void (__thiscall *)(void *, int))0x00C5BBB0)(obj, value);
+}
+inline void call_00A17A40(void *obj)  // FILEMAP: switchD_0080dbae::default
+{
+    ((void (__thiscall *)(void *))0x00A17A40)(obj);
+}
+inline void constructArchive(void *archive)  // lib::InputTextArchive<char const*,32> constructor (0x00E916F0)
+{
+    ((void (__thiscall *)(void *))0x00E916F0)(archive);
+}
+inline void destructArchive(void *archive)  // 0x00E91740 (FILEMAP: cXml::cXml_5)
+{
+    ((void (__thiscall *)(void *))0x00E91740)(archive);
+}
+inline void call_00BF2680(void *archive, const char *name, void *object)  // reads the `name` block into object
+{
+    ((void (__cdecl *)(void *, const char *, void *))0x00BF2680)(archive, name, object);
+}
+
+// the two camera offsets of the partner kinds 0 / 2 (FUN_00db84e0 then FUN_00db8520)
+inline void setCameraOffsets(Pl0000 *self, float x1, float y1, float z1, float x2, float y2, float z2)
+{
+    float offset[4];
+    offset[0] = x1;
+    offset[1] = y1;
+    offset[2] = z1;
+    call_00DB84E0(DAT_01bea1d0, self->field4F0(), -1, offset);
+    offset[0] = x2;
+    offset[1] = y2;
+    offset[2] = z2;
+    call_00DB8520(DAT_01bea1d0, self->field4F0(), -1, offset);
+}
+
+// camera offsets by the side of the partner: the yaw difference vec90[1] - yawD34 wrapped to [-pi, pi]
+// selects one of four quadrants (none when it falls outside all of them)
+inline void setQuadrantCameraOffsets(Pl0000 *self)
+{
+    float10 angle = call_00DDBA30(self->vec90()[1] - self->yawD34());
+    if (angle >= 0.0f && angle <= 1.5707964f) {
+        setCameraOffsets(self, 1.25f, 1.01f, -0.51f, -0.34f, 1.31f, 1.22f);
+    } else if (angle <= 0.0f && angle >= -1.5707964f) {
+        setCameraOffsets(self, -0.94f, 1.0f, -0.08f, 0.93f, 1.28f, 1.06f);
+    } else if (angle >= -3.1415927f && angle <= -1.5707964f) {
+        setCameraOffsets(self, -0.66f, 0.81f, 2.36f, 0.55f, 1.41f, 0.62f);
+    } else if (angle <= 3.1415927f && angle >= 1.5707964f) {
+        setCameraOffsets(self, 1.92f, 0.82f, 1.29f, -0.13f, 1.42f, 0.77f);
+    }
+}
+
+// turns towards the partner: its vf204 position given to FUN_00a8e880, then vf308
+inline void facePartner(Pl0000 *self, Behavior *partner)
+{
+    float partnerPos[4];
+    partner->vf204(partnerPos);
+    FUN_00a8e880((int)self, partnerPos);  // __thiscall
+    self->vf308(1.0f, 0.00017453292f, 3.1415927f, 0.0f);
+}
+
+// speed scale DAT_018a80e4 = 1 - (horizontal distance from the position to `target` - 5) * 0.08,
+// clamped to 0.7 .. 1.1
+inline void updateSpeedScale(Pl0000 *self, float *target)
+{
+    float *p = self->matrix() + 12;  // +0x40
+    DAT_018a80e4 = 1.0f - ((float)sqrt((double)((p[2] - target[2]) * (p[2] - target[2]) +
+                                                (p[0] - target[0]) * (p[0] - target[0]))) -
+                           5.0f) * 0.08f;
+    if (!(DAT_018a80e4 < 0.7f)) {
+        if (1.1f < DAT_018a80e4) {
+            DAT_018a80e4 = 1.1f;
+        }
+    } else {
+        DAT_018a80e4 = 0.7f;
+    }
+}
+
+// Step 0 / 2 of FUN_00bf6fb0: when the handle3EE8 object exists, puts its owner into action 4 (unless it
+// is in action 4 / 5), builds the movement curve curve3F20 from the position to the owner's position and
+// updates the speed scale.  `start` receives the owner's position too.
+inline void startCurveToPartner(Pl0000 *self, float *start, float *target)
+{
+    if (FUN_00a81330(&self->handle3EE8()) == 0) {
+        return;
+    }
+    int obj = (int)FUN_00a81330(&self->handle3EE8());
+    if (obj == 0) {
+        return;
+    }
+    int owner = (int)FUN_00a7c8a0(obj);
+    if (FUN_00a8cab0(owner) != 4 && FUN_00a8cab0(owner) != 5) {
+        FUN_00a8cb50(owner, 4);  // __thiscall
+    }
+    float *ownerPos = (float *)((int)FUN_00a7c8a0(obj) + 0x40);
+    target[0] = ownerPos[0];
+    target[1] = ownerPos[1];
+    target[2] = ownerPos[2];
+    target[3] = ownerPos[3];
+    start[0] = target[0];
+    start[1] = target[1];
+    start[2] = target[2];
+    start[3] = target[3];
+    call_00BC6E00(self->curve3F20(), self->matrix() + 12, target);
+    updateSpeedScale(self, target);
+}
+
+// Common start of the FUN_00bf75d0 links: ends the qte link, sends vf150(kind, link object) to the player
+// and vf150(kind, player id) to the partner.
+inline void linkBoth(Pl0000 *self, Behavior *partner, void *link, int kind)
+{
+    self->vf150(kind, (int)FUN_00a81330((uint *)link));
+    vcall<void>(partner, 0x150, kind, self->field4F0());
+}
+
+}  // namespace Pl0000_p14
+
+// 00BF5600  FUN_00bf5600  size=131  [between]
+// Resets (FUN_00be8aa0) and starts the carried-item link FUN_00be8f50(obj, key, offset) with the offset
+// (310.78, 20.41, 96.59) when obj's owner is object 0x2020A, else (0, 0, 0).  The twelve extra stack
+// arguments (ret 0x38) are not used by the body.
+void FUN_00bf5600(Pl0000 *self, int obj, int key, float *extra1, float *extra2, float *extra3, int extra4,
+                  float *extra5, float *extra6, float *extra7, int extra8, float extra9, float extra10,
+                  float extra11, int extra12)  // __thiscall
+{
+    float offset[4];
+    offset[0] = 0.0f;
+    offset[1] = 0.0f;
+    offset[2] = 0.0f;
+    offset[3] = 1.0f;
+    FUN_00be8aa0(self);
+    if (obj != 0) {
+        int owner = (int)FUN_00a7c8a0(obj);
+        if (owner != 0 && ((cObj *)owner)->modelObjId() == 0x2020A) {
+            offset[0] = 310.78f;
+            offset[1] = 20.41f;
+            offset[2] = 96.59f;
+        }
+    }
+    FUN_00be8f50(self, obj, key, offset);
+}
+
+// 00BF5690  Pl0000::vf150  size=5329  [class]
+// Starts the linked action for `kind` with the partner `obj`: resets the qte targets, ends the qte link,
+// takes obj's handle into handle91C and its lock target into obj12A8 / handle1370, then per kind sets the
+// action (kinds 0 / 2 also place the camera by the partner's side, face the partner, and kinds 0 .. 0x23
+// store the position key with FUN_00b7b380).
+void Pl0000::vf150(int kind, int obj)
+{
+    using namespace Pl0000_p14;
+    qteTarget3E60()[0] = 0.0f;
+    qteTarget3E60()[1] = 0.0f;
+    qteTarget3E60()[2] = 0.0f;
+    qteTarget3E60()[3] = 1.0f;
+    qteTarget3E70()[3] = 1.0f;
+    qteTarget3E70()[0] = 0.0f;
+    qteTarget3E70()[1] = 0.0f;
+    qteTarget3E70()[2] = 0.0f;
+    if (obj == 0) {
+        return;
+    }
+    FUN_00b7aa80(this);
+    FUN_00b8a040(this, 0, 0, 0);  // (third argument 0.0f)
+    setControllerRadius(controller764(this), 0.35f);
+    field5074() = 0;
+    field416C() = 0;
+    field5080() = 1;
+    call_00D82DE0((void *)field7CC(), field7D0());
+    DAT_01bea060 = DAT_01bea060 & 0xFFBFFFFF;
+    vec90()[0] = 0.0f;
+    field2644() = 0;
+    call_00A94BC0(this, 3, 0.016666668f);
+    call_00A94BC0(this, 4, 0.016666668f);
+    call_00A94BC0(this, 5, 0.016666668f);
+    call_00A94BC0(this, 6, 0.016666668f);
+    call_00A94BC0(this, 7, 0.016666668f);
+    call_00A94BC0(this, 8, 0.016666668f);
+    FUN_00a7c950((undefined4 *)&handle91C());
+    FUN_00a7c960((undefined4 *)&handle91C(), (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+    Behavior *partner = (Behavior *)FUN_00a7c8a0(obj);
+    int target = FUN_00c4e710((int)DAT_01beb908, obj, matrix() + 12);  // __thiscall; +0x40: position
+    bool found = isLockTarget(target);
+    if (!found && ((Behavior *)FUN_00a7c8a0(obj))->vf210() != 0) {
+        int other = (int)((Behavior *)FUN_00a7c8a0(obj))->vf210();
+        if (other != 0) {
+            target = FUN_00c4e710((int)DAT_01beb908, other, matrix() + 12);  // __thiscall
+            found = isLockTarget(target);
+        }
+    }
+    if (found) {
+        timer12AC() = 480.0f;
+        obj12A8() = target;
+        if (target != 0) {
+            FUN_008a4f80((int)&handle1370(), target);  // __thiscall
+        }
+    }
+    field26D4() = 0;
+    if (kind == 0) {
+        if (partner == 0) {
+            return;
+        }
+        field10E0() = 0;
+        setAction(this, 0x54, 0, 0, 0);
+        field10D4() = 8.0f;
+        field3418() = 40.0f;
+        call_00DB85A0(DAT_01bea1d0, 40.0f);
+        setCameraOffsets(this, 1.25f, 1.01f, -0.51f, -0.34f, 1.31f, 1.22f);
+        setQuadrantCameraOffsets(this);
+        field262C() = 0;
+        facePartner(this, partner);
+    } else if (kind == 2) {
+        setAction(this, 0x54, 4, 0, 0);
+        field10D4() = 8.0f;
+        field3418() = 40.0f;
+        if (partner != 0) {
+            facePartner(this, partner);
+        }
+        call_00DB85A0(DAT_01bea1d0, 60.0f);
+        setCameraOffsets(this, 1.25f, 1.01f, -0.51f, -0.34f, 1.31f, 1.22f);
+        setQuadrantCameraOffsets(this);
+        field262C() = 0;
+        field940(this) = 0;
+    } else if (kind == 3) {
+        setAction(this, 0x56, 0, 0, 0);
+        field10D4() = 8.0f;
+        field262C() = 0;
+        field3418() = 40.0f;
+        field940(this) = 0;
+        if (partner != 0) {
+            facePartner(this, partner);
+        }
+    } else if (kind == 4) {
+        setAction(this, 0x57, 0, 0, 0);
+        field10D4() = 8.0f;
+        field262C() = 0;
+        field3418() = 40.0f;
+        field940(this) = 0;
+        if (partner != 0) {
+            facePartner(this, partner);
+        }
+    } else if (kind == 5) {
+        field3418() = 40.0f;
+        setAction(this, 0x58, 0, 0, 0);
+    } else if (kind == 6) {
+        setAction(this, 0x59, 0, 0, 0);
+    } else if (kind == 7) {
+        field3418() = 60.0f;
+        setAction(this, 0x5A, 0, 0, 0);
+    } else if (kind == 0xB) {
+        setAction(this, 0xDC, 0, 0, 0);
+    } else {
+        if (kind == 0xE) {
+            FUN_00bee830((int)this);
+            setAction(this, 0xF8, 0, 0, 0);
+            return;
+        }
+        if (kind == 0x10) {
+            FUN_00bee830((int)this);
+            setAction(this, 0xDF, 0, 0, 0);
+            vf220(10.0f);
+            return;
+        }
+        if (kind == 0x11) {
+            FUN_00bee830((int)this);
+            setAction(this, 0xFB, 0, 0, 0);
+            return;
+        }
+        if (kind == 0xF) {
+            FUN_00bee830((int)this);
+            setAction(this, 0xFC, 0, 0, 0);
+            return;
+        }
+        if (kind == 0x1A) {
+            FUN_00bee830((int)this);
+            setAction(this, 0xEC, 0, 0, 0);
+            return;
+        }
+        if (kind == 0x1B) {
+            setAction(this, 0xED, 0, 0, 0);
+        } else if (kind == 0x20) {
+            setAction(this, 0xF4, 0, 0, 0);
+        } else if (kind == 0x21) {
+            setAction(this, 0xF5, 0, 0, 0);
+        } else if (kind == 0x22) {
+            setAction(this, 0xF6, 0, 0, 0);
+        } else if (kind == 0x23) {
+            setAction(this, 0xF7, 0, 0, 0);
+        } else {
+            if (kind == 0x49) {
+                setAction(this, 0x105, 0, 0, 0);
+                return;
+            }
+            if (kind != 0x1C) {
+                if (kind == 0x1E) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xF0, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x1F) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xF1, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x1D) {
+                    setAction(this, 0xF2, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x25) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xFD, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x26) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xFE, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x27) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xFF, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x28) {
+                    setAction(this, 0x10B, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x29) {
+                    setAction(this, 0x10B, 6, 0, 0);
+                    return;
+                }
+                if (kind == 0x2A) {
+                    setAction(this, 0x10C, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x2D) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xE2, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x31) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xE3, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x32) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xE4, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x37) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x110, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x38) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x111, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x39) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x112, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x3A) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x113, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x3B) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x114, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x3C) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x115, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x3D) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x116, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x3E) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x117, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x3F) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x118, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x35) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x10E, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x34) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x10D, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x36) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x10F, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x40) {
+                    setAction(this, 0x119, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x41) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0x11A, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x4A) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xE6, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x4B) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xE5, 0, 0, 0);
+                    return;
+                }
+                if (kind == 0x4C) {
+                    FUN_00bee830((int)this);
+                    setAction(this, 0xE7, 0, 0, 0);
+                    return;
+                }
+                goto laterKinds;
+            }
+            FUN_00bee830((int)this);
+            setAction(this, 0xEE, 0, 0, 0);
+        }
+    }
+    FUN_00b7b380(this, obj, (undefined4)(matrix() + 12), 1);  // +0x40: position
+laterKinds:
+    if (kind == 0x51) {
+        setAction(this, 0x100, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x52) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x101, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x42) {
+        setAction(this, 0x11B, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x44) {
+        setAction(this, 0x102, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x45) {
+        setAction(this, 0x103, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x46) {
+        setAction(this, 0x104, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x57) {
+        setAction(this, 0x11C, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x58) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x11D, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x59) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x11E, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x5A) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x11F, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x5C) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x123, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x5D) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x12A, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x5E) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x125, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x5F) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x12C, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x64) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x131, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x60) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x12E, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x61) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x12D, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x62) {
+        FUN_00bee830((int)this);
+        setAction(this, 0x12F, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x63) {
+        float pos[4];  // [3] is not set
+        float rot[4];  // [3] is not set
+        pos[0] = -198.5f;
+        pos[1] = -7.11f;
+        pos[2] = 494.66f;
+        rot[0] = 0.0f;
+        rot[1] = 1.5707964f;
+        rot[2] = 0.0f;
+        vf7C((undefined4)pos, (undefined4)rot);
+        FUN_00bee830((int)this);
+        setAction(this, 0x130, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x65) {
+        setAction(this, 0x137, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x66) {
+        setAction(this, 0x139, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x67) {
+        setAction(this, 0x13A, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x68) {
+        setAction(this, 0x13B, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x69) {
+        setAction(this, 0x13C, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x6A) {
+        setAction(this, 0x13E, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x6B) {
+        setAction(this, 0x13F, 0, 0, 0);
+        int other = (int)FUN_00a81330(&handle11AC());
+        if (other != 0) {
+            Behavior *owner = (Behavior *)FUN_00a7c8a0(other);
+            if (owner != 0) {
+                vcall<void>(owner, 0x150, kind, field4F0());
+                return;
+            }
+        }
+        return;
+    }
+    if (kind == 0x75) {
+        setAction(this, 0x140, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x70) {
+        setAction(this, 0x106, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x71) {
+        setAction(this, 0x107, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x72) {
+        setAction(this, 0x108, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x73) {
+        setAction(this, 0x109, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x74) {
+        setAction(this, 0x10A, 0, 0, 0);
+        return;
+    }
+    if (kind == 0x76) {
+        setAction(this, 0x13D, 0, 0, 0);
+    }
+}
+
+// 00BF6B80  FUN_00bf6b80  size=533  [callgraph]
+// Action step check: in step 3 after 2.0 of action time, the maskE18 button (or the stick when field40CC)
+// with a handle3EF0 object switches the partner handles (handle3EEC = handle3EE8, handle3EE8 = handle3EF0)
+// and starts action 0x3E.  When the handle3EE8 partner is gone (or busy): without FUN_00b8fc60 the next
+// handle is taken and action 0x3E / 0x3F / 0xD5 follows; with it action 0x3F (phase 0xA15) / 0xD5.
+void __fastcall FUN_00bf6b80(Pl0000 *self)
+{
+    using namespace Pl0000_p14;
+    FUN_00a7c950((undefined4 *)&self->handle3EF0());
+    call_00BEC070(self, 1);
+    if (subState61C(self) == 0) {
+        return;
+    }
+    if (subState61C(self) == 3 && 2.0f <= field920(self) &&
+        ((self->inputTrigger() & self->maskE18()) != 0 ||
+         (self->field40CC() != 0 && 90000.0f < self->inputSqD28())) &&
+        FUN_00a81330(&self->handle3EF0()) != 0) {
+        FUN_00a7c960((undefined4 *)&self->handle3EEC(),
+                     (undefined4 *)FUN_00a7c7f0((int)FUN_00a81330(&self->handle3EE8())));  // __thiscall
+        FUN_00a7c960((undefined4 *)&self->handle3EE8(),
+                     (undefined4 *)FUN_00a7c7f0((int)FUN_00a81330(&self->handle3EF0())));  // __thiscall
+        setAction(self, 0x3E, 0, 0, 0);
+    }
+    if (subState61C(self) != 3) {
+        return;
+    }
+    if (!handle3EE8Active(self) && FUN_00b8fc60(self) == 0) {
+        FUN_00a7c950((undefined4 *)&self->handle3EEC());
+        FUN_00a7c960((undefined4 *)&self->handle3EE8(),
+                     (undefined4 *)FUN_00a7c7f0((int)FUN_00a81330(&self->handle3EF0())));  // __thiscall
+        int action;
+        if (((self->inputHold() & self->maskE18()) != 0 ||
+             (self->field40CC() != 0 && 90000.0f < self->inputSqD28())) &&
+            FUN_00a81330(&self->handle3EF0()) != 0) {
+            action = 0x3E;
+        } else if (FUN_00932720() == 0xA15) {
+            action = 0x3F;
+        } else {
+            action = 0xD5;
+        }
+        setAction(self, action, 0, 0, 0);
+    }
+    if (!handle3EE8Active(self) && FUN_00b8fc60(self) != 0) {
+        if (FUN_00932720() == 0xA15) {
+            setAction(self, 0x3F, 0, 0, 0);
+            return;
+        }
+        setAction(self, 0xD5, 0, 0, 0);
+    }
+}
+
+// 00BF6FB0  FUN_00bf6fb0  size=1534  [callgraph]
+// Action steps of the jump to the handle3EE8 partner:
+//  0: curve to the partner (startCurveToPartner), FUN_00b8a040, motion 0xB5 (0x4BC / 0x4BB when the partner
+//     is more than 1.5 to the side in the local space) at the speed scale, model tint 0, up axis vec3EC0;
+//  1: counts the action time; once 4.0 is reached while field3F00 is below its limit the slow-down
+//     FUN_00b7ab80(20, 0.025) starts (dt 0.02); after 4.0 the next step; follows the handle3EEC owner (+0.2 up);
+//  2: curve to the partner again;
+//  3: follows the curve (field924 advances by dt * 2 / (25 / speed scale) up to 2, then action 0x3D).
+void __fastcall FUN_00bf6fb0(Pl0000 *self)
+{
+    using namespace Pl0000_p14;
+    float target[4];       // partner position, later the sampled curve position
+    float start[4];        // position, later the partner position in the local space
+    float inverse[16];
+    self->field2660() = 1;
+    self->vf314();
+    FUN_00a7c950((undefined4 *)&self->handle3EF0());
+    call_00BEC070(self, 1);
+    float *position = self->matrix() + 12;  // +0x40
+    start[0] = position[0];
+    start[1] = position[1];
+    start[2] = position[2];
+    start[3] = position[3];
+    switch (subState61C(self)) {
+    case 0: {
+        startCurveToPartner(self, start, target);
+        field924(self) = 0.0f;
+        subState61C(self) = subState61C(self) + 1;
+        self->field2620() = 0;
+        FUN_00b8a040(self, 0, 0, 0);  // (third argument 0.0f)
+        self->field3F00() = self->field3F00() + 1;
+        field920(self) = 0.0f;
+        field928(self) = 0.0f;
+        field948(self) = 0;
+        field94C(self) = 0;
+        D3DXMatrixInverse(inverse, 0, self->matrix());
+        D3DXVec3TransformNormal(start, start, inverse);
+        start[0] = inverse[12] + start[0];
+        start[1] = inverse[13] + start[1];
+        start[2] = inverse[14] + start[2];
+        short motion = 0xB5;
+        if (1.5f < start[0]) {
+            motion = 0x4BC;
+        }
+        if (start[0] < -1.5f) {
+            motion = 0x4BB;
+        }
+        call_00AA4080(self, motion, 0, 0.033333335f, 1.0f, 0x8000000, -1.0f, DAT_018a80e4);
+        int model = self->field118C();
+        if (model != 0) {
+            setModelTint(model, 0.0f);
+        }
+        self->field3EF8() = 1;
+        FUN_00b893e0(self, self->vec3EC0(), 1);
+    }
+        // fall through
+    case 1: {
+        float time = field920(self) + dt910(self);
+        field920(self) = time;
+        int limit = 4;
+        if (DAT_018b9174 != 0xA15) {
+            limit = 2;
+        }
+        if (self->field3F00() < limit && field94C(self) == 0 && 4.0f <= time) {
+            field94C(self) = 1;
+            FUN_00b7ab80(self, 20.0f, 0.025f);
+            dt910(self) = 0.02f;
+        }
+        if (4.0f <= field920(self)) {
+            subState61C(self) = subState61C(self) + 1;
+        }
+        FUN_00b94790(self, 1.0f, 1.0f);
+        self->vf318();
+        if (FUN_00a81330(&self->handle3EEC()) != 0) {
+            int obj = (int)FUN_00a81330(&self->handle3EEC());
+            if (obj != 0) {
+                float *ownerPos = (float *)((int)FUN_00a7c8a0(obj) + 0x40);
+                self->quat()[0] = ownerPos[0];  // +0x50
+                self->quat()[1] = ownerPos[1];
+                self->quat()[2] = ownerPos[2];
+                self->quat()[3] = ownerPos[3];
+                self->quat()[1] = self->quat()[1] + 0.2f;
+                return;
+            }
+        }
+        return;
+    }
+    case 2:
+        startCurveToPartner(self, start, target);
+        subState61C(self) = subState61C(self) + 1;
+        field924(self) = 0.0f;
+        field920(self) = 0.0f;
+        self->field2620() = 0;
+        field948(self) = 0;
+        field94C(self) = 0;
+        // fall through
+    case 3: {
+        field920(self) = field920(self) + dt910(self);
+        FUN_00b94790(self, 1.0f, 1.0f);
+        self->vf318();
+        FUN_00a581b0((short *)self->curve3F20(), target, 0.0f, field924(self));  // __thiscall
+        float rate = 2.0f / (25.0f / DAT_018a80e4);
+        field928(self) = (float)((rate - field928(self)) * pow(1.0, (double)dt910(self)));  // _CIpow (0x00FDC1F0)
+        // (the machine code also compares field924 with 1.1 / 0.8 here without using the results)
+        float curvePos = rate * dt910(self) + field924(self);
+        field924(self) = curvePos;
+        if (2.0f <= curvePos) {
+            field924(self) = 2.0f;
+            FUN_00a581b0((short *)self->curve3F20(), target, 0.0f, 2.0f);  // __thiscall
+            setAction(self, 0x3D, 2, 0, 0);
+        }
+        self->quat()[0] = target[0];  // +0x50
+        self->quat()[1] = target[1];
+        self->quat()[2] = target[2];
+        return;
+    }
+    default:
+        return;
+    }
+}
+
+// 00BF75D0  FUN_00bf75d0  size=4891  [callgraph]
+// Handles the link record `link` (object handle at +0, kinds at +0x58 / +0x5C): *allowed = 0 when kind
+// 0x5C == 8 needs the full cells.  When linking is possible (FUN_00b80840, FUN_00c15520, FUN_00b90770) and
+// the partner is free, starts the link for kind 0x58 (vf150 to both, qte camera, carried-item offsets of
+// FUN_00bf5600 ...) and returns 1.  Otherwise, with FUN_00c15530 and the maskE30 button, the kinds
+// 0x1001 .. 0x1004 link to the FUN_005f4370 owner.  0 when nothing was started.
+undefined4 FUN_00bf75d0(Pl0000 *self, void *link, int *allowed)  // __thiscall
+{
+    using namespace Pl0000_p14;
+    float vec[4];  // pointer passed as the unused extra arguments of FUN_00bf5600; the bone position (kinds 0x1F / 0x20)
+    FUN_00a7c950((undefined4 *)&self->handleFE0());
+    *allowed = 1;
+    if (linkKind5C(link) == 8 && (DAT_01bea090 & 0x80000000) == 0 && FUN_00bc3230(self, 0) == 0) {
+        *allowed = 0;
+    }
+    if (FUN_00b80840((int *)self) == 0 || *allowed == 0) {
+        return 0;
+    }
+    if (FUN_00c15520((int)link)) {
+        call_00B808D0(self, link);
+        Behavior *partner = 0;
+        if (FUN_00a81330((uint *)link) != 0) {
+            partner = (Behavior *)FUN_00a7c8a0((int)FUN_00a81330((uint *)link));
+        }
+        if (FUN_00b90770((int)self, linkKind5C(link), (int)link) != 0 && partner != 0 &&  // __thiscall
+            partner->field4E4() == 0 && partner->vf274() == 0) {
+            self->vf220(5.0f);
+            int kind = linkKind58(link);
+            if (kind == 2 && state618(self) != 0x76) {
+                FUN_00b8a040(self, 0, 0, 0);  // (third argument 0.0f)
+                setAction(self, 0x76, 0, 0, 0);
+                return 1;
+            }
+            if (kind == 3) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0xF);
+                return 1;
+            }
+            if (kind == 0x24) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x27);
+                return 1;
+            }
+            if (kind == 5) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                call_00DB3E80(DAT_01bea750, 0.0f, 0, DAT_01bea1d0);
+                linkBoth(self, partner, link, 0xE);
+                return 1;
+            }
+            if (kind == 0x28) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x36);
+                return 1;
+            }
+            if (kind == 0x2A) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x41);
+                return 1;
+            }
+            if (kind == 7) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x2E);
+                return 1;
+            }
+            if (kind == 8) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x2F);
+                return 1;
+            }
+            if (kind == 0x27) {
+                linkBoth(self, partner, link, 0x31);
+                return 1;
+            }
+            if (kind == 0xB) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x52);
+                return 1;
+            }
+            if (kind == 10) {
+                FUN_00b7e090(self, 0xE);
+                setAction(self, 0x45, 0, 0, 0);
+                FUN_00c15320((int)link);
+                return 1;
+            }
+            if (kind == 0x25 && state618(self) != 0x68) {
+                FUN_00b7b380(self, (int)FUN_00a81330((uint *)link), (undefined4)self->quat(), 1);  // +0x50
+                FUN_00b7b270(self, 1.0f, 0.00017453292f, 3.1415927f, 0.0f);
+                setAction(self, 0x68, 0, 0, 0);
+                self->field2628() = 0;
+                self->request256C() = 0;
+                return 1;
+            }
+            if (kind == 0x26 && vcall<int>(partner, 0x14C, 0x3A, self->field4F0()) != 0) {
+                FUN_00b7e7d0(self, (int)FUN_00a81330((uint *)link), 0x016A2C0C);  // ? constant 0x016A2C0C
+                linkBoth(self, partner, link, 0x3A);
+                return 1;
+            }
+            if (linkKind58(link) == 0x16 && vcall<int>(partner, 0x14C, 0x4C, self->field4F0()) != 0) {
+                linkBoth(self, partner, link, 0x4C);
+                return 1;
+            }
+            kind = linkKind58(link);
+            if (kind == 0xC) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                if (partner->modelObjId() == 0x20200) {
+                    FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 6, vec, vec, vec, 6, vec, vec, vec, 1, 180.0f,
+                                 0.5235988f, 0.5235988f, 1);
+                } else {
+                    FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x114, vec, vec, vec, 0x114, vec, vec, vec, 2,
+                                 180.0f, 0.5235988f, 0.5235988f, 1);
+                }
+                vcall<void>(partner, 0x150, 0x12, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x15) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x49);
+                return 1;
+            }
+            if (kind == 0x14) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x10);
+                return 1;
+            }
+            if (kind == 0x12) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                int variant;
+                if (partner->modelObjId() == 0x20200) {
+                    variant = 2;
+                } else {
+                    variant = 0;
+                }
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x110, vec, vec, vec, 0x110, vec, vec, vec, variant,
+                             180.0f, 0.5235988f, 0.5235988f, 1);
+                vcall<void>(partner, 0x150, 0x14, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x13) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x111, vec, vec, vec, 0x111, vec, vec, vec, 2,
+                             240.0f, 0.5235988f, 0.5235988f, 1);
+                vcall<void>(partner, 0x150, 0x13, self->field4F0());
+                return 1;
+            }
+            if (kind == 0xD) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x3A, vec, vec, vec, 0x41, vec, vec, vec, 1,
+                             240.0f, 0.5235988f, 0.5235988f, 1);
+                vcall<void>(partner, 0x150, 0x15, self->field4F0());
+                return 1;
+            }
+            if (kind == 0xE) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x20, vec, vec, vec, 0x1E, vec, vec, vec, 1,
+                             210.0f, 0.5235988f, 0.5235988f, 1);
+                vcall<void>(partner, 0x150, 0x16, self->field4F0());
+                return 1;
+            }
+            if (kind == 0xF) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x112, vec, vec, vec, 0x112, vec, vec, vec, 0,
+                             180.0f, 0.5235988f, 0.5235988f, 1);
+                vcall<void>(partner, 0x150, 0x17, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x10) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x2B, vec, vec, vec, 0x29, vec, vec, vec, 1,
+                             210.0f, 0.5235988f, 0.5235988f, 1);
+                vcall<void>(partner, 0x150, 0x18, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x11) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x26, vec, vec, vec, 0x26, vec, vec, vec, 0,
+                             180.0f, 0.5235988f, 0.5235988f, 1);
+                vcall<void>(partner, 0x150, 0x19, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x17) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0xE, vec, vec, vec, 0xE, vec, vec, vec, 1,
+                             210.0f, 0.34906584f, 0.34906584f, 1);
+                vcall<void>(partner, 0x150, 0x4D, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x18) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x18, vec, vec, vec, 0x18, vec, vec, vec, 1,
+                             210.0f, 0.34906584f, 0.34906584f, 1);
+                vcall<void>(partner, 0x150, 0x4E, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x19) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x24, vec, vec, vec, 0x24, vec, vec, vec, 1,
+                             210.0f, 0.34906584f, 0.34906584f, 1);
+                vcall<void>(partner, 0x150, 0x4F, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x1A) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), 0x2E, vec, vec, vec, 0x2E, vec, vec, vec, 1,
+                             210.0f, 0.34906584f, 0.34906584f, 1);
+                vcall<void>(partner, 0x150, 0x50, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x1B) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x22);
+                return 1;
+            }
+            if (kind == 0x1C) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x58);
+                return 1;
+            }
+            if (kind == 0x1D) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x59);
+                return 1;
+            }
+            if (kind == 0x29) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x3D);
+                return 1;
+            }
+            if (kind == 0x1E) {
+                FUN_00bf5600(self, (int)FUN_00a81330((uint *)link), -1, vec, vec, vec, -1, vec, vec, vec, 1, 240.0f,
+                             0.34906584f, 0.34906584f, 0);
+                vcall<void>(partner, 0x150, 0x5B, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x1F) {
+                vec[0] = 0.0f;
+                vec[1] = 0.0f;
+                vec[2] = 0.0f;
+                if (FUN_00a81330((uint *)link) != 0 && FUN_00a7c8a0((int)FUN_00a81330((uint *)link)) != 0) {
+                    int bone = FUN_00a12210((int)FUN_00a7c8a0((int)FUN_00a81330((uint *)link)), 0x404);  // __thiscall
+                    if (bone != 0) {
+                        vec[0] = *(float *)(bone + 0x40);
+                        vec[1] = *(float *)(bone + 0x44);
+                        vec[2] = *(float *)(bone + 0x48);
+                        vec[3] = *(float *)(bone + 0x4C);
+                    }
+                }
+                FUN_00be8f50(self, (int)FUN_00a81330((uint *)link), 0x409, vec);
+                vcall<void>(partner, 0x150, 0x6E, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x20) {
+                vec[0] = 0.0f;
+                vec[1] = 0.0f;
+                vec[2] = 0.0f;
+                if (FUN_00a81330((uint *)link) != 0 && FUN_00a7c8a0((int)FUN_00a81330((uint *)link)) != 0) {
+                    int bone = FUN_00a12210((int)FUN_00a7c8a0((int)FUN_00a81330((uint *)link)), 0x604);  // __thiscall
+                    if (bone != 0) {
+                        vec[0] = *(float *)(bone + 0x40);
+                        vec[1] = *(float *)(bone + 0x44);
+                        vec[2] = *(float *)(bone + 0x48);
+                        vec[3] = *(float *)(bone + 0x4C);
+                    }
+                }
+                FUN_00be8f50(self, (int)FUN_00a81330((uint *)link), 0x609, vec);
+                vcall<void>(partner, 0x150, 0x6F, self->field4F0());
+                return 1;
+            }
+            if (kind == 0x21 && FUN_00a8cab0((int)self) != 0x106) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x70);
+                return 1;
+            }
+            if (linkKind58(link) == 0x22 && FUN_00a8cab0((int)self) != 0x107) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x71);
+                return 1;
+            }
+            if (linkKind58(link) == 0x23) {
+                FUN_00b8a040(self, 0, 0, 0);
+                linkBoth(self, partner, link, 0x6B);
+                return 1;
+            }
+        }
+    }
+    if (FUN_00c15530((int)link) && !self->vf32C()) {
+        self->fieldBB4() = 3.0f;
+        if ((self->inputTrigger() & self->maskE30()) != 0 && FUN_00a81330((uint *)link) != 0) {
+            Behavior *owner = (Behavior *)call_005F4370(link);
+            if (owner->field4E4() == 0) {
+                int kind = linkKind58(link);
+                if (kind == 0x1001) {
+                    DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                    FUN_00b8a040(self, 0, 0, 0);
+                    call_00DB3E80(DAT_01bea750, 20.0f, 0, DAT_01bea1d0);
+                    linkBoth(self, owner, link, 0x25);
+                    return 1;
+                }
+                if (kind == 0x1002) {
+                    DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                    FUN_00b8a040(self, 0, 0, 0);
+                    call_00DB3E80(DAT_01bea750, 20.0f, 0, DAT_01bea1d0);
+                    linkBoth(self, owner, link, 0x3C);
+                    return 1;
+                }
+                if (kind == 0x1003) {
+                    DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                    FUN_00b8a040(self, 0, 0, 0);
+                    call_00DB3E80(DAT_01bea750, 20.0f, 0, DAT_01bea1d0);
+                    linkBoth(self, owner, link, 0x34);
+                    return 1;
+                }
+                if (kind == 0x1004) {
+                    DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                    FUN_00b8a040(self, 0, 0, 0);
+                    call_00DB3E80(DAT_01bea750, 20.0f, 0, DAT_01bea1d0);
+                    linkBoth(self, owner, link, 0x3F);
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+// 00BF88F0  FUN_00bf88f0  size=191  [callgraph]
+// Constructor of a parameter block (base FUN_00d82ff0): default values at +0x14C .. +0x174, then the
+// "constant" block of the text archive opened on `source` (FUN_00e91420) is read into it.  Returns this.
+void *FUN_00bf88f0(void *self, undefined4 source)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p14;
+    unsigned char archive[0x74];  // lib::InputTextArchive<char const*,32>
+    FUN_00d82ff0((undefined4 *)self);
+    char *p = (char *)self;
+    *(float *)(p + 0x14C) = 300.0f;  // this+0x14C .. +0x174: ? parameters (defaults)
+    *(float *)(p + 0x150) = 300.0f;
+    *(float *)(p + 0x154) = 7.0f;
+    *(float *)(p + 0x158) = 7.0f;
+    *(float *)(p + 0x15C) = 0.12f;
+    *(float *)(p + 0x160) = 0.5f;
+    *(float *)(p + 0x164) = 0.8f;
+    *(float *)(p + 0x168) = 0.1f;
+    *(float *)(p + 0x16C) = 15.0f;
+    *(float *)(p + 0x170) = 0.05f;
+    *(float *)(p + 0x174) = 10.0f;
+    constructArchive(archive);
+    FUN_00e91420((int)archive, (int)source);  // __thiscall
+    call_00BF2680(archive, "constant", self);  // s_constant_016a2c14
+    destructArchive(archive);
+    return self;
+}
+
+// 00BF8BD0  FUN_00bf8bd0  size=654  [callgraph]
+// Kind 3 handler of ZangekiEventQteStatePl0010 (this = the state, `context` = its
+// StateMachineContextPl0010): with a linked qte target (context handle +0x534, state target +0x30)
+// whose +0x87C is 0 the zangeki qte starts (FUN_00bcf3e0, motion frame 0, angle 0, FUN_00be6620 /
+// FUN_00bf24f0 / FUN_00bbb050, FUN_00c5bbb0(2)); otherwise the qte is cancelled (camera reset, the
+// player keeps only its yaw, controller state 6, FUN_00d82510(0xB, 100)).  DAT_01bea9a0 is 1 meanwhile.
+void FUN_00bf8bd0(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p14;
+    char *ctx = asContext(context);
+    Pl0000 *player = (Pl0000 *)asKind(*(void **)(ctx + 0xC) /* StateMachineContext+0xC: owner */, 0x4,
+                                      DAT_01be9db8);
+    bool linked;
+    if (FUN_00a81330((uint *)(asContext(context) + 0x534)) == 0 ||  // StateMachineContextPl0010+0x534: handle
+        *(int *)((char *)state + 0x30) == 0) {  // ZangekiEventQteStatePl0010+0x30: target
+        linked = false;
+    } else {
+        linked = true;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(*(int *)((char *)state + 0x30) + 0x87C) == 0) {  // target+0x87C: ?
+        int animation = (int)FUN_00a92f90((int)player);
+        if (call_00E26E90(animation) != 0) {
+            call_00E36AC0(animation + 0xF4, 0, 0.0f);
+        }
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        FUN_00b8bb40(player, 0.0f);
+        void *item = (void *)player->field7D0();
+        if (item != 0 && asKind(item, 0x0, DAT_01be9ef4) != 0) {
+            *(float *)((char *)item + 0x378) = 0.0f;  // carried item (is-a DAT_01be9ef4) +0x378: ?
+        }
+        call_00BE6620(context, state, 100, 0, 0);
+        call_00BF24F0(context, 1.0f);
+        if (*(int *)(asContext(context) + 0x2F4) == 0) {  // StateMachineContextPl0010+0x2F4
+            call_00BBB050(context);
+        }
+        call_00C5BBB0(DAT_01d616d0, 2);
+        return;
+    }
+    call_00DA8810(DAT_01bea1d0, 0.0f);
+    call_00DB3E80(DAT_01bea750, 0.0f, 1, DAT_01bea1d0);
+    *(int *)(asContext(context) + 0x500) = 0;  // StateMachineContextPl0010+0x500
+    DAT_01bea9a0 = 0;
+    float *rot = (float *)player->vf84();
+    float yawOnly[4];  // [3] is not set
+    yawOnly[1] = rot[1];
+    yawOnly[0] = 0.0f;
+    yawOnly[2] = 0.0f;
+    vcall<void>(player, 0x88, yawOnly);
+    FUN_00b7aa80(player);
+    FUN_008e5c50(controller764(player), 6);  // __thiscall
+    FUN_008e0b70(controller764(player), 1);  // __thiscall
+    FUN_00d82510((int)state, 0xB, 100);  // __thiscall
+    *(int *)(ctx + 0x32C) = 1;  // StateMachineContextPl0010+0x32C
+    call_00A17A40(player);
+}
+
+// 00BF8E60  FUN_00bf8e60  size=594  [callgraph]
+// Kind 4 handler of ZangekiEventQteStatePl0010: like FUN_00bf8bd0 without FUN_00be6620 and without the
+// final FUN_00c5bbb0(2).
+void FUN_00bf8e60(void *state, undefined4 *context)  // __thiscall, ret 4
+{
+    using namespace Pl0000_p14;
+    char *ctx = asContext(context);
+    Pl0000 *player = (Pl0000 *)asKind(*(void **)(ctx + 0xC) /* StateMachineContext+0xC: owner */, 0x4,
+                                      DAT_01be9db8);
+    bool linked;
+    if (FUN_00a81330((uint *)(asContext(context) + 0x534)) == 0 ||  // StateMachineContextPl0010+0x534: handle
+        *(int *)((char *)state + 0x30) == 0) {  // ZangekiEventQteStatePl0010+0x30: target
+        linked = false;
+    } else {
+        linked = true;
+    }
+    DAT_01bea9a0 = 1;
+    call_00BBC310(context);
+    if (linked && *(int *)(*(int *)((char *)state + 0x30) + 0x87C) == 0) {  // target+0x87C: ?
+        int animation = (int)FUN_00a92f90((int)player);
+        if (call_00E26E90(animation) != 0) {
+            call_00E36AC0(animation + 0xF4, 0, 0.0f);
+        }
+        call_00BCF3E0(state, context, 1, 1, 30.0f, 30.0f);
+        FUN_00b8bb40(player, 0.0f);
+        void *item = (void *)player->field7D0();
+        if (item != 0 && asKind(item, 0x0, DAT_01be9ef4) != 0) {
+            *(float *)((char *)item + 0x378) = 0.0f;  // carried item (is-a DAT_01be9ef4) +0x378: ?
+        }
+        call_00BF24F0(context, 1.0f);
+        if (*(int *)(asContext(context) + 0x2F4) == 0) {  // StateMachineContextPl0010+0x2F4
+            call_00BBB050(context);
+            return;
+        }
+    } else {
+        *(int *)(asContext(context) + 0x500) = 0;  // StateMachineContextPl0010+0x500
+        DAT_01bea9a0 = 0;
+        float *rot = (float *)player->vf84();
+        float yawOnly[4];  // [3] is not set
+        yawOnly[1] = rot[1];
+        yawOnly[0] = 0.0f;
+        yawOnly[2] = 0.0f;
+        vcall<void>(player, 0x88, yawOnly);
+        FUN_00b7aa80(player);
+        FUN_008e5c50(controller764(player), 6);  // __thiscall
+        FUN_008e0b70(controller764(player), 1);  // __thiscall
+        FUN_00d82510((int)state, 0xB, 100);  // __thiscall
+        *(int *)(ctx + 0x32C) = 1;  // StateMachineContextPl0010+0x32C
+        call_00A17A40(player);
+    }
+}

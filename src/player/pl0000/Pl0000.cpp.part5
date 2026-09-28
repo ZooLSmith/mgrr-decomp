@@ -1,0 +1,1557 @@
+// src/player/pl0000/Pl0000.cpp (part 6/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// globals
+extern unsigned int DAT_01bea090;  // game flags (bit 0x20 / 0x8000 tested here)
+extern unsigned int DAT_01bea060;  // global flags
+extern unsigned int DAT_01bea094;  // global flags
+extern int DAT_01bea010;           // mode word; (DAT_01bea010 % 4) selects a parameter row (vf3B4)
+extern int DAT_01bea024;           // 0xE: the damage-mesh variants are switched (FUN_00b7b440)
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern char DAT_0163d0ac[];        // "[Hw::VecNormalize]..." (message of FUN_00dd5650)
+extern unsigned char DAT_01be9a98[];  // object table searched by FUN_00a82090 (find by name / id)
+extern unsigned char DAT_01886ea0[];  // object: ECX of FUN_0094e5e0
+extern unsigned char DAT_01b35df8[];  // collision world: ECX of RayCastSingleHitWork::RayCastSingleHitWork_2
+extern float DAT_01bea380[4];      // vectors given to FUN_00db6410 (FUN_00b8a370)
+extern float DAT_01bea390[4];
+extern unsigned char DAT_01bea750[];  // object: ECX of FUN_00db3e80 (FUN_00b8d3b0)
+extern unsigned char DAT_01be9c94[];  // type descriptor tested with FUN_00dd6d80 (objects of handles3354)
+extern int DAT_01dc1314;           // set to 1 by FUN_00b8e340
+extern float DAT_01dc4eb0[4];      // copy of the "Sito" ray end rayEnd2760 (FUN_00b8e340)
+
+namespace Pl0000_p6 {
+
+// address of the sub-object / field at byte offset `off` of `obj`
+template <class T> inline T *at(int obj, unsigned int off) { return (T *)((char *)obj + off); }
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &state618(void *p)      { return *(int *)((char *)p + 0x618); }    // Behavior+0x618: ? current action / state id
+inline int   &subState61C(void *p)   { return *(int *)((char *)p + 0x61C); }    // Behavior+0x61C: ? sub-state of state618
+inline int   &controller764(void *p) { return *(int *)((char *)p + 0x764); }    // Behavior+0x764: ? character controller (0 = none)
+inline float &dt910(void *p)         { return *(float *)((char *)p + 0x910); }  // BehaviorAppBase+0x910: ? frame delta time
+inline float &field920(void *p)      { return *(float *)((char *)p + 0x920); }  // BehaviorAppBase+0x920: ?
+
+// virtual call through slot `off` (byte offset) of an object whose class is not known here
+template <class R> inline R vcall(void *obj, unsigned int off)
+{
+    return (*(R (__thiscall **)(void *))(*(char **)obj + off))(obj);
+}
+template <class R, class A> inline R vcall(void *obj, unsigned int off, A a)
+{
+    return (*(R (__thiscall **)(void *, A))(*(char **)obj + off))(obj, a);
+}
+template <class R, class A, class B> inline R vcall(void *obj, unsigned int off, A a, B b)
+{
+    return (*(R (__thiscall **)(void *, A, B))(*(char **)obj + off))(obj, a, b);
+}
+
+// virtual slot `off` of the manager returned by FUN_00c13920 (slot 0x68: game mode)
+inline int mgrCall(unsigned int off)
+{
+    return vcall<int>((void *)FUN_00c13920(), off);
+}
+
+// true when the type returned by virtual slot `slot` of `obj` is-a `desc` (FUN_00dd6d80)
+inline bool isKindOf(void *obj, unsigned int slot, void *desc)
+{
+    undefined4 *type = vcall<undefined4 *>(obj, slot);
+    return FUN_00dd6d80(type, (undefined4 *)desc) != 0;
+}
+
+// FUN_00a81330 resolves an object handle; FUN_00a7c8a0 returns that object's owner (object+0x48).
+// Inlined in the original as: handle ok ? FUN_00a7c8a0(FUN_00a81330(h)) : 0.
+inline int handleOwner(unsigned int *handle)
+{
+    if (FUN_00a81330(handle) == 0) {
+        return 0;
+    }
+    return FUN_00a7c8a0((int)FUN_00a81330(handle));
+}
+
+// Sets (set = true) or clears bit 0 of the flags word (+0x38) of every mesh of `model` (0x70-byte
+// entries, name at entry+0x60 -> +0x40) whose name contains `tag` (FUN_00fdbbd0 = strstr).
+// The count and the array are re-read every iteration, as in the original.
+inline void setMeshFlag(cModelBase *model, const char *tag, bool set)
+{
+    for (int i = 0; i < model->meshCount(); i++) {
+        char *mesh = (char *)model->meshArray() + i * 0x70;
+        int name = *(int *)(*(int *)(mesh + 0x60) + 0x40);
+        if (name != 0 && FUN_00fdbbd0((uint *)name, (char *)tag) != 0) {
+            if (set) {
+                *(unsigned int *)(mesh + 0x38) |= 1;
+            } else {
+                *(unsigned int *)(mesh + 0x38) &= 0xFFFFFFFE;
+            }
+        }
+    }
+}
+
+// Entry `index` of the float parameter table at +0x142C (0x14-byte entries of 5 floats).
+inline float *paramEntry(Pl0000 *self, int index)
+{
+    return self->paramTable142C() + index * 5;
+}
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void setAction(void *obj, int action, int a, int b, int c)  // FUN_00a8caf0 (Behavior)
+{
+    ((void (__thiscall *)(void *, int, int, int, int))0x00A8CAF0)(obj, action, a, b, c);
+}
+inline void call_00DD5650(const char *message)  // ? debug message (zero-length vector)
+{
+    ((void (__cdecl *)(const char *))0x00DD5650)(message);
+}
+inline float wrapAngle(float angle)  // FUN_00ddba30: ? angle wrapped to [-pi, pi], result in st(0)
+{
+    return ((float (__cdecl *)(float))0x00DDBA30)(angle);
+}
+inline int call_00E26E90(int obj)
+{
+    return ((int (__fastcall *)(int))0x00E26E90)(obj);
+}
+inline int call_00A959F0(Pl0000 *self, int layer)  // result of FUN_00a958c0 scaled and truncated to int
+{
+    return ((int (__thiscall *)(Pl0000 *, int))0x00A959F0)(self, layer);
+}
+inline int call_00B7E760(Pl0000 *self)  // FUN_00b7e760 (part 2)
+{
+    return ((int (__fastcall *)(Pl0000 *))0x00B7E760)(self);
+}
+inline int call_00B7F980()  // FUN_00b7f980 (part 3): its EAX (tail-called slot 0x3C) is used here
+{
+    return ((int (__cdecl *)())0x00B7F980)();
+}
+// FUN_00b86b00 (part 4): attack-action selection, ret 0x10 (the generated prototype lacks an argument)
+inline int call_00B86B00(Pl0000 *self, int allowE20, int clearOnE20, int allowE24, int unused)
+{
+    return ((int (__thiscall *)(Pl0000 *, int, int, int, int))0x00B86B00)(self, allowE20, clearOnE20, allowE24, unused);
+}
+inline void call_00DB3E80(void *obj, float time, int a, void *b)  // ret 0xC
+{
+    ((void (__thiscall *)(void *, float, int, void *))0x00DB3E80)(obj, time, a, b);
+}
+
+// RayCastSingleHitWork::RayCastSingleHitWork_2 (0x0090B130) on the collision world
+inline int rayCast(void *world, void *a, void *b, void *c, void *d, void *request)
+{
+    return ((int (__thiscall *)(void *, void *, void *, void *, void *, void *))0x0090B130)(
+        world, a, b, c, d, request);
+}
+
+// ray request built on the stack (0x38 bytes)
+struct RayRequest {
+    float from[4];
+    float to[4];
+    unsigned int flags;  // (FUN_009f8b40() << 16) | kind
+    int field24;
+    int mask28;
+    int field2C;
+    const char *name;
+    int field34;
+};
+
+// Normalizes the xyz of `v` (FUN_00ddf460) when its squared length is > 0; otherwise the
+// zero-length message is reported with FUN_00dd5650 and v becomes (0, 1, 0).  (The original also
+// tests every component for NaN, which gives the same result as the > 0 test.)
+inline void normalizeOrReset(float *v)
+{
+    float lengthSq = v[2] * v[2] + v[0] * v[0] + v[1] * v[1];
+    if (lengthSq > 0.0f) {
+        FUN_00ddf460(v, v);
+    } else {
+        call_00DD5650(DAT_0163d0ac);
+        v[0] = 0.0f;
+        v[1] = 1.0f;
+        v[2] = 0.0f;
+    }
+}
+
+// Common start of the per-frame action handlers: fieldB78 = !FUN_00a8c760(0).
+inline void updateB78(Pl0000 *self)
+{
+    self->fieldB78() = 1;
+    if (FUN_00a8c760((int)self, 0)) {  // __thiscall
+        self->fieldB78() = 0;
+    }
+}
+
+// Part of FUN_00b8d3b0 (inlined four times): when `target` accepts the interaction `id`
+// (vf14C), the player is put on top of it (height from vf140 when `addHeight`), both take the
+// same yaw, the qte link is ended and both objects are told with vf150(id, other).
+inline void snapToTarget(Pl0000 *self, Behavior *target, int id, bool addHeight)
+{
+    if (vcall<int>(target, 0x14C, id, self->field4F0()) == 0) {
+        return;
+    }
+    float *targetPos = target->matrix() + 12;  // +0x40
+    if (addHeight) {
+        self->quat()[1] = vcall<float>(target, 0x140) + targetPos[1];  // +0x54
+    } else {
+        self->quat()[1] = targetPos[1];
+    }
+    self->quat()[0] = targetPos[0];  // +0x50
+    self->quat()[2] = targetPos[2];  // +0x58
+    target->vec90()[1] = self->vec90()[1];  // yaw (+0x94)
+    DAT_01bea060 = DAT_01bea060 | 0x2000000;
+    FUN_00b8a040((int)self, 0, 0, 0);  // __thiscall (third argument 0.0f)
+    call_00DB3E80(DAT_01bea750, 20.0f, 0, DAT_01bea1d0);
+    vcall<void>(self, 0x150, id, (int)FUN_00a81330(&self->handle91C()));
+    vcall<void>(target, 0x150, id, self->field4F0());
+}
+
+}  // namespace Pl0000_p6
+
+// 00B8C400  FUN_00b8c400  size=498  [between]
+// When fieldBFC is set: for each of the objects 0xD0800..0xD0802 found near the player within 5.0
+// whose direction is within the front cone (dot >= 0.3) of FUN_00a925a0, FUN_00c209f0()->vf14(0xB).
+void __fastcall FUN_00b8c400(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    if (self->fieldBFC() == 0) {
+        return;
+    }
+    float *pos = self->matrix() + 12;  // +0x40
+    float searchPos[3];
+    int ids[3];
+    searchPos[0] = pos[0];
+    ids[0] = 0xD0800;
+    ids[1] = 0xD0801;
+    searchPos[1] = pos[1];
+    ids[2] = 0xD0802;
+    searchPos[2] = pos[2];
+    float origin[4];
+    origin[3] = pos[3];
+    origin[0] = searchPos[0];
+    origin[1] = searchPos[1];
+    origin[2] = searchPos[2];
+    unsigned int i = 0;
+    do {
+        int found = FUN_00a7f7b0((int)DAT_01be9a98, ids[i], searchPos);  // __thiscall
+        if (found != 0) {
+            float *other = (float *)(FUN_00a7c8a0(found) + 0x40);
+            float dx = other[0] - origin[0];
+            float dy = other[1] - origin[1];
+            float dz = other[2] - origin[2];
+            float distance = sqrtf(dz * dz + dy * dy + dx * dx);
+            if (distance <= 5.0f) {
+                other = (float *)(FUN_00a7c8a0(found) + 0x40);
+                float dir[4];
+                dir[0] = other[0] - origin[0];
+                dir[1] = other[1] - origin[1];
+                dir[2] = other[2] - origin[2];
+                dir[3] = other[3] - origin[3];
+                if (dir[0] != 0.0f || dir[1] != 0.0f || dir[2] != 0.0f) {
+                    normalizeOrReset(dir);
+                }
+                float forwardBuf[7];  // 0x1C-byte stack buffer in the original
+                float *forward = FUN_00a925a0((int)self, forwardBuf);  // __thiscall
+                if (0.3f <= forward[1] * dir[1] + dir[0] * forward[0] + forward[2] * dir[2]) {
+                    vcall<void>((void *)FUN_00c209f0(), 0x14, 0xB);
+                }
+            }
+        }
+        i++;
+    } while (i < 3);
+    self->fieldBFC() = 0;
+}
+
+// 00B8C600  FUN_00b8c600  size=36  [between]
+void __fastcall FUN_00b8c600(Pl0000 *self)
+{
+    self->vf320(0.016666668f);
+    self->vf3F0();  // tail call
+}
+
+// 00B8C630  FUN_00b8c630  size=36  [between]
+void __fastcall FUN_00b8c630(Pl0000 *self)
+{
+    self->vf320(0.016666668f);
+    self->vf3F0();  // tail call
+}
+
+// 00B8C660  FUN_00b8c660  size=195  [between]
+void __fastcall FUN_00b8c660(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    self->vf320(0.016666668f);
+    self->vf3F0();
+    if (self->vf34C() == 0) {
+        setAction(self, 0x22, 0, 0, 0);
+        return;
+    }
+    if ((DAT_01bea094 & 0x40000000) == 0 && 90000.0f < self->inputSqD28()) {
+        setAction(self, 0x24, 0, 0, 0);
+        return;
+    }
+    if ((DAT_01bea094 & 0x100000) != 0) {
+        if (200.0f < self->fieldD10()) {
+            setAction(self, 0x25, 0, 0, 0);
+            return;
+        }
+        if (self->fieldD10() < -200.0f) {
+            setAction(self, 0x26, 0, 0, 0);
+        }
+    }
+}
+
+// 00B8C730  FUN_00b8c730  size=195  [between]
+void __fastcall FUN_00b8c730(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    self->vf320(0.016666668f);
+    self->vf3F0();
+    if (self->vf34C() == 0) {
+        setAction(self, 0x22, 0, 0, 0);
+        return;
+    }
+    int step = subState61C(self);
+    if ((step == 1 && self->inputSqD28() < 62500.0f) || (step == 3 && self->inputSqD28() < 62500.0f)) {
+        goto stop;
+    }
+    if (step == 5) {
+        if (self->inputSqD28() < 62500.0f) {
+            goto stop;
+        }
+        if (self->inputSqD28() < 722500.0f) {
+            subState61C(self) = 2;
+            return;
+        }
+    }
+    return;
+stop:
+    subState61C(self) = 6;
+    setAction(self, 0x23, 0, 0, 0);
+}
+
+// 00B8C800  FUN_00b8c800  size=245  [between]
+void __fastcall FUN_00b8c800(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    self->vf320(0.016666668f);
+    self->vf3F0();
+    if (self->vf34C() == 0) {
+        setAction(self, 0x22, 0, 0, 0);
+        return;
+    }
+    if (state618(self) == 0x25) {
+        if (self->fieldD10() <= 190.0f) {
+            setAction(self, 0x23, 0, 0, 0);
+        }
+        if (self->fieldD10() < -200.0f) {
+            setAction(self, 0x26, 0, 0, 0);
+            return;
+        }
+    } else {
+        if (self->fieldD10() >= -190.0f) {
+            setAction(self, 0x23, 0, 0, 0);
+        }
+        if (self->fieldD10() >= 200.0f) {
+            setAction(self, 0x26, 0, 0, 0);
+            return;
+        }
+    }
+    if ((DAT_01bea094 & 0x40000000) == 0 && 90000.0f < self->inputSqD28()) {
+        setAction(self, 0x24, 0, 0, 0);
+    }
+}
+
+// 00B8C900  Pl0000::vf14C  size=657  [class]
+// 1 when the interaction `kind` with the object `obj` is allowed (the original tests the kinds
+// one after the other; the list is kept as a switch).
+undefined4 Pl0000::vf14C(int kind, int obj)
+{
+    using namespace Pl0000_p6;
+    if ((DAT_01bea090 & 0x1000) != 0) {
+        return 0;
+    }
+    if (kind != 8 && obj == 0) {
+        return 0;
+    }
+    if (kind != 8 || obj != 0) {
+        int owner = FUN_00a7c8a0(obj);
+        if (owner == 0) {
+            return 0;
+        }
+        if (kind != 8) {
+            switch (kind) {
+            case 0:
+                if (field3184() != 0) {
+                    return 0;
+                }
+                if (vcall<int>((void *)owner, 0x180) == 0) {
+                    return 0;
+                }
+                return 1;
+            case 0x28:
+            case 0x29:
+                if (FUN_00a8cab0((int)this) == 0x10B) {
+                    return 0;
+                }
+                return vf1D8() == 0;
+            case 0x32:
+                return ~(bits53F0()[0] >> 30) & 1;
+            case 0x3A:
+                if (FUN_00a81330(&handle11AC()) != 0) {
+                    return 0;
+                }
+                return 1;
+            case 0xB: case 0xE: case 0x10: case 0x11: case 0xF:
+            case 0x1A: case 0x1B: case 0x1C: case 0x23: case 0x49: case 0x2A: case 0x2D:
+            case 0x30: case 0x31: case 0x33: case 0x37: case 0x38: case 0x39:
+            case 0x40: case 0x4B: case 0x4A: case 0x4C: case 0x51: case 0x52:
+            case 0x42: case 0x44: case 0x45: case 0x46: case 0x57: case 0x58: case 0x59: case 0x5A:
+            case 0x5B: case 0x5C: case 0x5D: case 0x5E: case 0x61: case 0x60: case 0x5F: case 100:
+            case 0x62: case 99: case 0x68: case 0x69: case 0x6B:
+                return 1;
+            default:
+                return 0;
+            }
+        }
+    }
+    // kind 8: the object of handle100C must exist and have an owner
+    int linked = (int)FUN_00a81330(&handle100C());
+    if (linked != 0 && FUN_00a7c8a0(linked) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
+// 00B8CBD0  Pl0000::vf184  size=145  [class]
+int Pl0000::vf184(int kind, int obj, int hitInfo)
+{
+    if (obj != 0 && FUN_00a7c8a0(obj) != 0) {
+        if (hitInfo != 0 && !vf32C()) {
+            if (kind == 0x49 && Pl0000_p6::call_00B7E760(this) == 0) {
+                return 9;
+            }
+            unsigned int flags = *(unsigned int *)(hitInfo + 0x8C);
+            if (field3184() == 0 && (flags & 0x40000000) != 0 && (flags & 0x20000000) == 0 &&
+                (flags & 0x2000000) == 0) {
+                return (5 < *(unsigned char *)(hitInfo + 0x11)) ? -1 : 8;
+            }
+        }
+        return -1;
+    }
+    return -1;
+}
+
+// 00B8CC70  Pl0000::vf188  size=235  [class]
+void Pl0000::vf188(int kind, int obj)
+{
+    using namespace Pl0000_p6;
+    if (obj == 0) {
+        return;
+    }
+    FUN_00a7c950((undefined4 *)&handle91C());
+    FUN_00a7c960((undefined4 *)&handle91C(), (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+    int owner = FUN_00a7c8a0(obj);
+    FUN_00a7c960((undefined4 *)&handle1198(), (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+    if (owner == 0) {
+        return;
+    }
+    field10D4() = 8.0f;
+    request2568() = 0;
+    request256C() = 0;
+    field25A4() = 0;
+    if (kind == 9) {
+        FUN_00b7b380((int)this, obj, (undefined4)(matrix() + 12), 1);  // __thiscall
+        setAction(this, 0x2E, 0, 0, 0);
+        vf220(10.0f);
+        FUN_00a7c960((undefined4 *)&handle11AC(), (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+        if (*(int *)(owner + 0x4B0) == 0x20070) {
+            setAction(this, 0x33, 0, 0, 0);
+        }
+    }
+}
+
+// 00B8CD60  FUN_00b8cd60  size=368  [between]
+// Turns towards the object of handle2684 (FUN_00b87df0) when field2570 is set and timer343C has
+// run out; on success starts action 0xB7 (and 0xBD).  Always returns 0.
+undefined4 __fastcall FUN_00b8cd60(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    bool allowed = true;
+    if (FUN_00a8c760((int)self, 0x1F)) {  // __thiscall
+        allowed = false;
+        if (state618(self) == 0xC6 && self->field27E0() != 0) {
+            allowed = true;
+        }
+    }
+    if (self->vf1D8() != 0) {
+        if (vcall<int>((void *)FUN_00c13920(), 0xAC, 0x1000) == 0) {
+            allowed = false;
+        }
+    }
+    if (self->field2570() != 0 && allowed && 0.0f < self->timer343C() && self->field2570() < 3) {
+        self->field2570() = 2;
+    }
+    if (self->field2570() != 0 && allowed && self->timer343C() <= 0.0f) {
+        int target = (int)FUN_00a81330(&self->handle2684());
+        if (target != 0) {
+            float maxTurn;
+            if (*(int *)(FUN_00a7c8a0(target) + 0x4B0) == 0x20600) {
+                maxTurn = 3.1415927f;
+            } else {
+                maxTurn = 1.0471976f;
+            }
+            if (FUN_00b87df0((int)self, target, self->yaw1070(), maxTurn) != 0) {  // __thiscall
+                self->vf220(0.0f);
+                if (!FUN_00a8c760((int)self, 0x21)) {
+                    setAction(self, 0xB7, 0, 0, 0);
+                    if (self->vf1D8() != 0) {
+                        setAction(self, 0xBD, 0, 0, 0);
+                    }
+                }
+                self->fieldB90() = 0x5A;
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+
+// 00B8CED0  FUN_00b8ced0  size=867  [between]
+// Push-out vector push1020 away from the target of handle1370 (turning towards it with vf308)
+// while it is within reach and height range.  ret 0x10.
+void FUN_00b8ced0(Pl0000 *self, float reach, float margin, float verticalScale, float verticalLimit)  // __thiscall
+{
+    using namespace Pl0000_p6;
+    int target = handleOwner(&self->handle1370());
+    float *push = self->push1020();
+    push[0] = 0.0f;
+    push[1] = 0.0f;
+    push[2] = 0.0f;
+    float *pos = self->matrix() + 12;  // +0x40
+    float origin[4];
+    origin[0] = pos[0];
+    origin[2] = pos[2];
+    origin[3] = pos[3];
+    origin[1] = pos[1] + 0.5f;
+    reach = self->push26C4() * reach;
+    verticalScale = self->push26C8() * verticalScale;
+    verticalLimit = self->push26C8() * verticalLimit;
+    if (target == 0) {
+        return;
+    }
+    float targetPos[4];
+    if (FUN_00a81330(&self->handle1370()) != 0) {
+        FUN_00c15010((int)&self->handle1370(), targetPos);  // __thiscall
+    }
+    FUN_00a8e880((int)self, targetPos);  // __thiscall
+    self->vf308(0.2f, 0.0017453292f, 0.5235988f, 0.0f);
+    if (!FUN_00a8c760((int)self, 5)) {  // __thiscall
+        return;
+    }
+    if (vcall<int>((void *)target, 0x228) == 0) {
+        return;
+    }
+    targetPos[1] = targetPos[1] - 1.0f;
+    FUN_00a8e880((int)self, targetPos);  // __thiscall
+    self->vf308(0.1f, 0.00017453292f, 0.08726646f, 0.0f);
+    float dy = targetPos[1] - origin[1];
+    if (dy <= self->push26D0() + self->radius1380() && self->push26CC() - self->radius1380() <= dy) {
+        float dx = targetPos[0] - origin[0];
+        float dz = targetPos[2] - origin[2];
+        float range = self->radius1380() + reach + self->field1384();
+        if (dx * dx + dz * dz <= range * range) {
+            push[0] = dx;
+            push[1] = dy;
+            push[2] = dz;
+            push[3] = targetPos[3] - origin[3];
+            push[1] = push[1] * verticalScale;
+            if (push[1] < -verticalLimit) {
+                push[1] = -verticalLimit;
+            }
+            if (verticalLimit < push[1]) {
+                push[1] = verticalLimit;
+            }
+            float savedY = push[1];
+            float remaining = (sqrtf(push[2] * push[2] + push[0] * push[0]) - self->radius1380()) - margin;
+            if (remaining <= 0.0f) {
+                push[0] = 0.0f;
+                push[2] = 0.0f;
+                push[1] = 0.0f;
+                return;
+            }
+            normalizeOrReset(push);
+            float scale = remaining * 0.15f * self->push26C4();
+            push[0] = push[0] * scale;
+            push[1] = push[1] * scale;
+            push[2] = push[2] * scale;
+            push[3] = scale * push[3];
+            push[1] = savedY;
+            return;
+        }
+    }
+}
+
+// 00B8D240  FUN_00b8d240  size=161  [between]
+void __fastcall FUN_00b8d240(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf1D4(1);
+    if (FUN_00b8cd60(self) != 0) {
+        return;
+    }
+    if (self->vf320(0.016666668f) != 0) {
+        setAction(self, 0xC, 0, 0, 0);
+        return;
+    }
+    if (FUN_00b89f30((int)self) != 0) {
+        FUN_00b7e090((int *)self, 0);  // __thiscall
+        return;
+    }
+    if (subState61C(self) != 0 && FUN_00a8c760((int)self, 1)) {  // __thiscall
+        call_00B86B00(self, 1, 0, 1, 1);
+    }
+}
+
+// 00B8D2F0  FUN_00b8d2f0  size=186  [between]
+void __fastcall FUN_00b8d2f0(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf1D4(1);
+    if (self->vf320(0.016666668f) != 0) {
+        setAction(self, 0xC, 0, 0, 0);
+        return;
+    }
+    if (FUN_00b8cd60(self) != 0) {
+        return;
+    }
+    if (FUN_00b89f30((int)self) != 0) {
+        FUN_00b7e090((int *)self, 0);  // __thiscall
+        return;
+    }
+    if (subState61C(self) != 0) {
+        if (FUN_00a8c760((int)self, 1) && call_00B86B00(self, 1, 1, 1, 1) != 0) {  // __thiscall
+            return;
+        }
+        if (self->field27C0() != 0) {
+            self->move890()[1] = 0.3f;
+        }
+    }
+}
+
+// 00B8D3B0  FUN_00b8d3b0  size=1104  [between]
+// From sub-state 3 on: when the linked object (handle91C) is close (horizontal distance below
+// 1.5 / 2.5) and not too far below, the player snaps onto it for the interactions 0x26 / 0x3B /
+// 0x35 / 0x3E it accepts.
+void __fastcall FUN_00b8d3b0(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    self->fieldF50() = 0;
+    updateB78(self);
+    self->vf1D4(1);
+    if (subState61C(self) == 4) {
+        if (self->vf320(0.016666668f) != 0) {
+            FUN_00da9610((int)DAT_01bea1d0);
+            setAction(self, 0xB, 0, 0, 0);
+            return;
+        }
+    } else {
+        self->vf320(0.016666668f);
+    }
+    if ((DAT_01bea090 & 0x8000) == 0 &&
+        (FUN_00a8c760((int)self, 0x17) || FUN_00a8c760((int)self, 1) || 0.0f < self->slowTimer341C()) &&
+        FUN_00b89e20((int)self)) {
+        self->vec90()[0] = 0.0f;  // +0x90
+        FUN_00da9610((int)DAT_01bea1d0);
+        FUN_00b7e090((int *)self, 0);  // __thiscall
+        return;
+    }
+    if (subState61C(self) < 3 || FUN_00a81330(&self->handle91C()) == 0) {
+        return;
+    }
+    Behavior *target = (Behavior *)FUN_00a7c8a0((int)FUN_00a81330(&self->handle91C()));
+    if (target == 0) {
+        FUN_00da9610((int)DAT_01bea1d0);
+        setAction(self, 0xB, 0, 0, 0);
+        return;
+    }
+    float *pos = self->matrix() + 12;
+    float *targetPos = target->matrix() + 12;
+    float dx = pos[0] - targetPos[0];
+    float dz = pos[2] - targetPos[2];
+    float distance = sqrtf(dz * dz + dx * dx);
+    float range;
+    if (vcall<int>(target, 0x14C, 0x3E, self->field4F0()) == 0) {
+        range = 2.25f;
+    } else {
+        range = 6.25f;
+    }
+    if (distance < range) {
+        float dy = pos[1] - targetPos[1];
+        if (dy <= vcall<float>(target, 0x144) * 1.2f) {
+            snapToTarget(self, target, 0x26, true);
+            snapToTarget(self, target, 0x3B, true);
+            snapToTarget(self, target, 0x35, false);
+            snapToTarget(self, target, 0x3E, false);
+        }
+    }
+}
+
+// 00B8D800  FUN_00b8d800  size=669  [between]
+// Horizontal push-out vector push1020 away from the target of handle1370 (FUN_00b8ced0 without
+// the turn), scaled by pow(0.3, dt) * remaining distance.  ret 8.
+void FUN_00b8d800(Pl0000 *self, float reach, float margin)  // __thiscall
+{
+    using namespace Pl0000_p6;
+    int target = handleOwner(&self->handle1370());
+    float *push = self->push1020();
+    push[0] = 0.0f;
+    push[1] = 0.0f;
+    push[2] = 0.0f;
+    if (target == 0) {
+        return;
+    }
+    float targetPos[4];
+    if (FUN_00a81330(&self->handle1370()) != 0) {
+        FUN_00c15010((int)&self->handle1370(), targetPos);  // __thiscall
+    }
+    if (!FUN_00a8c760((int)self, 5)) {  // __thiscall
+        return;
+    }
+    if (vcall<int>((void *)target, 0x228) == 0) {
+        return;
+    }
+    float *pos = self->matrix() + 12;  // +0x40
+    float dir[4];
+    dir[0] = targetPos[0] - pos[0];
+    dir[1] = targetPos[1] - pos[1];
+    dir[2] = targetPos[2] - pos[2];
+    dir[3] = targetPos[3] - pos[3];
+    normalizeOrReset(dir);  // result not used
+    float dx = targetPos[0] - pos[0];
+    float dz = targetPos[2] - pos[2];
+    float range = self->radius1380() + reach;
+    if (dx * dx + dz * dz <= range * range) {
+        push[0] = dx;
+        push[1] = targetPos[1] - pos[1];
+        push[2] = dz;
+        push[3] = targetPos[3] - pos[3];
+        push[1] = 0.0f;
+        float remaining = (sqrtf(push[2] * push[2] + push[0] * push[0]) - self->radius1380()) - margin;
+        if (remaining <= 0.0f) {
+            push[0] = 0.0f;
+            push[2] = 0.0f;
+            return;
+        }
+        normalizeOrReset(push);
+        double factor = pow((double)0.3f, (double)dt910(self)) * remaining;  // _CIpow (0x00FDC1F0)
+        push[0] = (float)(push[0] * factor);
+        push[1] = (float)(factor * push[1]);
+        push[2] = (float)(factor * push[2]);
+        push[3] = (float)(factor * push[3]);
+        return;
+    }
+}
+
+// 00B8DAA0  Pl0000::vf280  size=268  [class]
+// "Pl0000 ViewRay" from `from` to `to`: returns the hit result, or 0 when nothing is hit or the hit
+// belongs to `ignore` (or both are objects of the 0x201A0 family).
+undefined4 Pl0000::vf280(float *hitPos, float *from, float *to, int ignore)
+{
+    using namespace Pl0000_p6;
+    int group = FUN_009f8b40((int)this);
+    RayRequest request;
+    request.from[0] = from[0];
+    request.flags = group << 16 | 6;
+    request.from[1] = from[1];
+    request.from[2] = from[2];
+    request.from[3] = from[3];
+    request.to[0] = to[0];
+    request.field24 = 4;
+    request.mask28 = 0;
+    request.to[1] = to[1];
+    request.field2C = 0;
+    request.name = "Pl0000 ViewRay";
+    request.to[2] = to[2];
+    request.field34 = 0;
+    request.to[3] = to[3];
+    int objectA;
+    int objectB;
+    int hit = rayCast(DAT_01b35df8, hitPos, 0, &objectA, &objectB, &request);
+    if (hit == 0) {
+        return 0;
+    }
+    if (objectA != 0 && ignore != 0 && (int)FUN_008f7780(objectA) == ignore) {
+        return 0;
+    }
+    if (objectB == 0 || ignore == 0) {
+        return hit;
+    }
+    int owner = FUN_008f7780(objectB);
+    if (owner != ignore) {
+        if (owner == 0) {
+            return hit;
+        }
+        if ((*(unsigned int *)(owner + 0x4B0) & 0xFFFF0) != 0x201A0) {
+            return hit;
+        }
+        if ((*(unsigned int *)(ignore + 0x4B0) & 0xFFFF0) != 0x201A0) {
+            return hit;
+        }
+    }
+    return 0;
+}
+
+// 00B8DBB0  Pl0000::vf3A0  size=134  [class]
+// Parameter [0] of the entry selected by the manager (slots 0x58 / 0x5C, entry byte 0), times the
+// entries 108 + DAT_01bea024 and 125 + mode.
+float10 Pl0000::vf3A0()
+{
+    using namespace Pl0000_p6;
+    void *manager = (void *)FUN_00c13920();
+    unsigned char *entry = 0;
+    int stage = vcall<int>((void *)FUN_00c13920(), 0x58);
+    if (manager != 0) {
+        entry = vcall<unsigned char *>(manager, 0x5C, stage);
+    }
+    float10 value;
+    if (stage == 8) {
+        value = paramEntry(this, 48)[0];
+    } else if (entry == 0) {
+        value = 1;
+    } else {
+        value = paramEntry(this, entry[0] + stage * 6)[0];
+    }
+    int mode = DAT_01bea010 % 4;  // signed remainder (and 0x80000003 / fix-up in the original)
+    return value * paramEntry(this, 108 + DAT_01bea024)[0] * paramEntry(this, 125 + mode)[0];
+}
+
+// 00B8DC40  Pl0000::vf3A4  size=115  [class]
+// As vf3A0 with the manager slots 0x68 / 0x70 and the table from entry 72.
+float10 Pl0000::vf3A4()
+{
+    using namespace Pl0000_p6;
+    void *manager = (void *)FUN_00c13920();
+    int mode68 = vcall<int>((void *)FUN_00c13920(), 0x68);
+    float10 value;
+    unsigned char *entry;
+    if (manager != 0 && (entry = vcall<unsigned char *>(manager, 0x70, mode68)) != 0) {
+        value = paramEntry(this, 72 + entry[0] + mode68 * 6)[0];
+    } else {
+        value = 1;
+    }
+    int mode = DAT_01bea010 % 4;
+    return value * paramEntry(this, 108 + DAT_01bea024)[0] * paramEntry(this, 125 + mode)[0];
+}
+
+// 00B8DCC0  Pl0000::vf3A8  size=135  [class]
+// As vf3A0 with parameter [2] and entry byte 1.
+float10 Pl0000::vf3A8()
+{
+    using namespace Pl0000_p6;
+    void *manager = (void *)FUN_00c13920();
+    unsigned char *entry = 0;
+    int stage = vcall<int>((void *)FUN_00c13920(), 0x58);
+    if (manager != 0) {
+        entry = vcall<unsigned char *>(manager, 0x5C, stage);
+    }
+    float10 value;
+    if (stage == 8) {
+        value = paramEntry(this, 48)[2];
+    } else if (entry == 0) {
+        value = 1;
+    } else {
+        value = paramEntry(this, entry[1] + stage * 6)[2];
+    }
+    int mode = DAT_01bea010 % 4;
+    return value * paramEntry(this, 108 + DAT_01bea024)[2] * paramEntry(this, 125 + mode)[2];
+}
+
+// 00B8DD50  Pl0000::vf3AC  size=116  [class]
+// As vf3A4 with parameter [2] and entry byte 1.
+float10 Pl0000::vf3AC()
+{
+    using namespace Pl0000_p6;
+    void *manager = (void *)FUN_00c13920();
+    int mode68 = vcall<int>((void *)FUN_00c13920(), 0x68);
+    float10 value;
+    unsigned char *entry;
+    if (manager != 0 && (entry = vcall<unsigned char *>(manager, 0x70, mode68)) != 0) {
+        value = paramEntry(this, 72 + entry[1] + mode68 * 6)[2];
+    } else {
+        value = 1;
+    }
+    int mode = DAT_01bea010 % 4;
+    return value * paramEntry(this, 108 + DAT_01bea024)[2] * paramEntry(this, 125 + mode)[2];
+}
+
+// 00B8DDD0  Pl0000::vf3B8  size=100  [class]
+// Parameter [4] of the entry selected by the manager (entry byte 3); no extra factors.
+float10 Pl0000::vf3B8()
+{
+    using namespace Pl0000_p6;
+    void *manager = (void *)FUN_00c13920();
+    unsigned char *entry = 0;
+    int stage = vcall<int>((void *)FUN_00c13920(), 0x58);
+    if (manager != 0) {
+        entry = vcall<unsigned char *>(manager, 0x5C, stage);
+    }
+    if (stage == 8) {
+        return paramEntry(this, 48)[4];
+    }
+    if (entry != 0) {
+        return paramEntry(this, entry[3] + stage * 6)[4];
+    }
+    return 1;
+}
+
+// 00B8DE40  Pl0000::vf3BC  size=45  [class]
+// Byte 3 of the manager entry (not tested for 0 in the original).
+undefined1 Pl0000::vf3BC()
+{
+    using namespace Pl0000_p6;
+    void *manager = (void *)FUN_00c13920();
+    int stage = vcall<int>((void *)FUN_00c13920(), 0x58);
+    if (manager != 0) {
+        unsigned char *entry = vcall<unsigned char *>(manager, 0x5C, stage);
+        return entry[3];
+    }
+    return 0;
+}
+
+// 00B8DE70  FUN_00b8de70  size=258  [callgraph]
+// Adjusts the bits 0x200 / 0x400 / 0x800 (+0x280) of the object FUN_00a92f90() by stage (slot 0x58).
+// The generated prototype has no arguments, but the incoming ECX (the player) is passed on to
+// FUN_00a92f90.
+void __fastcall FUN_00b8de70(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    int obj = FUN_00a92f90((int)self);
+    if (obj == 0 || (*at<unsigned char>(obj, 0x94) & 1) == 0) {
+        return;
+    }
+    if (call_00E26E90(obj) != 0) {
+        *at<unsigned int>(obj, 0x280) |= 0x200;
+    }
+    if (call_00E26E90(obj) != 0) {
+        *at<unsigned int>(obj, 0x280) &= 0xFFFFFBFF;
+    }
+    if (call_00E26E90(obj) != 0) {
+        *at<unsigned int>(obj, 0x280) &= 0xFFFFF7FF;
+    }
+    if (mgrCall(0x58) == 3) {
+        if (call_00E26E90(obj) != 0) {
+            *at<unsigned int>(obj, 0x280) &= 0xFFFFFDFF;
+        }
+        if (call_00E26E90(obj) != 0) {
+            *at<unsigned int>(obj, 0x280) |= 0x400;
+        }
+        if (call_00E26E90(obj) != 0) {
+            *at<unsigned int>(obj, 0x280) &= 0xFFFFF7FF;
+        }
+    }
+    if (mgrCall(0x58) == 7) {
+        if (call_00E26E90(obj) != 0) {
+            *at<unsigned int>(obj, 0x280) &= 0xFFFFFDFF;
+        }
+        if (call_00E26E90(obj) != 0) {
+            *at<unsigned int>(obj, 0x280) &= 0xFFFFFBFF;
+        }
+        if (call_00E26E90(obj) != 0) {
+            *at<unsigned int>(obj, 0x280) |= 0x800;
+        }
+    }
+}
+
+// 00B8DF80  FUN_00b8df80  size=114  [callgraph]
+void __fastcall FUN_00b8df80(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    self->fieldB94() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    FUN_00b8cd60(self);
+}
+
+// 00B8E000  FUN_00b8e000  size=284  [callgraph]
+void __fastcall FUN_00b8e000(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    self->fieldB94() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (subState61C(self) == 0 || FUN_00b8cd60(self) != 0) {
+        return;
+    }
+    if (FUN_00b89f30((int)self) != 0) {
+        FUN_00b7e090((int *)self, 0);  // __thiscall
+        return;
+    }
+    unsigned int hold = self->inputHold();
+    if ((self->maskE3C() & hold) == 0 || FUN_00416d50(8)) {
+        setAction(self, 0x87, 0, 0, 0);
+    } else {
+        if (90000.0f < self->inputSqD28()) {
+            setAction(self, 0x84, 0, 0, 0);
+            return;
+        }
+        if (subState61C(self) == 1 && (self->maskE40() & hold) != 0) {
+            setAction(self, 0x85, 0, 0, 0);
+            return;
+        }
+    }
+}
+
+// 00B8E120  FUN_00b8e120  size=263  [callgraph]
+void __fastcall FUN_00b8e120(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    self->fieldB94() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (FUN_00b8cd60(self) != 0) {
+        return;
+    }
+    if (FUN_00b89f30((int)self) != 0) {
+        FUN_00b7e090((int *)self, 0);  // __thiscall
+        return;
+    }
+    if ((self->maskE3C() & self->inputHold()) == 0 || (DAT_01bea090 & 0x800000) != 0) {
+        setAction(self, 0x87, 0, 0, 0);
+    } else {
+        if (self->inputSqD28() < 62500.0f) {
+            setAction(self, 0x83, 0, 0, 0);
+            return;
+        }
+        if (subState61C(self) == 1 && (self->maskE40() & self->inputHold()) != 0) {
+            setAction(self, 0x85, 0, 0, 0);
+            return;
+        }
+    }
+}
+
+// 00B8E230  FUN_00b8e230  size=114  [callgraph]
+void __fastcall FUN_00b8e230(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    self->fieldB94() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    FUN_00b8cd60(self);
+}
+
+// 00B8E2B0  FUN_00b8e2b0  size=139  [callgraph]
+void __fastcall FUN_00b8e2b0(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    self->fieldB94() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (FUN_00b8cd60(self) == 0 && FUN_00b89f30((int)self) != 0) {
+        FUN_00b7e090((int *)self, 0);  // __thiscall
+    }
+}
+
+// 00B8E340  FUN_00b8e340  size=582  [callgraph]
+// Unless field1410: casts the "Sito" ray 200 units from DAT_01bea380 towards DAT_01bea390; the end
+// point / hit is kept in rayEnd2760 and copied to DAT_01dc4eb0.
+void __fastcall FUN_00b8e340(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    if (self->field1410() != 0) {
+        return;
+    }
+    DAT_01dc1314 = 1;
+    FUN_00f98a90();
+    FUN_00f98aa0();
+    float start[4];
+    start[0] = DAT_01bea380[0];
+    start[1] = DAT_01bea380[1];
+    start[2] = DAT_01bea380[2];
+    start[3] = DAT_01bea380[3];
+    float dir[4];
+    dir[0] = DAT_01bea390[0] - DAT_01bea380[0];
+    dir[1] = DAT_01bea390[1] - DAT_01bea380[1];
+    dir[2] = DAT_01bea390[2] - DAT_01bea380[2];
+    dir[3] = DAT_01bea390[3] - DAT_01bea380[3];
+    normalizeOrReset(dir);
+    float *end = self->rayEnd2760();
+    dir[0] = dir[0] * 200.0f;
+    int hitFlag = 0;
+    dir[1] = dir[1] * 200.0f;
+    dir[2] = dir[2] * 200.0f;
+    dir[3] = dir[3] * 200.0f;
+    float target[4];
+    target[0] = dir[0] + start[0];
+    target[1] = dir[1] + start[1];
+    target[2] = start[2] + dir[2];
+    target[3] = dir[3] + start[3];
+    end[0] = target[0];
+    end[1] = target[1];
+    end[2] = target[2];
+    end[3] = target[3];
+    int group = FUN_009f8b40((int)self);
+    RayRequest request;
+    request.from[0] = start[0];
+    request.flags = group << 16 | 0x1E;
+    request.from[1] = start[1];
+    request.from[2] = start[2];
+    request.from[3] = start[3];
+    request.to[0] = target[0];
+    request.to[1] = target[1];
+    request.field24 = 0;
+    request.to[2] = target[2];
+    request.mask28 = 0;
+    request.field2C = 0;
+    request.to[3] = target[3];
+    request.name = "Sito";  // DAT_0163e7c8
+    request.field34 = 0;
+    unsigned char work[28];
+    rayCast(DAT_01b35df8, end, work, &hitFlag, 0, &request);
+    DAT_01dc4eb0[0] = end[0];
+    DAT_01dc4eb0[1] = end[1];
+    DAT_01dc4eb0[2] = end[2];
+    DAT_01dc4eb0[3] = end[3];
+}
+
+// 00B8E590  FUN_00b8e590  size=311  [callgraph]
+void __fastcall FUN_00b8e590(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (subState61C(self) == 0) {
+        return;
+    }
+    if (mgrCall(0x6C) == 9 && (self->inputHold() & self->maskE48()) != 0) {
+        setAction(self, 0x8F, 0, 0, 0);
+        return;
+    }
+    if ((self->inputHold() & self->maskE3C()) == 0 || (DAT_01bea090 & 0x1000000) != 0 ||
+        (DAT_01bea090 & 0x800000) != 0) {
+        setAction(self, 0x8E, 0, 0, 0);
+    } else if (90000.0f < self->inputSqD28()) {
+        if (!FUN_00416d50(7) && 810000.0f < self->inputSqD28()) {
+            setAction(self, 0x8D, 0, 0, 0);
+            return;
+        }
+        setAction(self, 0x8C, 0, 0, 0);
+        return;
+    }
+}
+
+// 00B8E6D0  FUN_00b8e6d0  size=311  [callgraph]
+// Same code as FUN_00b8e590.
+void __fastcall FUN_00b8e6d0(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (subState61C(self) == 0) {
+        return;
+    }
+    if (mgrCall(0x6C) == 9 && (self->inputHold() & self->maskE48()) != 0) {
+        setAction(self, 0x8F, 0, 0, 0);
+        return;
+    }
+    if ((self->inputHold() & self->maskE3C()) == 0 || (DAT_01bea090 & 0x1000000) != 0 ||
+        (DAT_01bea090 & 0x800000) != 0) {
+        setAction(self, 0x8E, 0, 0, 0);
+    } else if (90000.0f < self->inputSqD28()) {
+        if (!FUN_00416d50(7) && 810000.0f < self->inputSqD28()) {
+            setAction(self, 0x8D, 0, 0, 0);
+            return;
+        }
+        setAction(self, 0x8C, 0, 0, 0);
+        return;
+    }
+}
+
+// 00B8E810  FUN_00b8e810  size=410  [callgraph]
+void __fastcall FUN_00b8e810(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (subState61C(self) == 0) {
+        return;
+    }
+    if (mgrCall(0x6C) == 9 && (self->inputHold() & self->maskE48()) != 0) {
+        setAction(self, 0x8F, 0, 0, 0);
+        return;
+    }
+    if ((self->inputHold() & self->maskE3C()) == 0 || (DAT_01bea090 & 0x1000000) != 0 ||
+        (DAT_01bea090 & 0x800000) != 0) {
+        setAction(self, 0x8E, 0, 0, 0);
+        return;
+    }
+    int step = subState61C(self);
+    if (step < 4) {
+        if (self->inputSqD28() <= 62500.0f) {
+            subState61C(self) = 4;
+            return;
+        }
+        if (!FUN_00416d50(7)) {
+            if (step == 1 && (float)call_00A959F0(self, 0) <= 10.0f && 810000.0f < self->inputSqD28()) {
+                setAction(self, 0x8D, 0, 0, 0);
+            } else if (810000.0f < self->inputSqD28()) {
+                setAction(self, 0x8D, 2, 0, 0);
+                return;
+            }
+        }
+    }
+}
+
+// 00B8E9B0  FUN_00b8e9b0  size=298  [callgraph]
+void __fastcall FUN_00b8e9b0(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (subState61C(self) == 0) {
+        return;
+    }
+    if (mgrCall(0x6C) == 9 && (self->inputHold() & self->maskE48()) != 0) {
+        setAction(self, 0x8F, 0, 0, 0);
+        return;
+    }
+    if ((self->inputHold() & self->maskE3C()) == 0 || (DAT_01bea090 & 0x1000000) != 0 ||
+        (DAT_01bea090 & 0x800000) != 0) {
+        setAction(self, 0x8E, 0, 0, 0);
+    } else if (subState61C(self) < 4) {
+        if (self->inputSqD28() <= 62500.0f) {
+            subState61C(self) = 4;
+            return;
+        }
+        if (self->inputSqD28() <= 722500.0f) {
+            setAction(self, 0x8C, 2, 0, 0);
+            return;
+        }
+    }
+}
+
+// 00B8EAE0  FUN_00b8eae0  size=405  [callgraph]
+// Chooses the side actions 0x92 / 0x93 when the stick yaw is within ~0.87 rad of the player's
+// left / right (yaw -/+ pi/2).
+void __fastcall FUN_00b8eae0(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (subState61C(self) == 0) {
+        return;
+    }
+    unsigned int hold = self->inputHold();
+    if ((self->maskE3C() & hold) == 0 || self->field2794() != 0 || (DAT_01bea090 & 0x1000000) != 0 ||
+        FUN_00416d50(8)) {
+        setAction(self, 0x8E, 0, 0, 0);
+        return;
+    }
+    if ((self->maskE48() & hold) == 0) {
+        setAction(self, 0x90, 0, 0, 0);
+    }
+    float leftYaw = wrapAngle(self->vec90()[1] - 1.5707964f);
+    float rightYaw = wrapAngle(self->vec90()[1] + 1.5707964f);
+    float toLeft = wrapAngle(self->inputYawD30() - leftYaw);
+    float toRight = wrapAngle(self->inputYawD30() - rightYaw);
+    if (toLeft * toLeft <= 0.76154357f) {
+        setAction(self, 0x92, 0, 0, 0);
+    }
+    if (toRight * toRight <= 0.76154357f) {
+        setAction(self, 0x93, 0, 0, 0);
+        return;
+    }
+}
+
+// 00B8EC80  FUN_00b8ec80  size=532  [callgraph]
+void __fastcall FUN_00b8ec80(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf320(0.016666668f);
+    self->field26D8() = 1;
+    if (self->vf34C() != 0) {
+        self->vf388(0);
+        return;
+    }
+    if (subState61C(self) == 0) {
+        return;
+    }
+    if ((self->inputHold() & self->maskE3C()) == 0 || self->field2794() != 0 ||
+        (DAT_01bea090 & 0x1000000) != 0 || FUN_00416d50(8)) {
+        setAction(self, 0x8E, 0, 0, 0);
+        return;
+    }
+    if (field920(self) >= 60.0f && FUN_00a8c760((int)self, 0xB)) {  // __thiscall
+        if ((self->inputHold() & self->maskE48()) == 0) {
+            setAction(self, 0x90, 0, 0, 0);
+        }
+        float leftYaw = wrapAngle(self->vec90()[1] - 1.5707964f);
+        float rightYaw = wrapAngle(self->vec90()[1] + 1.5707964f);
+        if (self->inputSqD28() <= 90000.0f) {
+            setAction(self, 0x91, 0, 0, 0);
+            return;
+        }
+        float toLeft = wrapAngle(self->inputYawD30() - leftYaw);
+        float toRight = wrapAngle(self->inputYawD30() - rightYaw);
+        if (state618(self) == 0x93 && toLeft * toLeft <= 0.76154357f) {
+            setAction(self, 0x92, 0, 0, 0);
+        }
+        if (state618(self) == 0x92 && toRight * toRight <= 0.76154357f) {
+            setAction(self, 0x93, 0, 0, 0);
+            return;
+        }
+    }
+}
+
+// 00B8EEA0  FUN_00b8eea0  size=175  [callgraph]
+void __fastcall FUN_00b8eea0(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf1D4(1);
+    if (self->vf320(0.016666668f) != 0) {
+        setAction(self, 0xC, 0, 0, 0);
+        return;
+    }
+    if (FUN_00b8cd60(self) != 0) {
+        return;
+    }
+    if (FUN_00b89f30((int)self) != 0) {
+        FUN_00b7e090((int *)self, 0);  // __thiscall
+        return;
+    }
+    if (FUN_00a8c760((int)self, 1) && call_00B86B00(self, 1, 1, 1, 1) != 0) {  // __thiscall
+        return;
+    }
+    if (self->field27C0() != 0) {
+        self->move890()[1] = 0.3f;
+    }
+}
+
+// 00B8EF50  FUN_00b8ef50  size=261  [callgraph]
+void __fastcall FUN_00b8ef50(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf1D4(1);
+    if (subState61C(self) == 3) {
+        if (0x3C < *at<int>(controller764(self), 0x120)) {
+            setAction(self, 4, 0, 0, 0);
+            self->field2C5C() = 20.0f;
+        }
+        if (self->vf320(0.016666668f) != 0) {
+            subState61C(self) = subState61C(self) + 1;
+            return;
+        }
+    } else {
+        self->vf320(0.016666668f);
+    }
+    float held;
+    if ((self->inputHold() & self->maskE24()) == 0) {
+        held = 0.0f;
+    } else {
+        held = dt910(self) + self->holdTimeFDC();
+    }
+    self->holdTimeFDC() = held;
+    if (subState61C(self) != 0 && FUN_00b8cd60(self) == 0) {
+        if (FUN_00b89f30((int)self) != 0) {
+            FUN_00b7e090((int *)self, 0);  // __thiscall
+            return;
+        }
+        if (FUN_00a8c760((int)self, 1)) {  // __thiscall
+            call_00B86B00(self, 1, 1, 1, 1);
+        }
+    }
+}
+
+// 00B8F060  FUN_00b8f060  size=328  [callgraph]
+void __fastcall FUN_00b8f060(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    updateB78(self);
+    self->vf1D4(1);
+    if ((self->inputHold() & self->maskE24()) == 0) {
+        self->holdTimeFDC() = 0.0f;
+    } else {
+        self->holdTimeFDC() = dt910(self) + self->holdTimeFDC();
+    }
+    if (self->holdTimeFDC() == 0.0f) {
+        if (subState61C(self) == 1) {
+            setAction(self, 0xAD, 2, 0, 0);
+            return;
+        }
+        if (subState61C(self) == 3) {
+            subState61C(self) = 4;
+        }
+    }
+    if (subState61C(self) == 7) {
+        if (0x78 < *at<int>(controller764(self), 0x120)) {
+            setAction(self, 4, 0, 0, 0);
+            self->field2C5C() = 20.0f;
+        }
+        if (self->vf320(0.016666668f) != 0) {
+            subState61C(self) = subState61C(self) + 1;
+            return;
+        }
+    } else {
+        self->vf320(0.016666668f);
+    }
+    if (subState61C(self) != 0 && FUN_00b8cd60(self) == 0) {
+        if (FUN_00b89f30((int)self) != 0) {
+            FUN_00b7e090((int *)self, 0);  // __thiscall
+            return;
+        }
+        if (FUN_00a8c760((int)self, 1)) {  // __thiscall
+            call_00B86B00(self, 1, 1, 1, 1);
+        }
+    }
+}
+
+// 00B8F1B0  FUN_00b8f1b0  size=118  [callgraph]
+// 1 unless the item FUN_0094e5e0(FUN_00b7f840()) is missing, or neither FUN_00b7f940 nor
+// FUN_00b7f980 accepts it (mode 1 and game modes 8 / 9 always give 1).
+undefined4 FUN_00b8f1b0(void)
+{
+    using namespace Pl0000_p6;
+    if (DAT_01bea010 % 4 != 1 && mgrCall(0x6C) != 8 && mgrCall(0x6C) != 9) {
+        if (FUN_0094e5e0((int)DAT_01886ea0, FUN_00b7f840()) == 0) {  // __thiscall
+            return 0;
+        }
+        if (!FUN_00b7f940() && call_00B7F980() == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// 00B8F230  FUN_00b8f230  size=261  [callgraph]
+// Keeps up to 8 objects (of type DAT_01be9c94) in handles3354: entries whose object is in state 2
+// are cleared; when more than 4 are in state 0 / 1 the nearest one (+0xBF0) gets FUN_00a8cb50(2);
+// then `obj` is stored in the first free slot.  ret 4.
+void FUN_00b8f230(Pl0000 *self, int obj)  // __thiscall
+{
+    using namespace Pl0000_p6;
+    float nearestDistance = 6000.0f;
+    short count = 0;
+    int nearest = 0;
+    unsigned int *handle = self->handles3354();
+    for (int n = 8; n != 0; n--, handle++) {
+        if (FUN_00a81330(handle) == 0) {
+            continue;
+        }
+        int other = FUN_00a7c8a0((int)FUN_00a81330(handle));
+        if (other == 0 || !isKindOf((void *)other, 4, DAT_01be9c94)) {
+            continue;
+        }
+        if (FUN_00a8cab0(other) == 2) {
+            FUN_00a7c950((undefined4 *)handle);
+        }
+        if (FUN_00a8cab0(other) < 2) {
+            count++;
+            if (*at<float>(other, 0xBF0) < nearestDistance) {
+                nearestDistance = *at<float>(other, 0xBF0);
+                nearest = other;
+            }
+        }
+    }
+    if (4 < count && nearest != 0) {
+        FUN_00a8cb50(nearest, 2);  // __thiscall
+    }
+    for (short i = 0; i < 8; i++) {
+        if (FUN_00a81330(&self->handles3354()[i]) == 0) {
+            FUN_00a7c960((undefined4 *)&self->handles3354()[i], (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+            return;
+        }
+    }
+}
+
+// 00B8F340  FUN_00b8f340  size=610  [callgraph]
+// Shows the "wo1001_" meshes of the object of handleFFC and hides them again while timer27A4 runs
+// (or during action 0x24); creates the "wing" object 0x31002 (its "wing" meshes hidden) while
+// FUN_00a8c760(0x25) holds and releases it afterwards.
+void __fastcall FUN_00b8f340(Pl0000 *self)
+{
+    using namespace Pl0000_p6;
+    int linked = (int)FUN_00a81330(&self->handleFFC());
+    if (linked == 0 || FUN_00a7c8a0(linked) == 0) {
+        return;
+    }
+    setMeshFlag((cModelBase *)handleOwner(&self->handleFFC()), "wo1001_", true);
+    if (self->timer27A4() >= 0.0f) {
+        self->timer27A4() = self->timer27A4() - dt910(self);
+    }
+    if (self->timer27A4() >= 0.0f || FUN_00a8c760((int)self, 0x24)) {  // __thiscall
+        setMeshFlag((cModelBase *)handleOwner(&self->handleFFC()), "wo1001_", false);
+    }
+    if (self->wingState27A8() == 0) {
+        if (FUN_00a8c760((int)self, 0x25)) {  // __thiscall
+            float offset[3];
+            offset[0] = 0.0f;
+            offset[1] = 0.0f;
+            offset[2] = 0.0f;
+            self->wingState27A8() = 1;
+            int wing = (int)FUN_00ad0020(0x31002, self->field4F0(), 0x700, (undefined4)offset);
+            if (wing != 0) {
+                setMeshFlag((cModelBase *)wing, "wing", false);
+                FUN_00a7c960((undefined4 *)&self->handle27AC(),
+                             (undefined4 *)FUN_00a7c7f0(*at<int>(wing, 0x4F0)));  // __thiscall
+            }
+        }
+    } else if (self->wingState27A8() == 1 && !FUN_00a8c760((int)self, 0x25)) {  // __thiscall
+        self->wingState27A8() = 0;
+        int wingObj = (int)FUN_00a81330(&self->handle27AC());
+        if (wingObj != 0) {
+            FUN_00a805f0(wingObj);
+        }
+        FUN_00a7c950((undefined4 *)&self->handle27AC());
+        return;
+    }
+}

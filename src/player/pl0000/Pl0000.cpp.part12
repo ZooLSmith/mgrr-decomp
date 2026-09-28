@@ -1,0 +1,1777 @@
+// src/player/pl0000/Pl0000.cpp (part 13/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// imports
+extern "C" float *__stdcall D3DXMatrixInverse(float *out, float *determinant, const float *m);
+extern "C" float *__stdcall D3DXMatrixRotationY(float *out, float angle);
+extern "C" float *__stdcall D3DXVec3TransformNormal(float *out, const float *v, const float *m);
+extern "C" unsigned int _tls_index;
+extern "C" unsigned long __readfsdword(unsigned long offset);
+#pragma intrinsic(__readfsdword)
+
+// globals
+extern unsigned int DAT_01bea060;  // global flags
+extern unsigned int DAT_01bea070;  // global flags (input masking bits 0x20000 / 0x80000 / 0x100000 / 0x200000)
+extern unsigned int DAT_01bea094;  // global flags
+extern float DAT_01bea560[16];     // copy of the player's orientation matrix (FUN_00b895d0)
+extern float DAT_01bea5a0[16];     // its inverse
+extern float DAT_01bea6c0;
+extern unsigned char DAT_018b9140[];  // object: ECX of FUN_00d45a70
+extern unsigned char DAT_01dd0814[];  // random generator (ECX of FUN_00dde2d0)
+extern char DAT_0163d0ac[];        // "[Hw::VecNormalize]..." (message of FUN_00dd5650)
+extern int DAT_01885d68;           // cHavok: 1 = world locking disabled
+extern int DAT_01885db8;           // cHavok: non-zero = inside the unlock period
+extern int DAT_01b35fac;           // cHavok: world exists
+extern unsigned char DAT_01885d70[];  // cHavok world lock object (ECX of FUN_00dd7300)
+extern unsigned char DAT_01be9ef4[];  // type descriptor tested with FUN_00dd6d80 (FUN_00b85420)
+extern int DAT_018b9174;           // current phase id
+extern char DAT_01beb908[];        // object: ECX of FUN_00c4e710
+extern unsigned char DAT_01b35df8[];  // collision world: ECX of RayCastSingleHitWork::RayCastSingleHitWork_2
+extern unsigned char DAT_01b7b628[];  // object table: ECX of FUN_00a18d70 (find by name hash)
+
+// defined earlier in this file (parts 1 .. 12)
+void __fastcall FUN_00b7a090(Pl0000 *self);
+bool __fastcall FUN_00b7a600(Pl0000 *self);
+void __fastcall FUN_00b7ac20(Pl0000 *self);
+void FUN_00b7b380(Pl0000 *self, int obj, undefined4 key, int flag);  // __thiscall
+void FUN_00b7c9c0(Pl0000 *self, int hp);  // __thiscall
+void __fastcall FUN_00b7f530(Pl0000 *self);
+void FUN_00b86010(Pl0000 *self, int useLockOn);  // __thiscall
+void FUN_00b877b0(Pl0000 *self, int amount, int unused);  // __thiscall
+void __fastcall FUN_00b88e20(Pl0000 *self);
+void FUN_00b893e0(Pl0000 *self, float *up, int copy);  // __thiscall
+void __fastcall FUN_00b895d0(Pl0000 *self);
+void __fastcall FUN_00b8e340(Pl0000 *self);
+void __fastcall FUN_00b8f340(Pl0000 *self);
+void __fastcall FUN_00b93330(Pl0000 *self);
+void __fastcall FUN_00b93680(Pl0000 *self);
+void FUN_00b94790(Pl0000 *self, float unused1, float unused2);  // __thiscall
+void __fastcall FUN_00b94b00(Pl0000 *self);
+void __fastcall FUN_00b94fc0(Pl0000 *self);
+void __fastcall FUN_00b954d0(Pl0000 *self);
+void __fastcall FUN_00bc2bd0(Pl0000 *self);
+void __fastcall FUN_00bc3690(Pl0000 *self);
+void __fastcall FUN_00bc3dc0(Pl0000 *self);
+void __fastcall FUN_00bc54c0(Pl0000 *self);
+void __fastcall FUN_00be7f50(Pl0000 *self);
+void __fastcall FUN_00be86f0(Pl0000 *self);
+void __fastcall FUN_00be9130(Pl0000 *self);
+
+namespace Pl0000_p13 {
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &state618(void *p)      { return *(int *)((char *)p + 0x618); }    // Behavior+0x618: ? current action / state id
+inline int   &subState61C(void *p)   { return *(int *)((char *)p + 0x61C); }    // Behavior+0x61C: ? sub-state of the current action
+inline int   &controller764(void *p) { return *(int *)((char *)p + 0x764); }    // Behavior+0x764: ? character controller (0 = none)
+inline float &dt910(void *p)         { return *(float *)((char *)p + 0x910); }  // BehaviorAppBase+0x910: ? frame delta time
+inline float &dir914(void *p)        { return *(float *)((char *)p + 0x914); }  // BehaviorAppBase+0x914: ? direction of the hit / input (radians)
+inline float &field920(void *p)      { return *(float *)((char *)p + 0x920); }  // BehaviorAppBase+0x920: ? (here: count-down / time)
+inline float &field928(void *p)      { return *(float *)((char *)p + 0x928); }  // BehaviorAppBase+0x928: ? (here: curve position 0 .. 2)
+inline int   &field940(void *p)      { return *(int *)((char *)p + 0x940); }    // BehaviorAppBase+0x940: ? (here: motion variant)
+
+// virtual call through slot `off` (byte offset) of an object whose class is not known here
+template <class R> inline R vcall(void *obj, unsigned int off)
+{
+    return (*(R (__thiscall **)(void *))(*(char **)obj + off))(obj);
+}
+
+// virtual slot `off` of the manager returned by FUN_00c13920 (0x6C: game mode)
+inline int mgrCall(unsigned int off)
+{
+    return vcall<int>((void *)FUN_00c13920(), off);
+}
+
+// owner (FUN_00a7c8a0) of the object resolved from `handle` (FUN_00a81330, called once), or 0
+inline int ownerOf(unsigned int *handle)
+{
+    int obj = (int)FUN_00a81330(handle);
+    int owner = 0;
+    if (obj != 0) {
+        owner = (int)FUN_00a7c8a0(obj);
+    }
+    return owner;
+}
+
+// sum of the frame counters (+0xB8 / +0xC4 / +0xD0) of the animation object FUN_00a92f90()
+inline int motionFrames(int motion)
+{
+    return *(int *)(motion + 0xD0) + *(int *)(motion + 0xC4) + *(int *)(motion + 0xB8);
+}
+// FUN_00a92f90 then: no frames left, or FUN_00e36060(animation + 0xF4, 0) (the motion has ended)
+inline bool motionDone(Pl0000 *self)
+{
+    int animation = (int)FUN_00a92f90((int)self);
+    return motionFrames(animation) == 0 || FUN_00e36060(animation + 0xF4, 0);  // __thiscall
+}
+
+// FUN_00b895d0 inlined: resets the orientation to up = (0, 1, 0) and publishes it (DAT_01bea560 / inverse)
+inline void publishOrientation(Pl0000 *self)
+{
+    float up[3];
+    up[0] = 0.0f;
+    up[1] = 1.0f;
+    up[2] = 0.0f;
+    FUN_00b893e0(self, up, 1);
+    float *m = self->matrixB0();
+    for (int i = 0; i < 16; i++) {
+        DAT_01bea560[i] = m[i];
+    }
+    D3DXMatrixInverse(DAT_01bea5a0, 0, DAT_01bea560);
+    DAT_01bea6c0 = 0.0f;
+}
+
+// sets the model tint (+0xE4 / +0xE8 / +0xEC) of the animation model after FUN_00e26e90
+inline void setModelTint(int model, float value)
+{
+    FUN_00e26e90(model);
+    *(float *)(model + 0xE4) = value;
+    *(float *)(model + 0xE8) = value;
+    *(float *)(model + 0xEC) = value;
+}
+
+// Havok world read lock: FUN_00860de0 constructs the guard; its destructor is inlined.
+inline void havokReadUnlock()
+{
+    if (DAT_01885d68 != 1) {
+        char *tls = ((char **)__readfsdword(0x2C))[_tls_index];
+        if (*(int *)(tls + 4) == 0) {
+            int *readDepth = (int *)(tls + 8);
+            *readDepth = *readDepth - 1;
+            if (*readDepth == 0 && DAT_01b35fac != 0 && DAT_01885db8 == 0) {
+                FUN_00dd7300((int)DAT_01885d70);
+            }
+        }
+    }
+}
+// Havok world write lock: FUN_004066f0 constructs the guard; its destructor is inlined.
+inline void havokWriteUnlock()
+{
+    if (DAT_01885d68 != 1) {
+        char *tls = ((char **)__readfsdword(0x2C))[_tls_index];
+        int *writeDepth = (int *)(tls + 4);
+        *writeDepth = *writeDepth - 1;
+        if (*writeDepth == 0 && DAT_01b35fac != 0 && DAT_01885db8 == 0) {
+            FUN_00dd7320((int)DAT_01885d70);
+        }
+    }
+}
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void setAction(void *obj, int action, int a, int b, int c)  // FUN_00a8caf0 (Behavior)
+{
+    ((void (__thiscall *)(void *, int, int, int, int))0x00A8CAF0)(obj, action, a, b, c);
+}
+inline void call_00AA4080(void *self, int id, int layer, float a, float b, int flags, float c, float d)
+{
+    ((void (__thiscall *)(void *, int, int, float, float, int, float, float))0x00AA4080)(
+        self, id, layer, a, b, flags, c, d);
+}
+// 0x00A94A40: motion `motion` of the file set on a layer (ret 0x24)
+inline void call_00A94A40(void *self, int fileSet, int a, int b, int c, int d, int e, int motion, float blend,
+                          unsigned int flags)
+{
+    ((void (__thiscall *)(void *, int, int, int, int, int, int, int, float, unsigned int))0x00A94A40)(
+        self, fileSet, a, b, c, d, e, motion, blend, flags);
+}
+// 0x00A947E0: sets the frame of motion layer `layer` (ret 0x10)
+inline void call_00A947E0(void *self, int layer, float frame, float a, float b)
+{
+    ((void (__thiscall *)(void *, int, float, float, float))0x00A947E0)(self, layer, frame, a, b);
+}
+inline void call_00A94BC0(void *self, int layer, float time)
+{
+    ((void (__thiscall *)(void *, int, float))0x00A94BC0)(self, layer, time);
+}
+// 0x00A9F4C0: starts the named animation (ret 0x10)
+inline void call_00A9F4C0(void *self, const char *name, float blend, int flags, int a)
+{
+    ((void (__thiscall *)(void *, const char *, float, int, int))0x00A9F4C0)(self, name, blend, flags, a);
+}
+inline float10 call_00DDBA30(float value)  // angle wrapped to [-pi, pi]
+{
+    return ((float10 (__cdecl *)(float))0x00DDBA30)(value);
+}
+inline void call_00DD5650(const char *message)  // ? debug message
+{
+    ((void (__cdecl *)(const char *))0x00DD5650)(message);
+}
+inline int call_00E03EA0(const char *name)  // hash of a name
+{
+    return ((int (__cdecl *)(const char *))0x00E03EA0)(name);
+}
+// FUN_00bc6e00 (stdcall, ret 0xC): builds the movement curve `curve` from `from` to `to`
+inline void call_00BC6E00(void *curve, float *from, float *to)
+{
+    ((void (__stdcall *)(void *, float *, float *))0x00BC6E00)(curve, from, to);
+}
+inline void call_00C420C0(float time)  // sets DAT_01bea060 bit 0x20000000 and the time, then FUN_00c29a50
+{
+    ((void (__cdecl *)(float))0x00C420C0)(time);
+}
+inline void call_00D664E0(void *obj, int mode)  // ret 4
+{
+    ((void (__thiscall *)(void *, int))0x00D664E0)(obj, mode);
+}
+inline void call_00DDA360(int a, float b, float c, int d)
+{
+    ((void (__cdecl *)(int, float, float, int))0x00DDA360)(a, b, c, d);
+}
+inline int call_00D82980(void *obj, int index)
+{
+    return ((int (__thiscall *)(void *, int))0x00D82980)(obj, index);
+}
+inline void call_00D82DE0(void *obj, int item)  // FUN_00d82de0: ret 4
+{
+    ((void (__thiscall *)(void *, int))0x00D82DE0)(obj, item);
+}
+inline void call_00B95720(void *self)  // Pl0010::GroundTest
+{
+    ((void (__thiscall *)(void *))0x00B95720)(self);
+}
+inline void setControllerHeight(int controller, float height)  // CharacterControl::setHeight (0x008E49E0)
+{
+    ((void (__thiscall *)(int, float))0x008E49E0)(controller, height);
+}
+inline void call_0041CC40(int model, float value)  // ret 4
+{
+    ((void (__thiscall *)(int, float))0x0041CC40)(model, value);
+}
+inline void call_00F96550(float x, float y, const char *format, double value)  // debug print (empty in this build)
+{
+    ((void (__cdecl *)(float, float, const char *, double))0x00F96550)(x, y, format, value);
+}
+inline void setPhantomTransform(void *phantom, float *matrix)  // Phantom::setTransform (0x00901900), ret 4
+{
+    ((void (__thiscall *)(void *, float *))0x00901900)(phantom, matrix);
+}
+inline void constructCollector(void *collector)  // hkpAllCdPointCollector::hkpAllCdPointCollector (0x00438860)
+{
+    ((void (__thiscall *)(void *))0x00438860)(collector);
+}
+inline void destructCollector(void *collector)  // 0x004388C0: hkpAllCdPointCollector destructor body
+{
+    ((void (__thiscall *)(void *))0x004388C0)(collector);
+}
+inline int call_00A8B590(void *self)  // owner of the current action object (tail-calls FUN_00a7c8a0)
+{
+    return ((int (__thiscall *)(void *))0x00A8B590)(self);
+}
+// 0x008EAF70 (named hkpCdPointCollector::hkpCdPointCollector): ? ground probe of the character
+// controller along `delta` from `pos` (pos receives the hit); non-zero on a hit
+inline int call_008EAF70(int controller, float *delta, float *pos, int a, int b, float radius)
+{
+    return ((int (__thiscall *)(int, float *, float *, int, int, float))0x008EAF70)(controller, delta, pos, a, b,
+                                                                                   radius);
+}
+inline int call_00C58490(void *obj, int owner, float yaw, float maxYawDelta, float range)  // ret 0x10
+{
+    return ((int (__thiscall *)(void *, int, float, float, float))0x00C58490)(obj, owner, yaw, maxYawDelta, range);
+}
+// 0x00C4D5F0: collects the lock-on parts around `owner` into `parts` (ret 0x14)
+inline void call_00C4D5F0(void *obj, void *parts, int owner, float yaw, float maxYawDelta, float range)
+{
+    ((void (__thiscall *)(void *, void *, int, float, float, float))0x00C4D5F0)(obj, parts, owner, yaw,
+                                                                               maxYawDelta, range);
+}
+// 0x00C4D900 (named lib::StaticArray<Entity*,16>::StaticArray_14): number of entities of `parts`
+inline int call_00C4D900(void *obj, void *parts)
+{
+    return ((int (__thiscall *)(void *, void *))0x00C4D900)(obj, parts);
+}
+// FUN_0090eea0 on the collision world: sphere cast of `radius` into `collector` (ret 0x1C)
+inline int call_0090EEA0(void *world, void *collector, void *out, float *origin, float radius, float *delta,
+                         int flags, const char *name)
+{
+    return ((int (__thiscall *)(void *, void *, void *, float *, float, float *, int, const char *))0x0090EEA0)(
+        world, collector, out, origin, radius, delta, flags, name);
+}
+
+// hkpAllCdPointCollector with its inline storage of 8 hits (0x30 bytes each)
+struct __declspec(align(16)) CdCollector {
+    void *vftable;                // +0x00 hkpAllCdPointCollector::vftable (0x0163D3AC)
+    unsigned int earlyOutBits;    // +0x04 float 3.40282e+38 (0x7F7FFFEE)
+    int pad08[2];                 // +0x08
+    char *data;                   // +0x10 hit array (points at `storage`)
+    int count;                    // +0x14
+    unsigned int capacity;        // +0x18 capacity | 0x80000000 (do not deallocate)
+    int pad1C;                    // +0x1C
+    unsigned char storage[0x180]; // +0x20
+};
+
+// lib::StaticArray<cLockOnParts,8> built on the stack (0x70-byte entries)
+struct __declspec(align(16)) LockOnParts {
+    void *vftable;                // +0x00 lib::StaticArray<cLockOnParts,8>::vftable (0x016A2BA4)
+    void *data;                   // +0x04 points at `storage`
+    int count;                    // +0x08
+    int capacity;                 // +0x0C 8
+    unsigned char storage[0x380]; // +0x10
+};
+
+// the 16 stance motions of the handleFFC weapon file set (layers 0 .. 0x15), blend 0.2, flags 0x2000
+inline void startStanceMotions(Pl0000 *self)
+{
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 1, 0, 6, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 0, 0, 1, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, -1, 0, 5, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 1, 1, 10, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 0, 1, 8, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, -1, 1, 9, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 1, -1, 0xF, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 0, -1, 0xD, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, -1, -1, 0xE, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 1, 1, 0, 0x15, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 1, 0, 0, 0x13, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 1, -1, 0, 0x14, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, -1, 1, 0, 0x12, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, -1, 0, 0, 0x10, 0.2f, 0x2000);
+    call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, -1, -1, 0, 0x11, 0.2f, 0x2000);
+}
+
+// Normalises the xz push direction vec2800 and adds it to move890 (y scaled by 0.15, x / z by 0.2);
+// the y part replaces move890[1] when the normalised y is > 0.5.  Zero vector: nothing is done;
+// zero or invalid length: the FUN_00dd5650 message and (0, 1, 0).  Shared body of FUN_00bf4280 / FUN_00bf46d0.
+inline void applyPush2800(Pl0000 *self)
+{
+    float dir[4];
+    dir[0] = self->vec2800()[0];
+    dir[1] = self->vec2800()[1];
+    dir[2] = self->vec2800()[2];
+    dir[3] = self->vec2800()[3];
+    if (dir[0] == 0.0f && dir[1] == 0.0f && dir[2] == 0.0f) {
+        return;
+    }
+    float x;
+    float y;
+    float z;
+    // (the original also tests every component for NaN, which gives the same result as the > 0 test)
+    if (dir[0] * dir[0] + dir[1] * dir[1] + dir[2] * dir[2] > 0.0f) {
+        FUN_00ddf460(dir, dir);
+        if (!(dir[1] > 0.5f)) {
+            float *move = self->move890();
+            move[1] = dir[1] * 0.15f + move[1];
+            move[0] = dir[0] * 0.2f + move[0];
+            move[2] = dir[2] * 0.2f + move[2];
+            return;
+        }
+        y = dir[1];
+        x = dir[0];
+        z = dir[2];
+    } else {
+        call_00DD5650(DAT_0163d0ac);
+        y = 1.0f;
+        x = 0.0f;
+        z = 0.0f;
+    }
+    float *move = self->move890();
+    move[1] = y * 0.15f;
+    move[0] = x * 0.2f + move[0];
+    move[2] = z * 0.2f + move[2];
+}
+
+}  // namespace Pl0000_p13
+
+// 00BEAB60  FUN_00beab60  size=1648  [callgraph]
+// Gun stance ("GUNKAMAE", 16-direction variant): on entry the 16 stance motions of the handleFFC weapon
+// (blend 0.2, flags 0x2000) and the aim frames from the stick (fieldD08 / fieldD0C); then aims with the
+// right stick like FUN_00bea830 (fieldD10 turns vec90[1], fieldD14 the aim angle angle278C, clamped to
+// +-pi/4).  Always ends with FUN_00b8e340 (game mode 5) or FUN_00bc54c0.
+void __fastcall FUN_00beab60(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field13F8() = 0;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00A94BC0(self, 8, 0.2f);
+        call_00A9F4C0(self, "GUNKAMAE", 0.2f, 0x2000, 0);  // DAT_016496b0
+        startStanceMotions(self);
+        call_00A947E0(self, 0, self->fieldD08() * 0.001f, self->angle278C() * 1.2732395f,
+                      self->fieldD0C() * 0.001f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b94fc0(self);
+        field940(self) = 0;
+        self->vecBE0()[0] = 0.0f;
+        self->vecBE0()[1] = 0.0f;
+        self->vecBE0()[2] = 0.0f;
+    } else if (subState61C(self) != 1) {
+        goto dispatch;
+    }
+    {
+        self->field26DC() = 3.0f;
+        call_00A947E0(self, 0, self->fieldD08() * 0.001f, self->angle278C() * 1.2732395f,
+                      self->fieldD0C() * -0.001f);
+        FUN_00b94790(self, 1.0f, 1.0f);
+        float yawRate = (float)(FUN_00da7500() * 0.024434609f);
+        // ? the first use below takes the unrounded x87 product
+        float pitchRate = (float)(FUN_00da7570() * -0.024434609f);
+        if (self->fieldD10() >= 200.0f) {
+            self->vec90()[1] = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD10() - 200.0f) * 0.00125f * pitchRate + self->vec90()[1]));
+        }
+        if (self->fieldD10() <= -200.0f) {
+            self->vec90()[1] = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD10() + 200.0f) * 0.00125f * pitchRate + self->vec90()[1]));
+        }
+        if (self->fieldD14() >= 200.0f) {
+            self->angle278C() = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD14() - 200.0f) * 0.00125f * yawRate + self->angle278C()));
+        }
+        if (self->fieldD14() <= -200.0f) {
+            self->angle278C() = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD14() + 200.0f) * 0.00125f * yawRate + self->angle278C()));
+        }
+        if (self->angle278C() < -0.7853982f) {
+            self->angle278C() = -0.7853982f;
+        }
+        if (self->angle278C() > 0.7853982f) {
+            self->angle278C() = 0.7853982f;
+        }
+    }
+dispatch:
+    if (mgrCall(0x6C) == 5) {
+        FUN_00b8e340(self);
+        return;
+    }
+    FUN_00bc54c0(self);
+}
+
+// 00BEBA20  FUN_00beba20  size=774  [callgraph]
+// Action step (motion 0x439): step 0 starts the motion and builds the movement curve curve3F20 from the
+// position to position + (-15, 0, 7) turned by the bone 1 matrix of the "NEWTOWER" object; steps 0 / 1
+// follow the curve (field928 advances by dt / 45 up to 2) until the motion ends; step 2 resets the
+// orientation (up = (0, 1, 0)) and calls FUN_00d664e0(0) on DAT_018b9140.
+// (The raw decompilation lost most stack arguments; this follows the machine code.)
+void __fastcall FUN_00beba20(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    float point[4];          // curve end point, later the sampled curve position
+    float boneLocal[4];      // position in the bone space (computed but not used)
+    float boneInverse[16];
+    self->field2668() = 1;
+    self->vf314();
+    int step = subState61C(self);
+    if (step == 0) {
+        call_00AA4080(self, 0x439, 0, 0.033333335f, 1.0f, 0x8000000, -1.0f, 0.3f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        int model = self->field118C();
+        if (model != 0) {
+            setModelTint(model, 0.0f);
+        }
+        if (controller764(self) != 0) {
+            FUN_008e3c10(controller764(self));
+        }
+        point[0] = -15.0f;
+        self->hp() = 0;
+        point[1] = 0.0f;
+        point[2] = 7.0f;
+        int object = FUN_00a18d70((int)DAT_01b7b628, call_00E03EA0("NEWTOWER"), 0xF0015);  // __thiscall; DAT_0164129c
+        if (object != 0) {
+            int bone = FUN_00a12210((int)FUN_00a7c8a0(object), 1);  // __thiscall
+            if (bone != 0) {
+                D3DXMatrixInverse(boneInverse, 0, (float *)(bone + 0x10));
+                D3DXVec3TransformNormal(boneLocal, self->matrix() + 12, boneInverse);  // +0x40: translation row
+                boneLocal[0] = boneInverse[12] + boneLocal[0];
+                boneLocal[1] = boneInverse[13] + boneLocal[1];
+                boneLocal[2] = boneInverse[14] + boneLocal[2];
+                D3DXVec3TransformNormal(point, point, (float *)(bone + 0x10));
+            }
+        }
+        float *position = self->matrix() + 12;  // +0x40
+        point[0] = position[0] + point[0];
+        point[1] = position[1] + point[1];
+        point[2] = position[2] + point[2];
+        point[3] = position[3] + point[3];  // ? point[3] is never initialised
+        call_00BC6E00(self->curve3F20(), position, point);
+        field928(self) = 0.0f;
+    } else if (step != 1) {
+        if (step != 2) {
+            return;
+        }
+        subState61C(self) = 3;
+        publishOrientation(self);
+        call_00D664E0(DAT_018b9140, 0);
+        return;
+    }
+    self->vf220(10.0f);
+    self->BehaviorAppBase::vf64();  // direct call (0x00AA4AC0)
+    int animation = (int)FUN_00a92f90((int)self);
+    if (motionFrames(animation) != 0 && !FUN_00e36060(animation + 0xF4, 0)) {  // __thiscall
+        self->vf318();
+        FUN_00a581b0((short *)self->curve3F20(), point, 0.0f, field928(self));  // __thiscall
+        float t = dt910(self) * 0.022222223f + field928(self);
+        field928(self) = t;
+        if (!(t >= 2.0f)) {
+            self->quat()[0] = point[0];  // +0x50
+            self->quat()[1] = point[1];
+            self->quat()[2] = point[2];
+            return;
+        }
+        field928(self) = 2.0f;
+    }
+    subState61C(self) = subState61C(self) + 1;
+}
+
+// 00BEBD30  FUN_00bebd30  size=823  [callgraph]
+// Action step (motion 0x439, blend 0.5): step 0 starts the motion, builds the movement curve to
+// position + (-2, 2, 2), sets the slow time 20 (FUN_00c420c0), resets the orientation, sends
+// FUN_00a8cb50(0x14) to the handle3EE8 owner, reloads timer343C / field3440 when timer3454 ran out and
+// shakes the camera (FUN_00dda360); steps 0 / 1 follow the curve like FUN_00beba20; step 2 resets the
+// orientation.
+void __fastcall FUN_00bebd30(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    float point[4];
+    self->field2668() = 1;
+    self->vf314();
+    int step = subState61C(self);
+    if (step == 0) {
+        call_00AA4080(self, 0x439, 0, 0.033333335f, 1.0f, 0x8000000, -1.0f, 0.5f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        int model = self->field118C();
+        if (model != 0) {
+            setModelTint(model, 0.0f);
+        }
+        if (controller764(self) != 0) {
+            FUN_008e3c10(controller764(self));
+        }
+        self->hp() = 0;
+        float *position = self->matrix() + 12;  // +0x40
+        point[0] = position[0] - 2.0f;
+        point[1] = position[1] + 2.0f;
+        point[2] = 2.0f + position[2];
+        point[3] = position[3] + point[3];  // ? point[3] is never initialised
+        call_00BC6E00(self->curve3F20(), position, point);
+        field928(self) = 0.0f;
+        call_00C420C0(20.0f);
+        publishOrientation(self);
+        if (FUN_00a81330(&self->handle3EE8()) != 0) {
+            int obj = (int)FUN_00a81330(&self->handle3EE8());
+            if (obj != 0) {
+                int owner = (int)FUN_00a7c8a0(obj);
+                if (owner != 0) {
+                    FUN_00a8cb50(owner, 0x14);  // __thiscall
+                }
+            }
+        }
+        if (!(self->timer3454() > 0.0f)) {
+            self->timer343C() = 30.0f;
+            self->field3440() = 0.05f;
+        }
+        self->vf3E0(0xB6, 0);
+        call_00DDA360(0, 2.0f, 2.0f, 0xF);
+    } else if (step != 1) {
+        if (step != 2) {
+            return;
+        }
+        subState61C(self) = 3;
+        publishOrientation(self);
+        return;
+    }
+    self->vf220(10.0f);
+    self->BehaviorAppBase::vf64();  // direct call (0x00AA4AC0)
+    int animation = (int)FUN_00a92f90((int)self);
+    if (motionFrames(animation) != 0 && !FUN_00e36060(animation + 0xF4, 0)) {  // __thiscall
+        self->vf318();
+        FUN_00a581b0((short *)self->curve3F20(), point, 0.0f, field928(self));  // __thiscall
+        float t = dt910(self) * 0.022222223f + field928(self);
+        field928(self) = t;
+        if (!(t >= 2.0f)) {
+            self->quat()[0] = point[0];  // +0x50
+            self->quat()[1] = point[1];
+            self->quat()[2] = point[2];
+            return;
+        }
+        field928(self) = 2.0f;
+    }
+    subState61C(self) = subState61C(self) + 1;
+}
+
+// 00BEC450  FUN_00bec450  size=333  [callgraph]
+// Action step switched on FUN_00a8cac0(): 0 starts motion 0x439 (blend 0.2), clears the HP and resets the
+// orientation; 0 / 1 advance the step once FUN_00a94ce0(0) reports the end; 2 calls FUN_00d664e0(2).
+void __fastcall FUN_00bec450(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    int kind = (int)FUN_00a8cac0((int)self);
+    if (kind == 0) {
+        call_00AA4080(self, 0x439, 0, 0.2f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        if (controller764(self) != 0) {
+            FUN_008e3c10(controller764(self));
+        }
+        self->hp() = 0;
+        publishOrientation(self);
+    } else if (kind != 1) {
+        if (kind != 2) {
+            return;
+        }
+        call_00D664E0(DAT_018b9140, 2);
+        subState61C(self) = subState61C(self) + 1;
+        return;
+    }
+    self->vf220(10.0f);
+    self->BehaviorAppBase::vf64();  // direct call (0x00AA4AC0)
+    if (FUN_00a94ce0((int)self, 0)) {  // __thiscall
+        subState61C(self) = subState61C(self) + 1;
+    }
+}
+
+// 00BF26F0  Pl0000::vf2F8  size=80  [class]
+// Unless DAT_01bea060 bits 0x4A000400 or field4E4 are set: FUN_00be86f0, action 0xDA, FUN_00b7c9c0(0)
+// and the 10-frame timer.
+void Pl0000::vf2F8()
+{
+    using namespace Pl0000_p13;
+    if ((DAT_01bea060 & 0x4A000400) == 0 && field4E4() == 0) {
+        FUN_00be86f0(this);
+        setAction(this, 0xDA, 0, 0, 0);
+        FUN_00b7c9c0(this, 0);
+        vf220(10.0f);
+    }
+}
+
+// 00BF2740  Pl0000::vf48  size=1399  [class]
+// Per-frame update (before the motion): input (FUN_00b94b00 / FUN_00bc3690), the previous rotation
+// vec41B0, the squared stick length, ground test, the controller height easing (0.05 per frame towards
+// height3BB0), BehaviorAppBase::vf48, the frame time dt910, the count-down timers, the hit/lock state and
+// the debug speed-rate tuning in debug mode 0x25.
+void Pl0000::vf48()
+{
+    using namespace Pl0000_p13;
+    FUN_00b94b00(this);
+    FUN_00bc3690(this);
+    if ((DAT_01bea094 & 0x20000) != 0) {
+        return;
+    }
+    vec41B0()[0] = vec90()[0];
+    vec41B0()[1] = vec90()[1];
+    vec41B0()[2] = vec90()[2];
+    vec41B0()[3] = vec90()[3];
+    inputSqD28() = fieldD0C() * fieldD0C() + fieldD08() * fieldD08();
+    call_00B95720(this);  // Pl0010::GroundTest
+    FUN_00bc3dc0(this);
+    field27C0() = 0;
+    field27D4() = 0;
+    FUN_00bc2bd0(this);
+    if ((DAT_01bea070 & 0x40000000) != 0) {
+        return;
+    }
+    FUN_00b93680(this);
+    FUN_00b7a090(this);
+    if (vf32C()) {
+        flag3BA8() = 0;
+        flag3BA4() = 1;
+    }
+    int controller = controller764(this);
+    if (controller != 0 && flag3BA8() != 0) {
+        height3BAC() = *(float *)(controller + 0xF8);
+        if (field3BA0() != 0) {
+            FUN_008e0b70(controller, 1);  // __thiscall
+            flag3BA4() = 1;
+        } else {
+            FUN_008e0b70(controller, 0);  // __thiscall
+            if (flag3BA4() != 0) {
+                float current = height3BAC();
+                float target = height3BB0();
+                float height;
+                if (current < target) {
+                    height = current + 0.05f;
+                    if (!(height < target)) {
+                        flag3BA4() = 0;
+                        height = target;
+                    }
+                } else if (!(current >= target)) {  // unordered
+                    height = target;
+                } else {
+                    height = current - 0.05f;
+                    if (!(height > target)) {
+                        flag3BA4() = 0;
+                        height = target;
+                    }
+                }
+                setControllerHeight(controller764(this), height);
+            }
+        }
+    }
+    field3BA0() = 0;
+    flag3BA8() = 1;
+    BehaviorAppBase::vf48();
+    int owner = field4F0();
+    entry1188() = owner;
+    if (owner == 0) {
+        return;
+    }
+    field118C() = (int)FUN_00a92f90((int)this);
+    dt910(this) = (float)FUN_00e049b0((int *)FUN_00a92fb0((int)this));
+    vf3D0();
+    vf3D4();
+    if (timer2BF0() >= 0.0f) {
+        timer2BF0() = timer2BF0() - dt910(this);
+    }
+    if (timer2BF4() >= 0.0f) {
+        timer2BF4() = timer2BF4() - dt910(this);
+    }
+    if (field3418() >= 0.0f) {
+        field3418() = field3418() - dt910(this);
+    }
+    if (field10D4() >= 0.0f) {
+        field10D4() = field10D4() - dt910(this);
+    }
+    if (timer10D8() >= 0.0f) {
+        timer10D8() = timer10D8() - dt910(this);
+    }
+    if (timer2C3C() >= 0.0f) {
+        timer2C3C() = timer2C3C() - dt910(this);
+    }
+    if (field31A8() >= 0.0f) {
+        field31A8() = field31A8() - dt910(this);
+    }
+    if (timer39E4() >= 0.0f) {
+        timer39E4() = timer39E4() - dt910(this);
+    }
+    if (field3854() >= 0.0f) {
+        field3854() = field3854() - dt910(this);
+    }
+    if (timer2C10() >= 0.0f) {
+        timer2C10() = timer2C10() - dt910(this);
+    }
+    if (fieldB90() > 0) {
+        fieldB90() = fieldB90() - 1;
+    }
+    if (field31A0() >= 0.0f) {
+        field31A0() = field31A0() - dt910(this);
+    }
+    if (field31A4() >= 0.0f) {
+        field31A4() = field31A4() - dt910(this);
+    }
+    FUN_00b8f340(this);
+    if (field27E4() >= 0.0f) {
+        float left = field27E4() - dt910(this);
+        field27E4() = left;
+        if (left < 0.0f) {
+            field27E0() = 0;
+        }
+    }
+    if (field3858() != 0 && (inputHold() & maskE48()) == 0) {
+        field3858() = 0;
+    }
+    if (FUN_00416d50(3) && field31A8() < 0.0f) {
+        float left = timer31AC() - dt910(this);
+        timer31AC() = left;
+        if (left < 0.0f) {
+            timer31AC() = 2.0f;
+            FUN_00b877b0(this, 1, 1);
+        }
+    }
+    if (FUN_00a8c760((int)this, 4)) {  // __thiscall
+        FUN_00a8d280((int)this);
+        field392C() = 0;
+        if (FUN_00b7a600(this)) {
+            field392C() = 3;
+        }
+        if (field118C() != 0) {
+            call_0041CC40(field118C(), 1.0f);
+        }
+    }
+    FUN_00be7f50(this);
+    field27E8() = 0;
+    if (FUN_0057e970((int)this)) {
+        FUN_005912b0((int *)this);
+    } else {
+        vf3CC();
+    }
+    FUN_00b7f530(this);
+    if (FUN_00f96420() != 0x25) {
+        return;
+    }
+    // debug mode 0x25: pad bits 4 / 8 tune the ninja-run rate, 1 / 2 the wall-run rate
+    float step = 0.01f;
+    if ((inputHold() & 0x2000) != 0) {
+        step = 0.1f;
+    }
+    unsigned int pad = inputD04();
+    if ((pad & 4) != 0) {
+        rate53E0() = rate53E0() - step;
+    } else if ((pad & 8) != 0) {
+        rate53E0() = rate53E0() + step;
+    }
+    if ((pad & 1) != 0) {
+        rate53E4() = rate53E4() - step;
+    } else if ((pad & 2) != 0) {
+        rate53E4() = step + rate53E4();
+    }
+    call_00F96550(400.0f, 400.0f, "ninjaRunSpeedRate : %f", (double)rate53E0());  // DAT_016a2bd4
+    call_00F96550(400.0f, 420.0f, "wallRunSpeedRate  : %f", (double)rate53E4());  // DAT_016a2bbc
+}
+
+// 00BF2CC0  Pl0000::vf50  size=1752  [class]
+// Per-frame update (after the motion): places the phantom sub10E4 at bone 5 (or the position) with the
+// yaw; when field10F4 is set, pushes the player out of the penetrating bodies found by the phantom
+// (0.7 * normal * depth of every hit, only the horizontal part, never forwards) and optionally snaps to
+// the ground (flagBF0, FUN_008eaf70); then BehaviorAppBase::vf50 and the bone vectors vec40E0 .. vec4150
+// (previous and current FUN_00860f40 of bones 0x12 / 0x16 / 9 / 0xD).
+// (The raw decompilation lost most stack variables; this follows the machine code.)
+void Pl0000::vf50()
+{
+    using namespace Pl0000_p13;
+    char lockGuard;
+    float point[4];
+    float push[4];
+    float impulse[4];
+    float matrix16[16];
+    float worldInverse[16];
+    float bone12[4];
+    float bone16[4];
+    float bone9[4];
+    float boneD[4];
+    FUN_00b88e20(this);
+    FUN_004066f0((undefined4)&lockGuard);  // ECX = &lockGuard: Havok world write-lock guard
+    if (*(int *)sub10E4() != 0) {  // phantom exists
+        int bone = FUN_00a12210((int)this, 5);  // __thiscall
+        point[0] = quat()[0];  // +0x50
+        point[1] = quat()[1];
+        point[2] = quat()[2];
+        if (bone != 0) {
+            point[0] = *(float *)(bone + 0x40);
+            point[1] = *(float *)(bone + 0x44);
+            point[2] = *(float *)(bone + 0x48);
+        }
+        D3DXMatrixRotationY(matrix16, vec90()[1]);
+        matrix16[12] = point[0];
+        matrix16[13] = point[1];
+        matrix16[14] = point[2];
+        setPhantomTransform(sub10E4(), matrix16);
+    }
+    if (field10F4() != 0 && (DAT_01bea060 & 0x4A000000) == 0 && *(int *)sub10E4() != 0 &&
+        controller764(this) != 0 && *(int *)(controller764(this) + 0x114) != 0) {
+        push[0] = 0.0f;
+        push[1] = 0.0f;
+        push[2] = 0.0f;
+        CdCollector collector;
+        constructCollector(&collector);
+        FUN_00900350((int *)sub10E4(), (undefined4)&collector);  // __thiscall: penetrations of the phantom
+        if (collector.count > 0) {
+            int index = 0;
+            int offset = 0;
+            do {
+                float *hit = (float *)(collector.data + offset);
+                int root = *(int *)(hit + 10);  // +0x28 root collidable
+                int objectB = FUN_00445cc0(root);
+                int objectA = FUN_00445ca0(root);
+                int use = 1;
+                if (objectA != 0) {
+                    unsigned int info = *(unsigned int *)(objectA + 0xC);
+                    if (info != 0 && (*(unsigned int *)((-(unsigned int)(info != 0) & info) + 8) & 0x8000) != 0) {
+                        use = 0;
+                    }
+                    if (objectB == 0) {
+                        goto checkUse;
+                    }
+                } else if (objectB == 0) {
+                    goto next;
+                }
+                {
+                    FUN_00860de0((undefined4)&lockGuard);  // ECX = &lockGuard: Havok world read-lock guard
+                    int solid = 0;
+                    unsigned int *flags = *(unsigned int **)(objectB + 0xC);
+                    if (flags != 0 && (*flags & 0x100) != 0) {
+                        solid = 1;
+                    }
+                    havokReadUnlock();
+                    if (solid == 0) {
+                        use = 0;
+                    }
+                    unsigned int info = *(unsigned int *)(objectB + 0xC);
+                    if (info != 0 && (*(unsigned int *)((-(unsigned int)(info != 0) & info) + 8) & 0x8000) != 0) {
+                        goto next;
+                    }
+                }
+            checkUse:
+                if (use != 0) {
+                    FUN_0048aaf0(hit);
+                    float depth = hit[7];  // +0x1C
+                    if (depth < 0.0f) {
+                        impulse[3] = impulse[3] * depth;  // ? impulse[3] is never initialised
+                        impulse[1] = hit[5] * depth * 0.7f;
+                        impulse[0] = hit[4] * depth * 0.7f;
+                        impulse[2] = hit[6] * depth * 0.7f;
+                        point[0] = hit[0];
+                        point[1] = hit[1];
+                        point[2] = hit[2];
+                        D3DXMatrixInverse(matrix16, 0, matrix());
+                        D3DXVec3TransformNormal(point, point, matrix16);
+                        point[0] = matrix16[12] + point[0];
+                        point[1] = matrix16[13] + point[1];
+                        float localZ = matrix16[14] + point[2];
+                        if (localZ >= 0.0f) {
+                            push[0] = push[0] + impulse[0];
+                            push[1] = push[1] + impulse[1];
+                            push[2] = push[2] + impulse[2];
+                            push[3] = push[3] + impulse[3];  // ? push[3] is never initialised
+                        }
+                    }
+                }
+            next:
+                offset = offset + 0x30;
+                index = index + 1;
+            } while (index < collector.count);
+        }
+        D3DXMatrixInverse(worldInverse, 0, matrix());
+        D3DXVec3TransformNormal(push, push, worldInverse);
+        push[1] = 0.0f;
+        if (push[2] >= 0.0f) {
+            push[2] = 0.0f;
+            push[0] = 0.0f;
+        }
+        D3DXVec3TransformNormal(push, push, matrix());
+        quat()[0] = push[0] + quat()[0];
+        quat()[1] = push[1] + quat()[1];
+        quat()[2] = quat()[2] + push[2];
+        quat()[3] = push[3] + quat()[3];
+        if (flagBF0() != 0) {
+            point[0] = 0.0f;
+            point[1] = -0.5f;
+            point[2] = 0.0f;
+            impulse[0] = matrix()[12];  // +0x40
+            impulse[1] = matrix()[13];
+            impulse[2] = matrix()[14];
+            impulse[3] = matrix()[15];
+            if (call_008EAF70(controller764(this), point, impulse, 1, 0, 0.01f) != 0) {
+                quat()[1] = impulse[1];
+            }
+        }
+        destructCollector(&collector);
+    }
+    havokWriteUnlock();
+    flagBF0() = 0;
+    FUN_00b93330(this);
+    FUN_00b7ac20(this);
+    BehaviorAppBase::vf50();  // ? ECX is not reloaded after FUN_00b7ac20 in the machine code
+    if ((DAT_01bea060 & 0x48000000) != 0) {
+        if ((DAT_01bea070 & 0x40000000) != 0) {
+            return;
+        }
+        if (FUN_00a8c760((int)this, 0x38)) {  // __thiscall
+            int obj = call_00A8B590(this);
+            if (obj != 0) {
+                *(int *)(obj + 0x870) = 1;
+            }
+        }
+        FUN_00b954d0(this);
+        FUN_00be9130(this);
+    }
+    if ((DAT_01bea070 & 0x40000000) != 0) {
+        return;
+    }
+    vec4100()[0] = vec4110()[0];
+    vec4100()[1] = vec4110()[1];
+    vec4100()[2] = vec4110()[2];
+    vec4100()[3] = vec4110()[3];
+    vec40E0()[0] = vec40F0()[0];
+    vec40E0()[1] = vec40F0()[1];
+    vec40E0()[2] = vec40F0()[2];
+    vec40E0()[3] = vec40F0()[3];
+    vec4140()[0] = vec4150()[0];
+    vec4140()[1] = vec4150()[1];
+    vec4140()[2] = vec4150()[2];
+    vec4140()[3] = vec4150()[3];
+    vec4120()[0] = vec4130()[0];
+    vec4120()[1] = vec4130()[1];
+    vec4120()[2] = vec4130()[2];
+    vec4120()[3] = vec4130()[3];
+    FUN_00860f40(bone12, (undefined4)this, 0x12);
+    FUN_00860f40(bone16, (undefined4)this, 0x16);
+    FUN_00860f40(bone9, (undefined4)this, 9);
+    FUN_00860f40(boneD, (undefined4)this, 0xD);
+    vec4110()[0] = bone12[0];
+    vec4110()[1] = bone12[1];
+    vec4110()[2] = bone12[2];
+    vec4110()[3] = bone12[3];
+    vec40F0()[0] = bone16[0];
+    vec40F0()[1] = bone16[1];
+    vec40F0()[2] = bone16[2];
+    vec40F0()[3] = bone16[3];
+    vec4150()[0] = bone9[0];
+    vec4150()[1] = bone9[1];
+    vec4150()[2] = bone9[2];
+    vec4150()[3] = bone9[3];
+    vec4130()[0] = boneD[0];
+    vec4130()[1] = boneD[1];
+    vec4130()[2] = boneD[2];
+    vec4130()[3] = boneD[3];
+    int owner = field4F0();
+    entry1188() = owner;
+    if (owner != 0) {
+        field118C() = (int)FUN_00a92f90((int)this);
+        setSeqAtk();
+        if (field7B0() != 0) {
+            FUN_008f3cb0((int *)field7B0(), (undefined4)this);  // __thiscall
+        }
+    }
+}
+
+// 00BF33A0  FUN_00bf33a0  size=542  [between]
+// Directional reaction (motions 0x414 .. 0x41B by dir914 in quadrants of pi/4 .. 3pi/4; the second set
+// when fieldB74): on entry resets the orientation; when the motion ends action 0xB (vf340) or vf388(0).
+void __fastcall FUN_00bf33a0(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        int motion = 0x415;
+        if (0.7853982f < dir914(self) && dir914(self) < 2.3561945f) {
+            motion = 0x416;
+        }
+        if (dir914(self) < -0.7853982f && -2.3561945f < dir914(self)) {
+            motion = 0x417;
+        }
+        if (2.3561945f < dir914(self) || dir914(self) < -2.3561945f) {
+            motion = 0x414;
+        }
+        if (self->fieldB74() != 0) {
+            if (motion == 0x415) {
+                motion = 0x419;
+            } else if (motion == 0x417) {
+                motion = 0x41B;
+            } else if (motion == 0x416) {
+                motion = 0x41A;
+            } else if (motion == 0x414) {
+                motion = 0x418;
+            }
+        }
+        call_00AA4080(self, motion, 0, 0.0f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        publishOrientation(self);
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (motionDone(self)) {
+        if (self->vf340()) {
+            setAction(self, 0xB, 0, 0, 0);
+            return;
+        }
+        self->vf388(0);
+    }
+}
+
+// 00BF35C0  FUN_00bf35c0  size=573  [between]
+// Directional reaction (motions 0x41E .. 0x425, like FUN_00bf33a0); on entry also counts field27E0 up
+// while field27E4 >= 0 and reloads field27E4 = 30.
+void __fastcall FUN_00bf35c0(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        int motion = 0x41F;
+        if (0.7853982f < dir914(self) && dir914(self) < 2.3561945f) {
+            motion = 0x421;
+        }
+        if (dir914(self) < -0.7853982f && -2.3561945f < dir914(self)) {
+            motion = 0x420;
+        }
+        if (2.3561945f < dir914(self) || dir914(self) < -2.3561945f) {
+            motion = 0x41E;
+        }
+        if (self->fieldB74() != 0) {
+            if (motion == 0x41F) {
+                motion = 0x423;
+            } else if (motion == 0x421) {
+                motion = 0x425;
+            } else if (motion == 0x420) {
+                motion = 0x424;
+            } else if (motion == 0x41E) {
+                motion = 0x422;
+            }
+        }
+        call_00AA4080(self, motion, 0, 0.0f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        publishOrientation(self);
+        if (self->field27E4() >= 0.0f) {
+            self->field27E0() = self->field27E0() + 1;
+        }
+        self->field27E4() = 30.0f;
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (motionDone(self)) {
+        if (self->vf340()) {
+            setAction(self, 0xB, 0, 0, 0);
+            return;
+        }
+        self->vf388(0);
+    }
+}
+
+// 00BF3800  FUN_00bf3800  size=218  [between]
+// Plays motion 0x440 once, then vf388(0).
+void __fastcall FUN_00bf3800(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x440, 0, 0.0f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+        FUN_00be86f0(self);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (!motionDone(self)) {
+        return;
+    }
+    self->vf388(0);
+}
+
+// 00BF38E0  FUN_00bf38e0  size=228  [between]
+// Plays motion 0x3D8 once (clearing fieldB74), then vf388(0).
+void __fastcall FUN_00bf38e0(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x3D8, 0, 0.06666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+        FUN_00be86f0(self);
+        self->fieldB74() = 0;
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (!motionDone(self)) {
+        return;
+    }
+    self->vf388(0);
+}
+
+// 00BF39D0  FUN_00bf39d0  size=590  [between]
+// Two-part reaction: step 0 picks a random variant (field940 = 0 / 1: motions 0x42A / 0x437), turns to
+// angle27EC + pi and resets the orientation; step 2 plays the second motion (0x430 / 0x438); at the end
+// action 0xCD (variant 0) or 0xCE (variant 1).
+// (The raw decompilation mis-read the motion table: it is {0x42A, 0x437, 0x430, 0x438}; step 0 takes
+// entry field940, step 2 entry 2 + field940.)
+void __fastcall FUN_00bf39d0(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    int motions[4];
+    self->field2668() = 1;
+    self->vf314();
+    motions[0] = 0x42A;
+    motions[1] = 0x437;
+    motions[2] = 0x430;
+    motions[3] = 0x438;
+    self->vf220(10.0f);
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    switch (subState61C(self)) {
+    case 0: {
+        short pick = (short)FUN_00dde2d0((uint *)DAT_01dd0814, 0, 1);  // __thiscall
+        int motion = motions[pick];
+        field940(self) = pick;
+        self->vec90()[1] = (float)call_00DDBA30(self->angle27EC() + 3.1415927f);
+        call_00AA4080(self, motion, 0, 0.0f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00be86f0(self);
+        if (state618(self) == 0xCA) {
+            setModelTint(self->field118C(), 0.7f);
+        }
+        FUN_00b895d0(self);
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+        break;
+    }
+    case 1:
+        break;
+    case 2:
+        call_00AA4080(self, motions[2 + field940(self)], 0, 0.033333335f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        // fall through
+    case 3:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (motionDone(self)) {
+            if ((field940(self) & 1) == 0) {
+                setAction(self, 0xCD, 0, 0, 0);
+                return;
+            }
+            setAction(self, 0xCE, 0, 0, 0);
+            return;
+        }
+        return;
+    default:
+        return;
+    }
+    self->vf220(10.0f);
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (motionDone(self)) {
+        subState61C(self) = subState61C(self) + 1;
+    }
+}
+
+// 00BF3E10  FUN_00bf3e10  size=576  [between]
+// Three-part action: motion 0x443 (clears counter2844 / timer2848, resets the orientation), motion 0x444
+// held for 300 frames (field920), then motion 0x445 (0x446 when fieldB74) and vf388(0) at its end.
+void __fastcall FUN_00bf3e10(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    switch (subState61C(self)) {
+    case 0:
+        call_00AA4080(self, 0x443, 0, 0.0f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->counter2844() = 0;
+        self->timer2848() = 0;
+        FUN_00be86f0(self);
+        FUN_00b895d0(self);
+        self->vf220(15.0f);
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+        // fall through
+    case 1:
+        if (self->fieldB74() != 0) {
+            self->field13F8() = 0;
+        }
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (motionDone(self)) {
+            subState61C(self) = subState61C(self) + 1;
+            return;
+        }
+        break;
+    case 2:
+        call_00AA4080(self, 0x444, 0, 0.13333334f, 1.0f, 0, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        field920(self) = 300.0f;
+        // fall through
+    case 3: {
+        if (self->fieldB74() != 0) {
+            self->field13F8() = 0;
+        }
+        FUN_00b94790(self, 1.0f, 1.0f);
+        float left = field920(self) - dt910(self);
+        field920(self) = left;
+        if (left < 0.0f) {
+            subState61C(self) = subState61C(self) + 1;
+            return;
+        }
+        break;
+    }
+    case 4: {
+        int motion = 0x445;
+        if (self->fieldB74() != 0) {
+            motion = 0x446;
+        }
+        call_00AA4080(self, motion, 0, 0.13333334f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+    }
+        // fall through
+    case 5:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (motionDone(self)) {
+            self->vf388(0);
+            return;
+        }
+    }
+}
+
+// 00BF4070  FUN_00bf4070  size=518  [between]
+// Jump start (motion 0x448): turns to angle27EC + pi, sets the upward speed move890[1] (0.432, 0.54 when
+// flag3BC0), clears the push vec2800 and field920, resets the orientation and the fall timer (flag3BBC,
+// timer3BC4 = 15 or 22); counts field920 up; at the end action 0xD2.
+void __fastcall FUN_00bf4070(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x448, 0, 0.0f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        self->vec90()[1] = (float)call_00DDBA30(self->angle27EC() + 3.1415927f);
+        self->move890()[1] = 0.432f;
+        if (self->flag3BC0() != 0) {
+            self->move890()[1] = 0.54f;
+        }
+        self->move890()[0] = 0.0f;
+        self->move890()[2] = 0.0f;
+        self->vec2800()[0] = 0.0f;
+        self->vec2800()[1] = 0.0f;
+        self->vec2800()[2] = 0.0f;
+        field920(self) = 0.0f;
+        publishOrientation(self);
+        self->timer3BC4() = 15.0f;
+        self->flag3BBC() = 1;
+        if (self->flag3BC0() != 0) {
+            self->flag3BBC() = 1;
+            self->timer3BC4() = 22.0f;
+        }
+        self->flag3BC0() = 0;
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    field920(self) = dt910(self) + field920(self);
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (!motionDone(self)) {
+        return;
+    }
+    setAction(self, 0xD2, 0, 0, 0);
+    self->vec2800()[0] = 0.0f;
+    self->vec2800()[1] = 0.0f;
+    self->vec2800()[2] = 0.0f;
+}
+
+// 00BF4280  FUN_00bf4280  size=508  [between]
+// Motion 0x449 (blend 1/6); on entry the push direction vec2800 is added to move890 (applyPush2800).
+void __fastcall FUN_00bf4280(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x449, 0, 0.16666667f, 1.0f, 0, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00be86f0(self);
+        applyPush2800(self);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+}
+
+// 00BF4480  FUN_00bf4480  size=227  [between]
+// Motion 0x44B; on entry move890 = (0, -0.3, 0); afterwards move890[1] decreases by 0.05 per frame.
+void __fastcall FUN_00bf4480(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x44B, 0, 0.0f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        self->move890()[1] = -0.3f;
+        self->move890()[0] = 0.0f;
+        self->move890()[2] = 0.0f;
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    self->move890()[1] = self->move890()[1] - 0.05f;
+    FUN_00b94790(self, 1.0f, 1.0f);
+}
+
+// 00BF4570  FUN_00bf4570  size=332  [between]
+// Motion 0x44C (resets the orientation), then 15 frames (field920) and action 0xCD.
+void __fastcall FUN_00bf4570(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    switch (subState61C(self)) {
+    case 0:
+        call_00AA4080(self, 0x44C, 0, 0.16666667f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(2.0f);
+        FUN_00be86f0(self);
+        FUN_00b895d0(self);
+        // fall through
+    case 1:
+        FUN_00b94790(self, 1.0f, 1.0f);
+        if (!motionDone(self)) {
+            return;
+        }
+        subState61C(self) = subState61C(self) + 1;
+        return;
+    case 2:
+        subState61C(self) = 3;
+        field920(self) = 15.0f;
+        break;
+    case 3:
+        break;
+    default:
+        return;
+    }
+    field920(self) = field920(self) - dt910(self);
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (field920(self) < 0.0f) {
+        setAction(self, 0xCD, 0, 0, 0);
+    }
+}
+
+// 00BF46D0  FUN_00bf46d0  size=632  [between]
+// Motion 0x44D; on entry the push direction vec2800 is added to move890 (applyPush2800) and the player
+// turns to angle27EC + pi; at the end action 0xD6.
+void __fastcall FUN_00bf46d0(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    if (subState61C(self) != 0) {
+        if (subState61C(self) != 1) {
+            return;
+        }
+    } else {
+        call_00AA4080(self, 0x44D, 0, 0.0f, 1.0f, 0, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        applyPush2800(self);
+        vcall<void>((void *)FUN_00c1b9a0(), 0x30);
+        self->vec90()[1] = (float)call_00DDBA30(self->angle27EC() + 3.1415927f);
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (motionDone(self)) {
+        setAction(self, 0xD6, 0, 0, 0);
+    }
+}
+
+// 00BF4950  FUN_00bf4950  size=169  [between]
+// Motion 0x44E (blend 1/6), held.
+void __fastcall FUN_00bf4950(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x44E, 0, 0.16666667f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+}
+
+// 00BF4A00  FUN_00bf4a00  size=330  [between]
+// Motion 0x44F (resets the orientation), then action 0xCD.
+void __fastcall FUN_00bf4a00(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->field2668() = 1;
+    self->vf314();
+    if (self->fieldB74() != 0) {
+        self->field13F8() = 0;
+    }
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x44F, 0, 0.033333335f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        subState61C(self) = subState61C(self) + 1;
+        self->vf220(10.0f);
+        FUN_00be86f0(self);
+        publishOrientation(self);
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (!motionDone(self)) {
+        return;
+    }
+    setAction(self, 0xCD, 0, 0, 0);
+}
+
+// 00BF4B50  FUN_00bf4b50  size=461  [between]
+// Death-like end state: sets DAT_01bea060 bit 0x20000000 and field4E4, drops the held item (field7D0 of
+// the item holder field7CC, slot 0x44), plays motion 0x45C, clears the HP at its end and finally, after
+// field920 ran out, FUN_00c17870 (not in phase 0xA50 / with DAT_01bea060 bit 0x800000).
+void __fastcall FUN_00bf4b50(Pl0000 *self)
+{
+    using namespace Pl0000_p13;
+    self->vf314();
+    self->field2668() = 1;
+    DAT_01bea060 = DAT_01bea060 | 0x20000000;
+    self->field4E4() = 1;
+    self->field3BCC() = 0;
+    if (call_00D82980((void *)self->field7CC(), 0x44) != 0) {
+        call_00D82DE0((void *)self->field7CC(), self->field7D0());
+        int item = self->field7D0();
+        if (item != 0) {
+            undefined4 *type = vcall<undefined4 *>((void *)item, 0);
+            if (FUN_00dd6d80(type, (undefined4 *)DAT_01be9ef4) != 0) {  // __thiscall
+                *(int *)(item + 0x3EC) = 0;
+                *(int *)(item + 0x3F0) = 0;
+                *(int *)(item + 0x188) = 0;
+            }
+        }
+        self->field40C8() = 0;
+    }
+    switch (subState61C(self)) {
+    case 0:
+        FUN_00d4d920((int)DAT_018b9140);
+        call_00AA4080(self, 0x45C, 0, 0.033333335f, 1.0f, 0x8000000, -1.0f, 1.0f);
+        FUN_00be86f0(self);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b895d0(self);
+        FUN_00c29a50();
+        if (!(self->timer3454() > 0.0f)) {
+            self->timer343C() = 45.0f;
+            self->field3440() = 0.1f;
+        }
+        break;
+    case 1:
+        break;
+    case 2:
+        field920(self) = 0.0f;
+        subState61C(self) = 3;
+        // fall through
+    case 3: {
+        float left = field920(self) - dt910(self);
+        field920(self) = left;
+        if (left < 0.0f && DAT_018b9174 != 0xA50 && (DAT_01bea060 & 0x800000) == 0) {
+            FUN_00c17870();
+            return;
+        }
+        return;
+    }
+    default:
+        return;
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+    if (motionDone(self)) {
+        subState61C(self) = subState61C(self) + 1;
+        self->hp() = 0;
+    }
+}
+
+// 00BF4E00  hkpAllCdPointCollector::hkpAllCdPointCollector_17  size=1758  [between]
+// "Xcombo Low Check": finds a target (FUN_00c4df80 near, or FUN_00c58490 in the stick / facing
+// direction), locks it (FUN_00b86010) and picks the follow-up attack from the target distance and the
+// relative angle: 0x66 when a low sphere cast reaches the target between radius + 2 and radius + 6;
+// otherwise 0x70 when >= 4 entities are around, 0x6F / 0x61 (turning by pi or +-pi/2, turnBF8 = 0 / 1 / 2)
+// and 0x6F / 0x62 by the distance to the lock-on slot radius.  Always returns 1.
+// (FILEMAP misnames it as an hkpAllCdPointCollector constructor; `this` is the player.)
+undefined4 Pl0000::xcomboLowCheck()
+{
+    using namespace Pl0000_p13;
+    float *position = matrix() + 12;  // +0x40
+    float origin[4];
+    origin[0] = position[0];
+    origin[2] = position[2];
+    origin[3] = position[3];
+    obj2640() = 0;
+    origin[1] = position[1] + 0.3f;
+    if (!(inputSqD28() > 90000.0f)) {
+        int found = FUN_00c4df80((int)DAT_01beb908, field4F0(), 10.0f);  // __thiscall
+        obj2640() = found;
+        if (found != 0) {
+            FUN_00b7b380(this, (int)FUN_00a81330((uint *)found), (undefined4)position, 1);
+        }
+    } else {
+        float yaw = vec90()[1];
+        if (inputSqD28() > 90000.0f) {
+            yaw = inputYawD30();
+        }
+        int found = call_00C58490(DAT_01beb908, field4F0(), yaw, 0.80285144f, 5.0f);
+        if (found != 0) {
+            float yaw2 = vec90()[1];
+            if (inputSqD28() > 90000.0f) {
+                yaw2 = inputYawD30();
+            }
+            float narrow = 0.80285144f;
+            float maxDelta;
+            if (vf1D8() == 0) {
+                maxDelta = narrow;
+            } else {
+                maxDelta = 3.1415927f;
+            }
+            found = call_00C58490(DAT_01beb908, field4F0(), yaw2, maxDelta, 10.0f);
+        }
+        obj12A8() = found;
+        timer12AC() = 30.0f;
+        obj2640() = found;
+    }
+    if (obj2640() == 0) {
+        return 1;
+    }
+    FUN_00b86010(this, 1);
+    unsigned int *handle = &handle1370();
+    if (FUN_00a81330(handle) == 0) {
+        return 1;
+    }
+    int target = (int)FUN_00a7c8a0((int)FUN_00a81330(handle));
+    if (target == 0) {
+        return 1;
+    }
+    if (vcall<int>((void *)target, 0x228) == 0) {
+        return 1;
+    }
+    float targetPos[4];
+    if (FUN_00a81330(handle) != 0) {
+        FUN_00c15010((int)handle, targetPos);  // __thiscall
+    }
+    FUN_00a8e880((int)this, targetPos);  // __thiscall
+    float relAngle = (float)call_00DDBA30(
+        (float)(atan2((float10)targetPos[0] - position[0], (float10)targetPos[2] - position[2]) - vec90()[1]));
+    CdCollector collector;
+    collector.vftable = (void *)0x0163D3AC;  // hkpAllCdPointCollector::vftable
+    collector.data = (char *)collector.storage;
+    collector.capacity = 0x80000008;
+    collector.count = 0;
+    float dx = position[0] - targetPos[0];
+    float dz = position[2] - targetPos[2];
+    float distSq = dx * dx + dz * dz;
+    collector.earlyOutBits = 0x7F7FFFEE;  // 3.40282e+38f
+    float delta[4];
+    delta[0] = targetPos[0] - origin[0];
+    delta[2] = targetPos[2] - origin[2];
+    delta[3] = targetPos[3] - origin[3];
+    delta[1] = 0.0f;
+    unsigned char castOut[16];
+    int group = FUN_009f8b40((int)this);
+    int hit = call_0090EEA0(DAT_01b35df8, &collector, castOut, origin, 0.1f, delta, group << 16 | 6,
+                            "Xcombo Low Check");  // DAT_016a291c
+    if (hit != 0) {
+        FUN_0112bcf0((uint)&collector);  // sorts the hits
+        int objectA = 0;
+        int objectB = 0;
+        int root = *(int *)(collector.data + 0x28);
+        char kind = *(char *)(root + 0x18);
+        if (kind == 1) {
+            objectA = FUN_00445ca0(root);
+        }
+        if (kind == 2) {
+            objectB = FUN_00445cc0(root);
+        }
+        if (objectA != 0 && (int)FUN_008f7780(objectA) == target) {
+            hit = 0;
+        }
+        if (objectB != 0 && (int)FUN_008f7780(objectB) == target) {
+            hit = 0;
+        } else if (hit != 0) {
+            float10 nearRange = (float10)radius1380() + 2.0f;
+            float10 farRange = (float10)radius1380() + 6.0f;
+            if (!(distSq < nearRange * nearRange) && distSq < farRange * farRange) {
+                vf308(1.0f, 0.00017453292f, 3.1415927f, 0.0f);
+                setAction(this, 0x66, 0, 0, 0);
+                destructCollector(&collector);
+                return 1;
+            }
+        }
+    }
+    float yawOffset = 0.0f;
+    LockOnParts parts;
+    parts.count = 0;
+    parts.data = parts.storage;
+    parts.capacity = 8;
+    parts.vftable = (void *)0x016A2BA4;  // lib::StaticArray<cLockOnParts,8>::vftable
+    call_00C4D5F0(DAT_01beb908, &parts, field4F0(), vec90()[1], 3.1415927f, 2.5f);
+    if (call_00C4D900(DAT_01beb908, &parts) >= 4) {
+        setAction(this, 0x70, 0, 0, 0);
+    }
+    parts.data = parts.storage;
+    parts.count = 0;
+    parts.capacity = 8;
+    parts.vftable = (void *)0x016A2BA4;  // lib::StaticArray<cLockOnParts,8>::vftable
+    call_00C4D5F0(DAT_01beb908, &parts, field4F0(), vec90()[1], 0.2617994f, 4.0f);
+    FUN_00dde2d0((uint *)DAT_01dd0814, 0, 3);  // __thiscall; result unused
+    if ((short)FUN_00dde2d0((uint *)DAT_01dd0814, 0, 1) == 1 &&  // __thiscall
+        relAngle * relAngle <= 0.61685032f && distSq < 12.25f && distSq > 6.25f) {
+        setAction(this, 0x6F, 0, 0, 0);
+    }
+    FUN_00dde2d0((uint *)DAT_01dd0814, 0, 2);  // __thiscall; result unused
+    if (relAngle * relAngle >= 5.5516524f) {
+        yawOffset = 3.1415927f;
+        turnBF8() = 0;
+        setAction(this, 0x61, 0, 0, 0);
+    }
+    if (0.7853982f < relAngle && relAngle < 2.3561945f) {
+        yawOffset = -1.5707964f;
+        turnBF8() = 2;
+        setAction(this, 0x61, 0, 0, 0);
+    }
+    if (relAngle < -0.7853982f && relAngle > -2.3561945f) {
+        yawOffset = 1.5707964f;
+        turnBF8() = 1;
+        setAction(this, 0x61, 0, 0, 0);
+    }
+    vf308(1.0f, 0.00017453292f, 3.1415927f, yawOffset);
+    float *slot = (float *)(field266C() != 0 ? target1220() : target11B0());
+    float10 range3 = (float10)slot[4] + 3.0f;  // +0x10 radius of the lock-on slot
+    if (distSq > range3 * range3) {
+        float10 range6 = (float10)slot[4] + 6.0f;
+        if (distSq < range6 * range6) {
+            setAction(this, 0x6F, 0, 0, 0);
+            destructCollector(&collector);
+            return 1;
+        }
+    }
+    float10 range6 = (float10)slot[4] + 6.0f;
+    if (range6 * range6 <= distSq && hit == 0) {
+        setAction(this, 0x62, 0, 0, 0);
+    }
+    destructCollector(&collector);
+    return 1;
+}
+
+// 00BF54E0  FUN_00bf54e0  size=281  [between]
+// Starts action `action`; with `turn` set, actions 0xC9 / 0xCA pick a random variant (field940), turn to
+// angle27EC + pi and tint the model for state 0xCA, action 0xCB turns without variant; those three then
+// continue at step 2.  ret 8.
+void FUN_00bf54e0(Pl0000 *self, unsigned int action, int turn)  // __thiscall
+{
+    using namespace Pl0000_p13;
+    if (turn == 0) {
+        setAction(self, action, 0, 0, 0);
+        return;
+    }
+    if (action > 200) {
+        if (action < 0xCB) {
+            short pick = (short)FUN_00dde2d0((uint *)DAT_01dd0814, 0, 1);  // __thiscall
+            field940(self) = pick;
+            self->vec90()[1] = (float)call_00DDBA30(self->angle27EC() + 3.1415927f);
+            FUN_00be86f0(self);
+            if (state618(self) == 0xCA) {
+                setModelTint(self->field118C(), 0.7f);
+            }
+        } else {
+            if (action != 0xCB) {
+                return;
+            }
+            field940(self) = 0;
+            self->vec90()[1] = (float)call_00DDBA30(self->angle27EC() + 3.1415927f);
+            self->vf220(10.0f);
+            FUN_00be86f0(self);
+        }
+        setAction(self, action, 0, 0, 0);
+        subState61C(self) = 2;
+    }
+}

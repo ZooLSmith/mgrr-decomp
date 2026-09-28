@@ -1,0 +1,1939 @@
+// src/player/pl0000/Pl0000.cpp (part 12/22) -- cleaned from the raw decompilation; see docs/CLEANUP_GUIDE.md
+#include "mgrr.h"
+#include "Pl0000.h"
+#include "hkpAllCdPointCollector.h"
+
+// globals
+extern unsigned int DAT_01bea060;  // global flags
+extern unsigned int DAT_01bea090;  // game flags (bit 0x20 / 0x8000 tested here)
+extern int DAT_01bea010;           // mode word; (DAT_01bea010 % 4) selects a parameter row (vf3B4)
+extern unsigned int DAT_01bea094;  // global flags
+extern unsigned int DAT_01bea070;  // global flags (input masking bits 0x20000 / 0x80000 / 0x100000 / 0x200000)
+extern unsigned char DAT_01be9ef4[];  // type descriptor tested with FUN_00dd6d80 (FUN_00b85420)
+extern unsigned char DAT_01be9dbc[];  // type descriptor tested with FUN_00dd6d80 (FUN_00bd9e50)
+extern unsigned char DAT_01b34da0[];  // type descriptor tested with FUN_00dd6d80 (FUN_00be86f0)
+extern char DAT_01bea1d0[];        // object: ECX of FUN_00db8150 / FUN_00da9230
+extern unsigned char DAT_01b5d1e0[];  // save data object (0x8EE0 bytes; ECX of the save-data calls)
+extern unsigned char DAT_018b9140[];  // object: ECX of FUN_00d45a70
+extern unsigned char DAT_01dd0814[];  // random generator (ECX of FUN_00dde2d0)
+extern int DAT_01b7bd48;           // argument of FUN_00b84230 / FUN_00b842f0
+extern int DAT_01dc08d4;           // slow/zan state flag (FUN_00b7aa00 .. FUN_00b7aa80)
+extern int DAT_01dc08bc;           // set to 1 while the "datsu" (slow) state runs (FUN_00b85420)
+extern int DAT_01dc08c8;           // cleared by vfFC
+extern int DAT_01bea9a4;           // cleared by FUN_00b8a1d0
+extern float DAT_01d61ab0;         // 0.0f from FUN_00b8a1d0
+extern char DAT_0163d0ac[];        // "[Hw::VecNormalize]..." (message of FUN_00dd5650)
+extern unsigned char DAT_01b35df8[];  // collision world: ECX of RayCastSingleHitWork::RayCastSingleHitWork_2
+extern unsigned char DAT_01d60b68[];  // object: ECX of FUN_00c1bd80 (FUN_00be8330)
+extern unsigned char DAT_01b7c0b8[];  // heap: second argument of FUN_00dd3500 (getAttackInfo)
+extern char DAT_016a28f4[];        // "Pl0000::getAttackInfo <memory allocation failed>" (SJIS)
+extern unsigned char DAT_018e9b94[];  // Havok allocator object (slot 0x10: free(block, size))
+
+// defined earlier in this file (parts 1 .. 11)
+void __fastcall FUN_00b7aa80(Pl0000 *self);
+void FUN_00b7ab80(Pl0000 *self, float time, float value);  // __thiscall
+int FUN_00b7c7b0(Pl0000 *self, int kind);  // __thiscall
+void __fastcall FUN_00b7c8a0(Pl0000 *self);
+void __fastcall FUN_00b7c900(Pl0000 *self);
+int FUN_00b7c980(Pl0000 *self, int unused);  // __thiscall
+void FUN_00b7e090(Pl0000 *self, int kind);  // __thiscall
+int FUN_00b7ed30(Pl0000 *self, undefined4 arg);  // __thiscall
+void FUN_00b7fa30(Pl0000 *self, int hide);  // __thiscall
+undefined4 FUN_00b87910(Pl0000 *self, int index);  // __thiscall
+undefined4 FUN_00b87df0(Pl0000 *self, int obj, float yaw, float maxDelta);  // __thiscall
+void __fastcall FUN_00b88400(Pl0000 *self);
+void __fastcall FUN_00b887d0(Pl0000 *self);
+void FUN_00b8a040(Pl0000 *self, int keepAction, undefined4 unused, int setFlag2F0);  // __thiscall
+undefined4 __fastcall FUN_00b8c050(Pl0000 *self);
+void __fastcall FUN_00b8e340(Pl0000 *self);
+void FUN_00b94790(Pl0000 *self, float unused1, float unused2);  // __thiscall
+void __fastcall FUN_00b94fc0(Pl0000 *self);
+float10 FUN_00bc2f00(Pl0000 *self, int includeLocked);  // __thiscall
+void FUN_00bc3100(Pl0000 *self, float amount);  // __thiscall
+void FUN_00bc31d0(Pl0000 *self, float amount);  // __thiscall
+undefined4 __fastcall FUN_00bc32b0(Pl0000 *self);
+undefined4 FUN_00bc4610(Pl0000 *self, int obj);  // __thiscall
+void __fastcall FUN_00bc54c0(Pl0000 *self);
+int FUN_00bd9510(int record, int source);  // __thiscall
+float10 __fastcall FUN_00bda020(Pl0000 *self);
+void FUN_00bda060(Pl0000 *self, float amount, int stopAtFirst);  // __thiscall
+void FUN_00bda7a0(Pl0000 *self, undefined4 a, undefined4 b, undefined4 c, undefined4 d, undefined4 e,
+                  float *vecA, float *vecB, undefined4 f);  // __thiscall
+void __fastcall FUN_00bdbfd0(Pl0000 *self);
+void __fastcall FUN_00bdc060(Pl0000 *self);
+
+// defined in this part, used before their definition
+void __fastcall FUN_00be86f0(Pl0000 *self);
+void __fastcall FUN_00be8aa0(Pl0000 *self);
+
+namespace Pl0000_p12 {
+
+// fields of the base classes that are not (yet) in their refined headers
+inline int   &state618(void *p)      { return *(int *)((char *)p + 0x618); }    // Behavior+0x618: ? current action / state id
+inline int   &subState61C(void *p)   { return *(int *)((char *)p + 0x61C); }    // Behavior+0x61C: ? sub-state of the current action
+inline int   &controller764(void *p) { return *(int *)((char *)p + 0x764); }    // Behavior+0x764: ? character controller (0 = none)
+inline float &dt910(void *p)         { return *(float *)((char *)p + 0x910); }  // BehaviorAppBase+0x910: ? frame delta time
+inline float &field920(void *p)      { return *(float *)((char *)p + 0x920); }  // BehaviorAppBase+0x920: ? (here: 60.0f count-down)
+inline int   &field940(void *p)      { return *(int *)((char *)p + 0x940); }    // BehaviorAppBase+0x940: ?
+
+// virtual call through slot `off` (byte offset) of an object whose class is not known here
+template <class R> inline R vcall(void *obj, unsigned int off)
+{
+    return (*(R (__thiscall **)(void *))(*(char **)obj + off))(obj);
+}
+template <class R, class A> inline R vcall(void *obj, unsigned int off, A a)
+{
+    return (*(R (__thiscall **)(void *, A))(*(char **)obj + off))(obj, a);
+}
+template <class R, class A, class B> inline R vcall(void *obj, unsigned int off, A a, B b)
+{
+    return (*(R (__thiscall **)(void *, A, B))(*(char **)obj + off))(obj, a, b);
+}
+template <class R, class A, class B, class C> inline R vcall(void *obj, unsigned int off, A a, B b, C c)
+{
+    return (*(R (__thiscall **)(void *, A, B, C))(*(char **)obj + off))(obj, a, b, c);
+}
+
+// virtual slot `off` of the manager returned by FUN_00c13920 (0x58: stage, 0x68 / 0x6C: game modes,
+// 0x78: difficulty-like kind)
+inline int mgrCall(unsigned int off)
+{
+    return vcall<int>((void *)FUN_00c13920(), off);
+}
+
+// true when the type returned by virtual slot `slot(desc)` of `obj` is-a `desc` (FUN_00dd6d80)
+inline bool isKindOf(void *obj, unsigned int slot, void *desc)
+{
+    undefined4 *type = vcall<undefined4 *, void *>(obj, slot, desc);
+    return FUN_00dd6d80(type, (undefined4 *)desc) != 0;
+}
+
+// owner (FUN_00a7c8a0) of the object resolved from `handle` (FUN_00a81330, called once), or 0
+inline int ownerOf(unsigned int *handle)
+{
+    int obj = (int)FUN_00a81330(handle);
+    int owner = 0;
+    if (obj != 0) {
+        owner = (int)FUN_00a7c8a0(obj);
+    }
+    return owner;
+}
+
+// callees whose generated prototype lacks the ECX receiver, loses arguments or passes floats as integers
+inline void setAction(void *obj, int action, int a, int b, int c)  // FUN_00a8caf0 (Behavior)
+{
+    ((void (__thiscall *)(void *, int, int, int, int))0x00A8CAF0)(obj, action, a, b, c);
+}
+inline int call_0085C0E0(void *self)  // ? player mode (0 / 1 / 2)
+{
+    return ((int (__thiscall *)(void *))0x0085C0E0)(self);
+}
+inline void call_00AA4080(void *self, int id, int layer, float a, float b, int flags, float c, float d)
+{
+    ((void (__thiscall *)(void *, int, int, float, float, int, float, float))0x00AA4080)(
+        self, id, layer, a, b, flags, c, d);
+}
+// 0x00A94A40: motion `motion` of the file set on a layer (ret 0x24)
+inline void call_00A94A40(void *self, int fileSet, int a, int b, int c, int d, int e, int motion, float blend,
+                          unsigned int flags)
+{
+    ((void (__thiscall *)(void *, int, int, int, int, int, int, int, float, unsigned int))0x00A94A40)(
+        self, fileSet, a, b, c, d, e, motion, blend, flags);
+}
+// 0x00A947E0: sets the frame of motion layer `layer` (ret 0x10)
+inline void call_00A947E0(void *self, int layer, float frame, float a, float b)
+{
+    ((void (__thiscall *)(void *, int, float, float, float))0x00A947E0)(self, layer, frame, a, b);
+}
+inline void call_00A94BC0(void *self, int layer, float time)
+{
+    ((void (__thiscall *)(void *, int, float))0x00A94BC0)(self, layer, time);
+}
+inline void call_00A8C5F0(void *obj, int a, int b, int c, int d, int e)
+{
+    ((void (__thiscall *)(void *, int, int, int, int, int))0x00A8C5F0)(obj, a, b, c, d, e);
+}
+inline float10 call_00DDBA30(float value)  // angle wrapped to [-pi, pi]
+{
+    return ((float10 (__cdecl *)(float))0x00DDBA30)(value);
+}
+inline void call_00DD5650(const char *message)  // ? debug message
+{
+    ((void (__cdecl *)(const char *))0x00DD5650)(message);
+}
+inline void call_00EAA6E0(void *esp, float a, float b)  // cEspControler method
+{
+    ((void (__thiscall *)(void *, float, float))0x00EAA6E0)(esp, a, b);
+}
+inline void call_00DA0F50(void *camera, int a, float b, int c)
+{
+    ((void (__thiscall *)(void *, int, float, int))0x00DA0F50)(camera, a, b, c);
+}
+inline void setControllerRadius(int controller, float radius)  // CharacterControl::setRadius (0x008E4780)
+{
+    ((void (__thiscall *)(int, float))0x008E4780)(controller, radius);
+}
+inline int call_00D82980(void *obj, int index)
+{
+    return ((int (__thiscall *)(void *, int))0x00D82980)(obj, index);
+}
+inline void call_00D82DE0(void *obj, int item)  // FUN_00d82de0: ret 4
+{
+    ((void (__thiscall *)(void *, int))0x00D82DE0)(obj, item);
+}
+inline int call_009C4BF0(void *save)
+{
+    return ((int (__thiscall *)(void *))0x009C4BF0)(save);
+}
+inline void call_00DDA360(int a, float b, float c, int d)
+{
+    ((void (__cdecl *)(int, float, float, int))0x00DDA360)(a, b, c, d);
+}
+// FUN_00dd3500: allocates `size` bytes from `heap` (cdecl)
+inline void *call_00DD3500(unsigned int size, void *heap)
+{
+    return ((void *(__cdecl *)(unsigned int, void *))0x00DD3500)(size, heap);
+}
+// CollisionAttackData::CollisionAttackData (0x00D73030) on raw memory; returns the object
+inline int constructAttackData(void *memory)
+{
+    return ((int (__thiscall *)(void *))0x00D73030)(memory);
+}
+// FUN_0090eea0 on the collision world: sphere cast of `radius` into `collector` (ret 0x1C)
+inline int call_0090EEA0(void *world, void *collector, undefined4 a, undefined4 b, float radius, undefined4 c,
+                         int flags, const char *name)
+{
+    return ((int (__thiscall *)(void *, void *, undefined4, undefined4, float, undefined4, int, const char *))
+                0x0090EEA0)(world, collector, a, b, radius, c, flags, name);
+}
+
+// sum of the frame counters (+0xB8 / +0xC4 / +0xD0) of the animation object FUN_00a92f90()
+inline int motionFrames(int motion)
+{
+    return *(int *)(motion + 0xD0) + *(int *)(motion + 0xC4) + *(int *)(motion + 0xB8);
+}
+// FUN_00a92f90 then: no frames left, or FUN_00e36060(animation + 0xF4, 0) (the motion has ended)
+inline bool motionDone(Pl0000 *self)
+{
+    int animation = (int)FUN_00a92f90((int)self);
+    return motionFrames(animation) == 0 || FUN_00e36060(animation + 0xF4, 0);  // __thiscall
+}
+
+// entry of the array at entries3820 / count3828 (0x18 bytes)
+struct Cell {
+    int value00;     // +0x00
+    float amount;    // +0x04
+    int value08;     // +0x08
+    float capacity;  // +0x0C
+    float field10;   // +0x10
+    int locked;      // +0x14
+};
+
+// 0x120-byte record of the list284C (built on the stack, copied with FUN_00bd9510)
+struct __declspec(align(16)) Record120 {
+    unsigned char body[0x100];  // +0x000 FUN_004105d0 object, FUN_0043e160 copy
+    unsigned int handle;        // +0x100 object handle (FUN_00a7c930 / FUN_00a7c950 / FUN_00a7c960)
+    int key104;                 // +0x104
+    int pad108[2];              // +0x108
+    float vec110[4];            // +0x110
+};
+
+// hkpAllCdPointCollector with its inline storage of 8 hits (0x30 bytes each), constructor inlined
+struct __declspec(align(16)) CdCollector {
+    void *vftable;                // +0x00 hkpAllCdPointCollector::vftable (0x0163D3AC)
+    unsigned int earlyOutBits;    // +0x04 float 3.40282e+38 (0x7F7FFFEE)
+    int pad08[2];                 // +0x08
+    char *data;                   // +0x10 hit array (points at `storage`)
+    int count;                    // +0x14
+    unsigned int capacity;        // +0x18 capacity | 0x80000000 (do not deallocate)
+    int pad1C;                    // +0x1C
+    unsigned char storage[0x180]; // +0x20
+};
+
+// random-roll threshold of getAttackInfo: 1 - (int)(vf3B8() * -99)
+inline int rollThreshold(Pl0000 *self)
+{
+    return 1 - (int)(self->vf3B8() * -99.0f);  // _ftol2 (FUN_00fdbc60)
+}
+
+}  // namespace Pl0000_p12
+
+// 00BE6E90  Pl0000::getAttackInfo  size=3490  [class]
+// Allocates a CollisionAttackData (0x110 bytes) and fills its info block (+8) for attack `*attackId`:
+// damage (FUN_00b7ed30, scaled by field3198 / field3BB4 and vf3A0 / vf3A4), the values of the parameter
+// table field754 (slots 0x10 / 0x18 / 0x20 / 0x28 flags / 0x30 kind), stage-dependent bits and the
+// attack kind (switch below).  Returns the object (0 when the allocation failed).  ret 4.
+int Pl0000::getAttackInfo(ushort *attackId)
+{
+    using namespace Pl0000_p12;
+    void *memory = call_00DD3500(0x110, DAT_01b7c0b8);
+    int attackData;
+    if (memory == 0 || (attackData = constructAttackData(memory)) == 0) {
+        call_00DD5650(DAT_016a28f4);
+        return 0;
+    }
+    if (*attackId == 0) {
+        return attackData;
+    }
+    unsigned int *info = *(unsigned int **)(attackData + 8);
+    info[5] = field4F0();  // +0x14 attacker id
+    FUN_00a7c960((undefined4 *)(info + 6), (undefined4 *)FUN_00a7c7f0(field4F0()));  // +0x18 handle; __thiscall
+    int damage = FUN_00b7ed30(this, *attackId);
+    unsigned int value0C = vcall<unsigned int, unsigned int>((void *)field754(), 0x10, *attackId);
+    unsigned char power = vcall<unsigned char, unsigned int>((void *)field754(), 0x20, *attackId);
+    unsigned int value08 = vcall<unsigned int, unsigned int>((void *)field754(), 0x18, *attackId);
+    if (call_0085C0E0(this) == 2) {
+        damage = (int)((float10)damage * field3198());  // _ftol2
+    }
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        damage = (int)((float10)damage * field3BB4());  // _ftol2
+    }
+    unsigned int &flags8C = info[0x23];  // +0x8C
+    unsigned int &flags90 = info[0x24];  // +0x90
+    unsigned short &mode84 = *(unsigned short *)((char *)info + 0x84);
+    info[0] = *attackId;
+    mode84 = 1;
+    unsigned int flags = vcall<unsigned int, unsigned int>((void *)field754(), 0x28, *attackId);
+    if ((flags & 1) != 0 &&
+        ((DAT_01bea090 & 0x80000000) != 0 || (!(FUN_00bda020(this) <= 0.0f) && FUN_00bc32b0(this) == 0))) {
+        flags8C = flags8C | 0x10000;
+    }
+    flags8C = flags8C | 0x40000000;
+    if ((flags & 4) != 0) {
+        flags8C = flags8C & 0xBFFFFFFF;
+        flags8C = flags8C | 0x20000000;
+        mode84 = 3;
+    }
+    unsigned int heavy = flags & 8;
+    if (heavy != 0) {
+        flags8C = flags8C & 0xBFFFFFFF;
+        flags8C = flags8C | 0x800000;
+        mode84 = 2;
+    }
+    if ((flags & 0x10) != 0) {
+        *((unsigned char *)info + 0x11) = 3;
+    }
+    if ((flags & 0x20) != 0) {
+        *((unsigned char *)info + 0x11) = 7;
+    }
+    if ((flags & 0x40) != 0) {
+        *((unsigned char *)info + 0x11) = 10;
+    }
+    if ((char)flags < 0) {
+        flags8C = flags8C | 8;
+    }
+    if (*attackId == 0x84) {
+        flags8C = flags8C | 8;
+    }
+    int kind = vcall<int, unsigned int>((void *)field754(), 0x30, *attackId);
+    if (kind == 1) {
+        flags90 = flags90 | 0x10000000;
+    } else if (kind == 2) {
+        flags90 = flags90 | 0x8000000;
+    } else if (kind == 3) {
+        flags90 = flags90 | 0x4000000;
+    } else if (kind == 4) {
+        flags90 = flags90 | 0x2000000;
+    } else if (kind == 5) {
+        flags90 = flags90 | 0x1000000;
+    } else if (kind == 6) {
+        flags90 = flags90 | 0x800000;
+    } else if (kind == 7) {
+        flags90 = flags90 | 0x80000000;
+    } else if (kind == 8) {
+        flags90 = flags90 | 0x40000000;
+    } else if (kind == 9) {
+        flags90 = flags90 | 0x20000000;
+    } else if (kind == 10) {
+        flags90 = flags90 | 0x80000;
+    }
+    // stages 4 / 8: bit 3 turns the attack into a guard-break with a random extra bit
+    if ((mgrCall(0x58) == 4 || mgrCall(0x58) == 8) && (flags8C & 8) != 0) {
+        flags8C = flags8C & 0xBFFFFFFF;
+        flags8C = flags8C | 0x20000000;
+        flags90 = flags90 | 0x12000;
+        mode84 = 3;
+        int threshold = rollThreshold(this);
+        if ((short)FUN_00dde2d0((uint *)DAT_01dd0814, 1, 100) <= threshold) {  // __thiscall
+            flags90 = flags90 | 0x1000;
+        }
+    }
+    if ((flags8C & 8) != 0) {
+        damage = (int)(vf3A0() * (float10)damage);  // _ftol2
+    } else if (mgrCall(0x68) != 5 || field1400() == 0) {
+        damage = (int)(vf3A4() * (float10)damage);  // _ftol2
+    }
+    if (mgrCall(0x58) == 1 && (flags8C & 8) != 0) {
+        int threshold = rollThreshold(this);
+        if ((short)FUN_00dde2d0((uint *)DAT_01dd0814, 1, 100) <= threshold) {  // __thiscall
+            flags8C = flags8C | 0x801;
+        }
+    }
+    if (mgrCall(0x58) == 2 && (flags8C & 8) != 0) {
+        int threshold = rollThreshold(this);
+        if ((short)FUN_00dde2d0((uint *)DAT_01dd0814, 1, 100) <= threshold) {  // __thiscall
+            flags8C = flags8C | 2;
+        }
+    }
+    if (mgrCall(0x58) == 3 && (flags8C & 8) != 0) {
+        power = (unsigned char)(int)((float10)power + (float10)power);  // fistp, truncating
+        if (power >= 0xF) {
+            power = 0xF;
+        }
+    }
+    if ((mgrCall(0x58) == 4 || mgrCall(0x58) == 8) && (flags8C & 8) != 0) {
+        power = (unsigned char)(int)((float10)power + (float10)power);  // fistp, truncating
+        if (power >= 0xF) {
+            power = 0xF;
+        }
+    }
+    if (mgrCall(0x58) == 7 && (flags8C & 8) != 0) {
+        power = (unsigned char)(int)((float10)power * 0.7f);  // fistp, truncating
+    }
+    if (mgrCall(0x58) == 6 && (flags8C & 8) != 0) {
+        if (vf3BC() == 1) {
+            flags90 = flags90 | 0x20000;
+        } else {
+            flags90 = flags90 | 0x40000;
+        }
+    }
+    if (DAT_01bea010 % 4 == 3 && vcall<int>(this, 0x32C) != 0 && FUN_00b8c050(this) != 0) {
+        flags90 = flags90 | 0x20000;
+    }
+    flags90 = flags90 | 0x800;
+    info[3] = value0C;
+    info[1] = (unsigned int)damage;
+    info[2] = value08;
+    *(unsigned char *)(info + 4) = power;
+    switch (*attackId) {
+    case 4:
+        info[0] = 5;
+        break;
+    case 5:
+        info[0] = 6;
+        break;
+    case 6:
+        info[0] = 8;
+        break;
+    case 7:
+        info[0] = 9;
+        break;
+    case 8:
+        info[0] = 10;
+        break;
+    case 9:
+    case 10:
+        info[0] = 0xB;
+        break;
+    case 0xB:
+        info[0] = 0xD;
+        break;
+    case 0xC:
+        info[0] = 0xE;
+        break;
+    case 0xD:
+        info[0] = 0xF;
+        break;
+    case 0xE:
+        info[0] = 0x10;
+        break;
+    case 0xF:
+        info[0] = 0x12;
+        break;
+    case 0x10:
+        info[0] = 0x13;
+        break;
+    case 0x11:
+        info[0] = 0x14;
+        break;
+    case 0x12:
+        info[0] = 0x15;
+        break;
+    case 0x13:
+        info[0] = 0x16;
+        break;
+    case 0x14:
+        info[0] = 0x17;
+        break;
+    case 0x15:
+        info[0] = 0x18;
+        break;
+    case 0x16:
+        info[0] = 0x19;
+        break;
+    case 0x17:
+        info[0] = 0x1A;
+        break;
+    case 0x18:
+        info[0] = 0x1B;
+        break;
+    case 0x19:
+        info[0] = 0x1C;
+        break;
+    case 0x1A:
+        info[0] = 0x20;
+        break;
+    case 0x1B:
+        info[0] = 0x21;
+        break;
+    case 0x1C:
+        info[0] = 7;
+        break;
+    case 0x1E:
+        info[0] = 0x22;
+        break;
+    case 0x20:
+        info[0] = 0x23;
+        break;
+    case 0x22:
+    case 0x23:
+        info[0] = 0x24;
+        break;
+    case 0x24:
+        info[0] = 0x27;
+        break;
+    case 0x26:
+        info[0] = 0x28;
+        break;
+    case 0x28:
+        info[0] = 0x29;
+        break;
+    case 0x2A:
+        info[0] = 0x25;
+        break;
+    case 0x2C:
+        info[0] = 0x26;
+        break;
+    case 0x2E:
+        info[0] = 0x2A;
+        break;
+    case 0x2F:
+        info[0] = 0x2B;
+        break;
+    case 0x30:
+        info[0] = 0x2C;
+        flags8C = flags8C | 0x2000000;
+        break;
+    case 0x31:
+        info[0] = 0x2D;
+        flags8C = flags8C | 0x2000000;
+        break;
+    case 0x32:
+        info[0] = 0x2E;
+        break;
+    case 0x34:
+        info[0] = 0x2F;
+        break;
+    case 0x36:
+        info[0] = 0x32;
+        break;
+    case 0x38:
+        info[0] = 0x33;
+        break;
+    case 0x3A:
+        info[0] = 0x34;
+        break;
+    case 0x3C:
+        info[0] = 0x35;
+        flags8C = flags8C | 0x2000000;
+        break;
+    case 0x3E:
+    case 0x72:
+        info[0] = 0x36;
+        break;
+    case 0x40:
+    case 0x74:
+        info[0] = 0x37;
+        break;
+    case 0x42:
+    case 0x76:
+        info[0] = 0x39;
+        break;
+    case 0x43:
+        info[0] = 0x3A;
+        break;
+    case 0x44:
+        info[0] = 0x38;
+        break;
+    case 0x46:
+        info[0] = 0x3B;
+        break;
+    case 0x47:
+    case 0x7C:
+        info[0] = 0x3C;
+        flags8C = flags8C | 0x2000000;
+        break;
+    case 0x48:
+        info[0] = 0x3D;
+        break;
+    case 0x4A:
+        info[0] = 0x3E;
+        break;
+    case 0x4B:
+    case 0x7E:
+        info[0] = 0x3F;
+        break;
+    case 0x4C:
+        info[0] = 0x40;
+        break;
+    case 0x4E:
+    case 0x7A:
+        info[0] = 0x41;
+        break;
+    case 0x50:
+    case 0x78:
+        info[0] = 0x42;
+        break;
+    case 0x51:
+    case 0x79:
+        info[0] = 0x43;
+        break;
+    case 0x52:
+        info[0] = 0x47;
+        break;
+    case 0x53:
+        info[0] = 0x48;
+        break;
+    case 0x54:
+        info[0] = 0x49;
+        flags8C = flags8C | 0x2000;
+        break;
+    case 0x56:
+        info[0] = 0x4A;
+        mode84 = 5;
+        break;
+    case 0x58:
+        info[0] = 0x4B;
+        mode84 = 5;
+        break;
+    case 0x59:
+        info[0] = 0x4C;
+        mode84 = 5;
+        break;
+    case 0x5A:
+        info[0] = 0x30;
+        break;
+    case 0x5B:
+        info[0] = 0x31;
+        break;
+    case 0x5C:
+        info[0] = 0x44;
+        break;
+    case 0x5D:
+        info[0] = 0x45;
+        break;
+    case 0x5E:
+    case 0x80:
+        info[0] = 0x46;
+        break;
+    case 0x60:
+        info[0] = 0x4E;
+        flags8C = flags8C | 0x2000000;
+        break;
+    case 0x62:
+        info[0] = 0x4F;
+        flags8C = flags8C | 0x800;
+        flags8C = flags8C | 0x8000;
+        break;
+    case 100:
+        info[0] = 0x4D;
+        break;
+    case 0x66:
+        info[0] = 0x50;
+        break;
+    case 0x68:
+        info[0] = 0x11;
+        break;
+    case 0x6A:
+        info[0] = 0x1D;
+        break;
+    case 0x6C:
+        info[0] = 0x1E;
+        break;
+    case 0x6E:
+        info[0] = 0x1F;
+        break;
+    case 0x70:
+        info[0] = 0x51;
+        break;
+    case 0x82:
+        info[0] = 0x52;
+        flags8C = flags8C | 0x800;
+        break;
+    case 0x84:
+        info[0] = 0x53;
+        break;
+    case 0x86:
+        info[0] = 0x5B;
+        break;
+    case 0x88:
+        info[0] = 0x5C;
+        break;
+    case 0x8A:
+        info[0] = 0x5D;
+        break;
+    case 0x8C:
+        info[0] = 0x5E;
+        break;
+    case 0x8E:
+        info[0] = 0x60;
+        flags8C = flags8C | 0x400;
+        break;
+    // attacks that become mode 0x10 unless the table flags carry bit 2 or 3
+    case 0x90:
+    case 0x91:
+    case 0x92:
+    case 0x95:
+    case 0x93:
+    case 0x94:
+    case 0x96:
+    case 0x97:
+    case 0x98:
+    case 0x9A:
+    case 0xA6:
+    case 0xA8:
+    case 0xAA:
+    case 0xAC:
+    case 0xAE:
+    case 0xE0:
+    case 0xE2:
+    case 0xE4:
+        switch (*attackId) {
+        case 0x90: info[0] = 0x61; break;
+        case 0x91: info[0] = 0x62; break;
+        case 0x92:
+        case 0x95: info[0] = 99; break;
+        case 0x93: info[0] = 100; break;
+        case 0x94: info[0] = 0x65; break;
+        case 0x96: info[0] = 0x66; break;
+        case 0x97: info[0] = 0x66; break;
+        case 0x98: info[0] = 0x67; break;
+        case 0x9A: info[0] = 0x68; break;
+        case 0xA6: info[0] = 0x69; break;
+        case 0xA8: info[0] = 0x6A; break;
+        case 0xAA: info[0] = 0x6B; break;
+        case 0xAC: info[0] = 0x6C; break;
+        case 0xAE: info[0] = 0x6D; break;
+        case 0xE0: info[0] = 0x6E; break;
+        case 0xE2: info[0] = 0x6F; break;
+        case 0xE4: info[0] = 0x70; break;
+        }
+        if ((flags & 0xC) == 0) {
+            mode84 = 0x10;
+        }
+        break;
+    case 0x9C:
+        info[0] = 0x8E;
+        flags8C = flags8C | 0x800;
+        break;
+    case 0x9E:
+        info[0] = 0x8F;
+        flags8C = flags8C | 0x800;
+        break;
+    case 0xA0:
+        info[0] = 0x90;
+        flags8C = flags8C | 0x800;
+        break;
+    case 0xA2:
+        info[0] = 0x91;
+        break;
+    case 0xA4:
+        info[0] = 0x92;
+        break;
+    // attacks that become mode 0x11 unless heavy (table flag 8)
+    case 0xB0:
+        info[0] = 0x71;
+        if (heavy == 0) {
+            mode84 = 0x11;
+        }
+        break;
+    case 0xB4:
+        info[0] = 0x73;
+        if (heavy == 0) {
+            mode84 = 0x11;
+        }
+        break;
+    case 0xB6:
+        info[0] = 0x74;
+        if (heavy == 0) {
+            mode84 = 0x11;
+        }
+        flags8C = flags8C | 0x400;
+        break;
+    case 0xB8:
+        info[0] = 0x75;
+        if (heavy == 0) {
+            mode84 = 0x11;
+        }
+        break;
+    case 0xBA:
+        info[0] = 0x76;
+        if (heavy == 0) {
+            mode84 = 0x11;
+        }
+        flags8C = flags8C | 0x400;
+        break;
+    case 0xBC:
+        info[0] = 0x77;
+        if (heavy == 0) {
+            mode84 = 0x11;
+        }
+        break;
+    case 0xB2:
+    case 0xBE:
+    case 0xE6:
+        if (*attackId == 0xB2) {
+            info[0] = 0x72;
+        } else if (*attackId == 0xBE) {
+            info[0] = 0x78;
+        } else {
+            info[0] = 0x79;
+        }
+        if (heavy == 0) {
+            mode84 = 0x11;
+        }
+        flags8C = flags8C | 0x400;
+        break;
+    case 0xC0:
+        info[0] = 0x7E;
+        break;
+    case 0xC2:
+        info[0] = 0x7F;
+        break;
+    case 0xC4:
+        info[0] = 0x82;
+        break;
+    case 0xC6:
+        info[0] = 0x83;
+        break;
+    case 200:
+        info[0] = 0x84;
+        break;
+    case 0xCA:
+        info[0] = 0x85;
+        break;
+    case 0xCC:
+        info[0] = 0x86;
+        break;
+    case 0xCE:
+        info[0] = 0x87;
+        break;
+    case 0xD0:
+        info[0] = 0x88;
+        break;
+    case 0xD2:
+        info[0] = 0x89;
+        break;
+    case 0xD4:
+        info[0] = 0x8A;
+        break;
+    case 0xD6:
+        info[0] = 0x8B;
+        break;
+    case 0xD8:
+        info[0] = 0x8C;
+        break;
+    case 0xDA:
+        info[0] = 0x8D;
+        break;
+    case 0xDC:
+        info[0] = 0x80;
+        break;
+    case 0xDE:
+        info[0] = 0x81;
+        break;
+    case 0xE8:
+        info[0] = 0x7A;
+        break;
+    case 0xEA:
+        info[0] = 0x7B;
+        break;
+    case 0xEC:
+        info[0] = 0x7C;
+        break;
+    case 0xEE:
+        info[0] = 0x7D;
+        break;
+    case 0xF0:
+        info[0] = 0x93;
+        break;
+    case 0xF2:
+        flags90 = flags90 | 0x2000;
+        info[0] = 0x94;
+        break;
+    }
+    if (call_0085C0E0(this) == 2) {
+        flags8C = flags8C | 0x200;
+    }
+    DAT_01bea090 = DAT_01bea090 & 0xFFFFFFBF;
+    return attackData;
+}
+
+// 00BE7F50  FUN_00be7f50  size=261  [between]
+// On a press of maskE58 (outside the blocking global flags, FUN_00416d50(1) and field4E4): plays
+// sound-like event 0xF of FUN_00c209f0() when the kind (manager slot 0x78) is 1 and the HP is below
+// FUN_00b7c980, or kind 2 and the cells hold less than FUN_00bc2f00(0) -- if FUN_00b7c7b0(kind) allows.
+void __fastcall FUN_00be7f50(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    if ((DAT_01bea060 & 0x6A000000) != 0 || (DAT_01bea070 & 0x200000) != 0) {
+        return;
+    }
+    if (FUN_00416d50(1) || self->field4E4() != 0 || (self->inputTrigger() & self->maskE58()) == 0) {
+        return;
+    }
+    if (mgrCall(0x78) == 1) {
+        int hp = self->hp();
+        if (hp < FUN_00b7c980(self, 0) && FUN_00b7c7b0(self, mgrCall(0x78)) != 0) {
+            vcall<void, int>((void *)FUN_00c209f0(), 0x14, 0xF);
+        }
+    }
+    if (mgrCall(0x78) == 2) {
+        float charge = (float)FUN_00bda020(self);
+        if (charge < FUN_00bc2f00(self, 0) && FUN_00b7c7b0(self, mgrCall(0x78)) != 0) {
+            vcall<void, int>((void *)FUN_00c209f0(), 0x14, 0xF);
+        }
+    }
+}
+
+// 00BE8060  FUN_00be8060  size=673  [between]
+// (Re)builds the cells: array381C sized 8, field3830 / field3834 = 500, max HP (field33E0, or field33E4
+// with DAT_01bea090 bit 31) and HP (plus the upgrades); one full cell of field33D8 and (manager slot
+// 0x9C) empty cells of field33D4; then field3850 = total, the espA00 effect is stopped and the capacity
+// is published (FUN_00bc3100).
+void __fastcall FUN_00be8060(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    void *manager = (void *)FUN_00c13920();
+    FUN_00b84400((int)self->array381C(), 8, &DAT_01b7bd48);  // __thiscall
+    float firstAmount = self->field33D8();
+    float firstCapacity = self->field33D8();
+    int count;
+    if (manager == 0) {
+        count = 1;
+    } else {
+        count = vcall<int>(manager, 0x9C) + 1;
+    }
+    self->field3830() = 500.0f;
+    self->field3834() = 500.0f;
+    self->maxHp() = (int)self->field33E0();  // _ftol2
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        self->maxHp() = (int)self->field33E4();  // _ftol2
+    }
+    manager = (void *)FUN_00c13920();
+    int hp = self->maxHp();
+    if ((DAT_01bea090 & 0x80000000) == 0 && manager != 0) {
+        hp = vcall<int>(manager, 0x98) * self->hpBonus1E40() + hp;
+    }
+    self->hp() = hp;
+    for (int i = 0; i < count; i++) {
+        int n = self->count3828();
+        if (i == 0) {
+            if (n < self->field3824()) {
+                Cell *cell = (Cell *)(self->entries3820() + n * 0x18);
+                if (cell != 0) {
+                    cell->value00 = 100;
+                    cell->amount = firstAmount;
+                    cell->value08 = 100;
+                    cell->capacity = firstCapacity;
+                    cell->field10 = 0.0f;
+                    cell->locked = 0;
+                }
+                self->count3828() = self->count3828() + 1;
+            }
+        } else {
+            float capacity = self->field33D4();
+            if (n < self->field3824()) {
+                Cell *cell = (Cell *)(self->entries3820() + n * 0x18);
+                if (cell != 0) {
+                    cell->value00 = 100;
+                    cell->amount = 0.0f;
+                    cell->value08 = 100;
+                    cell->capacity = capacity;
+                    cell->field10 = 0.0f;
+                    cell->locked = 0;
+                }
+                self->count3828() = self->count3828() + 1;
+            }
+        }
+        FUN_00cb7a40(self->count3828());
+    }
+    float10 total = 0;
+    if ((DAT_01bea090 & 0x80000000) == 0) {
+        Cell *cell = (Cell *)self->entries3820();
+        Cell *end = cell + self->count3828();
+        for (; cell != end; cell++) {
+            if (cell->locked == 0) {
+                total = total + (float10)cell->amount;
+            }
+        }
+    } else {
+        total = (float10)self->field3830();
+    }
+    self->field3850() = (float)total;
+    self->fieldAB0() = 0;
+    call_00EAA6E0(self->espA00(), 10.0f, 0.0f);
+    self->fieldB70() = 0;
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        FUN_00bc3100(self, self->field3834());
+        return;
+    }
+    float10 capacity = 0;
+    Cell *cell = (Cell *)self->entries3820();
+    Cell *end = cell + self->count3828();
+    for (; cell != end; cell++) {
+        if (cell->locked == 0) {
+            capacity = capacity + (float10)cell->capacity;
+        }
+    }
+    FUN_00bc3100(self, (float)capacity);
+}
+
+// 00BE8310  FUN_00be8310  size=27  [between]
+// Charges the cells with `amount` (FUN_00bda060(amount, 0)) unless field4E4 is set.  ret 4.
+void FUN_00be8310(Pl0000 *self, float amount)  // __thiscall
+{
+    if (self->field4E4() == 0) {
+        FUN_00bda060(self, amount, 0);
+    }
+}
+
+// 00BE8330  FUN_00be8330  size=673  [between]
+// Per-frame cell update: field3850 = total; field383C counts down, then (outside FUN_00c1bd80) the cells
+// are charged with field339C every time timer3840 runs out unless FUN_00b87910(0); the espA00 effect
+// follows the player mode (FUN_0085c0e0 against fieldAB0); field3920 tracks the cell state (0: charged,
+// 1: FUN_00bc32b0, 2: empty) and tells the handleFF4 owner (FUN_00b78f70 / FUN_00b79000 / FUN_00b79090).
+void __fastcall FUN_00be8330(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    float10 total = 0;
+    if ((DAT_01bea090 & 0x80000000) == 0) {
+        Cell *cell = (Cell *)self->entries3820();
+        Cell *end = cell + self->count3828();
+        for (; cell != end; cell++) {
+            if (cell->locked == 0) {
+                total = total + (float10)cell->amount;
+            }
+        }
+    } else {
+        total = (float10)self->field3830();
+    }
+    self->field3850() = (float)total;
+    if (self->field383C() >= 0.0f) {
+        self->field383C() = self->field383C() - dt910(self);
+    }
+    if (!FUN_00c1bd80((uint *)DAT_01d60b68) && self->field383C() < 0.0f) {
+        self->field3844() = 0;
+        if (FUN_00b87910(self, 0) == 0) {
+            float timer = self->timer3840() - dt910(self);
+            self->timer3840() = timer;
+            if (timer < 0.0f) {
+                FUN_00bda060(self, self->field339C(), 1);
+                self->timer3840() = 1.0f;
+            }
+        } else {
+            self->field3844() = -1;
+        }
+    }
+    switch (self->fieldAB0()) {
+    case 0:
+        if (call_0085C0E0(self) == 1) {
+            FUN_00b7c8a0(self);
+            break;
+        }
+        if (call_0085C0E0(self) == 2) {
+            FUN_00b7c900(self);
+        }
+        break;
+    case 1:
+        if (call_0085C0E0(self) == 0) {
+            self->fieldAB0() = 0;
+            call_00EAA6E0(self->espA00(), 10.0f, 0.0f);
+            self->fieldB70() = 0;
+        } else if (call_0085C0E0(self) == 2) {
+            FUN_00b7c900(self);
+        }
+        break;
+    case 2:
+        if (call_0085C0E0(self) == 0) {
+            self->fieldAB0() = 0;
+            call_00EAA6E0(self->espA00(), 10.0f, 0.0f);
+            self->fieldB70() = 0;
+        } else if (call_0085C0E0(self) == 1) {
+            FUN_00b7c8a0(self);
+        }
+        break;
+    }
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        return;
+    }
+    if (self->field3920() != 0 && FUN_00bc32b0(self) == 0 && !(FUN_00bda020(self) <= 0.0f)) {
+        self->field3920() = 0;
+        if (FUN_00a81330(&self->handleFF4()) != 0) {
+            FUN_00b78f70((int)FUN_00a7c8a0((int)FUN_00a81330(&self->handleFF4())));
+        }
+    }
+    if (self->field3920() != 1 && FUN_00bc32b0(self) != 0 &&
+        ((DAT_01bea090 & 0x80000000) != 0 || !(FUN_00bda020(self) <= 0.0f))) {
+        self->field3920() = 1;
+        if (FUN_00a81330(&self->handleFF4()) != 0) {
+            FUN_00b79000((int)FUN_00a7c8a0((int)FUN_00a81330(&self->handleFF4())));
+        }
+    }
+    if (self->field3920() != 2 && (DAT_01bea090 & 0x80000000) == 0 && FUN_00bda020(self) <= 0.0f) {
+        self->field3920() = 2;
+        if (FUN_00a81330(&self->handleFF4()) != 0) {
+            FUN_00b79090((int)FUN_00a7c8a0((int)FUN_00a81330(&self->handleFF4())));
+        }
+    }
+}
+
+// 00BE85E0  FUN_00be85e0  size=266  [between]
+// Appends a record to list284C (unless field2970 or it is full): body copied from `source`
+// (FUN_0043e160), handle of `obj`, key and vector.  ret 0x10.
+void FUN_00be85e0(Pl0000 *self, undefined4 *source, int obj, int key, float *vec)  // __thiscall
+{
+    using namespace Pl0000_p12;
+    if (self->field2970() != 0 || self->field2858() >= self->field2854()) {
+        return;
+    }
+    Record120 record;
+    FUN_004105d0((undefined4 *)record.body);
+    FUN_00a7c930((undefined4 *)&record.handle);
+    FUN_00a7c950((undefined4 *)&record.handle);
+    record.vec110[0] = 0.0f;
+    record.vec110[1] = 0.0f;
+    record.vec110[2] = 0.0f;
+    record.key104 = -1;
+    FUN_0043e160((undefined4 *)record.body, source);  // __thiscall
+    FUN_00a7c950((undefined4 *)&record.handle);
+    if (obj != 0) {
+        FUN_00a7c960((undefined4 *)&record.handle, (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+    }
+    record.vec110[0] = vec[0];
+    record.key104 = key;
+    record.vec110[1] = vec[1];
+    record.vec110[2] = vec[2];
+    record.vec110[3] = vec[3];
+    if (self->field2858() < self->field2854()) {
+        int slot = self->field2858() * 0x120 + self->data2850();
+        if (slot != 0) {
+            FUN_00bd9510(slot, (int)&record);
+        }
+        self->field2858() = self->field2858() + 1;
+    }
+}
+
+// 00BE86F0  FUN_00be86f0  size=936  [between]
+// Resets the player to the neutral state: shows the equipment (FUN_00b7fa30(0)), releases the
+// handle91C object (DAT_01bea094 bit 12), stops the effects, restores the camera, the carried item
+// (field7D0), the controller radius (0.35), the motion layers 2 / 4 .. 8 and the flags.
+void __fastcall FUN_00be86f0(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    FUN_00b7fa30(self, 0);
+    DAT_01bea090 = DAT_01bea090 & 0xFFFFFFBF;
+    if ((DAT_01bea094 & 0x1000) != 0 && FUN_00a81330(&self->handle91C()) != 0) {
+        int obj = (int)FUN_00a7c8a0((int)FUN_00a81330(&self->handle91C()));
+        if (obj != 0 && isKindOf((void *)obj, 4, DAT_01b34da0)) {
+            FUN_0049cfa0(obj);
+            FUN_0049cf50(obj);
+        }
+    }
+    self->vf39C();
+    FUN_00b88400(self);
+    self->field26D4() = 0;
+    call_00EAA6E0(self->espE90(), 5.0f, 0.0f);
+    if (mgrCall(0x68) == 3) {
+        self->motion1424() = 0x701;
+        int obj = (int)FUN_00a81330(&self->handleFF8());
+        if (obj != 0) {
+            int owner = (int)FUN_00a7c8a0(obj);
+            if (owner != 0) {
+                FUN_00bdc2a0(owner);
+                if (state618((void *)owner) == 1) {
+                    setAction((void *)owner, 1, 4, 0, 0);
+                }
+                if (state618((void *)owner) == 2) {
+                    setAction((void *)owner, 1, 4, 0, 0);
+                }
+            }
+        }
+    }
+    if (FUN_00da0f40((int)DAT_01bea1d0) != 0) {
+        FUN_00da9230((int)DAT_01bea1d0, 0);  // __thiscall
+    }
+    if (FUN_00da0f90((int)DAT_01bea1d0) != 0) {
+        call_00DA0F50(DAT_01bea1d0, 0, 0.0f, 0);
+    }
+    self->vec90()[0] = 0.0f;
+    self->field10A4() = 1;
+    self->field26E0() = 0;
+    self->field3BCC() = 0;
+    if (call_00D82980((void *)self->field7CC(), 0x44) != 0) {
+        call_00D82DE0((void *)self->field7CC(), self->field7D0());
+        int item = self->field7D0();
+        if (item != 0 && isKindOf((void *)item, 0, DAT_01be9ef4)) {
+            *(int *)(item + 0x3EC) = 0;
+            *(int *)(item + 0x3F0) = 0;
+            *(int *)(item + 0x188) = 0;
+        }
+        self->field40C8() = 0;
+    }
+    setControllerRadius(controller764(self), 0.35f);
+    self->field5074() = 0;
+    self->field416C() = 0;
+    self->field5080() = 1;
+    call_00D82DE0((void *)self->field7CC(), self->field7D0());
+    DAT_01bea060 = DAT_01bea060 & 0xFFBFFFFF;
+    FUN_00b96b30((int)self);
+    self->vf394();
+    FUN_00a8d280((int)self);
+    self->field2620() = 0;
+    self->field2810() = 0;
+    int obj = (int)FUN_00a81330(&self->handle100C());
+    if (obj != 0) {
+        int owner = (int)FUN_00a7c8a0(obj);
+        if (owner != 0) {
+            float push[3];
+            push[0] = 0.0f;
+            push[1] = 10.0f;
+            push[2] = 0.0f;
+            vcall<void, int, float *>((void *)owner, 0x16C, self->field4F0(), push);
+        }
+    }
+    FUN_00a7c950((undefined4 *)&self->handle100C());
+    if (self->field798() != 0 && vcall<int, int>((void *)self->field798(), 4, 9) != 0) {
+        void *esp = 0;
+        if (self->field798() != 0) {
+            esp = vcall<void *, int>((void *)self->field798(), 4, 9);
+        }
+        call_00EAA6E0(esp, 10.0f, 0.0f);
+    }
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        FUN_00a9e120((int)self, 3, 0x711, 0);
+    }
+    call_00A94BC0(self, 2, 0.016666668f);
+    call_00A94BC0(self, 4, 0.016666668f);
+    call_00A94BC0(self, 5, 0.016666668f);
+    call_00A94BC0(self, 6, 0.016666668f);
+    call_00A94BC0(self, 7, 0.016666668f);
+    call_00A94BC0(self, 8, 0.016666668f);
+    if (FUN_00da10c0((int)DAT_01bea1d0) == 3) {
+        FUN_00dc1300((int)DAT_01bea1d0, 0);  // __thiscall
+    }
+    self->field3858() = 0;
+    self->field2644() = 0;
+    int frame = FUN_00a12210((int)self, 0xF00);  // __thiscall
+    if (frame != 0) {
+        *(unsigned short *)(frame + 0xA2) = *(unsigned short *)(frame + 0xA2) | 0x1000;
+    }
+}
+
+// 00BE8AA0  FUN_00be8aa0  size=950  [between]
+// Same reset as FUN_00be86f0, with the handle91C release first, without FUN_00b96b30 and with motion
+// layer 3 reset as well.
+void __fastcall FUN_00be8aa0(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    DAT_01bea090 = DAT_01bea090 & 0xFFFFFFBF;
+    if ((DAT_01bea094 & 0x1000) != 0 && FUN_00a81330(&self->handle91C()) != 0) {
+        int obj = (int)FUN_00a7c8a0((int)FUN_00a81330(&self->handle91C()));
+        if (obj != 0 && isKindOf((void *)obj, 4, DAT_01b34da0)) {
+            FUN_0049cfa0(obj);
+            FUN_0049cf50(obj);
+        }
+    }
+    FUN_00b7fa30(self, 0);
+    self->vf39C();
+    FUN_00b88400(self);
+    self->field26D4() = 0;
+    call_00EAA6E0(self->espE90(), 5.0f, 0.0f);
+    if (mgrCall(0x68) == 3) {
+        self->motion1424() = 0x701;
+        int obj = (int)FUN_00a81330(&self->handleFF8());
+        if (obj != 0) {
+            int owner = (int)FUN_00a7c8a0(obj);
+            if (owner != 0) {
+                FUN_00bdc2a0(owner);
+                if (state618((void *)owner) == 1) {
+                    setAction((void *)owner, 1, 4, 0, 0);
+                }
+                if (state618((void *)owner) == 2) {
+                    setAction((void *)owner, 1, 4, 0, 0);
+                }
+            }
+        }
+    }
+    if (FUN_00da0f40((int)DAT_01bea1d0) != 0) {
+        FUN_00da9230((int)DAT_01bea1d0, 0);  // __thiscall
+    }
+    if (FUN_00da0f90((int)DAT_01bea1d0) != 0) {
+        call_00DA0F50(DAT_01bea1d0, 0, 0.0f, 0);
+    }
+    self->vec90()[0] = 0.0f;
+    self->field10A4() = 1;
+    self->field26E0() = 0;
+    self->field3BCC() = 0;
+    if (call_00D82980((void *)self->field7CC(), 0x44) != 0) {
+        call_00D82DE0((void *)self->field7CC(), self->field7D0());
+        int item = self->field7D0();
+        if (item != 0 && isKindOf((void *)item, 0, DAT_01be9ef4)) {
+            *(int *)(item + 0x3EC) = 0;
+            *(int *)(item + 0x3F0) = 0;
+            *(int *)(item + 0x188) = 0;
+        }
+        self->field40C8() = 0;
+    }
+    setControllerRadius(controller764(self), 0.35f);
+    self->field5074() = 0;
+    self->field416C() = 0;
+    self->field5080() = 1;
+    call_00D82DE0((void *)self->field7CC(), self->field7D0());
+    DAT_01bea060 = DAT_01bea060 & 0xFFBFFFFF;
+    self->vf394();
+    FUN_00a8d280((int)self);
+    self->field2620() = 0;
+    self->field2810() = 0;
+    int obj = (int)FUN_00a81330(&self->handle100C());
+    if (obj != 0) {
+        int owner = (int)FUN_00a7c8a0(obj);
+        if (owner != 0) {
+            float push[3];
+            push[0] = 0.0f;
+            push[1] = 10.0f;
+            push[2] = 0.0f;
+            vcall<void, int, float *>((void *)owner, 0x16C, self->field4F0(), push);
+        }
+    }
+    FUN_00a7c950((undefined4 *)&self->handle100C());
+    if (self->field798() != 0 && vcall<int, int>((void *)self->field798(), 4, 9) != 0) {
+        void *esp = 0;
+        if (self->field798() != 0) {
+            esp = vcall<void *, int>((void *)self->field798(), 4, 9);
+        }
+        call_00EAA6E0(esp, 10.0f, 0.0f);
+    }
+    if ((DAT_01bea090 & 0x80000000) != 0) {
+        FUN_00a9e120((int)self, 3, 0x711, 0);
+    }
+    call_00A94BC0(self, 2, 0.016666668f);
+    call_00A94BC0(self, 3, 0.016666668f);
+    call_00A94BC0(self, 4, 0.016666668f);
+    call_00A94BC0(self, 5, 0.016666668f);
+    call_00A94BC0(self, 6, 0.016666668f);
+    call_00A94BC0(self, 7, 0.016666668f);
+    call_00A94BC0(self, 8, 0.016666668f);
+    if (FUN_00da10c0((int)DAT_01bea1d0) == 3) {
+        FUN_00dc1300((int)DAT_01bea1d0, 0);  // __thiscall
+    }
+    self->field3858() = 0;
+    self->field2644() = 0;
+    int frame = FUN_00a12210((int)self, 0xF00);  // __thiscall
+    if (frame != 0) {
+        *(unsigned short *)(frame + 0xA2) = *(unsigned short *)(frame + 0xA2) | 0x1000;
+    }
+}
+
+// 00BE8E60  FUN_00be8e60  size=155  [between]
+// Full reset: vf39C, FUN_00be86f0, motion layer 3, ends the DAT_01bea060 bit-25 link (handle91C,
+// FUN_00b90990), the slow state (FUN_00b7aa80 and its globals), FUN_00cbc9c0(1, 0), the controller
+// (FUN_008e6d00) and vf388(0).
+void __fastcall FUN_00be8e60(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    self->vf39C();
+    FUN_00be86f0(self);
+    self->field26D4() = 0;
+    call_00A94BC0(self, 3, 0.016666668f);
+    if ((DAT_01bea060 & 0x2000000) != 0) {
+        DAT_01bea060 = DAT_01bea060 & 0xFDFFFFFF;
+        FUN_00a7c950((undefined4 *)&self->handle91C());
+        FUN_00b90990((int)self);
+    }
+    FUN_00b7aa80(self);
+    DAT_01dc08d4 = 0;
+    DAT_01dc08bc = 0;
+    DAT_01dc08c8 = 0;
+    FUN_00cbc9c0(1, 0);
+    if (controller764(self) != 0) {
+        FUN_008e6d00(controller764(self));
+    }
+    self->vf388(0);
+}
+
+// 00BE8F00  FUN_00be8f00  size=80  [between]
+// FUN_00bda7a0 with two zero vectors (their w components are left uninitialised, as in the
+// original).  ECX is passed through unchanged.  ret 0x18.
+void FUN_00be8f00(Pl0000 *self, undefined4 a, undefined4 b, undefined4 c, undefined4 d, undefined4 e,
+                  undefined4 f)  // __thiscall
+{
+    float vecB[4];
+    float vecA[4];
+    vecB[0] = 0.0f;
+    vecB[1] = 0.0f;
+    vecB[2] = 0.0f;
+    vecA[0] = 0.0f;
+    vecA[1] = 0.0f;
+    vecA[2] = 0.0f;
+    FUN_00bda7a0(self, a, b, c, d, e, vecA, vecB, f);
+}
+
+// 00BE8F50  FUN_00be8f50  size=471  [between]
+// Resets (FUN_00be8aa0), then clears the carried item field7D0 (when it is-a DAT_01be9ef4): its
+// handle, its three matrices-like blocks and vectors; when `obj` has an owner with frame `key`, binds
+// the item to `obj` / `key` at `vec`.  Then DAT_01bea9a4 = 1, the controller is reset
+// (FUN_008e3c10), DAT_01d61ab0 = 0 and FUN_00b7e090(0) unless field40C8.  ret 0xC.
+void FUN_00be8f50(Pl0000 *self, int obj, int key, float *vec)  // __thiscall
+{
+    using namespace Pl0000_p12;
+    FUN_00be8aa0(self);
+    int item = self->field7D0();
+    if (item == 0 || !isKindOf((void *)item, 0, DAT_01be9ef4)) {
+        return;
+    }
+    *(int *)(item + 0x47C) = 0;
+    *(int *)(item + 0x480) = 0;
+    *(int *)(item + 0x484) = 0;
+    FUN_00a7c950((undefined4 *)(item + 0x404));
+    *(int *)(item + 0x408) = -1;
+    *(int *)(item + 0x40C) = -1;
+    *(float *)(item + 0x450) = 0.0f;
+    *(float *)(item + 0x454) = 0.0f;
+    *(float *)(item + 0x458) = 0.0f;
+    *(float *)(item + 0x45C) = 1.0f;
+    *(float *)(item + 0x46C) = 1.0f;
+    *(float *)(item + 0x460) = 0.0f;
+    *(float *)(item + 0x464) = 0.0f;
+    *(float *)(item + 0x468) = 0.0f;
+    *(float *)(item + 0x410) = 0.0f;
+    *(float *)(item + 0x414) = 0.0f;
+    *(float *)(item + 0x418) = 0.0f;
+    *(float *)(item + 0x41C) = 1.0f;
+    *(float *)(item + 0x42C) = 1.0f;
+    *(float *)(item + 0x420) = 0.0f;
+    *(float *)(item + 0x424) = 0.0f;
+    *(float *)(item + 0x428) = 0.0f;
+    *(float *)(item + 0x430) = 0.0f;
+    *(float *)(item + 0x434) = 0.0f;
+    *(float *)(item + 0x438) = 0.0f;
+    *(float *)(item + 0x43C) = 1.0f;
+    *(float *)(item + 0x44C) = 1.0f;
+    *(float *)(item + 0x440) = 0.0f;
+    *(float *)(item + 0x444) = 0.0f;
+    *(float *)(item + 0x448) = 0.0f;
+    *(float *)(item + 0x470) = 0.0f;
+    *(int *)(item + 0x478) = 1;
+    *(float *)(item + 0x474) = 0.0f;
+    *(float *)(item + 0x490) = 0.0f;
+    *(float *)(item + 0x494) = 0.0f;
+    *(float *)(item + 0x498) = 0.0f;
+    *(float *)(item + 0x49C) = 1.0f;
+    if (obj != 0) {
+        int owner = (int)FUN_00a7c8a0(obj);
+        if (owner != 0 && FUN_00a12210(owner, key) != 0) {  // __thiscall
+            FUN_00a7c960((undefined4 *)(item + 0x404), (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+            *(int *)(item + 0x408) = key;
+            *(float *)(item + 0x490) = vec[0];
+            *(float *)(item + 0x494) = vec[1];
+            *(float *)(item + 0x498) = vec[2];
+            *(float *)(item + 0x49C) = vec[3];
+        }
+    }
+    DAT_01bea9a4 = 1;
+    if (controller764(self) != 0) {
+        FUN_008e3c10(controller764(self));
+    }
+    DAT_01d61ab0 = 0.0f;
+    if (self->field40C8() == 0) {
+        FUN_00b7e090(self, 0);
+    }
+}
+
+// 00BE9130  FUN_00be9130  size=1102  [between]
+// Weapons of the handleFF8 / handleFFC owners (when they are-a DAT_01be9dbc): restarts motion layer 5
+// / 6 when motion1424 / field1408 changed (FUN_00a8c5f0); in game mode 3 shows or hides the first one
+// (parts alpha +0x1C of the 0x70-byte parts, vf1C / vf20); otherwise fades field1428 / field141C in
+// (+0.125) while FUN_00a8c760(0x13 / 0x14) holds and out (-0.2) otherwise, and applies them.
+void __fastcall FUN_00be9130(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    int objA = (int)FUN_00a81330(&self->handleFF8());
+    int weaponA;
+    int obj = (int)FUN_00a81330(&self->handleFF8());
+    int owner;
+    if (obj == 0 || (owner = (int)FUN_00a7c8a0(obj)) == 0) {
+        weaponA = 0;
+    } else {
+        weaponA = isKindOf((void *)owner, 4, DAT_01be9dbc) ? owner : 0;
+    }
+    int weaponB;
+    obj = (int)FUN_00a81330(&self->handleFFC());
+    if (obj == 0 || (owner = (int)FUN_00a7c8a0(obj)) == 0) {
+        weaponB = 0;
+    } else {
+        weaponB = isKindOf((void *)owner, 4, DAT_01be9dbc) ? owner : 0;
+    }
+    if (self->motion1424() != self->field1420()) {
+        self->field1420() = self->motion1424();
+        FUN_00a9e060((int)self, 5);
+        call_00A8C5F0(self, 5, self->field4F0(), objA, self->field1420(), -1);
+    }
+    if (mgrCall(0x68) == 3) {
+        if (weaponA != 0) {
+            int visible = 1;
+            if (self->field26D8() != 0) {
+                visible = 0;
+            }
+            unsigned int globalFlags = DAT_01bea060;
+            if ((globalFlags & 0x2000000) != 0) {
+                visible = 0;
+            }
+            if ((globalFlags & 0x40000000) != 0) {
+                visible = 0;
+            }
+            if ((globalFlags & 0x8000000) != 0) {
+                visible = 0;
+            }
+            if ((globalFlags & 0x20000000) != 0) {
+                visible = 0;
+            }
+            if ((globalFlags & 0x400) != 0) {
+                visible = 0;
+            }
+            if (!FUN_00a8c760((int)self, 0x28) && visible != 0) {  // __thiscall
+                for (int i = 0; i < *(short *)(weaponA + 0x324); i++) {
+                    *(float *)(*(int *)(weaponA + 0x320) + i * 0x70 + 0x1C) = 1.0f;
+                }
+                vcall<void>((void *)weaponA, 0x1C);
+            } else {
+                for (int i = 0; i < *(short *)(weaponA + 0x324); i++) {
+                    *(float *)(*(int *)(weaponA + 0x320) + i * 0x70 + 0x1C) = 0.0f;
+                }
+                vcall<void>((void *)weaponA, 0x20);
+            }
+        }
+    } else {
+        int fadeOut;
+        if (mgrCall(0x68) == 2) {
+            if (vcall<int>(self, 0x330) != 0) {
+                self->field26D4() = 0;
+            }
+            if (FUN_00a8c760((int)self, 0x13)) {  // __thiscall
+                self->field26D4() = 1;
+                self->fieldB74() = 1;
+                float value = self->field1428() + 0.125f;
+                self->field1428() = value;
+                if (value >= 1.0f) {
+                    self->field1428() = 1.0f;
+                }
+                if (weaponA != 0) {
+                    FUN_00bdc060((Pl0000 *)weaponA);  // ECX = the weapon object
+                }
+            }
+            fadeOut = self->field26D4() == 0;
+        } else if (FUN_00a8c760((int)self, 0x13)) {  // __thiscall
+            float value = self->field1428() + 0.125f;
+            self->field1428() = value;
+            if (value >= 1.0f) {
+                self->field1428() = 1.0f;
+            }
+            if (weaponA != 0) {
+                FUN_00bdc060((Pl0000 *)weaponA);  // ECX = the weapon object
+            }
+            fadeOut = 0;
+        } else {
+            fadeOut = 1;
+        }
+        if (fadeOut) {
+            float value = self->field1428() - 0.2f;
+            self->field1428() = value;
+            if (!(0.0f < value)) {
+                self->field1428() = 0.0f;
+            }
+            if (weaponA != 0) {
+                FUN_00bdbfd0((Pl0000 *)weaponA);  // ECX = the weapon object
+            }
+        }
+        if (weaponA != 0) {
+            float alpha = self->field1428();
+            for (int i = 0; i < *(short *)(weaponA + 0x324); i++) {
+                *(float *)(*(int *)(weaponA + 0x320) + i * 0x70 + 0x1C) = alpha;
+            }
+            if (self->field1428() == 0.0f) {
+                vcall<void>((void *)weaponA, 0x20);
+            }
+            if (self->field1428() >= 0.01f) {
+                vcall<void>((void *)weaponA, 0x1C);
+            }
+        }
+    }
+    if (self->field1408() != self->field140C()) {
+        self->field140C() = self->field1408();
+        FUN_00a9e060((int)self, 6);
+        int motion = self->field140C();
+        int id = self->field4F0();
+        call_00A8C5F0(self, 6, id, (int)FUN_00a81330(&self->handleFFC()), motion, 0);
+        FUN_00b887d0(self);
+    }
+    if (FUN_00a8c760((int)self, 0x14)) {  // __thiscall
+        float value = self->field141C() + 0.125f;
+        self->field141C() = value;
+        if (value >= 1.0f) {
+            self->field141C() = 1.0f;
+        }
+        if (weaponB == 0) {
+            return;
+        }
+        FUN_00bdc060((Pl0000 *)weaponB);  // ECX = the weapon object
+    } else {
+        float value = self->field141C() - 0.2f;
+        self->field141C() = value;
+        if (!(0.0f < value)) {
+            self->field141C() = 0.0f;
+        }
+        if (weaponB == 0) {
+            return;
+        }
+        FUN_00bdbfd0((Pl0000 *)weaponB);  // ECX = the weapon object
+    }
+    float alpha = self->field141C();
+    for (int i = 0; i < *(short *)(weaponB + 0x324); i++) {
+        *(float *)(*(int *)(weaponB + 0x320) + i * 0x70 + 0x1C) = alpha;
+    }
+    if (self->field141C() == 0.0f) {
+        vcall<void>((void *)weaponB, 0x20);
+    }
+    if (self->field141C() >= 0.01f) {
+        vcall<void>((void *)weaponB, 0x1C);  // tail call
+    }
+}
+
+// 00BE9580  Pl0000::thunk_vf134  size=5  [class]
+// Thunk: jmp Pl0000::vf134_00BDA8A0 (vftable slot 0x134).
+undefined4 Pl0000::vf134()
+{
+    return vf134_00BDA8A0();
+}
+
+// 00BE9590  FUN_00be9590  size=1611  [callgraph]
+// Hit reactions: counts timer2C14 down, then walks the collision hits (buffer67C / field684, 0x150
+// bytes each).  A hit with flag 0x400000 stores its vector in vec2830 and starts action 0x4D; otherwise,
+// when the attacker accepts (vf17C / vf184) and faces us, a counter (reaction 3 and attacker vf14C(0x10))
+// links both (vf150); a guarded / parried hit plays the block actions 0xB8 .. 0xC0, sends vf198, and
+// (FUN_00b80980) applies half of the damage.  Returns 1 when a hit was handled.
+undefined4 __fastcall FUN_00be9590(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    self->field2824() = 0;
+    if (self->timer2C14() >= 0.0f) {
+        self->timer2C14() = self->timer2C14() - dt910(self);
+    }
+    if (FUN_00a8c760((int)self, 7)) {  // __thiscall
+        return 0;
+    }
+    if ((DAT_01bea060 & 0x2000000) != 0) {
+        return 0;
+    }
+    if (0.0f < self->timer2C14()) {
+        return 0;
+    }
+    char *hit = (char *)self->buffer67C();
+    char *end = hit + self->field684() * 0x150;
+    for (; hit != end; hit += 0x150) {
+        int kind = *(int *)hit;
+        if (kind == 0 || kind == 1 || kind == 2 || kind == 0x1B0 || kind == 0x147) {
+            continue;
+        }
+        if ((*(unsigned int *)(hit + 0x8C) & 0x2000) != 0) {
+            continue;
+        }
+        int attacker = 0;
+        int obj = (int)FUN_00a81330((uint *)(hit + 0x18));
+        if (obj != 0) {
+            attacker = (int)FUN_00a7c8a0(obj);
+        }
+        int other = (int)FUN_00a81330((uint *)(hit + 0x124));
+        if (obj != 0) {
+            FUN_00a7c8a0(other);
+        }
+        if ((*(unsigned int *)(hit + 0x8C) & 0x400000) != 0) {
+            self->field2824() = 1;
+            self->vec2830()[0] = *(float *)(hit + 0x130);
+            self->vec2830()[1] = *(float *)(hit + 0x134);
+            self->vec2830()[2] = *(float *)(hit + 0x138);
+            self->vec2830()[3] = *(float *)(hit + 0x13C);
+            self->vec2830()[4] = *(float *)(hit + 0x140);
+            self->vf198((undefined4)attacker, (undefined4)(int)hit, 2);
+            if (FUN_00a8cab0((int)self) != 0x4D) {
+                setAction(self, 0x4D, 0, 0, 0);
+            }
+            continue;
+        }
+        int facing = 0;
+        if (attacker != 0 &&
+            (FUN_00b87df0(self, obj, self->yaw1070(), 1.0471976f) != 0 || FUN_00bc4610(self, obj) != 0)) {
+            facing = 1;
+        }
+        int reaction = -1;
+        if (attacker != 0 && vcall<int>((void *)attacker, 0x17C) != 0) {
+            reaction = vcall<int, int, int, int>((void *)attacker, 0x184, *(int *)hit, self->field4F0(), (int)hit);
+        }
+        bool strong = *(unsigned char *)(hit + 0x11) > 5;
+        self->byte2C18() = strong;
+        if (reaction != -1 && facing != 0 && self->vf360() != 0 && subState61C(self) < 2) {
+            if (obj != 0) {
+                FUN_00a7c960((undefined4 *)&self->handle2C1C(), (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+            }
+            if (reaction == 3 && vcall<int, int, int>((void *)attacker, 0x14C, 0x10, 0) != 0) {
+                DAT_01bea060 = DAT_01bea060 | 0x2000000;
+                FUN_00b8a040(self, 0, 0, 0);  // the middle argument is the float 0.0f
+                vcall<void, int, int>(self, 0x150, 0x10, obj);
+                vcall<void, int, int>((void *)attacker, 0x150, 0x10, self->field4F0());
+                return 1;
+            }
+        }
+        int block = 0;
+        if (self->vf360() != 0 && subState61C(self) < 2 && field940(self) != 0 && self->fieldB90() != 0) {
+            block = 1;
+        }
+        if (self->vf360() == 0 && self->fieldB90() != 0 && FUN_00a8c760((int)self, 0x21)) {  // __thiscall
+            block = 1;
+        }
+        if (reaction != -1 || block == 0) {
+            continue;
+        }
+        self->vec90()[0] = 0.0f;
+        self->fieldB90() = 0;
+        if (obj != 0) {
+            FUN_00a7c960((undefined4 *)&self->handle2C1C(), (undefined4 *)FUN_00a7c7f0(obj));  // __thiscall
+        }
+        int perfect = 0;
+        if (call_009C4BF0(DAT_01b5d1e0) == 0 && FUN_00a8c760((int)self, 0x2C)) {  // __thiscall
+            perfect = 1;
+        }
+        if (call_009C4BF0(DAT_01b5d1e0) == 1 && FUN_00a8c760((int)self, 0x2D)) {  // __thiscall
+            perfect = 1;
+        }
+        if (call_009C4BF0(DAT_01b5d1e0) == 2 && FUN_00a8c760((int)self, 0x2E)) {  // __thiscall
+            perfect = 1;
+        }
+        if (call_009C4BF0(DAT_01b5d1e0) == 3 && FUN_00a8c760((int)self, 0x2E)) {  // __thiscall
+            perfect = 1;
+        }
+        if (call_009C4BF0(DAT_01b5d1e0) == 4 && FUN_00a8c760((int)self, 0x2E)) {  // __thiscall
+            perfect = 1;
+        }
+        int unblockable = 0;
+        if ((*(unsigned int *)(hit + 0x8C) & 0x100) != 0) {
+            unblockable = 1;
+        }
+        FUN_00bc31d0(self, 0.0f);
+        vcall<void>((void *)FUN_00c1b9a0(), 0x40);
+        if (unblockable != 0) {
+            if (self->vf1D8() == 0) {
+                setAction(self, 0xBB, 0, 0, 0);
+                if (strong) {
+                    setAction(self, 0xBC, 0, 0, 0);
+                }
+            } else {
+                setAction(self, 0xC0, 0, 0, 0);
+            }
+            call_00DDA360(0, 1.0f, 1.0f, 8);
+            self->vf198((undefined4)attacker, (undefined4)(int)hit, 8);
+        } else {
+            vcall<void, int>((void *)FUN_00c209f0(), 0x14, 0xD);
+            if (self->vf1D8() == 0) {
+                setAction(self, 0xB9, 0, 0, 0);
+                if (strong) {
+                    setAction(self, 0xBA, 0, 0, 0);
+                }
+            } else {
+                setAction(self, 0xBF, 0, 0, 0);
+            }
+            int result = 2;
+            if (perfect != 0 && (*(unsigned int *)(hit + 0x8C) & 0x1000) == 0) {
+                setAction(self, self->vf1D8() == 0 ? 0xB8 : 0xBE, 0, 0, 0);
+                FUN_00d450c0((int)DAT_018b9140);
+                result = 4;
+            }
+            call_00DDA360(0, 1.0f, 1.0f, 8);
+            self->vf198((undefined4)attacker, (undefined4)(int)hit, (undefined4)result);
+            FUN_00b7ab80(self, 15.0f, 0.1f);
+            call_00DA0F50(DAT_01bea1d0, 1, 15.0f, 1);
+            self->vf220(30.0f);
+        }
+        if (FUN_00b80980((int)self) != 0) {
+            self->vf30C(*(int *)(hit + 4) / 2, 1);
+        }
+        return 1;
+    }
+    return 0;
+}
+
+// 00BE9BE0  FUN_00be9be0  size=594  [callgraph]
+// Action step: on entry motion 0x3D8, field920 = 60, vf394, FUN_00be86f0, vf220(10); then counts
+// field920 down, ends with vf388(0) when the motion is done, and while field2824 turns to vec2830 and
+// slides away from it (horizontal direction, speed 1 - distance / 10, at least 0.2).
+void __fastcall FUN_00be9be0(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00AA4080(self, 0x3D8, 0, 0.06666667f, 1.0f, 0x8000000, 0.0f, 1.0f);
+        field920(self) = 60.0f;
+        subState61C(self) = subState61C(self) + 1;
+        self->vf394();
+        FUN_00be86f0(self);
+        self->vf220(10.0f);
+        self->fieldB74() = 0;
+    } else if (subState61C(self) != 1) {
+        return;
+    }
+    self->field11A4() = 1;
+    field920(self) = field920(self) - dt910(self);
+    if (motionDone(self)) {
+        self->vf388(0);
+    }
+    if (self->field2824() != 0) {
+        float *target = self->vec2830();
+        FUN_00a8e880((int)self, target);  // __thiscall
+        self->vf308(0.3f, 0.00017453292f, 0.13962634f, 0.0f);
+        float *position = self->matrix() + 12;  // +0x40: translation row
+        float dir[4];
+        dir[0] = position[0] - target[0];
+        dir[2] = position[2] - target[2];
+        dir[3] = position[3] - target[3];
+        dir[1] = 0.0f;
+        float x;
+        float y;
+        float z;
+        if (!(dir[2] * dir[2] + dir[0] * dir[0] <= 0.0f) && dir[0] == dir[0] && dir[2] == dir[2]) {
+            FUN_00ddf460(dir, dir);
+            z = dir[2];
+            y = dir[1];
+            x = dir[0];
+        } else {
+            call_00DD5650(DAT_0163d0ac);
+            x = 0.0f;
+            y = 1.0f;
+            z = 0.0f;
+        }
+        float dx = position[0] - target[0];
+        float dz = position[2] - target[2];
+        float10 scale = 1.0f - sqrt((float10)dz * dz + (float10)dx * dx) * 0.1f;
+        if (scale < 0.2f) {
+            scale = 0.2f;
+        }
+        float *step = self->quat();  // +0x50
+        step[0] = (float)(step[0] + x * scale);
+        step[1] = (float)(step[1] + y * scale);
+        step[2] = (float)(step[2] + z * scale);
+        step[3] = (float)(step[3] + scale * dir[3]);
+    }
+    FUN_00b94790(self, 1.0f, 1.0f);
+}
+
+// 00BEA700  Pl0000::vf284  size=296  [class]
+// "Pl0000 ViewRay" sphere cast (radius 0.3, FUN_0090eea0) into an inline hkpAllCdPointCollector:
+// returns the hit result, or 0 when the closest hit belongs to `ignore`.  ret 0x10.
+undefined4 Pl0000::vf284(undefined4 arg1, undefined4 arg2, undefined4 arg3, int ignore)
+{
+    using namespace Pl0000_p12;
+    CdCollector collector;
+    collector.earlyOutBits = 0x7F7FFFEE;  // 3.40282e+38f
+    collector.vftable = (void *)0x0163D3AC;  // hkpAllCdPointCollector::vftable
+    collector.data = (char *)collector.storage;
+    collector.capacity = 0x80000008;
+    collector.count = 0;
+    int group = FUN_009f8b40((int)this);
+    int hit = call_0090EEA0(DAT_01b35df8, &collector, arg1, arg2, 0.3f, arg3, group << 16 | 6,
+                            "Pl0000 ViewRay");  // DAT_016a22b8
+    if (hit != 0) {
+        FUN_0112bcf0((uint)&collector);  // sorts the hits
+        int root = *(int *)(collector.data + 0x28);
+        int objectA = 0;
+        int objectB = 0;
+        if (*(char *)(root + 0x18) == 1) {
+            objectA = *(signed char *)(root + 0x10) + root;
+        }
+        if (*(char *)(root + 0x18) == 2) {
+            objectB = *(signed char *)(root + 0x10) + root;
+        }
+        if (objectA != 0 && ignore != 0 && (int)FUN_008f7780(objectA) == ignore) {
+            hit = 0;
+        }
+        if (objectB != 0 && ignore != 0 && (int)FUN_008f7780(objectB) == ignore) {
+            hit = 0;
+        }
+    }
+    // destructor inlined
+    collector.vftable = (void *)0x0163D3AC;  // hkpAllCdPointCollector::vftable
+    collector.count = 0;
+    if ((int)collector.capacity >= 0) {
+        vcall<void, char *, unsigned int>(DAT_018e9b94, 0x10, collector.data,
+                                          (collector.capacity & 0x3FFFFFFF) * 0x30);
+    }
+    return hit;
+}
+
+// 00BEA830  FUN_00bea830  size=803  [callgraph]
+// Gun stance ("GUNKAMAE") step: on entry the stance motions of the handleFFC weapon (layers 6 / 1 / 5)
+// and the aim frame; then aims with the right stick (fieldD10 turns vec90[1], fieldD14 the aim angle
+// angle278C, both beyond +-200 and scaled by the camera rates FUN_00da7570 / FUN_00da7500), clamped to
+// +-pi/4.  Always ends with FUN_00b8e340 (game mode 5) or FUN_00bc54c0.
+void __fastcall FUN_00bea830(Pl0000 *self)
+{
+    using namespace Pl0000_p12;
+    self->field13F8() = 0;
+    self->vf314();
+    if (subState61C(self) == 0) {
+        call_00A94BC0(self, 8, 0.13333334f);
+        FUN_00a9f560((int)self, (char *)"GUNKAMAE", 0.13333334f, 0x8000000, 0);  // DAT_016496b0
+        call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 1, 0, 0, 6, 0.13333334f, 0);
+        call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, 0, 0, 0, 1, 0.13333334f, 0);
+        call_00A94A40(self, ownerOf(&self->handleFFC()) + 0x494, -1, 0, -1, 0, 0, 5, 0.13333334f, 0);
+        call_00A947E0(self, 0, self->angle278C(), 0.0f, 0.0f);
+        subState61C(self) = subState61C(self) + 1;
+        FUN_00b94fc0(self);
+        field940(self) = 0;
+    } else if (subState61C(self) != 1) {
+        goto dispatch;
+    }
+    {
+        self->field26DC() = 3.0f;
+        call_00A947E0(self, 0, self->angle278C() * 1.2732395f, 0.0f, 0.0f);
+        FUN_00b94790(self, 1.0f, 1.0f);
+        float yawRate = (float)(FUN_00da7500() * 0.024434609f);
+        // ? the first use below takes the unrounded x87 product
+        float pitchRate = (float)(FUN_00da7570() * -0.024434609f);
+        if (self->fieldD10() >= 200.0f) {
+            self->vec90()[1] = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD10() - 200.0f) * 0.00125f * pitchRate + self->vec90()[1]));
+        }
+        if (self->fieldD10() <= -200.0f) {
+            self->vec90()[1] = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD10() + 200.0f) * 0.00125f * pitchRate + self->vec90()[1]));
+        }
+        if (self->fieldD14() >= 200.0f) {
+            self->angle278C() = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD14() - 200.0f) * 0.00125f * yawRate + self->angle278C()));
+        }
+        if (self->fieldD14() <= -200.0f) {
+            self->angle278C() = (float)call_00DDBA30(
+                (float)(((float10)self->fieldD14() + 200.0f) * 0.00125f * yawRate + self->angle278C()));
+        }
+        if (self->angle278C() < -0.7853982f) {
+            self->angle278C() = -0.7853982f;
+        }
+        if (self->angle278C() > 0.7853982f) {
+            self->angle278C() = 0.7853982f;
+        }
+    }
+dispatch:
+    if (mgrCall(0x6C) == 5) {
+        FUN_00b8e340(self);
+        return;
+    }
+    FUN_00bc54c0(self);
+}
